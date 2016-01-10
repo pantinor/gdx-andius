@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import com.badlogic.gdx.Files;
@@ -15,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -25,10 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
-/**
- *
- * @author Paul
- */
 public class Andius extends Game {
 
     public static final int SCREEN_WIDTH = 1024;
@@ -39,7 +31,8 @@ public class Andius extends Game {
     public static final Context context = new Context();
     
     public static Texture backGround;
-
+    public static TextureAtlas heroesAtlas;
+    
     public static BitmapFont font;
     public static BitmapFont smallFont;
     public static BitmapFont largeFont;
@@ -133,7 +126,7 @@ public class Andius extends Game {
 //                }
 //            }
 
-//            standardAtlas = new TextureAtlas(Gdx.files.classpath("assets/graphics/latest-atlas.txt"));
+            heroesAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/heroes-atlas.txt"));
 //
 //            hitTile = standardAtlas.findRegion("hit_flash");
 //            magicHitTile = standardAtlas.findRegion("magic_flash");
