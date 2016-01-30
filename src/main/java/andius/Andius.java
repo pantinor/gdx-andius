@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.Array;
 
 public class Andius extends Game {
 
@@ -28,10 +29,13 @@ public class Andius extends Game {
 
     public static final int MAP_VIEWPORT_DIM = 624;
 
-    public static final Context context = new Context();
+    public static final Context CONTEXT = new Context();
     
     public static Texture backGround;
     public static TextureAtlas heroesAtlas;
+    public static TextureAtlas mapAtlas;
+    
+    public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
     
     public static BitmapFont font;
     public static BitmapFont smallFont;
@@ -127,6 +131,8 @@ public class Andius extends Game {
 //            }
 
             heroesAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/heroes-atlas.txt"));
+            mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
+            moongateTextures = mapAtlas.findRegions("moongate");
 //
 //            hitTile = standardAtlas.findRegion("hit_flash");
 //            magicHitTile = standardAtlas.findRegion("magic_flash");
@@ -168,6 +174,7 @@ public class Andius extends Game {
 //            armors.init();
             
             Constants.Map.init();
+            Constants.Moongate.init();
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="48" tileheight="48">
- <tileset firstgid="1" name="uf_terrain" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="48" tileheight="48" nextobjectid="1">
+ <tileset firstgid="1" name="uf_terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
   <tile id="115">
    <animation>
@@ -75,21 +75,21 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="uf_terrain" tilewidth="48" tileheight="48">
+ <tileset firstgid="761" name="uf_terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <tileoffset x="0" y="-8"/>
   <image source="uf_terrain.png" width="960" height="1824"/>
  </tileset>
- <tileset firstgid="1521" name="uf_heroes" tilewidth="48" tileheight="48">
+ <tileset firstgid="1521" name="uf_heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
   <tileoffset x="0" y="-16"/>
   <image source="uf_heroes.png" width="1920" height="624"/>
  </tileset>
- <tileset firstgid="2041" name="uf_items" tilewidth="48" tileheight="48">
+ <tileset firstgid="2041" name="uf_items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
   <tileoffset x="0" y="-8"/>
   <image source="uf_items.png" width="1056" height="1056"/>
  </tileset>
  <layer name="floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt00EKgCAQBVDv3R26UvvK1h2nghYWWbQb4T34ILr5I5oSQFx5z7RnLHJYKonm6LsWyed+rX+0GeZ0vfuv/pF0xXq8nbXSf3hIK2+n1v9thkhq/fvURv+/7n8EAAAAAACAtmy9tD9z
+   eJzt0DEKgDAQRcHc/1L20Vh7HF1QiKJ9FmfgF9nqkVIAxtWOzcdqt7B+bDTRu3Vr5z1L/1Luf5+t/1If7yz908tC5v5Y5v6QpR8AAAAAAID/2AFWlDqT
   </data>
  </layer>
  <layer name="floor 2" width="48" height="48">

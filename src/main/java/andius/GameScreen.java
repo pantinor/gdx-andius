@@ -54,7 +54,7 @@ public class GameScreen extends BaseScreen {
             renderer.dispose();
         }
 
-        renderer = new TmxMapRenderer(Andius.context, null, this.map, this.map.getTiledMap(), 1f);
+        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
         mapBatch = renderer.getBatch();
 
         mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;

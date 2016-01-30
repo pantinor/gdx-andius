@@ -10,8 +10,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.TmxMapRenderer;
@@ -23,11 +27,14 @@ public class WorldScreen extends BaseScreen {
     private TmxMapRenderer renderer;
     private Batch mapBatch, batch;
     private final Viewport mapViewPort;
+    private final TextureAtlas moonPhaseAtlas;
+    private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
+    public GameTimer gameTimer = new GameTimer();
 
     private Texture t1, t2;
 
     public WorldScreen(Map map) {
-        
+
         this.map = map;
 
         batch = new SpriteBatch();
@@ -41,12 +48,26 @@ public class WorldScreen extends BaseScreen {
         addButtons();
 
         t1 = Utils.fillRectangle(WORLD_TILE_DIM, WORLD_TILE_DIM, Color.RED, .3f);
+
+        moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
+
+        SequenceAction seq1 = Actions.action(SequenceAction.class);
+        seq1.addAction(Actions.delay(.25f));
+        seq1.addAction(Actions.run(gameTimer));
+        stage.addAction(Actions.forever(seq1));
+
     }
 
     @Override
     public void show() {
+        gameTimer.active = true;
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
         loadMap(29, 51);
+    }
+
+    @Override
+    public void hide() {
+        gameTimer.active = false;
     }
 
     private void loadMap(int x, int y) {
@@ -55,13 +76,12 @@ public class WorldScreen extends BaseScreen {
             renderer.dispose();
         }
 
-        renderer = new TmxMapRenderer(Andius.context, null, this.map, this.map.getTiledMap(), 1f);
+        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
         mapBatch = renderer.getBatch();
 
         mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
 
 //        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), x, y, 25f);
-        
         newMapPixelCoords = getMapPixelCoords(x, y);
     }
 
@@ -89,15 +109,31 @@ public class WorldScreen extends BaseScreen {
 
         renderer.render();
 
+        mapBatch.begin();
+
+        for (Moongate g : Moongate.values()) {
+            TextureRegion t = g.getCurrentTexture();
+            if (t != null) {
+                mapBatch.draw(t, g.getX(), g.getY());
+            }
+        }
+
+        mapBatch.end();
+
         batch.begin();
 
         batch.draw(Andius.backGround, 0, 0);
         batch.draw(t1, WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17);
-        
-        //Vector3 v = getCurrentMapCoords();
-        //Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
 
+        batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
+        batch.draw(moonPhaseAtlas.findRegion("PHASE_" + feluccaphase), 372, Andius.SCREEN_HEIGHT - 32, 20, 20);
+
+        //Vector3 v = getCurrentMapCoords();
+        //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
+
+        stage.act();
+        stage.draw();
 
     }
 
@@ -119,44 +155,82 @@ public class WorldScreen extends BaseScreen {
         return new Vector3(Math.round(v.x / WORLD_TILE_DIM) - 6, ((mapPixelHeight - Math.round(v.y) - WORLD_TILE_DIM) / WORLD_TILE_DIM) - 3, 0);
     }
 
+    public class GameTimer implements Runnable {
+
+        public boolean active = true;
+
+        @Override
+        public void run() {
+            if (active) {
+
+                updateMoons();
+
+//                if (System.currentTimeMillis() - context.getLastCommandTime() > 20 * 1000) {
+//                    keyUp(Keys.SPACE);
+//                }
+            }
+        }
+    }
+
     @Override
     public boolean keyUp(int keycode) {
         Vector3 v = getCurrentMapCoords();
-        
+
         if (keycode == Keys.UP) {
             if (newMapPixelCoords.y + WORLD_TILE_DIM >= this.map.getMap().getHeight() * WORLD_TILE_DIM) {
                 newMapPixelCoords.y = 0;
+                postMove(Direction.NORTH, (int) v.x, Map.WORLD.getMap().getHeight() - 1);
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y + WORLD_TILE_DIM;
+                postMove(Direction.NORTH, v.x, v.y - 1);
             }
         } else if (keycode == Keys.DOWN) {
             if (newMapPixelCoords.y - WORLD_TILE_DIM < 0) {
                 newMapPixelCoords.y = (this.map.getMap().getHeight() - 1) * WORLD_TILE_DIM;
+                postMove(Direction.SOUTH, v.x, 0);
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y - WORLD_TILE_DIM;
+                postMove(Direction.SOUTH, v.x, v.y + 1);
             }
         } else if (keycode == Keys.RIGHT) {
             if (newMapPixelCoords.x + WORLD_TILE_DIM >= this.map.getMap().getWidth() * WORLD_TILE_DIM) {
                 newMapPixelCoords.x = 0;
+                postMove(Direction.EAST, 0, v.y);
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x + WORLD_TILE_DIM;
+                postMove(Direction.EAST, v.x + 1, v.y);
             }
         } else if (keycode == Keys.LEFT) {
             if (newMapPixelCoords.x - WORLD_TILE_DIM < 0) {
                 newMapPixelCoords.x = (this.map.getMap().getWidth() - 1) * WORLD_TILE_DIM;
+                postMove(Direction.WEST, Map.WORLD.getMap().getWidth() - 1, v.y);
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x - WORLD_TILE_DIM;
+                postMove(Direction.WEST, v.x - 1, v.y);
             }
         } else if (keycode == Keys.E) {
-            Portal p = this.map.getMap().getPortal((int)v.x, (int)v.y);
+            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
             if (p != null) {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
         }
-        
-//        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);
 
+//        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);
         return false;
+    }
+
+    private void postMove(Direction dir, float newx, float newy) {
+
+        //check for active moongate portal
+        for (Moongate g : Moongate.values()) {
+            if (g.getCurrentTexture() != null && newx == g.getMapX() && newy == g.getMapY()) {
+                //Sounds.play(Sound.MOONGATE);
+                Moongate d = getDestinationForMoongate(g);
+                newMapPixelCoords.x = d.getX();
+                newMapPixelCoords.y = d.getY();
+            }
+        }
+
     }
 
     @Override
@@ -166,6 +240,63 @@ public class WorldScreen extends BaseScreen {
 
     @Override
     public void partyDeath() {
+    }
+
+    private void updateMoons() {
+
+        phaseIndex++;
+        if (phaseIndex >= MOON_PHASES * MOON_SECONDS_PER_PHASE * 4) {
+            phaseIndex = 0;
+        }
+
+        phaseCount = (phaseIndex / (4 * MOON_SECONDS_PER_PHASE));
+        feluccaphase = phaseCount % 8;
+        trammelphase = phaseCount / 3;
+        if (trammelphase > 7) {
+            trammelphase = 7;
+        }
+        trammelSubphase = phaseIndex % (MOON_SECONDS_PER_PHASE * 4 * 3);
+
+        for (Moongate g : Moongate.values()) {
+            g.setCurrentTexture(null);
+        }
+
+        Moongate gate = Moongate.values()[trammelphase];
+        TextureAtlas.AtlasRegion texture = null;
+        if (trammelSubphase == 0) {
+            texture = Andius.moongateTextures.get(0);
+        } else if (trammelSubphase == 1) {
+            texture = Andius.moongateTextures.get(1);
+        } else if (trammelSubphase == 2) {
+            texture = Andius.moongateTextures.get(2);
+        } else if (trammelSubphase == 3) {
+            texture = Andius.moongateTextures.get(3);
+        } else if ((trammelSubphase > 3) && (trammelSubphase < (MOON_SECONDS_PER_PHASE * 4 * 3) - 3)) {
+            texture = Andius.moongateTextures.get(3);
+        } else if (trammelSubphase == (MOON_SECONDS_PER_PHASE * 4 * 3) - 3) {
+            texture = Andius.moongateTextures.get(2);
+        } else if (trammelSubphase == (MOON_SECONDS_PER_PHASE * 4 * 3) - 2) {
+            texture = Andius.moongateTextures.get(1);
+        } else if (trammelSubphase == (MOON_SECONDS_PER_PHASE * 4 * 3) - 1) {
+            texture = Andius.moongateTextures.get(0);
+        }
+        gate.setCurrentTexture(texture);
+
+    }
+
+    private Moongate getDestinationForMoongate(Moongate m) {
+
+        int destGate = m.ordinal();
+
+        if (feluccaphase == m.getD1()) {
+            destGate = m.getD1();
+        } else if (feluccaphase == m.getD2()) {
+            destGate = m.getD2();
+        } else if (feluccaphase == m.getD3()) {
+            destGate = m.getD3();
+        }
+
+        return Moongate.values()[destGate];
     }
 
 }

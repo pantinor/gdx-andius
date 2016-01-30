@@ -1,0 +1,32 @@
+uf_map.png
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moongate
+  rotate: false
+  xy: 432, 408
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+moongate
+  rotate: false
+  xy: 456, 408
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+moongate
+  rotate: false
+  xy: 480, 408
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
+moongate
+  rotate: false
+  xy: 504, 408
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 3

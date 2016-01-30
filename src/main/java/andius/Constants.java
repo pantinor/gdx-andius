@@ -4,6 +4,7 @@ import andius.objects.BaseMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -28,6 +29,13 @@ public interface Constants {
     public static final int MAX_CREATURES_ON_MAP = 10;
     public static final int MAX_WANDERING_CREATURES_IN_DUNGEON = 2;
     public static final int MAX_CREATURE_DISTANCE = 24;
+
+    enum Direction {
+        WEST,
+        NORTH,
+        EAST,
+        SOUTH;
+    }
 
     public enum Map {
 
@@ -153,6 +161,83 @@ public interface Constants {
 
         public int val() {
             return this.val;
+        }
+
+    }
+
+    public enum Moongate {
+        GATE_0(0, 1, 2),
+        GATE_1(3, 4, 5),
+        GATE_2(6, 7, 0),
+        GATE_3(1, 2, 3),
+        GATE_4(4, 5, 6),
+        GATE_5(7, 0, 1),
+        GATE_6(2, 3, 4),
+        GATE_7(5, 6, 7),;
+
+        private float x;
+        private float y;
+        private float mapX;
+        private float mapY;
+        private final int d1;
+        private final int d2;
+        private final int d3;
+
+        private TextureAtlas.AtlasRegion currentTexture;
+
+        private Moongate(int d1, int d2, int d3) {
+            this.d1 = d1;
+            this.d2 = d2;
+            this.d3 = d3;
+        }
+
+        public float getX() {
+            return x;
+        }
+
+        public float getY() {
+            return y;
+        }
+
+        public float getMapX() {
+            return mapX;
+        }
+
+        public float getMapY() {
+            return mapY;
+        }
+
+        public int getD1() {
+            return d1;
+        }
+
+        public int getD2() {
+            return d2;
+        }
+
+        public int getD3() {
+            return d3;
+        }
+
+        public TextureAtlas.AtlasRegion getCurrentTexture() {
+            return currentTexture;
+        }
+
+        public void setCurrentTexture(TextureAtlas.AtlasRegion currentTexture) {
+            this.currentTexture = currentTexture;
+        }
+
+        public static void init() {
+            MapLayer moongatesLayer = Map.WORLD.getTiledMap().getLayers().get("moongates");
+            Iterator<MapObject> iter = moongatesLayer.getObjects().iterator();
+            while (iter.hasNext()) {
+                MapObject obj = iter.next();
+                Moongate mg = Moongate.valueOf(obj.getName());
+                mg.x = obj.getProperties().get("x", Float.class);
+                mg.y = obj.getProperties().get("y", Float.class);
+                mg.mapX = Float.parseFloat(obj.getProperties().get("wx", String.class));
+                mg.mapY = Float.parseFloat(obj.getProperties().get("wy", String.class));
+            }
         }
 
     }
