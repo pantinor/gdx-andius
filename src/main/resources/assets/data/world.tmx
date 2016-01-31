@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" nextobjectid="11">
+ <properties>
+  <property name="startX" value="32"/>
+  <property name="startY" value="51"/>
+ </properties>
  <tileset firstgid="1" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
   <image source="uf_map.png" width="600" height="504"/>
   <terraintypes>
@@ -135,22 +139,6 @@
   <tile id="514" terrain="0,0,0,"/>
   <tile id="517" terrain=",,0,"/>
  </tileset>
- <tileset firstgid="526" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
-  <tileoffset x="6" y="-13"/>
-  <image source="uf_map.png" width="600" height="504"/>
-  <tile id="330">
-   <animation>
-    <frame tileid="330" duration="500"/>
-    <frame tileid="331" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="390">
-   <animation>
-    <frame tileid="390" duration="500"/>
-    <frame tileid="391" duration="500"/>
-   </animation>
-  </tile>
- </tileset>
  <layer name="water" width="256" height="256">
   <data encoding="base64" compression="zlib">
    eJztw0ENAAAMA6FTXf37TgQkrJqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq6nvdfAbr
@@ -173,25 +161,25 @@
  </layer>
  <layer name="props" width="256" height="256">
   <data encoding="base64" compression="zlib">
-   eJzt3T0KwjAYBuB2cNBDuHgoT9RB7S3Eo3gqEURwUBBE+xPb93mGdk0h75eSpE1VAQAAAAAAAAAAAAAAAPynU126BQBACZfSDQCKkX/IJf+QS/4hl/xDLvmHXPIPueQfMl3vF3sAIZKxH3LJP+SSf8gl/5BL/iGX/EOu2tofAAChGu/CAAAAAAAAAAAAAFBt7asFAAAAAABmpq1f7zAH+y/78yK4/6+Cnx2SGf8BAAAAAAAAAAAAAAAAAHhn4/tTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYzbEu3QJgLtQTAAAAAAAAAAAAAAAAAOhu7Xs9AAAAAADgiX/9AQAAAACQ6GB+HAAAAAAAeLBuAAAAAADTtzTPB0zMTt2Cj6zjAb8Yonac1SM6avQhAAAAgNE4fwMAAAAYinkH6Je9wgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0pXUmDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPydG5tNG68=
+   eJzt3UsKwjAUBdBk4EAX4cRFuaIOrN2GqxRBBCcFQfxA0t5zBu00hXeT0JfSUgAAAAAAAAAAAAAAAAD6dKmtRwAAtHBtPQCgGfmHXPIPueQfcsk/5JJ/yCX/kEv+IdPtcXEGECJZ+yGX/EMu+Ydc8g+55B9yyT/kqnp/AACEGuyFAQAAAAAAAAAAAKAcnasFAAAAAABWZqrzO6zB+GE9b4Lrfxf87JDM+g8AAAAAAAAAAAAAAAAAwCsH358CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANCxfW09AgCA34z2M3TqrDYBAAAAAIAnfQMAAAAAWL6t93zAwpzMW/CWPh7wDXMHPRrUJQAAAAAAAAAAwIzzfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8y+SfOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANCdOzs2GEA=
   </data>
  </layer>
- <layer name="clouds" width="256" height="256" visible="0">
+ <layer name="clouds" width="256" height="256">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T+1tB6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AADwAAQ==
   </data>
  </layer>
  <objectgroup name="portals">
-  <object id="1" name="LLECHY" type="portal" x="624" y="1224" width="24" height="24">
+  <object id="2" name="LLECHY" type="portal" x="624" y="1224" width="24" height="24">
    <properties>
-    <property name="x" value="26"/>
-    <property name="y" value="51"/>
+    <property name="wx" value="26"/>
+    <property name="wy" value="51"/>
    </properties>
   </object>
-  <object id="2" name="BARAD_ENELETH" type="portal" x="1536" y="312" width="24" height="24">
+  <object id="3" name="BARAD_ENELETH" type="portal" x="1536" y="312" width="24" height="24">
    <properties>
-    <property name="x" value="64"/>
-    <property name="y" value="13"/>
+    <property name="wx" value="64"/>
+    <property name="wy" value="13"/>
    </properties>
   </object>
  </objectgroup>
@@ -220,10 +208,10 @@
     <property name="wy" value="179"/>
    </properties>
   </object>
-  <object id="7" name="GATE_4" type="moongate" x="5784" y="864" width="24" height="24">
+  <object id="7" name="GATE_4" type="moongate" x="5256" y="936" width="24" height="24">
    <properties>
-    <property name="wx" value="241"/>
-    <property name="wy" value="36"/>
+    <property name="wx" value="219"/>
+    <property name="wy" value="39"/>
    </properties>
   </object>
   <object id="8" name="GATE_5" type="moongate" x="1272" y="4128" width="24" height="24">
@@ -238,10 +226,10 @@
     <property name="wy" value="64"/>
    </properties>
   </object>
-  <object id="10" name="GATE_7" type="moongate" x="2880" y="5496" width="24" height="24">
+  <object id="10" name="GATE_7" type="moongate" x="4680" y="4584" width="24" height="24">
    <properties>
-    <property name="wx" value="120"/>
-    <property name="wy" value="229"/>
+    <property name="wx" value="195"/>
+    <property name="wy" value="191"/>
    </properties>
   </object>
  </objectgroup>

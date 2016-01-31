@@ -24,14 +24,14 @@ import utils.Utils;
 public class WorldScreen extends BaseScreen {
 
     private final Map map;
-    private TmxMapRenderer renderer;
-    private Batch mapBatch, batch;
+    private final TmxMapRenderer renderer;
+    private final Batch mapBatch, batch;
     private final Viewport mapViewPort;
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
     public GameTimer gameTimer = new GameTimer();
 
-    private Texture t1, t2;
+    private Texture t1;
 
     public WorldScreen(Map map) {
 
@@ -56,33 +56,24 @@ public class WorldScreen extends BaseScreen {
         seq1.addAction(Actions.run(gameTimer));
         stage.addAction(Actions.forever(seq1));
 
+        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
+        mapBatch = renderer.getBatch();
+
+        mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
+            
+        newMapPixelCoords = getMapPixelCoords(this.map.getStartX(), this.map.getStartY());
+
     }
 
     @Override
     public void show() {
         gameTimer.active = true;
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
-        loadMap(29, 51);
     }
 
     @Override
     public void hide() {
         gameTimer.active = false;
-    }
-
-    private void loadMap(int x, int y) {
-
-        if (renderer != null) {
-            renderer.dispose();
-        }
-
-        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
-        mapBatch = renderer.getBatch();
-
-        mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
-
-//        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), x, y, 25f);
-        newMapPixelCoords = getMapPixelCoords(x, y);
     }
 
     @Override

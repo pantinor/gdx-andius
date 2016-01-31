@@ -41,7 +41,7 @@ public interface Constants {
 
         WORLD("Andius", "world.tmx", MapBorderBehavior.WRAP, WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", MapBorderBehavior.EXIT, TILE_DIM),
-        BARAD_ENELETH("Barad Eneleth", "llechy.tmx", MapBorderBehavior.EXIT, TILE_DIM),;
+        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", MapBorderBehavior.EXIT, TILE_DIM),;
 
         private final String label;
         private final String tmxFile;
@@ -50,6 +50,8 @@ public interface Constants {
         private BaseMap baseMap;
         private TiledMap tiledMap;
         private BaseScreen screen;
+        private int startX;
+        private int startY;
 
         private Map(String label, String tmx, MapBorderBehavior borderType, int dim) {
             this.label = label;
@@ -86,17 +88,26 @@ public interface Constants {
             return screen;
         }
 
+        public int getStartX() {
+            return startX;
+        }
+
+        public int getStartY() {
+            return startY;
+        }
+
         public static void init() {
             FileHandleResolver resolver = new Constants.ClasspathResolver();
             TmxMapLoader loader = new TmxMapLoader(resolver);
             for (Map m : Map.values()) {
                 m.tiledMap = loader.load("assets/data/" + m.tmxFile);
                 m.baseMap = new BaseMap();
-                m.screen = (m.dim == TILE_DIM ? new GameScreen(m) : new WorldScreen(m));
 
                 MapProperties prop = m.tiledMap.getProperties();
                 m.baseMap.setWidth(prop.get("width", Integer.class));
                 m.baseMap.setHeight(prop.get("height", Integer.class));
+                m.startX = Integer.parseInt(prop.get("startX", String.class));
+                m.startY = Integer.parseInt(prop.get("startY", String.class));
 
                 MapLayer portalsLayer = m.tiledMap.getLayers().get("portals");
                 if (portalsLayer != null) {
@@ -104,23 +115,15 @@ public interface Constants {
                     while (iter.hasNext()) {
                         MapObject obj = iter.next();
                         Map pm = Map.valueOf(obj.getName());
-                        String x = obj.getProperties().get("x", String.class);
-                        String y = obj.getProperties().get("y", String.class);
+                        String x = obj.getProperties().get("wx", String.class);
+                        String y = obj.getProperties().get("wy", String.class);
                         m.baseMap.addPortal(pm, Integer.parseInt(x), Integer.parseInt(y));
                     }
 
                 }
+                
+                m.screen = (m.dim == TILE_DIM ? new GameScreen(m) : new WorldScreen(m));
 
-//                float[][] shadowMap = new float[m.baseMap.getWidth()][m.baseMap.getHeight()];
-//                for (int y = 0; y < m.baseMap.getHeight(); y++) {
-//                    for (int x = 0; x < m.baseMap.getWidth(); x++) {
-//                        TiledMapTileLayer layer = (TiledMapTileLayer) m.tiledMap.getLayers().get("hills_forest");
-//                        TiledMapTileLayer.Cell cell = layer.getCell(x, m.baseMap.getWidth() - 1 - y);
-//                        shadowMap[x][y] = (cell != null ? 1 : 0);
-//                    }
-//                }
-//
-//                m.baseMap.setShadownMap(shadowMap);
             }
 
         }
