@@ -81,7 +81,7 @@
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC72XUW4DIQxEOVwPlK76zf71Mr1BpPzkAEl6o2YlkEajGdurbGNphMQCD2MwS2ve1qEutNL3Ffr0pA77b3YSatSOmdhffVOsTn068H9AzOcx3LzU+nTRT/m/cT+IXzHld8bk+Dj/K+ZY0frjOk2+iv9notY0S+1Xjk2DEk3x2XAOLu5ur6g1UmeB+dchro94LhZuXo5/JVXWX53V6PyovbCHH/mu2qg5oO9V/18xnsNmy1CVv1AfVRflV85Fih+dv4X6LVQ3+S6/8pl05tacuUouv2b7z+lrqMLP/Of47+VXrHK/RnfxEf6rO4XzEfOPMhwvyonMP1ros8pB7+Cj/zOO2V18NH8F9pS6/5y5sbP2jfxmKT7nsoh/Bl1GyWMij+PAbX+fuj11H+WjwL8A+yzaIBv3HvNPxL4PVf2fc1H+85lH++/4o2XvD16rWX4LcS5TMVW5YH5X9wPvzzl2xHd7Wo2fvT/cOVH87Eyp8TP/lT97+Nn7Jnt/YEz38NX7zuXCyNQ/dRR/986Jxv8DdEbeygAQAAA=
+   H4sIAAAAAAAAC72X0W3DMAxENVwHSj2A/Ndl+tPvAPnJAE2yUWNAAg6HO5JG3BA4GLAlPlGUKKs1b+tQF1rp+wp9evIO+292EmrUjpnYX31TrE59OvC/QcxnH25can666Kfi37gfxK+Yijtjcn5c/BVzrGj+cZ4mX+X/M1FrmqXWK+emwRNN8dlwDC7vbq2oOVJ7gfnXIX4f8Vwu3Lgc/0qqzL/aq9H+UWthDz+KXbVRY8DYq/G/YjyGzZahKn+hPupdVF+5Fil+tP8W6rfQu8l39ZX3pDM358xVcvU1W39OP0MVfhY/538vv2KV8zU6i4+IX50pXI+Yf5Shv6gmMv9oYcyqBr2Dj/HPPGZn8dH8FdhT6vxz5nxn7RvFzVJ8rmUR/wy6jCf7RB7ngds+nvp96jae9wL/AuyzaINsXHvMPxH7NlSNf45Fxc97Hu2/84+W3T94rubzS4hrmcop+8/uH7w+p++I79a08p/dP9w+UfxsTyn/Wfwqnj387H6T3T8wp3v46n6n/Gf/POqfOsq/u+dE/v8AAiJE7QAQAAA=
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
@@ -94,9 +94,14 @@
    H4sIAAAAAAAAC2NgGAWjYBSMglEwWEAhE3n6qoD6KsnUi2w3qfZjs5NSdwxmsHCA/bZ4gO0faP/DQOIAu6N0kITDKKAd2ADE8owQehSMglEwCoYTAAB+Jv3fABAAAA==
   </data>
  </layer>
+ <layer name="water_edges" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UgQmAIBBFcwedohUOWuVGc5RGy1M+WCCYiiLcAymQeF/7ehyKoiiKotTgTBx+ld+aOO5V/rB2dgv9yhhW9ljcVxiUujQ1A9zS4XCOOLx7W8hwmvezF/HAneVhmrQH9HHnGWb4d7o35F+1dtOlO7rp2xw5H39ywEsD9tlmvUSO0powBy+lHNybwSVv9fmAd3TPkKO0Jszt1G/hAYRN4+gAEAAA
+  </data>
+ </layer>
  <layer name="shadows" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2USwoAIAhEu4v3v2PrRFFBMWUeSC2EGj9zTj8kBADSXGybEa+eTs2k3EE+0T57dmTr7lRgeQ1q+DLNoyN/s7R5A8yF2GnlZvaev41ZqkHrV2SfPbnwBPAbF4GER8YAEAAA
+   H4sIAAAAAAAAC+2VWQoAIAhEu4v3v2PfheJMFG3zQAgycnKplP2YY0J4dfFajaB6dmq2YC3mw+YZ6ZFXe2cF2azRG7bcNqOZ2DJtqJ3Kr3+Kd18UgyX7vW+We3a2szEInihfTD8jvqMzgTmzsqcR/eIuKlbZzY4AEAAA
   </data>
  </layer>
  <layer name="walls" width="32" height="32">
@@ -124,4 +129,12 @@
    H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
   </data>
  </layer>
+ <objectgroup name="people">
+  <object id="1" name="Tyrone" type="merchant" x="912" y="624" width="48" height="48">
+   <properties>
+    <property name="startX" value="19"/>
+    <property name="startY" value="13"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
