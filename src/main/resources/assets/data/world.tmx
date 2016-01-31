@@ -122,9 +122,41 @@
   <tile id="400" terrain=",2,,2"/>
   <tile id="401" terrain="2,2,2,2"/>
   <tile id="402" terrain="2,,2,"/>
+  <tile id="410">
+   <animation>
+    <frame tileid="410" duration="400"/>
+    <frame tileid="411" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="412">
+   <animation>
+    <frame tileid="412" duration="400"/>
+    <frame tileid="413" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="414">
+   <animation>
+    <frame tileid="414" duration="400"/>
+    <frame tileid="415" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="416">
+   <animation>
+    <frame tileid="416" duration="400"/>
+    <frame tileid="417" duration="400"/>
+   </animation>
+  </tile>
   <tile id="425" terrain=",2,,"/>
   <tile id="426" terrain="2,2,,"/>
   <tile id="427" terrain="2,,,"/>
+  <tile id="443">
+   <animation>
+    <frame tileid="443" duration="200"/>
+    <frame tileid="444" duration="200"/>
+    <frame tileid="445" duration="200"/>
+    <frame tileid="446" duration="200"/>
+   </animation>
+  </tile>
   <tile id="450" terrain="2,2,2,"/>
   <tile id="451" terrain="2,2,,2"/>
   <tile id="461" terrain="0,0,,"/>

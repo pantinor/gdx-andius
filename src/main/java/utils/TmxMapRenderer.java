@@ -25,6 +25,7 @@ import andius.Context;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -33,7 +34,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
@@ -45,10 +47,25 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
     TextureRegion door;
     TextureRegion brick_floor;
     TextureRegion locked_door;
-    
+
+    List<CreatureLayer> creatureLayers = new ArrayList<>();
+
+    public interface CreatureLayer {
+
+        public void render(float time);
+    }
+
+    public void registerCreatureLayer(CreatureLayer layer) {
+        creatureLayers.add(layer);
+    }
+
+    public void unregisterCreatureLayer(CreatureLayer layer) {
+        creatureLayers.remove(layer);
+    }
+
     public TmxMapRenderer(Context context, TextureAtlas atlas, Map map, TiledMap tiledMap, float unitScale) {
         super(tiledMap, unitScale);
-        
+
         this.map = map;
         this.context = context;
         this.fov = new SpreadFOV(map.getMap().getWidth(), map.getMap().getHeight(), map.getBorderType() == MapBorderBehavior.WRAP);
@@ -71,7 +88,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
     }
 
     @Override
-    public void render() {        
+    public void render() {
         beginRender();
         for (MapLayer layer : map.getTiledMap().getLayers()) {
             if (layer instanceof TiledMapTileLayer && layer.isVisible()) {
@@ -86,8 +103,15 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
         stateTime += Gdx.graphics.getDeltaTime();
 
-        Color batchColor = batch.getColor();
-        float color = 0;
+        if (layer.getName().equals("creature")) {
+            for (CreatureLayer cl : creatureLayers) {
+                cl.render(stateTime);
+            }
+            return;
+        }
+
+        final Color batchColor = batch.getColor();
+        final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * layer.getOpacity());
 
         int layerWidth = layer.getWidth();
         int layerHeight = layer.getHeight();
@@ -133,11 +157,9 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
                     }
 
                     cell = layer.getCell(cx, cy);
-                    color = getColor(batchColor, cx, layerHeight - cy - 1);
 
                 } else {
                     cell = layer.getCell(col, row);
-                    color = getColor(batchColor, col, layerHeight - row - 1);
                 }
 
                 if (cell == null) {
@@ -146,20 +168,13 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
                 }
 
                 TiledMapTile tile = cell.getTile();
+
                 if (tile != null) {
+                    final boolean flipX = cell.getFlipHorizontally();
+                    final boolean flipY = cell.getFlipVertically();
+                    final int rotations = cell.getRotation();
 
                     TextureRegion region = tile.getTextureRegion();
-
-//                    DoorStatus ds = bm.getDoor(col, layerHeight - row - 1);
-//                    if (ds != null) {
-//                        region = door;
-//                        if (ds.locked) {
-//                            region = locked_door;
-//                        }
-//                        if (bm.isDoorOpen(ds)) {
-//                            region = brick_floor;
-//                        }
-//                    }
 
                     float x1 = x + tile.getOffsetX() * unitScale;
                     float y1 = y + tile.getOffsetY() * unitScale;
@@ -195,117 +210,74 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
                     vertices[U4] = u2;
                     vertices[V4] = v1;
 
-                    batch.draw(region.getTexture(), vertices, 0, vertices.length);
+                    if (flipX) {
+                        float temp = vertices[U1];
+                        vertices[U1] = vertices[U3];
+                        vertices[U3] = temp;
+                        temp = vertices[U2];
+                        vertices[U2] = vertices[U4];
+                        vertices[U4] = temp;
+                    }
+                    if (flipY) {
+                        float temp = vertices[V1];
+                        vertices[V1] = vertices[V3];
+                        vertices[V3] = temp;
+                        temp = vertices[V2];
+                        vertices[V2] = vertices[V4];
+                        vertices[V4] = temp;
+                    }
+                    if (rotations != 0) {
+                        switch (rotations) {
+                            case TiledMapTileLayer.Cell.ROTATE_90: {
+                                float tempV = vertices[V1];
+                                vertices[V1] = vertices[V2];
+                                vertices[V2] = vertices[V3];
+                                vertices[V3] = vertices[V4];
+                                vertices[V4] = tempV;
+
+                                float tempU = vertices[U1];
+                                vertices[U1] = vertices[U2];
+                                vertices[U2] = vertices[U3];
+                                vertices[U3] = vertices[U4];
+                                vertices[U4] = tempU;
+                                break;
+                            }
+                            case TiledMapTileLayer.Cell.ROTATE_180: {
+                                float tempU = vertices[U1];
+                                vertices[U1] = vertices[U3];
+                                vertices[U3] = tempU;
+                                tempU = vertices[U2];
+                                vertices[U2] = vertices[U4];
+                                vertices[U4] = tempU;
+                                float tempV = vertices[V1];
+                                vertices[V1] = vertices[V3];
+                                vertices[V3] = tempV;
+                                tempV = vertices[V2];
+                                vertices[V2] = vertices[V4];
+                                vertices[V4] = tempV;
+                                break;
+                            }
+                            case TiledMapTileLayer.Cell.ROTATE_270: {
+                                float tempV = vertices[V1];
+                                vertices[V1] = vertices[V4];
+                                vertices[V4] = vertices[V3];
+                                vertices[V3] = vertices[V2];
+                                vertices[V2] = tempV;
+
+                                float tempU = vertices[U1];
+                                vertices[U1] = vertices[U4];
+                                vertices[U4] = vertices[U3];
+                                vertices[U3] = vertices[U2];
+                                vertices[U2] = tempU;
+                                break;
+                            }
+                        }
+                    }
+                    batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
                 }
                 x += layerTileWidth;
             }
             y -= layerTileHeight;
-        }
-        
-//        if (bm.getPeople() != null) {
-//            for (Person p : bm.getPeople()) {
-//
-//                if (p == null || p.isRemovedFromMap()) {
-//                    continue;
-//                }
-//                
-//                if (p.getAnim() != null) {
-//                    draw(p.getAnim().getKeyFrame(stateTime, true), p.getCurrentPos().x, p.getCurrentPos().y, p.getX(), p.getY());
-//                } else {
-//                    draw(p.getTextureRegion(), p.getCurrentPos().x, p.getCurrentPos().y, p.getX(), p.getY());
-//                }
-//            }
-//
-//        }
-//
-//        List<Creature> crs = bm.getCreatures();
-//        if (crs.size() > 0) {
-//            for (Creature cr : crs) {
-//
-//                if (cr.currentPos == null || !cr.getVisible()) {
-//                    continue;
-//                }
-//
-//                if (cr.getTile() == CreatureType.pirate_ship) {
-//                    TextureRegion tr = cr.getAnim().getKeyFrames()[cr.sailDir.getVal() - 1];
-//                    draw(tr, cr.currentPos.x, cr.currentPos.y, cr.currentX, cr.currentY);
-//                } else {
-//                    draw(cr.getAnim().getKeyFrame(stateTime, true), cr.currentPos.x, cr.currentPos.y, cr.currentX, cr.currentY);
-//                }
-//
-//            }
-//        }
-//        
-//        for (Drawable dr : bm.getObjects()) {
-//            draw(dr.getTexture(), dr.getX(), dr.getY(), dr.getCx(), dr.getCy());
-//        }
-    }
-
-    private float getColor(Color batchColor, int x, int y) {
-        
-        return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
-
-//        float[][] lightMap = fov.getLightMap();
-//
-//        if (!(x >= 0 && x < lightMap.length && y >= 0 && y < lightMap[0].length)) {
-//            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
-//        }
-//
-//        float val = lightMap[x][y];
-//
-//        if (val <= 0) {
-//            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, .0f); //make it all black
-//        } else {
-//            val = val < .2f ? .2f : val;
-//            val = val > .85f ? 1f : val;
-//            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, val);
-//        }
-        
-    }
-
-    private void draw(TextureRegion region, float x, float y, int locX, int locY) {
-
-        float x1 = x;
-        float y1 = y;
-        float x2 = x1 + TILE_DIM;
-        float y2 = y1 + TILE_DIM;
-        
-        Rectangle b = new Rectangle(x, y, 5, 5);
-        
-        if (viewBounds.contains(b)) {
-
-            float u1 = region.getU();
-            float v1 = region.getV2();
-            float u2 = region.getU2();
-            float v2 = region.getV();
-
-            float color = getColor(batch.getColor(), locX, locY);
-
-            vertices[X1] = x1;
-            vertices[Y1] = y1;
-            vertices[C1] = color;
-            vertices[U1] = u1;
-            vertices[V1] = v1;
-
-            vertices[X2] = x1;
-            vertices[Y2] = y2;
-            vertices[C2] = color;
-            vertices[U2] = u1;
-            vertices[V2] = v2;
-
-            vertices[X3] = x2;
-            vertices[Y3] = y2;
-            vertices[C3] = color;
-            vertices[U3] = u2;
-            vertices[V3] = v2;
-
-            vertices[X4] = x2;
-            vertices[Y4] = y1;
-            vertices[C4] = color;
-            vertices[U4] = u2;
-            vertices[V4] = v1;
-
-            batch.draw(region.getTexture(), vertices, 0, 20);
         }
     }
 }

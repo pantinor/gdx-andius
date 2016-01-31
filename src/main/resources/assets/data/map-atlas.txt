@@ -30,3 +30,122 @@ moongate
   orig: 24, 24
   offset: 0, 0
   index: 3
+avatar_warrior_red
+  rotate: false
+  xy: 240, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+avatar_warrior_red
+  rotate: false
+  xy: 264, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+avatar_warrior_blue
+  rotate: false
+  xy: 288, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+avatar_warrior_blue
+  rotate: false
+  xy: 312, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+avatar_wizard_red
+  rotate: false
+  xy: 336, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+avatar_wizard_red
+  rotate: false
+  xy: 360, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+avatar_wizard_blue
+  rotate: false
+  xy: 384, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+avatar_wizard_blue
+  rotate: false
+  xy: 408, 384
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+marker_red
+  rotate: false
+  xy: 240, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+marker_red
+  rotate: false
+  xy: 264, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+marker_red
+  rotate: false
+  xy: 288, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
+marker_blue
+  rotate: false
+  xy: 312, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+marker_blue
+  rotate: false
+  xy: 336, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+marker_blue
+  rotate: false
+  xy: 360, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
+marker_white
+  rotate: false
+  xy: 384, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+marker_white
+  rotate: false
+  xy: 408, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+marker_white
+  rotate: false
+  xy: 432, 336
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2

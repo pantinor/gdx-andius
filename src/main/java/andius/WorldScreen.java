@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.TmxMapRenderer;
-import utils.Utils;
 
 public class WorldScreen extends BaseScreen {
 
@@ -30,8 +29,6 @@ public class WorldScreen extends BaseScreen {
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
     public GameTimer gameTimer = new GameTimer();
-
-    private Texture t1;
 
     public WorldScreen(Map map) {
 
@@ -46,8 +43,6 @@ public class WorldScreen extends BaseScreen {
         mapViewPort = new ScreenViewport(camera);
 
         addButtons();
-
-        t1 = Utils.fillRectangle(WORLD_TILE_DIM, WORLD_TILE_DIM, Color.RED, .3f);
 
         moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
 
@@ -114,7 +109,7 @@ public class WorldScreen extends BaseScreen {
         batch.begin();
 
         batch.draw(Andius.backGround, 0, 0);
-        batch.draw(t1, WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17);
+        batch.draw(Andius.avatar_warrior_red.getKeyFrame(time, true), WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17);
 
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + feluccaphase), 372, Andius.SCREEN_HEIGHT - 32, 20, 20);

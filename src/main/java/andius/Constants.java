@@ -4,6 +4,7 @@ import andius.objects.BaseMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -288,7 +289,7 @@ public interface Constants {
         DEAD;
     }
 
-    public enum Tile {
+    public enum Heroes {
 
         WIZARD,
         CLERIC,
@@ -420,6 +421,18 @@ public interface Constants {
         ELVEN_SWORDSMAN_BLUE,
         ELVEN_WIZARD_BLUE,
         ELVEN_ARCHER_BLUE,;
+        
+        private Animation animation;
+
+        public Animation getAnimation() {
+            return animation;
+        }
+        
+        public static void init(TextureAtlas atlas) {
+            for (Heroes hero : Heroes.values()) {
+                hero.animation = new Animation(1.2f,atlas.findRegions(hero.toString()));
+            }
+        }
 
     }
 

@@ -1,12 +1,11 @@
 package andius;
 
+import static andius.Constants.TILE_DIM;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -15,16 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.TmxMapRenderer;
-import utils.Utils;
+import utils.TmxMapRenderer.CreatureLayer;
 
 public class GameScreen extends BaseScreen {
 
     private final Map map;
     private final TmxMapRenderer renderer;
-    private final Batch mapBatch, batch;
+    private final Batch batch;
     private final Viewport mapViewPort;
-
-    private Texture t1;
 
     public GameScreen(Map map) {
 
@@ -39,11 +36,15 @@ public class GameScreen extends BaseScreen {
         mapViewPort = new ScreenViewport(camera);
 
         addButtons();
-
-        t1 = Utils.fillRectangle(TILE_DIM, TILE_DIM, Color.RED, .3f);
         
         renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
-        mapBatch = renderer.getBatch();
+        
+        renderer.registerCreatureLayer(new CreatureLayer() {
+            @Override
+            public void render(float time) {
+                renderer.getBatch().draw(Heroes.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM);
+            }
+        });
 
         mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;
 
@@ -81,14 +82,13 @@ public class GameScreen extends BaseScreen {
                 camera.position.y - TILE_DIM * 6,
                 Andius.MAP_VIEWPORT_DIM,
                 Andius.MAP_VIEWPORT_DIM);
-
+        
         renderer.render();
-
+        
         batch.begin();
 
         batch.draw(Andius.backGround, 0, 0);
-        batch.draw(t1, TILE_DIM * 7, TILE_DIM * 8);
-
+            
         //Vector3 v = getCurrentMapCoords();
         //Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();

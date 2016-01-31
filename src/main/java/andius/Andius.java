@@ -54,6 +54,16 @@ public class Andius extends Game {
     public static Animation explosionLarge;
     public static Animation explosion;
     public static Animation cloud;
+    
+    public static Animation avatar_warrior_red;
+    public static Animation avatar_warrior_blue;
+    public static Animation avatar_wizard_red;
+    public static Animation avatar_wizard_blue;
+
+    public static Animation marker_red;
+    public static Animation marker_blue;
+    public static Animation marker_white;
+
 
     public static void main(String[] args) {
 
@@ -133,6 +143,8 @@ public class Andius extends Game {
             heroesAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/heroes-atlas.txt"));
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
+            
+            avatar_warrior_red = new Animation(.4f,mapAtlas.findRegions("avatar_warrior_red"));
 //
 //            hitTile = standardAtlas.findRegion("hit_flash");
 //            magicHitTile = standardAtlas.findRegion("magic_flash");
@@ -175,6 +187,7 @@ public class Andius extends Game {
             
             Constants.Map.init();
             Constants.Moongate.init();
+            Constants.Heroes.init(heroesAtlas);
             
         } catch (Exception e) {
             e.printStackTrace();
