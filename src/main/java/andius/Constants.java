@@ -1,6 +1,7 @@
 package andius;
 
 import andius.objects.BaseMap;
+import andius.objects.Creature;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import java.util.Iterator;
+import utils.XORShiftRandom;
 
 public interface Constants {
 
@@ -31,22 +33,14 @@ public interface Constants {
     public static final int MAX_WANDERING_CREATURES_IN_DUNGEON = 2;
     public static final int MAX_CREATURE_DISTANCE = 24;
 
-    enum Direction {
-        WEST,
-        NORTH,
-        EAST,
-        SOUTH;
-    }
-
     public enum Map {
 
-        WORLD("Andius", "world.tmx", MapBorderBehavior.WRAP, WORLD_TILE_DIM),
-        LLECHY("Llechy", "llechy.tmx", MapBorderBehavior.EXIT, TILE_DIM),
-        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", MapBorderBehavior.EXIT, TILE_DIM),;
+        WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
+        LLECHY("Llechy", "llechy.tmx", TILE_DIM),
+        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),;
 
         private final String label;
         private final String tmxFile;
-        private final MapBorderBehavior borderType;
         private final int dim;
         private BaseMap baseMap;
         private TiledMap tiledMap;
@@ -54,10 +48,9 @@ public interface Constants {
         private int startX;
         private int startY;
 
-        private Map(String label, String tmx, MapBorderBehavior borderType, int dim) {
+        private Map(String label, String tmx, int dim) {
             this.label = label;
             this.tmxFile = tmx;
-            this.borderType = borderType;
             this.dim = dim;
         }
 
@@ -67,10 +60,6 @@ public interface Constants {
 
         public String getTmxFile() {
             return tmxFile;
-        }
-
-        public MapBorderBehavior getBorderType() {
-            return borderType;
         }
 
         public TiledMap getTiledMap() {
@@ -120,9 +109,26 @@ public interface Constants {
                         String y = obj.getProperties().get("wy", String.class);
                         m.baseMap.addPortal(pm, Integer.parseInt(x), Integer.parseInt(y));
                     }
-
                 }
-                
+
+                MapLayer peopleLayer = m.tiledMap.getLayers().get("people");
+                if (peopleLayer != null) {
+                    Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
+                    while (iter.hasNext()) {
+                        MapObject obj = iter.next();
+                        Heroes icon = Heroes.valueOf(obj.getName());
+                        int sx = Integer.parseInt(obj.getProperties().get("startX", String.class));
+                        int sy = Integer.parseInt(obj.getProperties().get("startY", String.class));
+                        float x = obj.getProperties().get("x", Float.class);
+                        float y = obj.getProperties().get("y", Float.class);
+                        String surname = obj.getProperties().get("surname", String.class);
+                        PersonRole role = PersonRole.valueOf(obj.getProperties().get("type", String.class));
+                        MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
+                        Creature cr = new Creature(icon, role, surname, sx, sy, x, y, movement);
+                        m.baseMap.creatures.add(cr);
+                    }
+                }
+
                 m.screen = (m.dim == TILE_DIM ? new GameScreen(m) : new WorldScreen(m));
 
             }
@@ -131,11 +137,110 @@ public interface Constants {
 
     }
 
-    public enum MapBorderBehavior {
+    enum Direction {
 
-        WRAP,
-        EXIT,
-        FIXED;
+        WEST(1, 0x1),
+        NORTH(2, 0x2),
+        EAST(3, 0x4),
+        SOUTH(4, 0x8);
+
+        private int val;
+        private int mask;
+
+        private Direction(int v, int mask) {
+            this.val = v;
+            this.mask = mask;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public int getMask() {
+            return mask;
+        }
+
+        public static boolean isDirInMask(Direction dir, int mask) {
+            int v = (mask & dir.mask);
+            return (v > 0);
+        }
+
+        public static boolean isDirInMask(int dir, int mask) {
+            int v = (mask & dir);
+            return (v > 0);
+        }
+
+        public static int addToMask(Direction dir, int mask) {
+            return (dir.mask | mask);
+        }
+
+        public static int removeFromMask(int mask, Direction... dirs) {
+            for (Direction dir : dirs) {
+                mask &= ~dir.getMask();
+            }
+            return mask;
+        }
+
+        public static Direction getRandomValidDirection(int mask) {
+            int n = 0;
+            Direction d[] = new Direction[4];
+            for (Direction dir : values()) {
+                if (isDirInMask(dir, mask)) {
+                    d[n] = dir;
+                    n++;
+                }
+            }
+            if (n == 0) {
+                return null;
+            }
+            int rand = new XORShiftRandom().nextInt(n);
+            return d[rand];
+        }
+
+        public static Direction reverse(Direction dir) {
+            switch (dir) {
+                case WEST:
+                    return EAST;
+                case NORTH:
+                    return SOUTH;
+                case EAST:
+                    return WEST;
+                case SOUTH:
+                    return NORTH;
+            }
+            return null;
+        }
+
+        public static Direction getByValue(int val) {
+            Direction ret = null;
+            for (Direction d : Direction.values()) {
+                if (val == d.getVal()) {
+                    ret = d;
+                    break;
+                }
+            }
+            return ret;
+        }
+
+        public static Direction getByMask(int mask) {
+            Direction ret = null;
+            for (Direction d : Direction.values()) {
+                if (mask == d.mask) {
+                    ret = d;
+                    break;
+                }
+            }
+            return ret;
+        }
+
+    };
+
+    public enum MovementBehavior {
+
+        FIXED,
+        WANDER,
+        FOLLOW_AVATAR,
+        ATTACK_AVATAR;
     }
 
     public enum Profession {
@@ -289,6 +394,11 @@ public interface Constants {
         DEAD;
     }
 
+    public enum PersonRole {
+        NONE,
+        MERCHANT;
+    }
+
     public enum Heroes {
 
         WIZARD,
@@ -421,16 +531,16 @@ public interface Constants {
         ELVEN_SWORDSMAN_BLUE,
         ELVEN_WIZARD_BLUE,
         ELVEN_ARCHER_BLUE,;
-        
+
         private Animation animation;
 
         public Animation getAnimation() {
             return animation;
         }
-        
+
         public static void init(TextureAtlas atlas) {
             for (Heroes hero : Heroes.values()) {
-                hero.animation = new Animation(1.2f,atlas.findRegions(hero.toString()));
+                hero.animation = new Animation(1.2f, atlas.findRegions(hero.toString()));
             }
         }
 

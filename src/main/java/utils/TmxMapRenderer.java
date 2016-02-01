@@ -25,7 +25,6 @@ import andius.Context;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -33,7 +32,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,6 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
     private final Map map;
     private final Context context;
-    private final SpreadFOV fov;
     float stateTime = 0;
 
     TextureRegion door;
@@ -68,7 +65,6 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
         this.map = map;
         this.context = context;
-        this.fov = new SpreadFOV(map.getMap().getWidth(), map.getMap().getHeight(), map.getBorderType() == MapBorderBehavior.WRAP);
 
         if (atlas != null) {
 
@@ -81,10 +77,6 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
             locked_door.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
 
-    }
-
-    public SpreadFOV getFOV() {
-        return this.fov;
     }
 
     @Override
@@ -124,13 +116,6 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
         int row1 = Math.max(0, (int) (viewBounds.y / layerTileHeight));
         int row2 = Math.min(layerHeight, (int) ((viewBounds.y + viewBounds.height + layerTileHeight) / layerTileHeight));
 
-        if (map.getBorderType() == MapBorderBehavior.WRAP) {
-            col1 = (int) (viewBounds.x / layerTileWidth);
-            col2 = (int) ((viewBounds.x + viewBounds.width + layerTileWidth) / layerTileWidth);
-            row1 = (int) (viewBounds.y / layerTileHeight);
-            row2 = (int) ((viewBounds.y + viewBounds.height + layerTileHeight) / layerTileHeight);
-        }
-
         float y = row2 * layerTileHeight;
         float startX = col1 * layerTileWidth;
 
@@ -139,28 +124,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
             float x = startX;
             for (int col = col1; col < col2; col++) {
 
-                TiledMapTileLayer.Cell cell = null;
-
-                if (map.getBorderType() == MapBorderBehavior.WRAP) {
-
-                    int cx = col;
-                    if (col < 0) {
-                        cx = layerWidth + col;
-                    } else if (col >= layerWidth) {
-                        cx = col - layerWidth;
-                    }
-                    int cy = row;
-                    if (row < 0) {
-                        cy = layerHeight + row;
-                    } else if (row >= layerHeight) {
-                        cy = row - layerHeight;
-                    }
-
-                    cell = layer.getCell(cx, cy);
-
-                } else {
-                    cell = layer.getCell(col, row);
-                }
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
 
                 if (cell == null) {
                     x += layerTileWidth;

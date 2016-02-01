@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Constants.TILE_DIM;
+import andius.objects.Creature;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import utils.PartyDeathException;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
 
@@ -36,13 +38,16 @@ public class GameScreen extends BaseScreen {
         mapViewPort = new ScreenViewport(camera);
 
         addButtons();
-        
+
         renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
-        
+
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Heroes.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM);
+                renderer.getBatch().draw(Heroes.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
+                for (Creature cr : GameScreen.this.map.getMap().creatures) {
+                    renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+                }
             }
         });
 
@@ -55,10 +60,10 @@ public class GameScreen extends BaseScreen {
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
-    
+
     @Override
     public void hide() {
-        
+
     }
 
     @Override
@@ -82,13 +87,13 @@ public class GameScreen extends BaseScreen {
                 camera.position.y - TILE_DIM * 6,
                 Andius.MAP_VIEWPORT_DIM,
                 Andius.MAP_VIEWPORT_DIM);
-        
+
         renderer.render();
-        
+
         batch.begin();
 
         batch.draw(Andius.backGround, 0, 0);
-            
+
         //Vector3 v = getCurrentMapCoords();
         //Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
@@ -123,8 +128,10 @@ public class GameScreen extends BaseScreen {
             }
             if (newMapPixelCoords.y + TILE_DIM >= this.map.getMap().getHeight() * TILE_DIM) {
                 newMapPixelCoords.y = 0;
+                v.y = 0;
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
+                v.y++;
             }
         } else if (keycode == Keys.DOWN) {
             if (!preMove(v, Direction.SOUTH)) {
@@ -132,8 +139,10 @@ public class GameScreen extends BaseScreen {
             }
             if (newMapPixelCoords.y - TILE_DIM < 0) {
                 newMapPixelCoords.y = (this.map.getMap().getHeight() - 1) * TILE_DIM;
+                v.y = this.map.getMap().getHeight() - 1;
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
+                v.y--;
             }
         } else if (keycode == Keys.RIGHT) {
             if (!preMove(v, Direction.EAST)) {
@@ -141,8 +150,10 @@ public class GameScreen extends BaseScreen {
             }
             if (newMapPixelCoords.x + TILE_DIM >= this.map.getMap().getWidth() * TILE_DIM) {
                 newMapPixelCoords.x = 0;
+                v.x = 0;
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
+                v.x++;
             }
         } else if (keycode == Keys.LEFT) {
             if (!preMove(v, Direction.WEST)) {
@@ -150,10 +161,14 @@ public class GameScreen extends BaseScreen {
             }
             if (newMapPixelCoords.x - TILE_DIM < 0) {
                 newMapPixelCoords.x = (this.map.getMap().getWidth() - 1) * TILE_DIM;
+                v.x = this.map.getMap().getWidth() - 1;
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
+                v.x--;
             }
         }
+
+        finishTurn((int) v.x, (int) v.y);
 
         return false;
     }
@@ -176,28 +191,13 @@ public class GameScreen extends BaseScreen {
             nx = (int) current.x + 1;
         }
 
-        if (this.map.getBorderType() == MapBorderBehavior.EXIT) {
-            if (nx > this.map.getMap().getWidth() - 1 || nx < 0 || ny > this.map.getMap().getHeight() - 1 || ny < 0) {
-
-                //remove any city/town actors (chests) from the map we are leaving
-//                for (Actor a : mapObjectsStage.getActors()) {
-//                    if (a instanceof Drawable) {
-//                        Drawable d = (Drawable) a;
-//                        if (d.getMapId() != Maps.WORLD.getId() && d.getMapId() == bm.getId()) {
-//                            d.remove();
-//                        }
-//                    }
-//                }
-
-                Andius.mainGame.setScreen(Map.WORLD.getScreen());
-                
-                return false;
-
-            }
+        if (nx > this.map.getMap().getWidth() - 1 || nx < 0 || ny > this.map.getMap().getHeight() - 1 || ny < 0) {
+            Andius.mainGame.setScreen(Map.WORLD.getScreen());
+            return false;
         }
-        
+
         TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("floor");
-        TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getMap().getWidth() - 1 - ny);
+        TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
         if (cell == null) {
             //Sounds.play(Sound.BLOCKED);
             return false;
@@ -208,6 +208,12 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void finishTurn(int currentX, int currentY) {
+
+        try {
+            this.map.getMap().moveObjects(this.map, this, currentX, currentY);
+        } catch (PartyDeathException t) {
+            partyDeath();
+        }
 
     }
 
