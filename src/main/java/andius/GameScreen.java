@@ -94,8 +94,8 @@ public class GameScreen extends BaseScreen {
 
         batch.draw(Andius.backGround, 0, 0);
 
-        //Vector3 v = getCurrentMapCoords();
-        //Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        Vector3 v = getCurrentMapCoords();
+        Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
     }
@@ -131,7 +131,7 @@ public class GameScreen extends BaseScreen {
                 v.y = 0;
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
-                v.y++;
+               v.y -= 1;
             }
         } else if (keycode == Keys.DOWN) {
             if (!preMove(v, Direction.SOUTH)) {
@@ -139,10 +139,10 @@ public class GameScreen extends BaseScreen {
             }
             if (newMapPixelCoords.y - TILE_DIM < 0) {
                 newMapPixelCoords.y = (this.map.getMap().getHeight() - 1) * TILE_DIM;
-                v.y = this.map.getMap().getHeight() - 1;
+               v.y = this.map.getMap().getHeight() - 1;
             } else {
                 newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
-                v.y--;
+               v.y += 1;
             }
         } else if (keycode == Keys.RIGHT) {
             if (!preMove(v, Direction.EAST)) {
@@ -153,7 +153,7 @@ public class GameScreen extends BaseScreen {
                 v.x = 0;
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
-                v.x++;
+               v.x += 1;
             }
         } else if (keycode == Keys.LEFT) {
             if (!preMove(v, Direction.WEST)) {
@@ -164,7 +164,7 @@ public class GameScreen extends BaseScreen {
                 v.x = this.map.getMap().getWidth() - 1;
             } else {
                 newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
-                v.x--;
+                v.x -= 1;
             }
         }
 
@@ -202,15 +202,15 @@ public class GameScreen extends BaseScreen {
             //Sounds.play(Sound.BLOCKED);
             return false;
         }
-
+        
         return true;
     }
 
     @Override
-    public void finishTurn(int currentX, int currentY) {
+    public void finishTurn(int x, int y) {
 
         try {
-            this.map.getMap().moveObjects(this.map, this, currentX, currentY);
+            this.map.getMap().moveObjects(this.map, this, x, y);
         } catch (PartyDeathException t) {
             partyDeath();
         }

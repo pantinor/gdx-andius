@@ -87,7 +87,7 @@
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC62WPW7DMAyFdZ5OvUMu0r3t1tkacpFMzRD0Dj1Bkt6oEioBD6+PPzLyAEKGLesTKZJ2KXnVYdvCOxltwvi+4h8c6/oA67o2+4GR+bX4fJyX4Z/BrsPuY7wBH33C9Td6Vul5JOQP/79vf+OpjSeLPxkcj9X4M9+S4qt8qGAR/1z+8+f157ApZGT2uef82SZ/o3Ux5upZ1v8uzn/lP66v6kDx1fnvlbU+x0Dt6QhWi/bFimu0tsoJfsfiW+vzGUaxVsK5is854omZqua6ngSf469ytsvLzz3+4xzmq7OL+EfHXluPfGs2x2Yv1lzrG+Ipw3+HPXTjOc/O+1F/4Bh6/s9rb/4evle3VszU+Vv84oxW3+V/HM5/1X+s/PekuFH+eHyOY9THM98dxY78V/0v6s3RvtQcr/9GynDV2eC9iB/lfnavuGfFVuc/pdjsf9clMOQ/ova5zjP8LNvjF1grW6dTj+59eFZfCeN8s+otm/8Y/xW+Vccr337Ovyzf+ldT/Mj/7H/SlNcrrX8/tU/Vc7x1VP9eZVkx+wWdMYxEABAAAA==
+   H4sIAAAAAAAAC62WS27DMAxEdZ6ucoccp8kua2uRi2SVLIreoSfI50a1UAkYTIcfGRmAkGHLeiJF0i4lr9ptmXgno0UY31f8vWNNJ7Cm+2ovGJlfi8/HeRn+Deze7dnHB/DRJ1x/oWeVnkdCfvf/5/E3XtbxYvEHg+MxG3/mW1J8lQ8VLOLfyn/+uL52G0JGZp9bzp9t8BdaF2OunmX9b+L8V/7j+qoOFF+d/1ZZ63MM1J7OYLVoX6y4RmurnOB3LL61Pp9hFGslnKv4nCOemKlqrulD8Dn+KmebvPzc4j/OYb46u4h/duxz7ZGH1XC05lrfEE8Z/hHYir9z3o/6A8fQ839ce/O38L26tWKmzt/iF2e0+i7/43D+q/5j5b8nxY3yx+NzHKM+nvnuKHbkv+p/UW+O9qXmeP03UoarzgbvRfwo97N7xT0rtjr/IcVm/5u+AkP+O2qf6zzDz7I9foG1snU69O7eh2f1nTDON6vesvmP8Z/hW3U88+3n/MvyrX81xY/8z/4nDXm90vr3U/tUPcdbR/XvWZYVs19FzSx5ABAAAA==
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
@@ -136,11 +136,11 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="SHOPKEEPER_BROWN" type="MERCHANT" x="384" y="192" width="48" height="48">
+  <object id="1" name="SHOPKEEPER_BROWN" type="MERCHANT" x="192" y="480" width="48" height="48">
    <properties>
-    <property name="movement" value="WANDER"/>
-    <property name="startX" value="8"/>
-    <property name="startY" value="4"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="4"/>
+    <property name="startY" value="10"/>
     <property name="surname" value="Tyrone"/>
    </properties>
   </object>

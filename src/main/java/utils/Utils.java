@@ -16,9 +16,9 @@ public class Utils {
         return t;
     }
     
-    public static Direction getPath(int width, int height, int toX, int toY, int validMovesMask, boolean towards, int fromX, int fromY) {
+    public static Direction getPath(int toX, int toY, int validMovesMask, boolean towards, int fromX, int fromY) {
         // find the directions that lead [to/away from] our target 
-        int directionsToObject = towards ? getRelativeDirection(width, height, toX, toY, fromX, fromY) : ~getRelativeDirection(width, height, toX, toY, fromX, fromY);
+        int directionsToObject = towards ? getRelativeDirection(toX, toY, fromX, fromY) : ~getRelativeDirection(toX, toY, fromX, fromY);
 
         // make sure we eliminate impossible options 
         directionsToObject &= validMovesMask;
@@ -28,20 +28,16 @@ public class Utils {
             return Direction.getRandomValidDirection(directionsToObject);
         } else {
             // there are no valid directions that lead to our target            
-            return null;
+            return Direction.getRandomValidDirection(validMovesMask);
         }
     }
 
-    /**
-     * Finds the movement distance (not using diagonals) from point a to point b
-     * on a map, taking into account map boundaries and such.
-     */
-    public static int movementDistance(int width, int height, int fromX, int fromY, int toX, int toY) {
+    public static int movementDistance(int fromX, int fromY, int toX, int toY) {
         int dirmask = 0;;
         int dist = 0;
 
         /* get the direction(s) to the coordinates */
-        dirmask = getRelativeDirection(width, height, toX, toY, fromX, fromY);
+        dirmask = getRelativeDirection(toX, toY, fromX, fromY);
 
         while (fromX != toX || fromY != toY) {
 
@@ -67,14 +63,7 @@ public class Utils {
         return dist;
     }
 
-    /**
-     * Returns a mask of directions that indicate where one point is relative to
-     * another. For instance, if the object at (x, y) is northeast of (c.x,
-     * c.y), then this function returns (MASK_DIR(DIR_NORTH) |
-     * MASK_DIR(DIR_EAST)) This function also takes into account map boundaries
-     * and adjusts itself accordingly.
-     */
-    public static int getRelativeDirection(int width, int height, int toX, int toY, int fromX, int fromY) {
+    public static int getRelativeDirection(int toX, int toY, int fromX, int fromY) {
         int dx = 0, dy = 0;
         int dirmask = 0;
 
