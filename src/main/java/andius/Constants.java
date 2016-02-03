@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import java.util.Iterator;
 import utils.XORShiftRandom;
@@ -87,6 +88,17 @@ public interface Constants {
         }
 
         public static void init() {
+
+            FileHandle fh = Gdx.files.classpath("assets/data/heroes-atlas.txt");
+            TextureAtlas.TextureAtlasData atlas = new TextureAtlas.TextureAtlasData(fh, fh.parent(), false);
+            String[] iconTileIds = new String[40 * 13];
+            for (TextureAtlas.TextureAtlasData.Region r : atlas.getRegions()) {
+                int x = r.left / r.width;
+                int y = r.top / r.height;
+                int i = x + (y * 40);
+                iconTileIds[i] = r.name;
+            }
+
             FileHandleResolver resolver = new Constants.ClasspathResolver();
             TmxMapLoader loader = new TmxMapLoader(resolver);
             for (Map m : Map.values()) {
@@ -113,15 +125,18 @@ public interface Constants {
 
                 MapLayer peopleLayer = m.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
+                    TiledMapTileLayer iconLayer = (TiledMapTileLayer) m.tiledMap.getLayers().get("creature");
+                    int firstgid = m.tiledMap.getTileSets().getTileSet("uf_heroes").getProperties().get("firstgid", Integer.class);
                     Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
                     while (iter.hasNext()) {
                         MapObject obj = iter.next();
-                        Heroes icon = Heroes.valueOf(obj.getName());
                         int sx = Integer.parseInt(obj.getProperties().get("startX", String.class));
                         int sy = Integer.parseInt(obj.getProperties().get("startY", String.class));
                         float x = obj.getProperties().get("x", Float.class);
                         float y = obj.getProperties().get("y", Float.class);
-                        String surname = obj.getProperties().get("surname", String.class);
+                        TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, m.baseMap.getHeight() - 1 - sy);
+                        Heroes icon = Heroes.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
+                        String surname = obj.getName();
                         PersonRole role = PersonRole.valueOf(obj.getProperties().get("type", String.class));
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
                         Creature cr = new Creature(icon, role, surname, sx, sy, x, y, movement);

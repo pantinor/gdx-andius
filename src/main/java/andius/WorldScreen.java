@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -55,7 +56,7 @@ public class WorldScreen extends BaseScreen {
         mapBatch = renderer.getBatch();
 
         mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
-            
+
         newMapPixelCoords = getMapPixelCoords(this.map.getStartX(), this.map.getStartY());
 
     }
@@ -163,37 +164,29 @@ public class WorldScreen extends BaseScreen {
         Vector3 v = getCurrentMapCoords();
 
         if (keycode == Keys.UP) {
-            if (newMapPixelCoords.y + WORLD_TILE_DIM >= this.map.getMap().getHeight() * WORLD_TILE_DIM) {
-                newMapPixelCoords.y = 0;
-                postMove(Direction.NORTH, (int) v.x, Map.WORLD.getMap().getHeight() - 1);
-            } else {
-                newMapPixelCoords.y = newMapPixelCoords.y + WORLD_TILE_DIM;
-                postMove(Direction.NORTH, v.x, v.y - 1);
+            if (!preMove(v, Direction.NORTH)) {
+                return false;
             }
+            newMapPixelCoords.y = newMapPixelCoords.y + WORLD_TILE_DIM;
+            postMove(Direction.NORTH, v.x, v.y - 1);
         } else if (keycode == Keys.DOWN) {
-            if (newMapPixelCoords.y - WORLD_TILE_DIM < 0) {
-                newMapPixelCoords.y = (this.map.getMap().getHeight() - 1) * WORLD_TILE_DIM;
-                postMove(Direction.SOUTH, v.x, 0);
-            } else {
-                newMapPixelCoords.y = newMapPixelCoords.y - WORLD_TILE_DIM;
-                postMove(Direction.SOUTH, v.x, v.y + 1);
+            if (!preMove(v, Direction.SOUTH)) {
+                return false;
             }
+            newMapPixelCoords.y = newMapPixelCoords.y - WORLD_TILE_DIM;
+            postMove(Direction.SOUTH, v.x, v.y + 1);
         } else if (keycode == Keys.RIGHT) {
-            if (newMapPixelCoords.x + WORLD_TILE_DIM >= this.map.getMap().getWidth() * WORLD_TILE_DIM) {
-                newMapPixelCoords.x = 0;
-                postMove(Direction.EAST, 0, v.y);
-            } else {
-                newMapPixelCoords.x = newMapPixelCoords.x + WORLD_TILE_DIM;
-                postMove(Direction.EAST, v.x + 1, v.y);
+            if (!preMove(v, Direction.EAST)) {
+                return false;
             }
+            newMapPixelCoords.x = newMapPixelCoords.x + WORLD_TILE_DIM;
+            postMove(Direction.EAST, v.x + 1, v.y);
         } else if (keycode == Keys.LEFT) {
-            if (newMapPixelCoords.x - WORLD_TILE_DIM < 0) {
-                newMapPixelCoords.x = (this.map.getMap().getWidth() - 1) * WORLD_TILE_DIM;
-                postMove(Direction.WEST, Map.WORLD.getMap().getWidth() - 1, v.y);
-            } else {
-                newMapPixelCoords.x = newMapPixelCoords.x - WORLD_TILE_DIM;
-                postMove(Direction.WEST, v.x - 1, v.y);
+            if (!preMove(v, Direction.WEST)) {
+                return false;
             }
+            newMapPixelCoords.x = newMapPixelCoords.x - WORLD_TILE_DIM;
+            postMove(Direction.WEST, v.x - 1, v.y);
         } else if (keycode == Keys.E) {
             Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
             if (p != null) {
@@ -203,6 +196,41 @@ public class WorldScreen extends BaseScreen {
 
 //        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);
         return false;
+    }
+
+    private boolean preMove(Vector3 current, Direction dir) {
+
+        int nx = (int) current.x;
+        int ny = (int) current.y;
+
+        if (dir == Direction.NORTH) {
+            ny = (int) current.y - 1;
+        }
+        if (dir == Direction.SOUTH) {
+            ny = (int) current.y + 1;
+        }
+        if (dir == Direction.WEST) {
+            nx = (int) current.x - 1;
+        }
+        if (dir == Direction.EAST) {
+            nx = (int) current.x + 1;
+        }
+
+        if (nx > this.map.getMap().getWidth() - 1 || nx < 0 || ny > this.map.getMap().getHeight() - 1 || ny < 0) {
+            Andius.mainGame.setScreen(Map.WORLD.getScreen());
+            return false;
+        }
+
+        TiledMapTileLayer grass = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("grass");
+        TiledMapTileLayer mountains = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("mountains");
+        TiledMapTileLayer.Cell c1 = grass.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
+        TiledMapTileLayer.Cell c2 = mountains.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
+        if (c1 == null || c2 != null) {
+            //Sounds.play(Sound.BLOCKED);
+            return false;
+        }
+
+        return true;
     }
 
     private void postMove(Direction dir, float newx, float newy) {

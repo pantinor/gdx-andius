@@ -79,9 +79,12 @@
    </animation>
   </tile>
  </tileset>
+ <tileset firstgid="761" name="uf_heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC72X0W3DMAxENVwHSj2A/Ndl+tPvAPnJAE2yUWNAAg6HO5JG3BA4GLAlPlGUKKs1b+tQF1rp+wp9evIO+292EmrUjpnYX31TrE59OvC/QcxnH25can666Kfi37gfxK+Yijtjcn5c/BVzrGj+cZ4mX+X/M1FrmqXWK+emwRNN8dlwDC7vbq2oOVJ7gfnXIX4f8Vwu3Lgc/0qqzL/aq9H+UWthDz+KXbVRY8DYq/G/YjyGzZahKn+hPupdVF+5Fil+tP8W6rfQu8l39ZX3pDM358xVcvU1W39OP0MVfhY/538vv2KV8zU6i4+IX50pXI+Yf5Shv6gmMv9oYcyqBr2Dj/HPPGZn8dH8FdhT6vxz5nxn7RvFzVJ8rmUR/wy6jCf7RB7ngds+nvp96jae9wL/AuyzaINsXHvMPxH7NlSNf45Fxc97Hu2/84+W3T94rubzS4hrmcop+8/uH7w+p++I79a08p/dP9w+UfxsTyn/Wfwqnj387H6T3T8wp3v46n6n/Gf/POqfOsq/u+dE/v8AAiJE7QAQAAA=
+   H4sIAAAAAAAAC72XQWrEMAxFfbgeaJoDJLteppuuB2YzB+i0N+oEbPg8viSHphV8AomtZ1m2HLcW29a1Gm34vkmftXin/Xe7GDW0I1P7u2+OtaLPKvx3Efn04XxG88PvUfw79wX8GXNxV0zmJ4p/xiJWNv86T4Pv8v9aqDXPcuuVuWnyVHN8mo6BvCgX2Ry5vUD+vYvvM16Ui2hcEf8Ozcy/26vV/lH+5SA/i921cWPQ2Gfj/41xDLstXbP8BX3cu6y+shY5frb/FvRb8G7wo/rKPRlZNOfkOkX1tVp/kT66ZvhV/Mz/Uf6MzZyv2Vl8RvzuTGE9Iv8sU39ZTST/bGnMrgb9B1/jH3mszuKz+Zuwh9z5F1nku2rfEDfl+KxlGf8quvUnfSqPeWDb76c+n3r059cE/ybsq2mjbF175F/AfnTNxj/G4uLnnlf76/yrVfcPztV4vhmxlrmc0n91/+D6HL4zfrSmnf/q/hHtE8ev9pTzX8Xv4jnCr+431f1Dc3qE7+53zn/1z+P+qbP8R/eczP8Pa+p6CgAQAAA=
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
@@ -92,6 +95,11 @@
  <layer name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMglEwWEAhE3n6qoD6KsnUi2w3qfZjs5NSdwxmsHCA/bZ4gO0faP/DQOIAu6N0kITDKKAd2ADE8owQehSMglEwCoYTAAB+Jv3fABAAAA==
+  </data>
+ </layer>
+ <layer name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQ0AAAgDsCVowb9FThQQnlZBEy50fQ8AAABgDUYsKkIAEAAA
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
@@ -114,11 +122,6 @@
    H4sIAAAAAAAAC2NgGAWjYGgCS8aBtd93gO0fzoB9AMIWZKf0aJxSFfwdYPsFR+NzFIyCUTBAgNzyj1rlJrnl32i5OQpGwfAHACzDHuEAEAAA
   </data>
  </layer>
- <layer name="creature" width="32" height="32">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
-  </data>
- </layer>
  <layer name="torches" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3UPQ4AEAyAUXFTh3EItzU1pCEx0CLfW1pLB/0JAcDNchznVkoc52ikLzpakb7o+BuP+e/9+q8vkRlIzrs2e8PPzvura6zU3Hl/mTMAJ1VEbTxPABAAAA==
@@ -130,12 +133,11 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="SHOPKEEPER_BROWN" type="MERCHANT" x="912" y="768" width="48" height="48">
+  <object id="1" name="Jason" type="MERCHANT" x="1056" y="96" width="48" height="48">
    <properties>
-    <property name="startX" value="19"/>
-    <property name="startY" value="16"/>
-    <property name="surname" value="Tyrone"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="startX" value="22"/>
+    <property name="startY" value="2"/>
    </properties>
   </object>
  </objectgroup>

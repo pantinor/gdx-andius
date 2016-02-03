@@ -75,8 +75,7 @@ public class BaseMap {
             switch (p.getMovement()) {
                 case ATTACK_AVATAR: {
                     int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
-                    System.out.printf("distance (%d, %d) to (%d, %d): %d\n", p.getWx(), p.getWy(), avatarX, avatarY, dist);
-                    if (dist < 1) {
+                    if (dist <= 1) {
                         //combat
                         continue;
                     }
@@ -110,31 +109,27 @@ public class BaseMap {
                 continue;
             }
             
-            Vector3 pos = null;
-
             switch (dir) {
                 case NORTH:
-                    pos = new Vector3(p.getWx(), p.getWy() - 1, 0);
+                    p.setWy(p.getWy() - 1);
                     break;
                 case SOUTH:
-                    pos = new Vector3(p.getWx(), p.getWy() + 1, 0);
+                    p.setWy(p.getWy() + 1);
                     break;
                 case EAST:
-                    pos = new Vector3(p.getWx() + 1, p.getWy(), 0);
+                    p.setWx(p.getWx() + 1);
                     break;
                 case WEST:
-                    pos = new Vector3(p.getWx() - 1, p.getWy(), 0);
+                    p.setWx(p.getWx() - 1);
                     break;
                 default:
                     break;
             }
             
-            Vector3 pixelPos = screen.getMapPixelCoords((int) pos.x, (int) pos.y);
+            Vector3 pixelPos = screen.getMapPixelCoords(p.getWx(), p.getWy() + 1);
             p.setX(pixelPos.x);
             p.setY(pixelPos.y);
-            p.setWx((int) pos.x);
-            p.setWy((int) pos.y);
-
+            
         }
     }
 
@@ -142,10 +137,10 @@ public class BaseMap {
         int mask = 0;
 
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("floor");
-        TiledMapTileLayer.Cell north = layer.getCell(x, height - 1 - y + 2);
-        TiledMapTileLayer.Cell south = layer.getCell(x, height - 1 - y - 0);
-        TiledMapTileLayer.Cell west = layer.getCell(x - 1, height - 1 - y + 1);
-        TiledMapTileLayer.Cell east = layer.getCell(x + 1, height - 1 - y + 1);
+        TiledMapTileLayer.Cell north = layer.getCell(x, height - 1 - y + 1);
+        TiledMapTileLayer.Cell south = layer.getCell(x, height - 1 - y - 1);
+        TiledMapTileLayer.Cell west = layer.getCell(x - 1, height - 1 - y + 0);
+        TiledMapTileLayer.Cell east = layer.getCell(x + 1, height - 1 - y + 0);
 
         mask = addToMask(Direction.NORTH, mask, north, x, y - 1, cr, avatarX, avatarY);
         mask = addToMask(Direction.SOUTH, mask, south, x, y + 1, cr, avatarX, avatarY);

@@ -94,8 +94,8 @@ public class GameScreen extends BaseScreen {
 
         batch.draw(Andius.backGround, 0, 0);
 
-        Vector3 v = getCurrentMapCoords();
-        Andius.font.draw(batch, String.format("%s, %s\n",v.x,v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        //Vector3 v = getCurrentMapCoords();
+        //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
     }
@@ -126,46 +126,26 @@ public class GameScreen extends BaseScreen {
             if (!preMove(v, Direction.NORTH)) {
                 return false;
             }
-            if (newMapPixelCoords.y + TILE_DIM >= this.map.getMap().getHeight() * TILE_DIM) {
-                newMapPixelCoords.y = 0;
-                v.y = 0;
-            } else {
-                newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
-               v.y -= 1;
-            }
+            newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
+            v.y -= 1;
         } else if (keycode == Keys.DOWN) {
             if (!preMove(v, Direction.SOUTH)) {
                 return false;
             }
-            if (newMapPixelCoords.y - TILE_DIM < 0) {
-                newMapPixelCoords.y = (this.map.getMap().getHeight() - 1) * TILE_DIM;
-               v.y = this.map.getMap().getHeight() - 1;
-            } else {
-                newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
-               v.y += 1;
-            }
+            newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
+            v.y += 1;
         } else if (keycode == Keys.RIGHT) {
             if (!preMove(v, Direction.EAST)) {
                 return false;
             }
-            if (newMapPixelCoords.x + TILE_DIM >= this.map.getMap().getWidth() * TILE_DIM) {
-                newMapPixelCoords.x = 0;
-                v.x = 0;
-            } else {
-                newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
-               v.x += 1;
-            }
+            newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
+            v.x += 1;
         } else if (keycode == Keys.LEFT) {
             if (!preMove(v, Direction.WEST)) {
                 return false;
             }
-            if (newMapPixelCoords.x - TILE_DIM < 0) {
-                newMapPixelCoords.x = (this.map.getMap().getWidth() - 1) * TILE_DIM;
-                v.x = this.map.getMap().getWidth() - 1;
-            } else {
-                newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
-                v.x -= 1;
-            }
+            newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
+            v.x -= 1;
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -202,7 +182,7 @@ public class GameScreen extends BaseScreen {
             //Sounds.play(Sound.BLOCKED);
             return false;
         }
-        
+
         return true;
     }
 

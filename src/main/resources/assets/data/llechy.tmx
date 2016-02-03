@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="21">
  <properties>
   <property name="startX" value="1"/>
   <property name="startY" value="15"/>
@@ -85,6 +85,9 @@
    </animation>
   </tile>
  </tileset>
+ <tileset firstgid="761" name="uf_heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC62WS27DMAxEdZ6ucoccp8kua2uRi2SVLIreoSfI50a1UAkYTIcfGRmAkGHLeiJF0i4lr9ptmXgno0UY31f8vWNNJ7Cm+2ovGJlfi8/HeRn+Deze7dnHB/DRJ1x/oWeVnkdCfvf/5/E3XtbxYvEHg+MxG3/mW1J8lQ8VLOLfyn/+uL52G0JGZp9bzp9t8BdaF2OunmX9b+L8V/7j+qoOFF+d/1ZZ63MM1J7OYLVoX6y4RmurnOB3LL61Pp9hFGslnKv4nCOemKlqrulD8Dn+KmebvPzc4j/OYb46u4h/duxz7ZGH1XC05lrfEE8Z/hHYir9z3o/6A8fQ839ce/O38L26tWKmzt/iF2e0+i7/43D+q/5j5b8nxY3yx+NzHKM+nvnuKHbkv+p/UW+O9qXmeP03UoarzgbvRfwo97N7xT0rtjr/IcVm/5u+AkP+O2qf6zzDz7I9foG1snU69O7eh2f1nTDON6vesvmP8Z/hW3U88+3n/MvyrX81xY/8z/4nDXm90vr3U/tUPcdbR/XvWZYVs19FzSx5ABAAAA==
@@ -102,7 +105,7 @@
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+   H4sIAAAAAAAAC2NgGAXUAC4sA+0C4oAL80C7gL7gL9NAu4B4wExB3MyF6vUaYfFLTbCEjLAzGQ3vIQMMhmFcOdDQT5nDLLxyhpl/hiLgGuFxIDPC/U8s+IOlPf1viLSxKQGPB0n6eEpld2CLT1oBiUEShkMBAADRMSFbABAAAA==
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
@@ -136,12 +139,144 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="SHOPKEEPER_BROWN" type="MERCHANT" x="192" y="480" width="48" height="48">
+  <object id="1" name="Jason" type="MERCHANT" x="864" y="96" width="48" height="48">
    <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
-    <property name="startX" value="4"/>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="startX" value="18"/>
+    <property name="startY" value="2"/>
+   </properties>
+  </object>
+  <object id="2" name="William" type="MERCHANT" x="1296" y="816" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="27"/>
+    <property name="startY" value="17"/>
+   </properties>
+  </object>
+  <object id="3" name="Dekker" type="MERCHANT" x="144" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="startX" value="3"/>
     <property name="startY" value="10"/>
-    <property name="surname" value="Tyrone"/>
+   </properties>
+  </object>
+  <object id="4" name="Calabrini" type="MERCHANT" x="336" y="768" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="7"/>
+    <property name="startY" value="16"/>
+   </properties>
+  </object>
+  <object id="5" name="Inoo" type="MERCHANT" x="1008" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="21"/>
+    <property name="startY" value="29"/>
+   </properties>
+  </object>
+  <object id="6" name="Daranor" type="MERCHANT" x="528" y="1200" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="11"/>
+    <property name="startY" value="25"/>
+   </properties>
+  </object>
+  <object id="7" name="Tyrone" type="MERCHANT" x="768" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="16"/>
+    <property name="startY" value="10"/>
+   </properties>
+  </object>
+  <object id="8" name="Browning" type="MERCHANT" x="192" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="4"/>
+    <property name="startY" value="27"/>
+   </properties>
+  </object>
+  <object id="9" name="Shakespeare" type="MERCHANT" x="288" y="1344" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="startX" value="6"/>
+    <property name="startY" value="28"/>
+   </properties>
+  </object>
+  <object id="10" name="Shazom" type="MERCHANT" x="1344" y="1056" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="28"/>
+    <property name="startY" value="22"/>
+   </properties>
+  </object>
+  <object id="11" name="Patric the Humble Shepherd" type="MERCHANT" x="1344" y="960" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="28"/>
+    <property name="startY" value="20"/>
+   </properties>
+  </object>
+  <object id="12" name="Kalab" type="MERCHANT" x="288" y="1200" width="48" height="48">
+   <properties>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="startX" value="6"/>
+    <property name="startY" value="25"/>
+   </properties>
+  </object>
+  <object id="13" name="Osric" type="MERCHANT" x="1248" y="1344" width="48" height="48">
+   <properties>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="startX" value="26"/>
+    <property name="startY" value="28"/>
+   </properties>
+  </object>
+  <object id="14" name="Nifadas" type="MERCHANT" x="1296" y="624" width="48" height="48">
+   <properties>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="startX" value="27"/>
+    <property name="startY" value="13"/>
+   </properties>
+  </object>
+  <object id="15" name="Christen" type="MERCHANT" x="1152" y="240" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="startX" value="24"/>
+    <property name="startY" value="5"/>
+   </properties>
+  </object>
+  <object id="16" name="Rebelias" type="MERCHANT" x="960" y="336" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="20"/>
+    <property name="startY" value="7"/>
+   </properties>
+  </object>
+  <object id="17" name="Cromwell" type="MERCHANT" x="864" y="336" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="18"/>
+    <property name="startY" value="7"/>
+   </properties>
+  </object>
+  <object id="19" name="Tracie" type="MERCHANT" x="1344" y="144" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="28"/>
+    <property name="startY" value="3"/>
+   </properties>
+  </object>
+  <object id="20" name="Mariah" type="MERCHANT" x="144" y="336" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="startX" value="3"/>
+    <property name="startY" value="7"/>
+   </properties>
+  </object>
+  <object id="21" name="Tyrone" type="MERCHANT" x="768" y="720" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="startX" value="16"/>
+    <property name="startY" value="15"/>
    </properties>
   </object>
  </objectgroup>
