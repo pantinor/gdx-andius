@@ -1,0 +1,14 @@
+<conversations>
+    <conversation map="LLECHY" name="Egbert" pronoun="He" description="A very old man.">
+        <topic query="time"
+               phrase="Time is all important." 
+               question="Do you know about time?"
+               no="Thats too bad."
+               yes="Good, seek time in dungeon of fire." />
+        <topic query="fire"
+               phrase="Fire is all important." 
+               question="Do you know about fire"
+               no="Thats too bad."
+               yes="Good, seek fire in dungeon of time." />
+    </conversation>
+</conversations>

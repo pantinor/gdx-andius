@@ -78,6 +78,9 @@ public class BaseMap {
                     if (dist <= 1) {
                         //combat
                         continue;
+                    } else if (dist >=4) {
+                        //dont move until close enough
+                        continue;
                     }
                     int mask = getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY);
                     dir = Utils.getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());

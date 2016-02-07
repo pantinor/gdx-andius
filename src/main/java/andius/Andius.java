@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.Conversations;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -188,6 +189,7 @@ public class Andius extends Game {
             Constants.Map.init();
             Constants.Moongate.init();
             Constants.Heroes.init(heroesAtlas);
+            Conversations.init();
             
         } catch (Exception e) {
             e.printStackTrace();

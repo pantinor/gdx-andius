@@ -38,8 +38,9 @@ public interface Constants {
 
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
-        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),;
-
+        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
+        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),;
+        
         private final String label;
         private final String tmxFile;
         private final int dim;
@@ -411,6 +412,7 @@ public interface Constants {
 
     public enum PersonRole {
         NONE,
+        MONSTER,
         MERCHANT;
     }
 

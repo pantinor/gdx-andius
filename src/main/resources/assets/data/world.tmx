@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" nextobjectid="11">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" nextobjectid="12">
  <properties>
-  <property name="startX" value="32"/>
-  <property name="startY" value="51"/>
+  <property name="startX" value="106"/>
+  <property name="startY" value="175"/>
  </properties>
  <tileset firstgid="1" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
   <image source="uf_map.png" width="600" height="504"/>
@@ -217,6 +217,12 @@
    <properties>
     <property name="wx" value="64"/>
     <property name="wy" value="13"/>
+   </properties>
+  </object>
+  <object id="11" name="WIWOLD" type="portal" x="2472" y="4176" width="24" height="24">
+   <properties>
+    <property name="wx" value="103"/>
+    <property name="wy" value="174"/>
    </properties>
   </object>
  </objectgroup>
