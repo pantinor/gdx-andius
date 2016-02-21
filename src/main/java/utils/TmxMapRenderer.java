@@ -21,22 +21,15 @@ import static com.badlogic.gdx.graphics.g2d.Batch.Y2;
 import static com.badlogic.gdx.graphics.g2d.Batch.Y3;
 import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
 import andius.Constants;
-import andius.Context;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
@@ -63,7 +56,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
         this.map = map;
     }
 
-    private boolean shouldRenderCell(int roomId, int x, int y) {
+    public boolean shouldRenderCell(int roomId, int x, int y) {
         if (this.map.getRoomIds() == null || roomId <= 0) {
             return true;
         }
@@ -120,7 +113,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
                 TiledMapTileLayer.Cell cell = layer.getCell(col, row);
 
-                if (cell == null || !shouldRenderCell(this.map.getScreen().currentRoomId(), col, layerHeight - row)) {
+                if (cell == null || !shouldRenderCell(this.map.getScreen().currentRoomId(), col, layerHeight - row - 1)) {
                     x += layerTileWidth;
                     continue;
                 }

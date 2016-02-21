@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -86,9 +87,10 @@ public class Andius extends Game {
         parameter.size = 18;
         font = generator.generateFont(parameter);
 
-        parameter.size = 16;
+        parameter.size = 12;
         smallFont = generator.generateFont(parameter);
-
+        smallFont.setColor(Color.YELLOW);
+        
         parameter.size = 24;
         largeFont = generator.generateFont(parameter);
 

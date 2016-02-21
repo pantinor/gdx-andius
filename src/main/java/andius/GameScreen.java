@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.Arrays;
 import utils.PartyDeathException;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
@@ -47,7 +48,9 @@ public class GameScreen extends BaseScreen {
             public void render(float time) {
                 renderer.getBatch().draw(Heroes.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
                 for (Creature cr : GameScreen.this.map.getMap().creatures) {
-                    renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+                    if (renderer.shouldRenderCell(currentRoomId,cr.getWx(), cr.getWy())) {
+                        renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+                    }
                 }
             }
         });
@@ -100,8 +103,8 @@ public class GameScreen extends BaseScreen {
 
         batch.draw(Andius.backGround, 0, 0);
 
-        //Vector3 v = getCurrentMapCoords();
-        //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
+//        Vector3 v = getCurrentMapCoords();
+//        Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
     }
@@ -154,15 +157,8 @@ public class GameScreen extends BaseScreen {
             v.x -= 1;
         } else if (keycode == Keys.E || keycode == Keys.K) {
             Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
-            if (p != null) {
-                if (p.getMap() != this.map) {
-                    Andius.mainGame.setScreen(p.getMap().getScreen());
-                } else {
-                    if (this.map.getRoomIds() != null) {
-                        currentRoomId = this.map.getRoomIds()[p.getDx()][p.getDy()][0];
-                    }
-                    newMapPixelCoords = getMapPixelCoords(p.getDx(), p.getDy());
-                }
+            if (p != null && p.getMap() != this.map) {
+                Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
         }
@@ -202,13 +198,23 @@ public class GameScreen extends BaseScreen {
             return false;
         }
 
+        Portal p = this.map.getMap().getPortal((int) nx, (int) ny);
+        if (p != null && p.getMap() == this.map) {
+            Vector3 dv = p.getDest();
+            if (this.map.getRoomIds() != null) {
+                currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
+            }
+            newMapPixelCoords = getMapPixelCoords((int) dv.x, (int) dv.y);
+            return false;
+        }
+
         return true;
     }
 
     @Override
     public void finishTurn(int x, int y) {
 
-        if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][0] > 0 && this.map.getRoomIds()[x][y][1] == 0) {
+        if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][1] == 0) {
             this.currentRoomId = this.map.getRoomIds()[x][y][0];
         }
 

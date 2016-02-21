@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" nextobjectid="404">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" nextobjectid="405">
  <properties>
   <property name="startX" value="49"/>
   <property name="startY" value="18"/>
@@ -78,25 +78,39 @@
  </tileset>
  <tileset firstgid="1779" name="bazaar" tilewidth="48" tileheight="48" tilecount="100" columns="10">
   <image source="bazaar.png" trans="ff00ff" width="480" height="480"/>
+  <tile id="3">
+   <animation>
+    <frame tileid="3" duration="300"/>
+    <frame tileid="4" duration="300"/>
+    <frame tileid="5" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="13">
+   <animation>
+    <frame tileid="15" duration="300"/>
+    <frame tileid="14" duration="300"/>
+    <frame tileid="13" duration="300"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="floor2" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YsQ3CMBBA0VMmpqDKDCBWYASzA4NRQBEQAkyUOyl5T7rKjYsv23IEAAAAAAAAAAAAAPCqvZlP6wDA79yhVOh522kTAAAAAAAAAAAAAAAAAAAAAAAAYJ32HQNL0BvVNAcAAAAAfXbDvHUAALbp4p0IAAAlxuoNsAk6A7j7dh6ehjhn7IP1GuO5M3cwS+jt6uj/n5mca1TL6u7gvOQP18lAFt0BAAAAAAAAAAAAAAAAQJ32GMikO7K10B25WugOANbmBkmWCPGQDwEA
+   H4sIAAAAAAAAC+3dMQ6CMBSA4YYTOzj1DBqv4BHqHTyYgw5IoFgJjwS+L3kJSReGP4/GxZQAAAAAAAAAAAAAjiN/BuaUkamd9w0b63eXkw5ZTx4864woU61pkClT39Bf1Had5qhpudv1z2tdaY41jO05dzsiaQ0AAAAAAAAAAAAAAAAAAAAAANizc8PAGvTG1jQHAAAAAG1O3bJzAACO6eGeCAAAm/DfvETQGcDb3D68deke8R7sV07fnfkGs4bWrq5+/2che42tRXV3sS/5w7M3EEV3AAAAAAAAAAAAAAAAALCd8hmIpDuilaQ7YpWkOwDYmxfAGLQakA8BAA==
   </data>
  </layer>
  <layer name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dwU3DMBQAUBQEnDhw4obEFCAxAogZmADBtQuwRqtOULFA1+KGKwgqJU1JE8dN/J5khdZScZVfx/lxnKMjAAAAIAdnZ6lbQI4uxB0AkLmP0/3qoI3jmnH4trqX4u97k6J+C9tcnRzG/972N+NT7t9d+/kmlIdQbmM3iGzUxVxZdx/KXSiPfTRo4OSwuxPibbmKuxB/y9Rt6dpbx2NROez2yv4uHGefwnF2GY6z06QNimRefH2vWVH9u5oVP9tpT00apa7yKM5baWKfPAqMUaqcSnmMneu7B2UzLoZ4Plczrpt+bzlwzucgroV+MKlzfRwJXIo7YOTMGyEHxpGkYBxJnyYVpYkh5rJJr23cyWWzj7ZxB1WcF9NEV/Gy+Tmr12IRAAAAAACIwfw52tj3GlYf8+f6ur7mOh4AAAAAuVtbd/hp7b1frDlMbOsxtloLcS7m6NF8rf+DFFzzJQVrpgAAAPxmPmkzzzue5bCrHg5R1ZqdcnfEVrVmp9wdAAAAbfw31yknmh/7nJzJ9ZKCXC8AQ7cw9wPIzLt+D6CRqud0bnqt6Vvr6ohPznTcDvX3JWcKAEDV/XsQW9X9ewAAAAAA0MS1e7QBGCBrjAAAjMPms8UhtpmYIxH9HX0q402fBwDj8Am+kI4jkA8BAA==
+   H4sIAAAAAAAAC+3dzU3DMBgA0CoSFA6cuSExBUiMAGKGToDgygKs0aoTIBboTghu/LhAUCghpZDEcfKeZIU2ErjKVzv+bJzRCAAAAOi7++3R6DGUh+3YNWFInkK8PYfyIu4AAKDzLrPv711n1Uf4ycFWN/72Tz/TP/n1XXedj0I5C+W46QoxGFUxl587DeUklPM2KpSweznEWoV4WyzjLsTfInZd6nZT472oHHY98vYu9LOT0M8uQj87jVqhhsyz9881y8q/V7Ps8zhtqUpUMG4F2FysnErex8613UkpxkWqa5Iq7uumH0c6zHgOmnerHYziLU86Tq9fJW36VWAorBuh79xLEoN7SVKSai6btGkngS4xLmYTdcXL6u9ZvhaLAAAAAABA3ayf47/+MofV1rqQtubXzOOlYRzaup1QdsexawIAAADQP4V9hyeF976w5zBNK8bYci/EuZijRfNC+wdtM+dLDPYCIAZzvgAAdJ31pJu5WPMsh3XnoWvK9uyUu6NpZXk6uTuaVpank7sDAIB++W2uU050eFxzhmxP3oMI9sUdAIm7tfYDGJg77R7ARsqe07nqqqJtrTpHszznvv+6+P2yPpYYrI8FgG4xFiEGYxEAAAAAAOpw6H+0AUiQPUYAAPph9dni0LSZmCMS7R1tyuNNmwcA/fAKUANodZAPAQA=
   </data>
  </layer>
  <layer name="creature" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3bMQqAMAwAQME+SZ/sD3To4E9c3fyC4KZ0cBC0tnC3JEOHbgkJaRoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAntrbv38AAAAA71rDlU/h/h0AkFrMiwEAAAAgqy6k8UujvRkAQBZDxr4r6vEAAAAAAKq2ueUBOM12XxQiqs8AAAAUpDczAQAAKncALicpTZAPAQA=
+   H4sIAAAAAAAAC+3dO0oDURQG4EDSiTuwdQFCRDeQzsbCIoWla3AFFhYuwAVYWghapLBIYWGRwlKwtQjoEgQLEwgyziOZuXO9831NAgnk9c85dw43TK8HAADAup77P7ezfrvvg+6pI3OTwLmdO04o6VNWAOBfmerdtORJ9ghMvYO4nQ/+fmzs+CUyoxKZLPMc+O0ypxZCVc65aEPZ3Fnfrcf6gk1sW2cAFNJrAWiC/ZQAAAAAzVjO9c33CSkrbzFkcLzBnoAX+wlYOKmQhT256bSdCOoewK5eBAAAAFDorGCGMmt4xnI7yL4PkBo1DgAAAAAAAAAACOXYfiUAqN1w0V8P9FkgMWWvK+q6t/m+fD+VyRTQBXdqHRGbyycABd5XZqEP5qIAnXekF5T21pHzrdeOfE6ALE3XwEN9N1nXLfbPU7kCACBhy73+wwDr3ntra4DGbKmxwIqbgDVhkvNaoxrmuhfqGwAAAAAkwf8o4vWRyG9jngzU4VEtIRKTRPozAADQjDr2Z0IV+2YmtOhK/gAAqME3X3K4l5APAQA=
   </data>
  </layer>
  <layer name="water-edges" width="158" height="110">
@@ -106,25 +120,25 @@
  </layer>
  <layer name="walls" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="shadows" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3cC46bMBAA0KhXyWFb9dTVqq0auTYYsI09vCetIFn+HgZ/Il4vAFb1vvj3Sqa16/BcYgDg/2do7fJ73+9t78yzPbfeqzDveR/fqLIVQ7HUlGdtnrt6HEdz1bswT1xnYjGNpxbPQs9TzlIfY1ZX+h75zbX6R3t0PlfHGCKIdC5P99QYhiPE/jzkK1qrGWcaqef+vn+rX/bnn2X3xtbcd+xpWdes6bMWh9c9/b7OnXMu79HXanF45hjTdY6M0a5yXeivxX1SWleM9RGhH+7HR7sil8u2ziHNdWn7Irct7rFVdivZa0Nwv1KsrVo+e3mRMUrXe6sclA8QmRxHa0f6sWCko/0uq/XJANypJm/W5lW5OQ5lBjBGzW9IuI+6DczFPQYAsD71OYjryjhTq/F/fTkAAMAV2gcAAAD0ZoyKlRmLBQAAAADgqfR9H2c8gYjEMgDAWOpbzEZMxrBC+b2TKbCG3Pu0Pufvuqdz+z363i/auvK+tZXKY4ZjjXx9Kasty5blL4b4K42D0nxpvdqYFGvkpPHWMk7EHFu22hw99lXKl+p3fFHmjCDPrOGJ/QF75xP9/ImlZ/tmRqP7MWu2LV+QczYOxA7RHM2f0NNW/Z/7nKnftRqr7L1PsQW0IP8AAAAtvJNp7n+lz1Brqz8tHRtIv/uc3u1Jv58BAIDZqX8DAMSibscM9PUDTyHPMZqYA4B4fgGb3AKPkA8BAA==
+   H4sIAAAAAAAAC+3cXW6jMBQGUDovtOtgsR3Nguet0rRqo6YemxjMj23OkaLQNAQSf1yMHWUYAGjVVHgbgvvcdbguGQD4/xya+/xHjz96vTXn9th6Q2LZ+b5/R7WtDPUlpz1z61zpfiytVVNimX7d2nkch+H5/fYy/nw8tU6YldK8OJ+ylv4YtSoZe+STz+qb69H6lM4x9KCn93J1V80wLCH79VCv2FrOPNOR9tze66/85/75em7q+Hp7ctyRp6Sv+ZGze+EYdmo7lHFc/8xemEOO0VoO1+xjbJ1U3sLHW/lc2F/JcRLWOrXvGD2Mw/2+u64I93HuPczlKva/mj+DK4i1bWtidS6sdxwndT2XylqLmQv9lbXTpM4hc+eWHjIHXMfcOGmMGsfWpsQynK3k+3wtjMkAbGFpX/Imp27m1lW1uR/ajB6trZOwp0c1Vc09l74N1MUxBgDQPv056FfJPNNW8//GcgAAgBKuDwAAANibOSpaZi4WAAAAAICrMva9nPkEeiTLAADH0t+iNjLZhxbabwrugTbEfk/rfvmsYzq23aW/+8W2Sn5vraX2qGFfe/58Scttyy3bX4a4CXOQWk6tl5tJWSMmzNuWOZE55sxdc+yxrVS91L/jgzbnCOpMG644HvDo/fT+/unLntc3NTp6HDPntdULYtbmQHbozdL6CXua6/9znjX9u63mKvfepmwBW1B/4NM4DsPz++1lPHtPAADaNAX3sf+l/oZcc+Np4dxA+Nj9/dmu9P0ZAAConf43AEBf9O2ogbF+4CrUOY4mcwDQn38qGUrvkA8BAA==
   </data>
  </layer>
  <layer name="lights" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dW4rDIBQA0NJldj9DYXYwux1KKYSgURNtNJ7zExpKwEf0Jl7M7QbU8nNPn0v9Lr0e/AX6xPpc6nfp9QB4My9zBvMyPTEOcgbjIAC1LGMZcc2bemhvGcvE4ppPO8TWE2LHUYnv+vBph9h6QuyYcmSdDPY6sk4GwHeknsfECOSK9ZXQ+dTzWOicvkhILJ7cG2eu+5l4tZ2rvEupYd3P1Ek7pe9SZqJO6hJX51Endck5z6NOaMF4xhmMZwAA5XsCQA2lewLAyEpyAFL/k686pjPa7WgOwFY+inF6DNoNAAAAAAAAAAAAAAAAAAAAAACAHtg3r9wj8S34hzpNsv/afvayAwAY33MRw/2K5+jAUz8E4IK2vidDH67YLlvfk6EPM7VLrXvsivcq7YTusfWcnPMuZKZ7lTbMyQDA7GZ5lnutcYXKOkv5ezNT7B0q60zlBwAAAAAAAGBsObkV8i+oLSe3Qv4FAAAAAAAv1ik4g3UKAAAAyPMPE6c1x5APAQA=
+   H4sIAAAAAAAAC+3dW4rDIBQA0NJldj9DYXYwux1KKYSiURutGs/5CZUSiK/cxIu5XIBafq7pstTv0vPBX6BPvJelfpeeD4An92V6cF9mJOZBejAPAlDLNpYR1zyph/a2sUwsrnm1Q2w9IXaclfhuDK92iK0nxI4pR9bJ4FNH1skA+I7U85gYgVyxvhIqTz2Phcr0RUJi8WStOFO82s5Z3qW0oE7aKX2XshJ1Upe4Oo86qUvOeR51QgvmM3ownwEAlO8JADWU7gkAMyvJAUj9T77qnHq029EcgL18FPP0HLQbAAAAAAAAAAAAAAAAAAAAAAAAI7BvXrlb4lvwN3WaZP+1z9nLDgBgfvdNDPcrnmMAd/0QgBPa+54MYzhju+x9T4YxrNQutcbYGccq7YTG2Ps9OeddyEpjlTbckwGA1a3yLPdY4wpd6yrXP5qVYu/Qta50/QAAAAAAAADMLSe3Qv4FteXkVsi/AAAAAADgwToFPVinAAAAgDz/0O2XeJAPAQA=
   </data>
  </layer>
  <layer name="doors" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dQU4CMRQA0MELGC/gPUxcuzEeljMYT+LarTuDMZEEDGNnOtP5LX1vJQKB0N/2/w60wwC06iv6DRAqqv3vdkEvTBW0P+S51XcIIl/sTw1tLl/oz5ptPjeGa4h52jc3ho1zRJo77qlF+vBcuJ2Ne/HkPETQ96E8uVpdxnKqv/83LzPFPtG/58bR0nlZ3PbhLREnW+d3EflkqbnVnL0enyU1ODQShznztzmfpXLmb2tIbTAHA727v4l+B+NKjNHG/To8VRx30BJjWp2sQRDBGgQRTse7Od/TvPTYBzHMRKnx7n1GLL2IO1byWTiWts77S3/3nnVoJ4ByUms71n7aVHu7pWodaz9t6qHdau9bXKce+hYAAKwp51qTeo8I6j2AYdj7nQXAGbUJEdQmANCPR3U48MtvdOjBqzgHAAAAAOCEdWN+uE4GAADkUEtQE/HIFo5n6ThThy0dz9Jxps4y1sLJZZ+DslI5XK85nn0O1id/IycGlsaN/I2cGBA3tE5+B0DKYff/32P398JcSWlLa11rLORYWuuqlaf5yPiccp7TK3P0ZbuM/RtzngPXxNhbh5zz20orWQMbe4Gp1BVEUFcAAFyfS9f//943dhs4p48AAMB27ClABHsKAAAAAAAAQIxvwjw2G5APAQA=
+   H4sIAAAAAAAAC+3dQUoDMRQA0KmLbsULeA/BtRvxXJ6nZxBP4tqV2J1UBQttaZ1OZjI/ad4DQa3FoflJ/s+0SdcBtfqKvgBCRbX/zSLoH1ME7Q9prvUdgsgX21NCm8sX2jNlmw+N4RJinvoNjWHjHJGGjntqkTY8Zm5n4148OQ8R9H3IT65WllM51eHvzcucY9XTv4fG0dh5uZa4/Vh23frn63MZfSV1eu2Jk7nzu4h8Mtfcas6ejteSEmwqicOU+buWOZ9ypczf1pDqYA4GWnd7FX0Fp+UYo437ZXgoOO6gJsa0MlmDIII1CCLsjndD3qd57G/vxDBn6hvv3gbE0pO4YyLrzLE0d96f+733TEM7AeTTt7Zj7adOpbdbX61j7adOLbRb6X2Ly9RC3wIAgCml3GtS7xFBvQfQdSufswDYozYhgtoEANpxrw4H/viMDi14EecAAAAAAOywbswv98kAAIAUaglKIh7r91xBG27P0nGmDnPanqXjTJ1xrIWTyj4HefXlcK3mePY5mJ78jZQYGBs38jdSYkDckKKkNRX5HQB9Nov/vz/1eCvMleQ2tta1xkKKsbWuWvk87wmvU8pzWmWOPm6RsH9jynPgkhh7y5ByfltuOWtgYy9wLnUFEdQVAACX59j9/8PHTv0M7NNHAABgPvYUIII9BQAAAAAAACDGNy2c6fqQDwEA
   </data>
  </layer>
- <objectgroup name="portals">
+ <objectgroup name="portals" visible="0">
   <object id="1" name="air vent" x="3936" y="96" width="48" height="48">
    <properties>
     <property name="dx" value="101"/>
@@ -411,237 +425,232 @@
   <object id="331" name="WORLD" x="2352" y="864" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="people" visible="0">
-  <object id="220" name="large rat" type="MONSTER" gid="965" x="5424" y="576" width="48" height="48">
+  <object id="220" name="large rat" type="MONSTER" x="5376" y="528" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="221" name="small rat" type="MONSTER" gid="964" x="5376" y="624" width="48" height="48">
+  <object id="221" name="small rat" type="MONSTER" x="5328" y="576" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="222" name="small rat" type="MONSTER" gid="964" x="5376" y="528" width="48" height="48">
+  <object id="222" name="small rat" type="MONSTER" x="5328" y="480" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="223" name="bear" type="MONSTER" gid="1001" x="5232" y="288" width="48" height="48">
+  <object id="223" name="bear" type="MONSTER" x="5232" y="288" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="224" name="omar" type="MONSTER" gid="837" x="5232" y="864" width="48" height="48">
+  <object id="224" name="omar" type="MONSTER" x="5424" y="864" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="225" name="mahmud" type="MONSTER" gid="837" x="5472" y="1104" width="48" height="48">
+  <object id="225" name="mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="226" name="unicorn" type="FRIENDLY" gid="1097" x="4752" y="912" width="48" height="48">
+  <object id="226" name="unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="227" name="werejackal" type="MONSTER" gid="1005" x="4320" y="384" width="48" height="48">
+  <object id="227" name="werejackal" type="MONSTER" x="4320" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="228" name="blob" type="MONSTER" gid="1237" x="5424" y="1536" width="48" height="48">
+  <object id="228" name="blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="229" name="dragon" type="MONSTER" gid="1113" x="4704" y="1584" width="48" height="48">
+  <object id="229" name="dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="230" name="enchanted sword" type="MONSTER" gid="1076" x="4656" y="1632" width="48" height="48">
+  <object id="230" name="enchanted sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="231" name="very young dragon" type="MONSTER" gid="1109" x="4128" y="1632" width="48" height="48">
+  <object id="231" name="very young dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="232" name="nizim al mulk" type="MONSTER" gid="837" x="2976" y="1536" width="48" height="48">
+  <object id="232" name="nizim al mulk" type="MONSTER" x="2976" y="1488" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="233" name="salaman" type="MONSTER" gid="837" x="3072" y="1632" width="48" height="48">
+  <object id="233" name="salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="234" name="alp arsalan" type="MONSTER" gid="837" x="2928" y="1584" width="48" height="48">
+  <object id="234" name="alp arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="235" name="absal" type="MONSTER" gid="837" x="2880" y="1536" width="48" height="48">
+  <object id="235" name="absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="236" name="abdullah" type="FRIENDLY" gid="1273" x="3216" y="1680" width="48" height="48">
+  <object id="236" name="abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="237" name="succubus" type="MONSTER" gid="1057" x="2064" y="1776" width="48" height="48">
+  <object id="237" name="succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="238" name="slime" type="MONSTER" gid="1229" x="2352" y="2064" width="48" height="48">
+  <object id="238" name="slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="239" name="barn owl" type="FRIENDLY" gid="1129" x="1968" y="2064" width="48" height="48">
+  <object id="239" name="barn owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="240" name="tiger" type="MONSTER" gid="1005" x="2304" y="1200" width="48" height="48">
+  <object id="240" name="tiger" type="MONSTER" x="2304" y="1152" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="241" name="thief" type="MONSTER" gid="837" x="2016" y="768" width="48" height="48">
+  <object id="242" name="mailik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="242" name="mailik" type="MONSTER" gid="837" x="2448" y="768" width="48" height="48">
-   <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="243" name="sultan shahriar" type="MONSTER" gid="1161" x="1680" y="816" width="48" height="48">
+  <object id="243" name="sultan shahriar" type="MONSTER" x="1680" y="768" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="244" name="guard" type="MONSTER" gid="808" x="1728" y="720" width="48" height="48">
+  <object id="244" name="guard" type="MONSTER" x="1680" y="672" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="245" name="guard" type="MONSTER" gid="808" x="1728" y="912" width="48" height="48">
+  <object id="245" name="guard" type="MONSTER" x="1680" y="864" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="246" name="tan rat" type="MONSTER" gid="965" x="1200" y="912" width="48" height="48">
+  <object id="246" name="tan rat" type="MONSTER" x="1200" y="864" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="247" name="grey rat" type="MONSTER" gid="965" x="1200" y="864" width="48" height="48">
+  <object id="247" name="grey rat" type="MONSTER" x="1200" y="816" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="248" name="enchanted statue" type="MONSTER" gid="1141" x="1344" y="720" width="48" height="48">
+  <object id="248" name="enchanted statue" type="MONSTER" x="1344" y="672" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="249" name="minotaur" type="MONSTER" gid="985" x="1440" y="3696" width="48" height="48">
+  <object id="249" name="minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="250" name="minotaur statue" type="MONSTER" gid="985" x="1200" y="3648" width="48" height="48">
+  <object id="250" name="minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="251" name="stone statue" type="MONSTER" gid="921" x="720" y="3792" width="48" height="48">
+  <object id="251" name="stone statue" type="MONSTER" x="720" y="3744" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="252" name="stone statue" type="MONSTER" gid="1141" x="432" y="4224" width="48" height="48">
+  <object id="252" name="stone statue" type="MONSTER" x="384" y="4176" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="253" name="oozing stenchbeast" type="MONSTER" gid="1233" x="576" y="4224" width="48" height="48">
+  <object id="253" name="oozing stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="254" name="stone statue" type="MONSTER" gid="1157" x="720" y="4656" width="48" height="48">
+  <object id="254" name="stone statue" type="MONSTER" x="672" y="4608" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="255" name="son of minotaur" type="MONSTER" gid="985" x="1008" y="4656" width="48" height="48">
+  <object id="255" name="son of minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="256" name="green dragon" type="MONSTER" gid="1117" x="2208" y="3792" width="48" height="48">
+  <object id="256" name="green dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="257" name="mechanized sword" type="FRIENDLY" gid="1077" x="2592" y="3744" width="48" height="48">
+  <object id="257" name="mechanized sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="258" name="whale" type="FRIENDLY" gid="825" x="2400" y="3600" width="48" height="48">
+  <object id="258" name="whale" type="FRIENDLY" x="2400" y="3552" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="259" name="werewolf" type="MONSTER" gid="1001" x="2640" y="3360" width="48" height="48">
+  <object id="259" name="werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="260" name="giant scorpion" type="MONSTER" gid="948" x="2160" y="3312" width="48" height="48">
+  <object id="260" name="giant scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="261" name="sewer rat" type="MONSTER" gid="965" x="2208" y="3168" width="48" height="48">
+  <object id="261" name="sewer rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="262" name="wererat" type="MONSTER" gid="965" x="2400" y="3168" width="48" height="48">
+  <object id="262" name="wererat" type="MONSTER" x="2208" y="3168" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="263" name="jungle rat" type="MONSTER" gid="965" x="2640" y="3168" width="48" height="48">
+  <object id="263" name="jungle rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="264" name="sword of damacles" type="FRIENDLY" gid="1076" x="2448" y="3072" width="48" height="48">
+  <object id="264" name="sword of damacles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="265" name="two edged sword" type="FRIENDLY" gid="1077" x="2352" y="3072" width="48" height="48">
+  <object id="265" name="two edged sword" type="FRIENDLY" x="2352" y="3024" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="266" name="dragon" type="MONSTER" gid="1113" x="2448" y="2928" width="48" height="48">
+  <object id="266" name="dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -706,52 +715,52 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="279" name="coggia houssain" type="MONSTER" gid="817" x="7152" y="4176" width="48" height="48">
+  <object id="279" name="coggia houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="281" name="morgiana" type="FRIENDLY" gid="1176" x="6144" y="5040" width="48" height="48">
+  <object id="281" name="morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="282" name="hassan ben sabbah" type="MONSTER" gid="837" x="6096" y="4944" width="48" height="48">
-   <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="283" name="mountain scorpion" type="MONSTER" gid="953" x="3888" y="336" width="48" height="48">
+  <object id="282" name="hassan ben sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="284" name="big zombie" type="MONSTER" gid="969" x="3024" y="288" width="48" height="48">
+  <object id="283" name="mountain scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="285" name="small zombie" type="MONSTER" gid="973" x="3072" y="336" width="48" height="48">
+  <object id="284" name="big zombie" type="MONSTER" x="3024" y="240" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="286" name="witless zombie" type="MONSTER" gid="973" x="3120" y="288" width="48" height="48">
+  <object id="285" name="small zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="287" name="sky wanderer" type="FRIENDLY" gid="1193" x="3648" y="2064" width="48" height="48">
+  <object id="286" name="witless zombie" type="MONSTER" x="3120" y="240" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="287" name="sky wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="288" name="sun wanderer" type="FRIENDLY" gid="1193" x="3504" y="2064" width="48" height="48">
+  <object id="288" name="sun wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="289" name="earth wanderer" type="FRIENDLY" gid="1193" x="3504" y="2160" width="48" height="48">
+  <object id="289" name="earth wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
@@ -761,8 +770,13 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
+  <object id="404" name="thief" type="MONSTER" x="2016" y="720" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="vendors" visible="0">
+ <objectgroup name="vendors">
   <object id="72" name="armor" type="vendor" x="2640" y="2160" width="48" height="48">
    <properties>
     <property name="Leather Armor" value="240"/>
@@ -776,7 +790,7 @@
     <property name="Oak Club" value="30"/>
    </properties>
   </object>
-  <object id="74" name="armor" type="vendor" x="2160" y="1200" width="48" height="48">
+  <object id="74" name="armor" type="vendor" x="2112" y="1200" width="48" height="48">
    <properties>
     <property name="Leather Armor" value="80"/>
     <property name="Rithmil Chain Mail" value="1000"/>
@@ -864,7 +878,7 @@
   <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" gid="1306" x="3456" y="2688" width="48" height="48"/>
   <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" gid="1303" x="5568" y="3504" width="48" height="48"/>
  </objectgroup>
- <objectgroup name="rooms">
+ <objectgroup name="rooms" visible="0">
   <object id="335" name="dusty road" x="2016" y="672">
    <polygon points="0,0 576,0 576,336 432,336 432,144 -48,144 -48,0"/>
   </object>

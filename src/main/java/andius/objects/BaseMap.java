@@ -37,8 +37,8 @@ public class BaseMap {
         this.height = height;
     }
 
-    public void addPortal(Map map, int sx, int sy, int dx, int dy) {
-        portals.add(new Portal(map, sx, sy, dx, dy));
+    public void addPortal(Map map, int sx, int sy, int dx, int dy, List<Vector3> randoms) {
+        portals.add(new Portal(map, sx, sy, dx, dy, randoms));
     }
     
     public Portal getPortal(int sx, int sy) {
