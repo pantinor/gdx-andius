@@ -5,25 +5,39 @@ import andius.Constants.Map;
 public class Portal {
 
     private final Map map;
-    private final int x;
-    private final int y;
+    private final int sx;
+    private final int sy;
+    private final int dx;
+    private final int dy;
 
-    public Portal(Map map, int x, int y) {
+    public Portal(Map map, int sx, int sy, int dx, int dy) {
         this.map = map;
-        this.x = x;
-        this.y = y;
+        this.sx = sx;
+        this.sy = sy;
+        this.dx = dx;
+        this.dy = dy;
     }
 
     public Map getMap() {
-        return map;
+        return this.map;
     }
 
-    public int getX() {
-        return x;
+    public int getSx() {
+        return sx;
     }
 
-    public int getY() {
-        return y;
+    public int getSy() {
+        return sy;
     }
+
+    public int getDx() {
+        return dx;
+    }
+
+    public int getDy() {
+        return dy;
+    }
+    
+    
 
 }

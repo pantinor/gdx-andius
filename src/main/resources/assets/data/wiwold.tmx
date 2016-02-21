@@ -4,7 +4,7 @@
   <property name="startX" value="35"/>
   <property name="startY" value="40"/>
  </properties>
- <tileset firstgid="1" name="uf_terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
   <tile id="115">
    <animation>
@@ -85,7 +85,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="uf_heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
   <image source="uf_heroes.png" width="1920" height="624"/>
  </tileset>
  <layer name="floor" width="48" height="48">
@@ -105,7 +105,7 @@
  </layer>
  <layer name="creature" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwEGAT80C7gLqgcpj5ZxSMglEwCkYBJjgJLOsnMEPooQpAbp84iN1/bBC7jRCg1O1XWajjDmLAPyb62TUKMMFo+A8P8GAIl1ekAl46lk/0BJxU8Fc7MyrdNYTSRROSm5uYMcWpBagRzqNgFJACCuiQ5pSGUF4nF8D6DFOGqF+nAd3dywyhR8HIAKp0rG9oUc6oAc3UHKA6cykV7NUbQfX9FSx+3TfEy5q9UPfvGaT+OEMgfQ1Wd4+CUTAKBgYAAB7eIhkAJAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwEGAT80C7gLqgcpj5ZxSMglEwCkYBJjgJLOsnDPHyHuSHiYPYD8cGsdsIAUrdfpWFOu4gBvxjop9dowATjIb/8AAPhnB5RSrgpWP5RE/ASQV/tTOj0l1DKF00Ibm5iRlTnFqAGuE8CkYBKaCADmlOaQjldXIBrM8wZYj6dRrQ3b3MEHoUjAygSsf6hhbljBrQTM0BqjOXUsFevRFU31/B4td9Q7ys2Qt1/55B6o8zBNLXYHX3KBgFo2BgAAAiva3/ACQAAA==
   </data>
  </layer>
  <layer name="water_edges" width="48" height="48">
@@ -138,6 +138,10 @@
    H4sIAAAAAAAAC+3ZwQ0AIQgEQGLzp1f1NcCPGCU3U4GP3UggAqCnd5x+AVA1kx4v3aZIhujgSXL619lGZ+lMfgHgvGy2BujCfmA//8S9svsAVNjTRHx/7PVZACQAAA==
   </data>
  </layer>
+ <objectgroup name="portals">
+  <object id="1" name="WORLD" type="portal" x="1632" y="1920" width="48" height="48"/>
+  <object id="2" name="WIWOLD_LVL_2" type="portal" x="240" y="624" width="48" height="48"/>
+ </objectgroup>
  <objectgroup name="people">
   <object id="1" name="lich" type="MONSTER" x="960" y="384" width="48" height="48">
    <properties>
@@ -424,13 +428,6 @@
     <property name="movement" value="ATTACK_AVATAR"/>
     <property name="startX" value="8"/>
     <property name="startY" value="18"/>
-   </properties>
-  </object>
-  <object id="66" name="zombie" type="MONSTER" x="864" y="768" width="48" height="48" rotation="90">
-   <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
-    <property name="startX" value="17"/>
-    <property name="startY" value="16"/>
    </properties>
   </object>
  </objectgroup>

@@ -28,23 +28,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
     private final Map map;
-    private final Context context;
     float stateTime = 0;
-
-    TextureRegion door;
-    TextureRegion brick_floor;
-    TextureRegion locked_door;
-
     List<CreatureLayer> creatureLayers = new ArrayList<>();
 
     public interface CreatureLayer {
@@ -60,23 +58,19 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
         creatureLayers.remove(layer);
     }
 
-    public TmxMapRenderer(Context context, TextureAtlas atlas, Map map, TiledMap tiledMap, float unitScale) {
+    public TmxMapRenderer(Map map, TiledMap tiledMap, float unitScale) {
         super(tiledMap, unitScale);
-
         this.map = map;
-        this.context = context;
+    }
 
-        if (atlas != null) {
-
-            door = atlas.findRegion("door");
-            brick_floor = atlas.findRegion("brick_floor");
-            locked_door = atlas.findRegion("locked_door");
-
-            door.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-            brick_floor.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-            locked_door.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+    private boolean shouldRenderCell(int roomId, int x, int y) {
+        if (this.map.getRoomIds() == null || roomId <= 0) {
+            return true;
         }
-
+        if (this.map.getRoomIds()[x][y][0] == roomId || this.map.getRoomIds()[x][y][1] == roomId || this.map.getRoomIds()[x][y][2] == roomId) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -126,7 +120,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
                 TiledMapTileLayer.Cell cell = layer.getCell(col, row);
 
-                if (cell == null) {
+                if (cell == null || !shouldRenderCell(this.map.getScreen().currentRoomId(), col, layerHeight - row)) {
                     x += layerTileWidth;
                     continue;
                 }

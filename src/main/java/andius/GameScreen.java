@@ -2,6 +2,7 @@ package andius;
 
 import static andius.Constants.TILE_DIM;
 import andius.objects.Creature;
+import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -39,7 +40,7 @@ public class GameScreen extends BaseScreen {
 
         addButtons();
 
-        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
+        renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 1f);
 
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
@@ -54,6 +55,11 @@ public class GameScreen extends BaseScreen {
         mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;
 
         newMapPixelCoords = getMapPixelCoords(this.map.getStartX(), this.map.getStartY());
+
+        if (this.map.getRoomIds() != null) {
+            currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
+        }
+
     }
 
     @Override
@@ -146,6 +152,19 @@ public class GameScreen extends BaseScreen {
             }
             newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
             v.x -= 1;
+        } else if (keycode == Keys.E || keycode == Keys.K) {
+            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
+            if (p != null) {
+                if (p.getMap() != this.map) {
+                    Andius.mainGame.setScreen(p.getMap().getScreen());
+                } else {
+                    if (this.map.getRoomIds() != null) {
+                        currentRoomId = this.map.getRoomIds()[p.getDx()][p.getDy()][0];
+                    }
+                    newMapPixelCoords = getMapPixelCoords(p.getDx(), p.getDy());
+                }
+            }
+            return false;
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -188,6 +207,10 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void finishTurn(int x, int y) {
+
+        if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][0] > 0 && this.map.getRoomIds()[x][y][1] == 0) {
+            this.currentRoomId = this.map.getRoomIds()[x][y][0];
+        }
 
         try {
             this.map.getMap().moveObjects(this.map, this, x, y);

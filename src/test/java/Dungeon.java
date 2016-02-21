@@ -35,7 +35,7 @@ public class Dungeon {
     public static void main(String[] args) {
 
         Dungeon d = new Dungeon();
-        d.createDungeon(48, 48, 30);
+        d.createDungeon(24, 24, 30);
 
         System.out.println(d.showDungeon());
 

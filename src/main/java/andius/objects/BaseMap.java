@@ -6,7 +6,6 @@ import andius.GameScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import utils.PartyDeathException;
 import utils.Utils;
@@ -15,7 +14,7 @@ public class BaseMap {
 
     private int width;
     private int height;
-    private final java.util.Map<Map, Portal> portals = new HashMap<>();
+    private final List<Portal> portals = new ArrayList<>();
     public final List<Creature> creatures = new ArrayList<>();
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
@@ -38,17 +37,13 @@ public class BaseMap {
         this.height = height;
     }
 
-    public void addPortal(Map map, int x, int y) {
-        portals.put(map, new Portal(map, x, y));
+    public void addPortal(Map map, int sx, int sy, int dx, int dy) {
+        portals.add(new Portal(map, sx, sy, dx, dy));
     }
-
-    public Portal getPortal(Map map) {
-        return portals.get(map);
-    }
-
-    public Portal getPortal(int x, int y) {
-        for (Portal p : portals.values()) {
-            if (p.getX() == x && p.getY() == y) {
+    
+    public Portal getPortal(int sx, int sy) {
+        for (Portal p : portals) {
+            if (p.getSx() == sx && p.getSy() == sy) {
                 return p;
             }
         }
@@ -62,6 +57,10 @@ public class BaseMap {
             }
         }
         return null;
+    }
+
+    public void removeCreature(Creature cr) {
+        creatures.remove(cr);
     }
 
     public void moveObjects(Map map, GameScreen screen, int avatarX, int avatarY) throws PartyDeathException {
@@ -78,7 +77,7 @@ public class BaseMap {
                     if (dist <= 1) {
                         //combat
                         continue;
-                    } else if (dist >=4) {
+                    } else if (dist >= 4) {
                         //dont move until close enough
                         continue;
                     }
@@ -111,7 +110,7 @@ public class BaseMap {
             if (dir == null) {
                 continue;
             }
-            
+
             switch (dir) {
                 case NORTH:
                     p.setWy(p.getWy() - 1);
@@ -128,11 +127,11 @@ public class BaseMap {
                 default:
                     break;
             }
-            
+
             Vector3 pixelPos = screen.getMapPixelCoords(p.getWx(), p.getWy() + 1);
             p.setX(pixelPos.x);
             p.setY(pixelPos.y);
-            
+
         }
     }
 
@@ -155,6 +154,17 @@ public class BaseMap {
 
     private int addToMask(Direction dir, int mask, TiledMapTileLayer.Cell cell, int x, int y, Creature cr, int avatarX, int avatarY) {
         if (cell != null) {
+
+            for (Creature c : this.creatures) {
+                if (c.getWx() == x && c.getWy() == y) {
+                    return mask;
+                }
+            }
+
+            if (avatarX == x && avatarY == y) {
+                return mask;
+            }
+
             mask = Direction.addToMask(dir, mask);
         }
         return mask;

@@ -6,6 +6,8 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 
 public class DungeonTmxConvert implements ApplicationListener {
+    
+    public static final int DIM = 32;
 
     public static void main(String[] args) throws Exception {
 
@@ -17,7 +19,7 @@ public class DungeonTmxConvert implements ApplicationListener {
 
         try {
             Dungeon d = new Dungeon();
-            d.createDungeon(48, 48, 30);
+            d.createDungeon(DIM, DIM, 30);
 
             Formatter c = new Formatter(getFloor(d), getWall(d), getDoor(d), getProp(d));
 
@@ -56,13 +58,13 @@ public class DungeonTmxConvert implements ApplicationListener {
             for (int x = 0; x < d.getXsize(); x++) {
                 switch (d.getCell(x, y)) {
                     case Dungeon.tileDirtFloor:
-                        dungeonMap.append(new Random().nextInt(1) + 206);
+                        dungeonMap.append(new Random().nextInt(3) + 182);
                         break;
                     case Dungeon.tileCorridor:
                     case Dungeon.tileDoor:
                     case Dungeon.tileUpStairs:
                     case Dungeon.tileDownStairs:
-                        dungeonMap.append(new Random().nextInt(3) + 206);
+                        dungeonMap.append(new Random().nextInt(3) + 182);
                         break;
                     default:
                         dungeonMap.append(0);
@@ -82,7 +84,7 @@ public class DungeonTmxConvert implements ApplicationListener {
                 switch (d.getCell(x, y)) {
                     case Dungeon.tileStoneWall:
                     case Dungeon.tileDirtWall:
-                        dungeonMap.append(342);
+                        dungeonMap.append(522);
                         break;
                     default:
                         dungeonMap.append(0);
@@ -154,8 +156,8 @@ public class DungeonTmxConvert implements ApplicationListener {
         public String toString() {
 
             StringBuffer sb = new StringBuffer();
-            for (int y = 0; y < 48; y++) {
-                for (int x = 0; x < 48; x++) {
+            for (int y = 0; y < DIM; y++) {
+                for (int x = 0; x < DIM; x++) {
                     sb.append("0,");
                 }
                 sb.append("\n");
@@ -163,7 +165,7 @@ public class DungeonTmxConvert implements ApplicationListener {
             sb.deleteCharAt(sb.length() - 2);
 
             String template = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                    + "<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\"48\" height=\"48\" tilewidth=\"48\" tileheight=\"48\" nextobjectid=\"21\">\n"
+                    + "<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\""+DIM+"\" height=\""+DIM+"\" tilewidth=\"48\" tileheight=\"48\" backgroundcolor=\"#000000\" nextobjectid=\"21\">\n"
                     + " <properties>\n"
                     + "  <property name=\"startX\" value=\"1\"/>\n"
                     + "  <property name=\"startY\" value=\"15\"/>\n"
@@ -252,52 +254,52 @@ public class DungeonTmxConvert implements ApplicationListener {
                     + " <tileset firstgid=\"761\" name=\"uf_heroes\" tilewidth=\"48\" tileheight=\"48\" tilecount=\"520\" columns=\"40\">\n"
                     + "  <image source=\"uf_heroes.png\" width=\"1920\" height=\"624\"/>\n"
                     + " </tileset>\n"
-                    + " <layer name=\"floor\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"floor\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   %s"
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"floor 2\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"floor 2\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"props\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"props\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   %s"
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"creature\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"creature\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"water_edges\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"water_edges\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"shadows\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"shadows\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"walls\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"walls\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   %s"
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"door\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"door\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   %s"
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"torches\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"torches\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"
                     + " </layer>\n"
-                    + " <layer name=\"webs\" width=\"48\" height=\"48\">\n"
+                    + " <layer name=\"webs\" width=\""+DIM+"\" height=\""+DIM+"\">\n"
                     + "  <data encoding=\"csv\">\n"
                     + "   " + sb.toString()
                     + "  </data>\n"

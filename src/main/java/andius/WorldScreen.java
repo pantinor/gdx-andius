@@ -50,7 +50,7 @@ public class WorldScreen extends BaseScreen {
         seq1.addAction(Actions.run(gameTimer));
         stage.addAction(Actions.forever(seq1));
 
-        renderer = new TmxMapRenderer(Andius.CONTEXT, null, this.map, this.map.getTiledMap(), 1f);
+        renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 1f);
         mapBatch = renderer.getBatch();
 
         mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;

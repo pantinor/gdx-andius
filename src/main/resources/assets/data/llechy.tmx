@@ -4,7 +4,7 @@
   <property name="startX" value="1"/>
   <property name="startY" value="15"/>
  </properties>
- <tileset firstgid="1" name="uf_terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
   <tile id="115">
    <animation>
@@ -85,7 +85,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="uf_heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
   <image source="uf_heroes.png" width="1920" height="624"/>
  </tileset>
  <layer name="floor" width="32" height="32">

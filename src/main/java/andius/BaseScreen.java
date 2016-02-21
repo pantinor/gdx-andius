@@ -31,6 +31,8 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     protected Vector2 currentMousePos;
 
     protected Creature currentEncounter;
+    
+    protected int currentRoomId = 0;
 
     /**
      * translate map tile coords to world pixel coords
@@ -41,6 +43,10 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
      * get the map coords at the camera center
      */
     public abstract Vector3 getCurrentMapCoords();
+    
+    public int currentRoomId() {
+        return this.currentRoomId;
+    }
 
     @Override
     public void dispose() {

@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -38,9 +41,11 @@ public interface Constants {
 
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
+        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),;
-        
+        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
+        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),;
+
         private final String label;
         private final String tmxFile;
         private final int dim;
@@ -49,6 +54,7 @@ public interface Constants {
         private BaseScreen screen;
         private int startX;
         private int startY;
+        private int[][][] roomIds;
 
         private Map(String label, String tmx, int dim) {
             this.label = label;
@@ -87,6 +93,10 @@ public interface Constants {
         public int getStartY() {
             return startY;
         }
+        
+        public int[][][] getRoomIds() {
+            return roomIds;
+        }
 
         public static void init() {
 
@@ -117,31 +127,90 @@ public interface Constants {
                     Iterator<MapObject> iter = portalsLayer.getObjects().iterator();
                     while (iter.hasNext()) {
                         MapObject obj = iter.next();
-                        Map pm = Map.valueOf(obj.getName());
-                        String x = obj.getProperties().get("wx", String.class);
-                        String y = obj.getProperties().get("wy", String.class);
-                        m.baseMap.addPortal(pm, Integer.parseInt(x), Integer.parseInt(y));
+                        Map pm;
+                        try {
+                            pm = Map.valueOf(obj.getName());
+                        } catch (Exception e) {
+                            pm = m;
+                        }
+                        float x = obj.getProperties().get("x", Float.class);
+                        float y = obj.getProperties().get("y", Float.class);
+                        int sx = (int) (x / m.dim);
+                        int sy = m.baseMap.getHeight() - 1 - (int) (y / m.dim);
+                        Object dx = obj.getProperties().get("dx");
+                        Object dy = obj.getProperties().get("dy");
+                        m.baseMap.addPortal(pm, sx, sy, dx != null ? Integer.parseInt((String)dx) : -1, dy != null ? Integer.parseInt((String)dy) : -1);
                     }
                 }
 
                 MapLayer peopleLayer = m.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
                     TiledMapTileLayer iconLayer = (TiledMapTileLayer) m.tiledMap.getLayers().get("creature");
-                    int firstgid = m.tiledMap.getTileSets().getTileSet("uf_heroes").getProperties().get("firstgid", Integer.class);
+                    int firstgid = m.tiledMap.getTileSets().getTileSet("heroes").getProperties().get("firstgid", Integer.class);
                     Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
                     while (iter.hasNext()) {
                         MapObject obj = iter.next();
-                        int sx = Integer.parseInt(obj.getProperties().get("startX", String.class));
-                        int sy = Integer.parseInt(obj.getProperties().get("startY", String.class));
                         float x = obj.getProperties().get("x", Float.class);
                         float y = obj.getProperties().get("y", Float.class);
-                        TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, m.baseMap.getHeight() - 1 - sy);
-                        Heroes icon = Heroes.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
+                        int sx = (int) (x / TILE_DIM);
+                        int sy = (int) (y / TILE_DIM);
+                        Heroes icon = null;
+                        TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
+                        if (iconCell != null) {
+                            icon = Heroes.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
+                        } else {
+                            icon = Heroes.valueOf(iconTileIds[obj.getProperties().get("gid", Integer.class) - firstgid]);
+                        }
                         String surname = obj.getName();
                         PersonRole role = PersonRole.valueOf(obj.getProperties().get("type", String.class));
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-                        Creature cr = new Creature(icon, role, surname, sx, sy, x, y, movement);
+                        Creature cr = new Creature(icon, role, surname, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
                         m.baseMap.creatures.add(cr);
+                    }
+                }
+
+                MapLayer roomsLayer = m.tiledMap.getLayers().get("rooms");
+                if (roomsLayer != null) {
+                    m.roomIds = new int[m.baseMap.getWidth()][m.baseMap.getHeight()][3];
+                    Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
+                    while (iter.hasNext()) {
+                        MapObject obj = iter.next();
+                        int id = obj.getProperties().get("id", Integer.class);
+                        if (obj instanceof RectangleMapObject) {
+                            RectangleMapObject rmo = (RectangleMapObject) obj;
+                            for (int y = 0; y < m.baseMap.getHeight(); y++) {
+                                for (int x = 0; x < m.baseMap.getWidth(); x++) {
+                                    if (rmo.getRectangle().contains(x * TILE_DIM + TILE_DIM / 2, m.baseMap.getHeight() * TILE_DIM - y * TILE_DIM)) {
+                                        if (m.roomIds[x][y][0] == 0) {
+                                            m.roomIds[x][y][0] = id;
+                                        } else if (m.roomIds[x][y][1] == 0) {
+                                            m.roomIds[x][y][1] = id;
+                                        } else if (m.roomIds[x][y][2] == 0) {
+                                            m.roomIds[x][y][2] = id;
+                                        } else {
+                                            throw new RuntimeException("Too many overlaps on roomids");
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            PolygonMapObject rmo = (PolygonMapObject) obj;
+                            for (int y = 0; y < m.baseMap.getHeight(); y++) {
+                                for (int x = 0; x < m.baseMap.getWidth(); x++) {
+                                    if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, m.baseMap.getHeight() * TILE_DIM - y * TILE_DIM)) {
+                                        if (m.roomIds[x][y][0] == 0) {
+                                            m.roomIds[x][y][0] = id;
+                                        } else if (m.roomIds[x][y][1] == 0) {
+                                            m.roomIds[x][y][1] = id;
+                                        } else if (m.roomIds[x][y][2] == 0) {
+                                            m.roomIds[x][y][2] = id;
+                                        } else {
+                                            throw new RuntimeException("Too many overlaps on roomids");
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -412,6 +481,7 @@ public interface Constants {
 
     public enum PersonRole {
         NONE,
+        FRIENDLY,
         MONSTER,
         MERCHANT;
     }

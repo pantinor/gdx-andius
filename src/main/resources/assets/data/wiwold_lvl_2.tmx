@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" backgroundcolor="#000000" nextobjectid="42">
+ <properties>
+  <property name="startX" value="22"/>
+  <property name="startY" value="16"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
+ <layer name="floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2TSw7AIAhEPbfWu3gUj1YXNWkIilP8pe0kLIyBxyAa8365xcwZfMrYka/pQ/LzRX6tp5/Ph8TQhJYv9YbcI3yt71n+ET7N1WoVv/ZmUl6P+c/ka/41rb+K/3RHUD6X28N/61xX85H6rXu/Mx/dL5vCX3EYE/3tnAPhl7yUvKX6wZEeer0/x+dyqF8r8LmapbvSOSv5DYkX8+wRofwW7yP5NaHsHfittUfzZ+gEntGXQQAQAAA=
+  </data>
+ </layer>
+ <layer name="floor 2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglFALuhjYlhAD3tK8GB6gH4m7OK9OMRpBfrobN8oGDygn055bbCDIxCcAKWpAkgpx4B2LoDafYBa9qO7ARjXCYTU9xChhhSAq4yjNwC64wCF+skGyOVrH5XDlwi7F9DK7B4Kw5QScAOKKQXkpgtq2T8KhhcAAEvzFOwAEAAA
+  </data>
+ </layer>
+ <layer name="props" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGP6gjGn42zkQfiQVlFPgRmT/UWLOcAJDIc6HEihkQuDBChYyobAToPQCSswcCv4eaIAcRrBwwiZGbTBU87ghGXpgfiXXz0V0CKuqAY6P2gGwHzlcK/HYXz3AYVNDJ/s34bCHnmmD0rQ+GMt6Svw0VMvJoQbQ0w0t0lEZUv06EPaTYjYhNYMxnyEDAPUR02gAEAAA
+  </data>
+ </layer>
+ <layer name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglFAC3CUBYLPsAycGwbS7lEwCoYz+MvEwKDEDKFHAeXgKDMqfZgZt9oPLKg0tQDITnz20hIcHSB7aQV2sqDSAwEqB9DugfT3KGBgEB0Nf7wAABPBB8UAEAAA
+  </data>
+ </layer>
+ <layer name="water_edges" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3TuwkAIRCE4dkefLRnaZZypbmCgXi5ewf/BwOyyZiMBAD4umpqxdTP+L1H/w3APdmk5LufyQH7986WVvz93O4H/mTuNWKnWz87xcsA0TL3KgAQAAA=
+  </data>
+ </layer>
+ <layer name="shadows" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WSQoAIAhFvYv3v2N74YNW5pAPokX0HcmI+sMf2IyIUQuL/UTjVKcTkwcMg7V7B51ptW/gZTs6rgGzm/+KtdTMCW2vRsUa9RZ4aFbpm+zcyJ+1DhnmlQfSbzSfs2Hxy/pf7lLb4T0LnWSNcwAQAAA=
+  </data>
+ </layer>
+ <layer name="walls" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC8VWbXKEIAxVfzp6xz1aj9KziHuFdf3XZcqbxjTkA2s3M0wgYB4PkmDXXSuPvuvG4Vvn9h8iYV6JT/Ew5phX49c07dM9Rv3T8+R+vPhUR/Fr/rJsb8KXYozv5y/xs99d4fjsuw9tv2fxa/64DXvM5zMNP30NH+eZ14+kYZyF9iWbh6OGv7zaWjTve6QFH7xnwnkeftsi+FsQP/O8F553wnk5wT8Vv6nYUumfib8IPm3cFsFFjvOYyILzgo2c/43HLsZRfIkXry+7wNXyKdnn4ah3oZ6MAicap9hPTVCjvFypTfMLsfJF42/he+4Ocd6Kj73PrHZ6Y9daV5vTaga+q90dlRwzLflv3e3m5I910fy3+E/OOoz4R/2eWK6MLFfod5rwupPYGPPWOeG7ha3bjLvV8uHB+LbmH31rVsKN85K0973KtdniKWltjr7VrfwhUs2FvPLvU5pb+2NL/bEO0bGF/wzw5/+bXFr+OfE/UsOX5pScvkXxKRbPkegaj493yxfr/FckABAAAA==
+  </data>
+ </layer>
+ <layer name="door" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAXDHbQzDrQLRsFIA4cZMdneFKRDbOZhE6MFEBzh+Wek+59SQMu0OVBgOPqJGoCSvELvcm0U0AdQUu8hA2qUw5SagZ4eB2P6pJYfB6PfiAHI/i8eYD+M9j0GNwAAtuLYDAAQAAA=
+  </data>
+ </layer>
+ <layer name="torches" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Tuw0AIAxDQcTuDMG2tBENFA4f690ARkR2KQCQo9XcvFV+F78/56nz4SX2U72FHbGfqq46/ulFN24bOd/2FLbij53iVwOb3tbhABAAAA==
+  </data>
+ </layer>
+ <layer name="webs" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGJ6gi2l42zeQYCT5dRSMglEwckE7Fcu6wV5uEuNXaobHKBgFwxUQyie0KAs6h3je7Bji7h8FtAdDPY0PNgAA2CB6HAAQAAA=
+  </data>
+ </layer>
+ <objectgroup name="people">
+  <object id="1" name="slug" type="MONSTER" x="1152" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="24"/>
+    <property name="startY" value="10"/>
+   </properties>
+  </object>
+  <object id="21" name="acolyte" type="MONSTER" x="768" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="16"/>
+    <property name="startY" value="18"/>
+   </properties>
+  </object>
+  <object id="22" name="evil-wizard" type="MONSTER" x="816" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="17"/>
+    <property name="startY" value="18"/>
+   </properties>
+  </object>
+  <object id="23" name="acolyte" type="MONSTER" x="864" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="18"/>
+    <property name="startY" value="18"/>
+   </properties>
+  </object>
+  <object id="24" name="frog" type="MONSTER" x="720" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="15"/>
+    <property name="startY" value="21"/>
+   </properties>
+  </object>
+  <object id="25" name="frog" type="MONSTER" x="816" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="17"/>
+    <property name="startY" value="21"/>
+   </properties>
+  </object>
+  <object id="26" name="rat" type="MONSTER" x="384" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="8"/>
+    <property name="startY" value="21"/>
+   </properties>
+  </object>
+  <object id="27" name="rat" type="MONSTER" x="288" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="6"/>
+    <property name="startY" value="21"/>
+   </properties>
+  </object>
+  <object id="28" name="rat" type="MONSTER" x="192" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="4"/>
+    <property name="startY" value="21"/>
+   </properties>
+  </object>
+  <object id="29" name="rat" type="MONSTER" x="240" y="1056" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="5"/>
+    <property name="startY" value="22"/>
+   </properties>
+  </object>
+  <object id="30" name="rat" type="MONSTER" x="288" y="1056" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="6"/>
+    <property name="startY" value="22"/>
+   </properties>
+  </object>
+  <object id="31" name="rat" type="MONSTER" x="192" y="1104" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="4"/>
+    <property name="startY" value="23"/>
+   </properties>
+  </object>
+  <object id="32" name="elemental" type="MONSTER" x="1152" y="1152" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="24"/>
+    <property name="startY" value="24"/>
+   </properties>
+  </object>
+  <object id="33" name="golem" type="MONSTER" x="1200" y="1200" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="25"/>
+    <property name="startY" value="25"/>
+   </properties>
+  </object>
+  <object id="34" name="elemental" type="MONSTER" x="1248" y="1152" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="26"/>
+    <property name="startY" value="24"/>
+   </properties>
+  </object>
+  <object id="35" name="elemental" type="MONSTER" x="1152" y="1248" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="24"/>
+    <property name="startY" value="26"/>
+   </properties>
+  </object>
+  <object id="36" name="wraith" type="MONSTER" x="1152" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="24"/>
+    <property name="startY" value="29"/>
+   </properties>
+  </object>
+  <object id="37" name="slug" type="MONSTER" x="1200" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="25"/>
+    <property name="startY" value="10"/>
+   </properties>
+  </object>
+  <object id="38" name="slug" type="MONSTER" x="1248" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="26"/>
+    <property name="startY" value="10"/>
+   </properties>
+  </object>
+  <object id="39" name="slug" type="MONSTER" x="1200" y="528" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="startX" value="25"/>
+    <property name="startY" value="11"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="portals">
+  <object id="40" name="WIWOLD" type="portal" x="1056" y="768" width="48" height="48">
+   <properties>
+    <property name="wx" value="22"/>
+    <property name="wy" value="16"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
