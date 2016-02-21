@@ -5,18 +5,18 @@
  */
 package andius.objects;
 
-import andius.Constants.Heroes;
+import andius.Constants.Icons;
 import andius.Constants.MovementBehavior;
-import andius.Constants.PersonRole;
+import andius.Constants.Role;
 
 /**
  *
  * @author Paul
  */
 public class Creature {
-    
-    private final Heroes icon;
-    private final PersonRole role;
+
+    private final Icons icon;
+    private final Role role;
     private final String surname;
     private int wx;
     private int wy;
@@ -24,7 +24,7 @@ public class Creature {
     private float y;
     private final MovementBehavior movement;
 
-    public Creature(Heroes icon, PersonRole role, String surname, int wx, int wy, float x, float y, MovementBehavior movement) {
+    public Creature(Icons icon, Role role, String surname, int wx, int wy, float x, float y, MovementBehavior movement) {
         this.icon = icon;
         this.role = role;
         this.surname = surname;
@@ -35,18 +35,18 @@ public class Creature {
         this.movement = movement;
     }
 
-    public PersonRole getRole() {
+    public Role getRole() {
         return role;
     }
-       
-    public Heroes getIcon() {
+
+    public Icons getIcon() {
         return icon;
     }
 
     public String getSurname() {
         return surname;
     }
-    
+
     public int getWx() {
         return wx;
     }
@@ -82,9 +82,5 @@ public class Creature {
     public MovementBehavior getMovement() {
         return movement;
     }
-    
-    
-    
-    
-    
+
 }

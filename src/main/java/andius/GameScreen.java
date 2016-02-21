@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import java.util.Arrays;
 import utils.PartyDeathException;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
@@ -46,7 +45,7 @@ public class GameScreen extends BaseScreen {
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Heroes.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
+                renderer.getBatch().draw(Icons.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
                 for (Creature cr : GameScreen.this.map.getMap().creatures) {
                     if (renderer.shouldRenderCell(currentRoomId,cr.getWx(), cr.getWy())) {
                         renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);

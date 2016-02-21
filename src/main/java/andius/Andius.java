@@ -190,7 +190,7 @@ public class Andius extends Game {
             
             Constants.Map.init();
             Constants.Moongate.init();
-            Constants.Heroes.init(heroesAtlas);
+            Constants.Icons.init(heroesAtlas);
             Conversations.init();
             
         } catch (Exception e) {

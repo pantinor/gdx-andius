@@ -7,11 +7,11 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -168,8 +168,8 @@ public interface Constants {
                         int sx = (int) (x / TILE_DIM);
                         int sy = (int) (y / TILE_DIM);
                         TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
-                        Heroes icon = Heroes.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
-                        PersonRole role = PersonRole.valueOf(obj.getProperties().get("type", String.class));
+                        Icons icon = Icons.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
+                        Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
                         Creature cr = new Creature(icon, role, surname, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
                         m.baseMap.creatures.add(cr);
@@ -318,31 +318,127 @@ public interface Constants {
 
     public enum Profession {
 
-        BARBARIAN("fighter", 0x001),
-        DRUID("shepherd", 0x002),
-        ALCHEMIST("tinker", 0x004),
-        RANGER("ranger", 0x008),
-        FIGHTER("fighter", 0x010),
-        WIZARD("mage", 0x020),
-        THIEF("rogue", 0x0040),
-        ILLUSIONIST("mage", 0x080),
-        CLERIC("cleric", 0x100),
-        PALADIN("paladin", 0x200);
+        RANGER(0x008),
+        FIGHTER(0x010),
+        WIZARD(0x020),
+        THIEF(0x0040),
+        CLERIC(0x100),
+        WITCHER(0x200);
 
-        private final String tile;
         private final int val;
 
-        private Profession(String tile, int val) {
-            this.tile = tile;
+        private Profession(int val) {
             this.val = val;
-        }
-
-        public String getTile() {
-            return tile;
         }
 
         public int val() {
             return this.val;
+        }
+
+    }
+
+    public enum ArmorType {
+        NONE(128, 0xfff),
+        CLOTH(136, 0xfff),
+        LEATHER(145, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.THIEF.val() | Profession.CLERIC.val() | Profession.WITCHER.val()),
+        CHAIN(160, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.CLERIC.val() | Profession.WITCHER.val()),
+        PLATE(176, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        CHAIN_P2(192, Profession.RANGER.val() | Profession.FIGHTER.val()),
+        PLATE_P2(208, Profession.RANGER.val() | Profession.FIGHTER.val()),
+        EXOTIC(224, 0xfff);
+
+        private final int usableMask;
+        private final int defense;
+        private TextureRegion icon;
+
+        private ArmorType(int def, int mask) {
+            this.usableMask = mask;
+            this.defense = def;
+        }
+
+        public static ArmorType get(int v) {
+            for (ArmorType x : values()) {
+                if (x.ordinal() == (v & 0xff)) {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public int getDefense() {
+            return this.defense;
+        }
+
+        public boolean canUse(Profession prof) {
+            return (prof.val() & this.usableMask) > 0;
+        }
+
+        public TextureRegion getIcon() {
+            return icon;
+        }
+
+        public void setIcon(TextureRegion icon) {
+            this.icon = icon;
+        }
+
+    }
+
+    public enum WeaponType {
+        NONE(4, 4, 0xfff),
+        DAGGER(4, 8, 0xfff),
+        STAFF(4, 9, 0xfff),
+        MACE(4, 10, Profession.CLERIC.val() | Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SLING(4, 13, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE(4, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW(4, 19, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD(4, 22, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_2H(4, 25, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE_P2(4, 28, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW_P2(4, 31, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_P2(4, 34, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE_P4(4, 40, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW_P4(4, 43, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_P4(4, 46, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        EXOTIC(4, 49, 0xfff);
+
+        private final int dmin;
+        private final int dmax;
+        private final int usableMask;
+        private TextureRegion icon;
+
+        private WeaponType(int dmin, int dmax, int mask) {
+            this.usableMask = mask;
+            this.dmin = dmin;
+            this.dmax = dmax;
+        }
+
+        public static WeaponType get(int v) {
+            for (WeaponType x : values()) {
+                if (x.ordinal() == (v & 0xff)) {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public boolean canUse(Profession prof) {
+            return (prof.val() & this.usableMask) > 0;
+        }
+
+        public TextureRegion getIcon() {
+            return icon;
+        }
+
+        public void setIcon(TextureRegion icon) {
+            this.icon = icon;
+        }
+
+        public int getDmin() {
+            return dmin;
+        }
+
+        public int getDmax() {
+            return dmax;
         }
 
     }
@@ -429,7 +525,7 @@ public interface Constants {
         HUMAN(75, 75, 75, 75),
         ELF(75, 99, 75, 50),
         DWARF(99, 75, 50, 75),
-        BOBIT(75, 50, 75, 99),
+        HOBBIT(75, 50, 75, 99),
         FUZZY(25, 99, 99, 75);
 
         private final int maxStr, maxDex, maxInt, maxWis;
@@ -467,14 +563,14 @@ public interface Constants {
         DEAD;
     }
 
-    public enum PersonRole {
+    public enum Role {
         NONE,
         FRIENDLY,
         MONSTER,
         MERCHANT;
     }
 
-    public enum Heroes {
+    public enum Icons {
 
         WIZARD,
         CLERIC,
@@ -614,8 +710,8 @@ public interface Constants {
         }
 
         public static void init(TextureAtlas atlas) {
-            for (Heroes hero : Heroes.values()) {
-                hero.animation = new Animation(1.2f, atlas.findRegions(hero.toString()));
+            for (Icons hero : Icons.values()) {
+                hero.animation = new Animation(3f, atlas.findRegions(hero.toString()));
             }
         }
 
