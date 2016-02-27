@@ -136,8 +136,6 @@
   <object id="1" name="Jason" type="MERCHANT" x="1056" y="96" width="48" height="48">
    <properties>
     <property name="movement" value="FOLLOW_AVATAR"/>
-    <property name="startX" value="22"/>
-    <property name="startY" value="2"/>
    </properties>
   </object>
  </objectgroup>
