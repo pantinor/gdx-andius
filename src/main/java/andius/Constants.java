@@ -16,9 +16,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import utils.Utils;
 import utils.XORShiftRandom;
 
 public interface Constants {
@@ -170,8 +172,15 @@ public interface Constants {
                         TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
                         Icons icon = Icons.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
                         Role role = Role.valueOf(obj.getProperties().get("type", String.class));
+                        Creatures monster = null;
+                        try {
+                            monster = Creatures.valueOf(obj.getProperties().get("creature", String.class));
+                        } catch (Exception e) {
+                            monster = Creatures.NONE;
+                        }
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-                        Creature cr = new Creature(icon, role, surname, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                        Creature cr = new Creature(icon);
+                        cr.set(monster, role, surname, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
                         m.baseMap.creatures.add(cr);
                     }
                 }
@@ -384,31 +393,33 @@ public interface Constants {
     }
 
     public enum WeaponType {
-        NONE(4, 4, 0xfff),
-        DAGGER(4, 8, 0xfff),
-        STAFF(4, 9, 0xfff),
-        MACE(4, 10, Profession.CLERIC.val() | Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SLING(4, 13, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE(4, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW(4, 19, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD(4, 22, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_2H(4, 25, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE_P2(4, 28, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW_P2(4, 31, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_P2(4, 34, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE_P4(4, 40, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW_P4(4, 43, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_P4(4, 46, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        EXOTIC(4, 49, 0xfff);
+        NONE(4, 4, 1, 0xfff),
+        DAGGER(4, 8, 1, 0xfff),
+        STAFF(4, 9, 1, 0xfff),
+        MACE(4, 10, 1, Profession.CLERIC.val() | Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SLING(4, 13, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE(4, 16, 1, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW(4, 19, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD(4, 22, 1, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_2H(4, 25, 1, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE_P2(4, 28, 1, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW_P2(4, 31, 16, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_P2(4, 34, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        AXE_P4(4, 40, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        BOW_P4(4, 43, 16, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        SWORD_P4(4, 46, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
+        EXOTIC(4, 49, 1, 0xfff);
 
         private final int dmin;
         private final int dmax;
+        private final int range;
         private final int usableMask;
         private TextureRegion icon;
 
-        private WeaponType(int dmin, int dmax, int mask) {
+        private WeaponType(int dmin, int dmax, int range, int mask) {
             this.usableMask = mask;
             this.dmin = dmin;
+            this.range = range;
             this.dmax = dmax;
         }
 
@@ -441,6 +452,21 @@ public interface Constants {
             return dmax;
         }
 
+        public int getRange() {
+            return range;
+        }
+
+    }
+
+    public enum CreatureStatus {
+
+        FINE,
+        DEAD,
+        FLEEING,
+        CRITICAL,
+        HEAVILYWOUNDED,
+        LIGHTLYWOUNDED,
+        BARELYWOUNDED;
     }
 
     public enum Moongate {
@@ -518,6 +544,15 @@ public interface Constants {
             }
         }
 
+    }
+
+    public enum HealType {
+
+        NONE,
+        CURE,
+        FULLHEAL,
+        RESURRECT,
+        HEAL;
     }
 
     public enum ClassType {
@@ -711,7 +746,8 @@ public interface Constants {
 
         public static void init(TextureAtlas atlas) {
             for (Icons hero : Icons.values()) {
-                hero.animation = new Animation(3f, atlas.findRegions(hero.toString()));
+                int frameRate = Utils.getRandomBetween(3, 5);
+                hero.animation = new Animation(frameRate, atlas.findRegions(hero.toString()));
             }
         }
 
@@ -722,6 +758,69 @@ public interface Constants {
         @Override
         public FileHandle resolve(String fileName) {
             return Gdx.files.classpath(fileName);
+        }
+
+    }
+
+    public enum AttackResult {
+
+        NONE,
+        HIT,
+        MISS;
+    }
+
+    public class AttackVector {
+
+        public int x;
+        public int y;
+        public int distance;
+
+        public AttackResult result;
+
+        public Creature impactedCreature;
+
+        public AttackVector(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public enum Creatures {
+        NONE("", 0, 0, false, 0),
+        ZOMBIE("Zombie", 48, 3, false, 50),;
+
+        private final String name;
+        private final int basehp;
+        private final int exp;
+        private final boolean ranged;
+        private final int gold;
+
+        private Creatures(String name, int basehp, int exp, boolean ranged, int gold) {
+            this.name = name;
+            this.basehp = basehp;
+            this.exp = exp;
+            this.ranged = ranged;
+            this.gold = gold;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getBasehp() {
+            return basehp;
+        }
+
+        public int getExp() {
+            return exp;
+        }
+
+        public boolean isRanged() {
+            return ranged;
+        }
+
+        public int getGold() {
+            return gold;
         }
 
     }
