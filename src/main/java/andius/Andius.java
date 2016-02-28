@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -32,20 +33,20 @@ public class Andius extends Game {
     public static final int MAP_VIEWPORT_DIM = 624;
 
     public static final Context CONTEXT = new Context();
-    
+
     public static Texture backGround;
     public static TextureAtlas heroesAtlas;
     public static TextureAtlas mapAtlas;
-    
+
     public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
-    
+
     public static BitmapFont font;
     public static BitmapFont smallFont;
     public static BitmapFont largeFont;
     public static BitmapFont ultimaFont;
 
     public static Andius mainGame;
-    //public static StartScreen startScreen;
+    public static StartScreen startScreen;
 
     public static Skin skin;
 
@@ -56,7 +57,7 @@ public class Andius extends Game {
     public static Animation explosionLarge;
     public static Animation explosion;
     public static Animation cloud;
-    
+
     public static Animation avatar_warrior_red;
     public static Animation avatar_warrior_blue;
     public static Animation avatar_wizard_red;
@@ -66,6 +67,7 @@ public class Andius extends Game {
     public static Animation marker_blue;
     public static Animation marker_white;
 
+    public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
 
     public static void main(String[] args) {
 
@@ -90,7 +92,7 @@ public class Andius extends Game {
         parameter.size = 12;
         smallFont = generator.generateFont(parameter);
         smallFont.setColor(Color.YELLOW);
-        
+
         parameter.size = 24;
         largeFont = generator.generateFont(parameter);
 
@@ -132,29 +134,29 @@ public class Andius extends Game {
         tfs.font = font;
 
         //hud = new LogDisplay();
+        
         try {
 
             backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
 
-//            TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/graphics/Portraits.gif")), 56, 64);
-//            for (int row = 0; row < 13; row++) {
-//                for (int col = 0; col < 16; col++) {
-//                    //faceTiles[row * 16 + col] = trs[row][col];
-//                }
-//            }
+            TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
+            for (int row = 0; row < 6; row++) {
+                for (int col = 0; col < 6; col++) {
+                    faceTiles[row * 6 + col] = trs[row][col];
+                }
+            }
 
             heroesAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/heroes-atlas.txt"));
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
-            
-            avatar_warrior_red = new Animation(.4f,mapAtlas.findRegions("avatar_warrior_red"));
+
+            avatar_warrior_red = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
 //
 //            hitTile = standardAtlas.findRegion("hit_flash");
 //            magicHitTile = standardAtlas.findRegion("magic_flash");
 //            missTile = standardAtlas.findRegion("miss_flash");
 //            corpse = standardAtlas.findRegion("corpse");
-            
-            
+
 //            TextureAtlas tmp = new TextureAtlas(Gdx.files.classpath("assets/data/explosion-atlas.txt"));
 //            Array<TextureAtlas.AtlasRegion> ar = tmp.findRegions("expl");
 //            explosion = new Animation(.2f, ar);
@@ -167,40 +169,19 @@ public class Andius extends Game {
 //            ar = tmp.findRegions("cloud");
 //            cloud = new Animation(.2f, ar);
 
-//            baseTileSet = (TileSet) Utils.loadXml("assets/xml/tileset-base.xml", TileSet.class);
-//            baseTileSet.setMaps();
-//
-//            u4TileSet = (TileSet) Utils.loadXml("assets/xml/u4-tileset-base.xml", TileSet.class);
-//            u4TileSet.setMaps();
-//
-//            maps = (MapSet) Utils.loadXml("assets/xml/maps.xml", MapSet.class);
-//            maps.init(baseTileSet);
-//            maps.init(MapType.combat, u4TileSet);//set combat maps with the u4 tile set
-//            maps.init(MapType.shrine, u4TileSet);//set combat maps with the u4 tile set
-//
-//            vendorClassSet = (VendorClassSet) Utils.loadXml("assets/xml/vendor.xml", VendorClassSet.class);
-//            vendorClassSet.init();
-//
-//            weapons = (WeaponSet) Utils.loadXml("assets/xml/weapons.xml", WeaponSet.class);
-//            armors = (ArmorSet) Utils.loadXml("assets/xml/armors.xml", ArmorSet.class);
-//            creatures = (CreatureSet) Utils.loadXml("assets/xml/creatures.xml", CreatureSet.class);
-//            creatures.init();
-//            weapons.init();
-//            armors.init();
-            
             Constants.Map.init();
             Constants.Moongate.init();
             Constants.Icons.init(heroesAtlas);
             Conversations.init();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         mainGame = this;
-//        startScreen = new StartScreen();
+        startScreen = new StartScreen();
+        setScreen(startScreen);
 
-        setScreen(Constants.Map.WORLD.getScreen());
     }
 
     public static class CloudDrawable extends Actor {

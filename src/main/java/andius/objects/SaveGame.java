@@ -98,6 +98,12 @@ public class SaveGame implements Constants {
             players[i] = new CharacterRecord();
             players[i].read(dis);
         }
+        
+        //set initial start
+        if (wx == 0 && wy == 0) {
+            wx = Map.WORLD.getStartX();
+            wx = Map.WORLD.getStartY();
+        }
 
         dis.close();
     }
@@ -105,7 +111,7 @@ public class SaveGame implements Constants {
     public static class CharacterRecord {
 
         public String name = null;
-        public int portaitIndex = 11 + 2 * 16;
+        public int portaitIndex = 0;
         public int lastLeveledUpLevel = 0;
         public Status status = Status.GOOD;
         public int str;

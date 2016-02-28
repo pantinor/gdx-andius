@@ -3,6 +3,7 @@
 /.classpath
 /.project
 /test.sav
-/save.rec
+/game.save
+/roster.save
 /test-output
 /nbactions.xml

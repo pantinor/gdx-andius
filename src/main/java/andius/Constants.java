@@ -16,7 +16,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +27,8 @@ public interface Constants {
     public static int WORLD_TILE_DIM = 24;
     public static int TILE_DIM = 48;
 
-    public static final String PARTY_SAV_BASE_FILENAME = "party.sav";
+    public static final String SAVE_FILENAME = "game.save";
+    public static final String ROSTER_FILENAME = "roster.save";
     public static final int STATS_NONE = 0;
     public static final int STATS_PLAYER1 = 1;
     public static final int STATS_PLAYER2 = 2;
