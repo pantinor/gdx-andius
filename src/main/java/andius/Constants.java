@@ -762,6 +762,16 @@ public interface Constants {
 
     }
 
+    public enum AuraType {
+
+        NONE,
+        HORN,
+        JINX,
+        NEGATE,
+        PROTECTION,
+        QUICKNESS;
+    }
+
     public enum AttackResult {
 
         NONE,

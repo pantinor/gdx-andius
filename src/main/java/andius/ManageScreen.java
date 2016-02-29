@@ -125,24 +125,24 @@ public class ManageScreen implements Screen, Constants {
         clear = new ImageButton(imgBtnSkin, "clear");
         add = new ImageButton(imgBtnSkin, "right");
         remove = new ImageButton(imgBtnSkin, "left");
-        cancel = new TextButton("Cancel", skin, "default");
-        save = new TextButton("Save", skin, "default");
+        cancel = new TextButton("Cancel", skin, "red");
+        save = new TextButton("Save", skin, "red");
         iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
         partyIconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         partyIconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
 
-        apply.setX(348);
-        apply.setY(Andius.SCREEN_HEIGHT - 150);
+        apply.setX(326);
+        apply.setY(Andius.SCREEN_HEIGHT - 200);
 
-        clear.setX(348);
-        clear.setY(Andius.SCREEN_HEIGHT - 200);
+        clear.setX(326);
+        clear.setY(Andius.SCREEN_HEIGHT - 292);
 
-        add.setX(348);
-        add.setY(Andius.SCREEN_HEIGHT - 450);
+        add.setX(326);
+        add.setY(Andius.SCREEN_HEIGHT - 396 - 50);
 
-        remove.setX(348);
-        remove.setY(Andius.SCREEN_HEIGHT - 500);
+        remove.setX(326);
+        remove.setY(Andius.SCREEN_HEIGHT - 472 - 50);
 
         save.setX(512);
         save.setY(Andius.SCREEN_HEIGHT - 42);
@@ -171,7 +171,7 @@ public class ManageScreen implements Screen, Constants {
 
                 int total = st + dx + in + wi;
                 if (total > 50 || nameField.getText().length() < 1) {
-                    //Sounds.play(Sound.NEGATIVE_EFFECT);
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
 
@@ -187,7 +187,7 @@ public class ManageScreen implements Screen, Constants {
                 sel.gold = 150;
                 sel.portaitIndex = pidx;
 
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
             }
         });
 
@@ -196,7 +196,7 @@ public class ManageScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 registry.getSelected().character = new CharacterRecord();
                 registry.getSelected().character.name = EMPTY;
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
             }
         });
 
@@ -206,17 +206,17 @@ public class ManageScreen implements Screen, Constants {
                 CharacterRecord rsel = registry.getSelected().character;
                 CharacterRecord psel = partyFormation.getSelected().character;
                 if (!psel.name.equals(EMPTY)) {
-                    //Sounds.play(Sound.NEGATIVE_EFFECT);
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
                 for (PartyIndex pi : partyFormation.getItems()) {
                     if (pi.character.name.equals(rsel.name)) {
-                        //Sounds.play(Sound.NEGATIVE_EFFECT);
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
                         return;
                     }
                 }
                 partyFormation.getSelected().character = rsel;
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
             }
         });
 
@@ -245,11 +245,11 @@ public class ManageScreen implements Screen, Constants {
                     }
                 }
                 if (found == null) {
-                    //Sounds.play(Sound.NEGATIVE_EFFECT);
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
                 } else {
                     partyFormation.getSelected().character = new CharacterRecord();
                     partyFormation.getSelected().character.name = EMPTY;
-                    //Sounds.play(Sound.TRIGGER);
+                    Sounds.play(Sound.TRIGGER);
                 }
             }
         });
@@ -277,7 +277,7 @@ public class ManageScreen implements Screen, Constants {
                     saveGame.write(SAVE_FILENAME);
                 } catch (Exception e) {
                 }
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
                 Andius.mainGame.setScreen(returnScreen);
             }
         });

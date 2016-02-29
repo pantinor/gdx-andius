@@ -85,7 +85,7 @@ public class Player {
         return true;
     }
 
-    public CharacterRecord getPlayer() {
+    public CharacterRecord getCharRec() {
         return player;
     }
 

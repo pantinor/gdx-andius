@@ -147,7 +147,7 @@ public class Utils {
     public static boolean dealDamage(Player attacker, Creature defender, int damage) {
         int xp = defender.getExp();
         if (!damageCreature(defender, damage, true)) {
-            attacker.getPlayer().awardXP(xp);
+            attacker.getCharRec().awardXP(xp);
             return false;
         }
         return true;
@@ -201,7 +201,7 @@ public class Utils {
 
     private static AttackVector attack(BaseMap map, Player attacker, Direction dir, int x, int y) {
 
-        WeaponType wt = attacker.getPlayer().weapon;
+        WeaponType wt = attacker.getCharRec().weapon;
 
         List<AttackVector> path = getDirectionalActionPath(map, dir.getMask(), x, y, 1, wt.getRange());
 
@@ -228,7 +228,7 @@ public class Utils {
         
         Creature creature = map.getCreatureAt(target.x, target.y);
 
-        WeaponType wt = attacker.getPlayer().weapon;
+        WeaponType wt = attacker.getCharRec().weapon;
         boolean wrongRange = (distance > wt.getRange());
 
         if (creature == null || wrongRange) {

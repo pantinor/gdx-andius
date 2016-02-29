@@ -217,18 +217,32 @@ journal-check-on
   orig: 20, 20
   offset: 0, 0
   index: -1
-wood-off
+red-off
   rotate: false
-  xy: 167, 117
-  size: 85, 29
-  orig: 85, 29
+  xy: 0, 130
+  size: 127, 35
+  orig: 127, 35
   offset: 0, 0
   index: -1
-wood-on
+red-on
   rotate: false
-  xy: 167, 147
-  size: 85, 29
-  orig: 85, 29
+  xy: 0, 165
+  size: 127, 35
+  orig: 127, 35
+  offset: 0, 0
+  index: -1
+purple-off
+  rotate: false
+  xy: 129, 123
+  size: 126, 29
+  orig: 126, 29
+  offset: 0, 0
+  index: -1
+purple-on
+  rotate: false
+  xy: 129, 154
+  size: 126, 29
+  orig: 126, 29
   offset: 0, 0
   index: -1
 scroller-fancy

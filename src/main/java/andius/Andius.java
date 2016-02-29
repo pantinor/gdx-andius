@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -24,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
+import utils.LogDisplay;
 
 public class Andius extends Game {
 
@@ -32,7 +32,7 @@ public class Andius extends Game {
 
     public static final int MAP_VIEWPORT_DIM = 624;
 
-    public static final Context CONTEXT = new Context();
+    public static Context CTX ;
 
     public static Texture backGround;
     public static TextureAtlas heroesAtlas;
@@ -66,6 +66,8 @@ public class Andius extends Game {
     public static Animation marker_red;
     public static Animation marker_blue;
     public static Animation marker_white;
+    
+    public static LogDisplay hud;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
 
@@ -89,9 +91,8 @@ public class Andius extends Game {
         parameter.size = 18;
         font = generator.generateFont(parameter);
 
-        parameter.size = 12;
+        parameter.size = 16;
         smallFont = generator.generateFont(parameter);
-        smallFont.setColor(Color.YELLOW);
 
         parameter.size = 24;
         largeFont = generator.generateFont(parameter);
@@ -121,8 +122,8 @@ public class Andius extends Game {
         ls.font = font;
         TextButton.TextButtonStyle tbs = skin.get("default", TextButton.TextButtonStyle.class);
         tbs.font = font;
-        TextButton.TextButtonStyle tbswood = skin.get("wood", TextButton.TextButtonStyle.class);
-        tbswood.font = font;
+        TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);
+        tbsred.font = font;
         SelectBox.SelectBoxStyle sbs = skin.get("default", SelectBox.SelectBoxStyle.class);
         sbs.font = font;
         sbs.listStyle.font = font;
@@ -133,7 +134,7 @@ public class Andius extends Game {
         TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
         tfs.font = font;
 
-        //hud = new LogDisplay();
+        hud = new LogDisplay();
         
         try {
 

@@ -15,7 +15,7 @@ import utils.XORShiftRandom;
 
 public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
-    protected BaseScreen returnScreen;
+    //protected BaseScreen returnScreen;
     protected Stage stage;
 
     protected float time = 0;

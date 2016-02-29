@@ -102,7 +102,7 @@ public class SaveGame implements Constants {
         //set initial start
         if (wx == 0 && wy == 0) {
             wx = Map.WORLD.getStartX();
-            wx = Map.WORLD.getStartY();
+            wy = Map.WORLD.getStartY();
         }
 
         dis.close();

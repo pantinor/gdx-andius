@@ -112,6 +112,8 @@ public class WorldScreen extends BaseScreen {
 
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + feluccaphase), 372, Andius.SCREEN_HEIGHT - 32, 20, 20);
+        
+        Andius.hud.render(batch, Andius.CTX.getPlayer());
 
         //Vector3 v = getCurrentMapCoords();
         //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);

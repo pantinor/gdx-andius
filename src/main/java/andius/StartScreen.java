@@ -1,10 +1,8 @@
 package andius;
 
-import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,51 +35,46 @@ public class StartScreen implements Screen, Constants {
 
         batch = new SpriteBatch();
 
-        manual = new TextButton("Manual", Andius.skin, "default");
+        manual = new TextButton("Manual", Andius.skin, "red");
         manual.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
                 //Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Exodus.skin));
             }
         });
         manual.setX(200);
         manual.setY(Andius.SCREEN_HEIGHT - 410);
         manual.setWidth(150);
-        manual.setHeight(25);
 
-        manage = new TextButton("Manage", Andius.skin, "default");
+        manage = new TextButton("Manage", Andius.skin, "red");
         manage.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
                 Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
             }
         });
         manage.setX(400);
         manage.setY(Andius.SCREEN_HEIGHT - 410);
         manage.setWidth(150);
-        manage.setHeight(25);
 
-        journey = new TextButton("Journey Onward", Andius.skin, "default");
+        journey = new TextButton("Journey Onward", Andius.skin, "red");
         journey.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                //Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);
                 if (!Gdx.files.internal(SAVE_FILENAME).file().exists()) {
                     Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                 } else {
-                    SaveGame saveGame = new SaveGame();
-                    try {
-                        saveGame.read(SAVE_FILENAME);
-                    } catch (Exception e) {
-                    }
-                    SaveGame.CharacterRecord r = saveGame.players[0];
-                    if (r == null || r.name.length() < 1) {
+                    Andius.CTX = new Context();
+                    if (Andius.CTX.getPlayer() == null || Andius.CTX.getPlayer().getCharRec().name.length() < 1) {
                         Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                     } else {
-                        Andius.mainGame.setScreen(Map.values()[saveGame.map].getScreen());
-                        stage.clear();
+                        BaseScreen scr = (BaseScreen) Map.values()[Andius.CTX.getSaveGame().map].getScreen();
+                        scr.newMapPixelCoords = scr.getMapPixelCoords(Andius.CTX.getSaveGame().wx, Andius.CTX.getSaveGame().wy);
+                        Andius.mainGame.setScreen(scr);
+                        //stage.clear();
                     }
                 }
 
@@ -90,7 +83,6 @@ public class StartScreen implements Screen, Constants {
         journey.setX(600);
         journey.setY(Andius.SCREEN_HEIGHT - 410);
         journey.setWidth(150);
-        journey.setHeight(25);
 
         stage = new Stage();
         stage.addActor(manual);
