@@ -1,6 +1,7 @@
 package andius.objects;
 
 import andius.Constants;
+import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -98,7 +99,7 @@ public class SaveGame implements Constants {
             players[i] = new CharacterRecord();
             players[i].read(dis);
         }
-        
+
         //set initial start
         if (wx == 0 && wy == 0) {
             wx = Map.WORLD.getStartX();
@@ -112,18 +113,19 @@ public class SaveGame implements Constants {
 
         public String name = null;
         public int portaitIndex = 0;
-        public int lastLeveledUpLevel = 0;
         public Status status = Status.GOOD;
         public int str;
-        public int dex;
         public int intell;
-        public int wis;
-        public ClassType race = ClassType.HUMAN;
-        public Profession profession = Profession.FIGHTER;
-        public int mana;
+        public int piety;
+        public int vitality;
+        public int agility;
+        public int luck;
+        public Race race = Race.HUMAN;
+        public ClassType classType = ClassType.FIGHTER;
         public int health;
         public int exp;
         public int gold;
+        public int level;
         public ArmorType armor = ArmorType.NONE;
         public WeaponType weapon = WeaponType.NONE;
         public int submorsels = 400;
@@ -149,35 +151,29 @@ public class SaveGame implements Constants {
             }
 
             dos.writeShort(portaitIndex);
-            dos.writeByte(lastLeveledUpLevel);
+            dos.writeByte(level);
             dos.writeByte(status.ordinal());
 
             dos.writeByte(str);
-            dos.writeByte(dex);
             dos.writeByte(intell);
-            dos.writeByte(wis);
+            dos.writeByte(piety);
+            dos.writeByte(vitality);
+            dos.writeByte(agility);
+            dos.writeByte(luck);
 
             dos.writeByte(race.ordinal());
-            dos.writeByte(profession.ordinal());
-            dos.writeShort(mana);
+            dos.writeByte(classType.ordinal());
 
             dos.writeShort(health);
-            dos.writeShort(0);
 
             dos.writeInt(gold);
             dos.writeInt(exp);
             dos.writeByte(armor.ordinal());
             dos.writeByte(weapon.ordinal());
-            dos.writeByte(0);
-            dos.writeByte(0);
-            dos.writeInt(0);
 
             for (ArmorType t : ArmorType.values()) {
                 dos.writeByte(armors[t.ordinal()]);
             }
-
-            dos.writeInt(0);
-            dos.writeInt(0);
 
             for (WeaponType t : WeaponType.values()) {
                 dos.writeByte(weapons[t.ordinal()]);
@@ -201,35 +197,28 @@ public class SaveGame implements Constants {
             name = new String(nameArray).trim();
 
             portaitIndex = dis.readShort();
-            lastLeveledUpLevel = dis.readByte() & 0xff;
+            level = dis.readByte() & 0xff;
             status = Status.values()[dis.readByte() & 0xff];
 
             str = dis.readByte() & 0xff;
-            dex = dis.readByte() & 0xff;
             intell = dis.readByte() & 0xff;
-            wis = dis.readByte() & 0xff;
+            piety = dis.readByte() & 0xff;
+            vitality = dis.readByte() & 0xff;
+            agility = dis.readByte() & 0xff;
+            luck = dis.readByte() & 0xff;
 
-            race = ClassType.values()[dis.readByte() & 0xff];
-            profession = Profession.values()[dis.readByte() & 0xff];
-            mana = dis.readShort();
+            race = Race.values()[dis.readByte() & 0xff];
+            classType = ClassType.values()[dis.readByte() & 0xff];
             health = dis.readShort();
-            dis.readShort();
 
             gold = dis.readInt();
             exp = dis.readInt();
             armor = ArmorType.get(dis.readByte() & 0xff);
             weapon = WeaponType.get(dis.readByte() & 0xff);
 
-            dis.readByte();
-            dis.readByte();
-            dis.readInt();
-
             for (ArmorType t : ArmorType.values()) {
                 armors[t.ordinal()] = dis.readByte() & 0xff;
             }
-
-            dis.readInt();
-            dis.readInt();
 
             for (WeaponType t : WeaponType.values()) {
                 weapons[t.ordinal()] = dis.readByte() & 0xff;
@@ -237,90 +226,44 @@ public class SaveGame implements Constants {
 
         }
 
-        public int getMaxMana() {
-            int maxMana = 0;
-            switch (profession) {
-                case FIGHTER:
-                case THIEF:
-                    break;
-                case RANGER:
-                    maxMana = wis / 2 > intell / 2 ? intell / 2 : wis / 2;
-                    break;
-                case WIZARD:
-                    maxMana = intell;
-                    break;
-                case CLERIC:
-                    maxMana = wis;
-                    break;
-                case WITCHER:
-                    maxMana = wis / 2;
-                    break;
-                default:
-
-            }
-            return maxMana;
-        }
-
-        public int getLevel() {
-            int lvl = lastLeveledUpLevel + 1;
-            return lvl;
-        }
-        
         public void awardXP(int value) {
             exp = Utils.adjustValueMax(exp, value, 9999);
         }
 
-        public int getMaxHealth() {
-            return getLevel() * 100 + 50;
-        }
-
-        public void adjustMagic(int pts) {
-            mana = Utils.adjustValueMax(mana, pts, getMaxMana());
+        public int getMaxHP() {
+            int hp = this.classType.getStartHP();
+            if (this.level > 0) {
+                hp += this.level * this.classType.getIncrHP();
+            }
+            return hp;
         }
 
         public void adjustGold(int v) {
-            gold = Utils.adjustValue(gold, v, 99999, 0);
+            gold = Utils.adjustValue(gold, v, 1000000, 0);
         }
 
-        public boolean levelUp() {
+        public int checkLevel() {
+            
+            int lvl = 0;
 
-            if (getLevel() >= 25) {
-                return false;
-            }
-
-            int expLvl = exp / 100;
-
-            if (expLvl <= lastLeveledUpLevel) {
-                return false;
-            }
-
-            int times = expLvl - lastLeveledUpLevel;
-            lastLeveledUpLevel = expLvl;
-
-            status = Status.GOOD;
-            health = getMaxHealth();
-
-            for (int i = 0; i < times; i++) {
-                /* improve stats by 1-8 each */
-                str += rand.nextInt(8) + 1;
-                dex += rand.nextInt(8) + 1;
-                intell += rand.nextInt(8) + 1;
-                wis += rand.nextInt(8) + 1;
-
-                if (str > this.race.getMaxStr()) {
-                    str = this.race.getMaxStr();
-                }
-                if (dex > this.race.getMaxDex()) {
-                    dex = this.race.getMaxDex();
-                }
-                if (intell > this.race.getMaxInt()) {
-                    intell = this.race.getMaxInt();
-                }
-                if (wis > this.race.getMaxWis()) {
-                    wis = this.race.getMaxWis();
+            for (int i=0;i<LEVEL_PROGRESSION_TABLE.length;i++) {
+                int[] levels = LEVEL_PROGRESSION_TABLE[i];
+                int thr = levels[this.classType.ordinal()];
+                if (this.exp >= thr) {
+                    lvl = i+1;
                 }
             }
-            return true;
+            
+            if (lvl == LEVEL_PROGRESSION_TABLE.length) {
+                int thr = LEVEL_PROGRESSION_TABLE[LEVEL_PROGRESSION_TABLE.length - 1][this.classType.ordinal()];
+                int sum = thr * 2;
+                while (this.exp > sum) {
+                    lvl ++;
+                    sum += thr;
+                }
+            }
+            
+            return lvl;
 
         }
 

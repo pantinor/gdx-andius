@@ -17,7 +17,7 @@ public class LogDisplay {
 
     static final int LOG_AREA_WIDTH = 265;
     static final int LOG_AREA_TOP = 396;
-    static final int LOG_X = 726;
+    static final int LOG_X = 738;
 
     public void append(String s) {
         synchronized (logs) {
@@ -68,18 +68,24 @@ public class LogDisplay {
             Andius.smallFont.setColor(Color.RED);
         }
 
-        batch.draw(Andius.faceTiles[pm.getCharRec().portaitIndex], LOG_X + 3, y + 5);
+        batch.draw(Andius.faceTiles[pm.getCharRec().portaitIndex], 738, Andius.SCREEN_HEIGHT - 119);
 
         CharacterRecord r = pm.getCharRec();
 
-        String d = String.format("%s  %s  %s", r.name.toUpperCase(), r.race.toString(), r.profession.toString());
-        Andius.smallFont.draw(batch, d, LOG_X + 64, y + 65);
+        String d = String.format("%s  LVL %d  %s  %s", r.name.toUpperCase(), pm.getCharRec().level, r.race.toString(), r.classType.toString());
+        Andius.smallFont.draw(batch, d, 805, Andius.SCREEN_HEIGHT - 51);
 
-        d = String.format("HLTH: %d %s LVL: %d EXP: %d", pm.getCharRec().health, pm.getCharRec().status.toString().charAt(0), pm.getCharRec().getLevel(), pm.getCharRec().exp);
-        Andius.smallFont.draw(batch, d, LOG_X + 64, y + 45);
+        d = String.format("%d", pm.getCharRec().health);
+        Andius.smallFont.draw(batch, d, 805, Andius.SCREEN_HEIGHT - 79);
 
-        d = String.format("GOLD: %d MANA: %d/%d", pm.getCharRec().gold, pm.getCharRec().mana, pm.getCharRec().getMaxMana());
-        Andius.smallFont.draw(batch, d, LOG_X + 64, y + 25);
+        //d = String.format("%d /%d", pm.getCharRec().mana, pm.getCharRec().getMaxMana());
+        //Andius.smallFont.draw(batch, d, 805, Andius.SCREEN_HEIGHT - 107);
+
+        d = String.format("%d", pm.getCharRec().gold);
+        Andius.smallFont.draw(batch, d, 805, Andius.SCREEN_HEIGHT - 135);
+
+        d = String.format("%d", pm.getCharRec().exp);
+        Andius.smallFont.draw(batch, d, 908, Andius.SCREEN_HEIGHT - 135);
 
         Andius.smallFont.setColor(Color.WHITE);
         y = 44;

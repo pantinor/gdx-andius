@@ -134,12 +134,12 @@ public class Utils {
     
     public static AttackResult attackHit(Creature attacker, Player defender) {
         int attackValue = RAND.nextInt(256);
-        int defenseValue = defender.getDefense();
+        int defenseValue = defender.getAC();
         return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
 
     private static AttackResult attackHit(Player attacker, Creature defender) {
-        int attackValue = RAND.nextInt(256) + attacker.getAttackBonus();
+        int attackValue = RAND.nextInt(256) ;
         int defenseValue = defender.getDefense();
         return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
@@ -203,7 +203,7 @@ public class Utils {
 
         WeaponType wt = attacker.getCharRec().weapon;
 
-        List<AttackVector> path = getDirectionalActionPath(map, dir.getMask(), x, y, 1, wt.getRange());
+        List<AttackVector> path = getDirectionalActionPath(map, dir.getMask(), x, y, 1, 0);
 
         AttackVector target = null;
         boolean foundTarget = false;
@@ -229,7 +229,7 @@ public class Utils {
         Creature creature = map.getCreatureAt(target.x, target.y);
 
         WeaponType wt = attacker.getCharRec().weapon;
-        boolean wrongRange = (distance > wt.getRange());
+        boolean wrongRange = (distance > 0);
 
         if (creature == null || wrongRange) {
             return res;

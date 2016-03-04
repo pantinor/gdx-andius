@@ -53,10 +53,10 @@ public class Player {
                 break;
 
             case FULLHEAL:
-                if (player.status == Status.DEAD || player.health == player.getMaxHealth()) {
+                if (player.status == Status.DEAD || player.health == player.getMaxHP()) {
                     return false;
                 }
-                player.health = player.getMaxHealth();
+                player.health = player.getMaxHP();
                 break;
 
             case RESURRECT:
@@ -68,7 +68,7 @@ public class Player {
                 break;
 
             case HEAL:
-                if (player.status == Status.DEAD || player.health == player.getMaxHealth()) {
+                if (player.status == Status.DEAD || player.health == player.getMaxHP()) {
                     return false;
                 }
                 player.health += 75 + (rand.nextInt(256) % 25);
@@ -78,8 +78,8 @@ public class Player {
                 return false;
         }
 
-        if (player.health > player.getMaxHealth()) {
-            player.health = player.getMaxHealth();
+        if (player.health > player.getMaxHP()) {
+            player.health = player.getMaxHP();
         }
 
         return true;
@@ -129,7 +129,7 @@ public class Player {
 
         //check if they can wear it
         WeaponType wt = WeaponType.get(i);
-        if (!wt.canUse(player.profession)) {
+        if (!wt.canUse(player.classType)) {
             return false;
         }
 
@@ -171,7 +171,7 @@ public class Player {
 
         //check if they can wear it
         ArmorType at = ArmorType.get(i);
-        if (!at.canUse(player.profession)) {
+        if (!at.canUse(player.classType)) {
             return false;
         }
 
@@ -208,15 +208,8 @@ public class Player {
         return true;
     }
 
-    public int getAttackBonus() {
-        if (player.dex >= 40) {
-            return 255;
-        }
-        return player.dex;
-    }
-
-    public int getDefense() {
-        return player.armor.getDefense();
+    public int getAC() {
+        return player.armor.getAC();
     }
 
     public void endTurn(Map map) throws PartyDeathException {
@@ -228,11 +221,9 @@ public class Player {
                 if (player.status == Status.POISONED) {
                     applyDamage(1, false);
                 } else {
-                    player.health = Utils.adjustValue(player.health, 1, player.getMaxHealth(), 0);
+                    player.health = Utils.adjustValue(player.health, 1, player.getMaxHP(), 0);
                 }
-                if (!isDisabled() && player.mana < player.getMaxMana()) {
-                    player.mana++;
-                }
+
             }
         }
 

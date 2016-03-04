@@ -107,3 +107,31 @@ right-arrow-disabled
   orig: 10, 30
   offset: 0, 0
   index: -1
+add-up
+  rotate: false
+  xy: 273, 39
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+add-down
+  rotate: false
+  xy: 286, 39
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+minus-up
+  rotate: false
+  xy: 273, 52
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+minus-down
+  rotate: false
+  xy: 286, 52
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1

@@ -17,15 +17,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.io.LittleEndianDataInputStream;
 import com.google.common.io.LittleEndianDataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import utils.Utils;
 
 public class ManageScreen implements Screen, Constants {
 
@@ -48,15 +49,24 @@ public class ManageScreen implements Screen, Constants {
 
     TextButton save;
     TextButton cancel;
+    TextButton reset;
 
     TextField nameField;
-    Slider strEdit;
-    Slider intEdit;
-    Slider dexEdit;
-    Slider wisEdit;
-    SelectBox<Profession> profSelect;
-    SelectBox<ClassType> raceSelect;
 
+    ImageButton strMinus, strPlus;
+    ImageButton intMinus, intPlus;
+    ImageButton piMinus, piPlus;
+    ImageButton vitMinus, vitPlus;
+    ImageButton agMinus, agPlus;
+    ImageButton luMinus, luPlus;
+
+    List<ClassType> profSelect;
+    SelectBox<Race> raceSelect;
+
+    int stVal, inVal, piVal, viVal, agVal, luVal;
+    int stExt, inExt, piExt, viExt, agExt, luExt;
+
+    ExtraPoints extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
     int pidx = 0;
 
     private static final String EMPTY = "<empty>";
@@ -126,6 +136,7 @@ public class ManageScreen implements Screen, Constants {
         add = new ImageButton(imgBtnSkin, "right");
         remove = new ImageButton(imgBtnSkin, "left");
         cancel = new TextButton("Cancel", skin, "red");
+        reset = new TextButton("Reset", skin, "default");
         save = new TextButton("Save", skin, "red");
         iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
@@ -150,27 +161,24 @@ public class ManageScreen implements Screen, Constants {
         cancel.setX(712);
         cancel.setY(Andius.SCREEN_HEIGHT - 42);
 
-        iconLeft.setX(750);
-        iconLeft.setY(Andius.SCREEN_HEIGHT - 165);
-        iconRight.setX(825);
-        iconRight.setY(Andius.SCREEN_HEIGHT - 165);
+        reset.setX(740);
+        reset.setY(Andius.SCREEN_HEIGHT - 340);
 
-        partyIconLeft.setX(770);
-        partyIconLeft.setY(Andius.SCREEN_HEIGHT - 684);
-        partyIconRight.setX(770 + 75);
-        partyIconRight.setY(Andius.SCREEN_HEIGHT - 684);
+        iconLeft.setX(769);
+        iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
+        iconRight.setX(838);
+        iconRight.setY(Andius.SCREEN_HEIGHT - 125);
+
+        partyIconLeft.setX(776);
+        partyIconLeft.setY(Andius.SCREEN_HEIGHT - 715);
+        partyIconRight.setX(770 + 77);
+        partyIconRight.setY(Andius.SCREEN_HEIGHT - 715);
 
         apply.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
-                int st = (int) strEdit.getValue();
-                int dx = (int) dexEdit.getValue();
-                int in = (int) intEdit.getValue();
-                int wi = (int) wisEdit.getValue();
-
-                int total = st + dx + in + wi;
-                if (total > 50 || nameField.getText().length() < 1) {
+                
+                if (profSelect.getSelected() == null || nameField.getText().length() < 1) {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
@@ -178,13 +186,16 @@ public class ManageScreen implements Screen, Constants {
                 CharacterRecord sel = registry.getSelected().character;
                 sel.name = nameField.getText();
                 sel.race = raceSelect.getSelected();
-                sel.profession = profSelect.getSelected();
-                sel.str = (int) strEdit.getValue();
-                sel.dex = (int) dexEdit.getValue();
-                sel.intell = (int) intEdit.getValue();
-                sel.wis = (int) wisEdit.getValue();
-                sel.health = 150;
-                sel.gold = 150;
+                sel.classType = profSelect.getSelected();
+                sel.str = stVal;
+                sel.intell = inVal;
+                sel.piety = piVal;
+                sel.vitality = viVal;
+                sel.agility = agVal;
+                sel.luck = luVal;
+
+                sel.health = sel.getMaxHP();
+                sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
 
                 Sounds.play(Sound.TRIGGER);
@@ -273,7 +284,7 @@ public class ManageScreen implements Screen, Constants {
                             r.name = null;
                         }
                     }
-                    
+
                     saveGame.write(SAVE_FILENAME);
                 } catch (Exception e) {
                 }
@@ -286,6 +297,20 @@ public class ManageScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Andius.mainGame.setScreen(returnScreen);
+            }
+        });
+
+        reset.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                stExt = 0;
+                inExt = 0;
+                piExt = 0;
+                viExt = 0;
+                agExt = 0;
+                luExt = 0;
+                extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
+                checkClasses();
             }
         });
 
@@ -342,45 +367,226 @@ public class ManageScreen implements Screen, Constants {
         sp2.setHeight(464);
 
         nameField = new TextField("", skin);
-        strEdit = new Slider(5, 25, 1, false, skin);
-        dexEdit = new Slider(5, 25, 1, false, skin);
-        intEdit = new Slider(5, 25, 1, false, skin);
-        wisEdit = new Slider(5, 25, 1, false, skin);
-        profSelect = new SelectBox<>(skin);
-        profSelect.setItems(Profession.values());
-        profSelect.setSelected(Profession.FIGHTER);
+        strMinus = new ImageButton(imgBtnSkin, "minus");
+        strPlus = new ImageButton(imgBtnSkin, "plus");
+        intMinus = new ImageButton(imgBtnSkin, "minus");
+        intPlus = new ImageButton(imgBtnSkin, "plus");
+        piMinus = new ImageButton(imgBtnSkin, "minus");
+        piPlus = new ImageButton(imgBtnSkin, "plus");
+        vitMinus = new ImageButton(imgBtnSkin, "minus");
+        vitPlus = new ImageButton(imgBtnSkin, "plus");
+        agMinus = new ImageButton(imgBtnSkin, "minus");
+        agPlus = new ImageButton(imgBtnSkin, "plus");
+        luMinus = new ImageButton(imgBtnSkin, "minus");
+        luPlus = new ImageButton(imgBtnSkin, "plus");
+
+        profSelect = new List<>(skin);
+        ScrollPane classPane = new ScrollPane(profSelect, skin);
+
         raceSelect = new SelectBox<>(skin);
-        raceSelect.setItems(ClassType.values());
-        raceSelect.setSelected(ClassType.HUMAN);
+        raceSelect.setItems(Race.values());
+        raceSelect.setSelected(Race.HUMAN);
+
+        stVal = Race.HUMAN.getInitialStrength();
+        inVal = Race.HUMAN.getInitialIntell();
+        piVal = Race.HUMAN.getInitialPiety();
+        viVal = Race.HUMAN.getInitialVitality();
+        agVal = Race.HUMAN.getInitialAgility();
+        luVal = Race.HUMAN.getInitialLuck();
+
+        raceSelect.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                Race race = raceSelect.getSelected();
+                stVal = race.getInitialStrength();
+                inVal = race.getInitialIntell();
+                piVal = race.getInitialPiety();
+                viVal = race.getInitialVitality();
+                agVal = race.getInitialAgility();
+                luVal = race.getInitialLuck();
+            }
+        });
+
+        strMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && stExt > 0) {
+                    extraPoints.incr();
+                    stExt--;
+                }
+                checkClasses();
+            }
+        });
+        strPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    stExt++;
+                }
+                checkClasses();
+            }
+        });
+        intMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && inExt > 0) {
+                    extraPoints.incr();
+                    inExt--;
+                }
+                checkClasses();
+            }
+        });
+        intPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    inExt++;
+                }
+                checkClasses();
+            }
+        });
+        piMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && piExt > 0) {
+                    extraPoints.incr();
+                    piExt--;
+                }
+                checkClasses();
+            }
+        });
+        piPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    piExt++;
+                }
+                checkClasses();
+            }
+        });
+        vitMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && viExt > 0) {
+                    extraPoints.incr();
+                    viExt--;
+                }
+                checkClasses();
+            }
+        });
+        vitPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    viExt++;
+                }
+                checkClasses();
+            }
+        });
+        agMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && agExt > 0) {
+                    extraPoints.incr();
+                    agExt--;
+                }
+                checkClasses();
+            }
+        });
+        agPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    agExt++;
+                }
+                checkClasses();
+            }
+        });
+        luMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val < extraPoints.max && luExt > 0) {
+                    extraPoints.incr();
+                    luExt--;
+                }
+                checkClasses();
+            }
+        });
+        luPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (extraPoints.val > 0) {
+                    extraPoints.decr();
+                    luExt++;
+                }
+                checkClasses();
+            }
+        });
 
         int x = 580;
         nameField.setX(x);
-        strEdit.setX(x);
-        dexEdit.setX(x);
-        intEdit.setX(x);
-        wisEdit.setX(x);
-        profSelect.setX(x);
+        strMinus.setX(x);
+        intMinus.setX(x);
+        piMinus.setX(x);
+        vitMinus.setX(x);
+        agMinus.setX(x);
+        luMinus.setX(x);
+
+        strPlus.setX(x + 35);
+        intPlus.setX(x + 35);
+        piPlus.setX(x + 35);
+        vitPlus.setX(x + 35);
+        agPlus.setX(x + 35);
+        luPlus.setX(x + 35);
+
+        classPane.setX(715);
+        classPane.setY(Andius.SCREEN_HEIGHT - 300);
+
         raceSelect.setX(x);
 
         int y = Andius.SCREEN_HEIGHT - 112;
         nameField.setY(y);
         raceSelect.setY(y -= 28);
-        profSelect.setY(y -= 28);
-        strEdit.setY(y -= 28);
-        dexEdit.setY(y -= 28);
-        intEdit.setY(y -= 28);
-        wisEdit.setY(y -= 28);
+        strMinus.setY(y -= 28);
+        intMinus.setY(y -= 28);
+        piMinus.setY(y -= 28);
+        vitMinus.setY(y -= 28);
+        agMinus.setY(y -= 28);
+        luMinus.setY(y -= 28);
+
+        y = Andius.SCREEN_HEIGHT - 112;
+        strPlus.setY(y -= 28 * 2);
+        intPlus.setY(y -= 28);
+        piPlus.setY(y -= 28);
+        vitPlus.setY(y -= 28);
+        agPlus.setY(y -= 28);
+        luPlus.setY(y -= 28);
 
         nameField.setMaxLength(16);
-        profSelect.setWidth(100);
+        classPane.setWidth(100);
         raceSelect.setWidth(100);
 
         stage.addActor(nameField);
-        stage.addActor(strEdit);
-        stage.addActor(intEdit);
-        stage.addActor(dexEdit);
-        stage.addActor(wisEdit);
-        stage.addActor(profSelect);
+        stage.addActor(strMinus);
+        stage.addActor(intMinus);
+        stage.addActor(piMinus);
+        stage.addActor(vitMinus);
+        stage.addActor(agMinus);
+        stage.addActor(luMinus);
+
+        stage.addActor(strPlus);
+        stage.addActor(intPlus);
+        stage.addActor(piPlus);
+        stage.addActor(vitPlus);
+        stage.addActor(agPlus);
+        stage.addActor(luPlus);
+
+        stage.addActor(classPane);
         stage.addActor(raceSelect);
 
         stage.addActor(apply);
@@ -388,6 +594,7 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(clear);
         stage.addActor(save);
         stage.addActor(cancel);
+        stage.addActor(reset);
         stage.addActor(add);
         stage.addActor(iconLeft);
         stage.addActor(iconRight);
@@ -396,6 +603,22 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(sp1);
         stage.addActor(sp2);
 
+    }
+
+    private void checkClasses() {
+        Array<ClassType> items = new Array<>();
+        for (ClassType ct : ClassType.values()) {
+            boolean s = stVal + stExt >= ct.getMinStr();
+            boolean i = inVal + inExt >= ct.getMinIntell();
+            boolean p = piVal + piExt >= ct.getMinPiety();
+            boolean v = viVal + viExt >= ct.getMinVitality();
+            boolean a = agVal + agExt >= ct.getMinAgility();
+            boolean l = stVal + stExt >= ct.getMinLuck();
+            if (s && i && p && v && a && l) {
+                items.add(ct);
+            }
+            profSelect.setItems(items);
+        }
     }
 
     @Override
@@ -424,30 +647,27 @@ public class ManageScreen implements Screen, Constants {
 
         font.draw(batch, "Name: ", x, viewY);
         font.draw(batch, "Race: ", x, viewY -= 28);
-        font.draw(batch, "Type: ", x, viewY -= 28);
         font.draw(batch, "Strength: ", x, viewY -= 28);
-        font.draw(batch, "Dexterity: ", x, viewY -= 28);
         font.draw(batch, "Intelligence: ", x, viewY -= 28);
-        font.draw(batch, "Wisdom: ", x, viewY -= 28);
+        font.draw(batch, "Piety: ", x, viewY -= 28);
+        font.draw(batch, "Vitality: ", x, viewY -= 28);
+        font.draw(batch, "Agility: ", x, viewY -= 28);
+        font.draw(batch, "Luck: ", x, viewY -= 28);
+        font.draw(batch, "Extra Points: ", x, viewY -= 28);
 
-        int st = (int) strEdit.getValue();
-        int dx = (int) dexEdit.getValue();
-        int in = (int) intEdit.getValue();
-        int wi = (int) wisEdit.getValue();
+        viewY = Andius.SCREEN_HEIGHT - 96;
 
-        int total = st + dx + in + wi;
-        if (total > 50) {
-            font.setColor(Color.RED);
-        }
-
-        font.draw(batch, st + "", x + 235, viewY += 28 * 3);
-        font.draw(batch, dx + "", x + 235, viewY -= 28);
-        font.draw(batch, in + "", x + 235, viewY -= 28);
-        font.draw(batch, wi + "", x + 235, viewY -= 28);
+        font.draw(batch, stVal + stExt + "", 600, viewY -= 28 * 2);
+        font.draw(batch, inVal + inExt + "", 600, viewY -= 28);
+        font.draw(batch, piVal + piExt + "", 600, viewY -= 28);
+        font.draw(batch, viVal + viExt + "", 600, viewY -= 28);
+        font.draw(batch, agVal + agExt + "", 600, viewY -= 28);
+        font.draw(batch, luVal + luExt + "", 600, viewY -= 28);
+        font.draw(batch, extraPoints.val + "", 600, viewY -= 28);
 
         font.setColor(Color.WHITE);
 
-        batch.draw(Andius.faceTiles[pidx], 768, Andius.SCREEN_HEIGHT - 168);
+        batch.draw(Andius.faceTiles[pidx], 784, Andius.SCREEN_HEIGHT - 132);
 
         CharacterRecord sel = this.registry.getSelected().character;
 
@@ -456,7 +676,7 @@ public class ManageScreen implements Screen, Constants {
 
         font.draw(batch, "Name: " + sel.name, x, viewY);
         font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
-        font.draw(batch, "Type: " + sel.profession.toString(), x, viewY -= 18);
+        font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
         font.draw(batch, "Weapon: " + sel.weapon.toString(), x, viewY -= 24);
         font.draw(batch, "Armour: " + sel.armor.toString(), x, viewY -= 18);
@@ -465,16 +685,18 @@ public class ManageScreen implements Screen, Constants {
         x = 90 + 135;
 
         font.draw(batch, "Strength: " + sel.str, x, viewY);
-        font.draw(batch, "Dexterity: " + sel.dex, x, viewY -= 18);
         font.draw(batch, "Intelligence: " + sel.intell, x, viewY -= 18);
-        font.draw(batch, "Wisdom: " + sel.wis, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 42);
-        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
+        font.draw(batch, "Piety: " + sel.piety, x, viewY -= 18);
+        font.draw(batch, "Vitality: " + sel.vitality, x, viewY -= 18);
+        font.draw(batch, "Agility: " + sel.agility, x, viewY -= 18);
+        font.draw(batch, "Luck: " + sel.luck, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 90 + 250;
 
         font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
+        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 18);
+        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
 
         batch.draw(Andius.faceTiles[sel.portaitIndex], 384, Andius.SCREEN_HEIGHT - 720);
 
@@ -485,7 +707,7 @@ public class ManageScreen implements Screen, Constants {
 
         font.draw(batch, "Name: " + sel.name, x, viewY);
         font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
-        font.draw(batch, "Type: " + sel.profession.toString(), x, viewY -= 18);
+        font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
         font.draw(batch, "Weapon: " + sel.weapon.toString(), x, viewY -= 24);
         font.draw(batch, "Armour: " + sel.armor.toString(), x, viewY -= 18);
@@ -494,22 +716,49 @@ public class ManageScreen implements Screen, Constants {
         x = 504 + 135;
 
         font.draw(batch, "Strength: " + sel.str, x, viewY);
-        font.draw(batch, "Dexterity: " + sel.dex, x, viewY -= 18);
         font.draw(batch, "Intelligence: " + sel.intell, x, viewY -= 18);
-        font.draw(batch, "Wisdom: " + sel.wis, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 42);
-        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
+        font.draw(batch, "Piety: " + sel.piety, x, viewY -= 18);
+        font.draw(batch, "Vitality: " + sel.vitality, x, viewY -= 18);
+        font.draw(batch, "Agility: " + sel.agility, x, viewY -= 18);
+        font.draw(batch, "Luck: " + sel.luck, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 504 + 250;
 
         font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
+        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 18);
+        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
+        
         batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 720);
 
         batch.end();
 
         stage.act();
         stage.draw();
+    }
+
+    private class ExtraPoints {
+
+        int val;
+        final int max;
+
+        ExtraPoints(int max) {
+            this.val = this.max = max;
+        }
+
+        void incr() {
+            val++;
+            if (val > max) {
+                val = max;
+            }
+        }
+
+        void decr() {
+            val--;
+            if (val < 0) {
+                val = 0;
+            }
+        }
     }
 
     private class RosterIndex {

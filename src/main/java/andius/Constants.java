@@ -325,44 +325,173 @@ public interface Constants {
         ATTACK_AVATAR;
     }
 
-    public enum Profession {
+    public enum Race {
 
-        RANGER(0x008),
-        FIGHTER(0x010),
-        WIZARD(0x020),
-        THIEF(0x0040),
-        CLERIC(0x100),
-        WITCHER(0x200);
+        HUMAN(8, 8, 5, 8, 8, 9),
+        ELF(7, 10, 10, 6, 9, 6),
+        DWARF(10, 7, 10, 10, 5, 6),
+        GNOME(7, 7, 10, 8, 10, 7),
+        HOBBIT(5, 7, 7, 6, 10, 12);
 
-        private final int val;
+        private final int initialStrength, initialIntell, initialPiety, initialVitality, initialAgility, initialLuck;
 
-        private Profession(int val) {
-            this.val = val;
+        private Race(int initialStrength, int initialIntell, int initialPiety, int initalVitality, int initialAgility, int initialLuck) {
+            this.initialStrength = initialStrength;
+            this.initialIntell = initialIntell;
+            this.initialPiety = initialPiety;
+            this.initialVitality = initalVitality;
+            this.initialAgility = initialAgility;
+            this.initialLuck = initialLuck;
         }
 
-        public int val() {
-            return this.val;
+        public int getInitialStrength() {
+            return initialStrength;
+        }
+
+        public int getInitialIntell() {
+            return initialIntell;
+        }
+
+        public int getInitialPiety() {
+            return initialPiety;
+        }
+
+        public int getInitialVitality() {
+            return initialVitality;
+        }
+
+        public int getInitialAgility() {
+            return initialAgility;
+        }
+
+        public int getInitialLuck() {
+            return initialLuck;
         }
 
     }
 
-    public enum ArmorType {
-        NONE(128, 0xfff),
-        CLOTH(136, 0xfff),
-        LEATHER(145, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.THIEF.val() | Profession.CLERIC.val() | Profession.WITCHER.val()),
-        CHAIN(160, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.CLERIC.val() | Profession.WITCHER.val()),
-        PLATE(176, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        CHAIN_P2(192, Profession.RANGER.val() | Profession.FIGHTER.val()),
-        PLATE_P2(208, Profession.RANGER.val() | Profession.FIGHTER.val()),
-        EXOTIC(224, 0xfff);
+    public enum ClassType {
 
-        private final int usableMask;
-        private final int defense;
+        FIGHTER("F", 10, 11, 11, 0, 0, 0, 0, 0),
+        MAGE("M", 5, 4, 0, 11, 0, 0, 0, 0),
+        CLERIC("C", 8, 7, 0, 0, 11, 0, 0, 0),
+        THIEF("T", 6, 7, 0, 0, 0, 0, 11, 0),
+        WIZARD("B", 6, 5, 0, 12, 12, 0, 0, 0),
+        SAMURAI("S", 14, 7, 15, 11, 10, 14, 10, 0),
+        LORD("L", 18, 9, 15, 12, 12, 15, 14, 15),
+        NINJA("N", 12, 5, 17, 17, 17, 17, 17, 17);
+
+        private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
+        private final String abbr;
+        private final int startHP;
+        private final int incrHP;
+
+        private ClassType(String abbr, int startHP, int incrHP, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck) {
+            this.abbr = abbr;
+            this.minStr = minStr;
+            this.minIntell = minIntell;
+            this.minPiety = minPiety;
+            this.minVitality = minVitality;
+            this.minAgility = minAgility;
+            this.minLuck = minLuck;
+            this.startHP = startHP;
+            this.incrHP = incrHP;
+        }
+
+        public String getAbbr() {
+            return this.abbr;
+        }
+
+        public int getMinStr() {
+            return minStr;
+        }
+
+        public int getMinIntell() {
+            return minIntell;
+        }
+
+        public int getMinPiety() {
+            return minPiety;
+        }
+
+        public int getMinVitality() {
+            return minVitality;
+        }
+
+        public int getMinAgility() {
+            return minAgility;
+        }
+
+        public int getMinLuck() {
+            return minLuck;
+        }
+
+        public int getStartHP() {
+            return startHP;
+        }
+
+        public int getIncrHP() {
+            return incrHP;
+        }
+
+    }
+
+    public static final int[][] LEVEL_PROGRESSION_TABLE = new int[][]{
+        {1000, 1100, 1050, 900, 1200, 1200, 1300, 1450},
+        {1724, 1896, 1810, 1551, 2105, 2105, 2280, 2543},
+        {2972, 3268, 3120, 2674, 3677, 3677, 4000, 4461},
+        {5124, 5634, 5379, 4610, 6477, 6477, 7017, 7826},
+        {8834, 9713, 9274, 7948, 11363, 11363, 12310, 13729},
+        {15231, 16746, 15989, 13703, 19935, 19935, 21596, 24085},
+        {26260, 28872, 27567, 23625, 34973, 34973, 37887, 42254},
+        {45275, 49779, 47529, 40732, 61356, 61356, 66468, 74129},
+        {78060, 85825, 81946, 70227, 107642, 107642, 116610, 130050},
+        {134586, 147974, 141286, 121081, 188845, 188845, 204578, 228157},
+        {232044, 255127, 243596, 208760, 331307, 331307, 358908, 400275},
+        {400075, 439874, 419993, 359931, 581240, 581240, 629663, 702236},
+        {289709, 318529, 304132, 260639, 428479, 428479, 475008, 529756}
+    };
+
+    public enum ArmorType {
+        NONE("None", 0, "FMTCBSLN", 0),
+        ROBES("Robes", 15, "FMTCBSLN", 1),
+        LEATHER("Leather Armor", 50, "FPTBSLN", 2),
+        CHAIN_MAIL("Chain Mail", 90, "FPSLN", 3),
+        BREAST_PLATE("Breast Plate", 200, "FPSLN", 4),
+        PLATE("Plate Mail", 750, "FSLN", 5),
+        CHAIN_P1("Chain Mail +1", 1500, "FPSLN", 4),
+        LEATHER_P1("Leather +1", 1500, "FPTBSLN", 3),
+        PLATE_P1("Plate Mail +1", 1500, "FSLN", 6),
+        BREAST_PLATE_P1("Breast Plate +1", 1500, "FPSLN", 5),
+        LEATHER_P2("Leather +2", 6000, "FPTBSLN", 4),
+        CHAIN_P2("Chain +2", 6000, "FPSLN", 5),
+        PLATE_P2("Plate Mail +2", 6000, "FPSLN", 7),
+        EVIL_CHAIN_P2("Evil Chain +2", 8000, "FPSLN", 5),
+        BR_PLATE_P2("Breast Plate +2", 10000, "FPSLN", 6),
+        BR_PLATE_P3("Breast Plate +3", 100000, "FPSLN", 7),
+        CHAIN_FIRE("Chain Pro Fire", 150000, "FPSLN", 6),
+        EVIL_PLATE_P3("Evil Plate +3", 150000, "FPSLN", 9),
+        LORDS_GARB("Lords Garb", 1000000, "L", 10);
+
+        private final String name;
+        private final int cost;
+        private final String usableMask;
+        private final int ac;
         private TextureRegion icon;
 
-        private ArmorType(int def, int mask) {
-            this.usableMask = mask;
-            this.defense = def;
+        private ArmorType(String name, int cost, String usableMask, int ac) {
+            this.name = name;
+            this.cost = cost;
+            this.usableMask = usableMask;
+            this.ac = ac;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getCost() {
+            return cost;
         }
 
         public static ArmorType get(int v) {
@@ -374,12 +503,12 @@ public interface Constants {
             return null;
         }
 
-        public int getDefense() {
-            return this.defense;
+        public int getAC() {
+            return this.ac;
         }
 
-        public boolean canUse(Profession prof) {
-            return (prof.val() & this.usableMask) > 0;
+        public boolean canUse(ClassType ct) {
+            return this.usableMask.contains(ct.getAbbr());
         }
 
         public TextureRegion getIcon() {
@@ -393,34 +522,56 @@ public interface Constants {
     }
 
     public enum WeaponType {
-        NONE(4, 4, 1, 0xfff),
-        DAGGER(4, 8, 1, 0xfff),
-        STAFF(4, 9, 1, 0xfff),
-        MACE(4, 10, 1, Profession.CLERIC.val() | Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SLING(4, 13, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE(4, 16, 1, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW(4, 19, 16, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD(4, 22, 1, Profession.THIEF.val() | Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_2H(4, 25, 1, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE_P2(4, 28, 1, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW_P2(4, 31, 16, Profession.RANGER.val() | Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_P2(4, 34, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        AXE_P4(4, 40, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        BOW_P4(4, 43, 16, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        SWORD_P4(4, 46, 1, Profession.FIGHTER.val() | Profession.WITCHER.val()),
-        EXOTIC(4, 49, 1, 0xfff);
+        NONE("None", 0, "FMTCBSLN", 1, 3),
+        DAGGER("Dagger", 5, "FMTSLN", 1, 4),
+        STAFF("Staff", 10, "FMTCBSLN", 1, 5),
+        SHORT_SWD("Short Sword", 15, "FTSLN", 1, 6),
+        LONG_SWD("Long Sword", 25, "FSLN", 1, 8),
+        ANOINT_MACE("Anointed Mace", 30, "FPBSLN", 2, 6),
+        ANOINT_FLAIL("Anointed Flail", 150, "FPSLN", 1, 7),
+        STAFF_P2("Staff +2", 2500, "FMTCBSLN", 3, 6),
+        STAFF_MOG("Staff of Mogref", 3000, "MB", 1, 6),
+        MACE_P2("Mace +2", 4000, "FPBSLN", 3, 10),
+        SHORT_SWD_P2("Short Sword +2", 4000, "FTSLN", 3, 8),
+        LONG_SWD_P2("Long Sword +2", 4000, "FSLN", 3, 12),
+        DAGGER_P2("Dagger +2", 8000, "FMTSLN", 3, 6),
+        SHORT_SWD_M2("Short Sword -2", 8000, "FTSLN", 1, 6),
+        LONG_SWD_P1("Long Sword +1", 10000, "FSLN", 2, 9),
+        DRAGON_SLAYER("Dragon Slayer", 10000, "FSLN", 2, 11),
+        WERE_SLAYER("Were Slayer", 10000, "FSLN", 2, 11),
+        MAGE_MASHER("Mage Masher", 10000, "FTSLN", 2, 7),
+        MACE_PRO_POISON("Mace Pro Poison", 10000, "FPBSLN", 1, 8),
+        MACE_P1("Mace +1", 12500, "FPBSLN", 3, 9),
+        SHORT_SWD_P1("Short Sword +1", 15000, "FTSLN", 2, 7),
+        STAFF_MONTINO("Staff of Montino", 15000, "FMTCBSLN", 2, 6),
+        BLADE_CUSINART("Blade Cusinart", 15000, "FSLN", 10, 12),
+        DAGGER_SPEED("Dagger of Speed", 30000, "MN", 1, 4),
+        EVIL_SWD_P3("Evil Sword +3", 50000, "FSLN", 4, 13),
+        THIEVES_DAGGER("Thieves Dagger", 50000, "TN", 1, 6),
+        SHURIKEN("Shuriken", 50000, "N", 11, 16),
+        MURASAMA_BLADE("Murasama Blade", 1000000, "S", 10, 50);
 
+        private final String name;
+        private final int cost;
+        private final String usableMask;
         private final int dmin;
         private final int dmax;
-        private final int range;
-        private final int usableMask;
         private TextureRegion icon;
 
-        private WeaponType(int dmin, int dmax, int range, int mask) {
-            this.usableMask = mask;
+        private WeaponType(String name, int cost, String usableMask, int dmin, int dmax) {
+            this.name = name;
+            this.cost = cost;
+            this.usableMask = usableMask;
             this.dmin = dmin;
-            this.range = range;
             this.dmax = dmax;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getCost() {
+            return cost;
         }
 
         public static WeaponType get(int v) {
@@ -432,16 +583,8 @@ public interface Constants {
             return null;
         }
 
-        public boolean canUse(Profession prof) {
-            return (prof.val() & this.usableMask) > 0;
-        }
-
-        public TextureRegion getIcon() {
-            return icon;
-        }
-
-        public void setIcon(TextureRegion icon) {
-            this.icon = icon;
+        public boolean canUse(ClassType ct) {
+            return this.usableMask.contains(ct.getAbbr());
         }
 
         public int getDmin() {
@@ -452,10 +595,13 @@ public interface Constants {
             return dmax;
         }
 
-        public int getRange() {
-            return range;
+        public TextureRegion getIcon() {
+            return icon;
         }
 
+        public void setIcon(TextureRegion icon) {
+            this.icon = icon;
+        }
     }
 
     public enum CreatureStatus {
@@ -553,41 +699,6 @@ public interface Constants {
         FULLHEAL,
         RESURRECT,
         HEAL;
-    }
-
-    public enum ClassType {
-
-        HUMAN(75, 75, 75, 75),
-        ELF(75, 99, 75, 50),
-        DWARF(99, 75, 50, 75),
-        HOBBIT(75, 50, 75, 99),
-        FUZZY(25, 99, 99, 75);
-
-        private final int maxStr, maxDex, maxInt, maxWis;
-
-        private ClassType(int mxSt, int mxDx, int mxIn, int mxWi) {
-            this.maxStr = mxSt;
-            this.maxDex = mxDx;
-            this.maxInt = mxIn;
-            this.maxWis = mxWi;
-        }
-
-        public int getMaxStr() {
-            return maxStr;
-        }
-
-        public int getMaxDex() {
-            return maxDex;
-        }
-
-        public int getMaxInt() {
-            return maxInt;
-        }
-
-        public int getMaxWis() {
-            return maxWis;
-        }
-
     }
 
     public enum Status {

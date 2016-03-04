@@ -92,7 +92,7 @@ public class Andius extends Game {
         font = generator.generateFont(parameter);
 
         parameter.size = 16;
-        smallFont = generator.generateFont(parameter);
+        //smallFont = generator.generateFont(parameter);
 
         parameter.size = 24;
         largeFont = generator.generateFont(parameter);
@@ -117,6 +117,9 @@ public class Andius extends Game {
         skin.add("death-screen", largeFont, BitmapFont.class);
         skin.add("ultima", ultimaFont, BitmapFont.class);
         skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
+        
+        smallFont = skin.get("verdana-10", BitmapFont.class);
+
 
         Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
         ls.font = font;
