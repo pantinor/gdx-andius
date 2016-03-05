@@ -1,7 +1,7 @@
 package andius.objects;
 
-import andius.Constants.Direction;
 import andius.Constants.Map;
+import andius.Direction;
 import andius.GameScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;

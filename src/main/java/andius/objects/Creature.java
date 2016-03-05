@@ -6,10 +6,10 @@
 package andius.objects;
 
 import andius.Constants.CreatureStatus;
-import andius.Constants.Creatures;
-import andius.Constants.Icons;
+import andius.Creatures;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
+import andius.Icons;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import utils.Utils;

@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -41,6 +42,7 @@ public class ManageScreen implements Screen, Constants {
     BitmapFont font;
     Texture bkgnd;
 
+    Label rosText;
     List<RosterIndex> registry;
     List<PartyIndex> partyFormation;
 
@@ -76,7 +78,7 @@ public class ManageScreen implements Screen, Constants {
 
     private static final String EMPTY = "<empty>";
 
-    SaveGame saveGame ;
+    SaveGame saveGame;
 
     public ManageScreen(Screen rs, Skin skin) {
         this.stage = new Stage();
@@ -92,9 +94,13 @@ public class ManageScreen implements Screen, Constants {
         } catch (Exception e) {
         }
 
-        PartyIndex[] mbrs = new PartyIndex[1];
+        PartyIndex[] mbrs = new PartyIndex[6];
         for (int i = 0; i < mbrs.length; i++) {
-            CharacterRecord r = saveGame.players[i];
+            CharacterRecord r = null;
+            try {
+                r = saveGame.players[i];
+            } catch (Exception e) {
+            }
             if (r == null || r.name.length() < 1) {
                 r = new CharacterRecord();
                 r.name = EMPTY;
@@ -111,7 +117,6 @@ public class ManageScreen implements Screen, Constants {
             recs[i].character.name = EMPTY;
         }
 
-
         try {
             GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file()));
             String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
@@ -120,7 +125,7 @@ public class ManageScreen implements Screen, Constants {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             RosterIndex[] r = gson.fromJson(json, RosterIndex[].class);
-            for (int i=0;i<20;i++) {
+            for (int i = 0; i < 20; i++) {
                 recs[i] = r[i];
             }
         } catch (Exception e) {
@@ -173,13 +178,13 @@ public class ManageScreen implements Screen, Constants {
 
         iconLeft.setX(769);
         iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
-        iconRight.setX(838);
+        iconRight.setX(840);
         iconRight.setY(Andius.SCREEN_HEIGHT - 125);
 
         partyIconLeft.setX(776);
-        partyIconLeft.setY(Andius.SCREEN_HEIGHT - 715);
+        partyIconLeft.setY(Andius.SCREEN_HEIGHT - 710);
         partyIconRight.setX(770 + 77);
-        partyIconRight.setY(Andius.SCREEN_HEIGHT - 715);
+        partyIconRight.setY(Andius.SCREEN_HEIGHT - 710);
 
         apply.addListener(new ChangeListener() {
             @Override
@@ -201,7 +206,8 @@ public class ManageScreen implements Screen, Constants {
                 sel.agility = agVal + agExt;
                 sel.luck = luVal + luExt;
 
-                sel.health = sel.getMaxHP();
+                sel.hp = sel.calculateMaxHP();
+                sel.maxhp = sel.hp;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
 
@@ -291,12 +297,13 @@ public class ManageScreen implements Screen, Constants {
                     gzos.write(b64.getBytes("UTF-8"));
                     gzos.close();
                     
-                    saveGame.players[0] = partyFormation.getItems().get(0).character;
-                    for (CharacterRecord r : saveGame.players) {
-                        if (r.name.equals(EMPTY)) {
-                            r.name = null;
+                    Array<CharacterRecord> sgchars = new Array<>();
+                    for (PartyIndex pi : partyFormation.getItems()) {
+                        if (!pi.character.name.equals(EMPTY)) {
+                            sgchars.add(pi.character);
                         }
                     }
+                    saveGame.players = sgchars.toArray(CharacterRecord.class);
                     saveGame.write(SAVE_FILENAME);
                 } catch (Exception e) {
                 }
@@ -365,12 +372,16 @@ public class ManageScreen implements Screen, Constants {
                 }
             }
         });
+        
+        rosText = new Label("Roster", skin);
+        rosText.setX(80);
+        rosText.setY(Andius.SCREEN_HEIGHT - 55 );
 
         ScrollPane sp1 = new ScrollPane(partyFormation, skin);
-        sp1.setX(496);
-        sp1.setY(264);
+        sp1.setX(490);
+        sp1.setY(232);
         sp1.setWidth(224);
-        sp1.setHeight(96);
+        sp1.setHeight(143);
 
         ScrollPane sp2 = new ScrollPane(registry, skin);
         sp2.setX(80);
@@ -614,6 +625,7 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(partyIconRight);
         stage.addActor(sp1);
         stage.addActor(sp2);
+        stage.addActor(rosText);
 
     }
 
@@ -679,7 +691,7 @@ public class ManageScreen implements Screen, Constants {
 
         font.setColor(Color.WHITE);
 
-        batch.draw(Andius.faceTiles[pidx], 784, Andius.SCREEN_HEIGHT - 132);
+        batch.draw(Andius.faceTiles[pidx], 785, Andius.SCREEN_HEIGHT - 131);
 
         CharacterRecord sel = this.registry.getSelected().character;
 
@@ -707,10 +719,10 @@ public class ManageScreen implements Screen, Constants {
         x = 90 + 250;
 
         font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 18);
+        font.draw(batch, "Hit Points: " + sel.hp, x, viewY -= 18);
         font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 384, Andius.SCREEN_HEIGHT - 720);
+        batch.draw(Andius.faceTiles[sel.portaitIndex], 383, Andius.SCREEN_HEIGHT - 721);
 
         sel = this.partyFormation.getSelected().character;
 
@@ -738,10 +750,10 @@ public class ManageScreen implements Screen, Constants {
         x = 504 + 250;
 
         font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 18);
+        font.draw(batch, "Hit Points: " + sel.hp, x, viewY -= 18);
         font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 720);
+        batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 719);
 
         batch.end();
 
@@ -772,7 +784,7 @@ public class ManageScreen implements Screen, Constants {
             }
         }
     }
-    
+
     private class RosterIndex {
 
         CharacterRecord character;

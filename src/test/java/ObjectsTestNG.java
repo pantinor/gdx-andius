@@ -1,15 +1,13 @@
 
-import andius.Constants;
-import andius.Constants.ArmorType;
-import andius.Constants.ClassType;
+import andius.ArmorType;
+import andius.ClassType;
 import andius.Constants.Map;
-import andius.Constants.Race;
-import andius.Constants.WeaponType;
+import andius.Race;
+import andius.WeaponType;
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
-import static junit.framework.Assert.assertEquals;
 import org.testng.annotations.Test;
 
 public class ObjectsTestNG {
@@ -50,7 +48,7 @@ public class ObjectsTestNG {
         avatar.name = "Steve" ;
         avatar.race = Race.HUMAN;
         avatar.classType = ClassType.FIGHTER;
-        avatar.health = 5;
+        avatar.hp = 5;
         avatar.exp = 50;
         avatar.gold = 10456;
         avatar.weapon = WeaponType.ANOINT_FLAIL;
@@ -62,8 +60,8 @@ public class ObjectsTestNG {
 
         sg.write("test.sav");
         
-        int level = avatar.checkLevel();
-        int mxhp = avatar.getMaxHP();
+        int level = avatar.calculateLevel();
+        int mxhp = avatar.calculateMaxHP();
         int x = 0;
     }
 

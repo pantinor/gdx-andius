@@ -101,7 +101,7 @@ public class GameScreen extends BaseScreen {
         batch.begin();
 
         batch.draw(Andius.backGround, 0, 0);
-        Andius.hud.render(batch, Andius.CTX.getPlayer());
+        Andius.hud.render(batch, Andius.CTX);
 
 //        Vector3 v = getCurrentMapCoords();
 //        Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);

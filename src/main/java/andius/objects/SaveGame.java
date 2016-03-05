@@ -1,7 +1,12 @@
 package andius.objects;
 
+import andius.ArmorType;
+import andius.ClassType;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
+import static andius.Constants.SPELL_PTS;
+import andius.Race;
+import andius.WeaponType;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;
@@ -20,7 +25,7 @@ public class SaveGame implements Constants {
 
     public static final Random rand = new XORShiftRandom();
 
-    public CharacterRecord[] players = new CharacterRecord[1];
+    public CharacterRecord[] players;
     public int map;
     public int wx;
     public int wy;
@@ -32,7 +37,13 @@ public class SaveGame implements Constants {
         String json = Base64Coder.decodeString(b64);
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        return gson.fromJson(json, SaveGame.class);
+        SaveGame sg = gson.fromJson(json, SaveGame.class);
+        //set initial start
+        if (sg.wx == 0 && sg.wy == 0) {
+            sg.wx = Map.WORLD.getStartX();
+            sg.wy = Map.WORLD.getStartY();
+        }
+        return sg;
     }
 
     public void write(String file) throws Exception {
@@ -59,7 +70,8 @@ public class SaveGame implements Constants {
         public int luck;
         public Race race = Race.HUMAN;
         public ClassType classType = ClassType.FIGHTER;
-        public int health;
+        public int hp;
+        public int maxhp;
         public int exp;
         public int gold;
         public int level;
@@ -73,19 +85,30 @@ public class SaveGame implements Constants {
             exp = Utils.adjustValueMax(exp, value, 9999);
         }
 
-        public int getMaxHP() {
-            int hp = this.classType.getStartHP();
-            if (this.level > 0) {
-                hp += this.level * this.classType.getIncrHP();
+        public void adjustGold(int v) {
+            gold = Utils.adjustValue(gold, v, 999999999, 0);
+        }
+
+        public int calculateMaxHP() {
+            int hp = this.classType.getHitDie();
+            for (int i = 0; i < this.level; i++) {
+                hp += Utils.getRandomBetween(1, this.classType.getHitDie());
+                if (this.vitality <= 3) {
+                    hp -= 2;
+                } else if (this.vitality == 4 || this.vitality == 5) {
+                    hp -= 1;
+                } else if (this.vitality == 16) {
+                    hp += 1;
+                } else if (this.vitality == 17) {
+                    hp += 2;
+                } else if (this.vitality >= 18) {
+                    hp += 3;
+                }
             }
             return hp;
         }
 
-        public void adjustGold(int v) {
-            gold = Utils.adjustValue(gold, v, 1000000, 0);
-        }
-
-        public int checkLevel() {
+        public int calculateLevel() {
 
             int lvl = 0;
 
@@ -108,6 +131,36 @@ public class SaveGame implements Constants {
 
             return lvl;
 
+        }
+
+        public int[] getMageSpellPoints() {
+            try {
+                if (this.classType == ClassType.MAGE || this.classType == ClassType.WIZARD) {
+                    return SPELL_PTS[this.level];
+                } else if (this.classType == ClassType.SAMURAI) {
+                    if (this.level >= 4) {
+                        return SPELL_PTS[this.level - 4];
+                    }
+                }
+            } catch (Exception e) {
+                return SPELL_PTS[SPELL_PTS.length - 1];
+            }
+            return new int[]{0, 0, 0, 0, 0, 0, 0};
+        }
+
+        public int[] getClericSpellPoints() {
+            try {
+                if (this.classType == ClassType.CLERIC) {
+                    return SPELL_PTS[this.level];
+                } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.LORD) {
+                    if (this.level >= 4) {
+                        return SPELL_PTS[this.level - 4];
+                    }
+                }
+            } catch (Exception e) {
+                return SPELL_PTS[SPELL_PTS.length - 1];
+            }
+            return new int[]{0, 0, 0, 0, 0, 0, 0};
         }
 
     }

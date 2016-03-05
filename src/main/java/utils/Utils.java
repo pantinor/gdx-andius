@@ -2,11 +2,11 @@ package utils;
 
 import andius.Constants.AttackResult;
 import andius.Constants.AttackVector;
-import andius.Constants.Direction;
-import andius.Constants.WeaponType;
+import andius.Direction;
+import andius.WeaponType;
 import andius.objects.BaseMap;
 import andius.objects.Creature;
-import andius.objects.Player;
+import andius.objects.Party.Player;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -147,7 +147,7 @@ public class Utils {
     public static boolean dealDamage(Player attacker, Creature defender, int damage) {
         int xp = defender.getExp();
         if (!damageCreature(defender, damage, true)) {
-            attacker.getCharRec().awardXP(xp);
+            attacker.rec().awardXP(xp);
             return false;
         }
         return true;
@@ -201,7 +201,7 @@ public class Utils {
 
     private static AttackVector attack(BaseMap map, Player attacker, Direction dir, int x, int y) {
 
-        WeaponType wt = attacker.getCharRec().weapon;
+        WeaponType wt = attacker.rec().weapon;
 
         List<AttackVector> path = getDirectionalActionPath(map, dir.getMask(), x, y, 1, 0);
 
@@ -228,7 +228,7 @@ public class Utils {
         
         Creature creature = map.getCreatureAt(target.x, target.y);
 
-        WeaponType wt = attacker.getCharRec().weapon;
+        WeaponType wt = attacker.rec().weapon;
         boolean wrongRange = (distance > 0);
 
         if (creature == null || wrongRange) {

@@ -23,7 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
-import utils.LogDisplay;
+import utils.Hud;
 
 public class Andius extends Game {
 
@@ -67,7 +67,7 @@ public class Andius extends Game {
     public static Animation marker_blue;
     public static Animation marker_white;
     
-    public static LogDisplay hud;
+    public static Hud hud;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
 
@@ -137,7 +137,7 @@ public class Andius extends Game {
         TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
         tfs.font = font;
 
-        hud = new LogDisplay();
+        hud = new Hud();
         
         try {
 
@@ -175,7 +175,7 @@ public class Andius extends Game {
 
             Constants.Map.init();
             Constants.Moongate.init();
-            Constants.Icons.init(heroesAtlas);
+            Icons.init(heroesAtlas);
             Conversations.init();
 
         } catch (Exception e) {

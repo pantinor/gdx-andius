@@ -11,6 +11,7 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	clear: { name: white, color: { r: 0, g: 0, b: 0, a: 0 } },
 	light: { name: white, color: { r: 0.7, g: 0.7, b: 0.7, a: 0.5 } },
 	dim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
 	dimmer: { name: white, color: { r: 0, g: 0, b: 0, a: 0.35 } },
@@ -50,7 +51,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-horizontal: { background: default-slider, knob: default-slider-knob }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: { font: default-font, fontColor: white, background: dim },
+	default: { font: default-font, fontColor: white, background: clear },
 	black-font: { font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

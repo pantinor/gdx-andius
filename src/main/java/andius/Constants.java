@@ -5,9 +5,7 @@ import andius.objects.Creature;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -19,8 +17,6 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import utils.Utils;
-import utils.XORShiftRandom;
 
 public interface Constants {
 
@@ -219,221 +215,12 @@ public interface Constants {
 
     }
 
-    enum Direction {
-
-        WEST(1, 0x1),
-        NORTH(2, 0x2),
-        EAST(3, 0x4),
-        SOUTH(4, 0x8);
-
-        private int val;
-        private int mask;
-
-        private Direction(int v, int mask) {
-            this.val = v;
-            this.mask = mask;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public int getMask() {
-            return mask;
-        }
-
-        public static boolean isDirInMask(Direction dir, int mask) {
-            int v = (mask & dir.mask);
-            return (v > 0);
-        }
-
-        public static boolean isDirInMask(int dir, int mask) {
-            int v = (mask & dir);
-            return (v > 0);
-        }
-
-        public static int addToMask(Direction dir, int mask) {
-            return (dir.mask | mask);
-        }
-
-        public static int removeFromMask(int mask, Direction... dirs) {
-            for (Direction dir : dirs) {
-                mask &= ~dir.getMask();
-            }
-            return mask;
-        }
-
-        public static Direction getRandomValidDirection(int mask) {
-            int n = 0;
-            Direction d[] = new Direction[4];
-            for (Direction dir : values()) {
-                if (isDirInMask(dir, mask)) {
-                    d[n] = dir;
-                    n++;
-                }
-            }
-            if (n == 0) {
-                return null;
-            }
-            int rand = new XORShiftRandom().nextInt(n);
-            return d[rand];
-        }
-
-        public static Direction reverse(Direction dir) {
-            switch (dir) {
-                case WEST:
-                    return EAST;
-                case NORTH:
-                    return SOUTH;
-                case EAST:
-                    return WEST;
-                case SOUTH:
-                    return NORTH;
-            }
-            return null;
-        }
-
-        public static Direction getByValue(int val) {
-            Direction ret = null;
-            for (Direction d : Direction.values()) {
-                if (val == d.getVal()) {
-                    ret = d;
-                    break;
-                }
-            }
-            return ret;
-        }
-
-        public static Direction getByMask(int mask) {
-            Direction ret = null;
-            for (Direction d : Direction.values()) {
-                if (mask == d.mask) {
-                    ret = d;
-                    break;
-                }
-            }
-            return ret;
-        }
-
-    };
-
     public enum MovementBehavior {
 
         FIXED,
         WANDER,
         FOLLOW_AVATAR,
         ATTACK_AVATAR;
-    }
-
-    public enum Race {
-
-        HUMAN(8, 8, 5, 8, 8, 9),
-        ELF(7, 10, 10, 6, 9, 6),
-        DWARF(10, 7, 10, 10, 5, 6),
-        GNOME(7, 7, 10, 8, 10, 7),
-        HOBBIT(5, 7, 7, 6, 10, 12);
-
-        private final int initialStrength, initialIntell, initialPiety, initialVitality, initialAgility, initialLuck;
-
-        private Race(int initialStrength, int initialIntell, int initialPiety, int initalVitality, int initialAgility, int initialLuck) {
-            this.initialStrength = initialStrength;
-            this.initialIntell = initialIntell;
-            this.initialPiety = initialPiety;
-            this.initialVitality = initalVitality;
-            this.initialAgility = initialAgility;
-            this.initialLuck = initialLuck;
-        }
-
-        public int getInitialStrength() {
-            return initialStrength;
-        }
-
-        public int getInitialIntell() {
-            return initialIntell;
-        }
-
-        public int getInitialPiety() {
-            return initialPiety;
-        }
-
-        public int getInitialVitality() {
-            return initialVitality;
-        }
-
-        public int getInitialAgility() {
-            return initialAgility;
-        }
-
-        public int getInitialLuck() {
-            return initialLuck;
-        }
-
-    }
-
-    public enum ClassType {
-
-        FIGHTER("F", 10, 11, 11, 0, 0, 0, 0, 0),
-        MAGE("M", 5, 4, 0, 11, 0, 0, 0, 0),
-        CLERIC("C", 8, 7, 0, 0, 11, 0, 0, 0),
-        THIEF("T", 6, 7, 0, 0, 0, 0, 11, 0),
-        WIZARD("B", 6, 5, 0, 12, 12, 0, 0, 0),
-        SAMURAI("S", 14, 7, 15, 11, 10, 14, 10, 0),
-        LORD("L", 18, 9, 15, 12, 12, 15, 14, 15),
-        NINJA("N", 12, 5, 17, 17, 17, 17, 17, 17);
-
-        private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
-        private final String abbr;
-        private final int startHP;
-        private final int incrHP;
-
-        private ClassType(String abbr, int startHP, int incrHP, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck) {
-            this.abbr = abbr;
-            this.minStr = minStr;
-            this.minIntell = minIntell;
-            this.minPiety = minPiety;
-            this.minVitality = minVitality;
-            this.minAgility = minAgility;
-            this.minLuck = minLuck;
-            this.startHP = startHP;
-            this.incrHP = incrHP;
-        }
-
-        public String getAbbr() {
-            return this.abbr;
-        }
-
-        public int getMinStr() {
-            return minStr;
-        }
-
-        public int getMinIntell() {
-            return minIntell;
-        }
-
-        public int getMinPiety() {
-            return minPiety;
-        }
-
-        public int getMinVitality() {
-            return minVitality;
-        }
-
-        public int getMinAgility() {
-            return minAgility;
-        }
-
-        public int getMinLuck() {
-            return minLuck;
-        }
-
-        public int getStartHP() {
-            return startHP;
-        }
-
-        public int getIncrHP() {
-            return incrHP;
-        }
-
     }
 
     public static final int[][] LEVEL_PROGRESSION_TABLE = new int[][]{
@@ -451,158 +238,44 @@ public interface Constants {
         {400075, 439874, 419993, 359931, 581240, 581240, 629663, 702236},
         {289709, 318529, 304132, 260639, 428479, 428479, 475008, 529756}
     };
-
-    public enum ArmorType {
-        NONE("None", 0, "FMTCBSLN", 0),
-        ROBES("Robes", 15, "FMTCBSLN", 1),
-        LEATHER("Leather Armor", 50, "FPTBSLN", 2),
-        CHAIN_MAIL("Chain Mail", 90, "FPSLN", 3),
-        BREAST_PLATE("Breast Plate", 200, "FPSLN", 4),
-        PLATE("Plate Mail", 750, "FSLN", 5),
-        CHAIN_P1("Chain Mail +1", 1500, "FPSLN", 4),
-        LEATHER_P1("Leather +1", 1500, "FPTBSLN", 3),
-        PLATE_P1("Plate Mail +1", 1500, "FSLN", 6),
-        BREAST_PLATE_P1("Breast Plate +1", 1500, "FPSLN", 5),
-        LEATHER_P2("Leather +2", 6000, "FPTBSLN", 4),
-        CHAIN_P2("Chain +2", 6000, "FPSLN", 5),
-        PLATE_P2("Plate Mail +2", 6000, "FPSLN", 7),
-        EVIL_CHAIN_P2("Evil Chain +2", 8000, "FPSLN", 5),
-        BR_PLATE_P2("Breast Plate +2", 10000, "FPSLN", 6),
-        BR_PLATE_P3("Breast Plate +3", 100000, "FPSLN", 7),
-        CHAIN_FIRE("Chain Pro Fire", 150000, "FPSLN", 6),
-        EVIL_PLATE_P3("Evil Plate +3", 150000, "FPSLN", 9),
-        LORDS_GARB("Lords Garb", 1000000, "L", 10);
-
-        private final String name;
-        private final int cost;
-        private final String usableMask;
-        private final int ac;
-        private TextureRegion icon;
-
-        private ArmorType(String name, int cost, String usableMask, int ac) {
-            this.name = name;
-            this.cost = cost;
-            this.usableMask = usableMask;
-            this.ac = ac;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getCost() {
-            return cost;
-        }
-
-        public static ArmorType get(int v) {
-            for (ArmorType x : values()) {
-                if (x.ordinal() == (v & 0xff)) {
-                    return x;
-                }
-            }
-            return null;
-        }
-
-        public int getAC() {
-            return this.ac;
-        }
-
-        public boolean canUse(ClassType ct) {
-            return this.usableMask.contains(ct.getAbbr());
-        }
-
-        public TextureRegion getIcon() {
-            return icon;
-        }
-
-        public void setIcon(TextureRegion icon) {
-            this.icon = icon;
-        }
-
-    }
-
-    public enum WeaponType {
-        NONE("None", 0, "FMTCBSLN", 1, 3),
-        DAGGER("Dagger", 5, "FMTSLN", 1, 4),
-        STAFF("Staff", 10, "FMTCBSLN", 1, 5),
-        SHORT_SWD("Short Sword", 15, "FTSLN", 1, 6),
-        LONG_SWD("Long Sword", 25, "FSLN", 1, 8),
-        ANOINT_MACE("Anointed Mace", 30, "FPBSLN", 2, 6),
-        ANOINT_FLAIL("Anointed Flail", 150, "FPSLN", 1, 7),
-        STAFF_P2("Staff +2", 2500, "FMTCBSLN", 3, 6),
-        STAFF_MOG("Staff of Mogref", 3000, "MB", 1, 6),
-        MACE_P2("Mace +2", 4000, "FPBSLN", 3, 10),
-        SHORT_SWD_P2("Short Sword +2", 4000, "FTSLN", 3, 8),
-        LONG_SWD_P2("Long Sword +2", 4000, "FSLN", 3, 12),
-        DAGGER_P2("Dagger +2", 8000, "FMTSLN", 3, 6),
-        SHORT_SWD_M2("Short Sword -2", 8000, "FTSLN", 1, 6),
-        LONG_SWD_P1("Long Sword +1", 10000, "FSLN", 2, 9),
-        DRAGON_SLAYER("Dragon Slayer", 10000, "FSLN", 2, 11),
-        WERE_SLAYER("Were Slayer", 10000, "FSLN", 2, 11),
-        MAGE_MASHER("Mage Masher", 10000, "FTSLN", 2, 7),
-        MACE_PRO_POISON("Mace Pro Poison", 10000, "FPBSLN", 1, 8),
-        MACE_P1("Mace +1", 12500, "FPBSLN", 3, 9),
-        SHORT_SWD_P1("Short Sword +1", 15000, "FTSLN", 2, 7),
-        STAFF_MONTINO("Staff of Montino", 15000, "FMTCBSLN", 2, 6),
-        BLADE_CUSINART("Blade Cusinart", 15000, "FSLN", 10, 12),
-        DAGGER_SPEED("Dagger of Speed", 30000, "MN", 1, 4),
-        EVIL_SWD_P3("Evil Sword +3", 50000, "FSLN", 4, 13),
-        THIEVES_DAGGER("Thieves Dagger", 50000, "TN", 1, 6),
-        SHURIKEN("Shuriken", 50000, "N", 11, 16),
-        MURASAMA_BLADE("Murasama Blade", 1000000, "S", 10, 50);
-
-        private final String name;
-        private final int cost;
-        private final String usableMask;
-        private final int dmin;
-        private final int dmax;
-        private TextureRegion icon;
-
-        private WeaponType(String name, int cost, String usableMask, int dmin, int dmax) {
-            this.name = name;
-            this.cost = cost;
-            this.usableMask = usableMask;
-            this.dmin = dmin;
-            this.dmax = dmax;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getCost() {
-            return cost;
-        }
-
-        public static WeaponType get(int v) {
-            for (WeaponType x : values()) {
-                if (x.ordinal() == (v & 0xff)) {
-                    return x;
-                }
-            }
-            return null;
-        }
-
-        public boolean canUse(ClassType ct) {
-            return this.usableMask.contains(ct.getAbbr());
-        }
-
-        public int getDmin() {
-            return dmin;
-        }
-
-        public int getDmax() {
-            return dmax;
-        }
-
-        public TextureRegion getIcon() {
-            return icon;
-        }
-
-        public void setIcon(TextureRegion icon) {
-            this.icon = icon;
-        }
-    }
+    
+    public static final int[][] SPELL_PTS = new int[][] {
+        {1,0,0,0,0,0,0},
+        {2,0,0,0,0,0,0},
+        {2,1,0,0,0,0,0},
+        {3,2,0,0,0,0,0},
+        {4,2,1,0,0,0,0},
+        //
+        {4,2,2,0,0,0,0},
+        {4,3,2,1,0,0,0},
+        {4,3,3,2,0,0,0},
+        {4,3,3,2,1,0,0},
+        {4,4,3,2,2,0,0},
+        //
+        {4,4,4,3,3,0,0},
+        {4,4,4,4,4,1,0},
+        {5,5,5,4,4,2,0},
+        {5,5,5,4,4,2,1},
+        {5,5,5,5,5,2,1},
+        //
+        {5,5,5,5,5,3,2},
+        {5,5,5,5,5,3,3},
+        {5,5,5,5,5,4,3},
+        {5,5,5,5,5,4,3},
+        {5,5,5,5,5,4,4},
+        //
+        {5,5,5,5,5,5,4},
+        {5,5,5,5,5,5,5},
+        {6,5,5,5,5,5,5},
+        {6,6,5,5,5,5,5},
+        {6,6,5,5,5,5,5},
+        //
+        {6,6,6,6,5,5,5},
+        {6,6,6,6,6,5,5},
+        {7,7,6,6,6,6,5},
+        {7,7,7,6,6,6,6},
+        {7,7,7,7,7,7,7}
+    };
 
     public enum CreatureStatus {
 
@@ -716,154 +389,6 @@ public interface Constants {
         MERCHANT;
     }
 
-    public enum Icons {
-
-        WIZARD,
-        CLERIC,
-        PALADIN,
-        RANGER,
-        BARBARIAN,
-        THIEF,
-        DRUID,
-        TORTURER,
-        FIGHTER,
-        SWASHBUCKLER,
-        KNIGHT,
-        WITCH,
-        BAT_MAJOR,
-        BAT_MINOR,
-        SPIDER_MAJOR,
-        SPIDER_MINOR,
-        BLACK_WIDOW_MAJOR,
-        BLACK_WIDOW_MINOR,
-        DWARF_FIGHTER,
-        SKELETON,
-        SKELETON_SWORDSMAN,
-        LICHE,
-        SKELETON_ARCHER,
-        ORC,
-        ORC_SHIELDSMAN,
-        TROLL,
-        OGRE_SHAMAN,
-        OGRE,
-        ORC_SHAMAN,
-        RAT_MAJOR,
-        RAT_MINOR,
-        ZOMBIE_GREEN,
-        ZOMBIE_BLUE,
-        WRAITH,
-        DWARF_CLERIC,
-        DWARF_LORD,
-        MINOTAUR,
-        VAMPIRE_RED,
-        VAMPIRE_BLUE,
-        SORCERER,
-        SORCERER_EVIL,
-        WOLF_BLACK,
-        WOLF_BROWN,
-        MERMAN_SWORDSMAN,
-        MERMAN_PIKE,
-        MERMAN_SHAMAN,
-        MERMAN_SWORDSMAN_BLUE,
-        MERMAN_PIKE_BLUE,
-        MERMAN_SHAMAN_BLUE,
-        GAZER,
-        GAZER_BLUE,
-        PHANTOM_BLUE,
-        PHANTOM_RED,
-        PHANTOM_GREY,
-        PIXIE,
-        PIXIE_RED,
-        DEMON_RED,
-        DEMON_BLUE,
-        DEMON_GREEN,
-        ANGEL,
-        DARK_ANGEL,
-        HALFLING,
-        HALFLING_RANGER,
-        HALFLING_SHIELDSMAN,
-        HALFLING_WIZARD,
-        WISP_MAJOR,
-        WISP_MINOR,
-        DRAGON_BLACK,
-        DRAGON_RED,
-        DRAGON_BLUE,
-        DRAGON_GREEN,
-        HAWK_WHITE,
-        HAWK_BROWN,
-        CROW,
-        MUMMY,
-        MUMMY_KING,
-        GOLEM_STONE,
-        GOLEM_FIRE,
-        GOLEM_EARTH,
-        GOLEM_ICE,
-        GOLEM_MUD,
-        COBRA_MAJOR,
-        COBRA_MINOR,
-        KING_RED,
-        QUEEN_RED,
-        KING_BLUE,
-        QUEEN_BLUE,
-        BEETLE_BLACK,
-        BEETLE_RED,
-        BEETLE_BLACK_MINOR,
-        BEETLE_RED_MINOR,
-        GHOST_MINOR,
-        GHOST_MAJOR,
-        SLIME_GREEN,
-        SLIME_RED,
-        SLIME_PURPLE,
-        GRUB_MINOR,
-        GRUB_MAJOR,
-        ELEMENTAL_PURPLE,
-        ELEMENTAL_BLUE,
-        ELEMENTAL_ORANGE,
-        ELEMENTAL_CYAN,
-        ELEMENTAL_BROWN,
-        BUTTERFLY_WHITE,
-        BUTTERFLY_RED,
-        BUTTERFLY_BLACK,
-        FROG_GREEN,
-        FROG_BLUE,
-        FROG_BROWN,
-        INSECT_SWARM,
-        MIMIC,
-        SHOPKEEPER_BROWN,
-        SHOPKEEPER_BLOND,
-        BLOOD_PRIEST,
-        BARBARIAN_AXE,
-        DEMON_LORD,
-        DARK_WIZARD,
-        FIGHTER_RED,
-        HOLY_AVENGER,
-        SWASHBUCKLER_BLUE,
-        DEATH_KNIGHT,
-        BRAWLER,
-        BRAWLER_DARK,
-        BRAWLER_BLOND,
-        ELVEN_SWORDSMAN_GREEN,
-        ELVEN_WIZARD_GREEN,
-        ELVEN_ARCHER_GREEN,
-        ELVEN_SWORDSMAN_BLUE,
-        ELVEN_WIZARD_BLUE,
-        ELVEN_ARCHER_BLUE,;
-
-        private Animation animation;
-
-        public Animation getAnimation() {
-            return animation;
-        }
-
-        public static void init(TextureAtlas atlas) {
-            for (Icons hero : Icons.values()) {
-                int frameRate = Utils.getRandomBetween(3, 5);
-                hero.animation = new Animation(frameRate, atlas.findRegions(hero.toString()));
-            }
-        }
-
-    }
-
     public class ClasspathResolver implements FileHandleResolver {
 
         @Override
@@ -871,6 +396,18 @@ public interface Constants {
             return Gdx.files.classpath(fileName);
         }
 
+    }
+
+    public enum SpellArea {
+        NONE,
+        CASTER,
+        CHAR,
+        FOE,
+        GROUP,
+        PARTY,
+        ALL,
+        DIVINE,
+        SUMMON;
     }
 
     public enum AuraType {
@@ -904,46 +441,6 @@ public interface Constants {
             this.x = x;
             this.y = y;
         }
-    }
-
-    public enum Creatures {
-        NONE("", 0, 0, false, 0),
-        ZOMBIE("Zombie", 48, 3, false, 50),;
-
-        private final String name;
-        private final int basehp;
-        private final int exp;
-        private final boolean ranged;
-        private final int gold;
-
-        private Creatures(String name, int basehp, int exp, boolean ranged, int gold) {
-            this.name = name;
-            this.basehp = basehp;
-            this.exp = exp;
-            this.ranged = ranged;
-            this.gold = gold;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getBasehp() {
-            return basehp;
-        }
-
-        public int getExp() {
-            return exp;
-        }
-
-        public boolean isRanged() {
-            return ranged;
-        }
-
-        public int getGold() {
-            return gold;
-        }
-
     }
 
 }
