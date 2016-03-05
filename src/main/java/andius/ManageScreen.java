@@ -1,5 +1,6 @@
 package andius;
 
+import static andius.Constants.ROSTER_FILENAME;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
@@ -21,11 +22,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
-import com.google.common.io.LittleEndianDataInputStream;
-import com.google.common.io.LittleEndianDataOutputStream;
+import com.badlogic.gdx.utils.Base64Coder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+import org.apache.commons.io.IOUtils;
 import utils.Utils;
 
 public class ManageScreen implements Screen, Constants {
@@ -71,7 +76,7 @@ public class ManageScreen implements Screen, Constants {
 
     private static final String EMPTY = "<empty>";
 
-    SaveGame saveGame = new SaveGame();
+    SaveGame saveGame ;
 
     public ManageScreen(Screen rs, Skin skin) {
         this.stage = new Stage();
@@ -83,7 +88,7 @@ public class ManageScreen implements Screen, Constants {
         bkgnd = new Texture(Gdx.files.classpath("assets/data/roster.png"));
 
         try {
-            saveGame.read(SAVE_FILENAME);
+            saveGame = SaveGame.read(SAVE_FILENAME);
         } catch (Exception e) {
         }
 
@@ -106,22 +111,24 @@ public class ManageScreen implements Screen, Constants {
             recs[i].character.name = EMPTY;
         }
 
-        InputStream is;
-        LittleEndianDataInputStream dis = null;
+
         try {
-            is = new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file());
-            dis = new LittleEndianDataInputStream(is);
-            for (RosterIndex ri : recs) {
-                try {
-                    ri.character.read(dis);
-                } catch (Exception e) {
-                }
+            GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file()));
+            String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
+            gzis.close();
+            String json = Base64Coder.decodeString(b64);
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            RosterIndex[] r = gson.fromJson(json, RosterIndex[].class);
+            for (int i=0;i<20;i++) {
+                recs[i] = r[i];
             }
         } catch (Exception e) {
+            //nothing
         }
 
         for (RosterIndex ri : recs) {
-            if (ri.character.name.trim().length() < 1) {
+            if (ri.character.name == null) {
                 ri.character.name = EMPTY;
             }
         }
@@ -177,7 +184,7 @@ public class ManageScreen implements Screen, Constants {
         apply.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                
+
                 if (profSelect.getSelected() == null || nameField.getText().length() < 1) {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
@@ -187,12 +194,12 @@ public class ManageScreen implements Screen, Constants {
                 sel.name = nameField.getText();
                 sel.race = raceSelect.getSelected();
                 sel.classType = profSelect.getSelected();
-                sel.str = stVal;
-                sel.intell = inVal;
-                sel.piety = piVal;
-                sel.vitality = viVal;
-                sel.agility = agVal;
-                sel.luck = luVal;
+                sel.str = stVal + stExt;
+                sel.intell = inVal + inExt;
+                sel.piety = piVal + piExt;
+                sel.vitality = viVal + viExt;
+                sel.agility = agVal + agExt;
+                sel.luck = luVal + luExt;
 
                 sel.health = sel.getMaxHP();
                 sel.gold = Utils.getRandomBetween(100, 200);
@@ -270,21 +277,26 @@ public class ManageScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
 
                 try {
-                    FileOutputStream fos = new FileOutputStream(ROSTER_FILENAME);
-                    LittleEndianDataOutputStream dos = new LittleEndianDataOutputStream(fos);
                     for (RosterIndex ri : registry.getItems()) {
                         if (ri.character.name.equals(EMPTY)) {
                             ri.character.name = null;
                         }
-                        ri.character.write(dos);
                     }
+                    GsonBuilder builder = new GsonBuilder();
+                    Gson gson = builder.create();
+                    String json = gson.toJson(registry.getItems().toArray());
+                    String b64 = Base64Coder.encodeString(json);
+                    FileOutputStream fos = new FileOutputStream(ROSTER_FILENAME);
+                    GZIPOutputStream gzos = new GZIPOutputStream(fos);
+                    gzos.write(b64.getBytes("UTF-8"));
+                    gzos.close();
+                    
                     saveGame.players[0] = partyFormation.getItems().get(0).character;
                     for (CharacterRecord r : saveGame.players) {
                         if (r.name.equals(EMPTY)) {
                             r.name = null;
                         }
                     }
-
                     saveGame.write(SAVE_FILENAME);
                 } catch (Exception e) {
                 }
@@ -728,7 +740,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
         font.draw(batch, "Hit Points: " + sel.health, x, viewY -= 18);
         font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
-        
+
         batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 720);
 
         batch.end();
@@ -760,7 +772,7 @@ public class ManageScreen implements Screen, Constants {
             }
         }
     }
-
+    
     private class RosterIndex {
 
         CharacterRecord character;

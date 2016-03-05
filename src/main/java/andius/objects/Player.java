@@ -111,7 +111,8 @@ public class Player {
         if (i == 0) {
             //take off the old and put it in inventory
             if (player.weapon.ordinal() != 0) {
-                player.weapons[player.weapon.ordinal()]++;
+                int v = player.weapons.get(player.weapon);
+                player.weapons.put(player.weapon, v++);
             }
             player.weapon = WeaponType.NONE;
             return true;
@@ -123,7 +124,7 @@ public class Player {
         }
 
         //check if it is in the inventory
-        if (player.weapons[i] <= 0) {
+        if (player.weapons.get(WeaponType.values()[i]) <= 0) {
             return false;
         }
 
@@ -135,11 +136,14 @@ public class Player {
 
         //take off the old and put it in inventory
         if (player.weapon.ordinal() != 0) {
-            player.weapons[player.weapon.ordinal()]++;
+            int v = player.weapons.get(player.weapon);
+            player.weapons.put(player.weapon, v++);
         }
 
         player.weapon = wt;
-        player.weapons[i]--;
+        int v = player.weapons.get(wt);
+        player.weapons.put(wt, v--);
+        
         return true;
     }
 
@@ -153,7 +157,8 @@ public class Player {
         if (i == 0) {
             //take off the old and put it in inventory
             if (player.armor.ordinal() != 0) {
-                player.armors[player.armor.ordinal()]++;
+                int v = player.armors.get(player.armor);
+                player.armors.put(player.armor, v++);
             }
             player.armor = ArmorType.NONE;
             return true;
@@ -165,7 +170,7 @@ public class Player {
         }
 
         //check if it is in the inventory
-        if (player.armors[i] <= 0) {
+        if (player.armors.get(ArmorType.values()[i]) <= 0) {
             return false;
         }
 
@@ -177,11 +182,14 @@ public class Player {
 
         //take off the old and put it in inventory
         if (player.armor.ordinal() != 0) {
-            player.armors[player.armor.ordinal()]++;
+            int v = player.armors.get(player.armor);
+            player.armors.put(player.armor, v++);
         }
 
         player.armor = at;
-        player.armors[i]--;
+        int v = player.armors.get(at);
+        player.armors.put(at, v--);
+        
         return true;
     }
 

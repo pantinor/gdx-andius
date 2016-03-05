@@ -22,12 +22,12 @@ public class ObjectsTestNG {
         }
     }
 
-    @Test
+    //@Test
     public void testReadSaveGame() throws Exception {
 
-        SaveGame sg = new SaveGame();
+        SaveGame sg = null;
         try {
-            sg.read("test.sav");
+            sg = SaveGame.read("test.sav");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,11 +55,9 @@ public class ObjectsTestNG {
         avatar.gold = 10456;
         avatar.weapon = WeaponType.ANOINT_FLAIL;
         avatar.armor = ArmorType.BREAST_PLATE;
-        avatar.weapons[WeaponType.NONE.ordinal()] = 0xFF;
-        avatar.armors[ArmorType.NONE.ordinal()] = 0xFE;
-        avatar.weapons[WeaponType.values().length - 1] = 0xBE;
-        avatar.armors[ArmorType.values().length - 1] = 0xAE;
-
+        avatar.weapons.put(WeaponType.ANOINT_FLAIL,1);
+        avatar.armors.put(ArmorType.BR_PLATE_P2,1);
+        
         sg.players[0] = avatar;
 
         sg.write("test.sav");
