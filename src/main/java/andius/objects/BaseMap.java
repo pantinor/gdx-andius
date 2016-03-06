@@ -15,7 +15,7 @@ public class BaseMap {
     private int width;
     private int height;
     private final List<Portal> portals = new ArrayList<>();
-    public final List<Creature> creatures = new ArrayList<>();
+    public final List<Actor> actors = new ArrayList<>();
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
     //otherwise cannot catch up and talk to the character
@@ -50,8 +50,8 @@ public class BaseMap {
         return null;
     }
 
-    public Creature getCreatureAt(int x, int y) {
-        for (Creature cr : creatures) {
+    public Actor getCreatureAt(int x, int y) {
+        for (Actor cr : actors) {
             if (cr.getWx() == x && cr.getWy() == y) {
                 return cr;
             }
@@ -59,15 +59,15 @@ public class BaseMap {
         return null;
     }
 
-    public void removeCreature(Creature cr) {
-        creatures.remove(cr);
+    public void removeCreature(Actor cr) {
+        actors.remove(cr);
     }
 
     public void moveObjects(Map map, GameScreen screen, int avatarX, int avatarY) throws PartyDeathException {
 
         wanderFlag++;
 
-        for (Creature p : creatures) {
+        for (Actor p : actors) {
 
             Direction dir = null;
 
@@ -135,7 +135,7 @@ public class BaseMap {
         }
     }
 
-    public int getValidMovesMask(Map map, int x, int y, Creature cr, int avatarX, int avatarY) {
+    public int getValidMovesMask(Map map, int x, int y, Actor cr, int avatarX, int avatarY) {
         int mask = 0;
 
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("floor");
@@ -152,10 +152,10 @@ public class BaseMap {
         return mask;
     }
 
-    private int addToMask(Direction dir, int mask, TiledMapTileLayer.Cell cell, int x, int y, Creature cr, int avatarX, int avatarY) {
+    private int addToMask(Direction dir, int mask, TiledMapTileLayer.Cell cell, int x, int y, Actor cr, int avatarX, int avatarY) {
         if (cell != null) {
 
-            for (Creature c : this.creatures) {
+            for (Actor c : this.actors) {
                 if (c.getWx() == x && c.getWy() == y) {
                     return mask;
                 }

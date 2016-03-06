@@ -5,11 +5,9 @@
  */
 package andius.objects;
 
-import andius.ArmorType;
 import andius.Constants.HealType;
 import andius.Constants.Map;
 import andius.Constants.Status;
-import andius.WeaponType;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.utils.Array;
 import java.util.Random;

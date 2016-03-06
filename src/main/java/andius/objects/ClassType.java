@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package andius;
+package andius.objects;
 
 /**
  *
@@ -15,7 +15,7 @@ public enum ClassType {
     MAGE("M", 4, 0, 11, 0, 0, 0, 0),
     CLERIC("C", 8, 0, 0, 11, 0, 0, 0),
     THIEF("T", 6, 0, 0, 0, 0, 11, 0),
-    WIZARD("B", 6, 0, 12, 12, 0, 0, 0),
+    WIZARD("W", 6, 0, 12, 12, 0, 0, 0),
     SAMURAI("S", 8, 15, 11, 10, 14, 10, 0),
     LORD("L", 10, 15, 12, 12, 15, 14, 15),
     NINJA("N", 6, 17, 17, 17, 17, 17, 17);

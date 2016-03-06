@@ -1,7 +1,9 @@
 package andius;
 
+import andius.objects.Icons;
+import andius.objects.Creatures;
+import andius.objects.Actor;
 import andius.objects.BaseMap;
-import andius.objects.Creature;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -172,12 +174,11 @@ public interface Constants {
                         try {
                             monster = Creatures.valueOf(obj.getProperties().get("creature", String.class));
                         } catch (Exception e) {
-                            monster = Creatures.NONE;
                         }
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-                        Creature cr = new Creature(icon);
-                        cr.set(monster, role, surname, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
-                        m.baseMap.creatures.add(cr);
+                        Actor actor = new Actor(icon);
+                        actor.set(monster, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                        m.baseMap.actors.add(actor);
                     }
                 }
 
@@ -418,29 +419,6 @@ public interface Constants {
         NEGATE,
         PROTECTION,
         QUICKNESS;
-    }
-
-    public enum AttackResult {
-
-        NONE,
-        HIT,
-        MISS;
-    }
-
-    public class AttackVector {
-
-        public int x;
-        public int y;
-        public int distance;
-
-        public AttackResult result;
-
-        public Creature impactedCreature;
-
-        public AttackVector(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
     }
 
 }

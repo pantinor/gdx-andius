@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;

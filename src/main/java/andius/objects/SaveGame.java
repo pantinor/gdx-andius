@@ -1,12 +1,9 @@
 package andius.objects;
 
-import andius.ArmorType;
-import andius.ClassType;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import static andius.Constants.SPELL_PTS;
 import andius.Race;
-import andius.WeaponType;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;
@@ -75,14 +72,24 @@ public class SaveGame implements Constants {
         public int exp;
         public int gold;
         public int level;
+        
         public ArmorType armor = ArmorType.NONE;
         public WeaponType weapon = WeaponType.NONE;
-        public int submorsels = 400;
+        public HelmType helm = HelmType.NONE;
+        public GloveType glove = GloveType.NONE;
+        public ItemType item1 = ItemType.NONE;
+        public ItemType item2 = ItemType.NONE;
+
         public HashMap<WeaponType, Integer> weapons = new HashMap<>();
         public HashMap<ArmorType, Integer> armors = new HashMap<>();
+        public HashMap<HelmType, Integer> helms = new HashMap<>();
+        public HashMap<GloveType, Integer> gloves = new HashMap<>();
+        public HashMap<ItemType, Integer> items = new HashMap<>();
+        
+        public int submorsels = 400;
 
         public void awardXP(int value) {
-            exp = Utils.adjustValueMax(exp, value, 9999);
+            exp = Utils.adjustValueMax(exp, value, 999999999);
         }
 
         public void adjustGold(int v) {

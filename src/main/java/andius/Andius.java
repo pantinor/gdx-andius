@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.Icons;
 import andius.objects.Conversations;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
@@ -70,6 +71,7 @@ public class Andius extends Game {
     public static Hud hud;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
+    public static TextureRegion[] hudIcons = new TextureRegion[12 * 8 * 5];
 
     public static void main(String[] args) {
 
@@ -147,6 +149,13 @@ public class Andius extends Game {
             for (int row = 0; row < 6; row++) {
                 for (int col = 0; col < 6; col++) {
                     faceTiles[row * 6 + col] = trs[row][col];
+                }
+            }
+            
+            TextureRegion[][] inv = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/inventory.png")), 44, 44);
+            for (int row = 0; row < 8*5; row++) {
+                for (int col = 0; col < 12; col++) {
+                    hudIcons[row * 8 + col] = inv[row][col];
                 }
             }
 

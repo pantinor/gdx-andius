@@ -1,7 +1,8 @@
 package andius;
 
+import andius.objects.Icons;
 import static andius.Constants.TILE_DIM;
-import andius.objects.Creature;
+import andius.objects.Actor;
 import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -46,7 +47,7 @@ public class GameScreen extends BaseScreen {
             @Override
             public void render(float time) {
                 renderer.getBatch().draw(Icons.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
-                for (Creature cr : GameScreen.this.map.getMap().creatures) {
+                for (Actor cr : GameScreen.this.map.getMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId,cr.getWx(), cr.getWy())) {
                         renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
                     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package andius;
+package andius.objects;
 
 import andius.Constants.SpellArea;
 
@@ -112,6 +112,7 @@ public enum Spells {
     private final int damageMin;
     private final int damageMax;
     private final String desc;
+    //private final int iconId;
 
     private Spells(ClassType type, int level, SpellArea area, int damageMin, int damageMax, String desc) {
         this.type = type;
@@ -120,6 +121,11 @@ public enum Spells {
         this.damageMin = damageMin;
         this.damageMax = damageMax;
         this.desc = desc;
+        //this.iconId = iconId;
+
     }
 
+//    public int getIconId() {
+//        return iconId;
+//    }
 }

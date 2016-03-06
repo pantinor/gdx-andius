@@ -1,7 +1,7 @@
 package andius;
 
 import andius.objects.BaseMap;
-import andius.objects.Creature;
+import andius.objects.Actor;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -15,7 +15,6 @@ import utils.XORShiftRandom;
 
 public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
-    //protected BaseScreen returnScreen;
     protected Stage stage;
 
     protected float time = 0;
@@ -29,8 +28,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     protected Camera camera;
 
     protected Vector2 currentMousePos;
-
-    protected Creature currentEncounter;
     
     protected int currentRoomId = 0;
 
