@@ -3,7 +3,6 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import static andius.Constants.SPELL_PTS;
-import andius.Race;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;

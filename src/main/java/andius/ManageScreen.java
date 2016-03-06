@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.Race;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
 import andius.objects.SaveGame;
@@ -93,6 +94,7 @@ public class ManageScreen implements Screen, Constants {
         try {
             saveGame = SaveGame.read(SAVE_FILENAME);
         } catch (Exception e) {
+            saveGame = new SaveGame();
         }
 
         PartyIndex[] mbrs = new PartyIndex[6];
@@ -297,7 +299,7 @@ public class ManageScreen implements Screen, Constants {
                     GZIPOutputStream gzos = new GZIPOutputStream(fos);
                     gzos.write(b64.getBytes("UTF-8"));
                     gzos.close();
-                    
+
                     Array<CharacterRecord> sgchars = new Array<>();
                     for (PartyIndex pi : partyFormation.getItems()) {
                         if (!pi.character.name.equals(EMPTY)) {
@@ -307,6 +309,7 @@ public class ManageScreen implements Screen, Constants {
                     saveGame.players = sgchars.toArray(CharacterRecord.class);
                     saveGame.write(SAVE_FILENAME);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 Sounds.play(Sound.TRIGGER);
                 Andius.mainGame.setScreen(returnScreen);
@@ -373,10 +376,10 @@ public class ManageScreen implements Screen, Constants {
                 }
             }
         });
-        
+
         rosText = new Label("Roster", skin);
         rosText.setX(80);
-        rosText.setY(Andius.SCREEN_HEIGHT - 55 );
+        rosText.setY(Andius.SCREEN_HEIGHT - 55);
 
         ScrollPane sp1 = new ScrollPane(partyFormation, skin);
         sp1.setX(490);
@@ -428,6 +431,14 @@ public class ManageScreen implements Screen, Constants {
                 viVal = race.getInitialVitality();
                 agVal = race.getInitialAgility();
                 luVal = race.getInitialLuck();
+                stExt = 0;
+                inExt = 0;
+                piExt = 0;
+                viExt = 0;
+                agExt = 0;
+                luExt = 0;
+                extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
+                checkClasses();
             }
         });
 

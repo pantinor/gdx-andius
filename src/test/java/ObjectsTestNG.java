@@ -2,7 +2,7 @@
 import andius.objects.ArmorType;
 import andius.objects.ClassType;
 import andius.Constants.Map;
-import andius.Race;
+import andius.objects.Race;
 import andius.objects.WeaponType;
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
