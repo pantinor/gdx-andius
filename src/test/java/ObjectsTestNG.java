@@ -1,13 +1,20 @@
 
-import andius.objects.ArmorType;
 import andius.objects.ClassType;
 import andius.Constants.Map;
 import andius.objects.Race;
-import andius.objects.WeaponType;
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
+import andius.objects.Item;
+import andius.objects.Monster;
+import andius.objects.Reward;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.io.InputStream;
+import java.util.List;
+import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 
 public class ObjectsTestNG {
@@ -49,10 +56,10 @@ public class ObjectsTestNG {
         avatar.hp = 5;
         avatar.exp = 50;
         avatar.gold = 10456;
-        avatar.weapon = WeaponType.DAGGER;
-        avatar.armor = ArmorType.BREAST_PLATE;
-        avatar.weapons.put(WeaponType.DAGGER, 1);
-        avatar.armors.put(ArmorType.ROBES, 1);
+        avatar.weapon = 1;
+        avatar.armor = 2;
+        avatar.inventory.put(5, 1);
+        avatar.inventory.put(4, 1);
 
         sg.players[0] = avatar;
 
@@ -63,7 +70,7 @@ public class ObjectsTestNG {
         int x = 0;
     }
 
-    @Test
+    //@Test
     public void formatEnum() throws Exception {
         String s = "";
 
@@ -94,6 +101,26 @@ public class ObjectsTestNG {
         }
 
         return ret.toString();
+    }
+
+    @Test
+    public void readJson() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+        String json = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/rewards-json.txt");
+        String json2 = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+        String json3 = IOUtils.toString(is);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {}.getType());
+        List<Reward> rewards = gson.fromJson(json2, new TypeToken<List<Reward>>() {}.getType());
+        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {}.getType());
+        int x = 0;
     }
 
 }

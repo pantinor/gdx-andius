@@ -2,6 +2,9 @@ package andius;
 
 import andius.objects.Icons;
 import andius.objects.Conversations;
+import andius.objects.Item;
+import andius.objects.Monster;
+import andius.objects.Reward;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -24,6 +27,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.io.InputStream;
+import org.apache.commons.io.IOUtils;
 import utils.Hud;
 
 public class Andius extends Game {
@@ -33,7 +41,7 @@ public class Andius extends Game {
 
     public static final int MAP_VIEWPORT_DIM = 624;
 
-    public static Context CTX ;
+    public static Context CTX;
 
     public static Texture backGround;
     public static TextureAtlas heroesAtlas;
@@ -67,11 +75,15 @@ public class Andius extends Game {
     public static Animation marker_red;
     public static Animation marker_blue;
     public static Animation marker_white;
-    
-    public static Hud hud;
+
+    public static Hud HUD;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
     public static TextureRegion[] hudIcons = new TextureRegion[12 * 8 * 5];
+    
+    public static java.util.List<Item> ITEMS;
+    public static java.util.List<Monster> MONSTERS;
+    public static java.util.List<Reward> REWARDS;
 
     public static void main(String[] args) {
 
@@ -119,9 +131,8 @@ public class Andius extends Game {
         skin.add("death-screen", largeFont, BitmapFont.class);
         skin.add("ultima", ultimaFont, BitmapFont.class);
         skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
-        
-        smallFont = skin.get("verdana-10", BitmapFont.class);
 
+        smallFont = skin.get("verdana-10", BitmapFont.class);
 
         Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
         ls.font = font;
@@ -139,8 +150,8 @@ public class Andius extends Game {
         TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
         tfs.font = font;
 
-        hud = new Hud();
-        
+        HUD = new Hud();
+
         try {
 
             backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
@@ -151,9 +162,9 @@ public class Andius extends Game {
                     faceTiles[row * 6 + col] = trs[row][col];
                 }
             }
-            
+
             TextureRegion[][] inv = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/inventory.png")), 44, 44);
-            for (int row = 0; row < 8*5; row++) {
+            for (int row = 0; row < 8 * 5; row++) {
                 for (int col = 0; col < 12; col++) {
                     hudIcons[row * 8 + col] = inv[row][col];
                 }
@@ -181,6 +192,24 @@ public class Andius extends Game {
 //            tmp = new TextureAtlas(Gdx.files.classpath("assets/data/cloud-atlas.txt"));
 //            ar = tmp.findRegions("cloud");
 //            cloud = new Animation(.2f, ar);
+
+            InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+            String json = IOUtils.toString(is);
+
+            is = this.getClass().getResourceAsStream("/assets/json/rewards-json.txt");
+            String json2 = IOUtils.toString(is);
+
+            is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+            String json3 = IOUtils.toString(is);
+
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            ITEMS = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
+            }.getType());
+            REWARDS = gson.fromJson(json2, new TypeToken<java.util.List<Reward>>() {
+            }.getType());
+            MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
+            }.getType());
 
             Constants.Map.init();
             Constants.Moongate.init();

@@ -22,18 +22,20 @@ public class Actor {
     private float x;
     private float y;
     private MovementBehavior movement;
+    private Monster monster;
     
     public Actor(Icons icon) {
         this.icon = icon;
     }
 
-    public void set(Creatures monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
+    public void set(Monster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
         this.x = x;
         this.y = y;
         this.movement = movement;
+        this.monster = monster;
     }
 
     public Role getRole() {

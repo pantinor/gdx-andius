@@ -714,8 +714,8 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
         font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
-        font.draw(batch, "Weapon: " + sel.weapon.toString(), x, viewY -= 24);
-        font.draw(batch, "Armour: " + sel.armor.toString(), x, viewY -= 18);
+        font.draw(batch, "Weapon: " + sel.weapon, x, viewY -= 24);
+        font.draw(batch, "Armour: " + sel.armor, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 90 + 135;
@@ -745,8 +745,8 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
         font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
-        font.draw(batch, "Weapon: " + sel.weapon.toString(), x, viewY -= 24);
-        font.draw(batch, "Armour: " + sel.armor.toString(), x, viewY -= 18);
+        font.draw(batch, "Weapon: " + sel.weapon, x, viewY -= 24);
+        font.draw(batch, "Armour: " + sel.armor, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 504 + 135;

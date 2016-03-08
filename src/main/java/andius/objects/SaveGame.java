@@ -72,18 +72,15 @@ public class SaveGame implements Constants {
         public int gold;
         public int level;
         
-        public ArmorType armor = ArmorType.NONE;
-        public WeaponType weapon = WeaponType.NONE;
-        public HelmType helm = HelmType.NONE;
-        public GloveType glove = GloveType.NONE;
-        public ItemType item1 = ItemType.NONE;
-        public ItemType item2 = ItemType.NONE;
+        public int armor;
+        public int weapon;
+        public int helm;
+        public int glove;
+        public int item1;
+        public int item2;
 
-        public HashMap<WeaponType, Integer> weapons = new HashMap<>();
-        public HashMap<ArmorType, Integer> armors = new HashMap<>();
-        public HashMap<HelmType, Integer> helms = new HashMap<>();
-        public HashMap<GloveType, Integer> gloves = new HashMap<>();
-        public HashMap<ItemType, Integer> items = new HashMap<>();
+        //map of item id and quantity
+        public HashMap<Integer, Integer> inventory = new HashMap<>();
         
         public int submorsels = 400;
 

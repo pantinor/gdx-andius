@@ -1,9 +1,9 @@
 package andius;
 
 import andius.objects.Icons;
-import andius.objects.Creatures;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
+import andius.objects.Monster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -170,9 +170,10 @@ public interface Constants {
                         TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
                         Icons icon = Icons.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
                         Role role = Role.valueOf(obj.getProperties().get("type", String.class));
-                        Creatures monster = null;
+                        Monster monster = null;
                         try {
-                            monster = Creatures.valueOf(obj.getProperties().get("creature", String.class));
+                            float mid = obj.getProperties().get("creature", Float.class);
+                            monster = Andius.MONSTERS.get((int)mid);
                         } catch (Exception e) {
                         }
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
@@ -239,43 +240,43 @@ public interface Constants {
         {400075, 439874, 419993, 359931, 581240, 581240, 629663, 702236},
         {289709, 318529, 304132, 260639, 428479, 428479, 475008, 529756}
     };
-    
-    public static final int[][] SPELL_PTS = new int[][] {
-        {1,0,0,0,0,0,0},
-        {2,0,0,0,0,0,0},
-        {2,1,0,0,0,0,0},
-        {3,2,0,0,0,0,0},
-        {4,2,1,0,0,0,0},
+
+    public static final int[][] SPELL_PTS = new int[][]{
+        {1, 0, 0, 0, 0, 0, 0},
+        {2, 0, 0, 0, 0, 0, 0},
+        {2, 1, 0, 0, 0, 0, 0},
+        {3, 2, 0, 0, 0, 0, 0},
+        {4, 2, 1, 0, 0, 0, 0},
         //
-        {4,2,2,0,0,0,0},
-        {4,3,2,1,0,0,0},
-        {4,3,3,2,0,0,0},
-        {4,3,3,2,1,0,0},
-        {4,4,3,2,2,0,0},
+        {4, 2, 2, 0, 0, 0, 0},
+        {4, 3, 2, 1, 0, 0, 0},
+        {4, 3, 3, 2, 0, 0, 0},
+        {4, 3, 3, 2, 1, 0, 0},
+        {4, 4, 3, 2, 2, 0, 0},
         //
-        {4,4,4,3,3,0,0},
-        {4,4,4,4,4,1,0},
-        {5,5,5,4,4,2,0},
-        {5,5,5,4,4,2,1},
-        {5,5,5,5,5,2,1},
+        {4, 4, 4, 3, 3, 0, 0},
+        {4, 4, 4, 4, 4, 1, 0},
+        {5, 5, 5, 4, 4, 2, 0},
+        {5, 5, 5, 4, 4, 2, 1},
+        {5, 5, 5, 5, 5, 2, 1},
         //
-        {5,5,5,5,5,3,2},
-        {5,5,5,5,5,3,3},
-        {5,5,5,5,5,4,3},
-        {5,5,5,5,5,4,3},
-        {5,5,5,5,5,4,4},
+        {5, 5, 5, 5, 5, 3, 2},
+        {5, 5, 5, 5, 5, 3, 3},
+        {5, 5, 5, 5, 5, 4, 3},
+        {5, 5, 5, 5, 5, 4, 3},
+        {5, 5, 5, 5, 5, 4, 4},
         //
-        {5,5,5,5,5,5,4},
-        {5,5,5,5,5,5,5},
-        {6,5,5,5,5,5,5},
-        {6,6,5,5,5,5,5},
-        {6,6,5,5,5,5,5},
+        {5, 5, 5, 5, 5, 5, 4},
+        {5, 5, 5, 5, 5, 5, 5},
+        {6, 5, 5, 5, 5, 5, 5},
+        {6, 6, 5, 5, 5, 5, 5},
+        {6, 6, 5, 5, 5, 5, 5},
         //
-        {6,6,6,6,5,5,5},
-        {6,6,6,6,6,5,5},
-        {7,7,6,6,6,6,5},
-        {7,7,7,6,6,6,6},
-        {7,7,7,7,7,7,7}
+        {6, 6, 6, 6, 5, 5, 5},
+        {6, 6, 6, 6, 6, 5, 5},
+        {7, 7, 6, 6, 6, 6, 5},
+        {7, 7, 7, 6, 6, 6, 6},
+        {7, 7, 7, 7, 7, 7, 7}
     };
 
     public enum CreatureStatus {
