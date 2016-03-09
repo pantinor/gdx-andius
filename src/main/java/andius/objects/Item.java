@@ -24,6 +24,9 @@ public class Item {
     private int stock;
     private boolean cursed;
     private String usable;
+    private int spellAffect;
+    private int numberUses;
+    private int regeneration;
 
     public boolean canUse(ClassType ct) {
         return this.usable.contains(ct.getAbbr());
@@ -71,6 +74,18 @@ public class Item {
 
     public boolean isCursed() {
         return cursed;
+    }
+
+    public int getSpellAffect() {
+        return spellAffect;
+    }
+
+    public int getNumberUses() {
+        return numberUses;
+    }
+
+    public int getRegeneration() {
+        return regeneration;
     }
 
 }

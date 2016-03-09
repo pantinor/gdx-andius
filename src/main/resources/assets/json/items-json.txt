@@ -15,6 +15,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BROKEN ITEM"
   },
   {
@@ -33,6 +36,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LONG SWORD"
   },
   {
@@ -51,6 +57,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHORT SWORD"
   },
   {
@@ -69,6 +78,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "ANOINTED MACE"
   },
   {
@@ -87,6 +99,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "ANOINTED FLAIL"
   },
   {
@@ -105,6 +120,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "STAFF"
   },
   {
@@ -123,6 +141,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "DAGGER"
   },
   {
@@ -141,6 +162,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SMALL SHIELD"
   },
   {
@@ -159,6 +183,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LARGE SHIELD"
   },
   {
@@ -177,6 +204,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "ROBES"
   },
   {
@@ -195,6 +225,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LEATHER ARMOR"
   },
   {
@@ -213,6 +246,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN MAIL"
   },
   {
@@ -231,6 +267,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE"
   },
   {
@@ -249,6 +288,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "PLATE MAIL"
   },
   {
@@ -267,6 +309,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "HELM"
   },
   {
@@ -285,6 +330,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 23,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "DIOS POTION"
   },
   {
@@ -303,6 +351,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 37,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "LATUMOFIS POT."
   },
   {
@@ -321,6 +372,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LONG SWORD+1"
   },
   {
@@ -339,6 +393,9 @@
     "stock": 2,
     "cursed": false,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHORT SWORD+1"
   },
   {
@@ -357,6 +414,9 @@
     "stock": 1,
     "cursed": false,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MACE+1"
   },
   {
@@ -375,6 +435,9 @@
     "stock": 3,
     "cursed": false,
     "usable": "MW",
+    "spellAffect": 2,
+    "numberUses": 25,
+    "regeneration": 0,
     "name": "STAFF OF MOGREF"
   },
   {
@@ -393,6 +456,9 @@
     "stock": 4,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 3,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/KANTINO"
   },
   {
@@ -411,6 +477,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LEATHER + 1"
   },
   {
@@ -429,6 +498,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN MAIL + 1"
   },
   {
@@ -447,6 +519,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "PLATE MAIL + 1"
   },
   {
@@ -465,6 +540,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHIELD + 1"
   },
   {
@@ -483,6 +561,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE +1"
   },
   {
@@ -501,6 +582,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 24,
+    "numberUses": 25,
+    "regeneration": 0,
     "name": "SCROLL/BADIOS"
   },
   {
@@ -519,6 +603,9 @@
     "stock": 27,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 1,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/HALITO"
   },
   {
@@ -537,6 +624,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LONG SWORD -1"
   },
   {
@@ -555,6 +645,9 @@
     "stock": 2,
     "cursed": true,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHORT SWORD -1"
   },
   {
@@ -573,6 +666,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MACE -1"
   },
   {
@@ -591,6 +687,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "STAFF +2"
   },
   {
@@ -609,6 +708,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "DRAGON SLAYER"
   },
   {
@@ -627,6 +729,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "HELM + 1"
   },
   {
@@ -645,6 +750,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FCTWSL",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LEATHER -1"
   },
   {
@@ -663,6 +771,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN -1"
   },
   {
@@ -681,6 +792,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE-1"
   },
   {
@@ -699,6 +813,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCTSL",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHIELD -1"
   },
   {
@@ -717,6 +834,9 @@
     "stock": 2,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 4,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "JEWELED AMULET"
   },
   {
@@ -735,6 +855,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 24,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/BADIOS"
   },
   {
@@ -753,6 +876,9 @@
     "stock": 1,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 6,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "POTION OF SOPIC"
   },
   {
@@ -771,6 +897,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LONG SWORD + 2"
   },
   {
@@ -789,6 +918,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHORT SWORD +2"
   },
   {
@@ -807,6 +939,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MACE + 2"
   },
   {
@@ -825,6 +960,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 31,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/LOMILWA"
   },
   {
@@ -843,6 +981,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 5,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/DILTO"
   },
   {
@@ -861,6 +1002,9 @@
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "COPPER GLOVES"
   },
   {
@@ -879,6 +1023,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LEATHER + 2"
   },
   {
@@ -897,6 +1044,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN + 2"
   },
   {
@@ -915,6 +1065,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "PLATE MAIL + 2"
   },
   {
@@ -933,6 +1086,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHIELD + 2"
   },
   {
@@ -951,6 +1107,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 24,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "HELM +2 (EVIL)"
   },
   {
@@ -969,6 +1128,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 35,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "POTION OF DIAL"
   },
   {
@@ -987,6 +1149,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 26,
+    "numberUses": 5,
+    "regeneration": 0,
     "name": "RING OF PORFIC"
   },
   {
@@ -1005,6 +1170,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "WERE SLAYER"
   },
   {
@@ -1023,6 +1191,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MAGE MASHER"
   },
   {
@@ -1041,6 +1212,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MACE PRO POISON"
   },
   {
@@ -1059,6 +1233,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 30,
+    "numberUses": 10,
+    "regeneration": 0,
     "name": "STAFF/MONTINO"
   },
   {
@@ -1077,6 +1254,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BLADE CUSINART\u0027"
   },
   {
@@ -1095,6 +1275,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "C",
+    "spellAffect": 29,
+    "numberUses": 10,
+    "regeneration": 0,
     "name": "AMULET/MANIFO"
   },
   {
@@ -1113,6 +1296,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "MWS",
+    "spellAffect": 7,
+    "numberUses": 10,
+    "regeneration": 0,
     "name": "ROD OF FLAME"
   },
   {
@@ -1131,6 +1317,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "EVIL CHAIN + 2"
   },
   {
@@ -1149,6 +1338,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "NEUT P-MAIL + 2"
   },
   {
@@ -1167,6 +1359,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "EVIL SHIELD +3"
   },
   {
@@ -1185,6 +1380,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 13,
+    "numberUses": 5,
+    "regeneration": 0,
     "name": "AMULET/MAKANITO"
   },
   {
@@ -1203,6 +1401,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 19,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "DIADEM OF MALOR"
   },
   {
@@ -1221,6 +1422,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 36,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "SCROLL/BADIAL"
   },
   {
@@ -1239,6 +1443,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHORT SWORD -2"
   },
   {
@@ -1257,6 +1464,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "DAGGER + 2"
   },
   {
@@ -1275,6 +1485,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FCWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "MACE -2"
   },
   {
@@ -1293,6 +1506,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "STAFF -2"
   },
   {
@@ -1311,6 +1527,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "MN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "DAGGER OF SPEED"
   },
   {
@@ -1329,6 +1548,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CURSED ROBE"
   },
   {
@@ -1347,6 +1569,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "LEATHER -2"
   },
   {
@@ -1365,6 +1590,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN -2"
   },
   {
@@ -1383,6 +1611,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE -2"
   },
   {
@@ -1401,6 +1632,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FCTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHIELD - 2"
   },
   {
@@ -1419,6 +1653,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CURSED HELMET"
   },
   {
@@ -1437,6 +1674,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE +2"
   },
   {
@@ -1455,6 +1695,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SILVER GLOVES"
   },
   {
@@ -1473,6 +1716,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "EVIL SWORD + 3"
   },
   {
@@ -1491,6 +1737,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "EVIL SSWORD + 3"
   },
   {
@@ -1509,6 +1758,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "TN",
+    "spellAffect": 0,
+    "numberUses": 100,
+    "regeneration": 0,
     "name": "THIEVES DAGGER"
   },
   {
@@ -1527,6 +1779,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BREAST PLATE +3"
   },
   {
@@ -1545,6 +1800,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "L",
+    "spellAffect": 0,
+    "numberUses": 50,
+    "regeneration": 1,
     "name": "LORDS GARB"
   },
   {
@@ -1563,6 +1821,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "S",
+    "spellAffect": 0,
+    "numberUses": 50,
+    "regeneration": 0,
     "name": "MURASAMA BLADE"
   },
   {
@@ -1581,6 +1842,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "N",
+    "spellAffect": 0,
+    "numberUses": 50,
+    "regeneration": 0,
     "name": "SHURIKEN"
   },
   {
@@ -1599,6 +1863,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "CHAIN PRO FIRE"
   },
   {
@@ -1617,6 +1884,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "EVIL PLATE + 3"
   },
   {
@@ -1635,6 +1905,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SHIELD + 3"
   },
   {
@@ -1653,6 +1926,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 1,
     "name": "RING OF HEALING"
   },
   {
@@ -1671,6 +1947,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "RING PRO UNDEAD"
   },
   {
@@ -1689,6 +1968,9 @@
     "stock": 1,
     "cursed": true,
     "usable": "FMCTWSLN",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": -3,
     "name": "DEADLY RING"
   },
   {
@@ -1707,6 +1989,9 @@
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
+    "spellAffect": 19,
+    "numberUses": 0,
+    "regeneration": 5,
     "name": "WERDNA\u0027S AMULET"
   },
   {
@@ -1725,6 +2010,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "STATUETTE/BEAR"
   },
   {
@@ -1743,6 +2031,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "STATUETTE/FROG"
   },
   {
@@ -1761,6 +2052,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BRONZE KEY"
   },
   {
@@ -1779,6 +2073,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "SILVER KEY"
   },
   {
@@ -1797,6 +2094,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "GOLD KEY"
   },
   {
@@ -1815,6 +2115,9 @@
     "stock": 0,
     "cursed": false,
     "usable": "",
+    "spellAffect": 0,
+    "numberUses": 0,
+    "regeneration": 0,
     "name": "BLUE RIBBON"
   }
 ]

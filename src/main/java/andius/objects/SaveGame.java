@@ -1,8 +1,6 @@
 package andius.objects;
 
 import andius.Constants;
-import static andius.Constants.LEVEL_PROGRESSION_TABLE;
-import static andius.Constants.SPELL_PTS;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;
@@ -138,15 +136,15 @@ public class SaveGame implements Constants {
 
         public int[] getMageSpellPoints() {
             try {
-                if (this.classType == ClassType.MAGE || this.classType == ClassType.WIZARD) {
-                    return SPELL_PTS[this.level];
+                if (this.classType == ClassType.MAGE) {
+                    return MAGE_SPELL_PTS[this.level];
+                } else if (this.classType == ClassType.WIZARD) {
+                    return WIZARD_MAGE_SPELL_PTS[this.level];
                 } else if (this.classType == ClassType.SAMURAI) {
-                    if (this.level >= 4) {
-                        return SPELL_PTS[this.level - 4];
-                    }
+                    return SAMURAI_MAGE_SPELL_PTS[this.level];
                 }
             } catch (Exception e) {
-                return SPELL_PTS[SPELL_PTS.length - 1];
+                return new int[]{9, 9, 9, 9, 9, 9, 9};
             }
             return new int[]{0, 0, 0, 0, 0, 0, 0};
         }
@@ -154,14 +152,14 @@ public class SaveGame implements Constants {
         public int[] getClericSpellPoints() {
             try {
                 if (this.classType == ClassType.CLERIC) {
-                    return SPELL_PTS[this.level];
-                } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.LORD) {
-                    if (this.level >= 4) {
-                        return SPELL_PTS[this.level - 4];
-                    }
+                    return CLERIC_SPELL_PTS[this.level];
+                } else if (this.classType == ClassType.WIZARD) {
+                    return WIZARD_CLERIC_SPELL_PTS[this.level];
+                } else if (this.classType == ClassType.LORD) {
+                    return LORD_CLERIC_SPELL_PTS[this.level];
                 }
             } catch (Exception e) {
-                return SPELL_PTS[SPELL_PTS.length - 1];
+                return new int[]{9, 9, 9, 9, 9, 9, 9};
             }
             return new int[]{0, 0, 0, 0, 0, 0, 0};
         }
