@@ -4,6 +4,7 @@ import andius.objects.Icons;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
+import andius.objects.MutableMonster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -102,16 +104,6 @@ public interface Constants {
 
         public static void init() {
 
-            FileHandle fh = Gdx.files.classpath("assets/data/heroes-atlas.txt");
-            TextureAtlas.TextureAtlasData atlas = new TextureAtlas.TextureAtlasData(fh, fh.parent(), false);
-            String[] iconTileIds = new String[40 * 13];
-            for (TextureAtlas.TextureAtlasData.Region r : atlas.getRegions()) {
-                int x = r.left / r.width;
-                int y = r.top / r.height;
-                int i = x + (y * 40);
-                iconTileIds[i] = r.name;
-            }
-
             FileHandleResolver resolver = new Constants.ClasspathResolver();
             TmxMapLoader loader = new TmxMapLoader(resolver);
             for (Map m : Map.values()) {
@@ -168,17 +160,24 @@ public interface Constants {
                         int sx = (int) (x / TILE_DIM);
                         int sy = (int) (y / TILE_DIM);
                         TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
-                        Icons icon = Icons.valueOf(iconTileIds[iconCell.getTile().getId() - firstgid]);
+                        Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
                         Role role = Role.valueOf(obj.getProperties().get("type", String.class));
-                        Monster monster = null;
-                        try {
-                            float mid = obj.getProperties().get("creature", Float.class);
-                            monster = Andius.MONSTERS.get((int) mid);
-                        } catch (Exception e) {
-                        }
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
+                        
                         Actor actor = new Actor(icon);
-                        actor.set(monster, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                        if (role == Role.MONSTER) {
+                            try {
+                                float mid = obj.getProperties().get("creature", Float.class);
+                                Monster monster = Andius.MONSTERS.get((int) mid);
+                                if (monster != null) {
+                                    actor.set(new MutableMonster(monster), role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                                }
+                            } catch (Exception e) {
+                            }
+                        } else {
+                            actor.set(null, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                        }
+                            
                         m.baseMap.actors.add(actor);
                     }
                 }
@@ -544,10 +543,8 @@ public interface Constants {
 
     public enum Status {
 
-        GOOD,
-        POISONED,
-        ASH,
-        DEAD;
+        OK, AFRAID, ASLEEP, PLYZE,
+        STONED, DEAD, ASHES, LOST;
     }
 
     public enum Role {
@@ -582,6 +579,66 @@ public interface Constants {
         NEGATE,
         PROTECTION,
         QUICKNESS;
+    }
+
+    public enum AttackResult {
+
+        NONE,
+        HIT,
+        MISS;
+    }
+
+    public enum CombatAction {
+
+        ATTACK,
+        ADVANCE,
+        RANGED,
+        FLEE,
+        TELEPORT;
+    }
+
+    public class AttackVector {
+
+        public final int x;
+        public final int y;
+        public int distance;
+        public AttackResult result;
+        public MutableMonster impactedCreature;
+
+        public AttackVector(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public class AddActorAction implements Runnable {
+
+        private final com.badlogic.gdx.scenes.scene2d.Actor actor;
+        private final Stage stage;
+
+        public AddActorAction(Stage stage, com.badlogic.gdx.scenes.scene2d.Actor actor) {
+            this.actor = actor;
+            this.stage = stage;
+        }
+
+        @Override
+        public void run() {
+            stage.addActor(actor);
+        }
+    }
+
+    public class PlaySoundAction implements Runnable {
+
+        private Sound s;
+
+        public PlaySoundAction(Sound s) {
+            this.s = s;
+        }
+
+        @Override
+        public void run() {
+            Sounds.play(s);
+        }
     }
 
 }

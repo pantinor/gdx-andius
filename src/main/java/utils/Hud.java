@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.Align;
 
 public class Hud {
 
-    final List<String> logs = new FixedSizeArrayList<>(20);
+    final List<String> logs = new FixedSizeArrayList<>(25);
 
-    static final int LOG_AREA_WIDTH = 254;
-    static final int LOG_AREA_TOP = 420;
-    static final int LOG_X = 731;
+    static final int LOG_AREA_WIDTH = 270;
+    static final int LOG_AREA_TOP = 360;
+    static final int LOG_X = 730;
 
     public void append(String s) {
         synchronized (logs) {
@@ -50,7 +50,7 @@ public class Hud {
     }
 
     public void render(Batch batch, Context ctxt) {
-        
+
         int y = Andius.SCREEN_HEIGHT - 50;
         int py = Andius.SCREEN_HEIGHT - 103;
 
@@ -58,10 +58,19 @@ public class Hud {
 
             Andius.smallFont.setColor(Color.WHITE);
 
-            if (rec.status == Status.POISONED) {
+            if (rec.status == Status.PLYZE) {
                 Andius.smallFont.setColor(Color.GREEN);
             }
-            if (rec.status == Status.ASH) {
+            if (rec.status == Status.AFRAID) {
+                Andius.smallFont.setColor(Color.FIREBRICK);
+            }
+            if (rec.status == Status.ASLEEP) {
+                Andius.smallFont.setColor(Color.FIREBRICK);
+            }
+            if (rec.status == Status.ASHES) {
+                Andius.smallFont.setColor(Color.FIREBRICK);
+            }
+            if (rec.status == Status.LOST) {
                 Andius.smallFont.setColor(Color.FIREBRICK);
             }
             if (rec.status == Status.DEAD) {
@@ -79,35 +88,35 @@ public class Hud {
             Andius.smallFont.draw(batch, d, 790, y);
 
             d = String.format("HP: %d /%d AC: %d STATUS: %s", rec.hp, rec.maxhp, 0, rec.status);
-            Andius.smallFont.draw(batch, d, 790, y-11);
+            Andius.smallFont.draw(batch, d, 790, y - 11);
 
             d = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);
-            Andius.smallFont.draw(batch, d, 790, y-22);
+            Andius.smallFont.draw(batch, d, 790, y - 22);
 
             int[] ms = rec.getMageSpellPoints();
             int[] cs = rec.getClericSpellPoints();
-            d = String.format("M: %d/%d/%d/%d/%d/%d/%d P: %d/%d/%d/%d/%d/%d/%d", 
+            d = String.format("M: %d/%d/%d/%d/%d/%d/%d P: %d/%d/%d/%d/%d/%d/%d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            Andius.smallFont.draw(batch, d, 790, y-33);
-            
+            Andius.smallFont.draw(batch, d, 790, y - 33);
+
             y -= 60;
             py -= 60;
 
         }
 
         Andius.smallFont.setColor(Color.WHITE);
-        y = 44;
+        y = 28;
 
         synchronized (logs) {
             ReverseListIterator iter = new ReverseListIterator(logs);
             while (iter.hasNext()) {
                 String next = (String) iter.next();
-                GlyphLayout layout = new GlyphLayout(Andius.font, next, Color.WHITE, LOG_AREA_WIDTH - 8, Align.left, true);
-                y += layout.height + 10;
+                GlyphLayout layout = new GlyphLayout(Andius.smallFont, next, Color.WHITE, LOG_AREA_WIDTH - 5, Align.left, true);
+                y += layout.height + 3;
                 if (y > LOG_AREA_TOP) {
                     break;
                 }
-                Andius.font.draw(batch, layout, LOG_X + 8, y);
+                Andius.smallFont.draw(batch, layout, LOG_X, y);
             }
         }
     }

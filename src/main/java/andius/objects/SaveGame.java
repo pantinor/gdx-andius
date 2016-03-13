@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.Base64Coder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import org.apache.commons.io.IOUtils;
@@ -55,7 +57,7 @@ public class SaveGame implements Constants {
 
         public String name = null;
         public int portaitIndex = 0;
-        public Status status = Status.GOOD;
+        public Status status = Status.OK;
         public int str;
         public int intell;
         public int piety;
@@ -70,15 +72,14 @@ public class SaveGame implements Constants {
         public int gold;
         public int level;
         
-        public int armor;
-        public int weapon;
-        public int helm;
-        public int glove;
-        public int item1;
-        public int item2;
+        public Item armor;
+        public Item weapon;
+        public Item helm;
+        public Item glove;
+        public Item item1;
+        public Item item2;
 
-        //map of item id and quantity
-        public HashMap<Integer, Integer> inventory = new HashMap<>();
+        public List<Item> inventory = new ArrayList<>();
         
         public int submorsels = 400;
 

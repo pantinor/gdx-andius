@@ -4,33 +4,59 @@ import java.util.List;
 
 public class Monster {
 
-    private String genericName;
-    private String name;
-    private int monsterID;
-    private int type;
-    private int imageID;
-    private int rewardTable1;
-    private int rewardTable2;
-    private int partnerID;
-    private int partnerOdds;
-    private int armourClass;
-    private int speed;
-    private int mageSpellLevel;
-    private int priestSpellLevel;
-    private int levelDrain;
-    private int bonus1;
-    private int bonus2;
-    private int bonus3;
-    private int resistance;
-    private int abilities;
-    private int exp;
-    private Dice groupSize;
-    private Dice hitPoints;
-    private List<Dice> damage;
+    public String genericName;
+    public String name;
+    int monsterID;
+    int type;
+    public Icons icon;
+    int rewardTable1;
+    int rewardTable2;
+    int partnerID;
+    int partnerOdds;
+    int armourClass;
+    int speed;
+    int mageSpellLevel;
+    int priestSpellLevel;
+    int levelDrain;
+    int bonus1;
+    int bonus2;
+    int bonus3;
+    int resistance;
+    int abilities;
+    int exp;
+    Dice groupSize;
+    Dice hitPoints;
+    List<Dice> damage;
 
-    public static String[] monsterClass
+    public final static String[] monsterClass
             = {"Fighter", "Mage", "Priest", "Thief", "Midget", "Giant", "Mythical", "Dragon", "Animal",
                 "Were", "Undead", "Demon", "Insect", "Enchanted"};
+
+    public void clone(Monster m) {
+        this.genericName = m.genericName;
+        this.name = m.name;
+        this.monsterID = m.monsterID;
+        this.type = m.type;
+        this.icon = m.icon;
+        this.rewardTable1 = m.rewardTable1;
+        this.rewardTable2 = m.rewardTable2;
+        this.partnerID = m.partnerID;
+        this.partnerOdds = m.partnerOdds;
+        this.armourClass = m.armourClass;
+        this.speed = m.speed;
+        this.mageSpellLevel = m.mageSpellLevel;
+        this.priestSpellLevel = m.priestSpellLevel;
+        this.levelDrain = m.levelDrain;
+        this.bonus1 = m.bonus1;
+        this.bonus2 = m.bonus2;
+        this.bonus3 = m.bonus3;
+        this.resistance = m.resistance;
+        this.abilities = m.abilities;
+        this.exp = m.exp;
+        this.groupSize = m.groupSize;
+        this.hitPoints = m.hitPoints;
+        this.damage = m.damage;
+    }
 
     public String getGenericName() {
         return genericName;
@@ -48,8 +74,8 @@ public class Monster {
         return type;
     }
 
-    public int getImageID() {
-        return imageID;
+    public Icons getIcon() {
+        return icon;
     }
 
     public int getRewardTable1() {

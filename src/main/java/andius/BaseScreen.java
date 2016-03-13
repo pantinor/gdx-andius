@@ -28,7 +28,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     protected Camera camera;
 
     protected Vector2 currentMousePos;
-    
+
     protected int currentRoomId = 0;
 
     /**
@@ -40,14 +40,14 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
      * get the map coords at the camera center
      */
     public abstract Vector3 getCurrentMapCoords();
-    
+
     public int currentRoomId() {
         return this.currentRoomId;
     }
 
     @Override
     public void dispose() {
-        
+
     }
 
     public Stage getStage() {
@@ -57,6 +57,19 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     public abstract void finishTurn(int currentX, int currentY);
 
     public void endCombat(boolean isWon, BaseMap combatMap, boolean wounded) {
+
+    }
+
+    public void log(String s) {
+        Andius.HUD.add(s);
+    }
+
+    public void logAppend(String s) {
+        Andius.HUD.append(s);
+    }
+
+    public void logDeleteLastChar() {
+        Andius.HUD.logDeleteLastChar();
     }
 
     public final void addButtons() {
@@ -72,7 +85,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 //        bookButt.setY(15);
 //
 //        stage.addActor(bookButt);
-
     }
 
     public abstract void partyDeath();

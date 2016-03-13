@@ -4,6 +4,9 @@ import andius.Direction;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -65,6 +68,22 @@ public class Utils {
             // there are no valid directions that lead to our target            
             return Direction.getRandomValidDirection(validMovesMask);
         }
+    }
+    
+    /**
+     * using diagonals computes distance, used with finding nearest party member
+     */
+    public static int distance(int fromX, int fromY, int toX, int toY) {
+        int dist = movementDistance(fromX, fromY, toX, toY);
+
+        if (dist <= 0) {
+            return dist;
+        }
+
+        /* calculate how many fewer movements there would have been */
+        dist -= Math.abs(fromX - toX) < Math.abs(fromY - toY) ? Math.abs(fromX - toX) : Math.abs(fromY - toY);
+
+        return dist;
     }
 
     public static int movementDistance(int fromX, int fromY, int toX, int toY) {
@@ -191,49 +210,49 @@ public class Utils {
 //        return true;
 //    }
 
-//    public static List<Vector2> getDirectionalActionPath(BaseMap combatMap, int dirmask, int x, int y, int minDistance, int maxDistance) {
-//
-//        List<Vector2> path = new ArrayList<>();
-//
-//        /*
-//         * try every tile in the given direction, up to the given range.
-//         * Stop when the the range is exceeded, or the action is blocked.
-//         */
-//        int nx = x;
-//        int ny = y;
-//
-//        for (int distance = minDistance; distance <= maxDistance; distance++) {
-//
-//            /* make sure our action isn't taking us off the map */
-//            if (nx > combatMap.getWidth() - 1 || nx < 0 || ny > combatMap.getHeight() - 1 || ny < 0) {
-//                break;
-//            }
-//
-//            boolean blocked = false;//combatMap.isTileBlockedForRangedAttack(nx, ny, checkForCreatures);
-//
-//            if (!blocked) {
-//                path.add(new Vector2(nx, ny));
-//            } else {
-//                path.add(new Vector2(nx, ny));
-//                break;
-//            }
-//
-//            if (Direction.isDirInMask(Direction.NORTH, dirmask)) {
-//                ny--;
-//            }
-//            if (Direction.isDirInMask(Direction.SOUTH, dirmask)) {
-//                ny++;
-//            }
-//            if (Direction.isDirInMask(Direction.EAST, dirmask)) {
-//                nx++;
-//            }
-//            if (Direction.isDirInMask(Direction.WEST, dirmask)) {
-//                nx--;
-//            }
-//
-//        }
-//
-//        return path;
-//    }
+    public static List<Vector2> getDirectionalActionPath(int mapWidth, int mapHeight, int dirmask, int x, int y, int minDistance, int maxDistance) {
+
+        List<Vector2> path = new ArrayList<>();
+
+        /*
+         * try every tile in the given direction, up to the given range.
+         * Stop when the the range is exceeded, or the action is blocked.
+         */
+        int nx = x;
+        int ny = y;
+
+        for (int distance = minDistance; distance <= maxDistance; distance++) {
+
+            /* make sure our action isn't taking us off the map */
+            if (nx > mapWidth - 1 || nx < 0 || ny > mapHeight - 1 || ny < 0) {
+                break;
+            }
+
+            boolean blocked = false;//combatMap.isTileBlockedForRangedAttack(nx, ny, checkForCreatures);
+
+            if (!blocked) {
+                path.add(new Vector2(nx, ny));
+            } else {
+                path.add(new Vector2(nx, ny));
+                break;
+            }
+
+            if (Direction.isDirInMask(Direction.NORTH, dirmask)) {
+                ny--;
+            }
+            if (Direction.isDirInMask(Direction.SOUTH, dirmask)) {
+                ny++;
+            }
+            if (Direction.isDirInMask(Direction.EAST, dirmask)) {
+                nx++;
+            }
+            if (Direction.isDirInMask(Direction.WEST, dirmask)) {
+                nx--;
+            }
+
+        }
+
+        return path;
+    }
 
 }

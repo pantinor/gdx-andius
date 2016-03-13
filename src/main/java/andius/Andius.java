@@ -80,7 +80,7 @@ public class Andius extends Game {
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
     public static TextureRegion[] hudIcons = new TextureRegion[12 * 8 * 5];
-    
+
     public static java.util.List<Item> ITEMS;
     public static java.util.List<Monster> MONSTERS;
     public static java.util.List<Reward> REWARDS;
@@ -193,6 +193,12 @@ public class Andius extends Game {
 //            ar = tmp.findRegions("cloud");
 //            cloud = new Animation(.2f, ar);
 
+
+            Icons.init();
+            Constants.Map.init();
+            Constants.Moongate.init();
+            Conversations.init();
+
             InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
             String json = IOUtils.toString(is);
 
@@ -210,11 +216,6 @@ public class Andius extends Game {
             }.getType());
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-
-            Constants.Map.init();
-            Constants.Moongate.init();
-            Icons.init(heroesAtlas);
-            Conversations.init();
 
         } catch (Exception e) {
             e.printStackTrace();

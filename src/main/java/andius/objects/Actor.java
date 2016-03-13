@@ -7,28 +7,29 @@ package andius.objects;
 
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
+import andius.objects.SaveGame.CharacterRecord;
 
 /**
  *
  * @author Paul
  */
 public class Actor {
-    
+
     private final Icons icon;
-    
     private Role role;
     private int wx;
     private int wy;
     private float x;
     private float y;
     private MovementBehavior movement;
-    private Monster monster;
-    
+    private MutableMonster monster;
+    private CharacterRecord player;
+
     public Actor(Icons icon) {
         this.icon = icon;
     }
 
-    public void set(Monster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
+    public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
@@ -36,6 +37,14 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.monster = monster;
+    }
+
+    public void set(CharacterRecord player, int wx, int wy, float x, float y) {
+        this.wx = wx;
+        this.wy = wy;
+        this.x = x;
+        this.y = y;
+        this.player = player;
     }
 
     public Role getRole() {
@@ -82,5 +91,16 @@ public class Actor {
         return movement;
     }
 
+    public MutableMonster getMonster() {
+        return monster;
+    }
+
+    public CharacterRecord getPlayer() {
+        return player;
+    }
+
+    public boolean isDisabled() {
+        return false;
+    }
 
 }

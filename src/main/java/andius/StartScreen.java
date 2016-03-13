@@ -2,10 +2,13 @@ package andius;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -73,8 +76,14 @@ public class StartScreen implements Screen, Constants {
                     } else {
                         BaseScreen scr = (BaseScreen) Map.values()[Andius.CTX.saveGame.map].getScreen();
                         scr.newMapPixelCoords = scr.getMapPixelCoords(Andius.CTX.saveGame.wx, Andius.CTX.saveGame.wy);
-                        Andius.mainGame.setScreen(scr);
+                        //Andius.mainGame.setScreen(scr);
                         //stage.clear();
+
+                        FileHandleResolver resolver = new Constants.ClasspathResolver();
+                        TmxMapLoader loader = new TmxMapLoader(resolver);
+                        TiledMap tm = loader.load("assets/data/combat1.tmx");
+                        CombatScreen cs = new CombatScreen(Andius.CTX, Map.WIWOLD, tm, Andius.MONSTERS.get(12));
+                        Andius.mainGame.setScreen(cs);
                     }
                 }
 

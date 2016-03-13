@@ -12,21 +12,39 @@ public class Item {
         RING_AMULET;
     }
 
-    private int itemID;
-    private int type;
-    private long cost;
-    private int partyOwns;
-    private String genericName;
-    private Dice damage;
-    private int armourClass;
-    private int speed;
-    private String name;
-    private int stock;
-    private boolean cursed;
-    private String usable;
-    private int spellAffect;
-    private int numberUses;
-    private int regeneration;
+    int itemID;
+    int type;
+    long cost;
+    int partyOwns;
+    String genericName;
+    Dice damage;
+    int armourClass;
+    int speed;
+    String name;
+    int stock;
+    boolean cursed;
+    String usable;
+    int spellAffect;
+    int numberUses;
+    int regeneration;
+
+    public void clone(Item i) {
+        this.itemID = i.itemID;
+        this.type = i.type;
+        this.cost = i.cost;
+        this.partyOwns = i.partyOwns;
+        this.genericName = i.genericName;
+        this.damage = i.damage;
+        this.armourClass = i.armourClass;
+        this.speed = i.speed;
+        this.name = i.name;
+        this.stock = i.stock;
+        this.cursed = i.cursed;
+        this.usable = i.usable;
+        this.spellAffect = i.spellAffect;
+        this.numberUses = i.numberUses;
+        this.regeneration = i.regeneration;
+    }
 
     public boolean canUse(ClassType ct) {
         return this.usable.contains(ct.getAbbr());

@@ -56,10 +56,10 @@ public class ObjectsTestNG {
         avatar.hp = 5;
         avatar.exp = 50;
         avatar.gold = 10456;
-        avatar.weapon = 1;
-        avatar.armor = 2;
-        avatar.inventory.put(5, 1);
-        avatar.inventory.put(4, 1);
+        avatar.weapon = new Item();
+        avatar.armor = new Item();
+        avatar.inventory.add(new Item());
+        avatar.inventory.add(new Item());
 
         sg.players[0] = avatar;
 

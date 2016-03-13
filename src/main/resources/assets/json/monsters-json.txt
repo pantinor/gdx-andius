@@ -1,8 +1,10 @@
 [
   {
-    "genericName": "SLIME",
+    "genericName": "Slime",
+    "name": "Bubbly Slime",
     "monsterID": 0,
     "type": 8,
+    "icon": "SLIME_GREEN",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 1,
@@ -17,6 +19,7 @@
     "bonus3": 0,
     "resistance": 65,
     "abilities": 0,
+    "exp": 55,
     "groupSize": {
       "qty": 2,
       "sides": 2,
@@ -33,14 +36,14 @@
         "sides": 1,
         "bonus": 0
       }
-    ],
-    "exp": 55,
-    "name": "BUBBLY SLIME"
+    ]
   },
   {
-    "genericName": "SMALL HUMANOID",
+    "genericName": "Small Humanoid",
+    "name": "Orc",
     "monsterID": 1,
     "type": 0,
+    "icon": "ORC_SHIELDSMAN",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 2,
@@ -55,6 +58,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 48,
+    "exp": 235,
     "groupSize": {
       "qty": 3,
       "sides": 2,
@@ -71,14 +75,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 235,
-    "name": "ORC"
+    ]
   },
   {
-    "genericName": "SMALL HUMANOID",
+    "genericName": "Small Humanoid",
+    "name": "Kobold",
     "monsterID": 2,
     "type": 0,
+    "icon": "ORC",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 1,
@@ -93,6 +97,7 @@
     "bonus3": 0,
     "resistance": 5,
     "abilities": 48,
+    "exp": 415,
     "groupSize": {
       "qty": 2,
       "sides": 2,
@@ -114,14 +119,14 @@
         "sides": 2,
         "bonus": 1
       }
-    ],
-    "exp": 415,
-    "name": "KOBOLD"
+    ]
   },
   {
-    "genericName": "SKELETON",
+    "genericName": "Skeleton",
+    "name": "Undead Kobold",
     "monsterID": 3,
     "type": 10,
+    "icon": "SKELETON",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 2,
@@ -136,6 +141,7 @@
     "bonus3": 0,
     "resistance": 6,
     "abilities": 0,
+    "exp": 230,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -152,14 +158,14 @@
         "sides": 4,
         "bonus": 1
       }
-    ],
-    "exp": 230,
-    "name": "UNDEAD KOBOLD"
+    ]
   },
   {
-    "genericName": "SCRUFFY MAN",
+    "genericName": "Scruffy Man",
+    "name": "Rogue",
     "monsterID": 4,
     "type": 3,
+    "icon": "HALFLING_RANGER",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 1,
@@ -174,6 +180,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 380,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -195,14 +202,14 @@
         "sides": 2,
         "bonus": 1
       }
-    ],
-    "exp": 380,
-    "name": "ROGUE"
+    ]
   },
   {
-    "genericName": "SCRUFFY MAN",
+    "genericName": "Scruffy Man",
+    "name": "Bushwacker",
     "monsterID": 5,
     "type": 0,
+    "icon": "BRAWLER_DARK",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 7,
@@ -217,6 +224,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 620,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -238,14 +246,14 @@
         "sides": 4,
         "bonus": 1
       }
-    ],
-    "exp": 620,
-    "name": "BUSHWACKER"
+    ]
   },
   {
-    "genericName": "MAN IN CHAIN",
+    "genericName": "Man In Chain",
+    "name": "Highway Man",
     "monsterID": 6,
     "type": 0,
+    "icon": "SWASHBUCKLER",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 7,
@@ -260,6 +268,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 56,
+    "exp": 840,
     "groupSize": {
       "qty": 2,
       "sides": 6,
@@ -291,14 +300,14 @@
         "sides": 2,
         "bonus": 1
       }
-    ],
-    "exp": 840,
-    "name": "HIGHWAYMAN"
+    ]
   },
   {
-    "genericName": "WEIRD HUMANOID",
+    "genericName": "Weird Humanoid",
+    "name": "Zombie",
     "monsterID": 7,
     "type": 10,
+    "icon": "ZOMBIE_BLUE",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 8,
@@ -313,6 +322,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 4,
+    "exp": 520,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -329,14 +339,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 520,
-    "name": "ZOMBIE"
+    ]
   },
   {
-    "genericName": "SLIME",
+    "genericName": "Slime",
+    "name": "Creeping Crud",
     "monsterID": 8,
     "type": 8,
+    "icon": "SLIME_PURPLE",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 0,
@@ -351,6 +361,7 @@
     "bonus3": 0,
     "resistance": 68,
     "abilities": 2,
+    "exp": 550,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -367,14 +378,14 @@
         "sides": 3,
         "bonus": 1
       }
-    ],
-    "exp": 550,
-    "name": "CREEPING CRUD"
+    ]
   },
   {
-    "genericName": "GAS CLOUD",
+    "genericName": "Gas Cloud",
+    "name": "Gas Cloud",
     "monsterID": 9,
     "type": 13,
+    "icon": "WISP_MAJOR",
     "rewardTable1": 0,
     "rewardTable2": 10,
     "partnerID": 0,
@@ -389,6 +400,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 36,
+    "exp": 350,
     "groupSize": {
       "qty": 2,
       "sides": 4,
@@ -405,14 +417,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 350,
-    "name": "GAS CLOUD"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 1 Mage",
     "monsterID": 10,
     "type": 1,
+    "icon": "WIZARD",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 6,
@@ -427,6 +439,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 475,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -443,14 +456,14 @@
         "sides": 2,
         "bonus": 0
       }
-    ],
-    "exp": 475,
-    "name": "LVL 1 MAGE"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Lvl 1 Priest",
     "monsterID": 11,
     "type": 2,
+    "icon": "HALFLING_WIZARD",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 4,
@@ -465,6 +478,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 515,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -481,14 +495,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 515,
-    "name": "LVL 1 PRIEST"
+    ]
   },
   {
-    "genericName": "SMALL OBJECT",
+    "genericName": "Small Object",
+    "name": "Creeping Coin",
     "monsterID": 12,
     "type": 13,
+    "icon": "MIMIC",
     "rewardTable1": 2,
     "rewardTable2": 4,
     "partnerID": 12,
@@ -503,6 +517,7 @@
     "bonus3": 0,
     "resistance": 62,
     "abilities": 64,
+    "exp": 920,
     "groupSize": {
       "qty": 9,
       "sides": 1,
@@ -519,14 +534,14 @@
         "sides": 1,
         "bonus": 0
       }
-    ],
-    "exp": 920,
-    "name": "CREEPING COIN?"
+    ]
   },
   {
-    "genericName": "KIMONOED MAN",
+    "genericName": "Kimonoed Man",
+    "name": "Lvl 1 Ninja",
     "monsterID": 13,
     "type": 0,
+    "icon": "BRAWLER",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 13,
@@ -541,6 +556,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 24,
+    "exp": 600,
     "groupSize": {
       "qty": 2,
       "sides": 4,
@@ -567,14 +583,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 600,
-    "name": "LVL 1 NINJA"
+    ]
   },
   {
-    "genericName": "RABBIT",
+    "genericName": "Rabbit",
+    "name": "Vorpal Bunny",
     "monsterID": 14,
     "type": 8,
+    "icon": "FROG_BLUE",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 15,
@@ -589,6 +605,7 @@
     "bonus3": 0,
     "resistance": 4,
     "abilities": 40,
+    "exp": 735,
     "groupSize": {
       "qty": 2,
       "sides": 3,
@@ -610,14 +627,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 735,
-    "name": "VORPAL BUNNY"
+    ]
   },
   {
-    "genericName": "GIANT RODENT",
+    "genericName": "Giant Rodent",
+    "name": "Capybara",
     "monsterID": 15,
     "type": 8,
+    "icon": "WOLF_BLACK",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 17,
@@ -632,6 +649,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 34,
+    "exp": 520,
     "groupSize": {
       "qty": 2,
       "sides": 4,
@@ -648,14 +666,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 520,
-    "name": "CAPYBARA"
+    ]
   },
   {
-    "genericName": "AMPHIBIAN",
+    "genericName": "Amphibian",
+    "name": "Giant Toad",
     "monsterID": 16,
     "type": 8,
+    "icon": "FROG_GREEN",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 17,
@@ -670,6 +688,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 34,
+    "exp": 795,
     "groupSize": {
       "qty": 2,
       "sides": 2,
@@ -696,14 +715,14 @@
         "sides": 3,
         "bonus": 2
       }
-    ],
-    "exp": 795,
-    "name": "GIANT TOAD"
+    ]
   },
   {
-    "genericName": "MANGY DOG",
+    "genericName": "Mangy Dog",
+    "name": "Coyote",
     "monsterID": 17,
     "type": 8,
+    "icon": "WOLF_BROWN",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 14,
@@ -718,6 +737,7 @@
     "bonus3": 0,
     "resistance": 56,
     "abilities": 32,
+    "exp": 780,
     "groupSize": {
       "qty": 4,
       "sides": 2,
@@ -734,14 +754,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 780,
-    "name": "COYOTE"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Lvl 3 Priest",
     "monsterID": 18,
     "type": 2,
+    "icon": "CLERIC",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 11,
@@ -756,6 +776,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 50,
+    "exp": 990,
     "groupSize": {
       "qty": 2,
       "sides": 2,
@@ -772,14 +793,14 @@
         "sides": 8,
         "bonus": 2
       }
-    ],
-    "exp": 990,
-    "name": "LVL 3 PRIEST"
+    ]
   },
   {
-    "genericName": "KIMONOED MAN",
+    "genericName": "Kimonoed Man",
+    "name": "Lvl 3 Samurai",
     "monsterID": 19,
     "type": 0,
+    "icon": "SORCERER",
     "rewardTable1": 1,
     "rewardTable2": 11,
     "partnerID": 12,
@@ -794,6 +815,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 32,
+    "exp": 795,
     "groupSize": {
       "qty": 4,
       "sides": 2,
@@ -820,14 +842,14 @@
         "sides": 4,
         "bonus": 1
       }
-    ],
-    "exp": 795,
-    "name": "LVL 3 SAMURAI"
+    ]
   },
   {
-    "genericName": "KIMONOED MAN",
+    "genericName": "Kimonoed Man",
+    "name": "Lvl 3 Ninja",
     "monsterID": 20,
     "type": 0,
+    "icon": "BLOOD_PRIEST",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 13,
@@ -842,6 +864,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 10,
+    "exp": 1360,
     "groupSize": {
       "qty": 2,
       "sides": 4,
@@ -878,14 +901,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1360,
-    "name": "LVL 3 NINJA"
+    ]
   },
   {
-    "genericName": "BEAR",
+    "genericName": "Bear",
+    "name": "Were Bear",
     "monsterID": 21,
     "type": 8,
+    "icon": "RAT_MAJOR",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 14,
@@ -900,6 +923,7 @@
     "bonus3": 0,
     "resistance": 12,
     "abilities": 38,
+    "exp": 1320,
     "groupSize": {
       "qty": 2,
       "sides": 3,
@@ -916,14 +940,14 @@
         "sides": 6,
         "bonus": 1
       }
-    ],
-    "exp": 1320,
-    "name": "WERE BEAR"
+    ]
   },
   {
-    "genericName": "FLY",
+    "genericName": "Fly",
+    "name": "Dragon Fly",
     "monsterID": 22,
     "type": 7,
+    "icon": "BEETLE_RED_MINOR",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 0,
@@ -938,6 +962,7 @@
     "bonus3": 20,
     "resistance": 2,
     "abilities": 16,
+    "exp": 1275,
     "groupSize": {
       "qty": 1,
       "sides": 3,
@@ -964,14 +989,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1275,
-    "name": "DRAGON FLY"
+    ]
   },
   {
-    "genericName": "WEIRD HUMANOID",
+    "genericName": "Weird Humanoid",
+    "name": "Rotting Corpse",
     "monsterID": 23,
     "type": 10,
+    "icon": "ZOMBIE_GREEN",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 34,
@@ -986,6 +1011,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 4,
+    "exp": 680,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -1012,14 +1038,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 680,
-    "name": "ROTTING CORPSE"
+    ]
   },
   {
-    "genericName": "OGRE",
+    "genericName": "Ogre",
+    "name": "Ogre",
     "monsterID": 24,
     "type": 0,
+    "icon": "OGRE_SHAMAN",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 14,
@@ -1034,6 +1060,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 960,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -1050,14 +1077,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 960,
-    "name": "OGRE"
+    ]
   },
   {
-    "genericName": "INSECT",
+    "genericName": "Insect",
+    "name": "Huge Spider",
     "monsterID": 25,
     "type": 12,
+    "icon": "BLACK_WIDOW_MAJOR",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 27,
@@ -1072,6 +1099,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 18,
+    "exp": 600,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -1088,14 +1116,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 600,
-    "name": "HUGE SPIDER"
+    ]
   },
   {
-    "genericName": "WERERAT",
+    "genericName": "Big Rat",
+    "name": "Were Rat",
     "monsterID": 26,
     "type": 9,
+    "icon": "RAT_MINOR",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 17,
@@ -1110,6 +1138,7 @@
     "bonus3": 0,
     "resistance": 64,
     "abilities": 16,
+    "exp": 755,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -1126,14 +1155,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 755,
-    "name": "WERERAT"
+    ]
   },
   {
-    "genericName": "INSECT",
+    "genericName": "Insect",
+    "name": "Boring Beetle",
     "monsterID": 27,
     "type": 12,
+    "icon": "BEETLE_BLACK",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 25,
@@ -1148,6 +1177,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1120,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -1164,14 +1194,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1120,
-    "name": "BORING BEETLE"
+    ]
   },
   {
-    "genericName": "DRAGON",
+    "genericName": "Dragon",
+    "name": "Gas Dragon",
     "monsterID": 28,
     "type": 7,
+    "icon": "DRAGON_BLACK",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 22,
@@ -1186,6 +1216,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2075,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -1212,14 +1243,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 2075,
-    "name": "GAS DRAGON"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Priestess",
     "monsterID": 29,
     "type": 2,
+    "icon": "DRUID",
     "rewardTable1": 2,
     "rewardTable2": 12,
     "partnerID": 28,
@@ -1234,6 +1265,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 870,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1250,14 +1282,14 @@
         "sides": 6,
         "bonus": 2
       }
-    ],
-    "exp": 870,
-    "name": "PRIESTESS"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Swordsman",
     "monsterID": 30,
     "type": 0,
+    "icon": "SWASHBUCKLER_BLUE",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 32,
@@ -1272,6 +1304,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 960,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1288,14 +1321,14 @@
         "sides": 7,
         "bonus": 0
       }
-    ],
-    "exp": 960,
-    "name": "SWORDSMAN"
+    ]
   },
   {
-    "genericName": "INSECT",
+    "genericName": "Insect",
+    "name": "Huge Spider",
     "monsterID": 31,
     "type": 12,
+    "icon": "SPIDER_MAJOR",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 37,
@@ -1310,6 +1343,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 18,
+    "exp": 600,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -1326,14 +1360,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 600,
-    "name": "HUGE SPIDER"
+    ]
   },
   {
-    "genericName": "ANIMAL",
+    "genericName": "Animal",
+    "name": "Attack Dog",
     "monsterID": 32,
     "type": 8,
+    "icon": "WOLF_BROWN",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 22,
@@ -1348,6 +1382,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 1120,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1364,14 +1399,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1120,
-    "name": "ATTACK DOG"
+    ]
   },
   {
-    "genericName": "GARGOYLE",
+    "genericName": "Gargoyle",
+    "name": "Gargoyle",
     "monsterID": 33,
     "type": 13,
+    "icon": "DEMON_BLUE",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 0,
@@ -1386,6 +1421,7 @@
     "bonus3": 50,
     "resistance": 64,
     "abilities": 0,
+    "exp": 2435,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1417,14 +1453,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 2435,
-    "name": "GARGOYLE"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Grave Mist",
     "monsterID": 34,
     "type": 10,
+    "icon": "INSECT_SWARM",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 37,
@@ -1439,6 +1475,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 4,
+    "exp": 1080,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1465,14 +1502,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1080,
-    "name": "GRAVE MIST"
+    ]
   },
   {
-    "genericName": "ANIMAL",
+    "genericName": "Animal",
+    "name": "Dragon Puppy",
     "monsterID": 35,
     "type": 7,
+    "icon": "DRAGON_GREEN",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 26,
@@ -1487,6 +1524,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2280,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1503,14 +1541,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 2280,
-    "name": "DRAGON PUPPY"
+    ]
   },
   {
-    "genericName": "WOLF",
+    "genericName": "Wolf",
+    "name": "Were Wolf",
     "monsterID": 36,
     "type": 9,
+    "icon": "WOLF_BLACK",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 26,
@@ -1525,6 +1563,7 @@
     "bonus3": 0,
     "resistance": 64,
     "abilities": 0,
+    "exp": 975,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1546,14 +1585,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 975,
-    "name": "WEREWOLF"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Shade",
     "monsterID": 37,
     "type": 10,
+    "icon": "GHOST_MINOR",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 23,
@@ -1568,6 +1607,7 @@
     "bonus3": 0,
     "resistance": 64,
     "abilities": 0,
+    "exp": 875,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1584,14 +1624,14 @@
         "sides": 4,
         "bonus": 1
       }
-    ],
-    "exp": 875,
-    "name": "SHADE"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Bishop",
     "monsterID": 38,
     "type": 2,
+    "icon": "CLERIC",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 39,
@@ -1606,6 +1646,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 1135,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1622,14 +1663,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 1135,
-    "name": "BISHOP"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Minor Daimyo",
     "monsterID": 39,
     "type": 0,
+    "icon": "DEMON_LORD",
     "rewardTable1": 3,
     "rewardTable2": 13,
     "partnerID": 38,
@@ -1644,6 +1685,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 1200,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1660,14 +1702,14 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 1200,
-    "name": "MINOR DAIMYO"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 5 Mage",
     "monsterID": 40,
     "type": 1,
+    "icon": "WITCH",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 41,
@@ -1682,6 +1724,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 620,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1698,14 +1741,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 620,
-    "name": "LVL 5 MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Lvl 4 Thief",
     "monsterID": 41,
     "type": 3,
+    "icon": "HALFLING",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 38,
@@ -1720,6 +1763,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 740,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1741,14 +1785,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 740,
-    "name": "LVL 4 THIEF"
+    ]
   },
   {
-    "genericName": "ANIMAL",
+    "genericName": "Animal",
+    "name": "Killer Wolf",
     "monsterID": 42,
     "type": 8,
+    "icon": "WOLF_BROWN",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 35,
@@ -1763,6 +1807,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1460,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1784,14 +1829,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1460,
-    "name": "KILLER WOLF"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Spirit",
     "monsterID": 43,
     "type": 6,
+    "icon": "GHOST_MAJOR",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 33,
@@ -1806,6 +1851,7 @@
     "bonus3": 25,
     "resistance": 64,
     "abilities": 2,
+    "exp": 1245,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1822,14 +1868,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1245,
-    "name": "SPIRIT"
+    ]
   },
   {
-    "genericName": "INSECT",
+    "genericName": "Insect",
+    "name": "Giant Spider",
     "monsterID": 44,
     "type": 12,
+    "icon": "SPIDER_MAJOR",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 25,
@@ -1844,6 +1890,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 2,
+    "exp": 960,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1860,14 +1907,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 960,
-    "name": "GIANT SPIDER"
+    ]
   },
   {
-    "genericName": "ANIMAL",
+    "genericName": "Animal",
+    "name": "Were Tiger",
     "monsterID": 45,
     "type": 9,
+    "icon": "WOLF_BLACK",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 36,
@@ -1882,6 +1929,7 @@
     "bonus3": 0,
     "resistance": 64,
     "abilities": 18,
+    "exp": 1405,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -1908,14 +1956,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1405,
-    "name": "WERETIGER"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Medusa lizard",
     "monsterID": 46,
     "type": 6,
+    "icon": "GRUB_MAJOR",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 43,
@@ -1930,6 +1978,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 1,
+    "exp": 1040,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -1946,14 +1995,14 @@
         "sides": 3,
         "bonus": 0
       }
-    ],
-    "exp": 1040,
-    "name": "MEDUSALIZARD"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Lvl 5 Priest",
     "monsterID": 47,
     "type": 2,
+    "icon": "ELVEN_WIZARD_BLUE",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 48,
@@ -1968,6 +2017,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1220,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -1984,14 +2034,14 @@
         "sides": 6,
         "bonus": 2
       }
-    ],
-    "exp": 1220,
-    "name": "LVL 5 PRIEST"
+    ]
   },
   {
-    "genericName": "MAN IN BLACK",
+    "genericName": "Man In Black",
+    "name": "Lvl 6 Ninja",
     "monsterID": 48,
     "type": 0,
+    "icon": "BRAWLER_BLOND",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 50,
@@ -2006,6 +2056,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1520,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2032,14 +2083,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1520,
-    "name": "LVL 6 NINJA"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 7 Mage",
     "monsterID": 49,
     "type": 1,
+    "icon": "ELVEN_WIZARD_BLUE",
     "rewardTable1": 4,
     "rewardTable2": 14,
     "partnerID": 48,
@@ -2054,6 +2105,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 1000,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2070,14 +2122,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1000,
-    "name": "LVL 7 MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Master Thief",
     "monsterID": 50,
     "type": 3,
+    "icon": "THIEF",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 47,
@@ -2092,6 +2144,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 48,
+    "exp": 960,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2118,14 +2171,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 960,
-    "name": "MASTER THIEF"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Major Daimyo",
     "monsterID": 51,
     "type": 0,
+    "icon": "DEMON_LORD",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 47,
@@ -2140,6 +2193,7 @@
     "bonus3": 20,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2340,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2161,14 +2215,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 2340,
-    "name": "MAJOR DAIMYO"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "High Priest",
     "monsterID": 52,
     "type": 2,
+    "icon": "CLERIC",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 53,
@@ -2183,6 +2237,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2160,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2199,14 +2254,14 @@
         "sides": 8,
         "bonus": 2
       }
-    ],
-    "exp": 2160,
-    "name": "HIGH PRIEST"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Champ Samurai",
     "monsterID": 53,
     "type": 0,
+    "icon": "WIZARD",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 52,
@@ -2221,6 +2276,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2395,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2237,14 +2293,14 @@
         "sides": 12,
         "bonus": 2
       }
-    ],
-    "exp": 2395,
-    "name": "CHAMP SAMURAI"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Arch Mage",
     "monsterID": 54,
     "type": 1,
+    "icon": "WITCH",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 53,
@@ -2259,6 +2315,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 790,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2275,14 +2332,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 790,
-    "name": "ARCH MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Master Thief",
     "monsterID": 55,
     "type": 3,
+    "icon": "SHOPKEEPER_BLOND",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 54,
@@ -2297,6 +2354,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 32,
+    "exp": 1140,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2318,14 +2376,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1140,
-    "name": "MASTER THIEF"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Gaze Hound",
     "monsterID": 56,
     "type": 8,
+    "icon": "WOLF_BROWN",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 56,
@@ -2340,6 +2398,7 @@
     "bonus3": 0,
     "resistance": 64,
     "abilities": 36,
+    "exp": 1235,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2356,14 +2415,14 @@
         "sides": 2,
         "bonus": 0
       }
-    ],
-    "exp": 1235,
-    "name": "GAZE HOUND"
+    ]
   },
   {
-    "genericName": "OGRE",
+    "genericName": "Ogre",
+    "name": "Ogre Lord",
     "monsterID": 57,
     "type": 1,
+    "icon": "OGRE",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 58,
@@ -2378,6 +2437,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1790,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2394,14 +2454,14 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 1790,
-    "name": "OGRE LORD"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Troll",
     "monsterID": 58,
     "type": 0,
+    "icon": "TROLL",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 58,
@@ -2416,6 +2476,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1720,
     "groupSize": {
       "qty": 1,
       "sides": 3,
@@ -2442,14 +2503,14 @@
         "sides": 4,
         "bonus": 4
       }
-    ],
-    "exp": 1720,
-    "name": "TROLL"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Life Stealer",
     "monsterID": 59,
     "type": 10,
+    "icon": "WRAITH",
     "rewardTable1": 5,
     "rewardTable2": 15,
     "partnerID": 59,
@@ -2464,6 +2525,7 @@
     "bonus3": 20,
     "resistance": 120,
     "abilities": 0,
+    "exp": 2240,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -2480,14 +2542,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 2240,
-    "name": "LIFESTEALER"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Night Stalker",
     "monsterID": 60,
     "type": 10,
+    "icon": "PHANTOM_GREY",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 57,
@@ -2502,6 +2564,7 @@
     "bonus3": 25,
     "resistance": 64,
     "abilities": 0,
+    "exp": 1475,
     "groupSize": {
       "qty": 2,
       "sides": 3,
@@ -2518,14 +2581,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1475,
-    "name": "NIGHTSTALKER"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Wyvern",
     "monsterID": 61,
     "type": 8,
+    "icon": "DRAGON_GREEN",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 43,
@@ -2540,6 +2603,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 2,
+    "exp": 1540,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2561,14 +2625,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1540,
-    "name": "WYVERN"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Lvl 8 Priest",
     "monsterID": 62,
     "type": 2,
+    "icon": "ELVEN_WIZARD_GREEN",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 61,
@@ -2583,6 +2647,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1720,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2599,14 +2664,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1720,
-    "name": "LVL 8 PRIEST"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Lvl 10 Fighter",
     "monsterID": 63,
     "type": 0,
+    "icon": "KNIGHT",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 63,
@@ -2621,6 +2686,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1900,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2642,14 +2708,14 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 1900,
-    "name": "LVL 10 FIGHTER"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 7 Mage",
     "monsterID": 64,
     "type": 1,
+    "icon": "DARK_WIZARD",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 61,
@@ -2664,6 +2730,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1240,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -2680,14 +2747,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1240,
-    "name": "LVL 7 MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Lvl 7 Thief",
     "monsterID": 65,
     "type": 3,
+    "icon": "SHOPKEEPER_BROWN",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 62,
@@ -2702,6 +2769,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 32,
+    "exp": 1220,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2723,14 +2791,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1220,
-    "name": "LVL 7 THIEF"
+    ]
   },
   {
-    "genericName": "MONK",
+    "genericName": "Monk",
+    "name": "Lvl 8 Ninja",
     "monsterID": 66,
     "type": 0,
+    "icon": "BRAWLER_BLOND",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 60,
@@ -2745,6 +2813,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 8,
+    "exp": 1020,
     "groupSize": {
       "qty": 1,
       "sides": 3,
@@ -2766,14 +2835,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 1020,
-    "name": "LVL 8 NINJA"
+    ]
   },
   {
-    "genericName": "GIANT",
+    "genericName": "Giant",
+    "name": "Earth Giant",
     "monsterID": 67,
     "type": 5,
+    "icon": "GOLEM_EARTH",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 0,
@@ -2788,6 +2857,7 @@
     "bonus3": 85,
     "resistance": 64,
     "abilities": 0,
+    "exp": 20435,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -2809,14 +2879,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 20435,
-    "name": "EARTH GIANT"
+    ]
   },
   {
-    "genericName": "DEMON",
+    "genericName": "Demon",
+    "name": "Lesser Demon",
     "monsterID": 68,
     "type": 11,
+    "icon": "DEMON_RED",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 66,
@@ -2831,6 +2901,7 @@
     "bonus3": 60,
     "resistance": 0,
     "abilities": 64,
+    "exp": 5100,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -2867,14 +2938,14 @@
         "sides": 4,
         "bonus": 4
       }
-    ],
-    "exp": 5100,
-    "name": "LESSER DEMON"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Chimera",
     "monsterID": 69,
     "type": 8,
+    "icon": "DRAGON_RED",
     "rewardTable1": 6,
     "rewardTable2": 16,
     "partnerID": 54,
@@ -2889,6 +2960,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 0,
+    "exp": 3515,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -2930,14 +3002,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 3515,
-    "name": "CHIMERA"
+    ]
   },
   {
-    "genericName": "GIANT",
+    "genericName": "Giant",
+    "name": "Fire Giant",
     "monsterID": 70,
     "type": 5,
+    "icon": "GOLEM_FIRE",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 68,
@@ -2952,6 +3024,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 0,
+    "exp": 2115,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -2968,14 +3041,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 2115,
-    "name": "FIRE GIANT"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Gorgon",
     "monsterID": 71,
     "type": 6,
+    "icon": "DRAGON_BLUE",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 69,
@@ -2990,6 +3063,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2920,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3006,14 +3080,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 2920,
-    "name": "GORGON"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "Lvl 8 Bishop",
     "monsterID": 72,
     "type": 2,
+    "icon": "CLERIC",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 71,
@@ -3028,6 +3102,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2060,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -3044,14 +3119,14 @@
         "sides": 8,
         "bonus": 4
       }
-    ],
-    "exp": 2060,
-    "name": "LVL 8 BISHOP"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Lvl 8 Fighter",
     "monsterID": 73,
     "type": 0,
+    "icon": "ELVEN_SWORDSMAN_GREEN",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 73,
@@ -3066,6 +3141,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2140,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -3087,14 +3163,14 @@
         "sides": 12,
         "bonus": 2
       }
-    ],
-    "exp": 2140,
-    "name": "LVL 8 FIGHTER"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 10 Mage",
     "monsterID": 74,
     "type": 1,
+    "icon": "ELVEN_WIZARD_BLUE",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 71,
@@ -3109,6 +3185,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1400,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -3125,14 +3202,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1400,
-    "name": "LVL 10 MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Thief",
     "monsterID": 75,
     "type": 3,
+    "icon": "THIEF",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 71,
@@ -3147,6 +3224,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 32,
+    "exp": 1640,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -3178,14 +3256,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 1640,
-    "name": "THIEF"
+    ]
   },
   {
-    "genericName": "MAN IN ROBE",
+    "genericName": "Man In Robe",
+    "name": "Master Ninja",
     "monsterID": 76,
     "type": 0,
+    "icon": "BRAWLER_BLOND",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 64,
@@ -3200,6 +3278,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 8,
+    "exp": 1280,
     "groupSize": {
       "qty": 1,
       "sides": 5,
@@ -3226,14 +3305,14 @@
         "sides": 10,
         "bonus": 3
       }
-    ],
-    "exp": 1280,
-    "name": "MASTER NINJA"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Murphy\u0027s Ghost",
     "monsterID": 77,
     "type": 10,
+    "icon": "WIZARD",
     "rewardTable1": 3,
     "rewardTable2": 3,
     "partnerID": 77,
@@ -3248,6 +3327,7 @@
     "bonus3": 40,
     "resistance": 126,
     "abilities": 16,
+    "exp": 4450,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3264,14 +3344,14 @@
         "sides": 1,
         "bonus": 1
       }
-    ],
-    "exp": 4450,
-    "name": "MURPHY\u0027S GHOST"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Will O\u0027 Wisp",
     "monsterID": 78,
     "type": 13,
+    "icon": "WISP_MINOR",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 0,
@@ -3286,6 +3366,7 @@
     "bonus3": 95,
     "resistance": 0,
     "abilities": 0,
+    "exp": 42840,
     "groupSize": {
       "qty": 1,
       "sides": 2,
@@ -3302,14 +3383,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 42840,
-    "name": "WILL O\u0027 WISP"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Bleeb",
     "monsterID": 79,
     "type": 8,
+    "icon": "SLIME_PURPLE",
     "rewardTable1": 7,
     "rewardTable2": 17,
     "partnerID": 76,
@@ -3324,6 +3405,7 @@
     "bonus3": 0,
     "resistance": 127,
     "abilities": 96,
+    "exp": 3300,
     "groupSize": {
       "qty": 1,
       "sides": 8,
@@ -3345,14 +3427,14 @@
         "sides": 8,
         "bonus": 1
       }
-    ],
-    "exp": 3300,
-    "name": "BLEEB"
+    ]
   },
   {
-    "genericName": "GIANT",
+    "genericName": "Giant",
+    "name": "Frost Giant",
     "monsterID": 80,
     "type": 5,
+    "icon": "GOLEM_ICE",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 75,
@@ -3367,6 +3449,7 @@
     "bonus3": 95,
     "resistance": 4,
     "abilities": 0,
+    "exp": 40875,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -3383,14 +3466,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 40875,
-    "name": "FROST GIANT"
+    ]
   },
   {
-    "genericName": "DRAGON",
+    "genericName": "Dragon",
+    "name": "Fire Dragon",
     "monsterID": 81,
     "type": 7,
+    "icon": "DRAGON_RED",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 0,
@@ -3405,6 +3488,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 5000,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -3431,14 +3515,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 5000,
-    "name": "FIRE DRAGON"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "High Priest",
     "monsterID": 82,
     "type": 2,
+    "icon": "DRUID",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 70,
@@ -3453,6 +3537,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 3300,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3474,14 +3559,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 3300,
-    "name": "HIGH PRIEST"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "High Wizard",
     "monsterID": 83,
     "type": 1,
+    "icon": "WIZARD",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 72,
@@ -3496,6 +3581,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 0,
+    "exp": 2395,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3512,14 +3598,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 2395,
-    "name": "HIGH WIZARD"
+    ]
   },
   {
-    "genericName": "MAN IN LEATHER",
+    "genericName": "Man In Leather",
+    "name": "Master Thief",
     "monsterID": 84,
     "type": 3,
+    "icon": "THIEF",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 73,
@@ -3534,6 +3620,7 @@
     "bonus3": 0,
     "resistance": 8,
     "abilities": 32,
+    "exp": 1935,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3555,14 +3642,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1935,
-    "name": "MASTER THIEF"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Hatamoto",
     "monsterID": 85,
     "type": 0,
+    "icon": "ELEMENTAL_PURPLE",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 74,
@@ -3577,6 +3664,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 8,
+    "exp": 1600,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3603,14 +3691,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1600,
-    "name": "HATAMOTO"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Vampire",
     "monsterID": 86,
     "type": 10,
+    "icon": "VAMPIRE_RED",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 86,
@@ -3625,6 +3713,7 @@
     "bonus3": 20,
     "resistance": 56,
     "abilities": 4,
+    "exp": 3330,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -3651,14 +3740,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 3330,
-    "name": "VAMPIRE"
+    ]
   },
   {
-    "genericName": "DEMON",
+    "genericName": "Demon",
+    "name": "Greater Demon",
     "monsterID": 87,
     "type": 11,
+    "icon": "ELEMENTAL_ORANGE",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 66,
@@ -3673,6 +3762,7 @@
     "bonus3": 95,
     "resistance": 0,
     "abilities": 70,
+    "exp": 44090,
     "groupSize": {
       "qty": 1,
       "sides": 6,
@@ -3709,14 +3799,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 44090,
-    "name": "GREATER DEMON"
+    ]
   },
   {
-    "genericName": "GIANT",
+    "genericName": "Giant",
+    "name": "Poison Giant",
     "monsterID": 88,
     "type": 5,
+    "icon": "GOLEM_MUD",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 78,
@@ -3731,6 +3821,7 @@
     "bonus3": 95,
     "resistance": 0,
     "abilities": 0,
+    "exp": 40840,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -3747,14 +3838,14 @@
         "sides": 10,
         "bonus": 0
       }
-    ],
-    "exp": 40840,
-    "name": "POISON GIANT"
+    ]
   },
   {
-    "genericName": "DRAGON",
+    "genericName": "Dragon",
+    "name": "Dragon Zombie",
     "monsterID": 89,
     "type": 10,
+    "icon": "DRAGON_BLACK",
     "rewardTable1": 8,
     "rewardTable2": 18,
     "partnerID": 79,
@@ -3769,6 +3860,7 @@
     "bonus3": 25,
     "resistance": 0,
     "abilities": 0,
+    "exp": 5200,
     "groupSize": {
       "qty": 1,
       "sides": 4,
@@ -3795,14 +3887,14 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 5200,
-    "name": "DRAGON ZOMBIE"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Raver Lord",
     "monsterID": 90,
     "type": 8,
+    "icon": "DEATH_KNIGHT",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 82,
@@ -3817,6 +3909,7 @@
     "bonus3": 0,
     "resistance": 2,
     "abilities": 0,
+    "exp": 4155,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3838,14 +3931,14 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 4155,
-    "name": "RAVER LORD"
+    ]
   },
   {
-    "genericName": "CONEHEAD",
+    "genericName": "Conehead",
+    "name": "High Master",
     "monsterID": 91,
     "type": 0,
+    "icon": "LICHE",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 85,
@@ -3860,6 +3953,7 @@
     "bonus3": 0,
     "resistance": 126,
     "abilities": 8,
+    "exp": 3000,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3886,14 +3980,14 @@
         "sides": 6,
         "bonus": 0
       }
-    ],
-    "exp": 3000,
-    "name": "THE HIGH MASTER"
+    ]
   },
   {
-    "genericName": "STRANGE ANIMAL",
+    "genericName": "Strange Animal",
+    "name": "Flack",
     "monsterID": 92,
     "type": 8,
+    "icon": "MERMAN_SWORDSMAN_BLUE",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 77,
@@ -3908,6 +4002,7 @@
     "bonus3": 0,
     "resistance": 127,
     "abilities": 15,
+    "exp": 9200,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3924,14 +4019,14 @@
         "sides": 8,
         "bonus": 3
       }
-    ],
-    "exp": 9200,
-    "name": "FLACK"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Arch Mage",
     "monsterID": 93,
     "type": 1,
+    "icon": "ELVEN_WIZARD_BLUE",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 83,
@@ -3946,6 +4041,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 3160,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -3962,14 +4058,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 3160,
-    "name": "ARCH MAGE"
+    ]
   },
   {
-    "genericName": "UNSEEN BEING",
+    "genericName": "Unseen Being",
+    "name": "Maelific",
     "monsterID": 94,
     "type": 10,
+    "icon": "DARK_WIZARD",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 88,
@@ -3984,6 +4080,7 @@
     "bonus3": 50,
     "resistance": 0,
     "abilities": 6,
+    "exp": 7460,
     "groupSize": {
       "qty": 1,
       "sides": 0,
@@ -4005,14 +4102,14 @@
         "sides": 0,
         "bonus": 1
       }
-    ],
-    "exp": 7460,
-    "name": "MAELIFIC"
+    ]
   },
   {
-    "genericName": "UNSEEN ENTITY",
+    "genericName": "Unseen Entity",
+    "name": "Vampire Lord",
     "monsterID": 95,
     "type": 10,
+    "icon": "VAMPIRE_BLUE",
     "rewardTable1": 9,
     "rewardTable2": 19,
     "partnerID": 86,
@@ -4027,6 +4124,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 4,
+    "exp": 7320,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -4043,14 +4141,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 7320,
-    "name": "VAMPIRE LORD"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Werdna",
     "monsterID": 96,
     "type": 1,
+    "icon": "DEATH_KNIGHT",
     "rewardTable1": 20,
     "rewardTable2": 20,
     "partnerID": 95,
@@ -4065,6 +4163,7 @@
     "bonus3": 70,
     "resistance": 14,
     "abilities": 15,
+    "exp": 15880,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -4086,14 +4185,14 @@
         "sides": 5,
         "bonus": 0
       }
-    ],
-    "exp": 15880,
-    "name": "W E R D N A"
+    ]
   },
   {
-    "genericName": "MAN IN KIMONO",
+    "genericName": "Man In Kimono",
+    "name": "High Ninja",
     "monsterID": 97,
     "type": 0,
+    "icon": "SORCERER",
     "rewardTable1": 0,
     "rewardTable2": 0,
     "partnerID": 0,
@@ -4108,6 +4207,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 8,
+    "exp": 1600,
     "groupSize": {
       "qty": 1,
       "sides": 1,
@@ -4134,14 +4234,14 @@
         "sides": 8,
         "bonus": 0
       }
-    ],
-    "exp": 1600,
-    "name": "HIGH NINJA"
+    ]
   },
   {
-    "genericName": "PRIEST",
+    "genericName": "Priest",
+    "name": "High Priest",
     "monsterID": 98,
     "type": 2,
+    "icon": "ELVEN_WIZARD_GREEN",
     "rewardTable1": 0,
     "rewardTable2": 0,
     "partnerID": 97,
@@ -4156,6 +4256,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 2200,
     "groupSize": {
       "qty": 2,
       "sides": 1,
@@ -4172,14 +4273,14 @@
         "sides": 8,
         "bonus": 4
       }
-    ],
-    "exp": 2200,
-    "name": "HIGH PRIEST"
+    ]
   },
   {
-    "genericName": "MAN IN ROBES",
+    "genericName": "Man In Robes",
+    "name": "Lvl 7 Mage",
     "monsterID": 99,
     "type": 1,
+    "icon": "WIZARD",
     "rewardTable1": 0,
     "rewardTable2": 0,
     "partnerID": 98,
@@ -4194,6 +4295,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 16,
+    "exp": 1000,
     "groupSize": {
       "qty": 2,
       "sides": 1,
@@ -4210,14 +4312,14 @@
         "sides": 4,
         "bonus": 0
       }
-    ],
-    "exp": 1000,
-    "name": "LVL 7 MAGE"
+    ]
   },
   {
-    "genericName": "MAN IN ARMOR",
+    "genericName": "Man In Armor",
+    "name": "Lvl 7 Fighter",
     "monsterID": 100,
     "type": 0,
+    "icon": "FIGHTER",
     "rewardTable1": 21,
     "rewardTable2": 21,
     "partnerID": 99,
@@ -4232,6 +4334,7 @@
     "bonus3": 0,
     "resistance": 0,
     "abilities": 0,
+    "exp": 1900,
     "groupSize": {
       "qty": 2,
       "sides": 1,
@@ -4253,8 +4356,6 @@
         "sides": 12,
         "bonus": 0
       }
-    ],
-    "exp": 1900,
-    "name": "LVL 7 FIGHTER"
+    ]
   }
 ]

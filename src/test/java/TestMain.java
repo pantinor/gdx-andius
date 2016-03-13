@@ -34,7 +34,7 @@ public class TestMain extends Game {
 
             FileHandleResolver resolver = new Constants.ClasspathResolver();
             TmxMapLoader loader = new TmxMapLoader(resolver);
-            TiledMap tm = loader.load("assets/data/world.tmx");
+            TiledMap tm = loader.load("assets/data/combat1.tmx");
 
             batch2 = new SpriteBatch();
 

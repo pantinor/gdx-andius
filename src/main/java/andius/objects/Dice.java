@@ -1,10 +1,23 @@
 package andius.objects;
 
-class Dice {
+import utils.XORShiftRandom;
 
-    int qty;
-    int sides;
-    int bonus;
+public class Dice {
+    
+    private final static XORShiftRandom rand = new XORShiftRandom();
+
+    private int qty;
+    private int sides;
+    private int bonus;
+    
+    public int roll() {
+        int roll = 0;
+        for (int i=0;i<qty;i++) {
+            roll += rand.nextInt(sides) + 1;
+        }
+        roll += bonus;
+        return roll;
+    }
 
     @Override
     public String toString() {
