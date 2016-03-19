@@ -20,6 +20,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 2,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 0"
   },
   {
@@ -43,6 +48,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 4,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 1"
   },
   {
@@ -66,6 +76,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 6,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 2"
   },
   {
@@ -89,6 +104,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 8,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 3"
   },
   {
@@ -112,6 +132,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 4"
   },
   {
@@ -135,6 +160,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 12,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 5"
   },
   {
@@ -158,6 +188,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 6"
   },
   {
@@ -181,6 +216,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 7"
   },
   {
@@ -204,6 +244,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 8"
   },
   {
@@ -227,6 +272,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 9"
   },
   {
@@ -272,6 +322,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 2,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 10"
   },
   {
@@ -339,6 +394,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 4,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 11"
   },
   {
@@ -406,6 +466,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 6,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 12"
   },
   {
@@ -473,6 +538,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 8,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 13"
   },
   {
@@ -565,6 +635,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 14"
   },
   {
@@ -657,6 +732,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 12,
+      "sides": 5,
+      "bonus": 0
+    },
     "name": "Type 15"
   },
   {
@@ -761,6 +841,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 16"
   },
   {
@@ -865,6 +950,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 17"
   },
   {
@@ -967,6 +1057,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 18"
   },
   {
@@ -1069,6 +1164,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 0
+    },
     "name": "Type 19"
   },
   {
@@ -1082,6 +1182,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 94,
+      "sides": 0,
+      "bonus": 0
+    },
     "name": "Type 20"
   },
   {
@@ -1109,6 +1214,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 16,
+      "sides": 0,
+      "bonus": 0
+    },
     "name": "Type 21"
   },
   {
@@ -1176,6 +1286,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 15,
+      "bonus": 10
+    },
     "name": "Type 22"
   },
   {
@@ -1225,6 +1340,11 @@
         ]
       }
     ],
+    "goldAmt": {
+      "qty": 10,
+      "sides": 10,
+      "bonus": 10
+    },
     "name": "Type 23"
   }
 ]

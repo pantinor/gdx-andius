@@ -1,5 +1,6 @@
 package andius;
 
+import static andius.Andius.game_scr_avatar;
 import andius.objects.Icons;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
@@ -46,10 +47,10 @@ public class GameScreen extends BaseScreen {
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Icons.FIGHTER_RED.getAnimation().getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
+                renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
                 for (Actor cr : GameScreen.this.map.getMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId,cr.getWx(), cr.getWy())) {
-                        renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+                        renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
                     }
                 }
             }

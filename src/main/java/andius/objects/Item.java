@@ -12,46 +12,48 @@ public class Item {
         RING_AMULET;
     }
 
-    int itemID;
+    String name;
+    String genericName;
+    int iconID;
     int type;
     long cost;
-    int partyOwns;
-    String genericName;
     Dice damage;
     int armourClass;
-    int speed;
-    String name;
+    int extraSwings;
     int stock;
     boolean cursed;
     String usable;
-    int spellAffect;
+    Spells spell;
     int numberUses;
     int regeneration;
+    int range;
 
-    public void clone(Item i) {
-        this.itemID = i.itemID;
-        this.type = i.type;
-        this.cost = i.cost;
-        this.partyOwns = i.partyOwns;
-        this.genericName = i.genericName;
-        this.damage = i.damage;
-        this.armourClass = i.armourClass;
-        this.speed = i.speed;
-        this.name = i.name;
-        this.stock = i.stock;
-        this.cursed = i.cursed;
-        this.usable = i.usable;
-        this.spellAffect = i.spellAffect;
-        this.numberUses = i.numberUses;
-        this.regeneration = i.regeneration;
+    @Override
+    public Item clone() {
+        Item i = new Item();
+        i.iconID = this.iconID;
+        i.type = this.type;
+        i.cost = this.cost;
+        i.genericName = this.genericName;
+        i.damage = this.damage;
+        i.armourClass = this.armourClass;
+        i.extraSwings = this.extraSwings;
+        i.name = this.name;
+        i.stock = this.stock;
+        i.cursed = this.cursed;
+        i.usable = this.usable;
+        i.spell = this.spell;
+        i.numberUses = this.numberUses;
+        i.regeneration = this.regeneration;
+        return i;
     }
 
     public boolean canUse(ClassType ct) {
         return this.usable.contains(ct.getAbbr());
     }
 
-    public int getItemID() {
-        return itemID;
+    public int getIconID() {
+        return iconID;
     }
 
     public int getType() {
@@ -60,10 +62,6 @@ public class Item {
 
     public long getCost() {
         return cost;
-    }
-
-    public int getPartyOwns() {
-        return partyOwns;
     }
 
     public String getGenericName() {
@@ -78,8 +76,8 @@ public class Item {
         return armourClass;
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getExtraSwings() {
+        return extraSwings;
     }
 
     public String getName() {
@@ -94,16 +92,29 @@ public class Item {
         return cursed;
     }
 
-    public int getSpellAffect() {
-        return spellAffect;
+    public Spells getSpell() {
+        return spell;
     }
 
     public int getNumberUses() {
         return numberUses;
     }
 
+    public void use() {
+        this.numberUses --;
+    }
+
     public int getRegeneration() {
         return regeneration;
+    }
+
+    public int getRange() {
+        return range;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d", name, type,damage, armourClass, extraSwings,spell,numberUses,regeneration);
     }
 
 }

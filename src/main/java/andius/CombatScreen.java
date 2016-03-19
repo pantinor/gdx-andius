@@ -1,9 +1,15 @@
 package andius;
 
+import andius.Andius.ExplosionDrawable;
 import static andius.Andius.MONSTERS;
+import static andius.Andius.REWARDS;
+import static andius.Andius.mainGame;
+import static andius.Andius.startScreen;
+import static andius.Constants.TILE_DIM;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
+import andius.objects.ProjectileActor;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
 
 import java.util.Iterator;
@@ -20,6 +26,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -39,6 +46,7 @@ import utils.PartyDeathException;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import com.badlogic.gdx.utils.Align;
 import utils.Utils;
 
 public class CombatScreen extends BaseScreen {
@@ -58,6 +66,7 @@ public class CombatScreen extends BaseScreen {
     private SpriteBatch batch;
     private SecondaryInputProcessor sip;
     private Viewport mapViewPort;
+    private GlyphLayout layout = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 76 - 5, Align.left, true);
 
     public final List<andius.objects.Actor> enemies = new ArrayList<>();
     public final List<andius.objects.Actor> partyMembers = new ArrayList<>();
@@ -91,9 +100,7 @@ public class CombatScreen extends BaseScreen {
         sip = new SecondaryInputProcessor();
         crSlots = new MutableMonster[AREA_CREATURES];
 
-        if (crType != null) {
-            fillCreatureTable();
-        }
+        fillCreatureTable();
 
         MapLayer mLayer = tmap.getLayers().get("Monster Positions");
         Iterator<MapObject> iter = mLayer.getObjects().iterator();
@@ -227,12 +234,12 @@ public class CombatScreen extends BaseScreen {
 
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
-            renderer.getBatch().draw(cr.getIcon().getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY());
+            renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
         }
 
         for (andius.objects.Actor p : partyMembers) {
             if (p.getPlayer().status != Status.DEAD) {
-                renderer.getBatch().draw(p.getIcon().getAnimation().getKeyFrame(time, true), p.getX(), p.getY());
+                renderer.getBatch().draw(p.getAnimation().getKeyFrame(time, true), p.getX(), p.getY());
             } else {
                 //renderer.getBatch().draw(Exodus.corpse, p.getX(), p.getY());
             }
@@ -248,13 +255,10 @@ public class CombatScreen extends BaseScreen {
         int count = 0, idx = 0;
         for (int i = 0; i < AREA_CREATURES; i++) {
             if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
-                String[] splt = crSlots[i].getName().split(" ");
-                Andius.smallFont.draw(batch, splt[0], hud_enmy_x[idx], y);
-                if (splt.length > 1) {
-                    Andius.smallFont.draw(batch, splt[1], hud_enmy_x[idx], y - 11);
-                }
-                Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
+                layout.setText(Andius.smallFont, crSlots[i].getName());
+                Andius.smallFont.draw(batch, layout, hud_enmy_x[idx], y);
                 batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 2, count > 7 ? 14 : 45);
+                Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
                 count++;
                 idx++;
                 if (count == 8) {
@@ -436,9 +440,7 @@ public class CombatScreen extends BaseScreen {
         @Override
         public void run() {
             try {
-                if (!creatureAction(cr)) {
-                    CombatScreen.this.enemies.remove(cr);
-                }
+                creatureAction(cr);
             } catch (PartyDeathException e) {
                 //CombatScreen.this.returnScreen.partyDeath();
             }
@@ -455,6 +457,7 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public void run() {
+            Andius.HUD.add(String.format("%s turns his toes up to the daises!", cr.getMonster().name));
             CombatScreen.this.enemies.remove(cr);
         }
     }
@@ -517,7 +520,27 @@ public class CombatScreen extends BaseScreen {
     public void end() {
 
         boolean isWon = this.enemies.isEmpty();
-        //returnScreen.endCombat(isWon, combatMap, wounded);
+        if (isWon) {
+            int goldRewardId = 0;
+            int chestRewardId = 0;
+            int exp = 0;
+
+            for (Monster m : crSlots) {
+                if (m != null) {
+                    exp += m.getExp();
+                    if (m.getGoldReward() > goldRewardId) {
+                        goldRewardId = m.getGoldReward();
+                    }
+                    if (m.getChestReward() > chestRewardId) {
+                        chestRewardId = m.getChestReward();
+                    }
+                }
+            }
+            mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, REWARDS.get(goldRewardId), REWARDS.get(chestRewardId)));
+        } else {
+            mainGame.setScreen(startScreen);
+        }
+        this.dispose();
     }
 
     private boolean rangedAttackAt(AttackVector target, andius.objects.Actor attacker) throws PartyDeathException {
@@ -909,16 +932,147 @@ public class CombatScreen extends BaseScreen {
         return p;
     }
 
+    private void animateAttack(andius.objects.Actor attacker, Direction dir) {
+
+        AttackVector av = attack(attacker, dir);
+        int tx = av.x * TILE_DIM;
+        int ty = mapPixelHeight - av.y * TILE_DIM - TILE_DIM;
+
+        boolean magicalStrike = false;
+        ProjectileActor p = new ProjectileActor(magicalStrike ? Color.CYAN : Color.RED, attacker.getX(), attacker.getY());
+        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f), Actions.removeActor(p)));
+
+        SequenceAction seq = Actions.action(SequenceAction.class);
+        seq.addAction(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)));
+        seq.addAction(Actions.run(new AddActorAction(stage, p)));
+
+        if (av.result == AttackResult.HIT) {
+            Actor d = new ExplosionDrawable(magicalStrike ? Andius.explBlue : Andius.explGray);
+            d.setX(tx + 12);
+            d.setY(ty + 12);
+            d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+            seq.addAction(Actions.run(new AddActorAction(stage, d)));
+            if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
+                seq.addAction(Actions.run(new RemoveCreatureAction(av.victim)));
+            }
+        }
+
+        seq.addAction(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                finishPlayerTurn();
+            }
+        }));
+
+        stage.addAction(seq);
+    }
+
+    private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
+
+        Item weapon = attacker.getPlayer().weapon;
+        int range = weapon.getRange() == 0 ? 1 : weapon.getRange();
+
+        List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);
+
+        AttackVector target = null;
+        for (int i = 0; i < path.size(); i++) {
+            target = path.get(i);
+            for (andius.objects.Actor c : this.enemies) {
+                if (c.getWx() == target.x && c.getWy() == target.y) {
+                    target.victim = c;
+                    break;
+                }
+            }
+            if (target.victim != null) {
+                for (int j = 0; j < weapon.getExtraSwings() + 1; j++) {
+                    target.result = Utils.attackHit(attacker.getPlayer(), target.victim.getMonster());
+                    if (target.result == AttackResult.HIT) {
+                        int damage = Utils.dealDamage(attacker.getPlayer(), target.victim.getMonster());
+                        Andius.HUD.add(String.format("%s strikes %s for %d damage!", attacker.getPlayer().name, target.victim.getMonster().name, damage));
+                    }
+                }
+            }
+        }
+
+        if (target != null && target.result != null && weapon.getNumberUses() > 0) {
+            weapon.use();
+            if (weapon.getNumberUses() <= 0) {
+                Andius.HUD.add("Your weapon has broken!");
+                attacker.getPlayer().weapon = Andius.ITEMS.get(0);
+            }
+        }
+
+        return target;
+    }
+
+    private List<AttackVector> getDirectionalActionPath(int mapWidth, int mapHeight, int dirmask, int x, int y, int minDistance, int maxDistance) {
+
+        List<AttackVector> path = new ArrayList<>();
+
+        /*
+         * try every tile in the given direction, up to the given range.
+         * Stop when the the range is exceeded, or the action is blocked.
+         */
+        int nx = x;
+        int ny = y;
+        int count = 1;
+
+        for (int distance = minDistance; distance <= maxDistance; distance++) {
+
+            /* make sure our action isn't taking us off the map */
+            if (nx > mapWidth - 1 || nx < 0 || ny > mapHeight - 1 || ny < 0) {
+                break;
+            }
+
+            boolean blocked = false;
+            TiledMapTileLayer layer = (TiledMapTileLayer) this.tmap.getLayers().get("floor");
+            TiledMapTileLayer.Cell cell = layer.getCell(nx, MAP_DIM - 1 - ny + 1);
+            if (cell != null) {
+                for (andius.objects.Actor c : this.enemies) {
+                    if (c.getWx() == nx && c.getWy() == ny) {
+                        blocked = true;
+                    }
+                }
+            } else {
+                blocked = true;
+            }
+
+            if (blocked) {
+                path.add(new AttackVector(nx, ny, count));
+                break;
+            } else {
+                path.add(new AttackVector(nx, ny, count));
+            }
+
+            if (Direction.isDirInMask(Direction.NORTH, dirmask)) {
+                ny--;
+            }
+            if (Direction.isDirInMask(Direction.SOUTH, dirmask)) {
+                ny++;
+            }
+            if (Direction.isDirInMask(Direction.EAST, dirmask)) {
+                nx++;
+            }
+            if (Direction.isDirInMask(Direction.WEST, dirmask)) {
+                nx--;
+            }
+            count++;
+        }
+
+        return path;
+    }
+
     private class SecondaryInputProcessor extends InputAdapter {
 
         private int code;
         private int x;
         private int y;
         private andius.objects.Actor player;
-        private StringBuilder buffer;
 
         public void init(andius.objects.Actor player, int code, int x, int y) {
-            
+
             this.player = player;
             this.code = code;
             this.x = x;
@@ -961,13 +1115,10 @@ public class CombatScreen extends BaseScreen {
 
                 logAppend(dir.toString());
 
-                Item weapon = this.player.getPlayer().weapon;
+                animateAttack(this.player, dir);
 
-                Sounds.play(Sound.PC_ATTACK);
-                //int range = wt.getWeapon().getRange();
-                //Utils.animateAttack(stage, combatScreen, attacker, dir, x, y, range);
-                
                 Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, stage));
+
                 return false;
 
             } else if (this.code == Keys.U) {

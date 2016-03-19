@@ -32,7 +32,7 @@ public class ObjectsTestNG {
 
         SaveGame sg = null;
         try {
-            sg = SaveGame.read("test.sav");
+            sg = SaveGame.read("party.sav");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class ObjectsTestNG {
         sg.write("test.sav");
 
         int level = avatar.calculateLevel();
-        int mxhp = avatar.calculateMaxHP();
+        int mxhp = avatar.getMoreHP();
         int x = 0;
     }
 

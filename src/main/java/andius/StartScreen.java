@@ -1,5 +1,9 @@
 package andius;
 
+import static andius.Andius.CTX;
+import static andius.Andius.MONSTERS;
+import static andius.Andius.REWARDS;
+import static andius.Andius.mainGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
@@ -68,22 +72,26 @@ public class StartScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Sounds.play(Sound.TRIGGER);
                 if (!Gdx.files.internal(SAVE_FILENAME).file().exists()) {
-                    Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
+                    mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                 } else {
-                    Andius.CTX = new Context();
-                    if (Andius.CTX.saveGame == null) {
-                        Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
+                    CTX = new Context();
+                    if (CTX.saveGame == null) {
+                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                     } else {
-                        BaseScreen scr = (BaseScreen) Map.values()[Andius.CTX.saveGame.map].getScreen();
-                        scr.newMapPixelCoords = scr.getMapPixelCoords(Andius.CTX.saveGame.wx, Andius.CTX.saveGame.wy);
+                        BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
+                        scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
                         //Andius.mainGame.setScreen(scr);
                         //stage.clear();
 
                         FileHandleResolver resolver = new Constants.ClasspathResolver();
                         TmxMapLoader loader = new TmxMapLoader(resolver);
                         TiledMap tm = loader.load("assets/data/combat1.tmx");
-                        CombatScreen cs = new CombatScreen(Andius.CTX, Map.WIWOLD, tm, Andius.MONSTERS.get(12));
-                        Andius.mainGame.setScreen(cs);
+                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
+                        mainGame.setScreen(cs);
+                        
+//                        RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+//                        mainGame.setScreen(rs);
+
                     }
                 }
 
@@ -131,7 +139,7 @@ public class StartScreen implements Screen, Constants {
         batch.begin();
         //batch.draw(title, 0, 0);
         titleFont.draw(batch, "ANDIUS", 320, Andius.SCREEN_HEIGHT - 140);
-        Andius.ultimaFont.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
+        Andius.titleFont.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
         //Andius.largeFont.draw(batch, "From the depths of shadow...he comes for VENGEANCE!", 300, Andius.SCREEN_HEIGHT - 342);
         //Andius.largeFont.draw(batch, "LIBGDX Conversion by Paul Antinori", 350, 84);
         //Andius.largeFont.draw(batch, "Copyright 2016 Paul Antinori", 375, 48);

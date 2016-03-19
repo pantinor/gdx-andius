@@ -9,8 +9,8 @@ public class Monster {
     int monsterID;
     int type;
     public Icons icon;
-    int rewardTable1;
-    int rewardTable2;
+    int goldReward;
+    int chestReward;
     int partnerID;
     int partnerOdds;
     int armourClass;
@@ -38,8 +38,8 @@ public class Monster {
         this.monsterID = m.monsterID;
         this.type = m.type;
         this.icon = m.icon;
-        this.rewardTable1 = m.rewardTable1;
-        this.rewardTable2 = m.rewardTable2;
+        this.goldReward = m.goldReward;
+        this.chestReward = m.chestReward;
         this.partnerID = m.partnerID;
         this.partnerOdds = m.partnerOdds;
         this.armourClass = m.armourClass;
@@ -78,12 +78,12 @@ public class Monster {
         return icon;
     }
 
-    public int getRewardTable1() {
-        return rewardTable1;
+    public int getGoldReward() {
+        return goldReward;
     }
 
-    public int getRewardTable2() {
-        return rewardTable2;
+    public int getChestReward() {
+        return chestReward;
     }
 
     public int getPartnerID() {

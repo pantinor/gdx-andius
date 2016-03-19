@@ -124,8 +124,6 @@ public class BaseMap {
                 case WEST:
                     p.setWx(p.getWx() - 1);
                     break;
-                default:
-                    break;
             }
 
             Vector3 pixelPos = screen.getMapPixelCoords(p.getWx(), p.getWy() + 1);

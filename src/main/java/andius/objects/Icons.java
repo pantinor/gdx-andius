@@ -148,17 +148,12 @@ public enum Icons {
     ELVEN_WIZARD_BLUE,
     ELVEN_ARCHER_BLUE,;
 
-    private Animation animation;
     private static final Icons[] LOOKUP_TABLE = new Icons[520];
-
-    public Animation getAnimation() {
-        return animation;
-    }
+    public static TextureAtlas ATLAS;
 
     public static void init() {
-        
         FileHandle fh = Gdx.files.classpath("assets/data/heroes-atlas.txt");
-        TextureAtlas atlas = new TextureAtlas(fh);
+        ATLAS = new TextureAtlas(fh);
         TextureAtlas.TextureAtlasData data = new TextureAtlas.TextureAtlasData(fh, fh.parent(), false);
         for (TextureAtlas.TextureAtlasData.Region r : data.getRegions()) {
             int x = r.left / r.width;
@@ -166,13 +161,8 @@ public enum Icons {
             int i = x + (y * 40);
             LOOKUP_TABLE[i] = Icons.valueOf(r.name);
         }
-            
-        for (Icons hero : Icons.values()) {
-            int frameRate = Utils.getRandomBetween(1, 4);
-            hero.animation = new Animation(frameRate, atlas.findRegions(hero.toString()));
-        }
     }
-    
+
     public static Icons get(int idx) {
         return LOOKUP_TABLE[idx];
     }

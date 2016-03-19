@@ -543,8 +543,8 @@ public interface Constants {
 
     public enum Status {
 
-        OK, AFRAID, ASLEEP, PLYZE,
-        STONED, DEAD, ASHES, LOST;
+        OK, AFRAID, ASLEEP, POISONED, PARALYZED,
+        STONED, DEAD, ASHES;
     }
 
     public enum Role {
@@ -583,7 +583,6 @@ public interface Constants {
 
     public enum AttackResult {
 
-        NONE,
         HIT,
         MISS;
     }
@@ -603,11 +602,12 @@ public interface Constants {
         public final int y;
         public int distance;
         public AttackResult result;
-        public MutableMonster impactedCreature;
+        public Actor victim;
 
-        public AttackVector(int x, int y) {
+        public AttackVector(int x, int y, int distance) {
             this.x = x;
             this.y = y;
+            this.distance = distance;
         }
     }
 

@@ -71,41 +71,80 @@ public class SaveGame implements Constants {
         public int exp;
         public int gold;
         public int level;
-        
+
         public Item armor;
         public Item weapon;
         public Item helm;
+        public Item shield;
         public Item glove;
         public Item item1;
         public Item item2;
+        
+        public int[] magePoints = new int[]{0, 0, 0, 0, 0, 0, 0};
+        public int[] clericPoints = new int[]{0, 0, 0, 0, 0, 0, 0};
 
         public List<Item> inventory = new ArrayList<>();
-        
+
         public int submorsels = 400;
 
-        public void awardXP(int value) {
-            exp = Utils.adjustValueMax(exp, value, 999999999);
+        public void awardXP(int v) {
+            exp = Utils.adjustValueMax(exp, v, Integer.MAX_VALUE);
         }
 
         public void adjustGold(int v) {
-            gold = Utils.adjustValue(gold, v, 999999999, 0);
+            gold = Utils.adjustValue(gold, v, Integer.MAX_VALUE, 0);
+        }
+        
+        public void adjustHP(int v) {
+            hp = Utils.adjustValue(hp, v, Integer.MAX_VALUE, 0);
+        }
+        
+        public boolean isDisabled() {
+            return this.status != Status.OK && this.status != Status.POISONED;
         }
 
-        public int calculateMaxHP() {
+        public int calculateAC() {
+            int ac = 10;
+            if (weapon != null) {
+                ac -= weapon.armourClass;
+            }
+            if (armor != null) {
+                ac -= armor.armourClass;
+            }
+            if (helm != null) {
+                ac -= helm.armourClass;
+            }
+            if (glove != null) {
+                ac -= glove.armourClass;
+            }
+            if (shield != null) {
+                ac -= shield.armourClass;
+            }
+            if (item1 != null) {
+                ac -= item1.armourClass;
+            }
+            if (item2 != null) {
+                ac -= item2.armourClass;
+            }
+            if (classType == ClassType.NINJA) {
+                ac = ( level / 3 ) - 2;
+            }
+            return ac;
+        }
+
+        public int getMoreHP() {
             int hp = this.classType.getHitDie();
-            for (int i = 0; i < this.level; i++) {
-                hp += Utils.getRandomBetween(1, this.classType.getHitDie());
-                if (this.vitality <= 3) {
-                    hp -= 2;
-                } else if (this.vitality == 4 || this.vitality == 5) {
-                    hp -= 1;
-                } else if (this.vitality == 16) {
-                    hp += 1;
-                } else if (this.vitality == 17) {
-                    hp += 2;
-                } else if (this.vitality >= 18) {
-                    hp += 3;
-                }
+            hp += rand.nextInt(this.classType.getHitDie()) + 1;
+            if (this.vitality <= 3) {
+                hp -= 2;
+            } else if (this.vitality == 4 || this.vitality == 5) {
+                hp -= 1;
+            } else if (this.vitality == 16) {
+                hp += 1;
+            } else if (this.vitality == 17) {
+                hp += 2;
+            } else if (this.vitality >= 18) {
+                hp += 3;
             }
             return hp;
         }
@@ -135,7 +174,7 @@ public class SaveGame implements Constants {
 
         }
 
-        public int[] getMageSpellPoints() {
+        public int[] getMaxMageSpellPoints() {
             try {
                 if (this.classType == ClassType.MAGE) {
                     return MAGE_SPELL_PTS[this.level];
@@ -150,7 +189,7 @@ public class SaveGame implements Constants {
             return new int[]{0, 0, 0, 0, 0, 0, 0};
         }
 
-        public int[] getClericSpellPoints() {
+        public int[] getMaxClericSpellPoints() {
             try {
                 if (this.classType == ClassType.CLERIC) {
                     return CLERIC_SPELL_PTS[this.level];

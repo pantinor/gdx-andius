@@ -1,12 +1,12 @@
 package utils;
 
+import andius.Constants.AttackResult;
 import andius.Direction;
+import andius.objects.MutableMonster;
+import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -69,7 +69,7 @@ public class Utils {
             return Direction.getRandomValidDirection(validMovesMask);
         }
     }
-    
+
     /**
      * using diagonals computes distance, used with finding nearest party member
      */
@@ -142,117 +142,37 @@ public class Utils {
         /* return the result */
         return dirmask;
     }
-    
-//    public static AttackResult attackHit(Creature attacker, Player defender) {
-//        int attackValue = RAND.nextInt(256);
-//        int defenseValue = defender.getAC();
-//        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
-//    }
-//
-//    private static AttackResult attackHit(Player attacker, Creature defender) {
-//        int attackValue = RAND.nextInt(256) ;
-//        int defenseValue = defender.getDefense();
-//        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
-//    }
-//
-//    public static boolean dealDamage(Player attacker, Creature defender, int damage) {
-//        int xp = defender.getExp();
-//        if (!damageCreature(defender, damage, true)) {
-//            attacker.rec().awardXP(xp);
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public static boolean dealDamage(Creature attacker, Player defender) throws PartyDeathException {
-//        int damage = attacker.getDamage();
-//        return defender.applyDamage(damage, true);
-//    }
-//    
-//    private static boolean damageCreature(Creature cr, int damage, boolean byplayer) {
-//
-//        cr.setHP(Utils.adjustValueMin(cr.getHP(), -damage, 0));
-//
-//        switch (cr.getDamageStatus()) {
-//
-//            case DEAD:
-//                if (byplayer) {
-//                    //Exodus.hud.add(String.format("%s Killed! Exp. %d", cr.getName(), cr.getExp()));
-//                } else {
-//                    //Exodus.hud.add(String.format("%s Killed!", cr.getName()));
-//                }
-//                return false;
-//            case FLEEING:
-//               //Exodus.hud.add(String.format("%s Fleeing!", cr.getName()));
-//                break;
-//
-//            case CRITICAL:
-//               // Exodus.hud.add(String.format("%s Critical!", cr.getName()));
-//                break;
-//
-//            case HEAVILYWOUNDED:
-//                //Exodus.hud.add(String.format("%s Heavily Wounded!", cr.getName()));
-//                break;
-//
-//            case LIGHTLYWOUNDED:
-//                //Exodus.hud.add(String.format("%s Lightly Wounded!", cr.getName()));
-//                break;
-//
-//            case BARELYWOUNDED:
-//                //Exodus.hud.add(String.format("%s Barely Wounded!", cr.getName()));
-//                break;
-//            case FINE:
-//                break;
-//            default:
-//                break;
-//        }
-//
-//        return true;
-//    }
 
-    public static List<Vector2> getDirectionalActionPath(int mapWidth, int mapHeight, int dirmask, int x, int y, int minDistance, int maxDistance) {
-
-        List<Vector2> path = new ArrayList<>();
-
-        /*
-         * try every tile in the given direction, up to the given range.
-         * Stop when the the range is exceeded, or the action is blocked.
-         */
-        int nx = x;
-        int ny = y;
-
-        for (int distance = minDistance; distance <= maxDistance; distance++) {
-
-            /* make sure our action isn't taking us off the map */
-            if (nx > mapWidth - 1 || nx < 0 || ny > mapHeight - 1 || ny < 0) {
-                break;
-            }
-
-            boolean blocked = false;//combatMap.isTileBlockedForRangedAttack(nx, ny, checkForCreatures);
-
-            if (!blocked) {
-                path.add(new Vector2(nx, ny));
-            } else {
-                path.add(new Vector2(nx, ny));
-                break;
-            }
-
-            if (Direction.isDirInMask(Direction.NORTH, dirmask)) {
-                ny--;
-            }
-            if (Direction.isDirInMask(Direction.SOUTH, dirmask)) {
-                ny++;
-            }
-            if (Direction.isDirInMask(Direction.EAST, dirmask)) {
-                nx++;
-            }
-            if (Direction.isDirInMask(Direction.WEST, dirmask)) {
-                nx--;
-            }
-
-        }
-
-        return path;
+    public static AttackResult attackHit(MutableMonster attacker, CharacterRecord defender) {
+        int attackValue = RAND.nextInt(20);
+        int defenseValue = defender.calculateAC();
+        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
 
+    public static AttackResult attackHit(CharacterRecord attacker, MutableMonster defender) {
+        int strMod = 0;
+        if (attacker.str <= 3) {
+            strMod = -3;
+        } else if (attacker.str == 4) {
+            strMod = -2;
+        } else if (attacker.str == 5) {
+            strMod = -1;
+        } else if (attacker.str == 16) {
+            strMod = 1;
+        } else if (attacker.str == 17) {
+            strMod = 2;
+        } else if (attacker.str >= 18) {
+            strMod = 3;
+        }
+        int attackValue = (RAND.nextInt(20) + 1) + strMod;
+        int defenseValue = defender.getArmourClass();
+        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
+    }
+
+    public static int dealDamage(CharacterRecord attacker, MutableMonster defender) {
+        int damage = attacker.weapon.getDamage().roll();
+        defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
+        defender.adjustHealthBar();
+        return damage;
+    }
 }

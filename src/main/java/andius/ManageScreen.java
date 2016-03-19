@@ -1,5 +1,6 @@
 package andius;
 
+import static andius.Andius.ITEMS;
 import andius.objects.Race;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
@@ -209,11 +210,15 @@ public class ManageScreen implements Screen, Constants {
                 sel.agility = agVal + agExt;
                 sel.luck = luVal + luExt;
 
-                sel.hp = sel.calculateMaxHP();
+                sel.hp = sel.getMoreHP();
                 sel.maxhp = sel.hp;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
-
+                sel.weapon = ITEMS.get(101).clone();
+                
+                sel.magePoints = sel.getMaxMageSpellPoints();
+                sel.magePoints = sel.getMaxClericSpellPoints();
+                
                 Sounds.play(Sound.TRIGGER);
             }
         });

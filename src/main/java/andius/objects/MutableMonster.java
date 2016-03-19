@@ -39,21 +39,21 @@ public class MutableMonster extends Monster {
 
     public TextureRegion getHealthBar() {
         if (healthBar == null) {
-            healthBar = new TextureRegion(Utils.fillRectangle(76, 3, Color.GREEN, .5f));
+            healthBar = new TextureRegion(Utils.fillRectangle(76, 10, Color.GREEN, .5f));
         }
         return this.healthBar;
     }
 
-    private void adjustHealthBar(int current) {
-        double percent = (double) current / 100;
+    public void adjustHealthBar() {
+        double percent = (double) currentHitPoints / maxHitPoints;
         double bar = percent * (double) 76;
-        if (current < 0) {
+        if (currentHitPoints < 0) {
             bar = 0;
         }
         if (bar > 76) {
             bar = 76;
         }
-        getHealthBar().setRegion(0, 0, (int) bar, 3);
+        getHealthBar().setRegion(0, 0, (int) bar, 10);
     }
 
 }

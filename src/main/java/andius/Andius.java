@@ -52,7 +52,8 @@ public class Andius extends Game {
     public static BitmapFont font;
     public static BitmapFont smallFont;
     public static BitmapFont largeFont;
-    public static BitmapFont ultimaFont;
+    public static BitmapFont hudLogFont;
+    public static BitmapFont titleFont;
 
     public static Andius mainGame;
     public static StartScreen startScreen;
@@ -63,18 +64,13 @@ public class Andius extends Game {
     public static float musicVolume = 0.1f;
     public static Music music;
 
-    public static Animation explosionLarge;
-    public static Animation explosion;
-    public static Animation cloud;
+    public static Animation explGray;
+    public static Animation explGreen;
+    public static Animation explRed;
+    public static Animation explBlue;
 
-    public static Animation avatar_warrior_red;
-    public static Animation avatar_warrior_blue;
-    public static Animation avatar_wizard_red;
-    public static Animation avatar_wizard_blue;
-
-    public static Animation marker_red;
-    public static Animation marker_blue;
-    public static Animation marker_white;
+    public static Animation world_scr_avatar;
+    public static Animation game_scr_avatar;
 
     public static Hud HUD;
 
@@ -102,53 +98,60 @@ public class Andius extends Game {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/gnuolane.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
+        parameter.size = 16;
+        hudLogFont = generator.generateFont(parameter);
+        
         parameter.size = 18;
         font = generator.generateFont(parameter);
-
-        parameter.size = 16;
-        //smallFont = generator.generateFont(parameter);
 
         parameter.size = 24;
         largeFont = generator.generateFont(parameter);
 
-        generator.dispose();
-
-        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/ultima.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        parameter.size = 96;
-        ultimaFont = generator.generateFont(parameter);
-
-        parameter.size = 48;
-        BitmapFont smallUltimaFont = generator.generateFont(parameter);
+        parameter.size = 72;
+        titleFont = generator.generateFont(parameter);
 
         generator.dispose();
 
         skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
         skin.remove("default-font", BitmapFont.class);
         skin.add("default-font", font, BitmapFont.class);
-        skin.add("journal", font, BitmapFont.class);
-        skin.add("death-screen", largeFont, BitmapFont.class);
-        skin.add("ultima", ultimaFont, BitmapFont.class);
-        skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
-
+        skin.add("larger-font", largeFont, BitmapFont.class);
+        skin.add("title-font", titleFont, BitmapFont.class);
         smallFont = skin.get("verdana-10", BitmapFont.class);
+        skin.add("small-font", smallFont, BitmapFont.class);
 
-        Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
-        ls.font = font;
-        TextButton.TextButtonStyle tbs = skin.get("default", TextButton.TextButtonStyle.class);
-        tbs.font = font;
-        TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);
-        tbsred.font = font;
-        SelectBox.SelectBoxStyle sbs = skin.get("default", SelectBox.SelectBoxStyle.class);
-        sbs.font = font;
-        sbs.listStyle.font = font;
-        CheckBox.CheckBoxStyle cbs = skin.get("default", CheckBox.CheckBoxStyle.class);
-        cbs.font = font;
-        List.ListStyle lis = skin.get("default", List.ListStyle.class);
-        lis.font = font;
-        TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
-        tfs.font = font;
+        {
+            Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
+            ls.font = font;
+            TextButton.TextButtonStyle tbs = skin.get("default", TextButton.TextButtonStyle.class);
+            tbs.font = font;
+            TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);
+            tbsred.font = font;
+            SelectBox.SelectBoxStyle sbs = skin.get("default", SelectBox.SelectBoxStyle.class);
+            sbs.font = font;
+            sbs.listStyle.font = font;
+            CheckBox.CheckBoxStyle cbs = skin.get("default", CheckBox.CheckBoxStyle.class);
+            cbs.font = font;
+            List.ListStyle lis = skin.get("default", List.ListStyle.class);
+            lis.font = font;
+            TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
+            tfs.font = font;
+        }
+        {
+            Label.LabelStyle ls = skin.get("larger", Label.LabelStyle.class);
+            ls.font = largeFont;
+            TextButton.TextButtonStyle tbs = skin.get("larger", TextButton.TextButtonStyle.class);
+            tbs.font = largeFont;
+            TextButton.TextButtonStyle tbsred = skin.get("red-larger", TextButton.TextButtonStyle.class);
+            tbsred.font = largeFont;
+            SelectBox.SelectBoxStyle sbs = skin.get("larger", SelectBox.SelectBoxStyle.class);
+            sbs.font = largeFont;
+            sbs.listStyle.font = largeFont;
+            List.ListStyle lis = skin.get("larger", List.ListStyle.class);
+            lis.font = largeFont;
+            TextField.TextFieldStyle tfs = skin.get("larger", TextField.TextFieldStyle.class);
+            tfs.font = largeFont;
+        }
 
         HUD = new Hud();
 
@@ -174,25 +177,39 @@ public class Andius extends Game {
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
 
-            avatar_warrior_red = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
-//
-//            hitTile = standardAtlas.findRegion("hit_flash");
-//            magicHitTile = standardAtlas.findRegion("magic_flash");
-//            missTile = standardAtlas.findRegion("miss_flash");
-//            corpse = standardAtlas.findRegion("corpse");
+            world_scr_avatar = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
+            game_scr_avatar = new Animation(.5f, heroesAtlas.findRegions("FIGHTER_RED"));
 
-//            TextureAtlas tmp = new TextureAtlas(Gdx.files.classpath("assets/data/explosion-atlas.txt"));
-//            Array<TextureAtlas.AtlasRegion> ar = tmp.findRegions("expl");
-//            explosion = new Animation(.2f, ar);
-//
-//            tmp = new TextureAtlas(Gdx.files.classpath("assets/data/Exp_type_B.atlas"));
-//            ar = tmp.findRegions("im");
-//            explosionLarge = new Animation(.1f, ar);
-//
-//            tmp = new TextureAtlas(Gdx.files.classpath("assets/data/cloud-atlas.txt"));
-//            ar = tmp.findRegions("cloud");
-//            cloud = new Animation(.2f, ar);
+            TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
+            Array<TextureRegion> gray = new Array<>();
+            gray.add(expl[0][0]);
+            gray.add(expl[0][1]);
+            gray.add(expl[0][2]);
+            gray.add(expl[0][3]);
+            gray.add(expl[0][4]);
+            Array<TextureRegion> blue = new Array<>();
+            blue.add(expl[0][5]);
+            blue.add(expl[0][6]);
+            blue.add(expl[0][7]);
+            blue.add(expl[0][8]);
+            blue.add(expl[0][9]);
+            Array<TextureRegion> red = new Array<>();
+            red.add(expl[1][0]);
+            red.add(expl[1][1]);
+            red.add(expl[1][2]);
+            red.add(expl[1][3]);
+            red.add(expl[1][4]);
+            Array<TextureRegion> green = new Array<>();
+            green.add(expl[1][5]);
+            green.add(expl[1][6]);
+            green.add(expl[1][7]);
+            green.add(expl[1][8]);
+            green.add(expl[1][9]);
 
+            explGray = new Animation(.1f, gray);
+            explBlue = new Animation(.1f, blue);
+            explRed = new Animation(.1f, red);
+            explGreen = new Animation(.1f, green);
 
             Icons.init();
             Constants.Map.init();
@@ -227,36 +244,19 @@ public class Andius extends Game {
 
     }
 
-    public static class CloudDrawable extends Actor {
-
-        float stateTime;
-
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            stateTime += Gdx.graphics.getDeltaTime();
-            batch.draw(Andius.cloud.getKeyFrame(stateTime, false), getX(), getY(), 64, 64);
-        }
-    }
-
     public static class ExplosionDrawable extends Actor {
 
-        float stateTime;
+        private float stateTime;
+        private final Animation anim;
 
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            stateTime += Gdx.graphics.getDeltaTime();
-            batch.draw(Andius.explosion.getKeyFrame(stateTime, false), getX(), getY(), 64, 64);
+        public ExplosionDrawable(Animation anim) {
+            this.anim = anim;
         }
-    }
-
-    public static class ExplosionLargeDrawable extends Actor {
-
-        float stateTime;
 
         @Override
         public void draw(Batch batch, float parentAlpha) {
             stateTime += Gdx.graphics.getDeltaTime();
-            batch.draw(Andius.explosionLarge.getKeyFrame(stateTime, false), getX(), getY(), 192, 192);
+            batch.draw(anim.getKeyFrame(stateTime, false), getX(), getY(), 24, 24);
         }
     }
 

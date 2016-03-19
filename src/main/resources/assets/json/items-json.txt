@@ -11,11 +11,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BROKEN ITEM"
@@ -32,11 +31,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LONG SWORD"
@@ -53,11 +51,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHORT SWORD"
@@ -74,11 +71,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "ANOINTED MACE"
@@ -95,11 +91,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "ANOINTED FLAIL"
@@ -116,11 +111,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "STAFF"
@@ -137,11 +131,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "DAGGER"
@@ -158,11 +151,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SMALL SHIELD"
@@ -179,11 +171,10 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LARGE SHIELD"
@@ -200,11 +191,10 @@
       "bonus": 0
     },
     "armourClass": 1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "ROBES"
@@ -221,11 +211,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LEATHER ARMOR"
@@ -242,11 +231,10 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN MAIL"
@@ -263,11 +251,10 @@
       "bonus": 0
     },
     "armourClass": 4,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE"
@@ -284,11 +271,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "PLATE MAIL"
@@ -305,11 +291,10 @@
       "bonus": 0
     },
     "armourClass": 1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "HELM"
@@ -326,11 +311,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 23,
+    "spell": "DIOS",
     "numberUses": 100,
     "regeneration": 0,
     "name": "DIOS POTION"
@@ -347,11 +332,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 37,
+    "spell": "LATUMOFIS",
     "numberUses": 100,
     "regeneration": 0,
     "name": "LATUMOFIS POT."
@@ -368,11 +353,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LONG SWORD+1"
@@ -389,11 +373,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 2,
     "cursed": false,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHORT SWORD+1"
@@ -410,11 +393,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 1,
     "cursed": false,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MACE+1"
@@ -431,11 +413,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 3,
     "cursed": false,
     "usable": "MW",
-    "spellAffect": 2,
+    "spell": "MOGREF",
     "numberUses": 25,
     "regeneration": 0,
     "name": "STAFF OF MOGREF"
@@ -452,14 +434,14 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 4,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 3,
+    "spell": "KANTINO",
     "numberUses": 100,
     "regeneration": 0,
-    "name": "SCROLL/KANTINO"
+    "name": "SCROLL/KATINO"
   },
   {
     "itemID": 22,
@@ -473,11 +455,10 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LEATHER + 1"
@@ -494,11 +475,10 @@
       "bonus": 0
     },
     "armourClass": 4,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN MAIL + 1"
@@ -515,11 +495,10 @@
       "bonus": 0
     },
     "armourClass": 6,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "PLATE MAIL + 1"
@@ -536,11 +515,10 @@
       "bonus": 0
     },
     "armourClass": 4,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHIELD + 1"
@@ -557,11 +535,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE +1"
@@ -578,11 +555,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 24,
+    "spell": "BADIOS",
     "numberUses": 25,
     "regeneration": 0,
     "name": "SCROLL/BADIOS"
@@ -599,11 +576,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 27,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 1,
+    "spell": "HALITO",
     "numberUses": 100,
     "regeneration": 0,
     "name": "SCROLL/HALITO"
@@ -620,11 +597,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LONG SWORD -1"
@@ -641,11 +617,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 2,
     "cursed": true,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHORT SWORD -1"
@@ -662,11 +637,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 1,
     "cursed": true,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MACE -1"
@@ -683,11 +657,10 @@
       "bonus": 2
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": -1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "STAFF +2"
@@ -704,11 +677,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "DRAGON SLAYER"
@@ -725,11 +697,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "HELM + 1"
@@ -746,11 +717,10 @@
       "bonus": 0
     },
     "armourClass": 1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FCTWSL",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LEATHER -1"
@@ -767,11 +737,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN -1"
@@ -788,11 +757,10 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE-1"
@@ -809,11 +777,10 @@
       "bonus": 0
     },
     "armourClass": -1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCTSL",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHIELD -1"
@@ -830,11 +797,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 2,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 4,
+    "spell": "DUMAPIC",
     "numberUses": 0,
     "regeneration": 0,
     "name": "JEWELED AMULET"
@@ -851,11 +818,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 24,
+    "spell": "BADIOS",
     "numberUses": 100,
     "regeneration": 0,
     "name": "SCROLL/BADIOS"
@@ -872,11 +839,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 6,
+    "spell": "SOPIC",
     "numberUses": 100,
     "regeneration": 0,
     "name": "POTION OF SOPIC"
@@ -893,11 +860,10 @@
       "bonus": 2
     },
     "armourClass": 0,
-    "speed": 3,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LONG SWORD + 2"
@@ -914,11 +880,10 @@
       "bonus": 2
     },
     "armourClass": 0,
-    "speed": 3,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHORT SWORD +2"
@@ -935,11 +900,10 @@
       "bonus": 2
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MACE + 2"
@@ -956,11 +920,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 31,
+    "spell": "LOMILWA",
     "numberUses": 100,
     "regeneration": 0,
     "name": "SCROLL/LOMILWA"
@@ -977,11 +941,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 5,
+    "spell": "DILTO",
     "numberUses": 100,
     "regeneration": 0,
     "name": "SCROLL/DILTO"
@@ -998,11 +962,10 @@
       "bonus": 0
     },
     "armourClass": 1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": -1,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "COPPER GLOVES"
@@ -1019,11 +982,10 @@
       "bonus": 0
     },
     "armourClass": 4,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LEATHER + 2"
@@ -1040,11 +1002,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN + 2"
@@ -1061,11 +1022,10 @@
       "bonus": 0
     },
     "armourClass": 7,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "PLATE MAIL + 2"
@@ -1082,11 +1042,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHIELD + 2"
@@ -1103,11 +1062,11 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 24,
+    "spell": "BADIOS",
     "numberUses": 0,
     "regeneration": 0,
     "name": "HELM +2 (EVIL)"
@@ -1124,11 +1083,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 35,
+    "spell": "DIAL",
     "numberUses": 100,
     "regeneration": 0,
     "name": "POTION OF DIAL"
@@ -1145,11 +1104,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 26,
+    "spell": "PORFIC",
     "numberUses": 5,
     "regeneration": 0,
     "name": "RING OF PORFIC"
@@ -1166,11 +1125,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "WERE SLAYER"
@@ -1187,11 +1145,10 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MAGE MASHER"
@@ -1208,11 +1165,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MACE PRO POISON"
@@ -1229,11 +1185,11 @@
       "bonus": 1
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 30,
+    "spell": "MONTINO",
     "numberUses": 10,
     "regeneration": 0,
     "name": "STAFF/MONTINO"
@@ -1250,11 +1206,10 @@
       "bonus": 9
     },
     "armourClass": 0,
-    "speed": 4,
+    "extraSwings": 4,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BLADE CUSINART\u0027"
@@ -1271,11 +1226,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "C",
-    "spellAffect": 29,
+    "spell": "MANIFO",
     "numberUses": 10,
     "regeneration": 0,
     "name": "AMULET/MANIFO"
@@ -1292,11 +1247,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "MWS",
-    "spellAffect": 7,
+    "spell": "MAHALITO",
     "numberUses": 10,
     "regeneration": 0,
     "name": "ROD OF FLAME"
@@ -1313,11 +1268,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "EVIL CHAIN + 2"
@@ -1334,11 +1288,10 @@
       "bonus": 0
     },
     "armourClass": 7,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "NEUT P-MAIL + 2"
@@ -1355,11 +1308,10 @@
       "bonus": 0
     },
     "armourClass": 5,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "EVIL SHIELD +3"
@@ -1376,11 +1328,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 13,
+    "spell": "MAKANITO",
     "numberUses": 5,
     "regeneration": 0,
     "name": "AMULET/MAKANITO"
@@ -1397,11 +1349,11 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 19,
+    "spell": "MALOR",
     "numberUses": 100,
     "regeneration": 0,
     "name": "DIADEM OF MALOR"
@@ -1418,11 +1370,11 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 36,
+    "spell": "BADIAL",
     "numberUses": 100,
     "regeneration": 0,
     "name": "SCROLL/BADIAL"
@@ -1439,11 +1391,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 0,
     "cursed": true,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHORT SWORD -2"
@@ -1460,11 +1411,10 @@
       "bonus": 2
     },
     "armourClass": 0,
-    "speed": 2,
+    "extraSwings": 2,
     "stock": 0,
     "cursed": false,
     "usable": "FMTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "DAGGER + 2"
@@ -1481,11 +1431,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FCWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "MACE -2"
@@ -1502,11 +1451,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 1,
+    "extraSwings": 1,
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "STAFF -2"
@@ -1522,12 +1470,11 @@
       "sides": 4,
       "bonus": 0
     },
-    "armourClass": -3,
-    "speed": 7,
+    "armourClass": 3,
+    "extraSwings": 7,
     "stock": 0,
     "cursed": false,
     "usable": "MN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "DAGGER OF SPEED"
@@ -1544,11 +1491,10 @@
       "bonus": 0
     },
     "armourClass": -2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CURSED ROBE"
@@ -1565,11 +1511,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "LEATHER -2"
@@ -1586,11 +1531,10 @@
       "bonus": 0
     },
     "armourClass": 1,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN -2"
@@ -1607,11 +1551,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE -2"
@@ -1628,11 +1571,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FCTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHIELD - 2"
@@ -1649,11 +1591,10 @@
       "bonus": 0
     },
     "armourClass": -2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CURSED HELMET"
@@ -1670,11 +1611,10 @@
       "bonus": 0
     },
     "armourClass": 6,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE +2"
@@ -1691,11 +1631,10 @@
       "bonus": 0
     },
     "armourClass": 3,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SILVER GLOVES"
@@ -1712,11 +1651,10 @@
       "bonus": 3
     },
     "armourClass": 0,
-    "speed": 4,
+    "extraSwings": 4,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "EVIL SWORD + 3"
@@ -1733,11 +1671,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 4,
+    "extraSwings": 4,
     "stock": 0,
     "cursed": false,
     "usable": "FTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "EVIL SSWORD + 3"
@@ -1754,11 +1691,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 4,
+    "extraSwings": 4,
     "stock": 0,
     "cursed": false,
     "usable": "TN",
-    "spellAffect": 0,
     "numberUses": 100,
     "regeneration": 0,
     "name": "THIEVES DAGGER"
@@ -1775,11 +1711,10 @@
       "bonus": 0
     },
     "armourClass": 7,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BREAST PLATE +3"
@@ -1796,11 +1731,10 @@
       "bonus": 0
     },
     "armourClass": 10,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "L",
-    "spellAffect": 0,
     "numberUses": 50,
     "regeneration": 1,
     "name": "LORDS GARB"
@@ -1817,11 +1751,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 3,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
     "usable": "S",
-    "spellAffect": 0,
     "numberUses": 50,
     "regeneration": 0,
     "name": "MURASAMA BLADE"
@@ -1838,11 +1771,10 @@
       "bonus": 10
     },
     "armourClass": 0,
-    "speed": 3,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
     "usable": "N",
-    "spellAffect": 0,
     "numberUses": 50,
     "regeneration": 0,
     "name": "SHURIKEN"
@@ -1859,11 +1791,10 @@
       "bonus": 0
     },
     "armourClass": 6,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "CHAIN PRO FIRE"
@@ -1880,11 +1811,10 @@
       "bonus": 0
     },
     "armourClass": 9,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "EVIL PLATE + 3"
@@ -1901,11 +1831,10 @@
       "bonus": 0
     },
     "armourClass": 6,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FCTSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SHIELD + 3"
@@ -1922,11 +1851,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 1,
     "name": "RING OF HEALING"
@@ -1943,11 +1871,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "RING PRO UNDEAD"
@@ -1964,11 +1891,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 1,
     "cursed": true,
     "usable": "FMCTWSLN",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": -3,
     "name": "DEADLY RING"
@@ -1985,14 +1911,14 @@
       "bonus": 0
     },
     "armourClass": 10,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": true,
     "usable": "FMCTWSLN",
-    "spellAffect": 19,
+    "spell": "MALOR",
     "numberUses": 0,
     "regeneration": 5,
-    "name": "WERDNA\u0027S AMULET"
+    "name": "WERDNAS AMULET"
   },
   {
     "itemID": 95,
@@ -2006,11 +1932,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "STATUETTE/BEAR"
@@ -2027,11 +1952,10 @@
       "bonus": 0
     },
     "armourClass": 2,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "STATUETTE/FROG"
@@ -2048,11 +1972,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BRONZE KEY"
@@ -2069,11 +1992,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "SILVER KEY"
@@ -2090,11 +2012,10 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "GOLD KEY"
@@ -2111,13 +2032,32 @@
       "bonus": 0
     },
     "armourClass": 0,
-    "speed": 0,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
     "usable": "",
-    "spellAffect": 0,
     "numberUses": 0,
     "regeneration": 0,
     "name": "BLUE RIBBON"
+  },
+  {
+    "itemID": 101,
+    "type": 0,
+    "cost": 0,
+    "partyOwns": 0,
+    "genericName": "NONE",
+    "damage": {
+      "qty": 1,
+      "sides": 2,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FSLNWTCM",
+    "numberUses": 0,
+    "regeneration": 0,
+    "name": "HANDS"
   }
 ]

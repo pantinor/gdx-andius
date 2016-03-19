@@ -8,6 +8,8 @@ package andius.objects;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import utils.Utils;
 
 /**
  *
@@ -15,7 +17,7 @@ import andius.objects.SaveGame.CharacterRecord;
  */
 public class Actor {
 
-    private final Icons icon;
+    private final Animation anim;
     private Role role;
     private int wx;
     private int wy;
@@ -26,7 +28,8 @@ public class Actor {
     private CharacterRecord player;
 
     public Actor(Icons icon) {
-        this.icon = icon;
+        float fr = (float) Utils.getRandomBetween(4, 9) / 10;
+        this.anim = new Animation(fr, Icons.ATLAS.findRegions(icon.toString()));
     }
 
     public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
@@ -51,8 +54,8 @@ public class Actor {
         return role;
     }
 
-    public Icons getIcon() {
-        return icon;
+    public Animation getAnimation() {
+        return anim;
     }
 
     public int getWx() {

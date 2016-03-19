@@ -33,7 +33,7 @@ public class Context {
             player.submorsels -= decr_interval;
             if (player.submorsels < 0) {
                 player.submorsels = 400;
-                if (player.status == Constants.Status.PLYZE) {
+                if (player.status == Constants.Status.POISONED) {
                     //applyDamage(1, false);
                 } else {
                     //player.hp = Utils.adjustValue(player.hp, 1, player.getMaxHP(), 0);
