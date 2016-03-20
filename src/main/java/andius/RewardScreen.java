@@ -6,7 +6,6 @@
 package andius;
 
 import static andius.Andius.mainGame;
-import static andius.Andius.startScreen;
 import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.Reward;
@@ -59,6 +58,7 @@ public class RewardScreen implements Screen, Constants {
     private final Reward goldReward;
     private final Reward chestReward;
     private final int difficultyLevel;
+    private final int expPoints;
 
     private Texture hud;
     private SpriteBatch batch;
@@ -88,6 +88,7 @@ public class RewardScreen implements Screen, Constants {
         this.goldReward = goldReward;
         this.chestReward = chestReward;
         this.difficultyLevel = difficultyLevel;
+        this.expPoints = expPoints;
 
         this.hud = new Texture(Gdx.files.classpath("assets/data/treasure.png"));
         this.batch = new SpriteBatch();
@@ -212,9 +213,9 @@ public class RewardScreen implements Screen, Constants {
 
         for (RewardElement elem : chestReward.getElements()) {
             CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
-            Item found = Andius.ITEMS.get(elem.getItemIds().get(rand.nextInt(elem.getItemIds().size())));
+            Item found = Andius.ITEMS_MAP.get(elem.getItemNames().get(rand.nextInt(elem.getItemNames().size()))).clone();
             picked.inventory.add(found.clone());
-            log(String.format("%s finds a %s.", player.name.toUpperCase(), found.getGenericName()));
+            log(String.format("%s finds a %s.", player.name.toUpperCase(), found.genericName));
         }
 
         this.chestOpened = true;
@@ -399,9 +400,11 @@ public class RewardScreen implements Screen, Constants {
             }
         }
         int goldAmt = this.goldReward.getGoldAmt().roll();
+        int exp = this.expPoints / okChars.size();
         for (CharacterRecord c : okChars) {
             c.adjustGold(goldAmt);
-            log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+            c.awardXP(exp);
+            log(String.format("%s found %d gold and %d experience points.", c.name.toUpperCase(), goldAmt, exp));
         }
     }
 

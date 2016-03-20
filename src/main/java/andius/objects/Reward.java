@@ -14,7 +14,7 @@ public class Reward {
 
         private int type;
         private int odds;
-        private List<Integer> itemIds;
+        private List<String> itemNames;
 
         public int getType() {
             return type;
@@ -24,8 +24,8 @@ public class Reward {
             return odds;
         }
 
-        public List<Integer> getItemIds() {
-            return itemIds;
+        public List<String> getItemNames() {
+            return itemNames;
         }
 
     }

@@ -255,7 +255,7 @@ public class CombatScreen extends BaseScreen {
         int count = 0, idx = 0;
         for (int i = 0; i < AREA_CREATURES; i++) {
             if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
-                layout.setText(Andius.smallFont, crSlots[i].getName());
+                layout.setText(Andius.smallFont, crSlots[i].getName().toUpperCase());
                 Andius.smallFont.draw(batch, layout, hud_enmy_x[idx], y);
                 batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 2, count > 7 ? 14 : 45);
                 Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
@@ -672,27 +672,11 @@ public class CombatScreen extends BaseScreen {
         switch (action) {
             case ATTACK: {
                 Sounds.play(Sound.NPC_ATTACK);
-
 //                AttackResult res = Utils.attackHit(creature, target);
-//
 //                if (res == AttackResult.HIT) {
 //                    Sounds.play(Sound.PC_STRUCK);
-//                    wounded = true;
-//
 //                    if (!Utils.dealDamage(creature, target)) {
 //                        target = null;
-//                    }
-//
-//                    if (target != null) {
-//                        if (creature.stealsFood() && rand.nextInt(8) == 0) {
-//                            Sounds.play(Sound.NEGATIVE_EFFECT);
-//                            target.getPlayer().food = Utils.adjustValue(target.getPlayer().food, -(rand.nextInt(10)), 9999, 0);
-//                        }
-//
-//                        if (creature.stealsGold() && rand.nextInt(8) == 0) {
-//                            Sounds.play(Sound.NEGATIVE_EFFECT);
-//                            target.getPlayer().gold = Utils.adjustValue(target.getPlayer().gold, -(rand.nextInt(40)), 9999, 0);
-//                        }
 //                    }
 //                }
                 break;
@@ -972,7 +956,7 @@ public class CombatScreen extends BaseScreen {
     private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
 
         Item weapon = attacker.getPlayer().weapon;
-        int range = weapon.getRange() == 0 ? 1 : weapon.getRange();
+        int range = weapon.range == 0 ? 1 : weapon.range;
 
         List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);
 
@@ -986,7 +970,7 @@ public class CombatScreen extends BaseScreen {
                 }
             }
             if (target.victim != null) {
-                for (int j = 0; j < weapon.getExtraSwings() + 1; j++) {
+                for (int j = 0; j < weapon.extraSwings + 1; j++) {
                     target.result = Utils.attackHit(attacker.getPlayer(), target.victim.getMonster());
                     if (target.result == AttackResult.HIT) {
                         int damage = Utils.dealDamage(attacker.getPlayer(), target.victim.getMonster());
@@ -996,11 +980,11 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (target != null && target.result != null && weapon.getNumberUses() > 0) {
+        if (target != null && target.result != null && weapon.numberUses > 0) {
             weapon.use();
-            if (weapon.getNumberUses() <= 0) {
+            if (weapon.numberUses <= 0) {
                 Andius.HUD.add("Your weapon has broken!");
-                attacker.getPlayer().weapon = Andius.ITEMS.get(0);
+                attacker.getPlayer().weapon = Andius.ITEMS_MAP.get("HANDS").clone();
             }
         }
 

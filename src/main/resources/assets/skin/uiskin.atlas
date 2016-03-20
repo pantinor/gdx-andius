@@ -220,29 +220,29 @@ journal-check-on
 red-off
   rotate: false
   xy: 0, 130
-  size: 127, 35
-  orig: 127, 35
+  size: 50, 30
+  orig: 50, 30
   offset: 0, 0
   index: -1
 red-on
   rotate: false
-  xy: 0, 165
-  size: 127, 35
-  orig: 127, 35
+  xy: 0, 160
+  size: 50, 30
+  orig: 50, 30
   offset: 0, 0
   index: -1
-purple-off
+brown-off
   rotate: false
-  xy: 129, 123
-  size: 126, 29
-  orig: 126, 29
+  xy: 0, 190
+  size: 50, 30
+  orig: 50, 30
   offset: 0, 0
   index: -1
-purple-on
+brown-on
   rotate: false
-  xy: 129, 154
-  size: 126, 29
-  orig: 126, 29
+  xy: 0, 220
+  size: 50, 30
+  orig: 50, 30
   offset: 0, 0
   index: -1
 scroller-fancy

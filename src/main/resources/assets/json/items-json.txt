@@ -1,130 +1,30 @@
 [
   {
-    "itemID": 0,
-    "type": 6,
+    "name": "HANDS",
+    "genericName": "NONE",
+    "iconID": 396,
+    "type": 0,
     "cost": 0,
-    "partyOwns": 0,
-    "genericName": "BROKEN ITEM",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BROKEN ITEM"
-  },
-  {
-    "itemID": 1,
-    "type": 0,
-    "cost": 25,
-    "partyOwns": 0,
-    "genericName": "SWORD",
     "damage": {
       "qty": 1,
-      "sides": 8,
+      "sides": 2,
       "bonus": 0
     },
     "armourClass": 0,
     "extraSwings": 0,
     "stock": -1,
     "cursed": false,
-    "usable": "FSLN",
+    "usable": "FSLNWTCM",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "LONG SWORD"
+    "range": 0
   },
   {
-    "itemID": 2,
-    "type": 0,
-    "cost": 15,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 6,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHORT SWORD"
-  },
-  {
-    "itemID": 3,
-    "type": 0,
-    "cost": 30,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
-    "damage": {
-      "qty": 2,
-      "sides": 3,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "ANOINTED MACE"
-  },
-  {
-    "itemID": 4,
-    "type": 0,
-    "cost": 150,
-    "partyOwns": 0,
-    "genericName": "STICK W/CHAIN",
-    "damage": {
-      "qty": 1,
-      "sides": 7,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "ANOINTED FLAIL"
-  },
-  {
-    "itemID": 5,
-    "type": 0,
-    "cost": 10,
-    "partyOwns": 0,
-    "genericName": "STICK",
-    "damage": {
-      "qty": 1,
-      "sides": 5,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "STAFF"
-  },
-  {
-    "itemID": 6,
+    "name": "DAGGER",
+    "genericName": "DAGGER",
+    "iconID": 103,
     "type": 0,
     "cost": 5,
-    "partyOwns": 0,
-    "genericName": "DAGGER",
     "damage": {
       "qty": 1,
       "sides": 4,
@@ -137,276 +37,194 @@
     "usable": "FMTSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "DAGGER"
+    "range": 0
   },
   {
-    "itemID": 7,
-    "type": 2,
-    "cost": 20,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SMALL SHIELD"
-  },
-  {
-    "itemID": 8,
-    "type": 2,
-    "cost": 40,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LARGE SHIELD"
-  },
-  {
-    "itemID": 9,
-    "type": 1,
-    "cost": 15,
-    "partyOwns": 0,
-    "genericName": "CLOTHING",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 1,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "ROBES"
-  },
-  {
-    "itemID": 10,
-    "type": 1,
-    "cost": 50,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LEATHER ARMOR"
-  },
-  {
-    "itemID": 11,
-    "type": 1,
-    "cost": 90,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CHAIN MAIL"
-  },
-  {
-    "itemID": 12,
-    "type": 1,
-    "cost": 200,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 4,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BREAST PLATE"
-  },
-  {
-    "itemID": 13,
-    "type": 1,
-    "cost": 750,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 5,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "PLATE MAIL"
-  },
-  {
-    "itemID": 14,
-    "type": 3,
-    "cost": 100,
-    "partyOwns": 0,
-    "genericName": "HELM",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 1,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "HELM"
-  },
-  {
-    "itemID": 15,
-    "type": 5,
-    "cost": 500,
-    "partyOwns": 0,
-    "genericName": "POTION",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "DIOS",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "DIOS POTION"
-  },
-  {
-    "itemID": 16,
-    "type": 5,
-    "cost": 300,
-    "partyOwns": 0,
-    "genericName": "POTION",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "LATUMOFIS",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "LATUMOFIS POT."
-  },
-  {
-    "itemID": 17,
+    "name": "STAFF",
+    "genericName": "STICK",
+    "iconID": 151,
     "type": 0,
-    "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
+    "cost": 10,
     "damage": {
       "qty": 1,
-      "sides": 8,
-      "bonus": 1
+      "sides": 5,
+      "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 2,
-    "stock": 0,
+    "extraSwings": 0,
+    "stock": -1,
     "cursed": false,
-    "usable": "FSLN",
+    "usable": "FMCTWSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "LONG SWORD+1"
+    "range": 0
   },
   {
-    "itemID": 18,
-    "type": 0,
-    "cost": 15000,
-    "partyOwns": 0,
+    "name": "SHORT SWORD",
     "genericName": "SWORD",
+    "iconID": 97,
+    "type": 0,
+    "cost": 15,
     "damage": {
       "qty": 1,
       "sides": 6,
-      "bonus": 1
+      "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 2,
-    "stock": 2,
+    "extraSwings": 0,
+    "stock": -1,
     "cursed": false,
     "usable": "FTSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "SHORT SWORD+1"
+    "range": 0
   },
   {
-    "itemID": 19,
+    "name": "LONG SWORD",
+    "genericName": "SWORD",
+    "iconID": 98,
     "type": 0,
-    "cost": 12500,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
+    "cost": 25,
     "damage": {
-      "qty": 2,
-      "sides": 4,
-      "bonus": 1
+      "qty": 1,
+      "sides": 8,
+      "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 2,
-    "stock": 1,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "ANOINTED MACE",
+    "genericName": "KNOBBED STICK",
+    "iconID": 113,
+    "type": 0,
+    "cost": 30,
+    "damage": {
+      "qty": 2,
+      "sides": 3,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
     "cursed": false,
     "usable": "FCWSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "MACE+1"
+    "range": 0
   },
   {
-    "itemID": 20,
+    "name": "ANOINTED FLAIL",
+    "genericName": "STICK ON CHAIN",
+    "iconID": 188,
+    "type": 0,
+    "cost": 150,
+    "damage": {
+      "qty": 1,
+      "sides": 7,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LONG SWORD -1",
+    "genericName": "SWORD",
+    "iconID": 106,
+    "type": 0,
+    "cost": 1000,
+    "damage": {
+      "qty": 1,
+      "sides": 8,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 1,
+    "cursed": true,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "MACE -1",
+    "genericName": "KNOBBED STICK",
+    "iconID": 244,
+    "type": 0,
+    "cost": 1000,
+    "damage": {
+      "qty": 2,
+      "sides": 3,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 1,
+    "stock": 1,
+    "cursed": true,
+    "usable": "FCWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHORT SWORD -1",
+    "genericName": "SWORD",
+    "iconID": 248,
+    "type": 0,
+    "cost": 1000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 1,
+    "stock": 2,
+    "cursed": true,
+    "usable": "FTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "STAFF +2",
+    "genericName": "STICK",
+    "iconID": 150,
+    "type": 0,
+    "cost": 2500,
+    "damage": {
+      "qty": 1,
+      "sides": 4,
+      "bonus": 2
+    },
+    "armourClass": 0,
+    "extraSwings": 1,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "STAFF OF MOGREF",
+    "genericName": "STAFF",
+    "iconID": 152,
     "type": 0,
     "cost": 3000,
-    "partyOwns": 0,
-    "genericName": "STAFF",
     "damage": {
       "qty": 1,
       "sides": 6,
@@ -420,745 +238,194 @@
     "spell": "MOGREF",
     "numberUses": 25,
     "regeneration": 0,
-    "name": "STAFF OF MOGREF"
+    "range": 0
   },
   {
-    "itemID": 21,
-    "type": 5,
-    "cost": 500,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
+    "name": "LONG SWORD +2",
+    "genericName": "SWORD",
+    "iconID": 99,
+    "type": 0,
+    "cost": 4000,
     "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
+      "qty": 1,
+      "sides": 10,
+      "bonus": 2
     },
     "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 4,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "KANTINO",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "SCROLL/KATINO"
-  },
-  {
-    "itemID": 22,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LEATHER + 1"
-  },
-  {
-    "itemID": 23,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 4,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CHAIN MAIL + 1"
-  },
-  {
-    "itemID": 24,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 6,
-    "extraSwings": 0,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "PLATE MAIL + 1"
+    "range": 0
   },
   {
-    "itemID": 25,
-    "type": 2,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 4,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHIELD + 1"
-  },
-  {
-    "itemID": 26,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 5,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BREAST PLATE +1"
-  },
-  {
-    "itemID": 27,
-    "type": 5,
-    "cost": 500,
-    "partyOwns": 0,
-    "genericName": "PAPER",
-    "damage": {
-      "qty": 0,
-      "sides": 1,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "BADIOS",
-    "numberUses": 25,
-    "regeneration": 0,
-    "name": "SCROLL/BADIOS"
-  },
-  {
-    "itemID": 28,
-    "type": 5,
-    "cost": 500,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 27,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "HALITO",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "SCROLL/HALITO"
-  },
-  {
-    "itemID": 29,
+    "name": "MACE +2",
+    "genericName": "KNOBBED STICK",
+    "iconID": 175,
     "type": 0,
-    "cost": 1000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
+    "cost": 4000,
     "damage": {
       "qty": 1,
       "sides": 8,
-      "bonus": 0
+      "bonus": 2
     },
     "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 1,
-    "cursed": true,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LONG SWORD -1"
-  },
-  {
-    "itemID": 30,
-    "type": 0,
-    "cost": 1000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 6,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 1,
-    "stock": 2,
-    "cursed": true,
-    "usable": "FTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHORT SWORD -1"
-  },
-  {
-    "itemID": 31,
-    "type": 0,
-    "cost": 1000,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
-    "damage": {
-      "qty": 2,
-      "sides": 3,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 1,
-    "stock": 1,
-    "cursed": true,
+    "extraSwings": 2,
+    "stock": 0,
+    "cursed": false,
     "usable": "FCWSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "MACE -1"
+    "range": 0
   },
   {
-    "itemID": 32,
+    "name": "SHORT SWORD +2",
+    "genericName": "SWORD",
+    "iconID": 101,
     "type": 0,
-    "cost": 2500,
-    "partyOwns": 0,
-    "genericName": "STICK",
+    "cost": 4000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
+      "bonus": 2
+    },
+    "armourClass": 0,
+    "extraSwings": 3,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "DAGGER +2",
+    "genericName": "DAGGER",
+    "iconID": 136,
+    "type": 0,
+    "cost": 8000,
     "damage": {
       "qty": 1,
       "sides": 4,
       "bonus": 2
     },
     "armourClass": 0,
-    "extraSwings": 1,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "STAFF +2"
-  },
-  {
-    "itemID": 33,
-    "type": 0,
-    "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 10,
-      "bonus": 1
-    },
-    "armourClass": 0,
-    "extraSwings": 1,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "DRAGON SLAYER"
-  },
-  {
-    "itemID": 34,
-    "type": 3,
-    "cost": 3000,
-    "partyOwns": 0,
-    "genericName": "HELM",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "HELM + 1"
-  },
-  {
-    "itemID": 35,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 1,
-    "extraSwings": 0,
-    "stock": 1,
-    "cursed": true,
-    "usable": "FCTWSL",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LEATHER -1"
-  },
-  {
-    "itemID": 36,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CHAIN -1"
-  },
-  {
-    "itemID": 37,
-    "type": 1,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 0,
-    "stock": 1,
-    "cursed": true,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BREAST PLATE-1"
-  },
-  {
-    "itemID": 38,
-    "type": 2,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": -1,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCTSL",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHIELD -1"
-  },
-  {
-    "itemID": 39,
-    "type": 6,
-    "cost": 5000,
-    "partyOwns": 0,
-    "genericName": "AMULET",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 2,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "DUMAPIC",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "JEWELED AMULET"
-  },
-  {
-    "itemID": 40,
-    "type": 5,
-    "cost": 500,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
-    "damage": {
-      "qty": 0,
-      "sides": 1,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "BADIOS",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "SCROLL/BADIOS"
-  },
-  {
-    "itemID": 41,
-    "type": 5,
-    "cost": 1500,
-    "partyOwns": 0,
-    "genericName": "POTION",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 1,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "SOPIC",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "POTION OF SOPIC"
-  },
-  {
-    "itemID": 42,
-    "type": 0,
-    "cost": 4000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 10,
-      "bonus": 2
-    },
-    "armourClass": 0,
-    "extraSwings": 3,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LONG SWORD + 2"
-  },
-  {
-    "itemID": 43,
-    "type": 0,
-    "cost": 4000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 6,
-      "bonus": 2
-    },
-    "armourClass": 0,
-    "extraSwings": 3,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHORT SWORD +2"
-  },
-  {
-    "itemID": 44,
-    "type": 0,
-    "cost": 4000,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
-    "damage": {
-      "qty": 1,
-      "sides": 8,
-      "bonus": 2
-    },
-    "armourClass": 0,
     "extraSwings": 2,
     "stock": 0,
     "cursed": false,
-    "usable": "FCWSLN",
+    "usable": "FMTSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "MACE + 2"
+    "range": 0
   },
   {
-    "itemID": 45,
-    "type": 5,
-    "cost": 2500,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "LOMILWA",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "SCROLL/LOMILWA"
-  },
-  {
-    "itemID": 46,
-    "type": 5,
-    "cost": 2500,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "DILTO",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "SCROLL/DILTO"
-  },
-  {
-    "itemID": 47,
-    "type": 4,
-    "cost": 6000,
-    "partyOwns": 0,
-    "genericName": "GLOVES",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 1,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "COPPER GLOVES"
-  },
-  {
-    "itemID": 48,
-    "type": 1,
-    "cost": 6000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 4,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LEATHER + 2"
-  },
-  {
-    "itemID": 49,
-    "type": 1,
-    "cost": 6000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 5,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CHAIN + 2"
-  },
-  {
-    "itemID": 50,
-    "type": 1,
-    "cost": 6000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 7,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "PLATE MAIL + 2"
-  },
-  {
-    "itemID": 51,
-    "type": 2,
-    "cost": 7000,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 5,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHIELD + 2"
-  },
-  {
-    "itemID": 52,
-    "type": 3,
+    "name": "MACE -2",
+    "genericName": "KNOBBED STICK",
+    "iconID": 185,
+    "type": 0,
     "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "HELM",
     "damage": {
-      "qty": 0,
-      "sides": 0,
+      "qty": 1,
+      "sides": 8,
       "bonus": 0
     },
-    "armourClass": 3,
+    "armourClass": 0,
     "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "spell": "BADIOS",
+    "stock": 1,
+    "cursed": true,
+    "usable": "FCWSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "HELM +2 (EVIL)"
+    "range": 0
   },
   {
-    "itemID": 53,
-    "type": 5,
-    "cost": 5000,
-    "partyOwns": 0,
-    "genericName": "POTION",
+    "name": "SHORT SWORD -2",
+    "genericName": "SWORD",
+    "iconID": 104,
+    "type": 0,
+    "cost": 8000,
     "damage": {
-      "qty": 0,
-      "sides": 1,
+      "qty": 1,
+      "sides": 6,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 0,
+    "extraSwings": 1,
     "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "DIAL",
-    "numberUses": 100,
+    "cursed": true,
+    "usable": "FTSLN",
+    "numberUses": 0,
     "regeneration": 0,
-    "name": "POTION OF DIAL"
+    "range": 0
   },
   {
-    "itemID": 54,
-    "type": 6,
-    "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "RING",
+    "name": "STAFF -2",
+    "genericName": "STICK",
+    "iconID": 154,
+    "type": 0,
+    "cost": 8000,
     "damage": {
-      "qty": 0,
-      "sides": 0,
+      "qty": 1,
+      "sides": 4,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 0,
+    "extraSwings": 1,
     "stock": 0,
-    "cursed": false,
+    "cursed": true,
     "usable": "FMCTWSLN",
-    "spell": "PORFIC",
-    "numberUses": 5,
+    "numberUses": 0,
     "regeneration": 0,
-    "name": "RING OF PORFIC"
+    "range": 0
   },
   {
-    "itemID": 55,
+    "name": "DRAGON SLAYER",
+    "genericName": "SWORD",
+    "iconID": 254,
     "type": 0,
     "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
     "damage": {
       "qty": 1,
       "sides": 10,
       "bonus": 1
     },
     "armourClass": 0,
-    "extraSwings": 2,
+    "extraSwings": 1,
     "stock": 0,
     "cursed": false,
     "usable": "FSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "WERE SLAYER"
+    "range": 0
   },
   {
-    "itemID": 56,
+    "name": "LONG SWORD +1",
+    "genericName": "SWORD",
+    "iconID": 99,
     "type": 0,
     "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
     "damage": {
       "qty": 1,
-      "sides": 6,
+      "sides": 8,
       "bonus": 1
     },
     "armourClass": 0,
     "extraSwings": 2,
     "stock": 0,
     "cursed": false,
-    "usable": "FTSLN",
+    "usable": "FSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "MAGE MASHER"
+    "range": 0
   },
   {
-    "itemID": 57,
+    "name": "MACE PROT POISON",
+    "genericName": "KNOBBED STICK",
+    "iconID": 244,
     "type": 0,
     "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
     "damage": {
       "qty": 1,
       "sides": 8,
@@ -1171,14 +438,114 @@
     "usable": "FCWSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "MACE PRO POISON"
+    "range": 0
   },
   {
-    "itemID": 58,
+    "name": "MAGE MASHER",
+    "genericName": "SWORD",
+    "iconID": 243,
+    "type": 0,
+    "cost": 10000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
+      "bonus": 1
+    },
+    "armourClass": 0,
+    "extraSwings": 2,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "WERE SLAYER",
+    "genericName": "SWORD",
+    "iconID": 253,
+    "type": 0,
+    "cost": 10000,
+    "damage": {
+      "qty": 1,
+      "sides": 10,
+      "bonus": 1
+    },
+    "armourClass": 0,
+    "extraSwings": 2,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "MACE +1",
+    "genericName": "KNOBBED STICK",
+    "iconID": 112,
+    "type": 0,
+    "cost": 12500,
+    "damage": {
+      "qty": 2,
+      "sides": 4,
+      "bonus": 1
+    },
+    "armourClass": 0,
+    "extraSwings": 2,
+    "stock": 1,
+    "cursed": false,
+    "usable": "FCWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BLADE CUSINART",
+    "genericName": "SWORD",
+    "iconID": 105,
     "type": 0,
     "cost": 15000,
-    "partyOwns": 0,
+    "damage": {
+      "qty": 1,
+      "sides": 3,
+      "bonus": 9
+    },
+    "armourClass": 0,
+    "extraSwings": 4,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHORT SWORD +1",
+    "genericName": "SWORD",
+    "iconID": 97,
+    "type": 0,
+    "cost": 15000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
+      "bonus": 1
+    },
+    "armourClass": 0,
+    "extraSwings": 2,
+    "stock": 2,
+    "cursed": false,
+    "usable": "FTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "STAFF OF MONTINO",
     "genericName": "STAFF",
+    "iconID": 213,
+    "type": 0,
+    "cost": 15000,
     "damage": {
       "qty": 1,
       "sides": 5,
@@ -1192,18 +559,58 @@
     "spell": "MONTINO",
     "numberUses": 10,
     "regeneration": 0,
-    "name": "STAFF/MONTINO"
+    "range": 0
   },
   {
-    "itemID": 59,
+    "name": "DAGGER OF SPEED",
+    "genericName": "DAGGER",
+    "iconID": 138,
     "type": 0,
-    "cost": 15000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
+    "cost": 30000,
     "damage": {
       "qty": 1,
-      "sides": 3,
-      "bonus": 9
+      "sides": 4,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 7,
+    "stock": 0,
+    "cursed": false,
+    "usable": "MN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHORT SWORD +3",
+    "genericName": "SWORD",
+    "iconID": 247,
+    "type": 0,
+    "cost": 50000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 4,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SWORD +3",
+    "genericName": "SWORD",
+    "iconID": 247,
+    "type": 0,
+    "cost": 50000,
+    "damage": {
+      "qty": 1,
+      "sides": 10,
+      "bonus": 3
     },
     "armourClass": 0,
     "extraSwings": 4,
@@ -1212,56 +619,314 @@
     "usable": "FSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "BLADE CUSINART\u0027"
+    "range": 0
   },
   {
-    "itemID": 60,
-    "type": 6,
-    "cost": 15000,
-    "partyOwns": 0,
-    "genericName": "AMULET",
+    "name": "SHURIKEN",
+    "genericName": "WEAPON",
+    "iconID": 190,
+    "type": 0,
+    "cost": 50000,
     "damage": {
-      "qty": 0,
-      "sides": 0,
+      "qty": 1,
+      "sides": 5,
+      "bonus": 10
+    },
+    "armourClass": 0,
+    "extraSwings": 3,
+    "stock": 0,
+    "cursed": false,
+    "usable": "N",
+    "numberUses": 50,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "THIEVES DAGGER",
+    "genericName": "DAGGER",
+    "iconID": 249,
+    "type": 0,
+    "cost": 50000,
+    "damage": {
+      "qty": 1,
+      "sides": 6,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 0,
+    "extraSwings": 4,
     "stock": 0,
     "cursed": false,
-    "usable": "C",
-    "spell": "MANIFO",
-    "numberUses": 10,
+    "usable": "TN",
+    "numberUses": 100,
     "regeneration": 0,
-    "name": "AMULET/MANIFO"
+    "range": 0
   },
   {
-    "itemID": 61,
-    "type": 6,
-    "cost": 25000,
-    "partyOwns": 0,
-    "genericName": "ROD",
+    "name": "MURASAMA BLADE",
+    "genericName": "WEAPON",
+    "iconID": 248,
+    "type": 0,
+    "cost": 1000000,
     "damage": {
-      "qty": 0,
-      "sides": 0,
+      "qty": 10,
+      "sides": 5,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 0,
+    "extraSwings": 3,
     "stock": 0,
     "cursed": false,
-    "usable": "MWS",
-    "spell": "MAHALITO",
-    "numberUses": 10,
+    "usable": "S",
+    "numberUses": 50,
     "regeneration": 0,
-    "name": "ROD OF FLAME"
+    "range": 0
   },
   {
-    "itemID": 62,
+    "name": "ROBES",
+    "genericName": "CLOTHING",
+    "iconID": 360,
     "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "CHAIN",
+    "cost": 15,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 1,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LEATHER ARMOR",
+    "genericName": "ARMOR",
+    "iconID": 312,
+    "type": 1,
+    "cost": 50,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN MAIL",
+    "genericName": "ARMOR",
+    "iconID": 301,
+    "type": 1,
+    "cost": 90,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BREAST PLATE",
+    "genericName": "ARMOR",
+    "iconID": 305,
+    "type": 1,
+    "cost": 200,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 4,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "PLATE MAIL",
+    "genericName": "ARMOR",
+    "iconID": 304,
+    "type": 1,
+    "cost": 750,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 5,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BREAST PLATE +1",
+    "genericName": "ARMOR",
+    "iconID": 194,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 5,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BREAST PLATE -1",
+    "genericName": "ARMOR",
+    "iconID": 303,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": 1,
+    "cursed": true,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN MAIL -1",
+    "genericName": "ARMOR",
+    "iconID": 325,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": true,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN MAIL +1",
+    "genericName": "ARMOR",
+    "iconID": 300,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 4,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LEATHER +1",
+    "genericName": "ARMOR",
+    "iconID": 196,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LEATHER -1",
+    "genericName": "ARMOR",
+    "iconID": 310,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 1,
+    "extraSwings": 0,
+    "stock": 1,
+    "cursed": true,
+    "usable": "FCTWSL",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "PLATE MAIL +1",
+    "genericName": "ARMOR",
+    "iconID": 302,
+    "type": 1,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 6,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN MAIL +2",
+    "genericName": "ARMOR",
+    "iconID": 301,
+    "type": 1,
+    "cost": 6000,
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1274,14 +939,34 @@
     "usable": "FCSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "EVIL CHAIN + 2"
+    "range": 0
   },
   {
-    "itemID": 63,
+    "name": "LEATHER +2",
+    "genericName": "ARMOR",
+    "iconID": 326,
     "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "PLATE ARMOR",
+    "cost": 6000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 4,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "PLATE MAIL + 2",
+    "genericName": "ARMOR",
+    "iconID": 303,
+    "type": 1,
+    "cost": 6000,
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1294,14 +979,314 @@
     "usable": "FCSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "NEUT P-MAIL + 2"
+    "range": 0
   },
   {
-    "itemID": 64,
-    "type": 2,
-    "cost": 25000,
-    "partyOwns": 0,
+    "name": "BREAST PLATE -2",
+    "genericName": "ARMOR",
+    "iconID": 303,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": true,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN MAIL -2",
+    "genericName": "ARMOR",
+    "iconID": 301,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 1,
+    "extraSwings": 0,
+    "stock": 1,
+    "cursed": true,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CURSED ROBE",
+    "genericName": "ROBE",
+    "iconID": 279,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": -2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": true,
+    "usable": "FMCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN +2",
+    "genericName": "CHAIN",
+    "iconID": 195,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 5,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LEATHER -2",
+    "genericName": "ARMOR",
+    "iconID": 306,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": true,
+    "usable": "FCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "PLATE MAIL +2",
+    "genericName": "PLATE ARMOR",
+    "iconID": 193,
+    "type": 1,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 7,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BREAST PLATE +2",
+    "genericName": "ARMOR",
+    "iconID": 302,
+    "type": 1,
+    "cost": 10000,
+    "damage": {
+      "qty": 0,
+      "sides": 1,
+      "bonus": 0
+    },
+    "armourClass": 6,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BREAST PLATE +3",
+    "genericName": "ARMOR",
+    "iconID": 304,
+    "type": 1,
+    "cost": 100000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 7,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "CHAIN PROT FIRE",
+    "genericName": "ARMOR",
+    "iconID": 300,
+    "type": 1,
+    "cost": 150000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 6,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "PLATE +3",
+    "genericName": "PLATE ARMOR",
+    "iconID": 302,
+    "type": 1,
+    "cost": 150000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 9,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LORDS GARB",
+    "genericName": "ARMOR",
+    "iconID": 308,
+    "type": 1,
+    "cost": 1000000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 10,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "L",
+    "numberUses": 50,
+    "regeneration": 1,
+    "range": 0
+  },
+  {
+    "name": "SMALL SHIELD",
     "genericName": "SHIELD",
+    "iconID": 271,
+    "type": 2,
+    "cost": 20,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LARGE SHIELD",
+    "genericName": "SHIELD",
+    "iconID": 269,
+    "type": 2,
+    "cost": 40,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHIELD +1",
+    "genericName": "SHIELD",
+    "iconID": 272,
+    "type": 2,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 4,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FCTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHIELD -1",
+    "genericName": "SHIELD",
+    "iconID": 270,
+    "type": 2,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": -1,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCTSL",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHIELD +2",
+    "genericName": "SHIELD",
+    "iconID": 352,
+    "type": 2,
+    "cost": 7000,
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1314,14 +1299,14 @@
     "usable": "FCTSLN",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "EVIL SHIELD +3"
+    "range": 0
   },
   {
-    "itemID": 65,
-    "type": 6,
-    "cost": 20000,
-    "partyOwns": 0,
-    "genericName": "AMULET",
+    "name": "SHIELD -2",
+    "genericName": "SHIELD",
+    "iconID": 270,
+    "type": 2,
+    "cost": 8000,
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1330,19 +1315,119 @@
     "armourClass": 0,
     "extraSwings": 0,
     "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "spell": "MAKANITO",
-    "numberUses": 5,
+    "cursed": true,
+    "usable": "FCTSLN",
+    "numberUses": 0,
     "regeneration": 0,
-    "name": "AMULET/MAKANITO"
+    "range": 0
   },
   {
-    "itemID": 66,
+    "name": "SHIELD +3",
+    "genericName": "SHIELD",
+    "iconID": 269,
+    "type": 2,
+    "cost": 25000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 5,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SHIELD +3",
+    "genericName": "SHIELD",
+    "iconID": 272,
+    "type": 2,
+    "cost": 250000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 6,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FCTSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "HELM",
+    "genericName": "HELM",
+    "iconID": 238,
+    "type": 3,
+    "cost": 100,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 1,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "HELM +1",
+    "genericName": "HELM",
+    "iconID": 389,
+    "type": 3,
+    "cost": 3000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "HELM +2",
+    "genericName": "HELM",
+    "iconID": 251,
+    "type": 3,
+    "cost": 8000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "spell": "BADIOS",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "DIADEM OF MALOR",
+    "genericName": "DIADEM",
+    "iconID": 390,
     "type": 3,
     "cost": 25000,
-    "partyOwns": 0,
-    "genericName": "DIADEM",
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1356,14 +1441,403 @@
     "spell": "MALOR",
     "numberUses": 100,
     "regeneration": 0,
-    "name": "DIADEM OF MALOR"
+    "range": 0
   },
   {
-    "itemID": 67,
+    "name": "CURSED HELMET",
+    "genericName": "HELM",
+    "iconID": 386,
+    "type": 3,
+    "cost": 50000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": -2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": true,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "COPPER GLOVES",
+    "genericName": "GLOVES",
+    "iconID": 236,
+    "type": 4,
+    "cost": 6000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 1,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SILVER GLOVES",
+    "genericName": "GAUNTLETS",
+    "iconID": 233,
+    "type": 4,
+    "cost": 60000,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 3,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BLUE RIBBON",
+    "genericName": "BLUE RIBBON",
+    "iconID": 350,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "BRONZE KEY",
+    "genericName": "BRONZE KEY",
+    "iconID": 71,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "GOLD KEY",
+    "genericName": "GOLD KEY",
+    "iconID": 71,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SILVER KEY",
+    "genericName": "SILVER KEY",
+    "iconID": 71,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "STATUETTE BEAR",
+    "genericName": "STATUETTE BEAR",
+    "iconID": 8,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "STATUETTE FROG",
+    "genericName": "STATUETTE FROG",
+    "iconID": 15,
+    "type": 5,
+    "cost": 0,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 2,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "LATUMOFIS POTION",
+    "genericName": "POTION",
+    "iconID": 606,
+    "type": 5,
+    "cost": 300,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "LATUMOFIS",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "DIOS POTION",
+    "genericName": "POTION",
+    "iconID": 507,
+    "type": 5,
+    "cost": 500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "DIOS",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF BADIOS",
+    "genericName": "PAPER",
+    "iconID": 67,
+    "type": 5,
+    "cost": 500,
+    "damage": {
+      "qty": 0,
+      "sides": 1,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": -1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "BADIOS",
+    "numberUses": 25,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF BADIOS",
+    "genericName": "SCROLL",
+    "iconID": 67,
+    "type": 5,
+    "cost": 500,
+    "damage": {
+      "qty": 0,
+      "sides": 1,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "BADIOS",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF HALITO",
+    "genericName": "SCROLL",
+    "iconID": 56,
+    "type": 5,
+    "cost": 500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 27,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "HALITO",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF KATINO",
+    "genericName": "SCROLL",
+    "iconID": 40,
+    "type": 5,
+    "cost": 500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 4,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "POTION OF SOPIC",
+    "genericName": "POTION",
+    "iconID": 510,
+    "type": 5,
+    "cost": 1500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 1,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "SOPIC",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF DILTO",
+    "genericName": "SCROLL",
+    "iconID": 88,
+    "type": 5,
+    "cost": 2500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "DILTO",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF LOMILWA",
+    "genericName": "SCROLL",
+    "iconID": 68,
+    "type": 5,
+    "cost": 2500,
+    "damage": {
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "LOMILWA",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "POTION OF DIAL",
+    "genericName": "POTION",
+    "iconID": 523,
+    "type": 5,
+    "cost": 5000,
+    "damage": {
+      "qty": 0,
+      "sides": 1,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "spell": "DIAL",
+    "numberUses": 100,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "SCROLL OF BADIAL",
+    "genericName": "SCROLL",
+    "iconID": 81,
     "type": 5,
     "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "SCROLL",
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1377,474 +1851,139 @@
     "spell": "BADIAL",
     "numberUses": 100,
     "regeneration": 0,
-    "name": "SCROLL/BADIAL"
+    "range": 0
   },
   {
-    "itemID": 68,
-    "type": 0,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
+    "name": "BROKEN ITEM",
+    "genericName": "BROKEN ITEM",
+    "iconID": 702,
+    "type": 6,
+    "cost": 0,
     "damage": {
-      "qty": 1,
-      "sides": 6,
+      "qty": 0,
+      "sides": 0,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 1,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHORT SWORD -2"
-  },
-  {
-    "itemID": 69,
-    "type": 0,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "DAGGER",
-    "damage": {
-      "qty": 1,
-      "sides": 4,
-      "bonus": 2
-    },
-    "armourClass": 0,
-    "extraSwings": 2,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
-    "usable": "FMTSLN",
+    "usable": "",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "DAGGER + 2"
+    "range": 0
   },
   {
-    "itemID": 70,
-    "type": 0,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "KNOBBED STICK",
+    "name": "JEWELED AMULET",
+    "genericName": "AMULET",
+    "iconID": 257,
+    "type": 6,
+    "cost": 5000,
     "damage": {
-      "qty": 1,
-      "sides": 8,
+      "qty": 0,
+      "sides": 0,
       "bonus": 0
     },
     "armourClass": 0,
     "extraSwings": 0,
-    "stock": 1,
-    "cursed": true,
-    "usable": "FCWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "MACE -2"
-  },
-  {
-    "itemID": 71,
-    "type": 0,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "STICK",
-    "damage": {
-      "qty": 1,
-      "sides": 4,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 1,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FMCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "STAFF -2"
-  },
-  {
-    "itemID": 72,
-    "type": 0,
-    "cost": 30000,
-    "partyOwns": 0,
-    "genericName": "DAGGER",
-    "damage": {
-      "qty": 1,
-      "sides": 4,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 7,
-    "stock": 0,
+    "stock": 2,
     "cursed": false,
-    "usable": "MN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "DAGGER OF SPEED"
-  },
-  {
-    "itemID": 73,
-    "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "ROBE",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": -2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
     "usable": "FMCTWSLN",
+    "spell": "DUMAPIC",
     "numberUses": 0,
     "regeneration": 0,
-    "name": "CURSED ROBE"
+    "range": 0
   },
   {
-    "itemID": 74,
-    "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "LEATHER -2"
-  },
-  {
-    "itemID": 75,
-    "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 1,
-    "extraSwings": 0,
-    "stock": 1,
-    "cursed": true,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CHAIN -2"
-  },
-  {
-    "itemID": 76,
-    "type": 1,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BREAST PLATE -2"
-  },
-  {
-    "itemID": 77,
-    "type": 2,
-    "cost": 8000,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FCTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHIELD - 2"
-  },
-  {
-    "itemID": 78,
-    "type": 3,
-    "cost": 50000,
-    "partyOwns": 0,
-    "genericName": "HELM",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": -2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": true,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "CURSED HELMET"
-  },
-  {
-    "itemID": 79,
-    "type": 1,
+    "name": "RING OF PORFIC",
+    "genericName": "RING",
+    "iconID": 262,
+    "type": 6,
     "cost": 10000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 1,
-      "bonus": 0
-    },
-    "armourClass": 6,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BREAST PLATE +2"
-  },
-  {
-    "itemID": 80,
-    "type": 4,
-    "cost": 60000,
-    "partyOwns": 0,
-    "genericName": "GAUNTLETS",
     "damage": {
       "qty": 0,
       "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 3,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SILVER GLOVES"
-  },
-  {
-    "itemID": 81,
-    "type": 0,
-    "cost": 50000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 10,
-      "bonus": 3
-    },
-    "armourClass": 0,
-    "extraSwings": 4,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "EVIL SWORD + 3"
-  },
-  {
-    "itemID": 82,
-    "type": 0,
-    "cost": 50000,
-    "partyOwns": 0,
-    "genericName": "SWORD",
-    "damage": {
-      "qty": 1,
-      "sides": 6,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 4,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
-    "usable": "FTSLN",
-    "numberUses": 0,
+    "usable": "FMCTWSLN",
+    "spell": "PORFIC",
+    "numberUses": 5,
     "regeneration": 0,
-    "name": "EVIL SSWORD + 3"
+    "range": 0
   },
   {
-    "itemID": 83,
-    "type": 0,
-    "cost": 50000,
-    "partyOwns": 0,
-    "genericName": "DAGGER",
+    "name": "AMULET OF MANIFO",
+    "genericName": "AMULET",
+    "iconID": 375,
+    "type": 6,
+    "cost": 15000,
     "damage": {
-      "qty": 1,
-      "sides": 6,
+      "qty": 0,
+      "sides": 0,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 4,
-    "stock": 0,
-    "cursed": false,
-    "usable": "TN",
-    "numberUses": 100,
-    "regeneration": 0,
-    "name": "THIEVES DAGGER"
-  },
-  {
-    "itemID": 84,
-    "type": 1,
-    "cost": 100000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 7,
     "extraSwings": 0,
     "stock": 0,
     "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
+    "usable": "C",
+    "spell": "MANIFO",
+    "numberUses": 10,
     "regeneration": 0,
-    "name": "BREAST PLATE +3"
+    "range": 0
   },
   {
-    "itemID": 85,
-    "type": 1,
-    "cost": 1000000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
+    "name": "AMULET OF MAKANITO",
+    "genericName": "AMULET",
+    "iconID": 376,
+    "type": 6,
+    "cost": 20000,
     "damage": {
       "qty": 0,
       "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 10,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "L",
-    "numberUses": 50,
-    "regeneration": 1,
-    "name": "LORDS GARB"
-  },
-  {
-    "itemID": 86,
-    "type": 0,
-    "cost": 1000000,
-    "partyOwns": 0,
-    "genericName": "WEAPON",
-    "damage": {
-      "qty": 10,
-      "sides": 5,
       "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 3,
+    "extraSwings": 0,
     "stock": 0,
     "cursed": false,
-    "usable": "S",
-    "numberUses": 50,
+    "usable": "FMCTWSLN",
+    "spell": "MAKANITO",
+    "numberUses": 5,
     "regeneration": 0,
-    "name": "MURASAMA BLADE"
+    "range": 0
   },
   {
-    "itemID": 87,
-    "type": 0,
-    "cost": 50000,
-    "partyOwns": 0,
-    "genericName": "WEAPON",
+    "name": "ROD OF FLAME",
+    "genericName": "ROD",
+    "iconID": 215,
+    "type": 6,
+    "cost": 25000,
     "damage": {
-      "qty": 1,
-      "sides": 5,
-      "bonus": 10
+      "qty": 0,
+      "sides": 0,
+      "bonus": 0
     },
     "armourClass": 0,
-    "extraSwings": 3,
-    "stock": 0,
-    "cursed": false,
-    "usable": "N",
-    "numberUses": 50,
-    "regeneration": 0,
-    "name": "SHURIKEN"
-  },
-  {
-    "itemID": 88,
-    "type": 1,
-    "cost": 150000,
-    "partyOwns": 0,
-    "genericName": "ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 6,
     "extraSwings": 0,
     "stock": 0,
     "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
+    "usable": "MWS",
+    "spell": "MAHALITO",
+    "numberUses": 10,
     "regeneration": 0,
-    "name": "CHAIN PRO FIRE"
+    "range": 0
   },
   {
-    "itemID": 89,
-    "type": 1,
-    "cost": 150000,
-    "partyOwns": 0,
-    "genericName": "PLATE ARMOR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 9,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "EVIL PLATE + 3"
-  },
-  {
-    "itemID": 90,
-    "type": 2,
-    "cost": 250000,
-    "partyOwns": 0,
-    "genericName": "SHIELD",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 6,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FCTSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SHIELD + 3"
-  },
-  {
-    "itemID": 91,
+    "name": "RING OF HEALING",
+    "genericName": "RING",
+    "iconID": 372,
     "type": 6,
     "cost": 300000,
-    "partyOwns": 0,
-    "genericName": "RING",
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1857,34 +1996,14 @@
     "usable": "FMCTWSLN",
     "numberUses": 0,
     "regeneration": 1,
-    "name": "RING OF HEALING"
+    "range": 0
   },
   {
-    "itemID": 92,
+    "name": "DEADLY RING",
+    "genericName": "RING",
+    "iconID": 373,
     "type": 6,
     "cost": 500000,
-    "partyOwns": 0,
-    "genericName": "RING",
-    "damage": {
-      "qty": 0,
-      "sides": 1,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "FMCTWSLN",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "RING PRO UNDEAD"
-  },
-  {
-    "itemID": 93,
-    "type": 6,
-    "cost": 500000,
-    "partyOwns": 0,
-    "genericName": "RING",
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1897,14 +2016,34 @@
     "usable": "FMCTWSLN",
     "numberUses": 0,
     "regeneration": -3,
-    "name": "DEADLY RING"
+    "range": 0
   },
   {
-    "itemID": 94,
+    "name": "RING PROT UNDEAD",
+    "genericName": "RING",
+    "iconID": 259,
+    "type": 6,
+    "cost": 500000,
+    "damage": {
+      "qty": 0,
+      "sides": 1,
+      "bonus": 0
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "numberUses": 0,
+    "regeneration": 0,
+    "range": 0
+  },
+  {
+    "name": "WERDNAS AMULET",
+    "genericName": "AMULET",
+    "iconID": 374,
     "type": 6,
     "cost": 999999999999,
-    "partyOwns": 0,
-    "genericName": "AMULET",
     "damage": {
       "qty": 0,
       "sides": 0,
@@ -1918,146 +2057,6 @@
     "spell": "MALOR",
     "numberUses": 0,
     "regeneration": 5,
-    "name": "WERDNAS AMULET"
-  },
-  {
-    "itemID": 95,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "STATUETTE/BEAR",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "STATUETTE/BEAR"
-  },
-  {
-    "itemID": 96,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "STATUETTE/FROG",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 2,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "STATUETTE/FROG"
-  },
-  {
-    "itemID": 97,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "BRONZE KEY",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BRONZE KEY"
-  },
-  {
-    "itemID": 98,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "SILVER KEY",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "SILVER KEY"
-  },
-  {
-    "itemID": 99,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "GOLD KEY",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "GOLD KEY"
-  },
-  {
-    "itemID": 100,
-    "type": 5,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "BLUE RIBBON",
-    "damage": {
-      "qty": 0,
-      "sides": 0,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": 0,
-    "cursed": false,
-    "usable": "",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "BLUE RIBBON"
-  },
-  {
-    "itemID": 101,
-    "type": 0,
-    "cost": 0,
-    "partyOwns": 0,
-    "genericName": "NONE",
-    "damage": {
-      "qty": 1,
-      "sides": 2,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FSLNWTCM",
-    "numberUses": 0,
-    "regeneration": 0,
-    "name": "HANDS"
+    "range": 0
   }
 ]

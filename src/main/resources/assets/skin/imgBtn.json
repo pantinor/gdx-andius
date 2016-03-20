@@ -7,6 +7,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
     left: { imageUp:left-up, imageDown:left-down, imageOver:left-up, imageChecked:left-up, imageCheckedOver:left-up, imageDisabled:left-disabled },
     clear: { imageUp:x-up, imageDown:x-down, imageOver:x-up, imageChecked:x-up, imageCheckedOver:x-up, imageDisabled:x-disabled },
     sm-arr-left: { imageUp:left-arrow-up, imageDown:left-arrow-down, imageOver:left-arrow-up, imageChecked:left-arrow-up, imageCheckedOver:left-arrow-up, imageDisabled:left-arrow-disabled },
-    sm-arr-right: { imageUp:right-arrow-up, imageDown:right-arrow-down, imageOver:right-arrow-up, imageChecked:right-arrow-up, imageCheckedOver:right-arrow-up, imageDisabled:right-arrow-disabled }
+    sm-arr-right: { imageUp:right-arrow-up, imageDown:right-arrow-down, imageOver:right-arrow-up, imageChecked:right-arrow-up, imageCheckedOver:right-arrow-up, imageDisabled:right-arrow-disabled },
+    right-pointer: { imageUp:right-pointer-up, imageDown:right-pointer-down, imageOver:right-pointer-up, imageChecked:right-pointer-up, imageCheckedOver:right-pointer-up, imageDisabled:right-pointer-up },
+    left-pointer: { imageUp:left-pointer-up, imageDown:left-pointer-down, imageOver:left-pointer-up, imageChecked:left-pointer-up, imageCheckedOver:left-pointer-up, imageDisabled:left-pointer-up },
 }
 }

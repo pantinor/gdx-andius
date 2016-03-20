@@ -5,6 +5,7 @@ import andius.objects.Conversations;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Reward;
+import andius.objects.Reward.RewardElement;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -31,6 +32,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
+import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 import utils.Hud;
 
@@ -75,9 +77,11 @@ public class Andius extends Game {
     public static Hud HUD;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
-    public static TextureRegion[] hudIcons = new TextureRegion[12 * 8 * 5];
+    public static TextureRegion[] invIcons = new TextureRegion[67 * 12];
 
     public static java.util.List<Item> ITEMS;
+    public static final java.util.Map<String, Item> ITEMS_MAP = new HashMap<>();
+
     public static java.util.List<Monster> MONSTERS;
     public static java.util.List<Reward> REWARDS;
 
@@ -100,7 +104,7 @@ public class Andius extends Game {
 
         parameter.size = 16;
         hudLogFont = generator.generateFont(parameter);
-        
+
         parameter.size = 18;
         font = generator.generateFont(parameter);
 
@@ -127,6 +131,8 @@ public class Andius extends Game {
             tbs.font = font;
             TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);
             tbsred.font = font;
+            TextButton.TextButtonStyle tbsbr = skin.get("brown", TextButton.TextButtonStyle.class);
+            tbsbr.font = font;
             SelectBox.SelectBoxStyle sbs = skin.get("default", SelectBox.SelectBoxStyle.class);
             sbs.font = font;
             sbs.listStyle.font = font;
@@ -144,6 +150,8 @@ public class Andius extends Game {
             tbs.font = largeFont;
             TextButton.TextButtonStyle tbsred = skin.get("red-larger", TextButton.TextButtonStyle.class);
             tbsred.font = largeFont;
+            TextButton.TextButtonStyle tbsbr = skin.get("brown-larger", TextButton.TextButtonStyle.class);
+            tbsbr.font = largeFont;
             SelectBox.SelectBoxStyle sbs = skin.get("larger", SelectBox.SelectBoxStyle.class);
             sbs.font = largeFont;
             sbs.listStyle.font = largeFont;
@@ -167,9 +175,10 @@ public class Andius extends Game {
             }
 
             TextureRegion[][] inv = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/inventory.png")), 44, 44);
-            for (int row = 0; row < 8 * 5; row++) {
-                for (int col = 0; col < 12; col++) {
-                    hudIcons[row * 8 + col] = inv[row][col];
+            Texture tx = new Texture(Gdx.files.classpath("assets/data/inventory.png"));
+            for (int row = 0; row < tx.getHeight() / 44; row++) {
+                for (int col = 0; col < tx.getWidth() / 44; col++) {
+                    invIcons[row * tx.getWidth() / 44 + col] = inv[row][col];
                 }
             }
 
@@ -229,6 +238,9 @@ public class Andius extends Game {
             Gson gson = builder.create();
             ITEMS = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
             }.getType());
+            for (Item i : ITEMS) {
+                ITEMS_MAP.put(i.name, i);
+            }
             REWARDS = gson.fromJson(json2, new TypeToken<java.util.List<Reward>>() {
             }.getType());
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {

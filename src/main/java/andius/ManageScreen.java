@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.ITEMS;
+import static andius.Andius.ITEMS_MAP;
 import andius.objects.Race;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
@@ -214,7 +215,7 @@ public class ManageScreen implements Screen, Constants {
                 sel.maxhp = sel.hp;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
-                sel.weapon = ITEMS.get(101).clone();
+                sel.weapon = ITEMS_MAP.get("HANDS").clone();
                 
                 sel.magePoints = sel.getMaxMageSpellPoints();
                 sel.magePoints = sel.getMaxClericSpellPoints();
@@ -720,10 +721,10 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
         if (sel.weapon != null) {
-            font.draw(batch, "Weapon: " + sel.weapon.getName(), x, viewY -= 24);
+            font.draw(batch, "Weapon: " + sel.weapon.name, x, viewY -= 24);
         }
         if (sel.armor != null) {
-            font.draw(batch, "Armour: " + sel.armor.getName(), x, viewY -= 18);
+            font.draw(batch, "Armour: " + sel.armor.name, x, viewY -= 18);
         }
 
         viewY = Andius.SCREEN_HEIGHT - 590;
@@ -755,10 +756,10 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
         font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
         if (sel.weapon != null) {
-            font.draw(batch, "Weapon: " + sel.weapon.getName(), x, viewY -= 24);
+            font.draw(batch, "Weapon: " + sel.weapon.name, x, viewY -= 24);
         }
         if (sel.armor != null) {
-            font.draw(batch, "Armour: " + sel.armor.getName(), x, viewY -= 18);
+            font.draw(batch, "Armour: " + sel.armor.name, x, viewY -= 18);
         }
         
         viewY = Andius.SCREEN_HEIGHT - 590;

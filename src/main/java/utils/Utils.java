@@ -170,7 +170,7 @@ public class Utils {
     }
 
     public static int dealDamage(CharacterRecord attacker, MutableMonster defender) {
-        int damage = attacker.weapon.getDamage().roll();
+        int damage = attacker.weapon.damage.roll();
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;

@@ -1,6 +1,6 @@
 package andius.objects;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     public enum ItemType {
         WEAPON,
@@ -12,21 +12,21 @@ public class Item {
         RING_AMULET;
     }
 
-    String name;
-    String genericName;
-    int iconID;
-    int type;
-    long cost;
-    Dice damage;
-    int armourClass;
-    int extraSwings;
-    int stock;
-    boolean cursed;
-    String usable;
-    Spells spell;
-    int numberUses;
-    int regeneration;
-    int range;
+    public String name;
+    public String genericName;
+    public int iconID;
+    public int type;
+    public long cost;
+    public Dice damage;
+    public int armourClass;
+    public int extraSwings;
+    public int stock;
+    public boolean cursed;
+    public String usable;
+    public Spells spell;
+    public int numberUses;
+    public int regeneration;
+    public int range;
 
     @Override
     public Item clone() {
@@ -52,69 +52,25 @@ public class Item {
         return this.usable.contains(ct.getAbbr());
     }
 
-    public int getIconID() {
-        return iconID;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public long getCost() {
-        return cost;
-    }
-
-    public String getGenericName() {
-        return genericName;
-    }
-
-    public Dice getDamage() {
-        return damage;
-    }
-
-    public int getArmourClass() {
-        return armourClass;
-    }
-
-    public int getExtraSwings() {
-        return extraSwings;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public boolean isCursed() {
-        return cursed;
-    }
-
-    public Spells getSpell() {
-        return spell;
-    }
-
-    public int getNumberUses() {
-        return numberUses;
-    }
-
     public void use() {
-        this.numberUses --;
+        this.numberUses--;
     }
 
-    public int getRegeneration() {
-        return regeneration;
+    @Override
+    public int compareTo(Item o) {
+        if (this.type != o.type) {
+            return Integer.compare(this.type, o.type);
+        }
+//        if (!this.name.equals(o.name)) {
+//            return this.name.compareTo(o.name);
+//        }
+        return Long.compare(this.cost, o.cost);
     }
 
-    public int getRange() {
-        return range;
-    }
-    
     @Override
     public String toString() {
-        return String.format("%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d", name, type,damage, armourClass, extraSwings,spell,numberUses,regeneration);
+        return String.format("%s %d %s %s", name, cost, armourClass, spell != null ? spell : "");
+        //return String.format("%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d", name, type, damage, armourClass, extraSwings, spell, numberUses, regeneration);
     }
 
 }

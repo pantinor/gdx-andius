@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.MONSTERS;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
@@ -83,14 +84,27 @@ public class StartScreen implements Screen, Constants {
                         //Andius.mainGame.setScreen(scr);
                         //stage.clear();
 
-                        FileHandleResolver resolver = new Constants.ClasspathResolver();
-                        TmxMapLoader loader = new TmxMapLoader(resolver);
-                        TiledMap tm = loader.load("assets/data/combat1.tmx");
-                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
-                        mainGame.setScreen(cs);
-                        
-//                        RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
-//                        mainGame.setScreen(rs);
+//                        FileHandleResolver resolver = new Constants.ClasspathResolver();
+//                        TmxMapLoader loader = new TmxMapLoader(resolver);
+//                        TiledMap tm = loader.load("assets/data/combat1.tmx");
+//                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
+//                        mainGame.setScreen(cs);
+                        //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+                        //mainGame.setScreen(rs);
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("HELM").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SHORT SWORD").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("WERDNAS AMULET").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
+//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
+
+                        EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
+                        mainGame.setScreen(es);
 
                     }
                 }
