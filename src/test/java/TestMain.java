@@ -1,7 +1,6 @@
 
-import andius.Constants;
+import static andius.Constants.CLASSPTH_RSLVR;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,8 +31,7 @@ public class TestMain extends Game {
 
         try {
 
-            FileHandleResolver resolver = new Constants.ClasspathResolver();
-            TmxMapLoader loader = new TmxMapLoader(resolver);
+            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
             TiledMap tm = loader.load("assets/data/combat1.tmx");
 
             batch2 = new SpriteBatch();

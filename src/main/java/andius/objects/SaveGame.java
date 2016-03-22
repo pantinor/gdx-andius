@@ -87,16 +87,19 @@ public class SaveGame implements Constants {
 
         public int submorsels = 400;
 
-        public void awardXP(int v) {
-            exp = Utils.adjustValueMax(exp, v, Integer.MAX_VALUE);
+        public void awardXP(int amt) {
+            exp = Utils.adjustValueMax(exp, amt, Integer.MAX_VALUE);
         }
 
-        public void adjustGold(int v) {
-            gold = Utils.adjustValue(gold, v, Integer.MAX_VALUE, 0);
+        public void adjustGold(int amt) {
+            gold = Utils.adjustValue(gold, amt, Integer.MAX_VALUE, 0);
         }
         
-        public void adjustHP(int v) {
-            hp = Utils.adjustValue(hp, v, Integer.MAX_VALUE, 0);
+        public void adjustHP(int amt) {
+            hp = Utils.adjustValue(hp, amt, Integer.MAX_VALUE, 0);
+            if (hp <= 0) {
+                status = Status.DEAD;
+            }
         }
         
         public boolean isDisabled() {

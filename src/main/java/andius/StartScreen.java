@@ -81,7 +81,7 @@ public class StartScreen implements Screen, Constants {
                     } else {
                         BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
                         scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
-                        //Andius.mainGame.setScreen(scr);
+                        Andius.mainGame.setScreen(scr);
                         //stage.clear();
 
 //                        FileHandleResolver resolver = new Constants.ClasspathResolver();
@@ -103,8 +103,8 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
 
-                        EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
-                        mainGame.setScreen(es);
+//                        EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
+//                        mainGame.setScreen(es);
 
                     }
                 }

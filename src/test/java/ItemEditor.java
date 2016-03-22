@@ -192,7 +192,7 @@ public class ItemEditor extends InputAdapter implements ApplicationListener {
         stage.draw();
     }
 
-    private void writeJson(String file, Object obj) {
+    private void writeJson(String file, List<Item> obj) {
         try {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.setPrettyPrinting().create();

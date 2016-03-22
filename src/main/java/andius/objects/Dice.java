@@ -18,6 +18,15 @@ public class Dice {
         roll += bonus;
         return roll;
     }
+    
+    public int getMax() {
+        int roll = 0;
+        for (int i=0;i<qty;i++) {
+            roll += sides;
+        }
+        roll += bonus;
+        return roll;
+    }
 
     @Override
     public String toString() {

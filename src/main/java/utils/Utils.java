@@ -18,24 +18,24 @@ public class Utils {
         return RAND.nextInt(high - low) + low;
     }
 
-    public static int adjustValueMax(int v, int val, int max) {
-        v += val;
+    public static int adjustValueMax(int v, int amt, int max) {
+        v += amt;
         if (v > max) {
             v = max;
         }
         return v;
     }
 
-    public static int adjustValueMin(int v, int val, int min) {
-        v += val;
+    public static int adjustValueMin(int v, int amt, int min) {
+        v += amt;
         if (v < min) {
             v = min;
         }
         return v;
     }
 
-    public static int adjustValue(int v, int val, int max, int min) {
-        v += val;
+    public static int adjustValue(int v, int amt, int max, int min) {
+        v += amt;
         if (v > max) {
             v = max;
         }

@@ -6,7 +6,6 @@
 package andius;
 
 import static andius.Andius.mainGame;
-import static andius.Constants.ROSTER_FILENAME;
 import static andius.Constants.SAVE_FILENAME;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
@@ -29,22 +28,14 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Base64Coder;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileOutputStream;
-import java.util.zip.GZIPOutputStream;
 import utils.Utils;
 
 /**
@@ -144,13 +135,8 @@ public class EquipmentScreen implements Screen, Constants {
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                try {
-                    for (PlayerIndex pi : EquipmentScreen.this.playerSelection.getItems()) {
-                        pi.save();
-                    }
-                    EquipmentScreen.this.context.saveGame.write(SAVE_FILENAME);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                for (PlayerIndex pi : EquipmentScreen.this.playerSelection.getItems()) {
+                    pi.save();
                 }
                 mainGame.setScreen(contextMap.getScreen());
             }

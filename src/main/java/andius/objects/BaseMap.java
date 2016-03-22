@@ -1,9 +1,15 @@
 package andius.objects;
 
+import static andius.Andius.CTX;
+import static andius.Andius.mainGame;
+import andius.CombatScreen;
+import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Map;
 import andius.Direction;
 import andius.GameScreen;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +46,7 @@ public class BaseMap {
     public void addPortal(Map map, int sx, int sy, int dx, int dy, List<Vector3> randoms) {
         portals.add(new Portal(map, sx, sy, dx, dy, randoms));
     }
-    
+
     public Portal getPortal(int sx, int sy) {
         for (Portal p : portals) {
             if (p.getSx() == sx && p.getSy() == sy) {
@@ -75,7 +81,10 @@ public class BaseMap {
                 case ATTACK_AVATAR: {
                     int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
                     if (dist <= 1) {
-                        //combat
+                        TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                        TiledMap tm = loader.load("assets/data/combat1.tmx");
+                        CombatScreen cs = new CombatScreen(CTX, map, tm, p);
+                        mainGame.setScreen(cs);
                         continue;
                     } else if (dist >= 4) {
                         //dont move until close enough

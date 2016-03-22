@@ -137,29 +137,57 @@ minus-down
   index: -1
 right-pointer-up
   rotate: false
-  xy: 320, 32
-  size: 32, 32
-  orig: 32, 32
+  xy: 328, 40
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 right-pointer-down
   rotate: false
-  xy: 352, 32
-  size: 32, 32
-  orig: 32, 32
+  xy: 328, 0
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 left-pointer-up
   rotate: false
-  xy: 352, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 368, 40
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 left-pointer-down
   rotate: false
-  xy: 320, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 368, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+inventory-up
+  rotate: false
+  xy: 256, 80
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+inventory-down
+  rotate: false
+  xy: 299, 80
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+save-up
+  rotate: false
+  xy: 256, 122
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+save-down
+  rotate: false
+  xy: 299, 122
+  size: 42, 42
+  orig: 42, 42
   offset: 0, 0
   index: -1

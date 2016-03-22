@@ -1,9 +1,12 @@
 package andius;
 
+import static andius.Andius.CTX;
 import static andius.Andius.game_scr_avatar;
+import static andius.Andius.mainGame;
 import andius.objects.Icons;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
+import andius.objects.BaseMap;
 import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -40,7 +43,7 @@ public class GameScreen extends BaseScreen {
 
         mapViewPort = new ScreenViewport(camera);
 
-        addButtons();
+        addButtons(this.map);
 
         renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 1f);
 
@@ -49,7 +52,7 @@ public class GameScreen extends BaseScreen {
             public void render(float time) {
                 renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
                 for (Actor cr : GameScreen.this.map.getMap().actors) {
-                    if (renderer.shouldRenderCell(currentRoomId,cr.getWx(), cr.getWy())) {
+                    if (renderer.shouldRenderCell(currentRoomId, cr.getWx(), cr.getWy())) {
                         renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
                     }
                 }
@@ -109,6 +112,9 @@ public class GameScreen extends BaseScreen {
 //        Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
+        stage.act();
+        stage.draw();
+
     }
 
     @Override
@@ -163,6 +169,10 @@ public class GameScreen extends BaseScreen {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
+        } else if (keycode == Keys.I) {
+            EquipmentScreen es = new EquipmentScreen(CTX, this.map);
+            mainGame.setScreen(es);
+            return false;
         }
 
         finishTurn((int) v.x, (int) v.y);
@@ -211,6 +221,13 @@ public class GameScreen extends BaseScreen {
         }
 
         return true;
+    }
+
+    @Override
+    public void endCombat(boolean isWon, andius.objects.Actor opponent) {
+        if (isWon) {
+            this.map.getMap().removeCreature(opponent);
+        }
     }
 
     @Override

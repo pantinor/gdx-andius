@@ -209,7 +209,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
         return false;
     }
 
-    private void writeJson(String file, Object obj) {
+    private void writeJson(String file, java.util.List<Monster> obj) {
         try {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.setPrettyPrinting().create();

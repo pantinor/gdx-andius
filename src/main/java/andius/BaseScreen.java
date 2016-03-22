@@ -1,7 +1,9 @@
 package andius;
 
-import andius.objects.BaseMap;
-import andius.objects.Actor;
+import static andius.Andius.CTX;
+import static andius.Andius.mainGame;
+import static andius.Constants.SAVE_FILENAME;
+import com.badlogic.gdx.Gdx;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -9,6 +11,9 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.XORShiftRandom;
@@ -56,7 +61,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     public abstract void finishTurn(int currentX, int currentY);
 
-    public void endCombat(boolean isWon, BaseMap combatMap, boolean wounded) {
+    public void endCombat(boolean isWon, andius.objects.Actor opponent) {
 
     }
 
@@ -72,19 +77,40 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         Andius.HUD.logDeleteLastChar();
     }
 
-    public final void addButtons() {
+    public final void addButtons(final Map map) {
+        Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
 
-//        TextButton bookButt = new TextButton("Book", Exodus.skin, "wood");
-//        bookButt.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-//                Exodus.mainGame.setScreen(new BookScreen(BaseScreen.this, Exodus.skin));
-//            }
-//        });
-//        bookButt.setX(625);
-//        bookButt.setY(15);
-//
-//        stage.addActor(bookButt);
+        ImageButton inventory = new ImageButton(imgBtnSkin, "inventory");
+        inventory.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
+                Sounds.play(Sound.TRIGGER);
+                EquipmentScreen es = new EquipmentScreen(CTX, map);
+                mainGame.setScreen(es);
+            }
+        });
+        inventory.setX(52);
+        inventory.setY(5);
+
+        ImageButton save = new ImageButton(imgBtnSkin, "save");
+        save.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
+                try {
+                    Sounds.play(Sound.TRIGGER);
+                    CTX.saveGame.write(SAVE_FILENAME);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mainGame.setScreen(map.getScreen());
+            }
+        });
+        save.setX(5);
+        save.setY(5);
+
+        stage.addActor(inventory);
+        stage.addActor(save);
+
     }
 
     public abstract void partyDeath();

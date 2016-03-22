@@ -55,18 +55,19 @@ public class CombatScreen extends BaseScreen {
     public static int AREA_PLAYERS = 6;
     public final static int MAP_DIM = 13;
 
-    private MutableMonster[] crSlots;
+    private final MutableMonster[] crSlots;
 
-    private CursorActor cursor;
-    public Map contextMap;
-    private Monster crType;
-    private Context context;
-    private TiledMap tmap;
-    private OrthogonalTiledMapRenderer renderer;
-    private SpriteBatch batch;
-    private SecondaryInputProcessor sip;
-    private Viewport mapViewPort;
-    private GlyphLayout layout = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 76 - 5, Align.left, true);
+    private final CursorActor cursor;
+    public final Map contextMap;
+    public final andius.objects.Actor opponent;
+    private final Monster crType;
+    private final Context context;
+    private final TiledMap tmap;
+    private final OrthogonalTiledMapRenderer renderer;
+    private final SpriteBatch batch;
+    private final SecondaryInputProcessor sip;
+    private final Viewport mapViewPort;
+    private final GlyphLayout layout = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 65, Align.left, true);
 
     public final List<andius.objects.Actor> enemies = new ArrayList<>();
     public final List<andius.objects.Actor> partyMembers = new ArrayList<>();
@@ -75,10 +76,11 @@ public class CombatScreen extends BaseScreen {
     private Texture enemy_hud;
     int[] hud_enmy_x = new int[]{50, 89 + 40, 168 + 40, 247 + 40, 326 + 40, 405 + 40, 484 + 40, 563 + 40};
 
-    public CombatScreen(Context context, Map contextMap, TiledMap tmap, Monster monster) {
+    public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent) {
 
         this.contextMap = contextMap;
-        this.crType = monster;
+        this.opponent = opponent;
+        this.crType = opponent.getMonster();
         this.context = context;
         this.tmap = tmap;
         this.renderer = new OrthogonalTiledMapRenderer(this.tmap);
@@ -527,7 +529,9 @@ public class CombatScreen extends BaseScreen {
 
             for (Monster m : crSlots) {
                 if (m != null) {
-                    exp += m.getExp();
+                    if (m.getExp() > exp) {
+                        exp = m.getExp();
+                    }
                     if (m.getGoldReward() > goldRewardId) {
                         goldRewardId = m.getGoldReward();
                     }
@@ -537,6 +541,7 @@ public class CombatScreen extends BaseScreen {
                 }
             }
             mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, REWARDS.get(goldRewardId), REWARDS.get(chestRewardId)));
+            this.contextMap.getScreen().endCombat(isWon, this.opponent);
         } else {
             mainGame.setScreen(startScreen);
         }

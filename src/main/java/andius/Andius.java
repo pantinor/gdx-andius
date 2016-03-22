@@ -83,6 +83,8 @@ public class Andius extends Game {
     public static final java.util.Map<String, Item> ITEMS_MAP = new HashMap<>();
 
     public static java.util.List<Monster> MONSTERS;
+    public static final java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
+
     public static java.util.List<Reward> REWARDS;
 
     public static void main(String[] args) {
@@ -220,11 +222,6 @@ public class Andius extends Game {
             explRed = new Animation(.1f, red);
             explGreen = new Animation(.1f, green);
 
-            Icons.init();
-            Constants.Map.init();
-            Constants.Moongate.init();
-            Conversations.init();
-
             InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
             String json = IOUtils.toString(is);
 
@@ -245,6 +242,14 @@ public class Andius extends Game {
             }.getType());
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
+            for (Monster i : MONSTERS) {
+                MONSTER_MAP.put(i.name, i);
+            }
+
+            Icons.init();
+            Constants.Map.init();
+            Constants.Moongate.init();
+            Conversations.init();
 
         } catch (Exception e) {
             e.printStackTrace();

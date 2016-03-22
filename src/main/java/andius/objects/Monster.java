@@ -2,7 +2,7 @@ package andius.objects;
 
 import java.util.List;
 
-public class Monster {
+public class Monster implements Comparable<Monster> {
 
     public String genericName;
     public String name;
@@ -152,6 +152,19 @@ public class Monster {
 
     public static String[] getMonsterClass() {
         return monsterClass;
+    }
+    
+    @Override
+    public int compareTo(Monster o) {
+        if (this.exp != o.exp) {
+            return Integer.compare(this.exp, o.exp);
+        }
+        return Integer.compare(this.hitPoints.getMax(), o.hitPoints.getMax());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %d %d %s %s", name, exp, armourClass, hitPoints, damage);
     }
 
 }

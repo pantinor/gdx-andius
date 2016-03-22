@@ -421,359 +421,429 @@
   </object>
   <object id="331" name="WORLD" x="2352" y="864" width="48" height="48"/>
  </objectgroup>
- <objectgroup name="people" visible="0">
+ <objectgroup name="people">
   <object id="220" name="large rat" type="MONSTER" x="5376" y="528" width="48" height="48">
    <properties>
+    <property name="creature" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="221" name="small rat" type="MONSTER" x="5328" y="576" width="48" height="48">
    <properties>
+    <property name="creature" value="Orc"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="222" name="small rat" type="MONSTER" x="5328" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Orc"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="223" name="bear" type="MONSTER" x="5232" y="288" width="48" height="48">
    <properties>
+    <property name="creature" value="Capybara"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="224" name="omar" type="MONSTER" x="5424" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="225" name="mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
    <properties>
+    <property name="creature" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="226" name="unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
    <properties>
+    <property name="creature" value="Coyote"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="227" name="werejackal" type="MONSTER" x="4320" y="336" width="48" height="48">
    <properties>
+    <property name="creature" value="Coyote"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="228" name="blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
    <properties>
+    <property name="creature" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="229" name="dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
    <properties>
+    <property name="creature" value="Wyvern"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="230" name="enchanted sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="231" name="very young dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
    <properties>
+    <property name="creature" value="Dragon Puppy"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="232" name="nizim al mulk" type="MONSTER" x="2976" y="1488" width="48" height="48">
    <properties>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="233" name="salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
    <properties>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="234" name="alp arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
    <properties>
+    <property name="creature" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="235" name="absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
    <properties>
+    <property name="creature" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="236" name="abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
+    <property name="creature" value="Bushwacker"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="237" name="succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
    <properties>
+    <property name="creature" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="238" name="slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
+    <property name="creature" value="Bubbly Slime"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="239" name="barn owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
    <properties>
+    <property name="creature" value="Kobold"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="240" name="tiger" type="MONSTER" x="2304" y="1152" width="48" height="48">
    <properties>
+    <property name="creature" value="Killer Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="242" name="mailik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
+    <property name="creature" value="Highway Man"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="243" name="sultan shahriar" type="MONSTER" x="1680" y="768" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="244" name="guard" type="MONSTER" x="1680" y="672" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="245" name="guard" type="MONSTER" x="1680" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="246" name="tan rat" type="MONSTER" x="1200" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="247" name="grey rat" type="MONSTER" x="1200" y="816" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="248" name="enchanted statue" type="MONSTER" x="1344" y="672" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="249" name="minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
    <properties>
+    <property name="creature" value="Ogre Lord"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="250" name="minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="251" name="stone statue" type="MONSTER" x="720" y="3744" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="252" name="stone statue" type="MONSTER" x="384" y="4176" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="253" name="oozing stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
    <properties>
+    <property name="creature" value="Grave Mist"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="254" name="stone statue" type="MONSTER" x="672" y="4608" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="255" name="son of minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
    <properties>
+    <property name="creature" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="256" name="green dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
    <properties>
+    <property name="creature" value="Wyvern"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="257" name="mechanized sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="258" name="whale" type="FRIENDLY" x="2400" y="3552" width="48" height="48">
    <properties>
+    <property name="creature" value="Spirit"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="259" name="werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="260" name="giant scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
    <properties>
+    <property name="creature" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="261" name="sewer rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="262" name="wererat" type="MONSTER" x="2208" y="3168" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="263" name="jungle rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
    <properties>
+    <property name="creature" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="264" name="sword of damacles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="265" name="two edged sword" type="FRIENDLY" x="2352" y="3024" width="48" height="48">
    <properties>
+    <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="266" name="dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
    <properties>
+    <property name="creature" value="Wyvern"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="267" name="aries the ram" type="MONSTER" x="6096" y="3120" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="268" name="pisces" type="MONSTER" x="6432" y="3408" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="269" name="aquarius" type="MONSTER" x="6576" y="3408" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="270" name="taurus" type="MONSTER" x="6000" y="3552" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="271" name="gemini" type="MONSTER" x="5472" y="3936" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="272" name="cancer the crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="273" name="leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
    <properties>
+    <property name="creature" value="Killer Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="274" name="virgo" type="MONSTER" x="6048" y="4992" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="275" name="libra" type="MONSTER" x="6288" y="4656" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="276" name="scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="277" name="sagittarius" type="MONSTER" x="6816" y="4128" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="278" name="capricornus" type="MONSTER" x="6768" y="3936" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="279" name="coggia houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
    <properties>
+    <property name="creature" value="Lvl 3 Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="281" name="morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
+    <property name="creature" value="Priestess"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="282" name="hassan ben sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
    <properties>
+    <property name="creature" value="Lvl 3 Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="283" name="mountain scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
+    <property name="creature" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="284" name="big zombie" type="MONSTER" x="3024" y="240" width="48" height="48">
    <properties>
+    <property name="creature" value="Rotting Corpse"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="285" name="small zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
    <properties>
+    <property name="creature" value="Zombie"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="286" name="witless zombie" type="MONSTER" x="3120" y="240" width="48" height="48">
    <properties>
+    <property name="creature" value="Zombie"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="287" name="sky wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
    <properties>
+    <property name="creature" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="288" name="sun wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
    <properties>
+    <property name="creature" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="289" name="earth wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
    <properties>
+    <property name="creature" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="330" name="gemini" type="MONSTER" x="5568" y="3936" width="48" height="48">
    <properties>
+    <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="404" name="thief" type="MONSTER" x="2016" y="720" width="48" height="48">
    <properties>
+    <property name="creature" value="Lvl 4 Thief"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="vendors">
+ <objectgroup name="vendors" visible="0">
   <object id="72" name="armor" type="vendor" x="2640" y="2160" width="48" height="48">
    <properties>
     <property name="Leather Armor" value="240"/>

@@ -1,5 +1,7 @@
 package andius;
 
+import static andius.Andius.CTX;
+import static andius.Andius.mainGame;
 import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -41,7 +43,7 @@ public class WorldScreen extends BaseScreen {
 
         mapViewPort = new ScreenViewport(camera);
 
-        addButtons();
+        addButtons(this.map);
 
         moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
 
@@ -112,7 +114,7 @@ public class WorldScreen extends BaseScreen {
 
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + feluccaphase), 372, Andius.SCREEN_HEIGHT - 32, 20, 20);
-        
+
         Andius.HUD.render(batch, Andius.CTX);
 
         //Vector3 v = getCurrentMapCoords();
@@ -192,6 +194,10 @@ public class WorldScreen extends BaseScreen {
             if (p != null) {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
+        } else if (keycode == Keys.I) {
+            EquipmentScreen es = new EquipmentScreen(CTX, this.map);
+            mainGame.setScreen(es);
+            return false;
         }
 
 //        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);

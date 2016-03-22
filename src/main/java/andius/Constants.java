@@ -104,8 +104,7 @@ public interface Constants {
 
         public static void init() {
 
-            FileHandleResolver resolver = new Constants.ClasspathResolver();
-            TmxMapLoader loader = new TmxMapLoader(resolver);
+            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
             for (Map m : Map.values()) {
                 m.tiledMap = loader.load("assets/data/" + m.tmxFile);
                 m.baseMap = new BaseMap();
@@ -163,16 +162,23 @@ public interface Constants {
                         Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
                         Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                         MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-                        
+                                                        
+                        //System.out.printf("Loading actor: %s %s %s on map %s.\n",surname,role,movement,m);
+
                         Actor actor = new Actor(icon);
                         if (role == Role.MONSTER) {
                             try {
-                                float mid = obj.getProperties().get("creature", Float.class);
-                                Monster monster = Andius.MONSTERS.get((int) mid);
+                                String mid = obj.getProperties().get("creature", String.class);
+                                Monster monster = Andius.MONSTER_MAP.get(mid);
                                 if (monster != null) {
-                                    actor.set(new MutableMonster(monster), role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                                    MutableMonster mm = new MutableMonster(monster);
+                                    mm.name = surname;
+                                    actor.set(mm, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
+                                } else {
+                                    System.err.printf("Cannot load actor: %s %s %s on map %s.\n",surname,role,movement,m);
                                 }
                             } catch (Exception e) {
+                                System.err.printf("Cannot find monster: %s on map %s.\n",surname,m);
                             }
                         } else {
                             actor.set(null, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
@@ -554,14 +560,12 @@ public interface Constants {
         MERCHANT;
     }
 
-    public class ClasspathResolver implements FileHandleResolver {
-
+    public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {
         @Override
         public FileHandle resolve(String fileName) {
             return Gdx.files.classpath(fileName);
         }
-
-    }
+    };
 
     public enum SpellTarget {
         PERSON, PARTY, MONSTER, MONSTER_GROUP, ALL_MONSTERS, VARIABLE, NONE, CASTER
