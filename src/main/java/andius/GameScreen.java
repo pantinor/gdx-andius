@@ -169,10 +169,6 @@ public class GameScreen extends BaseScreen {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
-        } else if (keycode == Keys.I) {
-            EquipmentScreen es = new EquipmentScreen(CTX, this.map);
-            mainGame.setScreen(es);
-            return false;
         }
 
         finishTurn((int) v.x, (int) v.y);

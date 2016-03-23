@@ -24,6 +24,10 @@ public class MutableMonster extends Monster {
         this.maxHitPoints = this.hitPoints.roll();
         this.currentHitPoints = this.maxHitPoints;
     }
+    
+    public void setIcon(Icons icon) {
+        this.icon = icon;
+    }
 
     public int getCurrentHitPoints() {
         return currentHitPoints;

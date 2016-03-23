@@ -61,9 +61,9 @@ public class Item implements Comparable<Item> {
         if (this.type != o.type) {
             return Integer.compare(this.type, o.type);
         }
-//        if (!this.name.equals(o.name)) {
-//            return this.name.compareTo(o.name);
-//        }
+        if (this.armourClass != o.armourClass) {
+            return Integer.compare(this.armourClass, o.armourClass);
+        }
         return Long.compare(this.cost, o.cost);
     }
 

@@ -6,7 +6,7 @@
 package andius;
 
 import static andius.Andius.mainGame;
-import static andius.Constants.SAVE_FILENAME;
+import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame;
@@ -56,6 +56,7 @@ public class EquipmentScreen implements Screen, Constants {
     private final TextButton drop;
     private final TextButton unequip;
     private final TextButton trade;
+    private final TextButton cancel;
 
     private final TradeSliderBox traderSlider;
 
@@ -131,7 +132,16 @@ public class EquipmentScreen implements Screen, Constants {
         invPane = new ScrollPane(playerSelection.getSelected().invTable);
         invPane.setBounds(485, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
-        this.exit = new TextButton("EXIT", Andius.skin, "brown-larger");
+        this.cancel = new TextButton("CNCL", Andius.skin, "brown-larger");
+        this.cancel.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                mainGame.setScreen(contextMap.getScreen());
+            }
+        });
+        this.cancel.setBounds(100, 220, 65, 40);
+
+        this.exit = new TextButton("SAVE", Andius.skin, "brown-larger");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -156,7 +166,26 @@ public class EquipmentScreen implements Screen, Constants {
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (selectedImage != null && selectedImage.getUserObject() != null) {
+                    Item it = (Item) selectedImage.getUserObject();
+                    selectedPlayer.invTable.add(new ItemListing(it, selectedPlayer.character));
+                    selectedPlayer.invTable.row();
+                    selectedImage.setDrawable(new TextureRegionDrawable(icon(null)));
+                    selectedImage.setUserObject(null);
+                    selectedImage = null;
 
+                    selectedPlayer.acLabel.setText("" + selectedPlayer.calculateAC());
+
+                    if (selectedPlayer.weaponIcon.getUserObject() != null) {
+                        Item weap = (Item) selectedPlayer.weaponIcon.getUserObject();
+                        selectedPlayer.damageLabel.setText(weap.damage.toString());
+                    } else {
+                        selectedPlayer.damageLabel.setText("");
+                    }
+                    Sounds.play(Sound.TRIGGER);
+                } else {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                }
             }
         });
         this.unequip.setBounds(325, 220, 65, 40);
@@ -165,7 +194,14 @@ public class EquipmentScreen implements Screen, Constants {
         this.drop.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
+                if (selectedItem != null) {
+                    selectedItem.removeActor(focusIndicator);
+                    selectedPlayer.invTable.removeActor(selectedItem);
+                    selectedItem = null;
+                    Sounds.play(Sound.TRIGGER);
+                } else {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                }
             }
         });
         this.drop.setBounds(400, 220, 65, 40);
@@ -173,6 +209,7 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(sp1);
         stage.addActor(invPane);
         stage.addActor(exit);
+        stage.addActor(cancel);
         stage.addActor(trade);
         stage.addActor(drop);
         stage.addActor(invDesc);
@@ -203,6 +240,7 @@ public class EquipmentScreen implements Screen, Constants {
     }
 
     @Override
+
     public void show() {
         Gdx.input.setInputProcessor(stage);
 
@@ -295,7 +333,7 @@ public class EquipmentScreen implements Screen, Constants {
             item1Icon = make(ItemType.RING_AMULET, sp.item1, icon(sp.item1), 322, Andius.SCREEN_HEIGHT - 333);
             item2Icon = make(ItemType.RING_AMULET, sp.item2, icon(sp.item2), 376, Andius.SCREEN_HEIGHT - 333);
 
-            acLabel = new Label(""+character.calculateAC(), Andius.skin, "larger");
+            acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
             acLabel.setX(360);
             acLabel.setY(Andius.SCREEN_HEIGHT - 393);
 
@@ -303,7 +341,7 @@ public class EquipmentScreen implements Screen, Constants {
             damageLabel.setX(360);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 437);
 
-            goldLabel = new Label(""+character.gold, Andius.skin, "larger");
+            goldLabel = new Label("" + character.gold, Andius.skin, "larger");
             goldLabel.setX(360);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 480);
 
@@ -338,11 +376,11 @@ public class EquipmentScreen implements Screen, Constants {
             character.glove = (Item) glovesIcon.getUserObject();
             character.item1 = (Item) item1Icon.getUserObject();
             character.item2 = (Item) item2Icon.getUserObject();
-            
+
             character.inventory.clear();
             for (Actor a : invTable.getChildren()) {
                 if (a instanceof ItemListing) {
-                    ItemListing il = (ItemListing)a;
+                    ItemListing il = (ItemListing) a;
                     character.inventory.add(il.item);
                 }
             }
@@ -379,9 +417,15 @@ public class EquipmentScreen implements Screen, Constants {
                         selectedItem.removeActor(focusIndicator);
                         PlayerIndex.this.invTable.removeActor(selectedItem);
                         selectedItem = null;
-                        
-                        acLabel.setText(""+character.calculateAC());
-                        damageLabel.setText(character.weapon.damage.toString());
+
+                        acLabel.setText("" + calculateAC());
+
+                        if (PlayerIndex.this.weaponIcon.getUserObject() != null) {
+                            Item weap = (Item) PlayerIndex.this.weaponIcon.getUserObject();
+                            selectedPlayer.damageLabel.setText(weap.damage.toString());
+                        } else {
+                            selectedPlayer.damageLabel.setText("");
+                        }
 
                     } else {
                         Sounds.play(Sound.NEGATIVE_EFFECT);
@@ -397,6 +441,44 @@ public class EquipmentScreen implements Screen, Constants {
                 return false;
             }
 
+        }
+
+        private int calculateAC() {
+            int ac = 10;
+
+            Item weapon = (Item) weaponIcon.getUserObject();
+            Item armor = (Item) armorIcon.getUserObject();
+            Item helm = (Item) helmIcon.getUserObject();
+            Item glove = (Item) glovesIcon.getUserObject();
+            Item shield = (Item) shieldIcon.getUserObject();
+            Item item1 = (Item) item1Icon.getUserObject();
+            Item item2 = (Item) item2Icon.getUserObject();
+
+            if (weapon != null) {
+                ac -= weapon.armourClass;
+            }
+            if (armor != null) {
+                ac -= armor.armourClass;
+            }
+            if (helm != null) {
+                ac -= helm.armourClass;
+            }
+            if (glove != null) {
+                ac -= glove.armourClass;
+            }
+            if (shield != null) {
+                ac -= shield.armourClass;
+            }
+            if (item1 != null) {
+                ac -= item1.armourClass;
+            }
+            if (item2 != null) {
+                ac -= item2.armourClass;
+            }
+            if (this.character.classType == ClassType.NINJA) {
+                ac = (this.character.level / 3) - 2;
+            }
+            return ac;
         }
     }
 

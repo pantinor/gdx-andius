@@ -218,7 +218,7 @@ public class ManageScreen implements Screen, Constants {
                 sel.weapon = ITEMS_MAP.get("HANDS").clone();
                 
                 sel.magePoints = sel.getMaxMageSpellPoints();
-                sel.magePoints = sel.getMaxClericSpellPoints();
+                sel.clericPoints = sel.getMaxClericSpellPoints();
                 
                 Sounds.play(Sound.TRIGGER);
             }
@@ -461,7 +461,7 @@ public class ManageScreen implements Screen, Constants {
         strPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && stExt + stVal < 18) {
                     extraPoints.decr();
                     stExt++;
                 }
@@ -481,7 +481,7 @@ public class ManageScreen implements Screen, Constants {
         intPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && inExt + inVal < 18) {
                     extraPoints.decr();
                     inExt++;
                 }
@@ -501,7 +501,7 @@ public class ManageScreen implements Screen, Constants {
         piPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && piExt + piVal < 18) {
                     extraPoints.decr();
                     piExt++;
                 }
@@ -511,7 +511,7 @@ public class ManageScreen implements Screen, Constants {
         vitMinus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val < extraPoints.max && viExt > 0) {
+                if (extraPoints.val < extraPoints.max && viExt > 0 && viExt + viVal < 19) {
                     extraPoints.incr();
                     viExt--;
                 }
@@ -521,7 +521,7 @@ public class ManageScreen implements Screen, Constants {
         vitPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && viExt + viVal < 18) {
                     extraPoints.decr();
                     viExt++;
                 }
@@ -541,7 +541,7 @@ public class ManageScreen implements Screen, Constants {
         agPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && agExt + agVal < 18) {
                     extraPoints.decr();
                     agExt++;
                 }
@@ -561,7 +561,7 @@ public class ManageScreen implements Screen, Constants {
         luPlus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (extraPoints.val > 0) {
+                if (extraPoints.val > 0 && luExt + luVal < 18) {
                     extraPoints.decr();
                     luExt++;
                 }

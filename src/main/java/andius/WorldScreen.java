@@ -194,10 +194,6 @@ public class WorldScreen extends BaseScreen {
             if (p != null) {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
-        } else if (keycode == Keys.I) {
-            EquipmentScreen es = new EquipmentScreen(CTX, this.map);
-            mainGame.setScreen(es);
-            return false;
         }
 
 //        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);

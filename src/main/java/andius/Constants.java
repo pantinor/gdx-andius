@@ -173,6 +173,7 @@ public interface Constants {
                                 if (monster != null) {
                                     MutableMonster mm = new MutableMonster(monster);
                                     mm.name = surname;
+                                    mm.setIcon(icon);
                                     actor.set(mm, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
                                 } else {
                                     System.err.printf("Cannot load actor: %s %s %s on map %s.\n",surname,role,movement,m);
