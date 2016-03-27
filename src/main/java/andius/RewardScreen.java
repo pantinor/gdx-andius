@@ -62,10 +62,10 @@ public class RewardScreen implements Screen, Constants {
     private final Stage stage;
 
     private final List<String> action;
-    private final Label playerSelectionLabel;
+    private final Label pselLabel;
     private final List<String> playerSelection;
     private final List<TrapType> trapSelection;
-    private final Table internalTable;
+
     private final Table logTable;
     private final ScrollPane logScroll;
     private final TextButton go;
@@ -75,8 +75,9 @@ public class RewardScreen implements Screen, Constants {
     private final java.util.List<CharacterRecord> whoTried = new java.util.ArrayList<>();
     private boolean chestOpened = false;
 
-    private static final int LOG_AREA_WIDTH = 400;
-    private static final int LOG_X = 300;
+    private static final int LOG_AREA_WIDTH = 650;
+    private static final int X_ALIGN = 280;
+    private static final int ITEM_HGT = 25;
 
     public RewardScreen(Context context, Map contextMap, int difficultyLevel, int expPoints, Reward goldReward, Reward chestReward) {
         this.context = context;
@@ -92,8 +93,6 @@ public class RewardScreen implements Screen, Constants {
 
         this.trapType = TrapType.values()[rand.nextInt(TrapType.values().length)];
 
-        this.playerSelectionLabel = new Label("WHICH PLAYER WILL OPEN ?", Andius.skin, "larger");
-
         final TrapType[] tt = new TrapType[TrapType.values().length - 1];
         for (int i = 1; i < TrapType.values().length; i++) {
             tt[i - 1] = TrapType.values()[i];
@@ -107,9 +106,9 @@ public class RewardScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (action.getSelected().equals("LEAVE")) {
-                    playerSelectionLabel.setText("");
+                    pselLabel.setText("");
                 } else {
-                    playerSelectionLabel.setText("WHICH PLAYER WILL " + action.getSelected() + " ?");
+                    pselLabel.setText("WHICH PLAYER WILL " + action.getSelected() + " ?");
                 }
                 if (action.getSelected().equals("DISARM")) {
                     trapSelection.setItems(tt);
@@ -155,38 +154,31 @@ public class RewardScreen implements Screen, Constants {
         ScrollPane sp2 = new ScrollPane(this.playerSelection, Andius.skin);
         ScrollPane sp3 = new ScrollPane(this.trapSelection, Andius.skin);
 
-        this.internalTable = new Table(Andius.skin);
-        this.internalTable.defaults().pad(5);
-
-        this.internalTable.add(new Label("A CHEST !", Andius.skin, "larger")).align(Align.left);
-        this.internalTable.add().minWidth(100);
-        this.internalTable.add().minWidth(100);
-        this.internalTable.add().minWidth(100);
-        this.internalTable.row();
-
-        this.internalTable.add(new Label("YOU MAY :", Andius.skin, "larger")).align(Align.left);
-        this.internalTable.add(this.playerSelectionLabel).align(Align.left).minWidth(100);
-        this.internalTable.add().minWidth(100);
-        this.internalTable.add().minWidth(100);
-        this.internalTable.row();
-
-        this.internalTable.add(sp1).align(Align.top).minWidth(100).minHeight(150);
-        this.internalTable.add(sp2).align(Align.top).minWidth(100).minHeight(150);
-        this.internalTable.add(sp3).align(Align.top).minWidth(150).minHeight(150);
-        this.internalTable.add(this.go).align(Align.top).minWidth(100).minHeight(40);
-        this.internalTable.row();
-
-        this.internalTable.setX(575);
-        this.internalTable.setY(410);
-
-        stage.addActor(internalTable);
+        Label tmp1 = new Label("A CHEST !", Andius.skin, "larger");
+        Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");
+        this.pselLabel = new Label("WHICH PLAYER WILL OPEN ?", Andius.skin, "larger");
 
         this.logTable = new Table(Andius.skin);
         this.logTable.defaults().padLeft(5).align(Align.left);
         logScroll = new ScrollPane(this.logTable, Andius.skin);
-        logScroll.setBounds(LOG_X, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
-        stage.addActor(logScroll);
 
+        tmp1.setBounds(X_ALIGN, 500, 175, ITEM_HGT);
+        tmp2.setBounds(X_ALIGN, 475, 175, ITEM_HGT);
+        sp1.setBounds(X_ALIGN, 295, 100, 175);
+        sp2.setBounds(X_ALIGN + 110, 295, 175, 175);
+        pselLabel.setBounds(X_ALIGN + 110, 475, 175, ITEM_HGT);
+        sp3.setBounds(X_ALIGN + 110 + 185, 295, 175, 175);
+        go.setBounds(X_ALIGN + 110 + 185 + 185, 310, 65, 40);
+        this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
+
+        stage.addActor(tmp1);
+        stage.addActor(tmp2);
+        stage.addActor(pselLabel);
+        stage.addActor(sp1);
+        stage.addActor(sp2);
+        stage.addActor(sp3);
+        stage.addActor(go);
+        stage.addActor(logScroll);
     }
 
     private void open(CharacterRecord player) {
@@ -196,6 +188,7 @@ public class RewardScreen implements Screen, Constants {
             return;
         }
         if (this.chestOpened) {
+            Sounds.play(Sound.NEGATIVE_EFFECT);
             log("Already opened!");
             return;
         }
@@ -220,6 +213,7 @@ public class RewardScreen implements Screen, Constants {
             log(String.format("%s finds a %s.", player.name.toUpperCase(), found.genericName));
         }
 
+        Sounds.play(Sound.POSITIVE_EFFECT);
         this.chestOpened = true;
 
     }
@@ -231,6 +225,7 @@ public class RewardScreen implements Screen, Constants {
             case POISON_NEEDLE:
                 log("You set " + this.trapType.toString() + " off!");
                 player.status = Status.POISONED;
+                Sounds.play(Sound.POISON_EFFECT);
                 break;
             case GAS_BOMB:
                 log("You set " + this.trapType.toString() + " off!");
@@ -239,6 +234,7 @@ public class RewardScreen implements Screen, Constants {
                         c.status = Status.POISONED;
                     }
                 }
+                Sounds.play(Sound.POISON_EFFECT);
                 break;
             case ANTI_MAGE:
                 log("You set " + this.trapType.toString() + " off!");
@@ -249,6 +245,7 @@ public class RewardScreen implements Screen, Constants {
                         }
                     }
                 }
+                Sounds.play(Sound.ROCKS);
                 break;
             case ANTI_PRIEST:
                 log("You set " + this.trapType.toString() + " off!");
@@ -259,6 +256,7 @@ public class RewardScreen implements Screen, Constants {
                         }
                     }
                 }
+                Sounds.play(Sound.ROCKS);
                 break;
             case CROSSBOW_BOLT: {
                 log("You set " + this.trapType.toString() + " off!");
@@ -267,6 +265,7 @@ public class RewardScreen implements Screen, Constants {
                     damage += rand.nextInt(8) + 1;
                 }
                 player.adjustHP(-damage);
+                Sounds.play(Sound.CROSSBOW);
                 break;
             }
             case EXPLODING_BOX: {
@@ -278,6 +277,7 @@ public class RewardScreen implements Screen, Constants {
                     }
                     c.adjustHP(-damage);
                 }
+                Sounds.play(Sound.EXPLOSION);
                 break;
             }
             case SPLINTERS: {
@@ -289,6 +289,7 @@ public class RewardScreen implements Screen, Constants {
                     }
                     c.adjustHP(-damage);
                 }
+                Sounds.play(Sound.BOOM);
                 break;
             }
             case BLADES: {
@@ -300,12 +301,13 @@ public class RewardScreen implements Screen, Constants {
                     }
                     c.adjustHP(-damage);
                 }
+                Sounds.play(Sound.BOOM);
                 break;
             }
             case STUNNER:
                 log("You set " + this.trapType.toString() + " off!");
-
                 player.status = Status.PARALYZED;
+                Sounds.play(Sound.GAZE);
                 break;
         }
         this.trapType = TrapType.NONE;
@@ -354,6 +356,7 @@ public class RewardScreen implements Screen, Constants {
             return;
         }
         log("Calfo disarmed " + this.trapType.toString());
+        Sounds.play(Sound.TRIGGER);
         player.clericPoints[Spells.CALFO.getLevel() - 1] -= 1;
         this.trapType = TrapType.NONE;
     }
@@ -365,7 +368,7 @@ public class RewardScreen implements Screen, Constants {
             return;
         }
         if (this.trapType == TrapType.NONE) {
-            log("Disarmed!");
+            log("Nothing found to disarm!");
             return;
         }
         int mod = (player.classType == ClassType.THIEF || player.classType == ClassType.NINJA ? 1 : 0);
@@ -373,6 +376,7 @@ public class RewardScreen implements Screen, Constants {
             if (rand.nextInt(70) + 1 < player.level - this.difficultyLevel + 50 * mod) {
                 log("You disarmed it!");
                 this.trapType = TrapType.NONE;
+                Sounds.play(Sound.TRIGGER);
             } else if (rand.nextInt(20) + 1 < player.agility) {
                 log("Disarm failed!");
             }
@@ -417,50 +421,28 @@ public class RewardScreen implements Screen, Constants {
         batch.begin();
         batch.draw(this.hud, 0, 0);
 
-        int x1 = 350;
+        int x1 = X_ALIGN;
         int y = 245;
         Andius.largeFont.draw(batch, "Name", x1, y);
-        Andius.largeFont.draw(batch, "Class", x1 + 100, y);
-        Andius.largeFont.draw(batch, "Status", x1 + 300, y);
-        Andius.largeFont.draw(batch, "Hit Points", x1 + 400, y);
+        Andius.largeFont.draw(batch, "Class", x1 += 150, y);
+        Andius.largeFont.draw(batch, "Status", x1 += 200, y);
+        Andius.largeFont.draw(batch, "Hit Points", x1 += 120, y);
         y -= 25;
         for (CharacterRecord c : this.context.players()) {
-            Andius.largeFont.setColor(Color.WHITE);
-
-            if (c.status == Status.POISONED) {
-                Andius.largeFont.setColor(Color.GREEN);
-            }
-            if (c.status == Status.AFRAID) {
-                Andius.largeFont.setColor(Color.ORANGE);
-            }
-            if (c.status == Status.ASLEEP) {
-                Andius.largeFont.setColor(Color.PINK);
-            }
-            if (c.status == Status.ASHES) {
-                Andius.largeFont.setColor(Color.LIGHT_GRAY);
-            }
-            if (c.status == Status.PARALYZED) {
-                Andius.largeFont.setColor(Color.YELLOW);
-            }
-            if (c.status == Status.STONED) {
-                Andius.largeFont.setColor(Color.LIGHT_GRAY);
-            }
-            if (c.status == Status.DEAD) {
-                Andius.largeFont.setColor(Color.DARK_GRAY);
-            }
+            x1 = X_ALIGN;
+            Andius.largeFont.setColor(c.status.getColor());
             if (c.hp > 0 && c.hp < 2) {
-                Andius.largeFont.setColor(Color.RED);
+                Andius.largeFont.setColor(Color.SALMON);
             }
             Andius.largeFont.draw(batch, c.name.toUpperCase(), x1, y);
             String d = String.format("LVL %d  %s  %s", c.level, c.race.toString(), c.classType.toString());
-            Andius.largeFont.draw(batch, d, x1 + 100, y);
-            Andius.largeFont.draw(batch, "" + c.status, x1 + 300, y);
-            Andius.largeFont.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 + 400, y);
+            Andius.largeFont.draw(batch, d, x1 += 150, y);
+            Andius.largeFont.draw(batch, "" + c.status, x1 += 200, y);
+            Andius.largeFont.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
             y -= 25;
         }
 
         Andius.largeFont.setColor(Color.WHITE);
-
 
         batch.end();
         stage.act();

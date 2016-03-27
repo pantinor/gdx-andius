@@ -2,9 +2,6 @@ package andius;
 
 public enum Sound {
 
-    MAGIC("magic.ogg", false, 0.3f),
-    ATTACK("attack.ogg", false, 0.3f),
-    MOONGATE("moongate_flash.ogg", false, 0.3f),
     BLOCKED("blocked.ogg", false, 0.3f),
     FLEE("flee.ogg", false, 0.3f),
     ERROR("error.ogg", false, 0.3f),
@@ -13,14 +10,13 @@ public enum Sound {
     PC_STRUCK("pc_struck.ogg", false, 0.3f),
     NPC_ATTACK("npc_attack.ogg", false, 0.3f),
     NPC_STRUCK("npc_struck.ogg", false, 0.3f),
-    NPC_MAGIC("enemy_magic_proj.ogg", false, 0.3f),
-    NPC_MAGIC_STRUCK("enemy_magic_proj_hit.ogg", false, 0.3f),
     EVADE("evade.ogg", false, 0.3f),
     POISON_EFFECT("Poison.ogg", false, 0.3f),
-    DAMAGE_EFFECT("poison_effect.ogg", false, 0.3f),
-    POISON_DAMAGE("poison_damage.ogg", false, 0.3f),
     SLEEP("Hypnosis.ogg", false, 0.3f),
     BOOM("boom.ogg", false, 0.3f),
+    EXPLOSION("Explosion.ogg", false, 0.3f),
+    CROSSBOW("crossbow.ogg", false, 0.3f),
+    GAZE("Gaze.ogg", false, 0.3f),
     HEALING("HealingMini.ogg", false, 0.3f),
     POSITIVE_EFFECT("PositiveEffect.ogg", false, 0.3f),
     NEGATIVE_EFFECT("NegativeEffect.ogg", false, 0.3f),
@@ -29,7 +25,6 @@ public enum Sound {
     ACID("AcidicRain.ogg", false, 0.3f),
     LIGHTNING("LightningBolt.ogg", false, 0.3f),
     FIREBALL("Fireball.ogg", false, 0.3f),
-    FIREFIELD("fire_field_walking.ogg", false, 0.3f),
     ROCKS("StoneRain.ogg", false, 0.3f),
     WIND("tornado.ogg", false, 0.3f),
     CANNON("cannon.mp3", false, 0.3f),
@@ -38,23 +33,7 @@ public enum Sound {
     DIVINE_INTERVENTION("divineint.ogg", false, 0.3f),
     DIVINE_MEDITATION("DivineMed.ogg", false, 0.3f),
     WAVE("chaowave.ogg", false, 0.3f),
-    GIGGLE("giggle.mp3", false, 0.3f),
-    //music
-    SPLASH("Exodus.mp3", true, 0.1f),
-    OUTSIDE("Wander.mp3", true, 0.1f),
-    TOWNS("Towns.mp3", true, 0.1f),
-    SHOPPING("Shopping.mp3", true, 0.1f),
-    RULEBRIT("Rule Brittania.mp3", true, 0.1f),
-    FANFARE("Fanfare.mp3", true, 0.1f),
-    DUNGEON("Dungeon.mp3", true, 0.1f),
-    COMBAT("Combat.mp3", true, 0.1f),
-    ALIVE("Alive.mp3", true, 0.1f),
-    CASTLES("Castles.mp3", true, 0.1f),
-    EXODUS("Exodus.mp3", true, 0.1f),
-
-    M1("music1.ogg", true, 0.1f),
-    M2("music2.ogg", true, 0.1f),
-    M3("music3.ogg", true, 0.1f);
+    GIGGLE("giggle.mp3", false, 0.3f),;
 
     String file;
     boolean looping;

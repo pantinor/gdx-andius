@@ -247,7 +247,6 @@ public class Andius extends Game {
             }
 
             Icons.init();
-            Constants.Map.init();
             Constants.Moongate.init();
             Conversations.init();
 

@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -82,8 +83,8 @@ public class StartScreen implements Screen, Constants {
 //                        TiledMap tm = loader.load("assets/data/combat1.tmx");
 //                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
 //                        mainGame.setScreen(cs);
-                        //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
-                        //mainGame.setScreen(rs);
+                        RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+                        mainGame.setScreen(rs);
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
@@ -98,14 +99,14 @@ public class StartScreen implements Screen, Constants {
                         //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
                         //mainGame.setScreen(es);
                         
-                        CTX.saveGame.players[0].hp = 5;
-                        CTX.saveGame.players[1].hp = 0;
-                        CTX.saveGame.players[1].status = Status.DEAD;
-                        CTX.saveGame.players[2].hp = 5;
-                        CTX.saveGame.players[2].status = Status.PARALYZED;
-                        CTX.saveGame.players[3].gold = 500;
-                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
-                        mainGame.setScreen(rs);
+//                        CTX.saveGame.players[0].hp = 5;
+//                        CTX.saveGame.players[1].hp = 0;
+//                        CTX.saveGame.players[1].status = Status.DEAD;
+//                        CTX.saveGame.players[2].hp = 5;
+//                        CTX.saveGame.players[2].status = Status.PARALYZED;
+//                        CTX.saveGame.players[3].gold = 500;
+//                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
+//                        mainGame.setScreen(rs);
 
                     }
                 }

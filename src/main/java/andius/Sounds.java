@@ -17,7 +17,7 @@ public class Sounds {
     public static boolean backgroundPlaying = true;
 
     static {
-        backgroundList.add(Sound.OUTSIDE);
+        backgroundList.add(Sound.SPIRITS);
     }
 
     public static class BackgroundMusicJukeBox implements Runnable {

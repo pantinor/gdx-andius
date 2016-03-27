@@ -57,31 +57,9 @@ public class Hud {
 
         for (CharacterRecord rec : ctxt.saveGame.players) {
 
-            Andius.smallFont.setColor(Color.WHITE);
-
-            if (rec.status == Status.POISONED) {
-                Andius.smallFont.setColor(Color.GREEN);
-            }
-            if (rec.status == Status.AFRAID) {
-                Andius.smallFont.setColor(Color.ORANGE);
-            }
-            if (rec.status == Status.ASLEEP) {
-                Andius.smallFont.setColor(Color.PINK);
-            }
-            if (rec.status == Status.ASHES) {
-                Andius.smallFont.setColor(Color.LIGHT_GRAY);
-            }
-            if (rec.status == Status.PARALYZED) {
-                Andius.smallFont.setColor(Color.YELLOW);
-            }
-            if (rec.status == Status.STONED) {
-                Andius.smallFont.setColor(Color.LIGHT_GRAY);
-            }
-            if (rec.status == Status.DEAD) {
-                Andius.smallFont.setColor(Color.SCARLET);
-            }
+            Andius.smallFont.setColor(rec.status.getColor());
             if (rec.hp > 0 && rec.hp < 2) {
-                Andius.smallFont.setColor(Color.RED);
+                Andius.smallFont.setColor(Color.SALMON);
             }
 
             batch.draw(Andius.faceTiles[rec.portaitIndex], 727, py);

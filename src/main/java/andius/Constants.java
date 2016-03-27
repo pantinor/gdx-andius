@@ -8,6 +8,7 @@ import andius.objects.MutableMonster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -46,7 +47,7 @@ public interface Constants {
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
-        CANT("Temple of Cant", "templeCant.tmx", TILE_DIM),
+        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),;
@@ -76,7 +77,10 @@ public interface Constants {
         }
 
         public TiledMap getTiledMap() {
-            return tiledMap;
+            if (this.tiledMap == null) {
+                init();
+            }
+            return this.tiledMap;
         }
 
         public BaseMap getMap() {
@@ -88,7 +92,10 @@ public interface Constants {
         }
 
         public BaseScreen getScreen() {
-            return screen;
+            if (this.screen == null) {
+                init();
+            }
+            return this.screen;
         }
 
         public int getStartX() {
@@ -103,122 +110,118 @@ public interface Constants {
             return roomIds;
         }
 
-        public static void init() {
+        public void init() {
 
             TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-            for (Map m : Map.values()) {
-                m.tiledMap = loader.load("assets/data/" + m.tmxFile);
-                m.baseMap = new BaseMap();
+            this.tiledMap = loader.load("assets/data/" + this.tmxFile);
+            this.baseMap = new BaseMap();
 
-                MapProperties prop = m.tiledMap.getProperties();
-                m.baseMap.setWidth(prop.get("width", Integer.class));
-                m.baseMap.setHeight(prop.get("height", Integer.class));
-                m.startX = Integer.parseInt(prop.get("startX", String.class));
-                m.startY = Integer.parseInt(prop.get("startY", String.class));
+            MapProperties prop = this.tiledMap.getProperties();
+            this.baseMap.setWidth(prop.get("width", Integer.class));
+            this.baseMap.setHeight(prop.get("height", Integer.class));
+            this.startX = Integer.parseInt(prop.get("startX", String.class));
+            this.startY = Integer.parseInt(prop.get("startY", String.class));
 
-                MapLayer portalsLayer = m.tiledMap.getLayers().get("portals");
-                if (portalsLayer != null) {
-                    Iterator<MapObject> iter = portalsLayer.getObjects().iterator();
-                    while (iter.hasNext()) {
-                        MapObject obj = iter.next();
-                        Map pm;
-                        try {
-                            pm = Map.valueOf(obj.getName());
-                        } catch (Exception e) {
-                            pm = m;
-                        }
-                        float x = obj.getProperties().get("x", Float.class);
-                        float y = obj.getProperties().get("y", Float.class);
-                        int sx = (int) (x / m.dim);
-                        int sy = m.baseMap.getHeight() - 1 - (int) (y / m.dim);
-                        Object dx = obj.getProperties().get("dx");
-                        Object dy = obj.getProperties().get("dy");
-                        List<Vector3> randoms = new ArrayList<>();
-                        for (int i = 0; i < 6; i++) {
-                            String temp = (String) obj.getProperties().get("random" + i);
-                            if (temp != null) {
-                                String[] s = temp.split(",");
-                                randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
-                            }
-                        }
-                        m.baseMap.addPortal(pm, sx, sy,
-                                dx != null ? Integer.parseInt((String) dx) : -1, dy != null ? Integer.parseInt((String) dy) : -1,
-                                randoms.size() > 0 ? randoms : null);
+            MapLayer portalsLayer = this.tiledMap.getLayers().get("portals");
+            if (portalsLayer != null) {
+                Iterator<MapObject> iter = portalsLayer.getObjects().iterator();
+                while (iter.hasNext()) {
+                    MapObject obj = iter.next();
+                    Map pm;
+                    try {
+                        pm = Map.valueOf(obj.getName());
+                    } catch (Exception e) {
+                        pm = this;
                     }
-                }
-
-                MapLayer peopleLayer = m.tiledMap.getLayers().get("people");
-                if (peopleLayer != null) {
-                    TiledMapTileLayer iconLayer = (TiledMapTileLayer) m.tiledMap.getLayers().get("creature");
-                    int firstgid = m.tiledMap.getTileSets().getTileSet("heroes").getProperties().get("firstgid", Integer.class);
-                    Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
-                    while (iter.hasNext()) {
-                        MapObject obj = iter.next();
-                        String surname = obj.getName();
-                        float x = obj.getProperties().get("x", Float.class);
-                        float y = obj.getProperties().get("y", Float.class);
-                        int sx = (int) (x / TILE_DIM);
-                        int sy = (int) (y / TILE_DIM);
-                        TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
-                        Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
-                        Role role = Role.valueOf(obj.getProperties().get("type", String.class));
-                        MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-                                                        
-                        //System.out.printf("Loading actor: %s %s %s on map %s.\n",surname,role,movement,m);
-
-                        Actor actor = new Actor(icon);
-                        if (role == Role.MONSTER) {
-                            try {
-                                String mid = obj.getProperties().get("creature", String.class);
-                                Monster monster = Andius.MONSTER_MAP.get(mid);
-                                if (monster != null) {
-                                    MutableMonster mm = new MutableMonster(monster);
-                                    mm.name = surname;
-                                    mm.setIcon(icon);
-                                    actor.set(mm, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
-                                } else {
-                                    System.err.printf("Cannot load actor: %s %s %s on map %s.\n",surname,role,movement,m);
-                                }
-                            } catch (Exception e) {
-                                System.err.printf("Cannot find monster: %s on map %s.\n",surname,m);
-                            }
-                        } else {
-                            actor.set(null, role, sx, m.baseMap.getHeight() - 1 - sy, x, y, movement);
-                        }
-                            
-                        m.baseMap.actors.add(actor);
-                    }
-                }
-
-                MapLayer roomsLayer = m.tiledMap.getLayers().get("rooms");
-                if (roomsLayer != null) {
-                    m.roomIds = new int[m.baseMap.getWidth()][m.baseMap.getHeight()][3];
-                    Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
-                    while (iter.hasNext()) {
-                        MapObject obj = iter.next();
-                        int id = obj.getProperties().get("id", Integer.class);
-                        PolygonMapObject rmo = (PolygonMapObject) obj;
-                        for (int y = 0; y < m.baseMap.getHeight(); y++) {
-                            for (int x = 0; x < m.baseMap.getWidth(); x++) {
-                                if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, m.baseMap.getHeight() * TILE_DIM - y * TILE_DIM - TILE_DIM / 2)) {
-                                    if (m.roomIds[x][y][0] == 0) {
-                                        m.roomIds[x][y][0] = id;
-                                    } else if (m.roomIds[x][y][1] == 0) {
-                                        m.roomIds[x][y][1] = id;
-                                    } else if (m.roomIds[x][y][2] == 0) {
-                                        m.roomIds[x][y][2] = id;
-                                    } else {
-                                        throw new RuntimeException("Too many overlaps on roomids");
-                                    }
-                                }
-                            }
+                    float x = obj.getProperties().get("x", Float.class);
+                    float y = obj.getProperties().get("y", Float.class);
+                    int sx = (int) (x / this.dim);
+                    int sy = this.baseMap.getHeight() - 1 - (int) (y / this.dim);
+                    Object dx = obj.getProperties().get("dx");
+                    Object dy = obj.getProperties().get("dy");
+                    List<Vector3> randoms = new ArrayList<>();
+                    for (int i = 0; i < 6; i++) {
+                        String temp = (String) obj.getProperties().get("random" + i);
+                        if (temp != null) {
+                            String[] s = temp.split(",");
+                            randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
                         }
                     }
+                    this.baseMap.addPortal(pm, sx, sy,
+                            dx != null ? Integer.parseInt((String) dx) : -1, dy != null ? Integer.parseInt((String) dy) : -1,
+                            randoms.size() > 0 ? randoms : null);
                 }
-
-                m.screen = (m.dim == TILE_DIM ? new GameScreen(m) : new WorldScreen(m));
-
             }
+
+            MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
+            if (peopleLayer != null) {
+                TiledMapTileLayer iconLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get("creature");
+                int firstgid = this.tiledMap.getTileSets().getTileSet("heroes").getProperties().get("firstgid", Integer.class);
+                Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
+                while (iter.hasNext()) {
+                    MapObject obj = iter.next();
+                    String surname = obj.getName();
+                    float x = obj.getProperties().get("x", Float.class);
+                    float y = obj.getProperties().get("y", Float.class);
+                    int sx = (int) (x / TILE_DIM);
+                    int sy = (int) (y / TILE_DIM);
+                    TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
+                    Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
+                    Role role = Role.valueOf(obj.getProperties().get("type", String.class));
+                    MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
+
+                    //System.out.printf("Loading actor: %s %s %s on map %s.\n",surname,role,movement,m);
+                    Actor actor = new Actor(icon);
+                    if (role == Role.MONSTER) {
+                        try {
+                            String mid = obj.getProperties().get("creature", String.class);
+                            Monster monster = Andius.MONSTER_MAP.get(mid);
+                            if (monster != null) {
+                                MutableMonster mm = new MutableMonster(monster);
+                                mm.name = surname;
+                                mm.setIcon(icon);
+                                actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                            } else {
+                                System.err.printf("Cannot load actor: %s %s %s on map %s.\n", surname, role, movement, this);
+                            }
+                        } catch (Exception e) {
+                            System.err.printf("Cannot find monster: %s on map %s.\n", surname, this);
+                        }
+                    } else {
+                        actor.set(null, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                    }
+
+                    this.baseMap.actors.add(actor);
+                }
+            }
+
+            MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
+            if (roomsLayer != null) {
+                this.roomIds = new int[this.baseMap.getWidth()][this.baseMap.getHeight()][3];
+                Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
+                while (iter.hasNext()) {
+                    MapObject obj = iter.next();
+                    int id = obj.getProperties().get("id", Integer.class);
+                    PolygonMapObject rmo = (PolygonMapObject) obj;
+                    for (int y = 0; y < this.baseMap.getHeight(); y++) {
+                        for (int x = 0; x < this.baseMap.getWidth(); x++) {
+                            if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, this.baseMap.getHeight() * TILE_DIM - y * TILE_DIM - TILE_DIM / 2)) {
+                                if (this.roomIds[x][y][0] == 0) {
+                                    this.roomIds[x][y][0] = id;
+                                } else if (this.roomIds[x][y][1] == 0) {
+                                    this.roomIds[x][y][1] = id;
+                                } else if (this.roomIds[x][y][2] == 0) {
+                                    this.roomIds[x][y][2] = id;
+                                } else {
+                                    throw new RuntimeException("Too many overlaps on roomids");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            this.screen = (this.dim == TILE_DIM ? new GameScreen(this) : new WorldScreen(this));
 
         }
 
@@ -551,8 +554,25 @@ public interface Constants {
 
     public enum Status {
 
-        OK, AFRAID, ASLEEP, POISONED, PARALYZED,
-        STONED, DEAD, ASHES;
+        OK(Color.WHITE),
+        AFRAID(Color.YELLOW),
+        ASLEEP(Color.MAGENTA),
+        POISONED(Color.GREEN),
+        PARALYZED(Color.CYAN),
+        STONED(Color.LIGHT_GRAY),
+        DEAD(Color.RED),
+        ASHES(Color.LIGHT_GRAY);
+
+        private final Color color;
+
+        private Status(Color color) {
+            this.color = color;
+        }
+
+        public Color getColor() {
+            return color;
+        }
+
     }
 
     public enum Role {
