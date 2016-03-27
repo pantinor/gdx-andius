@@ -96,7 +96,7 @@ public class SaveGame implements Constants {
         }
         
         public void adjustHP(int amt) {
-            hp = Utils.adjustValue(hp, amt, Integer.MAX_VALUE, 0);
+            hp = Utils.adjustValue(hp, amt, maxhp, 0);
             if (hp <= 0) {
                 status = Status.DEAD;
             }

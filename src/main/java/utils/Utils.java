@@ -144,8 +144,8 @@ public class Utils {
     }
 
     public static AttackResult attackHit(MutableMonster attacker, CharacterRecord defender) {
-        int attackValue = RAND.nextInt(20);
-        int defenseValue = defender.calculateAC();
+        int attackValue = RAND.nextInt(20) + 1;
+        int defenseValue = 20 - defender.calculateAC();
         return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
 

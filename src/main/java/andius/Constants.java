@@ -46,6 +46,7 @@ public interface Constants {
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
+        CANT("Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),;
@@ -557,6 +558,7 @@ public interface Constants {
     public enum Role {
         NONE,
         FRIENDLY,
+        TEMPLE,
         MONSTER,
         MERCHANT;
     }

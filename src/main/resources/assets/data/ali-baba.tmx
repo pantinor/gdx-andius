@@ -448,13 +448,13 @@
   </object>
   <object id="224" name="omar" type="MONSTER" x="5424" y="864" width="48" height="48">
    <properties>
-    <property name="creature" value="Bushwacker"/>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="225" name="mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
    <properties>
-    <property name="creature" value="Bushwacker"/>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -514,13 +514,13 @@
   </object>
   <object id="235" name="absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Bushwacker"/>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="236" name="abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
-    <property name="creature" value="Bushwacker"/>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
@@ -532,7 +532,7 @@
   </object>
   <object id="238" name="slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Bubbly Slime"/>
+    <property name="creature" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -548,9 +548,9 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="242" name="mailik" type="MONSTER" x="2448" y="720" width="48" height="48">
+  <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Highway Man"/>
+    <property name="creature" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -640,7 +640,7 @@
   </object>
   <object id="257" name="mechanized sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="creature" value="Murphy's Ghost"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -658,7 +658,7 @@
   </object>
   <object id="260" name="giant scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="creature" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -790,7 +790,7 @@
   </object>
   <object id="283" name="mountain scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Giant Spider"/>
+    <property name="creature" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>

@@ -6,6 +6,7 @@ import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.TILE_DIM;
+import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -468,11 +469,10 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public void run() {
-            //enable input again
             Gdx.input.setInputProcessor(CombatScreen.this);
-            //if (!party.isAnyoneAlive()) {
-            //    end();
-            //}
+            if (partyMembers.size() == 0) {
+                end();
+            }
         }
     }
 
@@ -677,13 +677,35 @@ public class CombatScreen extends BaseScreen {
         switch (action) {
             case ATTACK: {
                 Sounds.play(Sound.NPC_ATTACK);
-//                AttackResult res = Utils.attackHit(creature, target);
-//                if (res == AttackResult.HIT) {
-//                    Sounds.play(Sound.PC_STRUCK);
-//                    if (!Utils.dealDamage(creature, target)) {
-//                        target = null;
-//                    }
-//                }
+                AttackResult res = Utils.attackHit(creature.getMonster(), target.getPlayer());
+                if (res == AttackResult.HIT) {
+                    SequenceAction seq = Actions.action(SequenceAction.class);
+                    for (Dice dice : creature.getMonster().getDamage()) {
+                        int damage = dice.roll();
+                        target.getPlayer().adjustHP(-damage);
+                        Andius.HUD.add(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
+
+                        Actor d = new ExplosionDrawable(Andius.explGray);
+                        d.setX(target.getX() + 12);
+                        d.setY(target.getY() + 12);
+                        d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+                        seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                        seq.addAction(Actions.run(new AddActorAction(stage, d)));
+                        if (target.getPlayer().status == Status.DEAD) {
+                            seq.addAction(Actions.run(new Runnable() {
+                                @Override
+                                public void run() {
+                                    partyMembers.remove(target);
+                                }
+                            }));
+                        }
+
+                    }
+                    stage.addAction(seq);
+
+                } else {
+                    Andius.HUD.add(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
+                }
                 break;
             }
 
@@ -980,6 +1002,8 @@ public class CombatScreen extends BaseScreen {
                     if (target.result == AttackResult.HIT) {
                         int damage = Utils.dealDamage(attacker.getPlayer(), target.victim.getMonster());
                         Andius.HUD.add(String.format("%s strikes %s for %d damage!", attacker.getPlayer().name, target.victim.getMonster().name, damage));
+                    } else {
+                        Andius.HUD.add(String.format("%s misses %s", attacker.getPlayer().name, target.victim.getMonster().name));
                     }
                 }
             }

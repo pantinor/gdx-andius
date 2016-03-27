@@ -1,19 +1,13 @@
 package andius;
 
 import static andius.Andius.CTX;
-import static andius.Andius.ITEMS_MAP;
-import static andius.Andius.MONSTERS;
-import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -79,10 +73,9 @@ public class StartScreen implements Screen, Constants {
                     if (CTX.saveGame == null) {
                         mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                     } else {
-                        BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
-                        scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
-                        Andius.mainGame.setScreen(scr);
-                        //stage.clear();
+                        //BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
+                        //scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
+                        //Andius.mainGame.setScreen(scr);
 
 //                        FileHandleResolver resolver = new Constants.ClasspathResolver();
 //                        TmxMapLoader loader = new TmxMapLoader(resolver);
@@ -102,9 +95,17 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
-
-//                        EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
-//                        mainGame.setScreen(es);
+                        //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
+                        //mainGame.setScreen(es);
+                        
+                        CTX.saveGame.players[0].hp = 5;
+                        CTX.saveGame.players[1].hp = 0;
+                        CTX.saveGame.players[1].status = Status.DEAD;
+                        CTX.saveGame.players[2].hp = 5;
+                        CTX.saveGame.players[2].status = Status.PARALYZED;
+                        CTX.saveGame.players[3].gold = 500;
+                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
+                        mainGame.setScreen(rs);
 
                     }
                 }

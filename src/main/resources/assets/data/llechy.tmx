@@ -149,47 +149,47 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="3" name="Dekker" type="MERCHANT" x="144" y="480" width="48" height="48">
+  <object id="3" name="Dekker" type="FRIENDLY" x="144" y="480" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="4" name="Calabrini" type="MERCHANT" x="336" y="768" width="48" height="48">
+  <object id="4" name="Calabrini" type="FRIENDLY" x="336" y="768" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="5" name="Inoo" type="MERCHANT" x="1008" y="1392" width="48" height="48">
+  <object id="5" name="Inoo" type="FRIENDLY" x="1008" y="1392" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="6" name="Daranor" type="MERCHANT" x="528" y="1200" width="48" height="48">
-   <properties>
-    <property name="movement" value="FIXED"/>
-    </properties>
-  </object>
-  <object id="7" name="Tyrone" type="MERCHANT" x="768" y="480" width="48" height="48">
+  <object id="6" name="Daranor" type="FRIENDLY" x="528" y="1200" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="8" name="Browning" type="MERCHANT" x="192" y="1296" width="48" height="48">
+  <object id="7" name="Tyrone" type="FRIENDLY" x="768" y="480" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="9" name="Shakespeare" type="MERCHANT" x="288" y="1344" width="48" height="48">
+  <object id="8" name="Browning" type="FRIENDLY" x="192" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="9" name="Shakespeare" type="FRIENDLY" x="288" y="1344" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="10" name="Shazom" type="MERCHANT" x="1344" y="1056" width="48" height="48">
+  <object id="10" name="Shazom" type="FRIENDLY" x="1344" y="1056" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="11" name="Patric the Humble Shepherd" type="MERCHANT" x="1344" y="960" width="48" height="48">
+  <object id="11" name="Patric the Humble Shepherd" type="FRIENDLY" x="1344" y="960" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -209,32 +209,32 @@
     <property name="movement" value="FOLLOW_AVATAR"/>
    </properties>
   </object>
-  <object id="15" name="Christen" type="MERCHANT" x="1152" y="240" width="48" height="48">
+  <object id="15" name="Christen" type="FRIENDLY" x="1152" y="240" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="16" name="Rebelias" type="MERCHANT" x="960" y="336" width="48" height="48">
+  <object id="16" name="Rebelias" type="FRIENDLY" x="960" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="17" name="Cromwell" type="MERCHANT" x="864" y="336" width="48" height="48">
+  <object id="17" name="Cromwell" type="FRIENDLY" x="864" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="19" name="Tracie" type="MERCHANT" x="1344" y="144" width="48" height="48">
+  <object id="19" name="Tracie" type="FRIENDLY" x="1344" y="144" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="20" name="Mariah" type="MERCHANT" x="144" y="336" width="48" height="48">
+  <object id="20" name="Mariah" type="FRIENDLY" x="144" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="21" name="Tyrone" type="MERCHANT" x="768" y="720" width="48" height="48">
+  <object id="21" name="Tyrone" type="FRIENDLY" x="768" y="720" width="48" height="48">
    <properties>
     <property name="movement" value="WANDER"/>
    </properties>

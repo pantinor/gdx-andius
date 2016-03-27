@@ -105,7 +105,7 @@
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglFALPjBzMDwE4j/MhNWe5QFgs+w0N5duMBA2j0KRsFwBn+ZGBiUmCH0KKAcbISWVTuJKLM+sKDSwwGQ4v+hAHYOAv9UDqDdwyUehyoQHQ1/vAAAbYaIRQAQAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMglFALHBlRmBC4CgLBJ9hob27cIGBtHsUjILhDP4yMTAoMUPoUUA52Agtq3YSUWZ9YEGlhwMgxf9DAewcBP6pHEC7h0s8DlUgOhr+eAEA2qv1lgAQAAA=
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
@@ -139,113 +139,134 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="slug" type="MONSTER" x="1152" y="480" width="48" height="48">
+  <object id="1" name="bleeb" type="MONSTER" x="1152" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="21" name="acolyte" type="MONSTER" x="768" y="864" width="48" height="48">
+  <object id="21" name="priestess" type="MONSTER" x="768" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="22" name="evil-wizard" type="MONSTER" x="816" y="864" width="48" height="48">
+  <object id="22" name="evil wizard" type="MONSTER" x="816" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Lvl 5 Mage"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="23" name="acolyte" type="MONSTER" x="864" y="864" width="48" height="48">
+  <object id="23" name="priestess" type="MONSTER" x="864" y="864" width="48" height="48">
    <properties>
+    <property name="creature" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="24" name="frog" type="MONSTER" x="720" y="1008" width="48" height="48">
+  <object id="24" name="toad" type="MONSTER" x="720" y="1008" width="48" height="48">
    <properties>
+    <property name="creature" value="Giant Toad"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="25" name="frog" type="MONSTER" x="816" y="1008" width="48" height="48">
+  <object id="25" name="toad" type="MONSTER" x="816" y="1008" width="48" height="48">
    <properties>
+    <property name="creature" value="Giant Toad"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="32" name="elemental" type="MONSTER" x="1152" y="1152" width="48" height="48">
    <properties>
+    <property name="creature" value="Will O' Wisp"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="33" name="golem" type="MONSTER" x="1200" y="1200" width="48" height="48">
    <properties>
+    <property name="creature" value="Ogre Lord"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="34" name="elemental" type="MONSTER" x="1248" y="1152" width="48" height="48">
    <properties>
+    <property name="creature" value="Dragon Puppy"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="35" name="elemental" type="MONSTER" x="1152" y="1248" width="48" height="48">
    <properties>
+    <property name="creature" value="Earth Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="36" name="wraith" type="MONSTER" x="1152" y="1392" width="48" height="48">
    <properties>
+    <property name="creature" value="Night Stalker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="37" name="slug" type="MONSTER" x="1200" y="480" width="48" height="48">
+  <object id="37" name="bleeb" type="MONSTER" x="1200" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="38" name="slug" type="MONSTER" x="1248" y="480" width="48" height="48">
+  <object id="38" name="bleeb" type="MONSTER" x="1248" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="39" name="slug" type="MONSTER" x="1200" y="528" width="48" height="48">
+  <object id="39" name="bleeb" type="MONSTER" x="1200" y="528" width="48" height="48">
    <properties>
+    <property name="creature" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="65" name="elemental" type="MONSTER" x="192" y="1008" width="48" height="48">
    <properties>
+    <property name="creature" value="Fire Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="66" name="elemental" type="MONSTER" x="192" y="1104" width="48" height="48">
    <properties>
+    <property name="creature" value="Earth Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="67" name="elemental" type="MONSTER" x="288" y="1008" width="48" height="48">
    <properties>
+    <property name="creature" value="Fire Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="68" name="elemental" type="MONSTER" x="288" y="1104" width="48" height="48">
    <properties>
+    <property name="creature" value="Earth Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="70" name="merman" type="MONSTER" x="624" y="480" width="48" height="48">
+  <object id="70" name="samurai" type="MONSTER" x="624" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Champ Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="71" name="merman" type="MONSTER" x="672" y="480" width="48" height="48">
+  <object id="71" name="samurai" type="MONSTER" x="672" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Champ Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="72" name="merman" type="MONSTER" x="720" y="480" width="48" height="48">
+  <object id="72" name="samurai" type="MONSTER" x="720" y="480" width="48" height="48">
    <properties>
+    <property name="creature" value="Champ Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="portals">
+ <objectgroup name="portals" visible="0">
   <object id="40" name="WIWOLD" type="portal" x="1056" y="768" width="48" height="48">
    <properties>
     <property name="wx" value="22"/>

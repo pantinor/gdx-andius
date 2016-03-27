@@ -80,7 +80,7 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
     @Override
     public void renderTileLayer(TiledMapTileLayer layer) {
 
-        stateTime += Gdx.graphics.getDeltaTime();
+        stateTime += Gdx.graphics.getDeltaTime() / 4;
 
         if (layer.getName().equals("creature")) {
             for (CreatureLayer cl : creatureLayers) {

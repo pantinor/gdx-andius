@@ -169,6 +169,15 @@ public class GameScreen extends BaseScreen {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
+        } else if (keycode == Keys.T) {
+            Actor a = this.map.getMap().getCreatureAt((int) v.x, (int) v.y);
+            if (a != null) {
+                if (a.getRole() == Role.TEMPLE) {
+                    TempleScreen rs = new TempleScreen(CTX, this.map);
+                    mainGame.setScreen(rs);
+                    return false;
+                }
+            }
         }
 
         finishTurn((int) v.x, (int) v.y);

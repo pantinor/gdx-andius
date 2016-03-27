@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" nextobjectid="22">
+ <properties>
+  <property name="startX" value="1"/>
+  <property name="startY" value="12"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
+ <layer name="floor" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2UXQoAIAiDu1GH7OI9BRKZ8y8IHPjotwmy1kpeDcVY+R2YKD5VBj87fzQf8fCwJY8INuchsS1/vDyQ3Ny9t10Nf8+N3K3hn7x+5SO7ewbLDXSXGy8f7QNP52R2fumNJvPJAd0ACQAA
+  </data>
+ </layer>
+ <layer name="floor 2" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGBiwgQp4sJhPChgK5usjYVqYTw199DSfWDvIcQ+x+sg1mxj9lJqNzxxqmT1q/sCbPwpGwXADAPoWoK4ACQAA
+  </data>
+ </layer>
+ <layer name="props" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWUgrWM1FU30MCTEYGHAhhu4T8KRsEoGAWjgPYAAEzqMtUACQAA
+  </data>
+ </layer>
+ <layer name="creature" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAVDEXAyD7QLRsEoGAWjYBSMgqELAIeKIAEACQAA
+  </data>
+ </layer>
+ <layer name="water_edges" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGBggysjAIMLIsIBcDNS/AJ/5QDVgYAOxJ4FYbAM1F8g+QIz5hNSRq2/U/MFhPggQSmtI6sgCQH0JhOwg12xi7KDUbBgAhRm6HdB8foBa5qObhU1sJJsvimYWNN6pYv4oGAXDDQAAF9OAVAAJAAA=
+  </data>
+ </layer>
+ <layer name="shadows" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGBigTAU8CoYmGGpxSKw7KfEPIb3UCCtcZuAzm9S8hy5HrruHStoYBeSD0TJ9FAw0AADP48UGAAkAAA==
+  </data>
+ </layer>
+ <layer name="walls" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VYQ6DIAyF4bocAjjD1Pu6ZTa+1LZSBj+W+JJGgu0HAg9DuCrHEF5HrMdze8cCbXq/QN7G+j4cSVq/V2Uyf/b8NU798/mP4mvr8Cs/xW9onBLPnOQci7gUSYgs5HjZJPTjyrznGUNiW0J/t9R52Fgjte9yUdY+juBnY91G8ElF+AbO1/bYOutYz3Pw3qf/QGutltej1jqPl3r5lq+16Dn3hfm3Cp7GnEd92gFTmjz4AAkAAA==
+  </data>
+ </layer>
+ <layer name="door" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
+  </data>
+ </layer>
+ <layer name="torches" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgwA1amchjI4vhAzOZiGPD+Oj0KBgFowACSM17pILRvDcywWi6GgXDGQAAxZtn9QAJAAA=
+  </data>
+ </layer>
+ <layer name="webs" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
+  </data>
+ </layer>
+ <objectgroup name="people">
+  <object id="21" name="Priest of Cant" type="TEMPLE" x="672" y="192" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="rooms">
+  <object id="21" name="temple" x="0" y="480">
+   <polygon points="0,0 384,0 384,288 480,288 480,96 432,96 432,0 384,0 384,-48 240,-48 240,-480 1152,-480 1152,-48 1056,-48 1056,0 1008,0 1008,48 960,48 960,96 912,96 912,336 864,336 864,528 240,528 240,480 144,480 144,336 96,336 96,240 0,240"/>
+  </object>
+ </objectgroup>
+</map>

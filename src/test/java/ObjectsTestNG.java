@@ -12,8 +12,13 @@ import andius.objects.SaveGame.CharacterRecord;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
+import static java.lang.System.in;
 import java.util.List;
+import java.util.Random;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 
@@ -117,10 +122,68 @@ public class ObjectsTestNG {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {}.getType());
-        List<Reward> rewards = gson.fromJson(json2, new TypeToken<List<Reward>>() {}.getType());
-        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {}.getType());
+        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {
+        }.getType());
+        List<Reward> rewards = gson.fromJson(json2, new TypeToken<List<Reward>>() {
+        }.getType());
+        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
+        }.getType());
         int x = 0;
+    }
+
+    @Test
+    public void parseImage() throws Exception {
+        BufferedImage input = ImageIO.read(new File("C:\\Users\\Paul\\Documents\\water\\Wizardry7-Mapd.png"));
+        StringBuilder grass = new StringBuilder();
+        StringBuilder water = new StringBuilder();
+        Random ra = new Random();
+        for (int y = 0; y < 173; y++) {
+            for (int x = 0; x < 197; x++) {
+                try {
+                    int rgb = input.getRGB(x * 14, y * 14);
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
+                    if (x == 8 && y == 91) {
+                        int u = 0;
+                    }
+                    if (r == 0 && g == 0 && b == 0) { //nothing
+                        grass.append("0,");
+                        water.append("0,");
+                    } else if (r == 144 && g == 92 && b == 60) { //darker tile floor
+                        int id = ra.nextInt(4) + 206;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    } else if (r == 160 && g == 120 && b == 56) { //path
+                        int id = ra.nextInt(3) + 203;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    } else if (r == 0 && g == 0 && b >= 72) { //water
+                        grass.append("0,");
+                        water.append("176,");
+                    } else { //ground
+                        int id = ra.nextInt(4) + 122;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    }
+
+
+
+                } catch (Exception e) {
+                    System.err.printf("wrong coord %d %d\n", x, y);
+                }
+            }
+            grass.append("\n");
+            water.append("\n");
+
+        }
+        System.out.println("<data encoding=\"csv\">\n");
+        System.out.println(grass.toString().trim());
+        System.out.println("</data>\n\n\n");
+
+        System.out.println("<data encoding=\"csv\">\n");
+        System.out.println(water.toString().trim());
+        System.out.println("</data>\n");
     }
 
 }

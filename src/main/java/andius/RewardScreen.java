@@ -17,7 +17,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,8 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.Random;
-import org.apache.commons.collections.iterators.ReverseListIterator;
-import utils.FixedSizeArrayList;
 import utils.XORShiftRandom;
 
 /**
@@ -60,15 +57,17 @@ public class RewardScreen implements Screen, Constants {
     private final int difficultyLevel;
     private final int expPoints;
 
-    private Texture hud;
-    private SpriteBatch batch;
-    private Stage stage;
+    private final Texture hud;
+    private final SpriteBatch batch;
+    private final Stage stage;
 
     private final List<String> action;
     private final Label playerSelectionLabel;
     private final List<String> playerSelection;
     private final List<TrapType> trapSelection;
     private final Table internalTable;
+    private final Table logTable;
+    private final ScrollPane logScroll;
     private final TextButton go;
 
     TrapType trapType = TrapType.NONE;
@@ -76,11 +75,8 @@ public class RewardScreen implements Screen, Constants {
     private final java.util.List<CharacterRecord> whoTried = new java.util.ArrayList<>();
     private boolean chestOpened = false;
 
-    private final java.util.List<String> logs = new FixedSizeArrayList<>(10);
     private static final int LOG_AREA_WIDTH = 400;
-    private static final int LOG_AREA_TOP = Andius.SCREEN_HEIGHT - 46;
-    private static final int LOG_X = 346;
-    private GlyphLayout gllayout = new GlyphLayout(Andius.largeFont, "", Color.WHITE, LOG_AREA_WIDTH, Align.left, true);
+    private static final int LOG_X = 300;
 
     public RewardScreen(Context context, Map contextMap, int difficultyLevel, int expPoints, Reward goldReward, Reward chestReward) {
         this.context = context;
@@ -184,6 +180,12 @@ public class RewardScreen implements Screen, Constants {
         this.internalTable.setY(410);
 
         stage.addActor(internalTable);
+
+        this.logTable = new Table(Andius.skin);
+        this.logTable.defaults().padLeft(5).align(Align.left);
+        logScroll = new ScrollPane(this.logTable, Andius.skin);
+        logScroll.setBounds(LOG_X, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
+        stage.addActor(logScroll);
 
     }
 
@@ -384,9 +386,10 @@ public class RewardScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        synchronized (logs) {
-            logs.add(s);
-        }
+        logTable.add(new Label(s, Andius.skin, "larger"));
+        logTable.row();
+        logScroll.setScrollPercentY(100);
+        logScroll.layout();
     }
 
     @Override
@@ -455,22 +458,9 @@ public class RewardScreen implements Screen, Constants {
             Andius.largeFont.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 + 400, y);
             y -= 25;
         }
-        
+
         Andius.largeFont.setColor(Color.WHITE);
 
-        y = Andius.SCREEN_HEIGHT - 205;
-        synchronized (logs) {
-            ReverseListIterator iter = new ReverseListIterator(logs);
-            while (iter.hasNext()) {
-                String next = (String) iter.next();
-                gllayout.setText(Andius.largeFont, next);
-                y += gllayout.height + 7;
-                if (y > LOG_AREA_TOP) {
-                    break;
-                }
-                Andius.largeFont.draw(batch, gllayout, LOG_X, y);
-            }
-        }
 
         batch.end();
         stage.act();

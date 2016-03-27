@@ -10,20 +10,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,7 +57,7 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
 
         try {
 
-            InputStream is = this.getClass().getResourceAsStream("/assets/data/ali-baba.tmx");
+            InputStream is = this.getClass().getResourceAsStream("/assets/data/wiwold_lvl_2.tmx");
             JAXBContext jaxbContext = JAXBContext.newInstance(Map.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             map = (Map) jaxbUnmarshaller.unmarshal(is);
@@ -90,7 +84,7 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
             String creature = null;
             for (Property p : obj.getProperties().get(0).getProperties()) {
                 if (p.getName().equals("creature")) {
-                    creature = p.getName();
+                    creature = p.getValue();
                 }
             }
             Label l = new Label(obj.name + " " + (creature == null ? "" : creature), skin);

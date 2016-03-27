@@ -70,8 +70,8 @@ public class Monster implements Comparable<Monster> {
         return monsterID;
     }
 
-    public int getType() {
-        return type;
+    public String getType() {
+        return monsterClass[this.type];
     }
 
     public Icons getIcon() {
@@ -150,10 +150,7 @@ public class Monster implements Comparable<Monster> {
         return damage;
     }
 
-    public static String[] getMonsterClass() {
-        return monsterClass;
-    }
-    
+   
     @Override
     public int compareTo(Monster o) {
         if (this.exp != o.exp) {

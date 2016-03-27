@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" nextobjectid="13">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" nextobjectid="14">
  <properties>
   <property name="startX" value="23"/>
   <property name="startY" value="53"/>
@@ -198,7 +198,7 @@
  </layer>
  <layer name="props" width="256" height="256">
   <data encoding="base64" compression="zlib">
-   eJzt3TEKwjAYBtB2cNBDdPFQ3kfoYPUanrIIIjioCFIVkvC9N3TolJR8aeifkq4DAAAAAAAAAAAAAAAAqNO5L90CAKCEuXQDgGLkH3LJP+SSf8gl/5BL/iGX/EMu+YdMl9vFHkCI5N0PueQfcsk/5JJ/yCX/kEv+IVev9gcAQKjRWhgAAAAAAAAAAAAAup19tQAAAAAAAFC9aWFdbxVWB9w/9Hfzpu/Dy72lzxMAAAAAAAAAAAAAAAAAAIA2bf1fDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAxYa+dAsAAH4zWc9QqaOxCQAAAAAA3KkbAAAAAED71r7zAY05mLfgI3U84BvmDmo0GpcAAAAAAAAAAABP7PcDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4F9OzsQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA6lwB+NYXOQ==
+   eJzt3TEKwjAUBuB0cNBDdPFQ3kfoYPUaPaUIIjioCFIVkvJ/39ChU1L6pyHvQUsBAAAAAAAAAAAAAAAAaNPU1R4BAFDDufYAgGrkH3LJP+SSf8gl/5BL/iGX/EMu+YdMl9tFDyBE8u2HXPIPueQfcsk/5JJ/yCX/kKtT+wMAINRgLwwAAAAAAAAAAAAAZaevFgAAAAAAAJo3zqzrrcLqgPuH+W7ezL1/uTf3eQIAAADLNDkDAAAAAAAAAAAAAACIt9VbDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAw/qu9ggAAH4z2s/QqKN3EwAAAAAAuFM3AAAAAIDlWzvnAxbmYN2Cj9TxgG9YO2jR4L0EAAAAAAAAAAB4ot8PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgH85+ScOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANOcKEgsX3w==
   </data>
  </layer>
  <layer name="clouds" width="256" height="256">
@@ -211,6 +211,7 @@
   <object id="3" name="BARAD_ENELETH" type="portal" x="744" y="1224" width="24" height="24"/>
   <object id="11" name="WIWOLD" type="portal" x="840" y="1224" width="24" height="24"/>
   <object id="12" name="ALIBABA" type="portal" x="552" y="1224" width="24" height="24"/>
+  <object id="13" name="CANT" type="portal" x="864" y="1320" width="24" height="24"/>
  </objectgroup>
  <objectgroup name="moongates">
   <object id="3" name="GATE_0" type="moongate" x="3528" y="1632" width="24" height="24">
