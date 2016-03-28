@@ -129,7 +129,7 @@ public class EquipmentScreen implements Screen, Constants {
         ScrollPane sp1 = new ScrollPane(this.playerSelection, Andius.skin);
         sp1.setBounds(93, Andius.SCREEN_HEIGHT - 372, 165, 241);
 
-        invPane = new ScrollPane(playerSelection.getSelected().invTable);
+        invPane = new ScrollPane(playerSelection.getSelected().invTable, Andius.skin);
         invPane.setBounds(485, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
         this.cancel = new TextButton("CNCL", Andius.skin, "brown-larger");
@@ -180,7 +180,7 @@ public class EquipmentScreen implements Screen, Constants {
                         Item weap = (Item) selectedPlayer.weaponIcon.getUserObject();
                         selectedPlayer.damageLabel.setText(weap.damage.toString());
                     } else {
-                        selectedPlayer.damageLabel.setText("");
+                        selectedPlayer.damageLabel.setText("1d2");
                     }
                     Sounds.play(Sound.TRIGGER);
                 } else {
@@ -337,7 +337,7 @@ public class EquipmentScreen implements Screen, Constants {
             acLabel.setX(360);
             acLabel.setY(Andius.SCREEN_HEIGHT - 393);
 
-            damageLabel = new Label(character.weapon.damage.toString(), Andius.skin, "larger");
+            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "larger");
             damageLabel.setX(360);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 437);
 
@@ -424,7 +424,7 @@ public class EquipmentScreen implements Screen, Constants {
                             Item weap = (Item) PlayerIndex.this.weaponIcon.getUserObject();
                             selectedPlayer.damageLabel.setText(weap.damage.toString());
                         } else {
-                            selectedPlayer.damageLabel.setText("");
+                            selectedPlayer.damageLabel.setText("1d2");
                         }
 
                     } else {
@@ -499,11 +499,8 @@ public class EquipmentScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(invIcons[item.iconID]);
-            this.label = new Label("", Andius.skin, "larger");
+            this.label = new Label(item.name, Andius.skin, "larger");
             this.canusebkgnd = new Image();
-
-            this.label.setText(item.name);
-            this.icon.setDrawable(new TextureRegionDrawable(invIcons[item.iconID]));
 
             boolean canUse = item.canUse(rec.classType);
             if (!canUse) {
@@ -517,7 +514,7 @@ public class EquipmentScreen implements Screen, Constants {
             addActor(this.canusebkgnd);
 
             this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
-            this.label.setPosition(getX() + dim + 10, getY() + 25);
+            this.label.setPosition(getX() + dim + 10, getY() + 10);
             this.canusebkgnd.setBounds(getX(), getY(), w, h);
             this.setBounds(getX(), getY(), w, h);
 

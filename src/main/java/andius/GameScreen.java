@@ -176,6 +176,10 @@ public class GameScreen extends BaseScreen {
                     TempleScreen rs = new TempleScreen(CTX, this.map);
                     mainGame.setScreen(rs);
                     return false;
+                } else if (a.getRole() == Role.MERCHANT) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map);
+                    mainGame.setScreen(rs);
+                    return false;
                 }
             }
         }

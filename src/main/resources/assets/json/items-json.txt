@@ -1,25 +1,5 @@
 [
   {
-    "name": "HANDS",
-    "genericName": "NONE",
-    "iconID": 396,
-    "type": 0,
-    "cost": 0,
-    "damage": {
-      "qty": 1,
-      "sides": 2,
-      "bonus": 0
-    },
-    "armourClass": 0,
-    "extraSwings": 0,
-    "stock": -1,
-    "cursed": false,
-    "usable": "FSLNWTCM",
-    "numberUses": 0,
-    "regeneration": 0,
-    "range": 0
-  },
-  {
     "name": "DAGGER",
     "genericName": "DAGGER",
     "iconID": 103,
@@ -2043,7 +2023,7 @@
     "genericName": "AMULET",
     "iconID": 374,
     "type": 6,
-    "cost": 999999999999,
+    "cost": 999999999,
     "damage": {
       "qty": 0,
       "sides": 0,

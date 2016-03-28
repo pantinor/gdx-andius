@@ -16,7 +16,7 @@ public class Item implements Comparable<Item> {
     public String genericName;
     public int iconID;
     public int type;
-    public long cost;
+    public int cost;
     public Dice damage;
     public int armourClass;
     public int extraSwings;

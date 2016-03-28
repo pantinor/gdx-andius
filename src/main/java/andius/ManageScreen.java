@@ -215,7 +215,6 @@ public class ManageScreen implements Screen, Constants {
                 sel.maxhp = sel.hp;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
-                sel.weapon = ITEMS_MAP.get("HANDS").clone();
                 
                 sel.magePoints = sel.getMaxMageSpellPoints();
                 sel.clericPoints = sel.getMaxClericSpellPoints();

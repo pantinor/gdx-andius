@@ -82,7 +82,7 @@ public class TempleScreen implements Screen, Constants {
         this.titherSelection = new List<>(Andius.skin, "larger");
         Array<String> names = new Array<>();
         for (int i = 0; i < this.context.players().length; i++) {
-            if (this.context.players()[i].status == Status.OK) {
+            if (!this.context.players()[i].isDisabled()) {
                 names.add(this.context.players()[i].name.toUpperCase());
             }
         }

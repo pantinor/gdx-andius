@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import com.badlogic.gdx.Gdx;
@@ -74,17 +75,17 @@ public class StartScreen implements Screen, Constants {
                     if (CTX.saveGame == null) {
                         mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                     } else {
-                        //BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
-                        //scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
-                        //Andius.mainGame.setScreen(scr);
+                        BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
+                        scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
+                        Andius.mainGame.setScreen(scr);
 
 //                        FileHandleResolver resolver = new Constants.ClasspathResolver();
 //                        TmxMapLoader loader = new TmxMapLoader(resolver);
 //                        TiledMap tm = loader.load("assets/data/combat1.tmx");
 //                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
 //                        mainGame.setScreen(cs);
-                        RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
-                        mainGame.setScreen(rs);
+                        //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+                        //mainGame.setScreen(rs);
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
@@ -107,6 +108,9 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[3].gold = 500;
 //                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
 //                        mainGame.setScreen(rs);
+
+                        //VendorScreen es = new VendorScreen(CTX, Map.WIWOLD);
+                       // mainGame.setScreen(es);
 
                     }
                 }
