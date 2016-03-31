@@ -209,7 +209,7 @@ public class RewardScreen implements Screen, Constants {
         for (RewardElement elem : chestReward.getElements()) {
             CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
             Item found = Andius.ITEMS_MAP.get(elem.getItemNames().get(rand.nextInt(elem.getItemNames().size()))).clone();
-            picked.inventory.add(found.clone());
+            picked.inventory.add(found);
             log(String.format("%s finds a %s.", player.name.toUpperCase(), found.genericName));
         }
 

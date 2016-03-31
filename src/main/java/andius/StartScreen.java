@@ -4,6 +4,7 @@ import static andius.Andius.CTX;
 import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
+import andius.objects.Item;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -91,7 +92,9 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("HELM").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
+//                        Item tmp = ITEMS_MAP.get("DAGGER OF SPEED").clone();
+//                        tmp.unidentified = true;
+//                        CTX.saveGame.players[0].inventory.add(tmp);
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SHORT SWORD").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("WERDNAS AMULET").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
@@ -110,7 +113,7 @@ public class StartScreen implements Screen, Constants {
 //                        mainGame.setScreen(rs);
 
                         //VendorScreen es = new VendorScreen(CTX, Map.WIWOLD);
-                       // mainGame.setScreen(es);
+                       //mainGame.setScreen(es);
 
                     }
                 }

@@ -5,7 +5,6 @@ import andius.objects.Conversations;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Reward;
-import andius.objects.Reward.RewardElement;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

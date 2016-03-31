@@ -2,6 +2,7 @@ package utils;
 
 import andius.Constants.AttackResult;
 import andius.Direction;
+import andius.objects.Item;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
@@ -170,7 +171,8 @@ public class Utils {
     }
 
     public static int dealDamage(CharacterRecord attacker, MutableMonster defender) {
-        int damage = attacker.weapon.damage.roll();
+        Item weapon = attacker.weapon == null ? Item.HANDS : attacker.weapon;
+        int damage = weapon.damage.roll();
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;

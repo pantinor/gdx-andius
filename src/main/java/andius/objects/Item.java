@@ -11,6 +11,12 @@ public class Item implements Comparable<Item> {
         POTION_SCROLL_SPECIAL,
         RING_AMULET;
     }
+    
+    public static final Item HANDS = new Item();
+    static {
+        Dice d = new Dice(2, 1);
+        HANDS.damage = d;
+    }
 
     public String name;
     public String genericName;

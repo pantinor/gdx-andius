@@ -223,7 +223,7 @@ public class VendorScreen implements Screen, Constants {
                     if (selectedVendorItem.item.stock == -1) {
                         //nothing - always in stock
                     } else {
-                        selectedVendorItem.item.stock --;
+                        selectedVendorItem.item.stock--;
                         if (selectedVendorItem.item.stock == 0) {
                             selectedVendorItem.removeActor(focusIndicator);
                             vendorTable.removeActor(selectedVendorItem);
@@ -243,7 +243,7 @@ public class VendorScreen implements Screen, Constants {
                 if (selectedItem != null) {
                     selectedItem.removeActor(focusIndicator);
                     selectedPlayer.invTable.removeActor(selectedItem);
-                    selectedPlayer.character.adjustGold(selectedItem.item.cost/2);
+                    selectedPlayer.character.adjustGold(selectedItem.item.cost / 2);
                     selectedPlayer.goldLabel.setText("" + selectedPlayer.character.gold);
                     Item it = ITEMS_MAP.get(selectedItem.item.name);
                     if (it.stock == 0) {
@@ -253,7 +253,7 @@ public class VendorScreen implements Screen, Constants {
                     } else if (it.stock == -1) {
                         //nothing - always in stock
                     } else {
-                        it.stock ++;
+                        it.stock++;
                     }
                     selectedItem = null;
                     Sounds.play(Sound.TRIGGER);
@@ -474,9 +474,9 @@ public class VendorScreen implements Screen, Constants {
                         Sounds.play(Sound.TRIGGER);
                         Item old = (Item) event.getTarget().getUserObject();
                         event.getTarget().setUserObject(selectedItem.item);
-                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedItem.item.iconID]));
+                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(icon(selectedItem.item)));
 
-                        if (old != null && !old.name.equals("HANDS") && !old.name.equals("BROKEN ITEM")) {
+                        if (old != null && !old.name.equals("BROKEN ITEM")) {
                             PlayerIndex.this.invTable.add(new ItemListing(old, selectedItem.rec));
                             PlayerIndex.this.invTable.row();
                         }
@@ -566,7 +566,7 @@ public class VendorScreen implements Screen, Constants {
             this.rec = rec;
             this.item = item;
 
-            this.icon = new Image(invIcons[item.iconID]);
+            this.icon = new Image(icon(item));
             this.label = new Label(item.name, Andius.skin, "larger");
             this.price = new Label("" + item.cost / 2, Andius.skin, "larger");
 

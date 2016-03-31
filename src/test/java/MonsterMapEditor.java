@@ -57,7 +57,7 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
 
         try {
 
-            InputStream is = this.getClass().getResourceAsStream("/assets/data/wiwold_lvl_2.tmx");
+            InputStream is = this.getClass().getResourceAsStream("/assets/data/cave.tmx");
             JAXBContext jaxbContext = JAXBContext.newInstance(Map.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             map = (Map) jaxbUnmarshaller.unmarshal(is);
@@ -212,18 +212,6 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
     @Override
     public void resume() {
 
-    }
-
-    public void readTMX() throws Exception {
-        InputStream is = this.getClass().getResourceAsStream("/assets/data/ali-baba.tmx");
-        JAXBContext jaxbContext = JAXBContext.newInstance(Map.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Map map = (Map) jaxbUnmarshaller.unmarshal(is);
-
-        JAXBContext context = JAXBContext.newInstance(Map.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(map, System.out);
     }
 
 }

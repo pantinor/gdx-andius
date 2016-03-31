@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.REWARDS;
 import static andius.Andius.game_scr_avatar;
 import static andius.Andius.mainGame;
 import andius.objects.Icons;
@@ -169,6 +170,15 @@ public class GameScreen extends BaseScreen {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
+        } else if (keycode == Keys.G) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
+            if (cell != null && cell.getTile().getId() == 1281 + 29) { //chest item id
+                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, REWARDS.get(rand.nextInt(10)), REWARDS.get(rand.nextInt(10)));
+                mainGame.setScreen(rs);
+                cell.setTile(null);
+                return false;
+            }
         } else if (keycode == Keys.T) {
             Actor a = this.map.getMap().getCreatureAt((int) v.x, (int) v.y);
             if (a != null) {

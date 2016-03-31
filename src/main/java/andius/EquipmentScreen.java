@@ -407,9 +407,9 @@ public class EquipmentScreen implements Screen, Constants {
                         Sounds.play(Sound.TRIGGER);
                         Item old = (Item) event.getTarget().getUserObject();
                         event.getTarget().setUserObject(selectedItem.item);
-                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedItem.item.iconID]));
+                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(icon(selectedItem.item)));
 
-                        if (old != null && !old.name.equals("HANDS") && !old.name.equals("BROKEN ITEM")) {
+                        if (old != null && !old.name.equals("BROKEN ITEM")) {
                             PlayerIndex.this.invTable.add(new ItemListing(old, selectedItem.rec));
                             PlayerIndex.this.invTable.row();
                         }
@@ -498,7 +498,7 @@ public class EquipmentScreen implements Screen, Constants {
             this.rec = rec;
             this.item = item;
 
-            this.icon = new Image(invIcons[item.iconID]);
+            this.icon = new Image(icon(item));
             this.label = new Label(item.name, Andius.skin, "larger");
             this.canusebkgnd = new Image();
 

@@ -140,7 +140,9 @@ public class CombatScreen extends BaseScreen {
             if (index >= context.players().length) {
                 continue;
             }
-
+            if (this.context.players()[index].isDisabled()) {
+                continue;
+            }
             andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon());
             actor.set(this.context.players()[index], sx, sy, x, y);
             partyMembers.add(actor);
@@ -982,7 +984,7 @@ public class CombatScreen extends BaseScreen {
 
     private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
 
-        Item weapon = attacker.getPlayer().weapon;
+        Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
         int range = weapon.range == 0 ? 1 : weapon.range;
 
         List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);

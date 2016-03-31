@@ -10,6 +10,14 @@ public class Dice {
     private int sides;
     private int bonus;
     
+    public Dice() {
+    }
+    
+    public Dice(int sides, int qty) {
+        this.sides = sides;
+        this.qty = qty;
+    }
+    
     public int roll() {
         int roll = 0;
         for (int i=0;i<qty;i++) {
