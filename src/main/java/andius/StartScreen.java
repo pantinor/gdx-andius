@@ -111,9 +111,11 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[3].gold = 500;
 //                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
 //                        mainGame.setScreen(rs);
-
-                        //VendorScreen es = new VendorScreen(CTX, Map.WIWOLD);
-                       //mainGame.setScreen(es);
+//                        CTX.saveGame.players[0].exp = 1500;
+//                        CTX.saveGame.players[2].exp = 2500;
+//                        CTX.saveGame.players[1].exp = 3500;
+//                        InnScreen es = new InnScreen(CTX, Map.WIWOLD);
+//                        mainGame.setScreen(es);
 
                     }
                 }

@@ -17,8 +17,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 65,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 55,
     "groupSize": {
       "qty": 2,
@@ -56,8 +58,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 48,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 235,
     "groupSize": {
       "qty": 3,
@@ -95,8 +102,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 5,
-    "abilities": 48,
+    "resists": [
+      "COLD"
+    ],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 415,
     "groupSize": {
       "qty": 2,
@@ -139,8 +151,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 6,
-    "abilities": 0,
+    "resists": [
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [],
     "exp": 230,
     "groupSize": {
       "qty": 1,
@@ -178,8 +193,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 380,
     "groupSize": {
       "qty": 1,
@@ -222,8 +240,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 620,
     "groupSize": {
       "qty": 1,
@@ -266,8 +287,12 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 56,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP",
+      "AUTOKILL"
+    ],
     "exp": 840,
     "groupSize": {
       "qty": 2,
@@ -320,8 +345,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 4,
+    "resists": [],
+    "ability": [
+      "PARALYZE"
+    ],
     "exp": 520,
     "groupSize": {
       "qty": 1,
@@ -359,8 +386,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 68,
-    "abilities": 2,
+    "resists": [
+      "MAGIC",
+      "COLD"
+    ],
+    "ability": [
+      "POISON"
+    ],
     "exp": 550,
     "groupSize": {
       "qty": 1,
@@ -398,8 +430,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 36,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "PARALYZE"
+    ],
     "exp": 350,
     "groupSize": {
       "qty": 2,
@@ -437,8 +472,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 475,
     "groupSize": {
       "qty": 1,
@@ -476,8 +514,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 515,
     "groupSize": {
       "qty": 1,
@@ -515,8 +556,16 @@
     "bonus1": 0,
     "bonus2": 4,
     "bonus3": 0,
-    "resistance": 62,
-    "abilities": 64,
+    "resists": [
+      "LVLDRAIN",
+      "STONING",
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "LVLDRAIN"
+    ],
     "exp": 920,
     "groupSize": {
       "qty": 9,
@@ -554,8 +603,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 24,
+    "resists": [],
+    "ability": [
+      "SLEEP",
+      "AUTOKILL"
+    ],
     "exp": 600,
     "groupSize": {
       "qty": 2,
@@ -603,8 +655,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 4,
-    "abilities": 40,
+    "resists": [
+      "COLD"
+    ],
+    "ability": [
+      "RUN",
+      "AUTOKILL"
+    ],
     "exp": 735,
     "groupSize": {
       "qty": 2,
@@ -647,8 +704,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 34,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "POISON"
+    ],
     "exp": 520,
     "groupSize": {
       "qty": 2,
@@ -686,8 +746,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 34,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [
+      "RUN",
+      "POISON"
+    ],
     "exp": 795,
     "groupSize": {
       "qty": 2,
@@ -735,8 +800,14 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 56,
-    "abilities": 32,
+    "resists": [
+      "LVLDRAIN",
+      "STONING",
+      "POISON"
+    ],
+    "ability": [
+      "RUN"
+    ],
     "exp": 780,
     "groupSize": {
       "qty": 4,
@@ -774,8 +845,12 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 50,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP",
+      "POISON"
+    ],
     "exp": 990,
     "groupSize": {
       "qty": 2,
@@ -813,8 +888,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 32,
+    "resists": [],
+    "ability": [
+      "RUN"
+    ],
     "exp": 795,
     "groupSize": {
       "qty": 4,
@@ -862,8 +939,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 10,
+    "resists": [],
+    "ability": [
+      "AUTOKILL",
+      "POISON"
+    ],
     "exp": 1360,
     "groupSize": {
       "qty": 2,
@@ -921,8 +1001,15 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 12,
-    "abilities": 38,
+    "resists": [
+      "POISON",
+      "COLD"
+    ],
+    "ability": [
+      "RUN",
+      "PARALYZE",
+      "POISON"
+    ],
     "exp": 1320,
     "groupSize": {
       "qty": 2,
@@ -960,8 +1047,12 @@
     "bonus1": 0,
     "bonus2": 1,
     "bonus3": 20,
-    "resistance": 2,
-    "abilities": 16,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 1275,
     "groupSize": {
       "qty": 1,
@@ -1009,8 +1100,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 4,
+    "resists": [],
+    "ability": [
+      "PARALYZE"
+    ],
     "exp": 680,
     "groupSize": {
       "qty": 1,
@@ -1058,8 +1151,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 960,
     "groupSize": {
       "qty": 1,
@@ -1097,8 +1193,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 18,
+    "resists": [],
+    "ability": [
+      "SLEEP",
+      "POISON"
+    ],
     "exp": 600,
     "groupSize": {
       "qty": 1,
@@ -1136,8 +1235,12 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 64,
-    "abilities": 16,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 755,
     "groupSize": {
       "qty": 1,
@@ -1175,8 +1278,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1120,
     "groupSize": {
       "qty": 1,
@@ -1214,8 +1317,8 @@
     "bonus1": 0,
     "bonus2": 3,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2075,
     "groupSize": {
       "qty": 1,
@@ -1263,8 +1366,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 870,
     "groupSize": {
       "qty": 1,
@@ -1302,8 +1407,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 960,
     "groupSize": {
       "qty": 1,
@@ -1341,8 +1448,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 18,
+    "resists": [],
+    "ability": [
+      "SLEEP",
+      "POISON"
+    ],
     "exp": 600,
     "groupSize": {
       "qty": 1,
@@ -1380,8 +1490,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 1120,
     "groupSize": {
       "qty": 1,
@@ -1419,8 +1532,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 50,
-    "resistance": 64,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 2435,
     "groupSize": {
       "qty": 1,
@@ -1473,8 +1588,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 4,
+    "resists": [],
+    "ability": [
+      "PARALYZE"
+    ],
     "exp": 1080,
     "groupSize": {
       "qty": 1,
@@ -1522,8 +1639,8 @@
     "bonus1": 0,
     "bonus2": 2,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2280,
     "groupSize": {
       "qty": 1,
@@ -1561,8 +1678,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 64,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 975,
     "groupSize": {
       "qty": 1,
@@ -1605,8 +1724,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 64,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 875,
     "groupSize": {
       "qty": 1,
@@ -1644,8 +1765,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 1135,
     "groupSize": {
       "qty": 1,
@@ -1683,8 +1806,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 1200,
     "groupSize": {
       "qty": 1,
@@ -1722,8 +1847,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 620,
     "groupSize": {
       "qty": 1,
@@ -1761,8 +1888,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 740,
     "groupSize": {
       "qty": 1,
@@ -1805,8 +1932,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1460,
     "groupSize": {
       "qty": 1,
@@ -1849,8 +1976,12 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 25,
-    "resistance": 64,
-    "abilities": 2,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [
+      "POISON"
+    ],
     "exp": 1245,
     "groupSize": {
       "qty": 1,
@@ -1888,8 +2019,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 2,
+    "resists": [],
+    "ability": [
+      "POISON"
+    ],
     "exp": 960,
     "groupSize": {
       "qty": 1,
@@ -1927,8 +2060,13 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 64,
-    "abilities": 18,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [
+      "SLEEP",
+      "POISON"
+    ],
     "exp": 1405,
     "groupSize": {
       "qty": 1,
@@ -1976,8 +2114,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 1,
+    "resists": [],
+    "ability": [
+      "STONE"
+    ],
     "exp": 1040,
     "groupSize": {
       "qty": 1,
@@ -2015,8 +2155,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1220,
     "groupSize": {
       "qty": 1,
@@ -2054,8 +2194,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1520,
     "groupSize": {
       "qty": 1,
@@ -2103,8 +2243,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 1000,
     "groupSize": {
       "qty": 1,
@@ -2142,8 +2284,11 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 48,
+    "resists": [],
+    "ability": [
+      "RUN",
+      "SLEEP"
+    ],
     "exp": 960,
     "groupSize": {
       "qty": 1,
@@ -2191,8 +2336,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 20,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2340,
     "groupSize": {
       "qty": 1,
@@ -2235,8 +2380,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2160,
     "groupSize": {
       "qty": 1,
@@ -2274,8 +2419,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2395,
     "groupSize": {
       "qty": 1,
@@ -2313,8 +2458,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 790,
     "groupSize": {
       "qty": 1,
@@ -2352,8 +2497,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 32,
+    "resists": [],
+    "ability": [
+      "RUN"
+    ],
     "exp": 1140,
     "groupSize": {
       "qty": 1,
@@ -2396,8 +2543,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 64,
-    "abilities": 36,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [
+      "RUN",
+      "PARALYZE"
+    ],
     "exp": 1235,
     "groupSize": {
       "qty": 1,
@@ -2435,8 +2587,8 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1790,
     "groupSize": {
       "qty": 1,
@@ -2474,8 +2626,8 @@
     "bonus1": 3,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1720,
     "groupSize": {
       "qty": 1,
@@ -2523,8 +2675,13 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 20,
-    "resistance": 120,
-    "abilities": 0,
+    "resists": [
+      "MAGIC",
+      "LVLDRAIN",
+      "STONING",
+      "POISON"
+    ],
+    "ability": [],
     "exp": 2240,
     "groupSize": {
       "qty": 1,
@@ -2562,8 +2719,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 25,
-    "resistance": 64,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 1475,
     "groupSize": {
       "qty": 2,
@@ -2601,8 +2760,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 2,
+    "resists": [],
+    "ability": [
+      "POISON"
+    ],
     "exp": 1540,
     "groupSize": {
       "qty": 1,
@@ -2645,8 +2806,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1720,
     "groupSize": {
       "qty": 1,
@@ -2684,8 +2845,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1900,
     "groupSize": {
       "qty": 1,
@@ -2728,8 +2889,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1240,
     "groupSize": {
       "qty": 1,
@@ -2767,8 +2928,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 32,
+    "resists": [],
+    "ability": [
+      "RUN"
+    ],
     "exp": 1220,
     "groupSize": {
       "qty": 1,
@@ -2811,8 +2974,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 8,
+    "resists": [],
+    "ability": [
+      "AUTOKILL"
+    ],
     "exp": 1020,
     "groupSize": {
       "qty": 1,
@@ -2855,8 +3020,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 85,
-    "resistance": 64,
-    "abilities": 0,
+    "resists": [
+      "MAGIC"
+    ],
+    "ability": [],
     "exp": 20435,
     "groupSize": {
       "qty": 1,
@@ -2899,8 +3066,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 60,
-    "resistance": 0,
-    "abilities": 64,
+    "resists": [],
+    "ability": [
+      "LVLDRAIN"
+    ],
     "exp": 5100,
     "groupSize": {
       "qty": 1,
@@ -2958,8 +3127,10 @@
     "bonus1": 0,
     "bonus2": 1,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 0,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [],
     "exp": 3515,
     "groupSize": {
       "qty": 1,
@@ -3022,8 +3193,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 0,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [],
     "exp": 2115,
     "groupSize": {
       "qty": 1,
@@ -3061,8 +3234,8 @@
     "bonus1": 0,
     "bonus2": 5,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2920,
     "groupSize": {
       "qty": 1,
@@ -3100,8 +3273,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2060,
     "groupSize": {
       "qty": 1,
@@ -3139,8 +3312,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2140,
     "groupSize": {
       "qty": 1,
@@ -3183,8 +3356,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1400,
     "groupSize": {
       "qty": 1,
@@ -3222,8 +3395,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 32,
+    "resists": [],
+    "ability": [
+      "RUN"
+    ],
     "exp": 1640,
     "groupSize": {
       "qty": 1,
@@ -3276,8 +3451,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 8,
+    "resists": [],
+    "ability": [
+      "AUTOKILL"
+    ],
     "exp": 1280,
     "groupSize": {
       "qty": 1,
@@ -3325,8 +3502,17 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 40,
-    "resistance": 126,
-    "abilities": 16,
+    "resists": [
+      "MAGIC",
+      "LVLDRAIN",
+      "STONING",
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 4450,
     "groupSize": {
       "qty": 1,
@@ -3364,8 +3550,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 95,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 42840,
     "groupSize": {
       "qty": 1,
@@ -3403,8 +3589,18 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 127,
-    "abilities": 96,
+    "resists": [
+      "MAGIC",
+      "LVLDRAIN",
+      "STONING",
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "LVLDRAIN",
+      "RUN"
+    ],
     "exp": 3300,
     "groupSize": {
       "qty": 1,
@@ -3447,8 +3643,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 95,
-    "resistance": 4,
-    "abilities": 0,
+    "resists": [
+      "COLD"
+    ],
+    "ability": [],
     "exp": 40875,
     "groupSize": {
       "qty": 1,
@@ -3486,8 +3684,8 @@
     "bonus1": 0,
     "bonus2": 1,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 5000,
     "groupSize": {
       "qty": 1,
@@ -3535,8 +3733,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 3300,
     "groupSize": {
       "qty": 1,
@@ -3579,8 +3777,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 0,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [],
     "exp": 2395,
     "groupSize": {
       "qty": 1,
@@ -3618,8 +3818,12 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 8,
-    "abilities": 32,
+    "resists": [
+      "POISON"
+    ],
+    "ability": [
+      "RUN"
+    ],
     "exp": 1935,
     "groupSize": {
       "qty": 1,
@@ -3662,8 +3866,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 8,
+    "resists": [],
+    "ability": [
+      "AUTOKILL"
+    ],
     "exp": 1600,
     "groupSize": {
       "qty": 1,
@@ -3711,8 +3917,14 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 20,
-    "resistance": 56,
-    "abilities": 4,
+    "resists": [
+      "LVLDRAIN",
+      "STONING",
+      "POISON"
+    ],
+    "ability": [
+      "PARALYZE"
+    ],
     "exp": 3330,
     "groupSize": {
       "qty": 1,
@@ -3760,8 +3972,12 @@
     "bonus1": 1,
     "bonus2": 0,
     "bonus3": 95,
-    "resistance": 0,
-    "abilities": 70,
+    "resists": [],
+    "ability": [
+      "LVLDRAIN",
+      "PARALYZE",
+      "POISON"
+    ],
     "exp": 44090,
     "groupSize": {
       "qty": 1,
@@ -3819,8 +4035,8 @@
     "bonus1": 0,
     "bonus2": 3,
     "bonus3": 95,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 40840,
     "groupSize": {
       "qty": 1,
@@ -3858,8 +4074,8 @@
     "bonus1": 0,
     "bonus2": 4,
     "bonus3": 25,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 5200,
     "groupSize": {
       "qty": 1,
@@ -3907,8 +4123,10 @@
     "bonus1": 2,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 2,
-    "abilities": 0,
+    "resists": [
+      "FIRE"
+    ],
+    "ability": [],
     "exp": 4155,
     "groupSize": {
       "qty": 1,
@@ -3951,8 +4169,17 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 126,
-    "abilities": 8,
+    "resists": [
+      "MAGIC",
+      "LVLDRAIN",
+      "STONING",
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "AUTOKILL"
+    ],
     "exp": 3000,
     "groupSize": {
       "qty": 1,
@@ -4000,8 +4227,20 @@
     "bonus1": 0,
     "bonus2": 2,
     "bonus3": 0,
-    "resistance": 127,
-    "abilities": 15,
+    "resists": [
+      "MAGIC",
+      "LVLDRAIN",
+      "STONING",
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "AUTOKILL",
+      "PARALYZE",
+      "POISON",
+      "STONE"
+    ],
     "exp": 9200,
     "groupSize": {
       "qty": 1,
@@ -4039,8 +4278,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 3160,
     "groupSize": {
       "qty": 1,
@@ -4078,8 +4317,11 @@
     "bonus1": 3,
     "bonus2": 0,
     "bonus3": 50,
-    "resistance": 0,
-    "abilities": 6,
+    "resists": [],
+    "ability": [
+      "PARALYZE",
+      "POISON"
+    ],
     "exp": 7460,
     "groupSize": {
       "qty": 1,
@@ -4122,8 +4364,10 @@
     "bonus1": 4,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 4,
+    "resists": [],
+    "ability": [
+      "PARALYZE"
+    ],
     "exp": 7320,
     "groupSize": {
       "qty": 1,
@@ -4161,8 +4405,17 @@
     "bonus1": 5,
     "bonus2": 0,
     "bonus3": 70,
-    "resistance": 14,
-    "abilities": 15,
+    "resists": [
+      "POISON",
+      "COLD",
+      "FIRE"
+    ],
+    "ability": [
+      "AUTOKILL",
+      "PARALYZE",
+      "POISON",
+      "STONE"
+    ],
     "exp": 15880,
     "groupSize": {
       "qty": 1,
@@ -4205,8 +4458,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 8,
+    "resists": [],
+    "ability": [
+      "AUTOKILL"
+    ],
     "exp": 1600,
     "groupSize": {
       "qty": 1,
@@ -4254,8 +4509,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 2200,
     "groupSize": {
       "qty": 2,
@@ -4293,8 +4548,10 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 16,
+    "resists": [],
+    "ability": [
+      "SLEEP"
+    ],
     "exp": 1000,
     "groupSize": {
       "qty": 2,
@@ -4332,8 +4589,8 @@
     "bonus1": 0,
     "bonus2": 0,
     "bonus3": 0,
-    "resistance": 0,
-    "abilities": 0,
+    "resists": [],
+    "ability": [],
     "exp": 1900,
     "groupSize": {
       "qty": 2,

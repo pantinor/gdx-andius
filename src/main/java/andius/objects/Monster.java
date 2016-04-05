@@ -1,5 +1,8 @@
 package andius.objects;
 
+import andius.Constants.Ability;
+import andius.Constants.Resistance;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Monster implements Comparable<Monster> {
@@ -21,8 +24,8 @@ public class Monster implements Comparable<Monster> {
     int bonus1;
     int bonus2;
     int bonus3;
-    int resistance;
-    int abilities;
+    List<Resistance> resists;
+    List<Ability> ability;
     int exp;
     Dice groupSize;
     Dice hitPoints;
@@ -50,8 +53,8 @@ public class Monster implements Comparable<Monster> {
         this.bonus1 = m.bonus1;
         this.bonus2 = m.bonus2;
         this.bonus3 = m.bonus3;
-        this.resistance = m.resistance;
-        this.abilities = m.abilities;
+        this.resists = m.resists;
+        this.ability = m.ability;
         this.exp = m.exp;
         this.groupSize = m.groupSize;
         this.hitPoints = m.hitPoints;
@@ -126,14 +129,6 @@ public class Monster implements Comparable<Monster> {
         return bonus3;
     }
 
-    public int getResistance() {
-        return resistance;
-    }
-
-    public int getAbilities() {
-        return abilities;
-    }
-
     public int getExp() {
         return exp;
     }
@@ -150,7 +145,7 @@ public class Monster implements Comparable<Monster> {
         return damage;
     }
 
-   
+
     @Override
     public int compareTo(Monster o) {
         if (this.exp != o.exp) {

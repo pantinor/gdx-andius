@@ -9,22 +9,24 @@ import andius.objects.Monster;
 import andius.objects.Reward;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
-import static java.lang.System.in;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
+import utils.Utils;
 
 public class ObjectsTestNG {
 
-    @Test
+    //@Test
     public void testScript() throws Exception {
         Conversations convs = Conversations.init();
         for (Conversation c : convs.getConversations()) {
@@ -35,44 +37,42 @@ public class ObjectsTestNG {
     //@Test
     public void testReadSaveGame() throws Exception {
 
-        SaveGame sg = null;
-        try {
-            sg = SaveGame.read("party.sav");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-//        assertEquals(Map.WORLD.ordinal(), sg.map);
-//        assertEquals(157, sg.wx, 157);
-//        assertEquals(56, sg.wy, 56);
-//        assertEquals(5, sg.players[0].health);
-//        assertEquals(10456, sg.players[0].gold);
-//        assertEquals(2502, sg.players[0].exp);
-//        assertEquals(WeaponType.ANOINT_FLAIL, sg.players[0].weapon);
-//        assertEquals(ArmorType.BREAST_PLATE, sg.players[0].armor);
-        sg.map = Map.WORLD.ordinal();
-        sg.wx = 157;
-        sg.wy = 56;
-
         CharacterRecord avatar = new CharacterRecord();
         avatar.name = "Steve";
         avatar.race = Race.HUMAN;
-        avatar.classType = ClassType.FIGHTER;
-        avatar.hp = 5;
-        avatar.exp = 50;
-        avatar.gold = 10456;
+        avatar.classType = ClassType.MAGE;
+        avatar.hp = avatar.getMoreHP();
+        avatar.maxhp = avatar.hp;
+        avatar.gold = Utils.getRandomBetween(100, 200);
         avatar.weapon = new Item();
         avatar.armor = new Item();
         avatar.inventory.add(new Item());
         avatar.inventory.add(new Item());
+        avatar.intell = 12;
+        avatar.piety = 12;
 
-        sg.players[0] = avatar;
+        if (avatar.classType == ClassType.MAGE || avatar.classType == ClassType.WIZARD) {
+            avatar.knownSpells.add(Spells.values()[1]);
+            avatar.knownSpells.add(Spells.values()[3]);
+            avatar.magePoints[0] = 2;
+        }
+        if (avatar.classType == ClassType.CLERIC) {
+            avatar.knownSpells.add(Spells.values()[23]);
+            avatar.knownSpells.add(Spells.values()[24]);
+            avatar.clericPoints[0] = 2;
+        }
 
-        sg.write("test.sav");
+        for (int i = 0; i < 30; i++) {
+            avatar.level = i;
+            SaveGame.setSpellPoints(avatar);
+                    
+            SaveGame.tryLearn(avatar);
 
-        int level = avatar.calculateLevel();
-        int mxhp = avatar.getMoreHP();
-        int x = 0;
+            //System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+
+            System.out.println("" + i + "\t" + avatar.knownSpells);
+        }
+
     }
 
     //@Test
@@ -108,7 +108,7 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    @Test
+    //@Test
     public void readJson() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
@@ -131,7 +131,7 @@ public class ObjectsTestNG {
         int x = 0;
     }
 
-    @Test
+    //@Test
     public void parseImage() throws Exception {
         BufferedImage input = ImageIO.read(new File("C:\\Users\\Paul\\Documents\\water\\Wizardry7-Mapd.png"));
         StringBuilder grass = new StringBuilder();
@@ -166,8 +166,6 @@ public class ObjectsTestNG {
                         grass.append("" + id).append(",");
                         water.append("0,");
                     }
-
-
 
                 } catch (Exception e) {
                     System.err.printf("wrong coord %d %d\n", x, y);

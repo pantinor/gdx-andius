@@ -22,6 +22,9 @@ import com.badlogic.gdx.utils.Array;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -154,6 +157,13 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
                     Marshaller marshaller = context.createMarshaller();
                     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
                     marshaller.marshal(map, System.out);
+
+//                    GsonBuilder builder = new GsonBuilder();
+//                    Gson gson = builder.setPrettyPrinting().create();
+//                    String json = gson.toJson(monsters);
+//                    FileOutputStream fos = new FileOutputStream(new File("monsters.json"));
+//                    fos.write(json.getBytes("UTF-8"));
+//                    fos.close();
                 } catch (Exception e) {
 
                 }

@@ -100,7 +100,7 @@
  </layer>
  <layer name="props" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoD+oYBoASwcILBzCfq2lk9tHUnoYDKCICYIpATWjcYYTDOU8PwqIB9TIR6NgYAEA6CX8hAAJAAA=
+   H4sIAAAAAAAAC2NgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+DQPoQdz+9ALZ8NAqGFgAA58QL0QAJAAA=
   </data>
  </layer>
  <layer name="creature" width="24" height="24">

@@ -262,7 +262,7 @@ public class CombatScreen extends BaseScreen {
             if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
                 layout.setText(Andius.smallFont, crSlots[i].getName().toUpperCase());
                 Andius.smallFont.draw(batch, layout, hud_enmy_x[idx], y);
-                batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 2, count > 7 ? 14 : 45);
+                batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 1, count > 7 ? 15 : 46);
                 Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
                 count++;
                 idx++;
@@ -417,7 +417,6 @@ public class CombatScreen extends BaseScreen {
                 return;
             }
 
-            //boolean quick = context.getAura().getType() == AuraType.QUICKNESS;
             if (true) {
                 SequenceAction seq = Actions.action(SequenceAction.class);
                 for (andius.objects.Actor cr : this.enemies) {

@@ -167,7 +167,7 @@ public class Andius extends Game {
         try {
 
             backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
-
+            
             TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
             for (int row = 0; row < 6; row++) {
                 for (int col = 0; col < 6; col++) {

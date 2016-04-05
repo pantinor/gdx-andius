@@ -77,7 +77,7 @@ public class Hud {
 
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            d = String.format("M: %d/%d/%d/%d/%d/%d/%d P: %d/%d/%d/%d/%d/%d/%d",
+            d = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
             Andius.smallFont.draw(batch, d, 790, y - 33);
 

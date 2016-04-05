@@ -7,6 +7,7 @@ import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -152,34 +153,29 @@ public class ManageScreen implements Screen, Constants {
         clear = new ImageButton(imgBtnSkin, "clear");
         add = new ImageButton(imgBtnSkin, "right");
         remove = new ImageButton(imgBtnSkin, "left");
-        cancel = new TextButton("Cancel", skin, "red");
-        reset = new TextButton("Reset", skin, "default");
-        save = new TextButton("Save", skin, "red");
+        cancel = new TextButton("CANCEL", skin, "red");
+        reset = new TextButton("RESET", skin, "red");
+        save = new TextButton("SAVE", skin, "red");
         iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
         partyIconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         partyIconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
 
-        apply.setX(326);
+        apply.setX(335);
         apply.setY(Andius.SCREEN_HEIGHT - 200);
 
-        clear.setX(326);
-        clear.setY(Andius.SCREEN_HEIGHT - 292);
+        clear.setX(335);
+        clear.setY(Andius.SCREEN_HEIGHT - 250);
 
-        add.setX(326);
-        add.setY(Andius.SCREEN_HEIGHT - 396 - 50);
+        add.setX(335);
+        add.setY(Andius.SCREEN_HEIGHT - 450);
 
-        remove.setX(326);
-        remove.setY(Andius.SCREEN_HEIGHT - 472 - 50);
+        remove.setX(335);
+        remove.setY(Andius.SCREEN_HEIGHT - 500);
 
-        save.setX(512);
-        save.setY(Andius.SCREEN_HEIGHT - 42);
-
-        cancel.setX(712);
-        cancel.setY(Andius.SCREEN_HEIGHT - 42);
-
-        reset.setX(740);
-        reset.setY(Andius.SCREEN_HEIGHT - 340);
+        save.setBounds(300, Andius.SCREEN_HEIGHT - 50, 65, 40);
+        cancel.setBounds(390, Andius.SCREEN_HEIGHT - 50, 65, 40);
+        reset.setBounds(735, Andius.SCREEN_HEIGHT - 347, 65, 40);
 
         iconLeft.setX(769);
         iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
@@ -215,10 +211,20 @@ public class ManageScreen implements Screen, Constants {
                 sel.maxhp = sel.hp;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
-                
-                sel.magePoints = sel.getMaxMageSpellPoints();
-                sel.clericPoints = sel.getMaxClericSpellPoints();
-                
+
+                if (sel.classType == ClassType.MAGE || sel.classType == ClassType.WIZARD) {
+                    sel.knownSpells.add(Spells.values()[1]);
+                    sel.knownSpells.add(Spells.values()[3]);
+                    sel.magePoints[0] = 2;
+                }
+                if (sel.classType == ClassType.CLERIC) {
+                    sel.knownSpells.add(Spells.values()[23]);
+                    sel.knownSpells.add(Spells.values()[24]);
+                    sel.clericPoints[0] = 2;
+                }
+
+                SaveGame.setSpellPoints(sel);
+
                 Sounds.play(Sound.TRIGGER);
             }
         });
@@ -715,33 +721,19 @@ public class ManageScreen implements Screen, Constants {
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 90;
 
-        font.draw(batch, "Name: " + sel.name, x, viewY);
-        font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
-        font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
-        font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
-        if (sel.weapon != null) {
-            font.draw(batch, "Weapon: " + sel.weapon.name, x, viewY -= 24);
-        }
-        if (sel.armor != null) {
-            font.draw(batch, "Armour: " + sel.armor.name, x, viewY -= 18);
-        }
+        font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
+        font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
+        font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "TYPE: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "STAT: " + sel.status.toString().toUpperCase(), x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 90 + 135;
+        x = 90 + 145;
 
-        font.draw(batch, "Strength: " + sel.str, x, viewY);
-        font.draw(batch, "Intelligence: " + sel.intell, x, viewY -= 18);
-        font.draw(batch, "Piety: " + sel.piety, x, viewY -= 18);
-        font.draw(batch, "Vitality: " + sel.vitality, x, viewY -= 18);
-        font.draw(batch, "Agility: " + sel.agility, x, viewY -= 18);
-        font.draw(batch, "Luck: " + sel.luck, x, viewY -= 18);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 90 + 250;
-
-        font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.hp, x, viewY -= 18);
-        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
+        font.draw(batch, "GLD: " + sel.gold, x, viewY);
+        font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
+        font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
+        font.draw(batch, "INV: " + sel.inventory.size(), x, viewY -= 18);
 
         batch.draw(Andius.faceTiles[sel.portaitIndex], 383, Andius.SCREEN_HEIGHT - 721);
 
@@ -750,33 +742,28 @@ public class ManageScreen implements Screen, Constants {
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 504;
 
-        font.draw(batch, "Name: " + sel.name, x, viewY);
-        font.draw(batch, "Race: " + sel.race.toString(), x, viewY -= 18);
-        font.draw(batch, "Type: " + sel.classType.toString(), x, viewY -= 18);
-        font.draw(batch, "Status: " + sel.status.toString(), x, viewY -= 18);
-        if (sel.weapon != null) {
-            font.draw(batch, "Weapon: " + sel.weapon.name, x, viewY -= 24);
-        }
-        if (sel.armor != null) {
-            font.draw(batch, "Armour: " + sel.armor.name, x, viewY -= 18);
-        }
-        
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 504 + 135;
+        font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
+        font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
+        font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "TYPE: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "STAT: " + sel.status.toString().toUpperCase(), x, viewY -= 18);
 
-        font.draw(batch, "Strength: " + sel.str, x, viewY);
-        font.draw(batch, "Intelligence: " + sel.intell, x, viewY -= 18);
-        font.draw(batch, "Piety: " + sel.piety, x, viewY -= 18);
-        font.draw(batch, "Vitality: " + sel.vitality, x, viewY -= 18);
-        font.draw(batch, "Agility: " + sel.agility, x, viewY -= 18);
-        font.draw(batch, "Luck: " + sel.luck, x, viewY -= 18);
+        viewY = Andius.SCREEN_HEIGHT - 590;
+        x = 504 + 145;
+
+        font.draw(batch, "STR: " + sel.str, x, viewY);
+        font.draw(batch, "INT: " + sel.intell, x, viewY -= 18);
+        font.draw(batch, "PTY: " + sel.piety, x, viewY -= 18);
+        font.draw(batch, "VIT: " + sel.vitality, x, viewY -= 18);
+        font.draw(batch, "AGI: " + sel.agility, x, viewY -= 18);
+        font.draw(batch, "LCK: " + sel.luck, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 504 + 250;
 
-        font.draw(batch, "Gold: " + sel.gold, x, viewY -= 18);
-        font.draw(batch, "Hit Points: " + sel.hp, x, viewY -= 18);
-        font.draw(batch, "Experience: " + sel.exp, x, viewY -= 18);
+        font.draw(batch, "GLD: " + sel.gold, x, viewY);
+        font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
+        font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
         batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 719);
 

@@ -5,9 +5,9 @@
  */
 package andius.objects;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import utils.Utils;
 
 /**
  *
@@ -15,6 +15,11 @@ import utils.Utils;
  */
 public class MutableMonster extends Monster {
 
+    private static final TextureRegion HLTH_BAR;
+    static {
+        HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
+    }
+    
     private int currentHitPoints;
     private final int maxHitPoints;
     private TextureRegion healthBar;
@@ -24,7 +29,7 @@ public class MutableMonster extends Monster {
         this.maxHitPoints = this.hitPoints.roll();
         this.currentHitPoints = this.maxHitPoints;
     }
-    
+
     public void setIcon(Icons icon) {
         this.icon = icon;
     }
@@ -43,21 +48,21 @@ public class MutableMonster extends Monster {
 
     public TextureRegion getHealthBar() {
         if (healthBar == null) {
-            healthBar = new TextureRegion(Utils.fillRectangle(76, 10, Color.GREEN, .5f));
+            healthBar = new TextureRegion(HLTH_BAR);
         }
         return this.healthBar;
     }
 
     public void adjustHealthBar() {
         double percent = (double) currentHitPoints / maxHitPoints;
-        double bar = percent * (double) 76;
+        double bar = percent * (double) 74;
         if (currentHitPoints < 0) {
             bar = 0;
         }
-        if (bar > 76) {
-            bar = 76;
+        if (bar > 74) {
+            bar = 74;
         }
-        getHealthBar().setRegion(0, 0, (int) bar, 10);
+        getHealthBar().setRegion(381, 82, (int) bar, 8);
     }
 
 }

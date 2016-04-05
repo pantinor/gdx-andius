@@ -6,7 +6,6 @@ import utils.Utils;
 import utils.XORShiftRandom;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
-import java.util.HashMap;
 import com.badlogic.gdx.utils.Base64Coder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,7 +18,7 @@ import org.apache.commons.io.IOUtils;
 
 public class SaveGame implements Constants {
 
-    public static final Random rand = new XORShiftRandom();
+    public static final Random RANDOM = new XORShiftRandom();
 
     public CharacterRecord[] players;
     public int map;
@@ -79,9 +78,10 @@ public class SaveGame implements Constants {
         public Item glove;
         public Item item1;
         public Item item2;
-        
-        public int[] magePoints = new int[]{0, 0, 0, 0, 0, 0, 0};
-        public int[] clericPoints = new int[]{0, 0, 0, 0, 0, 0, 0};
+
+        public List<Spells> knownSpells = new ArrayList<>();
+        public int[] magePoints = new int[7];
+        public int[] clericPoints = new int[7];
 
         public List<Item> inventory = new ArrayList<>();
 
@@ -94,14 +94,14 @@ public class SaveGame implements Constants {
         public void adjustGold(int amt) {
             gold = Utils.adjustValue(gold, amt, Integer.MAX_VALUE, 0);
         }
-        
+
         public void adjustHP(int amt) {
             hp = Utils.adjustValue(hp, amt, maxhp, 0);
             if (hp <= 0) {
                 status = Status.DEAD;
             }
         }
-        
+
         public boolean isDisabled() {
             return this.status != Status.OK && this.status != Status.POISONED;
         }
@@ -129,15 +129,15 @@ public class SaveGame implements Constants {
             if (item2 != null) {
                 ac -= item2.armourClass;
             }
-            if (classType == ClassType.NINJA) {
-                ac = ( level / 3 ) - 2;
+            if (classType == ClassType.NINJA && weapon == null) {
+                ac = (level / 3) - 2;
             }
             return ac;
         }
 
         public int getMoreHP() {
             int hp = this.classType.getHitDie();
-            hp += rand.nextInt(this.classType.getHitDie()) + 1;
+            hp += RANDOM.nextInt(this.classType.getHitDie()) + 1;
             if (this.vitality <= 3) {
                 hp -= 2;
             } else if (this.vitality == 4 || this.vitality == 5) {
@@ -174,38 +174,164 @@ public class SaveGame implements Constants {
             }
 
             return lvl;
-
-        }
-
-        public int[] getMaxMageSpellPoints() {
-            try {
-                if (this.classType == ClassType.MAGE) {
-                    return MAGE_SPELL_PTS[this.level];
-                } else if (this.classType == ClassType.WIZARD) {
-                    return WIZARD_MAGE_SPELL_PTS[this.level];
-                } else if (this.classType == ClassType.SAMURAI) {
-                    return SAMURAI_MAGE_SPELL_PTS[this.level];
-                }
-            } catch (Exception e) {
-                return new int[]{9, 9, 9, 9, 9, 9, 9};
-            }
-            return new int[]{0, 0, 0, 0, 0, 0, 0};
-        }
-
-        public int[] getMaxClericSpellPoints() {
-            try {
-                if (this.classType == ClassType.CLERIC) {
-                    return CLERIC_SPELL_PTS[this.level];
-                } else if (this.classType == ClassType.WIZARD) {
-                    return WIZARD_CLERIC_SPELL_PTS[this.level];
-                } else if (this.classType == ClassType.LORD) {
-                    return LORD_CLERIC_SPELL_PTS[this.level];
-                }
-            } catch (Exception e) {
-                return new int[]{9, 9, 9, 9, 9, 9, 9};
-            }
-            return new int[]{0, 0, 0, 0, 0, 0, 0};
         }
 
     }
+
+    public static int gainOrLose(int attrib) {
+        if (RANDOM.nextInt(4) != 0) {
+            if (RANDOM.nextInt(130) < 25) {
+                if (attrib == 18 && RANDOM.nextInt(6) != 4) {
+                    //nothing
+                } else {
+                    attrib--;
+                }
+            } else if (attrib != 18) {
+                attrib++;
+            }
+        }
+        return attrib;
+    }
+
+    private static void setSpellCount(int[] spellCounts, int grp, int low, int high, List<Spells> knownSpells) {
+        for (int i = low; i <= high; i++) {
+            if (knownSpells.contains(Spells.values()[i - 1])) {
+                spellCounts[grp]++;
+            }
+        }
+    }
+
+    private static void setMinMageSpellCounts(CharacterRecord rec) {
+        setSpellCount(rec.magePoints, 0, 1, 4, rec.knownSpells);
+        setSpellCount(rec.magePoints, 1, 5, 6, rec.knownSpells);
+        setSpellCount(rec.magePoints, 2, 7, 8, rec.knownSpells);
+        setSpellCount(rec.magePoints, 3, 9, 11, rec.knownSpells);
+        setSpellCount(rec.magePoints, 4, 12, 14, rec.knownSpells);
+        setSpellCount(rec.magePoints, 5, 15, 18, rec.knownSpells);
+        setSpellCount(rec.magePoints, 6, 19, 21, rec.knownSpells);
+    }
+
+    private static void setMinPriestSpellCounts(CharacterRecord rec) {
+        setSpellCount(rec.clericPoints, 0, 22, 26, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 1, 27, 30, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 2, 31, 34, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 3, 35, 38, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 4, 39, 44, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 5, 45, 48, rec.knownSpells);
+        setSpellCount(rec.clericPoints, 6, 49, 50, rec.knownSpells);
+    }
+
+    public static void setSpellPoints(CharacterRecord rec) {
+
+        setMinMageSpellCounts(rec);
+        setMinPriestSpellCounts(rec);
+
+        if (rec.classType == ClassType.MAGE) {
+            setSpellsPerLevel(rec.magePoints, rec, 0, 2);
+        }
+        if (rec.classType == ClassType.CLERIC) {
+            setSpellsPerLevel(rec.clericPoints, rec, 0, 2);
+        }
+        if (rec.classType == ClassType.WIZARD) {
+            setSpellsPerLevel(rec.magePoints, rec, 0, 4);
+            setSpellsPerLevel(rec.clericPoints, rec, 3, 4);
+        }
+        if (rec.classType == ClassType.LORD) {
+            setSpellsPerLevel(rec.clericPoints, rec, 3, 2);
+        }
+        if (rec.classType == ClassType.SAMURAI) {
+            setSpellsPerLevel(rec.magePoints, rec, 3, 3);
+        }
+    }
+
+    private static void setSpellsPerLevel(int[] spellCounts, CharacterRecord rec, int lvlModifier1, int lvlModifier2) {
+        int count = rec.level - lvlModifier1;
+        if (count <= 0) {
+            return;
+        }
+        for (int i = 0; i < 7 && count > 0; i++) {
+            if (count > spellCounts[i]) {
+                spellCounts[i] = count;
+            }
+            count = count - lvlModifier2;
+        }
+        for (int i = 0; i < 7; i++) {
+            if (spellCounts[i] > 9) {
+                spellCounts[i] = 9;
+            }
+        }
+    }
+
+    public static boolean tryLearn(CharacterRecord rec) {
+
+        boolean learned = false;
+
+        if (rec.magePoints[0] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 1, 4) || learned;
+        }
+        if (rec.magePoints[1] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 5, 6) || learned;
+        }
+        if (rec.magePoints[2] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 7, 8) || learned;
+        }
+        if (rec.magePoints[3] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 9, 11) || learned;
+        }
+        if (rec.magePoints[4] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 12, 14) || learned;
+        }
+        if (rec.magePoints[5] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 15, 18) || learned;
+        }
+        if (rec.magePoints[6] > 0) {
+            learned = tryLearnSpell(rec, rec.intell, 19, 21) || learned;
+        }
+
+        if (rec.clericPoints[0] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 22, 26) || learned;
+        }
+        if (rec.clericPoints[1] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 27, 30) || learned;
+        }
+        if (rec.clericPoints[2] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 31, 34) || learned;
+        }
+        if (rec.clericPoints[3] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 35, 38) || learned;
+        }
+        if (rec.clericPoints[4] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 39, 44) || learned;
+        }
+        if (rec.clericPoints[5] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 45, 48) || learned;
+        }
+        if (rec.clericPoints[6] > 0) {
+            learned = tryLearnSpell(rec, rec.piety, 49, 50) || learned;
+        }
+
+        return learned;
+
+    }
+
+    private static boolean tryLearnSpell(CharacterRecord rec, int attrib, int low, int high) {
+        boolean knowsSpellsAtThisLevel = false;
+        boolean learned = false;
+        for (int i = low; i <= high; i++) {
+            Spells spell = Spells.values()[i - 1];
+            knowsSpellsAtThisLevel = knowsSpellsAtThisLevel || rec.knownSpells.contains(spell);
+        }
+        for (int i = low; i <= high; i++) {
+            Spells spell = Spells.values()[i - 1];
+            if (!rec.knownSpells.contains(spell)) {
+                if (RANDOM.nextInt(30) < attrib || !knowsSpellsAtThisLevel) {
+                    learned = true;
+                    knowsSpellsAtThisLevel = true;
+                    rec.knownSpells.add(spell);
+                }
+            }
+        }
+        return learned;
+    }
+
 }
