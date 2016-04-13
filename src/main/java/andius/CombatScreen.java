@@ -47,6 +47,9 @@ import utils.PartyDeathException;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import utils.Utils;
 
@@ -74,7 +77,12 @@ public class CombatScreen extends BaseScreen {
     public final List<andius.objects.Actor> partyMembers = new ArrayList<>();
     private int activeIndex;
 
-    private Texture enemy_hud;
+    private Texture frame;
+    private final Table logTable;
+    private final ScrollPane logScroll;
+    private final Stage hudStage;
+    private final CombatHud hud;
+
     int[] hud_enmy_x = new int[]{50, 89 + 40, 168 + 40, 247 + 40, 326 + 40, 405 + 40, 484 + 40, 563 + 40};
 
     public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent) {
@@ -86,7 +94,13 @@ public class CombatScreen extends BaseScreen {
         this.tmap = tmap;
         this.renderer = new OrthogonalTiledMapRenderer(this.tmap);
 
-        this.enemy_hud = new Texture(Gdx.files.classpath("assets/data/enemy_hud.png"));
+        this.frame = new Texture(Gdx.files.classpath("assets/data/combat_frame.png"));
+        this.logTable = new Table(Andius.skin);
+        this.logTable.defaults().align(Align.left).pad(0);
+        this.logScroll = new ScrollPane(this.logTable, Andius.skin);
+        this.logScroll.setBounds(728, 30, 269, 270);
+        this.logScroll.setScrollingDisabled(true, false);
+        this.hudStage = new Stage();
 
         MapProperties prop = tmap.getProperties();
         mapPixelHeight = prop.get("height", Integer.class) * TILE_DIM;
@@ -156,12 +170,20 @@ public class CombatScreen extends BaseScreen {
         stage.addActor(cursor);
         cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
 
+        hudStage.addActor(this.logScroll);
+
+        this.hud = new CombatHud(this.partyMembers);
+        andius.objects.Actor pm = getAndSetNextActivePlayer();
+        if (pm != null) {
+            hud.set(pm.getPlayer(), hudStage);
+        }
+
         newMapPixelCoords = getMapPixelCoords(6, 6);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(this);
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, hudStage));
     }
 
     @Override
@@ -173,6 +195,15 @@ public class CombatScreen extends BaseScreen {
         stage.dispose();
         renderer.dispose();
         batch.dispose();
+    }
+
+    public void log(String s) {
+        Label l = new Label(s, Andius.skin, "hudLogFont");
+        l.setWrap(true);
+        logTable.add(l).width(270);
+        logTable.row();
+        logScroll.setScrollPercentY(100);
+        logScroll.layout();
     }
 
     private void fillCreatureTable() {
@@ -253,8 +284,7 @@ public class CombatScreen extends BaseScreen {
         renderer.getBatch().end();
 
         batch.begin();
-        batch.draw(Andius.backGround, 0, 0);
-        batch.draw(this.enemy_hud, 40, 6);
+        batch.draw(this.frame, 0, 0);
 
         int y = 78;
         int count = 0, idx = 0;
@@ -273,16 +303,13 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        Andius.HUD.render(batch, Andius.CTX);
-
-//        if (context.getAura().getType() != AuraType.NONE) {
-//            Exodus.font.draw(batch, context.getAura().getType().toString(), 430, Exodus.SCREEN_HEIGHT - 7);
-//        }
         batch.end();
 
         stage.act();
         stage.draw();
 
+        hudStage.act();
+        hudStage.draw();
     }
 
     @Override
@@ -391,6 +418,7 @@ public class CombatScreen extends BaseScreen {
         if (next != null) {
             cursor.setVisible(true);
             cursor.set(next.getX(), next.getY());
+            hud.set(next.getPlayer(), hudStage);
         } else {
             cursor.setVisible(false);
         }
@@ -461,7 +489,7 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public void run() {
-            Andius.HUD.add(String.format("%s turns his toes up to the daises!", cr.getMonster().name));
+            log(String.format("%s turns his toes up to the daises!", cr.getMonster().name));
             CombatScreen.this.enemies.remove(cr);
         }
     }
@@ -470,7 +498,7 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public void run() {
-            Gdx.input.setInputProcessor(CombatScreen.this);
+            Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
             if (partyMembers.size() == 0) {
                 end();
             }
@@ -546,7 +574,6 @@ public class CombatScreen extends BaseScreen {
         } else {
             mainGame.setScreen(startScreen);
         }
-        this.dispose();
     }
 
     private boolean rangedAttackAt(AttackVector target, andius.objects.Actor attacker) throws PartyDeathException {
@@ -684,7 +711,7 @@ public class CombatScreen extends BaseScreen {
                     for (Dice dice : creature.getMonster().getDamage()) {
                         int damage = dice.roll();
                         target.getPlayer().adjustHP(-damage);
-                        Andius.HUD.add(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
+                        log(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
 
                         Actor d = new ExplosionDrawable(Andius.explGray);
                         d.setX(target.getX() + 12);
@@ -705,7 +732,7 @@ public class CombatScreen extends BaseScreen {
                     stage.addAction(seq);
 
                 } else {
-                    Andius.HUD.add(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
+                    log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
                 }
                 break;
             }
@@ -1002,9 +1029,9 @@ public class CombatScreen extends BaseScreen {
                     target.result = Utils.attackHit(attacker.getPlayer(), target.victim.getMonster());
                     if (target.result == AttackResult.HIT) {
                         int damage = Utils.dealDamage(attacker.getPlayer(), target.victim.getMonster());
-                        Andius.HUD.add(String.format("%s strikes %s for %d damage!", attacker.getPlayer().name, target.victim.getMonster().name, damage));
+                        log(String.format("%s strikes %s for %d damage!", attacker.getPlayer().name, target.victim.getMonster().name, damage));
                     } else {
-                        Andius.HUD.add(String.format("%s misses %s", attacker.getPlayer().name, target.victim.getMonster().name));
+                        log(String.format("%s misses %s", attacker.getPlayer().name, target.victim.getMonster().name));
                     }
                 }
             }
@@ -1013,7 +1040,7 @@ public class CombatScreen extends BaseScreen {
         if (target != null && target.result != null && weapon.numberUses > 0) {
             weapon.use();
             if (weapon.numberUses <= 0) {
-                Andius.HUD.add("Your weapon has broken!");
+                log("Your weapon has broken!");
                 attacker.getPlayer().weapon = Andius.ITEMS_MAP.get("HANDS").clone();
             }
         }
@@ -1127,11 +1154,11 @@ public class CombatScreen extends BaseScreen {
 
             if (this.code == Keys.A) {
 
-                logAppend(dir.toString());
+                log(dir.toString());
 
                 animateAttack(this.player, dir);
 
-                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, stage));
+                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
 
                 return false;
 

@@ -11,6 +11,7 @@ import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
@@ -28,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -85,8 +87,9 @@ public class EquipmentScreen implements Screen, Constants {
 
     ItemListing selectedItem;
     PlayerIndex selectedPlayer;
-    ScrollPane invPane;
-    Image focusIndicator;
+    SpellListing selectedSpell;
+    ScrollPane invPane, spellPane;
+    Image focusIndicator, spellFocusInd;
     Label invDesc;
 
     public EquipmentScreen(Context context, final Map contextMap) {
@@ -99,6 +102,10 @@ public class EquipmentScreen implements Screen, Constants {
         focusIndicator = new Image(Utils.fillRectangle(246, 50, Color.YELLOW, .35f));
         focusIndicator.setWidth(246);
         focusIndicator.setHeight(50);
+
+        spellFocusInd = new Image(Utils.fillRectangle(246, 50, Color.YELLOW, .35f));
+        spellFocusInd.setWidth(246);
+        spellFocusInd.setHeight(50);
 
         traderSlider = new TradeSliderBox();
 
@@ -132,6 +139,9 @@ public class EquipmentScreen implements Screen, Constants {
         invPane = new ScrollPane(playerSelection.getSelected().invTable, Andius.skin);
         invPane.setBounds(485, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
+        spellPane = new ScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
+        spellPane.setBounds(753, Andius.SCREEN_HEIGHT - 551, 246, 420);
+
         this.cancel = new TextButton("CNCL", Andius.skin, "brown-larger");
         this.cancel.addListener(new ChangeListener() {
             @Override
@@ -141,7 +151,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.cancel.setBounds(100, 220, 65, 40);
 
-        this.exit = new TextButton("SAVE", Andius.skin, "brown-larger");
+        this.exit = new TextButton("APPLY", Andius.skin, "brown-larger");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -208,6 +218,7 @@ public class EquipmentScreen implements Screen, Constants {
 
         stage.addActor(sp1);
         stage.addActor(invPane);
+        stage.addActor(spellPane);
         stage.addActor(exit);
         stage.addActor(cancel);
         stage.addActor(trade);
@@ -215,13 +226,27 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(invDesc);
         stage.addActor(unequip);
         stage.addActor(traderSlider);
+        
+        Label inventory = new Label("Inventory", Andius.skin, "larger");
+        Label splBk = new Label("Known Spells", Andius.skin, "larger");
+        Label presets = new Label("Spell Presets", Andius.skin, "larger");
+        inventory.setBounds(512, Andius.SCREEN_HEIGHT - 160, 20, 100);
+        splBk.setBounds(770, Andius.SCREEN_HEIGHT - 160, 20, 100);
+        presets.setBounds(826, Andius.SCREEN_HEIGHT - 735, 20, 100);
+        stage.addActor(inventory);
+        stage.addActor(splBk);
+        stage.addActor(presets);
 
         ChangeListener cl = new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 selectedItem = null;
+                selectedSpell = null;
                 if (selectedPlayer != null) {
                     for (Actor a : selectedPlayer.icons) {
+                        a.remove();
+                    }
+                    for (Actor a : selectedPlayer.slots) {
                         a.remove();
                     }
                 }
@@ -229,8 +254,14 @@ public class EquipmentScreen implements Screen, Constants {
                 for (Actor a : selectedPlayer.icons) {
                     stage.addActor(a);
                 }
+                for (Actor a : selectedPlayer.slots) {
+                    stage.addActor(a);
+                }
                 invPane.clearChildren();
                 invPane.setWidget(selectedPlayer.invTable);
+
+                spellPane.clearChildren();
+                spellPane.setWidget(selectedPlayer.spellTable);
             }
         };
 
@@ -274,7 +305,7 @@ public class EquipmentScreen implements Screen, Constants {
 
         final SaveGame.CharacterRecord character;
         final Table invTable = new Table(Andius.skin);
-
+        final Table spellTable = new Table(Andius.skin);
         final Image avatar;
         final Image weaponIcon;
         final Image armorIcon;
@@ -288,6 +319,7 @@ public class EquipmentScreen implements Screen, Constants {
         final Label goldLabel;
 
         final Actor[] icons = new Actor[11];
+        final Image[] slots = new Image[10];
 
         PlayerIndex(SaveGame.CharacterRecord sp) {
             this.character = sp;
@@ -313,6 +345,35 @@ public class EquipmentScreen implements Screen, Constants {
                         } else if (event.getTarget().getParent() instanceof ItemListing) {
                             selectedItem = (ItemListing) event.getTarget().getParent();
                             selectedItem.addActor(focusIndicator);
+                        }
+                    }
+
+                    return false;
+                }
+            }
+            );
+
+            spellTable.align(Align.top);
+
+            for (Spells spell : character.knownSpells) {
+                spellTable.add(new SpellListing(spell));
+                spellTable.row();
+            }
+
+            spellTable.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+
+                    if (event.toString().equals("touchDown")) {
+                        if (spellFocusInd.getParent() != null) {
+                            spellFocusInd.getParent().removeActor(spellFocusInd);
+                        }
+                        if (event.getTarget() instanceof SpellListing) {
+                            selectedSpell = (SpellListing) event.getTarget();
+                            selectedSpell.addActor(spellFocusInd);
+                        } else if (event.getTarget().getParent() instanceof SpellListing) {
+                            selectedSpell = (SpellListing) event.getTarget().getParent();
+                            selectedSpell.addActor(spellFocusInd);
                         }
                     }
 
@@ -356,6 +417,17 @@ public class EquipmentScreen implements Screen, Constants {
             icons[8] = acLabel;
             icons[9] = damageLabel;
             icons[10] = goldLabel;
+
+            int x = 762;
+            for (int i = 0; i < 5; i++) {
+                slots[i] = make(character.spellPresets[i], x, Andius.SCREEN_HEIGHT - 614, i);
+                x = x + 44 + 3;
+            }
+            x = 762;
+            for (int i = 0; i < 5; i++) {
+                slots[i + 5] = make(character.spellPresets[i + 5], x, Andius.SCREEN_HEIGHT - 660, i + 5);
+                x = x + 44 + 3;
+            }
         }
 
         private Image make(ItemType type, Item it, TextureRegion tr, int x, int y) {
@@ -364,6 +436,15 @@ public class EquipmentScreen implements Screen, Constants {
             im.setY(y);
             im.setUserObject(it);
             im.addListener(new InvItemChangeListener(type));
+            return im;
+        }
+
+        private Image make(Spells spell, int x, int y, int slot) {
+            Image im = new Image(spell != null ? invIcons[spell.getIcon()] : invIcons[803]);
+            im.setX(x);
+            im.setY(y);
+            im.setUserObject(spell);
+            im.addListener(new SpellChangeListener(spell, slot));
             return im;
         }
 
@@ -382,6 +463,14 @@ public class EquipmentScreen implements Screen, Constants {
                 if (a instanceof ItemListing) {
                     ItemListing il = (ItemListing) a;
                     character.inventory.add(il.item);
+                }
+            }
+
+            for (int i = 0; i < 10; i++) {
+                if (slots[i].getUserObject() != null) {
+                    character.spellPresets[i] = (Spells) slots[i].getUserObject();
+                } else {
+                    character.spellPresets[i] = null;
                 }
             }
 
@@ -441,6 +530,34 @@ public class EquipmentScreen implements Screen, Constants {
                 return false;
             }
 
+        }
+
+        private class SpellChangeListener implements EventListener {
+
+            Spells spell;
+            final int slot;
+
+            SpellChangeListener(Spells spell, int slot) {
+                this.spell = spell;
+                this.slot = slot;
+            }
+
+            @Override
+            public boolean handle(Event event) {
+                if (event.toString().equals("touchDown")) {
+                    if (selectedSpell != null) {
+                        Sounds.play(Sound.TRIGGER);
+                        event.getTarget().setUserObject(selectedSpell.spell);
+                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedSpell.spell.getIcon()]));
+                        this.spell = selectedSpell.spell;
+                    } else {
+                        event.getTarget().setUserObject(null);
+                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[803]));
+                        this.spell = null;
+                    }
+                }
+                return false;
+            }
         }
 
         private int calculateAC() {
@@ -516,6 +633,30 @@ public class EquipmentScreen implements Screen, Constants {
             this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
             this.label.setPosition(getX() + dim + 10, getY() + 10);
             this.canusebkgnd.setBounds(getX(), getY(), w, h);
+            this.setBounds(getX(), getY(), w, h);
+
+        }
+
+    }
+
+    private class SpellListing extends Group {
+
+        Spells spell;
+        final Image icon;
+        final Label label;
+
+        SpellListing(Spells spell) {
+            this.spell = spell;
+
+            this.icon = new Image(invIcons[spell.getIcon()]);
+            this.label = new Label(spell.toString().toUpperCase(), Andius.skin, "larger");
+
+            addActor(this.icon);
+            addActor(this.label);
+
+            this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
+            this.label.setPosition(getX() + dim + 10, getY() + 10);
+
             this.setBounds(getX(), getY(), w, h);
 
         }

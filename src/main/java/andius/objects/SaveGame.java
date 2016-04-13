@@ -80,6 +80,7 @@ public class SaveGame implements Constants {
         public Item item2;
 
         public List<Spells> knownSpells = new ArrayList<>();
+        public Spells[] spellPresets = new Spells[10];
         public int[] magePoints = new int[7];
         public int[] clericPoints = new int[7];
 

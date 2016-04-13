@@ -65,18 +65,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     }
 
-    public void log(String s) {
-        Andius.HUD.add(s);
-    }
-
-    public void logAppend(String s) {
-        Andius.HUD.append(s);
-    }
-
-    public void logDeleteLastChar() {
-        Andius.HUD.logDeleteLastChar();
-    }
-
     public final void addButtons(final Map map) {
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
 

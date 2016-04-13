@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -92,6 +91,9 @@ public class InnScreen implements Screen, Constants {
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (selectedPlayer == null || selectedPlayer.c.isDisabled()) {
+                    return;
+                }
                 if (roomSelection.getSelected().startsWith("THE STAB")) {
                     takeNap(0, 0, selectedPlayer);
                 } else if (roomSelection.getSelected().startsWith("COTS")) {
@@ -192,7 +194,7 @@ public class InnScreen implements Screen, Constants {
 
     private void takeNap(int hpAdd, int goldAmt, PlayerListing pi) {
         if (goldAmt > 0) {
-            boolean healed = false;
+            int healed = 0;
             while (pi.c.gold >= goldAmt && pi.c.hp < pi.c.maxhp) {
                 pi.c.hp += hpAdd;
                 if (pi.c.hp > pi.c.maxhp) {
@@ -201,10 +203,10 @@ public class InnScreen implements Screen, Constants {
                 pi.c.adjustGold(-goldAmt);
                 pi.gold.setText("" + pi.c.gold);
                 pi.hp.setText(pi.c.hp + " / " + pi.c.maxhp);
-                log(pi.c.name.toUpperCase() + " IS HEALING.");
-                healed = true;
+                healed++;
             }
-            if (healed) {
+            if (healed > 0) {
+                log(pi.c.name.toUpperCase() + " HAS HEALED (" + healed + " WEEKS).");
                 Sounds.play(Sound.HEALING);
             }
         } else {
@@ -214,19 +216,19 @@ public class InnScreen implements Screen, Constants {
         int level = pi.c.calculateLevel();
         if (level != pi.c.level) {
             while (pi.c.level < level) {
-                pi.c.level ++;
-                pi.c.hp += pi.c.getMoreHP();
+                pi.c.level++;
+                pi.c.maxhp += pi.c.getMoreHP();
             }
             log(pi.c.name.toUpperCase() + " IS NOW LEVEL " + level);
             pi.lvlracetype.setText("LVL " + pi.c.level + " " + pi.c.race.toString() + " " + pi.c.classType.toString());
-               
+
             pi.c.str = gainOrLose("STRENGTH", pi.c.str, pi.c);
             pi.c.intell = gainOrLose("INTELLIGENCE", pi.c.intell, pi.c);
             pi.c.piety = gainOrLose("PIETY", pi.c.piety, pi.c);
             pi.c.vitality = gainOrLose("VITALITY", pi.c.vitality, pi.c);
             pi.c.agility = gainOrLose("AGILITY", pi.c.agility, pi.c);
             pi.c.luck = gainOrLose("LUCK", pi.c.luck, pi.c);
-            
+
             SaveGame.setSpellPoints(pi.c);
             if (SaveGame.tryLearn(pi.c)) {
                 log(pi.c.name.toUpperCase() + " LEARNED NEW SPELLS!");
@@ -234,7 +236,7 @@ public class InnScreen implements Screen, Constants {
         }
 
         SaveGame.setSpellPoints(pi.c);
-        
+
         log("");
     }
 

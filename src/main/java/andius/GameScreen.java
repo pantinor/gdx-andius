@@ -190,6 +190,10 @@ public class GameScreen extends BaseScreen {
                     VendorScreen rs = new VendorScreen(CTX, this.map);
                     mainGame.setScreen(rs);
                     return false;
+                } else if (a.getRole() == Role.INNKEEPER) {
+                    InnScreen rs = new InnScreen(CTX, this.map);
+                    mainGame.setScreen(rs);
+                    return false;
                 }
             }
         }

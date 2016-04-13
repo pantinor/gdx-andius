@@ -398,6 +398,7 @@ public interface Constants {
         FRIENDLY,
         TEMPLE,
         MONSTER,
+        INNKEEPER,
         MERCHANT;
     }
 

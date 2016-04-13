@@ -128,6 +128,10 @@ public class Andius extends Game {
         {
             Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
             ls.font = font;
+            Label.LabelStyle ls2 = skin.get("hudLogFont", Label.LabelStyle.class);
+            ls2.font = hudLogFont;
+            Label.LabelStyle ls3 = skin.get("hudSmallFont", Label.LabelStyle.class);
+            ls3.font = smallFont;
             TextButton.TextButtonStyle tbs = skin.get("default", TextButton.TextButtonStyle.class);
             tbs.font = font;
             TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);

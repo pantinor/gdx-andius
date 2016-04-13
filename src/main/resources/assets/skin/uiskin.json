@@ -60,6 +60,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: white, background: clear },
 	larger: { font: default-font, fontColor: white, background: clear },
+	hudLogFont: { font: default-font, fontColor: white, background: clear },
+	hudSmallFont: { font: default-font, fontColor: white, background: clear },
 	black-font: { font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

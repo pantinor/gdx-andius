@@ -90,17 +90,17 @@
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC62WS27DMAxEdZ6ucoccp8kua2uRi2SVLIreoSfI50a1UAkYTIcfGRmAkGHLeiJF0i4lr9ptmXgno0UY31f8vWNNJ7Cm+2ovGJlfi8/HeRn+Deze7dnHB/DRJ1x/oWe1aD7K4nf/fx5/42UdLxZ/MDges/FnviXFV/lQwSL+rfznj+trtyFkZPa55fzZBn+hdTHm6lnW/ybOf+U/rq/qQPHV+W+VtT7HQO3pDFaL9sWKa7S2ygl+x+Jb6/MZRrFWwrmKzzniiZmq5po+BJ/jr3K2ycvPLf7jHOars4v4Z8c+1x55WA1Ha671DfGU4R+Brfg75/2oP3AMPf/HtTd/C9+rWytm6vwtfnFGq+/yPw7nv+o/Vv57Utwofzw+xzHq45nvjmJH/qv+F/XmaF9qjtd/I2W46mzwXsSPcj+7V9yzYqvzH1Js9r/pKzDkv6P2uc4z/Czb4xdYK1unQ+/ufXhW3wnjfLPqLZv/GP8ZvlXHM99+zr8s3/pXU/zI/+x/0pDXK61/P7VP1XO8dVT/nmVZMfsFnJLj7wAQAAA=
+   H4sIAAAAAAAAC62WQU7EMAxFcx5W3IHjADvW7WIuMitmgbgDJ5iBG9GIRvr6/G871XzJStWmebFju22trnW3ZeKdihZhfF/xnwLregPrum72AyPz1xbzcV6FfwG77va9jzfgo0+4/kLP1qb5KMff/f+6/Y3nbTw7/mBwPGbjz3wnxVf5sIJl/Ev7zx/X77sNIaOyzyPnzzb4C62LMVfPqv53cf4r/3F9VQeKr87/qNz6HAO1pxPY2rQvLq7Z2ion+B3Hd+vzGWaxVsK5is85EomZqua6HgSf469ytivKzyP+4xzmq7PL+KfAnrce+bIZjm6u+4ao2pjhvwJb8R+D97P+wDGM/B/X0fwj/KhulVz+O34LRtd3+R+H81/1H5f/kRSX80f57/gcx6yPV747ip35r/pf1puzfak5Uf/NVOGqs8F7GT/L/epecc+Krc5/SLHZ/66PxJB/j9rnOq/wq+yI32Ctap0O3bv34Vl9FozzzdVb5dvD+TfDd3U88+3n/Kvy3b+a4kea+U8ainql+/dT+1Q9J1pH9e9ZlovZL9WB7p0AEAAA
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGN6ggGmgXUB7YIeER8EoGAXUAxuQ8EDaPRBugNnZNsD2D2QcUArscOBRQBhQI/6dcdCk2D+S0/9QznsjHWBL66Sk/+EIcPkfVzk9lMvq4eafUUB9AADaAqzuABAAAA==
+   H4sIAAAAAAAAC2NgGN6ggGmgXUB7YIeER8EoGAXUAxuQ8EDaPRBugNnZNsD2D2QcUAPYMYyW0eQAasS/Mw6aFPtHcvof6nlvJANsaZ2U9D8cAS7/o5fRw6W8Hk5+GQXUBwBoj+mOABAAAA==
   </data>
  </layer>
  <layer name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WzQqAIAwAYN29Vw2sLj1OdO4dK4agNvMfI/bB2EUc6lCF+K4Z7OyaAMOkAEMbwR6v4DkmVH95qU8JzZ1a37f+EjH1/2qQGLWtCXuaMrb2nK3Wz+rbrzPdAHMPd+1DYs6h72g3YvVeP+ur9Pz1nejmWKX9X4r7n+Wiet3X/+a/mIqeatZv8e9iNOqdT3n7WXsnRE9HpAAQAAA=
+   H4sIAAAAAAAAC+3WzQqAIAwA4Ny9Vw2sLj1OdO4dK4agpvkzxYp9MHYZDnWIXfdeE5jZNgKGTgKGMoBZL+FeE+o/P/R3Ca2d2t+3f4qY/n/VC4zSloQzTaktvWat/bPytvNOV8DcwtV7F5hzqDfajlit98/aot6/ehPtHIs6/1Q8/yyXa9Z986//i13RUsn+Nf5djH3VAXaS4fsAEAAA
   </data>
  </layer>
  <layer name="creature" width="32" height="32">
@@ -115,12 +115,12 @@
  </layer>
  <layer name="shadows" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2WUQoAIQhEu4v3v2Mfu18iWzMMmYsPgoiMZgxzjAd7RwYWDL++G/cVH+1pYhB/qniK5v+EHnPz1ZtGz66QFwavaeUd62mmh5HGaijeckXdN6CsJRlUvbcaVrf6P2kwMn1naqy692j2UfQqt/EXHQxILlW9KsMEsI+gjgAQAAA=
+   H4sIAAAAAAAAC+2WUQoAIQhEu4v3v+N+7H6JVDMMa4YPhIgKZhRzjBf7IgMLwu/v3pvdj840MYg/VTxF8/+HHnPrVU2jb1fIC4PXtPKO9TTTw0hjNRS1XFH3CVT/9xQ98AZY3er/pMHI9J3pserZo9lHMaucyA0aGJBcqmZVhgcQRIP6ABAAAA==
   </data>
  </layer>
  <layer name="walls" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1WAQ6CMAwEf+UT+AqPQN9ATPyBRv0Bgk8Q9T8mbsHFpmk7VnBR8ZKLtiw71nYXqjRJzgQrIoYoTFwKxM+p9QWxrwPO14S+BPy8JNbbNSeQP4D/WB/Hy0D9nNGvGM0WrW+E82fpi5y+jXNEm6uFM0McA+uP6831v0H6+7Trw8Zw9/zdEnOy8OjjenP9v4K8m3Wba8Hs3wwvA+eP678W1P64t1Lsclrgerqerg1XHm+A/GXgemO+G5JHD+l9X0geGUNf0oihb+t8ZxhDX8IU9CnPG8P7+uLvfd/hfb531bxziPf4vqU1fi3NF6Xvw5j35RP1M4Ga+yrNi+b8obB7zmc0Y+n39V5prfb+hXjvlL9VH0crod8AEAAA
+   H4sIAAAAAAAAC+1WCw6CMAyFS3oIDoGegZh4A416AwSPIOqJ3KKLzUvXbeUTFV/SQEuzx9ruQZ1n2YWxmvEpSuNXguFzLr9k1nXAeMPwS8DnFZNvc84kfiT3yI/+KpG/8PDXHs4O8lth/4v8bT5+6xdgNtYIe6Y4JdYf6+3rfwv8h/zZh62x/eu6Y+ZkGeDHevv6fyNxN+s21pHZvxu79pw/X/+14NbH3kq+i2mB9XQ93RhbB7SB2i8D6402NiSN7tP7WEgaOQW/xDEFv5tvqs9Oo6fglzAHfk7zhtC+WPy17zu0L/SumndO0Z7Qv7RGr6X54vhDGPK8fCI/ajQ1zXmV5kWz/1S4NWO+PWPxx2qvlKs9fynaO+d/1QeRUmmKABAAAA==
   </data>
  </layer>
  <layer name="door" width="32" height="32">
@@ -139,12 +139,12 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="Jason" type="MERCHANT" x="864" y="96" width="48" height="48">
+  <object id="1" name="Jason" type="INNKEEPER" x="864" y="96" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="2" name="William" type="MERCHANT" x="1296" y="816" width="48" height="48">
+  <object id="2" name="William" type="FRIENDLY" x="1296" y="816" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -201,12 +201,12 @@
   </object>
   <object id="13" name="Osric" type="MERCHANT" x="1248" y="1344" width="48" height="48">
    <properties>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="14" name="Nifadas" type="MERCHANT" x="1296" y="624" width="48" height="48">
    <properties>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="15" name="Christen" type="FRIENDLY" x="1152" y="240" width="48" height="48">
