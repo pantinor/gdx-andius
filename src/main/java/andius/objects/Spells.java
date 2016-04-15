@@ -88,6 +88,10 @@ public enum Spells {
     public String getName() {
         return name;
     }
+    
+    public String getDesc() {
+        return "LVL " + this.level + " - " + this.toString().toUpperCase() + " - " + name;
+    }
 
     public ClassType getType() {
         return type;

@@ -6,8 +6,12 @@
 package andius;
 
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -46,6 +50,7 @@ public class CombatHud {
 
         final Image icon;
         final ImageButton[] slotButtons = new ImageButton[10];
+        final Label[] slotTooltips = new Label[10];
         final Label l1;
         final Label l2;
         final Label l3;
@@ -65,6 +70,10 @@ public class CombatHud {
                 if (rec.spellPresets[i] != null) {
                     TextureRegionDrawable t1 = new TextureRegionDrawable(Andius.invIcons[rec.spellPresets[i].getIcon()]);
                     slotButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
+                    slotTooltips[i] = new Label(rec.spellPresets[i].getDesc(), Andius.skin, "hudSmallFont");
+                    SpellSlotListener l = new SpellSlotListener(rec.spellPresets[i], i, slotTooltips[i]);
+                    slotButtons[i].addListener(l);
+                    addActor(slotTooltips[i]);
                     addActor(slotButtons[i]);
                 }
             }
@@ -86,6 +95,7 @@ public class CombatHud {
             for (int i = 0; i < 5; i++) {
                 if (this.slotButtons[i] != null) {
                     this.slotButtons[i].setPosition(x, 44 + 3);
+                    this.slotTooltips[i].setPosition(x, 92);
                 }
                 x = x + 44 + 3;
             }
@@ -93,6 +103,7 @@ public class CombatHud {
             for (int i = 0; i < 5; i++) {
                 if (this.slotButtons[i + 5] != null) {
                     this.slotButtons[i + 5].setPosition(x, 0);
+                    this.slotTooltips[i + 5].setPosition(x, 92);
                 }
                 x = x + 44 + 3;
             }
@@ -114,6 +125,40 @@ public class CombatHud {
             this.l2.setText(d2);
             this.l3.setText(d3);
             this.l4.setText(d4);
+        }
+
+    }
+
+    private class SpellSlotListener extends InputListener {
+
+        Spells spell;
+        final int slot;
+        private final Label tooltip;
+
+        SpellSlotListener(Spells spell, int slot, Label tooltip) {
+            this.spell = spell;
+            this.slot = slot;
+            this.tooltip = tooltip;
+            tooltip.setVisible(false);
+        }
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            if (spell != null) {
+                Sounds.play(Sound.TRIGGER);
+            }
+            return false;
+        }
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            tooltip.setVisible(true);
+            tooltip.toFront();
+        }
+
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            tooltip.setVisible(false);
         }
 
     }

@@ -22,14 +22,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -226,7 +228,7 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(invDesc);
         stage.addActor(unequip);
         stage.addActor(traderSlider);
-        
+
         Label inventory = new Label("Inventory", Andius.skin, "larger");
         Label splBk = new Label("Known Spells", Andius.skin, "larger");
         Label presets = new Label("Spell Presets", Andius.skin, "larger");
@@ -249,12 +251,18 @@ public class EquipmentScreen implements Screen, Constants {
                     for (Actor a : selectedPlayer.slots) {
                         a.remove();
                     }
+                    for (Actor a : selectedPlayer.slotTooltips) {
+                        a.remove();
+                    }
                 }
                 selectedPlayer = playerSelection.getSelected();
                 for (Actor a : selectedPlayer.icons) {
                     stage.addActor(a);
                 }
                 for (Actor a : selectedPlayer.slots) {
+                    stage.addActor(a);
+                }
+                for (Actor a : selectedPlayer.slotTooltips) {
                     stage.addActor(a);
                 }
                 invPane.clearChildren();
@@ -320,6 +328,7 @@ public class EquipmentScreen implements Screen, Constants {
 
         final Actor[] icons = new Actor[11];
         final Image[] slots = new Image[10];
+        final Label[] slotTooltips = new Label[10];
 
         PlayerIndex(SaveGame.CharacterRecord sp) {
             this.character = sp;
@@ -444,7 +453,10 @@ public class EquipmentScreen implements Screen, Constants {
             im.setX(x);
             im.setY(y);
             im.setUserObject(spell);
-            im.addListener(new SpellChangeListener(spell, slot));
+            slotTooltips[slot] = new Label(spell != null ? spell.getDesc() : "", Andius.skin, "hudSmallFont");
+            slotTooltips[slot].setX(x);
+            slotTooltips[slot].setY(y + 44);
+            im.addListener(new SpellChangeListener(spell, slot, slotTooltips[slot]));
             return im;
         }
 
@@ -532,32 +544,47 @@ public class EquipmentScreen implements Screen, Constants {
 
         }
 
-        private class SpellChangeListener implements EventListener {
+        private class SpellChangeListener extends InputListener {
 
             Spells spell;
             final int slot;
+            private final Label tooltip;
 
-            SpellChangeListener(Spells spell, int slot) {
+            SpellChangeListener(Spells spell, int slot, Label tooltip) {
                 this.spell = spell;
                 this.slot = slot;
+                this.tooltip = tooltip;
+                tooltip.setVisible(false);
             }
 
             @Override
-            public boolean handle(Event event) {
-                if (event.toString().equals("touchDown")) {
-                    if (selectedSpell != null) {
-                        Sounds.play(Sound.TRIGGER);
-                        event.getTarget().setUserObject(selectedSpell.spell);
-                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedSpell.spell.getIcon()]));
-                        this.spell = selectedSpell.spell;
-                    } else {
-                        event.getTarget().setUserObject(null);
-                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[803]));
-                        this.spell = null;
-                    }
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (selectedSpell != null) {
+                    Sounds.play(Sound.TRIGGER);
+                    event.getTarget().setUserObject(selectedSpell.spell);
+                    ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedSpell.spell.getIcon()]));
+                    this.tooltip.setText(selectedSpell.spell.getDesc());
+                    this.spell = selectedSpell.spell;
+                } else {
+                    event.getTarget().setUserObject(null);
+                    ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[803]));
+                    this.tooltip.setText("");
+                    this.spell = null;
                 }
                 return false;
             }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                tooltip.setVisible(true);
+                tooltip.toFront();
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                tooltip.setVisible(false);
+            }
+
         }
 
         private int calculateAC() {
