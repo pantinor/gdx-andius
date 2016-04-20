@@ -4,7 +4,6 @@ import andius.Andius;
 import andius.Context;
 import andius.objects.SaveGame.CharacterRecord;
 import java.util.List;
-import org.apache.commons.collections.iterators.ReverseListIterator;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;

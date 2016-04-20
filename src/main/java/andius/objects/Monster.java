@@ -21,9 +21,9 @@ public class Monster implements Comparable<Monster> {
     int mageSpellLevel;
     int priestSpellLevel;
     int levelDrain;
-    int bonus1;
-    int bonus2;
-    int bonus3;
+    int healpts;
+    int breath;
+    int unaffected;
     List<Resistance> resists;
     List<Ability> ability;
     int exp;
@@ -50,9 +50,9 @@ public class Monster implements Comparable<Monster> {
         this.mageSpellLevel = m.mageSpellLevel;
         this.priestSpellLevel = m.priestSpellLevel;
         this.levelDrain = m.levelDrain;
-        this.bonus1 = m.bonus1;
-        this.bonus2 = m.bonus2;
-        this.bonus3 = m.bonus3;
+        this.healpts = m.healpts;
+        this.breath = m.breath;
+        this.unaffected = m.unaffected;
         this.resists = m.resists;
         this.ability = m.ability;
         this.exp = m.exp;
@@ -117,16 +117,16 @@ public class Monster implements Comparable<Monster> {
         return levelDrain;
     }
 
-    public int getBonus1() {
-        return bonus1;
+    public int getHealpts() {
+        return healpts;
     }
 
-    public int getBonus2() {
-        return bonus2;
+    public int getBreath() {
+        return breath;
     }
 
-    public int getBonus3() {
-        return bonus3;
+    public int getUnaffected() {
+        return unaffected;
     }
 
     public int getExp() {

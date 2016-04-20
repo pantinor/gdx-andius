@@ -130,7 +130,7 @@ public class RewardScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 CharacterRecord player = null;
-                for (CharacterRecord p : context.players()) {
+                for (CharacterRecord p : RewardScreen.this.context.players()) {
                     if (p.name.toUpperCase().equals(playerSelection.getSelected())) {
                         player = p;
                         break;

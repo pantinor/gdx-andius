@@ -102,6 +102,22 @@ public class SaveGame implements Constants {
                 status = Status.DEAD;
             }
         }
+        
+        public boolean canCast(Spells spell) {
+            if (spell.getType() == ClassType.MAGE) {
+                return magePoints[spell.getLevel() - 1] > 0;
+            } else {
+                return clericPoints[spell.getLevel() - 1] > 0;
+            }
+        }
+        
+        public void decrMagicPts(Spells spell) {
+            if (spell.getType() == ClassType.MAGE) {
+                magePoints[spell.getLevel() - 1] --;
+            } else {
+                clericPoints[spell.getLevel() - 1] --;
+            }
+        }
 
         public boolean isDisabled() {
             return this.status != Status.OK && this.status != Status.POISONED;

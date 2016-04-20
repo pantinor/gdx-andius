@@ -90,7 +90,7 @@ public class TempleScreen implements Screen, Constants {
         this.titherSelection.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                for (CharacterRecord p : context.players()) {
+                for (CharacterRecord p : TempleScreen.this.context.players()) {
                     if (titherSelection.getSelected().startsWith(p.name.toUpperCase())) {
                         tither = p;
                         break;
@@ -193,7 +193,7 @@ public class TempleScreen implements Screen, Constants {
         }
         );
         this.patientScroll = new ScrollPane(patientTable, Andius.skin);
-        for (CharacterRecord p : context.players()) {
+        for (CharacterRecord p : this.context.players()) {
             patientTable.add(new PatientListing(p));
             patientTable.row();
         }

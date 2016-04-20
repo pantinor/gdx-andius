@@ -5,8 +5,11 @@
  */
 package andius;
 
+import andius.CombatScreen.SecondaryInputProcessor;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -27,20 +30,24 @@ import java.util.Map;
  */
 public class CombatHud {
 
-    private final Map<CharacterRecord, PlayerListing> map = new HashMap<>();
+    private final Map<andius.objects.Actor, PlayerListing> map = new HashMap<>();
     private PlayerListing current;
+    private final CombatScreen screen;
+    private final SecondaryInputProcessor sip;
 
-    public CombatHud(List<andius.objects.Actor> players) {
+    public CombatHud(CombatScreen screen, SecondaryInputProcessor sip, List<andius.objects.Actor> players) {
+        this.screen = screen;
+        this.sip = sip;
         for (andius.objects.Actor a : players) {
-            map.put(a.getPlayer(), new PlayerListing(a.getPlayer()));
+            map.put(a, new PlayerListing(a));
         }
     }
 
-    public void set(CharacterRecord rec, Stage stage) {
+    public void set(andius.objects.Actor player, Stage stage) {
         if (current != null) {
             current.remove();
         }
-        PlayerListing pl = map.get(rec);
+        PlayerListing pl = map.get(player);
         current = pl;
         current.set();
         stage.addActor(current);
@@ -55,11 +62,12 @@ public class CombatHud {
         final Label l2;
         final Label l3;
         final Label l4;
+        final andius.objects.Actor player;
         final CharacterRecord rec;
 
-        PlayerListing(CharacterRecord rec) {
-
-            this.rec = rec;
+        PlayerListing(andius.objects.Actor player) {
+            this.player = player;
+            this.rec = player.getPlayer();
             this.icon = new Image(Andius.faceTiles[rec.portaitIndex]);
             this.l1 = new Label("", Andius.skin, "hudSmallFont");
             this.l2 = new Label("", Andius.skin, "hudSmallFont");
@@ -71,7 +79,7 @@ public class CombatHud {
                     TextureRegionDrawable t1 = new TextureRegionDrawable(Andius.invIcons[rec.spellPresets[i].getIcon()]);
                     slotButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
                     slotTooltips[i] = new Label(rec.spellPresets[i].getDesc(), Andius.skin, "hudSmallFont");
-                    SpellSlotListener l = new SpellSlotListener(rec.spellPresets[i], i, slotTooltips[i]);
+                    SpellSlotListener l = new SpellSlotListener(player, rec.spellPresets[i], i, slotTooltips[i]);
                     slotButtons[i].addListener(l);
                     addActor(slotTooltips[i]);
                     addActor(slotButtons[i]);
@@ -131,11 +139,13 @@ public class CombatHud {
 
     private class SpellSlotListener extends InputListener {
 
+        final andius.objects.Actor player;
         Spells spell;
         final int slot;
         private final Label tooltip;
 
-        SpellSlotListener(Spells spell, int slot, Label tooltip) {
+        SpellSlotListener(andius.objects.Actor player, Spells spell, int slot, Label tooltip) {
+            this.player = player;
             this.spell = spell;
             this.slot = slot;
             this.tooltip = tooltip;
@@ -146,6 +156,8 @@ public class CombatHud {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (spell != null) {
                 Sounds.play(Sound.TRIGGER);
+                Gdx.input.setInputProcessor(sip);
+                sip.init(player, Keys.C, spell, player.getWx(), player.getWy());
             }
             return false;
         }

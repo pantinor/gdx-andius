@@ -11,6 +11,8 @@ import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
+import andius.objects.SpellUtil;
+import andius.objects.Spells;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
 
 import java.util.Iterator;
@@ -36,6 +38,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -172,10 +175,10 @@ public class CombatScreen extends BaseScreen {
 
         hudStage.addActor(this.logScroll);
 
-        this.hud = new CombatHud(this.partyMembers);
+        this.hud = new CombatHud(this, this.sip, this.partyMembers);
         andius.objects.Actor pm = getAndSetNextActivePlayer();
         if (pm != null) {
-            hud.set(pm.getPlayer(), hudStage);
+            hud.set(pm, hudStage);
         }
 
         newMapPixelCoords = getMapPixelCoords(6, 6);
@@ -197,6 +200,7 @@ public class CombatScreen extends BaseScreen {
         batch.dispose();
     }
 
+    @Override
     public void log(String s) {
         Label l = new Label(s, Andius.skin, "hudLogFont");
         l.setWrap(true);
@@ -347,7 +351,7 @@ public class CombatScreen extends BaseScreen {
                 }
             } else if (keycode == Keys.A) {
                 Gdx.input.setInputProcessor(sip);
-                sip.init(active, keycode, active.getWx(), active.getWy());
+                sip.init(active, keycode, null, active.getWx(), active.getWy());
                 return false;
             } else if (keycode == Keys.C) {
             } else if (keycode == Keys.N) {
@@ -418,7 +422,7 @@ public class CombatScreen extends BaseScreen {
         if (next != null) {
             cursor.setVisible(true);
             cursor.set(next.getX(), next.getY());
-            hud.set(next.getPlayer(), hudStage);
+            hud.set(next, hudStage);
         } else {
             cursor.setVisible(false);
         }
@@ -690,7 +694,7 @@ public class CombatScreen extends BaseScreen {
 //        }
 
         DistanceWrapper dist = new DistanceWrapper(0);
-        andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist, action == CombatAction.RANGED);
+        final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist, action == CombatAction.RANGED);
         if (target == null) {
             return true;
         }
@@ -971,22 +975,16 @@ public class CombatScreen extends BaseScreen {
         return p;
     }
 
-    private void animateAttack(andius.objects.Actor attacker, Direction dir) {
+    public void animateWeaponAttack(andius.objects.Actor attacker, Direction dir) {
 
         AttackVector av = attack(attacker, dir);
+
         int tx = av.x * TILE_DIM;
         int ty = mapPixelHeight - av.y * TILE_DIM - TILE_DIM;
 
-        boolean magicalStrike = false;
-        ProjectileActor p = new ProjectileActor(magicalStrike ? Color.CYAN : Color.RED, attacker.getX(), attacker.getY());
-        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f), Actions.removeActor(p)));
-
-        SequenceAction seq = Actions.action(SequenceAction.class);
-        seq.addAction(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)));
-        seq.addAction(Actions.run(new AddActorAction(stage, p)));
-
+        final SequenceAction seq = Actions.action(SequenceAction.class);
         if (av.result == AttackResult.HIT) {
-            Actor d = new ExplosionDrawable(magicalStrike ? Andius.explBlue : Andius.explGray);
+            Actor d = new ExplosionDrawable(Andius.explGray);
             d.setX(tx + 12);
             d.setY(ty + 12);
             d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
@@ -996,16 +994,29 @@ public class CombatScreen extends BaseScreen {
             if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
                 seq.addAction(Actions.run(new RemoveCreatureAction(av.victim)));
             }
+        } else {
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
         }
-
         seq.addAction(Actions.run(new Runnable() {
             @Override
             public void run() {
                 finishPlayerTurn();
             }
         }));
-
-        stage.addAction(seq);
+        
+        final ProjectileActor p = new ProjectileActor(Color.CYAN, attacker.getX(), attacker.getY());
+        
+        Action after = new Action() {
+            @Override
+            public boolean act(float delta) {
+                p.remove();
+                stage.addAction(seq);
+                return false;
+            }
+        };
+        
+        p.addAction(Actions.sequence(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)), Actions.moveTo(tx, ty, av.distance * .1f), after));        
+        stage.addActor(p);
     }
 
     private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
@@ -1028,7 +1039,7 @@ public class CombatScreen extends BaseScreen {
                 for (int j = 0; j < weapon.extraSwings + 1; j++) {
                     target.result = Utils.attackHit(attacker.getPlayer(), target.victim.getMonster());
                     if (target.result == AttackResult.HIT) {
-                        int damage = Utils.dealDamage(attacker.getPlayer(), target.victim.getMonster());
+                        int damage = Utils.dealDamage(weapon, target.victim.getMonster());
                         log(String.format("%s strikes %s for %d damage!", attacker.getPlayer().name, target.victim.getMonster().name, damage));
                     } else {
                         log(String.format("%s misses %s", attacker.getPlayer().name, target.victim.getMonster().name));
@@ -1042,6 +1053,80 @@ public class CombatScreen extends BaseScreen {
             if (weapon.numberUses <= 0) {
                 log("Your weapon has broken!");
                 attacker.getPlayer().weapon = Andius.ITEMS_MAP.get("HANDS").clone();
+            }
+        }
+
+        return target;
+    }
+
+    public void animateMagicAttack(andius.objects.Actor attacker, Direction dir, Spells spell) {
+
+        AttackVector av = cast(attacker, spell, dir);
+
+        int tx = av.x * TILE_DIM;
+        int ty = mapPixelHeight - av.y * TILE_DIM - TILE_DIM;
+
+        final SequenceAction seq = Actions.action(SequenceAction.class);
+        if (av.result == AttackResult.HIT) {
+            Actor d = new ExplosionDrawable(Andius.explBlue);
+            d.setX(tx + 12);
+            d.setY(ty + 12);
+            d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+            seq.addAction(Actions.run(new AddActorAction(stage, d)));
+            if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
+                seq.addAction(Actions.run(new RemoveCreatureAction(av.victim)));
+            }
+        } else {
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+        }
+        seq.addAction(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                finishPlayerTurn();
+            }
+        }));
+        
+        final ProjectileActor p = new ProjectileActor(Color.CYAN, attacker.getX(), attacker.getY());
+        
+        Action after = new Action() {
+            @Override
+            public boolean act(float delta) {
+                p.remove();
+                stage.addAction(seq);
+                return false;
+            }
+        };
+        
+        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f), after));        
+        stage.addActor(p);
+    }
+
+    private AttackVector cast(andius.objects.Actor attacker, Spells spell, Direction dir) {
+
+        List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, 12);
+
+        AttackVector target = null;
+        for (int i = 0; i < path.size(); i++) {
+            target = path.get(i);
+            for (andius.objects.Actor c : this.enemies) {
+                if (c.getWx() == target.x && c.getWy() == target.y) {
+                    target.victim = c;
+                    break;
+                }
+            }
+            if (target.victim != null) {
+                target.result = AttackResult.HIT;
+                if (rand.nextInt(100) < target.victim.getMonster().getUnaffected()) {
+                    target.result = AttackResult.MISS;
+                    log(target.victim.getMonster().name + " is unaffected.");
+                } else {
+                    int damage = Utils.calcPoints(spell.getHitCount(), spell.getHitRange(), 0);
+                    target.victim.getMonster().setCurrentHitPoints(target.victim.getMonster().getCurrentHitPoints() - damage);
+                    target.victim.getMonster().adjustHealthBar();
+                    log(String.format("%s does %d damage to %s.", spell, damage, target.victim.getMonster().name));
+                }
             }
         }
 
@@ -1105,15 +1190,17 @@ public class CombatScreen extends BaseScreen {
         return path;
     }
 
-    private class SecondaryInputProcessor extends InputAdapter {
+    public class SecondaryInputProcessor extends InputAdapter {
 
         private int code;
         private int x;
         private int y;
         private andius.objects.Actor player;
+        private Spells spell;
 
-        public void init(andius.objects.Actor player, int code, int x, int y) {
+        public void init(andius.objects.Actor player, int code, Spells spell, int x, int y) {
 
+            this.spell = spell;
             this.player = player;
             this.code = code;
             this.x = x;
@@ -1122,6 +1209,9 @@ public class CombatScreen extends BaseScreen {
             switch (code) {
                 case Keys.A:
                     log("ATTACK> ");
+                    break;
+                case Keys.C:
+                    log("CAST> ");
                     break;
 
             }
@@ -1155,11 +1245,15 @@ public class CombatScreen extends BaseScreen {
             if (this.code == Keys.A) {
 
                 log(dir.toString());
-
-                animateAttack(this.player, dir);
-
+                animateWeaponAttack(this.player, dir);
                 Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
+                return false;
 
+            } else if (this.code == Keys.C) {
+
+                log(dir.toString());
+                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null, dir);
+                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
                 return false;
 
             } else if (this.code == Keys.U) {

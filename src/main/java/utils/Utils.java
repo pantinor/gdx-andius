@@ -170,11 +170,20 @@ public class Utils {
         return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
 
-    public static int dealDamage(CharacterRecord attacker, MutableMonster defender) {
-        Item weapon = attacker.weapon == null ? Item.HANDS : attacker.weapon;
+    public static int dealDamage(Item weapon, MutableMonster defender) {
         int damage = weapon.damage.roll();
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;
+    }
+    
+    public static int calcPoints(int hits, int range, int min) {
+        int points = 0;
+        while (hits > 0) {
+            points = points + RAND.nextInt(range) + 1;
+            hits--;
+        }
+        points += min;
+        return points;
     }
 }

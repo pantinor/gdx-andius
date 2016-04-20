@@ -81,6 +81,11 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
+    public void log(String s) {
+        Andius.HUD.add(s);
+    }
+
+    @Override
     public void render(float delta) {
 
         time += delta;

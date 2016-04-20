@@ -45,7 +45,9 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
      * get the map coords at the camera center
      */
     public abstract Vector3 getCurrentMapCoords();
-
+    
+    public abstract void log(String t);
+    
     public int currentRoomId() {
         return this.currentRoomId;
     }

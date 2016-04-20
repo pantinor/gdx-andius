@@ -127,6 +127,11 @@ public class WorldScreen extends BaseScreen {
     }
 
     @Override
+    public void log(String s) {
+        Andius.HUD.add(s);
+    }
+
+    @Override
     public void resize(int width, int height) {
         viewport.update(width, height, false);
         mapViewPort.update(width, height, false);
