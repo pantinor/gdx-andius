@@ -19,10 +19,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -90,6 +90,8 @@ public class EquipmentScreen implements Screen, Constants {
     ItemListing selectedItem;
     PlayerIndex selectedPlayer;
     SpellListing selectedSpell;
+    private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font, "", Color.WHITE, 226, Align.left, true);
+
     ScrollPane invPane, spellPane;
     Image focusIndicator, spellFocusInd;
     Label invDesc;
@@ -305,6 +307,22 @@ public class EquipmentScreen implements Screen, Constants {
         Andius.largeFont.draw(batch, "DAMG", 300, Andius.SCREEN_HEIGHT - 437 + 24);
         Andius.largeFont.draw(batch, "GOLD", 300, Andius.SCREEN_HEIGHT - 480 + 24);
 
+        Andius.largeFont.draw(batch, "EXP", 76, Andius.SCREEN_HEIGHT - 620);
+        Andius.largeFont.draw(batch, "HP", 82, Andius.SCREEN_HEIGHT - 666);
+        Andius.largeFont.draw(batch, "MAXHP", 50, Andius.SCREEN_HEIGHT - 710);
+
+        Andius.largeFont.draw(batch, "STR", 240, Andius.SCREEN_HEIGHT - 620);
+        Andius.largeFont.draw(batch, "INT", 242, Andius.SCREEN_HEIGHT - 666);
+        Andius.largeFont.draw(batch, "PTY", 240, Andius.SCREEN_HEIGHT - 710);
+
+        Andius.largeFont.draw(batch, "VIT", 387, Andius.SCREEN_HEIGHT - 620);
+        Andius.largeFont.draw(batch, "AGI", 387, Andius.SCREEN_HEIGHT - 666);
+        Andius.largeFont.draw(batch, "LCK", 385, Andius.SCREEN_HEIGHT - 710);
+
+        if (selectedSpell != null) {
+            Andius.font.draw(batch, SPDESCLAYOUT, 520, Andius.SCREEN_HEIGHT - 579);
+        }
+
         batch.end();
 
     }
@@ -326,7 +344,17 @@ public class EquipmentScreen implements Screen, Constants {
         final Label damageLabel;
         final Label goldLabel;
 
-        final Actor[] icons = new Actor[11];
+        final Label expL;
+        final Label hpL;
+        final Label mxhpL;
+        final Label strL;
+        final Label intL;
+        final Label ptyL;
+        final Label vitL;
+        final Label agiL;
+        final Label lckL;
+
+        final Actor[] icons = new Actor[20];
         final Image[] slots = new Image[10];
         final Label[] slotTooltips = new Label[10];
 
@@ -379,9 +407,11 @@ public class EquipmentScreen implements Screen, Constants {
                         }
                         if (event.getTarget() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget();
+                            SPDESCLAYOUT.setText(Andius.font, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         } else if (event.getTarget().getParent() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget().getParent();
+                            SPDESCLAYOUT.setText(Andius.font, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         }
                     }
@@ -415,6 +445,42 @@ public class EquipmentScreen implements Screen, Constants {
             goldLabel.setX(360);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 480);
 
+            expL = new Label("" + character.exp, Andius.skin, "larger");
+            expL.setX(115);
+            expL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
+
+            hpL = new Label("" + character.hp, Andius.skin, "larger");
+            hpL.setX(115);
+            hpL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
+
+            mxhpL = new Label("" + character.maxhp, Andius.skin, "larger");
+            mxhpL.setX(115);
+            mxhpL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
+
+            strL = new Label("" + character.str, Andius.skin, "larger");
+            strL.setX(287);
+            strL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
+
+            intL = new Label("" + character.intell, Andius.skin, "larger");
+            intL.setX(287);
+            intL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
+
+            ptyL = new Label("" + character.piety, Andius.skin, "larger");
+            ptyL.setX(287);
+            ptyL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
+
+            vitL = new Label("" + character.vitality, Andius.skin, "larger");
+            vitL.setX(427);
+            vitL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
+
+            agiL = new Label("" + character.agility, Andius.skin, "larger");
+            agiL.setX(427);
+            agiL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
+
+            lckL = new Label("" + character.luck, Andius.skin, "larger");
+            lckL.setX(427);
+            lckL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
+
             icons[0] = avatar;
             icons[1] = weaponIcon;
             icons[2] = armorIcon;
@@ -426,6 +492,15 @@ public class EquipmentScreen implements Screen, Constants {
             icons[8] = acLabel;
             icons[9] = damageLabel;
             icons[10] = goldLabel;
+            icons[11] = expL;
+            icons[12] = hpL;
+            icons[13] = mxhpL;
+            icons[14] = strL;
+            icons[15] = intL;
+            icons[16] = ptyL;
+            icons[17] = vitL;
+            icons[18] = agiL;
+            icons[19] = lckL;
 
             int x = 762;
             for (int i = 0; i < 5; i++) {
@@ -449,11 +524,11 @@ public class EquipmentScreen implements Screen, Constants {
         }
 
         private Image make(Spells spell, int x, int y, int slot) {
-            Image im = new Image(spell != null ? invIcons[spell.getIcon()] : invIcons[803]);
+            Image im = new Image(spell != null && character.knownSpells.contains(spell) ? invIcons[spell.getIcon()] : invIcons[803]);
             im.setX(x);
             im.setY(y);
             im.setUserObject(spell);
-            slotTooltips[slot] = new Label(spell != null ? spell.getDesc() : "", Andius.skin, "hudSmallFont");
+            slotTooltips[slot] = new Label(spell != null && character.knownSpells.contains(spell) ? spell.getTag() : "", Andius.skin, "hudSmallFont");
             slotTooltips[slot].setX(x);
             slotTooltips[slot].setY(y + 44);
             im.addListener(new SpellChangeListener(spell, slot, slotTooltips[slot]));
@@ -563,7 +638,7 @@ public class EquipmentScreen implements Screen, Constants {
                     Sounds.play(Sound.TRIGGER);
                     event.getTarget().setUserObject(selectedSpell.spell);
                     ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(invIcons[selectedSpell.spell.getIcon()]));
-                    this.tooltip.setText(selectedSpell.spell.getDesc());
+                    this.tooltip.setText(selectedSpell.spell.getTag());
                     this.spell = selectedSpell.spell;
                 } else {
                     event.getTarget().setUserObject(null);

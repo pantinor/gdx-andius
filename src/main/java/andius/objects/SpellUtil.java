@@ -32,10 +32,6 @@ public class SpellUtil {
     public static boolean spellCast(final BaseScreen screen, final Context context, final Spells spell,
             final andius.objects.Actor caster, final andius.objects.Actor subject, final Direction dir) {
 
-        if (caster == null || spell == null || screen == null) {
-            return false;
-        }
-
         if (!caster.getPlayer().canCast(spell)) {
             screen.log("Thou dost not have enough magic points!");
             Sounds.play(Sound.NEGATIVE_EFFECT);

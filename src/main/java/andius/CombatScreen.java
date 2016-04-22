@@ -37,6 +37,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -206,8 +207,8 @@ public class CombatScreen extends BaseScreen {
         l.setWrap(true);
         logTable.add(l).width(270);
         logTable.row();
-        logScroll.setScrollPercentY(100);
         logScroll.layout();
+        logScroll.setScrollPercentY(100);
     }
 
     private void fillCreatureTable() {
@@ -358,6 +359,13 @@ public class CombatScreen extends BaseScreen {
             } else if (keycode == Keys.U) {
             } else if (keycode == Keys.R) {
             } else if (keycode == Keys.W) {
+            } else if (keycode >= Keys.F1 && keycode <= Keys.F10) {
+                if (active.getPlayer().spellPresets[keycode - Keys.F1] != null) {
+                    Sounds.play(Sound.TRIGGER);
+                    Gdx.input.setInputProcessor(sip);
+                    sip.init(active, Keys.C, active.getPlayer().spellPresets[keycode - Keys.F1], active.getWx(), active.getWy());
+                    return false;
+                }
             }
 
             finishPlayerTurn();
@@ -1003,9 +1011,9 @@ public class CombatScreen extends BaseScreen {
                 finishPlayerTurn();
             }
         }));
-        
+
         final ProjectileActor p = new ProjectileActor(Color.CYAN, attacker.getX(), attacker.getY());
-        
+
         Action after = new Action() {
             @Override
             public boolean act(float delta) {
@@ -1014,8 +1022,8 @@ public class CombatScreen extends BaseScreen {
                 return false;
             }
         };
-        
-        p.addAction(Actions.sequence(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)), Actions.moveTo(tx, ty, av.distance * .1f), after));        
+
+        p.addAction(Actions.sequence(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)), Actions.moveTo(tx, ty, av.distance * .1f), after));
         stage.addActor(p);
     }
 
@@ -1087,19 +1095,19 @@ public class CombatScreen extends BaseScreen {
                 finishPlayerTurn();
             }
         }));
-        
+
         final ProjectileActor p = new ProjectileActor(Color.CYAN, attacker.getX(), attacker.getY());
-        
+
         Action after = new Action() {
             @Override
             public boolean act(float delta) {
                 p.remove();
                 stage.addAction(seq);
-                return false;
+                return true;
             }
         };
-        
-        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f), after));        
+
+        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f, Interpolation.sineIn), after));
         stage.addActor(p);
     }
 
@@ -1219,6 +1227,9 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public boolean keyUp(int keycode) {
+
+            Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
+
             Direction dir = Direction.NORTH;
 
             int nx = this.x, ny = this.y;
@@ -1242,25 +1253,21 @@ public class CombatScreen extends BaseScreen {
                     break;
             }
 
+            log(dir.toString());
+
             if (this.code == Keys.A) {
 
-                log(dir.toString());
                 animateWeaponAttack(this.player, dir);
-                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
-                return false;
 
             } else if (this.code == Keys.C) {
 
-                log(dir.toString());
-                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null, dir);
-                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
-                return false;
-
-            } else if (this.code == Keys.U) {
+                boolean success = SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null, dir);
+                if (!success) {
+                    finishPlayerTurn();
+                }
 
             }
 
-            finishTurn(nx, ny);
             return false;
         }
 

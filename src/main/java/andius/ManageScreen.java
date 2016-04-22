@@ -209,6 +209,7 @@ public class ManageScreen implements Screen, Constants {
 
                 sel.hp = sel.getMoreHP();
                 sel.maxhp = sel.hp;
+                sel.level = 1;
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
 

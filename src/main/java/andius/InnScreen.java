@@ -193,6 +193,33 @@ public class InnScreen implements Screen, Constants {
     }
 
     private void takeNap(int hpAdd, int goldAmt, PlayerListing pi) {
+
+        int expnextlvl = pi.c.checkAndSetLevel();
+        while (expnextlvl >= 0) {
+            pi.c.maxhp += pi.c.getMoreHP();
+
+            log(pi.c.name.toUpperCase() + " IS LEVEL " + pi.c.level);
+            pi.lvlracetype.setText("LVL " + pi.c.level + " " + pi.c.race.toString() + " " + pi.c.classType.toString());
+
+            pi.c.str = gainOrLose("STRENGTH", pi.c.str, pi.c);
+            pi.c.intell = gainOrLose("INTELLIGENCE", pi.c.intell, pi.c);
+            pi.c.piety = gainOrLose("PIETY", pi.c.piety, pi.c);
+            pi.c.vitality = gainOrLose("VITALITY", pi.c.vitality, pi.c);
+            pi.c.agility = gainOrLose("AGILITY", pi.c.agility, pi.c);
+            pi.c.luck = gainOrLose("LUCK", pi.c.luck, pi.c);
+
+            SaveGame.setSpellPoints(pi.c);
+            if (SaveGame.tryLearn(pi.c)) {
+                log(pi.c.name.toUpperCase() + " LEARNED NEW SPELLS!");
+            }
+            
+            expnextlvl = pi.c.checkAndSetLevel();
+        }
+
+        log(pi.c.name.toUpperCase() + " NEEDS " + Math.abs(expnextlvl) + " EXPERIENCE TO THE NEXT LEVEL.");
+
+        SaveGame.setSpellPoints(pi.c);
+
         if (goldAmt > 0) {
             int healed = 0;
             while (pi.c.gold >= goldAmt && pi.c.hp < pi.c.maxhp) {
@@ -212,30 +239,6 @@ public class InnScreen implements Screen, Constants {
         } else {
             log(pi.c.name.toUpperCase() + " IS NAPPING.");
         }
-
-        int level = pi.c.calculateLevel();
-        if (level != pi.c.level) {
-            while (pi.c.level < level) {
-                pi.c.level++;
-                pi.c.maxhp += pi.c.getMoreHP();
-            }
-            log(pi.c.name.toUpperCase() + " IS NOW LEVEL " + level);
-            pi.lvlracetype.setText("LVL " + pi.c.level + " " + pi.c.race.toString() + " " + pi.c.classType.toString());
-
-            pi.c.str = gainOrLose("STRENGTH", pi.c.str, pi.c);
-            pi.c.intell = gainOrLose("INTELLIGENCE", pi.c.intell, pi.c);
-            pi.c.piety = gainOrLose("PIETY", pi.c.piety, pi.c);
-            pi.c.vitality = gainOrLose("VITALITY", pi.c.vitality, pi.c);
-            pi.c.agility = gainOrLose("AGILITY", pi.c.agility, pi.c);
-            pi.c.luck = gainOrLose("LUCK", pi.c.luck, pi.c);
-
-            SaveGame.setSpellPoints(pi.c);
-            if (SaveGame.tryLearn(pi.c)) {
-                log(pi.c.name.toUpperCase() + " LEARNED NEW SPELLS!");
-            }
-        }
-
-        SaveGame.setSpellPoints(pi.c);
 
         log("");
     }

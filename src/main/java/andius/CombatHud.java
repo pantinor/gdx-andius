@@ -75,10 +75,10 @@ public class CombatHud {
             this.l4 = new Label("", Andius.skin, "hudSmallFont");
 
             for (int i = 0; i < 10; i++) {
-                if (rec.spellPresets[i] != null) {
+                if (rec.spellPresets[i] != null && rec.knownSpells.contains(rec.spellPresets[i])) {
                     TextureRegionDrawable t1 = new TextureRegionDrawable(Andius.invIcons[rec.spellPresets[i].getIcon()]);
                     slotButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
-                    slotTooltips[i] = new Label(rec.spellPresets[i].getDesc(), Andius.skin, "hudSmallFont");
+                    slotTooltips[i] = new Label(rec.spellPresets[i].getTag(), Andius.skin, "hudSmallFont");
                     SpellSlotListener l = new SpellSlotListener(player, rec.spellPresets[i], i, slotTooltips[i]);
                     slotButtons[i].addListener(l);
                     addActor(slotTooltips[i]);

@@ -1,6 +1,7 @@
 package andius.objects;
 
 import andius.Constants;
+import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;
@@ -104,6 +105,9 @@ public class SaveGame implements Constants {
         }
         
         public boolean canCast(Spells spell) {
+            if (!knownSpells.contains(spell)) {
+                return false;
+            }
             if (spell.getType() == ClassType.MAGE) {
                 return magePoints[spell.getLevel() - 1] > 0;
             } else {
@@ -169,28 +173,22 @@ public class SaveGame implements Constants {
             return hp;
         }
 
-        public int calculateLevel() {
-
-            int lvl = 0;
-
-            for (int i = 0; i < LEVEL_PROGRESSION_TABLE.length; i++) {
-                int[] levels = LEVEL_PROGRESSION_TABLE[i];
-                int thr = levels[this.classType.ordinal()];
-                if (this.exp >= thr) {
-                    lvl = i + 1;
+        public int checkAndSetLevel() {
+            
+            int expnxtlvl = 0;
+            if (this.level <= 12) {
+                expnxtlvl = LEVEL_PROGRESSION_TABLE[this.level][this.classType.ordinal()];
+            } else {
+                for (int i = 13;i<=this.level;i++) {
+                    expnxtlvl += LEVEL_PROGRESSION_TABLE[0][this.classType.ordinal()];
                 }
             }
-
-            if (lvl == LEVEL_PROGRESSION_TABLE.length) {
-                int thr = LEVEL_PROGRESSION_TABLE[LEVEL_PROGRESSION_TABLE.length - 1][this.classType.ordinal()];
-                int sum = thr * 2;
-                while (this.exp > sum) {
-                    lvl++;
-                    sum += thr;
-                }
+            
+            if (this.exp - expnxtlvl >= 0) {
+                this.level ++;
             }
 
-            return lvl;
+            return (this.exp - expnxtlvl);
         }
 
     }

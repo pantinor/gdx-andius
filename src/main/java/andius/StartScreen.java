@@ -5,6 +5,7 @@ import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import andius.objects.Item;
+import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -79,6 +80,25 @@ public class StartScreen implements Screen, Constants {
                         BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
                         scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
                         Andius.mainGame.setScreen(scr);
+
+//                        for (int j = 0; j < 6; j++) {
+//                            CTX.saveGame.players[j].level = 1;
+//                            CTX.saveGame.players[j].hp = 8;
+//                            CTX.saveGame.players[j].maxhp = 12;
+//                            CTX.saveGame.players[j].gold = 3000;
+//                            
+//                            CTX.saveGame.players[j].exp = 2200;
+//                            CTX.saveGame.players[j].magePoints = new int[7];
+//                            CTX.saveGame.players[j].clericPoints = new int[7];
+//                            CTX.saveGame.players[j].knownSpells.clear();
+//                            
+//                            CTX.saveGame.players[j].str = 8;
+//                            CTX.saveGame.players[j].intell = 8;
+//                            CTX.saveGame.players[j].piety = 8;
+//                            CTX.saveGame.players[j].vitality = 8;
+//                            CTX.saveGame.players[j].agility = 8;
+//                            CTX.saveGame.players[j].luck = 8;
+//                        }
 
 //                        FileHandleResolver resolver = new Constants.ClasspathResolver();
 //                        TmxMapLoader loader = new TmxMapLoader(resolver);

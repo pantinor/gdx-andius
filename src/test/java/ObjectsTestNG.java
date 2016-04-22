@@ -40,7 +40,7 @@ public class ObjectsTestNG {
         CharacterRecord avatar = new CharacterRecord();
         avatar.name = "Steve";
         avatar.race = Race.HUMAN;
-        avatar.classType = ClassType.MAGE;
+        avatar.classType = ClassType.WIZARD;
         avatar.hp = avatar.getMoreHP();
         avatar.maxhp = avatar.hp;
         avatar.gold = Utils.getRandomBetween(100, 200);
@@ -50,6 +50,7 @@ public class ObjectsTestNG {
         avatar.inventory.add(new Item());
         avatar.intell = 12;
         avatar.piety = 12;
+        avatar.level = 1;
 
         if (avatar.classType == ClassType.MAGE || avatar.classType == ClassType.WIZARD) {
             avatar.knownSpells.add(Spells.values()[1]);
@@ -61,17 +62,22 @@ public class ObjectsTestNG {
             avatar.knownSpells.add(Spells.values()[24]);
             avatar.clericPoints[0] = 2;
         }
+        
+            avatar.exp = 1300;
+            int ret = 0;
+            while( ret >= 0) {
+                ret = avatar.checkAndSetLevel();
+            }
+            System.out.printf("%d\t%d\t%d\n",avatar.level, avatar.exp, ret);
+        
 
-        for (int i = 0; i < 30; i++) {
-            avatar.level = i;
-            SaveGame.setSpellPoints(avatar);
-                    
-            SaveGame.tryLearn(avatar);
-
-            //System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-
-            System.out.println("" + i + "\t" + avatar.knownSpells);
-        }
+//        for (int i = 0; i < 30; i++) {
+//            avatar.level = i;
+//            SaveGame.setSpellPoints(avatar);
+//            SaveGame.tryLearn(avatar);
+//            //System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+//            System.out.println("" + i + "\t" + avatar.knownSpells);
+//        }
 
     }
 
