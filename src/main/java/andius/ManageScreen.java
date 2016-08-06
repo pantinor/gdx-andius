@@ -767,6 +767,12 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
         batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 719);
+        
+        int[] ms = sel.magePoints;
+        int[] cs = sel.clericPoints;
+        String d = String.format("MG: %d %d %d %d %d %d %d    CL: %d %d %d %d %d %d %d",
+                ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
+        font.draw(batch, d, 504, 60);
 
         batch.end();
 

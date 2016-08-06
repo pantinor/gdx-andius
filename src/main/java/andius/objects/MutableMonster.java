@@ -16,10 +16,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class MutableMonster extends Monster {
 
     private static final TextureRegion HLTH_BAR;
+
     static {
         HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
     }
-    
+
+    private int acmodifier;
     private int currentHitPoints;
     private final int maxHitPoints;
     private TextureRegion healthBar;
@@ -63,6 +65,37 @@ public class MutableMonster extends Monster {
             bar = 74;
         }
         getHealthBar().setRegion(381, 82, (int) bar, 8);
+    }
+
+    public String getDamageTag() {
+        double percent = (double) currentHitPoints / maxHitPoints;
+        if (percent > 0.99) {
+            if (this.type > 4) {
+                return "who, unharmed, growls ominously.";
+            } else {
+                return "chortles merrily as the armor takes the full blow.";
+            }
+        } else if (percent > 0.75) {
+
+            return "still has lots of fight left.";
+            
+        } else if (percent > 0.50) {
+            if (this.type > 4) {
+                return "whose tough hide softens the blow.";
+            } else {
+                return "whose armor takes some of the impact.";
+            }
+        } else {
+            return "is feeling rather weak.";
+        }
+    }
+
+    public void setACModifier(int acmodifier) {
+        this.acmodifier = acmodifier;
+    }
+
+    public int getACModifier() {
+        return acmodifier;
     }
 
 }

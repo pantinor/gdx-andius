@@ -66,6 +66,10 @@ public class InnScreen implements Screen, Constants {
         this.context = context;
         this.contextMap = contextMap;
 
+        for (CharacterRecord player : Andius.CTX.players()) {
+            player.acmodifier2 = 0;
+        }
+
         this.hud = new Texture(Gdx.files.classpath("assets/data/inn.png"));
 
         this.batch = new SpriteBatch();
@@ -212,7 +216,7 @@ public class InnScreen implements Screen, Constants {
             if (SaveGame.tryLearn(pi.c)) {
                 log(pi.c.name.toUpperCase() + " LEARNED NEW SPELLS!");
             }
-            
+
             expnextlvl = pi.c.checkAndSetLevel();
         }
 

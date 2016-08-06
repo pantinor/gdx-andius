@@ -87,7 +87,7 @@ public class StartScreen implements Screen, Constants {
 //                            CTX.saveGame.players[j].maxhp = 12;
 //                            CTX.saveGame.players[j].gold = 3000;
 //                            
-//                            CTX.saveGame.players[j].exp = 2200;
+//                            CTX.saveGame.players[j].exp = 12000;
 //                            CTX.saveGame.players[j].magePoints = new int[7];
 //                            CTX.saveGame.players[j].clericPoints = new int[7];
 //                            CTX.saveGame.players[j].knownSpells.clear();

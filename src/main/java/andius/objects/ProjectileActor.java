@@ -23,6 +23,7 @@ public class ProjectileActor extends Actor {
         BALLS.put(Color.BLUE,getBall(Color.BLUE));
         BALLS.put(Color.YELLOW,getBall(Color.YELLOW));
         BALLS.put(Color.WHITE,getBall(Color.WHITE));
+        BALLS.put(Color.GRAY,getBall(Color.GRAY));
         BALLS.put(Color.BROWN,getBall(Color.BROWN));
     }
 

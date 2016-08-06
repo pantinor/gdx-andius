@@ -166,7 +166,7 @@ public class Utils {
             strMod = 3;
         }
         int attackValue = (RAND.nextInt(20) + 1) + strMod;
-        int defenseValue = defender.getArmourClass();
+        int defenseValue = defender.getArmourClass() + defender.getACModifier();
         return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
     }
 
@@ -177,13 +177,13 @@ public class Utils {
         return damage;
     }
     
-    public static int calcPoints(int hits, int range, int min) {
+    public static int dealSpellDamage(int hits, int range, int bonus) {
         int points = 0;
         while (hits > 0) {
-            points = points + RAND.nextInt(range) + 1;
+            points += RAND.nextInt(range) + 1;
             hits--;
         }
-        points += min;
+        points += bonus;
         return points;
     }
 }

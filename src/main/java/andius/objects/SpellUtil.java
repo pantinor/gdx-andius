@@ -3,25 +3,20 @@ package andius.objects;
 import andius.Andius;
 import andius.BaseScreen;
 import andius.CombatScreen;
-import andius.Constants;
 import andius.Constants.AddActorAction;
 import andius.Constants.PlaySoundAction;
-import static andius.Constants.TILE_DIM;
 import andius.Context;
 import andius.Direction;
-import andius.GameScreen;
 import andius.Sound;
 import andius.Sounds;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import utils.Utils;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import java.util.Random;
 import utils.XORShiftRandom;
 
@@ -37,14 +32,13 @@ public class SpellUtil {
             Sounds.play(Sound.NEGATIVE_EFFECT);
             return false;
         }
-        
+
 //        if (context.getAura().getType() == AuraType.NEGATE) {
 //            Exodus.hud.add("Spell is negated!");
 //            return false;
 //        }
-
         caster.getPlayer().decrMagicPts(spell);
-        
+
         SequenceAction seq = Actions.action(SequenceAction.class);
         seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
         seq.addAction(Actions.delay(0.5f));
@@ -52,39 +46,22 @@ public class SpellUtil {
             @Override
             public void run() {
                 switch (spell) {
-                    case HALITO:
-                        break;
                     case MOGREF:
+                    case SOPIC:
+                        caster.getPlayer().acmodifier1 = spell.getHitBonus();
                         break;
                     case KATINO:
                         break;
                     case DUMAPIC:
                         break;
                     case DILTO:
-                        break;
-                    case SOPIC:
-                        break;
-                    case MAHALITO:
-                        break;
-                    case MOLITO:
-                        break;
                     case MORLIS:
-                        break;
-                    case DALTO:
-                        break;
-                    case LAHALITO:
-                        break;
                     case MAMORLIS:
+                        modMonsterAC((CombatScreen) screen, spell.getHitBonus());
                         break;
                     case MAKANITO:
                         break;
-                    case MADALTO:
-                        break;
                     case LAKANITO:
-                        break;
-                    case ZILWAN:
-                        break;
-                    case MASOPIC:
                         break;
                     case HAMAN:
                         break;
@@ -92,20 +69,36 @@ public class SpellUtil {
                         break;
                     case MAHAMAN:
                         break;
-                    case TILTOWAIT:
-                        break;
                     case KALKI:
+                    case MATU:
+                    case BAMATU:
+                    case MASOPIC:
+                        modPartyAC1((CombatScreen) screen, spell.getHitBonus());
                         break;
                     case DIOS:
                         break;
+                    case LITOKAN:
+                    case LORTO:
+                    case MALIKTO:
+                    case MAHALITO:
+                    case MOLITO:
+                    case DALTO:
+                    case LAHALITO:
+                    case TILTOWAIT:
+                    case MADALTO:
+                        spellGroupDamage((CombatScreen) screen, caster, spell);
+                        break;
+                    case HALITO:
+                    case BADIAL:
+                    case BADIALMA:
+                    case ZILWAN:
                     case BADIOS:
-                        ((CombatScreen)screen).animateMagicAttack(caster, dir, spell);
+                        ((CombatScreen) screen).animateMagicAttack(caster, dir, spell);
                         break;
                     case MILWA:
                         break;
                     case PORFIC:
-                        break;
-                    case MATU:
+                        caster.getPlayer().acmodifier1 = spell.getHitBonus();
                         break;
                     case CALFO:
                         break;
@@ -119,21 +112,14 @@ public class SpellUtil {
                         break;
                     case LATUMAPIC:
                         break;
-                    case BAMATU:
-                        break;
                     case DIAL:
-                        break;
-                    case BADIAL:
                         break;
                     case LATUMOFIS:
                         break;
                     case MAPORFIC:
+                        modPartyAC2((CombatScreen) screen, spell.getHitBonus());
                         break;
                     case DIALMA:
-                        break;
-                    case BADIALMA:
-                        break;
-                    case LITOKAN:
                         break;
                     case KANDI:
                         break;
@@ -141,15 +127,11 @@ public class SpellUtil {
                         break;
                     case BADI:
                         break;
-                    case LORTO:
-                        break;
                     case MADI:
                         break;
                     case MABADI:
                         break;
                     case LOKTOFEIT:
-                        break;
-                    case MALIKTO:
                         break;
                     case KADORTO:
                         break;
@@ -247,390 +229,72 @@ public class SpellUtil {
 //        }
     }
 
-    public static void spellGroupDamage(BaseScreen screen, CharacterRecord caster, int minDamage, int maxDamage) {
+    public static void spellGroupDamage(final CombatScreen screen, andius.objects.Actor caster, Spells spell) {
+        SequenceAction seq = Actions.action(SequenceAction.class);
 
-//        final CombatScreen combatScreen = (CombatScreen) screen;
-//
-//        SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//        for (Creature cr : combatScreen.combatMap.getCreatures()) {
-//
-//            Utils.dealDamage(caster, cr, Utils.getRandomBetween(minDamage, maxDamage));
-//            Tile tile = Exodus.baseTileSet.getTileByName("hit_flash");
-//            Drawable d = new Drawable(combatScreen.combatMap, cr.currentX, cr.currentY, tile, Exodus.standardAtlas);
-//            d.setX(cr.currentPos.x);
-//            d.setY(cr.currentPos.y);
-//            d.addAction(Actions.sequence(Actions.delay(.4f), Actions.fadeOut(.2f), Actions.removeActor()));
-//
-//            seq.addAction(Actions.run(new AddActorAction(combatScreen.getStage(), d)));
-//            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//
-//            if (cr.getDamageStatus() == CreatureStatus.DEAD) {
-//                seq.addAction(Actions.run(combatScreen.new RemoveCreatureAction(cr)));
-//            }
-//
-//        }
-//
-//        seq.addAction(Actions.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                combatScreen.finishPlayerTurn();
-//            }
-//        }));
-//
-//        combatScreen.getStage().addAction(seq);
-    }
+        for (andius.objects.Actor m : screen.enemies) {
 
-    public static void spellUndead(BaseScreen screen, CharacterRecord caster) {
+            if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
+                screen.log(m.getMonster().name + " is unaffected.");
+                seq.addAction(Actions.sequence(Actions.delay(.5f), Actions.run(new PlaySoundAction(Sound.EVADE))));
+            } else {
+                int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+                m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
+                m.getMonster().adjustHealthBar();
+                screen.log(String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()));
 
-//        SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//        final CombatScreen combatScreen = (CombatScreen) screen;
-//
-//        int level = caster.getPlayer().getLevel();
-//
-//        for (Creature cr : combatScreen.combatMap.getCreatures()) {
-//
-//            boolean turn = Utils.rand.nextInt(100) >= 50;
-//
-//            if (level > 5) {
-//                turn = Utils.rand.nextInt(100) >= 35;
-//            }
-//            if (level > 10) {
-//                turn = Utils.rand.nextInt(100) >= 20;
-//            }
-//            if (level > 15) {
-//                turn = true;
-//            }
-//
-//            if (cr.getUndead() && turn) {
-//                Tile tile = Exodus.baseTileSet.getTileByName("hit_flash");
-//                Drawable d = new Drawable(combatScreen.combatMap, cr.currentX, cr.currentY, tile, Exodus.standardAtlas);
-//                d.setX(cr.currentPos.x);
-//                d.setY(cr.currentPos.y);
-//
-//                d.addAction(Actions.sequence(Actions.delay(.4f), Actions.fadeOut(.2f), Actions.removeActor()));
-//
-//                seq.addAction(Actions.run(new AddActorAction(combatScreen.getStage(), d)));
-//                seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//
-//                Utils.dealDamage(caster, cr, cr.getBasehp());
-//            }
-//
-//            if (cr.getDamageStatus() == CreatureStatus.DEAD) {
-//                seq.addAction(Actions.run(combatScreen.new RemoveCreatureAction(cr)));
-//            }
-//
-//        }
-//
-//        seq.addAction(Actions.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                combatScreen.finishPlayerTurn();
-//            }
-//        }));
-//
-//        combatScreen.getStage().addAction(seq);
-    }
+                final Actor d = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
+                d.setX(m.getX() + 12);
+                d.setY(m.getY() + 12);
+                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
-    public static void spellRepond(BaseScreen screen, CharacterRecord caster) {
+                seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                seq.addAction(Actions.run(new AddActorAction(screen.getStage(), d)));
+                if (m.getMonster().getCurrentHitPoints() <= 0) {
+                    seq.addAction(Actions.run(screen.new RemoveCreatureAction(m)));
+                }
 
-//        SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//        final CombatScreen combatScreen = (CombatScreen) screen;
-//
-//        int level = caster.getPlayer().getLevel();
-//
-//        for (Creature cr : combatScreen.combatMap.getCreatures()) {
-//
-//            boolean turn = Utils.rand.nextInt(100) >= 50;
-//
-//            if (level > 5) {
-//                turn = Utils.rand.nextInt(100) >= 35;
-//            }
-//            if (level > 10) {
-//                turn = Utils.rand.nextInt(100) >= 20;
-//            }
-//            if (level > 15) {
-//                turn = true;
-//            }
-//
-//            if (turn && (cr.getTile() == CreatureType.troll || cr.getTile() == CreatureType.orc || cr.getTile() == CreatureType.gremlin)) {
-//
-//                Tile tile = Exodus.baseTileSet.getTileByName("hit_flash");
-//                Drawable d = new Drawable(combatScreen.combatMap, cr.currentX, cr.currentY, tile, Exodus.standardAtlas);
-//                d.setX(cr.currentPos.x);
-//                d.setY(cr.currentPos.y);
-//
-//                d.addAction(Actions.sequence(Actions.delay(.4f), Actions.fadeOut(.2f), Actions.removeActor()));
-//
-//                seq.addAction(Actions.run(new AddActorAction(combatScreen.getStage(), d)));
-//                seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//
-//                Utils.dealDamage(caster, cr, cr.getBasehp());
-//            }
-//
-//            if (cr.getDamageStatus() == CreatureStatus.DEAD) {
-//                seq.addAction(Actions.run(combatScreen.new RemoveCreatureAction(cr)));
-//            }
-//
-//        }
-//        
-//        seq.addAction(Actions.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                combatScreen.finishPlayerTurn();
-//            }
-//        }));
-//
-//        combatScreen.getStage().addAction(seq);
-    }
-
-    public static void spellView(BaseScreen screen, CharacterRecord caster) {
-//        InputProcessor ip = screen.getPeerGemInputProcessor();
-//        if (ip != null) {
-//            Gdx.input.setInputProcessor(ip);
-//        }
-    }
-
-    public static void spellXit(BaseScreen screen, CharacterRecord caster) {
-//        if (screen.scType == ScreenType.DUNGEON) {
-//            DungeonScreen dngScreen = (DungeonScreen) screen;
-//            screen.log("Leaving " + dngScreen.dngMap.getLabel());
-//            if (Exodus.mainGame != null) {
-//                Exodus.mainGame.setScreen(dngScreen.gameScreen);
-//            }
-//        }
-    }
-
-    public static void spellYup(BaseScreen screen, CharacterRecord caster) {
-//        DungeonScreen dngScreen = (DungeonScreen) screen;
-//
-//        dngScreen.currentLevel--;
-//
-//        if (dngScreen.currentLevel < 0) {
-//            dngScreen.currentLevel = 0;
-//            Exodus.mainGame.setScreen(dngScreen.gameScreen);
-//        } else {
-//
-//            for (int i = 0; i < 32; i++) {
-//                int x = Utils.rand.nextInt(16);
-//                int y = Utils.rand.nextInt(16);
-//                if (dngScreen.validTeleportLocation(x, y, dngScreen.currentLevel)) {
-//                    dngScreen.currentPos = new Vector3(x + .5f, .5f, y + .5f);
-//                    dngScreen.camera.position.set(dngScreen.currentPos);
-//                    if (dngScreen.currentDir == Direction.EAST) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x + 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                    } else if (dngScreen.currentDir == Direction.WEST) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x - 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                    } else if (dngScreen.currentDir == Direction.NORTH) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z - 1);
-//                    } else if (dngScreen.currentDir == Direction.SOUTH) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z + 1);
-//                    }
-//                    dngScreen.moveMiniMapIcon();
-//                    break;
-//                }
-//            }
-//
-//            dngScreen.createMiniMap();
-//        }
-
-    }
-
-    public static void spellZdown(BaseScreen screen, CharacterRecord caster) {
-
-//        DungeonScreen dngScreen = (DungeonScreen) screen;
-//
-//        dngScreen.currentLevel++;
-//
-//        if (dngScreen.currentLevel > DungeonScreen.DUNGEON_LVLS) {
-//
-//            dngScreen.currentLevel = DungeonScreen.DUNGEON_LVLS;
-//
-//        } else {
-//
-//            for (int i = 0; i < 32; i++) {
-//                int x = Utils.rand.nextInt(16);
-//                int y = Utils.rand.nextInt(16);
-//                if (dngScreen.validTeleportLocation(x, y, dngScreen.currentLevel)) {
-//                    dngScreen.currentPos = new Vector3(x + .5f, .5f, y + .5f);
-//                    dngScreen.camera.position.set(dngScreen.currentPos);
-//                    if (dngScreen.currentDir == Direction.EAST) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x + 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                    } else if (dngScreen.currentDir == Direction.WEST) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x - 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                    } else if (dngScreen.currentDir == Direction.NORTH) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z - 1);
-//                    } else if (dngScreen.currentDir == Direction.SOUTH) {
-//                        dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z + 1);
-//                    }
-//                    dngScreen.moveMiniMapIcon();
-//                    break;
-//                }
-//            }
-//
-//            dngScreen.createMiniMap();
-//        }
-    }
-
-    public static void spellLibRec(BaseScreen screen, CharacterRecord caster) {
-
-//        DungeonScreen dngScreen = (DungeonScreen) screen;
-//
-//        for (int i = 0; i < 32; i++) {
-//            int x = Utils.rand.nextInt(16);
-//            int y = Utils.rand.nextInt(16);
-//            if (dngScreen.validTeleportLocation(x, y, dngScreen.currentLevel)) {
-//                dngScreen.currentPos = new Vector3(x + .5f, .5f, y + .5f);
-//                dngScreen.camera.position.set(dngScreen.currentPos);
-//                if (dngScreen.currentDir == Direction.EAST) {
-//                    dngScreen.camera.lookAt(dngScreen.currentPos.x + 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                } else if (dngScreen.currentDir == Direction.WEST) {
-//                    dngScreen.camera.lookAt(dngScreen.currentPos.x - 1, dngScreen.currentPos.y, dngScreen.currentPos.z);
-//                } else if (dngScreen.currentDir == Direction.NORTH) {
-//                    dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z - 1);
-//                } else if (dngScreen.currentDir == Direction.SOUTH) {
-//                    dngScreen.camera.lookAt(dngScreen.currentPos.x, dngScreen.currentPos.y, dngScreen.currentPos.z + 1);
-//                }
-//                dngScreen.moveMiniMapIcon();
-//                break;
-//            }
-//        }
-//
-//        dngScreen.createMiniMap();
-    }
-
-    public static void destoryAllCreatures(BaseScreen screen, CharacterRecord caster) {
-
-//        if (screen.scType == ScreenType.MAIN) {
-//
-//            final GameScreen gameScreen = (GameScreen) screen;
-//
-//            SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//            for (final Creature cr : screen.context.getCurrentMap().getCreatures()) {
-//
-//                Utils.dealDamage(caster, cr, 255);
-//
-//                Tile tile = Exodus.baseTileSet.getTileByName("hit_flash");
-//                Drawable d = new Drawable(screen.context.getCurrentMap(), cr.currentX, cr.currentY, tile, Exodus.standardAtlas);
-//                d.setX(cr.currentPos.x);
-//                d.setY(cr.currentPos.y);
-//                d.addAction(Actions.sequence(Actions.delay(.4f), Actions.fadeOut(.2f), Actions.removeActor()));
-//
-//                seq.addAction(Actions.run(new AddActorAction(gameScreen.getStage(), d)));
-//                seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//                seq.addAction(Actions.run(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        screen.context.getCurrentMap().getCreatures().remove(cr);
-//                    }
-//                }));
-//
-//            }
-//
-//            gameScreen.getStage().addAction(seq);
-//
-//        }
-    }
-
-    public static void useMaskOfMinax(BaseScreen screen, CharacterRecord caster) {
-
-//        final CombatScreen combatScreen = (CombatScreen) screen;
-//
-//        final SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//        for (Creature cr : combatScreen.combatMap.getCreatures()) {
-//
-//            if (Utils.rand.nextInt(3) == 0) {
-//                Utils.dealDamage(caster, cr, 255);
-//            } else {
-//                if (cr.getHP() > 23) {
-//                    Utils.dealDamage(caster, cr, cr.getHP() * (3 / 4));
-//                } else {
-//                    Utils.dealDamage(caster, cr, 15);
-//                }
-//            }
-//
-//            Actor d = new CloudDrawable();
-//            d.setX(cr.currentPos.x - 16);
-//            d.setY(cr.currentPos.y - 16);
-//            d.addAction(Actions.sequence(Actions.delay(2f), Actions.removeActor()));
-//
-//            seq.addAction(Actions.run(new PlaySoundAction(Sound.SPIRITS)));
-//            seq.addAction(Actions.run(new AddActorAction(combatScreen.getStage(), d)));
-//            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//
-//            if (cr.getDamageStatus() == CreatureStatus.DEAD) {
-//                seq.addAction(Actions.run(combatScreen.new RemoveCreatureAction(cr)));
-//            }
-//
-//        }
-//        
-//        seq.addAction(Actions.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                combatScreen.finishPlayerTurn();
-//            }
-//        }));
-//        
-//        combatScreen.getStage().addAction(seq);
-    }
-
-    public static void useRageOfGod(BaseScreen screen, CharacterRecord caster) {
-
-//        final CombatScreen combatScreen = (CombatScreen) screen;
-//
-//        final SequenceAction seq = Actions.action(SequenceAction.class);
-//
-//        for (Creature cr : combatScreen.combatMap.getCreatures()) {
-//
-//            if (Utils.rand.nextInt(2) == 0) {
-//                Utils.dealDamage(caster, cr, 255);
-//            } else if (Utils.rand.nextInt(2) == 0) {
-//                if (cr.getHP() > 23) {
-//                    Utils.dealDamage(caster, cr, cr.getHP() - 23);
-//                }
-//            } else {
-//                Utils.dealDamage(caster, cr, cr.getHP() / 2);
-//            }
-//
-//            Actor d = new ExplosionLargeDrawable();
-//            d.setX(cr.currentPos.x - 32 * 3 + 16);
-//            d.setY(cr.currentPos.y - 32 * 3 + 16);
-//            d.addAction(Actions.sequence(Actions.delay(2f), Actions.removeActor()));
-//
-//            seq.addAction(Actions.run(new PlaySoundAction(Sound.RAGE)));
-//            seq.addAction(Actions.run(new AddActorAction(combatScreen.getStage(), d)));
-//            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-//
-//            if (cr.getDamageStatus() == CreatureStatus.DEAD) {
-//                seq.addAction(Actions.run(combatScreen.new RemoveCreatureAction(cr)));
-//            }
-//
-//        }
-//
-//        seq.addAction(Actions.run(new Runnable() {
-//            @Override
-//            public void run() {
-//                combatScreen.finishPlayerTurn();
-//            }
-//        }));
-//        
-//        combatScreen.getStage().addAction(seq);
-    }
-
-    private static int modSpellAC(CharacterRecord rec, int acmod, int low, int high) {
-        int ac = rec.calculateAC();
-        for (int i = low; i < high; i++) {
-            ac += acmod;
+            }
         }
-        return ac;
+
+        screen.getStage().addAction(seq);
+
+        screen.log("Any key to continue...");
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyUp(int keycode) {
+                Gdx.input.setInputProcessor(new InputMultiplexer(screen, screen.hudStage));
+                screen.finishPlayerTurn();
+                return false;
+            }
+        });
+
+    }
+
+    private static void modPartyAC1(CombatScreen screen, int acmod) {
+        for (andius.objects.Actor player : screen.partyMembers) {
+            if (!player.getPlayer().isDisabled()) {
+                player.getPlayer().acmodifier1 = acmod;
+            }
+        }
+    }
+
+    private static void modPartyAC2(CombatScreen screen, int acmod) {
+        for (andius.objects.Actor player : screen.partyMembers) {
+            if (!player.getPlayer().isDisabled()) {
+                player.getPlayer().acmodifier2 = acmod;
+            }
+        }
+    }
+
+    private static void modMonsterAC(CombatScreen screen, int acmod) {
+        for (andius.objects.Actor m : screen.enemies) {
+            m.getMonster().setACModifier(acmod);
+        }
     }
 
     private static void doSpellHeal(BaseScreen sc, CharacterRecord rec, Spells spell) {
-        int points = Utils.calcPoints(spell.getHitCount(), spell.getHitRange(), 0);
+        int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
         sc.log(rec.name + " is healed.");
         rec.adjustHP(points);
     }

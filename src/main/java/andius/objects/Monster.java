@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.Ability;
 import andius.Constants.Resistance;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Monster implements Comparable<Monster> {
@@ -31,9 +30,10 @@ public class Monster implements Comparable<Monster> {
     Dice hitPoints;
     List<Dice> damage;
 
-    public final static String[] monsterClass
-            = {"Fighter", "Mage", "Priest", "Thief", "Midget", "Giant", "Mythical", "Dragon", "Animal",
-                "Were", "Undead", "Demon", "Insect", "Enchanted"};
+    public enum Type {
+        FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,
+        WERE, UNDEAD, DEMON, INSECT, ENCHANTED;
+    }
 
     public void clone(Monster m) {
         this.genericName = m.genericName;
@@ -73,8 +73,8 @@ public class Monster implements Comparable<Monster> {
         return monsterID;
     }
 
-    public String getType() {
-        return monsterClass[this.type];
+    public Type getType() {
+        return Type.values()[this.type];
     }
 
     public Icons getIcon() {
@@ -144,7 +144,6 @@ public class Monster implements Comparable<Monster> {
     public List<Dice> getDamage() {
         return damage;
     }
-
 
     @Override
     public int compareTo(Monster o) {

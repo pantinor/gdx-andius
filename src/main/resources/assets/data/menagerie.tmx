@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" nextobjectid="113">
+ <properties>
+  <property name="startX" value="16"/>
+  <property name="startY" value="19"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
+ <layer name="floor" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+1U0Q6EMAjju5X799PEJr0GGBjj05EQ5xylFpjZ+7Ydvh/usu/XN/hH3rEXGWKBq7H79VyZcmLOvAZmdrb6Nslb4W9B3FP4WosVTqWt1oDdBTPDqfAjDdRXOJU+nb6BdequvCb4lT7Q+Oz9rH5mv7Oic9XpE8RW/8r4WvcOfnUWfJ3WEw07+aEjz8IdnOgOi+Zris/8WGfkjfJMeLPGnCc6OzXlxRqpZT22wuf70S2//+/yz+60J/D/9p59AWdZA/8ACQAA
+  </data>
+ </layer>
+ <layer name="floor 2" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAW0AkeQMK3tGQWjYBQMDkDrPD+a30fBKKAOAAC4AMAnAAkAAA==
+  </data>
+ </layer>
+ <layer name="props" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+DQPoQdz+9ALZ8NAqGFgAA58QL0QAJAAA=
+  </data>
+ </layer>
+ <layer name="creature" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGBjwlnmALKYD4BnGfqM2uMAy0C4YGKA7DNLIWSL84DoM/DmSwUU65c8/TPSxZxSMAmQAAJsWXkcACQAA
+  </data>
+ </layer>
+ <layer name="water_edges" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAW0AuKMDAlijAwLtICYxvYcoKX5o2AUjALiATC/g/LkAlqZP5rfR8EooA4AANJbl10ACQAA
+  </data>
+ </layer>
+ <layer name="shadows" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoD9QRsK4xPFhcs2kFyDWzSMFjIYFKqBVWOBK//jsp2e8jJS4J6f8GgWjYBTQHwAARxUNTAAJAAA=
+  </data>
+ </layer>
+ <layer name="walls" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VUQ6EIAxEiQfxDuwhUO5/oV0Sm8xOplA2rF9O0giGPmsZNKWUXtt3lE+c19W73xu3tag2r7DGlCHH7u9bP4zHfMxFcb7V0p53XDVVeEePn2EN8zhYeZI/itV83r/VfN6Hf/BxrnwzwzdPFIc/2huPr/pbBb+QR1UtzPf6q3yqlKE2xffyI/5UtXj65XxZ/ZEa8PyfNPb8j/yRRmuU/1fylRcifZ/h987eCj6PI9w7+b3/E/Ojfcec6Pd/pu+PtN7KudpBAAkAAA==
+  </data>
+ </layer>
+ <layer name="door" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoC/4S4BPKRBkxM8fBfgBteMDHYz0+BjM6X807kfDYBRQF/CPxvegBgBF7gBWAAkAAA==
+  </data>
+ </layer>
+ <layer name="torches" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgwA5amXBIUAnMpLH5hMBw998ooAwMdPpAtp8WbkG2fySnVVjY0iq+YWE7ksN4FIyCwQoAdtvDoQAJAAA=
+  </data>
+ </layer>
+ <layer name="webs" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgwA26mPBIkqinnQyzaAXQ3UKOP4cTGExxMxjAQIcHNvsJpdGO0TgkGgx0/NIaYEsLncPcz/QEo3lt+AAALW+52wAJAAA=
+  </data>
+ </layer>
+ <objectgroup name="portals">
+  <object id="111" name="WORLD" x="768" y="912" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup name="people">
+  <object id="93" name="creeping crud" type="MONSTER" x="768" y="288" width="48" height="48">
+   <properties>
+    <property name="creature" value="Creeping Crud"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="94" name="capybara" type="MONSTER" x="288" y="48" width="48" height="48">
+   <properties>
+    <property name="creature" value="Capybara"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="95" name="priest" type="MONSTER" x="624" y="144" width="48" height="48">
+   <properties>
+    <property name="creature" value="Lvl 1 Priest"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="96" name="ninja" type="MONSTER" x="768" y="528" width="48" height="48">
+   <properties>
+    <property name="creature" value="Lvl 1 Ninja"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="97" name="slime" type="MONSTER" x="384" y="768" width="48" height="48">
+   <properties>
+    <property name="creature" value="Bubbly Slime"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="98" name="zombie" type="MONSTER" x="336" y="528" width="48" height="48">
+   <properties>
+    <property name="creature" value="Zombie"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="99" name="rogue" type="MONSTER" x="288" y="432" width="48" height="48">
+   <properties>
+    <property name="creature" value="Rogue"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="112" name="mage" type="MONSTER" x="480" y="816" width="48" height="48">
+   <properties>
+    <property name="creature" value="Lvl 1 Mage"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="rooms"/>
+</map>

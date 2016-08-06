@@ -1432,7 +1432,7 @@
   },
   {
     "genericName": "Insect",
-    "name": "Huge Spider",
+    "name": "Camel Spider",
     "monsterID": 31,
     "type": 12,
     "icon": "SPIDER_MAJOR",

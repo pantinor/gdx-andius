@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -31,6 +32,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 import utils.Hud;
@@ -65,10 +67,7 @@ public class Andius extends Game {
     public static float musicVolume = 0.1f;
     public static Music music;
 
-    public static Animation explGray;
-    public static Animation explGreen;
-    public static Animation explRed;
-    public static Animation explBlue;
+    public static java.util.Map<Color, Animation> EXPLMAP = new HashMap<>();
 
     public static Animation world_scr_avatar;
     public static Animation game_scr_avatar;
@@ -83,6 +82,7 @@ public class Andius extends Game {
 
     public static java.util.List<Monster> MONSTERS;
     public static final java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
+    public static final java.util.Map<Integer, java.util.List<Monster>> MONSTER_LEVELS = new HashMap<>();
 
     public static java.util.List<Reward> REWARDS;
 
@@ -171,7 +171,7 @@ public class Andius extends Game {
         try {
 
             backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
-            
+
             TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
             for (int row = 0; row < 6; row++) {
                 for (int col = 0; col < 6; col++) {
@@ -195,35 +195,12 @@ public class Andius extends Game {
             game_scr_avatar = new Animation(.5f, heroesAtlas.findRegions("FIGHTER_RED"));
 
             TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
-            Array<TextureRegion> gray = new Array<>();
-            gray.add(expl[0][0]);
-            gray.add(expl[0][1]);
-            gray.add(expl[0][2]);
-            gray.add(expl[0][3]);
-            gray.add(expl[0][4]);
-            Array<TextureRegion> blue = new Array<>();
-            blue.add(expl[0][5]);
-            blue.add(expl[0][6]);
-            blue.add(expl[0][7]);
-            blue.add(expl[0][8]);
-            blue.add(expl[0][9]);
-            Array<TextureRegion> red = new Array<>();
-            red.add(expl[1][0]);
-            red.add(expl[1][1]);
-            red.add(expl[1][2]);
-            red.add(expl[1][3]);
-            red.add(expl[1][4]);
-            Array<TextureRegion> green = new Array<>();
-            green.add(expl[1][5]);
-            green.add(expl[1][6]);
-            green.add(expl[1][7]);
-            green.add(expl[1][8]);
-            green.add(expl[1][9]);
-
-            explGray = new Animation(.1f, gray);
-            explBlue = new Animation(.1f, blue);
-            explRed = new Animation(.1f, red);
-            explGreen = new Animation(.1f, green);
+            EXPLMAP.put(Color.GRAY, new Animation(.1f, getTextureArray(expl, 0, 0)));
+            EXPLMAP.put(Color.BLUE, new Animation(.1f, getTextureArray(expl, 0, 5)));
+            EXPLMAP.put(Color.RED, new Animation(.1f, getTextureArray(expl, 1, 0)));
+            EXPLMAP.put(Color.GREEN, new Animation(.1f, getTextureArray(expl, 1, 5)));
+            EXPLMAP.put(Color.PURPLE, new Animation(.1f, getTextureArray(expl, 4, 5)));
+            EXPLMAP.put(Color.YELLOW, new Animation(.1f, getTextureArray(expl, 5, 5)));
 
             InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
             String json = IOUtils.toString(is);
@@ -245,8 +222,28 @@ public class Andius extends Game {
             }.getType());
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-            for (Monster i : MONSTERS) {
-                MONSTER_MAP.put(i.name, i);
+            for (int i = 0; i < 8; i++) {
+                MONSTER_LEVELS.put(i, new ArrayList<>());
+            }
+            for (Monster m : MONSTERS) {
+                MONSTER_MAP.put(m.name, m);
+                if (m.getExp() > 0 && m.getExp() <= 599) {
+                    MONSTER_LEVELS.get(0).add(m);
+                } else if (m.getExp() >= 600 && m.getExp() <= 999) {
+                    MONSTER_LEVELS.get(1).add(m);
+                } else if (m.getExp() >= 1000 && m.getExp() <= 1399) {
+                    MONSTER_LEVELS.get(2).add(m);
+                } else if (m.getExp() >= 1400 && m.getExp() <= 1999) {
+                    MONSTER_LEVELS.get(3).add(m);
+                } else if (m.getExp() >= 2000 && m.getExp() <= 2999) {
+                    MONSTER_LEVELS.get(4).add(m);
+                } else if (m.getExp() >= 3000 && m.getExp() <= 4999) {
+                    MONSTER_LEVELS.get(5).add(m);
+                } else if (m.getExp() >= 5000 && m.getExp() <= 9999) {
+                    MONSTER_LEVELS.get(6).add(m);
+                } else {
+                    MONSTER_LEVELS.get(7).add(m);
+                }
             }
 
             Icons.init();
@@ -261,6 +258,16 @@ public class Andius extends Game {
         startScreen = new StartScreen();
         setScreen(startScreen);
 
+    }
+
+    private Array<TextureRegion> getTextureArray(TextureRegion[][] expl, int x, int y) {
+        Array<TextureRegion> arr = new Array<>();
+        arr.add(expl[x][y]);
+        arr.add(expl[x][y + 1]);
+        arr.add(expl[x][y + 2]);
+        arr.add(expl[x][y + 3]);
+        arr.add(expl[x][y + 4]);
+        return arr;
     }
 
     public static class ExplosionDrawable extends Actor {

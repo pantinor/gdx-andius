@@ -8,6 +8,7 @@ package andius.objects;
 import andius.Constants.SpellArea;
 import andius.Constants.SpellTarget;
 import andius.Sound;
+import com.badlogic.gdx.graphics.Color;
 import java.util.HashMap;
 
 /**
@@ -16,57 +17,57 @@ import java.util.HashMap;
  */
 public enum Spells {
 
-    HALITO("Little Fire", ClassType.MAGE, 1, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 1, 8, 51),
-    MOGREF("Body Iron", ClassType.MAGE, 1, Sound.GAZE, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 95),
-    KATINO("Bad Air", ClassType.MAGE, 1, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 86),
-    DUMAPIC("Clarity", ClassType.MAGE, 1, Sound.GAZE, SpellTarget.NONE, SpellArea.CAMP, 0, 0, 33),
-    DILTO("Darkness", ClassType.MAGE, 2, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 88),
-    SOPIC("Glass", ClassType.MAGE, 2, Sound.GAZE, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 85),
-    MAHALITO("Big fire", ClassType.MAGE, 3, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 4, 24, 79),
-    MOLITO("Spark storm", ClassType.MAGE, 3, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 3, 18, 46),
-    MORLIS("Fear", ClassType.MAGE, 4, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 89),
-    DALTO("Blizzard Blast", ClassType.MAGE, 4, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 1),
-    LAHALITO("Flame storm", ClassType.MAGE, 4, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 6, 36, 81),
-    MAMORLIS("Terror", ClassType.MAGE, 5, Sound.GAZE, SpellTarget.ALL_MONSTERS, SpellArea.COMBAT, 0, 0, 90),
-    MAKANITO("Deadly Air", ClassType.MAGE, 5, Sound.GAZE, SpellTarget.ALL_MONSTERS, SpellArea.COMBAT, 0, 0, 43),
-    MADALTO("Frost", ClassType.MAGE, 5, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 8, 64, 21),
-    LAKANITO("Suffocation", ClassType.MAGE, 6, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 28),
-    ZILWAN("Dispel", ClassType.MAGE, 6, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 0, 0, 14),
-    MASOPIC("Big glass", ClassType.MAGE, 6, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 5),
-    HAMAN("Change", ClassType.MAGE, 6, Sound.GAZE, SpellTarget.VARIABLE, SpellArea.COMBAT, 0, 0, 72),
-    MALOR("Apport", ClassType.MAGE, 7, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT_OR_CAMP, 0, 0, 94),
-    MAHAMAN("Great Change", ClassType.MAGE, 7, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 18),
-    TILTOWAIT("(Untranslatable)", ClassType.MAGE, 7, Sound.GAZE, SpellTarget.ALL_MONSTERS, SpellArea.COMBAT, 10, 100, 63),
+    HALITO("Little Fire", ClassType.MAGE, 1, Sound.FIREBALL, Color.RED, SpellTarget.MONSTER, SpellArea.COMBAT, 1, 8, 0, 51),
+    MOGREF("Body Iron", ClassType.MAGE, 1, Sound.GAZE, Color.CYAN, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 2, 95),
+    KATINO("Bad Air", ClassType.MAGE, 1, Sound.SLEEP, Color.PURPLE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 0, 86),
+    DUMAPIC("Clarity", ClassType.MAGE, 1, Sound.GAZE, Color.CYAN, SpellTarget.NONE, SpellArea.CAMP, 0, 0, 0, 33),
+    DILTO("Darkness", ClassType.MAGE, 2, Sound.GAZE, Color.PURPLE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 2, 88),
+    SOPIC("Glass", ClassType.MAGE, 2, Sound.GAZE, Color.CYAN, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 4, 85),
+    MAHALITO("Big fire", ClassType.MAGE, 3, Sound.EXPLOSION, Color.RED, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 4, 6, 1, 79),
+    MOLITO("Spark storm", ClassType.MAGE, 3, Sound.EXPLOSION, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 3, 6, 0, 46),
+    MORLIS("Fear", ClassType.MAGE, 4, Sound.SPIRITS, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 3, 89),
+    DALTO("Blizzard Blast", ClassType.MAGE, 4, Sound.GAZE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 6, 6, 2, 1),
+    LAHALITO("Flame storm", ClassType.MAGE, 4, Sound.GAZE, Color.RED, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 6, 6, 1, 81),
+    MAMORLIS("Terror", ClassType.MAGE, 5, Sound.GAZE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 4, 90),
+    MAKANITO("Deadly Air", ClassType.MAGE, 5, Sound.WIND, Color.PURPLE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 0, 43),
+    MADALTO("Frost", ClassType.MAGE, 5, Sound.WIND, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 8, 8, 2, 21),
+    LAKANITO("Suffocation", ClassType.MAGE, 6, Sound.GAZE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 0, 28),
+    ZILWAN("Dispel", ClassType.MAGE, 6, Sound.GAZE, Color.YELLOW, SpellTarget.MONSTER, SpellArea.COMBAT, 10, 200, 0, 14),
+    MASOPIC("Big glass", ClassType.MAGE, 6, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 4, 5),
+    HAMAN("Change", ClassType.MAGE, 6, Sound.GAZE, Color.CYAN, SpellTarget.VARIABLE, SpellArea.COMBAT, 0, 0, 0, 72),
+    MALOR("Apport", ClassType.MAGE, 7, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT_OR_CAMP, 0, 0, 0, 94),
+    MAHAMAN("Great Change", ClassType.MAGE, 7, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 0, 18),
+    TILTOWAIT("(Untranslatable)", ClassType.MAGE, 7, Sound.TREMOR, Color.RED, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 10, 15, 0, 63),
     //
-    KALKI("Blessings", ClassType.CLERIC, 1, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 95),
-    DIOS("Heal", ClassType.CLERIC, 1, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 1, 8, 25),
-    BADIOS("Harm", ClassType.CLERIC, 1, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 1, 8, 61),
-    MILWA("Light", ClassType.CLERIC, 1, Sound.GAZE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 31),
-    PORFIC("Shield", ClassType.CLERIC, 1, Sound.GAZE, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 5),
-    MATU("Blessing & Zeal", ClassType.CLERIC, 2, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 38),
-    CALFO("X-ray vision", ClassType.CLERIC, 2, Sound.GAZE, SpellTarget.CASTER, SpellArea.LOOTING, 0, 0, 40),
-    MANIFO("Statue", ClassType.CLERIC, 2, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 91),
-    MONTINO("Still air", ClassType.CLERIC, 2, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 7),
-    LOMILWA("More light", ClassType.CLERIC, 3, Sound.GAZE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 31),
-    DIALKO("Softness", ClassType.CLERIC, 3, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 30),
-    LATUMAPIC("Identification", ClassType.CLERIC, 3, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 32),
-    BAMATU("Prayer", ClassType.CLERIC, 3, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 38),
-    DIAL("More Heal", ClassType.CLERIC, 4, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 2, 16, 41),
-    BADIAL("More Hurt", ClassType.CLERIC, 4, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 2, 16, 44),
-    LATUMOFIS("Cure poison", ClassType.CLERIC, 4, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 15),
-    MAPORFIC("Big Shield", ClassType.CLERIC, 4, Sound.GAZE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 352),
-    DIALMA("Greatly Heal", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 3, 24, 27),
-    BADIALMA("Greatly Hurt", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 3, 24, 50),
-    LITOKAN("Flame tower", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 3, 24, 65),
-    KANDI("Location", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 365),
-    DI("Life", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 637),
-    BADI("Death", ClassType.CLERIC, 5, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 0, 0, 35),
-    LORTO("Blades", ClassType.CLERIC, 6, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 6, 36, 62),
-    MADI("Healing", ClassType.CLERIC, 6, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 25),
-    MABADI("Incredibly Harm", ClassType.CLERIC, 6, Sound.GAZE, SpellTarget.MONSTER, SpellArea.COMBAT, 18, 58, 54),
-    LOKTOFEIT("Recall", ClassType.CLERIC, 6, Sound.GAZE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 76),
-    MALIKTO("The Word of Death", ClassType.CLERIC, 7, Sound.GAZE, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 12, 72, 59),
-    KADORTO("Resurrection", ClassType.CLERIC, 7, Sound.GAZE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 24);
+    KALKI("Blessings", ClassType.CLERIC, 1, Sound.HEALING, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 1, 95),
+    DIOS("Heal", ClassType.CLERIC, 1, Sound.HEALING, Color.CYAN, SpellTarget.PERSON, SpellArea.ANY_TIME, 1, 8, 0, 25),
+    BADIOS("Harm", ClassType.CLERIC, 1, Sound.POISON_EFFECT, Color.YELLOW, SpellTarget.MONSTER, SpellArea.COMBAT, 1, 8, 0, 61),
+    MILWA("Light", ClassType.CLERIC, 1, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 0, 31),
+    PORFIC("Shield", ClassType.CLERIC, 1, Sound.GAZE, Color.CYAN, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 4, 5),
+    MATU("Blessing & Zeal", ClassType.CLERIC, 2, Sound.HEALING, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 2, 38),
+    CALFO("X-ray vision", ClassType.CLERIC, 2, Sound.GAZE, Color.CYAN, SpellTarget.CASTER, SpellArea.LOOTING, 0, 0, 0, 40),
+    MANIFO("Statue", ClassType.CLERIC, 2, Sound.GAZE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 0, 91),
+    MONTINO("Still air", ClassType.CLERIC, 2, Sound.GAZE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 0, 0, 0, 7),
+    LOMILWA("More light", ClassType.CLERIC, 3, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 0, 31),
+    DIALKO("Softness", ClassType.CLERIC, 3, Sound.GAZE, Color.CYAN, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 30),
+    LATUMAPIC("Identification", ClassType.CLERIC, 3, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 0, 32),
+    BAMATU("Prayer", ClassType.CLERIC, 3, Sound.HEALING, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 4, 38),
+    DIAL("More Heal", ClassType.CLERIC, 4, Sound.HEALING, Color.CYAN, SpellTarget.PERSON, SpellArea.ANY_TIME, 2, 16, 0, 41),
+    BADIAL("More Hurt", ClassType.CLERIC, 4, Sound.GAZE, Color.YELLOW, SpellTarget.MONSTER, SpellArea.COMBAT, 2, 8, 0, 44),
+    LATUMOFIS("Cure poison", ClassType.CLERIC, 4, Sound.GAZE, Color.GREEN, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 15),
+    MAPORFIC("Big Shield", ClassType.CLERIC, 4, Sound.GAZE, Color.CYAN, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 2, 352),
+    DIALMA("Greatly Heal", ClassType.CLERIC, 5, Sound.HEALING, Color.YELLOW, SpellTarget.PERSON, SpellArea.ANY_TIME, 3, 24, 0, 27),
+    BADIALMA("Greatly Hurt", ClassType.CLERIC, 5, Sound.SPIRITS, Color.RED, SpellTarget.MONSTER, SpellArea.COMBAT, 3, 8, 0, 50),
+    LITOKAN("Flame tower", ClassType.CLERIC, 5, Sound.FIREBALL, Color.RED, SpellTarget.PARTY, SpellArea.COMBAT, 3, 8, 1, 65),
+    KANDI("Location", ClassType.CLERIC, 5, Sound.GAZE, Color.CYAN, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 0, 365),
+    DI("Life", ClassType.CLERIC, 5, Sound.DIVINE_INTERVENTION, Color.GREEN, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 0, 637),
+    BADI("Death", ClassType.CLERIC, 5, Sound.SPIRITS, Color.PURPLE, SpellTarget.MONSTER, SpellArea.COMBAT, 0, 0, 0, 35),
+    LORTO("Blades", ClassType.CLERIC, 6, Sound.GAZE, Color.GRAY, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 6, 6, 0, 62),
+    MADI("Healing", ClassType.CLERIC, 6, Sound.HEALING, Color.CYAN, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 25),
+    MABADI("Incredibly Harm", ClassType.CLERIC, 6, Sound.TREMOR, Color.GRAY, SpellTarget.MONSTER, SpellArea.COMBAT, 18, 58, 0, 54),
+    LOKTOFEIT("Recall", ClassType.CLERIC, 6, Sound.DIVINE_MEDITATION, Color.CYAN, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 0, 76),
+    MALIKTO("The Word of Death", ClassType.CLERIC, 7, Sound.RAGE, Color.CYAN, SpellTarget.MONSTER_GROUP, SpellArea.COMBAT, 12, 6, 0, 59),
+    KADORTO("Resurrection", ClassType.CLERIC, 7, Sound.DIVINE_INTERVENTION, Color.CYAN, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 24);
 
     private final static HashMap<Spells, String> desc = new HashMap<>();
 
@@ -130,10 +131,12 @@ public enum Spells {
     private final SpellArea area;
     private final int hitCount;
     private final int hitRange;
+    private final int hitBonus;
     private final int icon;
     private final Sound snd;
+    private final Color color;
 
-    private Spells(String name, ClassType type, int level, Sound snd, SpellTarget target, SpellArea area, int hitCount, int hitRange, int icon) {
+    private Spells(String name, ClassType type, int level, Sound snd, Color color, SpellTarget target, SpellArea area, int hitCount, int hitRange, int hitBonus, int icon) {
         this.name = name;
         this.type = type;
         this.level = level;
@@ -141,8 +144,10 @@ public enum Spells {
         this.area = area;
         this.hitCount = hitCount;
         this.hitRange = hitRange;
+        this.hitBonus = hitBonus;
         this.icon = icon;
         this.snd = snd;
+        this.color = color;
     }
 
     public String getName() {
@@ -177,6 +182,10 @@ public enum Spells {
         return hitRange;
     }
 
+    public int getHitBonus() {
+        return hitBonus;
+    }
+
     public int getIcon() {
         return icon;
     }
@@ -184,9 +193,13 @@ public enum Spells {
     public Sound getSound() {
         return this.snd;
     }
-    
+
     public String getDescription() {
         return desc.get(this);
+    }
+
+    public Color getColor() {
+        return color;
     }
 
 }

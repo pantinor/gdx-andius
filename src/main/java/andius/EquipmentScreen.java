@@ -751,7 +751,7 @@ public class EquipmentScreen implements Screen, Constants {
             this.spell = spell;
 
             this.icon = new Image(invIcons[spell.getIcon()]);
-            this.label = new Label(spell.toString().toUpperCase(), Andius.skin, "larger");
+            this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "larger");
 
             addActor(this.icon);
             addActor(this.label);

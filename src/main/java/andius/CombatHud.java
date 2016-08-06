@@ -155,9 +155,7 @@ public class CombatHud {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (spell != null) {
-                Sounds.play(Sound.TRIGGER);
-                Gdx.input.setInputProcessor(sip);
-                sip.init(player, Keys.C, spell, player.getWx(), player.getWy());
+                screen.initCast(spell, player);
             }
             return false;
         }

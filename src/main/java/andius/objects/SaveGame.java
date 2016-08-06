@@ -1,5 +1,6 @@
 package andius.objects;
 
+import andius.Andius;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import java.util.Random;
@@ -43,6 +44,10 @@ public class SaveGame implements Constants {
     }
 
     public void write(String file) throws Exception {
+        for (CharacterRecord player : players) {
+            player.acmodifier1 = 0;
+            player.acmodifier2 = 0;
+        }
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         String json = gson.toJson(this);
@@ -88,6 +93,8 @@ public class SaveGame implements Constants {
         public List<Item> inventory = new ArrayList<>();
 
         public int submorsels = 400;
+        public int acmodifier1; //lasts for single combat
+        public int acmodifier2; //lasts until next rest at inn
 
         public void awardXP(int amt) {
             exp = Utils.adjustValueMax(exp, amt, Integer.MAX_VALUE);
@@ -103,7 +110,7 @@ public class SaveGame implements Constants {
                 status = Status.DEAD;
             }
         }
-        
+
         public boolean canCast(Spells spell) {
             if (!knownSpells.contains(spell)) {
                 return false;
@@ -114,12 +121,12 @@ public class SaveGame implements Constants {
                 return clericPoints[spell.getLevel() - 1] > 0;
             }
         }
-        
+
         public void decrMagicPts(Spells spell) {
             if (spell.getType() == ClassType.MAGE) {
-                magePoints[spell.getLevel() - 1] --;
+                magePoints[spell.getLevel() - 1]--;
             } else {
-                clericPoints[spell.getLevel() - 1] --;
+                clericPoints[spell.getLevel() - 1]--;
             }
         }
 
@@ -153,6 +160,8 @@ public class SaveGame implements Constants {
             if (classType == ClassType.NINJA && weapon == null) {
                 ac = (level / 3) - 2;
             }
+            ac -= acmodifier1;
+            ac -= acmodifier2;
             return ac;
         }
 
@@ -174,18 +183,18 @@ public class SaveGame implements Constants {
         }
 
         public int checkAndSetLevel() {
-            
+
             int expnxtlvl = 0;
             if (this.level <= 12) {
                 expnxtlvl = LEVEL_PROGRESSION_TABLE[this.level][this.classType.ordinal()];
             } else {
-                for (int i = 13;i<=this.level;i++) {
+                for (int i = 13; i <= this.level; i++) {
                     expnxtlvl += LEVEL_PROGRESSION_TABLE[0][this.classType.ordinal()];
                 }
             }
-            
+
             if (this.exp - expnxtlvl >= 0) {
-                this.level ++;
+                this.level++;
             }
 
             return (this.exp - expnxtlvl);
@@ -208,15 +217,16 @@ public class SaveGame implements Constants {
         return attrib;
     }
 
-    private static void setSpellCount(int[] spellCounts, int grp, int low, int high, List<Spells> knownSpells) {
+    private static void setSpellCount(int[] spellCounts, int idx, int low, int high, List<Spells> knownSpells) {
         for (int i = low; i <= high; i++) {
             if (knownSpells.contains(Spells.values()[i - 1])) {
-                spellCounts[grp]++;
+                spellCounts[idx]++;
             }
         }
     }
 
     private static void setMinMageSpellCounts(CharacterRecord rec) {
+        rec.magePoints = new int[7];
         setSpellCount(rec.magePoints, 0, 1, 4, rec.knownSpells);
         setSpellCount(rec.magePoints, 1, 5, 6, rec.knownSpells);
         setSpellCount(rec.magePoints, 2, 7, 8, rec.knownSpells);
@@ -227,6 +237,7 @@ public class SaveGame implements Constants {
     }
 
     private static void setMinPriestSpellCounts(CharacterRecord rec) {
+        rec.clericPoints = new int[7];
         setSpellCount(rec.clericPoints, 0, 22, 26, rec.knownSpells);
         setSpellCount(rec.clericPoints, 1, 27, 30, rec.knownSpells);
         setSpellCount(rec.clericPoints, 2, 31, 34, rec.knownSpells);

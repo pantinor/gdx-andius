@@ -68,6 +68,7 @@ public interface Constants {
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
+        MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
         ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
@@ -256,22 +257,44 @@ public interface Constants {
         FOLLOW_AVATAR,
         ATTACK_AVATAR;
     }
-
+    
     public static final int[][] LEVEL_PROGRESSION_TABLE = new int[][]{
-        {289709, 318529, 304132, 260639, 428479, 428479, 475008, 529756},
-        {1000, 1100, 1050, 900, 1200, 1200, 1300, 1450},
-        {1724, 1896, 1810, 1551, 2105, 2105, 2280, 2543},
-        {2972, 3268, 3120, 2674, 3677, 3677, 4000, 4461},
-        {5124, 5634, 5379, 4610, 6477, 6477, 7017, 7826},
-        {8834, 9713, 9274, 7948, 11363, 11363, 12310, 13729},
-        {15231, 16746, 15989, 13703, 19935, 19935, 21596, 24085},
-        {26260, 28872, 27567, 23625, 34973, 34973, 37887, 42254},
-        {45275, 49779, 47529, 40732, 61356, 61356, 66468, 74129},
-        {78060, 85825, 81946, 70227, 107642, 107642, 116610, 130050},
-        {134586, 147974, 141286, 121081, 188845, 188845, 204578, 228157},
-        {232044, 255127, 243596, 208760, 331307, 331307, 358908, 400275},
-        {400075, 439874, 419993, 359931, 581240, 581240, 629663, 702236}
+        {289709, 318529, 304132, 260639, 438479, 456601, 475008, 529756},
+        {1000, 1100, 1050, 900, 1200, 1250, 1300, 1450},
+        {1724, 1896, 1810, 1551, 2105, 2192, 2280, 2543},
+        {2972, 3268, 3120, 2674, 3692, 3845, 4000, 4461},
+        {5124, 5634, 5379, 4610, 6477, 6745, 7017, 7826},
+        {8834, 9713, 9274, 7948, 11363, 11833, 12310, 13729},
+        {15231, 16746, 15989, 13703, 19935, 20759, 21596, 24085},
+        {26260, 28872, 27567, 23625, 34973, 36419, 37887, 42254},
+        {45275, 49779, 47529, 40732, 61356, 63892, 66468, 74129},
+        {78060, 85825, 81946, 70227, 107642, 112091, 116610, 130050},
+        {134586, 147974, 141286, 121081, 188845, 196650, 204578, 228157},
+        {232044, 255127, 243596, 208760, 331307, 345000, 358908, 400275},
+        {400075, 439874, 419993, 359931, 581240, 605263, 629663, 702236}
     };
+
+    public static final String[] HITMSGS = new String[]{
+        "whacks",
+        "smites",
+        "jabs",
+        "pokes",
+        "wallops",
+        "bashes",
+        "pounds",
+        "smashes",
+        "whops",
+        "whomps",
+        "smacks",
+        "clouts",};
+
+    public static final String[] DEATHMSGS = new String[]{
+        "shuffles off this mortal coil.",
+        "turns his toes up to the daises.",
+        "pays an obolus to Charon.",
+        "kicks the proverbial bucket.",
+        "departs the land of the living.",
+        "moans OH MA, I THINK ITS MY TIME."};
 
     public enum CreatureStatus {
 
@@ -410,7 +433,7 @@ public interface Constants {
     };
 
     public enum SpellTarget {
-        PERSON, PARTY, MONSTER, MONSTER_GROUP, ALL_MONSTERS, VARIABLE, NONE, CASTER
+        PERSON, PARTY, MONSTER, MONSTER_GROUP, VARIABLE, NONE, CASTER
     };
 
     public enum SpellArea {
@@ -486,5 +509,5 @@ public interface Constants {
             Sounds.play(s);
         }
     }
-    
+
 }
