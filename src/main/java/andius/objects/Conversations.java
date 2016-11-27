@@ -36,7 +36,7 @@ public class Conversations {
     }
 
     @XmlRootElement(name = "conversation")
-    public static class Conversation {
+    public static class Conversation implements Comparable {
 
         private Constants.Map map;
         private String name;
@@ -112,6 +112,17 @@ public class Conversations {
         public String toString() {
             return String.format("Conversation [map=%s, name=%s, pronoun=%s, description=%s, topics=%s]",
                     map, name, pronoun, description, topics);
+        }
+
+        @Override
+        public int compareTo(Object obj) {
+            if (this.map == null || obj == null) {
+                return (this.map == null) ? -1 : 1;
+            }
+            if (this.map == null && obj == null) {
+                return 0;
+            }
+            return this.map.toString().compareToIgnoreCase("" + obj);
         }
 
     }
