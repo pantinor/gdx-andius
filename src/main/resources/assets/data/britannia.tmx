@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="25">
+ <properties>
+  <property name="startX" value="15"/>
+  <property name="startY" value="31"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
+  <tileoffset x="0" y="-16"/>
+  <image source="uf_heroes.png" width="1920" height="624"/>
+ </tileset>
+ <tileset firstgid="1281" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
+  <tileoffset x="0" y="-8"/>
+  <image source="uf_items.png" width="1056" height="1056"/>
+ </tileset>
+ <layer name="floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+VXwQ3DMAhkuO6TqgOku3WyKlIs0csd4NhpH0VCcWTC+Qhg20zLKvS5qx8zXQPftttsshBFuwpWe3qN/GfzbRzFANeAc8x3FX+WjPL3ehd6Bj/7/xiH9q7wH0IzfLbWaF09+Lh2L5hPCnMUHzmrGkZb9p7he1H4qp7RdlZdZPgs/uzbsxLh+yfazua/GO9VrFfOFMafxeBb+GyvqOZfr5p98lG5H/XiWerxMfZX829jlve9+ddbF1H+/Qo/q/8XaIRd/Wdmx9zL+DN8xDH4Bn1E9Zf1n1H+6FPtff/Cv3pWvpI/9nwTtkxG+Xup3D/O8K+seZPs/M16wAj/DP9G+Fc4VW3RfxZ/Vitt7G3ZWSbbU60w7/dFvNsx/BXsK/wiUX2K8Vf3z0g22zc8mzEQABAAAA==
+  </data>
+ </layer>
+ <layer name="floor 2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3X0QmAMAwE0EzmSnEC13CNzNDJ/BJLSEQbk7aSBwdBxKMWxAJcFvDl/fwZ9XonHr2rECuskmIhm5/sAVWJRkIstPVrPV/3a0bp34N66uDL62le2j5Lcv/HwL+ZFqTMUVr6c/3y3KKwRCvKfAdhrn/WP50/vGzO9596nL8Pky3keAAQAAA=
+  </data>
+ </layer>
+ <layer name="props" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAW4gOEws49W5hcyQehWRkxMKahkQmBcdhfikKM1gNk9EPYj200r+5HDHDkO0O0eqPCnNcDl/1EAAZsGIDxScNiJS3wUDC8wGv+DG6CXmZSAOTjY9ALk2D+c/E8OoKb//zKiYnoD5PqN2LoOub062l4YHmAtiWmPVPUDCQDyl5rAABAAAA==
+  </data>
+ </layer>
+ <layer name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OAQkAAAgDsIP9WxjUGHLYEiwBAACg1c73gBYHAtF1MgAQAAA=
+  </data>
+ </layer>
+ <layer name="water_edges" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3R0QmAQAgGYN3B64ZohYa50Ryl0TI44YKkFyuK/wPRhwP1JAIAyFGYSJjUsr7Re2Fa99pyu2sG39HD+1h9IH2WbFEfm6PJEOXh/tmq7TANUfs/R3tG7+Gb+j3V4+qeuD9AnpnPawD4hw1r4tu8ABAAAA==
+  </data>
+ </layer>
+ <layer name="shadows" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2XSQ7AIAhFvQv3v2M3riiDAwgOLzGhza8flbS0lHigDhxHz++RC+URAeWL70HH4PSapyWa/+ycHqzYK+6MsgMozpKzR51xPtjzJqR3zYx2B6xyP2EvboSrY6n+qedWnrtH36bFPbpTeOvnr0fWL/VgGXtJy14x0/8HpWn5rrfqHn8+Amdh0wAQAAA=
+  </data>
+ </layer>
+ <layer name="walls" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC91XSw6EIAyFDYfQjPc/HwvXoxmb4Jt+aNGZxCaNSEtLH5/SklOaDt6J2mXjmj48QkWxT/KecVGSxpdsyyn+UdbmJcnb+Hu41Z/zN85ItfEj+dfG9epb+CPOlr3IfCu0azqvP4eVNW9P/5TPbWlftza8OPf0SzoeXelc/NL/jt1r4+X4avv8Dv/RfusuQ/9enC196y5H/3SP4JcjTm/O1+PvJbKjYcf5HM07aEfbo5z/0bzL2fkn/hH/nnwq6Ub9c/m1vcuRMAdz97x3/XHtSL7CuLXRQRpZ/wnwIPkCduifs3/l+Y/Ef4f/J8XvOStXxI/nWHoT3RE/99bz5PPR+Ll+T/0h1WSc3HovjNYfaEurSziK1h9esuwjphZuEf+afcRUqw8iZNl/AwkcaIQAEAAA
+  </data>
+ </layer>
+ <layer name="door" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3U0Q0AEAwEUCwgxjGE/acwgkT8+tJemxD3/k+upEK4W41YvoP5BuZjwvI7dB6UdJ7hU+NYUd6Xde8s7KHtTfd6bXd/ZrX/6xzp7i9W+89/RMfy/TX4/kRE5GkCCH4xowAQAAA=
+  </data>
+ </layer>
+ <layer name="torches" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NggIBWJlSa2oDW5g9XgC/ccIXlaBgPLjAaH6NguIDRMoc8MBo+wwMQk/5B7OEQ3+h+GgWjgFaAXulrNB2PglGAAABbNcBvABAAAA==
+  </data>
+ </layer>
+ <layer name="webs" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3SqQ0AMAwEQcvN56k6wCwNRFZmyNEDG0F3O2tHvv3BH+bV2dIdAAC0cAC0w1XJABAAAA==
+  </data>
+ </layer>
+ <objectgroup name="people" visible="0">
+  <object id="1" name="Jason" type="INNKEEPER" x="1008" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="rooms">
+  <object id="2" x="912" y="864">
+   <polygon points="0,0 0,480 288,480 288,0 0,0"/>
+  </object>
+  <object id="3" x="1152" y="672">
+   <polygon points="0,0 0,816 0,864 336,864 336,528 192,528 192,0 0,0"/>
+  </object>
+  <object id="5" x="864" y="144">
+   <polygon points="0,0 0,432 336,432 336,0 0,0"/>
+  </object>
+  <object id="7" x="1152" y="0">
+   <polygon points="0,0 0,288 336,288 336,0 0,0"/>
+  </object>
+  <object id="9" x="336" y="0">
+   <polygon points="0,0 0,48 48,48 48,144 864,144 864,0 0,0"/>
+  </object>
+  <object id="11" x="0" y="0">
+   <polygon points="0,0 0,288 144,288 144,1200 0,1200 0,1536 336,1536 336,0 0,0"/>
+  </object>
+  <object id="12" x="288" y="864">
+   <polygon points="0,0 0,480 288,480 288,96 240,96 240,0 0,0"/>
+  </object>
+  <object id="17" x="288" y="144">
+   <polygon points="0,0 336,0 336,432 0,432 0,0"/>
+  </object>
+  <object id="19" x="576" y="144">
+   <polygon points="0,0 0,288 336,288 336,0"/>
+  </object>
+  <object id="20" x="1152" y="288">
+   <polygon points="0,0 0,432 192,432 192,0"/>
+  </object>
+  <object id="21" x="288" y="48">
+   <polygon points="0,0 144,0 144,96 0,96"/>
+  </object>
+  <object id="24" x="288" y="1344">
+   <polygon points="0,0 0,192 912,192 912,0 672,0 672,-480 912,-480 912,-768 624,-768 624,-912 288,-912 288,-768 0,-768 0,-480 240,-480 240,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="portals" visible="0"/>
+</map>

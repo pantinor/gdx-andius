@@ -73,7 +73,9 @@ public interface Constants {
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
-        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),;
+        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
+        BRITTANIA("Castle of Brittania", "britannia.tmx", TILE_DIM),
+        ;
 
         private final String label;
         private final String tmxFile;
