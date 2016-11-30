@@ -18,6 +18,7 @@ import utils.Utils;
  */
 public class Actor {
 
+    private final String name;
     private final Animation anim;
     private Role role;
     private int wx;
@@ -29,7 +30,8 @@ public class Actor {
     private CharacterRecord player;
     private Conversation conversation;
 
-    public Actor(Icons icon) {
+    public Actor(Icons icon, String name) {
+        this.name = name;
         float fr = (float) Utils.getRandomBetween(4, 9) / 10;
         this.anim = new Animation(fr, Icons.ATLAS.findRegions(icon.toString()));
     }
@@ -50,6 +52,10 @@ public class Actor {
         this.x = x;
         this.y = y;
         this.player = player;
+    }
+    
+    public String getName() {
+        return this.name;
     }
 
     public Role getRole() {

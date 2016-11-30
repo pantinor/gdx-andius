@@ -8,6 +8,7 @@ import static andius.Andius.startScreen;
 import static andius.Constants.DEATHMSGS;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Dice;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Monster.Type;
@@ -139,7 +140,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].getIcon());
+            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].getIcon(), crSlots[index].getIcon().name());
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
 //            if (enemies.size() > 0) {
@@ -163,7 +164,7 @@ public class CombatScreen extends BaseScreen {
             if (this.context.players()[index].isDisabled()) {
                 continue;
             }
-            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon());
+            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon(), context.players()[index].name);
             actor.set(this.context.players()[index], sx, sy, x, y);
             partyMembers.add(actor);
 //            if (partyMembers.size() > 0) {

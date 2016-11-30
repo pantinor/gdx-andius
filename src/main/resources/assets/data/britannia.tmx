@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="25">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="45">
  <properties>
   <property name="startX" value="15"/>
   <property name="startY" value="31"/>
@@ -80,41 +80,39 @@
   </tile>
  </tileset>
  <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <tileoffset x="0" y="-16"/>
   <image source="uf_heroes.png" width="1920" height="624"/>
  </tileset>
  <tileset firstgid="1281" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
-  <tileoffset x="0" y="-8"/>
   <image source="uf_items.png" width="1056" height="1056"/>
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+VXwQ3DMAhkuO6TqgOku3WyKlIs0csd4NhpH0VCcWTC+Qhg20zLKvS5qx8zXQPftttsshBFuwpWe3qN/GfzbRzFANeAc8x3FX+WjPL3ehd6Bj/7/xiH9q7wH0IzfLbWaF09+Lh2L5hPCnMUHzmrGkZb9p7he1H4qp7RdlZdZPgs/uzbsxLh+yfazua/GO9VrFfOFMafxeBb+GyvqOZfr5p98lG5H/XiWerxMfZX829jlve9+ddbF1H+/Qo/q/8XaIRd/Wdmx9zL+DN8xDH4Bn1E9Zf1n1H+6FPtff/Cv3pWvpI/9nwTtkxG+Xup3D/O8K+seZPs/M16wAj/DP9G+Fc4VW3RfxZ/Vitt7G3ZWSbbU60w7/dFvNsx/BXsK/wiUX2K8Vf3z0g22zc8mzEQABAAAA==
+   H4sIAAAAAAAAC+VXwQ3DMAhkuO6TqgOku3WyKlIs0csd4NhpH0VCcWTM+Qjg2EzLKvS5qx8zXQPftttsshBFuwpWe3qN/GfzbRzFAPeAc8x3FX+WjPL3ehd6Bj/7/hiH9q7wH0IzfLbXaF89+Lh3L5hPCnMUHzmrGkZb9p7he1H4qp7RdlZdZPgs/mztWYnw/RNtZ/NfjPcq1itnCuPPYvAtfHZWVPOvV80++ajcj3rxLPX4GPur+bcxy/ve/Outiyj/foWf1f8LNMKufjOzY+5l/Bk+4hisQR9R/WX9Z5Q/+lRn37/wr/4rX8kfe74JW4U/wt9L5f5xhr/ixGoxmmc9YIR/hn8j/CucqrboP4s/q5U29rbsXyY7U60w789FvNsx/BXsK/wiUX2K8Vf3z0g22zfdDaP5ABAAAA==
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3X0QmAMAwE0EzmSnEC13CNzNDJ/BJLSEQbk7aSBwdBxKMWxAJcFvDl/fwZ9XonHr2rECuskmIhm5/sAVWJRkIstPVrPV/3a0bp34N66uDL62le2j5Lcv/HwL+ZFqTMUVr6c/3y3KKwRCvKfAdhrn/WP50/vGzO9596nL8Pky3keAAQAAA=
+   H4sIAAAAAAAAC+3XYQqAMAgGUE/WlewEXaOO4RH7FclQKJduhg8EidHHEkYDuC3gy/v9GY36Jh65q1C9kFWJhU3/ZAbEKhoJ1UPbv5bzdb5mlvw9KIcXvnxe8tLmLKn5z6E9M3uQ0kex5Nf+5d7iUPoolnyEXP+sf7p/eNmc119G3L9PSKKYvgAQAAA=
   </data>
  </layer>
  <layer name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW4gOEws49W5hcyQehWRkxMKahkQmBcdhfikKM1gNk9EPYj200r+5HDHDkO0O0eqPCnNcDl/1EAAZsGIDxScNiJS3wUDC8wGv+DG6CXmZSAOTjY9ALk2D+c/E8OoKb//zKiYnoD5PqN2LoOub062l4YHmAtiWmPVPUDCQDyl5rAABAAAA==
+   H4sIAAAAAAAAC2NgGAW4gOEws49W5hcyQehWRkxMKahkQmBcdhfikKM1gNk9EPYj200r+5HDHDkO0O0eqPCnNcDl/1EAAZsGIDxScNiJS3wUDC8wGv+DG6CXmdQCi5kYEqhnGtF2kgxo5f+FA5C+F5IR5tT0fyoTdja9AHL9Rmxdh9xeHW0vDA+wlsR+DKnqBxIAAIt3uScAEAAA
   </data>
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OAQkAAAgDsIP9WxjUGHLYEiwBAACg1c73gBYHAtF1MgAQAAA=
+   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARypVM6PAvqBztG8QjL4xUR7O6hZhi3BY9ZwKCtHy3/qAQC41N4bABAAAA==
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3R0QmAQAgGYN3B64ZohYa50Ryl0TI44YKkFyuK/wPRhwP1JAIAyFGYSJjUsr7Re2Fa99pyu2sG39HD+1h9IH2WbFEfm6PJEOXh/tmq7TANUfs/R3tG7+Gb+j3V4+qeuD9AnpnPawD4hw1r4tu8ABAAAA==
+   H4sIAAAAAAAAC+2U3QnAIAyEkx3ULNNhHM1ROlpTMKCg9MUf2t4HR+5BuMRAiAAAYAyeiRxT0pp2ZB9M5+21xlk92Iwmy1Ff4XIvo+nlaB/RFfKL80cjOkMoJPmfe3P23oN3kveZTE/7xP6/hXDbryJw2/8lX4q7LpNuPABgHxfW6KPrABAAAA==
   </data>
  </layer>
  <layer name="shadows" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XSQ7AIAhFvQv3v2M3riiDAwgOLzGhza8flbS0lHigDhxHz++RC+URAeWL70HH4PSapyWa/+ycHqzYK+6MsgMozpKzR51xPtjzJqR3zYx2B6xyP2EvboSrY6n+qedWnrtH36bFPbpTeOvnr0fWL/VgGXtJy14x0/8HpWn5rrfqHn8+Amdh0wAQAAA=
+   H4sIAAAAAAAAC2NgGHigDMXo7IE2nxZuwWbHQABs9qKLKZOAcaknZCc1ASH7KTWTFoAeYYUrjgY7UEZjDxY30yKd4bIH3c6RBPCVNZSoHQqAWm4fDmExEgGudIwv/WPTR894p5dd+OpKYsJqqINR/+Pmk+N/euUVatlDzbbiYOp/YFNDTL1OrLpRgAkAr/TB4gAQAAA=
   </data>
  </layer>
  <layer name="walls" width="32" height="32">
@@ -137,8 +135,98 @@
    H4sIAAAAAAAAC+3SqQ0AMAwEQcvN56k6wCwNRFZmyNEDG0F3O2tHvv3BH+bV2dIdAAC0cAC0w1XJABAAAA==
   </data>
  </layer>
- <objectgroup name="people" visible="0">
+ <objectgroup name="people">
   <object id="1" name="Jason" type="INNKEEPER" x="1008" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="27" name="Guard" type="NONE" x="96" y="96" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="28" name="Guard" type="NONE" x="1392" y="192" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="29" name="Guard" type="NONE" x="96" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="30" name="Hawkwind" type="NONE" x="432" y="1248" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="31" name="Guard" type="NONE" x="624" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="32" name="Guard" type="NONE" x="816" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="33" name="Guard" type="NONE" x="624" y="816" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="34" name="Chuckles" type="NONE" x="720" y="960" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="35" name="Guard" type="NONE" x="816" y="816" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="36" name="Guard" type="NONE" x="1344" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="37" name="Joshua" type="NONE" x="1344" y="1104" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="38" name="Shawn" type="NONE" x="1008" y="240" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="39" name="Water" type="NONE" x="1008" y="384" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="40" name="Landri" type="NONE" x="768" y="48" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="41" name="Guard" type="NONE" x="432" y="192" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="42" name="Guard" type="NONE" x="528" y="336" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="43" name="Guard" type="NONE" x="528" y="432" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="44" name="Guard" type="NONE" x="336" y="432" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -182,5 +270,18 @@
    <polygon points="0,0 0,192 912,192 912,0 672,0 672,-480 912,-480 912,-768 624,-768 624,-912 288,-912 288,-768 0,-768 0,-480 240,-480 240,0"/>
   </object>
  </objectgroup>
- <objectgroup name="portals" visible="0"/>
+ <objectgroup name="portals">
+  <object id="25" name="BRITANNIA2" type="portal" x="144" y="144" width="48" height="48">
+   <properties>
+    <property name="wx" value="3"/>
+    <property name="wy" value="3"/>
+   </properties>
+  </object>
+  <object id="26" name="BRITANNIA2" type="portal" x="1296" y="144" width="48" height="48">
+   <properties>
+    <property name="wx" value="27"/>
+    <property name="wy" value="3"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

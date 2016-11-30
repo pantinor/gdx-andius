@@ -75,6 +75,7 @@ public interface Constants {
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         BRITTANIA("Castle of Brittania", "britannia.tmx", TILE_DIM),
+        BRITTANIA2("Castle of Brittania", "britannia2.tmx", TILE_DIM),
         ;
 
         private final String label;
@@ -196,7 +197,7 @@ public interface Constants {
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 
                     //System.out.printf("Loading actor: %s %s %s on map %s.\n",surname,role,movement,m);
-                    Actor actor = new Actor(icon);
+                    Actor actor = new Actor(icon, surname);
                     if (role == Role.MONSTER) {
                         try {
                             String mid = obj.getProperties().get("creature", String.class);

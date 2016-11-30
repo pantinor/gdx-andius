@@ -1,6 +1,7 @@
 package andius.objects;
 
 import andius.Constants;
+import andius.Constants.Map;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,15 @@ public class Conversations {
     @XmlElement(name = "conversation")
     public List<Conversation> getConversations() {
         return convs;
+    }
+    
+    public Conversation get(Map map, String name) {
+        for(Conversation c : this.convs) {
+            if (c.map == map && c.name.equalsIgnoreCase(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     public void setConverations(List<Conversation> c) {

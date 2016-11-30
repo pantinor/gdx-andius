@@ -2,12 +2,10 @@ package andius;
 
 import static andius.Andius.CTX;
 import static andius.Andius.REWARDS;
-import static andius.Andius.game_scr_avatar;
 import static andius.Andius.mainGame;
-import andius.objects.Icons;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
-import andius.objects.BaseMap;
+import andius.objects.Conversations.Conversation;
 import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -199,6 +197,11 @@ public class GameScreen extends BaseScreen {
                     InnScreen rs = new InnScreen(CTX, this.map);
                     mainGame.setScreen(rs);
                     return false;
+                } else {
+                    Conversation c = Andius.CONVERSATIONS.get(this.map, a.getName());
+                    if (c != null) {
+                        new ConversationDialog(this, c).show(this.stage);
+                    }
                 }
             }
         }

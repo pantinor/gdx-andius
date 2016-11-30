@@ -73,6 +73,7 @@ public class Andius extends Game {
     public static Animation game_scr_avatar;
 
     public static Hud HUD;
+    public static Conversations CONVERSATIONS;
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
     public static TextureRegion[] invIcons = new TextureRegion[67 * 12];
@@ -248,7 +249,7 @@ public class Andius extends Game {
 
             Icons.init();
             Constants.Moongate.init();
-            Conversations.init();
+            CONVERSATIONS = Conversations.init();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,22 +1,15 @@
 
-import static andius.Constants.CLASSPTH_RSLVR;
+import andius.Andius;
+import andius.ConversationDialog;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class TestMain extends Game {
-
-    Animation a1, a2, a3;
-    Texture tr;
-
-    float time = 0;
-    Batch batch2;
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -31,13 +24,56 @@ public class TestMain extends Game {
 
         try {
 
-            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-            TiledMap tm = loader.load("assets/data/combat1.tmx");
+            Andius a = new Andius();
+            a.create();
+            
+            TestScreen t = new TestScreen();
+            setScreen(t);
 
-            batch2 = new SpriteBatch();
+            ConversationDialog d = new ConversationDialog(null, Andius.CONVERSATIONS.getConversations().get(2));
+            d.show(t.stage);
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private class TestScreen implements Screen {
+
+        Stage stage = new Stage();
+
+        @Override
+        public void show() {
+            Gdx.input.setInputProcessor(stage);
+        }
+
+        @Override
+        public void render(float f) {
+            Gdx.gl.glClearColor(0, 0, 0, 0);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            stage.act();
+            stage.draw();
+        }
+
+        @Override
+        public void resize(int i, int i1) {
+        }
+
+        @Override
+        public void pause() {
+        }
+
+        @Override
+        public void resume() {
+        }
+
+        @Override
+        public void hide() {
+        }
+
+        @Override
+        public void dispose() {
         }
 
     }
