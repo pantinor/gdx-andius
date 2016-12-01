@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="45">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="47">
  <properties>
   <property name="startX" value="15"/>
   <property name="startY" value="31"/>
@@ -87,22 +87,22 @@
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+VXwQ3DMAhkuO6TqgOku3WyKlIs0csd4NhpH0VCcWTM+Qjg2EzLKvS5qx8zXQPftttsshBFuwpWe3qN/GfzbRzFAPeAc8x3FX+WjPL3ehd6Bj/7/hiH9q7wH0IzfLbXaF89+Lh3L5hPCnMUHzmrGkZb9p7he1H4qp7RdlZdZPgs/mztWYnw/RNtZ/NfjPcq1itnCuPPYvAtfHZWVPOvV80++ajcj3rxLPX4GPur+bcxy/ve/Outiyj/foWf1f8LNMKufjOzY+5l/Bk+4hisQR9R/WX9Z5Q/+lRn37/wr/4rX8kfe74JW4U/wt9L5f5xhr/ixGoxmmc9YIR/hn8j/CucqrboP4s/q5U29rbsXyY7U60w789FvNsx/BXsK/wiUX2K8Vf3z0g22zfdDaP5ABAAAA==
+   H4sIAAAAAAAAC+VXwQ3DMAhkuO6TqgOku3WyKlIs0csd4NhpH0VCcWTM+Qjg2EzLKvS5qx8zXQPftttsshBFuwpWe3qN/GfzbRzFAPeAc8x3FX+WjPL3ehd6Bj/7/hiH9q7wH0IzfLbXaF89+Lh3L5hPCnMUHzmrGkZb9p7he1H4qp7RdlZdZPgs/mztWYnw/RNtZ/NfjPcq1itnCuPPYvAtfHZWVPOvV80++ajcj3rxLPX4GPur+bcxy/ve/Outiyj/foWf1f8LNMKufjOzY+5l/Bk+4hisQR9R/WX9Z5Q/+lRn37/wr/4rX8kfe74JW4U/wt9L5f5xlj/jxGoxmmc9YIR/hn8j/JWwWGW26D+LP6uVNva27F8mO1OtMO/PRbzbMfwV7Cv8IlF9ivFX989INts3WgExSgAQAAA=
   </data>
  </layer>
  <layer name="floor 2" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XYQqAMAgGUE/WlewEXaOO4RH7FclQKJduhg8EidHHEkYDuC3gy/v9GY36Jh65q1C9kFWJhU3/ZAbEKhoJ1UPbv5bzdb5mlvw9KIcXvnxe8tLmLKn5z6E9M3uQ0kex5Nf+5d7iUPoolnyEXP+sf7p/eNmc119G3L9PSKKYvgAQAAA=
+   H4sIAAAAAAAAC+3XYQqAMAgG0J2sK9kJukYdwyP2K5KhUJpuhg8kiehjE6K1dluaL+/3ZzRqTzxyV6asgFSJBV3/ZAZIKhoyZSGtX8r5Ol8yS/4elEMLXt4veUlz5tT859B/My1Q6KNo8mv9fK9xCH0UTT6Qa4Z/1j+dP7xszs9fRpy/T8+uCg0AEAAA
   </data>
  </layer>
  <layer name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW4gOEws49W5hcyQehWRkxMKahkQmBcdhfikKM1gNk9EPYj200r+5HDHDkO0O0eqPCnNcDl/1EAAZsGIDxScNiJS3wUDC8wGv+DG6CXmdQCi5kYEqhnGtF2kgxo5f+FA5C+F5IR5tT0fyoTdja9AHL9Rmxdh9xeHW0vDA+wlsR+DKnqBxIAAIt3uScAEAAA
+   H4sIAAAAAAAAC2NgGAW4gOEws49W5hcyQehWRkxMKahkQmBcdhfikKM1gNk9EPYj200r+5HDHDkO0O0eqPCnNcDl/1EAAZsGIDxScNiJS3wUDC8wGv+DG6CXmdQCi5kYEqhnGtF2kgxo5f+FA5C+F5IR5tT0fyoTdja9AHL9RmxdB/PzaHth+IC1JPZjSFU/kAAAWZHNWgAQAAA=
   </data>
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARypVM6PAvqBztG8QjL4xUR7O6hZhi3BY9ZwKCtHy3/qAQC41N4bABAAAA==
+   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARypVM5TE6iOpgW8oHMEhY8mlfz6i4k65uAD1CzDluAxaziUlaPlP/UAAJ80Ai4AEAAA
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
@@ -136,22 +136,22 @@
   </data>
  </layer>
  <objectgroup name="people">
-  <object id="1" name="Jason" type="INNKEEPER" x="1008" y="1296" width="48" height="48">
+  <object id="1" name="Jason" type="TEMPLE" x="1008" y="1296" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="27" name="Guard" type="NONE" x="96" y="96" width="48" height="48">
+  <object id="27" name="a guard" type="NONE" x="96" y="96" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="28" name="Guard" type="NONE" x="1392" y="192" width="48" height="48">
+  <object id="28" name="a guard" type="NONE" x="1392" y="192" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="29" name="Guard" type="NONE" x="96" y="1296" width="48" height="48">
+  <object id="29" name="a guard" type="NONE" x="96" y="1296" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -161,17 +161,17 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="31" name="Guard" type="NONE" x="624" y="1392" width="48" height="48">
+  <object id="31" name="a guard" type="NONE" x="624" y="1392" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="32" name="Guard" type="NONE" x="816" y="1392" width="48" height="48">
+  <object id="32" name="a guard" type="NONE" x="816" y="1392" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="33" name="Guard" type="NONE" x="624" y="816" width="48" height="48">
+  <object id="33" name="a guard" type="NONE" x="624" y="816" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -181,12 +181,12 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="35" name="Guard" type="NONE" x="816" y="816" width="48" height="48">
+  <object id="35" name="a guard" type="NONE" x="816" y="816" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="36" name="Guard" type="NONE" x="1344" y="1296" width="48" height="48">
+  <object id="36" name="a guard" type="NONE" x="1344" y="1296" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -211,24 +211,34 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="41" name="Guard" type="NONE" x="432" y="192" width="48" height="48">
+  <object id="41" name="a guard" type="NONE" x="432" y="192" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="42" name="Guard" type="NONE" x="528" y="336" width="48" height="48">
+  <object id="42" name="a guard" type="NONE" x="528" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="43" name="Guard" type="NONE" x="528" y="432" width="48" height="48">
+  <object id="43" name="a guard" type="NONE" x="528" y="432" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="44" name="Guard" type="NONE" x="336" y="432" width="48" height="48">
+  <object id="44" name="a guard" type="NONE" x="336" y="432" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="45" name="Seesha" type="NONE" x="960" y="1008" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="46" name="Sheila" type="NONE" x="1104" y="1200" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
  </objectgroup>

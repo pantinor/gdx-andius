@@ -10,6 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -46,6 +47,7 @@ public class Conversations {
     }
 
     @XmlRootElement(name = "conversation")
+    @XmlType (propOrder={"map","name","pronoun","description","topics"})
     public static class Conversation implements Comparable {
 
         private Constants.Map map;
@@ -151,6 +153,7 @@ public class Conversations {
     }
 
     @XmlRootElement(name = "topic")
+    @XmlType (propOrder={"query","phrase","question","yesResponse","noResponse"})
     public static class Topic {
 
         private String query;

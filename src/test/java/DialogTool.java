@@ -19,6 +19,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -285,10 +287,10 @@ public class DialogTool extends javax.swing.JFrame {
             this.topicTable.getColumnModel().getColumn(3).setMaxWidth(1000);
             this.topicTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-            UIManager.put("Table.alternateRowColor", Color.YELLOW);
+            UIManager.put("Table.alternateRowColor", new Color(242, 242, 242));
 
             JTextField textField = new JTextField();
-            textField.setFont(new Font("Tahoma", 0, 24));
+            textField.setFont(new Font("Tahoma", 0, 16));
             textField.setBorder(new LineBorder(Color.BLACK));
             DefaultCellEditor dce = new DefaultCellEditor(textField);
             for (int x = 1; x < 4; x++) {
@@ -333,7 +335,7 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
 
-        convTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        convTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         convTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -353,7 +355,7 @@ public class DialogTool extends javax.swing.JFrame {
         convTable.setRowHeight(32);
         conversationPanel.setViewportView(convTable);
 
-        topicTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        topicTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         topicTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -462,7 +464,14 @@ public class DialogTool extends javax.swing.JFrame {
     }//GEN-LAST:event_removeTopicBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        try {
+            JAXBContext context = JAXBContext.newInstance(Conversations.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(this.convs, System.out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_saveBtnActionPerformed
 
     /**
