@@ -1,5 +1,6 @@
 
 import andius.Andius;
+import andius.Constants;
 import andius.ConversationDialog;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -26,6 +27,8 @@ public class TestMain extends Game {
 
             Andius a = new Andius();
             a.create();
+            
+            Constants.Map.BRITANIA.init();
             
             TestScreen t = new TestScreen();
             setScreen(t);

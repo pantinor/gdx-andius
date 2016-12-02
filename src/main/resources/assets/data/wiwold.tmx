@@ -140,7 +140,12 @@
  </layer>
  <objectgroup name="portals">
   <object id="1" name="WORLD" type="portal" x="1632" y="1920" width="48" height="48"/>
-  <object id="2" name="WIWOLD_LVL_2" type="portal" x="240" y="624" width="48" height="48"/>
+  <object id="2" name="WIWOLD_LVL_2" type="portal" x="240" y="624" width="48" height="48">
+   <properties>
+    <property name="dx" value="22"/>
+    <property name="dy" value="16"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="people">
   <object id="1" name="evil spirit" type="MONSTER" x="960" y="384" width="48" height="48">
@@ -390,7 +395,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="rooms">
+ <objectgroup name="rooms" visible="0">
   <object id="67" name="entrance" x="1584" y="1824">
    <polygon points="0,0 0,240 336,240 336,0 240,0 240,-48 96,-48 96,0"/>
   </object>

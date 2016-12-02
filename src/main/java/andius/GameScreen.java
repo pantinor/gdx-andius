@@ -170,6 +170,15 @@ public class GameScreen extends BaseScreen {
         } else if (keycode == Keys.E || keycode == Keys.K) {
             Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
             if (p != null && p.getMap() != this.map) {
+                Vector3 dv = p.getDest();
+                int dx = (int) dv.x;
+                int dy = (int) dv.y;
+                if (dx >= 0 && dy >= 0) {
+                    if (p.getMap().getRoomIds() != null) {
+                        p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
+                    }
+                    p.getMap().getScreen().newMapPixelCoords = p.getMap().getScreen().getMapPixelCoords(dx, dy);
+                }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
             return false;
@@ -242,7 +251,7 @@ public class GameScreen extends BaseScreen {
         }
 
         Portal p = this.map.getMap().getPortal((int) nx, (int) ny);
-        if (p != null && p.getMap() == this.map) {
+        if (p != null && p.getMap() == this.map) { //warp over portal on the same map ie ali-baba map has this
             Vector3 dv = p.getDest();
             if (this.map.getRoomIds() != null) {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];

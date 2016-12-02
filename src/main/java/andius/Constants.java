@@ -74,8 +74,8 @@ public interface Constants {
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        BRITTANIA("Castle of Brittania", "britannia.tmx", TILE_DIM),
-        BRITTANIA2("Castle of Brittania", "britannia2.tmx", TILE_DIM),
+        BRITANIA("Castle of Britania", "britania.tmx", TILE_DIM),
+        BRITANIA2("Castle of Britania", "britania2.tmx", TILE_DIM),
         ;
 
         private final String label;
@@ -174,7 +174,8 @@ public interface Constants {
                         }
                     }
                     this.baseMap.addPortal(pm, sx, sy,
-                            dx != null ? Integer.parseInt((String) dx) : -1, dy != null ? Integer.parseInt((String) dy) : -1,
+                            dx != null ? Integer.parseInt((String) dx) : -1, 
+                            dy != null ? Integer.parseInt((String) dy) : -1,
                             randoms.size() > 0 ? randoms : null);
                 }
             }

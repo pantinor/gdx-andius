@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="47">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="48">
  <properties>
   <property name="startX" value="15"/>
   <property name="startY" value="31"/>
@@ -281,17 +281,18 @@
   </object>
  </objectgroup>
  <objectgroup name="portals">
-  <object id="25" name="BRITANNIA2" type="portal" x="144" y="144" width="48" height="48">
+  <object id="25" name="BRITANIA2" type="portal" x="144" y="144" width="48" height="48">
    <properties>
-    <property name="wx" value="3"/>
-    <property name="wy" value="3"/>
+    <property name="dx" value="3"/>
+    <property name="dy" value="3"/>
    </properties>
   </object>
-  <object id="26" name="BRITANNIA2" type="portal" x="1296" y="144" width="48" height="48">
+  <object id="26" name="BRITANIA2" type="portal" x="1296" y="144" width="48" height="48">
    <properties>
-    <property name="wx" value="27"/>
-    <property name="wy" value="3"/>
+    <property name="dx" value="27"/>
+    <property name="dy" value="3"/>
    </properties>
   </object>
+  <object id="47" name="DUNGEON" type="portal" x="336" y="96" width="48" height="48"/>
  </objectgroup>
 </map>

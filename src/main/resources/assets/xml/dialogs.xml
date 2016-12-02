@@ -12,7 +12,7 @@
                yes="Good, seek fire in dungeon of time." />
     </conversation>
     
-    <conversation map="BRITTANIA" name="Joshua" pronoun="He" description="A concerned mage.">
+    <conversation map="BRITANIA" name="Joshua" pronoun="He" description="A concerned mage.">
         <topic query="job"
                phrase="Perhaps you can help about a theft." 
                question=""
@@ -55,7 +55,7 @@
                yes="Maybe you can find it." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Juliet" pronoun="She" description="A fair maiden.">
+    <conversation map="BRITANIA" name="Juliet" pronoun="She" description="A fair maiden.">
         <topic query="job"
                phrase="I can help thee." 
                question=""
@@ -98,7 +98,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Jester Twin" pronoun="He" description="A dancing jester">
+    <conversation map="BRITANIA" name="Jester Twin" pronoun="He" description="A dancing jester">
         <topic query="job"
                phrase="To entertain." 
                question=""
@@ -141,7 +141,7 @@
                yes="A shame, we do!" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="a guard" pronoun="He" description="A burly guard">
+    <conversation map="BRITANIA" name="a guard" pronoun="He" description="A burly guard">
         <topic query="job"
                phrase="I guard the castle and my liege!" 
                question=""
@@ -184,7 +184,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Le Chef" pronoun="He" description="A person with a white hat.">
+    <conversation map="BRITANIA" name="Le Chef" pronoun="He" description="A person with a white hat.">
         <topic query="job"
                phrase="I am the chef." 
                question=""
@@ -227,7 +227,7 @@
                yes="Then thou must be a spiritualist!" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="a reaper" pronoun="It" description="A reaper">
+    <conversation map="BRITANIA" name="a reaper" pronoun="It" description="A reaper">
         <topic query="job"
                phrase="I kill adventurers!" 
                question=""
@@ -270,7 +270,7 @@
                yes="Then thou must be stupid." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="a nameless prisoner" pronoun="He" description="A ragged soul.">
+    <conversation map="BRITANIA" name="a nameless prisoner" pronoun="He" description="A ragged soul.">
         <topic query="job"
                phrase="I have none." 
                question=""
@@ -313,7 +313,7 @@
                yes="I hope that this is true!" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Zorin" pronoun="He" description="A wise mage">
+    <conversation map="BRITANIA" name="Zorin" pronoun="He" description="A wise mage">
         <topic query="job"
                phrase="I am here to help thee." 
                question=""
@@ -356,7 +356,7 @@
                yes="Alas." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="a guard" pronoun="He" description="A burly guard">
+    <conversation map="BRITANIA" name="a guard" pronoun="He" description="A burly guard">
         <topic query="job"
                phrase="I guard the castle and all within." 
                question=""
@@ -399,7 +399,7 @@
                yes="He will aid you if you are in need!" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Water" pronoun="It" description="Water">
+    <conversation map="BRITANIA" name="Water" pronoun="It" description="Water">
         <topic query="job"
                phrase="I hold a secret." 
                question=""
@@ -442,7 +442,7 @@
                yes="Oh." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Shawn" pronoun="She" description="A shepherdess both strong and beautiful.">
+    <conversation map="BRITANIA" name="Shawn" pronoun="She" description="A shepherdess both strong and beautiful.">
         <topic query="job"
                phrase="I watch the water." 
                question=""
@@ -485,7 +485,7 @@
                yes="My towne was destroyed for its pride. The ruins lie on an isle at LAT K minutes J seconds, LONG L minutes L seconds !" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Seesha" pronoun="She" description="An injured fighter">
+    <conversation map="BRITANIA" name="Seesha" pronoun="She" description="An injured fighter">
         <topic query="job"
                phrase="I fight for my country." 
                question=""
@@ -528,7 +528,7 @@
                yes="Hmm." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Chuckles" pronoun="He" description="A bouncing jester">
+    <conversation map="BRITANIA" name="Chuckles" pronoun="He" description="A bouncing jester">
         <topic query="job"
                phrase="I am the royal jester" 
                question=""
@@ -571,7 +571,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="a guard" pronoun="He" description="A guard">
+    <conversation map="BRITANIA" name="a guard" pronoun="He" description="A guard">
         <topic query="job"
                phrase="A guard" 
                question=""
@@ -614,7 +614,7 @@
                yes="Then please leave at once!" />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Sheila" pronoun="She" description="A solemn ranger">
+    <conversation map="BRITANIA" name="Sheila" pronoun="She" description="A solemn ranger">
         <topic query="job"
                phrase="I search for the inner light." 
                question=""
@@ -657,7 +657,7 @@
                yes="The mantra are chants needed to focus thy thoughts while meditating." />
     </conversation>
 
-    <conversation map="BRITTANIA" name="Landri" pronoun="He" description="A grim shepherd">
+    <conversation map="BRITANIA" name="Landri" pronoun="He" description="A grim shepherd">
         <topic query="job"
                phrase="I am here to warn thee!" 
                question=""
@@ -700,7 +700,7 @@
                yes="That is good." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Joshua" pronoun="He" description="A wise mage.">
+    <conversation map="BRITANIA2" name="Joshua" pronoun="He" description="A wise mage.">
         <topic query="job"
                phrase="I can help." 
                question=""
@@ -743,7 +743,7 @@
                yes="Oh." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Juliet" pronoun="She" description="A fair maiden.">
+    <conversation map="BRITANIA2" name="Juliet" pronoun="She" description="A fair maiden.">
         <topic query="job"
                phrase="I can help thee." 
                question=""
@@ -786,7 +786,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Jester Twin" pronoun="He" description="A dancing jester">
+    <conversation map="BRITANIA2" name="Jester Twin" pronoun="He" description="A dancing jester">
         <topic query="job"
                phrase="To entertain." 
                question=""
@@ -829,7 +829,7 @@
                yes="A shame, we do!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="a guard" pronoun="He" description="A burly guard">
+    <conversation map="BRITANIA2" name="a guard" pronoun="He" description="A burly guard">
         <topic query="job"
                phrase="I guard the castle and my liege!" 
                question=""
@@ -872,7 +872,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Le Chef" pronoun="He" description="A person with a white hat.">
+    <conversation map="BRITANIA2" name="Le Chef" pronoun="He" description="A person with a white hat.">
         <topic query="job"
                phrase="I am the chef." 
                question=""
@@ -915,7 +915,7 @@
                yes="Then thou must be a spiritualist!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="a reaper" pronoun="It" description="A reaper">
+    <conversation map="BRITANIA2" name="a reaper" pronoun="It" description="A reaper">
         <topic query="job"
                phrase="I kill adventurers!" 
                question=""
@@ -958,7 +958,7 @@
                yes="Then thou must be stupid." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="a nameless prisoner" pronoun="He" description="A ragged soul.">
+    <conversation map="BRITANIA2" name="a nameless prisoner" pronoun="He" description="A ragged soul.">
         <topic query="job"
                phrase="I have none." 
                question=""
@@ -1001,7 +1001,7 @@
                yes="I hope that this is true!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Zorin" pronoun="He" description="A wise mage">
+    <conversation map="BRITANIA2" name="Zorin" pronoun="He" description="A wise mage">
         <topic query="job"
                phrase="I am here to help thee." 
                question=""
@@ -1044,7 +1044,7 @@
                yes="Alas." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="a guard" pronoun="He" description="A burly guard">
+    <conversation map="BRITANIA2" name="a guard" pronoun="He" description="A burly guard">
         <topic query="job"
                phrase="I guard the castle and all within." 
                question=""
@@ -1087,7 +1087,7 @@
                yes="He will aid you if you are in need!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Water" pronoun="It" description="Water">
+    <conversation map="BRITANIA2" name="Water" pronoun="It" description="Water">
         <topic query="job"
                phrase="I hold a secret." 
                question=""
@@ -1130,7 +1130,7 @@
                yes="Oh." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Shawn" pronoun="She" description="A shepherdess both strong and beautiful.">
+    <conversation map="BRITANIA2" name="Shawn" pronoun="She" description="A shepherdess both strong and beautiful.">
         <topic query="job"
                phrase="I watch the water." 
                question=""
@@ -1173,7 +1173,7 @@
                yes="My towne was destroyed for its pride. The ruins lie on an isle at LAT K minutes J seconds LONG L minutes L seconds!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Seesha" pronoun="She" description="An injured fighter">
+    <conversation map="BRITANIA2" name="Seesha" pronoun="She" description="An injured fighter">
         <topic query="job"
                phrase="I fight for my country." 
                question=""
@@ -1216,7 +1216,7 @@
                yes="Hmm." />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Chuckles" pronoun="He" description="A bouncing jester">
+    <conversation map="BRITANIA2" name="Chuckles" pronoun="He" description="A bouncing jester">
         <topic query="job"
                phrase="I am the royal jester" 
                question=""
@@ -1259,7 +1259,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="a guard" pronoun="He" description="A guard">
+    <conversation map="BRITANIA2" name="a guard" pronoun="He" description="A guard">
         <topic query="job"
                phrase="A guard" 
                question=""
@@ -1302,7 +1302,7 @@
                yes="Then please leave at once!" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Sir Rolinn" pronoun="He" description="A Solemn Guard">
+    <conversation map="BRITANIA2" name="Sir Rolinn" pronoun="He" description="A Solemn Guard">
         <topic query="job"
                phrase="I keep Order!" 
                question=""
@@ -1345,7 +1345,7 @@
                yes="" />
     </conversation>
 
-    <conversation map="CASTLE_OF_LORD_BRITISH_2" name="Boness" pronoun="He" description="A grim skeleton">
+    <conversation map="BRITANIA2" name="Boness" pronoun="He" description="A grim skeleton">
         <topic query="job"
                phrase="Searching for Humility!" 
                question=""

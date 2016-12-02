@@ -214,7 +214,7 @@
   <object id="13" name="CANT" type="portal" x="864" y="1320" width="24" height="24"/>
   <object id="14" name="CAVE" type="portal" x="648" y="1344" width="24" height="24"/>
   <object id="15" name="MENAGERIE" type="portal" x="744" y="1392" width="24" height="24"/>
-  <object id="16" name="BRITTANIA" type="portal" x="864" y="1392" width="24" height="24"/>
+  <object id="16" name="BRITANIA" type="portal" x="864" y="1392" width="24" height="24"/>
  </objectgroup>
  <objectgroup name="moongates">
   <object id="3" name="GATE_0" type="moongate" x="3528" y="1632" width="24" height="24">
