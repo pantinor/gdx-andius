@@ -78,7 +78,7 @@ public class StartScreen implements Screen, Constants {
                         mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
                     } else {
                         BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
-                        scr.newMapPixelCoords = scr.getMapPixelCoords(CTX.saveGame.wx, CTX.saveGame.wy);
+                        scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
                         Andius.mainGame.setScreen(scr);
 
 //                        for (int j = 0; j < 6; j++) {

@@ -25,7 +25,7 @@ public class SpellUtil {
     private static final Random rand = new XORShiftRandom();
 
     public static boolean spellCast(final BaseScreen screen, final Context context, final Spells spell,
-            final andius.objects.Actor caster, final andius.objects.Actor subject, final Direction dir) {
+            final andius.objects.Actor caster, final andius.objects.Actor target, final Direction dir) {
 
         if (!caster.getPlayer().canCast(spell)) {
             screen.log("Thou dost not have enough magic points!");
@@ -93,7 +93,9 @@ public class SpellUtil {
                     case BADIALMA:
                     case ZILWAN:
                     case BADIOS:
-                        ((CombatScreen) screen).animateMagicAttack(caster, dir, spell);
+                    case BADI:
+                    case MABADI:
+                        ((CombatScreen) screen).animateMagicAttack(caster, spell, dir, target);
                         break;
                     case MILWA:
                         break;
@@ -125,11 +127,7 @@ public class SpellUtil {
                         break;
                     case DI:
                         break;
-                    case BADI:
-                        break;
                     case MADI:
-                        break;
-                    case MABADI:
                         break;
                     case LOKTOFEIT:
                         break;

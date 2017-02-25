@@ -5,12 +5,14 @@
  */
 package andius;
 
-import andius.CombatScreen.SecondaryInputProcessor;
+import andius.objects.Item;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,14 +35,29 @@ public class CombatHud {
     private final Map<andius.objects.Actor, PlayerListing> map = new HashMap<>();
     private PlayerListing current;
     private final CombatScreen screen;
-    private final SecondaryInputProcessor sip;
+    private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
 
-    public CombatHud(CombatScreen screen, SecondaryInputProcessor sip, List<andius.objects.Actor> players) {
+    public CombatHud(CombatScreen screen, List<andius.objects.Actor> players) {
         this.screen = screen;
-        this.sip = sip;
+
+        FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
+        Texture tx = new Texture(fh);
+        int canvasGridWidth = tx.getWidth() / 44;
+        int canvasGridHeight = tx.getHeight() / 44;
+
+        TextureRegion[][] inv = TextureRegion.split(tx, 44, 44);
+        for (int row = 0; row < canvasGridHeight; row++) {
+            for (int col = 0; col < canvasGridWidth; col++) {
+                Image img = new Image(inv[row][col]);
+                img.setName("" + (row * canvasGridWidth + col));
+                invIcons[row * canvasGridWidth + col] = inv[row][col];
+            }
+        }
+
         for (andius.objects.Actor a : players) {
             map.put(a, new PlayerListing(a));
         }
+
     }
 
     public void set(andius.objects.Actor player, Stage stage) {
@@ -64,6 +81,13 @@ public class CombatHud {
         final Label l4;
         final andius.objects.Actor player;
         final CharacterRecord rec;
+        final Image weaponIcon;
+        final Image armorIcon;
+        final Image helmIcon;
+        final Image shieldIcon;
+        final Image glovesIcon;
+        final Image item1Icon;
+        final Image item2Icon;
 
         PlayerListing(andius.objects.Actor player) {
             this.player = player;
@@ -99,22 +123,40 @@ public class CombatHud {
             this.l3.setPosition(x + 60, 124 + 24);
             this.l4.setPosition(x + 60, 124 + 12);
 
-            x = getX() + 28;
+            x = getX() + 15;
             for (int i = 0; i < 5; i++) {
                 if (this.slotButtons[i] != null) {
                     this.slotButtons[i].setPosition(x, 44 + 3);
-                    this.slotTooltips[i].setPosition(x, 92);
+                    this.slotTooltips[i].setPosition(getX() + 15, 92);
                 }
                 x = x + 44 + 3;
             }
-            x = getX() + 28;
+            x = getX() + 15;
             for (int i = 0; i < 5; i++) {
                 if (this.slotButtons[i + 5] != null) {
                     this.slotButtons[i + 5].setPosition(x, 0);
-                    this.slotTooltips[i + 5].setPosition(x, 92);
+                    this.slotTooltips[i + 5].setPosition(getX() + 15, 92);
                 }
                 x = x + 44 + 3;
             }
+
+            x = getX() + 15;
+            int y = -200;
+            weaponIcon = image(rec.weapon, x, y + 96);
+            armorIcon = image(rec.armor, x + 48, y + 96);
+            helmIcon = image(rec.helm, x + 96, y + 96);
+            shieldIcon = image(rec.shield, x, y + 48);
+            glovesIcon = image(rec.glove, x + 48, y + 48);
+            item1Icon = image(rec.item1, x, y + 0);
+            item2Icon = image(rec.item2, x + 48, y + 0);
+
+            addActor(this.weaponIcon);
+            addActor(this.armorIcon);
+            addActor(this.helmIcon);
+            addActor(this.shieldIcon);
+            addActor(this.glovesIcon);
+            addActor(this.item1Icon);
+            addActor(this.item2Icon);
 
             this.setBounds(734, 534, 265, 177);
         }
@@ -133,6 +175,14 @@ public class CombatHud {
             this.l2.setText(d2);
             this.l3.setText(d3);
             this.l4.setText(d4);
+        }
+
+        private Image image(Item it, float x, float y) {
+            TextureRegion tr = (it == null ? invIcons[803] : invIcons[it.iconID]);
+            Image im = new Image(tr);
+            im.setX(x);
+            im.setY(y);
+            return im;
         }
 
     }

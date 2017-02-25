@@ -79,10 +79,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
+  <image source="uf_heroes.png" width="1920" height="672"/>
  </tileset>
- <tileset firstgid="1281" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
+ <tileset firstgid="1321" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
   <image source="uf_items.png" width="1056" height="1056"/>
  </tileset>
  <layer name="floor" width="32" height="32">
@@ -102,7 +102,7 @@
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARypVM5TE6iOpgW8oHMEhY8mlfz6i4k65uAD1CzDluAxaziUlaPlP/UAAJ80Ai4AEAAA
+   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARhZB9oFmEB1NC3gBZ0jKHw0qeTXX0zUMQcfoGYZtgSPWcOhrBwt/6kHAOH8/YUAEAAA
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">

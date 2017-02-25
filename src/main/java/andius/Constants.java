@@ -437,7 +437,7 @@ public interface Constants {
     };
 
     public enum SpellTarget {
-        PERSON, PARTY, MONSTER, MONSTER_GROUP, VARIABLE, NONE, CASTER
+        PERSON, PARTY, MONSTER, GROUP, VARIABLE, NONE, CASTER
     };
 
     public enum SpellArea {

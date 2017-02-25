@@ -60,7 +60,7 @@ public class GameScreen extends BaseScreen {
 
         mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;
 
-        newMapPixelCoords = getMapPixelCoords(this.map.getStartX(), this.map.getStartY());
+        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY());
 
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
@@ -128,20 +128,20 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
-    public Vector3 getMapPixelCoords(int x, int y) {
-        Vector3 v = new Vector3(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
-        return v;
+    public void setMapPixelCoords(Vector3 v, int x, int y) {
+        v.set(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
     }
 
     @Override
-    public Vector3 getCurrentMapCoords() {
-        Vector3 v = camera.unproject(new Vector3(TILE_DIM * 7, TILE_DIM * 8, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
-        return new Vector3(Math.round(v.x / TILE_DIM) - 3, ((mapPixelHeight - Math.round(v.y) - TILE_DIM) / TILE_DIM) - 0, 0);
+    public void setCurrentMapCoords(Vector3 v) {
+        Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 7, TILE_DIM * 8, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
+        v.set(Math.round(tmp.x / TILE_DIM) - 3, ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM) - 0, 0);
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        Vector3 v = getCurrentMapCoords();
+        Vector3 v = new Vector3();
+        setCurrentMapCoords(v);
 
         if (keycode == Keys.UP) {
             if (!preMove(v, Direction.NORTH)) {
@@ -177,7 +177,7 @@ public class GameScreen extends BaseScreen {
                     if (p.getMap().getRoomIds() != null) {
                         p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
                     }
-                    p.getMap().getScreen().newMapPixelCoords = p.getMap().getScreen().getMapPixelCoords(dx, dy);
+                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy);
                 }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
@@ -256,7 +256,7 @@ public class GameScreen extends BaseScreen {
             if (this.map.getRoomIds() != null) {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
             }
-            newMapPixelCoords = getMapPixelCoords((int) dv.x, (int) dv.y);
+            setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y);
             return false;
         }
 
@@ -282,7 +282,6 @@ public class GameScreen extends BaseScreen {
         } catch (PartyDeathException t) {
             partyDeath();
         }
-
     }
 
     @Override

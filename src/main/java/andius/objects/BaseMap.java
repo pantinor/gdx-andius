@@ -135,7 +135,8 @@ public class BaseMap {
                     break;
             }
 
-            Vector3 pixelPos = screen.getMapPixelCoords(p.getWx(), p.getWy() + 1);
+            Vector3 pixelPos = new Vector3();
+            screen.setMapPixelCoords(pixelPos, p.getWx(), p.getWy() + 1);
             p.setX(pixelPos.x);
             p.setY(pixelPos.y);
 

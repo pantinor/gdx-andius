@@ -7,9 +7,7 @@ package andius.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import utils.Utils;
 
 /**
  *
@@ -146,9 +144,10 @@ public enum Icons {
     ELVEN_ARCHER_GREEN,
     ELVEN_SWORDSMAN_BLUE,
     ELVEN_WIZARD_BLUE,
-    ELVEN_ARCHER_BLUE,;
+    ELVEN_ARCHER_BLUE,
+    JESTER;
 
-    private static final Icons[] LOOKUP_TABLE = new Icons[520];
+    private static final Icons[] LOOKUP_TABLE = new Icons[560];
     public static TextureAtlas ATLAS;
 
     public static void init() {

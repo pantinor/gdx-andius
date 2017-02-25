@@ -3642,3 +3642,31 @@ ZOMBIE_GREEN
   orig: 48, 48
   offset: 0, 0
   index: 3
+JESTER
+  rotate: false
+  xy: 0, 624
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 0
+JESTER
+  rotate: false
+  xy: 48, 624
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 1
+JESTER
+  rotate: false
+  xy: 96, 624
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 2
+JESTER
+  rotate: false
+  xy: 144, 624
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 3

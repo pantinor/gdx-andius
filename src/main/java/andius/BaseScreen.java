@@ -26,25 +26,29 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     protected Random rand = new XORShiftRandom();
 
     protected int mapPixelHeight;
-    public Vector3 newMapPixelCoords;
+    public final Vector3 newMapPixelCoords = new Vector3();
 
-    protected Viewport viewport = new ScreenViewport();
+    protected final Viewport viewport = new ScreenViewport();
 
     protected Camera camera;
 
-    protected Vector2 currentMousePos;
+    protected final Vector2 currentMousePos = new Vector2();
 
     protected int currentRoomId = 0;
 
     /**
      * translate map tile coords to world pixel coords
+     * @param v
+     * @param x
+     * @param y
      */
-    public abstract Vector3 getMapPixelCoords(int x, int y);
+    public abstract void setMapPixelCoords(Vector3 v, int x, int y);
 
     /**
      * get the map coords at the camera center
+     * @param v
      */
-    public abstract Vector3 getCurrentMapCoords();
+    public abstract void setCurrentMapCoords(Vector3 v);
     
     public abstract void log(String t);
     
@@ -88,7 +92,8 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 try {
                     Sounds.play(Sound.TRIGGER);
-                    Vector3 v = Map.WORLD.getScreen().getCurrentMapCoords();
+                    Vector3 v = new Vector3();
+                    Map.WORLD.getScreen().setCurrentMapCoords(v);
                     CTX.saveGame.map = Map.WORLD.ordinal();
                     CTX.saveGame.wx = (int)v.x;
                     CTX.saveGame.wy = (int)v.y;
@@ -115,7 +120,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        currentMousePos = new Vector2(screenX, screenY);
+        currentMousePos.set(screenX, screenY);
         return false;
     }
 

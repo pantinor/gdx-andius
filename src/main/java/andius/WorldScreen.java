@@ -57,7 +57,7 @@ public class WorldScreen extends BaseScreen {
 
         mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
 
-        newMapPixelCoords = getMapPixelCoords(this.map.getStartX(), this.map.getStartY());
+        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY());
 
     }
 
@@ -138,15 +138,14 @@ public class WorldScreen extends BaseScreen {
     }
 
     @Override
-    public Vector3 getMapPixelCoords(int x, int y) {
-        Vector3 v = new Vector3(x * WORLD_TILE_DIM, mapPixelHeight - y * WORLD_TILE_DIM, 0);
-        return v;
+    public void setMapPixelCoords(Vector3 v, int x, int y) {
+        v.set(x * WORLD_TILE_DIM, mapPixelHeight - y * WORLD_TILE_DIM, 0);
     }
 
     @Override
-    public Vector3 getCurrentMapCoords() {
-        Vector3 v = camera.unproject(new Vector3(WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
-        return new Vector3(Math.round(v.x / WORLD_TILE_DIM) - 6, ((mapPixelHeight - Math.round(v.y) - WORLD_TILE_DIM) / WORLD_TILE_DIM) - 3, 0);
+    public void setCurrentMapCoords(Vector3 v) {
+        Vector3 tmp = camera.unproject(new Vector3(WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
+        v.set(Math.round(tmp.x / WORLD_TILE_DIM) - 6, ((mapPixelHeight - Math.round(tmp.y) - WORLD_TILE_DIM) / WORLD_TILE_DIM) - 3, 0);
     }
 
     public class GameTimer implements Runnable {
@@ -168,7 +167,8 @@ public class WorldScreen extends BaseScreen {
 
     @Override
     public boolean keyUp(int keycode) {
-        Vector3 v = getCurrentMapCoords();
+        Vector3 v = new Vector3();
+        setCurrentMapCoords(v);
 
         if (keycode == Keys.UP) {
             if (!preMove(v, Direction.NORTH)) {

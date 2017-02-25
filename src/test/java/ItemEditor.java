@@ -95,8 +95,8 @@ public class ItemEditor extends InputAdapter implements ApplicationListener {
         );
 
         try {
-            InputStream is = this.getClass().getResourceAsStream("/items-json.txt");
-            String json = IOUtils.toString(new FileInputStream(new File("items-json.txt")));
+            InputStream is = this.getClass().getResourceAsStream("assets/json/items-json.txt");
+            String json = IOUtils.toString(is);//new FileInputStream(new File("assets/json/items-json.txt")));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
