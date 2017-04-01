@@ -2,119 +2,46 @@
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
 import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.table.TableColumn;
-import andius.Constants.Map;
 import andius.objects.Conversations.Topic;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.DefaultListSelectionModel;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Paul
- */
 public class DialogTool extends javax.swing.JFrame {
 
-    public class ConversationTableItemModel extends AbstractTableModel {
+    public class ConversationNode extends DefaultMutableTreeNode {
 
-        private Conversations convs;
-
-        public ConversationTableItemModel(Conversations convs) {
-            this.convs = convs;
+        public ConversationNode(Conversation conv) {
+            super(conv);
         }
 
         @Override
-        public int getRowCount() {
-            return this.convs.getConversations().size();
+        public Conversation getUserObject() {
+            return (Conversation) super.getUserObject();
         }
 
         @Override
-        public boolean isCellEditable(int row, int column) {
-            return true;
-        }
-
-        @Override
-        public int getColumnCount() {
-            return 4;
-        }
-
-        @Override
-        public void setValueAt(java.lang.Object v, int rowIndex, int columnIndex) {
-
-            String s = (String) v;
-
-            Conversation c = this.convs.getConversations().get(rowIndex);
-            switch (columnIndex) {
-                case 0:
-                    c.setMap(Map.valueOf(s));
-                    break;
-                case 1:
-                    c.setName(s);
-                    break;
-                case 2:
-                    c.setPronoun(s);
-                    break;
-                case 3:
-                    c.setDescription(s);
-                    break;
-            }
-
-        }
-
-        @Override
-        public String getColumnName(int columnIndex) {
-            switch (columnIndex) {
-                case 0:
-                    return "MAP";
-                case 1:
-                    return "NAME";
-                case 2:
-                    return "PRONOUN";
-                case 3:
-                    return "DESCRIPTION";
-            }
-            return "";
-        }
-
-        @Override
-        public Class<?> getColumnClass(int columnIndex) {
-            return String.class;
-        }
-
-        @Override
-        public java.lang.Object getValueAt(int rowIndex, int columnIndex) {
-
-            Conversation c = this.convs.getConversations().get(rowIndex);
-            switch (columnIndex) {
-                case 0:
-                    return c.getMap();
-                case 1:
-                    return c.getName();
-                case 2:
-                    return c.getPronoun();
-                case 3:
-                    return c.getDescription();
-            }
-
-            return null;
+        public String toString() {
+            Conversation c = getUserObject();
+            return c.getName() + " - " + c.getPronoun() + " - " + c.getDescription();
         }
 
     }
@@ -125,6 +52,10 @@ public class DialogTool extends javax.swing.JFrame {
 
         private void setTopics(List<Topic> topics) {
             this.topics = topics;
+        }
+
+        private List<Topic> getTopics() {
+            return this.topics;
         }
 
         @Override
@@ -217,7 +148,6 @@ public class DialogTool extends javax.swing.JFrame {
     }
 
     private Conversations convs = null;
-    private ConversationTableItemModel cm = null;
     private TopicTableItemModel tm = null;
 
     public DialogTool() {
@@ -226,56 +156,106 @@ public class DialogTool extends javax.swing.JFrame {
             this.convs = Conversations.init();
             Collections.sort(this.convs.getConversations());
 
+            Set<String> maps = new TreeSet<>();
+
             Iterator<Conversation> iter = this.convs.getConversations().iterator();
             while (iter.hasNext()) {
                 Conversation c = iter.next();
                 if (c.getMap() == null) {
-                    c.setMap(Map.LLECHY);
+                    c.setMap("UNDEFINED");
                 }
                 if (c.getName() == null || c.getName().length() < 1) {
                     iter.remove();
                 }
+                maps.add(c.getMap());
             }
 
-            this.cm = new ConversationTableItemModel(this.convs);
-            this.convTable.setModel(cm);
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("Map");
+            for (String m : maps) {
+                DefaultMutableTreeNode mapNode = new DefaultMutableTreeNode(m.toString());
+                Iterator<Conversation> it = this.convs.getConversations().iterator();
+                while (it.hasNext()) {
+                    Conversation c = it.next();
+                    if (m.equals(c.getMap())) {
+                        ConversationNode convNode = new ConversationNode(c);
+                        mapNode.add(convNode);
+                    }
+                }
+                root.add(mapNode);
+            }
+            this.jTree1.setModel(new DefaultTreeModel(root));
+            this.jTree1.setRootVisible(false);
 
             this.tm = new TopicTableItemModel();
             tm.setTopics(this.convs.getConversations().get(0).getTopics());
             this.topicTable.setModel(tm);
 
-            TableColumn mapCol = this.convTable.getColumnModel().getColumn(0);
-            JComboBox comboBox = new JComboBox();
-            for (Map m : Map.values()) {
-                comboBox.addItem(m.toString());
-            }
-            mapCol.setCellEditor(new DefaultCellEditor(comboBox));
-
-            this.convTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
+            this.jTree1.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
                 @Override
-                public void valueChanged(ListSelectionEvent lse) {
-                    if (!lse.getValueIsAdjusting()) {
-                        DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse.getSource();
-                        int row = dlsm.isSelectedIndex(lse.getLastIndex()) ? lse.getLastIndex() : lse.getFirstIndex();
-                        if (row >= 0) {
-                            Conversation c = DialogTool.this.convs.getConversations().get(row);
-                            if (c != null) {
-                                DialogTool.this.tm.setTopics(c.getTopics());
-                                DialogTool.this.tm.fireTableDataChanged();
-                            }
+                public void valueChanged(TreeSelectionEvent e) {
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+                    if (n instanceof ConversationNode) {
+                        ConversationNode cn = (ConversationNode) n;
+                        Conversation c = cn.getUserObject();
+                        if (c != null) {
+                            DialogTool.this.tm.setTopics(c.getTopics());
+                            DialogTool.this.tm.fireTableDataChanged();
+
+                            DialogTool.this.jTextFieldName.setText(c.getName());
+                            DialogTool.this.jTextFieldPronoun.setText(c.getPronoun());
+                            DialogTool.this.jTextFieldDesc.setText(c.getDescription());
                         }
                     }
                 }
             });
 
-            this.convTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-            this.convTable.getColumnModel().getColumn(0).setMaxWidth(500);
-            this.convTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-            this.convTable.getColumnModel().getColumn(1).setMaxWidth(500);
-            this.convTable.getColumnModel().getColumn(2).setPreferredWidth(100);
-            this.convTable.getColumnModel().getColumn(2).setMaxWidth(100);
-            this.convTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+            DialogTool.this.jTextFieldName.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
+                    if (n instanceof ConversationNode) {
+                        ConversationNode cn = (ConversationNode) n;
+                        Conversation c = cn.getUserObject();
+                        if (c != null) {
+                            c.setName(DialogTool.this.jTextFieldName.getText());
+                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+                            m.nodeChanged(n);
+                        }
+                    }
+                }
+            });
+
+            DialogTool.this.jTextFieldPronoun.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
+                    if (n instanceof ConversationNode) {
+                        ConversationNode cn = (ConversationNode) n;
+                        Conversation c = cn.getUserObject();
+                        if (c != null) {
+                            c.setPronoun(DialogTool.this.jTextFieldPronoun.getText());
+                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+                            m.nodeChanged(n);
+                        }
+                    }
+                }
+            });
+
+            DialogTool.this.jTextFieldDesc.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
+                    if (n instanceof ConversationNode) {
+                        ConversationNode cn = (ConversationNode) n;
+                        Conversation c = cn.getUserObject();
+                        if (c != null) {
+                            c.setDescription(DialogTool.this.jTextFieldDesc.getText());
+                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+                            m.nodeChanged(n);
+                        }
+                    }
+                }
+            });
 
             this.topicTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             this.topicTable.getColumnModel().getColumn(0).setMaxWidth(100);
@@ -293,9 +273,6 @@ public class DialogTool extends javax.swing.JFrame {
             textField.setFont(new Font("Tahoma", 0, 16));
             textField.setBorder(new LineBorder(Color.BLACK));
             DefaultCellEditor dce = new DefaultCellEditor(textField);
-            for (int x = 1; x < 4; x++) {
-                this.convTable.getColumnModel().getColumn(x).setCellEditor(dce);
-            }
             for (int x = 0; x < 5; x++) {
                 this.topicTable.getColumnModel().getColumn(x).setCellEditor(dce);
             }
@@ -317,14 +294,17 @@ public class DialogTool extends javax.swing.JFrame {
     private void initComponents() {
 
         saveBtn = new javax.swing.JButton();
-        conversationPanel = new javax.swing.JScrollPane();
-        convTable = new javax.swing.JTable();
         topicPanel = new javax.swing.JScrollPane();
         topicTable = new javax.swing.JTable();
         removeTopicBtn = new javax.swing.JButton();
         addTopicBtn = new javax.swing.JButton();
         addPersonBtn = new javax.swing.JButton();
         removePersonBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jTextFieldName = new javax.swing.JTextField();
+        jTextFieldPronoun = new javax.swing.JTextField();
+        jTextFieldDesc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -334,26 +314,6 @@ public class DialogTool extends javax.swing.JFrame {
                 saveBtnActionPerformed(evt);
             }
         });
-
-        convTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        convTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "MAP", "NAME", "PRONOUN", "DESCRIPTION"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        convTable.setRowHeight(32);
-        conversationPanel.setViewportView(convTable);
 
         topicTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         topicTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -403,33 +363,50 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Map");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jTree1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(addTopicBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeTopicBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveBtn))
-                    .addComponent(topicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                    .addComponent(conversationPanel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addPersonBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removePersonBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(topicPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(addPersonBtn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(removePersonBtn))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldName)
+                                .addComponent(jTextFieldPronoun)
+                                .addComponent(jTextFieldDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(conversationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPronoun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPersonBtn)
@@ -448,19 +425,50 @@ public class DialogTool extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonBtnActionPerformed
-        // TODO add your handling code here:
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        if (n != null) {
+            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+
+            Conversation conv = new Conversation();
+            conv.getTopics().add(new Topic("name", "", "", "", ""));
+            conv.getTopics().add(new Topic("job", "", "", "", ""));
+            conv.getTopics().add(new Topic("health", "", "", "", ""));
+            conv.getTopics().add(new Topic("look", "", "", "", ""));
+            conv.getTopics().add(new Topic("give", "", "", "", ""));
+
+            if (n instanceof ConversationNode) {
+                DefaultMutableTreeNode mapNode = (DefaultMutableTreeNode) n.getParent();
+                ConversationNode convNode = new ConversationNode(conv);
+                model.insertNodeInto(convNode, mapNode, mapNode.getChildCount());
+            } else {
+                ConversationNode convNode = new ConversationNode(conv);
+                model.insertNodeInto(convNode, n, n.getChildCount());
+            }
+        }
     }//GEN-LAST:event_addPersonBtnActionPerformed
 
     private void removePersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePersonBtnActionPerformed
-        // TODO add your handling code here:
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        if (n != null) {
+            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+            if (n instanceof ConversationNode) {
+                DefaultMutableTreeNode mapNode = (DefaultMutableTreeNode) n.getParent();
+                model.removeNodeFromParent(n);
+            }
+        }
     }//GEN-LAST:event_removePersonBtnActionPerformed
 
     private void addTopicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTopicBtnActionPerformed
-        // TODO add your handling code here:
+        this.tm.getTopics().add(new Topic());
+        this.tm.fireTableDataChanged();
     }//GEN-LAST:event_addTopicBtnActionPerformed
 
     private void removeTopicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTopicBtnActionPerformed
-        // TODO add your handling code here:
+        int row = this.topicTable.getSelectedRow();
+        if (row >= 0) {
+            this.tm.getTopics().remove(row);
+            this.tm.fireTableDataChanged();
+        }
     }//GEN-LAST:event_removeTopicBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -512,8 +520,11 @@ public class DialogTool extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPersonBtn;
     private javax.swing.JButton addTopicBtn;
-    private javax.swing.JTable convTable;
-    private javax.swing.JScrollPane conversationPanel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldDesc;
+    private javax.swing.JTextField jTextFieldName;
+    private javax.swing.JTextField jTextFieldPronoun;
+    private javax.swing.JTree jTree1;
     private javax.swing.JButton removePersonBtn;
     private javax.swing.JButton removeTopicBtn;
     private javax.swing.JButton saveBtn;

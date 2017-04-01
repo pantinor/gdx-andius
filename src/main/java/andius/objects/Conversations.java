@@ -1,6 +1,5 @@
 package andius.objects;
 
-import andius.Constants;
 import andius.Constants.Map;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,8 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "conversations")
 public class Conversations {
@@ -32,10 +29,10 @@ public class Conversations {
     public List<Conversation> getConversations() {
         return convs;
     }
-    
+
     public Conversation get(Map map, String name) {
-        for(Conversation c : this.convs) {
-            if (c.map == map && c.name.equalsIgnoreCase(name)) {
+        for (Conversation c : this.convs) {
+            if (map.toString().equals(c.map) && c.name.equalsIgnoreCase(name)) {
                 return c;
             }
         }
@@ -47,18 +44,17 @@ public class Conversations {
     }
 
     @XmlRootElement(name = "conversation")
-    @XmlType (propOrder={"map","name","pronoun","description","topics"})
+    @XmlType(propOrder = {"map", "name", "pronoun", "description", "topics"})
     public static class Conversation implements Comparable {
 
-        private Constants.Map map;
+        private String map;
         private String name;
         private String pronoun;
         private String description;
         private List<Topic> topics = new ArrayList<>();
 
         @XmlAttribute
-        @XmlJavaTypeAdapter(MapAdapter.class)
-        public Constants.Map getMap() {
+        public String getMap() {
             return map;
         }
 
@@ -82,7 +78,7 @@ public class Conversations {
             return topics;
         }
 
-        public void setMap(Constants.Map map) {
+        public void setMap(String map) {
             this.map = map;
         }
 
@@ -127,34 +123,32 @@ public class Conversations {
         }
 
         @Override
-        public int compareTo(Object obj) {
-            if (this.map == null || obj == null) {
-                return (this.map == null) ? -1 : 1;
+        public int compareTo(Object o) {
+            Conversation c = (Conversation) o;
+            if (this.map.equals(c.getMap())) {
+                return this.name.compareTo(c.getName());
+            } else {
+                return this.map.compareTo(c.getMap());
             }
-            if (this.map == null && obj == null) {
-                return 0;
-            }
-            return this.map.toString().compareToIgnoreCase("" + obj);
         }
 
-    }
-
-    public static class MapAdapter extends XmlAdapter<String, Constants.Map> {
-
-        @Override
-        public String marshal(Constants.Map t) {
-            return t.toString();
-        }
-
-        @Override
-        public Constants.Map unmarshal(String val) {
-            return Constants.Map.valueOf(val);
-        }
     }
 
     @XmlRootElement(name = "topic")
-    @XmlType (propOrder={"query","phrase","question","yesResponse","noResponse"})
+    @XmlType(propOrder = {"query", "phrase", "question", "yesResponse", "noResponse"})
     public static class Topic {
+
+        public Topic() {
+
+        }
+
+        public Topic(String query, String phrase, String question, String yesResponse, String noResponse) {
+            this.query = query;
+            this.phrase = phrase;
+            this.question = question;
+            this.yesResponse = yesResponse;
+            this.noResponse = noResponse;
+        }
 
         private String query;
         private String phrase;

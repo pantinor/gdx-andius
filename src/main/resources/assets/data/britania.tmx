@@ -102,7 +102,7 @@
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBARhZB9oFmEB1NC3gBZ0jKHw0qeTXX0zUMQcfoGYZtgSPWcOhrBwt/6kHAOH8/YUAEAAA
+   H4sIAAAAAAAAC2NgGNrAlYU65kQyU8ec4QioHTa0DmvJYRqXQyWN+tIoTw4V/4+CUTAKaAdGy4XBAf4wDbQLMIHqaFrACzpHUPhoUsmvv+iQzqlZhi3BY9ZwKCtHy3/qAQDojoozABAAAA==
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
