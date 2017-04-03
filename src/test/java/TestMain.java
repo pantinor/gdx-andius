@@ -1,6 +1,7 @@
 
 import andius.Andius;
 import andius.Constants;
+import andius.Context;
 import andius.ConversationDialog;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -33,7 +34,7 @@ public class TestMain extends Game {
             TestScreen t = new TestScreen();
             setScreen(t);
 
-            ConversationDialog d = new ConversationDialog(null, Andius.CONVERSATIONS.getConversations().get(2));
+            ConversationDialog d = new ConversationDialog(new Context(),null, Andius.CONVERSATIONS.get("Bordermarch", "Dupre"));
             d.show(t.stage);
 
         } catch (Exception e) {

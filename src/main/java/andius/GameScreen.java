@@ -207,9 +207,9 @@ public class GameScreen extends BaseScreen {
                     mainGame.setScreen(rs);
                     return false;
                 } else {
-                    Conversation c = Andius.CONVERSATIONS.get(this.map, a.getName());
+                    Conversation c = Andius.CONVERSATIONS.get(this.map.getLabel(), a.getName());
                     if (c != null) {
-                        new ConversationDialog(this, c).show(this.stage);
+                        new ConversationDialog(CTX, this, c).show(this.stage);
                     }
                 }
             }

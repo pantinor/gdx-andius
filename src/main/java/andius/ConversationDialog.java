@@ -10,6 +10,7 @@ package andius;
  * @author Paul
  */
 import andius.objects.Conversations.Conversation;
+import andius.objects.Conversations.Label;
 import andius.objects.Conversations.Topic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -26,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
+import java.util.TreeMap;
 import utils.LogScrollPane;
 
 public class ConversationDialog extends Window implements Constants {
@@ -36,11 +38,11 @@ public class ConversationDialog extends Window implements Constants {
     Actor previousKeyboardFocus, previousScrollFocus;
     private final FocusListener focusListener;
     private final GameScreen screen;
-    private final Conversation conversation;
+    private final Conversation conv;
     private final Table internalTable;
     private final TextField input;
     private final LogScrollPane scrollPane;
-    private Topic previousTopic;
+    private Label previousLabel;
 
     protected InputListener ignoreTouchDown = new InputListener() {
         @Override
@@ -50,10 +52,10 @@ public class ConversationDialog extends Window implements Constants {
         }
     };
 
-    public ConversationDialog(GameScreen screen, Conversation conversation) {
+    public ConversationDialog(Context ctx, GameScreen screen, Conversation conv) {
         super("", Andius.skin.get("dialog", Window.WindowStyle.class));
         this.screen = screen;
-        this.conversation = conversation;
+        this.conv = conv;
 
         setSkin(Andius.skin);
         setModal(true);
@@ -81,32 +83,47 @@ public class ConversationDialog extends Window implements Constants {
                     }
 
                     String query = tf.getText();
-                    Topic t = conversation.matchTopic(query);
-                    if (t != null) {
 
-                        if (t.getQuery() != null && t.getQuery().equals("join")) {
+                    if (previousLabel != null) {
 
+                        Topic lt = previousLabel.matchTopic(query);
+                        if (lt != null) {
+                            Wrapper w = new Wrapper(lt.getPhrase());
+                            recurseLabels(w);
+                            previousLabel = w.active;
+                            scrollPane.add(w.phrase);
                         } else {
 
-                            scrollPane.add(t.getPhrase());
-                            if (t.getQuestion() != null && t.getQuestion().length() > 0) {
-                                scrollPane.add(t.getQuestion());
+                            lt = previousLabel.matchTopic("default");
+                            if (lt != null) {
+                                Wrapper w = new Wrapper(lt.getPhrase());
+                                recurseLabels(w);
+                                previousLabel = w.active;
+                                scrollPane.add(w.phrase);
+                            } else {
+                                scrollPane.add("That I cannot help thee with.");
+                                previousLabel = null;
                             }
+                            
                         }
 
-                        previousTopic = t;
+                    } else if (query.contains("name")) {
+
+                        scrollPane.add(conv.getName());
+
                     } else {
 
-                        if (previousTopic != null && previousTopic.getQuestion() != null) {
-                            if (query.toLowerCase().contains("y")) {
-                                scrollPane.add(previousTopic.getYesResponse());
-                            } else {
-                                scrollPane.add(previousTopic.getNoResponse());
-                            }
+                        Topic t = conv.matchTopic(query);
+                        if (t != null) {
+                            Wrapper w = new Wrapper(t.getPhrase());
+                            recurseLabels(w);
+                            previousLabel = w.active;
+                            scrollPane.add(w.phrase);
                         } else {
+
                             scrollPane.add("That I cannot help thee with.");
+
                         }
-                        previousTopic = null;
                     }
 
                     tf.setText("");
@@ -144,7 +161,56 @@ public class ConversationDialog extends Window implements Constants {
             }
         };
 
-        scrollPane.add("You meet " + this.conversation.getDescription().toLowerCase() + ".");
+        Topic greeting = conv.matchTopic("greeting");
+        if (greeting != null) {
+            Wrapper w = new Wrapper(greeting.getPhrase());
+            recurseLabels(w);
+            previousLabel = w.active;
+            scrollPane.add(w.phrase);
+        }
+        
+        if (conv.getDescription() != null) {
+            Wrapper w = new Wrapper(conv.getDescription());
+            recurseLabels(w);
+            previousLabel = w.active;
+            scrollPane.add("You meet " + w.phrase);
+        }
+
+    }
+
+    private static class Wrapper {
+
+        String phrase;
+        Label active;
+
+        public Wrapper(String phrase) {
+            this.phrase = phrase;
+        }
+    }
+
+    private void recurseLabels(Wrapper w) {
+
+        if (w.phrase.contains("%") && this.conv.getLabels() != null) {
+
+            java.util.Map<Integer, Label> order = new TreeMap<>();
+
+            for (Label label : this.conv.getLabels()) {
+                int x = w.phrase.indexOf("%" + label.getId() + "%");
+                if (x >= 0) {
+                    order.put(x, label);
+                }
+            }
+
+            if (!order.isEmpty()) {
+
+                for (Label l : order.values()) {
+                    w.phrase = w.phrase.replace("%" + l.getId() + "%", l.getQuery());
+                    w.active = l;
+                }
+
+                recurseLabels(w);
+            }
+        }
 
     }
 
@@ -171,7 +237,7 @@ public class ConversationDialog extends Window implements Constants {
         stage.addActor(this);
         stage.setKeyboardFocus(input);
         stage.setScrollFocus(this);
-                
+
         Gdx.input.setInputProcessor(stage);
 
         Action action = sequence(Actions.alpha(0), Actions.fadeIn(0.4f, Interpolation.fade));

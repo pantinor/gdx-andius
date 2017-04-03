@@ -7,6 +7,7 @@ import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.DEATHMSGS;
 import static andius.Constants.TILE_DIM;
+import andius.objects.CursorActor;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -25,10 +26,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -58,6 +56,7 @@ import utils.Utils;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CombatScreen extends BaseScreen {
 
@@ -613,95 +612,6 @@ public class CombatScreen extends BaseScreen {
         }
     }
 
-    private boolean rangedAttackAt(AttackVector target, andius.objects.Actor attacker) throws PartyDeathException {
-
-//        PartyMember defender = null;
-//        for (PartyMember p : party.getMembers()) {
-//            if (p.combatCr.currentX == target.x && p.combatCr.currentY == target.y) {
-//                defender = p;
-//                break;
-//            }
-//        }
-//
-//        if (defender == null) {
-//            return false;
-//        }
-//
-//        AttackResult res = (this.contextMap == Maps.EXODUS && defender.getPlayer().armor != ArmorType.EXOTIC ? AttackResult.HIT : Utils.attackHit(attacker, defender));
-//
-//        TileEffect effect = TileEffect.NONE;
-//        Color col = Color.WHITE;
-//
-//        if (attacker.rangedAttackIs("poison_field")) {
-//            effect = TileEffect.POISON;
-//            col = Color.GREEN;
-//        } else if (attacker.rangedAttackIs("magic_flash")) {
-//            col = Color.CYAN;
-//        } else if (attacker.rangedAttackIs("fire_field")) {
-//            effect = TileEffect.FIRE;
-//            col = Color.RED;
-//        } else if (attacker.rangedAttackIs("energy_field")) {
-//            effect = TileEffect.ELECTRICITY;
-//            col = Color.BLUE;
-//        } else if (attacker.rangedAttackIs("rocks")) {
-//            col = Color.BROWN;
-//        }
-//
-//        final ProjectileActor p = new ProjectileActor(this, col, attacker.currentX, attacker.currentY, res);
-//        Vector3 v = getMapPixelCoords(defender.combatCr.currentX, defender.combatCr.currentY);
-//        p.addAction(sequence(moveTo(v.x, v.y, .3f), new Action() {
-//            public boolean act(float delta) {
-//                switch (p.res) {
-//                    case HIT:
-//                        p.resultTexture = Exodus.hitTile;
-//                        Sounds.play(Sound.NPC_MAGIC_STRUCK);
-//                        wounded = true;
-//                        break;
-//                    case MISS:
-//                        p.resultTexture = Exodus.missTile;
-//                        Sounds.play(Sound.EVADE);
-//                        break;
-//                }
-//                return true;
-//            }
-//        }, fadeOut(.2f), removeActor(p)));
-//
-//        stage.addActor(p);
-//
-//        switch (effect) {
-//            case ELECTRICITY:
-//                Sounds.play(Sound.LIGHTNING);
-//                log("Electrified!");
-//                Utils.dealDamage(attacker, defender);
-//                break;
-//            case FIRE:
-//            case LAVA:
-//                Sounds.play(Sound.FIREBALL);
-//                log("Fiery Hit!");
-//                Utils.dealDamage(attacker, defender);
-//                break;
-//            case NONE:
-//                break;
-//            case POISON:
-//            case POISONFIELD:
-//                if (rand.nextInt(2) == 0 && defender.getPlayer().status != StatusType.POISONED) {
-//                    Sounds.play(Sound.POISON_EFFECT);
-//                    log("Poisoned!");
-//                    defender.getPlayer().status = StatusType.POISONED;
-//                }
-//                break;
-//            default:
-//                break;
-//
-//        }
-//
-//        if (res == AttackResult.HIT) {
-//            Utils.dealDamage(attacker, defender);
-//        }
-//        return res == AttackResult.HIT;
-        return false;
-    }
-
     @Override
     public void partyDeath() {
         //not used here
@@ -714,33 +624,19 @@ public class CombatScreen extends BaseScreen {
 
         Gdx.input.setInputProcessor(null);
 
-//        if (creature.negates()) {
-//            context.setAura(AuraType.NEGATE, 2);
-//        }
-        CombatAction action = CombatAction.ATTACK;
-//        if (creature.getTeleports() && rand.nextInt(100) <= 25) {
-//            action = CombatAction.TELEPORT;
-//        } else if (creature.getRanged() && rand.nextInt(100) <= 33) {
-//            action = CombatAction.RANGED;
-//        } else {
-//            action = CombatAction.ATTACK;
-//        }
-
-        DistanceWrapper dist = new DistanceWrapper(0);
-        final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist, action == CombatAction.RANGED);
+        AtomicInteger dist = new AtomicInteger(0);
+        final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist);
         if (target == null) {
             return true;
         }
 
-        if (action == CombatAction.ATTACK && dist.getVal() > 1) {
+        CombatAction action = CombatAction.ATTACK;
+        if (action == CombatAction.ATTACK && dist.get() > 1) {
             action = CombatAction.ADVANCE;
         }
 
-//        if (creature.getCamouflage() && !hideOrShow(creature)) {
-//            return true;
-//        }
         switch (action) {
-            case ATTACK: {
+            case ATTACK:
                 Sounds.play(Sound.NPC_ATTACK);
                 AttackResult res = Utils.attackHit(creature.getMonster(), target.getPlayer());
                 if (res == AttackResult.HIT) {
@@ -772,58 +668,15 @@ public class CombatScreen extends BaseScreen {
                     log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
                 }
                 break;
-            }
-
-//            case TELEPORT: {//only wisp teleports
-//                boolean valid = false;
-//                int rx = 0, ry = 0, count = 0;
-//                while (!valid && count < 5) {
-//                    rx = rand.nextInt(combatMap.getWidth());
-//                    ry = rand.nextInt(combatMap.getHeight());
-//                    Tile t = combatMap.getTile(rx, ry);
-//                    if (t != null) {
-//                        valid = true;
-//                        TileRule rule = t.getRule();
-//                        if (rule != null && rule.has(TileAttrib.creatureunwalkable)) {
-//                            valid = false;
-//                        }
-//                    }
-//                    count++;
-//                }
-//                if (valid) {
-//                    moveCreature(action, creature, rx, ry);
-//                }
-//                break;
-//            }
-//            case RANGED: {
-//
-//                // figure out which direction to fire the weapon
-//                int dirmask = Utils.getRelativeDirection(MapBorderBehavior.fixed, combatMap.getWidth(), combatMap.getHeight(), target.combatCr.currentX, target.combatCr.currentY, creature.currentX, creature.currentY);
-//
-//                Sounds.play(Sound.NPC_ATTACK);
-//
-//                List<AttackVector> path = Utils.getDirectionalActionPath(combatMap, dirmask, creature.currentX, creature.currentY, 1, 11, false, false, false);
-//                for (AttackVector v : path) {
-//                    if (rangedAttackAt(v, creature)) {
-//                        break;
-//                    }
-//                }
-//
-//                break;
-//            }
             case FLEE:
             case ADVANCE: {
-
                 moveCreature(action, creature, target.getWx(), target.getWy());
-
-                //is map OOB
                 if (creature.getWx() >= MAP_DIM || creature.getWy() < 0
                         || creature.getWy() >= MAP_DIM || creature.getWy() < 0) {
                     log(String.format("%s Flees!", creature.getMonster().getName()));
                     Sounds.play(Sound.EVADE);
                     return false;
                 }
-
                 break;
             }
         }
@@ -831,11 +684,10 @@ public class CombatScreen extends BaseScreen {
         return true;
     }
 
-    private andius.objects.Actor nearestPartyMember(int fromX, int fromY, DistanceWrapper dist, boolean ranged) {
-        andius.objects.Actor opponent = null;
+    private andius.objects.Actor nearestPartyMember(int fromX, int fromY, AtomicInteger dist) {
+        andius.objects.Actor nearest = null;
         int d = 0;
         int leastDist = 0xFFFF;
-        //boolean jinx = context.getAura().getType() == AuraType.JINX;
 
         for (int i = 0; i < this.partyMembers.size(); i++) {
 
@@ -844,43 +696,20 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            //if (!jinx) {
-            if (ranged) {
-                d = Utils.distance(fromX, fromY, pm.getWx(), pm.getWy());
-            } else {
-                d = Utils.movementDistance(fromX, fromY, pm.getWx(), pm.getWy());
-            }
+            d = Utils.movementDistance(fromX, fromY, pm.getWx(), pm.getWy());
 
             /* skip target 50% of time if same distance */
             if (d < leastDist || (d == leastDist && rand.nextInt(2) == 0)) {
-                opponent = pm;
+                nearest = pm;
                 leastDist = d;
             }
-            //}
         }
 
-        if (opponent != null) {
-            dist.setVal(leastDist);
+        if (nearest != null) {
+            dist.set(leastDist);
         }
 
-        return opponent;
-    }
-
-    private class DistanceWrapper {
-
-        private int val;
-
-        public DistanceWrapper(int val) {
-            this.val = val;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
+        return nearest;
     }
 
     private boolean moveCreature(CombatAction action, andius.objects.Actor cr, int targetX, int targetY) {
@@ -916,49 +745,6 @@ public class CombatScreen extends BaseScreen {
 
         //System.out.println(String.format("cx=%d cy=%d tx=%d ty=%d",cr.getWx(),cr.getWy(),targetX, targetY));
         return true;
-
-    }
-
-    private Texture getCursorTexture() {
-        Pixmap pixmap = new Pixmap(TILE_DIM, TILE_DIM, Format.RGBA8888);
-        pixmap.setColor(Color.YELLOW);
-        int w = 4;
-        pixmap.fillRectangle(0, 0, w, TILE_DIM);
-        pixmap.fillRectangle(TILE_DIM - w, 0, w, TILE_DIM);
-        pixmap.fillRectangle(w, 0, TILE_DIM - 2 * w, w);
-        pixmap.fillRectangle(w, TILE_DIM - w, TILE_DIM - 2 * w, w);
-        return new Texture(pixmap);
-    }
-
-    private class CursorActor extends Actor {
-
-        Texture texture;
-        boolean visible = true;
-
-        CursorActor() {
-            texture = getCursorTexture();
-        }
-
-        void set(float x, float y) {
-            setX(x);
-            setY(y);
-        }
-
-        @Override
-        public void setVisible(boolean v) {
-            this.visible = v;
-        }
-
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-
-            Color color = getColor();
-            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-
-            if (visible) {
-                batch.draw(texture, getX(), getY());
-            }
-        }
 
     }
 

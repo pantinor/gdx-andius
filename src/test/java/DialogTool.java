@@ -1,6 +1,7 @@
 
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
+import andius.objects.Conversations.Label;
 import javax.swing.DefaultCellEditor;
 import andius.objects.Conversations.Topic;
 import java.awt.Color;
@@ -21,7 +22,6 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
@@ -41,7 +41,7 @@ public class DialogTool extends javax.swing.JFrame {
         @Override
         public String toString() {
             Conversation c = getUserObject();
-            return c.getName() + " - " + c.getPronoun() + " - " + c.getDescription();
+            return c.getName() + " - " + " - " + c.getDescription();
         }
 
     }
@@ -65,7 +65,7 @@ public class DialogTool extends javax.swing.JFrame {
 
         @Override
         public int getColumnCount() {
-            return 5;
+            return 2;
         }
 
         @Override
@@ -80,12 +80,6 @@ public class DialogTool extends javax.swing.JFrame {
                     return "QUERY";
                 case 1:
                     return "PHRASE";
-                case 2:
-                    return "QUESTION";
-                case 3:
-                    return "YES RESPONSE";
-                case 4:
-                    return "NO RESPONSE";
             }
             return "";
         }
@@ -102,15 +96,6 @@ public class DialogTool extends javax.swing.JFrame {
                     break;
                 case 1:
                     t.setPhrase(s);
-                    break;
-                case 2:
-                    t.setQuestion(s);
-                    break;
-                case 3:
-                    t.setYesResponse(s);
-                    break;
-                case 4:
-                    t.setNoResponse(s);
                     break;
             }
 
@@ -134,12 +119,6 @@ public class DialogTool extends javax.swing.JFrame {
                     return t.getQuery();
                 case 1:
                     return t.getPhrase();
-                case 2:
-                    return t.getQuestion();
-                case 3:
-                    return t.getYesResponse();
-                case 4:
-                    return t.getNoResponse();
             }
 
             return null;
@@ -147,8 +126,90 @@ public class DialogTool extends javax.swing.JFrame {
 
     }
 
+    public class LabelTableItemModel extends AbstractTableModel {
+
+        private List<Label> labels;
+
+        private void setLabels(List<Label> topics) {
+            this.labels = topics;
+        }
+
+        private List<Label> getLabels() {
+            return this.labels;
+        }
+
+        @Override
+        public int getRowCount() {
+            return this.labels.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 2;
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return true;
+        }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            switch (columnIndex) {
+                case 0:
+                    return "ID";
+                case 1:
+                    return "QUERY";
+
+            }
+            return "";
+        }
+
+        @Override
+        public void setValueAt(java.lang.Object v, int rowIndex, int columnIndex) {
+
+            String s = (String) v;
+
+            Label t = this.labels.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    t.setId(s);
+                    break;
+                case 1:
+                    t.setQuery(s);
+                    break;
+            }
+
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+
+        public Label getLabelAt(int row) {
+            return this.labels.get(row);
+        }
+
+        @Override
+        public java.lang.Object getValueAt(int rowIndex, int columnIndex) {
+
+            Label t = this.labels.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return t.getId();
+                case 1:
+                    return t.getQuery();
+            }
+
+            return null;
+        }
+
+    }
+    
     private Conversations convs = null;
     private TopicTableItemModel tm = null;
+    private LabelTableItemModel lm = null;
 
     public DialogTool() {
         initComponents();
@@ -189,6 +250,10 @@ public class DialogTool extends javax.swing.JFrame {
             this.tm = new TopicTableItemModel();
             tm.setTopics(this.convs.getConversations().get(0).getTopics());
             this.topicTable.setModel(tm);
+            
+            this.lm = new LabelTableItemModel();
+            lm.setLabels(this.convs.getConversations().get(0).getLabels());
+            this.labelTable.setModel(lm);
 
             this.jTree1.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
                 @Override
@@ -200,9 +265,11 @@ public class DialogTool extends javax.swing.JFrame {
                         if (c != null) {
                             DialogTool.this.tm.setTopics(c.getTopics());
                             DialogTool.this.tm.fireTableDataChanged();
+                            
+                            DialogTool.this.lm.setLabels(c.getLabels());
+                            DialogTool.this.lm.fireTableDataChanged();
 
                             DialogTool.this.jTextFieldName.setText(c.getName());
-                            DialogTool.this.jTextFieldPronoun.setText(c.getPronoun());
                             DialogTool.this.jTextFieldDesc.setText(c.getDescription());
                         }
                     }
@@ -218,22 +285,6 @@ public class DialogTool extends javax.swing.JFrame {
                         Conversation c = cn.getUserObject();
                         if (c != null) {
                             c.setName(DialogTool.this.jTextFieldName.getText());
-                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
-                            m.nodeChanged(n);
-                        }
-                    }
-                }
-            });
-
-            DialogTool.this.jTextFieldPronoun.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
-                    if (n instanceof ConversationNode) {
-                        ConversationNode cn = (ConversationNode) n;
-                        Conversation c = cn.getUserObject();
-                        if (c != null) {
-                            c.setPronoun(DialogTool.this.jTextFieldPronoun.getText());
                             DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
                             m.nodeChanged(n);
                         }
@@ -257,24 +308,25 @@ public class DialogTool extends javax.swing.JFrame {
                 }
             });
 
-            this.topicTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.topicTable.getColumnModel().getColumn(0).setMaxWidth(100);
-            this.topicTable.getColumnModel().getColumn(1).setPreferredWidth(400);
-            this.topicTable.getColumnModel().getColumn(1).setMaxWidth(1000);
-            this.topicTable.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.topicTable.getColumnModel().getColumn(2).setMaxWidth(1000);
-            this.topicTable.getColumnModel().getColumn(3).setPreferredWidth(400);
-            this.topicTable.getColumnModel().getColumn(3).setMaxWidth(1000);
+            this.topicTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+            this.topicTable.getColumnModel().getColumn(0).setMaxWidth(800);
             this.topicTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+            
+            this.labelTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.labelTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            this.labelTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
             UIManager.put("Table.alternateRowColor", new Color(242, 242, 242));
 
             JTextField textField = new JTextField();
-            textField.setFont(new Font("Tahoma", 0, 16));
+            textField.setFont(new Font("Tahoma", 0, 12));
             textField.setBorder(new LineBorder(Color.BLACK));
             DefaultCellEditor dce = new DefaultCellEditor(textField);
-            for (int x = 0; x < 5; x++) {
+            for (int x = 0; x < 2; x++) {
                 this.topicTable.getColumnModel().getColumn(x).setCellEditor(dce);
+            }
+            for (int x = 0; x < 2; x++) {
+                this.labelTable.getColumnModel().getColumn(x).setCellEditor(dce);
             }
 
         } catch (Exception e) {
@@ -303,8 +355,9 @@ public class DialogTool extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jTextFieldName = new javax.swing.JTextField();
-        jTextFieldPronoun = new javax.swing.JTextField();
         jTextFieldDesc = new javax.swing.JTextField();
+        labelPane = new javax.swing.JScrollPane();
+        labelTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -315,24 +368,24 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
 
-        topicTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        topicTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         topicTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "QUERY", "PHRASE", "QUESTION", "YES", "NO"
+                "QUERY", "PHRASE"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        topicTable.setRowHeight(32);
+        topicTable.setRowHeight(28);
         topicPanel.setViewportView(topicTable);
 
         removeTopicBtn.setText("REMOVE TOPIC");
@@ -363,9 +416,33 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
 
+        jTree1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Map");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
+
+        labelTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "QUERY"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        labelTable.setRowHeight(28);
+        labelPane.setViewportView(labelTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -374,6 +451,7 @@ public class DialogTool extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelPane)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(addTopicBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -381,18 +459,19 @@ public class DialogTool extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveBtn))
                     .addComponent(topicPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(addPersonBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(removePersonBtn))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldName)
-                                .addComponent(jTextFieldPronoun)
-                                .addComponent(jTextFieldDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addPersonBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removePersonBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldName)
+                                    .addComponent(jTextFieldDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -404,15 +483,15 @@ public class DialogTool extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldPronoun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPersonBtn)
                     .addComponent(removePersonBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addComponent(topicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
@@ -430,11 +509,11 @@ public class DialogTool extends javax.swing.JFrame {
             DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
 
             Conversation conv = new Conversation();
-            conv.getTopics().add(new Topic("name", "", "", "", ""));
-            conv.getTopics().add(new Topic("job", "", "", "", ""));
-            conv.getTopics().add(new Topic("health", "", "", "", ""));
-            conv.getTopics().add(new Topic("look", "", "", "", ""));
-            conv.getTopics().add(new Topic("give", "", "", "", ""));
+            conv.getTopics().add(new Topic("name", ""));
+            conv.getTopics().add(new Topic("job", ""));
+            conv.getTopics().add(new Topic("health", ""));
+            conv.getTopics().add(new Topic("look", ""));
+            conv.getTopics().add(new Topic("give", ""));
 
             if (n instanceof ConversationNode) {
                 DefaultMutableTreeNode mapNode = (DefaultMutableTreeNode) n.getParent();
@@ -523,8 +602,9 @@ public class DialogTool extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldDesc;
     private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldPronoun;
     private javax.swing.JTree jTree1;
+    private javax.swing.JScrollPane labelPane;
+    private javax.swing.JTable labelTable;
     private javax.swing.JButton removePersonBtn;
     private javax.swing.JButton removeTopicBtn;
     private javax.swing.JButton saveBtn;

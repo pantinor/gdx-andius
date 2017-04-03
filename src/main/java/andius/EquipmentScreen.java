@@ -344,6 +344,8 @@ public class EquipmentScreen implements Screen, Constants {
         final Label damageLabel;
         final Label goldLabel;
 
+        final Label classL;
+        final Label spptsL;
         final Label expL;
         final Label hpL;
         final Label mxhpL;
@@ -354,7 +356,7 @@ public class EquipmentScreen implements Screen, Constants {
         final Label agiL;
         final Label lckL;
 
-        final Actor[] icons = new Actor[20];
+        final Actor[] icons = new Actor[22];
         final Image[] slots = new Image[10];
         final Label[] slotTooltips = new Label[10];
 
@@ -433,6 +435,19 @@ public class EquipmentScreen implements Screen, Constants {
             item1Icon = make(ItemType.RING_AMULET, sp.item1, icon(sp.item1), 322, Andius.SCREEN_HEIGHT - 333);
             item2Icon = make(ItemType.RING_AMULET, sp.item2, icon(sp.item2), 376, Andius.SCREEN_HEIGHT - 333);
 
+            String d2 = String.format("%s  LVL %d  %s", character.race.toString(), character.level, character.classType.toString());
+            classL = new Label(d2, Andius.skin, "larger");
+            classL.setX(90);
+            classL.setY(Andius.SCREEN_HEIGHT - 420);
+
+            int[] ms = character.magePoints;
+            int[] cs = character.clericPoints;
+            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d", 
+                    ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
+            spptsL = new Label(d4, Andius.skin, "larger");
+            spptsL.setX(90);
+            spptsL.setY(Andius.SCREEN_HEIGHT - 600);
+
             acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
             acLabel.setX(360);
             acLabel.setY(Andius.SCREEN_HEIGHT - 393);
@@ -501,6 +516,8 @@ public class EquipmentScreen implements Screen, Constants {
             icons[17] = vitL;
             icons[18] = agiL;
             icons[19] = lckL;
+            icons[20] = classL;
+            icons[21] = spptsL;
 
             int x = 762;
             for (int i = 0; i < 5; i++) {

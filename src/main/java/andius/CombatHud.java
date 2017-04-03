@@ -93,10 +93,10 @@ public class CombatHud {
             this.player = player;
             this.rec = player.getPlayer();
             this.icon = new Image(Andius.faceTiles[rec.portaitIndex]);
-            this.l1 = new Label("", Andius.skin, "hudSmallFont");
-            this.l2 = new Label("", Andius.skin, "hudSmallFont");
-            this.l3 = new Label("", Andius.skin, "hudSmallFont");
-            this.l4 = new Label("", Andius.skin, "hudSmallFont");
+            this.l1 = new Label("", Andius.skin, "hudLogFont");
+            this.l2 = new Label("", Andius.skin, "hudLogFont");
+            this.l3 = new Label("", Andius.skin, "hudLogFont");
+            this.l4 = new Label("", Andius.skin, "hudLogFont");
 
             for (int i = 0; i < 10; i++) {
                 if (rec.spellPresets[i] != null && rec.knownSpells.contains(rec.spellPresets[i])) {
@@ -118,10 +118,10 @@ public class CombatHud {
             float x = getX();
             this.icon.setPosition(x, 124);
 
-            this.l1.setPosition(x + 60, 124 + 48);
-            this.l2.setPosition(x + 60, 124 + 36);
-            this.l3.setPosition(x + 60, 124 + 24);
-            this.l4.setPosition(x + 60, 124 + 12);
+            this.l1.setPosition(x + 60, 112 + 56);
+            this.l2.setPosition(x + 60, 112 + 40);
+            this.l3.setPosition(x + 60, 112 + 24);
+            this.l4.setPosition(x + 40, -12);
 
             x = getX() + 15;
             for (int i = 0; i < 5; i++) {
@@ -163,14 +163,13 @@ public class CombatHud {
 
         public void set() {
 
-            String d1 = String.format("%s  LVL %d  %s  %s", rec.name.toUpperCase(), rec.level, rec.race.toString(), rec.classType.toString());
-            String d2 = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status);
-            String d3 = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);
+            String d1 = String.format("%s", rec.name.toUpperCase());
+            String d2 = String.format("%s  LVL %d  %s", rec.race.toString(), rec.level, rec.classType.toString());
+            String d3 = String.format("HP: %d /%d  AC: %d  ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status);
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            String d4 = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
+            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d", 
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-
             this.l1.setText(d1);
             this.l2.setText(d2);
             this.l3.setText(d3);

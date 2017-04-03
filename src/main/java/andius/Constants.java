@@ -42,27 +42,6 @@ public interface Constants {
     public static final int MAX_WANDERING_CREATURES_IN_DUNGEON = 2;
     public static final int MAX_CREATURE_DISTANCE = 24;
 
-    public enum Resistance {
-        NONE,
-        MAGIC,
-        LVLDRAIN,
-        STONING,
-        POISON,
-        COLD,
-        FIRE;
-    }
-
-    public enum Ability {
-        NONE,
-        LVLDRAIN,
-        RUN,
-        SLEEP,
-        AUTOKILL,
-        PARALYZE,
-        POISON,
-        STONE;
-    }
-
     public enum Map {
 
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
@@ -74,9 +53,8 @@ public interface Constants {
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        BRITANIA("Castle of Britania", "britania.tmx", TILE_DIM),
-        BRITANIA2("Castle of Britania", "britania2.tmx", TILE_DIM),
-        ;
+        BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
+        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),;
 
         private final String label;
         private final String tmxFile;
@@ -174,7 +152,7 @@ public interface Constants {
                         }
                     }
                     this.baseMap.addPortal(pm, sx, sy,
-                            dx != null ? Integer.parseInt((String) dx) : -1, 
+                            dx != null ? Integer.parseInt((String) dx) : -1,
                             dy != null ? Integer.parseInt((String) dy) : -1,
                             randoms.size() > 0 ? randoms : null);
                 }
@@ -261,7 +239,7 @@ public interface Constants {
         FOLLOW_AVATAR,
         ATTACK_AVATAR;
     }
-    
+
     public static final int[][] LEVEL_PROGRESSION_TABLE = new int[][]{
         {289709, 318529, 304132, 260639, 438479, 456601, 475008, 529756},
         {1000, 1100, 1050, 900, 1200, 1250, 1300, 1450},
@@ -454,6 +432,27 @@ public interface Constants {
         QUICKNESS;
     }
 
+    public enum Resistance {
+        NONE,
+        MAGIC,
+        LVLDRAIN,
+        STONING,
+        POISON,
+        COLD,
+        FIRE;
+    }
+
+    public enum Ability {
+        NONE,
+        LVLDRAIN,
+        RUN,
+        SLEEP,
+        AUTOKILL,
+        PARALYZE,
+        POISON,
+        STONE;
+    }
+
     public enum AttackResult {
 
         HIT,
@@ -461,12 +460,9 @@ public interface Constants {
     }
 
     public enum CombatAction {
-
         ATTACK,
         ADVANCE,
-        RANGED,
-        FLEE,
-        TELEPORT;
+        FLEE;
     }
 
     public class AttackVector {

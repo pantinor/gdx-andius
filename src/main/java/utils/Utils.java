@@ -71,22 +71,6 @@ public class Utils {
         }
     }
 
-    /**
-     * using diagonals computes distance, used with finding nearest party member
-     */
-    public static int distance(int fromX, int fromY, int toX, int toY) {
-        int dist = movementDistance(fromX, fromY, toX, toY);
-
-        if (dist <= 0) {
-            return dist;
-        }
-
-        /* calculate how many fewer movements there would have been */
-        dist -= Math.abs(fromX - toX) < Math.abs(fromY - toY) ? Math.abs(fromX - toX) : Math.abs(fromY - toY);
-
-        return dist;
-    }
-
     public static int movementDistance(int fromX, int fromY, int toX, int toY) {
         int dirmask = 0;;
         int dist = 0;

@@ -228,23 +228,7 @@ public class Andius extends Game {
             }
             for (Monster m : MONSTERS) {
                 MONSTER_MAP.put(m.name, m);
-                if (m.getExp() > 0 && m.getExp() <= 599) {
-                    MONSTER_LEVELS.get(0).add(m);
-                } else if (m.getExp() >= 600 && m.getExp() <= 999) {
-                    MONSTER_LEVELS.get(1).add(m);
-                } else if (m.getExp() >= 1000 && m.getExp() <= 1399) {
-                    MONSTER_LEVELS.get(2).add(m);
-                } else if (m.getExp() >= 1400 && m.getExp() <= 1999) {
-                    MONSTER_LEVELS.get(3).add(m);
-                } else if (m.getExp() >= 2000 && m.getExp() <= 2999) {
-                    MONSTER_LEVELS.get(4).add(m);
-                } else if (m.getExp() >= 3000 && m.getExp() <= 4999) {
-                    MONSTER_LEVELS.get(5).add(m);
-                } else if (m.getExp() >= 5000 && m.getExp() <= 9999) {
-                    MONSTER_LEVELS.get(6).add(m);
-                } else {
-                    MONSTER_LEVELS.get(7).add(m);
-                }
+                MONSTER_LEVELS.get(m.getLevel()).add(m);
             }
 
             Icons.init();

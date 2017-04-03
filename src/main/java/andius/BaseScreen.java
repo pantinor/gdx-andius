@@ -92,6 +92,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 try {
                     Sounds.play(Sound.TRIGGER);
+                    log("Progress Saved");
                     Vector3 v = new Vector3();
                     Map.WORLD.getScreen().setCurrentMapCoords(v);
                     CTX.saveGame.map = Map.WORLD.ordinal();
