@@ -235,6 +235,7 @@ public class VendorScreen implements Screen, Constants {
                     selectedPlayer.invTable.add(new ItemListing(selectedVendorItem.item.clone(), selectedPlayer.character));
                     selectedPlayer.invTable.row();
                     invPane.setScrollPercentY(100);
+                    invPane.layout();
                     selectedPlayer.character.adjustGold(-selectedVendorItem.item.cost);
                     selectedPlayer.goldLabel.setText("" + selectedPlayer.character.gold);
                     if (selectedVendorItem.item.stock == -1) {

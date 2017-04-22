@@ -262,8 +262,8 @@ public class InnScreen implements Screen, Constants {
     private void log(String s) {
         logTable.add(new Label(s, Andius.skin, "larger"));
         logTable.row();
-        logScroll.setScrollPercentY(100);
         logScroll.layout();
+        logScroll.setScrollPercentY(100);
     }
 
     private class PlayerListing extends Group {
