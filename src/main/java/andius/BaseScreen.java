@@ -8,10 +8,14 @@ import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -111,6 +115,15 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         stage.addActor(inventory);
         stage.addActor(save);
 
+    }
+    
+    public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
+        Label label = new Label(text.replace(". ", ".\n"), Andius.skin, "larger");
+        label.setPosition(sx, sy);
+        label.setColor(color);
+        stage.addActor(label);
+        Sounds.play(Sound.POSITIVE_EFFECT);
+        label.addAction(sequence(Actions.moveTo(dx, dy, delay), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
     public abstract void partyDeath();

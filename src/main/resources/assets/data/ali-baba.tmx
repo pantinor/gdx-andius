@@ -67,13 +67,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" trans="ff00ff" width="1920" height="624"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
+  <image source="uf_heroes.png" trans="ff00ff" width="1920" height="672"/>
  </tileset>
- <tileset firstgid="1281" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
+ <tileset firstgid="1321" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
   <image source="uf_items.png" trans="ff00ff" width="1056" height="1056"/>
  </tileset>
- <tileset firstgid="1765" name="bazaar" tilewidth="48" tileheight="48" tilecount="100" columns="10">
+ <tileset firstgid="1805" name="bazaar" tilewidth="48" tileheight="48" tilecount="100" columns="10">
   <image source="bazaar.png" trans="ff00ff" width="480" height="480"/>
   <tile id="3">
    <animation>
@@ -92,7 +92,7 @@
  </tileset>
  <layer name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="floor2" width="158" height="110">
@@ -102,7 +102,7 @@
  </layer>
  <layer name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dX0rDMBwA4FHQYwieQsEjKJ7BE4i+egGvsbETiBfYZUTf/POmvpihlTpr57Rpmvb7INStoBn9LWl+ielkAgAAAAzdzfZkchfK7XbqmjAm9yHeHkJ5FHcAANB7Z8X39y6K5iP8ZGerH3/7p58ZnvL6rrvOe6EchbIfu0KMRlPMlecOQzkI5biLCmXsRg6xVSHeFsu4C/G3SF2Xtl22eC8qh92Osr0L/exJ6GcXoZ+dJq1QJPPi/XPNivrv1az4PE47qhINjFsBNpcqp1L2sXNtd1aqcZHrmqSG+7rpx5EeM56D+K60g0ks+9WnDPtV8qZfBcbCuhGGzr0kKbiXJCe55rLJm3YS6BPjYjbRVrys/p7la7EIAAAAAAC0zfo5/usvc1hdrQvpan7NPF4enkO8vYTyqr0DAAAAaF1l3+GTyntf2HOY2KoxttwLcS7m6NC80v5B18z5koK9AEjBnC8AAH1nPelmTtc8y2Hdeeibuj075e6IrS5PJ3dHbHV5Ork7AAAYlt/mOuVEx8c1Z4w8r4kU5HlJQZ4XiOHK2g9gZK61ewAbqXtO56rzhra16RxxyZsOXx+/X/KmpCBvCgD9YixCCsYiAAAAAAC0Ydf/aAOQIXuMAAAMw+qzxSG2mZgjEe0dXSrjTZsHAMPwBpGiB7KQDwEA
+   H4sIAAAAAAAAC+3dS24TMRgA4Ggk1FUFOx474BAgsa+EQKxygKy6RLDlAlwjUU5QcYEcrY7KoDRMJrTY48d8n2RNk5FSV/PHHv92PYsFAAAA0LrLi8XiWShPL3LXhJZdd/dfPw/x9iKUl+IOAACK9637+70f3fgRTrl6UsbvPvUz7emv77nr/C6Uz6G8T10hZmMs5vpzn0L5EMqXKSpUsUs5xKhCvO32cRfib5e7LrH9jHgvKocdR9/ehX52FfrZXehn11krlMi2u/u7Nt3w92rT/TmuJ6oSIx47bl0WPt4tvX5A3XLlVPo+dquNq8phXNS6Jmnkvm79+0jBjOcgvRvtYBb7fvVVhf0qddOvAnNh3Qitcy9JDu4lqUmtuWzqpp0ESmJczEPEipfjz9m/FosAAAAAAEBs1s/xvx4zhzXVupCp5tfM49XhdYi3N6G81d4BAAAARHew7/Dq4L177DlMaocxtt8LcSvmmMjyLt5WuevBfJnzJQd7AZCDOV8AAEpnPenDfD3zLIdz56E0Q3t2yt2R2lCeTu6O1IbydHJ3AADQln/NdcqJzo9rzhx5XhM5yPO2b1ngXKg8L5DCTYHtHUBKvwpr964Lqw/AsaHndB77PtKWjZ3jtBj9g7xp+0r8fsmbkoO8KQBzUUseyViEHIxFAAAAAACI4aP/0QagQvYYAQBow/GzxSG1jZgjE+0dU+rjTZsHAG24BdedwimQDwEA
   </data>
  </layer>
  <layer name="creature" width="158" height="110">
@@ -122,20 +122,20 @@
  </layer>
  <layer name="shadows" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3c706rMBwGYDwfdiNc7Dnxgk3UmByNLs7askL505bnSZbhHIOtLz9Ku2wYAGjVWHgbgvvcdTgvGQD4fQ7Nff69x++93pJze2y9IbHsfN+/vdpWhvqS0565da50P+bWqjGxTL+u7fx8GYaX99vr5efjqXXCrJTmxfmUpfTHqFXJ2COffFbfXI/Wp3SOoQc9vZezO2uGYQ7Zr4d6xdpy5pn2tOX2/v7Jf+7j13NTx9fbg+OOPCV9zY+c3QrHsFPboYzj+mf2whyyj9ZyuGQfY+uk8hY+3srnwvZKjpOw1ql9++hhHO7fzXVFuI9T72EqV7H/1fwZnEGsbVsTq3NhvWM/qeu5VNZazFzoSdYOkzqHTJ1besgccB5T46QxahxrGxPLcLSS7/O1MCYDsIa5fcmrnLqZW1fV5n5oM3q0tE7Clu7VVDX3WPo2UBfHGABA+/TnoF8l80xrzf8bywEAAEq4PgAAAGBr5qhomblYAAAAAADOytj3fOYT6JEsAwDsS3+L2shkH1povzG4B9oQ+z2t2+WjjunYduf+7hfrKvm9tZbao4Z97fnzJS23LddsfxniKsxBajm1Xm4mZY2YMG9r5kTmmDJ1zbHFtlL1Uv+OD9qcPagzbTjjeMC999P7+6cvW17f1Gjvccyc11YviFmaA9mhN3PrJ2xpqv/PcZb079aaq9x6m7IFrEH9gU/Pl2F4eb+9Xo7eEwCANo3Bfex/qb8h19R4Wjg3ED52e3+0M31/BgAAaqf/DQDQF307amCsHzgLdY69yRwA9Oc/3MYbRZAPAQA=
+   H4sIAAAAAAAAC+3c0W6bMBgGULabPEfLw27aA+9u0lq10VLPJgaDsc05UhSahkDijx9jR5kmAHo1F96m4D53Ha5LBgD+P4fmPv/Z489eb8u5PbbelFh2vh9frbaVobHktGdunSvdj7W1ak4sM657O7/cpun17Tbfvj6eWifMSmlenE/ZSn+MVpWMPfLBZ/WP69H2lM4xjGCk93J1V80wrCH77VCv2FvOPFNNR27vx/f85/76fG7q+PrzzXFHnpK+5nvOHoVj2KntUMZx/TV7YQ6po7ccbtnH2DqpvIWP9/K5cLyS4ySsdWpfHSOMw/18uK4I93HpPSzlKva/lj+DK4i1bW9idS6sd9STup5LZa3HzIV+y9ppUueQpXPLCJkDrmNpnDRGjWNvc2IZzlbyfb4exmQA9rC2L3mXUzdz66raPA5txoi21kk40rOaquaeS98G2uIYAwDon/4cjKtknmmv+X9jOQAAQAnXBwAAABzNHBU9MxcLAAAAAMBVGftez3wCI5JlAIC69LdojUyOoYf2m4N7oA+x39N6XD7rmI5td+3vfrGvkt9b66k9WtjXkT9f0nLbcs/2lyHuwhykllPr5WZS1ogJ87ZnTmSOJUvXHEdsK1Uv9e94p82pQZ3pwxXHA569n9HfP2M58vqmRbXHMXNeW70gZmsOZIfRrK2fcKSl/j/n2dK/22uu8uhtyhawB/UHPrzcpun17Tbfzt4TAIA+zcF97H+pvyHX0nhaODcQPvZ4f7YrfX8GAABap/8NADAWfTtaYKwfuAp1jtpkDgDG8xdmYbQnkA8BAA==
   </data>
  </layer>
  <layer name="lights" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dW4rDIBQA0NJldj9DYXYwux1KKYSiURutGs/5CZUSiK/cxIu5XIBafq7pstTv0vPBX6BPvJelfpeeD4An92V6cF9mJOZBejAPAlDLNpYR1zyph/a2sUwsrnm1Q2w9IXaclfhuDK92iK0nxI4pR9bJ4FNH1skA+I7U85gYgVyxvhIqTz2Phcr0RUJi8WStOFO82s5Z3qW0oE7aKX2XshJ1Upe4Oo86qUvOeR51QgvmM3ownwEAlO8JADWU7gkAMyvJAUj9T77qnHq029EcgL18FPP0HLQbAAAAAAAAAAAAAAAAAAAAAAAAI7BvXrlb4lvwN3WaZP+1z9nLDgBgfvdNDPcrnmMAd/0QgBPa+54MYzhju+x9T4YxrNQutcbYGccq7YTG2Ps9OeddyEpjlTbckwGA1a3yLPdY4wpd6yrXP5qVYu/Qta50/QAAAAAAAADMLSe3Qv4FteXkVsi/AAAAAADgwToFPVinAAAAgDz/0O2XeJAPAQA=
+   H4sIAAAAAAAAC+3dYWrDIAAG0LJj9j6lsBvstqOEQlY0aqLTxPf+lIatUI3mi1pzuwG1PL7Sx1LvSz8PfgLnxOex1PvSzwNg4bpMD67LjEQ/SA/6QQBqWWcZuWahHNpbZ5lYrnnXQ2w+IfZ6VvLdGN71EJtPiL2mHJkng72OzJMB8D9S92MyArli50roeOp+LHTMuUhILE/WypnyajtXGUtpQZm0UzqWMhNlUpdcnUeZ1GXNeR5lQgv6M3rQnwEAlO8JADWU7gkAZ1ayBiD1d9arnlOPeju6BmBrPYp++hzUGzCakkwk4wAAAAAs9uxtYhwGAAAAAAAAAAAAAAAAGI3fMpW7J54Ff1emSfZf289edgAA5/dcZbhveY4BPJ2HAFzQ1vNkaCenrB+RMfYr2HqeDGOYqV5qtbErtlXaCbWxz2tyzljITG2VNlyTAYDZzXIv95rjssf/OGbK3qHvOtP3L5VqkzXbbE6fYP4AAKCOrSzVImcdeT4cAAAAAPBXye9/9vwvhOSsrbD+AgAAAACAF/MR9GCeAgAAAPL8AlA/gZaQDwEA
   </data>
  </layer>
  <layer name="doors" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dQUoDMRQA0KmLbsULeA/BtRvxXJ6nZxBPIqIbt+6kKlhoS8fpZCb9SfMeCGotDs1P8n+mTboOqNVX9AUQKqr9rxZB/5giaH9Ic6nvEES+2J4S2ly+0J4523xsDJcQ89RvbAwb54g0dtxTi7ThPnM7G/fiyXmIoO9DfnK1svTlVPu/Ny9zjNVA/x4bR1Pn5Vri9nXZde8/X2/L6Cup0/NAnJw6v4vIJ3PNrebs+XgtKcG6kjhMmb9rmfMpV8r8bQ2pDuZgoHXXF9FX0C/HGG3cL8NdwXEHNTGmlckaBBGsQRBhe7wb8z7NQ397I4Y50tB49zIilh7EHTP5zBxLp877c7/3nnloJ4B8htZ2rP3UqfR2G6p1rP3UqYV2K71vcZ5a6FsAADCnlHtN6j0iqPcAum7lcxYAO9QmRFCbAEA7btXhwB+f0aEFT+IcAAAAAIAt1o355T4ZAACQQi1BScRj/R4raMPNWTrO1OGUNmfpOFNnGmvhpLLPQV5DOVyrOZ59DuYnfyMlBqbGjfyNlBgQN6QoaU1FfgfAkPXi/+/7Hm+FuZLcpta61lhIMbXWVSsf5yPhdUp5TqvM0YctEvZvTHkOnBNjbxlSzm/LLWcNbOwFjqWuIIK6AgDg/By6/7//WN/PwC59BAAATseeAkSwpwAAAAAAAADE+AZOyaThkA8BAA==
+   H4sIAAAAAAAAC+3dQU4CMRQA0MENK4NewHuYuHZjPJfn4QzGk7h2686gJpIAAWemM+W39L3EREXihP62/3eg7TqgVl/RF0CoqPa/XQT9Y4qg/SHNSt8hiHyxPSW0uXyhPXO2+dgYLiHmqd/YGDbOEWnsuKcWacNT5nY27sWT8xBB34f85GplOZVTHf7evMwQ657+PTaOps7LtcTt9bLrbn6+VsvoK6nTW0+cnDu/i8gnc82t5uz5eC0pwaaSOEyZv2uZ8ylXyvxtDakO5mCgdXdX0VdwWo4x2rhfhseC4w5qYkwrkzUIIliDIMLueDfmfZrH/vZeDDNQ33j3PiKWnsUdM/nMHEvnzvtzv/eeeWgngHz61nas/dSp9Hbrq3Ws/dSphXYrvW9xmVroWwAAMKeUe03qPSKo9wC6bu1zFgB71CZEUJsAQDse1OHAH5/RoQWv4hwAAAAAgB3WjfnlPhkAAJBCLUFJxGP9Xipow+1ZOs7U4Zy2Z+k4U2caa+Gkss9BXn05XKs5nn0O5id/IyUGpsaN/I2UGBA3pChpTUV+B0CfzeL/70893gpzJblNrXWtsZBiaq2rVh7mI+F1SnlOq8zRxy0S9m9MeQ5cEmNvGVLOb8stZw1s7AWGUlcQQV0BAHB5jt3/P3zs1M/APn0EAADOx54CRLCnAAAAAAAAAMT4BoPAdPOQDwEA
   </data>
  </layer>
- <objectgroup name="portals" visible="0">
+ <objectgroup name="portals">
   <object id="1" name="air vent" x="3936" y="96" width="48" height="48">
    <properties>
     <property name="dx" value="101"/>
@@ -843,7 +843,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="vendors" visible="0">
+ <objectgroup name="vendors">
   <object id="72" name="armor" type="vendor" x="2640" y="2160" width="48" height="48">
    <properties>
     <property name="Leather Armor" value="240"/>
@@ -934,18 +934,18 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="messages" visible="0">
-  <object id="211" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." gid="1303" x="6288" y="3936" width="48" height="48"/>
-  <object id="213" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" gid="1304" x="5712" y="4176" width="48" height="48"/>
-  <object id="214" name="rune" type="Take the same path as you did in my maze and you should do all right. The resemblance is really quite a-mazing! - the astrologer" gid="1304" x="816" y="3648" width="48" height="48"/>
-  <object id="215" name="rune" type="Take the high road!" gid="1306" x="4656" y="912" width="48" height="48"/>
-  <object id="216" name="rune" type="Here lies quartered body of Cassim, the rich brother of Ali Baba.  He came to grab all of the gold but when he went to leave he said 'open barley'!" gid="1308" x="2736" y="912" width="48" height="48"/>
-  <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." gid="1307" x="3456" y="384" width="48" height="48"/>
-  <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" gid="1305" x="2640" y="3840" width="48" height="48"/>
-  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" gid="1306" x="3456" y="2688" width="48" height="48"/>
-  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" gid="1303" x="5568" y="3504" width="48" height="48"/>
+ <objectgroup name="messages">
+  <object id="211" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." gid="1343" x="6288" y="3936" width="48" height="48"/>
+  <object id="213" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" gid="1344" x="5712" y="4176" width="48" height="48"/>
+  <object id="214" name="rune" type="Take the same path as you did in my maze and you should do all right. The resemblance is really quite a-mazing! - the astrologer" gid="1344" x="816" y="3648" width="48" height="48"/>
+  <object id="215" name="rune" type="Take the high road!" gid="1346" x="4656" y="912" width="48" height="48"/>
+  <object id="216" name="rune" type="Here lies quartered body of Cassim, the rich brother of Ali Baba.  He came to grab all of the gold but when he went to leave he said 'open barley'!" gid="1348" x="2736" y="912" width="48" height="48"/>
+  <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." gid="1347" x="3456" y="384" width="48" height="48"/>
+  <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" gid="1345" x="2640" y="3840" width="48" height="48"/>
+  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" gid="1346" x="3456" y="2688" width="48" height="48"/>
+  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" gid="1343" x="5568" y="3504" width="48" height="48"/>
  </objectgroup>
- <objectgroup name="rooms" visible="0">
+ <objectgroup name="rooms">
   <object id="335" name="dusty road" x="2016" y="672">
    <polygon points="0,0 576,0 576,336 432,336 432,144 -48,144 -48,0"/>
   </object>
