@@ -404,7 +404,9 @@ public interface Constants {
         TEMPLE,
         MONSTER,
         INNKEEPER,
-        MERCHANT;
+        MERCHANT,
+        MERCHANT1,
+        MERCHANT2;
     }
 
     public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {

@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -145,6 +146,18 @@ public class ObjectsTestNG {
         List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
         }.getType());
         int x = 0;
+        
+        Collections.sort(items);
+        
+        for (Item it : items) {
+            //System.out.println(it);
+        }
+        
+        Collections.sort(monsters);
+        
+        for (Monster m : monsters) {
+            System.out.println(m);
+        }
     }
 
     //@Test

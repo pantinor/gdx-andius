@@ -2391,4 +2391,28 @@
             <topic query="y" phrase="Then it is thine!   LUM  is the chant which thou dost seek!"/>
         </label>
     </conversation>
+    <conversation map="Shahriar" name="Morgiana" description="A clever slave-girl.">
+        <topic query="job" phrase="I am a slave from Cassim's household. I am being held prisoner here and will gratefully serve my rescuers."/>
+        <topic query="bye" phrase="Stay safe!"/>
+        <topic query="cass" phrase="He was killed by thieves and quartered."/>
+        <topic query="kill or quar" phrase="But I had Baba Mustafa the tailor stitch his body back together to give him a proper burial!"/>
+        <topic query="tail or baba" phrase="He was blindfolded when he did it."/>
+        <topic query="his or mast" phrase="Yes, 'tis very sad, though I hope for his return, so I may once again place roast pheasant before him!"/>
+        <topic query="roas or phea" phrase="'Twas his favorite."/>
+        <topic query="stoc" phrase="We have many delicacies from every region of the Kingdom!"/>
+        <topic query="deli" phrase="We even have pheasant!"/>
+        <topic query="king or regi" phrase="All over!"/>
+    </conversation>
+    <conversation map="Shahriar" name="Princess Buddir Al-Buddoor" description="The beautiful daughter of the Sultan.">
+        <topic query="job" phrase="I am the daughter of the sultan."/>
+        <topic query="bye" phrase="Stay safe!"/>
+        <topic query="cass" phrase="He was killed by thieves and quartered."/>
+        <topic query="kill or quar" phrase="But I had Baba Mustafa the tailor stitch his body back together to give him a proper burial!"/>
+        <topic query="tail or baba" phrase="He was blindfolded when he did it."/>
+        <topic query="his or mast" phrase="Yes, 'tis very sad, though I hope for his return, so I may once again place roast pheasant before him!"/>
+        <topic query="roas or phea" phrase="'Twas his favorite."/>
+        <topic query="stoc" phrase="We have many delicacies from every region of the Kingdom!"/>
+        <topic query="deli" phrase="We even have pheasant!"/>
+        <topic query="king or regi" phrase="All over!"/>
+    </conversation>
 </conversations>

@@ -14,6 +14,7 @@ import andius.objects.Monster;
 import andius.objects.Monster.Type;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
+import andius.objects.SaveGame;
 import andius.objects.SpellUtil;
 import andius.objects.Spells;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
@@ -142,9 +143,6 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].getIcon(), crSlots[index].getIcon().name());
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
-//            if (enemies.size() > 0) {
-//                break;
-//            }
         }
 
         MapLayer pLayer = tmap.getLayers().get("Player Positions");
@@ -166,9 +164,6 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon(), context.players()[index].name);
             actor.set(this.context.players()[index], sx, sy, x, y);
             partyMembers.add(actor);
-//            if (partyMembers.size() > 0) {
-//                break;
-//            }
         }
 
         cursor = new CursorActor();
@@ -349,7 +344,8 @@ public class CombatScreen extends BaseScreen {
 
         andius.objects.Actor active = getActivePartyMember();
 
-        try {
+        if (active != null) {
+
             if (keycode == Keys.SPACE || active.isDisabled()) {
                 log("Pass");
             } else if (keycode == Keys.UP) {
@@ -387,14 +383,9 @@ public class CombatScreen extends BaseScreen {
                     return false;
                 }
             }
-
-            finishPlayerTurn();
-
-            //} catch (PartyDeathException e) {
-            //    this.returnScreen.partyDeath();
-        } finally {
-
         }
+
+        finishPlayerTurn();
 
         return false;
 
@@ -464,9 +455,7 @@ public class CombatScreen extends BaseScreen {
     public void finishTurn(int currentX, int currentY) {
 
         try {
-            //party.endTurn(Maps.get(combatMap.getId()), combatMap.getType());
 
-            //context.getAura().passTurn();
             if (this.enemies.isEmpty()) {
                 end();
                 return;
@@ -477,15 +466,14 @@ public class CombatScreen extends BaseScreen {
                 return;
             }
 
-            if (true) {
-                SequenceAction seq = Actions.action(SequenceAction.class);
-                for (andius.objects.Actor cr : this.enemies) {
-                    seq.addAction(Actions.run(new CreatureActionsAction(cr)));
-                    seq.addAction(Actions.delay(.04f));
-                }
-                seq.addAction(Actions.run(new FinishCreatureAction()));
-                stage.addAction(seq);
+            SequenceAction seq = Actions.action(SequenceAction.class);
+            for (andius.objects.Actor cr : this.enemies) {
+                seq.addAction(Actions.run(new CreatureActionsAction(cr)));
+                seq.addAction(Actions.delay(.04f));
             }
+            seq.addAction(Actions.run(new FinishCreatureAction()));
+            stage.addAction(seq);
+
         } catch (Exception e) {
             //this.returnScreen.partyDeath();
         }
@@ -531,7 +519,7 @@ public class CombatScreen extends BaseScreen {
         @Override
         public void run() {
             Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
-            if (partyMembers.size() == 0) {
+            if (partyMembers.isEmpty()) {
                 end();
             }
         }
@@ -608,7 +596,20 @@ public class CombatScreen extends BaseScreen {
             mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, REWARDS.get(goldRewardId), REWARDS.get(chestRewardId)));
             this.contextMap.getScreen().endCombat(isWon, this.opponent);
         } else {
-            mainGame.setScreen(startScreen);
+            boolean anyoneAlive = false;
+            for (SaveGame.CharacterRecord ch : this.context.players()) {
+                if (ch.status != Status.DEAD) {
+                    anyoneAlive = true;
+                    break;
+                }
+            }
+
+            if (anyoneAlive) {
+                this.contextMap.getScreen().endCombat(false, this.opponent);
+                mainGame.setScreen(this.contextMap.getScreen());
+            } else {
+                mainGame.setScreen(startScreen);
+            }
         }
     }
 
@@ -657,6 +658,7 @@ public class CombatScreen extends BaseScreen {
                                 @Override
                                 public void run() {
                                     partyMembers.remove(target);
+                                    getAndSetNextActivePlayer();
                                 }
                             }));
                         }
@@ -749,7 +751,7 @@ public class CombatScreen extends BaseScreen {
     }
 
     private andius.objects.Actor getActivePartyMember() {
-        return this.partyMembers.get(activeIndex);
+        return !this.partyMembers.isEmpty() && activeIndex < this.partyMembers.size() ? this.partyMembers.get(activeIndex) : null;
     }
 
     private boolean isRoundDone() {

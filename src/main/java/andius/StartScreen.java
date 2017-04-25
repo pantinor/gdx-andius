@@ -99,7 +99,6 @@ public class StartScreen implements Screen, Constants {
 //                            CTX.saveGame.players[j].agility = 8;
 //                            CTX.saveGame.players[j].luck = 8;
 //                        }
-
 //                        FileHandleResolver resolver = new Constants.ClasspathResolver();
 //                        TmxMapLoader loader = new TmxMapLoader(resolver);
 //                        TiledMap tm = loader.load("assets/data/combat1.tmx");
@@ -135,6 +134,8 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[2].exp = 2500;
 //                        CTX.saveGame.players[1].exp = 3500;
 //                        InnScreen es = new InnScreen(CTX, Map.WIWOLD);
+//                        mainGame.setScreen(es);
+//                        VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
 //                        mainGame.setScreen(es);
 
                     }

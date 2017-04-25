@@ -202,8 +202,8 @@ public class GameScreen extends BaseScreen {
                     TempleScreen rs = new TempleScreen(CTX, this.map);
                     mainGame.setScreen(rs);
                     return false;
-                } else if (a.getRole() == Role.MERCHANT) {
-                    VendorScreen rs = new VendorScreen(CTX, this.map);
+                } else if (a.getRole() == Role.MERCHANT || a.getRole() == Role.MERCHANT1 || a.getRole() == Role.MERCHANT2) {
+                    VendorScreen rs = new VendorScreen(CTX, a.getRole(), this.map);
                     mainGame.setScreen(rs);
                     return false;
                 } else if (a.getRole() == Role.INNKEEPER) {

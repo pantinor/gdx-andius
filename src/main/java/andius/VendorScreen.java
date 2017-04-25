@@ -92,7 +92,7 @@ public class VendorScreen implements Screen, Constants {
     Image vendorFocusInd;
     Label invDesc;
 
-    public VendorScreen(Context context, final Constants.Map contextMap) {
+    public VendorScreen(Context context, Role role, final Constants.Map contextMap) {
         this.context = context;
 
         this.hud = new Texture(Gdx.files.classpath("assets/data/vendor.png"));
@@ -137,8 +137,16 @@ public class VendorScreen implements Screen, Constants {
         vendorTable.align(Align.top);
         for (Item it : ITEMS) {
             if (it.stock != 0) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
+                if (role == Role.MERCHANT1 && it.cost <= 500) {
+                    vendorTable.add(new VendorItem(it));
+                    vendorTable.row();
+                } else if (role == Role.MERCHANT2 && it.cost <= 10000) {
+                    vendorTable.add(new VendorItem(it));
+                    vendorTable.row();
+                } else if (role == Role.MERCHANT) {
+                    vendorTable.add(new VendorItem(it));
+                    vendorTable.row();
+                }
             }
         }
 
