@@ -1,8 +1,9 @@
 package andius.objects;
 
-import andius.Andius;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
 import utils.Utils;
 import utils.XORShiftRandom;
@@ -13,6 +14,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -26,6 +29,7 @@ public class SaveGame implements Constants {
     public int map;
     public int wx;
     public int wy;
+    public final java.util.Map<Map, List<Integer>> removedActors = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
         GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
@@ -44,10 +48,41 @@ public class SaveGame implements Constants {
     }
 
     public void write(String file) throws Exception {
+        
         for (CharacterRecord player : players) {
             player.acmodifier1 = 0;
             player.acmodifier2 = 0;
         }
+
+        this.removedActors.clear();
+        for (Map map : Map.values()) {
+            if (map.getMap() != null) {
+                MapLayer peopleLayer = map.getTiledMap().getLayers().get("people");
+                if (peopleLayer != null) {
+                    Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
+                    while (iter.hasNext()) {
+                        MapObject obj = iter.next();
+                        int id = obj.getProperties().get("id", Integer.class);
+                        boolean found = false;
+                        for (Actor a : map.getMap().actors) {
+                            if (a.getId() == id) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            List<Integer> l = this.removedActors.get(map);
+                            if (l == null) {
+                                l = new ArrayList<>();
+                                this.removedActors.put(map, l);
+                            }
+                            l.add(id);
+                        }
+                    }
+                }
+            }
+        }
+
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         String json = gson.toJson(this);

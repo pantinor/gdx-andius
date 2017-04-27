@@ -73,7 +73,7 @@ public class CombatTestMain extends Game {
             TiledMap tm = loader.load("assets/data/combat1.tmx");
 
             Monster monster = Andius.MONSTER_LEVELS.get(4).get(1);
-            Actor actor = new Actor(monster.icon, monster.name);
+            Actor actor = new Actor(monster.icon, 0, monster.name);
             MutableMonster mm = new MutableMonster(monster);
             mm.name = monster.name;
             mm.setIcon(monster.icon);

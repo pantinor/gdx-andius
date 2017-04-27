@@ -26,6 +26,7 @@ import java.util.Iterator;
 import utils.PartyDeathException;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
+import utils.Utils;
 
 public class GameScreen extends BaseScreen {
 
@@ -74,6 +75,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void show() {
+        this.map.syncRemovedActors(CTX.saveGame);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
@@ -253,7 +255,7 @@ public class GameScreen extends BaseScreen {
             //Sounds.play(Sound.BLOCKED);
             return false;
         }
-        
+
         MapLayer messagesLayer = this.map.getTiledMap().getLayers().get("messages");
         if (messagesLayer != null) {
             Iterator<MapObject> iter = messagesLayer.getObjects().iterator();
@@ -267,15 +269,28 @@ public class GameScreen extends BaseScreen {
                 }
             }
         }
-    
 
         Portal p = this.map.getMap().getPortal((int) nx, (int) ny);
-        if (p != null && p.getMap() == this.map) { //warp over portal on the same map ie ali-baba map has this
+        if (p != null && p.getMap() == this.map) { //go to a portal on the same map ie ali-baba map has this
             Vector3 dv = p.getDest();
             if (this.map.getRoomIds() != null) {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
             }
             setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y);
+
+            for (Actor act : this.map.getMap().actors) {//so follower can follow thru portal
+                if (act.getMovement() == MovementBehavior.FOLLOW_AVATAR) {
+                    int dist = Utils.movementDistance(act.getWx(), act.getWy(), (int) nx, (int) ny);
+                    if (dist < 5) {
+                        act.setWx((int) dv.x);
+                        act.setWy((int) dv.y);
+                        Vector3 pixelPos = new Vector3();
+                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy());
+                        act.setX(pixelPos.x);
+                        act.setY(pixelPos.y);
+                    }
+                }
+            }
             return false;
         }
 

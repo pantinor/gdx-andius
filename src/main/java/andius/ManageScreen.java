@@ -1,7 +1,5 @@
 package andius;
 
-import static andius.Andius.ITEMS;
-import static andius.Andius.ITEMS_MAP;
 import andius.objects.Race;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
@@ -83,9 +81,8 @@ public class ManageScreen implements Screen, Constants {
 
     private static final String EMPTY = "<empty>";
 
-    SaveGame saveGame;
-
-    public ManageScreen(Screen rs, Skin skin) {
+    public ManageScreen(Screen rs, Skin skin, SaveGame saveGame) {
+        
         this.stage = new Stage();
         this.batch = new SpriteBatch();
         this.returnScreen = rs;
@@ -93,12 +90,6 @@ public class ManageScreen implements Screen, Constants {
         font = Andius.font;
 
         bkgnd = new Texture(Gdx.files.classpath("assets/data/roster.png"));
-
-        try {
-            saveGame = SaveGame.read(SAVE_FILENAME);
-        } catch (Exception e) {
-            saveGame = new SaveGame();
-        }
 
         PartyIndex[] mbrs = new PartyIndex[6];
         for (int i = 0; i < mbrs.length; i++) {

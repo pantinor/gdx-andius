@@ -7,7 +7,6 @@ package andius.objects;
 
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
-import andius.objects.Conversations.Conversation;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import utils.Utils;
@@ -18,6 +17,7 @@ import utils.Utils;
  */
 public class Actor {
 
+    private final int id;
     private final String name;
     private final Animation anim;
     private Role role;
@@ -28,9 +28,9 @@ public class Actor {
     private MovementBehavior movement;
     private MutableMonster monster;
     private CharacterRecord player;
-    private Conversation conversation;
 
-    public Actor(Icons icon, String name) {
+    public Actor(Icons icon, int id, String name) {
+        this.id = id;
         this.name = name;
         float fr = (float) Utils.getRandomBetween(4, 9) / 10;
         this.anim = new Animation(fr, Icons.ATLAS.findRegions(icon.toString()));
@@ -52,6 +52,10 @@ public class Actor {
         this.x = x;
         this.y = y;
         this.player = player;
+    }
+    
+    public int getId() {
+        return this.id;
     }
     
     public String getName() {
@@ -112,14 +116,6 @@ public class Actor {
 
     public boolean isDisabled() {
         return false;
-    }
-
-    public Conversation getConversation() {
-        return conversation;
-    }
-
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
     }
 
 }

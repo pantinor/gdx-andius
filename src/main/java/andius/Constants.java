@@ -5,6 +5,7 @@ import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
+import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -166,6 +167,7 @@ public interface Constants {
                 while (iter.hasNext()) {
                     MapObject obj = iter.next();
                     String surname = obj.getName();
+                    int id = obj.getProperties().get("id", Integer.class);
                     float x = obj.getProperties().get("x", Float.class);
                     float y = obj.getProperties().get("y", Float.class);
                     int sx = (int) (x / TILE_DIM);
@@ -175,8 +177,8 @@ public interface Constants {
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 
-                    //System.out.printf("Loading actor: %s %s %s on map %s.\n",surname,role,movement,m);
-                    Actor actor = new Actor(icon, surname);
+                    //System.out.printf("Loading actor: %s %s %s on map %d.\n",surname,role,movement,id);
+                    Actor actor = new Actor(icon, id, surname);
                     if (role == Role.MONSTER) {
                         try {
                             String mid = obj.getProperties().get("creature", String.class);
@@ -228,6 +230,19 @@ public interface Constants {
 
             this.screen = (this.dim == TILE_DIM ? new GameScreen(this) : new WorldScreen(this));
 
+        }
+
+        public void syncRemovedActors(SaveGame saveGame) {
+            List<Integer> l = saveGame.removedActors.get(this);
+            if (l != null && this.baseMap != null) {
+                Iterator<Actor> iter = this.baseMap.actors.iterator();
+                while (iter.hasNext()) {
+                    Actor a = iter.next();
+                    if (l.contains(a.getId())) {
+                        iter.remove();
+                    }
+                }
+            }
         }
 
     }

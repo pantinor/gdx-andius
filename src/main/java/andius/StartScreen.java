@@ -4,6 +4,7 @@ import static andius.Andius.CTX;
 import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
+import static andius.Constants.SAVE_FILENAME;
 import andius.objects.Item;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
@@ -25,7 +26,6 @@ public class StartScreen implements Screen, Constants {
 
     float time = 0;
     Batch batch;
-    //Texture title;
 
     TextButton manual;
     TextButton manage;
@@ -58,7 +58,19 @@ public class StartScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Sounds.play(Sound.TRIGGER);
-                Andius.mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
+                if (CTX == null) {
+                    CTX = new Context();
+                    try {
+                        SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
+                        CTX.setSaveGame(saveGame);
+                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, saveGame));
+                    } catch (Exception e) {
+                        CTX.setSaveGame(new SaveGame());
+                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
+                    }
+                } else {
+                    mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
+                }
             }
         });
         manage.setX(400);
@@ -69,17 +81,19 @@ public class StartScreen implements Screen, Constants {
         journey.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Sounds.play(Sound.TRIGGER);
-                if (!Gdx.files.internal(SAVE_FILENAME).file().exists()) {
-                    mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
-                } else {
-                    CTX = new Context();
-                    if (CTX.saveGame == null) {
-                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin));
-                    } else {
-                        BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
-                        scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
-                        Andius.mainGame.setScreen(scr);
+
+                try {
+                    Sounds.play(Sound.TRIGGER);
+
+                    if (CTX == null) {
+                        CTX = new Context();
+                        SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
+                        CTX.setSaveGame(saveGame);
+                    }
+
+                    BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
+                    scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
+                    Andius.mainGame.setScreen(scr);
 
 //                        for (int j = 0; j < 6; j++) {
 //                            CTX.saveGame.players[j].level = 1;
@@ -104,8 +118,8 @@ public class StartScreen implements Screen, Constants {
 //                        TiledMap tm = loader.load("assets/data/combat1.tmx");
 //                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
 //                        mainGame.setScreen(cs);
-                        //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
-                        //mainGame.setScreen(rs);
+                    //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+                    //mainGame.setScreen(rs);
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
@@ -119,9 +133,8 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
-                        //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
-                        //mainGame.setScreen(es);
-                        
+                    //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
+                    //mainGame.setScreen(es);
 //                        CTX.saveGame.players[0].hp = 5;
 //                        CTX.saveGame.players[1].hp = 0;
 //                        CTX.saveGame.players[1].status = Status.DEAD;
@@ -137,8 +150,9 @@ public class StartScreen implements Screen, Constants {
 //                        mainGame.setScreen(es);
 //                        VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
 //                        mainGame.setScreen(es);
-
-                    }
+                } catch (Exception e) {
+                    CTX.setSaveGame(new SaveGame());
+                    mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
                 }
 
             }

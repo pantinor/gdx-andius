@@ -76,7 +76,7 @@ public class BaseMap {
         for (Actor p : actors) {
 
             Direction dir = null;
-
+            
             switch (p.getMovement()) {
                 case ATTACK_AVATAR: {
                     int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
@@ -105,10 +105,6 @@ public class BaseMap {
                     if (wanderFlag % 2 == 0) {
                         continue;
                     }
-//                    if (p.isTalking()) {
-//                        continue;
-//                    }
-
                     dir = Direction.getRandomValidDirection(getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY));
                 }
                 default:

@@ -915,8 +915,8 @@
   </object>
   <object id="407" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="5040" y="3888" width="48" height="48">
    <properties>
-     <property name="creature" value="Priestess"/>
-    <property name="movement" value="FIXED"/>
+    <property name="creature" value="Priestess"/>
+    <property name="movement" value="FOLLOW_AVATAR"/>
    </properties>
   </object>
  </objectgroup>

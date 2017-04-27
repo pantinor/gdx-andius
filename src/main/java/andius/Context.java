@@ -5,7 +5,6 @@
  */
 package andius;
 
-import static andius.Constants.SAVE_FILENAME;
 import andius.objects.Aura;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
@@ -16,11 +15,8 @@ public class Context {
     public final Aura aura = new Aura();
     public SaveGame saveGame;
 
-    public Context() {
-        try {
-            this.saveGame = SaveGame.read(SAVE_FILENAME);
-        } catch (Exception e) {
-        }
+    public void setSaveGame(SaveGame sg) {
+        this.saveGame = sg;
     }
     
     public CharacterRecord[] players() {
