@@ -28,6 +28,7 @@ public class Actor {
     private MovementBehavior movement;
     private MutableMonster monster;
     private CharacterRecord player;
+    private CursorActor playerCursor;
 
     public Actor(Icons icon, int id, String name) {
         this.id = id;
@@ -53,11 +54,11 @@ public class Actor {
         this.y = y;
         this.player = player;
     }
-    
+
     public int getId() {
         return this.id;
     }
-    
+
     public String getName() {
         return this.name;
     }
@@ -116,6 +117,14 @@ public class Actor {
 
     public boolean isDisabled() {
         return false;
+    }
+
+    public CursorActor getPlayerCursor() {
+        return playerCursor;
+    }
+
+    public void setPlayerCursor(CursorActor playerCursor) {
+        this.playerCursor = playerCursor;
     }
 
 }

@@ -6,10 +6,12 @@
 package andius.objects;
 
 import static andius.Constants.TILE_DIM;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
@@ -17,11 +19,19 @@ import com.badlogic.gdx.graphics.g2d.Batch;
  */
 public class CursorActor extends com.badlogic.gdx.scenes.scene2d.Actor {
 
-    Texture texture;
-    boolean visible = true;
+    TextureRegion textureRed;
+    TextureRegion textureYellow;
+    TextureRegion textureBlue;
+    TextureRegion texturePurple;
+
+    boolean visible = false;
 
     public CursorActor() {
-        texture = getCursorTexture();
+        TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/cursor.png")), 48, 48);
+        this.textureYellow = trs[0][0];
+        this.textureBlue = trs[0][1];
+        this.textureRed = trs[1][0];
+        this.texturePurple = trs[1][1];
     }
 
     public void set(float x, float y) {
@@ -41,7 +51,9 @@ public class CursorActor extends com.badlogic.gdx.scenes.scene2d.Actor {
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
         if (visible) {
-            batch.draw(texture, getX(), getY());
+            batch.draw(textureYellow, getX(), getY());
+        } else {
+            batch.draw(textureBlue, getX(), getY());
         }
     }
 

@@ -23,8 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -37,7 +37,7 @@ public class CombatHud {
     private final CombatScreen screen;
     private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
 
-    public CombatHud(CombatScreen screen, List<andius.objects.Actor> players) {
+    public CombatHud(CombatScreen screen, Set<andius.objects.Actor> players) {
         this.screen = screen;
 
         FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
@@ -65,9 +65,11 @@ public class CombatHud {
             current.remove();
         }
         PlayerListing pl = map.get(player);
-        current = pl;
-        current.set();
-        stage.addActor(current);
+        if (pl != null) {
+            current = pl;
+            current.set();
+            stage.addActor(current);
+        }
     }
 
     private class PlayerListing extends Group {
@@ -168,7 +170,7 @@ public class CombatHud {
             String d3 = String.format("HP: %d /%d  AC: %d  ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status);
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d", 
+            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
             this.l1.setText(d1);
             this.l2.setText(d2);

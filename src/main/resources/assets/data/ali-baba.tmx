@@ -92,7 +92,7 @@
  </tileset>
  <layer name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   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
+   H4sIAAAAAAAAC+2dTW7cNhhAeQ+fIesWyDLbomfoqnFXabcu4skJGmTVGzQtkEWO4KNVRESYZj7+U6RIvQd80L+GHr35SHFGtFIAADArD5WhnGnOcXBNap0r9Q7gaO+UOtY3PJ6TVt6lbFMq7kmJ65pfnZDWSfvAGI7yTlqvrGlOeXz72fuHvFPCdrwbS4s2Xq6LKeVJKZ99vpBX5Ls1KfEy9Ryp+8TqVLxbj1be5Z7LPi4HnLsGKW6U+GOO+7TFxy3+cuKTMzVh9oVnvkRiVSTvUu4LzHHGL9e/j3tI2+CZVO/+8MRdQpwRX76LtdFs73IDnqn1TlPjXYu2Wk/OUIYVaOGdxufXat5BG1p4V+MO3l2TmHfGPZ93v6s6b3K9G+Fe6DVjfS6xz9xVaVXPGmLXSFp3dudi/YA+z5SK/81XpWX7TrqXsOd918CeH+ldyWfAt+w7n1LH/x0zcJR3koehz749P8K7kvo+t371uQrHcmbvfOVKdcydj21TwjLk87jFh31626eP1np3nc1Z3/8U32OfGek85Lt2SL49CuuVMH1wls9Eihs+h0L1LLTBzWOue9J+rpO344vZnJS2Hb4dh5TjPgjrbe+k/LgKONaHUD0ruWgfc7OOBcjBvq8wy+58qN03az0LY/HlOzuPucuGnDqJ+gtsQvWrlPda9dPSHwG5pNz7HeVcb1f5bMyB7zrVeJfz/UPsdcjL61DqRcn5pXPFypBTVrybB7yDERx9zXIci5UB7/pT+p7H3vfR3sXKkFLW2D5QDp/1tL919fegN3gHI8A7GAHewQjw7iWM99SXlV3KAe/6UJPvSo9N7ccYkXPxrg+11xzvoISjvHuVeHyLMrQE7/pAvnsJ3vUB716Cd30Y7V3p8XgHK4F3MAK8gxHgHQAY3o0uAFyOd1b0gvEuYJR3uHdtWnnnG+PC5pa4H6xPK+/sMaOk8aNuirGl4JmW3rnOSa6tOJYe5HNU+84dc8odNxTvrs3R9xW+XId316bX/ax7T4F316Z3Pwr1LGjoN4ZRvBldgMk4+/8qPyNvMgJk8C6fo70LjQW/ynjweJdPL+9C43fPDt7l09u70P/bmxW8K8fnVW27znbtlVrzOwq8yyf2/FbtM13Us+M56rm8GnKeeS0B78Zz5DOhpfieWW31LOtVvTuTgzN4l7oNvufOmobmezsZa0cdnXtC5arZvgK54xjcqe89Oqt3mlhucfex1x1ZFh3/bvF5i6/7/H+essA3ZvJOE8tpKrCt9vrb/XGSd1+t+Gxt+7vydVdkNu80KePRxNa/3eN+i9/26X3gNd0+YPfcOr+ZfPfPHuQ7P7N65y5Luc7d396mXTPeGfd8YzCEvnugfVfGjN65hHKcry42vr11QkJyLjfX4t9LVvBOE7q20j2GyXc6xxn/fPWsL8/hXR2+PjvXRXf+LORcdzO123d6ajyUkL5nxbt63P6UWKyGnfc0Kb8tSfFOeZZnRJf//RZ/Njzn1b27tyL1N00599RKze+dce79HobY+xDK+yXe5bzvV65vVvl7tXMm59mUeKcj1zkTeAealvnuhy1+2uNHYXvK64X2CSH9vlZ6vmCl32SsQEk+cb36Wamn19v09bf56vZdTpl8v+eW1j9mnhvaU1rPakq8K3291Hxn/5Y79JwBjKWld1s9+8tWxz7p2Oafenrny3XSWEh4N56z3VfU5Du7XaeUfwykVZ4hnZmW+a5FP0ptPSvlO+rZtbh6vzGMAe9gBHfOVNrmWwYo5cGZStt8y2dmprJeAV9bX5r3rTsDLe5joB94ByPwXRe8gyPBOxgB3sEIUq7TDN7BXKQ4hXfQGpyCs4B30Bva4TAC7gFhBHgHI8A5GAHOAQAArM3/vEHqapAPAQA=
   </data>
  </layer>
  <layer name="floor2" width="158" height="110">
@@ -107,12 +107,12 @@
  </layer>
  <layer name="creature" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dIU4DQRQA0CatI9wAywFISuACdRgEogLJGTgBAsEBOAASQQKiAoFAICqQJFhEEzgAogmCNmmaTbe7nd2d7rxnWtFm2/Tv/zO/M7udDgAAAGW9df8fx91mPwfpCRFzo5rjduI8SdK0V/w9P2IFALbKi9pNQ17FHjWT7yBulyt6EEPnL5EZrBGT67wGll2X6MemrkwPOxXmXDRh3bgzvivH+IJN7KqZALnU2nr9qk1AIqynpA76pAAAlKVHA2yzeV+/yv6+OTfLsuIthv+YhhvE6rs4Z+asQCwciJuk7UWQ9wD21SIAAACAXBc5PZRxxT2W+172c4BYhFo/J8cBAAAAAAAA1M+1AABI1akaCADB9Wf19UidBVpm3fuKbnLf26y9GW3r3U1dd60w91IGUvAg1xGxifgEIMfXwtz9qWXzeACKO0mgzxvKZyLzrY9EvidAlqpz4LEa21q3DdbPc3EFAARwY0xBpOZr/fs1xOhjzjFCXc8cIEU7ciiw4K7GnDBacaxBgL7ulfxGDcxFAAAAAKpnH0W8vlvy2+gnAyE8yyVEYtSS+gwAAFQjxPpMKOJQz4QG2ZsLAEAIf57ALymQDwEA
+   H4sIAAAAAAAAC+3dPU4CQRQAYBLojIW9rQcwwegFOICFBYWlZ/AEFhYewANYWphoQWFhYWFBYWlia0GiB7AgsRASQgj7w+zusPN9DRSQhfD2vZnHzG6nAwAAQFlv3f/HcbfZz0F6QsTcqOa4nThPkjTtFX/Pj1gBgK3yonbTkFexR83kO4jb5ZoexND5S2QGOWIyz2tg2XWJfmzqyvSwU2HORRPyxp3xXTnGF2xiV80EyKTW1utXbQISYT0lddAnBQCgLD0aYJvN+/pV9vfNuVm2Kt5i+I9puEGsvotzZs4KxMKhuEnafgR5D+BALQIAAADIdJHRQxlX3GO5761+DhCLUOvn5DgAAAAAAACA+rkWAACpOlUDASC4/qy+HquzQMvkva/oJve9XbU3o229u6nrrhXmXspACh7kOiI2EZ8AZPhamLs/tWweD0Bxewn0eUP5TGS+9ZHI9wRYpeoceKLGttZtg/XzXFwBAAHcGFMQqfla/34NMfqYcYxQ1zMHSNGOHAosuKsxJ4zWHGsQoK97Jb9RA3MRAAAAgOrZRxGv75b8NvrJQAjPcgmRGLWkPgMAANUIsT4TijjSM6FB9uYCABDCH5RvE+uQDwEA
   </data>
  </layer>
  <layer name="water-edges" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dsQ2DMBAFUDsz2MkyTJIqE2QmRmG0mBAkFAW6GITfk64AN1d8YTc+QgAAAAAAAACO4n7ZuwNa9JQ7AACAn24xPK4x9HOV535t/XsNANiWYwip7J/ZHkpFJXNvXTnHbZ3tnO8AAAAAAAAAAAAAAAAAAAAAAAAAzms5fy6tlLl0/FMuGUyf6krOSo3vhr37oh1jBmUOAAAAAAAAAAAAAAAAAAA4ihxDGOc9ZLMeqGie/+D+PQAAAAAAAAAAAAAAAADUl6f/Ovd790Fb0nSvedi7D9oxfuu6kjm5o5ZF5tylB4CTeAE63viOkA8BAA==
+   H4sIAAAAAAAAC+3dvQ3CMBAGUJsZYjIEK2QSKiZgpozCaJz5kRACOmKI35OsKElzxafYLs5JCQAAAAAAAPgV+03rCujRUe4AAABeGnM6bHOa7yPu53fvn98BAJ+VnNIQ82cxh7KgyNzFFOu4T2s76zsAAAAAAAAAAAAAAAAAAAAAAACA9Xo8f254M5xLxzeVyOBwG1PkLEZ9dmpdF/2oGZQ5AAAAAAAAAAAAAPhfY25dAb2p/Ti7fLnOrWuhL6P+BwAA6EaJfWc976HYe7Kg+/kP+u8BAAAAAAAAAAAAAAAAYHnl+l/nuXUd9GW49jWfWtdBP+q3borMyR1LecicXnoAWIkzXxqyk5APAQA=
   </data>
  </layer>
  <layer name="walls" width="158" height="110">
@@ -122,7 +122,7 @@
  </layer>
  <layer name="shadows" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3c7U6zMBgG4OmpcLC+8YD9Z2KMr3HWlhVaoB/XlZjhNsZHbx4KXXa7AdCrpfDvFjzmzsO8ZADg7zk09/2Pnn/0eXvO7bH5bolp5/vxndW2MjSWnPbMrXOl67G1Vi2Jaca1J4thnmqcC51P2Ut/jFaV3Hvki331w/Voe0rHGEYw0rbMbtYMwxay3w71itpyxpnOdOTyXp7z3/v6/72p4+v9yXFHnpK+5mfO9iyHMo7r39nbkkPq6S2He9YxNk8qb+HzvewXjldynIS1Tu07xwj34f7dXVeE67i2DWu5ir3W8j6YQaxtexOrc2G943qprPWYudCbrF0mdQ5ZO7eMkDmAFDWO2pbENFyt5Pt8PdyTAbhSTt3Mratq8zi0GcA5HtVUNfda+jbQFscYAED/9OdgXCXjTLXG/93LAQAASrg+AAAA4GjGqOiZsVgAAAAAAGbl3vd2xhMYkSwDAJxLf4vWyOQYemi/JXgE+hD7Pa376auO6dhyt/7uF3WV/N5aT+3RwrqOvH9Jy23Lmu0vQ3wLc5CaTs2Xm0lZIybMW82cyBxr1q45jlhWql7q3/FJm3MGdaYPM94PeLQ9o2//VrNvf+uOvL5pRWwbz6pbOZ+tXhCzNweyw2i21k840lr/n+vs6d/VGqs8epmyBdSg/gAAADUswWPstdT/kGvtflo4NhA+d/94tZm+PwMAAK3T/wYAGIu+HS1wrx+YhTrH2WQOAMbzAUCFVfyQDwEA
+   H4sIAAAAAAAAC+3cW26cMBQAUNKtsNhUXXD/IkVRK3Xi2mCwAT/OkSLIDG9fro09YlkA6NVa+LcE09x1mJcYAPi/Ds1dfu/zve2dqdtj6y2JefX9+O4qWzE0lpzyzM1zpcdxNFetiXnGdSYWw3iqUReqTzlLe4xWlfQ98odr9Y/n0faUjjGMYKRzmd2sMQxHiP12yFfUljPOdKcr9/f+I3/ZX3+XTd1fH2/uO/KUtDW/4uzMfijjvv4ee0fikHp6i8MzxxhbJxVv4ee9XBeuV3KfhLlO7rvHCP1wP1+eK8Jj3DqHrbiKfdfyNZhBrGx7E8tzYb7jealY6zHmQr/F2mNSdchW3TJCzAGkyHHUtibm4Wklv+froU8G4Ek5eTM3r8rN41BmAPfYy6ly7rO0baAt7jEAgP5pz8G4SsaZao3/68sBAABKeD4AAADgasao6JmxWAAAAAAAZqXv+zjjCYxILAMA3Et7i9aIyTH0UH5rMAX6EHuf1uv8U/d0bL9H3/tFXSXvW+upPFo41pGvL2m5ZVmz/Pe2oX03jzAOUvOp9XJjUiwRE8ZbzTgRc2zZeua4Yl+pfKl9xxdlzh3kmT7M2B+Q82w68vkfNfv5t+7K55tWxM7xrryVs235gpizcSB2GM3R/AlX2hub4hln2ne1xiqv3qfYAmqQfwAAgBrWYBr7LvU/5NrqTwvHBsLPXqdPm+n3MwAA0DrtbwCAsWjb0QJ9/cAs5DnuJuYAYDyf1WK+8ZAPAQA=
   </data>
  </layer>
  <layer name="lights" width="158" height="110">
@@ -932,70 +932,70 @@
   <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" gid="1343" x="5568" y="3504" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="335" name="dusty road" x="2016" y="672">
+  <object id="335" name="Dusty road" x="2016" y="672">
    <polygon points="0,0 576,0 576,336 432,336 432,144 -48,144 -48,0"/>
   </object>
-  <object id="336" name="old mine road" x="2640" y="1296">
+  <object id="336" name="Old mine road" x="2640" y="1296">
    <polygon points="0,0 0,144 624,144 624,288 960,288 960,0"/>
   </object>
-  <object id="338" name="aries the ram" x="6000" y="2928">
+  <object id="338" name="Aries the ram" x="6000" y="2928">
    <polygon points="0,0 240,0 240,864 96,864 96,480 0,480"/>
   </object>
-  <object id="339" name="leo" x="5952" y="4368">
+  <object id="339" name="Leo" x="5952" y="4368">
    <polygon points="0,0 0,48 -192,48 -192,528 48,528 48,480 96,480 96,192 144,192 144,0"/>
   </object>
-  <object id="340" name="virgo" x="6048" y="4368">
+  <object id="340" name="Virgo" x="6048" y="4368">
    <polygon points="0,0 192,0 192,528 336,528 336,768 -96,768 -96,480 -48,480 -48,288 0,288"/>
   </object>
-  <object id="341" name="library" x="1968" y="528">
+  <object id="341" name="Royal Library" x="1968" y="528">
    <polygon points="0,0 0,144 480,144 480,0"/>
   </object>
-  <object id="343" name="home of Ali Baba" x="2016" y="816">
+  <object id="343" name="Home of Ali Baba" x="2016" y="816">
    <polygon points="0,0 0,144 480,144 480,0"/>
   </object>
-  <object id="344" name="sultan's palace" x="1632" y="528">
+  <object id="344" name="Sultan's palace" x="1632" y="528">
    <polygon points="0,0 0,432 384,432 384,0"/>
   </object>
-  <object id="345" name="palace vault" x="1152" y="480">
+  <object id="345" name="Shahriar treasury" x="1152" y="480">
    <polygon points="0,0 0,480 480,480 480,0"/>
   </object>
-  <object id="346" name="forest" x="2016" y="960">
+  <object id="346" name="Forest" x="2016" y="960">
    <polygon points="0,0 0,432 672,432 672,0"/>
   </object>
-  <object id="347" name="view from a tree" x="2640" y="1008">
+  <object id="347" name="View from a tree" x="2640" y="1008">
    <polygon points="0,0 0,288 336,288 336,0"/>
   </object>
-  <object id="348" name="thieves cave" x="2688" y="576">
+  <object id="348" name="Thieves cave" x="2688" y="576">
    <polygon points="0,0 0,432 672,432 672,0"/>
   </object>
-  <object id="350" name="foothills cemetary" x="2496" y="48">
+  <object id="350" name="Foothills cemetary" x="2496" y="48">
    <polygon points="0,0 0,336 864,336 864,0"/>
   </object>
-  <object id="352" name="the mountain" x="3312" y="48">
+  <object id="352" name="The mountain" x="3312" y="48">
    <polygon points="0,0 0,480 672,480 672,0"/>
   </object>
   <object id="353" name="roy g. biv" x="4128" y="336">
    <polygon points="0,0 144,0 144,288 0,288"/>
   </object>
-  <object id="354" name="jackal altar" x="4224" y="192">
+  <object id="354" name="Jackal altar" x="4224" y="192">
    <polygon points="0,0 0,288 624,288 624,0"/>
   </object>
-  <object id="355" name="deserted tunnel" x="4368" y="480">
+  <object id="355" name="Deserted tunnel" x="4368" y="480">
    <polygon points="0,0 0,144 480,144 480,0"/>
   </object>
-  <object id="356" name="air vent" x="4800" y="192">
+  <object id="356" name="Air vent" x="4800" y="192">
    <polygon points="0,0 0,480 144,480 144,0"/>
   </object>
-  <object id="357" name="bear cave" x="4896" y="192">
+  <object id="357" name="Bear cave" x="4896" y="192">
    <polygon points="0,0 0,240 720,240 720,0"/>
   </object>
-  <object id="358" name="rats nest" x="4896" y="432">
+  <object id="358" name="Rats nest" x="4896" y="432">
    <polygon points="0,0 0,192 720,192 720,0"/>
   </object>
-  <object id="359" name="astrologer's maze" x="4992" y="720">
+  <object id="359" name="Astrologer's maze" x="4992" y="720">
    <polygon points="0,0 0,480 672,480 672,0"/>
   </object>
-  <object id="362" name="spiral staircase" x="5616" y="768">
+  <object id="362" name="Spiral staircase" x="5616" y="768">
    <polygon points="0,0 0,336 240,336 240,0"/>
   </object>
   <object id="363" name="y" x="4896" y="1392">
@@ -1019,100 +1019,100 @@
   <object id="369" name="i" x="1776" y="1920">
    <polygon points="0,0 0,336 768,336 768,0"/>
   </object>
-  <object id="371" name="gilded hallway" x="2304" y="2448">
+  <object id="371" name="Gilded hallway" x="2304" y="2448">
    <polygon points="0,0 0,576 240,576 240,0"/>
   </object>
-  <object id="372" name="guard room" x="2112" y="2976">
+  <object id="372" name="Guard room" x="2112" y="2976">
    <polygon points="0,0 0,288 624,288 624,0"/>
   </object>
-  <object id="373" name="stinger strewn cell" x="2112" y="3216">
+  <object id="373" name="Stinger strewn cell" x="2112" y="3216">
    <polygon points="0,0 0,240 288,240 288,0"/>
   </object>
-  <object id="374" name="long way from home" x="2448" y="3264">
+  <object id="374" name="Long way from home" x="2448" y="3264">
    <polygon points="0,0 0,192 288,192 288,0"/>
   </object>
-  <object id="375" name="save the whales" x="2064" y="3456">
+  <object id="375" name="Save the whales" x="2064" y="3456">
    <polygon points="0,0 0,192 720,192 720,0"/>
   </object>
-  <object id="376" name="dragon lair" x="2064" y="3648">
+  <object id="376" name="Dragon lair" x="2064" y="3648">
    <polygon points="0,0 0,288 384,288 384,0"/>
   </object>
-  <object id="377" name="gold for the lucky" x="2400" y="3648">
+  <object id="377" name="Gold for the lucky" x="2400" y="3648">
    <polygon points="0,0 0,336 384,336 384,0"/>
   </object>
-  <object id="379" name="inner staircase" x="1824" y="3504">
+  <object id="379" name="Inner staircase" x="1824" y="3504">
    <polygon points="0,0 0,288 288,288 288,0"/>
   </object>
-  <object id="380" name="minotaur's vault" x="1632" y="3792">
+  <object id="380" name="Minotaur's vault" x="1632" y="3792">
    <polygon points="0,0 0,144 480,144 480,0"/>
   </object>
-  <object id="381" name="minotaur's den" x="1296" y="3552">
+  <object id="381" name="Minotaur's den" x="1296" y="3552">
    <polygon points="0,0 0,384 384,384 384,0"/>
   </object>
-  <object id="382" name="minotaur's maze" x="672" y="3408">
+  <object id="382" name="Minotaur's maze" x="672" y="3408">
    <polygon points="0,0 0,432 672,432 672,0"/>
   </object>
-  <object id="383" name="deep dark stairway" x="336" y="3312">
+  <object id="383" name="Deep dark stairway" x="336" y="3312">
    <polygon points="0,0 0,384 384,384 384,0"/>
   </object>
-  <object id="384" name="failing wall" x="48" y="3984">
+  <object id="384" name="Failing wall" x="48" y="3984">
    <polygon points="0,0 0,336 672,336 672,0"/>
   </object>
-  <object id="385" name="minotaur's playroom" x="576" y="4464">
+  <object id="385" name="Minotaur's playroom" x="576" y="4464">
    <polygon points="0,0 0,288 576,288 576,0"/>
   </object>
-  <object id="386" name="underground stream" x="3168" y="2496">
+  <object id="386" name="Underground stream" x="3168" y="2496">
    <polygon points="0,0 0,480 720,480 720,0"/>
   </object>
-  <object id="387" name="magic pavilion" x="3264" y="3024">
+  <object id="387" name="Magic tour-billion" x="3264" y="3024">
    <polygon points="0,0 0,384 480,384 480,0"/>
   </object>
-  <object id="388" name="slide" x="5040" y="1824">
+  <object id="388" name="Slide" x="5040" y="1824">
    <polygon points="0,0 0,624 144,624 144,0"/>
   </object>
-  <object id="389" name="mine shaft" x="5328" y="3408">
+  <object id="389" name="Mine shaft" x="5328" y="3408">
    <polygon points="0,0 0,96 576,96 576,0"/>
   </object>
-  <object id="390" name="hallway" x="6192" y="3360">
+  <object id="390" name="Hallway" x="6192" y="3360">
    <polygon points="0,0 0,384 192,384 192,0"/>
   </object>
-  <object id="391" name="pisces" x="6336" y="3360">
+  <object id="391" name="Pisces" x="6336" y="3360">
    <polygon points="0,0 0,384 192,384 192,0"/>
   </object>
-  <object id="392" name="aquarius" x="6480" y="3360">
+  <object id="392" name="Aquarius" x="6480" y="3360">
    <polygon points="0,0 0,384 240,384 240,0"/>
   </object>
-  <object id="393" name="taurus" x="5904" y="3408">
+  <object id="393" name="Taurus" x="5904" y="3408">
    <polygon points="0,0 0,336 240,336 240,0"/>
   </object>
-  <object id="394" name="astrologer's lab" x="5952" y="3744">
+  <object id="394" name="Astrologer's lab" x="5952" y="3744">
    <polygon points="0,0 0,672 672,672 672,0"/>
   </object>
-  <object id="396" name="cancer" x="5232" y="4032">
+  <object id="396" name="Cancer" x="5232" y="4032">
    <polygon points="0,0 0,240 768,240 768,0"/>
   </object>
-  <object id="397" name="gemini" x="5232" y="3840">
+  <object id="397" name="Gemini" x="5232" y="3840">
    <polygon points="0,0 0,192 768,192 768,0"/>
   </object>
-  <object id="398" name="libra" x="6192" y="4368">
+  <object id="398" name="Libra" x="6192" y="4368">
    <polygon points="0,0 0,432 288,432 288,0"/>
   </object>
-  <object id="399" name="scorpio" x="6432" y="4368">
+  <object id="399" name="Scorpio" x="6432" y="4368">
    <polygon points="0,0 0,432 240,432 240,0"/>
   </object>
-  <object id="400" name="capricornus" x="6576" y="3840">
+  <object id="400" name="Capricornus" x="6576" y="3840">
    <polygon points="0,0 0,192 816,192 816,0"/>
   </object>
-  <object id="401" name="sagitarius" x="6576" y="4032">
+  <object id="401" name="Sagittarius" x="6576" y="4032">
    <polygon points="0,0 0,240 816,240 816,0"/>
   </object>
-  <object id="402" name="thieves clearing" x="2832" y="1440">
+  <object id="402" name="Thieves clearing" x="2832" y="1440">
    <polygon points="0,0 0,240 480,240 480,0 288,0 288,-48 144,-48 144,0"/>
   </object>
-  <object id="403" name="crystal cave" x="4368" y="768">
+  <object id="403" name="Crystal cave" x="4368" y="768">
    <polygon points="0,0 0,288 672,288 672,0"/>
   </object>
-  <object id="405" name="Princess Cell" x="4944" y="3792">
+  <object id="405" name="Princess's Cell" x="4944" y="3792">
    <polygon points="0,0 0,192 240,192 240,0 0,0"/>
   </object>
  </objectgroup>

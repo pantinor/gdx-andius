@@ -57,6 +57,8 @@ import utils.Utils;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CombatScreen extends BaseScreen {
@@ -67,7 +69,6 @@ public class CombatScreen extends BaseScreen {
 
     private final MutableMonster[] crSlots;
 
-    private final CursorActor cursor;
     public final Map contextMap;
     public final andius.objects.Actor opponent;
     private final Monster crType;
@@ -80,8 +81,8 @@ public class CombatScreen extends BaseScreen {
     private final Viewport mapViewPort;
     private final GlyphLayout layout = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 65, Align.left, true);
 
-    public final List<andius.objects.Actor> enemies = new ArrayList<>();
-    public final List<andius.objects.Actor> partyMembers = new ArrayList<>();
+    public final Set<andius.objects.Actor> enemies = new LinkedHashSet<>();
+    public final Set<andius.objects.Actor> partyMembers = new LinkedHashSet<>();
     private int activeIndex;
 
     private Texture frame;
@@ -163,13 +164,14 @@ public class CombatScreen extends BaseScreen {
             }
             andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon(), 0, context.players()[index].name);
             actor.set(this.context.players()[index], sx, sy, x, y);
+
+            CursorActor cursor = new CursorActor();
+            cursor.set(actor.getX(), actor.getY());
+            stage.addActor(cursor);
+            cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
+            actor.setPlayerCursor(cursor);
             partyMembers.add(actor);
         }
-
-        cursor = new CursorActor();
-        cursor.set(this.partyMembers.get(0).getX(), this.partyMembers.get(0).getY());
-        stage.addActor(cursor);
-        cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
 
         hudStage.addActor(this.logScroll);
 
@@ -268,17 +270,25 @@ public class CombatScreen extends BaseScreen {
 
         renderer.render();
 
+        stage.act();
+        stage.draw();
+
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
             renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
         }
 
+        int x = 0;
+        float cx = 0, cy = 0;
         for (andius.objects.Actor p : partyMembers) {
             if (p.getPlayer().status != Status.DEAD) {
                 renderer.getBatch().draw(p.getAnimation().getKeyFrame(time, true), p.getX(), p.getY());
-            } else {
-                //renderer.getBatch().draw(Exodus.corpse, p.getX(), p.getY());
             }
+            if (x == this.activeIndex) {
+                cx = p.getX();
+                cy = p.getY();
+            }
+            x++;
         }
 
         renderer.getBatch().end();
@@ -305,9 +315,6 @@ public class CombatScreen extends BaseScreen {
 
         batch.end();
 
-        stage.act();
-        stage.draw();
-
         if (cip.active) {
             int pointerx = (int) currentMousePos.x - 1 * TILE_DIM;
             int pointery = (int) (Andius.SCREEN_HEIGHT - currentMousePos.y - 2 * TILE_DIM);
@@ -325,7 +332,7 @@ public class CombatScreen extends BaseScreen {
                         break;
                     }
                 }
-                shapeRenderer.line(cursor.getX() + TILE_DIM / 2, cursor.getY() + TILE_DIM / 2, pointerx, pointery);
+                shapeRenderer.line(cx + TILE_DIM / 2, cy + TILE_DIM / 2, pointerx, pointery);
                 shapeRenderer.end();
             }
         }
@@ -411,6 +418,7 @@ public class CombatScreen extends BaseScreen {
 
         if (nx < 0 || ny < 0 || nx >= MAP_DIM || ny >= MAP_DIM) {
             this.partyMembers.remove(active);
+            active.getPlayerCursor().remove();
             Sounds.play(Sound.FLEE);
             return false;
         }
@@ -438,13 +446,7 @@ public class CombatScreen extends BaseScreen {
         boolean roundIsDone = isRoundDone() || this.enemies.isEmpty();
 
         andius.objects.Actor next = getAndSetNextActivePlayer();
-        if (next != null) {
-            cursor.setVisible(true);
-            cursor.set(next.getX(), next.getY());
-            hud.set(next, hudStage);
-        } else {
-            cursor.setVisible(false);
-        }
+        hud.set(next, hudStage);
 
         if (roundIsDone) {
             finishTurn(0, 0);
@@ -658,6 +660,7 @@ public class CombatScreen extends BaseScreen {
                                 @Override
                                 public void run() {
                                     partyMembers.remove(target);
+                                    target.getPlayerCursor().remove();
                                     getAndSetNextActivePlayer();
                                 }
                             }));
@@ -691,9 +694,8 @@ public class CombatScreen extends BaseScreen {
         int d = 0;
         int leastDist = 0xFFFF;
 
-        for (int i = 0; i < this.partyMembers.size(); i++) {
+        for (andius.objects.Actor pm : partyMembers) {
 
-            andius.objects.Actor pm = this.partyMembers.get(i);
             if (pm.getPlayer().status == Status.DEAD) {
                 continue;
             }
@@ -751,7 +753,7 @@ public class CombatScreen extends BaseScreen {
     }
 
     private andius.objects.Actor getActivePartyMember() {
-        return !this.partyMembers.isEmpty() && activeIndex < this.partyMembers.size() ? this.partyMembers.get(activeIndex) : null;
+        return !this.partyMembers.isEmpty() && activeIndex < this.partyMembers.size() ? getPartyMember(activeIndex) : null;
     }
 
     private boolean isRoundDone() {
@@ -761,8 +763,8 @@ public class CombatScreen extends BaseScreen {
             return true;
         }
         boolean noMoreAble = true;;
-        for (int i = tmp; i < this.partyMembers.size(); i++) {
-            if (!this.partyMembers.get(i).isDisabled()) {
+        for (andius.objects.Actor player : partyMembers) {
+            if (!player.isDisabled()) {
                 noMoreAble = false;
             }
         }
@@ -771,29 +773,43 @@ public class CombatScreen extends BaseScreen {
 
     private andius.objects.Actor getAndSetNextActivePlayer() {
         boolean allbad = true;
-        for (int i = 0; i < this.partyMembers.size(); i++) {
-            if (!this.partyMembers.get(i).isDisabled()) {
+        for (andius.objects.Actor p : partyMembers) {
+            if (!p.isDisabled()) {
                 allbad = false;
             }
+            CursorActor ca = p.getPlayerCursor();
+            ca.setVisible(false);
+            ca.setX(p.getX());
+            ca.setY(p.getY());
         }
+
         if (allbad) {
             activeIndex = 0;
             return null;
         }
 
-        andius.objects.Actor p = null;
-        boolean flag = true;
-        while (flag) {
+        while (true) {
             this.activeIndex++;
             if (activeIndex >= this.partyMembers.size()) {
                 activeIndex = 0;
             }
-            if (!this.partyMembers.get(activeIndex).isDisabled()) {
-                p = this.partyMembers.get(activeIndex);
-                flag = false;
+            andius.objects.Actor p = getPartyMember(activeIndex);
+            if (!p.isDisabled()) {
+                p.getPlayerCursor().setVisible(true);
+                return p;
             }
         }
-        return p;
+    }
+
+    private andius.objects.Actor getPartyMember(int index) {
+        int i = 0;
+        for (andius.objects.Actor player : partyMembers) {
+            if (index == i) {
+                return player;
+            }
+            i++;
+        }
+        return null;
     }
 
     private void animateWeaponAttack(andius.objects.Actor attacker, Direction dir, andius.objects.Actor target) {

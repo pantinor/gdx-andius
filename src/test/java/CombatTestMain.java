@@ -5,11 +5,13 @@ import andius.CombatScreen;
 import andius.Constants;
 import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Role;
+import static andius.Constants.SAVE_FILENAME;
 import andius.Constants.SpellTarget;
 import andius.Context;
 import andius.objects.Actor;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
+import andius.objects.SaveGame;
 import andius.objects.Spells;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -36,6 +38,8 @@ public class CombatTestMain extends Game {
             a.create();
 
             Context ctx = new Context();
+            SaveGame sg = SaveGame.read(SAVE_FILENAME);
+            ctx.setSaveGame(sg);
 
             for (int j = 0; j < 6; j++) {
 //                ctx.saveGame.players[j].level = 1;

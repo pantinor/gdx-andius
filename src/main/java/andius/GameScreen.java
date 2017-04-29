@@ -75,6 +75,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void show() {
+        setRoomName();
         this.map.syncRemovedActors(CTX.saveGame);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
@@ -120,6 +121,10 @@ public class GameScreen extends BaseScreen {
 
 //        Vector3 v = getCurrentMapCoords();
 //        Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        if (this.roomName != null) {
+            Andius.largeFont.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
+        }
+
         batch.end();
 
         stage.act();
@@ -275,6 +280,7 @@ public class GameScreen extends BaseScreen {
             Vector3 dv = p.getDest();
             if (this.map.getRoomIds() != null) {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
+                setRoomName();
             }
             setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y);
 
@@ -309,6 +315,7 @@ public class GameScreen extends BaseScreen {
 
         if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][1] == 0) {
             this.currentRoomId = this.map.getRoomIds()[x][y][0];
+            setRoomName();
         }
 
         try {
@@ -320,6 +327,23 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void partyDeath() {
+    }
+
+    private void setRoomName() {
+        MapLayer roomsLayer = this.map.getTiledMap().getLayers().get("rooms");
+        if (roomsLayer != null) {
+            Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
+            while (iter.hasNext()) {
+                MapObject obj = iter.next();
+                int id = obj.getProperties().get("id", Integer.class);
+                String name = obj.getName();
+                if (id == this.currentRoomId) {
+                    this.roomName = name;
+                    return;
+                }
+            }
+        }
+        this.roomName = null;
     }
 
 }
