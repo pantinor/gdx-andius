@@ -85,8 +85,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
+  <image source="uf_heroes.png" width="1920" height="672"/>
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
@@ -274,7 +274,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="rooms" visible="0">
+ <objectgroup name="rooms">
   <object id="42" x="1008" y="672">
    <polygon points="0,0 0,336 144,336 144,432 288,432 288,336 384,336 384,0"/>
   </object>
@@ -299,13 +299,13 @@
   <object id="49" x="720" y="1152">
    <polygon points="0,0 0,336 144,336 144,192 336,192 336,96 144,96 144,0"/>
   </object>
-  <object id="50" x="528" y="768">
+  <object id="50" name="Evil Wizard's Lab" x="528" y="768">
    <polygon points="0,0 0,432 336,432 336,384 480,384 480,0"/>
   </object>
   <object id="51" x="528" y="1152">
    <polygon points="0,0 0,288 144,288 144,0"/>
   </object>
-  <object id="52" x="432" y="432">
+  <object id="52" name="Azath" x="432" y="432">
    <polygon points="0,0 0,288 192,288 192,384 336,384 336,288 528,288 528,0"/>
   </object>
   <object id="53" x="816" y="96">
@@ -326,7 +326,7 @@
   <object id="58" x="0" y="528">
    <polygon points="0,0 0,96 480,96 480,0"/>
   </object>
-  <object id="69" x="0" y="816">
+  <object id="69" name="Daruj" x="0" y="816">
    <polygon points="0,0 0,480 528,480 528,0"/>
   </object>
  </objectgroup>

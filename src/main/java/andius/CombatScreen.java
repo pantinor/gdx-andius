@@ -890,11 +890,13 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (av != null && av.result != null && weapon.numberUses > 0) {
+        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
             weapon.use();
             if (weapon.numberUses <= 0) {
                 log("Your weapon has broken!");
-                attacker.getPlayer().weapon = Andius.ITEMS_MAP.get("HANDS").clone();
+                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
+                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
+                attacker.getPlayer().weapon = null;
             }
         }
 
@@ -929,11 +931,13 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (av != null && av.result != null && weapon.numberUses > 0) {
+        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
             weapon.use();
             if (weapon.numberUses <= 0) {
                 log("Your weapon has broken!");
-                attacker.getPlayer().weapon = Andius.ITEMS_MAP.get("HANDS").clone();
+                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
+                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
+                attacker.getPlayer().weapon = null;
             }
         }
 

@@ -97,7 +97,7 @@ public class RewardScreen implements Screen, Constants {
         for (int i = 1; i < TrapType.values().length; i++) {
             tt[i - 1] = TrapType.values()[i];
         }
-        this.trapSelection = new List<>(Andius.skin, "larger");
+        this.trapSelection = new List<>(Andius.skin, "default");
         this.trapSelection.setItems(new TrapType[0]);
 
         this.action = new List<>(Andius.skin, "larger");
@@ -108,7 +108,7 @@ public class RewardScreen implements Screen, Constants {
                 if (action.getSelected().equals("LEAVE")) {
                     pselLabel.setText("");
                 } else {
-                    pselLabel.setText("WHICH PLAYER WILL " + action.getSelected() + " ?");
+                    pselLabel.setText("WHO WILL " + action.getSelected() + " ?");
                 }
                 if (action.getSelected().equals("DISARM")) {
                     trapSelection.setItems(tt);
@@ -156,7 +156,7 @@ public class RewardScreen implements Screen, Constants {
 
         Label tmp1 = new Label("A CHEST !", Andius.skin, "larger");
         Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");
-        this.pselLabel = new Label("WHICH PLAYER WILL OPEN ?", Andius.skin, "larger");
+        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "larger");
 
         this.logTable = new Table(Andius.skin);
         this.logTable.defaults().padLeft(5).align(Align.left);
@@ -167,8 +167,8 @@ public class RewardScreen implements Screen, Constants {
         sp1.setBounds(X_ALIGN, 295, 100, 175);
         sp2.setBounds(X_ALIGN + 110, 295, 175, 175);
         pselLabel.setBounds(X_ALIGN + 110, 475, 175, ITEM_HGT);
-        sp3.setBounds(X_ALIGN + 110 + 185, 295, 175, 175);
-        go.setBounds(X_ALIGN + 110 + 185 + 185, 310, 65, 40);
+        go.setBounds(X_ALIGN + 110 + 185, 310, 65, 40);
+        sp3.setBounds(X_ALIGN + 110 + 185 + 80, 298, 155, 198);
         this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
 
         stage.addActor(tmp1);
@@ -390,7 +390,7 @@ public class RewardScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        logTable.add(new Label(s, Andius.skin, "larger"));
+        logTable.add(new Label(s, Andius.skin, "default"));
         logTable.row();
         logScroll.layout();
         logScroll.setScrollPercentY(100);

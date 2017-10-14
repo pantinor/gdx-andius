@@ -85,8 +85,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
+  <image source="uf_heroes.png" width="1920" height="672"/>
  </tileset>
  <layer name="floor" width="48" height="48">
   <data encoding="base64" compression="gzip">
@@ -395,8 +395,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="rooms" visible="0">
-  <object id="67" name="entrance" x="1584" y="1824">
+ <objectgroup name="rooms">
+  <object id="67" name="Wiwold" x="1584" y="1824">
    <polygon points="0,0 0,240 336,240 336,0 240,0 240,-48 96,-48 96,0"/>
   </object>
   <object id="68" x="1872" y="1968">

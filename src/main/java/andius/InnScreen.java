@@ -91,7 +91,7 @@ public class InnScreen implements Screen, Constants {
 
         this.roomSelection.setItems(names);
 
-        this.go = new TextButton("BUY", Andius.skin, "brown-larger");
+        this.go = new TextButton("BUY", Andius.skin, "red-larger");
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -112,7 +112,7 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL", Andius.skin, "brown-larger");
+        this.pool = new TextButton("POOL", Andius.skin, "red-larger");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -135,7 +135,7 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("EXIT", Andius.skin, "brown-larger");
+        this.exit = new TextButton("EXIT", Andius.skin, "red-larger");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -260,7 +260,7 @@ public class InnScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        logTable.add(new Label(s, Andius.skin, "larger"));
+        logTable.add(new Label(s, Andius.skin, "default"));
         logTable.row();
         logScroll.layout();
         logScroll.setScrollPercentY(100);

@@ -16,6 +16,7 @@ public class Item implements Comparable<Item> {
     static {
         Dice d = new Dice(2, 1);
         HANDS.damage = d;
+        HANDS.genericName = "HANDS";
     }
 
     public String name;

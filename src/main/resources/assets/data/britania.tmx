@@ -243,13 +243,13 @@
   </object>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="2" x="912" y="864">
+  <object id="2" name="Infirmary" x="912" y="864">
    <polygon points="0,0 0,480 288,480 288,0 0,0"/>
   </object>
   <object id="3" x="1152" y="672">
    <polygon points="0,0 0,816 0,864 336,864 336,528 192,528 192,0 0,0"/>
   </object>
-  <object id="5" x="864" y="144">
+  <object id="5" name="Cool Spring" x="864" y="144">
    <polygon points="0,0 0,432 336,432 336,0 0,0"/>
   </object>
   <object id="7" x="1152" y="0">
@@ -261,19 +261,19 @@
   <object id="11" x="0" y="0">
    <polygon points="0,0 0,288 144,288 144,1200 0,1200 0,1536 336,1536 336,0 0,0"/>
   </object>
-  <object id="12" x="288" y="864">
+  <object id="12" name="Seer Hawkwind" x="288" y="864">
    <polygon points="0,0 0,480 288,480 288,96 240,96 240,0 0,0"/>
   </object>
-  <object id="17" x="288" y="144">
+  <object id="17" name="Guard's Room" x="288" y="144">
    <polygon points="0,0 336,0 336,432 0,432 0,0"/>
   </object>
-  <object id="19" x="576" y="144">
+  <object id="19" name="Storage" x="576" y="144">
    <polygon points="0,0 0,288 336,288 336,0"/>
   </object>
   <object id="20" x="1152" y="288">
    <polygon points="0,0 0,432 192,432 192,0"/>
   </object>
-  <object id="21" x="288" y="48">
+  <object id="21" name="Dungeon Stairwell" x="288" y="48">
    <polygon points="0,0 144,0 144,96 0,96"/>
   </object>
   <object id="24" x="288" y="1344">

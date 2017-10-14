@@ -93,33 +93,11 @@ public class StartScreen implements Screen, Constants {
 
                     BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
                     scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
-                    Andius.mainGame.setScreen(scr);
+                    mainGame.setScreen(scr);
 
-//                        for (int j = 0; j < 6; j++) {
-//                            CTX.saveGame.players[j].level = 1;
-//                            CTX.saveGame.players[j].hp = 8;
-//                            CTX.saveGame.players[j].maxhp = 12;
-//                            CTX.saveGame.players[j].gold = 3000;
-//                            
-//                            CTX.saveGame.players[j].exp = 12000;
-//                            CTX.saveGame.players[j].magePoints = new int[7];
-//                            CTX.saveGame.players[j].clericPoints = new int[7];
-//                            CTX.saveGame.players[j].knownSpells.clear();
-//                            
-//                            CTX.saveGame.players[j].str = 8;
-//                            CTX.saveGame.players[j].intell = 8;
-//                            CTX.saveGame.players[j].piety = 8;
-//                            CTX.saveGame.players[j].vitality = 8;
-//                            CTX.saveGame.players[j].agility = 8;
-//                            CTX.saveGame.players[j].luck = 8;
-//                        }
-//                        FileHandleResolver resolver = new Constants.ClasspathResolver();
-//                        TmxMapLoader loader = new TmxMapLoader(resolver);
-//                        TiledMap tm = loader.load("assets/data/combat1.tmx");
-//                        CombatScreen cs = new CombatScreen(CTX, Map.WIWOLD, tm, MONSTERS.get(13));
-//                        mainGame.setScreen(cs);
                     //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
                     //mainGame.setScreen(rs);
+                    
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
@@ -135,6 +113,7 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
                     //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
                     //mainGame.setScreen(es);
+                    
 //                        CTX.saveGame.players[0].hp = 5;
 //                        CTX.saveGame.players[1].hp = 0;
 //                        CTX.saveGame.players[1].status = Status.DEAD;
@@ -146,10 +125,11 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].exp = 1500;
 //                        CTX.saveGame.players[2].exp = 2500;
 //                        CTX.saveGame.players[1].exp = 3500;
-//                        InnScreen es = new InnScreen(CTX, Map.WIWOLD);
-//                        mainGame.setScreen(es);
-//                        VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
-//                        mainGame.setScreen(es);
+                        //InnScreen es = new InnScreen(CTX, Map.WIWOLD);
+                        //mainGame.setScreen(es);
+                        //VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
+                        //mainGame.setScreen(es);
+
                 } catch (Exception e) {
                     CTX.setSaveGame(new SaveGame());
                     mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));

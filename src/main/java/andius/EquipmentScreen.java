@@ -146,7 +146,7 @@ public class EquipmentScreen implements Screen, Constants {
         spellPane = new ScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
         spellPane.setBounds(753, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
-        this.cancel = new TextButton("CNCL", Andius.skin, "brown-larger");
+        this.cancel = new TextButton("CNCL", Andius.skin, "red-larger");
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -155,7 +155,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.cancel.setBounds(100, 220, 65, 40);
 
-        this.exit = new TextButton("APPLY", Andius.skin, "brown-larger");
+        this.exit = new TextButton("APPLY", Andius.skin, "red-larger");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -167,7 +167,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.exit.setBounds(175, 220, 65, 40);
 
-        this.trade = new TextButton("TRAD", Andius.skin, "brown-larger");
+        this.trade = new TextButton("TRAD", Andius.skin, "red-larger");
         this.trade.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -176,7 +176,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.trade.setBounds(250, 220, 65, 40);
 
-        this.unequip = new TextButton("REMV", Andius.skin, "brown-larger");
+        this.unequip = new TextButton("REMV", Andius.skin, "red-larger");
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -204,7 +204,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.unequip.setBounds(325, 220, 65, 40);
 
-        this.drop = new TextButton("DROP", Andius.skin, "brown-larger");
+        this.drop = new TextButton("DROP", Andius.skin, "red-larger");
         this.drop.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -602,7 +602,7 @@ public class EquipmentScreen implements Screen, Constants {
                         event.getTarget().setUserObject(selectedItem.item);
                         ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(icon(selectedItem.item)));
 
-                        if (old != null && !old.name.equals("BROKEN ITEM")) {
+                        if (old != null && !"BROKEN ITEM".equals(old.name)) {
                             PlayerIndex.this.invTable.add(new ItemListing(old, selectedItem.rec));
                             PlayerIndex.this.invTable.row();
                         }

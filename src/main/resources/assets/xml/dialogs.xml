@@ -2415,4 +2415,35 @@
         <topic query="deli" phrase="We even have pheasant!"/>
         <topic query="king or regi" phrase="All over!"/>
     </conversation>
+    <conversation map="Shahriar" name="Sultan Shahriar" description="the Sultan of Shahriar.">
+        <topic query="job" phrase="I am the Sultan! May Allah have mecy on this wretched father, there are traitors in my midst. The Princess Buddir al-Buddoor has been kidnapped! Tell the elite corps immediately!"/>
+        <topic query="bye" phrase="Farewell, and stay on the Path!"/>
+        <topic query="princ" phrase="0%"/>
+        <label id="0" query="The Princess Buddir al-Buddoor has been kidnapped! Can you rescue her?">
+            <topic query="default" phrase="I see."/>
+            <topic query="y" phrase="%1%"/>
+        </label>
+        <label id="1" query="The Princess Buddir al-Buddoor has been kidnapped! Can you rescue her?">
+            <topic query="default" phrase="%1%"/>
+            <topic query="y" phrase="%2%"/>
+            <topic query="n" phrase="Thou art wiser than I thought! %5%"/>
+        </label>
+        <label id="2" query="Doth the evil and hatred within him make thee better than he?">
+            <topic query="default" phrase="%2%"/>
+            <topic query="y" phrase="%3%"/>
+            <topic query="n" phrase="%4%"/>
+        </label>
+        <label id="3" query="Art thou proud of this fact?">
+            <topic query="default" phrase="Then there may be hope for thee yet."/>
+            <topic query="y" phrase="%Karma - 1% Thou art not truly an Avatar!"/>
+        </label>
+        <label id="4" query="Then how dost thou judge him? Dost thou know all there is to know about him?">
+            <topic query="default" phrase="Then perhaps thou shouldst reserve judgement!"/>
+            <topic query="y" phrase="%Karma - 1% Doubtful, at best!"/>
+        </label>
+        <label id="5" query="Dost thou need the Mantra of Humility?">
+            <topic query="default" phrase="Thou must be doing well!"/>
+            <topic query="y" phrase="Then it is thine!   LUM  is the chant which thou dost seek!"/>
+        </label>
+    </conversation>
 </conversations>

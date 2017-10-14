@@ -560,19 +560,19 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="243" name="sultan shahriar" type="MONSTER" x="1680" y="768" width="48" height="48">
+  <object id="243" name="Sultan Shahriar" type="FRIENDLY" x="1680" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="244" name="guard" type="MONSTER" x="1680" y="672" width="48" height="48">
+  <object id="244" name="guard" type="FRIENDLY" x="1680" y="672" width="48" height="48">
    <properties>
     <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="245" name="guard" type="MONSTER" x="1680" y="864" width="48" height="48">
+  <object id="245" name="guard" type="FRIENDLY" x="1680" y="864" width="48" height="48">
    <properties>
     <property name="creature" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
@@ -704,31 +704,31 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="267" name="aries the ram" type="MONSTER" x="6096" y="3120" width="48" height="48">
+  <object id="267" name="aries the ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="268" name="pisces" type="MONSTER" x="6432" y="3408" width="48" height="48">
+  <object id="268" name="pisces" type="FRIENDLY" x="6432" y="3408" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="269" name="aquarius" type="MONSTER" x="6576" y="3408" width="48" height="48">
+  <object id="269" name="aquarius" type="FRIENDLY" x="6576" y="3408" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="270" name="taurus" type="MONSTER" x="6000" y="3552" width="48" height="48">
+  <object id="270" name="taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="271" name="gemini" type="MONSTER" x="5472" y="3936" width="48" height="48">
+  <object id="271" name="gemini" type="FRIENDLY" x="5472" y="3936" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
@@ -746,13 +746,13 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="274" name="virgo" type="MONSTER" x="6048" y="4992" width="48" height="48">
+  <object id="274" name="virgo" type="FRIENDLY" x="6048" y="4992" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="275" name="libra" type="MONSTER" x="6288" y="4656" width="48" height="48">
+  <object id="275" name="libra" type="FRIENDLY" x="6288" y="4656" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
@@ -764,13 +764,13 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="277" name="sagittarius" type="MONSTER" x="6816" y="4128" width="48" height="48">
+  <object id="277" name="sagittarius" type="FRIENDLY" x="6816" y="4128" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="278" name="capricornus" type="MONSTER" x="6768" y="3936" width="48" height="48">
+  <object id="278" name="capricornus" type="FRIENDLY" x="6768" y="3936" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
