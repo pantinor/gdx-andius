@@ -90,6 +90,17 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         });
         inventory.setX(52);
         inventory.setY(5);
+        
+        ImageButton reorder = new ImageButton(imgBtnSkin, "inventory");
+        reorder.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
+                Sounds.play(Sound.TRIGGER);
+                new ReorderPartyDialog(CTX, BaseScreen.this).show(stage);
+            }
+        });
+        reorder.setX(104);
+        reorder.setY(5);
 
         ImageButton save = new ImageButton(imgBtnSkin, "save");
         save.addListener(new ChangeListener() {
@@ -114,6 +125,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         save.setY(5);
 
         stage.addActor(inventory);
+        stage.addActor(reorder);
         stage.addActor(save);
 
     }

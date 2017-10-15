@@ -890,7 +890,7 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
+        if (av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
             weapon.use();
             if (weapon.numberUses <= 0) {
                 log("Your weapon has broken!");

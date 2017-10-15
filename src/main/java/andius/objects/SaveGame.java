@@ -48,7 +48,7 @@ public class SaveGame implements Constants {
     }
 
     public void write(String file) throws Exception {
-        
+
         for (CharacterRecord player : players) {
             player.acmodifier1 = 0;
             player.acmodifier2 = 0;
@@ -233,6 +233,11 @@ public class SaveGame implements Constants {
             }
 
             return (this.exp - expnxtlvl);
+        }
+
+        @Override
+        public String toString() {
+            return this.name.toUpperCase();
         }
 
     }

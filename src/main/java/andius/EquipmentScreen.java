@@ -625,7 +625,7 @@ public class EquipmentScreen implements Screen, Constants {
                     }
                 } else if (event.toString().equals("enter")) {
                     Item i = (Item) event.getTarget().getUserObject();
-                    invDesc.setText(i != null ? i.name : "");
+                    invDesc.setText(i != null ? i.name + " " + (i.numberUses > 0 ? "("+i.numberUses+")" : "") : "");
                     selectedImage = (Image) event.getTarget();
                 } else if (event.toString().equals("exit")) {
                     invDesc.setText("");

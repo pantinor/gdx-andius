@@ -224,6 +224,13 @@ red-off
   orig: 50, 30
   offset: 0, 0
   index: -1
+red-over
+  rotate: false
+  xy: 50, 130
+  size: 50, 30
+  orig: 50, 30
+  offset: 0, 0
+  index: -1
 red-on
   rotate: false
   xy: 0, 160
@@ -234,6 +241,13 @@ red-on
 brown-off
   rotate: false
   xy: 0, 190
+  size: 50, 30
+  orig: 50, 30
+  offset: 0, 0
+  index: -1
+brown-over
+  rotate: false
+  xy: 50, 190
   size: 50, 30
   orig: 50, 30
   offset: 0, 0

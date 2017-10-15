@@ -25,11 +25,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: default-round-down, up: default-round, font: default-font, fontColor: white, downFontColor: blue },
-	red: { down: red-off, up: red-on, font: default-font, fontColor: white, downFontColor: red },
-        red-larger: { down: red-off, up: red-on, font: default-font, fontColor: white, downFontColor: red },
+	red: { down: red-off, up: red-on, font: default-font, over: red-over, fontColor: white, downFontColor: red },
+        red-larger: { down: red-off, up: red-on, font: default-font, over: red-over, fontColor: white, downFontColor: red },
 	larger: { down: default-round-down, up: default-round, font: default-font, fontColor: white, downFontColor: blue },
-        brown: { down: brown-off, up: brown-on, font: default-font, fontColor: white, downFontColor: red },
-        brown-larger: { down: brown-off, up: brown-on, font: default-font, fontColor: white, downFontColor: red },
+        brown: { down: brown-off, up: brown-on, font: default-font, over: brown-over, fontColor: white, downFontColor: red },
+        brown-larger: { down: brown-off, up: brown-on, font: default-font, over: brown-over, fontColor: white, downFontColor: red },
 	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: blue }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
