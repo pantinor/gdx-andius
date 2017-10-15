@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -326,6 +327,13 @@ public class VendorScreen implements Screen, Constants {
                 }
                 invPane.clearChildren();
                 invPane.setWidget(selectedPlayer.invTable);
+
+                for (Cell cell : vendorTable.getCells()) {
+                    if (cell.getActor() instanceof VendorItem) {
+                        VendorItem vi = (VendorItem) cell.getActor();
+                        vi.setUsable(selectedPlayer.character.classType);
+                    }
+                }
             }
         };
 
@@ -624,10 +632,11 @@ public class VendorScreen implements Screen, Constants {
 
     private class VendorItem extends Group {
 
-        Item item;
+        final Item item;
         final Image icon;
         final Label label;
         final Label price;
+        final Image canusebkgnd = new Image();
 
         VendorItem(Item item) {
             this.item = item;
@@ -635,17 +644,28 @@ public class VendorScreen implements Screen, Constants {
             this.icon = new Image(invIcons[item.iconID]);
             this.label = new Label(item.name, Andius.skin, "larger");
             this.price = new Label("" + item.cost, Andius.skin, "larger");
+            this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
 
             addActor(this.icon);
             addActor(this.label);
             addActor(this.price);
+            addActor(this.canusebkgnd);
 
             float x = getX();
             this.icon.setBounds(x + 3, getY() + 3, dim, dim);
             this.label.setPosition(x += 54, getY() + 10);
             this.price.setPosition(x += 175, getY() + 10);
-
+            this.canusebkgnd.setBounds(getX(), getY(), w, h);
             this.setBounds(getX(), getY(), w, h);
+        }
+
+        public void setUsable(ClassType ct) {
+            boolean canUse = item.canUse(ct);
+            if (!canUse) {
+                canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(redBackgrnd)));
+            } else {
+                canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
+            }
         }
 
     }

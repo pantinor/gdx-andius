@@ -49,9 +49,7 @@ public class StartScreen implements Screen, Constants {
                 //Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Exodus.skin));
             }
         });
-        manual.setX(200);
-        manual.setY(Andius.SCREEN_HEIGHT - 410);
-        manual.setWidth(150);
+        manual.setBounds(200, Andius.SCREEN_HEIGHT - 410, 150, 40);
 
         manage = new TextButton("Manage", Andius.skin, "red");
         manage.addListener(new ChangeListener() {
@@ -73,9 +71,7 @@ public class StartScreen implements Screen, Constants {
                 }
             }
         });
-        manage.setX(400);
-        manage.setY(Andius.SCREEN_HEIGHT - 410);
-        manage.setWidth(150);
+        manage.setBounds(400, Andius.SCREEN_HEIGHT - 410, 150, 40);
 
         journey = new TextButton("Journey Onward", Andius.skin, "red");
         journey.addListener(new ChangeListener() {
@@ -137,9 +133,8 @@ public class StartScreen implements Screen, Constants {
 
             }
         });
-        journey.setX(600);
-        journey.setY(Andius.SCREEN_HEIGHT - 410);
-        journey.setWidth(150);
+        journey.setBounds(600, Andius.SCREEN_HEIGHT - 410, 150, 40);
+
 
         stage = new Stage();
         stage.addActor(manual);

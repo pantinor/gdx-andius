@@ -11,8 +11,9 @@ public class Item implements Comparable<Item> {
         POTION_SCROLL_SPECIAL,
         RING_AMULET;
     }
-    
+
     public static final Item HANDS = new Item();
+
     static {
         Dice d = new Dice(2, 1);
         HANDS.damage = d;
@@ -56,7 +57,8 @@ public class Item implements Comparable<Item> {
     }
 
     public boolean canUse(ClassType ct) {
-        return this.usable.contains(ct.getAbbr());
+        //System.out.printf("classtype %s for item %s can use=%s\n", ct, this.name, this.usable.indexOf(ct.getAbbr()) != -1);
+        return this.usable.indexOf(ct.getAbbr()) != -1;
     }
 
     public void use() {
