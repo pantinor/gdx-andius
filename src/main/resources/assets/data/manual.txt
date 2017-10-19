@@ -1,0 +1,37 @@
+Manage
+generate new characters
+add and remove characters frmo the roster
+add and remove characters from the active save game party
+store characters from the active save game party to the roster
+
+Game Play
+
+Conversation
+talk to NPCs
+
+Reorder 
+reorder the party members drag and drop
+
+Inventory
+equip and unequip items in inventory
+
+Combat
+party members take turns in combat
+use pointer or arrow keys to attack directionally
+cast spells
+
+Commands
+t talk
+e enter / exit
+move arrow keys
+g get treasure
+
+Vendor
+buy and sell items
+
+Temple
+tithe to the temple and receive healing and restoration
+
+Inn
+rest, heal and level up with experience
+

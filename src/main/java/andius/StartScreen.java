@@ -46,7 +46,7 @@ public class StartScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Sounds.play(Sound.TRIGGER);
-                //Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Exodus.skin));
+                Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Andius.skin));
             }
         });
         manual.setBounds(200, Andius.SCREEN_HEIGHT - 410, 150, 40);
