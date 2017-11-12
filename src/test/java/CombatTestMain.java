@@ -51,9 +51,7 @@ public class CombatTestMain extends Game {
                 ctx.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
                 ctx.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
                 for (Spells s : Spells.values()) {
-                    if (s.getTarget() == SpellTarget.MONSTER) {
-                        ctx.saveGame.players[j].knownSpells.add(s);
-                    }
+                    ctx.saveGame.players[j].knownSpells.add(s);
                 }
 //
 //                ctx.saveGame.players[j].str = 8;
@@ -70,6 +68,10 @@ public class CombatTestMain extends Game {
                 ctx.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
                 ctx.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
                 ctx.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
+                
+                
+                ctx.saveGame.players[j].spellPresets[5] = Spells.DIALMA;
+
 
             }
 

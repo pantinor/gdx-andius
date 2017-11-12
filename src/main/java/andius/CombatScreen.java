@@ -11,7 +11,6 @@ import andius.objects.CursorActor;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
-import andius.objects.Monster.Type;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
 import andius.objects.SaveGame;
@@ -38,7 +37,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -383,12 +381,6 @@ public class CombatScreen extends BaseScreen {
             } else if (keycode == Keys.U) {
             } else if (keycode == Keys.R) {
             } else if (keycode == Keys.W) {
-            } else if (keycode >= Keys.F1 && keycode <= Keys.F10) {
-                Spells spell = active.getPlayer().spellPresets[keycode - Keys.F1];
-                if (spell != null) {
-                    initCast(spell, active);
-                    return false;
-                }
             }
         }
 
@@ -501,18 +493,20 @@ public class CombatScreen extends BaseScreen {
         }
     }
 
-    public class RemoveCreatureAction implements Runnable {
+    public static class RemoveCreatureAction implements Runnable {
 
-        private andius.objects.Actor cr;
+        private final andius.objects.Actor cr;
+        private final CombatScreen screen;
 
-        public RemoveCreatureAction(andius.objects.Actor cr) {
+        public RemoveCreatureAction(CombatScreen screen, andius.objects.Actor cr) {
             this.cr = cr;
+            this.screen = screen;
         }
 
         @Override
         public void run() {
-            log(String.format("%s %s", cr.getMonster().name, DEATHMSGS[rand.nextInt(DEATHMSGS.length)]));
-            CombatScreen.this.enemies.remove(cr);
+            screen.log(String.format("%s %s", cr.getMonster().name, DEATHMSGS[screen.rand.nextInt(DEATHMSGS.length)]));
+            screen.enemies.remove(cr);
         }
     }
 
@@ -846,7 +840,7 @@ public class CombatScreen extends BaseScreen {
             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
             seq.addAction(Actions.run(new AddActorAction(stage, d)));
             if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
-                seq.addAction(Actions.run(new RemoveCreatureAction(av.victim)));
+                seq.addAction(Actions.run(new RemoveCreatureAction(this, av.victim)));
             }
 
             seq.addAction(Actions.run(new Runnable() {
@@ -944,137 +938,6 @@ public class CombatScreen extends BaseScreen {
         return av;
     }
 
-    public void initCast(Spells spell, andius.objects.Actor player) {
-        Sounds.play(Sound.TRIGGER);
-        if (spell.getTarget() == SpellTarget.MONSTER) {
-            Gdx.input.setInputProcessor(cip);
-            cip.init(player, Keys.C, spell, player.getWx(), player.getWy());
-        } else if (spell.getTarget() == SpellTarget.GROUP) {
-            boolean success = SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, player, null, null);
-            if (!success) {
-                finishPlayerTurn();
-            }
-        } else {
-
-        }
-    }
-
-    public void animateMagicAttack(andius.objects.Actor attacker, Spells spell, Direction dir, andius.objects.Actor target) {
-
-        AttackVector av = null;
-        if (dir != null) {
-            av = cast(attacker, spell, dir);
-        } else {
-            av = cast(attacker, spell, target);
-        }
-
-        int tx = av.x * TILE_DIM;
-        int ty = mapPixelHeight - av.y * TILE_DIM - TILE_DIM;
-
-        final SequenceAction seq = Actions.action(SequenceAction.class);
-        if (av.result == AttackResult.HIT) {
-            Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
-            d.setX(tx + 12);
-            d.setY(ty + 12);
-            d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
-
-            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-            seq.addAction(Actions.run(new AddActorAction(stage, d)));
-            if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
-                seq.addAction(Actions.run(new RemoveCreatureAction(av.victim)));
-            }
-        } else {
-            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
-        }
-        seq.addAction(Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                finishPlayerTurn();
-            }
-        }));
-
-        final ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
-
-        Action after = new Action() {
-            @Override
-            public boolean act(float delta) {
-                p.remove();
-                stage.addAction(seq);
-                return true;
-            }
-        };
-
-        p.addAction(Actions.sequence(Actions.moveTo(tx, ty, av.distance * .1f, Interpolation.sineIn), after));
-        stage.addActor(p);
-    }
-
-    private AttackVector cast(andius.objects.Actor attacker, Spells spell, Direction dir) {
-
-        List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, 12);
-
-        AttackVector target = null;
-        for (int i = 0; i < path.size(); i++) {
-            target = path.get(i);
-            for (andius.objects.Actor c : this.enemies) {
-                if (c.getWx() == target.x && c.getWy() == target.y) {
-                    target.victim = c;
-                    break;
-                }
-            }
-            if (target.victim != null) {
-                target.result = AttackResult.HIT;
-                if (spell == Spells.ZILWAN) {
-                    if (target.victim.getMonster().getType() == Type.UNDEAD) {
-                        spellDamage(spell, target.victim.getMonster());
-                    } else {
-                        target.result = AttackResult.MISS;
-                        log(target.victim.getMonster().name + " is unaffected.");
-                    }
-                } else if (rand.nextInt(100) < target.victim.getMonster().getUnaffected()) {
-                    target.result = AttackResult.MISS;
-                    log(target.victim.getMonster().name + " is unaffected.");
-                } else {
-                    spellDamage(spell, target.victim.getMonster());
-                }
-
-            }
-        }
-
-        return target;
-    }
-
-    private AttackVector cast(andius.objects.Actor attacker, Spells spell, andius.objects.Actor target) {
-
-        AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), 12);
-
-        if (av.victim != null) {
-            av.result = AttackResult.HIT;
-            if (spell == Spells.ZILWAN) {
-                if (av.victim.getMonster().getType() == Type.UNDEAD) {
-                    spellDamage(spell, av.victim.getMonster());
-                } else {
-                    av.result = AttackResult.MISS;
-                    log(av.victim.getMonster().name + " is unaffected.");
-                }
-            } else if (rand.nextInt(100) < av.victim.getMonster().getUnaffected()) {
-                av.result = AttackResult.MISS;
-                log(av.victim.getMonster().name + " is unaffected.");
-            } else {
-                spellDamage(spell, av.victim.getMonster());
-            }
-
-        }
-
-        return av;
-    }
-
-    private void spellDamage(Spells spell, MutableMonster m) {
-        int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-        m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
-        m.adjustHealthBar();
-        log(String.format("%s %s", m.name, m.getDamageTag()));
-    }
-
     private List<AttackVector> getDirectionalActionPath(int mapWidth, int mapHeight, int dirmask, int x, int y, int minDistance, int maxDistance) {
 
         List<AttackVector> path = new ArrayList<>();
@@ -1149,6 +1012,22 @@ public class CombatScreen extends BaseScreen {
         return av;
     }
 
+    public void initCast(Spells spell, andius.objects.Actor player) {
+        Sounds.play(Sound.TRIGGER);
+        switch (spell.getTarget()) {
+            case MONSTER:
+            case PERSON:
+                Gdx.input.setInputProcessor(cip);
+                cip.init(player, Keys.C, spell, player.getWx(), player.getWy());
+                break;
+            case GROUP:
+                SpellUtil.spellCast(this, context, spell, player, null);
+                break;
+            default:
+                break;
+        }
+    }
+
     private class CombatInputProcessor extends InputAdapter {
 
         private int code;
@@ -1209,10 +1088,7 @@ public class CombatScreen extends BaseScreen {
 
             } else if (this.code == Keys.C) {
 
-                boolean success = SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null, dir);
-                if (!success) {
-                    finishPlayerTurn();
-                }
+                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null);
 
             }
 
@@ -1229,10 +1105,20 @@ public class CombatScreen extends BaseScreen {
             int pointery = (Andius.SCREEN_HEIGHT - screenY - 2 * TILE_DIM);
 
             andius.objects.Actor target = null;
+
             for (andius.objects.Actor c : enemies) {
                 if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery) < 10)) {
                     target = c;
                     break;
+                }
+            }
+
+            if (target == null) {
+                for (andius.objects.Actor c : partyMembers) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery) < 10)) {
+                        target = c;
+                        break;
+                    }
                 }
             }
 
@@ -1248,10 +1134,7 @@ public class CombatScreen extends BaseScreen {
 
             } else if (this.code == Keys.C) {
 
-                boolean success = SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, target, null);
-                if (!success) {
-                    finishPlayerTurn();
-                }
+                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, target);
 
             }
 

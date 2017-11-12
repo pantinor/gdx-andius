@@ -1,22 +1,23 @@
 package andius.objects;
 
 import andius.Andius;
-import andius.BaseScreen;
 import andius.CombatScreen;
+import andius.CombatScreen.RemoveCreatureAction;
 import andius.Constants.AddActorAction;
 import andius.Constants.PlaySoundAction;
+import andius.Constants.LogAction;
+import andius.Constants.Status;
 import andius.Context;
-import andius.Direction;
 import andius.Sound;
 import andius.Sounds;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import utils.Utils;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import java.util.Random;
 import utils.XORShiftRandom;
 
@@ -24,252 +25,212 @@ public class SpellUtil {
 
     private static final Random rand = new XORShiftRandom();
 
-    public static boolean spellCast(final BaseScreen screen, final Context context, final Spells spell,
-            final andius.objects.Actor caster, final andius.objects.Actor target, final Direction dir) {
+    public static void spellCast(CombatScreen screen, Context context, Spells spell,
+            andius.objects.Actor caster, andius.objects.Actor target) {
 
         if (!caster.getPlayer().canCast(spell)) {
             screen.log("Thou dost not have enough magic points!");
             Sounds.play(Sound.NEGATIVE_EFFECT);
-            return false;
         }
 
-//        if (context.getAura().getType() == AuraType.NEGATE) {
-//            Exodus.hud.add("Spell is negated!");
-//            return false;
-//        }
         caster.getPlayer().decrMagicPts(spell);
 
         SequenceAction seq = Actions.action(SequenceAction.class);
         seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
         seq.addAction(Actions.delay(0.5f));
+
+        switch (spell) {
+            case MOGREF:
+            case SOPIC:
+                caster.getPlayer().acmodifier1 = spell.getHitBonus();
+                break;
+            case KATINO:
+                break;
+            case DUMAPIC:
+                break;
+            case DILTO:
+            case MORLIS:
+            case MAMORLIS:
+                modMonsterAC(screen, seq, spell.getHitBonus());
+                break;
+            case MAKANITO:
+                break;
+            case LAKANITO:
+                break;
+            case HAMAN:
+                break;
+            case MALOR:
+                break;
+            case MAHAMAN:
+                break;
+            case KALKI:
+            case MATU:
+            case BAMATU:
+            case MASOPIC:
+                modPartyAC1(screen, seq, spell.getHitBonus());
+                break;
+            case LITOKAN:
+            case LORTO:
+            case MALIKTO:
+            case MAHALITO:
+            case MOLITO:
+            case DALTO:
+            case LAHALITO:
+            case TILTOWAIT:
+            case MADALTO:
+                spellGroupDamage(screen, seq, caster, spell);
+                break;
+            case HALITO:
+            case BADIAL:
+            case BADIALMA:
+            case ZILWAN:
+            case BADIOS:
+            case BADI:
+            case MABADI:
+                projectileMagicAttack(screen, seq, caster, spell, target);
+                break;
+            case MILWA:
+                break;
+            case PORFIC:
+                caster.getPlayer().acmodifier1 = spell.getHitBonus();
+                break;
+            case CALFO:
+                break;
+            case MANIFO:
+                break;
+            case MONTINO:
+                break;
+            case LOMILWA:
+                break;
+            case DIALKO:
+                break;
+            case LATUMAPIC:
+                break;
+            case DIOS:
+            case DIAL:
+            case DIALMA:
+            case MADI:
+                doSpellHeal(screen, seq, target.getPlayer(), spell);
+                break;
+            case LATUMOFIS:
+                break;
+            case MAPORFIC:
+                modPartyAC2(screen, seq, spell.getHitBonus());
+                break;
+            case KANDI:
+                break;
+            case DI:
+                break;
+            case LOKTOFEIT:
+                break;
+            case KADORTO:
+                break;
+
+        }
+
         seq.addAction(Actions.run(new Runnable() {
             @Override
             public void run() {
-                switch (spell) {
-                    case MOGREF:
-                    case SOPIC:
-                        caster.getPlayer().acmodifier1 = spell.getHitBonus();
-                        break;
-                    case KATINO:
-                        break;
-                    case DUMAPIC:
-                        break;
-                    case DILTO:
-                    case MORLIS:
-                    case MAMORLIS:
-                        modMonsterAC((CombatScreen) screen, spell.getHitBonus());
-                        break;
-                    case MAKANITO:
-                        break;
-                    case LAKANITO:
-                        break;
-                    case HAMAN:
-                        break;
-                    case MALOR:
-                        break;
-                    case MAHAMAN:
-                        break;
-                    case KALKI:
-                    case MATU:
-                    case BAMATU:
-                    case MASOPIC:
-                        modPartyAC1((CombatScreen) screen, spell.getHitBonus());
-                        break;
-                    case DIOS:
-                        break;
-                    case LITOKAN:
-                    case LORTO:
-                    case MALIKTO:
-                    case MAHALITO:
-                    case MOLITO:
-                    case DALTO:
-                    case LAHALITO:
-                    case TILTOWAIT:
-                    case MADALTO:
-                        spellGroupDamage((CombatScreen) screen, caster, spell);
-                        break;
-                    case HALITO:
-                    case BADIAL:
-                    case BADIALMA:
-                    case ZILWAN:
-                    case BADIOS:
-                    case BADI:
-                    case MABADI:
-                        ((CombatScreen) screen).animateMagicAttack(caster, spell, dir, target);
-                        break;
-                    case MILWA:
-                        break;
-                    case PORFIC:
-                        caster.getPlayer().acmodifier1 = spell.getHitBonus();
-                        break;
-                    case CALFO:
-                        break;
-                    case MANIFO:
-                        break;
-                    case MONTINO:
-                        break;
-                    case LOMILWA:
-                        break;
-                    case DIALKO:
-                        break;
-                    case LATUMAPIC:
-                        break;
-                    case DIAL:
-                        break;
-                    case LATUMOFIS:
-                        break;
-                    case MAPORFIC:
-                        modPartyAC2((CombatScreen) screen, spell.getHitBonus());
-                        break;
-                    case DIALMA:
-                        break;
-                    case KANDI:
-                        break;
-                    case DI:
-                        break;
-                    case MADI:
-                        break;
-                    case LOKTOFEIT:
-                        break;
-                    case KADORTO:
-                        break;
-
-                }
+                screen.finishPlayerTurn();
             }
         }));
 
         screen.getStage().addAction(seq);
 
-        return true;
     }
 
-    public static void spellBlink(BaseScreen screen, Direction dir) {
+    private static void projectileMagicAttack(CombatScreen screen, SequenceAction seq, andius.objects.Actor attacker, Spells spell, andius.objects.Actor target) {
 
-//        if (screen.scType == ScreenType.MAIN) {
-//
-//            GameScreen gameScreen = (GameScreen) screen;
-//            BaseMap bm = screen.context.getCurrentMap();
-//
-//            Vector3 v = gameScreen.getCurrentMapCoords();
-//            int x = (int) v.x;
-//            int y = (int) v.y;
-//
-//            if (bm.getId() != Maps.SOSARIA.getId()) {
-//                return;
-//            }
-//
-//            int distance = 0;
-//            int diff = 0;
-//            Direction reverseDir = Direction.reverse(dir);
-//
-//            int var = (dir.getMask() & (Direction.WEST.getMask() | Direction.EAST.getMask())) > 0 ? x : y;
-//
-//            /* find the distance we are going to move */
-//            distance = (var) % 0x10;
-//            if (dir == Direction.EAST || dir == Direction.SOUTH) {
-//                distance = 0x10 - distance;
-//            }
-//
-//            /* see if we move another 16 spaces over */
-//            diff = 0x10 - distance;
-//            if ((diff > 0) && (Utils.rand.nextInt(diff * diff) > distance)) {
-//                distance += 0x10;
-//            }
-//
-//            /* test our distance, and see if it works */
-//            for (int i = 0; i < distance; i++) {
-//                if (dir == Direction.NORTH) {
-//                    y--;
-//                }
-//                if (dir == Direction.SOUTH) {
-//                    y++;
-//                }
-//                if (dir == Direction.WEST) {
-//                    x--;
-//                }
-//                if (dir == Direction.EAST) {
-//                    x++;
-//                }
-//            }
-//
-//            int i = distance;
-//            /* begin walking backward until you find a valid spot */
-//            while ((i-- > 0) && bm.getTile(x, y) != null && bm.getTile(x, y).getRule().has(TileAttrib.unwalkable)) {
-//                if (reverseDir == Direction.NORTH) {
-//                    y--;
-//                }
-//                if (reverseDir == Direction.SOUTH) {
-//                    y++;
-//                }
-//                if (reverseDir == Direction.WEST) {
-//                    x--;
-//                }
-//                if (reverseDir == Direction.EAST) {
-//                    x++;
-//                }
-//            }
-//
-//            if (bm.getTile(x, y) != null && !bm.getTile(x, y).getRule().has(TileAttrib.unwalkable)) {
-//
-//                /* we didn't move! */
-//                if (x == (int) v.x && y == (int) v.y) {
-//                    screen.log("Failed to teleport!");
-//                }
-//
-//                gameScreen.newMapPixelCoords = gameScreen.getMapPixelCoords(x, y);
-//                gameScreen.recalcFOV(bm, x, y);
-//
-//            } else {
-//                screen.log("Failed to teleport!");
-//            }
-//        } else {
-//            screen.log("Outdoors only!");
-//        }
+        int targetX = target.getWx();
+        int targetY = target.getWy();
+
+        int a = Math.abs(attacker.getWx() - targetX);
+        int b = Math.abs(attacker.getWy() - targetY);
+
+        ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
+
+        if (rand.nextInt(100) < target.getMonster().getUnaffected()
+                || (spell == Spells.ZILWAN && target.getMonster().getType() != Monster.Type.UNDEAD)) {
+            seq.addAction(Actions.run(new LogAction(screen, target.getMonster().name + " is unaffected.")));
+        } else {
+            spellDamage(spell, target.getMonster());
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s %s", target.getMonster().name, target.getMonster().getDamageTag()))));
+        }
+
+        Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
+        expl.setX(target.getX() + 12);
+        expl.setY(target.getY() + 12);
+        expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+        seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+
+        if (target.getMonster().getCurrentHitPoints() <= 0) {
+            seq.addAction(Actions.run(new RemoveCreatureAction(screen, target)));
+        }
+
+        Action after = new Action() {
+            @Override
+            public boolean act(float delta) {
+                p.remove();
+                screen.getStage().addAction(seq);
+                return true;
+            }
+        };
+
+        p.addAction(Actions.sequence(Actions.moveTo(target.getX(), target.getY(), .3f, Interpolation.sineIn), after));
+
+        screen.getStage().addActor(p);
     }
 
-    public static void spellGroupDamage(final CombatScreen screen, andius.objects.Actor caster, Spells spell) {
-        SequenceAction seq = Actions.action(SequenceAction.class);
+    private static void spellDamage(Spells spell, MutableMonster m) {
+        int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+        m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
+        m.adjustHealthBar();
+    }
+
+    private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, andius.objects.Actor caster, Spells spell) {
 
         for (andius.objects.Actor m : screen.enemies) {
 
+            seq.addAction(Actions.delay(.60f));
+
             if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
-                screen.log(m.getMonster().name + " is unaffected.");
-                seq.addAction(Actions.sequence(Actions.delay(.5f), Actions.run(new PlaySoundAction(Sound.EVADE))));
+                seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+
+                final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
+                expl.setX(m.getX() + 12);
+                expl.setY(m.getY() + 12);
+                expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+                seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+                seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+
             } else {
+
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
                 m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
                 m.getMonster().adjustHealthBar();
-                screen.log(String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()));
 
-                final Actor d = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
-                d.setX(m.getX() + 12);
-                d.setY(m.getY() + 12);
-                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+                seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()))));
+
+                final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
+                expl.setX(m.getX() + 12);
+                expl.setY(m.getY() + 12);
+                expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
                 seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-                seq.addAction(Actions.run(new AddActorAction(screen.getStage(), d)));
+                seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+
                 if (m.getMonster().getCurrentHitPoints() <= 0) {
-                    seq.addAction(Actions.run(screen.new RemoveCreatureAction(m)));
+                    seq.addAction(Actions.run(new RemoveCreatureAction(screen, m)));
                 }
 
             }
         }
 
-        screen.getStage().addAction(seq);
-
-        screen.log("Any key to continue...");
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean keyUp(int keycode) {
-                Gdx.input.setInputProcessor(new InputMultiplexer(screen, screen.hudStage));
-                screen.finishPlayerTurn();
-                return false;
-            }
-        });
-
     }
 
-    private static void modPartyAC1(CombatScreen screen, int acmod) {
+    private static void modPartyAC1(CombatScreen screen, SequenceAction seq, int acmod) {
         for (andius.objects.Actor player : screen.partyMembers) {
             if (!player.getPlayer().isDisabled()) {
                 player.getPlayer().acmodifier1 = acmod;
@@ -277,7 +238,7 @@ public class SpellUtil {
         }
     }
 
-    private static void modPartyAC2(CombatScreen screen, int acmod) {
+    private static void modPartyAC2(CombatScreen screen, SequenceAction seq, int acmod) {
         for (andius.objects.Actor player : screen.partyMembers) {
             if (!player.getPlayer().isDisabled()) {
                 player.getPlayer().acmodifier2 = acmod;
@@ -285,16 +246,27 @@ public class SpellUtil {
         }
     }
 
-    private static void modMonsterAC(CombatScreen screen, int acmod) {
+    private static void modMonsterAC(CombatScreen screen, SequenceAction seq, int acmod) {
         for (andius.objects.Actor m : screen.enemies) {
             m.getMonster().setACModifier(acmod);
         }
     }
 
-    private static void doSpellHeal(BaseScreen sc, CharacterRecord rec, Spells spell) {
-        int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
-        sc.log(rec.name + " is healed.");
-        rec.adjustHP(points);
+    private static void doSpellHeal(CombatScreen screen, SequenceAction seq, CharacterRecord target, Spells spell) {
+        if (target.status != Status.DEAD) {
+
+            seq.addAction(Actions.run(new LogAction(screen, target.name + " is healed.")));
+
+            if (spell == Spells.MADI) {
+                target.status = Status.OK;
+                target.adjustHP(target.maxhp);
+            } else {
+                int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
+                target.adjustHP(points);
+            }
+        } else {
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+        }
     }
 
 }

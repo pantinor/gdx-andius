@@ -482,7 +482,7 @@ public interface Constants {
         FLEE;
     }
 
-    public class AttackVector {
+    public static class AttackVector {
 
         public final int x;
         public final int y;
@@ -497,7 +497,7 @@ public interface Constants {
         }
     }
 
-    public class AddActorAction implements Runnable {
+    public static class AddActorAction implements Runnable {
 
         private final com.badlogic.gdx.scenes.scene2d.Actor actor;
         private final Stage stage;
@@ -513,7 +513,7 @@ public interface Constants {
         }
     }
 
-    public class PlaySoundAction implements Runnable {
+    public static class PlaySoundAction implements Runnable {
 
         private Sound s;
 
@@ -524,6 +524,22 @@ public interface Constants {
         @Override
         public void run() {
             Sounds.play(s);
+        }
+    }
+
+    public static class LogAction implements Runnable {
+
+        private BaseScreen screen;
+        private String text;
+
+        public LogAction(BaseScreen screen, String text) {
+            this.screen = screen;
+            this.text = text;
+        }
+
+        @Override
+        public void run() {
+            this.screen.log(this.text);
         }
     }
 
