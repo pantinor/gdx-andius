@@ -394,10 +394,11 @@ public interface Constants {
 
         OK(Color.WHITE),
         AFRAID(Color.YELLOW),
+        SILENCED(Color.ORANGE),
         ASLEEP(Color.MAGENTA),
         POISONED(Color.GREEN),
         PARALYZED(Color.CYAN),
-        STONED(Color.LIGHT_GRAY),
+        STONED(Color.DARK_GRAY),
         DEAD(Color.RED),
         ASHES(Color.LIGHT_GRAY);
 

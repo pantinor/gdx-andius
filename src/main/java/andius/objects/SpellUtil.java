@@ -28,114 +28,151 @@ public class SpellUtil {
     public static void spellCast(CombatScreen screen, Context context, Spells spell,
             andius.objects.Actor caster, andius.objects.Actor target) {
 
-        if (!caster.getPlayer().canCast(spell)) {
-            screen.log("Thou dost not have enough magic points!");
-            Sounds.play(Sound.NEGATIVE_EFFECT);
-        }
-
-        caster.getPlayer().decrMagicPts(spell);
-
         SequenceAction seq = Actions.action(SequenceAction.class);
-        seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
-        seq.addAction(Actions.delay(0.5f));
+        
+        try {
 
-        switch (spell) {
-            case MOGREF:
-            case SOPIC:
-                caster.getPlayer().acmodifier1 = spell.getHitBonus();
-                break;
-            case KATINO:
-                break;
-            case DUMAPIC:
-                break;
-            case DILTO:
-            case MORLIS:
-            case MAMORLIS:
-                modMonsterAC(screen, seq, spell.getHitBonus());
-                break;
-            case MAKANITO:
-                break;
-            case LAKANITO:
-                break;
-            case HAMAN:
-                break;
-            case MALOR:
-                break;
-            case MAHAMAN:
-                break;
-            case KALKI:
-            case MATU:
-            case BAMATU:
-            case MASOPIC:
-                modPartyAC1(screen, seq, spell.getHitBonus());
-                break;
-            case LITOKAN:
-            case LORTO:
-            case MALIKTO:
-            case MAHALITO:
-            case MOLITO:
-            case DALTO:
-            case LAHALITO:
-            case TILTOWAIT:
-            case MADALTO:
-                spellGroupDamage(screen, seq, caster, spell);
-                break;
-            case HALITO:
-            case BADIAL:
-            case BADIALMA:
-            case ZILWAN:
-            case BADIOS:
-            case BADI:
-            case MABADI:
-                projectileMagicAttack(screen, seq, caster, spell, target);
-                break;
-            case MILWA:
-                break;
-            case PORFIC:
-                caster.getPlayer().acmodifier1 = spell.getHitBonus();
-                break;
-            case CALFO:
-                break;
-            case MANIFO:
-                break;
-            case MONTINO:
-                break;
-            case LOMILWA:
-                break;
-            case DIALKO:
-                break;
-            case LATUMAPIC:
-                break;
-            case DIOS:
-            case DIAL:
-            case DIALMA:
-            case MADI:
-                doSpellHeal(screen, seq, target.getPlayer(), spell);
-                break;
-            case LATUMOFIS:
-                break;
-            case MAPORFIC:
-                modPartyAC2(screen, seq, spell.getHitBonus());
-                break;
-            case KANDI:
-                break;
-            case DI:
-                break;
-            case LOKTOFEIT:
-                break;
-            case KADORTO:
-                break;
-
-        }
-
-        seq.addAction(Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                screen.finishPlayerTurn();
+            if (!caster.getPlayer().canCast(spell)) {
+                screen.log("Thou dost not have enough magic points!");
+                Sounds.play(Sound.NEGATIVE_EFFECT);
+                return;
             }
-        }));
+            
+            caster.getPlayer().decrMagicPts(spell);
 
-        screen.getStage().addAction(seq);
+            seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
+            seq.addAction(Actions.delay(0.5f));
+
+            switch (spell) {
+                case MOGREF:
+                case SOPIC:
+                    caster.getPlayer().acmodifier1 = spell.getHitBonus();
+                    break;
+                case KATINO:
+                    for (andius.objects.Actor m : screen.enemies) {
+                        seq.addAction(Actions.delay(.60f));
+                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+                        } else {
+                            m.getMonster().setStatus(Status.ASLEEP);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is asleep.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                        }
+                    }
+                    break;
+                case DILTO:
+                case MORLIS:
+                case MAMORLIS:
+                    modMonsterAC(screen, seq, spell.getHitBonus());
+                    break;
+                case MAKANITO:
+                    spellGroupDamage(screen, seq, spell, 35, 40);
+                    break;
+                case LAKANITO:
+                    spellGroupDamage(screen, seq, spell, 45, 65);
+                    break;
+                case KALKI:
+                case MATU:
+                case BAMATU:
+                case MASOPIC:
+                    modPartyAC1(screen, seq, spell.getHitBonus());
+                    break;
+                case LITOKAN:
+                case LORTO:
+                case MALIKTO:
+                case MAHALITO:
+                case MOLITO:
+                case DALTO:
+                case LAHALITO:
+                case TILTOWAIT:
+                case MADALTO:
+                    spellGroupDamage(screen, seq, spell);
+                    break;
+                case HALITO:
+                case BADIAL:
+                case BADIALMA:
+                case ZILWAN:
+                case BADIOS:
+                case BADI:
+                case MABADI:
+                    projectileMagicAttack(screen, seq, caster, spell, target);
+                    break;
+                case PORFIC:
+                    caster.getPlayer().acmodifier1 = spell.getHitBonus();
+                    break;
+                case MANIFO:
+                    for (andius.objects.Actor m : screen.enemies) {
+                        seq.addAction(Actions.delay(.60f));
+                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+                        } else {
+                            m.getMonster().setStatus(Status.PARALYZED);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is paralyzed.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                        }
+                    }
+                    break;
+                case MONTINO:
+                    for (andius.objects.Actor m : screen.enemies) {
+                        seq.addAction(Actions.delay(.60f));
+                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+                        } else {
+                            m.getMonster().setStatus(Status.SILENCED);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is silenced.")));
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                        }
+                    }
+                    break;
+
+                case DIOS:
+                case DIAL:
+                case DIALMA:
+                case MADI:
+                    doSpellHeal(screen, seq, target.getPlayer(), spell);
+                    break;
+                case LATUMOFIS:
+                case DIALKO:
+                    if (target.getPlayer().status == Status.POISONED) {
+                        target.getPlayer().status = Status.OK;
+                    }
+                    break;
+                case MAPORFIC:
+                    modPartyAC2(screen, seq, spell.getHitBonus());
+                    break;
+
+                //TODO
+                case LOMILWA:
+                case CALFO:
+                case MILWA:
+                case LATUMAPIC:
+                case KANDI:
+                case DI:
+                case LOKTOFEIT:
+                case KADORTO:
+                case HAMAN:
+                case MALOR:
+                case MAHAMAN:
+                case DUMAPIC:
+                    seq.addAction(Actions.run(new LogAction(screen, "NOT IMPLEMENTED YET SORRY")));
+                    seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+                    break;
+            }
+            
+        } finally {
+            
+            seq.addAction(Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    screen.finishPlayerTurn();
+                }
+            }));
+
+            screen.getStage().addAction(seq);
+        }
 
     }
 
@@ -188,7 +225,7 @@ public class SpellUtil {
         m.adjustHealthBar();
     }
 
-    private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, andius.objects.Actor caster, Spells spell) {
+    private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, Spells spell) {
 
         for (andius.objects.Actor m : screen.enemies) {
 
@@ -226,6 +263,34 @@ public class SpellUtil {
                 }
 
             }
+        }
+
+    }
+
+    private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, Spells spell, int minDamage, int maxDamage) {
+
+        for (andius.objects.Actor m : screen.enemies) {
+
+            seq.addAction(Actions.delay(.60f));
+
+            int damage = Utils.dealSpellDamage(0, 0, Utils.getRandomBetween(minDamage, maxDamage));
+            m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
+            m.getMonster().adjustHealthBar();
+
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()))));
+
+            final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
+            expl.setX(m.getX() + 12);
+            expl.setY(m.getY() + 12);
+            expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+            seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+
+            if (m.getMonster().getCurrentHitPoints() <= 0) {
+                seq.addAction(Actions.run(new RemoveCreatureAction(screen, m)));
+            }
+
         }
 
     }

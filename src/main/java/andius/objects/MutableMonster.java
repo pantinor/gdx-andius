@@ -5,9 +5,11 @@
  */
 package andius.objects;
 
+import andius.Constants.Status;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -23,6 +25,8 @@ public class MutableMonster extends Monster {
 
     private int acmodifier;
     private int currentHitPoints;
+    private Status status = Status.OK;
+    private final AtomicInteger statusEffectsCountdown = new AtomicInteger();
     private final int maxHitPoints;
     private TextureRegion healthBar;
 
@@ -42,6 +46,24 @@ public class MutableMonster extends Monster {
 
     public void setCurrentHitPoints(int currentHitPoints) {
         this.currentHitPoints = currentHitPoints;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+        this.statusEffectsCountdown.set(4);
+    }
+
+    public void decrementStatusEffectCount() {
+        if (this.statusEffectsCountdown.get() > 0) {
+            this.statusEffectsCountdown.decrementAndGet();
+        }
+        if (this.statusEffectsCountdown.get() == 0) {
+            this.status = Status.OK;
+        }
     }
 
     public int getMaxHitPoints() {
@@ -78,7 +100,7 @@ public class MutableMonster extends Monster {
         } else if (percent > 0.75) {
 
             return "still has lots of fight left.";
-            
+
         } else if (percent > 0.50) {
             if (this.type > 4) {
                 return "whose tough hide softens the blow.";

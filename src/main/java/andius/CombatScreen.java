@@ -301,6 +301,9 @@ public class CombatScreen extends BaseScreen {
                 layout.setText(Andius.smallFont, crSlots[i].getName().toUpperCase());
                 Andius.smallFont.draw(batch, layout, hud_enmy_x[idx], y);
                 batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 1, count > 7 ? 15 : 46);
+                if (crSlots[i].getStatus() != Status.OK) {
+                    Andius.smallFont.draw(batch, crSlots[i].getStatus().toString().toLowerCase(), hud_enmy_x[idx] + 1, y - 13);
+                }
                 Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
                 count++;
                 idx++;
@@ -487,6 +490,7 @@ public class CombatScreen extends BaseScreen {
         public void run() {
             try {
                 creatureAction(cr);
+                cr.getMonster().decrementStatusEffectCount();
             } catch (PartyDeathException e) {
                 //CombatScreen.this.returnScreen.partyDeath();
             }
@@ -620,6 +624,10 @@ public class CombatScreen extends BaseScreen {
     private boolean creatureAction(andius.objects.Actor creature) throws PartyDeathException {
 
         Gdx.input.setInputProcessor(null);
+
+        if (creature.getMonster().getStatus() != Status.OK && creature.getMonster().getStatus() != Status.SILENCED) {
+            return true;
+        }
 
         AtomicInteger dist = new AtomicInteger(0);
         final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist);
