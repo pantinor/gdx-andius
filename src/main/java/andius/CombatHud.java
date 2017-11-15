@@ -83,13 +83,17 @@ public class CombatHud {
         final Label l4;
         final andius.objects.Actor player;
         final CharacterRecord rec;
-        final Image weaponIcon;
-        final Image armorIcon;
-        final Image helmIcon;
-        final Image shieldIcon;
-        final Image glovesIcon;
-        final Image item1Icon;
-        final Image item2Icon;
+
+        final static int WEAPON_IDX = 0;
+        final static int ARMOR_IDX = 1;
+        final static int HELM_IDX = 2;
+        final static int SHIELD_IDX = 3;
+        final static int GLOVES_IDX = 4;
+        final static int ITEM1_IDX = 5;
+        final static int ITEM2_IDX = 6;
+
+        final ImageButton[] itemButtons = new ImageButton[7];
+        final Label[] itemTooltips = new Label[7];
 
         PlayerListing(andius.objects.Actor player) {
             this.player = player;
@@ -144,27 +148,34 @@ public class CombatHud {
 
             x = getX() + 15;
             int y = -200;
-            weaponIcon = image(rec.weapon, x, y + 96);
-            armorIcon = image(rec.armor, x + 48, y + 96);
-            helmIcon = image(rec.helm, x + 96, y + 96);
-            shieldIcon = image(rec.shield, x, y + 48);
-            glovesIcon = image(rec.glove, x + 48, y + 48);
-            item1Icon = image(rec.item1, x, y + 0);
-            item2Icon = image(rec.item2, x + 48, y + 0);
 
-            addActor(this.weaponIcon);
-            addActor(this.armorIcon);
-            addActor(this.helmIcon);
-            addActor(this.shieldIcon);
-            addActor(this.glovesIcon);
-            addActor(this.item1Icon);
-            addActor(this.item2Icon);
+            setItemButton(WEAPON_IDX, rec.weapon, x, y + 96);
+            setItemButton(ARMOR_IDX, rec.armor, x + 48, y + 96);
+            setItemButton(HELM_IDX, rec.helm, x + 96, y + 96);
+            setItemButton(SHIELD_IDX, rec.shield, x, y + 48);
+            setItemButton(GLOVES_IDX, rec.glove, x + 48, y + 48);
+            setItemButton(ITEM1_IDX, rec.item1, x, y + 0);
+            setItemButton(ITEM2_IDX, rec.item2, x + 48, y + 0);
 
             this.setBounds(734, 534, 265, 177);
         }
 
-        public void set() {
+        private void setItemButton(int i, Item item, float x, float y) {
+            if (item != null) {
+                TextureRegionDrawable t1 = new TextureRegionDrawable(invIcons[item.iconID]);
+                itemButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
+                itemButtons[i].setX(x);
+                itemButtons[i].setY(y);
+                itemTooltips[i] = new Label(item.name + " " + (item.numberUses > 0 ? "(" + item.numberUses + ")" : ""), Andius.skin, "hudSmallFont");
+                itemTooltips[i].setPosition(x, y);
+                ItemListener l = new ItemListener(player, item, itemTooltips[i]);
+                itemButtons[i].addListener(l);
+                addActor(itemTooltips[i]);
+                addActor(itemButtons[i]);
+            }
+        }
 
+        public void set() {
             String d1 = String.format("%s", rec.name.toUpperCase());
             String d2 = String.format("%s  LVL %d  %s", rec.race.toString(), rec.level, rec.classType.toString());
             String d3 = String.format("HP: %d /%d  AC: %d  ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status);
@@ -178,12 +189,40 @@ public class CombatHud {
             this.l4.setText(d4);
         }
 
-        private Image image(Item it, float x, float y) {
-            TextureRegion tr = (it == null ? invIcons[803] : invIcons[it.iconID]);
-            Image im = new Image(tr);
-            im.setX(x);
-            im.setY(y);
-            return im;
+    }
+
+    private class ItemListener extends InputListener {
+
+        final andius.objects.Actor player;
+        Item item;
+        private final Label tooltip;
+
+        ItemListener(andius.objects.Actor player, Item item, Label tooltip) {
+            this.player = player;
+            this.item = item;
+            this.tooltip = tooltip;
+            tooltip.setVisible(false);
+        }
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            if (item != null && item.spell != null && item.numberUses > 0) {
+                item.numberUses--;
+                tooltip.setText(item.name + " (" + item.numberUses + ")");
+                screen.initCast(item.spell, player);
+            }
+            return false;
+        }
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            tooltip.setVisible(true);
+            tooltip.toFront();
+        }
+
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            tooltip.setVisible(false);
         }
 
     }

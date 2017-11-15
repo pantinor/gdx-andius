@@ -1028,6 +1028,10 @@ public class CombatScreen extends BaseScreen {
                 Gdx.input.setInputProcessor(cip);
                 cip.init(player, Keys.C, spell, player.getWx(), player.getWy());
                 break;
+            case NONE:
+            case VARIABLE:
+            case CASTER:
+            case PARTY:
             case GROUP:
                 SpellUtil.spellCast(this, context, spell, player, null);
                 break;

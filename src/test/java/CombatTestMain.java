@@ -48,10 +48,10 @@ public class CombatTestMain extends Game {
 //                ctx.saveGame.players[j].gold = 3000;
 //
 //                ctx.saveGame.players[j].exp = 12000;
-                //ctx.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-                //ctx.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-                ctx.saveGame.players[j].magePoints = new int[]{1, 1, 1, 1, 1, 1, 1};
-                ctx.saveGame.players[j].clericPoints = new int[]{1, 1, 1, 1, 1, 1, 1};
+                ctx.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+                ctx.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+                //ctx.saveGame.players[j].magePoints = new int[]{1, 1, 1, 1, 1, 1, 1};
+                //ctx.saveGame.players[j].clericPoints = new int[]{1, 1, 1, 1, 1, 1, 1};
                 for (Spells s : Spells.values()) {
                     ctx.saveGame.players[j].knownSpells.add(s);
                 }
@@ -70,7 +70,7 @@ public class CombatTestMain extends Game {
                 ctx.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
                 ctx.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
                 ctx.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
-
+                
                 ctx.saveGame.players[j].spellPresets[5] = Spells.KATINO;
 
             }

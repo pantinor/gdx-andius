@@ -273,7 +273,7 @@ public class SpellUtil {
 
             seq.addAction(Actions.delay(.60f));
 
-            int damage = Utils.dealSpellDamage(0, 0, Utils.getRandomBetween(minDamage, maxDamage));
+            int damage = Utils.getRandomBetween(minDamage, maxDamage);
             m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
             m.getMonster().adjustHealthBar();
 
