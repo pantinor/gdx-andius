@@ -9,6 +9,8 @@ import andius.Constants.Status;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -17,10 +19,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MutableMonster extends Monster {
 
-    private static final TextureRegion HLTH_BAR;
+    private static TextureRegion HLTH_BAR = null;
 
     static {
-        HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
+        try {
+            HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     private int acmodifier;
@@ -29,6 +35,10 @@ public class MutableMonster extends Monster {
     private final AtomicInteger statusEffectsCountdown = new AtomicInteger();
     private final int maxHitPoints;
     private TextureRegion healthBar;
+
+    public List<Spells> knownSpells = new ArrayList<>();
+    public int[] magePoints = new int[7];
+    public int[] clericPoints = new int[7];
 
     public MutableMonster(Monster m) {
         clone(m);
@@ -50,6 +60,11 @@ public class MutableMonster extends Monster {
 
     public Status getStatus() {
         return status;
+    }
+    
+    public void resetStatus() {
+        this.status = Status.OK;
+        this.statusEffectsCountdown.set(0);
     }
 
     public void setStatus(Status status) {
@@ -118,6 +133,25 @@ public class MutableMonster extends Monster {
 
     public int getACModifier() {
         return acmodifier;
+    }
+
+    public boolean canCast(Spells spell) {
+        if (!knownSpells.contains(spell)) {
+            return false;
+        }
+        if (spell.getType() == ClassType.MAGE) {
+            return magePoints[spell.getLevel() - 1] > 0;
+        } else {
+            return clericPoints[spell.getLevel() - 1] > 0;
+        }
+    }
+
+    public void decrMagicPts(Spells spell) {
+        if (spell.getType() == ClassType.MAGE) {
+            magePoints[spell.getLevel() - 1]--;
+        } else {
+            clericPoints[spell.getLevel() - 1]--;
+        }
     }
 
 }

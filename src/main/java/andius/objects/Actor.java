@@ -115,10 +115,6 @@ public class Actor {
         return player;
     }
 
-    public boolean isDisabled() {
-        return false;
-    }
-
     public CursorActor getPlayerCursor() {
         return playerCursor;
     }

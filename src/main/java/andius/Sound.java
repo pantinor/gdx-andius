@@ -33,7 +33,13 @@ public enum Sound {
     DIVINE_INTERVENTION("divineint.ogg", false, 0.3f),
     DIVINE_MEDITATION("DivineMed.ogg", false, 0.3f),
     WAVE("chaowave.ogg", false, 0.3f),
-    GIGGLE("giggle.mp3", false, 0.3f),;
+    GIGGLE("giggle.mp3", false, 0.3f),
+    POWER_CHAINS("PowerChains.ogg", false, 0.3f),
+    MAGIC("magic.ogg", false, 0.3f),
+    INFERNO("Inferno.ogg", false, 0.3f),
+    MEDITATION("Meditation.ogg", false, 0.3f),
+    FLAME_WAVE("flamewave.ogg", false, 0.3f),
+    WEAKNESS("weakness.ogg", false, 0.3f),;
 
     String file;
     boolean looping;

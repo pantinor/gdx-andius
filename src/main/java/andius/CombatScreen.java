@@ -81,7 +81,7 @@ public class CombatScreen extends BaseScreen {
 
     public final Set<andius.objects.Actor> enemies = new LinkedHashSet<>();
     public final Set<andius.objects.Actor> partyMembers = new LinkedHashSet<>();
-    private int activeIndex;
+    private int activeIndex = -1;
 
     private Texture frame;
     private final Table logTable;
@@ -157,7 +157,7 @@ public class CombatScreen extends BaseScreen {
             if (index >= context.players().length) {
                 continue;
             }
-            if (this.context.players()[index].isDisabled()) {
+            if (this.context.players()[index].isDead()) {
                 continue;
             }
             andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon(), 0, context.players()[index].name);
@@ -173,11 +173,9 @@ public class CombatScreen extends BaseScreen {
 
         hudStage.addActor(this.logScroll);
 
-        this.hud = new CombatHud(this, this.partyMembers);
+        hud = new CombatHud(this, this.partyMembers);
         andius.objects.Actor pm = getAndSetNextActivePlayer();
-        if (pm != null) {
-            hud.set(pm, hudStage);
-        }
+        hud.set(pm, hudStage);
 
         setMapPixelCoords(newMapPixelCoords, 6, 6);
     }
@@ -217,6 +215,10 @@ public class CombatScreen extends BaseScreen {
                 j = rand.nextInt(AREA_CREATURES);
             } while (crSlots[j] != null);
             crSlots[j] = new MutableMonster(this.crType);
+            if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
+                SaveGame.setMonsterSpellPoints(crSlots[j]);
+                SaveGame.tryLearn(crSlots[j]);
+            }
         }
 
         int numPartners = 0;
@@ -236,6 +238,10 @@ public class CombatScreen extends BaseScreen {
                 j = rand.nextInt(AREA_CREATURES);
             } while (crSlots[j] != null);
             crSlots[j] = new MutableMonster(MONSTERS.get(this.crType.getPartnerID()));
+            if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
+                SaveGame.setMonsterSpellPoints(crSlots[j]);
+                SaveGame.tryLearn(crSlots[j]);
+            }
         }
 
     }
@@ -353,8 +359,9 @@ public class CombatScreen extends BaseScreen {
         andius.objects.Actor active = getActivePartyMember();
 
         if (active != null) {
-
-            if (keycode == Keys.SPACE || active.isDisabled()) {
+            if (active.getPlayer().isDisabled()) {
+                log("Disabled!");
+            } else if (keycode == Keys.SPACE) {
                 log("Pass");
             } else if (keycode == Keys.UP) {
                 if (preMove(active, Direction.NORTH)) {
@@ -451,50 +458,47 @@ public class CombatScreen extends BaseScreen {
     @Override
     public void finishTurn(int currentX, int currentY) {
 
-        try {
-
-            if (this.enemies.isEmpty()) {
-                end();
-                return;
-            }
-
-            if (this.partyMembers.isEmpty()) {
-                end();
-                return;
-            }
-
-            SequenceAction seq = Actions.action(SequenceAction.class);
-            for (andius.objects.Actor cr : this.enemies) {
-                seq.addAction(Actions.run(new CreatureActionsAction(cr)));
-                seq.addAction(Actions.delay(.04f));
-            }
-            seq.addAction(Actions.run(new FinishCreatureAction()));
-            stage.addAction(seq);
-
-        } catch (Exception e) {
-            //this.returnScreen.partyDeath();
+        if (this.enemies.isEmpty()) {
+            end();
+            return;
         }
 
-    }
-
-    private class CreatureActionsAction implements Runnable {
-
-        private andius.objects.Actor cr;
-
-        public CreatureActionsAction(andius.objects.Actor cr) {
-            super();
-            this.cr = cr;
+        if (this.partyMembers.isEmpty()) {
+            end();
+            return;
         }
 
-        @Override
-        public void run() {
-            try {
-                creatureAction(cr);
-                cr.getMonster().decrementStatusEffectCount();
-            } catch (PartyDeathException e) {
-                //CombatScreen.this.returnScreen.partyDeath();
+        Gdx.input.setInputProcessor(null);
+
+        final SequenceAction seq = Actions.action(SequenceAction.class);
+
+        for (andius.objects.Actor cr : this.enemies) {
+            seq.addAction(Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    creatureAction(seq, cr);
+                }
+            }));
+            seq.addAction(Actions.delay(.04f));
+        }
+
+        seq.addAction(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
+                if (partyMembers.isEmpty()) {
+                    end();
+                } else if (getNextAblePartyMember() == null) {
+                    for (andius.objects.Actor a : partyMembers) {
+                        a.getPlayer().decrementStatusEffects();
+                    }
+                    finishTurn(0, 0);
+                }
             }
-        }
+        }));
+
+        stage.addAction(seq);
+
     }
 
     public static class RemoveCreatureAction implements Runnable {
@@ -511,17 +515,6 @@ public class CombatScreen extends BaseScreen {
         public void run() {
             screen.log(String.format("%s %s", cr.getMonster().name, DEATHMSGS[screen.rand.nextInt(DEATHMSGS.length)]));
             screen.enemies.remove(cr);
-        }
-    }
-
-    private class FinishCreatureAction implements Runnable {
-
-        @Override
-        public void run() {
-            Gdx.input.setInputProcessor(new InputMultiplexer(CombatScreen.this, hudStage));
-            if (partyMembers.isEmpty()) {
-                end();
-            }
         }
     }
 
@@ -618,77 +611,84 @@ public class CombatScreen extends BaseScreen {
         //not used here
     }
 
-    /**
-     * Return false if to remove from map.
-     */
-    private boolean creatureAction(andius.objects.Actor creature) throws PartyDeathException {
+    private void creatureAction(SequenceAction seq, andius.objects.Actor creature) {
 
-        Gdx.input.setInputProcessor(null);
+        try {
 
-        if (creature.getMonster().getStatus() != Status.OK && creature.getMonster().getStatus() != Status.SILENCED) {
-            return true;
-        }
-
-        AtomicInteger dist = new AtomicInteger(0);
-        final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist);
-        if (target == null) {
-            return true;
-        }
-
-        CombatAction action = CombatAction.ATTACK;
-        if (action == CombatAction.ATTACK && dist.get() > 1) {
-            action = CombatAction.ADVANCE;
-        }
-
-        switch (action) {
-            case ATTACK:
-                Sounds.play(Sound.NPC_ATTACK);
-                AttackResult res = Utils.attackHit(creature.getMonster(), target.getPlayer());
-                if (res == AttackResult.HIT) {
-                    SequenceAction seq = Actions.action(SequenceAction.class);
-                    for (Dice dice : creature.getMonster().getDamage()) {
-                        int damage = dice.roll();
-                        target.getPlayer().adjustHP(-damage);
-                        log(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
-
-                        Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
-                        d.setX(target.getX() + 12);
-                        d.setY(target.getY() + 12);
-                        d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
-                        seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-                        seq.addAction(Actions.run(new AddActorAction(stage, d)));
-                        if (target.getPlayer().status == Status.DEAD) {
-                            seq.addAction(Actions.run(new Runnable() {
-                                @Override
-                                public void run() {
-                                    partyMembers.remove(target);
-                                    target.getPlayerCursor().remove();
-                                    getAndSetNextActivePlayer();
-                                }
-                            }));
-                        }
-
-                    }
-                    stage.addAction(seq);
-
-                } else {
-                    log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
-                }
-                break;
-            case FLEE:
-            case ADVANCE: {
-                moveCreature(action, creature, target.getWx(), target.getWy());
-                if (creature.getWx() >= MAP_DIM || creature.getWy() < 0
-                        || creature.getWy() >= MAP_DIM || creature.getWy() < 0) {
-                    log(String.format("%s Flees!", creature.getMonster().getName()));
-                    Sounds.play(Sound.EVADE);
-                    return false;
-                }
-                break;
+            if (creature.getMonster().getStatus() != Status.OK && creature.getMonster().getStatus() != Status.SILENCED) {
+                return;
             }
+
+            AtomicInteger dist = new AtomicInteger(0);
+            final andius.objects.Actor target = nearestPartyMember(creature.getWx(), creature.getWy(), dist);
+            if (target == null) {
+                return;
+            }
+
+            CombatAction action = CombatAction.ATTACK;
+            if ((creature.getMonster().getPriestSpellLevel() > 0 || creature.getMonster().getMageSpellLevel() > 0)
+                    && rand.nextInt(3) == 0 && creature.getMonster().knownSpells.size() > 0) {
+                action = CombatAction.CAST;
+            } else if (action == CombatAction.ATTACK && dist.get() > 1) {
+                action = CombatAction.ADVANCE;
+            }
+
+            switch (action) {
+                case ATTACK:
+                    Sounds.play(Sound.NPC_ATTACK);
+                    boolean hit = Utils.attackHit(creature.getMonster(), target.getPlayer());
+                    if (hit) {
+                        for (Dice dice : creature.getMonster().getDamage()) {
+                            int damage = dice.roll();
+                            target.getPlayer().adjustHP(-damage);
+                            log(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
+
+                            Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
+                            d.setX(target.getX() + 12);
+                            d.setY(target.getY() + 12);
+                            d.addAction(Actions.sequence(Actions.delay(.3f), Actions.removeActor()));
+
+                            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                            seq.addAction(Actions.run(new AddActorAction(stage, d)));
+                            if (target.getPlayer().status == Status.DEAD) {
+                                seq.addAction(Actions.run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        partyMembers.remove(target);
+                                        target.getPlayerCursor().remove();
+                                    }
+                                }));
+                            }
+
+                        }
+                        stage.addAction(seq);
+
+                    } else {
+                        log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
+                    }
+                    break;
+                case CAST: {
+                    Spells spell = creature.getMonster().knownSpells.get(rand.nextInt(creature.getMonster().knownSpells.size()));
+                    log(String.format("%s casts %s", creature.getMonster().name, spell));
+                    SpellUtil.spellMonsterCast(this, seq, spell, creature, target);
+                    break;
+                }
+                case FLEE:
+                case ADVANCE: {
+                    moveCreature(action, creature, target.getWx(), target.getWy());
+                    if (creature.getWx() >= MAP_DIM || creature.getWy() < 0
+                            || creature.getWy() >= MAP_DIM || creature.getWy() < 0) {
+                        log(String.format("%s Flees!", creature.getMonster().getName()));
+                        Sounds.play(Sound.EVADE);
+                        return;
+                    }
+                    break;
+                }
+            }
+        } finally {
+            creature.getMonster().decrementStatusEffectCount();
         }
 
-        return true;
     }
 
     private andius.objects.Actor nearestPartyMember(int fromX, int fromY, AtomicInteger dist) {
@@ -758,49 +758,57 @@ public class CombatScreen extends BaseScreen {
         return !this.partyMembers.isEmpty() && activeIndex < this.partyMembers.size() ? getPartyMember(activeIndex) : null;
     }
 
+    private andius.objects.Actor getNextAblePartyMember() {
+        int tmp = activeIndex;
+        if (tmp >= this.partyMembers.size()) {
+            tmp = 0;
+        }
+        for (int i = tmp; i < partyMembers.size(); i++) {
+            andius.objects.Actor a = getPartyMember(i);
+            if (!a.getPlayer().isDisabled()) {
+                return a;
+            }
+            tmp++;
+        }
+
+        return null;
+    }
+
     private boolean isRoundDone() {
         int tmp = activeIndex;
         tmp++;
         if (tmp >= this.partyMembers.size()) {
             return true;
         }
-        boolean noMoreAble = true;;
+        boolean allDeadRoundIsDone = true;
         for (andius.objects.Actor player : partyMembers) {
-            if (!player.isDisabled()) {
-                noMoreAble = false;
+            if (!player.getPlayer().isDead()) {
+                allDeadRoundIsDone = false;
             }
         }
-        return noMoreAble;
+        return allDeadRoundIsDone;
     }
 
     private andius.objects.Actor getAndSetNextActivePlayer() {
-        boolean allbad = true;
+
         for (andius.objects.Actor p : partyMembers) {
-            if (!p.isDisabled()) {
-                allbad = false;
-            }
             CursorActor ca = p.getPlayerCursor();
             ca.setVisible(false);
             ca.setX(p.getX());
             ca.setY(p.getY());
         }
 
-        if (allbad) {
+        this.activeIndex++;
+        if (activeIndex >= this.partyMembers.size()) {
             activeIndex = 0;
-            return null;
         }
 
-        while (true) {
-            this.activeIndex++;
-            if (activeIndex >= this.partyMembers.size()) {
-                activeIndex = 0;
-            }
-            andius.objects.Actor p = getPartyMember(activeIndex);
-            if (!p.isDisabled()) {
-                p.getPlayerCursor().setVisible(true);
-                return p;
-            }
-        }
+        andius.objects.Actor p = getPartyMember(activeIndex);
+        p.getPlayerCursor().setVisible(true);
+        p.getPlayer().decrementStatusEffects();
+
+        return p;
+
     }
 
     private andius.objects.Actor getPartyMember(int index) {
@@ -840,37 +848,41 @@ public class CombatScreen extends BaseScreen {
         };
 
         if (av.result == AttackResult.HIT) {
+
             Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
             d.setX(tx + 12);
             d.setY(ty + 12);
-            d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
-            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-            seq.addAction(Actions.run(new AddActorAction(stage, d)));
             if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
-                seq.addAction(Actions.run(new RemoveCreatureAction(this, av.victim)));
+                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor(), Actions.run(new RemoveCreatureAction(this, av.victim))));
+            } else {
+                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
             }
 
-            seq.addAction(Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    finishPlayerTurn();
-                }
-            }));
-
-            p.addAction(Actions.sequence(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)), Actions.moveTo(tx, ty, av.distance * .1f), after));
+            p.addAction(Actions.sequence(
+                    Actions.run(new PlaySoundAction(Sound.PC_ATTACK)),
+                    Actions.moveTo(tx, ty, av.distance * .1f),
+                    Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)),
+                    Actions.delay(.1f),
+                    Actions.run(new AddActorAction(stage, d)),
+                    after));
 
         } else {
-            seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
-            seq.addAction(Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    finishPlayerTurn();
-                }
-            }));
 
-            p.addAction(Actions.sequence(Actions.run(new PlaySoundAction(Sound.PC_ATTACK)), after));
+            p.addAction(Actions.sequence(
+                    Actions.run(new PlaySoundAction(Sound.PC_ATTACK)),
+                    Actions.moveTo(tx, ty, av.distance * .1f),
+                    Actions.delay(.1f),
+                    Actions.run(new PlaySoundAction(Sound.EVADE)),
+                    after));
         }
+
+        seq.addAction(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                finishPlayerTurn();
+            }
+        }));
 
         stage.addActor(p);
     }
@@ -880,15 +892,15 @@ public class CombatScreen extends BaseScreen {
         int range = weapon.range == 0 ? 1 : weapon.range;
 
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
-
+        av.result = AttackResult.MISS;
         if (av.victim != null) {
             for (int j = 0; j < weapon.extraSwings + 1; j++) {
-                av.result = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
-                if (av.result == AttackResult.HIT) {
+                boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
+                if (hit) {
+                    av.result = AttackResult.HIT;
                     int damage = Utils.dealDamage(weapon, av.victim.getMonster());
-                    log(String.format("%s %s %s.", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name));
+                    log(String.format("%s %s %s, who %s", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
                 }
-                log(String.format("%s %s", av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
             }
         }
 
@@ -922,13 +934,14 @@ public class CombatScreen extends BaseScreen {
                 }
             }
             if (av.victim != null) {
+                av.result = AttackResult.MISS;
                 for (int j = 0; j < weapon.extraSwings + 1; j++) {
-                    av.result = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
-                    if (av.result == AttackResult.HIT) {
+                    boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
+                    if (hit) {
+                        av.result = AttackResult.HIT;
                         int damage = Utils.dealDamage(weapon, av.victim.getMonster());
-                        log(String.format("%s %s %s.", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name));
+                        log(String.format("%s %s %s, who %s", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
                     }
-                    log(String.format("%s %s", av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
                 }
             }
         }

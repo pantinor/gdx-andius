@@ -480,6 +480,7 @@ public interface Constants {
     public enum CombatAction {
         ATTACK,
         ADVANCE,
+        CAST,
         FLEE;
     }
 

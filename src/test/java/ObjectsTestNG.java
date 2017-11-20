@@ -7,7 +7,9 @@ import andius.objects.Conversations.Label;
 import andius.objects.Conversations.Topic;
 import andius.objects.Item;
 import andius.objects.Monster;
+import andius.objects.MutableMonster;
 import andius.objects.Reward;
+import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.google.gson.Gson;
@@ -20,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -72,24 +75,24 @@ public class ObjectsTestNG {
             avatar.clericPoints[0] = 2;
         }
 
-//        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-//        avatar.magePoints[0] --;
-//        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-//        SaveGame.setSpellPoints(avatar);
-//        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-//            avatar.exp = 1300;
-//            int ret = 0;
-//            while( ret >= 0) {
-//                ret = avatar.checkAndSetLevel();
-//            }
-//            System.out.printf("%d\t%d\t%d\n",avatar.level, avatar.exp, ret);
-//        for (int i = 1; i < 30; i++) {
-//            avatar.level = i;
-//            SaveGame.setSpellPoints(avatar);
-//            SaveGame.tryLearn(avatar);
-//            System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-//            System.out.println("" + i + "\t" + avatar.knownSpells);
-//        }
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        avatar.magePoints[0]--;
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        SaveGame.setSpellPoints(avatar);
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        avatar.exp = 1300;
+        int ret = 0;
+        while (ret >= 0) {
+            ret = avatar.checkAndSetLevel();
+        }
+        System.out.printf("%d\t%d\t%d\n", avatar.level, avatar.exp, ret);
+        for (int i = 1; i < 30; i++) {
+            avatar.level = i;
+            SaveGame.setSpellPoints(avatar);
+            SaveGame.tryLearn(avatar);
+            System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+            System.out.println("" + i + "\t" + avatar.knownSpells);
+        }
     }
 
     //@Test
@@ -146,17 +149,24 @@ public class ObjectsTestNG {
         List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
         }.getType());
         int x = 0;
-        
+
         Collections.sort(items);
-        
+
         for (Item it : items) {
             //System.out.println(it);
         }
-        
+
         Collections.sort(monsters);
-        
+
         for (Monster m : monsters) {
-            System.out.println(m);
+            if (m.getMageSpellLevel() > 0 || m.getPriestSpellLevel() > 0) {
+                System.out.printf("%s\tmspl: %d\tpspl: %d\n", m.name, m.getMageSpellLevel(), m.getPriestSpellLevel());
+                MutableMonster mm = new MutableMonster(m);
+                SaveGame.setMonsterSpellPoints(mm);
+                SaveGame.tryLearn(mm);
+                System.out.println("\t" + Arrays.toString(mm.magePoints) + "\t" + Arrays.toString(mm.clericPoints));
+                System.out.println("\t" + mm.knownSpells);
+            }
         }
     }
 
@@ -380,7 +390,7 @@ public class ObjectsTestNG {
 
             }
         }
-        
+
         Iterator<Conversation> it2 = convs.getConversations().iterator();
         while (it2.hasNext()) {
             Conversation c = it2.next();
@@ -394,6 +404,63 @@ public class ObjectsTestNG {
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(convs, System.out);
 
+    }
+
+    @Test
+    public void testAttack() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+        String json = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+        String json3 = IOUtils.toString(is);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+
+        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {
+        }.getType());
+
+        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
+        }.getType());
+
+        java.util.Map<String, Item> itemsMap = new HashMap<>();
+        for (Item i : items) {
+            itemsMap.put(i.name, i);
+        }
+
+        CharacterRecord avatar = new CharacterRecord();
+        avatar.name = "Steve";
+        avatar.race = Race.HUMAN;
+        avatar.classType = ClassType.FIGHTER;
+        avatar.hp = 100;
+        avatar.maxhp = avatar.hp;
+
+        avatar.armor = itemsMap.get("CHAIN MAIL").clone();
+        avatar.weapon = itemsMap.get("MACE +1").clone();
+        avatar.helm = itemsMap.get("HELM").clone();
+        avatar.shield = itemsMap.get("LARGE SHIELD").clone();
+        //avatar.glove = itemsMap.get("SILVER GLOVES").clone();
+        //avatar.item1 = itemsMap.get("ROD OF FLAME").clone();
+        //avatar.item2 = itemsMap.get("WERDNAS AMULET").clone();
+
+        avatar.str = 16;
+        avatar.agility = 16;
+        avatar.luck = 12;
+
+        avatar.level = 1;
+        
+        for (int x = 0;x<20;x++) {
+            MutableMonster mm = new MutableMonster(monsters.get(85));
+            Utils.attackHit(mm, avatar);
+            Utils.attackHit(avatar, mm);
+        }
+
+        for (Monster m : monsters) {
+            MutableMonster mm = new MutableMonster(m);
+            //Utils.attackHit(mm, avatar);
+            //Utils.attackHit(avatar, mm);
+        }
     }
 
 }

@@ -6,7 +6,6 @@ import andius.Constants;
 import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
-import andius.Constants.SpellTarget;
 import andius.Context;
 import andius.objects.Actor;
 import andius.objects.Monster;
@@ -78,7 +77,8 @@ public class CombatTestMain extends Game {
             TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
             TiledMap tm = loader.load("assets/data/combat1.tmx");
 
-            Monster monster = Andius.MONSTER_LEVELS.get(4).get(1);
+            Monster monster = Andius.MONSTER_LEVELS.get(6).get(1);
+            //Monster monster = Andius.MONSTER_MAP.get("Kobold");
             Actor actor = new Actor(monster.icon, 0, monster.name);
             MutableMonster mm = new MutableMonster(monster);
             mm.name = monster.name;

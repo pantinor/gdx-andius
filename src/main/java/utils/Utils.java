@@ -1,6 +1,7 @@
 package utils;
 
 import andius.Constants.AttackResult;
+import andius.Constants.Status;
 import andius.Direction;
 import andius.objects.Item;
 import andius.objects.MutableMonster;
@@ -128,13 +129,24 @@ public class Utils {
         return dirmask;
     }
 
-    public static AttackResult attackHit(MutableMonster attacker, CharacterRecord defender) {
+    public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
         int attackValue = RAND.nextInt(20) + 1;
-        int defenseValue = 20 - defender.calculateAC();
-        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
+        int defenseValue = 20 - defender.calculateAC() - attacker.getLevel() - (defender.status == Status.OK ? 0 : 3);
+
+        if (defenseValue < 1) {
+            defenseValue = 1;
+        }
+
+        if (defenseValue > 19) {
+            defenseValue = 19;
+        }
+
+        //System.out.printf("%s AC[%d] result: %s (%d/%d)\n", 
+        //        attacker.name, defender.calculateAC(), attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
+        return attackValue >= defenseValue ;
     }
 
-    public static AttackResult attackHit(CharacterRecord attacker, MutableMonster defender) {
+    public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
         int strMod = 0;
         if (attacker.str <= 3) {
             strMod = -3;
@@ -150,17 +162,38 @@ public class Utils {
             strMod = 3;
         }
         int attackValue = (RAND.nextInt(20) + 1) + strMod;
-        int defenseValue = defender.getArmourClass() + defender.getACModifier();
-        return attackValue > defenseValue ? AttackResult.HIT : AttackResult.MISS;
+        int defenseValue = 21 - defender.getArmourClass() + defender.getACModifier() - (defender.getStatus() == Status.OK ? 0 : 3);
+
+        if (attackValue < 1) {
+            attackValue = 1;
+        }
+
+        if (attackValue > 19) {
+            attackValue = 19;
+        }
+
+        if (defenseValue < 1) {
+            defenseValue = 1;
+        }
+
+        if (defenseValue > 19) {
+            defenseValue = 19;
+        }
+
+        //System.out.printf("%s AC[%d] result: %s (%d/%d)\n",
+        //        attacker.name, defender.getArmourClass(),
+        //        attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
+
+        return attackValue >= defenseValue ;
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {
-        int damage = weapon.damage.roll();
+        int damage = weapon.damage.roll() + (defender.getStatus() == Status.OK ? 0 : 5);
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;
     }
-    
+
     public static int dealSpellDamage(int hits, int range, int bonus) {
         int points = 0;
         while (hits > 0) {
