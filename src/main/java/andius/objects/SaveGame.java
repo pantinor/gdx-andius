@@ -67,7 +67,6 @@ public class SaveGame implements Constants {
 //            }
         }
 
-        this.removedActors.clear();
         for (Map map : Map.values()) {
             if (map.getMap() != null) {
                 MapLayer peopleLayer = map.getTiledMap().getLayers().get("people");

@@ -45,7 +45,7 @@ public interface Constants {
 
     public enum Map {
 
-        WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
+        WORLD("Andius", "u4_world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
@@ -374,8 +374,9 @@ public interface Constants {
                 Moongate mg = Moongate.valueOf(obj.getName());
                 mg.x = obj.getProperties().get("x", Float.class);
                 mg.y = obj.getProperties().get("y", Float.class);
-                mg.mapX = Float.parseFloat(obj.getProperties().get("wx", String.class));
-                mg.mapY = Float.parseFloat(obj.getProperties().get("wy", String.class));
+                mg.mapX = mg.x / 24;
+                mg.mapY = 256 - (mg.y / 24) - 1;
+                int c = 0;
             }
         }
 
