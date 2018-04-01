@@ -229,10 +229,10 @@ public class WorldScreen extends BaseScreen {
         }
 
         TiledMapTileLayer grass = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("grass");
-        TiledMapTileLayer mountains = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("mountains");
+        //TiledMapTileLayer mountains = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("mountains");
         TiledMapTileLayer.Cell c1 = grass.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
-        TiledMapTileLayer.Cell c2 = mountains.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
-        if (c1 == null || c2 != null) {
+        //TiledMapTileLayer.Cell c2 = mountains.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
+        if (c1 == null) {
             //Sounds.play(Sound.BLOCKED);
             return false;
         }
@@ -245,7 +245,7 @@ public class WorldScreen extends BaseScreen {
         //check for active moongate portal
         for (Moongate g : Moongate.values()) {
             if (g.getCurrentTexture() != null && newx == g.getMapX() && newy == g.getMapY()) {
-                //Sounds.play(Sound.MOONGATE);
+                Sounds.play(Sound.WAVE);
                 Moongate d = getDestinationForMoongate(g);
                 newMapPixelCoords.x = d.getX();
                 newMapPixelCoords.y = d.getY();

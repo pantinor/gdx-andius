@@ -28,6 +28,11 @@ public class Reward {
             return itemNames;
         }
 
+        @Override
+        public String toString() {
+            return "\tRewardElement{" + "type=" + type + ", odds=" + odds + ", itemNames=" + itemNames + "}\n";
+        }
+
     }
 
     public Dice getGoldAmt() {
@@ -44,6 +49,11 @@ public class Reward {
 
     public List<RewardElement> getElements() {
         return elements;
+    }
+
+    @Override
+    public String toString() {
+        return "Reward{" + "name=" + name + ", id=" + id + ", goldAmt=" + goldAmt + ", elements=\n" + elements;
     }
 
 }

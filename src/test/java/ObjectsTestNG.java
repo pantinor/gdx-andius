@@ -5,10 +5,12 @@ import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
 import andius.objects.Conversations.Label;
 import andius.objects.Conversations.Topic;
+import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.Reward;
+import andius.objects.Reward.RewardElement;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
@@ -152,8 +154,32 @@ public class ObjectsTestNG {
 
         Collections.sort(items);
 
+        java.util.Map<String, Item> itemMap = new HashMap<>();
+
         for (Item it : items) {
             //System.out.println(it);
+            itemMap.put(it.name, it);
+        }
+
+        for (Reward r : rewards) {
+
+            int goldAmt = r.getGoldAmt().roll();
+            //System.out.println(String.format("player found %d gold with %s", goldAmt, r.getName()));
+
+            for (RewardElement rw : r.getElements()) {
+                int odds = rw.getOdds();
+                int roll = Dice.rand.nextInt(101);
+                if (roll <= odds) {
+                    String found = rw.getItemNames().get(Dice.rand.nextInt(rw.getItemNames().size()));
+                    //System.out.println(String.format("player finds a %s", found));
+                }
+                for (String n : rw.getItemNames()) {
+                    if (!itemMap.containsKey(n)) {
+                        System.out.println("cannot find " + n);
+                    }
+                }
+            }
+
         }
 
         Collections.sort(monsters);
@@ -449,8 +475,8 @@ public class ObjectsTestNG {
         avatar.luck = 12;
 
         avatar.level = 1;
-        
-        for (int x = 0;x<20;x++) {
+
+        for (int x = 0; x < 20; x++) {
             MutableMonster mm = new MutableMonster(monsters.get(85));
             Utils.attackHit(mm, avatar);
             Utils.attackHit(avatar, mm);

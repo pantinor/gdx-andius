@@ -4,7 +4,7 @@ import utils.XORShiftRandom;
 
 public class Dice {
     
-    private final static XORShiftRandom rand = new XORShiftRandom();
+    public final static XORShiftRandom rand = new XORShiftRandom();
 
     private int qty;
     private int sides;

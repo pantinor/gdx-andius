@@ -1184,7 +1184,7 @@
     ],
     "goldAmt": {
       "qty": 94,
-      "sides": 0,
+      "sides": 94,
       "bonus": 0
     },
     "name": "Type 20"
@@ -1216,7 +1216,7 @@
     ],
     "goldAmt": {
       "qty": 16,
-      "sides": 0,
+      "sides": 16,
       "bonus": 0
     },
     "name": "Type 21"
