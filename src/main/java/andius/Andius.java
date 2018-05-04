@@ -223,7 +223,7 @@ public class Andius extends Game {
             }.getType());
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 11; i++) {
                 MONSTER_LEVELS.put(i, new ArrayList<>());
             }
             for (Monster m : MONSTERS) {

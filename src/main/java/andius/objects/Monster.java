@@ -132,7 +132,7 @@ public class Monster implements Comparable<Monster> {
     public int getExp() {
         return exp;
     }
-    
+
     public int getLevel() {
         if (exp > 0 && this.exp <= 599) {
             return 0;
@@ -144,12 +144,18 @@ public class Monster implements Comparable<Monster> {
             return 3;
         } else if (this.exp >= 2000 && this.exp <= 2999) {
             return 4;
-        } else if (this.exp >= 3000 && this.exp <= 4999) {
+        } else if (this.exp >= 3000 && this.exp <= 3999) {
             return 5;
-        } else if (this.exp >= 5000 && this.exp <= 9999) {
+        } else if (this.exp >= 4000 && this.exp <= 4999) {
             return 6;
-        } else {
+        } else if (this.exp >= 5000 && this.exp <= 5999) {
             return 7;
+        } else if (this.exp >= 6000 && this.exp <= 7999) {
+            return 8;
+        } else if (this.exp >= 8000 && this.exp <= 9999) {
+            return 9;
+        } else {
+            return 10;
         }
     }
 

@@ -55,7 +55,18 @@ public interface Constants {
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
-        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),;
+        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),
+        WIZARDRY1("Wizardy Level 1", "WizLevel1.tmx", TILE_DIM),
+        WIZARDRY2("Wizardy Level 2", "WizLevel2.tmx", TILE_DIM),
+        WIZARDRY3("Wizardy Level 3", "WizLevel3.tmx", TILE_DIM),
+        WIZARDRY4("Wizardy Level 4", "WizLevel4.tmx", TILE_DIM),
+        WIZARDRY5("Wizardy Level 5", "WizLevel5.tmx", TILE_DIM),
+        WIZARDRY6("Wizardy Level 6", "WizLevel6.tmx", TILE_DIM),
+        WIZARDRY7("Wizardy Level 7", "WizLevel7.tmx", TILE_DIM),
+        WIZARDRY8("Wizardy Level 8", "WizLevel8.tmx", TILE_DIM),
+        WIZARDRY9("Wizardy Level 9", "WizLevel9.tmx", TILE_DIM),
+        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM)
+        ;
 
         private final String label;
         private final String tmxFile;
@@ -173,6 +184,9 @@ public interface Constants {
                     int sx = (int) (x / TILE_DIM);
                     int sy = (int) (y / TILE_DIM);
                     TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
+                    if (iconCell == null || iconCell.getTile() == null) {
+                        int d = 0;
+                    }
                     Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));

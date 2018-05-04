@@ -165,5 +165,14 @@ public enum Icons {
     public static Icons get(int idx) {
         return LOOKUP_TABLE[idx];
     }
+    
+    public static int tile(Icons icon) {
+        for (int i=0;i<LOOKUP_TABLE.length;i++) {
+            if (LOOKUP_TABLE[i].equals(icon)) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
 }
