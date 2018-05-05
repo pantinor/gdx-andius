@@ -633,28 +633,36 @@ public class WizardryMapTmxConvert implements ApplicationListener {
             for (int r = 19; r >= 0; r--) {
                 for (int c = 0; c < 20; c++) {
                     MazeCell cell = level.cells[r][c];
-                    if (cell.block[2][1] == Type.HIDDEN_NORTH) {
-                        MazeCell adj = level.cells[r + 1 > 19 ? 0 : r + 1][c];
+                    if (cell.block[2][1] == Type.HIDDEN_NORTH || cell.block[2][1] == Type.DOOR) {
+                        int j = r + 1 > 19 ? 0 : r + 1;
+                        int k = c;
+                        MazeCell adj = level.cells[j][k];
                         if (adj.block[0][1] == Type.SOUTH_WALL || adj.block[0][1] == Type.WALL) {
-                            hidden((c) * (3 * 48) + (1 * 48), (20 - r) * (3 * 48) - (3 * 48), r, c);
+                            hidden((c) * (3 * 48) + (1 * 48), (20 - r) * (3 * 48) - (3 * 48), k * 3 + 1, (19 - j) * 3 + 1);
                         }
                     }
-                    if (cell.block[0][1] == Type.HIDDEN_SOUTH) {
-                        MazeCell adj = level.cells[r - 1 < 0 ? 19 : r - 1][c];
+                    if (cell.block[0][1] == Type.HIDDEN_SOUTH || cell.block[0][1] == Type.DOOR) {
+                        int j = r - 1 < 0 ? 19 : r - 1;
+                        int k = c;
+                        MazeCell adj = level.cells[j][k];
                         if (adj.block[2][1] == Type.NORTH_WALL || adj.block[2][1] == Type.WALL) {
-                            hidden((c) * (3 * 48) + (1 * 48), (20 - r) * (3 * 48) - (1 * 48), r, c);
+                            hidden((c) * (3 * 48) + (1 * 48), (20 - r) * (3 * 48) - (1 * 48), k * 3 + 1, (19 - j) * 3 + 1);
                         }
                     }
-                    if (cell.block[1][0] == Type.HIDDEN_WEST) {
-                        MazeCell adj = level.cells[r][c - 1 < 0 ? 19 : c - 1];
+                    if (cell.block[1][0] == Type.HIDDEN_WEST || cell.block[1][0] == Type.DOOR) {
+                        int j = r;
+                        int k = c - 1 < 0 ? 19 : c - 1;
+                        MazeCell adj = level.cells[j][k];
                         if (adj.block[1][2] == Type.WALL) {
-                            hidden((c) * (3 * 48) + (0 * 48), (20 - r) * (3 * 48) - (2 * 48), r, c);
+                            hidden((c) * (3 * 48) + (0 * 48), (20 - r) * (3 * 48) - (2 * 48), k * 3 + 1, (19 - j) * 3 + 1);
                         }
                     }
-                    if (cell.block[1][2] == Type.HIDDEN_EAST) {
-                        MazeCell adj = level.cells[r][c + 1 > 19 ? 0 : c + 1];
+                    if (cell.block[1][2] == Type.HIDDEN_EAST || cell.block[1][2] == Type.DOOR) {
+                        int j = r;
+                        int k = c + 1 > 19 ? 0 : c + 1;
+                        MazeCell adj = level.cells[j][k];
                         if (adj.block[1][0] == Type.WALL) {
-                            hidden((c) * (3 * 48) + (2 * 48), (20 - r) * (3 * 48) - (2 * 48), r, c);
+                            hidden((c) * (3 * 48) + (2 * 48), (20 - r) * (3 * 48) - (2 * 48), k * 3 + 1, (19 - j) * 3 + 1);
                         }
                     }
 
@@ -848,8 +856,8 @@ public class WizardryMapTmxConvert implements ApplicationListener {
             String template = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\"" + this.mapWidth + "\" height=\"" + this.mapHeight + "\" tilewidth=\"48\" tileheight=\"48\" nextobjectid=\"1\">\n"
                     + " <properties>\n"
-                    + "  <property name=\"startX\" value=\"15\"/>\n"
-                    + "  <property name=\"startY\" value=\"31\"/>\n"
+                    + "  <property name=\"startX\" value=\"1\"/>\n"
+                    + "  <property name=\"startY\" value=\"58\"/>\n"
                     + " </properties>"
                     + " <tileset firstgid=\"1\" name=\"terrain\" tilewidth=\"48\" tileheight=\"48\" tilecount=\"760\" columns=\"20\">\n"
                     + "  <image source=\"uf_terrain.png\" width=\"960\" height=\"1824\"/>\n"
