@@ -752,319 +752,319 @@
    <object id="5" name="Greater Demon" type="MONSTER" x="2496" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="6" name="Earth Giant" type="MONSTER" x="2640" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="7" name="Will O' Wisp" type="MONSTER" x="2784" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="8" name="Earth Giant" type="MONSTER" x="2496" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="9" name="Werdna" type="MONSTER" x="2640" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="10" name="Frost Giant" type="MONSTER" x="2784" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="11" name="Werdna" type="MONSTER" x="2496" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="12" name="Earth Giant" type="MONSTER" x="2640" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="13" name="Poison Giant" type="MONSTER" x="2784" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="15" name="Will O' Wisp" type="MONSTER" x="48" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="16" name="Greater Demon" type="MONSTER" x="192" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="18" name="Werdna" type="MONSTER" x="336" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="19" name="Greater Demon" type="MONSTER" x="48" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="20" name="Will O' Wisp" type="MONSTER" x="192" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="21" name="Werdna" type="MONSTER" x="336" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="22" name="Will O' Wisp" type="MONSTER" x="2064" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="23" name="Greater Demon" type="MONSTER" x="2208" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="25" name="Greater Demon" type="MONSTER" x="48" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="26" name="Will O' Wisp" type="MONSTER" x="192" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="27" name="Will O' Wisp" type="MONSTER" x="336" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="28" name="Greater Demon" type="MONSTER" x="1344" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="29" name="Poison Giant" type="MONSTER" x="1488" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="30" name="Frost Giant" type="MONSTER" x="1632" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="31" name="Frost Giant" type="MONSTER" x="2064" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="32" name="Earth Giant" type="MONSTER" x="2208" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="33" name="Werdna" type="MONSTER" x="2352" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="35" name="Earth Giant" type="MONSTER" x="1344" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="37" name="Greater Demon" type="MONSTER" x="1488" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="38" name="Greater Demon" type="MONSTER" x="1632" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="40" name="Earth Giant" type="MONSTER" x="2064" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Earth Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="41" name="Poison Giant" type="MONSTER" x="2208" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="42" name="Greater Demon" type="MONSTER" x="2352" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="44" name="Poison Giant" type="MONSTER" x="1344" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="45" name="Greater Demon" type="MONSTER" x="1488" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="46" name="Werdna" type="MONSTER" x="1632" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="48" name="Greater Demon" type="MONSTER" x="2640" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="50" name="Werdna" type="MONSTER" x="2784" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="52" name="Greater Demon" type="MONSTER" x="2640" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="53" name="Frost Giant" type="MONSTER" x="2784" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="54" name="Poison Giant" type="MONSTER" x="2640" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="55" name="Frost Giant" type="MONSTER" x="2784" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="56" name="Werdna" type="MONSTER" x="48" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Werdna"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="57" name="Poison Giant" type="MONSTER" x="192" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Poison Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="58" name="Will O' Wisp" type="MONSTER" x="48" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="59" name="Frost Giant" type="MONSTER" x="192" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="60" name="Frost Giant" type="MONSTER" x="1344" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="61" name="Frost Giant" type="MONSTER" x="1488" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="63" name="Frost Giant" type="MONSTER" x="1632" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="65" name="Greater Demon" type="MONSTER" x="48" y="48" width="48" height="48">
    <properties>
     <property name="creature" value="Greater Demon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="67" name="Will O' Wisp" type="MONSTER" x="192" y="48" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="68" name="Will O' Wisp" type="MONSTER" x="1344" y="48" width="48" height="48">
    <properties>
     <property name="creature" value="Will O' Wisp"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="70" name="Frost Giant" type="MONSTER" x="1488" y="48" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="71" name="Frost Giant" type="MONSTER" x="1632" y="48" width="48" height="48">
    <properties>
     <property name="creature" value="Frost Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 

@@ -178,9 +178,24 @@ public class GameScreen extends BaseScreen {
             }
             newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
             v.x -= 1;
-        } else if (keycode == Keys.E || keycode == Keys.K) {
-            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
+        } else if (keycode == Keys.D || keycode == Keys.U) {//elevators
+            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y, keycode == Keys.U);
             if (p != null && p.getMap() != this.map) {
+                Vector3 dv = p.getDest();
+                int dx = (int) dv.x;
+                int dy = (int) dv.y;
+                if (dx >= 0 && dy >= 0) {
+                    if (p.getMap().getRoomIds() != null) {
+                        p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
+                    }
+                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy);
+                }
+                Andius.mainGame.setScreen(p.getMap().getScreen());
+            }
+            return false;
+        } else if (keycode == Keys.E || keycode == Keys.K) {//stairs
+            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
+            if (p != null && p.getMap() != this.map && !p.isElevator()) {
                 Vector3 dv = p.getDest();
                 int dx = (int) dv.x;
                 int dy = (int) dv.y;

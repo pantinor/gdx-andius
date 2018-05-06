@@ -65,8 +65,7 @@ public interface Constants {
         WIZARDRY7("Wizardy Level 7", "WizLevel7.tmx", TILE_DIM),
         WIZARDRY8("Wizardy Level 8", "WizLevel8.tmx", TILE_DIM),
         WIZARDRY9("Wizardy Level 9", "WizLevel9.tmx", TILE_DIM),
-        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM)
-        ;
+        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM);
 
         private final String label;
         private final String tmxFile;
@@ -153,20 +152,44 @@ public interface Constants {
                     float y = obj.getProperties().get("y", Float.class);
                     int sx = (int) (x / this.dim);
                     int sy = this.baseMap.getHeight() - 1 - (int) (y / this.dim);
-                    Object dx = obj.getProperties().get("dx");
-                    Object dy = obj.getProperties().get("dy");
-                    List<Vector3> randoms = new ArrayList<>();
-                    for (int i = 0; i < 6; i++) {
-                        String temp = (String) obj.getProperties().get("random" + i);
-                        if (temp != null) {
-                            String[] s = temp.split(",");
-                            randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
+
+                    if ("ELEVATOR".equals(obj.getName())) {
+                        Object down = obj.getProperties().get("DOWN");
+                        if (down != null) {
+                            pm = Map.valueOf((String) down);
+                            Object dx = obj.getProperties().get("dx");
+                            Object dy = obj.getProperties().get("dy");
+                            this.baseMap.addPortal(pm, sx, sy,
+                                    dx != null ? Integer.parseInt((String) dx) : -1,
+                                    dy != null ? Integer.parseInt((String) dy) : -1,
+                                    null, true, false);
                         }
+                        Object up = obj.getProperties().get("UP");
+                        if (up != null) {
+                            pm = Map.valueOf((String) up);
+                            Object ux = obj.getProperties().get("ux");
+                            Object uy = obj.getProperties().get("uy");
+                            this.baseMap.addPortal(pm, sx, sy,
+                                    ux != null ? Integer.parseInt((String) ux) : -1,
+                                    uy != null ? Integer.parseInt((String) uy) : -1,
+                                    null, true, true);
+                        }
+                    } else {
+                        Object dx = obj.getProperties().get("dx");
+                        Object dy = obj.getProperties().get("dy");
+                        List<Vector3> randoms = new ArrayList<>();
+                        for (int i = 0; i < 6; i++) {
+                            String temp = (String) obj.getProperties().get("random" + i);
+                            if (temp != null) {
+                                String[] s = temp.split(",");
+                                randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
+                            }
+                        }
+                        this.baseMap.addPortal(pm, sx, sy,
+                                dx != null ? Integer.parseInt((String) dx) : -1,
+                                dy != null ? Integer.parseInt((String) dy) : -1,
+                                randoms.size() > 0 ? randoms : null, false, false);
                     }
-                    this.baseMap.addPortal(pm, sx, sy,
-                            dx != null ? Integer.parseInt((String) dx) : -1,
-                            dy != null ? Integer.parseInt((String) dy) : -1,
-                            randoms.size() > 0 ? randoms : null);
                 }
             }
 

@@ -794,403 +794,403 @@
    <object id="2" name="Lvl 8 Fighter" type="MONSTER" x="1488" y="2784" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="4" name="Dragon Puppy" type="MONSTER" x="1488" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="5" name="Gorgon" type="MONSTER" x="192" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Gorgon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="6" name="High Priest" type="MONSTER" x="336" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="7" name="Champ Samurai" type="MONSTER" x="480" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="8" name="Major Daimyo" type="MONSTER" x="624" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="9" name="Lvl 8 Bishop" type="MONSTER" x="768" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="11" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="12" name="Gorgon" type="MONSTER" x="1776" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Gorgon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="13" name="Gargoyle" type="MONSTER" x="1920" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="14" name="Gas Dragon" type="MONSTER" x="2064" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="15" name="Lvl 8 Bishop" type="MONSTER" x="2208" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="16" name="Life Stealer" type="MONSTER" x="2352" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="17" name="Life Stealer" type="MONSTER" x="2496" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="18" name="Lvl 8 Fighter" type="MONSTER" x="2640" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="19" name="Dragon Puppy" type="MONSTER" x="2784" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="20" name="Major Daimyo" type="MONSTER" x="192" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="21" name="Life Stealer" type="MONSTER" x="768" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="22" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="23" name="Dragon Puppy" type="MONSTER" x="2784" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="24" name="Dragon Puppy" type="MONSTER" x="192" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="25" name="Gorgon" type="MONSTER" x="768" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Gorgon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="26" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="27" name="High Wizard" type="MONSTER" x="2784" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Wizard"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="28" name="High Priest" type="MONSTER" x="192" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="29" name="Major Daimyo" type="MONSTER" x="768" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="30" name="Gargoyle" type="MONSTER" x="1632" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="31" name="High Wizard" type="MONSTER" x="2784" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="High Wizard"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="32" name="Major Daimyo" type="MONSTER" x="192" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="33" name="Champ Samurai" type="MONSTER" x="336" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="34" name="High Priest" type="MONSTER" x="480" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="35" name="High Priest" type="MONSTER" x="624" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="36" name="Lvl 8 Fighter" type="MONSTER" x="768" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="37" name="Life Stealer" type="MONSTER" x="1632" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="38" name="Champ Samurai" type="MONSTER" x="2784" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="39" name="Fire Giant" type="MONSTER" x="1632" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="41" name="Gargoyle" type="MONSTER" x="2496" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="42" name="Life Stealer" type="MONSTER" x="2784" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="44" name="Champ Samurai" type="MONSTER" x="1632" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="45" name="High Priest" type="MONSTER" x="1776" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="46" name="High Wizard" type="MONSTER" x="1920" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Wizard"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="47" name="Gas Dragon" type="MONSTER" x="2064" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="48" name="Lvl 8 Fighter" type="MONSTER" x="2208" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="49" name="Major Daimyo" type="MONSTER" x="2352" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="50" name="Life Stealer" type="MONSTER" x="2640" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="51" name="Gas Dragon" type="MONSTER" x="2784" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="53" name="Gorgon" type="MONSTER" x="1632" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Gorgon"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="55" name="Life Stealer" type="MONSTER" x="1632" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="56" name="Lvl 7 Fighter" type="MONSTER" x="1632" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="57" name="Lvl 7 Fighter" type="MONSTER" x="1776" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="59" name="Lvl 7 Fighter" type="MONSTER" x="1632" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="60" name="Lvl 7 Fighter" type="MONSTER" x="1776" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="61" name="Fire Giant" type="MONSTER" x="1920" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="62" name="Champ Samurai" type="MONSTER" x="624" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="63" name="Life Stealer" type="MONSTER" x="1056" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="65" name="Lvl 7 Fighter" type="MONSTER" x="1632" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="66" name="Lvl 7 Fighter" type="MONSTER" x="1776" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="67" name="Lvl 8 Bishop" type="MONSTER" x="624" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="68" name="Lvl 8 Bishop" type="MONSTER" x="1056" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="72" name="Major Daimyo" type="MONSTER" x="624" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="73" name="High Priest" type="MONSTER" x="1056" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="74" name="High Priest" type="MONSTER" x="1200" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="75" name="High Priest" type="MONSTER" x="1488" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="76" name="Lvl 8 Fighter" type="MONSTER" x="624" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="77" name="Dragon Puppy" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="78" name="Fire Giant" type="MONSTER" x="912" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="79" name="Fire Giant" type="MONSTER" x="1056" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 

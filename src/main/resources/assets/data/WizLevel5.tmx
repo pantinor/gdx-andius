@@ -731,799 +731,799 @@
    <object id="3" name="High Priest" type="MONSTER" x="624" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="4" name="High Priest" type="MONSTER" x="912" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="5" name="Vampire" type="MONSTER" x="1056" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="6" name="Chimera" type="MONSTER" x="1200" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="7" name="Bleeb" type="MONSTER" x="1488" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="8" name="Vampire" type="MONSTER" x="1632" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="9" name="Vampire" type="MONSTER" x="1776" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="10" name="Bleeb" type="MONSTER" x="1920" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="11" name="Vampire" type="MONSTER" x="1056" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="12" name="Chimera" type="MONSTER" x="1200" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="13" name="Vampire" type="MONSTER" x="1488" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="14" name="Chimera" type="MONSTER" x="1632" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="15" name="Chimera" type="MONSTER" x="1776" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="16" name="High Priest" type="MONSTER" x="1920" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="17" name="High Priest" type="MONSTER" x="2064" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="18" name="Chimera" type="MONSTER" x="2208" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="19" name="Chimera" type="MONSTER" x="2352" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="20" name="Chimera" type="MONSTER" x="2496" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="21" name="High Master" type="MONSTER" x="1632" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="22" name="Vampire" type="MONSTER" x="1776" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="23" name="Arch Mage" type="MONSTER" x="1920" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="24" name="Chimera" type="MONSTER" x="2064" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="25" name="High Priest" type="MONSTER" x="2208" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="26" name="High Priest" type="MONSTER" x="2352" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="27" name="Arch Mage" type="MONSTER" x="2496" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="28" name="Arch Mage" type="MONSTER" x="624" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="29" name="Arch Mage" type="MONSTER" x="1056" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="30" name="High Priest" type="MONSTER" x="1200" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="31" name="Arch Mage" type="MONSTER" x="1632" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="32" name="Arch Mage" type="MONSTER" x="1776" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="33" name="High Priest" type="MONSTER" x="1920" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="34" name="Arch Mage" type="MONSTER" x="2064" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="35" name="Vampire" type="MONSTER" x="2208" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="36" name="High Priest" type="MONSTER" x="2352" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="37" name="Vampire" type="MONSTER" x="2496" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="38" name="Chimera" type="MONSTER" x="1632" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="39" name="Vampire" type="MONSTER" x="1776" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="40" name="High Master" type="MONSTER" x="1920" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="41" name="Vampire" type="MONSTER" x="2064" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="42" name="High Master" type="MONSTER" x="2208" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="43" name="Bleeb" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="44" name="Arch Mage" type="MONSTER" x="2496" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="45" name="Bleeb" type="MONSTER" x="192" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="46" name="High Master" type="MONSTER" x="336" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="47" name="Arch Mage" type="MONSTER" x="912" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="48" name="Arch Mage" type="MONSTER" x="1056" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="49" name="Bleeb" type="MONSTER" x="192" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="50" name="High Priest" type="MONSTER" x="336" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="51" name="Bleeb" type="MONSTER" x="480" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="52" name="Arch Mage" type="MONSTER" x="624" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="53" name="Bleeb" type="MONSTER" x="912" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="54" name="Vampire" type="MONSTER" x="1488" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="55" name="Vampire" type="MONSTER" x="1632" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="56" name="Bleeb" type="MONSTER" x="1776" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="57" name="Arch Mage" type="MONSTER" x="1920" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="58" name="Vampire" type="MONSTER" x="2064" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="59" name="Chimera" type="MONSTER" x="2208" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="60" name="High Priest" type="MONSTER" x="2352" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="61" name="High Priest" type="MONSTER" x="2640" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="62" name="Chimera" type="MONSTER" x="2784" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="63" name="High Master" type="MONSTER" x="192" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="64" name="Bleeb" type="MONSTER" x="336" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="65" name="Arch Mage" type="MONSTER" x="480" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="66" name="High Master" type="MONSTER" x="624" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="68" name="High Priest" type="MONSTER" x="1200" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="69" name="Arch Mage" type="MONSTER" x="1488" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="70" name="Vampire" type="MONSTER" x="1776" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="71" name="High Master" type="MONSTER" x="1920" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="72" name="High Priest" type="MONSTER" x="2064" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="73" name="Chimera" type="MONSTER" x="2352" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="74" name="Vampire" type="MONSTER" x="2640" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="75" name="Vampire" type="MONSTER" x="2784" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="76" name="High Master" type="MONSTER" x="48" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="77" name="Chimera" type="MONSTER" x="1488" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="78" name="Arch Mage" type="MONSTER" x="1632" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="79" name="Bleeb" type="MONSTER" x="1776" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="80" name="High Priest" type="MONSTER" x="2064" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="81" name="Arch Mage" type="MONSTER" x="2208" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="82" name="High Priest" type="MONSTER" x="2352" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="83" name="High Master" type="MONSTER" x="2640" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="84" name="Arch Mage" type="MONSTER" x="2784" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="85" name="Arch Mage" type="MONSTER" x="912" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="86" name="Chimera" type="MONSTER" x="1056" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="87" name="Chimera" type="MONSTER" x="1200" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="88" name="Bleeb" type="MONSTER" x="1344" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="89" name="High Priest" type="MONSTER" x="1488" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="90" name="High Priest" type="MONSTER" x="1632" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="91" name="Vampire" type="MONSTER" x="1776" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="92" name="High Master" type="MONSTER" x="2208" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="93" name="Chimera" type="MONSTER" x="2352" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="94" name="Arch Mage" type="MONSTER" x="2640" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="95" name="Bleeb" type="MONSTER" x="2784" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="96" name="Chimera" type="MONSTER" x="1056" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="97" name="High Priest" type="MONSTER" x="1200" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="98" name="Bleeb" type="MONSTER" x="1344" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="99" name="Bleeb" type="MONSTER" x="1488" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="100" name="High Priest" type="MONSTER" x="1632" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="101" name="High Priest" type="MONSTER" x="2064" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="102" name="Chimera" type="MONSTER" x="2208" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="103" name="Chimera" type="MONSTER" x="2352" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="104" name="Vampire" type="MONSTER" x="2640" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="105" name="Arch Mage" type="MONSTER" x="2784" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="106" name="High Priest" type="MONSTER" x="624" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="107" name="Chimera" type="MONSTER" x="912" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="108" name="Bleeb" type="MONSTER" x="1056" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="109" name="Arch Mage" type="MONSTER" x="1200" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="110" name="Chimera" type="MONSTER" x="1344" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="111" name="Arch Mage" type="MONSTER" x="1488" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="112" name="High Priest" type="MONSTER" x="1632" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="113" name="Chimera" type="MONSTER" x="1776" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="114" name="Arch Mage" type="MONSTER" x="1920" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="115" name="Bleeb" type="MONSTER" x="2064" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="116" name="High Priest" type="MONSTER" x="2208" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="117" name="High Master" type="MONSTER" x="2352" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="118" name="Vampire" type="MONSTER" x="2640" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="119" name="High Master" type="MONSTER" x="2784" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="120" name="High Priest" type="MONSTER" x="2208" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="121" name="Vampire" type="MONSTER" x="2208" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="122" name="Vampire" type="MONSTER" x="2208" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="123" name="Bleeb" type="MONSTER" x="192" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="124" name="Arch Mage" type="MONSTER" x="480" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="125" name="Vampire" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="126" name="Bleeb" type="MONSTER" x="1056" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="127" name="Vampire" type="MONSTER" x="1344" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="128" name="Bleeb" type="MONSTER" x="1488" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="129" name="Bleeb" type="MONSTER" x="2208" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="130" name="Chimera" type="MONSTER" x="2496" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="131" name="Arch Mage" type="MONSTER" x="2784" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="132" name="High Master" type="MONSTER" x="1344" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="133" name="Bleeb" type="MONSTER" x="1488" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="134" name="Bleeb" type="MONSTER" x="1632" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="135" name="High Master" type="MONSTER" x="1776" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="136" name="High Priest" type="MONSTER" x="2208" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 

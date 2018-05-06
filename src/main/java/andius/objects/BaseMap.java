@@ -43,13 +43,22 @@ public class BaseMap {
         this.height = height;
     }
 
-    public void addPortal(Map map, int sx, int sy, int dx, int dy, List<Vector3> randoms) {
-        portals.add(new Portal(map, sx, sy, dx, dy, randoms));
+    public void addPortal(Map map, int sx, int sy, int dx, int dy, List<Vector3> randoms, boolean elevator, boolean up) {
+        portals.add(new Portal(map, sx, sy, dx, dy, randoms, elevator, up));
     }
 
     public Portal getPortal(int sx, int sy) {
         for (Portal p : portals) {
             if (p.getSx() == sx && p.getSy() == sy) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    public Portal getPortal(int sx, int sy, boolean up) {
+        for (Portal p : portals) {
+            if (p.isElevator() && p.isUp() == up && p.getSx() == sx && p.getSy() == sy) {
                 return p;
             }
         }

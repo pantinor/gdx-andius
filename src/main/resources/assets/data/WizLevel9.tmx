@@ -731,433 +731,433 @@
    <object id="2" name="Flack" type="MONSTER" x="1200" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="3" name="Flack" type="MONSTER" x="1344" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="5" name="Flack" type="MONSTER" x="1200" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="6" name="Flack" type="MONSTER" x="1344" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="7" name="Flack" type="MONSTER" x="2352" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="8" name="Flack" type="MONSTER" x="2496" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="9" name="Flack" type="MONSTER" x="2352" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="10" name="Flack" type="MONSTER" x="2496" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="11" name="Flack" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="12" name="Flack" type="MONSTER" x="2496" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="13" name="Flack" type="MONSTER" x="2352" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="14" name="Flack" type="MONSTER" x="2496" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="15" name="Flack" type="MONSTER" x="48" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="16" name="Flack" type="MONSTER" x="192" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="17" name="Flack" type="MONSTER" x="336" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="18" name="Flack" type="MONSTER" x="1344" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="19" name="Flack" type="MONSTER" x="1488" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="20" name="Flack" type="MONSTER" x="1632" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="21" name="Flack" type="MONSTER" x="1776" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="22" name="Flack" type="MONSTER" x="1920" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="23" name="Flack" type="MONSTER" x="2064" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="24" name="Flack" type="MONSTER" x="2208" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="25" name="Flack" type="MONSTER" x="2352" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="26" name="Flack" type="MONSTER" x="2496" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="27" name="Flack" type="MONSTER" x="2640" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="28" name="Flack" type="MONSTER" x="2784" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="29" name="Flack" type="MONSTER" x="1344" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="30" name="Flack" type="MONSTER" x="1488" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="31" name="Flack" type="MONSTER" x="1632" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="32" name="Flack" type="MONSTER" x="1776" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="33" name="Flack" type="MONSTER" x="1920" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="34" name="Flack" type="MONSTER" x="2064" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="35" name="Flack" type="MONSTER" x="2208" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="36" name="Flack" type="MONSTER" x="2352" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="37" name="Flack" type="MONSTER" x="2496" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="38" name="Flack" type="MONSTER" x="336" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="39" name="Flack" type="MONSTER" x="480" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="40" name="Flack" type="MONSTER" x="336" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="41" name="Flack" type="MONSTER" x="480" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="42" name="Flack" type="MONSTER" x="336" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="43" name="Flack" type="MONSTER" x="480" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="44" name="Flack" type="MONSTER" x="336" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="45" name="Flack" type="MONSTER" x="480" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="46" name="Flack" type="MONSTER" x="336" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="47" name="Flack" type="MONSTER" x="480" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="48" name="Flack" type="MONSTER" x="912" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="49" name="Flack" type="MONSTER" x="1056" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="50" name="Flack" type="MONSTER" x="336" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="51" name="Flack" type="MONSTER" x="480" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="52" name="Flack" type="MONSTER" x="912" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="53" name="Flack" type="MONSTER" x="1056" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="54" name="Flack" type="MONSTER" x="336" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="55" name="Flack" type="MONSTER" x="480" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="56" name="Flack" type="MONSTER" x="336" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="57" name="Flack" type="MONSTER" x="480" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="58" name="Flack" type="MONSTER" x="2352" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="59" name="Flack" type="MONSTER" x="2496" y="480" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="60" name="Flack" type="MONSTER" x="336" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="61" name="Flack" type="MONSTER" x="480" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="62" name="Flack" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="63" name="Flack" type="MONSTER" x="2064" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="64" name="Flack" type="MONSTER" x="2208" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="65" name="Flack" type="MONSTER" x="2352" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="66" name="Flack" type="MONSTER" x="2496" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="67" name="Flack" type="MONSTER" x="336" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="68" name="Flack" type="MONSTER" x="480" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="69" name="Flack" type="MONSTER" x="624" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="70" name="Flack" type="MONSTER" x="768" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="71" name="Flack" type="MONSTER" x="2064" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="72" name="Flack" type="MONSTER" x="2208" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="73" name="Flack" type="MONSTER" x="2352" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 <object id="74" name="Flack" type="MONSTER" x="2496" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Flack"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
 
