@@ -6,6 +6,9 @@ import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
+import andius.objects.Item;
+import andius.objects.Monster;
+import andius.objects.MutableMonster;
 import andius.objects.Portal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -211,7 +214,7 @@ public class GameScreen extends BaseScreen {
         } else if (keycode == Keys.G) {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
-            if (cell != null && cell.getTile().getId() == 1350) { //chest item id
+            if (cell != null && cell.getTile().getId() >= 1321) { //items tileset
                 RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, REWARDS.get(rand.nextInt(10)), REWARDS.get(rand.nextInt(10)));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
@@ -285,8 +288,60 @@ public class GameScreen extends BaseScreen {
                 float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
                 if (nx == mx && this.map.getMap().getHeight() - 1 - ny == my) {
                     String msg = obj.getProperties().get("type", String.class);
-                    animateText(msg, Color.WHITE, 100, 300, 100, 500, 2);
+
+                    animateText(msg, Color.WHITE, 100, 300, 100, 400, 3);
+                    
+                    String itemRequired = obj.getProperties().get("itemRequired", String.class);
+                    if (itemRequired != null) {
+                        Item found = Andius.ITEMS_MAP.get(itemRequired);
+                        boolean owned = false;
+                        for (int i = 0; i < Andius.CTX.players().length && found != null; i++) {
+                            if (Andius.CTX.players()[i].inventory.contains(found)) {
+                                owned = true;
+                            }
+                        }
+                        if (!owned) {
+                            Sounds.play(Sound.NEGATIVE_EFFECT);
+                            animateText("Cannot pass!", Color.RED, 100, 200, 100, 300, 3);
+                            return false;
+                        }
+                    }
+
+                    String itemObtained = obj.getProperties().get("itemObtained", String.class);
+                    if (itemObtained != null) {
+                        Item found = Andius.ITEMS_MAP.get(itemObtained);
+                        boolean owned = false;
+                        for (int i = 0; i < Andius.CTX.players().length; i++) {
+                            if (Andius.CTX.players()[i].inventory.contains(found)) {
+                                owned = true;
+                            }
+                        }
+                        if (found != null && !owned) {
+                            Sounds.play(Sound.POSITIVE_EFFECT);
+                            Andius.CTX.players()[0].inventory.add(found);
+                            animateText(Andius.CTX.players()[0].name + " obtained a " + found.name + "!", Color.GREEN, 100, 200, 100, 300, 3);
+                        }
+                    }
+
+                    String monsterFound = obj.getProperties().get("monsterId", String.class);
+                    if (monsterFound != null) {
+                        Monster found = Andius.MONSTER_MAP.get(monsterFound);
+                        if (found != null) {
+                            Actor actor = new Actor(found.getIcon(), -1, monsterFound);
+                            MutableMonster mm = new MutableMonster(found);
+                            String msx = obj.getProperties().get("monsterSpawnX", String.class);
+                            String msy = obj.getProperties().get("monsterSpawnY", String.class);
+                            Vector3 pixelPos = new Vector3();
+                            setMapPixelCoords(pixelPos, msx != null ? Integer.valueOf(msx) : nx, msy != null ? Integer.valueOf(msy) : ny);
+                            actor.set(mm, Role.MONSTER, 
+                                    msx != null ? Integer.valueOf(msx) : nx, 
+                                    msy != null ? Integer.valueOf(msy) : ny, 
+                                    pixelPos.x, pixelPos.y, MovementBehavior.ATTACK_AVATAR);
+                            this.map.getMap().actors.add(actor);
+                        }
+                    }
                 }
+
             }
         }
 

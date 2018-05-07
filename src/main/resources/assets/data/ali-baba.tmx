@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" nextobjectid="408">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" nextobjectid="408">
  <properties>
   <property name="startX" value="49"/>
   <property name="startY" value="18"/>
@@ -73,23 +73,6 @@
  <tileset firstgid="1321" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
   <image source="uf_items.png" trans="ff00ff" width="1056" height="1056"/>
  </tileset>
- <tileset firstgid="1805" name="bazaar" tilewidth="48" tileheight="48" tilecount="100" columns="10">
-  <image source="bazaar.png" trans="ff00ff" width="480" height="480"/>
-  <tile id="3">
-   <animation>
-    <frame tileid="5" duration="300"/>
-    <frame tileid="4" duration="300"/>
-    <frame tileid="3" duration="300"/>
-   </animation>
-  </tile>
-  <tile id="13">
-   <animation>
-    <frame tileid="15" duration="300"/>
-    <frame tileid="14" duration="300"/>
-    <frame tileid="13" duration="300"/>
-   </animation>
-  </tile>
- </tileset>
  <layer name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2dTW7cNhhAeQ+fIesWyDLbomfoqnFXabcu4skJGmTVGzQtkEWO4KNVRESYZj7+U6RIvQd80L+GHr35SHFGtFIAADArD5WhnGnOcXBNap0r9Q7gaO+UOtY3PJ6TVt6lbFMq7kmJ65pfnZDWSfvAGI7yTlqvrGlOeXz72fuHvFPCdrwbS4s2Xq6LKeVJKZ99vpBX5Ls1KfEy9Ryp+8TqVLxbj1be5Z7LPi4HnLsGKW6U+GOO+7TFxy3+cuKTMzVh9oVnvkRiVSTvUu4LzHHGL9e/j3tI2+CZVO/+8MRdQpwRX76LtdFs73IDnqn1TlPjXYu2Wk/OUIYVaOGdxufXat5BG1p4V+MO3l2TmHfGPZ93v6s6b3K9G+Fe6DVjfS6xz9xVaVXPGmLXSFp3dudi/YA+z5SK/81XpWX7TrqXsOd918CeH+ldyWfAt+w7n1LH/x0zcJR3koehz749P8K7kvo+t371uQrHcmbvfOVKdcydj21TwjLk87jFh31626eP1np3nc1Z3/8U32OfGek85Lt2SL49CuuVMH1wls9Eihs+h0L1LLTBzWOue9J+rpO344vZnJS2Hb4dh5TjPgjrbe+k/LgKONaHUD0ruWgfc7OOBcjBvq8wy+58qN03az0LY/HlOzuPucuGnDqJ+gtsQvWrlPda9dPSHwG5pNz7HeVcb1f5bMyB7zrVeJfz/UPsdcjL61DqRcn5pXPFypBTVrybB7yDERx9zXIci5UB7/pT+p7H3vfR3sXKkFLW2D5QDp/1tL919fegN3gHI8A7GAHewQjw7iWM99SXlV3KAe/6UJPvSo9N7ccYkXPxrg+11xzvoISjvHuVeHyLMrQE7/pAvnsJ3vUB716Cd30Y7V3p8XgHK4F3MAK8gxHgHQAY3o0uAFyOd1b0gvEuYJR3uHdtWnnnG+PC5pa4H6xPK+/sMaOk8aNuirGl4JmW3rnOSa6tOJYe5HNU+84dc8odNxTvrs3R9xW+XId316bX/ax7T4F316Z3Pwr1LGjoN4ZRvBldgMk4+/8qPyNvMgJk8C6fo70LjQW/ynjweJdPL+9C43fPDt7l09u70P/bmxW8K8fnVW27znbtlVrzOwq8yyf2/FbtM13Us+M56rm8GnKeeS0B78Zz5DOhpfieWW31LOtVvTuTgzN4l7oNvufOmobmezsZa0cdnXtC5arZvgK54xjcqe89Oqt3mlhucfex1x1ZFh3/bvF5i6/7/H+essA3ZvJOE8tpKrCt9vrb/XGSd1+t+Gxt+7vydVdkNu80KePRxNa/3eN+i9/26X3gNd0+YPfcOr+ZfPfPHuQ7P7N65y5Luc7d396mXTPeGfd8YzCEvnugfVfGjN65hHKcry42vr11QkJyLjfX4t9LVvBOE7q20j2GyXc6xxn/fPWsL8/hXR2+PjvXRXf+LORcdzO123d6ajyUkL5nxbt63P6UWKyGnfc0Kb8tSfFOeZZnRJf//RZ/Njzn1b27tyL1N00599RKze+dce79HobY+xDK+yXe5bzvV65vVvl7tXMm59mUeKcj1zkTeAealvnuhy1+2uNHYXvK64X2CSH9vlZ6vmCl32SsQEk+cb36Wamn19v09bf56vZdTpl8v+eW1j9mnhvaU1rPakq8K3291Hxn/5Y79JwBjKWld1s9+8tWxz7p2Oafenrny3XSWEh4N56z3VfU5Du7XaeUfwykVZ4hnZmW+a5FP0ptPSvlO+rZtbh6vzGMAe9gBHfOVNrmWwYo5cGZStt8y2dmprJeAV9bX5r3rTsDLe5joB94ByPwXRe8gyPBOxgB3sEIUq7TDN7BXKQ4hXfQGpyCs4B30Bva4TAC7gFhBHgHI8A5GAHOAQAArM3/vEHqapAPAQA=
@@ -102,7 +85,7 @@
  </layer>
  <layer name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3dUU7CMBgAYLLEeASPoonvJkbjEwfgiUejr17Aa0A4AfECHM0SmcEFNsCt67rvS5oBS8Y/9tOuHXSTCQAAAAD837zoOwIAAOBSbwfO5z+K+iUc83CVxnsfe0x+yuPbdJxvQ3kO5a7rgBiNupwr1z2Fch/KS4yAYCfk22abdyH/Nn3H0rbPFs9Fb67b29aYlfVdaGdnoZ3dhHZ20WtAHVkVP/u1LA5/r5bF73IRKSRqXNpvnSbe3009PmDY+hpTKdvYlTpuUHIYa6s5r1vslgCjtlYPAgCZyaEvCwAAAJfSL+YcbeVLdTvb53IRAAAAAACA1KR8DStWbCl/BgAAAAAQw968w7O91/4w5zBd28+x7VyIKzlHJNOffJv1HQcAAAAA/fJ70vO8NtzLoWk9AAAAANCNU8c6jYmOj2MOAO2YuhYKjMRafQeMzFdi9d48sXgAqg7dp7PqvaYuq1s3NDH3RfvAKXL6fgEA0Ew/AQAAAAAAoFuP/qMNwACZYwQAIA/Ve4tD15Zyjp6o74ipzDd1HgDk4RtIJM0AkA8BAA==
+   H4sIAAAAAAAAC+3dQUrDQBQA0BLomRTcC6K4ygGy6lJ06wW8RkNOULxAjuaU2hKlJhqbTJJ5D4Zpm80P/Pw/Q2GyWgEAAADA/22y2BEAAAB9PZ9Zz79m7TNM0e36b99Jy1UYD2Fcxw6EpNyHcRPGY+xASErIt3qfdyH/6tixXNqbtehkhT5bhD5bhz67jR3LEKrscF9ldv65KrPTvB0pJFr03bfmE68xU4+Py2juW3/6DEty7LGVGsfIWtZ1288ZIGk7dRAAAAAAAAAAAAAAAAAAAAAAAFi4xrnDReO3L5w5zNCaObY/C7GSc4wkP+RbETsOAAAAAJiTp453OXRdBwAAAAAAAJij3H+hQCJ26h2QmPeJ1b3NxOIB6OOlpZa1XZubMe9Ff+A3lvR8AQDQzT4BAAAAAABgXHfr2BEAAAAAqfj+bnEYWinniES9Y0zHfFPzAGAZPgBdBLe6kA8BAA==
   </data>
  </layer>
  <layer name="creature" width="158" height="110">
@@ -921,15 +904,13 @@
   </object>
  </objectgroup>
  <objectgroup name="messages">
-  <object id="211" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." gid="1343" x="6288" y="3936" width="48" height="48"/>
-  <object id="213" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" gid="1344" x="5712" y="4176" width="48" height="48"/>
-  <object id="214" name="rune" type="Take the same path as you did in my maze and you should do all right. The resemblance is really quite a-mazing! - the astrologer" gid="1344" x="816" y="3648" width="48" height="48"/>
-  <object id="215" name="rune" type="Take the high road!" gid="1346" x="4656" y="912" width="48" height="48"/>
-  <object id="216" name="rune" type="Here lies quartered body of Cassim, the rich brother of Ali Baba.  He came to grab all of the gold but when he went to leave he said 'open barley'!" gid="1348" x="2736" y="912" width="48" height="48"/>
-  <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." gid="1347" x="3456" y="384" width="48" height="48"/>
-  <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" gid="1345" x="2640" y="3840" width="48" height="48"/>
-  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" gid="1346" x="3456" y="2688" width="48" height="48"/>
-  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" gid="1343" x="5568" y="3504" width="48" height="48"/>
+  <object id="211" name="rune" type="A voice comes from nowhere, the astrologer of the august sultan shahriar bids you welcome." x="6288" y="3888" width="48" height="48"/>
+  <object id="213" name="rune" type="When a-mazed, remember to stay high and do right! - the friendly mage" x="5712" y="4128" width="48" height="48"/>
+  <object id="215" name="rune" type="Take the high road!" x="4656" y="864" width="48" height="48"/>
+  <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." x="3456" y="336" width="48" height="48"/>
+  <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" x="2640" y="3792" width="48" height="48"/>
+  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" x="3456" y="2640" width="48" height="48"/>
+  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" x="5568" y="3456" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="rooms">
   <object id="335" name="Dusty road" x="2016" y="672">
@@ -1061,7 +1042,7 @@
   <object id="385" name="Minotaur's playroom" x="576" y="4464">
    <polygon points="0,0 0,288 576,288 576,0"/>
   </object>
-  <object id="386" name="Underground stream" x="3168" y="2496">
+  <object id="386" name="Underground stream" x="3168" y="2448">
    <polygon points="0,0 0,480 720,480 720,0"/>
   </object>
   <object id="387" name="Magic tour-billion" x="3264" y="3024">
