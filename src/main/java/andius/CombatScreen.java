@@ -46,7 +46,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
-import utils.PartyDeathException;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -310,7 +309,7 @@ public class CombatScreen extends BaseScreen {
                 if (crSlots[i].getStatus() != Status.OK) {
                     Andius.smallFont.draw(batch, crSlots[i].getStatus().toString().toLowerCase(), hud_enmy_x[idx] + 1, y - 13);
                 }
-                Andius.smallFont.draw(batch, "" + crSlots[i].getMaxHitPoints(), hud_enmy_x[idx] + 58, y - 13);
+                Andius.smallFont.draw(batch, crSlots[i].getLevel() + " (" + crSlots[i].getMaxHitPoints() + ")", hud_enmy_x[idx] + 28, y - 13);
                 count++;
                 idx++;
                 if (count == 8) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="48">
  <properties>
-  <property name="startX" value="15"/>
-  <property name="startY" value="31"/>
+  <property name="startX" value="37"/>
+  <property name="startY" value="10"/>
  </properties>
  <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
@@ -87,7 +87,7 @@
  </tileset>
  <layer name="floor" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="floor 2" width="60" height="60">
@@ -97,12 +97,7 @@
  </layer>
  <layer name="props" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3RwQmAQAxFwcWS9G7N1mBlYgeiaEwyA3vOf+wYAAAAAGS2BrwsMm5+qlPrSW9temvTW5ve2vTWpre2K73z6yu+0+1/AeAPtil6AQAAAHctQXf3oLudHKXxF41AOAAA
-  </data>
- </layer>
- <layer name="creature" width="60" height="60">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3a2wmDQBBG4UDShIVZhCVsmRawvQTykoHkwL8kkqjnexIZLw/jODt6uUhSpl2f2+vt/XaNIVMQI9W8qhbInw776Twd8nkUHTsP3r/0D+g5kvbIfNaR2D9L0iuqjTPMK+pabIb9UxBTz1njaR7SgxgpMUPu0Ywu6R8o52mmUfPZ+YZGUR2muj1BfU7Weg2uRffzyWxQ+/Krd3HSV1QT1Fuq7c36fHr0/W7ZoBdNvtG0IG+TfsP53jlRP0C5TccmKN/oWh16DMpz6rd1HqP/UVSL73fpodZP6jdof/LukEiSM8l6jeLpWOo9Rmcj0taoDtMMkGZ91mdtgdZuSUyStxTvuk+jknlCks8r9Mzf+kda0rHcAQu9GK9AOAAA
+   H4sIAAAAAAAACu3XwQkAIBADwWBJ+rRpS7SHAzmEmQay3yQAAAAAAAAAAMnsDgAAvnZGdwEAAABVq2l3+5LPXSvGi8FAOAAA
   </data>
  </layer>
  <layer name="water_edges" width="60" height="60">
@@ -112,17 +107,22 @@
  </layer>
  <layer name="shadows" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu2YgQrDIAxE+y/7/38cYwyGGHtJTq16D4SiqdXkjKHXtR6vSsu+v2MTX3b3z0g99dao9Cx+WLFn9SPfZOn5rk/wKWM4k6fc+cycX46JM0B1Ytn+jyE2LY1HzgbrLAnBIFproGfhdE72w6i6w5P7md8Q++OpC1ramKlfZC0ix6p+bOnV6l9xn8LPCrFm3dnZXMjMpcrP4kNG171rWWlTILRq2tImmqe9OsyeAeVnkcHSDVtP0ml/evh0VryQ3FzTrDVHa/3ZfxrIXXJVxsUZMPTjqZnROVAb5e51YcYqq190jvJ97/q8+xBng+S96Dwj9CU9z+UpPmfrAK05PDWD51l6ttnFN5E9tHRo2d49R0Frol3itTJP8X9Z41o20RadJ/v9k3kDHGWfAkA4AAA=
   </data>
  </layer>
  <layer name="walls" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="door" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2aSw7DMAgF0xP0WL3/jaosKrlRSCDmZx6ztCqbqTGhqbetaZpo3q/oCPQ5c9rHKro2/3jsscUa0vzUzmdqLotxrbg5c2YYn/Gl5pHGE8EvFk5MXZ8xQNnjYz6jeFNU9ed4fRzc9zUk64z56VWfq+bACNqZR3CkQHNH822uoZ43Hs+7CNB8j0h7AGlPYh1P06wMWq6j+Vbjrj5Lfyt55oPFcyuz76pwegDuXqL0cY0fmXvUzLHdoRX3Kmfew3fmHfLMPJnQinsVfzTfFRj/l3ly7tH2As33ipmarFX/tT5/B9q+V/OdvSMR3btm7Z+17oatkm8VfKna69lLS/I58/srzp1Ji1pTyfdsDS+/6LoqvdNr8Z17+lf2HesnJ68iz3DGXiIrXyhrFuNAOAAA
+   H4sIAAAAAAAACu2aWw6CMBBFcQXG/S/HdZEYP0yUMLTTeXinveeLQGkGOF5L6bYRQjLYL47db2llpPGY8JpW5MpbqW1lnzXe0nEbkice+yVv98bxs7bf/UvbrXqikVz87O9xlT7PzQz5rOHo8yrXjYJm7HA8ZzSf/8lIfmbnM8q9In7wma4DnzXpYRVPLGOMCCL7fmMZY0TAd0ZCSBWi8xkN5vMvPfO3UnsN9IygguxmRG3IbiLXhsLIN2hrP2d4vVM/G/14fYOmWzWoNleD/P8RAX9HNiy+ZMzvefts8SVjfo8+y1hdQMhGTQ1WFxBcQqhhdbzWwmnW8s1Kr8/Vxo3enHkRdU9aDvasEbXWlplzzNRYejNN65XFseO5nrlbwacKNSLxAmrvON5AOAAA
+  </data>
+ </layer>
+ <layer name="creature" width="60" height="60">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3awQ2DMAyFYaSyRAdjiI7AmB2AXbhaap/kpxhI4P+OUYQ42I5jmCYAyFlfNXveiT3Ad/6//hHxs4l19Ry136Wev5jvD/SgKi+AHhDPuBP6ZwD45dbGeBdT97UWVTMTQFFxG+cSakahtPQYzDdwJ27uYFy9ncVHxB71GdFV8ZDJtUxPznwPbr/q1tVMjFXl0RH3UIylpQ/hfMeTxfoZ67bKqbgezwXyCK5MzMQ9Z37Lo0/GKDI9MPUZo8jUee59qBLjbTO/cbv/UQN4nh3uthsqQDgAAA==
   </data>
  </layer>
  <layer name="torches" width="60" height="60">
@@ -137,12 +137,6 @@
  </layer>
  <objectgroup name="messages"/>
  <objectgroup name="people">
-  <object id="3" name="High Priest" type="MONSTER" x="624" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="4" name="High Priest" type="MONSTER" x="912" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
@@ -161,19 +155,7 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="7" name="Bleeb" type="MONSTER" x="1488" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="8" name="Vampire" type="MONSTER" x="1632" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="9" name="Vampire" type="MONSTER" x="1776" y="2640" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
@@ -185,57 +167,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="11" name="Vampire" type="MONSTER" x="1056" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="12" name="Chimera" type="MONSTER" x="1200" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="13" name="Vampire" type="MONSTER" x="1488" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="14" name="Chimera" type="MONSTER" x="1632" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="15" name="Chimera" type="MONSTER" x="1776" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="16" name="High Priest" type="MONSTER" x="1920" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="17" name="High Priest" type="MONSTER" x="2064" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="18" name="Chimera" type="MONSTER" x="2208" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="19" name="Chimera" type="MONSTER" x="2352" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -245,39 +179,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="21" name="High Master" type="MONSTER" x="1632" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="22" name="Vampire" type="MONSTER" x="1776" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="23" name="Arch Mage" type="MONSTER" x="1920" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="24" name="Chimera" type="MONSTER" x="2064" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="25" name="High Priest" type="MONSTER" x="2208" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="26" name="High Priest" type="MONSTER" x="2352" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -300,42 +204,6 @@
    </properties>
   </object>
   <object id="30" name="High Priest" type="MONSTER" x="1200" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="31" name="Arch Mage" type="MONSTER" x="1632" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="32" name="Arch Mage" type="MONSTER" x="1776" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="33" name="High Priest" type="MONSTER" x="1920" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="34" name="Arch Mage" type="MONSTER" x="2064" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="35" name="Vampire" type="MONSTER" x="2208" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="36" name="High Priest" type="MONSTER" x="2352" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
@@ -365,12 +233,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="41" name="Vampire" type="MONSTER" x="2064" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="42" name="High Master" type="MONSTER" x="2208" y="2064" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
@@ -389,21 +251,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="45" name="Bleeb" type="MONSTER" x="192" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="46" name="High Master" type="MONSTER" x="336" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="47" name="Arch Mage" type="MONSTER" x="912" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -413,27 +263,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="49" name="Bleeb" type="MONSTER" x="192" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="50" name="High Priest" type="MONSTER" x="336" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="51" name="Bleeb" type="MONSTER" x="480" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="52" name="Arch Mage" type="MONSTER" x="624" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -449,45 +281,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="55" name="Vampire" type="MONSTER" x="1632" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="56" name="Bleeb" type="MONSTER" x="1776" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="57" name="Arch Mage" type="MONSTER" x="1920" y="1776" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="58" name="Vampire" type="MONSTER" x="2064" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="59" name="Chimera" type="MONSTER" x="2208" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="60" name="High Priest" type="MONSTER" x="2352" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="61" name="High Priest" type="MONSTER" x="2640" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -497,45 +293,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="63" name="High Master" type="MONSTER" x="192" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="64" name="Bleeb" type="MONSTER" x="336" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="65" name="Arch Mage" type="MONSTER" x="480" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="66" name="High Master" type="MONSTER" x="624" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="68" name="High Priest" type="MONSTER" x="1200" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="69" name="Arch Mage" type="MONSTER" x="1488" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="70" name="Vampire" type="MONSTER" x="1776" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -545,21 +305,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="72" name="High Priest" type="MONSTER" x="2064" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="73" name="Chimera" type="MONSTER" x="2352" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="74" name="Vampire" type="MONSTER" x="2640" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -575,109 +323,13 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="77" name="Chimera" type="MONSTER" x="1488" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="78" name="Arch Mage" type="MONSTER" x="1632" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="79" name="Bleeb" type="MONSTER" x="1776" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="80" name="High Priest" type="MONSTER" x="2064" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="81" name="Arch Mage" type="MONSTER" x="2208" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="82" name="High Priest" type="MONSTER" x="2352" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="83" name="High Master" type="MONSTER" x="2640" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="84" name="Arch Mage" type="MONSTER" x="2784" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="85" name="Arch Mage" type="MONSTER" x="912" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="86" name="Chimera" type="MONSTER" x="1056" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="87" name="Chimera" type="MONSTER" x="1200" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="88" name="Bleeb" type="MONSTER" x="1344" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="89" name="High Priest" type="MONSTER" x="1488" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="90" name="High Priest" type="MONSTER" x="1632" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="91" name="Vampire" type="MONSTER" x="1776" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="92" name="High Master" type="MONSTER" x="2208" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="93" name="Chimera" type="MONSTER" x="2352" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="94" name="Arch Mage" type="MONSTER" x="2640" y="1344" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
@@ -695,12 +347,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="97" name="High Priest" type="MONSTER" x="1200" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="98" name="Bleeb" type="MONSTER" x="1344" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
@@ -713,33 +359,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="100" name="High Priest" type="MONSTER" x="1632" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="101" name="High Priest" type="MONSTER" x="2064" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="102" name="Chimera" type="MONSTER" x="2208" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="103" name="Chimera" type="MONSTER" x="2352" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="104" name="Vampire" type="MONSTER" x="2640" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -755,18 +377,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="107" name="Chimera" type="MONSTER" x="912" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="108" name="Bleeb" type="MONSTER" x="1056" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="109" name="Arch Mage" type="MONSTER" x="1200" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
@@ -779,51 +389,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="111" name="Arch Mage" type="MONSTER" x="1488" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="112" name="High Priest" type="MONSTER" x="1632" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="113" name="Chimera" type="MONSTER" x="1776" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="114" name="Arch Mage" type="MONSTER" x="1920" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="115" name="Bleeb" type="MONSTER" x="2064" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="116" name="High Priest" type="MONSTER" x="2208" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="117" name="High Master" type="MONSTER" x="2352" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="118" name="Vampire" type="MONSTER" x="2640" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -881,12 +449,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="128" name="Bleeb" type="MONSTER" x="1488" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="129" name="Bleeb" type="MONSTER" x="2208" y="336" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
@@ -911,18 +473,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="133" name="Bleeb" type="MONSTER" x="1488" y="192" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="134" name="Bleeb" type="MONSTER" x="1632" y="192" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="135" name="High Master" type="MONSTER" x="1776" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
@@ -937,148 +487,167 @@
   </object>
  </objectgroup>
  <objectgroup name="portals">
-  <object id="1" name="stairs_up to level 4" x="48" y="2784" width="48" height="48">
+  <object id="1" name="WIZARDRY4" x="48" y="2784" width="48" height="48">
    <properties>
     <property name="dx" value="52"/>
     <property name="dy" value="37"/>
    </properties>
   </object>
-  <object id="2" name="elevator levels 4 to 9" x="1488" y="2784" width="48" height="48">
+  <object id="2" name="ELEVATOR" x="1488" y="2784" width="48" height="48">
    <properties>
+    <property name="DOWN" value="WIZARDRY6"/>
+    <property name="UP" value="WIZARDRY4"/>
     <property name="dx" value="31"/>
     <property name="dy" value="58"/>
+    <property name="ux" value="31"/>
+    <property name="uy" value="58"/>
    </properties>
   </object>
-  <object id="67" name="stairs_down to level 6" x="1200" y="1632" width="48" height="48">
+  <object id="67" name="WIZARDRY6" x="1200" y="1632" width="48" height="48">
    <properties>
     <property name="dx" value="25"/>
     <property name="dy" value="34"/>
    </properties>
   </object>
-  <object id="137" name="hidden door" x="1872" y="192" width="48" height="48">
-   <properties>
-    <property name="dx" value="37"/>
-    <property name="dy" value="4"/>
-   </properties>
-  </object>
-  <object id="138" name="hidden door" x="2208" y="144" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="1"/>
-   </properties>
-  </object>
-  <object id="139" name="hidden door" x="528" y="336" width="48" height="48">
-   <properties>
-    <property name="dx" value="13"/>
-    <property name="dy" value="7"/>
-   </properties>
-  </object>
-  <object id="140" name="hidden door" x="2208" y="288" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="4"/>
-   </properties>
-  </object>
-  <object id="141" name="hidden door" x="1584" y="480" width="48" height="48">
-   <properties>
-    <property name="dx" value="31"/>
-    <property name="dy" value="10"/>
-   </properties>
-  </object>
-  <object id="142" name="hidden door" x="1680" y="480" width="48" height="48">
-   <properties>
-    <property name="dx" value="37"/>
-    <property name="dy" value="10"/>
-   </properties>
-  </object>
-  <object id="143" name="hidden door" x="2208" y="432" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="7"/>
-   </properties>
-  </object>
-  <object id="144" name="hidden door" x="2208" y="576" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="10"/>
-   </properties>
-  </object>
-  <object id="145" name="hidden door" x="2304" y="624" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="13"/>
-   </properties>
-  </object>
-  <object id="146" name="hidden door" x="2496" y="672" width="48" height="48">
-   <properties>
-    <property name="dx" value="52"/>
-    <property name="dy" value="16"/>
-   </properties>
-  </object>
-  <object id="147" name="hidden door" x="1680" y="768" width="48" height="48">
-   <properties>
-    <property name="dx" value="37"/>
-    <property name="dy" value="16"/>
-   </properties>
-  </object>
-  <object id="148" name="hidden door" x="2208" y="720" width="48" height="48">
-   <properties>
-    <property name="dx" value="46"/>
-    <property name="dy" value="13"/>
-   </properties>
-  </object>
-  <object id="149" name="hidden door" x="2640" y="720" width="48" height="48">
-   <properties>
-    <property name="dx" value="55"/>
-    <property name="dy" value="13"/>
-   </properties>
-  </object>
-  <object id="150" name="hidden door" x="1920" y="1536" width="48" height="48">
-   <properties>
-    <property name="dx" value="40"/>
-    <property name="dy" value="34"/>
-   </properties>
-  </object>
-  <object id="151" name="hidden door" x="1680" y="1632" width="48" height="48">
-   <properties>
-    <property name="dx" value="37"/>
-    <property name="dy" value="34"/>
-   </properties>
-  </object>
-  <object id="152" name="hidden door" x="2160" y="1632" width="48" height="48">
-   <properties>
-    <property name="dx" value="43"/>
-    <property name="dy" value="34"/>
-   </properties>
-  </object>
-  <object id="153" name="hidden door" x="2448" y="2064" width="48" height="48">
-   <properties>
-    <property name="dx" value="49"/>
-    <property name="dy" value="43"/>
-   </properties>
-  </object>
-  <object id="154" name="hidden door" x="432" y="2352" width="48" height="48">
-   <properties>
-    <property name="dx" value="7"/>
-    <property name="dy" value="49"/>
-   </properties>
-  </object>
-  <object id="155" name="hidden door" x="1008" y="2352" width="48" height="48">
-   <properties>
-    <property name="dx" value="19"/>
-    <property name="dy" value="49"/>
-   </properties>
-  </object>
-  <object id="156" name="hidden door" x="672" y="2784" width="48" height="48">
-   <properties>
-    <property name="dx" value="16"/>
-    <property name="dy" value="58"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="1" x="1584" y="1824">
-   <polygon points="0,0 0,240 336,240 336,0 240,0 240,-48 96,-48 96,0"/>
+  <object id="1" x="0" y="2448">
+   <polygon points="0,0 192,0 192,432 0,432"/>
+  </object>
+  <object id="2" x="288" y="2448">
+   <polygon points="0,0 -288,0 -288,-288 288,-288 288,-144 0,-144"/>
+  </object>
+  <object id="3" x="192" y="2880">
+   <polygon points="0,0 0,-432 48,-432 48,-576 432,-576 432,-144 576,-144 576,0"/>
+  </object>
+  <object id="4" x="864" y="2160">
+   <polygon points="0,0 -288,0 -288,624 0,624"/>
+  </object>
+  <object id="5" x="1008" y="2592">
+   <polygon points="0,0 0,192 -192,192 -192,0"/>
+  </object>
+  <object id="6" x="1152" y="2784">
+   <polygon points="0,0 0,-192 -192,-192 -192,0"/>
+  </object>
+  <object id="7" x="1296" y="2784">
+   <polygon points="0,0 0,-192 -192,-192 -192,0"/>
+  </object>
+  <object id="8" x="1344" y="2160">
+   <polygon points="0,0 -528,0 -528,432 0,432"/>
+  </object>
+  <object id="9" x="144" y="1440">
+   <polygon points="0,0 576,0 576,624 0,624"/>
+  </object>
+  <object id="10" x="816" y="1440">
+   <polygon points="0,0 0,576 528,576 528,0"/>
+  </object>
+  <object id="11" x="1488" y="1440">
+   <polygon points="0,0 -192,0 -192,1296 -720,1296 -720,1440 528,1440 528,1296 0,1296"/>
+  </object>
+  <object id="12" x="0" y="1584">
+   <polygon points="0,0 192,0 192,432 672,432 672,144 864,144 864,432 1296,432 1344,432 1344,576 0,576"/>
+  </object>
+  <object id="13" x="0" y="1584">
+   <polygon points="0,0 0,-576 720,-576 720,-144 192,-144 192,0"/>
+  </object>
+  <object id="14" x="0" y="816">
+   <polygon points="0,0 192,0 192,240 0,240"/>
+  </object>
+  <object id="15" x="1632" y="864">
+   <polygon points="0,0 0,144 -768,144 -768,864 -960,864 -960,144 -1440,144 -1440,0"/>
+  </object>
+  <object id="16" x="864" y="1008">
+   <polygon points="0,0 0,432 624,432 624,0"/>
+  </object>
+  <object id="17" x="1008" y="576">
+   <polygon points="0,0 0,288 -1008,288 -1008,0"/>
+  </object>
+  <object id="18" x="1632" y="576">
+   <polygon points="0,0 0,288 -624,288 -624,0"/>
+  </object>
+  <object id="19" x="96" y="288">
+   <polygon points="0,0 0,192 240,192 240,0"/>
+  </object>
+  <object id="20" x="384" y="288">
+   <polygon points="0,0 0,192 240,192 240,0"/>
+  </object>
+  <object id="21" x="672" y="288">
+   <polygon points="0,0 0,192 240,192 240,0"/>
+  </object>
+  <object id="22" x="960" y="288">
+   <polygon points="0,0 0,192 240,192 240,0"/>
+  </object>
+  <object id="23" x="1584" y="288">
+   <polygon points="0,0 144,0 144,576 1296,576 1296,720 0,720"/>
+  </object>
+  <object id="24" x="2448" y="1008">
+   <polygon points="0,0 0,864 -1008,864 -1008,0"/>
+  </object>
+  <object id="25" x="2544" y="1008">
+   <polygon points="0,0 0,288 336,288 336,0"/>
+  </object>
+  <object id="26" x="2544" y="1584">
+   <polygon points="0,0 336,0 336,-288 0,-288"/>
+  </object>
+  <object id="27" x="2544" y="1872">
+   <polygon points="0,0 192,0 192,48 336,48 336,-288 0,-288"/>
+  </object>
+  <object id="28" x="2304" y="576">
+   <polygon points="0,0 0,288 432,288 432,336 576,336 576,0"/>
+  </object>
+  <object id="29" x="1680" y="576">
+   <polygon points="0,0 672,0 672,288 0,288"/>
+  </object>
+  <object id="30" x="2352" y="432">
+   <polygon points="0,0 0,144 -672,144 -672,0"/>
+  </object>
+  <object id="31" x="2352" y="288">
+   <polygon points="0,0 0,144 -672,144 -672,0"/>
+  </object>
+  <object id="32" x="2880" y="144">
+   <polygon points="0,0 -432,0 -432,288 -576,288 -576,432 0,432"/>
+  </object>
+  <object id="33" x="1440" y="1872">
+   <polygon points="0,0 0,144 1248,144 1248,864 528,864 528,1008 1440,1008 1440,0 1152,0 1152,-864 960,-864 960,0"/>
+  </object>
+  <object id="34" x="1584" y="2016">
+   <polygon points="0,0 -144,0 -144,720 144,720 144,432 0,432"/>
+  </object>
+  <object id="35" x="2016" y="2016">
+   <polygon points="0,0 0,144 48,144 48,240 0,240 0,432 -144,432 -144,480 -288,480 -288,432 -432,432 -432,0"/>
+  </object>
+  <object id="36" x="2016" y="2448">
+   <polygon points="0,0 0,336 -336,336 -336,0"/>
+  </object>
+  <object id="37" x="2448" y="2448">
+   <polygon points="0,0 -480,0 -480,192 0,192"/>
+  </object>
+  <object id="38" x="2640" y="2448">
+   <polygon points="0,0 -240,0 -240,192 0,192"/>
+  </object>
+  <object id="39" x="2640" y="2304">
+   <polygon points="0,0 -240,0 -240,144 0,144"/>
+  </object>
+  <object id="40" x="2640" y="2160">
+   <polygon points="0,0 -240,0 -240,144 0,144"/>
+  </object>
+  <object id="41" x="2640" y="2016">
+   <polygon points="0,0 -240,0 -240,144 0,144"/>
+  </object>
+  <object id="42" x="2016" y="2016">
+   <polygon points="0,0 0,432 432,432 432,0"/>
+  </object>
+  <object id="43" x="2736" y="2016">
+   <polygon points="0,0 -144,0 -144,576 -768,576 -768,720 0,720"/>
+  </object>
+  <object id="44" x="2880" y="0">
+   <polygon points="0,0 0,144 -384,144 -384,480 -576,480 -576,144 -2880,144 -2880,0"/>
+  </object>
+  <object id="45" x="1296" y="144">
+   <polygon points="0,0 0,432 288,432 288,144 1056,144 1056,0"/>
+  </object>
+  <object id="47" x="0" y="144">
+   <polygon points="0,0 0,432 1344,432 1344,288 144,288 144,144 1152,144 1152,288 1344,288 1344,0"/>
   </object>
  </objectgroup>
 </map>

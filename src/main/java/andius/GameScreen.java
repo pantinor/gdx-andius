@@ -212,6 +212,40 @@ public class GameScreen extends BaseScreen {
             }
             return false;
         } else if (keycode == Keys.G) {
+
+            MapLayer messagesLayer = this.map.getTiledMap().getLayers().get("messages");
+            if (messagesLayer != null) {
+                Iterator<MapObject> iter = messagesLayer.getObjects().iterator();
+                while (iter.hasNext()) {
+                    MapObject obj = iter.next();
+                    float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
+                    float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
+                    if (v.x == mx && this.map.getMap().getHeight() - v.y - 1 == my) {
+                        if ("REWARD".equals(obj.getName())) {
+                            StringBuilder sb = new StringBuilder();
+                            Iterator<String> iter2 = obj.getProperties().getKeys();
+                            while (iter2.hasNext()) {
+                                String key = iter2.next();
+                                if (key.startsWith("item")) {
+                                    Item found = Andius.ITEMS_MAP.get(obj.getProperties().get(key, String.class));
+                                    sb.append("Party found ").append(found.genericName).append(". ");
+                                    Andius.CTX.players()[0].inventory.add(found);
+                                }
+                            }
+                            animateText(sb.toString(), Color.GREEN, 100, 300, 100, 400, 3);
+                            messagesLayer.getObjects().remove(obj);
+                            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
+                            if (cell != null) {
+                                cell.setTile(null);
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            //random treasure chest
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
             if (cell != null && cell.getTile().getId() >= 1321) { //items tileset
@@ -220,6 +254,7 @@ public class GameScreen extends BaseScreen {
                 cell.setTile(null);
                 return false;
             }
+
         } else if (keycode == Keys.T) {
             Actor a = this.map.getMap().getCreatureAt((int) v.x, (int) v.y);
             if (a != null) {
@@ -290,7 +325,7 @@ public class GameScreen extends BaseScreen {
                     String msg = obj.getProperties().get("type", String.class);
 
                     animateText(msg, Color.WHITE, 100, 300, 100, 400, 3);
-                    
+
                     String itemRequired = obj.getProperties().get("itemRequired", String.class);
                     if (itemRequired != null) {
                         Item found = Andius.ITEMS_MAP.get(itemRequired);
@@ -333,9 +368,9 @@ public class GameScreen extends BaseScreen {
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);
                             Vector3 pixelPos = new Vector3();
                             setMapPixelCoords(pixelPos, msx != null ? Integer.valueOf(msx) : nx, msy != null ? Integer.valueOf(msy) : ny);
-                            actor.set(mm, Role.MONSTER, 
-                                    msx != null ? Integer.valueOf(msx) : nx, 
-                                    msy != null ? Integer.valueOf(msy) : ny, 
+                            actor.set(mm, Role.MONSTER,
+                                    msx != null ? Integer.valueOf(msx) : nx,
+                                    msy != null ? Integer.valueOf(msy) : ny,
                                     pixelPos.x, pixelPos.y, MovementBehavior.ATTACK_AVATAR);
                             this.map.getMap().actors.add(actor);
                         }

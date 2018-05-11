@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="20">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="32">
  <properties>
-  <property name="startX" value="15"/>
-  <property name="startY" value="31"/>
+  <property name="startX" value="31"/>
+  <property name="startY" value="4"/>
  </properties>
  <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
@@ -87,47 +87,47 @@
  </tileset>
  <layer name="floor" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer name="floor 2" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3PMREAIBADwfevBjnIoaFAAUWyO3MCbgYAAAAAAAAAAHrtWwu/2fwCZFtPDfxm8wsA8McB4R9y8UA4AAA=
   </data>
  </layer>
  <layer name="props" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3YsQ3AIAwEQMRIYRUmzmQZASGBbDl3pasvXi6+NYB9IzoAAFDG7GfukJneAvyHn08Gekgl+gyQxxsdAJJ7ogMAAACwZHOmEn2mEvvzfR981rKYQDgAAA==
-  </data>
- </layer>
- <layer name="creature" width="60" height="60">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3aMQ7CMAyF4Yqw9BAdGXqcjBlyEA7UQ7Ix9g216ogESPp/k4Uq6PBquQ7TBABAn1LY63zf66dRA/9sCefX5HBcq9nxPUBrnhySVfTidTu/ZivM8yMc10CPrDwzh6NH9GcAAADAT3cmuq/Wz6O8G+qZjrUP1x1L5L0SX9R6j1G6P8QYFqM3as/Us5JUKSet8+bZmWM81tm0xXP27bE27s/k+ZpyYa5SpRzW6vMW8nxNpf221pzQOs+lzynGoP12NmbpxZilP/pdncnlHnQOica9bUZt/a8VAIBfewNE4LkqQDgAAA==
+   H4sIAAAAAAAACu3ZQQoCIRQGYPFItZxrzA1a1Ha62dxwgqBVBdMk6vP7wI0iKP6+haYEsN+59gIABrHm2iuA8uYPOd/bTxyXgGcstwDjUPNpgRwSiTwDtGNSk+Hl/uY+nL6MAdA/f/f8w5Kf7Ve3x9xrR1k8sleAUrw5E4k8E4n35/I2CC915EA4AAA=
   </data>
  </layer>
  <layer name="water_edges" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3UsQ3AMAhFQbxDsr9H8WixImUFiPBdQ/tfQwQAAAAAAAAAAJztGrGqN2TS25tegL7u8f69ue+s3pJht353lQ5Jore303oBgP94AOBvmKxAOAAA
   </data>
  </layer>
  <layer name="shadows" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3ZQQqDMBBAUe+S+9+xdFdCY6ltzGTmPRBBN2o+Q8DjqKcVOeBpdYfaZZYrXemXnfTdvrv/zXWIzMzl1Q7re/aMZ3uQ0f1ssr7Xzu6esdkbJwb7hhhadyaGiu1XetdqKvZMThomI/9cyOhfveo4v09ra/bF51tfs6Jhew2y0TLA2GjGzZ59mfcbrTsz1+pmZrYcoWk9w+8eP5uHZUA4AAA=
   </data>
  </layer>
  <layer name="walls" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   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
+   H4sIAAAAAAAACuVaCW7jMAysPpSj/UHibH/QHP9/yFaAB5lMSZu6EhQdQPARiRajIUVROqS3t68/Ug5z+SuI6LtJv7fU6HskPpznku8v3+X2Xa7Cmdtc50r1LlLvJlfcX6TdF727znL5m7hHHf7N0iui7+mX8v3YML5A5sh2Lu/Jfs7X3fwuX/dSZz9ft3RFYS6+k8z9XHbUfkPPFn+nSn3598PMFYub+h5lEr6iHtvFOdm8xm9oB3u6kRzIUv1q+cy/13Db4tUIqB6148v95brg6cf8Drz7mN9ze/WZ4Cs4b/nSUozQdxLdtYBf2gY8R3v4T3C4h09UGT30PYm+E7VXO1+79/7HWqiMWv+sY6ptWd+doTu+u5nrwhfz+ynd/fEuPfrdKHR8Lc60+Kvcx3/EUdWd62WoX/6S9xynoE6Jr9Px7aGv+i7VEfeeDTDYd3ko4bl+p0d8taYvjzX3GfEH8xV1pnT33Xt678WEHrRuD32X7Be+OUPH11qXnagu4gzEEUAJn7XuiPH9THc/xWUtRjmSXktzUQmfe42vzhuwN2v+Rfmc62wd+er3POB7kZik1/hyf9Sv8rpNn1HH4iS/W+Isy1vj9gj/XAOrn9yXJT5vgv+LJafHejAD6zb4W6zNmHeIjTeO/CifOfYu4aF+AyjlM9pYOQfNa3BReD7f6t91QY7K5Dm9h7+ynmvgrbkUJbbEPr8lnxPhSSl0HgdnOecR4bAn0+tnjb691zJYF7IfRi5wjcNL/arVV/nbY3y5b5F1XKnMjF7223ttznzeBObZiEzrGd8qiSfRphW6nkAurnSNsNSv2vk3IqcUqq/mu1plenJeNb7qr0riCg/arjZ/NUJflgkOcx66VWZGrb4j5qNIrFuKXvm6yDxeCitm26V7PJ7tGflt3jfBngrq8v6NZb+6X/iqeNKykV572hnW+xyHnyrsd0RuvIdPyICf3zrypoC+I8bXy7207GuDr3zVHOixQt/e/pm/UcNrzWfqlb9XMx/18M9ebFDDHV1rZWhemPVe49KUfvq46HkJD95/WMMdKxeK65f8j6wv4ljOv3n3nHNAjFDix5b4XAprfD0bPKafHKhFib7e2q3G95+pjfe/Ma8tfWvO/JTYnme/bCt6zgP5j116jEk4ZzgZcjgm98ZX90D4vISXEy7NNVnPbCNqP3wGic+C6JkoyLmKDOjl6RtBNI+8pm+veGMNk6Nv1Ja5ny18xn81+qwd26/l59YQ3RdRLM1HfEZJz9Mhv41cN3P/lh73GLkO5Hv2G+177RkMz35HneU7kY4t46t5mSi8teoofdn/t4xvdB9I4eWKR51Ns+LnpfH1zlrU+ivPP9fEPJFzIFa8ofv41nyt83gNJ/Rb3B+N1SPF65uV0z4le3w1Nl7a4wZK+czjMol8/m5LTkPrsH9utZ1S/8z97LHGjEDtt2U+b9nLq+FxTeH5qFeuLKov8xl7grpfzjlpxNAcU1zS4xlpPYt9To+xSyS/MQKIozJK186t332FviNygBG8cnwZz/ZXz/AVOh/qfPSM7x5eVE7pPvfz/TPKf7hejQtAOAAA
   </data>
  </layer>
  <layer name="door" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2aYQqDMAxG9QQ7lve/0RhjbAzqzNo0Sd/3QOiPGvP8ihR124QQQoi63PbncTZehSs+Kzm3XI799xyRH+t6/hxXXAM9vtY6Yj6jns9Vcqf50tB+47854s2K+3APou4R7briHOUiZuK93rKt52z9VIZyLymeL2i+NGj50ny/ufKNpmecCe1nxp6bzdeLrJ6j+joadbJ5R/pWfu5ZsTqMco7Kl+YbyaPXVr9eNavna61P86VBy5fmS8Oae4Z8Z/47kcG3t37U/nn19xtZ+pgFzZcGLV+ar/DnDj5SxkRAOAAA
+   H4sIAAAAAAAACu3asQ2EMAwFUGAB5mGGE1PfPMwASkHJXSQQEPu9MqKIhVN8J10HAPB+3/7pHcB9xoN+P1ontqj/PWpdtOVT0Yc13/wzJev3OVm90KrVWSWQTP28JKq16IendwBwr5IfSw7NkiP3/ChHxvJr7nfFnAWA89y9AxCJtwfvkWlWDwAt2gCRxXfOQDgAAA==
+  </data>
+ </layer>
+ <layer name="creature" width="60" height="60">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3aMQ7CIBQAUCIuHqKjR+kBHB04SA/UQ3ZzdbCGKLSUvjcxEELCh/A/hAAAwN6GuPcMoJxbRjzn9IEWLJfyY97j5zYc0Vo8T9ft5wL/cj4DAEA7HvJKoJISdatR3YCTSWKejqRO75k13jT5Tcu5zHyQ87zXfcp3z7d196cIAOp4AYRMx5pAOAAA
   </data>
  </layer>
  <layer name="torches" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3PsQ0AAAQAQbG7vS2gJ3JXffsRAAAAsKNy7k++fgEAAAAAAAAAAAD3NZRHvGNAOAAA
   </data>
  </layer>
  <layer name="webs" width="60" height="60">
@@ -157,20 +157,15 @@
   <object id="69" name="71" type="Suddenly, a loud penetrating clanging of bells can be heard. There is a sudden silence as the bells stop, followed by the clanking and tromping of guardian monsters. The party gets the idea that they are in big trouble!" x="1200" y="624" width="48" height="48"/>
   <object id="70" name="67" type="A sign on the door reads: *** testing grounds control center ***   this area is strictly off-limits.  *** do not enter ***" x="1488" y="624" width="48" height="48"/>
   <object id="71" name="71" type="Suddenly, a loud penetrating clanging of bells can be heard. There is a sudden silence as the bells stop, followed by the clanking and tromping of guardian monsters. The party gets the idea that they are in big trouble!" x="1776" y="624" width="48" height="48"/>
+  <object id="20" name="REWARD" type="A dusty mound of items." x="1824" y="720" width="48" height="48">
+   <properties>
+    <property name="item1" value="LATUMOFIS POTION"/>
+    <property name="item2" value="ROD OF FLAME"/>
+    <property name="item3" value="DEADLY RING"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="people">
-  <object id="2" name="Lvl 8 Fighter" type="MONSTER" x="1488" y="2784" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="4" name="Dragon Puppy" type="MONSTER" x="1488" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="5" name="Gorgon" type="MONSTER" x="192" y="2496" width="48" height="48">
    <properties>
     <property name="creature" value="Gorgon"/>
@@ -183,93 +178,15 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="7" name="Champ Samurai" type="MONSTER" x="480" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="8" name="Major Daimyo" type="MONSTER" x="624" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="9" name="Lvl 8 Bishop" type="MONSTER" x="768" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="11" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="12" name="Gorgon" type="MONSTER" x="1776" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gorgon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="13" name="Gargoyle" type="MONSTER" x="1920" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="14" name="Gas Dragon" type="MONSTER" x="2064" y="2496" width="48" height="48">
+  <object id="14" name="Gas Dragon" type="MONSTER" x="1776" y="2304" width="48" height="48">
    <properties>
     <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="15" name="Lvl 8 Bishop" type="MONSTER" x="2208" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Bishop"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="16" name="Life Stealer" type="MONSTER" x="2352" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="17" name="Life Stealer" type="MONSTER" x="2496" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="18" name="Lvl 8 Fighter" type="MONSTER" x="2640" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="19" name="Dragon Puppy" type="MONSTER" x="2784" y="2496" width="48" height="48">
-   <properties>
-    <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="20" name="Major Daimyo" type="MONSTER" x="192" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="Major Daimyo"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="21" name="Life Stealer" type="MONSTER" x="768" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="22" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2352" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -285,18 +202,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="25" name="Gorgon" type="MONSTER" x="768" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gorgon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="26" name="Lvl 8 Fighter" type="MONSTER" x="1632" y="2208" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="27" name="High Wizard" type="MONSTER" x="2784" y="2208" width="48" height="48">
    <properties>
     <property name="creature" value="High Wizard"/>
@@ -309,141 +214,21 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="29" name="Major Daimyo" type="MONSTER" x="768" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="30" name="Gargoyle" type="MONSTER" x="1632" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="31" name="High Wizard" type="MONSTER" x="2784" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Wizard"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="32" name="Major Daimyo" type="MONSTER" x="192" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="33" name="Champ Samurai" type="MONSTER" x="336" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="34" name="High Priest" type="MONSTER" x="480" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="35" name="High Priest" type="MONSTER" x="624" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="36" name="Lvl 8 Fighter" type="MONSTER" x="768" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="37" name="Life Stealer" type="MONSTER" x="1632" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="38" name="Champ Samurai" type="MONSTER" x="2784" y="1920" width="48" height="48">
-   <properties>
-    <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="39" name="Fire Giant" type="MONSTER" x="1632" y="1776" width="48" height="48">
+  <object id="39" name="Fire Giant" type="MONSTER" x="1824" y="1872" width="48" height="48">
    <properties>
     <property name="creature" value="Fire Giant"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="41" name="Gargoyle" type="MONSTER" x="2496" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="42" name="Life Stealer" type="MONSTER" x="2784" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="44" name="Champ Samurai" type="MONSTER" x="1632" y="1632" width="48" height="48">
+  <object id="44" name="Champ Samurai" type="MONSTER" x="2640" y="1872" width="48" height="48">
    <properties>
     <property name="creature" value="Champ Samurai"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="45" name="High Priest" type="MONSTER" x="1776" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="46" name="High Wizard" type="MONSTER" x="1920" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Wizard"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="47" name="Gas Dragon" type="MONSTER" x="2064" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="48" name="Lvl 8 Fighter" type="MONSTER" x="2208" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="49" name="Major Daimyo" type="MONSTER" x="2352" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Major Daimyo"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="50" name="Life Stealer" type="MONSTER" x="2640" y="1632" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="51" name="Gas Dragon" type="MONSTER" x="2784" y="1632" width="48" height="48">
    <properties>
     <property name="creature" value="Gas Dragon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="53" name="Gorgon" type="MONSTER" x="1632" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Gorgon"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="55" name="Life Stealer" type="MONSTER" x="1632" y="1200" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -483,12 +268,6 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="63" name="Life Stealer" type="MONSTER" x="1056" y="768" width="48" height="48">
-   <properties>
-    <property name="creature" value="Life Stealer"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="65" name="Lvl 7 Fighter" type="MONSTER" x="1632" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Lvl 7 Fighter"/>
@@ -519,52 +298,11 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="73" name="High Priest" type="MONSTER" x="1056" y="480" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="74" name="High Priest" type="MONSTER" x="1200" y="480" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="75" name="High Priest" type="MONSTER" x="1488" y="480" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="76" name="Lvl 8 Fighter" type="MONSTER" x="624" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Lvl 8 Fighter"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="77" name="Dragon Puppy" type="MONSTER" x="768" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Dragon Puppy"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="78" name="Fire Giant" type="MONSTER" x="912" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="79" name="Fire Giant" type="MONSTER" x="1056" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Fire Giant"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="portals">
-  <object id="1" name="elevator levels 4 to 9" x="1488" y="2784" width="48" height="48">
+  <object id="1" name="ELEVATOR" x="1488" y="2784" width="48" height="48">
    <properties>
+    <property name="DOWN" value="WIZARDRY5"/>
     <property name="dx" value="31"/>
     <property name="dy" value="58"/>
    </properties>
@@ -587,24 +325,6 @@
     <property name="dy" value="34"/>
    </properties>
   </object>
-  <object id="81" name="hidden door" x="912" y="432" width="48" height="48">
-   <properties>
-    <property name="dx" value="19"/>
-    <property name="dy" value="7"/>
-   </properties>
-  </object>
-  <object id="82" name="hidden door" x="1344" y="528" width="48" height="48">
-   <properties>
-    <property name="dx" value="28"/>
-    <property name="dy" value="13"/>
-   </properties>
-  </object>
-  <object id="83" name="hidden door" x="1056" y="1008" width="48" height="48">
-   <properties>
-    <property name="dx" value="22"/>
-    <property name="dy" value="19"/>
-   </properties>
-  </object>
   <object id="84" name="hidden door" x="1632" y="1104" width="48" height="48">
    <properties>
     <property name="dx" value="34"/>
@@ -623,85 +343,85 @@
     <property name="dy" value="28"/>
    </properties>
   </object>
-  <object id="87" name="hidden door" x="2352" y="1728" width="48" height="48">
-   <properties>
-    <property name="dx" value="49"/>
-    <property name="dy" value="34"/>
-   </properties>
-  </object>
-  <object id="88" name="hidden door" x="2688" y="1776" width="48" height="48">
-   <properties>
-    <property name="dx" value="58"/>
-    <property name="dy" value="37"/>
-   </properties>
-  </object>
-  <object id="89" name="hidden door" x="480" y="2400" width="48" height="48">
+  <object id="21" x="912" y="480" width="48" height="48">
    <properties>
     <property name="dx" value="10"/>
-    <property name="dy" value="52"/>
+    <property name="dy" value="40"/>
    </properties>
   </object>
-  <object id="90" name="hidden door" x="2352" y="2400" width="48" height="48">
+  <object id="22" x="480" y="2112" width="48" height="48">
    <properties>
-    <property name="dx" value="49"/>
-    <property name="dy" value="52"/>
+    <property name="dx" value="10"/>
+    <property name="dy" value="37"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="2" x="1728" y="1728">
-   <polygon points="0,0 0,288 720,288 720,0"/>
+  <object id="2" name="Proving Grounds of the Mad Overlord Level 4" x="1728" y="1728">
+   <polygon points="-48,0 -48,288 720,288 720,0"/>
   </object>
-  <object id="3" x="1728" y="2016">
+  <object id="3" name="Proving Grounds of the Mad Overlord Level 4" x="1728" y="2016">
    <polygon points="0,0 0,144 1008,144 1008,0"/>
   </object>
-  <object id="4" x="2448" y="1728">
+  <object id="4" name="Proving Grounds of the Mad Overlord Level 4" x="2448" y="1728">
    <polygon points="0,0 144,0 144,288 0,288"/>
   </object>
-  <object id="5" x="2592" y="1728">
-   <polygon points="0,0 192,0 192,288 0,288"/>
+  <object id="5" name="Proving Grounds of the Mad Overlord Level 4" x="2592" y="1728">
+   <polygon points="-48,0 192,0 192,288 -48,288"/>
   </object>
-  <object id="6" x="1728" y="2160">
-   <polygon points="0,0 0,288 1008,288 1008,0"/>
+  <object id="6" name="Proving Grounds of the Mad Overlord Level 4" x="1728" y="2160">
+   <polygon points="-48,0 -48,336 1056,336 1056,0"/>
   </object>
-  <object id="7" x="1584" y="2592">
+  <object id="7" name="Proving Grounds of the Mad Overlord Level 4" x="1584" y="2592">
    <polygon points="0,0 0,240 1296,240 1296,0"/>
   </object>
-  <object id="8" x="2736" y="1728">
+  <object id="8" name="Proving Grounds of the Mad Overlord Level 4" x="2736" y="1728">
    <polygon points="0,0 -144,0 -144,-144 144,-144 144,864 -1152,864 -1152,-144 -288,-144 -288,0 -1008,0 -1008,720 0,720 0,0"/>
   </object>
-  <object id="9" x="2448" y="1728">
-   <polygon points="0,0 144,0 144,-1584 -2016,-1584 -2016,192 -1872,192 -1872,-720 -1296,-720 -1296,-864 -1824,-864 -1872,-912 -1872,-1440 0,-1440 0,0"/>
+  <object id="10" name="Proving Grounds of the Mad Overlord Level 4" x="576" y="288">
+   <polygon points="-48,0 -48,624 624,624 624,0"/>
   </object>
-  <object id="10" x="576" y="288">
-   <polygon points="0,0 0,576 576,576 576,0"/>
+  <object id="12" name="Proving Grounds of the Mad Overlord Level 4" x="1152" y="288">
+   <polygon points="0,0 0,144 144,144 144,288 288,288 288,144 480,144 480,288 720,288 720,576 864,576 864,720 720,720 720,816 720,864 576,864 576,1104 576,1152 432,1152 432,1296 1296,1296 1296,0"/>
   </object>
-  <object id="11" x="1152" y="432">
-   <polygon points="0,0 144,0 144,144 288,144 288,0 432,0 432,144 720,144 720,288 0,288"/>
+  <object id="15" name="Proving Grounds of the Mad Overlord Level 4" x="1872" y="864">
+   <polygon points="0,0 0,192 192,192 192,0"/>
   </object>
-  <object id="12" x="1152" y="288">
-   <polygon points="0,0 0,144 144,144 144,288 288,288 288,144 432,144 432,288 720,288 720,576 864,576 864,720 720,720 720,816 672,864 576,864 576,1104 528,1152 432,1152 432,1296 1296,1296 1296,0"/>
+  <object id="16" name="Proving Grounds of the Mad Overlord Level 4" x="1584" y="1152">
+   <polygon points="-48,0 -48,144 192,144 192,-48 -48,-48"/>
   </object>
-  <object id="13" x="1440" y="720">
-   <polygon points="0,0 144,0 144,2160 0,2160"/>
+  <object id="17" name="Proving Grounds of the Mad Overlord Level 4" x="1584" y="1296">
+   <polygon points="-48,0 -48,144 192,144 192,0"/>
   </object>
-  <object id="14" x="1584" y="720">
-   <polygon points="0,0 288,0 288,432 0,432"/>
+  <object id="18" name="Proving Grounds of the Mad Overlord Level 4" x="1152" y="720">
+   <polygon points="0,0 288,0 288,2160 -1152,2160 -1152,-720 1728,-720 1728,864 1440,864 1440,-576 -720,-576 -720,1152 -1008,1152 -1008,1872 -288,1872 -288,1152 -576,1152 -576,288 -48,288 0,288"/>
   </object>
-  <object id="15" x="1872" y="864">
-   <polygon points="0,0 0,144 144,144 144,0"/>
+  <object id="19" name="Proving Grounds of the Mad Overlord Level 4" x="144" y="1872">
+   <polygon points="-48,0 -48,720 768,720 768,0"/>
   </object>
-  <object id="16" x="1584" y="1152">
-   <polygon points="0,0 0,144 144,144 144,-48 0,-48"/>
+  <object id="23" name="Proving Grounds of the Mad Overlord Level 4" x="1152" y="576">
+   <polygon points="0,0 768,0 768,144 0,144"/>
   </object>
-  <object id="17" x="1584" y="1296">
-   <polygon points="0,0 0,144 144,144 144,0"/>
+  <object id="24" name="Proving Grounds of the Mad Overlord Level 4" x="1152" y="432">
+   <polygon points="0,0 192,0 192,192 0,192"/>
   </object>
-  <object id="18" x="1152" y="720">
-   <polygon points="0,0 288,0 288,2160 -1152,2160 -1152,-720 1728,-720 1728,864 1440,864 1440,-576 -720,-576 -720,1152 -1008,1152 -1008,1872 -288,1872 -288,1152 -576,1152 -576,288 -48,288 0,240"/>
+  <object id="25" name="Proving Grounds of the Mad Overlord Level 4" x="1440" y="432">
+   <polygon points="0,0 192,0 192,144 192,192 0,192"/>
   </object>
-  <object id="19" x="144" y="1872">
-   <polygon points="0,0 0,720 720,720 720,0"/>
+  <object id="26" name="Proving Grounds of the Mad Overlord Level 4" x="1536" y="720">
+   <polygon points="0,0 192,0 192,-48 384,-48 384,432 0,432"/>
+  </object>
+  <object id="27" name="Proving Grounds of the Mad Overlord Level 4" x="1392" y="720">
+   <polygon points="0,0 192,0 192,720 240,720 240,2160 0,2160"/>
+  </object>
+  <object id="28" name="Proving Grounds of the Mad Overlord Level 4" x="1584" y="1584">
+   <polygon points="0,0 0,1008 1296,1008 1296,0 1008,0 1008,144 1056,144 1056,192 1152,192 1152,864 144,864 144,144 864,144 864,0"/>
+  </object>
+  <object id="30" name="Proving Grounds of the Mad Overlord Level 4" x="1680" y="2016">
+   <polygon points="0,0 0,144 1104,144 1104,0"/>
+  </object>
+  <object id="31" name="Proving Grounds of the Mad Overlord Level 4" x="2400" y="1728">
+   <polygon points="0,0 240,0 240,-1584 -144,-1584 -2016,-1584 -2016,144 -1776,144 -1776,-720 -1200,-720 -1200,-864 -1824,-864 -1824,-1440 0,-1440"/>
   </object>
  </objectgroup>
 </map>

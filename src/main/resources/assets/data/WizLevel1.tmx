@@ -100,11 +100,6 @@
    H4sIAAAAAAAACu3YQQqAIBAAQBH6UPeO9YL+UI/oU/0wCiKCgg6ZITMgeBDZg+uuhkBKfcwdAeTj/ANAWSa1HQAogP8KgOfq3AHAT8z6B9g0coHEuiqEIR7zK0M8r7/bB+Aro/r4Of97pHaV12t/sY83eW9SEvczAJShzR0AvGQBk/xAnjA5AAA=
   </data>
  </layer>
- <layer name="creature" width="60" height="61">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3aMQ6CQBCFYRJsOICFh7CgtKSwpPBoHsXS0gNwDAsOYG9l8gpesmZdMov/VxEi7hh2h2HHpsHHvl0+f9qVHfdsxn1mjHs33wmkuLXLxymO5vOvhPk8y7W67kqvQcRROnfl5FWnk5hd/IOc78nPMPqM3FuCq0/UJUCcWMck9/qQcN/nwM/uUeJPqU+wPYOZw1PC3I5cl2refpCfUQm3HlXkZwp+S/PYmJHHdH/P7VGU4GrjNWNATDXuA7iaX9fXtcLfBQAAAACRad+5450LGxK5twIA/4DeMWrk/kfn6mTXU87pOQLR8J4IAN97A9MfN7kwOQAA
-  </data>
- </layer>
  <layer name="water_edges" width="60" height="61">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAvg1Ku4QVMDkAAA==
@@ -123,6 +118,11 @@
  <layer name="door" width="60" height="61">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu2aYQ7CIAyFhxcwHscT+MN4rp3HMxiP4xGWGWJIJtK5QstK6ZcYlzoXqo/HEzcM3xzdAHIHXoPqa0wE9ZeDz6fgCfQF1dc4Ae/B1N0BPr8lRpc+5r4OpO1UnVJXtfu9uM8DQ0u6wnyPUij53gNbfDbHi0vHMA2/82V06Tp0footPpvjxRhS1/dzJTVfsPVaYL2gNWJNUvgA9zwqgUPz3POoZ7zXzcxZNQc/HmjulOg/eJ20TOHHQ5npl8zCet0CVS6VxHmlD4393pT0wQ3Gzx4NfKb/1hJt67m0tUQKmKw7Rc9boV7blmPm/M0uNYf0yl7r7177QhrzhsGLlD3MtRzt0aZny9Gywe75t/gfQW207wvvjbT9Pm4sZxuBOD/8yxOtE+eHXvLEVXCfVGt93KN2Lcf0ouVeSM1Zn1Vq7ctJwLKKHiA9p9Dq3ZCepXp3zj2Ke1LTDzF61kqP/qx1/Q16hrzX10O/mnS+9F7ouEedGwYVrWQIbj/PuQ+kF8xjDSre+m8L4zA5AAA=
+  </data>
+ </layer>
+ <layer name="creature" width="60" height="61">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3aMQ6CQBCFYRJsOICFh7CgtKSwpPBoHsXS0gNwDAsOYG9l8gpesmZdMov/VxEi7hh2h2HHpsHHvl0+f9qVHfdsxn1mjHs33wmkuLXLxymO5vOvhPk8y7W67kqvQcRROnfl5FWnk5hd/IOc78nPMPqM3FuCq0/UJUCcWMck9/qQcN/nwM/uUeJPqU+wPYOZw1PC3I5cl2refpCfUQm3HlXkZwp+S/PYmJHHdH/P7VGU4GrjNWNATDXuA7iaX9fXtcLfBQAAAACRad+5450LGxK5twIA/4DeMWrk/kfn6mTXU87pOQLR8J4IAN97A9MfN7kwOQAA
   </data>
  </layer>
  <layer name="torches" width="60" height="61">
@@ -704,163 +704,163 @@
   </object>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="6" x="2880" y="2736">
+  <object id="6" name="Proving Grounds of the Mad Overlord Level 1" x="2880" y="2736">
    <polygon points="0,0 0,144 -1344,144 -1344,0"/>
   </object>
-  <object id="9" x="0" y="1440">
+  <object id="9" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="1440">
    <polygon points="0,0 0,144 1296,144 1296,0"/>
   </object>
-  <object id="16" x="864" y="2448">
+  <object id="16" name="Proving Grounds of the Mad Overlord Level 1" x="864" y="2448">
    <polygon points="0,0 0,288 432,288 432,0"/>
   </object>
-  <object id="17" x="288" y="2304">
+  <object id="17" name="Proving Grounds of the Mad Overlord Level 1" x="288" y="2304">
    <polygon points="0,0 0,288 432,288 432,0"/>
   </object>
-  <object id="18" x="720" y="1872">
+  <object id="18" name="Proving Grounds of the Mad Overlord Level 1" x="720" y="1872">
    <polygon points="0,0 0,288 432,288 432,0"/>
   </object>
-  <object id="19" x="1296" y="2736">
+  <object id="19" name="Proving Grounds of the Mad Overlord Level 1" x="1296" y="2736">
    <polygon points="0,0 0,144 -1296,144 -1296,-1152 48,-1152 48,-1008 -288,-1008 -288,-816 -432,-816 -432,-1008 -720,-1008 -720,-384 -864,-384 -864,-1008 -1152,-1008 -1152,0"/>
   </object>
-  <object id="20" x="144" y="1728">
+  <object id="20" name="Proving Grounds of the Mad Overlord Level 1" x="144" y="1728">
    <polygon points="0,0 288,0 288,576 144,576 144,864 576,864 576,576 432,576 432,0 720,0 720,144 576,144 576,432 1008,432 1008,144 864,144 864,0 1152,0 1152,720 720,720 720,1008 0,1008"/>
   </object>
-  <object id="21" x="0" y="1008">
+  <object id="21" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="1008">
    <polygon points="0,0 432,0 432,288 0,288"/>
   </object>
-  <object id="22" x="864" y="1008">
+  <object id="22" name="Proving Grounds of the Mad Overlord Level 1" x="864" y="1008">
    <polygon points="0,0 0,288 288,288 288,0"/>
   </object>
-  <object id="23" x="720" y="1296">
+  <object id="23" name="Proving Grounds of the Mad Overlord Level 1" x="720" y="1296">
    <polygon points="0,0 0,-288 -96,-288 -144,-336 -144,-624 -288,-624 -288,-480 -336,-432 -384,-432 -576,-432 -576,-288 -288,-288 -288,0"/>
   </object>
-  <object id="24" x="576" y="432">
+  <object id="24" name="Proving Grounds of the Mad Overlord Level 1" x="576" y="432">
    <polygon points="0,0 432,0 432,432 0,432"/>
   </object>
-  <object id="25" x="0" y="432">
+  <object id="25" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="432">
    <polygon points="0,0 432,0 432,384 432,432 384,432 0,432"/>
   </object>
-  <object id="26" x="0" y="864">
+  <object id="26" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="864">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="27" x="0" y="0">
+  <object id="27" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="0">
    <polygon points="0,0 288,0 288,432 0,432"/>
   </object>
-  <object id="28" x="288" y="0">
+  <object id="28" name="Proving Grounds of the Mad Overlord Level 1" x="288" y="0">
    <polygon points="0,0 576,0 576,432 288,432 288,576 144,576 144,432 0,432"/>
   </object>
-  <object id="29" x="432" y="576">
+  <object id="29" name="Proving Grounds of the Mad Overlord Level 1" x="432" y="576">
    <polygon points="0,0 0,96 144,96 144,0"/>
   </object>
-  <object id="30" x="864" y="0">
+  <object id="30" name="Proving Grounds of the Mad Overlord Level 1" x="864" y="0">
    <polygon points="0,0 432,0 432,432 0,432"/>
   </object>
-  <object id="31" x="1008" y="432">
+  <object id="31" name="Proving Grounds of the Mad Overlord Level 1" x="1008" y="432">
    <polygon points="0,0 144,0 144,576 -144,576 -144,432 0,432"/>
   </object>
-  <object id="32" x="1152" y="432">
+  <object id="32" name="Proving Grounds of the Mad Overlord Level 1" x="1152" y="432">
    <polygon points="0,0 144,0 144,864 0,864"/>
   </object>
-  <object id="33" x="576" y="864">
+  <object id="33" name="Proving Grounds of the Mad Overlord Level 1" x="576" y="864">
    <polygon points="0,0 0,144 144,144 144,480 288,480 288,0"/>
   </object>
-  <object id="34" x="2304" y="1728">
+  <object id="34" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="1728">
    <polygon points="0,0 -288,0 -288,720 0,720"/>
   </object>
-  <object id="35" x="2016" y="1728">
+  <object id="35" name="Proving Grounds of the Mad Overlord Level 1" x="2016" y="1728">
    <polygon points="0,0 -288,0 -288,864 288,864 288,720 0,720"/>
   </object>
-  <object id="36" x="2304" y="2448">
+  <object id="36" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="2448">
    <polygon points="0,0 0,144 288,144 288,-576 432,-576 432,288 576,288 576,-720 144,-720 144,0"/>
   </object>
-  <object id="37" x="2592" y="1872">
+  <object id="37" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="1872">
    <polygon points="0,0 144,0 144,864 -1008,864 -1008,-288 288,-288 288,-144 -144,-144 -144,576 -288,576 -288,-144 -864,-144 -864,720 0,720"/>
   </object>
-  <object id="38" x="2304" y="0">
+  <object id="38" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="0">
    <polygon points="0,0 0,288 288,288 288,0"/>
   </object>
-  <object id="39" x="2592" y="144">
+  <object id="39" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="144">
    <polygon points="0,0 0,288 288,288 288,0"/>
   </object>
-  <object id="40" x="2592" y="0">
+  <object id="40" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="0">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="41" x="2736" y="0">
+  <object id="41" name="Proving Grounds of the Mad Overlord Level 1" x="2736" y="0">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="42" x="2304" y="0">
+  <object id="42" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="0">
    <polygon points="0,0 0,144 -576,144 -576,1488 -720,1488 -720,0"/>
   </object>
-  <object id="43" x="1728" y="144">
+  <object id="43" name="Proving Grounds of the Mad Overlord Level 1" x="1728" y="144">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="44" x="1872" y="144">
+  <object id="44" name="Proving Grounds of the Mad Overlord Level 1" x="1872" y="144">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="45" x="2016" y="144">
+  <object id="45" name="Proving Grounds of the Mad Overlord Level 1" x="2016" y="144">
    <polygon points="0,0 0,144 288,144 288,0"/>
   </object>
-  <object id="46" x="1728" y="288">
+  <object id="46" name="Proving Grounds of the Mad Overlord Level 1" x="1728" y="288">
    <polygon points="0,0 144,0 144,1152 0,1152"/>
   </object>
-  <object id="47" x="1872" y="288">
+  <object id="47" name="Proving Grounds of the Mad Overlord Level 1" x="1872" y="288">
    <polygon points="0,0 0,1200 144,1200 144,0"/>
   </object>
-  <object id="48" x="2016" y="288">
+  <object id="48" name="Proving Grounds of the Mad Overlord Level 1" x="2016" y="288">
    <polygon points="0,0 0,144 576,144 576,0"/>
   </object>
-  <object id="49" x="2304" y="432">
+  <object id="49" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="432">
    <polygon points="0,0 0,144 -144,144 -144,1008 -288,1008 -288,0"/>
   </object>
-  <object id="50" x="2160" y="576">
+  <object id="50" name="Proving Grounds of the Mad Overlord Level 1" x="2160" y="576">
    <polygon points="0,0 0,912 144,912 144,0"/>
   </object>
-  <object id="51" x="2304" y="432">
+  <object id="51" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="432">
    <polygon points="0,0 0,144 288,144 288,0"/>
   </object>
-  <object id="52" x="2592" y="432">
+  <object id="52" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="432">
    <polygon points="0,0 0,288 288,288 288,0"/>
   </object>
-  <object id="53" x="2304" y="576">
+  <object id="53" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="576">
    <polygon points="0,0 0,144 288,144 288,0"/>
   </object>
-  <object id="54" x="2304" y="720">
+  <object id="54" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="720">
    <polygon points="0,0 0,144 288,144 288,0"/>
   </object>
-  <object id="55" x="2592" y="720">
+  <object id="55" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="720">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="56" x="2736" y="720">
+  <object id="56" name="Proving Grounds of the Mad Overlord Level 1" x="2736" y="720">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="57" x="2592" y="864">
+  <object id="57" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="864">
    <polygon points="0,0 0,240 0,288 288,288 288,0"/>
   </object>
-  <object id="58" x="2304" y="864">
+  <object id="58" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="864">
    <polygon points="0,0 0,432 144,432 144,144 288,144 288,0"/>
   </object>
-  <object id="59" x="2448" y="1008">
+  <object id="59" name="Proving Grounds of the Mad Overlord Level 1" x="2448" y="1008">
    <polygon points="0,0 0,480 144,480 144,0"/>
   </object>
-  <object id="60" x="2304" y="1296">
+  <object id="60" name="Proving Grounds of the Mad Overlord Level 1" x="2304" y="1296">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="61" x="2592" y="1152">
+  <object id="61" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="1152">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="62" x="2736" y="1152">
+  <object id="62" name="Proving Grounds of the Mad Overlord Level 1" x="2736" y="1152">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
-  <object id="63" x="2592" y="1296">
+  <object id="63" name="Proving Grounds of the Mad Overlord Level 1" x="2592" y="1296">
    <polygon points="0,0 0,144 288,144 288,0"/>
   </object>
-  <object id="64" x="1296" y="1728">
+  <object id="64" name="Proving Grounds of the Mad Overlord Level 1" x="1296" y="1728">
    <polygon points="0,0 144,0 144,-144 288,-144 288,1152 0,1152"/>
   </object>
-  <object id="65" x="0" y="1296">
+  <object id="65" name="Proving Grounds of the Mad Overlord Level 1" x="0" y="1296">
    <polygon points="0,0 0,144 1296,144 1296,288 1296,432 1440,432 1440,288 2880,288 2880,144 1584,144 1584,-1296 1440,-1296 1440,-1152 1296,-1152 1296,0"/>
   </object>
-  <object id="66" x="1296" y="0">
+  <object id="66" name="Proving Grounds of the Mad Overlord Level 1" x="1296" y="0">
    <polygon points="0,0 0,144 144,144 144,0"/>
   </object>
  </objectgroup>
