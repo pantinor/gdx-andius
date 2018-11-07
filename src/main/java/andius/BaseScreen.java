@@ -7,8 +7,8 @@ import com.badlogic.gdx.Gdx;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -34,7 +34,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     protected final Viewport viewport = new ScreenViewport();
 
-    protected Camera camera;
+    protected OrthographicCamera camera;
 
     protected final Vector2 currentMousePos = new Vector2();
 
@@ -131,7 +131,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
     
     public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
-        Label label = new Label(text.replace(". ", ".\n"), Andius.skin, "larger");
+        Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), Andius.skin, "larger");
         label.setPosition(sx, sy);
         label.setColor(color);
         stage.addActor(label);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="48">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="48" tileheight="48" infinite="0" nextobjectid="80">
  <properties>
-  <property name="startX" value="37"/>
-  <property name="startY" value="10"/>
+  <property name="startX" value="1"/>
+  <property name="startY" value="58"/>
  </properties>
  <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
   <image source="uf_terrain.png" width="960" height="1824"/>
@@ -87,47 +87,47 @@
  </tileset>
  <layer name="floor" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACuWXW27dMAxEuW77LqDLbj8iYHJyRrabtmlRAhexZT041HDIzPx/dsTv9eN3vj2fb+9HvB8xdsq39f0Ve5145zi/mx+5P/2lj69xH4j3nI/+2V6Gn/6f8p0YDuyX5zHmtq/Fo817zb9tRzy/8H5lGfeMtXEz4//CmsbR9IfrT5xlvDWenbHnIftbHmSs+M04Y/40TjNWhpfzGcPB+SsHj3GMM34++fyECz9jeReM42f2XMb7y/Hd2uZH8orjbX7GnHfRdDrXtnnUuJn3PnA89zS8Fiv6Pw/n83557sx7vK323OEzxwdree4VB+6ON/2nRlzNb3YVN46bnlMLbZxjTavye+shqFPcr2kgNdf6H9PFjEPzh7ljmkp/iYfcJl+XzzMf40zcI2utv2HcGw+/yp5q9Wf8Ny5OGWOtpjauv9Y75no7y/Y/xrm1+ND8I7cyry03cty4dMXJ/BmfTxnPWFn+tfrCfobnsN+w2pF7Mp9bP8OawHfDaHXqjtF/03fOWWYcZg9gdT+/kbvtTskH3iXPYv3lt8E66ixzzZ7Jeas/zFXGmLhaHK7y1zhlPjA2xsOJ56f6+Kvtd5/f+u1vX/Qj38lnq/HkPnlMnV6W9/5VeNlTHeM4qJumDdY/JX+e9q7Llq9/iy2sV8Y45Vr2Y8kN4n3Nx9hTW1s/Y5pmNcG+s+7NfMwB5u+uRyVecn9Z7ml9t+ls+m8/xi7freYY3sQ1WLPGifHO/dp51ttZrb+jz4yL3RH9zLmGt9U766NSW4/xWO+0lTlzB2/Tp8RoudF6A6vVre7v7rdxmbFl/3+Fl7/GPetBfsbS350+W24yXubzUz+I8UleWN+66+va/bYca5w3/b3jc+455XnXb7DvpvZTqw0ve3piMb1ibt/By1gZ3vS39VdP7LP9Rsb+aS4zR3JsPbMfW8Z69Fk+n5sf/2ehhu5ysMXHdNV6U+6TPpsP1BbDm/Opz+yvGBvmC810j/dLfbb7zXje0ckrvDsj3t3+tLa39X47a30CY3JirvWTrHtrLXUv/Wz+WH6Y7e4390gs5hvvnefa/wusA7N5voM3dWM3PzESB/XY8Nocnsu4jcy38Ss+Zx4Tc5vfcDD2nEeNGYyTl9Qee8951l9Rr3KMfegha9r/CC1W1GfmKeNg+mB4rWe2Nbueg3EiBvO9YTe8aVda12oLjRp1R0Pv+sBzrji/ntOf5Mv6nvfAu2IvcWDN7n7tju2ddbr1QXxO/w2v6YnVhrbO8qHVIOvb6XPr9az2MVatLt/pWRvfn/BtnfWnjbXC+EpNaL2h3c2JeeTzMt41+17W3MwZ+rD2pi85nvtQw62ekFvExXpn9Yi6Qbysuzs/Lb8stnd5+JSrd4wYc7zpT87nN2rRYP7InOSccZvzrcfLdfSd97vrAchZ5sxVrW59guElH40zaz33OcaxMn95p4P1xGNxZu41PmccjEt3rfXnd3qJplfGZcaZtcY4n9bw2p0mFvYMrf5SO8nLHV7OzT2WkTeWU8wL+pnv9J+xNd2z3OH7Hbzca31v99u0wWrBjgN5vuk/9+FdX/GZ/rezn1ib3/CyR1hzyBnTAbtPap/pFs9l3Hgm73+nmedmzmyw0Oed7vF+iYW5n+eS7+SsYWw+GH/sfpkDtMbnp9wz/bF7NL1vuU/dW2PNz8RrmrO7X4uhaYidy/tnr8D8ImdyreXPlT4b3jyLeNd8w34Xr2mhaXX60Pou9k3mzw7vLjeJN33jnFz3wrwraz3DE8saPfM+zuTFzHu87PN2emx7kof8nvdmPnAd57N3ov7/b/YdSXRPxEA4AAA=
+   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
   </data>
  </layer>
  <layer name="floor 2" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3VUQqCQBSGUWlTmltQa2ltxUW4sEZQmIeEoIkm7znwv178ULBpAODYki2K5WBnpvf8NMdoXr3qjdK+i/zOozSvov2vo/UCAABE9Lj8+gngM75h4B3zttq0aWO2rtDdWnuHtHu2W6G7tfZe06ZsfaG7tfZ+i14AAAD4X0/uSwUrQDgAAA==
   </data>
  </layer>
  <layer name="props" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3XwQkAIBADwWBJ+rRpS7SHAzmEmQay3yQAAAAAAAAAAMnsDgAAvnZGdwEAAABVq2l3+5LPXSvGi8FAOAAA
+   H4sIAAAAAAAACu3XwQ1AQBBAUdShCo7KcaAGohjRqAZIRLIG+14DM3P6maKA/+ur6A0AIIYGwrvUZfQGwBP0FwAAuGrI7H8YM7v3q5roBQBIYj7o8HLS5ulms9cMW79leDMAAAD/1QbN7fzXye2yXoAQQDgAAA==
   </data>
  </layer>
  <layer name="water_edges" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3ZzQnDMAwGUHsHe5zs0tEySkdrUiiUkFxlkN4DXXzSh//Abg0Ano3eXqt7iDaPzFtf3UWsUSxvxTmumnkUzl3x/K6s4lq/u7uOsXd4I0H+9/avZuK8AAAAAEBOs39rX91HlPMtO/Pb9ZW8uVXLO/3FAAAAkMgHArpviUA4AAA=
   </data>
  </layer>
  <layer name="shadows" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2YgQrDIAxE+y/7/38cYwyGGHtJTq16D4SiqdXkjKHXtR6vSsu+v2MTX3b3z0g99dao9Cx+WLFn9SPfZOn5rk/wKWM4k6fc+cycX46JM0B1Ytn+jyE2LY1HzgbrLAnBIFproGfhdE72w6i6w5P7md8Q++OpC1ramKlfZC0ix6p+bOnV6l9xn8LPCrFm3dnZXMjMpcrP4kNG171rWWlTILRq2tImmqe9OsyeAeVnkcHSDVtP0ml/evh0VryQ3FzTrDVHa/3ZfxrIXXJVxsUZMPTjqZnROVAb5e51YcYqq190jvJ97/q8+xBng+S96Dwj9CU9z+UpPmfrAK05PDWD51l6ttnFN5E9tHRo2d49R0Frol3itTJP8X9Z41o20RadJ/v9k3kDHGWfAkA4AAA=
+   H4sIAAAAAAAACu3ZUQ6EIAxFUfbC/vfor0GJpQWk7T2JiZlMooXylJlSgNhqcwAA/tXmMvkM+Ndb16zzfKS9QH/gdJaevPc0fQ7P6NncpM9rnusATnZCHq3eD5G/MfaZ0vv2VNMIb/OVRbY56e3jvefLTDtrP228+Z0TAPrIwTGSd/6oYxm5Njxp35Pevk/O+JNlvr7+N5F+PluW/Yv3+8e72jnfdW3rNTXrb0Wdo2s/ak6slCFntay1W8Yv43hrXOjfudpAOAAA
   </data>
  </layer>
  <layer name="walls" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACuWba27rOgyEjzaUR5dgO1vIw/tfyG0AD/J5OpSd06I/ziVg2FUoSpRH1Ihyh/bnz+3zui/X8/n6eT2Wvx/L31foXBe9GXVvi+7N9P35Yc+yP+Pvh7X1QFvXlvtzRfvs9w3Pw3L9X0T+nj+vw+f1sdzPy/PzflqeeUlXvx2X67DcT8vzCTpn/HZCO0fYOi1lZzxT74j2n8Lnp6gebX7ApvydgQfhhBgXxm7Ax93uc1vjbm5rfD3tToZpnzs3K1df5rbG8XXx8Xkf4e8Y+jLDzm/jeXyzrcMO/cH83dKVPnEsbOoS/rzcMeb6unr9SXNA9QbD41PvApvSoT/sv3ROsCf9oa3j6GX5bbLyoSiX/sXK6eMU/BU+5/bqA3Htc2oLzzP6ozZVh/762E/oP0V+uf5Q6FOPWDqEZ6+bxDF+Cfb57GUD2jouz8f28ne08hF+sXwo9Kf2ir1qi+/I+yB8c44o5iY8098J5fT3ENpynAhXP1HucZXSs0MsK+ZXeE52emP7G1LFW76vd22kmFCJ/PX4ekaZsHRCuS7GUukoPpI3iJ8MqEvMqs8D2qdd8h/H89jW/OKAdtVnzQX5m/A4tFeMFaZG6JHrSv8Be+QojO2KxSwXJrlGzGjr3r7y56eornSn9pUfkZf38JxiZS9+6h311vyqLdXdg83ees74n+TS1j5Q7xrqerxJvxFvvfqp3x6fz+3rXJlgX2sF7Sg2ax6coH9p6zFN498b8x5/6Nmkj6rDupwn3D9y7yd92hdfdr6td0p+4Nws9WuPv3s4pNf9Tnzew8mTv5rvjIsaA+7tGFcvbb2XU9kILApj57aOu5e25rXqj/N0xmfF8kPHPjn9GW1pjJ3feuy84VKsIw9gvGVuwmPjzcq57yQ+GYtnu27t69rgPJs2OC80nlt8/l8S3w8Kn56PEKaY1zhjbIi9D6unu9dl7oT7QcbVhGvmOzjHxNnVH9rlXpLzVxjgvox5L/ENj4uyw7yC4/KOu3gCYzDbuZs+94GeOxHWiU3uVdXe3F6xJb33JL29F/cme+Lsnr3fO0J7VcweWl4XhlDm5W6f+5Q9e5Aq1yHsEcPHHWOY9tlJJ/lQ8YVr4a9zjD3vLu0NlUtI19Y6OxX9pOyJzz1sSBzDf5OnkM3e1ZPR+pNE81f9VS6CuWhxWuEq+TSZnT2cpxrbyletHYrRLo5T8m5yJ+37FO8Y9+5tzS0ehb8aN56nbEnCAPeevfec6vq+wbnLfXmff8sxJrP/bm55C5+9uZz6nPJYqU22y/MPcgNyWK3jKe/HsxZhiLyZeZStcX7X3z3x2d+vcEDuyTwDebDXm8JccM7Nvd2Wv8qP8hI3qWK7pJpPvt9/hwM4n3k377fVlvu7Bw+SKj5zPSLGhD1hmLk62ZpsnIgn593cB9IftcVzPOYiPF5L/9jWfDr1J/F1vhfmAYRplU1tvY97iq/b/Jt8d2jrfAPHWnefq+qD+sF2/b0zF0R/Get5XuPj4lJxG88DVXhLfPUp7Gd6j5WkOEZ76k/Vl63563M86Wo9Srh1PuN98vf7btweg7/V2ujzrsrXpfpXs8/8NfXvRTlxy1zFFlfh+sE5sic+e1xN/lZ8pto3VXbUXnqu5J08XjVvKGl/5HFYGGPuwjmy+zcGO94nxVDGUZ6BeB7PvyOh/XPoD9cYxnznnQknjNee032K4yedFfq4XNo69+Bn257H8287WEcxnO3zjIVrivMkCXP4SaqcgEuVi/6t3GDigZLBsJTO47i3Yj3PGzMf7fgUj6Wu8Mr7wcqYr3M8E+fk67110/NhxAV/F+5Yj980pTM6P9cYFz2td/5dnHNt5QP97NBx69/gfZf3fkfkL9fBPX2oOECyLWGMkoxtHZOZrz2ES7jyfDOxRB2eUzOm00ePmUnUz55M1leeoUiEZ2GHOCEmVC4czvZbFcN9bjg3lr9bvnicr8YkrQuMkXvG1m1yn8LyPcK63Ndsxeo9OW33I60vHq/8DMS/k2M8r9Yx9o/fgzI+c/5W/I3iPD8J84rk6mn+ShzHt/aKe4yD7qP7y1wZ8cyxInfa893jls5ofU+8uooDPaxyDa10evkF1a3iVeLMezGQ+pDmL2Otc2OPFen9elviu0dcjmeuTRN0WK74Lh2tEb5+SD/xoTR/dY5MDFdyCXZcn2dz/j2F2mUuRXrkumlO3dp6Lbi0dRz2NYL9VT/TPqqHHa6hXuZ2XKp9iqRqt9qL9XLOVV4r7UmvbR1j03yu9l/OmclPmMNJGKpwRQ7P56F49j0R++nzmc8e66jDcSbe+M2+csb39sKb9LdyJpShfcX51jPr8rnKX/E7JQrXFI5tsuF7a9qovmVKf3+H4/v7rPqX1mvqcC2r5lH1LZv2Sjyr0ffRPI9JHJg8nt+F8FycPN59qs6JGUspxAxj7DsYewq/c2JOg2VpDjqnJ0fy/xvTXZLWer/GUMY9SPXbT17DD9lR3rg6h/sXr/8A0lnK3kA4AAA=
+   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
   </data>
  </layer>
  <layer name="door" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2aWw6CMBBFcQXG/S/HdZEYP0yUMLTTeXinveeLQGkGOF5L6bYRQjLYL47db2llpPGY8JpW5MpbqW1lnzXe0nEbkice+yVv98bxs7bf/UvbrXqikVz87O9xlT7PzQz5rOHo8yrXjYJm7HA8ZzSf/8lIfmbnM8q9In7wma4DnzXpYRVPLGOMCCL7fmMZY0TAd0ZCSBWi8xkN5vMvPfO3UnsN9IygguxmRG3IbiLXhsLIN2hrP2d4vVM/G/14fYOmWzWoNleD/P8RAX9HNiy+ZMzvefts8SVjfo8+y1hdQMhGTQ1WFxBcQqhhdbzWwmnW8s1Kr8/Vxo3enHkRdU9aDvasEbXWlplzzNRYejNN65XFseO5nrlbwacKNSLxAmrvON5AOAAA
+   H4sIAAAAAAAACu3XQQ6AIAxEUT2fp/UMxnsZ90iAMKF2/ttiEEopsG0AACCKa189AgCznGb7+Tabrxr5g2gUORn53kNOooTa7K1n/SPXt1asP4A/y1CHZ3CIQ+b7WWlumc/nzHPLxKGuoN3RkA8t3wAA4HzHcJ57NOr35dv/yD9UOaJ+g739887zU8vxUtvovlDqGU8tx0tt6n0xEs8/71OXOsNdQe8rxsQes63IqWjnrJrDuTDDA6EcMhhAOAAA
   </data>
  </layer>
  <layer name="creature" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3awQ2DMAyFYaSyRAdjiI7AmB2AXbhaap/kpxhI4P+OUYQ42I5jmCYAyFlfNXveiT3Ad/6//hHxs4l19Ry136Wev5jvD/SgKi+AHhDPuBP6ZwD45dbGeBdT97UWVTMTQFFxG+cSakahtPQYzDdwJ27uYFy9ncVHxB71GdFV8ZDJtUxPznwPbr/q1tVMjFXl0RH3UIylpQ/hfMeTxfoZ67bKqbgezwXyCK5MzMQ9Z37Lo0/GKDI9MPUZo8jUee59qBLjbTO/cbv/UQN4nh3uthsqQDgAAA==
+   H4sIAAAAAAAACu3avQ3CMBCG4QhnCZeRWImhMkYGomAAJCgyBlLKJMgIET7ZvvP7NHF5vvOPzkrXAfDk1peOoJxrw3MHgBo9Q+kI8rg3Ms9aPIzk+yyOczIyb89mavDRpU+PrVDvV889mbK+May5V9cgt9F4/N+03GtbX5vAuyNr2uLdjmOoNZRSPayyp6I/27P4Bue5bwKgw5uozuu0jn/J6xD2X+7g/wzkDwDM8Hjn8faTh6rfVfb6ta3n2uJRYY8BUImbc5L/EvPgDEdLFtX87ttAOAAA
   </data>
  </layer>
  <layer name="torches" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
+   H4sIAAAAAAAACu3VsQoAIAhAwejf+++mICJaJMK428RVnqUAAABwU6uxPfzEvQOZjYZpGUDMrqPaCgA5rD97nk87AAAAAADe6S5DuLZAOAAA
   </data>
  </layer>
  <layer name="webs" width="60" height="60">
@@ -135,7 +135,25 @@
    H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAADwZkvEChtAOAAA
   </data>
  </layer>
- <objectgroup name="messages"/>
+ <objectgroup name="messages">
+  <object id="48" name="REWARD" x="288" y="144" width="48" height="48">
+   <properties>
+    <property name="item1" value="MAGE MASHER"/>
+    <property name="item2" value="DAGGER OF SPEED"/>
+   </properties>
+  </object>
+  <object id="49" name="REWARD" x="1680" y="480" width="48" height="48">
+   <properties>
+    <property name="item1" value="LORDS GARB"/>
+   </properties>
+  </object>
+  <object id="50" name="REWARD" x="1680" y="864" width="48" height="48">
+   <properties>
+    <property name="item1" value="JEWELED AMULET"/>
+    <property name="item2" value="RING OF HEALING"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="people">
   <object id="4" name="High Priest" type="MONSTER" x="912" y="2640" width="48" height="48">
    <properties>
@@ -149,43 +167,31 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="6" name="Chimera" type="MONSTER" x="1200" y="2640" width="48" height="48">
+  <object id="6" name="Chimera" type="MONSTER" x="288" y="2256" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="8" name="Vampire" type="MONSTER" x="1632" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="10" name="Bleeb" type="MONSTER" x="1920" y="2640" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="17" name="High Priest" type="MONSTER" x="2064" y="2496" width="48" height="48">
+  <object id="17" name="High Priest" type="MONSTER" x="1584" y="1824" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="20" name="Chimera" type="MONSTER" x="2496" y="2496" width="48" height="48">
+  <object id="20" name="Chimera" type="MONSTER" x="2496" y="2688" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="24" name="Chimera" type="MONSTER" x="2064" y="2352" width="48" height="48">
+  <object id="24" name="Chimera" type="MONSTER" x="2064" y="2400" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="27" name="Arch Mage" type="MONSTER" x="2496" y="2352" width="48" height="48">
+  <object id="27" name="Arch Mage" type="MONSTER" x="2352" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
@@ -197,67 +203,49 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="29" name="Arch Mage" type="MONSTER" x="1056" y="2208" width="48" height="48">
+  <object id="29" name="Arch Mage" type="MONSTER" x="1344" y="1440" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="30" name="High Priest" type="MONSTER" x="1200" y="2208" width="48" height="48">
+  <object id="30" name="High Priest" type="MONSTER" x="1104" y="1440" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="37" name="Vampire" type="MONSTER" x="2496" y="2208" width="48" height="48">
+  <object id="37" name="Vampire" type="MONSTER" x="2592" y="2304" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="38" name="Chimera" type="MONSTER" x="1632" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Chimera"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="39" name="Vampire" type="MONSTER" x="1776" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="40" name="High Master" type="MONSTER" x="1920" y="2064" width="48" height="48">
+  <object id="40" name="High Master" type="MONSTER" x="2112" y="1824" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="42" name="High Master" type="MONSTER" x="2208" y="2064" width="48" height="48">
+  <object id="42" name="High Master" type="MONSTER" x="2208" y="1824" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="43" name="Bleeb" type="MONSTER" x="2352" y="2064" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="44" name="Arch Mage" type="MONSTER" x="2496" y="2064" width="48" height="48">
+  <object id="44" name="Arch Mage" type="MONSTER" x="2304" y="1824" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="46" name="High Master" type="MONSTER" x="336" y="1920" width="48" height="48">
+  <object id="46" name="High Master" type="MONSTER" x="384" y="1920" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="48" name="Arch Mage" type="MONSTER" x="1056" y="1920" width="48" height="48">
+  <object id="48" name="Arch Mage" type="MONSTER" x="1440" y="1824" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
@@ -269,219 +257,165 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="53" name="Bleeb" type="MONSTER" x="912" y="1776" width="48" height="48">
+  <object id="53" name="Bleeb" type="MONSTER" x="1728" y="2304" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="54" name="Vampire" type="MONSTER" x="1488" y="1776" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="57" name="Arch Mage" type="MONSTER" x="1920" y="1776" width="48" height="48">
+  <object id="57" name="Arch Mage" type="MONSTER" x="2256" y="1440" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="62" name="Chimera" type="MONSTER" x="2784" y="1776" width="48" height="48">
+  <object id="62" name="Chimera" type="MONSTER" x="2640" y="1296" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="65" name="Arch Mage" type="MONSTER" x="480" y="1632" width="48" height="48">
+  <object id="65" name="Arch Mage" type="MONSTER" x="624" y="2352" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="71" name="High Master" type="MONSTER" x="1920" y="1632" width="48" height="48">
+  <object id="71" name="High Master" type="MONSTER" x="1872" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="73" name="Chimera" type="MONSTER" x="2352" y="1632" width="48" height="48">
+  <object id="73" name="Chimera" type="MONSTER" x="2496" y="1200" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="75" name="Vampire" type="MONSTER" x="2784" y="1632" width="48" height="48">
+  <object id="75" name="Vampire" type="MONSTER" x="2640" y="1488" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="76" name="High Master" type="MONSTER" x="48" y="1488" width="48" height="48">
+  <object id="76" name="High Master" type="MONSTER" x="1824" y="1056" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="79" name="Bleeb" type="MONSTER" x="1776" y="1488" width="48" height="48">
+  <object id="79" name="Bleeb" type="MONSTER" x="1920" y="1536" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="84" name="Arch Mage" type="MONSTER" x="2784" y="1488" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="95" name="Bleeb" type="MONSTER" x="2784" y="1344" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="96" name="Chimera" type="MONSTER" x="1056" y="1200" width="48" height="48">
+  <object id="96" name="Chimera" type="MONSTER" x="1248" y="816" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="98" name="Bleeb" type="MONSTER" x="1344" y="1200" width="48" height="48">
+  <object id="98" name="Bleeb" type="MONSTER" x="1632" y="864" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="99" name="Bleeb" type="MONSTER" x="1488" y="1200" width="48" height="48">
+  <object id="99" name="Bleeb" type="MONSTER" x="1680" y="1008" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="101" name="High Priest" type="MONSTER" x="2064" y="1200" width="48" height="48">
+  <object id="101" name="High Priest" type="MONSTER" x="1872" y="960" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="105" name="Arch Mage" type="MONSTER" x="2784" y="1200" width="48" height="48">
+  <object id="105" name="Arch Mage" type="MONSTER" x="2304" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="106" name="High Priest" type="MONSTER" x="624" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="109" name="Arch Mage" type="MONSTER" x="1200" y="1056" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="110" name="Chimera" type="MONSTER" x="1344" y="1056" width="48" height="48">
+  <object id="110" name="Chimera" type="MONSTER" x="1392" y="816" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="117" name="High Master" type="MONSTER" x="2352" y="1056" width="48" height="48">
+  <object id="117" name="High Master" type="MONSTER" x="2352" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="119" name="High Master" type="MONSTER" x="2784" y="1056" width="48" height="48">
+  <object id="119" name="High Master" type="MONSTER" x="2448" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="120" name="High Priest" type="MONSTER" x="2208" y="768" width="48" height="48">
+  <object id="120" name="High Priest" type="MONSTER" x="1824" y="672" width="48" height="48">
    <properties>
     <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="121" name="Vampire" type="MONSTER" x="2208" y="624" width="48" height="48">
+  <object id="121" name="Vampire" type="MONSTER" x="1728" y="624" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="122" name="Vampire" type="MONSTER" x="2208" y="480" width="48" height="48">
-   <properties>
-    <property name="creature" value="Vampire"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="123" name="Bleeb" type="MONSTER" x="192" y="336" width="48" height="48">
+  <object id="123" name="Bleeb" type="MONSTER" x="240" y="192" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="124" name="Arch Mage" type="MONSTER" x="480" y="336" width="48" height="48">
+  <object id="124" name="Arch Mage" type="MONSTER" x="720" y="768" width="48" height="48">
    <properties>
     <property name="creature" value="Arch Mage"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="125" name="Vampire" type="MONSTER" x="768" y="336" width="48" height="48">
+  <object id="125" name="Vampire" type="MONSTER" x="192" y="576" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="126" name="Bleeb" type="MONSTER" x="1056" y="336" width="48" height="48">
+  <object id="126" name="Bleeb" type="MONSTER" x="384" y="240" width="48" height="48">
    <properties>
     <property name="creature" value="Bleeb"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="127" name="Vampire" type="MONSTER" x="1344" y="336" width="48" height="48">
+  <object id="127" name="Vampire" type="MONSTER" x="288" y="528" width="48" height="48">
    <properties>
     <property name="creature" value="Vampire"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="129" name="Bleeb" type="MONSTER" x="2208" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Bleeb"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="130" name="Chimera" type="MONSTER" x="2496" y="336" width="48" height="48">
+  <object id="130" name="Chimera" type="MONSTER" x="1392" y="912" width="48" height="48">
    <properties>
     <property name="creature" value="Chimera"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="131" name="Arch Mage" type="MONSTER" x="2784" y="336" width="48" height="48">
-   <properties>
-    <property name="creature" value="Arch Mage"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="132" name="High Master" type="MONSTER" x="1344" y="192" width="48" height="48">
+  <object id="132" name="High Master" type="MONSTER" x="672" y="864" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="135" name="High Master" type="MONSTER" x="1776" y="192" width="48" height="48">
+  <object id="135" name="High Master" type="MONSTER" x="864" y="672" width="48" height="48">
    <properties>
     <property name="creature" value="High Master"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="136" name="High Priest" type="MONSTER" x="2208" y="192" width="48" height="48">
-   <properties>
-    <property name="creature" value="High Priest"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -511,143 +445,92 @@
   </object>
  </objectgroup>
  <objectgroup name="rooms">
-  <object id="1" x="0" y="2448">
-   <polygon points="0,0 192,0 192,432 0,432"/>
+  <object id="51" name="Proving Grounds of the Mad Overlord Level 5" x="2592" y="1728">
+   <polygon points="0,0 0,432 -240,432 -240,528 -384,528 -384,432 -672,432 -672,0"/>
   </object>
-  <object id="2" x="288" y="2448">
-   <polygon points="0,0 -288,0 -288,-288 288,-288 288,-144 0,-144"/>
+  <object id="52" name="Proving Grounds of the Mad Overlord Level 5" x="2784" y="1392">
+   <polygon points="0,0 0,288 -240,288 -240,384 -384,384 -384,144 -432,144 -432,0"/>
   </object>
-  <object id="3" x="192" y="2880">
-   <polygon points="0,0 0,-432 48,-432 48,-576 432,-576 432,-144 576,-144 576,0"/>
+  <object id="53" name="Proving Grounds of the Mad Overlord Level 5" x="2112" y="1344">
+   <polygon points="0,0 288,0 288,240 0,240"/>
   </object>
-  <object id="4" x="864" y="2160">
-   <polygon points="0,0 -288,0 -288,624 0,624"/>
+  <object id="54" name="Proving Grounds of the Mad Overlord Level 5" x="2400" y="1056">
+   <polygon points="0,0 384,0 384,336 192,336 192,384 0,384"/>
   </object>
-  <object id="5" x="1008" y="2592">
-   <polygon points="0,0 0,192 -192,192 -192,0"/>
+  <object id="55" name="Proving Grounds of the Mad Overlord Level 5" x="2592" y="1056">
+   <polygon points="0,0 0,-336 -240,-336 -240,-384 -288,-384 -288,-432 -384,-432 -384,0"/>
   </object>
-  <object id="6" x="1152" y="2784">
-   <polygon points="0,0 0,-192 -192,-192 -192,0"/>
+  <object id="56" name="Proving Grounds of the Mad Overlord Level 5" x="1632" y="288">
+   <polygon points="0,0 0,528 240,528 240,576 384,576 384,192 336,192 336,48 144,48 144,0"/>
   </object>
-  <object id="7" x="1296" y="2784">
-   <polygon points="0,0 0,-192 -192,-192 -192,0"/>
+  <object id="57" name="Proving Grounds of the Mad Overlord Level 5" x="1728" y="1296">
+   <polygon points="0,0 288,0 288,-480 0,-480"/>
   </object>
-  <object id="8" x="1344" y="2160">
-   <polygon points="0,0 -528,0 -528,432 0,432"/>
+  <object id="58" name="Proving Grounds of the Mad Overlord Level 5" x="2016" y="1296">
+   <polygon points="0,0 144,0 144,96 288,96 288,-288 -48,-288 -48,0"/>
   </object>
-  <object id="9" x="144" y="1440">
-   <polygon points="0,0 576,0 576,624 0,624"/>
+  <object id="59" name="Proving Grounds of the Mad Overlord Level 5" x="1584" y="816">
+   <polygon points="0,0 192,0 192,384 0,384"/>
   </object>
-  <object id="10" x="816" y="1440">
-   <polygon points="0,0 0,576 528,576 528,0"/>
+  <object id="60" name="Proving Grounds of the Mad Overlord Level 5" x="1680" y="672">
+   <polygon points="0,0 0,144 -48,144 -48,432 -720,432 -720,384 -768,384 -768,0"/>
   </object>
-  <object id="11" x="1488" y="1440">
-   <polygon points="0,0 -192,0 -192,1296 -720,1296 -720,1440 528,1440 528,1296 0,1296"/>
+  <object id="61" name="Proving Grounds of the Mad Overlord Level 5" x="960" y="1344">
+   <polygon points="0,0 0,240 432,240 432,336 576,336 576,0"/>
   </object>
-  <object id="12" x="0" y="1584">
-   <polygon points="0,0 192,0 192,432 672,432 672,144 864,144 864,432 1296,432 1344,432 1344,576 0,576"/>
+  <object id="62" name="Proving Grounds of the Mad Overlord Level 5" x="1152" y="1584">
+   <polygon points="0,0 0,624 240,624 240,480 144,480 144,0"/>
   </object>
-  <object id="13" x="0" y="1584">
-   <polygon points="0,0 0,-576 720,-576 720,-144 192,-144 192,0"/>
+  <object id="63" name="Proving Grounds of the Mad Overlord Level 5" x="1824" y="1632">
+   <polygon points="0,0 0,480 -288,480 -288,528 -432,528 -432,480 -576,480 -576,0"/>
   </object>
-  <object id="14" x="0" y="816">
-   <polygon points="0,0 192,0 192,240 0,240"/>
+  <object id="64" name="Proving Grounds of the Mad Overlord Level 5" x="1344" y="2544">
+   <polygon points="0,0 0,-432 288,-432 288,48 0,48"/>
   </object>
-  <object id="15" x="1632" y="864">
-   <polygon points="0,0 0,144 -768,144 -768,864 -960,864 -960,144 -1440,144 -1440,0"/>
+  <object id="65" name="Proving Grounds of the Mad Overlord Level 5" x="1920" y="2208">
+   <polygon points="0,0 0,240 -288,240 -288,0"/>
   </object>
-  <object id="16" x="864" y="1008">
-   <polygon points="0,0 0,432 624,432 624,0"/>
+  <object id="66" name="Proving Grounds of the Mad Overlord Level 5" x="1920" y="2304">
+   <polygon points="0,0 336,0 336,240 192,240 192,336 48,336 48,240 0,240 0,144 -48,144 -48,0"/>
   </object>
-  <object id="17" x="1008" y="576">
-   <polygon points="0,0 0,288 -1008,288 -1008,0"/>
+  <object id="67" name="Proving Grounds of the Mad Overlord Level 5" x="1632" y="2592">
+   <polygon points="0,0 0,144 -192,144 -192,240 624,240 624,-48 480,-48 480,0"/>
   </object>
-  <object id="18" x="1632" y="576">
-   <polygon points="0,0 0,288 -624,288 -624,0"/>
+  <object id="68" name="Proving Grounds of the Mad Overlord Level 5" x="2688" y="2592">
+   <polygon points="0,0 0,240 -480,240 -480,0 -432,0 -432,-48 -288,-48 -288,0"/>
   </object>
-  <object id="19" x="96" y="288">
-   <polygon points="0,0 0,192 240,192 240,0"/>
+  <object id="69" name="Proving Grounds of the Mad Overlord Level 5" x="2784" y="2208">
+   <polygon points="0,0 0,240 -288,240 -288,144 -336,144 -336,0"/>
   </object>
-  <object id="20" x="384" y="288">
-   <polygon points="0,0 0,192 240,192 240,0"/>
+  <object id="70" name="Proving Grounds of the Mad Overlord Level 5" x="2496" y="2544">
+   <polygon points="0,0 -96,0 -96,96 -240,96 -240,0 -288,0 -288,-336 0,-336"/>
   </object>
-  <object id="21" x="672" y="288">
-   <polygon points="0,0 0,192 240,192 240,0"/>
+  <object id="71" name="Proving Grounds of the Mad Overlord Level 5" x="1824" y="1440">
+   <polygon points="0,0 288,0 288,336 96,336 96,240 0,240"/>
   </object>
-  <object id="22" x="960" y="288">
-   <polygon points="0,0 0,192 240,192 240,0"/>
+  <object id="72" name="Proving Grounds of the Mad Overlord Level 5" x="768" y="2400">
+   <polygon points="0,0 0,144 -48,144 -48,336 0,336 0,384 144,384 144,336 576,336 576,96 624,96 624,0"/>
   </object>
-  <object id="23" x="1584" y="288">
-   <polygon points="0,0 144,0 144,576 1296,576 1296,720 0,720"/>
+  <object id="73" name="Proving Grounds of the Mad Overlord Level 5" x="912" y="2832">
+   <polygon points="0,0 0,-96 -144,-96 -144,-144 -768,-144 -768,0"/>
   </object>
-  <object id="24" x="2448" y="1008">
-   <polygon points="0,0 0,864 -1008,864 -1008,0"/>
+  <object id="74" name="Proving Grounds of the Mad Overlord Level 5" x="192" y="2880">
+   <polygon points="0,0 -192,0 -192,-288 384,-288 384,-336 528,-336 528,-192 0,-192"/>
   </object>
-  <object id="25" x="2544" y="1008">
-   <polygon points="0,0 0,288 336,288 336,0"/>
+  <object id="75" name="Proving Grounds of the Mad Overlord Level 5" x="432" y="2016">
+   <polygon points="0,0 336,0 336,528 288,528 288,576 144,576 144,528 48,528 48,288 0,288"/>
   </object>
-  <object id="26" x="2544" y="1584">
-   <polygon points="0,0 336,0 336,-288 0,-288"/>
+  <object id="76" name="Proving Grounds of the Mad Overlord Level 5" x="192" y="1728">
+   <polygon points="0,0 0,672 288,672 288,0"/>
   </object>
-  <object id="27" x="2544" y="1872">
-   <polygon points="0,0 192,0 192,48 336,48 336,-288 0,-288"/>
+  <object id="77" name="Proving Grounds of the Mad Overlord Level 5" x="480" y="576">
+   <polygon points="0,0 0,432 480,432 480,0"/>
   </object>
-  <object id="28" x="2304" y="576">
-   <polygon points="0,0 0,288 432,288 432,336 576,336 576,0"/>
+  <object id="78" name="Proving Grounds of the Mad Overlord Level 5" x="96" y="384">
+   <polygon points="0,0 0,336 432,336 432,192 384,192 384,0"/>
   </object>
-  <object id="29" x="1680" y="576">
-   <polygon points="0,0 672,0 672,288 0,288"/>
-  </object>
-  <object id="30" x="2352" y="432">
-   <polygon points="0,0 0,144 -672,144 -672,0"/>
-  </object>
-  <object id="31" x="2352" y="288">
-   <polygon points="0,0 0,144 -672,144 -672,0"/>
-  </object>
-  <object id="32" x="2880" y="144">
-   <polygon points="0,0 -432,0 -432,288 -576,288 -576,432 0,432"/>
-  </object>
-  <object id="33" x="1440" y="1872">
-   <polygon points="0,0 0,144 1248,144 1248,864 528,864 528,1008 1440,1008 1440,0 1152,0 1152,-864 960,-864 960,0"/>
-  </object>
-  <object id="34" x="1584" y="2016">
-   <polygon points="0,0 -144,0 -144,720 144,720 144,432 0,432"/>
-  </object>
-  <object id="35" x="2016" y="2016">
-   <polygon points="0,0 0,144 48,144 48,240 0,240 0,432 -144,432 -144,480 -288,480 -288,432 -432,432 -432,0"/>
-  </object>
-  <object id="36" x="2016" y="2448">
-   <polygon points="0,0 0,336 -336,336 -336,0"/>
-  </object>
-  <object id="37" x="2448" y="2448">
-   <polygon points="0,0 -480,0 -480,192 0,192"/>
-  </object>
-  <object id="38" x="2640" y="2448">
-   <polygon points="0,0 -240,0 -240,192 0,192"/>
-  </object>
-  <object id="39" x="2640" y="2304">
-   <polygon points="0,0 -240,0 -240,144 0,144"/>
-  </object>
-  <object id="40" x="2640" y="2160">
-   <polygon points="0,0 -240,0 -240,144 0,144"/>
-  </object>
-  <object id="41" x="2640" y="2016">
-   <polygon points="0,0 -240,0 -240,144 0,144"/>
-  </object>
-  <object id="42" x="2016" y="2016">
-   <polygon points="0,0 0,432 432,432 432,0"/>
-  </object>
-  <object id="43" x="2736" y="2016">
-   <polygon points="0,0 -144,0 -144,576 -768,576 -768,720 0,720"/>
-  </object>
-  <object id="44" x="2880" y="0">
-   <polygon points="0,0 0,144 -384,144 -384,480 -576,480 -576,144 -2880,144 -2880,0"/>
-  </object>
-  <object id="45" x="1296" y="144">
-   <polygon points="0,0 0,432 288,432 288,144 1056,144 1056,0"/>
-  </object>
-  <object id="47" x="0" y="144">
-   <polygon points="0,0 0,432 1344,432 1344,288 144,288 144,144 1152,144 1152,288 1344,288 1344,0"/>
+  <object id="79" name="Proving Grounds of the Mad Overlord Level 5" x="192" y="96">
+   <polygon points="0,0 0,288 48,288 48,336 192,336 192,288 288,288 288,0"/>
   </object>
  </objectgroup>
 </map>

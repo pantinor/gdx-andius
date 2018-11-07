@@ -149,3 +149,31 @@ marker_white
   orig: 24, 24
   offset: 0, 0
   index: 2
+castle_gray
+  rotate: false
+  xy: 240, 240
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0
+castle_gray
+  rotate: false
+  xy: 264, 240
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 1
+castle_gray
+  rotate: false
+  xy: 288, 240
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 2
+castle_gray
+  rotate: false
+  xy: 312, 240
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 3

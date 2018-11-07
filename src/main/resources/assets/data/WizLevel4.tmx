@@ -136,26 +136,26 @@
   </data>
  </layer>
  <objectgroup name="messages">
-  <object id="3" name="79" type="A sign on the door reads: monster allocation center" x="1488" y="2640" width="48" height="48">
+  <object id="3" name="79" type="A sign on the door reads: Monster Allocation Center" x="1488" y="2640" width="48" height="48">
    <properties>
     <property name="itemRequired" value="BLUE RIBBON"/>
    </properties>
   </object>
-  <object id="10" name="77" type="A sign on the door reads: treasure repository." x="1488" y="2496" width="48" height="48"/>
-  <object id="52" name="92" type="In this 10 by 10 room, you note a large semi-circular desk. upon it are the remains of what might have been scrying glasses and amulets of summoning and other artifacts of control and knowledge. unfortunately, they all seem to have been destroyed beyond repair.  as the party entered the room, a sliding panel on the left wall slammed shut. shortly after, it glowed a pale blue. no member of the party was able to pry it open.      then, the door on the opposite side of the room begins to glow a bright orange, seeming to beckon to the party to come.  as the party turns about, they notice the door which they had used has disappeared." x="1632" y="1344" width="48" height="48">
+  <object id="10" name="77" type="A sign on the door reads: Treasure Repository" x="1488" y="2496" width="48" height="48"/>
+  <object id="52" name="92" type="In this 10 by 10 room, you note a large semi-circular desk. upon it are the remains of what might have been scrying glasses and amulets of summoning and other artifacts of control and knowledge. Unfortunately, they all seem to have been destroyed beyond repair.  as the party entered the room, a sliding panel on the left wall slammed shut. Shortly after, it glowed a pale blue. no member of the party was able to pry it open. Then, the door on the opposite side of the room begins to glow a bright orange, seeming to beckon to the party to come. As the party turns about, they notice the door which they had used has disappeared." x="1632" y="1344" width="48" height="48">
    <properties>
     <property name="itemObtained" value="BLUE RIBBON"/>
    </properties>
   </object>
-  <object id="54" name="84" type="Everybody in the party passes out!    after a time, the party comes to. feeling much weakened, the party finds themselves outside the door they tried to enter." x="1632" y="1200" width="48" height="48"/>
-  <object id="58" name="111" type="As the party enters the room, the door slams shut, glows bright orange, and disappears. A door appears to the right. A voice, coming from no apparent direction can be heard. It says:  congratulations, my loyal and worthy subjects. Today you have served me well and truly proven yourself worthy of the quest you are now to undertake. Several years ago, an amulet was stolen from the treasury by an evil wizard who is purported to be in the dungeon immediately below where you now stand. This amulet has powers which we are now in dire need of. It is your quest to find this amulet and retrieve it from this wizard. In recognition of your great deed today, I will give you a blue ribbon, which may be used to access the level transporter on this floor. Without it, the party would be unable to enter the room in which it lies. Go now, and god speed in your quest!" x="2496" y="1056" width="48" height="48">
+  <object id="54" name="84" type="Everybody in the party passes out!|After a time, the party comes to. FSeeling much weakened, the party finds themselves outside the door they tried to enter." x="1632" y="1200" width="48" height="48"/>
+  <object id="58" name="111" type="As the party enters the room, the door slams shut, glows bright orange, and disappears. A door appears to the right. A voice, coming from no apparent direction can be heard. It says:  congratulations, my loyal and worthy subjects. Today you have served me well and truly proven yourself worthy of the quest you are now to undertake. Several years ago, an amulet was stolen from the treasury by an evil wizard who is purported to be in the dungeon immediately below where you now stand. This amulet has powers which we are now in dire need of. It is your quest to find this amulet and retrieve it from this wizard. In recognition of your great deed today, I will give you a BLUE RIBBON which may be used to access the level transporter on this floor. Without it, the party would be unable to enter the room in which it lies. Go now, and god speed in your quest!" x="2496" y="1056" width="48" height="48">
    <properties>
     <property name="itemRequired" value="STATUETTE BEAR"/>
    </properties>
   </object>
-  <object id="64" name="63" type="A sign on the door reads: *** testing grounds control center ***  this area is strictly off-limits. *** do not enter ***" x="1488" y="768" width="48" height="48"/>
+  <object id="64" name="63" type="A sign on the door reads: *** testing grounds control center ***|this area is strictly off-limits. *** do not enter ***" x="1488" y="768" width="48" height="48"/>
   <object id="69" name="71" type="Suddenly, a loud penetrating clanging of bells can be heard. There is a sudden silence as the bells stop, followed by the clanking and tromping of guardian monsters. The party gets the idea that they are in big trouble!" x="1200" y="624" width="48" height="48"/>
-  <object id="70" name="67" type="A sign on the door reads: *** testing grounds control center ***   this area is strictly off-limits.  *** do not enter ***" x="1488" y="624" width="48" height="48"/>
+  <object id="70" name="67" type="A sign on the door reads: *** testing grounds control center *** |this area is strictly off-limits. *** do not enter ***" x="1488" y="624" width="48" height="48"/>
   <object id="71" name="71" type="Suddenly, a loud penetrating clanging of bells can be heard. There is a sudden silence as the bells stop, followed by the clanking and tromping of guardian monsters. The party gets the idea that they are in big trouble!" x="1776" y="624" width="48" height="48"/>
   <object id="20" name="REWARD" type="A dusty mound of items." x="1824" y="720" width="48" height="48">
    <properties>
@@ -315,8 +315,9 @@
   </object>
   <object id="43" name="ELEVATOR" x="1488" y="1632" width="48" height="48">
    <properties>
-    <property name="dx" value="31"/>
-    <property name="dy" value="34"/>
+    <property name="UP" value="WIZARDRY3"/>
+    <property name="ux" value="31"/>
+    <property name="uy" value="34"/>
    </properties>
   </object>
   <object id="80" name="WIZARDRY3" x="1488" y="192" width="48" height="48">
