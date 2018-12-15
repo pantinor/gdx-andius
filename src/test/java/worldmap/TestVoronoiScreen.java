@@ -19,12 +19,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.ConvexHull;
 import com.badlogic.gdx.math.DelaunayTriangulator;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.ShortArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 public class TestVoronoiScreen extends MyScreenAdapter {
 
@@ -48,11 +54,16 @@ public class TestVoronoiScreen extends MyScreenAdapter {
 
     boolean drawCircumcircle = false,
             drawCircumcenter = false,
-            drawPoints = true,
-            drawDelaunay = true,
+            drawPoints = false,
+            drawDelaunay = false,
             drawVoronoi = true,
             drawMidpoints = false,
             drawHull = false;
+
+    List<Float[]> pts;
+    List<Cell> cells;
+    List<Manor> manors;
+    List<State> states;
 
     public TestVoronoiScreen() {
 
@@ -67,15 +78,40 @@ public class TestVoronoiScreen extends MyScreenAdapter {
     }
 
     private void generateNewPoints(int numPoints) {
-        int pad = 200;//distance away from edge of screen
-        points = new FloatArray();
-        for (int i = 0; i < numPoints * 2; i += 2) {
-            float x = MathUtils.random(pad, Gdx.graphics.getWidth() - pad);
-            float y = MathUtils.random(pad, Gdx.graphics.getHeight() - pad);
-            points.add(x);
-            points.add(y);
+
+        try {
+            FileInputStream fstream = new FileInputStream("target/classes/assets/azgaarMaps/fantasy_map_1542492422343.map");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+            String sparams = br.readLine();
+            String spoints = br.readLine();
+            String scells = br.readLine();
+            String smanors = br.readLine();
+            String sstates = br.readLine();
+
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+
+            pts = gson.fromJson(spoints, new TypeToken<java.util.List<Float[]>>() {
+            }.getType());
+            cells = gson.fromJson(scells, new TypeToken<java.util.List<Cell>>() {
+            }.getType());
+            manors = gson.fromJson(smanors, new TypeToken<java.util.List<Manor>>() {
+            }.getType());
+            states = gson.fromJson(sstates, new TypeToken<java.util.List<State>>() {
+            }.getType());
+
+            points = new FloatArray();
+            for (Float[] f : pts) {
+                points.add(f[0]);
+                points.add(f[1]);
+            }
+
+            calculateDelaunay();
+
+        } catch (Exception e) {
+
         }
-        calculateDelaunay();
     }
 
     private void calculateDelaunay() {
@@ -185,11 +221,30 @@ public class TestVoronoiScreen extends MyScreenAdapter {
 
         updateControls();
 
-        drawMenu();
+        //drawMenu();
     }
 
     private void drawStuff() {
         shape.begin(ShapeType.Line);
+
+        for (Cell c : cells) {
+            if (true) {
+                Color col = Color.NAVY;
+                if (c.ctype == null) {
+                    col = Color.GREEN;
+                } else if (c.ctype == 1) {
+                    col = Color.LIME;
+                } else if (c.ctype == 2) {
+                    col = Color.FOREST;
+                } else if (c.ctype == -2) {
+                    col = Color.ROYAL;
+                } else if (c.ctype == -1) {
+                    col = Color.BLUE;
+                }
+                shape.setColor(col);
+                shape.circle(c.data[0], c.data[1], 3);
+            }
+        }
 
         int pSize = 6;
         for (DelaunayCell d : dCells) {
@@ -220,17 +275,17 @@ public class TestVoronoiScreen extends MyScreenAdapter {
                 drawCellEdge(d, d.nBC);
             }
 
-            if (!hullPoly.contains(d.circumcenter)) {
-                shape.setColor(Color.MAGENTA);
-            } else {
-                shape.setColor(Color.GREEN);
-            }
-            if (drawCircumcircle) {
-                shape.circle(d.circumcenter.x, d.circumcenter.y, d.circumradius);
-            }
-            if (drawCircumcenter) {
-                shape.circle(d.circumcenter.x, d.circumcenter.y, pSize);
-            }
+//            if (!hullPoly.contains(d.circumcenter)) {
+//                shape.setColor(Color.MAGENTA);
+//            } else {
+//                shape.setColor(Color.GREEN);
+//            }
+//            if (drawCircumcircle) {
+//                shape.circle(d.circumcenter.x, d.circumcenter.y, d.circumradius);
+//            }
+//            if (drawCircumcenter) {
+//                shape.circle(d.circumcenter.x, d.circumcenter.y, pSize);
+//            }
         }
 
         if (drawHull) {
@@ -269,35 +324,25 @@ public class TestVoronoiScreen extends MyScreenAdapter {
     }
 
     private void updateControls() {
+
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-            generateNewPoints(3);
+
         }
 
-        if (Gdx.input.justTouched() && Gdx.input.isButtonPressed(Buttons.LEFT)) {
-            points.add(Gdx.input.getX());
-            points.add(Gdx.graphics.getHeight() - Gdx.input.getY());
-            calculateDelaunay();
+        if (Gdx.input.isButtonPressed(Keys.LEFT)) {
+            cam.position.x -= 100;
         }
 
-        if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-            int x = Gdx.input.getX();
-            int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            boolean mod = false;
+        if (Gdx.input.isButtonPressed(Keys.RIGHT)) {
+            cam.position.x += 100;
+        }
 
-            for (int i = 0; i < points.size && !mod; i += 2) {
-                float px = points.get(i);
-                float py = points.get(i + 1);
+        if (Gdx.input.isButtonPressed(Keys.UP)) {
+            cam.position.y -= 100;
+        }
 
-                if (Vector2.dst(x, y, px, py) < 20) {
-                    points.set(i, x);
-                    points.set(i + 1, y);
-                    mod = true;
-                }
-            }
-
-            if (mod) {
-                calculateDelaunay();
-            }
+        if (Gdx.input.isButtonPressed(Keys.DOWN)) {
+            cam.position.y += 100;
         }
 
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1)) {
@@ -436,6 +481,51 @@ public class TestVoronoiScreen extends MyScreenAdapter {
         dy = b.y - yc;
         float radius = (float) Math.sqrt(dx * dx + dy * dy);
         return new Vector3(xc, yc, radius);
+    }
+
+    private class Cell {
+
+        Integer index;
+        Float[] data;
+        Integer height;
+        Integer ctype;
+        Integer fn;
+        Integer[] neighbors;
+        Integer harbor;
+        Float area;
+        Float flux;
+        Integer haven;
+        Float score;
+        String region;
+        Integer culture;
+        Float pop;
+        Integer path;
+    }
+
+    private class Manor {
+
+        Integer i;
+        Integer cell;
+        Float x;
+        Float y;
+        Integer region;
+        Integer culture;
+        String name;
+        Float population;
+    }
+
+    private class State {
+
+        Integer i;
+        String color;
+        Float power;
+        Object capital;
+        String name;
+        Integer burgs;
+        Float urbanPopulation;
+        Integer cells;
+        Float ruralPopulation;
+        Float area;
     }
 
 }

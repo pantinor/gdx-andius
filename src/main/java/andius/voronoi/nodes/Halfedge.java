@@ -23,7 +23,7 @@ public final class Halfedge {
     public LR leftRight;
     public Vertex vertex;
     // the vertex's y-coordinate in the transformed Voronoi space V*
-    public double ystar;
+    public float ystar;
 
     public Halfedge(Edge edge, LR lr) {
         init(edge, lr);
@@ -70,7 +70,7 @@ public final class Halfedge {
     public boolean isLeftOf(Point p) {
         Site topSite;
         boolean rightOfSite, above, fast;
-        double dxp, dyp, dxs, t1, t2, t3, yl;
+        float dxp, dyp, dxs, t1, t2, t3, yl;
 
         topSite = edge.get_rightSite();
         rightOfSite = p.x > topSite.get_x();

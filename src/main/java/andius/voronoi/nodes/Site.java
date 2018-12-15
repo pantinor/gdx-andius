@@ -3,17 +3,42 @@ package andius.voronoi.nodes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Stack;
 
 public final class Site implements ICoord {
 
-    private static Stack<Site> _pool = new Stack();
+    private final static Stack<Site> _pool = new Stack();
 
-    public static Site create(Point p, int index, double weight) {
+    private int _siteIndex;
+    public ArrayList<Edge> _edges;
+    private ArrayList<LR> _edgeOrientations;
+    public Polygon region;
+    private Point _coord;
+    public Object cell;
+
+    final private static float EPSILON = .005f;
+    final private static int TOP = 1;
+    final private static int BOTTOM = 2;
+    final private static int LEFT = 4;
+    final private static int RIGHT = 8;
+
+    public Site(Point p, int index) {
+        init(p, index);
+    }
+
+    private Site init(Point p, int index) {
+        _coord = p;
+        _siteIndex = index;
+        _edges = new ArrayList();
+        return this;
+    }
+
+    public static Site create(Point p, int index) {
         if (_pool.size() > 0) {
-            return _pool.pop().init(p, index, weight);
+            return _pool.pop().init(p, index);
         } else {
-            return new Site(p, index, weight);
+            return new Site(p, index);
         }
     }
 
@@ -31,9 +56,6 @@ public final class Site implements ICoord {
      * sort sites on y, then x, coord also change each site's _siteIndex to
      * match its new position in the list so the _siteIndex can be used to
      * identify the site for nearest-neighbor queries
-     *
-     * haha "also" - means more than one responsibility...
-     *
      */
     private static double compare(Site s1, Site s2) {
         int returnValue = Voronoi.compareByYThenX(s1, s2);
@@ -57,47 +79,19 @@ public final class Site implements ICoord {
 
         return returnValue;
     }
-    final private static double EPSILON = .005;
 
     private static boolean closeEnough(Point p0, Point p1) {
         return Point.distance(p0, p1) < EPSILON;
     }
-    private Point _coord;
 
     @Override
     public Point get_coord() {
         return _coord;
     }
-    public double weight;
-    private int _siteIndex;
-    // the edges that define this Site's Voronoi region:
-    public ArrayList<Edge> _edges;
-    // which end of each edge hooks up with the previous edge in _edges:
-    private ArrayList<LR> _edgeOrientations;
-    // ordered list of points that define the region clipped to bounds:
-    private ArrayList<Point> _region;
-
-    public Site(Point p, int index, double weight) {
-        init(p, index, weight);
-    }
-
-    private Site init(Point p, int index, double weight) {
-        _coord = p;
-        _siteIndex = index;
-        this.weight = weight;
-        _edges = new ArrayList();
-        _region = null;
-        return this;
-    }
 
     @Override
     public String toString() {
         return "Site " + _siteIndex + ": " + get_coord();
-    }
-
-    private void move(Point p) {
-        clear();
-        _coord = p;
     }
 
     public void dispose() {
@@ -115,10 +109,7 @@ public final class Site implements ICoord {
             _edgeOrientations.clear();
             _edgeOrientations = null;
         }
-        if (_region != null) {
-            _region.clear();
-            _region = null;
-        }
+        region = null;
     }
 
     void addEdge(Edge edge) {
@@ -126,7 +117,6 @@ public final class Site implements ICoord {
     }
 
     public Edge nearestEdge() {
-        // _edges.sort(Edge.compareSitesDistances);
         Collections.sort(_edges, new Comparator<Edge>() {
             @Override
             public int compare(Edge o1, Edge o2) {
@@ -160,25 +150,23 @@ public final class Site implements ICoord {
         return null;
     }
 
-    ArrayList<Point> region(Rectangle clippingBounds) {
+    List<Point> region(Rectangle clippingBounds) {
         if (_edges == null || _edges.isEmpty()) {
-            return new ArrayList();
+            return null;
         }
         if (_edgeOrientations == null) {
             reorderEdges();
-            _region = clipToBounds(clippingBounds);
-            if ((new Polygon(_region)).winding() == Winding.CLOCKWISE) {
-                Collections.reverse(_region);
-            }
+            List<Point> pts = clipToBounds(clippingBounds);
+            region = new Polygon(pts);
+            return pts;
+        } else {
+            return null;
         }
-        return _region;
     }
 
     private void reorderEdges() {
-        //trace("_edges:", _edges);
         EdgeReorderer reorderer = new EdgeReorderer(_edges, Vertex.class);
         _edges = reorderer.get_edges();
-        //trace("reordered:", _edges);
         _edgeOrientations = reorderer.get_edgeOrientations();
         reorderer.dispose();
     }
@@ -230,18 +218,18 @@ public final class Site implements ICoord {
                 // (NOTE this will not be correct if the region should take up more than
                 // half of the bounds rect, for then we will have gone the wrong way
                 // around the bounds and included the smaller part rather than the larger)
-                int rightCheck = BoundsCheck.check(rightPoint, bounds);
-                int newCheck = BoundsCheck.check(newPoint, bounds);
-                double px, py;
-                if ((rightCheck & BoundsCheck.RIGHT) != 0) {
+                int rightCheck = boundsCheck(rightPoint, bounds);
+                int newCheck = boundsCheck(newPoint, bounds);
+                float px, py;
+                if ((rightCheck & RIGHT) != 0) {
                     px = bounds.right;
-                    if ((newCheck & BoundsCheck.BOTTOM) != 0) {
+                    if ((newCheck & BOTTOM) != 0) {
                         py = bounds.bottom;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.TOP) != 0) {
+                    } else if ((newCheck & TOP) != 0) {
                         py = bounds.top;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.LEFT) != 0) {
+                    } else if ((newCheck & LEFT) != 0) {
                         if (rightPoint.y - bounds.y + newPoint.y - bounds.y < bounds.height) {
                             py = bounds.top;
                         } else {
@@ -250,15 +238,15 @@ public final class Site implements ICoord {
                         points.add(new Point(px, py));
                         points.add(new Point(bounds.left, py));
                     }
-                } else if ((rightCheck & BoundsCheck.LEFT) != 0) {
+                } else if ((rightCheck & LEFT) != 0) {
                     px = bounds.left;
-                    if ((newCheck & BoundsCheck.BOTTOM) != 0) {
+                    if ((newCheck & BOTTOM) != 0) {
                         py = bounds.bottom;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.TOP) != 0) {
+                    } else if ((newCheck & TOP) != 0) {
                         py = bounds.top;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.RIGHT) != 0) {
+                    } else if ((newCheck & RIGHT) != 0) {
                         if (rightPoint.y - bounds.y + newPoint.y - bounds.y < bounds.height) {
                             py = bounds.top;
                         } else {
@@ -267,15 +255,15 @@ public final class Site implements ICoord {
                         points.add(new Point(px, py));
                         points.add(new Point(bounds.right, py));
                     }
-                } else if ((rightCheck & BoundsCheck.TOP) != 0) {
+                } else if ((rightCheck & TOP) != 0) {
                     py = bounds.top;
-                    if ((newCheck & BoundsCheck.RIGHT) != 0) {
+                    if ((newCheck & RIGHT) != 0) {
                         px = bounds.right;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.LEFT) != 0) {
+                    } else if ((newCheck & LEFT) != 0) {
                         px = bounds.left;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.BOTTOM) != 0) {
+                    } else if ((newCheck & BOTTOM) != 0) {
                         if (rightPoint.x - bounds.x + newPoint.x - bounds.x < bounds.width) {
                             px = bounds.left;
                         } else {
@@ -284,15 +272,15 @@ public final class Site implements ICoord {
                         points.add(new Point(px, py));
                         points.add(new Point(px, bounds.bottom));
                     }
-                } else if ((rightCheck & BoundsCheck.BOTTOM) != 0) {
+                } else if ((rightCheck & BOTTOM) != 0) {
                     py = bounds.bottom;
-                    if ((newCheck & BoundsCheck.RIGHT) != 0) {
+                    if ((newCheck & RIGHT) != 0) {
                         px = bounds.right;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.LEFT) != 0) {
+                    } else if ((newCheck & LEFT) != 0) {
                         px = bounds.left;
                         points.add(new Point(px, py));
-                    } else if ((newCheck & BoundsCheck.TOP) != 0) {
+                    } else if ((newCheck & TOP) != 0) {
                         if (rightPoint.x - bounds.x + newPoint.x - bounds.x < bounds.width) {
                             px = bounds.left;
                         } else {
@@ -315,35 +303,19 @@ public final class Site implements ICoord {
         }
     }
 
-    public double get_x() {
+    public float get_x() {
         return _coord.x;
     }
 
-    public double get_y() {
+    public float get_y() {
         return _coord.y;
     }
 
-    public double dist(ICoord p) {
+    public float dist(ICoord p) {
         return Point.distance(p.get_coord(), this._coord);
     }
-}
 
-final class BoundsCheck {
-
-    final public static int TOP = 1;
-    final public static int BOTTOM = 2;
-    final public static int LEFT = 4;
-    final public static int RIGHT = 8;
-
-    /**
-     *
-     * @param point
-     * @param bounds
-     * @return an int with the appropriate bits set if the Point lies on the
-     * corresponding bounds lines
-     *
-     */
-    public static int check(Point point, Rectangle bounds) {
+    public static int boundsCheck(Point point, Rectangle bounds) {
         int value = 0;
         if (point.x == bounds.left) {
             value |= LEFT;
@@ -358,9 +330,5 @@ final class BoundsCheck {
             value |= BOTTOM;
         }
         return value;
-    }
-
-    public BoundsCheck() {
-        throw new Error("BoundsCheck constructor unused");
     }
 }

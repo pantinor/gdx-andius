@@ -9,10 +9,10 @@ public final class HalfedgePriorityQueue // also known as heap
     private int _count;
     private int _minBucket;
     private int _hashsize;
-    private double _ymin;
-    private double _deltay;
+    private float _ymin;
+    private float _deltay;
 
-    public HalfedgePriorityQueue(double ymin, double deltay, int sqrt_nsites) {
+    public HalfedgePriorityQueue(float ymin, float deltay, int sqrt_nsites) {
         _ymin = ymin;
         _deltay = deltay;
         _hashsize = 4 * sqrt_nsites;

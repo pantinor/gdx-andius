@@ -1,6 +1,7 @@
 package andius.voronoi.nodes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class SiteList implements IDisposable {
 
@@ -51,12 +52,12 @@ public final class SiteList implements IDisposable {
             _currentIndex = 0;
             _sorted = true;
         }
-        double xmin, xmax, ymin, ymax;
+        float xmin, xmax, ymin, ymax;
         if (_sites.isEmpty()) {
             return new Rectangle(0, 0, 0, 0);
         }
-        xmin = Double.MAX_VALUE;
-        xmax = Double.MIN_VALUE;
+        xmin = Float.MAX_VALUE;
+        xmax = Float.MIN_VALUE;
         for (Site site : _sites) {
             if (site.get_x() < xmin) {
                 xmin = site.get_x();
@@ -89,21 +90,24 @@ public final class SiteList implements IDisposable {
     public ArrayList<Circle> circles() {
         ArrayList<Circle> circles = new ArrayList();
         for (Site site : _sites) {
-            double radius = 0;
+            float radius = 0;
             Edge nearestEdge = site.nearestEdge();
 
             if (!nearestEdge.isPartOfConvexHull()) {
-                radius = nearestEdge.sitesDistance() * 0.5;
+                radius = nearestEdge.sitesDistance() * 0.5f;
             }
             circles.add(new Circle(site.get_x(), site.get_y(), radius));
         }
         return circles;
     }
 
-    public ArrayList<ArrayList<Point>> regions(Rectangle plotBounds) {
-        ArrayList<ArrayList<Point>> regions = new ArrayList();
+    public List<List<Point>> regions(Rectangle plotBounds) {
+        ArrayList<List<Point>> regions = new ArrayList();
         for (Site site : _sites) {
-            regions.add(site.region(plotBounds));
+            List<Point> r = site.region(plotBounds);
+            if (r != null) {
+                regions.add(r);
+            }
         }
         return regions;
     }

@@ -265,11 +265,10 @@ public interface Constants {
                 }
             }
 
-            this.screen = (this.dim == TILE_DIM ? 
-                    new GameScreen(this) : 
-                    //new WorldScreen(this)
-                    new VoronoiWorldScreen()
-                    );
+            this.screen = (this.dim == TILE_DIM
+                    ? new GameScreen(this)
+                    : //new WorldScreen(this)
+                    new VoronoiAzgaarMapScreen());
 
         }
 

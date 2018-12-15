@@ -1,17 +1,45 @@
 package andius.voronoi.nodes;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public final class Polygon {
 
-    private ArrayList<Point> _vertices;
+    private final List<Point> verticesList;
+    final float[] vertices;
 
-    public Polygon(ArrayList<Point> vertices) {
-        _vertices = vertices;
+    public Polygon(List<Point> v) {
+        this.verticesList = v;
+        this.vertices = new float[verticesList.size() * 2];
+        int idx = 0;
+        for (Point p : v) {
+            this.vertices[idx] = p.x;
+            this.vertices[idx + 1] = p.y;
+            idx += 2;
+        }
     }
 
-    public double area() {
-        return Math.abs(signedDoubleArea() * 0.5);
+    public float area() {
+        return (float) Math.abs(signedDoubleArea() * 0.5);
+    }
+
+    public boolean contains(float x, float y) {
+        final int numFloats = vertices.length;
+        int intersects = 0;
+
+        for (int i = 0; i < numFloats; i += 2) {
+            float x1 = vertices[i];
+            float y1 = vertices[i + 1];
+            float x2 = vertices[(i + 2) % numFloats];
+            float y2 = vertices[(i + 3) % numFloats];
+            if (((y1 <= y && y < y2) || (y2 <= y && y < y1)) && x < ((x2 - x1) / (y2 - y1) * (y - y1) + x1)) {
+                intersects++;
+            }
+        }
+        return (intersects & 1) == 1;
+    }
+    
+    public float[] vertices() {
+        return this.vertices;
     }
 
     public Winding winding() {
@@ -25,15 +53,15 @@ public final class Polygon {
         return Winding.NONE;
     }
 
-    private double signedDoubleArea() {
+    private float signedDoubleArea() {
         int index, nextIndex;
-        int n = _vertices.size();
+        int n = verticesList.size();
         Point point, next;
-        double signedDoubleArea = 0;
+        float signedDoubleArea = 0;
         for (index = 0; index < n; ++index) {
             nextIndex = (index + 1) % n;
-            point = _vertices.get(index);
-            next = _vertices.get(nextIndex);
+            point = verticesList.get(index);
+            next = verticesList.get(nextIndex);
             signedDoubleArea += point.x * next.y - next.x * point.y;
         }
         return signedDoubleArea;

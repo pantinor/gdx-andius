@@ -4,10 +4,11 @@ import java.util.Stack;
 
 final public class Vertex extends Object implements ICoord {
 
-    final public static Vertex VERTEX_AT_INFINITY = new Vertex(Double.NaN, Double.NaN);
+    public static final float NaN = 0.0f / 0.0f;
+    final public static Vertex VERTEX_AT_INFINITY = new Vertex(NaN, NaN);
     final private static Stack<Vertex> _pool = new Stack();
 
-    private static Vertex create(double x, double y) {
+    private static Vertex create(float x, float y) {
 
         if (Double.isNaN(x) || Double.isNaN(y)) {
             return VERTEX_AT_INFINITY;
@@ -32,11 +33,11 @@ final public class Vertex extends Object implements ICoord {
         return _vertexIndex;
     }
 
-    public Vertex(double x, double y) {
+    public Vertex(float x, float y) {
         init(x, y);
     }
 
-    private Vertex init(double x, double y) {
+    private Vertex init(float x, float y) {
         _coord = new Point(x, y);
         return this;
     }
@@ -66,7 +67,7 @@ final public class Vertex extends Object implements ICoord {
     public static Vertex intersect(Halfedge halfedge0, Halfedge halfedge1) {
         Edge edge0, edge1, edge;
         Halfedge halfedge;
-        double determinant, intersectionX, intersectionY;
+        float determinant, intersectionX, intersectionY;
         boolean rightOfSite;
 
         edge0 = halfedge0.edge;
@@ -103,11 +104,11 @@ final public class Vertex extends Object implements ICoord {
         return Vertex.create(intersectionX, intersectionY);
     }
 
-    public double get_x() {
+    public float get_x() {
         return _coord.x;
     }
 
-    public double get_y() {
+    public float get_y() {
         return _coord.y;
     }
 }

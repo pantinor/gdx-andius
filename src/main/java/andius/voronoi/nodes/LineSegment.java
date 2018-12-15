@@ -2,9 +2,9 @@ package andius.voronoi.nodes;
 
 public final class LineSegment extends Object {
 
-    public static double compareLengths_MAX(LineSegment segment0, LineSegment segment1) {
-        double length0 = Point.distance(segment0.p0, segment0.p1);
-        double length1 = Point.distance(segment1.p0, segment1.p1);
+    public static float compareLengths_MAX(LineSegment segment0, LineSegment segment1) {
+        float length0 = Point.distance(segment0.p0, segment0.p1);
+        float length1 = Point.distance(segment1.p0, segment1.p1);
         if (length0 < length1) {
             return 1;
         }
@@ -14,7 +14,7 @@ public final class LineSegment extends Object {
         return 0;
     }
 
-    public static double compareLengths(LineSegment edge0, LineSegment edge1) {
+    public static float compareLengths(LineSegment edge0, LineSegment edge1) {
         return -compareLengths_MAX(edge0, edge1);
     }
     public Point p0, p1;

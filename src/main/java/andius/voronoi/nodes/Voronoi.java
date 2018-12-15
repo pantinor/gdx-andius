@@ -29,6 +29,8 @@ package andius.voronoi.nodes;
  */
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public final class Voronoi {
@@ -74,8 +76,27 @@ public final class Voronoi {
         fortunesAlgorithm();
     }
 
+    public Voronoi(List<Float[]> points, float factor) {
+        float maxWidth = 0, maxHeight = 0;
+        for (Float[] f : points) {
+            maxWidth = Math.max(maxWidth, f[0] * factor);
+            maxHeight = Math.max(maxHeight, f[1] * factor);
+        }
+        _sites = new SiteList();
+        _sitesIndexedByLocation = new HashMap();
+        int length = points.size();
+        for (int i = 0; i < length; ++i) {
+            Float[] f = points.get(i);
+            addSite(new Point(f[0] * factor, f[1] * factor), i);
+        }
+        _plotBounds = new Rectangle(0, 0, maxWidth, maxHeight);
+        _triangles = new ArrayList();
+        _edges = new ArrayList();
+        fortunesAlgorithm();
+    }
+
     public Voronoi(ArrayList<Point> points) {
-        double maxWidth = 0, maxHeight = 0;
+        float maxWidth = 0, maxHeight = 0;
         for (Point p : points) {
             maxWidth = Math.max(maxWidth, p.x);
             maxHeight = Math.max(maxHeight, p.y);
@@ -84,10 +105,10 @@ public final class Voronoi {
         fortunesAlgorithm();
     }
 
-    public Voronoi(int numSites, double maxWidth, double maxHeight, Random r) {
+    public Voronoi(int numSites, float maxWidth, float maxHeight, Random r) {
         ArrayList<Point> points = new ArrayList();
         for (int i = 0; i < numSites; i++) {
-            points.add(new Point(r.nextDouble() * maxWidth, r.nextDouble() * maxHeight));
+            points.add(new Point(r.nextFloat() * maxWidth, r.nextFloat() * maxHeight));
         }
         init(points, new Rectangle(0, 0, maxWidth, maxHeight));
         fortunesAlgorithm();
@@ -110,8 +131,7 @@ public final class Voronoi {
     }
 
     private void addSite(Point p, int index) {
-        double weight = Math.random() * 100;
-        Site site = Site.create(p, index, weight);
+        Site site = Site.create(p, index);
         _sites.push(site);
         _sitesIndexedByLocation.put(p, site);
     }
@@ -120,12 +140,26 @@ public final class Voronoi {
         return _edges;
     }
 
-    public ArrayList<Point> region(Point p) {
+    public Site site(Point coord) {
+        Site site = _sitesIndexedByLocation.get(coord);
+        return site;
+    }
+
+    public Iterator<Site> sites() {
+        return this._sitesIndexedByLocation.values().iterator();
+    }
+
+    public List<List<Point>> regions() {
+        return _sites.regions(_plotBounds);
+    }
+
+    public List<Point> region(Point p) {
         Site site = _sitesIndexedByLocation.get(p);
-        if (site == null) {
-            return new ArrayList();
+        if (site != null) {
+            return site.region(_plotBounds);
+        } else {
+            return null;
         }
-        return site.region(_plotBounds);
     }
 
     public ArrayList<Point> neighborSitesForSite(Point coord) {
@@ -155,12 +189,6 @@ public final class Voronoi {
             }
         }
         return filtered;
-
-        /*function myTest(edge:Edge, index:int, vector:Vector.<Edge>):Boolean
-         {
-         return ((edge.leftSite && edge.leftSite.coord == coord)
-         ||  (edge.rightSite && edge.rightSite.coord == coord));
-         }*/
     }
 
     private ArrayList<LineSegment> visibleLineSegments(ArrayList<Edge> edges) {
@@ -213,11 +241,6 @@ public final class Voronoi {
         }
 
         return filtered;
-
-        /*function myTest(edge:Edge, index:int, vector:Vector.<Edge>):Boolean
-         {
-         return (edge.isPartOfConvexHull());
-         }*/
     }
 
     public ArrayList<Point> hullPointsInOrder() {
@@ -242,10 +265,6 @@ public final class Voronoi {
             points.add(edge.site(orientation).get_coord());
         }
         return points;
-    }
-
-    public ArrayList<ArrayList<Point>> regions() {
-        return _sites.regions(_plotBounds);
     }
 
     public ArrayList<Point> siteCoords() {

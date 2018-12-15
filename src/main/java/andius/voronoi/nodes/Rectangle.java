@@ -2,9 +2,9 @@ package andius.voronoi.nodes;
 
 public class Rectangle {
 
-    final public double x, y, width, height, right, bottom, left, top;
+    final public float x, y, width, height, right, bottom, left, top;
 
-    public Rectangle(double x, double y, double width, double height) {
+    public Rectangle(float x, float y, float width, float height) {
         left = this.x = x;
         top = this.y = y;
         this.width = width;
@@ -21,11 +21,11 @@ public class Rectangle {
         return inBounds(p.x, p.y);
     }
 
-    public boolean inBounds(double x0, double y0) {
+    public boolean inBounds(float x0, float y0) {
         return !(x0 < x || x0 > right || y0 < y || y0 > bottom);
     }
 
-    public boolean closeEnough(double d1, double d2, double diff) {
+    public boolean closeEnough(float d1, float d2, float diff) {
         return Math.abs(d1 - d2) <= diff;
     }
 }

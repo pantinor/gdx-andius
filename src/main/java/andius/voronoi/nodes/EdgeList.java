@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public final class EdgeList implements IDisposable {
 
-    private double _deltax;
-    private double _xmin;
+    private float _deltax;
+    private float _xmin;
     private int _hashsize;
     private ArrayList<Halfedge> _hash;
     public Halfedge leftEnd;
@@ -28,7 +28,7 @@ public final class EdgeList implements IDisposable {
         _hash = null;
     }
 
-    public EdgeList(double xmin, double deltax, int sqrt_nsites) {
+    public EdgeList(float xmin, float deltax, int sqrt_nsites) {
         _xmin = xmin;
         _deltax = deltax;
         _hashsize = 2 * sqrt_nsites;

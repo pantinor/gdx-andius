@@ -34,7 +34,7 @@ public class Radial implements HeightAlgorithm {
      */
     @Override
     public boolean isWater(Point p, Rectangle bounds, Random r) {
-        p = new Point(2 * (p.x / bounds.width - 0.5), 2 * (p.y / bounds.height - 0.5));
+        p = new Point(2 * (p.x / bounds.width - 0.5f), 2 * (p.y / bounds.height - 0.5f));
 
         double angle = Math.atan2(p.y, p.x);
         double length = 0.5 * (Math.max(Math.abs(p.x), Math.abs(p.y)) + p.length());

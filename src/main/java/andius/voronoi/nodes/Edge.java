@@ -24,20 +24,20 @@ public final class Edge {
      *
      */
     public static Edge createBisectingEdge(Site site0, Site site1) {
-        double dx, dy, absdx, absdy;
-        double a, b, c;
+        float dx, dy, absdx, absdy;
+        float a, b, c;
 
         dx = site1.get_x() - site0.get_x();
         dy = site1.get_y() - site0.get_y();
         absdx = dx > 0 ? dx : -dx;
         absdy = dy > 0 ? dy : -dy;
-        c = site0.get_x() * dx + site0.get_y() * dy + (dx * dx + dy * dy) * 0.5;
+        c = site0.get_x() * dx + site0.get_y() * dy + (dx * dx + dy * dy) * 0.5f;
         if (absdx > absdy) {
-            a = 1.0;
+            a = 1.0f;
             b = dy / dx;
             c /= dx;
         } else {
-            b = 1.0;
+            b = 1.0f;
             a = dx / dy;
             c /= dy;
         }
@@ -71,45 +71,6 @@ public final class Edge {
         return edge;
     }
 
-    /*final private static LINESPRITE:Sprite = new Sprite();
-     final private static GRAPHICS:Graphics = LINESPRITE.graphics;
-
-     private var _delaunayLineBmp:BitmapData;
-     internal function get delaunayLineBmp():BitmapData
-     {
-     if (!_delaunayLineBmp)
-     {
-     _delaunayLineBmp = makeDelaunayLineBmp();
-     }
-     return _delaunayLineBmp;
-     }
-
-     // making this available to Voronoi; running out of memory in AIR so I cannot cache the bmp
-     internal function makeDelaunayLineBmp():BitmapData
-     {
-     var p0:Point = leftSite.coord;
-     var p1:Point = rightSite.coord;
-
-     GRAPHICS.clear();
-     // clear() resets line style back to undefined!
-     GRAPHICS.lineStyle(0, 0, 1.0, false, LineScaleMode.NONE, CapsStyle.NONE);
-     GRAPHICS.moveTo(p0.x, p0.y);
-     GRAPHICS.lineTo(p1.x, p1.y);
-
-     var w:int = int(Math.ceil(Math.max(p0.x, p1.x)));
-     if (w < 1)
-     {
-     w = 1;
-     }
-     var h:int = int(Math.ceil(Math.max(p0.y, p1.y)));
-     if (h < 1)
-     {
-     h = 1;
-     }
-     var bmp:BitmapData = new BitmapData(w, h, true, 0);
-     bmp.draw(LINESPRITE);
-     return bmp;
-     }*/
     public LineSegment delaunayLine() {
         // draw a line connecting the input Sites for which the edge is a bisector:
         return new LineSegment(get_leftSite().get_coord(), get_rightSite().get_coord());
@@ -125,7 +86,7 @@ public final class Edge {
     private static int _nedges = 0;
     final public static Edge DELETED = new Edge();
     // the equation of the edge: ax + by = c
-    public double a, b, c;
+    public float a, b, c;
     // the two Voronoi vertices that the edge connects
     //		(if one of them is null, the edge extends to infinity)
     private Vertex _leftVertex;
@@ -155,13 +116,13 @@ public final class Edge {
         return (_leftVertex == null || _rightVertex == null);
     }
 
-    public double sitesDistance() {
+    public float sitesDistance() {
         return Point.distance(get_leftSite().get_coord(), get_rightSite().get_coord());
     }
 
-    public static double compareSitesDistances_MAX(Edge edge0, Edge edge1) {
-        double length0 = edge0.sitesDistance();
-        double length1 = edge1.sitesDistance();
+    public static float compareSitesDistances_MAX(Edge edge0, Edge edge1) {
+        float length0 = edge0.sitesDistance();
+        float length1 = edge1.sitesDistance();
         if (length0 < length1) {
             return 1;
         }
@@ -171,7 +132,7 @@ public final class Edge {
         return 0;
     }
 
-    public static double compareSitesDistances(Edge edge0, Edge edge1) {
+    public static float compareSitesDistances(Edge edge0, Edge edge1) {
         return -compareSitesDistances_MAX(edge0, edge1);
     }
     // Once clipVertices() is called, this Dictionary will hold two Points
@@ -253,13 +214,13 @@ public final class Edge {
      *
      */
     public void clipVertices(Rectangle bounds) {
-        double xmin = bounds.x;
-        double ymin = bounds.y;
-        double xmax = bounds.right;
-        double ymax = bounds.bottom;
+        float xmin = bounds.x;
+        float ymin = bounds.y;
+        float xmax = bounds.right;
+        float ymax = bounds.bottom;
 
         Vertex vertex0, vertex1;
-        double x0, x1, y0, y1;
+        float x0, x1, y0, y1;
 
         if (a == 1.0 && b >= 0.0) {
             vertex0 = _rightVertex;
