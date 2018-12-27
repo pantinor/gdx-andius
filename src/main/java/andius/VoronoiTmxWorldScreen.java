@@ -11,7 +11,6 @@ import andius.voronoi.graph.Edge;
 import andius.voronoi.nodes.LineSegment;
 import andius.voronoi.nodes.Point;
 import andius.voronoi.nodes.Rectangle;
-import andius.voronoi.nodes.Site;
 import andius.voronoi.nodes.Voronoi;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -25,7 +24,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -41,44 +39,50 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
-public class VoronoiAzgaarMapScreen extends BaseScreen {
+public class VoronoiTmxWorldScreen extends BaseScreen {
 
     private final List<Cell> cells;
-    private final List<Manor> manors;
-    private final List<State> states;
-    private final float factor = 2.5f;
+    private final java.util.Map<Constants.Moongate, Cell> moongateMap = new HashMap<>();
+
+    private final float factor = 1.00f;
 
     private final Viewport mapViewPort;
     private final Batch mapBatch, batch;
     private Center currentLocation;
-    private final VoronoiAzgaarRenderer renderer;
+    private final VoronoiRenderer renderer;
 
     public static Animation castle;
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
     public GameTimer gameTimer = new GameTimer();
-    public java.util.Map<Constants.Moongate, Cell> moongateMap = new HashMap<>();
+    private static final Random RANDOM = new Random();
 
-    public VoronoiAzgaarMapScreen() {
+    public VoronoiTmxWorldScreen() {
 
-        String spoints = null;
+        String spoints = "";
         String scells = null;
-        String smanors = null;
-        String sstates = null;
+        String sportals = null;
+        String smoongates = null;
 
         try {
-            //https://azgaar.github.io/Fantasy-Map-Generator/
-            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/fantasy_map_1544401192718.map").read();
+            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/u4-voronoi-world.data").read();
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-            br.readLine();
-            spoints = br.readLine();
+            String line = br.readLine();
+            while (!line.equals("CELLS")) {
+                line = br.readLine();
+                if (!line.equals("CELLS")) {
+                    spoints += line;
+                }
+            }
             scells = br.readLine();
-            smanors = br.readLine();
-            sstates = br.readLine();
+            line = br.readLine();
+            sportals = br.readLine();
+            line = br.readLine();
+            smoongates = br.readLine();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,17 +95,39 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         }.getType());
         cells = gson.fromJson(scells, new TypeToken<java.util.List<Cell>>() {
         }.getType());
-        manors = gson.fromJson(smanors, new TypeToken<java.util.List<Manor>>() {
+
+        List<PortalBean> portals = gson.fromJson(sportals, new TypeToken<java.util.List<PortalBean>>() {
         }.getType());
-        states = gson.fromJson(sstates, new TypeToken<java.util.List<State>>() {
+        List<MGBean> moongates = gson.fromJson(smoongates, new TypeToken<java.util.List<MGBean>>() {
         }.getType());
 
-        for (Cell c : cells) {
-            c.data[0] *= factor;
-            c.data[1] *= factor;
+        Rectangle rect = new Rectangle(1, 1, 1, 1);
+        for (PortalBean p : portals) {
+            for (Cell cell : cells) {
+                rect.set(cell.x - 1, cell.y - 1, 3, 3);
+                if (rect.inBounds(p.x, p.y)) {
+                    cell.portal = new Portal(Constants.Map.BRITANIA, 0, 0, 15, 31, null, false, false);
+                    break;
+                }
+            }
         }
 
-        renderer = new VoronoiAzgaarRenderer(pts, factor);
+        for (MGBean m : moongates) {
+            for (Cell cell : cells) {
+                rect.set(cell.x - 1, cell.y - 1, 3, 3);
+                if (rect.inBounds(m.x, m.y)) {
+                    moongateMap.put(Moongate.values()[m.id], cell);
+                    break;
+                }
+            }
+        }
+
+        for (Cell c : cells) {
+            c.x *= factor;
+            c.y *= factor;
+        }
+
+        renderer = new VoronoiRenderer(pts);
         mapBatch = renderer.getBatch();
 
         castle = new Animation(.4f, mapAtlas.findRegions("castle_gray"));
@@ -121,26 +147,9 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         mapViewPort = new ScreenViewport(camera);
 
-        currentLocation = renderer.getCenter(6000);
+        currentLocation = renderer.getCenter(32936);
         newMapPixelCoords.set((float) currentLocation.loc.x, (float) currentLocation.loc.y, 0f);
 
-        moongateMap.put(Moongate.GATE_0, renderer.getCenterCell(6018));
-        moongateMap.put(Moongate.GATE_1, renderer.getCenterCell(2216));
-        moongateMap.put(Moongate.GATE_2, renderer.getCenterCell(1770));
-        moongateMap.put(Moongate.GATE_3, renderer.getCenterCell(695));
-        moongateMap.put(Moongate.GATE_4, renderer.getCenterCell(5199));
-        moongateMap.put(Moongate.GATE_5, renderer.getCenterCell(5712));
-        moongateMap.put(Moongate.GATE_6, renderer.getCenterCell(8541));
-        moongateMap.put(Moongate.GATE_7, renderer.getCenterCell(567));
-    }
-
-    private Cell getCellForStateCapital(State state) {
-        if (state.capital instanceof Double) {
-            int idx = ((Double) state.capital).intValue();
-            Manor m = manors.get(idx);
-            return cells.get(m.cell);
-        }
-        return null;
     }
 
     @Override
@@ -209,7 +218,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             if (t != null) {
                 Cell c = moongateMap.get(g);
                 mapBatch.begin();
-                mapBatch.draw(t, c.data[0], c.data[1], 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
+                mapBatch.draw(t, c.x, c.y, 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
                 mapBatch.end();
             }
         }
@@ -240,34 +249,22 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     public boolean keyUp(int keycode) {
         Center current = this.currentLocation;
 
-        if (keycode == Input.Keys.UP) {
-            Center next = preMove(current, Direction.NORTH);
-            if (next == null) {
-                return false;
-            }
-            this.currentLocation = next;
-            postMove(Direction.NORTH, next);
-        } else if (keycode == Input.Keys.DOWN) {
-            Center next = preMove(current, Direction.SOUTH);
-            if (next == null) {
-                return false;
-            }
-            this.currentLocation = next;
-            postMove(Direction.SOUTH, next);
-        } else if (keycode == Input.Keys.RIGHT) {
-            Center next = preMove(current, Direction.EAST);
-            if (next == null) {
-                return false;
-            }
-            this.currentLocation = next;
-            postMove(Direction.EAST, next);
-        } else if (keycode == Input.Keys.LEFT) {
-            Center next = preMove(current, Direction.WEST);
-            if (next == null) {
-                return false;
-            }
-            this.currentLocation = next;
-            postMove(Direction.WEST, next);
+        if (keycode == Input.Keys.UP || keycode == Input.Keys.NUMPAD_8) {
+            move(current, Direction.NORTH);
+        } else if (keycode == Input.Keys.DOWN || keycode == Input.Keys.NUMPAD_2) {
+            move(current, Direction.SOUTH);
+        } else if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.NUMPAD_6) {
+            move(current, Direction.EAST);
+        } else if (keycode == Input.Keys.LEFT || keycode == Input.Keys.NUMPAD_4) {
+            move(current, Direction.WEST);
+        } else if (keycode == Input.Keys.NUMPAD_7) {
+            move(current, Direction.NORTH_WEST);
+        } else if (keycode == Input.Keys.NUMPAD_9) {
+            move(current, Direction.NORTH_EAST);
+        } else if (keycode == Input.Keys.NUMPAD_1) {
+            move(current, Direction.SOUTH_WEST);
+        } else if (keycode == Input.Keys.NUMPAD_3) {
+            move(current, Direction.SOUTH_EAST);
         } else if (keycode == Input.Keys.E) {
             Portal p = this.currentLocation.cell != null ? ((Cell) this.currentLocation.cell).portal : null;
             if (p != null) {
@@ -278,28 +275,53 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         return false;
     }
 
+    private void move(Center current, Direction dir) {
+        Center next = preMove(current, dir);
+        if (next == null) {
+            return;
+        }
+        this.currentLocation = next;
+        postMove(dir, next);
+    }
+
     private Center preMove(Center current, Direction dir) {
 
         Center next = null;
 
+        int dist = 24;
+
         if (dir == Direction.NORTH) {
-            next = current.getClosestNeighbor(current.loc.x, current.loc.y - 48);
+            next = current.getClosestNeighbor(current.loc.x, current.loc.y - dist);
         }
         if (dir == Direction.SOUTH) {
-            next = current.getClosestNeighbor(current.loc.x, current.loc.y + 48);
+            next = current.getClosestNeighbor(current.loc.x, current.loc.y + dist);
         }
         if (dir == Direction.WEST) {
-            next = current.getClosestNeighbor(current.loc.x - 48, current.loc.y);
+            next = current.getClosestNeighbor(current.loc.x - dist, current.loc.y);
         }
         if (dir == Direction.EAST) {
-            next = current.getClosestNeighbor(current.loc.x + 48, current.loc.y);
+            next = current.getClosestNeighbor(current.loc.x + dist, current.loc.y);
+        }
+
+        if (dir == Direction.NORTH_EAST) {
+            next = current.getClosestNeighbor(current.loc.x + dist, current.loc.y - dist);
+        }
+        if (dir == Direction.NORTH_WEST) {
+            next = current.getClosestNeighbor(current.loc.x - dist, current.loc.y - dist);
+        }
+
+        if (dir == Direction.SOUTH_EAST) {
+            next = current.getClosestNeighbor(current.loc.x + dist, current.loc.y + dist);
+        }
+        if (dir == Direction.SOUTH_WEST) {
+            next = current.getClosestNeighbor(current.loc.x - dist, current.loc.y + dist);
         }
 
         if (next != null) {
             Cell cell = (Cell) next.cell;
-            if (cell == null || (cell.ctype != null && cell.ctype < 0) || cell.height >= 70) {
-                Sounds.play(Sound.BLOCKED);
-                return null;
+            if (cell == null || (cell.height != null && cell.height < 0) || cell.height >= 70) {
+                //Sounds.play(Sound.BLOCKED);
+                //return null;
             }
         }
         return next;
@@ -392,113 +414,101 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         return Constants.Moongate.values()[destGate];
     }
 
-    public static class Cell {
+    class Cell {
 
-        Integer index;
-        Float[] data;
+        String name;
+        Float x;
+        Float y;
         Integer height;
-        Integer ctype;
-        Integer fn;
-        Integer[] neighbors;
-        Integer harbor;
-        Float area;
-        Float flux;
-        Integer haven;
-        Float score;
-        String region;
-        Integer culture;
-        Float pop;
-        Integer path;
+
         Center center;
         Portal portal;
         Color color;
 
-        @Override
-        public String toString() {
-            return "Cell{" + "index=" + index + ", height=" + height + ", ctype=" + ctype + ", fn=" + fn + ", harbor=" + harbor + '}';
-        }
-
         public Color color() {
             if (this.color == null) {
-                if (ctype != null) {
-                    switch (ctype) {
-                        case -2:
-                            this.color = new Color(0, 0, 0.6f, 1);
+                if (name != null) {
+                    switch (name) {
+                        case "shallows":
+                            this.color = new Color(0, 0, 0.95f, 1);
                             break;
-                        case -1:
-                            this.color = new Color(0, 0, 0.9f, 1);
+                        case "water":
+                            this.color = new Color(0, 0, 0.75f, 1);
                             break;
-                        case 1:
-                            this.color = new Color(0, (float) ((100 - height - 10) * .01f), 0, 1);
-                            //this.color = transitionOfHueRange(height * .01, 360, 120);
+                        case "sea":
+                            this.color = new Color(0, 0, 0.5f, 1);
                             break;
-                        case 2:
-                            this.color = new Color(0, (float) ((100 - height - 10) * .01f), 0, 1);
-                            //this.color = transitionOfHueRange(height * .01, 360, 120);
+                        case "hills":
+                            this.color = Color.BROWN;
+                            break;
+                        case "mountains":
+                            float gray = ((RANDOM.nextInt(21) + 60)) * .01f;
+                            this.color = new Color(gray, gray, gray, 1f);
+                            break;
+                        case "forest":
+                            this.color = Color.FOREST;
+                            break;
+                        case "brush":
+                            this.color = new Color(0, 0.7f, 0, 1);
+                            break;
+                        case "lava":
+                            this.color = Color.FIREBRICK;
+                            break;
+                        case "fire_field":
+                            this.color = Color.SCARLET;
+                            break;
+                        case "swamp":
+                            this.color = new Color(0xcccc00ff);
+                            break;
+                        case "shrine":
+                        case "dungeon":
+                        case "city":
+                        case "bridge":
+                        case "castle":
+                        case "town":
+                        case "ankh":
+                        case "ruins":
+                        case "lcb_west":
+                        case "lcb_entrance":
+                        case "lcb_east":
+                            this.color = Color.PINK;
                             break;
                         default:
                             this.color = new Color(0, (float) ((100 - height - 0) * .01f), 0, 1);
                     }
                 } else {
                     this.color = new Color(0, (float) ((100 - height - 0) * .01f), 0, 1);
-                    //this.color = transitionOfHueRange(height * .01, 360, 120);
                 }
 
-                if (height >= 70) {
-                    // mountain grays
-                    this.color = new Color(height * .01f, height * .01f, height * .01f, 1f);
-                } else if (height > 50) {
-                    // hills
-                    //this.color = transitionOfHueRange(height * .01, 360, 120);
-                    this.color = new Color(0, (float) ((100 - height - 10) * .01f), 0, 1);
-                } else if (height >= 21 && height < 22) {
-                    // swamp
-                    this.color = new Color(0xcccc00ff);
-                } else if (height >= 22 && height < 48 && Math.random() < height / 100) {
-                    // forest
-                    this.color = Color.FOREST;
-                }
             }
 
             return this.color;
         }
-    }
-
-    public static class Manor {
-
-        Integer i;
-        Integer cell;
-        Float x;
-        Float y;
-        Object region;
-        Integer culture;
-        String name;
-        Float population;
 
         @Override
         public String toString() {
-            return "Manor{" + "i=" + i + ", cell=" + cell + ", x=" + x + ", y=" + y + ", region=" + region + ", culture=" + culture + ", name=" + name + ", population=" + population + '}';
+            return "Cell{" + "name=" + name + ", x=" + x + ", y=" + y + ", portal=" + portal + '}';
         }
 
     }
 
-    public static class State {
+    class PortalBean {
 
-        Integer i;
-        String color;
-        Float power;
-        Object capital;
         String name;
-        Integer burgs;
-        Float urbanPopulation;
-        Integer cells;
-        Float ruralPopulation;
-        Float area;
+        Float x;
+        Float y;
     }
 
-    public class VoronoiAzgaarRenderer implements MapRenderer {
+    class MGBean {
 
-        final Voronoi voro;
+        Integer id;
+        Float x;
+        Float y;
+    }
+
+    public class VoronoiRenderer {
+
+        private final Voronoi voro;
         private final List<Edge> edges = new ArrayList();
         private final List<Corner> corners = new ArrayList();
         private final List<Center> centers = new ArrayList();
@@ -508,9 +518,8 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         private final com.badlogic.gdx.math.Rectangle viewBounds;
         private final Rectangle bounds;
         private final Batch batch;
-        float factor = 1.0f;
 
-        public VoronoiAzgaarRenderer(List<Float[]> pts, float factor) {
+        public VoronoiRenderer(List<Float[]> pts) {
 
             this.shape = new ShapeRenderer();
             this.batch = new SpriteBatch();
@@ -521,33 +530,15 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             buildGraph();
             improveCorners();
 
-            for (Cell c : cells) {
-                Iterator<Site> iter = this.voro.sites();
-                while (iter.hasNext()) {
-                    Site s = iter.next();
-                    if (s.region != null && s.region.contains(c.data[0], c.data[1])) {
-                        s.cell = c;
-                        break;
-                    }
-                }
-            }
-
-            for (int i = 0; i < centers.size(); i++) {
-                Center center = centers.get(i);
-                Site s = this.voro.site(center.loc);
-                if (s != null) {
-                    Cell cell = (Cell) s.cell;
-                    if (cell != null) {
+            for (Cell cell : cells) {
+                for (int i = 0; i < centers.size(); i++) {
+                    Center center = centers.get(i);
+                    if (Math.round(cell.x * 100.0) == Math.round(center.loc.x * 100.0)
+                            && Math.round(cell.y * 100.0) == Math.round(center.loc.y * 100.0)) {
                         center.cell = cell;
                         cell.center = center;
+                        break;
                     }
-                }
-            }
-
-            for (Manor m : manors) {
-                Cell c = cells.get(m.cell);
-                if (c.center != null) {
-                    c.portal = new Portal(Constants.Map.BRITANIA, 0, 0, 15, 31, null, false, false);
                 }
             }
 
@@ -560,7 +551,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         public com.badlogic.gdx.math.Rectangle getViewBounds() {
             return viewBounds;
         }
-        
+
         public Center getCenter(int i) {
             return this.centers.get(i);
         }
@@ -569,7 +560,6 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             return (Cell) this.centers.get(i).cell;
         }
 
-        @Override
         public void setView(OrthographicCamera camera) {
             batch.setProjectionMatrix(camera.combined);
             shape.setProjectionMatrix(camera.combined);
@@ -580,7 +570,6 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             viewBounds.set(camera.position.x - w / 2, camera.position.y - h / 2, w, h);
         }
 
-        @Override
         public void setView(Matrix4 projection, float x, float y, float width, float height) {
             batch.setProjectionMatrix(projection);
             shape.setProjectionMatrix(projection);
@@ -603,7 +592,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
             for (Edge e : edges) {
                 if (e.v0 != null && e.v1 != null && viewBounds.contains(e.v0.loc.x, e.v0.loc.y)) {
-                    if (e.d0.cell != null && ((Cell) e.d0.cell).height >= 21) {
+                    if (e.d0.cell != null && ((Cell) e.d0.cell).height != null && ((Cell) e.d0.cell).height > 0) {
                         this.shape.begin(ShapeRenderer.ShapeType.Line);
                         this.shape.setColor(Color.GRAY);
                         this.shape.line(e.v0.loc.x, e.v0.loc.y, e.v1.loc.x, e.v1.loc.y);
@@ -641,14 +630,6 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 //                }
             }
 
-        }
-
-        @Override
-        public void render() {
-        }
-
-        @Override
-        public void render(int[] layers) {
         }
 
         private void drawPolygon(Center c, Color color) {

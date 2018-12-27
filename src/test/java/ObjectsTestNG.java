@@ -1,4 +1,5 @@
 
+import andius.Direction;
 import andius.objects.ClassType;
 import andius.objects.Race;
 import andius.objects.Conversations;
@@ -35,6 +36,8 @@ import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import org.apache.commons.io.IOUtils;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 import utils.Utils;
 
@@ -432,7 +435,7 @@ public class ObjectsTestNG {
 
     }
 
-    @Test
+    //@Test
     public void testAttack() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
@@ -487,6 +490,38 @@ public class ObjectsTestNG {
             //Utils.attackHit(mm, avatar);
             //Utils.attackHit(avatar, mm);
         }
+    }
+    
+    @Test
+    public void testDirection() throws Exception {
+        
+        int mask = 0;
+        mask = Direction.addToMask(Direction.NORTH, mask);
+        
+        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
+        
+        mask = Direction.addToMask(Direction.NORTH_WEST, mask);
+        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
+        assertTrue(Direction.isDirInMask(Direction.NORTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
+        
+        mask = Direction.removeFromMask(mask, Direction.NORTH_WEST);
+        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
+
+
     }
 
 }

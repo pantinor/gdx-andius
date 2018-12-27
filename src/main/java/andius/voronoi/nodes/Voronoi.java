@@ -37,41 +37,14 @@ public final class Voronoi {
 
     private SiteList _sites;
     private HashMap<Point, Site> _sitesIndexedByLocation;
-    private ArrayList<Triangle> _triangles;
     private ArrayList<Edge> _edges;
     private Rectangle _plotBounds;
 
-    public Rectangle get_plotBounds() {
+    public Rectangle getBounds() {
         return _plotBounds;
     }
 
-    public void dispose() {
-        int i, n;
-        if (_sites != null) {
-            _sites.dispose();
-            _sites = null;
-        }
-        if (_triangles != null) {
-            n = _triangles.size();
-            for (i = 0; i < n; ++i) {
-                _triangles.get(i).dispose();
-            }
-            _triangles.clear();
-            _triangles = null;
-        }
-        if (_edges != null) {
-            n = _edges.size();
-            for (i = 0; i < n; ++i) {
-                _edges.get(i).dispose();
-            }
-            _edges.clear();
-            _edges = null;
-        }
-        _plotBounds = null;
-        _sitesIndexedByLocation = null;
-    }
-
-    public Voronoi(ArrayList<Point> points, Rectangle plotBounds) {
+    public Voronoi(List<Point> points, Rectangle plotBounds) {
         init(points, plotBounds);
         fortunesAlgorithm();
     }
@@ -90,12 +63,11 @@ public final class Voronoi {
             addSite(new Point(f[0] * factor, f[1] * factor), i);
         }
         _plotBounds = new Rectangle(0, 0, maxWidth, maxHeight);
-        _triangles = new ArrayList();
         _edges = new ArrayList();
         fortunesAlgorithm();
     }
 
-    public Voronoi(ArrayList<Point> points) {
+    public Voronoi(List<Point> points) {
         float maxWidth = 0, maxHeight = 0;
         for (Point p : points) {
             maxWidth = Math.max(maxWidth, p.x);
@@ -114,16 +86,15 @@ public final class Voronoi {
         fortunesAlgorithm();
     }
 
-    private void init(ArrayList<Point> points, Rectangle plotBounds) {
+    private void init(List<Point> points, Rectangle plotBounds) {
         _sites = new SiteList();
         _sitesIndexedByLocation = new HashMap();
         addSites(points);
         _plotBounds = plotBounds;
-        _triangles = new ArrayList();
         _edges = new ArrayList();
     }
 
-    private void addSites(ArrayList<Point> points) {
+    private void addSites(List<Point> points) {
         int length = points.size();
         for (int i = 0; i < length; ++i) {
             addSite(points.get(i), i);

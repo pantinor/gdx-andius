@@ -16,7 +16,11 @@ public enum Direction {
     WEST(1, 0x1),
     NORTH(2, 0x2),
     EAST(3, 0x4),
-    SOUTH(4, 0x8);
+    SOUTH(4, 0x8),
+    NORTH_WEST(5, 0x10),
+    NORTH_EAST(6, 0x20),
+    SOUTH_WEST(7, 0x40),
+    SOUTH_EAST(8, 0x80);
 
     private int val;
     private int mask;

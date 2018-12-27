@@ -2,7 +2,7 @@ package andius.voronoi.nodes;
 
 public class Rectangle {
 
-    final public float x, y, width, height, right, bottom, left, top;
+    public float x, y, width, height, right, bottom, left, top;
 
     public Rectangle(float x, float y, float width, float height) {
         left = this.x = x;
@@ -27,5 +27,14 @@ public class Rectangle {
 
     public boolean closeEnough(float d1, float d2, float diff) {
         return Math.abs(d1 - d2) <= diff;
+    }
+
+    public void set(float x, float y, float width, float height) {
+        left = this.x = x;
+        top = this.y = y;
+        this.width = width;
+        this.height = height;
+        right = x + width;
+        bottom = y + height;
     }
 }

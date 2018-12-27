@@ -1,6 +1,5 @@
 package andius.voronoi.graph;
 
-import andius.VoronoiAzgaarMapScreen.Cell;
 import andius.voronoi.nodes.Point;
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class Center {
     public ArrayList<Corner> corners = new ArrayList();
     public ArrayList<Center> neighbors = new ArrayList();
     public ArrayList<Edge> borders = new ArrayList();
-    public Cell cell;
+    public Object cell;
 
     public Center() {
     }
