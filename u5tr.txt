@@ -1,0 +1,4242 @@
+Alistair
+
+Name: Alistair the Bard
+
+Description: a melancholy musician.
+
+Greeting: A fine day to thee <AVATAR NAME> !
+
+Job: I try to lift people's spirits through my music!
+
+Goodbye: Good day to thee, friend!
+
+
+Text information:
+
+    spir or musi: Once, this was a happy place, where all could come to shed the worries of the world for a brief time." <New Line> <New Line> <Key wait> "But now, times have changed and all that remains are memories!
+    memo: Memories of the good times.
+    good or time: When Lord British ruled this land with a firm but just hand.
+    just or hand: 'Tis hard for a monarch to walk the line of power and fairness.
+    line or mona or powe or fair: We miss the true ruler, and yet hope for his return!
+
+Stephen
+
+Name: Stephen
+
+Description: a large, jolly man with a very dirty apron.
+
+Greeting:
+
+Job: I am the lower kitchen chef.
+
+Goodbye: May thou stay as well fed as I am!
+
+
+Text information:
+
+    apr: Well, what dost thou expect! I've been working in the kitchen!
+    cook or chef: I love to cook, especially for banquets!
+    kitc: 'Tis small but well stocked.
+    banq: Alas, we have not had one since the master left us.
+    his or mast: Yes, 'tis very sad, though I hope for his return, so I may once again place roast pheasant before him!
+    roas or phea: 'Twas his favorite.
+    stoc: We have many delicacies from every region of the Kingdom!
+    deli: We even have pheasant!
+    king or regi: All over!
+
+Treanna
+
+Name: Treanna" <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Ask Name>
+
+Description: a young girl.
+
+Greeting: <Goto Label 0>
+
+Job: I am the stable girl.
+
+Goodbye: Goodbye.
+
+
+Text information:
+
+    stab: Lord British's stables are home to many of the finest breeds in the land.
+    val: <Goto Label 1>
+    lord or brit: Alas, he is no longer with us.
+    bree: We have prime examples of most of the major breeds." <New Line> <New Line> <Goto Label 1>
+    smit: <Goto Label 4> 
+
+Label information:
+
+    <Label 0> Greetings, <AVATAR NAME> , nice to see thee again." <New Line> <New Line> <Nothing> 
+
+    <Label 1> What's thy favorite breed?
+        Default: Never heard of that one, must be one of Blackthorn's new creations!
+        val: Hey, mine too!" <New Line> <New Line> <Goto Label 2>
+        step or plou or moun: Well, they're well enough I suppose, but they hath not any true spirit!
+
+    <Label 2> Ever heard of a talking horse?
+        Default: <Goto Label 2>
+        n: A mage from Paws name Bandaii claims one exists! I wish I could remember the horse's name....
+        y: <Goto Label 3> 
+
+    <Label 3> What was its name?
+        Default: No, that's not it.
+        ed: Not that one!
+        smit: <Goto Label 4> 
+
+    <Label 4> That's it!" <New Line> <New Line> <PAUSE> "I have heard it lives in Iolo's barn, by his hut in the deep forest!" <New Line> <New Line> <Nothing> 
+
+Margaret
+
+Name: Margaret
+
+Description: a sprightly old woman.
+
+Greeting: Aye, <AVATAR NAME> , always a pleasure!
+
+Job: I am the upper kitchen chef.
+
+Goodbye: Drop by later for a hot bowl of soup.
+
+
+Text information:
+
+    uppe or kitc or chef: We feed a whole lot o' folks here!
+    folk: We serve mostly guards. Since Lord British left we get few visitors.
+    visi: <Goto Label 0>
+    brit: He took an expedition into the newfound Underworld and was killed!
+    guar: They're a mangy lot, but I loves 'em.
+    food or soup: <Goto Label 2>
+    cold or day: The weather's turned quite bitter since those Shadowlords appeared!
+    weat or shad: Indeed it has!
+
+Label information:
+
+    <Label 0> <If/Else Knows Name> <Goto Label 1> Art thou from around here?
+        Default: Nice to have thee, friend." <New Line> <New Line> <Ask Name>
+        y: I see.
+
+    <Label 1> 'Tis a shame." <New Line> <New Line> <Nothing> 
+
+    <Label 2> Wouldst thou like some hot broth?
+        Default: Ah.
+        y: 'ere, 'ave some. It'll take the chill from thy bones on these cold days." <New Line> <New Line> <Change - Item 65> <PAUSE> <Goto Label 3> 
+
+    <Label 3> Wouldst thou pay 5 crowns to 'elp offset the cost?
+        Default: <Karma - 1> Well, thanks anyway.
+        y: <Gold - 005> Thanks.
+
+Desiree
+
+Name: Desiree
+
+Description: a scruffy young girl.
+
+Greeting:
+
+Job: I help my grandmother prepare the meals!
+
+Goodbye: See ya!
+
+
+Text information:
+
+    gran: Her name is Margaret, and her broth is the best.
+    prep or meal: It's hard work, for we feed a lot of hungry mouths.
+    feed or hung or mout: Those guards eat like bottomless pits... But, none of them are as bad as Lord Stuart the Hungry!
+    lord or stu: He travels around between the towns and castles and eats and eats until they throw him out!" <New Line> <New Line> <Key wait> "I hear he's been working on a magic spell to create food!
+    magi or spel or crea or food: It is not yet perfected, I'm told. Apparently, it only creates a small quantity, much too little for him!
+
+Drudgeworth
+
+Name: Drudgeworth
+
+Description: a unkempt and pitiful soul with a distant stare. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: I didn't do it!" <New Line> <New Line> <Goto Label 1>
+
+Goodbye: <Goto Label 3>
+
+
+Text information:
+
+    sent: For a crime I did not commit.
+    faul or comm or crim: I didn't mean to kill 'er! Honest!
+    who or kill or her: Why doesn't they believes me?" <New Line> <New Line> <PAUSE> <Goto Label 1>
+    chuc: 'Twer his fault really!
+    help: Why, I can show ye where it's hidden!
+    it or wher or hidd: Lets me out, I'll show ye." <New Line> <New Line> <PAUSE> <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Hey, come 'ere!" <New Line> <New Line> <Key wait> "Yer the first soul I've seen in months!" <New Line> <New Line> <Key wait> "Won't ye stay and speak with me a while?
+        Default: <Goto Label 3>
+        y: Chuckles 'ates me! Left me locked up 'ere well beyond me sentence!
+
+    <Label 1> Ye believes me, don't ye?
+        Default: <Goto Label 3>
+        y: Then let me out. I can helps ye!
+
+    <Label 2> Ye will let me out, won't ye?
+        Default: <Goto Label 3>
+        y: Aye, let's go then." <New Line> <END CONVERSATION> 
+
+    <Label 3> Then go! On yer wretched way, <Rune> PIGDOG <Rune> ! Just ye wait 'til I get outta this hole! I'll teach ye to mess with ol' Drudgeworth!" <New Line> <END CONVERSATION> 
+
+Saduj
+
+Name: Saduj
+
+Description: a shifty-eyed man.
+
+Greeting:
+
+Job: I'm the gardener.
+
+Goodbye: Be off!
+
+
+Text information:
+
+    gard: Really! Just inspecting the plants.
+    plan or insp: Thou knowest, watering and the like!
+    wate or like: <Goto Label 0>
+    blac or obje or hide or brit or cham: I know not what it is, but it rests in a sandalwood box.
+    sand or box: If destroyed, there shall be no chance for that scourge British to return!" <New Line> <New Line> <Key wait> <Goto Label 5>
+    join: <Goto Label 5> 
+
+Label information:
+
+    <Label 0> What is the matter..." <New Line> <New Line> <PAUSE> "Dost thou not believe me?
+        Default: I see." <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> For that matter, what art thou doing here?
+        Default: Likely story!" <New Line> <New Line> <Key wait> <Goto Label 2> 
+
+    <Label 2> Art thou with the Oppression?
+        Default: Neither am I.
+        y: <Goto Label 3> 
+
+    <Label 3> Prove it! What's the password?
+        Default: Impostor!" <New Line> <END CONVERSATION>
+        impe: <Goto Label 4> 
+
+    <Label 4> Greetings friend! Knowest thou of my mission?
+        Default: Oh.
+        n: Blackthorn himself sent me here to find an object hidden in Lord British's chambers.
+
+    <Label 5> Might I join thee, that we might work together?
+        Default: Later perhaps.
+        y: Good!" <New Line> <New Line> <Join Party> 
+
+Stillwelt
+
+Name: Stillwelt
+
+Description: a big, mean, nasty, ugly guard! <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job:
+
+Goodbye: Bye!
+
+
+Label information:
+
+    <Label 0> Hey, you!" <New Line> <New Line> <PAUSE> "Dost thou not know that this is a restricted area?
+        Default: <Goto Label 1> 
+
+    <Label 1> Shut up!" <New Line> <New Line> <PAUSE> "Thou art not allowed up here!" <New Line> <New Line> <Goto Label 2> 
+
+    <Label 2> Art thou going to leave on thy own or must I throw thee off the battlements?
+        Default: I didn't catch thy meaning. Didst thou understand me? I said..." <New Line> <New Line> <PAUSE> <Goto Label 2>
+        thro or n: <Call Guards> Thou hadst thy chance!" <New Line> <END CONVERSATION>
+        own or leav or y: Get off the roof, NOW!" <New Line> <END CONVERSATION> 
+
+Chuckles
+
+Name: Chuckles
+
+Description: a bouncing jester!
+
+Greeting:
+
+Job: I am here to welcome and try to entertain!
+
+Goodbye: Let me know if I might entertain thee again!
+
+
+Text information:
+
+    welc: Welcome, welcome, welcome." <New Line> <New Line> <Key wait> "Welcome to the castle of His Royal Majesty, His Eminence, The Immortal, currently missing, feared dead, Lord Cantabrigian British!" <New Line> <New Line> <Key wait> "And, his trustworthy, loyal, helpful, friendly, courteous, kind, obedient, cheerful, thrifty, brave, clean, and reverent..." <New Line> <New Line> <Key wait> "...Jester, Chuckles the Bumble..." <New Line> <New Line> <Key wait> ...That's ME!
+    ente: <Goto Label 0>
+    roya or maje or emin or immo or miss or dead or cant or brit: The same.
+    cast: This one.
+    drud: Who?
+
+Label information:
+
+    <Label 0> Ho eyo he hum!" <New Line> <New Line> <PAUSE> "Ho eyo he hum!" <New Line> <New Line> <PAUSE> "Ho eyo he hum!" <New Line> <New Line> <PAUSE> "Bounce, bounce, bounce, bounce!" <New Line> <New Line> <PAUSE> "Didst thou enjoy that?
+        Default: Oh, I'll do it better this time!" <New Line> <New Line> <PAUSE> <Goto Label 0>
+        y: I thought thou might!
+
+Blackthorn
+
+Name: Blackthorn
+
+Description: the Dark Lord himself! <New Line> <New Line> <PAUSE> <If/Else Knows Name> <Goto Label 0> <Goto Label 4>
+
+Greeting:
+
+Job:
+
+Goodbye:
+
+
+Label information:
+
+    <Label 0> Greetings, <AVATAR NAME> , what an unexpected pleasure!" <New Line> <New Line> <PAUSE> "Wilt thou be staying with us long?
+        Default: I beg to differ!" <New Line> <New Line> <PAUSE> "So very kind of thee to deliver thyself unto me!" <New Line> <New Line> <PAUSE> "Prepare now to meet thy fate! <Call Guards> " <New Line> <END CONVERSATION>
+        y: <Goto Label 2> 
+
+    <Label 2> Hast thou joined us in the Oppression?
+        Default: Then how considerate of thee to turn thyself in..." <New Line> <New Line> <PAUSE> "Guards! Seize this infidel! <Call Guards> " <New Line> <END CONVERSATION>
+        y: <Goto Label 3> 
+
+    <Label 3> Then, surely, thou dost know our password...." <New Line> <New Line> <PAUSE> "What is it?
+        Default: No, I'm afraid that is not it..." <New Line> <New Line> <PAUSE> "Guards! Seize this infidel! <Call Guards> " <New Line> <END CONVERSATION>
+        impe: Fine! With thee on our side, we shall be invincible!" <New Line> <New Line> <PAUSE> "Please, feel free to roam my castle and grounds!" <New Line> <END CONVERSATION> 
+
+    <Label 4> Who dares approach the mighty Blackthorn?" <New Line> <New Line> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <PAUSE> "I think not, let's try again!" <New Line> <New Line> <PAUSE> <Goto Label 4> 
+
+Gorn
+
+Name: Gorn
+
+Description: a mighty-thewed barbarian. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: <Goto Label 0>
+
+Goodbye: Take care.
+
+
+Label information:
+
+    <Label 0> Ah, Brohm be praised! A soul to share my cell!" <New Line> <New Line> <PAUSE> "With me for an escape?
+        Default: Fool!" <New Line> <END CONVERSATION>
+        y: <Goto Label 1> 
+
+    <Label 1> If I helps thee, wilt thou take me with thee?
+        Default: Hmmm." <New Line> <END CONVERSATION>
+        y: <Goto Label 2> 
+
+    <Label 2> I've escaped many times, and been caught as many. I knows this castle likes the backs of me hands!" <New Line> <New Line> <Key wait> <Goto Label 3> 
+
+    <Label 3> In the dead of night we must go out through a secret door that's here behinds me." <New Line> <New Line> <Key wait> "Climbs up onto the roof and sneaks down the northern ladder." <New Line> <New Line> <Key wait> "In Blackthorn's bedroom, go through a secret door, down the ladder on t'other side." <New Line> <New Line> <Key wait> "Through the secret door to the north, down another ladder and out the back gates!" <New Line> <New Line> <Key wait> "Wait there 'til morning when the drawbridge is lowered and flee for our lives!" <New Line> <New Line> <Key wait> "Get all that down?
+        Default: <Goto Label 3>
+        y: Get the keys I hid in the brazier and let's be off!" <New Line> <New Line> <Join Party> 
+
+Unnamed Prisoner
+
+Name: ...." <New Line> <New Line> <PAUSE> "Thou art in grave danger!
+
+Description: a scraggly, tortured soul in tattered garb.
+
+Greeting:
+
+Job: I've been here oh so many months, and all for the breaking of a Law of Virtue!
+
+Goodbye: Don't leave me here! Please unlock my chains!
+
+
+Text information:
+
+    grav or dang: Guards, daemons and Shadowlords abound! Thou must leave before it's too late!
+    guar or daem or shad: Yes, they come here often to beat and taunt me!
+    brea or law or virt: It matters not, they are all a travesty!
+    trav: They defile the foundations of Virtue!
+
+Kraw
+
+Name: Kraw
+
+Description: a simple man with a crooked back.
+
+Greeting:
+
+Job: I tend the horses.
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    hors or tend: Yes, we have a fine stable of thoroughbreds.
+    stab or thor: Indeed, the finest. Why, we have not only the plough and mountain breeds, but even the purest breed of the High Steppes. " <New Line> <New Line> <Key wait> "We lack only the Valorian warhorse, which we still seek!
+    val: That breed we still lack.
+    step or plou or moun: That breed we have.
+
+Weblock
+
+Name: Weblock
+
+Description: a mysterious old mage with a twisted, bony face. <New Line> <New Line> <Key wait> <Goto Label 0>
+
+Greeting:
+
+Job: I am here to aid thee.
+
+Goodbye: Watch thy step.
+
+
+Text information:
+
+    aid: <Goto Label 1>
+    blac: Try up the northern stairs to the throne room, but he usually does not see visitors!
+    gorn or hass: He is a prisoner in the dungeon!
+    kraw: He is likely in the stables.
+    webl: 'Tis I.
+    gall: The chef is probably in the kitchen.
+    foul: The jester is often hard to locate!
+    thro: Try up the northern stairs.
+    kitc: Go up the ladder in the main foyer.
+    foye: Back down the stairs.
+    dung: Take the stairs behind the guardposts, near the front gates.
+    roof: Climb up a corner tower from the dungeon level.
+    stab: Take the ladder down.
+
+Label information:
+
+    <Label 0> Please sign in." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> Where or whom dost thou seek?" <New Line> <New Line> <Nothing> 
+
+Gallrot
+
+Name: Gallrot
+
+Description: fat and greasy man.
+
+Greeting:
+
+Job: I make the slop that feeds this lot of mangy dogs.
+
+Goodbye: Oh, bugger off then.
+
+
+Text information:
+
+    food or slop: A little ol' horse meat, a few young children, that sort of thing." <New Line> <New Line> <Goto Label 0>
+    meat or hors: It's cheap an' plentiful!
+    youn or chil: When we can get 'em!
+    cook or chef: I make the food here.
+    mang or dog: Well, they may not really be dogs, but they sure is mangy!
+
+Label information:
+
+    <Label 0> Care to try some?
+        Default: Don't touch the stuff meself.
+        y: Gulp..." <New Line> <New Line> <PAUSE> "Choke..." <New Line> <New Line> <PAUSE> "Gag..." <New Line> <New Line> <PAUSE> "Spit..." <New Line> <New Line> <PAUSE> "Aye, goes down a bit rough.
+
+Foulwell
+
+Name: Foulwell
+
+Description: a pompous, silly man.
+
+Greeting:
+
+Job: I entertain with tales of the inquisition.
+
+Goodbye: Jingle, jingle!
+
+
+Text information:
+
+    tale or inqu: Why, just the other day, we had a marvelous time, watching a young lady being drawn and quartered!
+    lady or draw or quar: She refused to humble herself to a guard's advances!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Isn't that a riot?
+        Default: Perhaps then, thou wouldst find more humorous the one about the visitor who failed to laugh at the Royal Jester's stories." <New Line> <New Line> <Key wait> "The cook's young nephew was a little brat. He didn't laugh at my jokes, so we threw 'im in the vat!" <New Line> <New Line> <PAUSE> <Goto Label 2>
+        y: <Goto Label 1> 
+
+    <Label 1> Wouldst thou like to join us next time?
+        Default: Just watch thyself, friend!
+        y: I'll be sure to look ye up.
+
+    <Label 2> Ho, ho, ha, ha, he, he..." <New Line> <New Line> <PAUSE> "How 'bout that one, like it?
+        Default: <Call Guards> GUARDS!
+        y: I thank thee.
+
+Hassad
+
+Name: Hassad
+
+Description: an old and blind wizard. <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Goto Label 1>
+
+Greeting:
+
+Job: I am a prisoner, just as thou art now.
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    pris: I was taken from my home in New Magincia.
+    magi: Therein I led a peaceful life.
+    life or peac: Until the Shadowlords found me.
+    foun or shad: I have knowledge Blackthorn seeks.
+    know or blac or seek: That is for me to know.
+    powe or word or coun: <If/Else Knows Name> <Goto Label 2> I don't know of what thou dost speak.
+
+Label information:
+
+    <Label 0> Is that thee <AVATAR NAME> ?
+        Default: Then what dost thou want?
+        y: Oh, good.
+
+    <Label 1> Who is there?" <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <PAUSE> What dost thou want?" <New Line> <New Line> <Nothing> 
+
+    <Label 2> I know of the Great Council, but what maketh thee ask me?
+        Default: I know nothing about it!
+        kaik: She is a fine woman. If she has told thee of me, she must have great faith in thee." <New Line> <New Line> <Key wait> <Goto Label 3>
+        dawn: <Goto Label 3> 
+
+    <Label 3> I presume thou dost seek the Word of Power for the dungeon Hythloth. Are we where I may speak freely?
+        Default: Then I shall wait.
+        y: The Word thou seeketh is <Rune> IGNAVUS <Rune> !
+
+Camile
+
+Name: Camile
+
+Description: a young woman.
+
+Greeting: <Goto Label 0>
+
+Job: I keep the fields.
+
+Goodbye: <If/Else Knows Name> <Goto Label 2> Oh, by the way..." <New Line> <New Line> <Ask Name> " <New Line> <END CONVERSATION>
+
+
+Text information:
+
+    fiel: Unlike the unfortunates living in other parts of the land, our crops grow true and strong!
+    crop or true or stro: Indeed they do!
+    unfo or othe or land: Surely, thou knowest of the ravages of the Dark Lord!
+    shad or rava or dark: Blackthorn sends the Shadowlords unto many townes, but we lie too close to Lord British's castle.
+    blac: The Dark Lord, ya fool!
+    clos or brit or cast: It would seem as though they don't like to get too close to the castle of the True Master!
+    true or mast: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> <AVATAR NAME> , how art thou doing on this fine day?
+        Default: <Goto Label 1> 
+
+    <Label 1> Hmmm... How hath thy journeys fared?
+        Default: I see, what canst I do for thee today?" <New Line> <New Line> <Nothing> 
+
+    <Label 2> Farewell, and a good day to thee, <AVATAR NAME> ." <New Line> <END CONVERSATION> 
+
+    <Label 3> Surely, thou dost agree Lord British is the rightful ruler?
+        Default: Begone, foolish knave!" <New Line> <END CONVERSATION>
+        y: Good.
+
+Phillip
+
+Name: Phillip
+
+Description: a sweaty and soiled farmer.
+
+Greeting: Aye up lad, what's goin' on?
+
+Job: I work these fields, with me chum Dibbs.
+
+Goodbye: <If/Else Knows Name> <Goto Label 0> <Ask Name> " <New Line> <New Line> <Goto Label 0>
+
+
+Text information:
+
+    chum or dibb: That's just me nickname for Christopher.
+    chri: He works the fields with me.
+    farm or fiel: It's an 'ard grind, but I shan't be doin' it long.
+    long or it or grin: I've plans to become an artist!
+    arti: 'Till then I'll just keep workin' 'ere!
+
+Label information:
+
+    <Label 0> Cheerio!" <New Line> <END CONVERSATION> 
+
+Christopher (U5)
+
+Name: Christopher
+
+Description: a dashing young farmer.
+
+Greeting: G'day, <AVATAR NAME> !
+
+Job: I fiddle in the fields to keep me fed.
+
+Goodbye: Ta, mate.
+
+
+Text information:
+
+    dibb: I see thou hast been speakin' with Phillip.
+    phil: He's me mate!
+    mate: Friend.
+    fidd or fiel: I pride myself in a job well done, even if one does not enjoy it.
+    enjo or job or done: What I really enjoy is writing works of fantasy.
+    writ or fant: I'm currently working on an epic called 'Times of Lore!'
+    time or lore: I hope to have it published soon.
+    soon or publ: Through Origin, of course." <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wilt thou buy it?
+        Default: Then I'll be of little help to thee in the future!
+        y: Good!" <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <New Line> "Enchanted, I'm sure, to have met such an enlightened soul.
+
+    <Label 1> What a nice chap thou art." <New Line> <New Line> <Nothing> 
+
+Thentis
+
+Name: Thentis
+
+Description: a young farmer.
+
+Greeting:
+
+Job: I am a farmer." <New Line> <New Line> <Goto Label 0>
+
+Goodbye: Good journeys.
+
+
+Text information:
+
+    resi: Never heard of it.
+    blac: A fine man..." <New Line> <New Line> <PAUSE> "Cough, cough!
+    dawn: To the others!
+
+Label information:
+
+    <Label 0> What dost thou do?
+        Default: <Goto Label 1> 
+
+    <Label 1> Dost thou like it?
+        Default: <Goto Label 2> 
+
+    <Label 2> Art thou helped, or hindered by the new laws?
+        Default: I said..." <New Line> <New Line> <PAUSE> <Goto Label 2>
+        help: Oh.
+        hind: <Goto Label 3> 
+
+    <Label 3> Then might I venture to say that thou doth oppose Blackthorn's new laws?
+        Default: I see.
+        y: <Goto Label 4> 
+
+    <Label 4> Art thou aware that this is heresy?
+        Default: It is!
+        y: <Goto Label 5> 
+
+    <Label 5> Dost thou know of the Resistance?
+        Default: Hmmm...
+        y: <Goto Label 6> 
+
+    <Label 6> Dost thou support it?
+        Default: Oh.
+        y: <Goto Label 7> 
+
+    <Label 7> Dost thou know their password?
+        Default: I see.
+        y: <Goto Label 8>
+        dawn: <Goto Label 9> 
+
+    <Label 8> What is it?
+        Default: Hmmm...
+        dawn: <Goto Label 9> 
+
+    <Label 9> Good..." <New Line> <New Line> <PAUSE> "Sorry about all the questions, but we've got to be careful." <New Line> <New Line> <Key wait> "If thou art with us, meet us by the well at midnight!" <New Line> <New Line> <Key wait> "Mention the password to those attending, but no one else, for spies abound!" <New Line> <END CONVERSATION> 
+
+Joshua (U5)
+
+Name: Joshua" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name> " <New Line> <New Line> <Nothing>
+
+Description: a soiled farmer.
+
+Greeting: Greetings <AVATAR NAME> !
+
+Job: I am a farmer, of course!
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    farm: Our crops grow well.
+    crop: 'Tis on account of the fine soil!
+    soil: This soil grows the best crops.
+    dawn: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> What didst thou say?
+        Default: Oh.
+        dawn: <Goto Label 1> 
+
+    <Label 1> <If/Else Knows Name> <Goto Label 2> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 2> <Nothing> 
+
+    <Label 2> Dost thou serve the Resistance?
+        Default: Oh.
+        y: Good!" <New Line> <New Line> <PAUSE> <Goto Label 3> 
+
+    <Label 3> Shall I tell thee what I know?
+        Default: O.K.
+        y: I've heard much of the Shadowlords." <New Line> <New Line> <Key wait> "If faced in combat, thou art drawn into their plane of existance to do battle." <New Line> <New Line> <Key wait> "It seems that they cannot be killed by normal means, so most who fight them die quickly." <New Line> <New Line> <Key wait> "A few souls have lived to tell that if a Shadowlord is struck down, it will vanish into thin air!" <New Line> <New Line> <Key wait> "Soon after, its twisted soul shall return anew!" <New Line> <New Line> <Key wait> "One named Sutek knows how to destroy them, he lives on a remote isle in the south of the Great Sea!" <New Line> <END CONVERSATION>
+
+Leof
+
+Name: Leof
+
+Description: a burly farm hand.
+
+Greeting:
+
+Job: I work for Miss Vigil
+
+Goodbye: Good day.
+
+
+Text information:
+
+    miss or vigi: She owns the farm.
+    farm: That's where I work.
+    dawn: <Goto Label 0>
+    resi: <Goto Label 1> 
+
+Label information:
+
+    <Label 0> Yes, sunrise is beautiful." <New Line> <New Line> <PAUSE> "Hard to Resist, wouldst thou not agree?
+        Default: Indeed!
+
+    <Label 1> Whom dost thou resist?
+        Default: I see.
+        blac: <Goto Label 2> 
+
+    <Label 2> We too resist his foul, oppressive regime!" <New Line> <New Line> <Key wait> "Hast thou ever faced a Shadowlord?
+        Default: We have heard that here upon the very surface of Britannia there is a place where their energies focus!" <New Line> <New Line> <Key wait> "Just where it is we have not learned, but thou might learn more if thou dost seek out Sir Sean, who lives..." <New Line> <New Line> <Key wait> "Ah yes, in the Lycaeum on Dagger Isle." <New Line> <New Line> <Key wait> "If thou canst find him, ask of Stonegate!Mayhap those Spectres can be dispatched from this plane of existence!" <New Line> <END CONVERSATION> 
+
+Vigil
+
+Name: Vigil
+
+Description: a strong, tall woman
+
+Greeting:
+
+Job: I make my living by farming.
+
+Goodbye: Good hunting!
+
+
+Text information:
+
+    livi or farm: <Goto Label 0>
+    adve or roam or land or warr: That was before!
+    befo: Never mind.
+    neve: That's right! Never mind!" <New Line> <END CONVERSATION>
+    dawn: <Goto Label 1>
+    them or frie: Thentis, Joshua, and Leof!
+    then or josh or leof: We adventured together!
+    lear or much: That was before the Shadowlords!
+    shad: My friends and I learned much about them before we retired. Talk to them!
+
+Label information:
+
+    <Label 0> I do now, but once I roamed the land as a warrior!" <New Line> <New Line> <PAUSE> "Dost thou believe me?
+        Default: Try me then, fool!" <New Line> <END CONVERSATION>
+        y: Thou art perceptive!
+
+    <Label 1> Hmmm..." <New Line> <New Line> <PAUSE> "I guess that thou art with the Resistance, yes?
+        Default: O.K. have it your way.
+        y: <Goto Label 2> 
+
+    <Label 2> Canst thou prove it?
+        Default: <Goto Label 2>
+        y: I doubt it!" <New Line> <END CONVERSATION>
+        n: <Goto Label 3> 
+
+    <Label 3> At least thou art honest!" <New Line> <New Line> <Key wait> "I feel thou art trustworthy." <New Line> <New Line> <Key wait> "Before, when my friends and I were a band of stalwart adventurers, we learned much!" <New Line> <New Line> <Nothing> 
+
+Kurt
+
+Name: Kurt
+
+Description: a young boy
+
+Greeting: None
+
+Job: I am the stable boy.
+
+Goodbye: Good bye!
+
+
+Text information:
+
+    stab or boy: I tend the horses.
+    tend: I feed and groom them.
+    feed: Oats and hay, mostly.
+    oat: And hay.
+    hay: And oats.
+    groo: It's hard work but I enjoy the horses.
+    hors: We have many breeds.
+    bree: Well...." <New Line> <New Line> <PAUSE> "We have Ploughhorses, the Mountain breed, and those from the Steppes!" <New Line> <New Line> <Key wait> "Unfortunately, we don't have any Valorian purebreds, But they do over in the castle!" <New Line> <New Line> <Key wait> <Goto Label 0>
+    plou or moun or step: We have those.
+    val or cast or trea: I am sure Treanna would love to talk to thee about horses, especially Valorian horses!
+
+Label information:
+
+    <Label 0> Hast thou ever seen one?
+        Default: My friend Treanna and I both love them. Treanna works in the castle and gets to see them every day!
+
+Sir Adam
+
+Name: Sir Adam the Torch
+
+Description: a man with singed eyebrows and charred clothes, holding a blackened box.
+
+Greeting:
+
+Job: I seek to improve water travel!
+
+Goodbye: See 'ya!
+
+
+Text information:
+
+    wate or trav or blac or box: Look out, this might explode.
+    expl: Should be safe enough, though. What harm could a fire do, especially on board a ship!?
+    fire or ship: 'Twas Squire Jimmy's fault, indeed. I told him to keep that torch away from my experiment, but nooo! He never listens!
+    expe or idea: I found that a mixture of sulfur ash, mandrake, and the powder they fire cannons with will unleash great power when burned!
+    unle or powe: Enough to make a ship sail sixscore knots faster!" <New Line> <New Line> <PAUSE> "For a second or two, anyway." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> This could be a great breakthrough, dost thou agree?
+        Default: Hmph!" <New Line> <END CONVERSATION>
+        Y: I wish I could convince Master Hawkins.
+
+Squire Jimmy
+
+Name: Squire Jimmy
+
+Description: a wide-eyed young boy <New Line> <New Line> <If/Else Knows Name> <Nothing> <Goto Label 0>
+
+Greeting:
+
+Job: I am apprenticed to Master Hawkins!
+
+Goodbye: Come back and see us ever and anon!
+
+
+Text information:
+
+    hawk: Hawkins, the third generation master shipwright!
+    ship or mast or appr: His grandfather designed the HMS Cape, fastest ship that ever sailed! Now Master Hawkins and his servants ply the family trade.
+    trad or serv or fami: Shipbuilding!
+    cape or hms: Master Hawkins misplaced the plans for 'er long ago, and nothing since has been so fast. Still, we try many new ideas!" <New Line> <New Line> <Key wait> <Nothing>
+    idea: Ask Sir Adam!
+
+Label information:
+
+    <Label 0> I say, thou dost seem rather well-travelled. What news of the world hath thee?
+        Default: Ah, that's the same news as anyone else's. They teach us in school that 'tis all for the common good. I suppose that we're to believe what we're taught." <New Line> <New Line> <Key wait> <Ask Name> " <New Line> <New Line> <Nothing>
+
+Flint
+
+Name: Flint
+
+Description: a short, bearded stump of a man
+
+Greeting:
+
+Job: I work me forge, craftin' fine ship parts!
+
+Goodbye: Come back anytime, I'll be here.
+
+
+Text information:
+
+    part or forg or ship: Nowadays, they're turnin' to all this newfangled magical stuff to run ships, an' away from the days of sweat and iron!
+    swea or iron or stuf or magi or days: In my younger days, we thought it queer to use aught but what grew by the beaches in the vessels we made." <New Line> <New Line> <Key wait> "And proud we were indeed of our handiwork, even when it sank." <New Line> <New Line> <Key wait> "Then, just as I learned the craft, we began to make use of more iron and steel than wood. An' things were just fine up 'til now.
+    til or unti or now: Now with all that magic, no one knows what's goin' on!
+
+Glinkie
+
+Name: Glinkie
+
+Description: a wisened adventurer!
+
+Greeting:
+
+Job: I've come to Paws to visit the guild.
+
+Goodbye: Until we next meet.
+
+
+Text information:
+
+    guil: I hear they have some of the best gems made.
+    gem: I am searching for the mystic Shrine of Spirituality, and feel they would be of good use!
+    spir or shri: I fear it was destroyed!
+    dest: <Goto Label 0>
+    word or powe: Whilst at the destroyed shrine, yell the word of power." <New Line> <New Line> <Key wait> "Then meditate upon the Shrine's virtue with the proper Mantra for three cycles.
+
+Label information:
+
+    <Label 0> Dost thou know where to find it?
+        Default: Too bad.
+        y: <Goto Label 1> 
+
+    <Label 1> Where?
+        Default: I don't think so.
+        moon or mid or gate or equa: <Goto Label 2> 
+
+    <Label 2> Art thou saying that I must enter a Moongate to reach the Shrine of Spirituality?
+        Default: Oh.
+        y: <Goto Label 3> 
+
+    <Label 3> At midnight?
+        Default: Oh.
+        y: Oh, no wonder I never found it!" <New Line> <New Line> <Key wait> "Well, that one is likely safe then..." <New Line> <New Line> <Key wait> "But, should thou see one destroyed..." <New Line> <New Line> <Key wait> "Remember they can be restored with the Words of Power!
+
+Bandaii
+
+Name: Bandaii
+
+Description: a mysterious mage.
+
+Greeting:
+
+Job: I seek a magical beast.
+
+Goodbye: Farewell friend.
+
+
+Text information:
+
+    magi or beas: Since the last age, rumours abound of a legendary horse!
+    rumo or lege or hors: I search for Smith, the notorious talking horse!
+    smit or talk: I do not doubt the rumours, but this I must see for myself!" <New Line> <New Line> <Goto Label 0>
+    magi or fly or carp: Yes, I once had a magic flying carpet." <New Line> <New Line> <Key wait> "I wilt tell thee where it was, if thou wilt help me find the talking horse!
+    iolo or hut: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Dost thou believe in talking horses?
+        Default: Too bad.
+        y: <Goto Label 1> 
+
+    <Label 1> Hast thou seen one?
+        Default: Too bad.
+        y: <Goto Label 2> 
+
+    <Label 2> Was it Smith?
+        Default: Think of that, another!
+        y: <Goto Label 3> 
+
+    <Label 3> Where didst thou see him?
+        Default: Unlikely.
+        iolo or hut: At last!" <New Line> <New Line> <PAUSE> "For thy efforts I will tell thee that I gave a magical carpet to Lord British himself!" <New Line> <New Line> <Key wait> "He kept it in his private chamber atop his castle! If thou can get it, I'm sure thou can use it." <New Line> <END CONVERSATION> 
+
+Ava
+
+Name: Ava
+
+Description: a pretty young girl.
+
+Greeting: Welcome, <AVATAR NAME> .
+
+Job: My sister and I care for this temple.
+
+Goodbye: Lead a life of Virtue.
+
+
+Text information:
+
+    temp: The Temple of Virtue.
+    sist: Leona.
+    virt: Here, we hold the Eight Virtues sacred." <New Line> <New Line> <Goto Label 0>
+    eigh or sacr: Indeed we do.
+    fals or shar: <Goto Label 4>
+    visi: Ask my sister!
+
+Label information:
+
+    <Label 0> Dost thou wish to make an offering?
+        Default: Do as thou wilt.
+        y: <Goto Label 1> 
+
+    <Label 1> <If/Else Knows Name> <Goto Label 2> We welcome thee." <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 3> <Goto Label 2> 
+
+    <Label 2> We ask for 5 gold crowns, wilt thou give?
+        Default: As thou wilt.
+        y: <Gold - 005> We thank thee.
+
+    <Label 3> We ask for 5 gold crowns, wilt thou give?
+        Default: As thou wilt.
+        y: <Gold - 005> <Karma + 1> <Karma + 1> <Karma + 1> <Karma + 1> <Karma + 1> We thank thee.
+
+    <Label 4> Art thou the Avatar of legend?
+        Default: Virtue makes no mistakes." <New Line> <New Line> <PAUSE> "We shall tell thee what we know of the Shard of Falsehood." <New Line> <New Line> <Key wait> "Ask my sister of her vision!
+
+Leona
+
+Name: Leona
+
+Description: a pretty young girl.
+
+Greeting:
+
+Job: We care for the temple.
+
+Goodbye: Bye.
+
+
+Text information:
+
+    temp: The Temple of Virtue.
+    sist: Ava.
+    fals or virt or shar: Talk with my sister.
+    visi: In the deep of night, many moons ago, a vision came unto my sister and I..." <New Line> <New Line> <Key wait> "We saw the Shard of Falsehood deep below a dungeon named Deceit." <New Line> <New Line> <Key wait> "The path that was revealed traveled first southwest across many high peaks, opening to a large system of caverns." <New Line> <New Line> <Key wait> "Then the way led southwest. At a major intersection it turned northwest, soon branching northeast." <New Line> <New Line> <Key wait> "After a long journey northward, the passage turned west. Here the path went on to rocky hills to the southwest, then turned northwest." <New Line> <New Line> <Key wait> "Over a lake it ran, unto a massive series of great falls, ending in a larger lake." <New Line> <New Line> <Key wait> "Here, upon a small isle, lies the Shard of Falsehood!
+
+Ambrose
+
+Name: Ambrose
+
+Description: a frail and injured fighter.
+
+Greeting:
+
+Job: I am resting.
+
+Goodbye: Good luck, thou shalt need it!
+
+
+Text information:
+
+    rest: A long and brutal battle 'twas.
+    long or brut or batt: I was deep below the surface of Britannia, in search of the fabled mystic weapons of the Avatar!
+    myst or weap or avat: I had heard that they lay at the foundation of the Great Abyss!
+    abys: Though the Abyss is gone, I descended through the mines of Hythloth to search out the mystics.
+    sear or mine or hyth: Within the Underworld, where the Abyss once was, the lava still flows, north of the underground entrance of Hythloth." <New Line> <New Line> <Key wait> "'Tis there, northward across cavernous peaks from the dungeon, amidst the boiling lava, that the mystic arms are said to lie!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou seek the fate of Lord British?
+        Default: I see.
+        y: Remember only the Mystic arms work near great evil. Only such evil could hold our lord!
+
+Thorkin
+
+Name: Thorkin
+
+Description: a broad-chested, burly man.
+
+Greeting: Ahar there, <AVATAR NAME> .
+
+Job: I be a blacksmith.
+
+Goodbye: If'n ye haves need of a smithy, gimme a shout, matey!
+
+
+Text information:
+
+    blac: I works metal fer The Rusty Bucket an' Buccaneer's Booty.
+    forg or meta: Iron.
+    rust or buck: I makes the iron rivets 'n bindins fer their ships.
+    bucc or boot: I forge most all er' thems fine weapons.
+    fine or weap: Sharp swords and nasty daggers!
+    rive or bind or ship: Only the best.
+    swor: Good fer slitt'n the gullet of a fat merchant." <New Line> <New Line> <Key wait> <Goto Label 0>
+    dagg: Sharp 'n deadly!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Interested in makin' a purchase?
+        Default: <Goto Label 0>
+        n: Too bad.
+        y: Talk to Kitiara, I'm sure ye'll be more'n satisfied!" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name> 
+
+Scally
+
+Name: Scally
+
+Description: a chubby old bard.
+
+Greeting:
+
+Job: Likin' ye might expect, I entertain.
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    expe or ente: Why, I is the best singer 'ere in this whole towne!" <New Line> <New Line> <Key wait> "'Course, I is the only singer in this whole towne..." <New Line> <New Line> <Key wait> "No matter..." <New Line> <New Line> <Key wait> <Goto Label 0>
+    pira or davi: A real nasty ol' bloke I 'ear!
+    nast or blok or crot or misb: Aye, but I've also 'eard he was a great inventor!
+    inve: Some say he's made a strange tool to aid in navigation.
+    tool or navi: I believes he called it a..." <New Line> <New Line> <PAUSE> "Err..." <New Line> <New Line> <PAUSE> "Ahh..." <New Line> <New Line> <PAUSE> "Umm..." <New Line> <New Line> <PAUSE> "...Sextant.
+    sext or wher: No one knows just where ol' David's off to, but I've 'eard some speculat'n he's runnin' a lighthouse.
+
+Label information:
+
+    <Label 0> Wouldst ye likes me to sing ye a song, there mate?
+        Default: <Goto Label 0>
+        n: Ah.
+        y"There once was a pirate named David, so crotchety and misbehav'd." <New Line> <New Line> <Key wait> "And then one day, he sailed away, only to where, he would not say.: @Bidney
+        a scruffy, smelly man.:
+        I loves to drink!: Hic.
+        drin: Rum, that's me favorite." <New Line> <New Line> <PAUSE> "Hic!" <New Line> <New Line> <PAUSE> "'Scuse me.
+        rum: Yo ho ho!
+        ho or yo: And a bottle of rum!
+        bott: Of rum!" <New Line> <New Line> <PAUSE> <Goto Label 0>
+        moun or clim or grap: Grapple of Rum!" <New Line> <New Line> <PAUSE> "Hic!" <New Line> <New Line> <PAUSE> <Goto Label 3>
+        pira: <Goto Label 4> 
+
+    <Label 0> Ey, got any?
+        Default: Hic, oh.
+        y: <Goto Label 1> 
+
+    <Label 1> Might I have a li'l taste?
+        Default: <Goto Label 2>
+        y: <Goto Label 3> 
+
+    <Label 2> Please?
+        Default: Grumble... Hic!
+        y: Aye, thanks mate!... Hic!
+
+    <Label 3> Didst ye ask me 'bout mountain climb'n?
+        Default: I used to be a..." <New Line> <New Line> <PAUSE> "Hic..." <New Line> <New Line> <PAUSE> "Mountain climber..." <New Line> <New Line> <PAUSE> "Gave it up..." <New Line> <New Line> <PAUSE> "Too dangerous..." <New Line> <New Line> <PAUSE> "So, I 'came a pirate!
+
+    <Label 4> Gave me grapple to a man named Lord Michael..." <New Line> <New Line> <PAUSE> "Lived o'er at the Emapthical Abbeyneyney..." <New Line> <New Line> <PAUSE> "Hic... Zzzzz..." <New Line> <END CONVERSATION> 
+
+Bidney
+
+Name: Bidney
+
+Description: a scruffy, smelly man.
+
+Greeting:
+
+Job: I loves to drink!
+
+Goodbye: Hic.
+
+
+Text information:
+
+    drin: Rum, that's me favorite." <New Line> <New Line> <PAUSE> "Hic!" <New Line> <New Line> <PAUSE> "'Scuse me.
+    rum: Yo ho ho!
+    ho or yo: And a bottle of rum!
+    bott: Of rum!" <New Line> <New Line> <PAUSE> <Goto Label 0>
+    moun or clim or grap: Grapple of Rum!" <New Line> <New Line> <PAUSE> "Hic!" <New Line> <New Line> <PAUSE> <Goto Label 3>
+    pira: <Goto Label 4> 
+
+Label information:
+
+    <Label 0> Ey, got any?
+        Default: Hic, oh.
+        y: <Goto Label 1> 
+
+    <Label 1> Might I have a li'l taste?
+        Default: <Goto Label 2>
+        y: <Goto Label 3> 
+
+    <Label 2> Please?
+        Default: Grumble... Hic!
+        y: Aye, thanks mate!... Hic!
+
+    <Label 3> Didst ye ask me 'bout mountain climb'n?
+        Default: I used to be a..." <New Line> <New Line> <PAUSE> "Hic..." <New Line> <New Line> <PAUSE> "Mountain climber..." <New Line> <New Line> <PAUSE> "Gave it up..." <New Line> <New Line> <PAUSE> "Too dangerous..." <New Line> <New Line> <PAUSE> "So, I 'came a pirate!
+
+    <Label 4> Gave me grapple to a man named Lord Michael..." <New Line> <New Line> <PAUSE> "Lived o'er at the Emapthical Abbeyneyney..." <New Line> <New Line> <PAUSE> "Hic... Zzzzz..." <New Line> <END CONVERSATION> 
+
+Sven
+
+Name: Sven
+
+Description: a swarthy pirate.
+
+Greeting:
+
+Job: I'm a pirate!!!
+
+Goodbye: I need a drink!
+
+
+Text information:
+
+    pira: Aye, but once upon a time, I was a glassblower.
+    glas: Used to make fine and wonderful things, I did.
+    fine or wond or thin: Oh, sculptures, crystals and the like.
+    scul or crys or like: Aye, fine they were too." <New Line> <New Line> <Key wait> "But, there were'nt much money in it, so I 'came a pirate!
+    glas or swor or weap: I once tried to make glass weapons, but all my attempts failed." <New Line> <New Line> <Key wait> "I have heard, though, of magically enhanced crystalline swords of great power!
+    magi or enha or crys or grea or powe: They were said to have been lost in the Serpent's Spine by the captain of a great airship.
+    capt or air or ship: Airships sound like a heap of nonsense if thou wert to ask me!
+
+Lord Dalgrin
+
+Name: Lord Dalgrin
+
+Description: a tall man in pirate attire. <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> "Greet'ns stranger, I am Lord Dalgrin." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: <Goto Label 0>
+
+Goodbye: Watch out fer them keel haulin' seadogs of that Blackthorn feller.
+
+
+Text information:
+
+    bloo: Dead foes don't talk!
+    pira: I plunder where'er the winds take me.
+    wind or sea: I been 'round the world many a time!
+    dead or foes: I've had my share.
+    roun or worl or time or shar: More'n I can count." <New Line> <New Line> <PAUSE> "But today, I thinks I'll just relax an 'ave a drink with Tierra!
+    drin: Rum, me thinks.
+    rum: Smart arse!
+    tier: Aye, she's a feisty wench..." <New Line> <New Line> <PAUSE> "But, give'r a drink and she'll oft'n 'ave a bit a news fer ya.
+
+Label information:
+
+    <Label 0> Avast ye mate, surely thou dost know who I am, don't ye?
+        Default: Why, I am the most bloodthirsty pirate to sail the seas.
+
+    <Label 1> Why, shiver me timbers, if it ain't ol' <AVATAR NAME> !" <New Line> <New Line> <Nothing> 
+
+Tierra
+
+Name: Tierra
+
+Description: a feisty wench.
+
+Greeting: A goodly day unto thee <AVATAR NAME> .
+
+Job: <If/Else Knows Name> <Goto Label 0> What makes ye think it's any o'thee business?
+
+Goodbye: <If/Else Knows Name> <Goto Label 1> Beat it!
+
+
+Text information:
+
+    busi: None of yours.
+    drin: Sure, I'll drinks with ye..." <New Line> <New Line> <PAUSE> If'n I canst only find my glass.
+    glas: I left it round 'ere somewhere.
+    roun or ere or some: I canst not seem to remember.
+    reme: Speak'n of which..." <New Line> <New Line> <If/Else Knows Name> <Goto Label 2> <PAUSE> "I canst not remember yer name..." <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 2> <Nothing> 
+
+Label information:
+
+    <Label 0> <AVATAR NAME> , thou ought to know by now." <New Line> <New Line> <Nothing> 
+
+    <Label 1> See ya later, <AVATAR NAME> ." <New Line> <END CONVERSATION> 
+
+    <Label 2> Dost ye think me pretty?
+        Default: <Goto Label 2>
+        n: Thou hast the beauty of an orc thyself!" <New Line> <END CONVERSATION>
+        y: <Goto Label 3> 
+
+    <Label 3> I likes thee, perhaps I canst help thee!" <New Line> <New Line> <Key wait> "Dost ye wish ye couldst climb mountains?
+        Default: Well, Bidney here used to..." <New Line> <New Line> <Key wait> "Talk to him 'bout mountain climb'n.
+
+Geoffrey
+
+Name: Geoffrey
+
+Description: a large and impressive fighter." <New Line> <New Line> <Key wait> " <AVATAR NAME> !" <New Line> <New Line> "Greetings, and well met!" <New Line> <New Line> <Key wait> "'Tis I, Geoffrey, thy old friend of battles past!" <New Line> <New Line> <Key wait> <Goto Label 0>
+
+Greeting:
+
+Job: I await thy request to join with thee in battle!
+
+Goodbye: Come for me soon!
+
+
+Text information:
+
+    trou: With Blackthorn and the Shadowlords!
+    blac: Indeed, what a tyrant!
+    shad: Such foul spectres of Evil!
+    tyra or spec or evil: <Goto Label 2>
+    join: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> Have the years treated thee well?
+        Default: <Goto Label 0>
+        n: That is unfortunate." <New Line> <New Line> <Goto Label 1>
+        y: Ah, that is good." <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> I presume thou hast heard of our troubles." <New Line> <New Line> <Nothing> 
+
+    <Label 2> Is it time we set off against them?
+        Default: <Goto Label 2>
+        n: Soon, I hope.
+        y: <Goto Label 3> 
+
+    <Label 3> Shall I join thy party now?
+        Default: <Goto Label 3>
+        n: Soon, I hope.
+        y: I am eager for battle!" <New Line> <New Line> <Join Party> 
+
+DWELLING.TLK
+Jennifer
+
+Name: Jennifer
+
+Description: a weathered young girl.
+
+Greeting:
+
+Job: I live here and help my grandpa with the light.
+
+Goodbye: A good night to thee!
+
+
+Text information:
+
+    gran: He is old, but very wise.
+    ligh: We keep the light shining through storms and darkness to help guide ships safely to port.
+    stor or dark: Many would die if this light were not to shine.
+    port: The port of Britanny.
+    brit: North and east of here thou shalt find its pier.
+    wise: He once was a great mariner!
+    mari: He has travelled throughout the Great Sea.
+    sea: Thou should ask him of his travels!
+
+Jotham
+
+Name: Jotham
+
+Description: a crusty old sea dog smoking a pipe. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: I once sailed upon the open seas.
+
+Goodbye: Watch out for reefs!
+
+
+Text information:
+
+    trav or sail or seas: 'Twas many years ago, when I was much younger.
+    youn: Now, I leave such things to others.
+    thin or othe: The seas are very dangerous these days.
+    dang or thes or days: I've heard rumours of great whirlpools, caused by the collapse of caverns deep below the ocean floor in the Underworld.
+    unde or cave or whir: There are some who say that the ships they drag under lie beached deep within the recesses of the earth.
+    deep or rece or eart: They are even those who claim that some survive the perilous journey below." <New Line> <New Line> <Key wait> "Only to be killed and eaten by the horrible creatures that dwell in the dark recesses.
+    rum: Aye, 'tis my favorite.
+
+Label information:
+
+    <Label 0> Ahoy there, matey. Care to join me for a tot of rum?
+        Default: Pardon me if I do.
+        y: 'ere ye are, mate!
+
+Windmire
+
+Name: Windmire
+
+Description: an old seaman with a flowing white beard.
+
+Greeting:
+
+Job: I tend this lighthouse, here with my wife.
+
+Goodbye: Leave a good watch on board, if thou dost leave thy ship in the port of Minoc.
+
+
+Text information:
+
+    wife: Her name is Emilly. She helps me with the light.
+    ligh: We help ships reach the harbour safely at night or in a storm.
+    harb or nigh: Indeed, this is a busy port. We are frequented by merchant ships from around the world.
+    worl or merc or freq or port: Minoc has a well-known shipwright, as well as a fine armourer!
+    mino: Minoc is the City of Sacrifice!
+    ship: A man named Captain Blythe runs that renowned establishment called the Crow's Nest.
+    armo: Indeed, Shenstone of the Darkwatch Armoury is famous for his fine leather work!
+    blyt: I hear he's got a heart blacker than gunpowder!
+    shen: Don't know the man myself.
+    acci or mate or scot: I don't wish to talk about it.
+
+Emilly
+
+Name: Emilly
+
+Description: a fine and hardened woman.
+
+Greeting:
+
+Job: I tend the light with my husband, Windmire.
+
+Goodbye: A good day to thee.
+
+
+Text information:
+
+    tend or ligh: 'Tis pleasant, peaceful work.
+    husb or wind: He was a fine sailor.
+    was or sail: That was before the accident.
+    acci: His best shipmate died in a storm whilst trying to reach this port." <New Line> <New Line> <Key wait> "Since that day, Windmire has dedicated his life to protecting these shipping lanes.
+    prot or ship or lane: He arranged for the construction of this lighthouse, as well as the breakwater around the pier area.
+    mate: His name was Scotty and he was a fine lad.
+    scot: He was a fine lad. Yelled something about a 'beam' just 'fore he died. Gave Windmire the idea for the lighthouse, he did.
+
+Anthony
+
+Name: Anthony
+
+Description: a lively young boy.
+
+Greeting: Oh, 'tis thee.
+
+Job: Well, I do my chores every day.
+
+Goodbye: Good bye.
+
+
+Text information:
+
+    chor: I do my studies and clean my room.
+    stud: I am studying Virtue.
+    clea or room: Yes, my parents make me clean it every day!
+    moth or fath or pare: My mother's name is Charlotte and my father's name is David.
+    char: Yes, she is my mother.
+    davi: He is my father.
+    virt: Blackthorn's Eight Laws of Virtue!
+    blac or eigh or laws: I must learn to recite them.
+    reci: I can't yet." <New Line> <New Line> <Key wait> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Nothing> 
+
+Label information:
+
+    <Label 0> Dost thou live by Virtue?
+        Default: Then thou art a bad person!
+        y: <Goto Label 1> 
+
+    <Label 1> Art thou an Avatar?
+        Default: Thou should study too.
+        y: <Goto Label 2> 
+
+    <Label 2> If I study Blackthorn's laws well, will I become an Avatar?
+        Default: <Goto Label 3>
+        y: Good!
+
+    <Label 3> Why, are his laws in error?
+        Default: Then thou art not being very kind!
+        y: I do not believe thee! He would not lie to us!" <New Line> <END CONVERSATION> 
+
+Charlotte (U5)
+
+Name: Charlotte
+
+Description: a young woman.
+
+Greeting:
+
+Job: I live here with my husband and son, and maintain the lighthouse!
+
+Goodbye: May thou walk the true path of the Eight Laws.
+
+
+Text information:
+
+    husb: His name is David.
+    davi: He is a fine figure of a man.
+    son: My son's name is Anthony.
+    anth: He is my son.
+    main or ligh: 'Tis quiet work.
+    quie: 'Tis the ideal climate for an amateur philosopher like myself.
+    amat or phil: I ponder the virtues of Avatarhood.
+    virt or avat: Indeed, I believe there is a lot of merit in the premise of Blackthorn's First Law.
+    prem or law or firs or one: We must look at the very roots of dishonesty, and see it comes from the twisted tongues of liars." <New Line> <New Line> <Key wait> "And, surely, one cannot lie without a tongue!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wouldst thou agree, the teachings of Blackthorn are meaningful and true?
+        Default: Hold thy tongue, heretic, or thou shalt lose it!
+        y: Thou art a wise and truthful scholar.
+
+David
+
+Name: David
+
+Description: a crotchety old man.
+
+Greeting:
+
+Job: What dost ye thinks I do? Ye mangy dog!
+
+Goodbye: Good riddance!
+
+
+Text information:
+
+    tend or ligh or main: Good guess, ya scum!
+    wit or dim: Aye, now I know that I speak the truth! Ye must have the brains of a jellyfish!
+    son or anth: He's a brat of a kid!
+    wife or char: Aye, she's a good woman, but she's got some strange ideas.
+    stra or idea: Ask 'er!
+    sext: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Aye, shiver me timbers, so ye've 'eard of me great invention?
+        Default: 'Den what are ye babbling 'bout!
+        y: <Goto Label 1> 
+
+    <Label 1> Obviously, thou art a person of exceptional wisdom!" <New Line> <New Line> <Key wait> "So, me matey, does ya think me invention were a good one?
+        Default: What dost thou know!" <New Line> <END CONVERSATION>
+        y: <Goto Label 2> 
+
+    <Label 2> Thou dost speak true!" <New Line> <New Line> <PAUSE> "Wouldst thou like one I've made with me own hands?
+        Default: Harumph!" <New Line> <END CONVERSATION>
+        y: <Change - Item 72> 'ere ye are mate, use it wisely and thou shalt profit by it!" <New Line> <END CONVERSATION> 
+
+Gregory
+
+Name: Gregory
+
+Description: a tall, heavily scarred man. <New Line> <New Line> "What in the name of Mondain art ye doing in me lighthouse!" <New Line> <New Line> <Key wait> <Goto Label 0>
+
+Greeting:
+
+Job: Now that's a real poser!
+
+Goodbye: And a good riddance, too.
+
+
+Text information:
+
+    ligh: Yes, ye did guess it, ya bloomin' plonker!
+
+Label information:
+
+    <Label 0> Didst ye not know this is private property?
+        Default: <Goto Label 1> 
+
+    <Label 1> Were ye born that ugly, or didst ye lose a fight with a frying pan?
+        Default: Not only ugly, but yer stupid too!" <New Line> <New Line> <PAUSE> "What dost ye want anyway?
+
+Jacqueline
+
+Name: Jacqueline
+
+Description: a bony woman with a blank stare.
+
+Greeting:
+
+Job: I, uh..." <New Line> <New Line> <PAUSE> "don't remember.
+
+Goodbye: Uh, bye....
+
+
+Text information:
+
+    reme: Remember what?
+    star: Oh, am I?
+    y: Sorry.
+    mud: Mmmmm, my favorite!
+
+Sutek
+
+Name: Sutek
+
+Description: a young, solemn mage. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job:
+
+Goodbye:
+
+
+Label information:
+
+    <Label 0> Greetings, I am Sutek." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <END CONVERSATION> 
+
+    <Label 1> Art thou the Avatar of legend?
+        Default: Oh." <New Line> <END CONVERSATION>
+        y: I have been scrying for the nature of the three Shards!" <New Line> <New Line> <Key wait> "I have learned they were formed at the time of the first Dark Lord." <New Line> <New Line> <Key wait> "When Mondain's Gem of Immortality was destroyed, its shards still harbored unspeakable evil!" <New Line> <New Line> <Key wait> "They lay festering deep within the earth, but now their malevolent power has been unleashed upon the world." <New Line> <New Line> <Key wait> "The Shards and the Shadowlords can and must be destroyed!" <New Line> <New Line> <Key wait> "The Shards must be recovered from their resting places in the boundless Underworld, and cast into the Eternal Flames of Truth, Love, and Courage..." <New Line> <New Line> <Key wait> "Even as each respective Shadowlord stands nigh upon the flame of the Principle it opposes." <New Line> <New Line> <Key wait> "Take now this knowledge and use it well!" <New Line> <END CONVERSATION> 
+
+Sin'Vraal
+
+Name: Sin'Vraal
+
+Description: a huge, horned, leather-winged daemon.
+
+Greeting:
+
+Job: I once served the mighty Astaroth, but that was long ago.
+
+Goodbye: I bid thee a safe journey.
+
+
+Text information:
+
+    asta: Speak not that name in too loud a voice, lest thou summon the Shadowlord of Hatred!
+    summ or shad or hat: Beware, for they who yell their Names, oft die at the will of the foul wraiths!
+    foul or wrai or once or serv: No longer do I serve Evil, for deep below the earth did the Once and True King show me the paths of Virtue!
+    virt or king or belo or eart or deep: I can only tell thee that he has turned me from the ways of darkness, but he'll have no such luck with the Shadowlords!
+    shar: The accursed Shard of Hatred that spawned my former master lies within the underworld at the location thou wouldst call <Rune> I <Rune> ' <Rune> A <Rune> ", <Rune> I <Rune> ' <Rune> A <Rune> "" <New Line> <New Line> <Key wait> "Enter through the dungeons by Lost Hope Bay!
+
+Grendel
+
+Name: Grendel
+
+Description: a giant rat! <New Line> <New Line> "Squeek..." <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> "Squeek..." <New Line> <New Line> <PAUSE> "What dost thou want?" <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: I once was a great alchemist!
+
+Goodbye: Squeek!
+
+
+Text information:
+
+    alch: Squeek..." <New Line> <New Line> <PAUSE> "That was before my accident!
+    acci: Squeek..." <New Line> <New Line> <PAUSE> "I was working on a spell called: <New Line> <Rune> VAS REL XEN BET <Rune> <New Line> It got a little out of hand.
+    spel or hand or vas: It was to be an enchantment to turn foes into rats.
+    rat: Squeek..." <New Line> <New Line> <PAUSE> "During an early experiment I was transformed into a rat!" <New Line> <New Line> <PAUSE> "I have since perfected a lesser version.
+    less or vers or perf: I call it <Rune> REL XEN BET <Rune> . It is of the Sixth Circle, and will turn one being into a rat for fair time!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wouldst thou like the formula?
+        Default: O.K.
+        y: It requires that one part spider silk be mixed with a pinch of sulfurous ash..." <New Line> <New Line> <Key wait> "...with a crushed root of mandrake and spores scraped from a nightshade cap.
+
+Smith the Horse
+
+Name: Smith
+
+Description: a strangely familiar horse. <New Line> <New Line> <If/Else Knows Name> <Goto Label 3> <Goto Label 0>
+
+Greeting:
+
+Job: Well..." <New Line> <New Line> <PAUSE> "I eat hay.
+
+Goodbye: Come back and see me again. Really!
+
+
+Text information:
+
+    eat or hay: Yep." <New Line> <New Line> <PAUSE> "Oh, I'm also here to ask you something.
+    ask: <Goto Label 4>
+    forg or tell: Yea..." <New Line> <New Line> <Key wait> "The answer..." <New Line> <New Line> <Key wait> "It was..." <New Line> <New Line> <Key wait> " <Rune> INFINITY <Rune> !
+
+Label information:
+
+    <Label 0> Hey..." <New Line> <New Line> <PAUSE> "You look familiar, have we met?
+        Default: <Goto Label 1>
+        y: <Goto Label 2> 
+
+    <Label 1> Oh..." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <Nothing> 
+
+    <Label 2> I thought so..." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <Nothing> 
+
+    <Label 3> Hello, <AVATAR NAME> ..." <New Line> <New Line> <Key wait> "You know what?
+        Default: Way back..." <New Line> <New Line> <Key wait> "Way, way back..." <New Line> <New Line> <Key wait> "I forgot to tell you something!
+
+    <Label 4> Lord British wanted me to ask you if you were enjoying this game?
+        Default: <Goto Label 4>
+        n: Well, if you have any complaints, write to him at Origin. He would really like to know.
+        y: He will be so glad to hear it..." <New Line> <New Line> <Key wait> "Of course, he won't ever know unless you write to him at Origin and tell him so." <New Line> <New Line> <Key wait> "I know first hand he'd like that.
+
+Kenneth
+
+Name: Lord Kenneth
+
+Description: a scholarly gentleman.
+
+Greeting:
+
+Job: I am the Court Composer.
+
+Goodbye: Bye.
+
+
+Text information:
+
+    cour or comp: I travel throughout Britannia teaching my craft." <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou wish to learn the harpsichord?
+        Default: Alas.
+        y: <Goto Label 2> 
+
+    <Label 2> Open the Book of Lore to the Music section and study the score for the piece 'Stones'." <New Line> <New Line> <Key wait> <Goto Label 3> 
+
+    <Label 3> The notes are like a series of square marks upon a four-line staff. Their positions, either on one or between two lines, marks their pitch." <New Line> <New Line> <Key wait> "A letter C marks the second line of the staff as the pitch 'C'. The first 3 notes are 'ABC'." <New Line> <New Line> <Key wait> What are the next 3?
+        Default: No, try again." <New Line> <New Line> <Key wait> <Goto Label 3>
+        dcb: Good!" <New Line> <New Line> <Goto Label 4> 
+
+    <Label 4> Many keyboards are marked with numbers, so that ABC would be 678.What would the next 3 be?
+        Default: No, try again." <New Line> <New Line> <Key wait> <Goto Label 4>
+        987: Good! So the first phrase goes 678 987 8767653! Now thou must practice!" <New Line> <END CONVERSATION> 
+
+Sir Arbuthnot
+
+Name: Sir Arbuthnot
+
+Description: a hardened man.
+
+Greeting: Ah, <AVATAR NAME> , 'tis thee.
+
+Job: I am the Royal Coinmaker!
+
+Goodbye: Fare thee well.
+
+
+Text information:
+
+    roya or coin: Well..." <New Line> <New Line> <PAUSE> "That is to say I was, before I became a wanted man!
+    was or want or man: I am afraid I did something that was not taken too well by the current regime.
+    take or well or curr or regi: <Goto Label 0>
+    magi or coin: It was in the symbol of the Codex!
+    symb or code: It was commisioned secretly by persons unknown even to me. It was to be used to call back the one true Avatar!
+    avat: <Goto Label 1> 
+
+Label information:
+
+    <Label 0> Dost thou favor the current regime?
+        Default: I see.
+        n: I minted a magical coin!
+
+    <Label 1> Dost thou know of the one true Avatar?
+        Default: I see.
+        y: <Goto Label 2> 
+
+    <Label 2> Art thou the one true Avatar?
+        Default: Oh.
+        'Tis indeed an honor!" <New Line> <New Line> <Ask Name> " <New Line> <New Line> <Nothing> : @
+        ng: Songs of valqP
+
+KEEP.TLK
+Captain Johne
+
+Name: Johne, Captain Johne.
+
+Description: an unkempt mage in tattered robes. <New Line> <New Line> "At long last, another living soul!" <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: I fear the Shadowlords!
+
+Goodbye: Beware!
+
+
+Text information:
+
+    fear or shad: Years ago, my ship was swallowed by a massive whirlpool. The remains of my ship washed up on this isle with myself and three others." <New Line> <New Line> <Key wait> "When I recovered, I explored my surroundings, and found a great gem broken into three shards." <New Line> <New Line> <Key wait> "The Shards, full of evil, drove me to kill my three companions, and from their blood sprang the three Shadowlords. " <New Line> <New Line> <Key wait> "Taking the Shards deep into this underworld, they entrapped Lord British, and hold Blackthorn in their power." <New Line> <New Line> <Key wait> "They spare me only to taunt me with such news until my dying day." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wilt thou save Britannia?
+        Default: Pity." <New Line> <END CONVERSATION>
+        y: <Goto Label 1> 
+
+    <Label 1> Might I join thee?
+        Default: Pity." <New Line> <END CONVERSATION>
+        y: Let me avenge my wrongdoing." <New Line> <New Line> <Join Party> 
+
+Sir Simon
+
+Name: Sir Simon
+
+Description: a strong, spry man.
+
+Greeting:
+
+Job: I am lord of this keep.
+
+Goodbye: Farewell!
+
+
+Text information:
+
+    keep: We fled here when the tyrant Blackthorn began to spread his self-righteous rule.
+    blac or rule: The land has not been the same since the loss of Lord British." <New Line> <New Line> <Key wait> "A good friend. I wish I knew of a way to help him.
+    brit or help: All I know is that his crown jewels, the Crown, the Sceptre and the Amulet must be recovered.
+    crow: A powerful artifact. Lord British once told me of its ability.
+    abil: When worn, it absorbs all magical forms of attack, no matter how powerful.
+    scep: A mighty item of immense power. It is said that when used it can disperse all magical barriers, even in the ethereal plane." <New Line> <New Line> <Key wait> "I hear 'tis held by the Shadowlords themselves, in their earthly fortress!
+    amul: Of that, my wife knows more than I.
+
+Lady Tessa
+
+Name: Lady Tessa
+
+Description: a tall, beautiful woman.
+
+Greeting:
+
+Job: I practice the mystical arts.
+
+Goodbye: Tread softly, thy destiny is a great one!
+
+
+Text information:
+
+    arts or myst: I can see thou art no ordinary mortal, but the Avatar of legend, and thus familiar with my profession.
+    prof or lege or avat: <Goto Label 0>
+    amul: <Goto Label 1> 
+
+Label information:
+
+    <Label 0> I see it in thy eyes, but tell me, dost thou support Blackthorn's rule?
+        Default: I see.
+        n: I knew that one who has tread the path of Virtue could not agree with the current state of affairs." <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+    <Label 1> I have seen the Amulet which Lord British once bore. It lies forgotten in the Underworld, amongst the graves of valiant warriors." <New Line> <New Line> <Key wait> "With only this can thee find thy path in a place of unholy darkness, which I have forseen shall block thy way." <New Line> <New Line> <Key wait> "'Tis beyond such a place that thou must search, if thou art to mend the injustice wrought upon the world by Blackthorn and his spectres!" <New Line> <END CONVERSATION> 
+
+Seggallion
+
+Name: Lord Seggallion
+
+Description: a wistful looking man.
+
+Greeting:
+
+Job: I am the lord of this keep.
+
+Goodbye: Farewell, stranger!
+
+
+Text information:
+
+    keep: A fine homestead, furnished with the proceeds from my old profession.
+    home or prof or proc or old: Many years ago, I carved my living from the seafaring trade routes of Britannia.
+    trad or rout or livi: You know..." <New Line> <New Line> <Key wait> "I demanded a fair toll for passage through my waters..." <New Line> <New Line> <Key wait> "The fact that this usually amounted to all of their belongings is irrelevant!
+    star or spy: I used my spyglass to study the stars." <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wouldst thou like to see it?
+        Default: I see.
+        y: I used it on many nights for navigational purposes. I use it but rarely now." <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> Dost thou study the stars?
+        Default: Too bad.
+        y: <Goto Label 2> 
+
+    <Label 2> What is it said that the eight planets represent?
+        Default: Really.
+        virt: <Goto Label 3> 
+
+    <Label 3> I would like thee to have my spyglass, Wouldst thou like it?
+        Default: O.K.
+        y: <Change - Item 73> Use it wisely!
+
+Temme
+
+Name: Temme
+
+Description: a tall, dark woman.
+
+Greeting:
+
+Job: I am a mage of great repute!
+
+Goodbye: Nice talking shoppe.
+
+
+Text information:
+
+    grea or repu: Modesty was never one of my great virtues. But, I am actually quite good." <New Line> <New Line> <Key wait> <Goto Label 0>
+    spel or thin or near or disa: I know I've got the words right, but I may have mixed the reagents improperly, I think.
+    word: I use the chant... " <New Line> <New Line> <PAUSE> "Now, don't tell anyone else..." <New Line> <New Line> <PAUSE> " <Rune> AN YLEM <Rune> !
+    an ylem: Not now, fool! Am I still here?
+    y: Good, watch it!
+    reag: I think it was Ash and Mandrake..." <New Line> <New Line> <Key wait> "But, then again, perhaps it was Garlic and Blood Moss..." <New Line> <New Line> <Key wait> "Oh, I don't know. I've never had a very good memory.
+
+Label information:
+
+    <Label 0> Would ye be impressed if I told thee that I can cast a spell that CREATES light even on the darkest night?
+        Default: Well I've done better." <New Line> <END CONVERSATION>
+        y: Well! If ye think that's good, I've NEARLY made things disappear!
+
+Dufus
+
+Name: Dufus
+
+Description: a clumsy looking boy.
+
+Greeting:
+
+Job: I am apprentice to the Great Mage Temme!
+
+Goodbye: Nice talking with thee!
+
+
+Text information:
+
+    mage or temm or grea: The most all-powerful mage to walk the surface of Britannia.
+    appr: I am lucky enough to be chosen as understudy to the Great Mage Temme, so that one day I too can cast powerful spells.
+    powe or spel: Beyond imagining! Why, one day I even saw her nearly kill a Giant Rat with a single spell.
+    gian or rat: Yes, 'tis true, I saw it with my own eyes!" <New Line> <New Line> <Goto Label 0>
+    spy: Lord Seggallion uses it to study the stars! If thou ask, he might show it unto thee.
+
+Label information:
+
+    <Label 0> Would ye like me to tell thee something really amazing?
+        Default: Oh, well.
+        y: Just the other day, the Great Mage Temme lit a fire with no flint or steel, but merely Lord Seggallion's spyglass.
+
+Quintin
+
+Name: Quintin
+
+Description: a round, jovial man.
+
+Greeting:
+
+Job: I am the cook for this keep.
+
+Goodbye: May thou never get indigestion!
+
+
+Text information:
+
+    cook: Yes, I simmer up plenty of tasty dishes for the residents of this abode.
+    keep: One of the better looking keeps I have worked in.
+    tast or dish: They have to be good, or else the Lord will order Temme to turn me into a newt!
+    lord: Seggallion.
+    resi or abod: A mixed bunch with an interesting history, Before he retired, my lord was a famous pirate. Now, even he fears Blackthorn." <New Line> <New Line> <Key wait> "But, I mustn't gossip!
+    blac: I mustn't gossip.
+    goss: Like I said, I don't wish to tell tales, but if thou dost have an ear for gossip, I've never heard anyone who talks as much as my friend Telila." <New Line> <New Line> <Key wait> "She lives in the city of Britain, ask her for some rumours or gossip!
+
+Thrud
+
+Name: Thrud
+
+Description: a dark, heavyset man.
+
+Greeting:
+
+Job: An infamous mercenary!
+
+Goodbye: Uhmph!
+
+
+Text information:
+
+    infa or merc: I enjoy killing immensely!
+    kill or imme: <Goto Label 0>
+    item or jewe or weap: <Goto Label 1> 
+
+Label information:
+
+    <Label 0> Surely thou hast heard of the time when I butchered an entire village?
+        Default: I had just returned from a war across the sea, when on my way home, I stopped at an inn." <New Line> <New Line> <Key wait> "The meal I ate there gave me indigestion for two days! Upon recovery, I killed the innkeeper and his entire staff." <New Line> <New Line> <Key wait> "The ensuing outcry forced me to dispense with the rest of the village!
+
+    <Label 1> The Jeweled Sword and Shield are fine weapons indeed! Wouldst thou like them?
+        Default: Thy loss!
+        y: <Goto Label 2> 
+
+    <Label 2> I will let thee have these great weapons for the Resistance's password, which thou hast so cleverly discovered." <New Line> <New Line> <Key wait> "Tell me, what is it?
+        Default: Liar! Guards! <Call Guards> " <New Line> <END CONVERSATION>
+        dawn: May they serve thee well! <Change - Item 8> <Change - Item 28> " <New Line> <END CONVERSATION> 
+
+Elistaria
+
+Name: Elistaria
+
+Description: a tall, dark lady
+
+Greeting:
+
+Job: I dabble in the dark arts.
+
+Goodbye: Begone, wretch!
+
+
+Text information:
+
+    dabb or arts or dark: I play with forces beyond the comprehension of most mortals.
+    forc or comp or mort: I conjure daemons and such.
+    daem or demo: Yes! My favorite creatures! Thou hast seen my two best summonings guarding this keep.
+    oppr: <Goto Label 1>
+    impera: <Goto Label 3>
+    miss or item: The Jeweled Weapons of course! Ask Thrud for them!
+
+Label information:
+
+    <Label 1> What is the password?
+        Default: <Goto Label 8>
+        impera: <Goto Label 3> 
+
+    <Label 3> Ah yes, now I remember. Thou art the one infiltrating the Resistance." <New Line> <New Line> <Key wait> "Here, wear this badge when thou doth wish to show thou art with Blackthorn and the Oppression!" <New Line> <New Line> <Change - Item 74> <Key wait> "It may be that Thrud has some items that may be useful in your mission." <New Line> <New Line> <Nothing> 
+
+    <Label 8> Daemons! Kill this wretch! <Call Guards> " <New Line> <END CONVERSATION> " <New Line> <END CONVERSATION> 
+
+Balinor
+
+Name: Balinor
+
+Description: a leather-winged abomination <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job:
+
+Goodbye:
+
+
+Label information:
+
+    <Label 0> Foul mortal, thou hast disturbed my peaceful rest!" <New Line> <New Line> <Key wait> "My bound duty is to prevent intruders from passing! And so I shall!" <New Line> <New Line> <Key wait> "But first, thou dost seem an educated person and so I offer thee an educated solution to the problem at hand..." <New Line> <New Line> <Key wait> "I suggest a battle of wits for thy passage. If I win, I shall slay thee, if thou dost win, I shall let thee pass to face the perils within!" <New Line> <New Line> <Key wait> "Dost thou accept?
+        Default: So be it! <Call Guards> " <New Line> <END CONVERSATION>
+        y: Ah good, I've not tested my wit for some time!" <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+    <Label 1> What is as tall as a house, round as a cup, and all the king's horses can't draw it up?
+        Default: Hah! Thou hast failed! Now to keep my part of the bargain! <Call Guards> " <New Line> <END CONVERSATION>
+        well: Thou hast guessed well, foolish one, but thou hast committed a fatal blunder!" <New Line> <New Line> <Key wait> "Never trust a Daemon's word! Hah, hah, hah! <Call Guards> " <New Line> <END CONVERSATION> 
+
+Lady Janell
+
+Name: Lady Janell
+
+Description: a wise and beautiful princess.
+
+Greeting:
+
+Job: I am Queen of the Magi of Britannia.
+
+Goodbye: Fare thee well, and quest ye forever for Truth.
+
+
+Text information:
+
+    quee or mag or brit: Evil times are before us, but the hearts of our people shall perservere.
+    hear or peop or dark or time: Though the days grow darker, there are many who still seek the light of Truth.
+    seek or ligh or trut: I know of two sisters, ascetics of a temple of Virtue, who know of the evil artifact which most opposes Truth!
+    arti or evil or temp or oppo: Seek out the twin sisters in the hidden city of Cove, and ask them of the Shard of Falsehood!" <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou meditate at shrines?
+        Default: I see.
+        y: <Goto Label 1> 
+
+    <Label 1> Dost thou seek the Shrine of Spirituality?
+        Default: I see.
+        y: Enter one of the mystic moongates at precisely midnight. Then shalt thou find the Shrine!
+
+Lord Shalineth
+
+Name: Lord Shalineth
+
+Description: a tall man with a bearing of wisdom and power. <New Line> <New Line> <Key wait> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <New Line> "Well met, worthy servant of Truth!" <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: I am the Lord of the Keep of Truth.
+
+Goodbye: Go, abandon not thy quest for Light!
+
+
+Text information:
+
+    keep: The Lycaeum is the Keep of Truth.
+    trut: We use the precepts of Truth to strengthen our magic.
+    magi: It is Truth that lends our arts the power to overcome all Evil, if we but trust in it.
+    evil: A creature of great Evil must hide its name, for it is at the mercy of one armed with such a simple truth.
+    merc or simp or name: Through the exercise of great magic and scrying, I have gleaned the name of the Shadowlord of Falsehood." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou swear not to use it foolishly?
+        Default: <Goto Label 0>
+        y: The Name of this dread lord is <Rune> FAULINEI <Rune> . Speak it not, for only at thy bidding can he enter our hallowed Keep.
+        n: Thou fool." <New Line> <END CONVERSATION> 
+
+    <Label 1> A pleasure to see thee again, <AVATAR NAME> " <New Line> <New Line> <Nothing> 
+
+Rollo
+
+Name: Rollo
+
+Description: a wisened scribe.
+
+Greeting:
+
+Job: I am scribe for the Lycaeum.
+
+Goodbye: Fare thee well.
+
+
+Text information:
+
+    lyca: In our libraries, we keep many of the important Britannian documents.
+    scri: I serve the duties of librarian, and have written a number of the works we have published.
+    libr: Our libraries are the best in Britannia.
+    brit or docu: 'Tis here that the journal of Lord British's expedition into the underworld was authenticated!
+    jour or lord or expe or unde or auth: Yes, 'tis sad, but 'twould seem that there is little hope for his return.
+    writ or work or publ: I compiled the reference work known as 'The Book of Lore.'" <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Hast thou seen it?
+        Default: Too bad.
+        y: <Goto Label 1> 
+
+    <Label 1> Didst thou enjoy it?
+        Default: <Goto Label 1>
+        n: Shows what thou dost know!
+        y: I thank thee, kind soul.
+
+Lady Hayden
+
+Name: Lady Hayden.
+
+Description: a lovely young woman, both stately and fair.
+
+Greeting: Ah, again we meet. Well met, <AVATAR NAME> .
+
+Job: I seek the ways of truth and knowledge, here in the Lycaeum.
+
+Goodbye: Farewell, mighty Avatar.
+
+
+Text information:
+
+    stud or know or lyca: Yes, I study here with my companion, Lord R'hien.
+    comp or rhie or lord or r'hi: He is the Keeper of the Royal Horses, and a fine man.
+    roya or hors: I find peace in riding our sturdy mounts through the forests to the south." <New Line> <New Line> <Key wait> "It helps me think of my magic and happier times.
+    moun or ridi: Horses.
+    magi: We once wrought our spells for learning, not to save our lives when confronted by evil creatures. Peace is a more valuable part of our lives now.
+    happ or time or peac: If only one still unafraid to fight for Virtue walked the land..." <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Art thou afraid?
+        Default: I see.
+        n: Then there is hope!
+
+Lord R'hien
+
+Name: Lord R'hien
+
+Description: a chivalric, battle-hardened knight.
+
+Greeting:
+
+Job: I fight for the ways of Truth.
+
+Goodbye: May Truth always guide thee.
+
+
+Text information:
+
+    ways or trut or figh: In these days, Truth is in great peril!
+    peri: Blackthorn has warped the meaning of the Virtues to match his self-righteous needs.
+    warp or mean or virt or self or need: The people live as sheep, manipulated by his misguided principles!
+    misg or prin: Virtue, when imposed by force rather than belief and choice, lacks the meaning that is required for a guiding force in one's life.
+    stev: Hi, John! Thanks for putting me in Ultima V!
+
+Lord Michael
+
+Name: Lord Michael
+
+Description: a tall, caring man.
+
+Greeting:
+
+Job: I am lord of this castle.
+
+Goodbye: Take care!
+
+
+Text information:
+
+    cast: Here in Empath Abbey we protect the Principle of Love from the evils that would corrupt it.
+    prin or love or corr or evil: Since the disappearance of Lord British, evil has reared its foul head, and now the three Castles of Virtue stand alone.
+    thre or alon or stan or virt: The Shadowlords dare not desecrate this holy place, not even the Shadowlord of Hate!
+    shad or hate: Seek out the daemon who lives in the great eastern desert. He knows much of the Lord of Hatred!
+    moun or clim or grap: I have the grapple used to climb mountains." <New Line> <New Line> <Key wait> "Though it allows passage through many mountains, there are some peaks which still cannot be crossed!" <New Line> <New Line> <Key wait> "And, one can still fall whilst using it if one is not nimble enough!" <New Line> <New Line> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Wouldst thou like it?
+        Default: Oh.
+        y: Use it well, and be careful! <Change - Item 70> " <New Line> <END CONVERSATION> 
+
+Cory
+
+Name: Cory
+
+Description: a pretty young girl.
+
+Greeting:
+
+Job: I am the cook for this castle.
+
+Goodbye: See thee!
+
+
+Text information:
+
+    cast: A great fortress, saving us from the turmoil engulfing Britannia.
+    cook: I certainly do! Many delicacies pass from my kitchens onto the plates of hungry souls.
+    hung or soul or deli: Such mouth-watering dishes as fried shark and sauteed squid au poivre.
+    shar or squi: <Goto Label 0>
+    turm or engu or brit: Ever since Lord British disappeared, the entire kingdom has gone to ruin. Blackthorn only hinders matters.
+    hind or matt or blac: Blackthorn claims he is the true ruler!
+    lord or brit: I wish he would return!
+
+Label information:
+
+    <Label 0> Ah! A connoisseur! Wouldst thou like to try some?
+        Default: Thy loss.
+        y: Here, eat this.." <New Line> <New Line> <PAUSE> You put the morsel in your mouth... <New Line> <New Line> <PAUSE> Such food as this you've never tasted! It melts in your mouth, tasting of a thousand different spices, all perfectly matched! <Change - Item 65> <Key wait> <New Line> <New Line> "Good, huh!
+
+Hardluck
+
+Name: Hardluck
+
+Description: a cheerful man.
+
+Greeting:
+
+Job: I am the Abbey jester!
+
+Goodbye: May fate smile brightly on you!
+
+
+Text information:
+
+    jest: I juggle and sing fine songs!
+    sing or song: Blackthorn once was a fine ol' man." <New Line> <New Line> <Key wait> "Upon fine principles he would stand." <New Line> <New Line> <Key wait> "But then came the Shadowlords, full of evil." <New Line> <New Line> <Key wait> "Blackthorn's soul they came to steal." <New Line> <New Line> <Key wait> "All at once the Tyranny began." <New Line> <New Line> <Key wait> "All because of Fate's dark hand!" <New Line> <New Line> <Key wait> <Goto Label 0>
+    abbe: Empath Abbey!
+    empa: Hey, thou ought to be a jester too!
+    jug: Nah, not in the mood.
+
+Label information:
+
+    <Label 0> Like it?
+        Default: Oh.
+        y: Thou may have noticed that it points out that Blackthorn himself is not responsible for the evils he imposes." <New Line> <New Line> <Key wait> "Rather, he is trapped, as we are, under the control of the truly evil Shadowlords, only more so." <New Line> <New Line> <Key wait> "A pity.
+
+Barbra
+
+Name: Barbra
+
+Description: a serene lady.
+
+Greeting:
+
+Job: I am keeper of the flame of Love.
+
+Goodbye: Tread carefully, Avatar. The fate of our world depends on thee.
+
+
+Text information:
+
+    flam or love: One of the three Principles, Avatar of legend!
+    lord or brit or virt or lege or prin or avat: <Goto Label 0>
+    keep: I tend and protect the sacred flame of Love, to show the world that all hope is not yet lost!
+    hope or lost: Since the loss of Lord British, evil, especially in the form of the three Shadowlords, has infested this land.
+    shad: They oppose the basic fabric of Virtue!
+
+Label information:
+
+    <Label 0> Thou dost know it is thy duty to try and recover what this kingdom has lost. Dost thou intend to?
+        Default: Too bad.
+        y: Then perhaps I have a vision that may help thee." <New Line> <New Line> <Key wait> "I saw a great man in a distant place." <New Line> <New Line> <Key wait> "I saw him as if through a looking glass." <New Line> <New Line> <Key wait> "I saw naught but his reflection." <New Line> <New Line> <Key wait> "More I do not know." <New Line> <END CONVERSATION> 
+
+Tim
+
+Name: Tim
+
+Description: a spritely young man.
+
+Greeting:
+
+Job: I am the bard for this castle.
+
+Goodbye: Journey safely!
+
+
+Text information:
+
+    bard: Yes, I play and sing for the inhabitants of this castle.
+    inha or cast: Empath Abbey.
+    play: <Goto Label 0>
+    sing: Tra-la-la!
+    cour or comp or trav or ken: He trades music lessons for melodies. He is compiling a collection of Britannian folkmusic.
+    less or melo or coll or folk: Recently he gave a recital in Trinsic, and then headed south." <New Line> <New Line> <Key wait> "He often teaches a piece by Iolo and Gweno. 'Tis a favorite of Lord British.
+    iolo or bard or teac or piec or favo: Some even say that to play the piece on the finest instrument may cause magical occurrences.
+    fine or inst or magi or occu: Only on an instrument worthy of kings!
+
+Label information:
+
+    <Label 0> Dost thou enjoy fine harpsichord music?
+        Default: Oh.
+        y: Since Lord British's disappearance, his Court Composer Sir Kenneth is said to be traveling throughout Britannia.
+
+Toede
+
+Name: Toede
+
+Description: a small, fat, slimy soul.
+
+Greeting:
+
+Job: I helped build Blackthorn's castle, before I was captured.
+
+Goodbye: Don't leave me!
+
+
+Text information:
+
+    blac: A nicer overlord I've never met!
+    buil or cast: The largest, strongest, most impregnable fortress ever constructed in the history of Britannia.
+    larg or stro or fort or impr: Built on the isle of three volcanoes, in the southeast of Britannia." <New Line> <New Line> <Key wait> "Yes, I was the foreman for trap-door construction. There are many placed on common passageways." <New Line> <New Line> <Key wait> "Blackthorn's castle, beware! If thou doth fall...." <New Line> <New Line> <PAUSE> "Think of me!
+    capt: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> I was shipwrecked on this isle and captured by ones who did not share my belief in the righteousness of Blackthorn's rule." <New Line> <New Line> <Key wait> "Dost thou support Blackthorn?
+        Default: Heretic!" <New Line> <END CONVERSATION>
+        y: <Goto Label 1> 
+
+    <Label 1> Good! Wilt thou help me escape?
+        Default: <Rune> PIGDOG <Rune> !" <New Line> <END CONVERSATION>
+        y: Then free me from these manacles!
+
+Lord Malone
+
+Name: Lord Malone
+
+Description: a tall, strong man.
+
+Greeting:
+
+Job: I am the lord of this castle and the surrounding land.
+
+Goodbye: Farewell!
+
+
+Text information:
+
+    cast or surr or land: This area of the kingdom was entrusted to my ancestors by Lord British in payment for their deeds of Valor.
+    pay or deed or valo: My great grandfather was the famous Sir Percy, who cleared the local countryside of dragons many decades ago.
+    lord or brit: I fear that Lord British is no more. He has been missing for some time. I feel sure if he still lived he would deal with the impostor Blackthorn!
+    impo or blac: This castle, a bastion of Courage, is one of the last redoubts against the evil of the Shadowlords!
+    evil or cowa or shad: Even Nosfentor dares not cross the sacred threshold of Serpent's Hold!
+    nosf: Speak not that name too loudly, for 'tis the name of the Shadowlord of Cowardice!
+
+Loubet
+
+Name: Monsieur Loubet
+
+Description: a tall, cynical man.
+
+Greeting:
+
+Job: I am the fencing master.
+
+Goodbye: Au revoir!
+
+
+Text information:
+
+    fenc or mast: I am ze best! As an enfant I learned fencing from my father who was tutor to ze king of a distant land.
+    land or dist: I lived zere in my childhood, and came to Britannia upon a magical carpet!
+    magi or carp: Ah, an interesting tale. Unfortunately, I zold it zoon after my arrival in Britannia." <New Line> <New Line> <Key wait> "I did not know zey were so scarce here, or I would not have zold it." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Monsieur, dost thou seek to discover ze fate of Lord British?
+        Default: Oh.
+        y: <Goto Label 1> 
+
+    <Label 1> Perhaps zen my magic carpet would be of some use?
+        Default: I zold it to a mage named Bandaii. He lived in a village named Paws." <New Line> <New Line> <Key wait> "Strange fellow, he was looking for a talking horse!" <New Line> <New Line> <Key wait> "If thou canst find him, he might be willing to zell thee my carpet!
+
+Kristi
+
+Name: Kristi
+
+Description: a pretty, dark haired woman.
+
+Greeting: Oh, it's thee. Hi.
+
+Job: I cook for the hungry mouths in this castle.
+
+Goodbye: Bye!
+
+
+Text information:
+
+    land or evil: There are many now that Lord British is gone.
+    cast or cook or hung or mout: The inhabitants, as well as any visitors.
+    inha: And visitors.
+    visi: We don't have too many these days..." <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Nothing>
+    skul or keys: <If/Else Knows Name> <Goto Label 2> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> A few weeks ago there was a strange, silent mage who ate here. He gave me 5 skull keys as payment." <New Line> <New Line> <Key wait> "He said they are magic and powerful, worth many gold pieces. I have no use for them." <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+    <Label 1> I will sell them to thee for 100 gold crowns. Wouldst thou like to buy them?
+        Default: Thy loss.
+        y: <Gold - 100> <Change - Item 75> <Change - Item 75> <Change - Item 75> <Change - Item 75> <Change - Item 75> The mage said that they could open even magically locked doors.
+
+    <Label 2> I have no more, but the mage told me that he acquired them from an armourer named Shenstone!" <New Line> <New Line> <Nothing> 
+
+Gardner
+
+Name: Gardner
+
+Description: a sincere man.
+
+Greeting:
+
+Job: I am the keeper of the Flame of Courage.
+
+Goodbye: Fare thee well!
+
+
+Text information:
+
+    cour or flam or keep: I tend this Flame of Virtue against the darkness of Blackthorn and the Shadowlords.
+    dark or blac or shad: Within the flames I often see visions!
+    visi: Avatar, I can offer thee my vision of the Shard of Cowardice to aid thee on thy quest.
+    shar or cowa or ques: Upon the Isle of the Avatar, there lies a dungeon. At its bottom lies a small, cavernous room of the Underworld." <New Line> <New Line> <Key wait> "However, there are many more such small chambers, near enough to be reached by one with the proper magic!" <New Line> <New Line> <Key wait> "With many uses of such magic, and a great deal of exploration, one may find the Shard of Cowardice." <New Line> <New Line> <Key wait> "It lies at the location which upon the surface would be recorded as <Rune> L <Rune> ' <Rune> A <Rune> ", <Rune> L <Rune> ' <Rune> I <Rune> ".
+
+Sir Sean
+
+Name: Sir Sean
+
+Description: a young nobleman.
+
+Greeting:
+
+Job: I am the Keeper of the Eternal Flame of Truth.
+
+Goodbye: I wish thee luck, though I fear for thy life.
+
+
+Text information:
+
+    trut or eter or keep or flam: We stand against the three evil lords who ravage the land!
+    evil or land or lord: The Shadowlords!
+    shad: They are foul spectres!
+    foul or spec: Indeed they are!
+    ston: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Art thou afraid to journey into Evil's abode?
+        Default: <Goto Label 0>
+        y: Coward.
+        n: Sail first thy ship unto the southernmost part of Lost Hope Bay. Travel so far as thy skiff will take thee." <New Line> <New Line> <Key wait> "Some speak of a special implement that can be used to cross the mountains. Find first this equipment!" <New Line> <New Line> <Key wait> "Then climb thyway through the mountains to the south." <New Line> <New Line> <Key wait> "There thou shalt find the black keep Stonegate, guarded by Balinor, foulest of daemons!" <New Line> <New Line> <Key wait> "This is the earthly domain of the three Shadowlords, from which few have returned!
+
+Mariah
+
+Name: Mariah
+
+Description: a weak and frail friend. <New Line> <New Line> " <AVATAR NAME> , my old friend." <New Line> <New Line> <Key wait> "'Tis I, Mariah!" <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: I have been quite ill, for many days.
+
+Goodbye: Please, return and take me with thee when thou canst.
+
+
+Text information:
+
+    ill or day: The healers here, in the Lycaeum, canst heal even the wound of a Shadowlord quickly.
+    shad: I met one in Moonglow some time back, but did escape with my life!" <New Line> <New Line> <Key wait> <Goto Label 0>
+    join: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> So, art thou here to set things right?
+        Default: <Goto Label 0>
+        n: Then we are doomed.
+        y: <Goto Label 1> 
+
+    <Label 1> Wilt thou have need of my services?
+        Default: <Goto Label 1>
+        n: I am deeply grieved.
+        y: <Goto Label 2> 
+
+    <Label 2> My wounds are mostly healed. Shall I join with thee now?
+        Default: <Goto Label 2>
+        n: Soon, I hope.
+        y: I am honored to be with thee again!" <New Line> <New Line> <Join Party> 
+
+Toshi
+
+Name: Toshi
+
+Description: a small, nimble, deadly looking man.
+
+Greeting: Hail friend!
+
+Job: I am a student here at the Abbey.
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    abbe: Empath Abbey, castle to the Principle of Love!
+    prin or trut or love or cour: 'Tis one of the three Principles, Truth, Love, and Courage!
+    stud: Here I learn how love can exist in a world filled with such evil!
+    evil: I learn how it can be overcome.
+    over or lear: Thou doth show much interest in the Principle of Love." <New Line> <New Line> <Key wait> "Perhaps, thou should study here at the abbey..." <New Line> <New Line> <If/Else Knows Name> <Nothing> <Key wait> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Nothing>
+    join: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> I would like to join thee on thy quest!" <New Line> <New Line> <PAUSE> "Might I join thee?
+        Default: <Goto Label 0>
+        n: I am saddened.
+        y: A great honor indeed!" <New Line> <New Line> <Join Party> 
+
+Maxwell
+
+Name: Maxwell
+
+Description: a strong, yet sleek fighter.
+
+Greeting: Ah, <AVATAR NAME> , my good friend!" <New Line> <New Line> <Key wait> "Monsieur Loubet has been telling me of thy quest." <New Line> <New Line> <Key wait> <Goto Label 0>
+
+Job: I am a student here at Serpent's Hold.
+
+Goodbye: Farewell." <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <END CONVERSATION>
+
+
+Text information:
+
+    serp or hold: Here we study the Principle of Courage.
+    prin or cour or stud: I study the many arts and styles of fighting under Monsieur Loubet.
+    mons or loub: He is a well-known Master of Arms!
+    art or styl or figh: My favorite weapon is the axe!
+    favo or weap or axe: Yes, the axe.
+    join: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> I would like to join thee, wilt thou have me?
+        Default: <Goto Label 0>
+        n: A pity.
+        y: 'Tis indeed a great honor!" <New Line> <New Line> <Join Party> 
+
+    <Label 1> <END CONVERSATION> 
+
+Dupre
+
+Name: Dupre
+
+Description: a paladin, shining with Virtue. <New Line> <New Line> "Ah, <AVATAR NAME> !" <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: Sentri and I live here in Bordermarch. We await thy call for us to join thee!
+
+Goodbye: Farewell. Return soon with good news.
+
+
+Text information:
+
+    join: <Goto Label 2>
+    duck: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> That is thee, yes?
+        Default: <Goto Label 0>
+        n: I am sorry, I have mistaken thee for an old friend." <New Line> <END CONVERSATION>
+        y: I hardly recognize thee, it has been so long." <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> Hast thou returned to Britannia to set things straight?
+        Default: Then we are doomed!
+        y: <Goto Label 2> 
+
+    <Label 2> Shall I join with thee again?
+        Default: As thou wisheth.
+        y: Good, it will be good to fight by thy side again!" <New Line> <New Line> <Join Party> 
+
+    <Label 3> Wanna buy a duck?
+        Default: They're cheap.
+        y: <Goto Label 4> 
+
+    <Label 4> It'll cost 5 gold crowns, O.K.?
+        Default: Cheapskate!
+        y: <Gold - 005> <Change - Item 65> Enjoy the duck!
+
+Sentri
+
+Name: Sentri
+
+Description: a strong fighter. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: We live here in Bordermarch to escape the Shadowlords!
+
+Goodbye: Farewell, good Avatar!
+
+
+Text information:
+
+    evil or shad: Spectres of Evil!
+    join: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Have we not met before?
+        Default: Ah yes, I remember, 'twas before the dark times!" <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+    <Label 1> Thou art the Avatar of legend, art thou not?
+        Default: Oh, I could have sworn it was thee.
+        y: <Goto Label 2> 
+
+    <Label 2> Art thou here collecting adventurers for thy cause?
+        Default: I see.
+        y: <Goto Label 3> 
+
+    <Label 3> I would be honored to join thee, wilt thou have me?
+        Default: I understand.
+        y: It is indeed an honor to fight with thee." <New Line> <New Line> <Join Party> 
+
+Julia
+
+Name: Julia
+
+Description: a kindly tinker. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: I live here at the Abbey, a refuge from the Shadowlords!
+
+Goodbye: Farewell, good Avatar!
+
+
+Text information:
+
+    shad: They hunt all of us who helped thee on the quest. Blackthorn fears us!
+    blac or fear: He feared we would find a way to bring thee back. Which is, of course, exactly what we did!" <New Line> <New Line> <Key wait> <Goto Label 1>
+    join: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> <AVATAR NAME> , it is thee, is it not?
+        Default: Oh, sorry.
+        y: At long last! We had thought thy return was beyond hope!
+
+    <Label 1> <AVATAR NAME> , is it time we took up arms again?
+        Default: I wish it were.
+        y: <Goto Label 2> 
+
+    <Label 2> Shall I join with thee now?
+        Default: Just let me know.
+        y: At last, we begin anew!" <New Line> <New Line> <Join Party> 
+
+TOWNE.TLK
+Zachariah
+
+Name: Zachariah
+
+Description: a stately, white-haired man of many years.
+
+Greeting: Welcome, <AVATAR NAME> , in these dark times.
+
+Job: I study the stars.
+
+Goodbye: Good journeys.
+
+
+Text information:
+
+    tele or star: I watch the signs amongst the planets!
+    sign or plan: Comets have come! A sign of evil!
+    evil or come: There are three comets in the firmament. Likely, each of these represents one of the Shadowlords.
+    shad: It seems that when a comet aligns with a planet, the city of that virtue comes under attack!
+    city or virt or atta: If only the Avatar would return!
+    avat or retu: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Art thou the Avatar of legend?
+        Default: Alas.
+        y: Indeed?" <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <END CONVERSATION> 
+
+    <Label 1> What is the password of our Resistance?
+        Default: I do not yet believe thee!" <New Line> <END CONVERSATION>
+        dawn: I have news that may aid thee..." <New Line> <New Line> <Key wait> "There is a mage named Goeth that knows a newly discovered power of the moongates." <New Line> <New Line> <Key wait> "Seek him out in Jhelom. Beware, some say he has gone insane!" <New Line> <END CONVERSATION> 
+
+Malifora
+
+Name: Malifora
+
+Description: an old, strangely familiar gypsy. <New Line> <New Line> <PAUSE> "Welcome, <AVATAR NAME> , 'tis good to see thee!" <New Line> <New Line> "How may I aid thee?
+
+Greeting:
+
+Job: I can see many things beyond thy keen!
+
+Goodbye: <Goto Label 0>
+
+
+Text information:
+
+    see or keen or thin: Tell me what thou seeketh.
+    blac: I see that he resides upon an isle of three volcanoes, far to the south in the great sea!
+    shad: Their magic is too black for even my eyes to penetrate!
+    crow or scep or amul: I can tell thee only that thou hast great need of this item!
+    shar: I see them lying scattered deep in the underworld!
+    mant: I see an honest man chanting <Rune> AHM <Rune> !
+    word: I see the runes <Rune> FALLAX <Rune> inscribed upon the entrance of the dungeon Deceit!
+    coun: Yes, <AVATAR NAME> , I served on the Great Council.
+
+Label information:
+
+    <Label 0> Wouldst thou pay me 15 gold crowns for my aid?
+        Default: Someday, thou shalt need me!" <New Line> <END CONVERSATION>
+        y: <Gold - 015> Thy kindness shall be remembered!" <New Line> <END CONVERSATION> 
+
+Malik
+
+Name: Malik" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a young gypsy child.
+
+Greeting: Hi, <AVATAR NAME> " <New Line> <New Line> <Goto Label 0>
+
+Job: Mostly just playing games.
+
+Goodbye: Farewell!
+
+
+Text information:
+
+    play or game: <Goto Label 1>
+    she or moth or gyps or fort or tell: <Goto Label 2>
+    powe or reag or mand or nigh or free: He lives in Skara Brae, ask him.
+    glas or swor: I once knew a man who tried to make glass weapons." <New Line> <New Line> <Key wait> "I think he gave up and became a pirate! Probably lives in Buccaneer's Den now.
+
+Label information:
+
+    <Label 0> Been to see my mother today?
+        Default: I know she'd like to see thee." <New Line> <New Line> <Goto Label 3>
+        y: <Goto Label 3> 
+
+    <Label 1> Didst thou know my mother is a fortuneteller?
+        Default: Well, she is!
+        y: Oh.
+
+    <Label 2> I'll tell thee more for 3 gold coins, o.k.?
+        Default: Thy loss." <New Line> <END CONVERSATION>
+        o or y: <Gold - 004> We live in the building in the northwest corner. Go talk to her! She knows lots of chants and powerful words!" <New Line> <END CONVERSATION> 
+
+    <Label 3> Didst thou know that I can help thee too?
+        Default: I know a man named Saul who knows where thou canst find the powerful reagents Mandrake and Nightshade.
+
+Donn Piatt
+
+Name: Donn Piatt
+
+Description: a stately lord in fine attire. <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Goto Label 1>
+
+Greeting: Good day!
+
+Job: I am Head Counsel for this fine community.
+
+Goodbye: Let me know if I may ever be of service.
+
+
+Text information:
+
+    comm or head or coun: Of Moonglow, of course!
+    pub: It is in the southeast building.
+    herb: It is in the southwest building.
+    man or towe: The man in the tower is a seed of discontent and will bring thee ill fortune!
+    moon: Yes!
+    fort: Ill fortune!
+
+Label information:
+
+    <Label 0> A good day to thee <AVATAR NAME> , art thou well today?
+        Default: I see...
+        Y: Ah, good. So glad to hear it!
+
+    <Label 1> A good day to thee." <New Line> <New Line> <Key wait> "My name is Donn Piatt, and I am the Head Counsel for this fine community!" <New Line> <New Line> <Key wait> <Ask Name> " <New Line> <New Line> "May I be of service unto thee?
+        Default: Well, our towne is at thy service!" <New Line> <END CONVERSATION>
+        Y: Thou may wish to frequent our fine pub or our herbalist, but avoid the man in the tower!
+
+Lord Stuart the Hungry
+
+Name: Lord Stuart the Hungry" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Key wait> <Ask Name>
+
+Description: a man of average build who seems rather ravenous!
+
+Greeting: <PAUSE> <Goto Label 0>
+
+Job: Oh, I do love to eat!
+
+Goodbye: Don't worry, I'll finish that for you!
+
+
+Text information:
+
+    eat: It's not the quality, it's the quantity!
+    qual: It's edible.
+    quan: I love the all-you-can-eat special!
+    spec or rav or food: I love to eat!
+    magi or spel: Well, yes, I've been working on a spell to make food, but it's not perfected yet.
+    perf: It makes but a small quantity of high quality food! " <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+Label information:
+
+    <Label 0> Hey, <AVATAR NAME> , join me for some chow?
+        Default: Ah well, more for me!
+        Y: There's no room here, sit over there!" <New Line> <END CONVERSATION> 
+
+    <Label 1> Thou dost look thin enough that it might be good for thee. Want to know it?
+        Default: Must be on a diet!
+        y: 'Tis an enchantment of the Second Circle, and is intoned <Rune> IN XEN MANI <Rune> , requiring ginseng, garlic and mandrake root.
+
+Greyson
+
+Name: Greyson
+
+Description: a noble fighting bard.
+
+Greeting: A good day to thee, <AVATAR NAME> !
+
+Job: I am an adventurer!
+
+Goodbye: Until morrow.
+
+
+Text information:
+
+    adve: I have been many places, and seen many things!
+    thin or plac: I've even seen the Guardians!
+    guar: They are like two winged stone giants, yet they possess life!
+    gian or life: Only those upon a sacred quest ordained by the mystic Shrines are granted passage unto the Codex of Ultimate Wisdom which lies beyond!
+    code: I know not more, for I was not on a sacred quest and could not pass.
+    sacr or ques or shri: One must know first the Mantra for a particular shrine." <New Line> <New Line> <Key wait> "Meditate there, and be sent upon a sacred quest, then canst thou enter the Shrine of the Codex!
+    mant: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Who dost thou think is the rightful ruler of Britannia?
+        Default: Interesting viewpoint.
+        brit: <Goto Label 1> 
+
+    <Label 1> Which Mantra dost thou seek?
+        Default: I know not that Mantra!
+        comp: The Mantra of Compassion is <Rune> MU <Rune> !
+
+Justin
+
+Name: Justin
+
+Description: a spicy ol' chef.
+
+Greeting: A good day to thee <AVATAR NAME>
+
+Job: Why, I am the cook, of course!
+
+Goodbye: Until then.
+
+
+Text information:
+
+    chef or cook: My specialty is roast leg of mutton a la Britanny!
+    roas or leg or mutt: Ah, 'tis the finest in all the land, if I do say so myself!" <New Line> <New Line> <Goto Label 0>
+    spec or brit: I learned the recipe from Andre', of West Britanny.
+    reci: That, my friend, is a family secret!
+    secr: I won't tell!
+
+Label information:
+
+    <Label 0> Wouldst thou like to try a bite?
+        Default: Too bad, 'tis quite good!
+        y: <Change - Item 65> Here thou art..." <New Line> <New Line> <PAUSE> "Smack..." <New Line> <New Line> <PAUSE> "Slurp..." <New Line> <New Line> <PAUSE> "Chomp..." <New Line> <New Line> <PAUSE> <Goto Label 1> 
+
+    <Label 1> Didst thou enjoy it?
+        Default: I am deeply sorry!
+        y: <Goto Label 2> 
+
+    <Label 2> Surely then, thou wouldst pay me 3 gold coins for such a culinary delight?
+        Default: Begone then, and never darken my kitchen again!" <New Line> <END CONVERSATION>
+        y: <Gold - 003> I thank thee kindly!" <New Line> <New Line> <Key wait> <Goto Label 3> 
+
+    <Label 3> Dost thou admire fine glass and crystal?
+        Default: Eb, our busboy, knows much of fine glassware!
+
+Eb
+
+Name: Eb" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a young boy.
+
+Greeting: <Goto Label 0>
+
+Job: I am the busboy.
+
+Goodbye: Farewell!
+
+
+Text information:
+
+    bus: I clean the tables.
+    clea: The tables.
+    tabl: The ones with dirty dishes.
+    dish: The ones on the dirty tables.
+    dirt: Our customers are messy!
+    mess: They mess up the tables.
+    cust: They always make a mess!" <New Line> <New Line> <Goto Label 1>
+    glas: <Goto Label 3>
+    mali: He lives in Moonglow.
+    moon: On Dagger Isle.
+
+Label information:
+
+    <Label 0> Hello, <AVATAR NAME> , art thou here to eat?
+        Default: Too bad!
+        y: Please then, have a seat!
+
+    <Label 1> Art thou going to eat here?
+        Default: Too bad!
+        y: <Goto Label 2> 
+
+    <Label 2> Art thou going to leave a mess?
+        Default: Well, then have a seat, please!" <New Line> <END CONVERSATION>
+        y: See if I give thee good service!" <New Line> <END CONVERSATION> 
+
+    <Label 3> Didst thou break a glass?
+        Default: Don't worry, klutz, I'll clean it up!
+        n: <Goto Label 4> 
+
+    <Label 4> Dost thou admire fine glasswork?
+        Default: <Goto Label 5> 
+
+    <Label 5> Ever heard of a glass sword?
+        Default: My friend Malik, who lives in Moonglow, knew a man who tried to make one.
+
+Terrance
+
+Name: Terrance
+
+Description: a sweaty, soiled farmer.
+
+Greeting: <Goto Label 0>
+
+Job: I keep this orchard to earn my humble living.
+
+Goodbye: Fare thee well.
+
+
+Text information:
+
+    orch or earn: It's even harder in these dark times!
+    livi or humb: I barely manage to make ends meet." <New Line> <New Line> <Goto Label 1>
+    hard or time or dark: It's mostly on account of them blasted Shadowlords!
+    shad: If it weren't for the Resistance, I'd have nothing left.
+    resi: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> How art thou, <AVATAR NAME> , well I hope?
+        Default: Ah, 'tis a shame.
+        y: Ah, good!
+
+    <Label 1> Dost thou have enough to eat?
+        Default: Ah, good!
+        n: Then here friend, I have enough to share with one in need!" <New Line> <New Line> <Change - Item 65> <Key wait> <If/Else Knows Name> <Nothing> "My name is Terrance!" <New Line> <New Line> <Ask Name> 
+
+    <Label 2> Ooops...." <New Line> <New Line> <PAUSE> "Dost thou intend to turn me in for my treason?
+        Default: Then so be it!" <New Line> <New Line> <PAUSE> "Help! Guards! I'm being robbed! <Call Guards> <Karma - 1> " <New Line> <END CONVERSATION>
+        n: I am grateful." <New Line> <New Line> <Goto Label 3> 
+
+    <Label 3> Dost thou know of the Resistance?
+        Default: Ask the owner of the Arms of Justice!
+        y: Good!
+
+Telila
+
+Name: Telila
+
+Description: a hard and ragged woman.
+
+Greeting: Hello, <AVATAR NAME> .
+
+Job: I clean the rooms.
+
+Goodbye: Goodbye.
+
+
+Text information:
+
+    clea: 'Tis light but tedious work.
+    room: We have but few guests these days.
+    gues: We have a mage and a bard staying this night.
+    thes or days: Few guests.
+    mage: His name is Annon- a strange fellow! He spends his days alone upon the balconies!
+    balc: Up on the second floor of the inn!
+    bard: A nice chap! His name is Greyson and he can usually be found near the fountains!
+    foun: At the centre of towne!
+    rumo or goss: I love to gossip!" <New Line> <New Line> <PAUSE> "Why, just the other day an armourer named Bullwier from Jhelom came by on a visit." <New Line> <New Line> <Key wait> "Well, I wasn't trying to, mind you, but I overheard him talking about those famous Mystic Arms!
+    myst or arms: You know, the ones used by the Avatar of legend! " <New Line> <New Line> <Key wait> "Bullwier did say more, but he left for Jhelom before I accidently heard any more!
+
+Gwenno
+
+Name: Gwenno
+
+Description: a charming woman. <New Line> <New Line> "Hello friends, 'tis good to see thee all!" <New Line> <New Line> <Nothing>
+
+Greeting:
+
+Job: I repair bows and crossbows.
+
+Goodbye: <Goto Label 2>
+
+
+Text information:
+
+    cros or bow: Iolo makes them, I repair them.
+    repa: The finest yew bows and the stoutest crossbows in the land!
+    iolo: Strange, is it not, that even though Iolo is an outlaw, we still manage to keep his bows in stock..." <New Line> <New Line> <PAUSE> "Nudge, nudge...
+    outl: Yes, there are many signs about those brigands (tee hee) in many towns.
+    brig or sign: Wanted: Dead or Alive!
+    dead or aliv or want: Dead or Alive!
+    town: Yew, for instance!
+    yew: Northwest of here, in the Deep Forest." <New Line> <New Line> <Goto Label 0>
+    join: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> Say, art thou from around here?
+        Default: I thought not.
+        y: Then perhaps just not too smart!
+
+    <Label 2> Aren't ye going to ask me to join with thee?
+        Default: I am Iolo's better half!" <New Line> <END CONVERSATION>
+        y: <Goto Label 3> 
+
+    <Label 3> Iolo and I both thank thee!" <New Line> <New Line> <Join Party> 
+
+Annon
+
+Name: Annon
+
+Description: a grave wizard. <New Line> <New Line> <If/Else Knows Name> <Goto Label 3> <Goto Label 0>
+
+Greeting:
+
+Job: I once served on the Great Council!
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    coun or grea: We derived the eight Words of Power!
+    word or powe: We used these words to seal the eight dungeons!
+    seal or dung: Blackthorn hunts us down, so that he might unlock them and free the evils within!
+    blac or hunt or free or evil or unlo: <Test Karma: 75> <Goto Label 4> I trust not yet thy Virtue!
+
+Label information:
+
+    <Label 0> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> Good day!" <New Line> <END CONVERSATION> 
+
+    <Label 1> I have heard tales of thy deeds and am honored to meet thee!" <New Line> <New Line> <Key wait> "I am Annon, of the Great Council!" <New Line> <New Line> <Nothing> 
+
+    <Label 3> Greetings, <AVATAR NAME> ." <New Line> <New Line> <Nothing> 
+
+    <Label 4> I know merely one of these Words." <New Line> <New Line> <PAUSE> "Dost thou wish to know it?
+        Default: Oh.
+        y: The Word is <Rune> VILIS <Rune> , and remember, it can be used to open the dungeon Despise! " <New Line> <New Line> <Key wait> "The daughter of another council member works as a sailmaker. Ask the child about her mother for she too knows one of the Words of Power!
+
+Bullwier
+
+Name: Bullwier
+
+Description: a rough and scrungy man with a patch on one eye. <New Line> <New Line> <PAUSE> <Goto Label 0>
+
+Greeting:
+
+Job: I make weapons, canst thou not see!
+
+Goodbye: Finally!
+
+
+Text information:
+
+    weap: Swords, shields, and helms, fool!
+    swor: Iron swords! Thou art testing my patience!
+    shie: Iron shields! What dost thou expect!
+    helm: Iron helms! But, thou already hast a thick skull!
+    iron: Thou art testing my patience, fool!
+    pati or fool: GUARDS!!! <Call Guards> " <New Line> <END CONVERSATION>
+    myst: I've heard rumors about a man by the name of Ambrose, who was in search of the weapons.
+    ambr or weap or rumo: 'Twas rumored he was heavily injured during his quest. " <New Line> <New Line> <Key wait> "So badly injured is he, that he is conscious for only about an hour near midnight each night." <New Line> <New Line> <Key wait> "He is healing in the towne of Cove.
+
+Label information:
+
+    <Label 0> Hey, you..." <New Line> <New Line> <PAUSE> "Dost thou have any business here?
+        Default: Then thou art trespassing! Buzz off!" <New Line> <END CONVERSATION>
+        y: What dost thou want, and I don't have all day!
+
+Trian
+
+Name: Trian" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a young minstrel.
+
+Greeting: A good day unto thee, <AVATAR NAME> !
+
+Job: I play songs!
+
+Goodbye: Farewell!
+
+
+Text information:
+
+    song: Songs of valor, of course!
+    val: The tales of many a valiant deed come through this pub!
+    deed or tale: Why, there's a fighter who frequents this place by the name of Thorne.
+    figh or thor: His travels take him on many quests.
+    ques: He visits the shrines often!
+    shri: Of that, thou shalt have to ask him!
+    dest or word or powe: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou intend to explore one of the forbidden dungeons?
+        Default: Good, it is not only dangerous, but illegal!
+        y: Well, if thou must be so foolish as to try that, I can tell thee only this." <New Line> <New Line> <Key wait> "There is one in this towne who doth search for that which is not there. He knows the Word of Power." <New Line> <New Line> <Key wait> "But, he has gone quite insane, so if he doth have trouble remembering, saying each word backwards oft is of some help!
+
+Goeth
+
+Name: Goeth
+
+Description: a confused and bewildered mage!
+
+Greeting:
+
+Job: Looking rof something, I am.
+
+Goodbye: I ees thee.
+
+
+Text information:
+
+    look or some: Not gnol ago, I tsol it.
+    tsol or lost or it: Valuable, saw it!
+    valu: Remember ton I; but here be it must!
+    moon or ston or word or powe: Remember ton I; but know it I should!
+    drow or rewo: Ah, sey, coming kcab to me it is." <New Line> <New Line> <Goto Label 0>
+    noom or etag or seta or seno or enot: On taht, my dnim is more clear!" <New Line> <New Line> <Key wait> <Goto Label 1> 
+
+Label information:
+
+    <Label 0> Drow which, that was?
+        Default: Remember ton I.
+        drat: Drow of Rewop thou seeketh; remember <Rune> AIPONI <Rune> htod I.
+
+    <Label 1> Noom Gates, thou tsod know about?
+        Default: I have found taht, below the location erehw a gate appears, there si a stone!" <New Line> <New Line> <Key wait> "Reveal it nac thou, htiw a simple hcraes, retfa the gate senaw." <New Line> <New Line> <Key wait> "If uoht taketh siht stone and yrub it elsewhere, the noom gate shall appear ni the wen location!" <New Line> <New Line> <Key wait> <Goto Label 2> 
+
+    <Label 2> Amazing, is ti ton?
+        Default: This sevig one great rewop indeed!
+
+Thorne
+
+Name: Thorne
+
+Description: a battleworn fighter.
+
+Greeting: <Goto Label 0>
+
+Job: I'm resting up between battles.
+
+Goodbye: Good hunting!
+
+
+Text information:
+
+    rest: I like to exchange battle stories!
+    exch or batt or stor: Just the other day I was locked in mortal combat with a bunch of nasty trolls!
+    trol: They even had the gall to ask ME for gold in order to pass!
+    gall or gold or pass: I taught them a thing or two!
+    mant or shri: <Goto Label 1>
+    word or powe: Ask the minstrel!
+
+Label information:
+
+    <Label 0> <AVATAR NAME> , been in any good battles lately?
+        Default: Too bad.
+        y: Glad to hear it!
+
+    <Label 1> Who dost thou serve?
+        Default: Sorry.
+        brit: The Mantra for Valor is <Rune> RA <Rune> !" <New Line> <New Line> <Goto Label 3> 
+
+    <Label 3> Wilt thou be exploring the dungeon Destard?
+        Default: Ah.
+        y: In many dungeon rooms there are trips that open secret passages!" <New Line> <New Line> <Key wait> "The more devious ones are those that must be pushed, like wall panels." <New Line> <New Line> <Key wait> "Some even must be shot at, such as a torch across a chasm!" <New Line> <New Line> <Key wait> "And, remember, thou dost need the Word of Power to enter!
+
+Chamfort
+
+Name: Chamfort
+
+Description: a hearty blacksmith.
+
+Greeting: Hello, <AVATAR NAME> !
+
+Job: I own this smithy and also forge its goods!
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    resi: <Goto Label 0>
+    land: He is the local leader of the Resistance.
+    loca or lead: There is a secret passage through my fireplace that will lead thee unto him! Go now, and good luck!" <New Line> <END CONVERSATION>
+    good or forg or smit: I'm a busy man and don't have time to chat." <New Line> <New Line> <PAUSE> "So, if thou wilt excuse me..." <New Line> <END CONVERSATION>
+    mant: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> Who told thee to ask me?
+        Default: I don't know what thou art talking about.
+        terr: I see..." <New Line> <New Line> <PAUSE> <Goto Label 1> 
+
+    <Label 1> Dost thou wish to aid the Resistance?
+        Default: Then we have no business.
+        y: Very good!" <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 2> <PAUSE> "We don't need thy help." <New Line> <END CONVERSATION> 
+
+    <Label 2> The first thing thou dost need is to see Landon!" <New Line> <New Line> <PAUSE> "The password is <Rune> DAWN <Rune> ." <New Line> <New Line> <PAUSE> <Nothing> 
+
+    <Label 3> Who told thee to ask me?
+        Default: I don't know what thou art talking about.
+        jere: Ah, yes. The Mantra of Justice is <Rune> BEH <Rune> !
+
+Landon
+
+Name: Landon
+
+Description: a grim and stalwart fighter. <New Line> <New Line> <If/Else Knows Name> <Goto Label 3> <Goto Label 0>
+
+Greeting:
+
+Job: If thou must ask, thou need not know.
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    resi: <Goto Label 2>
+    blac or brit or crow: Blackthorn uses the powers of the Crown to maintain his reign of tyranny!
+    powe or reig or tyra: 'Tis said that he keeps it in a small room atop his terrible castle!" <New Line> <New Line> <Key wait> "It must be recovered! <AVATAR NAME> , thou art the one to do it!" <New Line> <New Line> <Key wait> "Be warned, he uses its powers to prevent the use of magic within his castle!" <New Line> <New Line> <Key wait> "Seek out Sir Simon on a mountain isle, west of Spiritwood." <New Line> <END CONVERSATION> 
+
+Label information:
+
+    <Label 0> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <END CONVERSATION> 
+
+    <Label 1> With whom dost thy loyalty lie?
+        Default: We have no business." <New Line> <END CONVERSATION>
+        brit: Fine, how might I aid thee?
+
+    <Label 2> What's the password?
+        Default: Buzz off!" <New Line> <END CONVERSATION>
+        dawn: Good!" <New Line> <New Line> <PAUSE> <Goto Label 4> 
+
+    <Label 3> Hello, <AVATAR NAME> , how can I aid thee?" <New Line> <New Line> <Nothing> 
+
+    <Label 4> Canst thou help us with the cause?
+        Default: Too bad.
+        y: Well, <AVATAR NAME> , it is rumored that Blackthorn himself has taken Lord British's crown!
+
+Judge Dryden
+
+Name: Judge Dryden
+
+Description: a man in flowing black robes.
+
+Greeting: I remember thee, what dost thou want?" <New Line> <New Line> <Goto Label 0>
+
+Job: I am the head Inquisitor.
+
+Goodbye: Live by the Eight Laws!
+
+
+Text information:
+
+    judg or cour or inqu: This is the Court of Inquisition of His Majesty Blackthorn!" <New Line> <New Line> <Goto Label 0>
+    oppr: <Goto Label 6>
+    plea: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Art thou here to confess?
+        Default: <Goto Label 1>
+        y: <Goto Label 3> 
+
+    <Label 1> Perhaps then, to plead for the life of another, yes?
+        Default: Then what?
+        y: <Goto Label 2> 
+
+    <Label 2> Whom dost thou wish me to pity?
+        Default: That one is not a prisoner here!
+        jero or fele or grey or mari or aley: That one deserves no pity!
+
+    <Label 3> <If/Else Knows Name> <Goto Label 4> <Ask Name> " <New Line> <New Line> <PAUSE> <If/Else Knows Name> <Goto Label 4> Thou art not in my records!" <New Line> <New Line> <Nothing> 
+
+    <Label 4> Art thou pleading guilty of heresy?
+        Default: Nonetheless... GUARDS! <Call Guards> " <New Line> <END CONVERSATION>
+        y: GUARDS! <Call Guards> " <New Line> <END CONVERSATION> 
+
+    <Label 6> Who sent thee?
+        Default: Never heard of 'em.
+        tact: I see..." <New Line> <New Line> <PAUSE> "I think thou had best see Archmage Flain!" <New Line> <New Line> <Key wait> "He will be eager to meet thee. See him in the tower of Skara Brae and ask him of the Oppression!
+
+Jeremy
+
+Name: Jeremy
+
+Description: a man with a tall white hat.
+
+Greeting: Hello again.
+
+Job: I am the chef at The Slaughtered Lamb.
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    slau or lamb or chef: I work hard- I need the money.
+    mone: I'm trying to get my brother out of jail.
+    jail or brot: It is going to cost me 500 gold crowns!
+    500 or gold or crow: I know not how I shall save that much." <New Line> <New Line> <Goto Label 0>
+    key: <Change - Item 67> <Change - Item 67> <Change - Item 67> <Change - Item 67> <Change - Item 67> Have five!" <New Line> <New Line> <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Wouldst thou donate 30 gold crowns?
+        Default: Thanks anyway.
+        y: <Gold - 030> I thank thee, kind soul!" <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> Is there anything that thou dost need- food, keys or perhaps information?
+        Default: I don't have that.
+        key: <Change - Item 67> <Change - Item 67> <Change - Item 67> <Change - Item 67> <Change - Item 67> Have five!" <New Line> <New Line> <Goto Label 2>
+        food: <Change - Item 65> Done!
+        info: All I can tell thee is that Chamfort knows a Mantra!
+
+    <Label 2> Surely thou wilt give me 50 gold for those keys?
+        Default: <Karma - 1> <Karma - 1> <Karma - 1> Scoundrel!" <New Line> <END CONVERSATION>
+        y: <Gold - 050> Thou art most gracious!" <New Line> <New Line> <Goto Label 1> 
+
+Jerone
+
+Name: Jerone
+
+Description: a quiet, solitary man.
+
+Greeting: Back again eh?
+
+Job: Well, I used to be an adventurer!
+
+Goodbye: I'm sure we'll see more of each other.
+
+
+Text information:
+
+    adve or used: Now I'm a prisoner!
+    pris: I was convicted of heresy!
+    conv or here: I stated my belief that Lord British was alive!
+    brit or stat or beli or aliv: It happened one night when I was camping out on the moors.
+    camp or moor: A strange apparition arose before my fire!
+    fire or aros or appa: It was HIM, I swear it!!!" <New Line> <New Line> <Goto Label 0>
+    hurr or jere or brot: He is collecting the 500 gold crowns needed for my release.
+    gold or rele or coll: He used to give me keys, but I kept getting caught!
+    key or caug: I'm sure if thou wouldst ask he wouldst give thee a key! He comes by around ten each morning and evening.
+
+Label information:
+
+    <Label 0> Surely thou dost believe me?
+        Default: Well, it's true!
+        y: Then surely thou must agree, there is hope!" <New Line> <New Line> <PAUSE> "If only my brother would hurry!
+
+Felespar
+
+Name: Felespar
+
+Description: a grave old wizard.
+
+Greeting: Greetings, <AVATAR NAME> , 'tis good to see thee." <New Line> <New Line> <PAUSE> <Goto Label 0>
+
+Job: When I was a free man, I served on the Great Council.
+
+Goodbye: May thy travels fare well!
+
+
+Text information:
+
+    grea or coun: The Great Council once served His Majesty Lord British and sealed the 8 dungeons!
+    maje or brit: Alas, if only he were here now.
+    seal or dung: To entomb the foul creatures that dwell within!
+    powe or word: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Any news of Lord British?
+        Default: Hmmm....
+        y: <Goto Label 1> 
+
+    <Label 1> Good news?
+        Default: Distressing.
+        y: There is hope!
+
+    <Label 2> Thou must be inquiring about the Words of Power, yes?
+        Default: Perhaps not, then.
+        y: <Goto Label 3> 
+
+    <Label 3> The Words of Power are aptly named and not given out lightly." <New Line> <New Line> <Key wait> "So, tell me, art thou with the Resistance?
+        Default: Too bad.
+        y: <Goto Label 4> 
+
+    <Label 4> And, their password is?
+        Default: Nay, 'tis not.
+        dawn: Very well, the Word of Power for the dungeon Wrong is <Rune> MALUM <Rune> ! Use it wisely!
+
+Mario
+
+Name: Mario
+
+Description: a man torn and tattered from days in the stocks. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job: I am bein' 'orribly punished for a trivial crime.
+
+Goodbye: Well, if thou wilt not 'elp me, at least free me son Aleyn!
+
+
+Text information:
+
+    son or aley: He too 'as been left to die!
+    pity: ME!
+    unlo or stoc or elp or sca: For Pete's sake, use a key and jimmy the bloody lock!
+    key or pete: Gimme a break!
+    jimm or lock: The one on the stocks, ye bloomin' idiot!
+    puni: I've been sentenced to slowly die in the stocks, for me minor crime.
+    mino or crim: I was convicted by Ye Court of Inquisition. " <New Line> <New Line> <PAUSE> "I could afford only 40% of me earnings to give unto charity!" <New Line> <New Line> <PAUSE> "A fact that I did not confess until I was caught and tortured!
+    caug or tort: Don't ask!
+
+Label information:
+
+    <Label 0> Won't ye 'elp me please?
+        Default: Oh, pity me!
+        y: Please, unlock the stocks an 'elp me 'scape!
+
+Aleyn
+
+Name: Aleyn
+
+Description: a small battered child, barely breathing and limp in the stocks.
+
+Greeting: Help.
+
+Job: I fear I have broken a law!
+
+Goodbye: Don't go.
+
+
+Text information:
+
+    help: Help me.
+    brok or law: I failed to enforce the Seventh Law of Virtue.
+    seve or 7 or virt: I did not turn my father in for donating too little to charity!
+    fath: Mario.
+    dona or char: That's just what I'm told!
+
+Tactus
+
+Name: Tactus
+
+Description: a strong youth.
+
+Greeting: Greetings!
+
+Job: I make the chainmail armour and coifs here at Darkwatch Armoury!
+
+Goodbye: Farewell.
+
+
+Text information:
+
+    dark or watc or chai or armo or coif: Indeed, I believe it to be amongst the finest in the land!
+    fine or land: Since Blackthorn has come to power, our sales have increased threefold!
+    blac or sale or powe or incr: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Blackthorn's reign has been most beneficial, I think you'll agree, yes?
+        Default: That shows what thou dost know, shallow minded fool!
+        y: I can tell thou art very keen!" <New Line> <New Line> <PAUSE> <Goto Label 1> 
+
+    <Label 1> I wouldst like thee to see a friend of mine, if thou couldst. Wilt thou?
+        Default: Too bad, we need thy type.
+        y: He is very close with Lord Blackthorn himself! I believe thou shalt find him an interesting fellow!" <New Line> <New Line> <Key wait> "His name is Judge Dryden and thou might find him in the court of Yew. Ask him of the Oppression and tell him Tactus sent thee!" <New Line> <END CONVERSATION> 
+
+Fiona
+
+Name: Fiona
+
+Description: a mystical woman dressed in meager clothes. <New Line> <New Line> <Goto Label 1>
+
+Greeting:
+
+Job: I run the poor house.
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    hous or poor: The problem has worsened with the taxation and Inquisition!
+    tax or inqu: If only Lord British could return." <New Line> <New Line> <Goto Label 0>
+    grea or coun: <Goto Label 5> 
+
+Label information:
+
+    <Label 0> Dost thou believe he may still live?
+        Default: Alas.
+        y: I give such rumors little hope.
+
+    <Label 1> I am Fiona. I run the Poor House." <New Line> <New Line> <Key wait> "Art thou in dire need of food?
+        Default: Good.
+        y: <Goto Label 3> 
+
+    <Label 3> <Change - Item 65> Eat it slowly, we have but little." <New Line> <New Line> <Nothing> 
+
+    <Label 5> What makes thee think that I know?
+        Default: I know not of what thou dost speak!
+        anno or rew or dawn or daug: Yes, I did once serve on the Great Council." <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <PAUSE> <If/Else Knows Name> <Goto Label 6> <END CONVERSATION> 
+
+    <Label 6> Thou must be the Avatar of legends past!" <New Line> <New Line> <PAUSE> <Goto Label 7> 
+
+    <Label 7> What knowledge dost thou seek from me?
+        Default: Sorry, I know that not.
+        word or powe or cove: The Word of Power to open the dungeon of Covetous is <Rune> AVIDUS <Rune> !
+
+Rew
+
+Name: Rew
+
+Description: a small, thin and tattered child.
+
+Greeting: Hello, <AVATAR NAME> , nice to see thee.
+
+Job: I sew sails.
+
+Goodbye: Come talk to me again!
+
+
+Text information:
+
+    sew or sail: It's very hard work.
+    hard: And, we work very long hours!
+    long or hour: Seven days a week!
+    seve or days or week: <Goto Label 0>
+    cah: I'm told it's a mantra, whatever that is." <New Line> <New Line> <Key wait> <Goto Label 2>
+    moth: Her name is Fiona. She works at the poor house.
+    fion: My mom works at the poor house.
+    wish or well: I heard one person claim they got a horse!
+
+Label information:
+
+    <Label 0> Unfair, dost thou agree?
+        Default: Well, I do!
+        y: Me too..." <New Line> <New Line> <PAUSE> <If/Else Knows Name> <Goto Label 1> <Ask Name> " <New Line> <New Line> <Goto Label 1> 
+
+    <Label 1> 'Tis with great sacrifice we sew, but we have a little chant we sing to pass the time. Like to hear it?
+        Default: Thou knowest not what thou art missing!
+        y: The raven sees <New Line> The raven saw <New Line> And in the corn <New Line> He sayeth 'Cah'!
+
+    <Label 2> Dost thou believe that wishes can come true?
+        Default: I do.
+        y: I've heard that some wells are wishing wells!
+
+Fenelon
+
+Name: Fenelon
+
+Description: a sad and weakened soul.
+
+Greeting: G'day <AVATAR NAME> , I hope ye've been well.
+
+Job: I sew sails for Captain Blythe.
+
+Goodbye: Tomorrow then.
+
+
+Text information:
+
+    capt or blyt: He's the owner of The Crow's Nest! Between thee and I, he's a real nasty soul!
+    crow or nest: They do have fine sails, if nothing else!
+    sew or fine or sail: Made only from the finest muslin and a dash of spider silk!
+    musl or spid or silk: That's right!
+    nast or soul: He has myself, and Rew here, held in indentured servitude indefinitely!
+    ind or serv: Yes, tis a pity, especially for such a young child as Rew.
+    rew: She is a wonderful child.
+    wond or chil: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> <If/Else Knows Name> <Goto Label 2> Thou dost show kindness." <New Line> <New Line> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 1> <Goto Label 2> 
+
+    <Label 1> <Karma + 1> <Karma + 1> <Karma + 1> <Karma + 1> <Karma + 1> Dost thou usually pay the sacrifice tax?
+        Default: The guard is off at lunch and at night. Enter and leave then to avoid him!
+
+    <Label 2> Indeed." <New Line> <New Line> <Nothing> 
+
+Lady Sahra
+
+Name: Lady Sahra
+
+Description: a strong woman of firm resolve.
+
+Greeting:
+
+Job: I help with the sick and injured.
+
+Goodbye: May thy journeys be free of strife!
+
+
+Text information:
+
+    sick: The plagues, once thought gone, have returned!
+    retu or plag: It is carried by rats and other rodents.
+    rat or rode: They are nasty, unclean creatures.
+    inju: Many come to convalesce from injuries sustained in factional skirmishes!
+    fact or skir: They have lessened dramatically since martial law was imposed!
+    mart or law or impo: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Blackthorn has done a good job given the circumstances. Dost thou not agree?
+        Default: Well, I do. Poor man, he's badly misunderstood.
+        y: If people would just let him, he'd straighten out a lot of this mess!
+
+Delwyn
+
+Name: Delwyn
+
+Description: a poor and destitute beggar. <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Goto Label 3>
+
+Greeting:
+
+Job: <Goto Label 3>
+
+Goodbye: See thee again soon, gov'na!
+
+
+Text information:
+
+    beg: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> Greetings, <AVATAR NAME> , surely thou canst spare a few gold crowns for a friend in need?
+        Default: But, <AVATAR NAME> , how shall I eat...
+        y: <Gold - 003> Thank ye gov'na!" <New Line> <New Line> <PAUSE> "Oh, and by the way..." <New Line> <New Line> <PAUSE> "I seen sump'n ye might wish to know since last we met..." <New Line> <New Line> <PAUSE> <Goto Label 1> 
+
+    <Label 1> Care to know it?
+        Default: O.K.
+        y: Well, I ben noticin' Shenstone the armourer's ben sneakin' 'bout town 'round noontime!" <New Line> <New Line> <Key wait> <Goto Label 2> 
+
+    <Label 2> Surely, <AVATAR NAME> , that bit o'news is worth some gold to ye ain't it?
+        Default: Cheapskate!
+        y: <Gold - 003> Bless ye, thy kindness is only exceeded by thy virtue!
+
+    <Label 3> Pity, pity me, I'm but a poor and destitute beggar!" <New Line> <New Line> <PAUSE> "Surely thou canst spare a few gold crowns?
+        Default: Cheapskate!
+        y: <Gold - 003> Bless ye!" <New Line> <New Line> <If/Else Knows Name> <Goto Label 4> <Ask Name> " <New Line> <New Line> <If/Else Knows Name> <Goto Label 4> <END CONVERSATION> 
+
+    <Label 4> Thou shalt find me a worthy investment! Later, I shall prove it unto thee!" <New Line> <END CONVERSATION> 
+
+Woolfe
+
+Name: Woolfe" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a stout man in a shining suit of armour!
+
+Greeting: Well met <AVATAR NAME> , and a g'day to thee!
+
+Job: I'm the blacksmith here at The Paladin's Protectorate.
+
+Goodbye: Farewell, my friend!
+
+
+Text information:
+
+    pala or prot or blac: I forge fine weapons and stout armour!
+    forg: It's o'er there in the back!
+    weap: My favorites are the spiked helms, shields and morning stars!
+    favo or spik or helm or shie or morn or star: Indeed, they are!
+    armo: Plate mail, my friend." <New Line> <New Line> <PAUSE> "Ey, doth shine so brightly too!" <New Line> <New Line> <PAUSE> "'been make'n a suit for my young son.
+    son: He's been sick!
+    sick: My son Jimmy is a fine lad. He is staying at the healer's.
+    jim: They occasionally let him visit the lake. If thou dost see him, ask him about ships. He enjoys talking about them.
+    lake or heal: He's got this funny roommate that sleepwalks!
+    fun or room or slee: Yea, in the middle of the night, he walks the city walls!
+
+Sindar
+
+Name: Sindar..." <New Line> <New Line> <PAUSE> "...I think.
+
+Description: an old wizard who appears to be sleepwalking!
+
+Greeting:
+
+Job: <PAUSE> Job?" <New Line> <New Line> <PAUSE> <Nothing>
+
+Goodbye: <PAUSE> Uh..." <New Line> <New Line> <PAUSE> "Bye." <New Line> <PAUSE> <END CONVERSATION>
+
+
+Text information:
+
+    wake: <PAUSE> Wake?" <New Line> <New Line> <PAUSE> <Nothing>
+    grea or coun or wiza: <PAUSE> Yes." <New Line> <New Line> <PAUSE> <Nothing>
+    word or powe: <PAUSE> <Rune> INFAMA <Rune> !" <New Line> <New Line> <PAUSE> <Nothing>
+    whic or dung: <PAUSE> Dungeon?" <New Line> <New Line> <PAUSE> " <Rune> SHAME <Rune> !" <New Line> <New Line> <PAUSE> <Nothing>
+
+Jimmy
+
+Name: Jimmy
+
+Description: a pale young boy.
+
+Greeting: Hello, <AVATAR NAME> , nice to see thee.
+
+Job: I just like to sit by the lake and think.
+
+Goodbye: <If/Else Knows Name> <Goto Label 2> <Goto Label 3>
+
+
+Text information:
+
+    lake or thin: It is very relaxing.
+    ship: <Goto Label 0>
+    hms or h.m. or cape: <Goto Label 1>
+    extr or powe: Twice the hull strength and twice the speed of any other vessel!
+    stre or hull: She bore a magical ship's wheel that did enchant her bow!
+    magi or whee or ench or bow: 'Twas lost during the Age of the Avatar!
+    spee: Rigging her sails a special way gave her this enchanted ability!
+    spec or rigg or ench: It was designed by Master Hawkins of the Oaken Oar.
+    mast or hawk or oak or oar: 'Tis rumoured that plans for her rigging still are kept by Hawkins himself at his shoppe!
+    shop or plan: 'Tis but only a rumour!
+
+Label information:
+
+    <Label 0> I love ships! Ever 'eard of the H.M.S. Cape?
+        Default: <Goto Label 1> 
+
+    <Label 1> Many extraordinary powers had she!" <New Line> <New Line> <Nothing> 
+
+    <Label 2> Come visit with me again soon!" <New Line> <END CONVERSATION> 
+
+    <Label 3> <Ask Name> " <New Line> <New Line> <Goto Label 2> 
+
+Gruman
+
+Name: Gruman" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a stately knight.
+
+Greeting: Well met <AVATAR NAME> ." <New Line> <New Line> <Goto Label 0>
+
+Job: I walk the walls of fair Trinsic!
+
+Goodbye: Farewell, and may thy blade drink the blood of Honor's enemies!
+
+
+Text information:
+
+    mant or hono: <Goto Label 2>
+    walk or trin: I am waiting here for a sign!
+    wait or sign: I know not what form it shall take, but when it comes I shall go in search of my lord!
+    lord: Lord British, of course!
+
+Label information:
+
+    <Label 0> Hath thy sword tasted blood since last we met?
+        Default: A pity!
+        y: <Goto Label 1> 
+
+    <Label 1> For a just and honorable cause I trust?
+        Default: <Karma - 1> Villainous scum!
+        y: 'Tis always good to commit thy life to deeds of Honor!
+
+    <Label 2> Dost thou seek the Mantra for the Virtue of Honor?
+        Default: O.K.
+        y: <Test Karma: 50> <Goto Label 3> If only thou seemed honorable, I would tell it unto thee!
+
+    <Label 3> Then 'tis thine!" <New Line> <New Line> <PAUSE> " <Rune> SUMM <Rune> is the chant that thou dost seek!" <New Line> <New Line> <Nothing>
+
+Jaana
+
+Name: Jaana
+
+Description: A fine young lass. <New Line> <New Line> "Hail, <AVATAR NAME> , my old friend, 'tis good to see thee again!" <New Line> <New Line> <Key wait> <Goto Label 0>
+
+Greeting:
+
+Job: I have worked here for the Resistance since Blackthorn came to power.
+
+Goodbye: Come for me soon, old friend!
+
+
+Text information:
+
+    join: <Goto Label 3> 
+
+Label information:
+
+    <Label 0> So, tell me, hast thou returned to set things right?
+        Default: <Goto Label 0>
+        n: What! No! Leave my sight!" <New Line> <END CONVERSATION>
+        y: <Goto Label 1> 
+
+    <Label 1> Good!" <New Line> <New Line> <PAUSE> "Hath thy journeys fared well so far?
+        Default: <Goto Label 2>
+        n: Too bad." <New Line> <New Line> <Goto Label 2>
+        y: Glad to hear it." <New Line> <New Line> <Goto Label 2> 
+
+    <Label 2> I have been working here for the Resistance since Blackthorn came to power." <New Line> <New Line> <Key wait> <Goto Label 3> 
+
+    <Label 3> Is it time I joined thee on thy quest?
+        Default: Just let me know when.
+        y: I yearn for battle!" <New Line> <New Line> <Join Party> 
+
+Greymarch
+
+Name: Greymarch
+
+Description: a sorely beaten fighter.
+
+Greeting:
+
+Job: I once sought adventure on the open range!
+
+Goodbye: Good luck!
+
+
+Text information:
+
+    froed: <Goto Label 0>
+    rang or adve: I've been sitting in this cell now for quite some time, with no word from my son.
+    son: I fear Froed was killed by the wicked guards that threw me in here!
+
+Label information:
+
+    <Label 0> My son! Hast thou seen him?
+        Default: Then why taunt me?
+        y: <Goto Label 1> 
+
+    <Label 1> And, he is well?
+        Default: No, no it can't be!" <New Line> <END CONVERSATION>
+        y: <Goto Label 2> 
+
+    <Label 2> Where didst thou see him?
+        Default: Hmmm...
+        skar: Aha, he must have hidden in the woods!" <New Line> <New Line> <PAUSE> <Goto Label 3> 
+
+    <Label 3> Surely, thou wilt let me repay thee in some way?
+        Default: Hmmm....
+        y: I have nothing material, but I will tell ye what I know!" <New Line> <New Line> <Key wait> "When Lord British left for the Underworld he left behind his Sceptre." <New Line> <New Line> <Key wait> "I was told that the Sceptre had great powers against the forces of evil!" <New Line> <New Line> <Key wait> "Seek out Sir Simon in a keep, perched on the high mountains of an isle west of Spiritwood.
+
+Froed
+
+Name: Froed
+
+Description: a small, dirty, and tattered child. <New Line> <New Line> "Please, don't hurt me!" <New Line> <New Line> <If/Else Knows Name> <Goto Label 0> <Nothing>
+
+Greeting:
+
+Job: I am hiding!
+
+Goodbye: Bye.
+
+
+Text information:
+
+    hurt: Please, don't!
+    hid: From those nasty people!
+    nast or peop: They dragged off my father!
+    fath: His name is Greymarch. He spoke out against Blackthorn and they took him away." <New Line> <New Line> <PAUSE> <Goto Label 1>
+    spok or blac: Since he came to power, no one can speak their mind!
+    mo: She died when I was born.
+    grey: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Oh, it is thee, <AVATAR NAME> . Thou didst give me a scare!" <New Line> <New Line> <Nothing> 
+
+    <Label 1> Hast thou ever heard of him?
+        Default: I hope he still lives.
+        y: <Goto Label 2> 
+
+    <Label 2> Hast thou seen any sign of him?
+        Default: I wonder where they have taken him.
+        y: <Goto Label 3> 
+
+    <Label 3> Where?
+        Default: I've not seen him there!
+        jail or pris or yew: Then there is hope!" <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <New Line> <PAUSE> <Goto Label 4> 
+
+    <Label 4> Wouldst thou take him a message?
+        Default: O.K.
+        y: Tell him Froed is well and I'm sure he shall reward thee!
+
+Flain
+
+Name: Flain
+
+Description: a dark and ominous wizard. <New Line> <New Line> <Goto Label 0>
+
+Greeting:
+
+Job:
+
+Goodbye:
+
+
+Label information:
+
+    <Label 0> Why hast thou disturbed me, wretch?
+        Default: How dare thee enter my tower uninvited." <New Line> <New Line> <PAUSE> <Goto Label 8>
+        oppr: This had best be important, for if 'tis not..." <New Line> <New Line> <Key wait> " <Goto Label 1> 
+
+    <Label 1> Who sent thee?
+        Default: I know not of what thou dost speak. " <New Line> <New Line> <PAUSE> <Goto Label 8>
+        judg or dryd: <Goto Label 2> 
+
+    <Label 2> Dost thou wish to join the Oppression?
+        Default: <Goto Label 8>
+        y: <Goto Label 3> 
+
+    <Label 3> First, thou must prove thy allegiance! Tell me the name of a member of the Great Council, so we might dispatch the traitor!
+        Default: I do not believe thee!" <New Line> <New Line> <PAUSE> <Goto Label 8>
+        hass: We know that one already!" <New Line> <New Line> <PAUSE> <Goto Label 8>
+        mali or anno or goet or fele or fion or sind: <PAUSE> Ah, very good, just as we suspected. That one will soon perish!" <New Line> <New Line> <Key wait> "Now, to further thy acceptance in our order, go see Elistaria on the northeastern most isle of Britannia. Say to her the password, 'Impera'." <New Line> <END CONVERSATION> 
+
+    <Label 8> Begone, fool, before I blast thee!" <New Line> <END CONVERSATION> 
+
+Kindor
+
+Name: Kindor
+
+Description: a weak and sickly bard.
+
+Greeting: Hello..." <New Line> <New Line> <PAUSE> " <AVATAR NAME> .
+
+Job: I..." <New Line> <New Line> <PAUSE> "am here to convalesce.
+
+Goodbye: Fare thee well!
+
+
+Text information:
+
+    conv: To..." <New Line> <New Line> <PAUSE> "let my wounds heal!
+    woun or heal: I was..." <New Line> <New Line> <PAUSE> "struck by a Shadowlord's magical arrow!
+    shad or arro: I fear..." <New Line> <New Line> <PAUSE> "that I shall die!
+    die: <PAUSE> Not knowing is the worst part, though.
+    shri: <PAUSE> Yes, I know the Mantra of Spirituality." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> If I give it unto thee, wilt thou use it to help rid us of the evil Shadowlords?
+        Default: Then I shall not give it unto thee!
+        y: Use it soon, for remember, Blackthorn too searches for the Mantra...." <New Line> <New Line> <Key wait> "He will use the Mantra to destroy the shrines and remove their power from the world!" <New Line> <New Line> <Key wait> "The Mantra of Spirituality is <Rune> OM <Rune> ! Guard it well!" <New Line> <New Line> <Key wait> "I had not yet learned the location of the shrine, but I was on my way to see Lady Janell in the Lycaeum. She may know." <New Line> <END CONVERSATION> 
+
+Saul
+
+Name: Saul
+
+Description: a ragged man.
+
+Greeting:
+
+Job: I am a visitor.
+
+Goodbye: Good day.
+
+
+Text information:
+
+    visi: Came to see an old friend!
+    frie: His name is Kindor. He was struck by a Shadowlord's bolt!
+    kind or shad or bolt: He resisted the Shadowlord's takeover of his towne!
+    take or resi: He fled after he was shot. I found him near death and brought him here." <New Line> <New Line> <PAUSE> <Goto Label 0>
+    mand or nigh: <Goto Label 2> 
+
+Label information:
+
+    <Label 0> Wilt thou help us vanquish these daemons?
+        Default: Pity.
+        y: Kindor has some information regarding a shrine that might aid thee." <New Line> <New Line> <PAUSE> "Visit him at the healer's near 6 P.M.
+
+    <Label 2> Wisheth thee to find them?
+        Default: O.K.
+        y: Legend tells of a spot in the Bloody Plains, forever damp from the blood of many battles." <New Line> <New Line> <Key wait> "Mandrake root can be found there or in the Fens of the Dead." <New Line> <New Line> <Key wait> "Deadly nightshade can only be found in the most thickly forested spot of Spiritwood." <New Line> <New Line> <Key wait> "Both may only be collected in the darkness of midnight!
+
+Tomoka
+
+Name: Tomoka
+
+Description: a weary but contented villager.
+
+Greeting:
+
+Job: I work in the communal fields.
+
+Goodbye: Goodbye, and good journey!
+
+
+Text information:
+
+    comm or fiel: Each of us profits from the labours of the group!
+    prof or grou or labo: We are all dependent upon each other, more than ever now that Blackthorn takes so much of our harvest!
+    blac or harv: He says he means to improve our lives, but he does little to keep his promise.
+    impr or live or litt or prom: Lord British would not have approved.
+    brit or appr: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Dost thou believe he may one day return?
+        Default: Neither do I.
+        y: Kind words, stranger.
+
+Shirita
+
+Name: Shirita
+
+Description: a kindly old woman.
+
+Greeting:
+
+Job: I tend the graves of the former inhabitants of Magincia, poor souls!
+
+Goodbye: 'Til then.
+
+
+Text information:
+
+    magi or soul or form or inha: Long ago, Magincia was destroyed for its sins of pride and arrogance.
+    sins or prid or arro: Magincia was once a thriving merchant community, the envy of all Britannia!
+    envy or brit: Sadly, they were not at all humble. Daemons sprang from the earth, engulfing Magincia in flames!
+    daem or demo or flam: The souls of the inhabitants lived on as undead creatures to warn others from the twisted path of Pride!" <New Line> <New Line> <Key wait> After years of torment, they have finally been laid to rest." <New Line> <New Line> <Key wait> <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Pride is difficult to avoid. Dost thou strive to walk a humble path?
+        Default: Then daemons shall surely engulf thee too!
+        y: Good. There is a wise old man in this towne, who lives the life of a recluse. He has much wisdom on the virtue of Humility.
+
+Yasuda
+
+Name: Yasuda" <New Line> <New Line> <If/Else Knows Name> <Nothing> <Ask Name>
+
+Description: a noble farmer.
+
+Greeting: Welcome, <AVATAR NAME> , how can I help thee?
+
+Job: I am a farmer.
+
+Goodbye: Farewell, and may the sun shine brightly upon thy future!
+
+
+Text information:
+
+    farm: We have worked very hard here to rebuild Magincia.
+    rebu or magi: It has been a very long and laborious task, but we are near completion.
+    comp: We would be through now if 'twer not for the black devils who come and take fully half our yield!
+    shad or blac or devi: The Shadowlords are Blackthorn's enforcers of his self-righteous regime!
+    yiel: 'Tis not much, I assure thee!
+
+Tetsuo
+
+Name: Tetsuo" <New Line> <New Line> <If/Else Knows Name> <Nothing> <PAUSE> <Ask Name> " <New Line> <New Line> <Nothing>
+
+Description: a bright and cheerful young man.
+
+Greeting: A fine day to thee, <AVATAR NAME> .
+
+Job: I work hard and reflect upon the greater meaning.
+
+Goodbye: May thou spend thy days walking the path of virtue!
+
+
+Text information:
+
+    refl or grea or mean: <Goto Label 0>
+    misg: The foundations of virtue are of good intent, but one must choose the path of virtue freely!
+    virt or path: When deeds of a normally virtuous nature are forced upon thee, they lose that virtue." <New Line> <New Line> <Key wait> "One must truly want to do good for others, rather than be forced to do so!
+
+Label information:
+
+    <Label 0> Art thou a servant of Blackthorn?
+        Default: The Eight Laws are a good guide...
+        n: I feel the Eight Laws are misguiding!
+
+Fumiko
+
+Name: Fumiko
+
+Description: a stout hearted young woman.
+
+Greeting: Hello, <AVATAR NAME> , I trust thou hast been well.
+
+Job: I share the workload in the community fields.
+
+Goodbye: Fare well. <If/Else Knows Name> <Goto Label 0> " <New Line> <New Line> <PAUSE> "Oh, by the way..." <New Line> <New Line> <PAUSE> <Ask Name> " <New Line> <END CONVERSATION>
+
+
+Text information:
+
+    comm or fiel: We work long days, but 'tis a choice we make freely!
+    choi or free: Devoid of freedom, what would virtue be...
+    virt: None are more hopelessly enslaved than those who falsely believe they are free!
+    hope or ensl or fals or beli: Those who mindlessly follow the will and tyranny of Blackthorn! Yet still, many believe themselves free!
+
+Label information:
+
+    <Label 0> " <New Line> <END CONVERSATION> 
+
+Kaiko
+
+Name: Kaiko
+
+Description: a timid, reserved woman.
+
+Greeting:
+
+Job: I work to grow the crops for our towne.
+
+Goodbye: May thou find what thou dost seek!
+
+
+Text information:
+
+    town: New Magincia!
+    crop: Without our work, many would starve, yet we seek no more than our humble earnings, unlike the new King!
+    king: Blackthorn, the usurper!
+    usur or blac: He takes half our harvest, and imprisons those with the knowledge of the ancients!
+    anci or impr or know: One of our people was of the Council, and was jailed by the King even though he never lifted a finger against the throne!
+    coun or lead or thro or jail: Hassad came to us from Skara Brae, fleeing Blackthorn's search." <New Line> <New Line> <Key wait> "A long time he lived among us, for Magincia was near forgotten." <New Line> <New Line> <Key wait> "But, the Shadowlords found him. Now he lies chained in Blackthorn's dark dungeon." <New Line> <New Line> <Key wait> "He is to be an example to those who refuse to yield their knowledge for his evil use!
+
+Katrina
+
+Name: Katrina
+
+Description: Katrina, an old friend. <New Line> <New Line> <PAUSE> <Goto Label 0>
+
+Greeting:
+
+Job: I am waiting here until I can resume the battle!
+
+Goodbye: Farewell my old friend, return for me when thou canst!
+
+
+Text information:
+
+    wait or batt: The battle of Virtue!
+    virt: 'Tis thee, <AVATAR NAME> , that knows the virtues better than all others!
+    join: <Goto Label 1> 
+
+Label information:
+
+    <Label 0> <AVATAR NAME> , thou hast returned!" <New Line> <New Line> <PAUSE> "I'd heard rumors of thy arrival!" <New Line> <New Line> <PAUSE> "I see they were true!" <New Line> <New Line> <PAUSE> "Is it time we resumed the battle?
+        Default: Alas, I yearn for battle!
+        y: <Goto Label 1> 
+
+    <Label 1> Am I to join thee now?
+        Default: I see, soon I hope!
+        y: Let us be off!" <New Line> <New Line> <Join Party> 
+
+Wartow
+
+Name: Wartow
+
+Description: a wise old man.
+
+Greeting:
+
+Job: I stay here to live out my life!
+
+Goodbye: Farewell, and stay on the Path!
+
+
+Text information:
+
+    life: I have lived many years.
+    year: Too many to count!
+    humi or wis: <Goto Label 0> 
+
+Label information:
+
+    <Label 0> Who dost thou serve?
+        Default: I see.
+        brit: <Goto Label 1> 
+
+    <Label 1> Dost thou hate the evil tyrant Blackthorn?
+        Default: <Goto Label 1>
+        y: <Goto Label 2>
+        n: Thou art wiser than I thought!" <New Line> <New Line> <PAUSE> <Goto Label 5> 
+
+    <Label 2> Doth the evil and hatred within him make thee better than he?
+        Default: <Goto Label 2>
+        y: <Goto Label 3>
+        n: <Goto Label 4> 
+
+    <Label 3> Art thou proud of this fact?
+        Default: Then there may be hope for thee yet.
+        y: <Karma - 1> Thou art not truly an Avatar!
+
+    <Label 4> Then how dost thou judge him? Dost thou know all there is to know about him?
+        Default: Then perhaps thou shouldst reserve judgement!
+        y: <Karma - 1> Doubtful, at best!
+
+    <Label 5> Dost thou need the Mantra of Humility?
+        Default: Thou must be doing well!
+        y: Then it is thine!" <New Line> <New Line> <PAUSE> " <Rune> LUM <Rune> is the chant which thou dost seek!

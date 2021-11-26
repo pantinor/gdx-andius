@@ -73,7 +73,7 @@ public class GameScreen extends BaseScreen {
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
         }
-
+        
     }
 
     @Override
@@ -271,7 +271,7 @@ public class GameScreen extends BaseScreen {
                     mainGame.setScreen(rs);
                     return false;
                 } else {
-                    Conversation c = Andius.CONVERSATIONS.get(this.map.getLabel(), a.getName());
+                    Conversation c = Andius.CONVERSATIONS.get(this.map.toString(), a.getName());
                     if (c != null) {
                         new ConversationDialog(CTX, this, c).show(this.stage);
                     }

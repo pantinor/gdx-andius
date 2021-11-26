@@ -45,7 +45,7 @@ public interface Constants {
 
     public enum Map {
 
-        WORLD("Andius", "u4_world.tmx", WORLD_TILE_DIM),
+        WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
@@ -56,6 +56,21 @@ public interface Constants {
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
         BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),
+        LYCAEUM("Lycaeum", "lycaeum.tmx", TILE_DIM),
+        EMPATH_ABBEY("Empath Abbey", "empathabbey.tmx", TILE_DIM),
+        SERPENTS_HOLD("Serpents Hold", "serpentshold.tmx", TILE_DIM),
+        MOONGLOW("Moonglow", "moonglow.tmx", TILE_DIM),
+        BRITAIN("Britain", "britain.tmx", TILE_DIM),
+        JHELOM("Jhelom", "jhelom.tmx", TILE_DIM),
+        YEW("Yew", "yew.tmx", TILE_DIM),
+        MINOC("Minoc", "minoc.tmx", TILE_DIM),
+        TRINSIC("Trinsic", "trinsic.tmx", TILE_DIM),
+        SKARABRAE("Skara Brae", "skarabrae.tmx", TILE_DIM),
+        MAGINCIA("Magincia", "magincia.tmx", TILE_DIM),
+        PAWS("Paws", "paws.tmx", TILE_DIM),
+        BUCCANEERS_DEN("Buccaneers Den", "buccaneersden.tmx", TILE_DIM),
+        VESPER("Vesper", "vesper.tmx", TILE_DIM),
+        COVE("Cove", "cove.tmx", TILE_DIM),
         WIZARDRY1("Wizardy Level 1", "WizLevel1.tmx", TILE_DIM),
         WIZARDRY2("Wizardy Level 2", "WizLevel2.tmx", TILE_DIM),
         WIZARDRY3("Wizardy Level 3", "WizLevel3.tmx", TILE_DIM),
@@ -267,9 +282,8 @@ public interface Constants {
 
             this.screen = (this.dim == TILE_DIM
                     ? new GameScreen(this)
-                    //: new WorldScreen(this)
-                    : new VoronoiTmxWorldScreen()
-                    //new VoronoiAzgaarMapScreen()
+                    : new WorldScreen(this)
+                    //: new VoronoiTmxWorldScreen() //new VoronoiAzgaarMapScreen()
                     );
 
         }

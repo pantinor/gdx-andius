@@ -447,7 +447,9 @@ public class CombatScreen extends BaseScreen {
         boolean roundIsDone = isRoundDone() || this.enemies.isEmpty();
 
         andius.objects.Actor next = getAndSetNextActivePlayer();
-        hud.set(next, hudStage);
+        if (next != null) {
+            hud.set(next, hudStage);
+        }
 
         if (roundIsDone) {
             finishTurn(0, 0);
@@ -803,8 +805,10 @@ public class CombatScreen extends BaseScreen {
         }
 
         andius.objects.Actor p = getPartyMember(activeIndex);
-        p.getPlayerCursor().setVisible(true);
-        p.getPlayer().decrementStatusEffects();
+        if (p != null) {
+            p.getPlayerCursor().setVisible(true);
+            p.getPlayer().decrementStatusEffects();
+        }
 
         return p;
 

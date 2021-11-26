@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.PolygonRegion;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -106,7 +107,13 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
             for (Cell cell : cells) {
                 rect.set(cell.x - 1, cell.y - 1, 3, 3);
                 if (rect.inBounds(p.x, p.y)) {
-                    cell.portal = new Portal(Constants.Map.BRITANIA, 0, 0, 15, 31, null, false, false);
+                    Constants.Map map = Constants.Map.LLECHY;
+                    try {
+                        map = Constants.Map.valueOf(p.name);
+                    } catch (Exception e) {
+                        map = Constants.Map.MENAGERIE;
+                    }
+                    cell.portal = new Portal(map, 0, 0, 15, 31, null, false, false);
                     break;
                 }
             }
@@ -147,7 +154,7 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
 
         mapViewPort = new ScreenViewport(camera);
 
-        currentLocation = renderer.getCenter(32936);
+        currentLocation = renderer.getCenter(37191);
         newMapPixelCoords.set((float) currentLocation.loc.x, (float) currentLocation.loc.y, 0f);
 
     }
@@ -485,6 +492,22 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
             return this.color;
         }
 
+        public boolean enterable() {
+            switch (this.name) {
+                case "shrine":
+                case "dungeon":
+                case "city":
+                case "castle":
+                case "town":
+                case "ankh":
+                case "ruins":
+                case "lcb_entrance":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         @Override
         public String toString() {
             return "Cell{" + "name=" + name + ", x=" + x + ", y=" + y + ", portal=" + portal + '}';
@@ -612,15 +635,6 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
                 }
             }
 
-//            for (Manor m : manors) {
-//                Cell c = cells.get(m.cell);
-//                if (viewBounds.contains(c.data[0], c.data[1])) {
-//                    shape.begin(ShapeRenderer.ShapeType.Line);
-//                    shape.setColor(Color.FIREBRICK);
-//                    shape.circle(c.data[0], c.data[1], 3);
-//                    shape.end();
-//                }
-//            }
             if (current != null) {
 //                if (viewBounds.contains(current.loc.x, current.loc.y)) {
 //                    shape.begin(ShapeRenderer.ShapeType.Line);
@@ -806,6 +820,54 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
             });
         }
 
+    }
+
+    class VoroPolygonRegion extends PolygonRegion {
+
+        final float[] textureCoords;
+        final float[] vertices;
+        final short[] triangles;
+        final TextureRegion region;
+
+        public VoroPolygonRegion(TextureRegion region, float[] vertices, short[] triangles) {
+            super(region, vertices, triangles);
+            this.region = region;
+            this.vertices = vertices;
+            this.triangles = triangles;
+            this.textureCoords = new float[vertices.length];
+
+            float u = region.getU(), v = region.getV();
+            float uvWidth = region.getU2() - u;
+            float uvHeight = region.getV2() - v;
+            int width = region.getRegionWidth();
+            int height = region.getRegionHeight();
+
+            for (int i = 0, n = vertices.length; i < n; i++) {
+                textureCoords[i] = u + uvWidth * (vertices[i] / width);
+                i++;
+                textureCoords[i] = v + uvHeight * (1 - (vertices[i] / height));
+            }
+        }
+
+        @Override
+        public float[] getVertices() {
+            return vertices;
+        }
+
+        @Override
+        public short[] getTriangles() {
+            return triangles;
+        }
+
+        @Override
+        public float[] getTextureCoords() {
+            return textureCoords;
+        }
+
+        @Override
+        public TextureRegion getRegion() {
+            return region;
+        }
     }
 
 }

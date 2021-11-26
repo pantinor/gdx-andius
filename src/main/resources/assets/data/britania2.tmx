@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="17">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextobjectid="18">
  <properties>
   <property name="startX" value="0"/>
   <property name="startY" value="0"/>
@@ -85,8 +85,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
+  <image source="uf_heroes.png" width="1920" height="672"/>
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="csv">
@@ -200,34 +200,34 @@
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,857,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,857,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,829,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,829,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,833,0,833,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1161,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1085,0,0,0,764,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,793,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1085,0,0,0,0,0,793,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,813,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,1085,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,829,0,829,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,829,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,845,0,0,0,0,0,0,0,0,0,0,0,0,0,829,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,853,0,0,0,0,0,0,841,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,849,0,0,845,0,0,0,0,0,0,0,0,0,0,829,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,881,0,0,0,0,0,0,0,0,0,933,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,829,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,813,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,765,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,997,0,0,0,0,0,0,0,0,0,0,829,0,0,0,829,0,0,0,0,0,0,0,0,0,0,813,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
@@ -449,29 +449,184 @@
 </data>
  </layer>
  <objectgroup name="people">
-  <object id="6" name="Zorin" type="NONE" x="96" y="1392" width="48" height="48">
+  <object id="17" name="Boness" type="FRIENDLY" x="192" y="1104" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
+    <property name="tileType" value="skeleton"/>
    </properties>
   </object>
-  <object id="7" name="a guard" type="NONE" x="96" y="144" width="48" height="48">
+  <object id="3" name="Child" type="FRIENDLY" x="480" y="576" width="48" height="48">
    <properties>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="child"/>
    </properties>
   </object>
-  <object id="8" name="a guard" type="NONE" x="1344" y="144" width="48" height="48">
+  <object id="4" name="Child" type="FRIENDLY" x="624" y="480" width="48" height="48">
    <properties>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="child"/>
    </properties>
   </object>
-  <object id="9" name="Sir Rolinn" type="NONE" x="1296" y="1248" width="48" height="48">
+  <object id="5" name="Child" type="FRIENDLY" x="624" y="384" width="48" height="48">
    <properties>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="child"/>
    </properties>
   </object>
-  <object id="16" name="Lord British" type="NONE" x="912" y="336" width="48" height="48">
+  <object id="6" name="Jester Twin" type="FRIENDLY" x="1008" y="432" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="jester"/>
+   </properties>
+  </object>
+  <object id="7" name="a guard" type="FRIENDLY" x="192" y="768" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="8" name="a guard" type="FRIENDLY" x="96" y="96" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="9" name="a nameless prisoner" type="FRIENDLY" x="192" y="1056" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
+    <property name="tileType" value="beggar"/>
+   </properties>
+  </object>
+  <object id="10" name="a guard" type="FRIENDLY" x="1344" y="96" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="11" name="Sir Rolinn" type="FRIENDLY" x="1344" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="12" name="a guard" type="FRIENDLY" x="1056" y="1296" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="13" name="Zorin" type="FRIENDLY" x="96" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="evil_mage"/>
+   </properties>
+  </object>
+  <object id="14" name="a nameless prisoner" type="FRIENDLY" x="192" y="960" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="beggar"/>
+   </properties>
+  </object>
+  <object id="15" name="a nameless prisoner" type="FRIENDLY" x="336" y="960" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="beggar"/>
+   </properties>
+  </object>
+  <object id="16" name="a nameless prisoner" type="FRIENDLY" x="192" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="beggar"/>
+   </properties>
+  </object>
+  <object id="17" name="a nameless prisoner" type="FRIENDLY" x="240" y="912" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="beggar"/>
+   </properties>
+  </object>
+  <object id="18" name="a reaper" type="FRIENDLY" x="672" y="1104" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="reaper"/>
+   </properties>
+  </object>
+  <object id="19" name="a guard" type="FRIENDLY" x="960" y="624" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="20" name="a guard" type="FRIENDLY" x="864" y="624" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="21" name="Le Chef" type="FRIENDLY" x="528" y="288" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="villager"/>
+   </properties>
+  </object>
+  <object id="22" name="Le Chef" type="FRIENDLY" x="432" y="288" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="villager"/>
+   </properties>
+  </object>
+  <object id="23" name="Guard" type="FRIENDLY" x="816" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="24" name="Guard" type="FRIENDLY" x="624" y="1392" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="25" name="a guard" type="FRIENDLY" x="576" y="912" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="26" name="a guard" type="FRIENDLY" x="864" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="27" name="a guard" type="FRIENDLY" x="864" y="960" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="guard"/>
+   </properties>
+  </object>
+  <object id="28" name="Jester Twin" type="FRIENDLY" x="912" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="WANDER"/>
+    <property name="tileType" value="jester"/>
+   </properties>
+  </object>
+  <object id="29" name="Bard Singing" type="FRIENDLY" x="816" y="528" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="bard_singing"/>
+   </properties>
+  </object>
+  <object id="30" name="Juliet" type="FRIENDLY" x="816" y="384" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="villager"/>
+   </properties>
+  </object>
+  <object id="31" name="Lord British" type="FRIENDLY" x="912" y="336" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+    <property name="tileType" value="lord_british"/>
    </properties>
   </object>
  </objectgroup>
@@ -482,13 +637,12 @@
     <property name="dy" value="3"/>
    </properties>
   </object>
-  <object id="2" name="BRITANNIA" type="portal" x="1296" y="144" width="48" height="48">
+  <object id="2" name="BRITANIA" type="portal" x="1296" y="144" width="48" height="48">
    <properties>
     <property name="dx" value="27"/>
     <property name="dy" value="3"/>
    </properties>
   </object>
-  <object id="3" name="LORDSHOLD" type="portal" x="1296" y="1344" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="rooms">
   <object id="10" x="288" y="144">

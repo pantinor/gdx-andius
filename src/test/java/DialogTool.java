@@ -5,21 +5,25 @@ import andius.objects.Conversations.Label;
 import javax.swing.DefaultCellEditor;
 import andius.objects.Conversations.Topic;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.xml.bind.JAXBContext;
@@ -60,7 +64,7 @@ public class DialogTool extends javax.swing.JFrame {
 
         @Override
         public int getRowCount() {
-            return this.topics.size();
+            return this.topics != null ? this.topics.size() : 0;
         }
 
         @Override
@@ -140,7 +144,7 @@ public class DialogTool extends javax.swing.JFrame {
 
         @Override
         public int getRowCount() {
-            return this.labels.size();
+            return this.labels != null ? this.labels.size() : 0;
         }
 
         @Override
@@ -206,10 +210,29 @@ public class DialogTool extends javax.swing.JFrame {
         }
 
     }
-    
+
+    public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer {
+
+        public WordWrapCellRenderer() {
+            setLineWrap(true);
+            setWrapStyleWord(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setText(value.toString());
+            setSize(table.getColumnModel().getColumn(column).getWidth(), getPreferredSize().height);
+            if (table.getRowHeight(row) != getPreferredSize().height) {
+                table.setRowHeight(row, getPreferredSize().height);
+            }
+            return this;
+        }
+    }
+
     private Conversations convs = null;
     private TopicTableItemModel tm = null;
     private LabelTableItemModel lm = null;
+    private TopicTableItemModel ltm = null;
 
     public DialogTool() {
         initComponents();
@@ -244,30 +267,38 @@ public class DialogTool extends javax.swing.JFrame {
                 }
                 root.add(mapNode);
             }
-            this.jTree1.setModel(new DefaultTreeModel(root));
-            this.jTree1.setRootVisible(false);
+            this.convTree.setModel(new DefaultTreeModel(root));
+            this.convTree.setRootVisible(false);
 
             this.tm = new TopicTableItemModel();
             tm.setTopics(this.convs.getConversations().get(0).getTopics());
             this.topicTable.setModel(tm);
-            
+
             this.lm = new LabelTableItemModel();
             lm.setLabels(this.convs.getConversations().get(0).getLabels());
             this.labelTable.setModel(lm);
 
-            this.jTree1.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
+            this.ltm = new TopicTableItemModel();
+            this.labelTopicsTable.setModel(ltm);
+
+            this.convTree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
                 @Override
                 public void valueChanged(TreeSelectionEvent e) {
-                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) convTree.getLastSelectedPathComponent();
                     if (n instanceof ConversationNode) {
                         ConversationNode cn = (ConversationNode) n;
                         Conversation c = cn.getUserObject();
                         if (c != null) {
                             DialogTool.this.tm.setTopics(c.getTopics());
                             DialogTool.this.tm.fireTableDataChanged();
-                            
+
                             DialogTool.this.lm.setLabels(c.getLabels());
                             DialogTool.this.lm.fireTableDataChanged();
+
+                            if (c.getLabels().size() > 0 && c.getLabels().get(0).getTopics().size() > 0) {
+                                DialogTool.this.ltm.setTopics(c.getLabels().get(0).getTopics());
+                                DialogTool.this.ltm.fireTableDataChanged();
+                            }
 
                             DialogTool.this.jTextFieldName.setText(c.getName());
                             DialogTool.this.jTextFieldDesc.setText(c.getDescription());
@@ -279,13 +310,13 @@ public class DialogTool extends javax.swing.JFrame {
             DialogTool.this.jTextFieldName.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.convTree.getLastSelectedPathComponent();
                     if (n instanceof ConversationNode) {
                         ConversationNode cn = (ConversationNode) n;
                         Conversation c = cn.getUserObject();
                         if (c != null) {
                             c.setName(DialogTool.this.jTextFieldName.getText());
-                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.convTree.getModel();
                             m.nodeChanged(n);
                         }
                     }
@@ -295,13 +326,13 @@ public class DialogTool extends javax.swing.JFrame {
             DialogTool.this.jTextFieldDesc.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.jTree1.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode n = (DefaultMutableTreeNode) DialogTool.this.convTree.getLastSelectedPathComponent();
                     if (n instanceof ConversationNode) {
                         ConversationNode cn = (ConversationNode) n;
                         Conversation c = cn.getUserObject();
                         if (c != null) {
                             c.setDescription(DialogTool.this.jTextFieldDesc.getText());
-                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+                            DefaultTreeModel m = (DefaultTreeModel) DialogTool.this.convTree.getModel();
                             m.nodeChanged(n);
                         }
                     }
@@ -311,22 +342,25 @@ public class DialogTool extends javax.swing.JFrame {
             this.topicTable.getColumnModel().getColumn(0).setPreferredWidth(200);
             this.topicTable.getColumnModel().getColumn(0).setMaxWidth(800);
             this.topicTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-            
+
             this.labelTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             this.labelTable.getColumnModel().getColumn(0).setMaxWidth(100);
             this.labelTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
+            this.labelTopicsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.labelTopicsTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            this.labelTopicsTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
             UIManager.put("Table.alternateRowColor", new Color(242, 242, 242));
 
-            JTextField textField = new JTextField();
-            textField.setFont(new Font("Tahoma", 0, 12));
-            textField.setBorder(new LineBorder(Color.BLACK));
-            DefaultCellEditor dce = new DefaultCellEditor(textField);
             for (int x = 0; x < 2; x++) {
-                this.topicTable.getColumnModel().getColumn(x).setCellEditor(dce);
+                this.topicTable.getColumnModel().getColumn(x).setCellRenderer(new WordWrapCellRenderer());
             }
             for (int x = 0; x < 2; x++) {
-                this.labelTable.getColumnModel().getColumn(x).setCellEditor(dce);
+                this.labelTable.getColumnModel().getColumn(x).setCellRenderer(new WordWrapCellRenderer());
+            }
+            for (int x = 0; x < 2; x++) {
+                this.labelTopicsTable.getColumnModel().getColumn(x).setCellRenderer(new WordWrapCellRenderer());
             }
 
         } catch (Exception e) {
@@ -352,12 +386,14 @@ public class DialogTool extends javax.swing.JFrame {
         addTopicBtn = new javax.swing.JButton();
         addPersonBtn = new javax.swing.JButton();
         removePersonBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        mapConversationsPane = new javax.swing.JScrollPane();
+        convTree = new javax.swing.JTree();
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldDesc = new javax.swing.JTextField();
         labelPane = new javax.swing.JScrollPane();
         labelTable = new javax.swing.JTable();
+        labelTopicsPane = new javax.swing.JScrollPane();
+        labelTopicsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -416,18 +452,15 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
 
-        jTree1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        convTree.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Map");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        convTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        mapConversationsPane.setViewportView(convTree);
 
         labelTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "QUERY"
@@ -442,36 +475,61 @@ public class DialogTool extends javax.swing.JFrame {
             }
         });
         labelTable.setRowHeight(28);
+        labelTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelTableMouseClicked(evt);
+            }
+        });
         labelPane.setViewportView(labelTable);
+
+        labelTopicsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "QUERY", "PHRASE"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        labelTopicsPane.setViewportView(labelTopicsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelPane)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(addTopicBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeTopicBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveBtn))
-                    .addComponent(topicPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(topicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelPane, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelTopicsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mapConversationsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(addPersonBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removePersonBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldName)
-                                    .addComponent(jTextFieldDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(removePersonBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDesc)
+                            .addComponent(jTextFieldName))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -479,7 +537,7 @@ public class DialogTool extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mapConversationsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -489,24 +547,25 @@ public class DialogTool extends javax.swing.JFrame {
                     .addComponent(addPersonBtn)
                     .addComponent(removePersonBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelTopicsPane)
+                    .addComponent(topicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addComponent(labelPane, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(removeTopicBtn)
                     .addComponent(addTopicBtn))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addPersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonBtnActionPerformed
-        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.convTree.getLastSelectedPathComponent();
         if (n != null) {
-            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.convTree.getModel();
 
             Conversation conv = new Conversation();
             conv.getTopics().add(new Topic("name", ""));
@@ -527,12 +586,19 @@ public class DialogTool extends javax.swing.JFrame {
     }//GEN-LAST:event_addPersonBtnActionPerformed
 
     private void removePersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePersonBtnActionPerformed
-        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) this.convTree.getLastSelectedPathComponent();
         if (n != null) {
-            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.jTree1.getModel();
+            DefaultTreeModel model = (DefaultTreeModel) DialogTool.this.convTree.getModel();
             if (n instanceof ConversationNode) {
-                DefaultMutableTreeNode mapNode = (DefaultMutableTreeNode) n.getParent();
                 model.removeNodeFromParent(n);
+            } else {
+                Enumeration iter = n.children();
+                while (iter.hasMoreElements()) {
+                    DefaultMutableTreeNode ch = (DefaultMutableTreeNode) iter.nextElement();
+                    if (ch instanceof ConversationNode) {
+                        model.removeNodeFromParent(ch);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_removePersonBtnActionPerformed
@@ -560,6 +626,14 @@ public class DialogTool extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void labelTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelTableMouseClicked
+        int row = this.labelTable.getSelectedRow();
+        if (row >= 0) {
+            this.ltm.setTopics(this.lm.getLabels().get(row).getTopics());
+            this.ltm.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_labelTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -599,12 +673,14 @@ public class DialogTool extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPersonBtn;
     private javax.swing.JButton addTopicBtn;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree convTree;
     private javax.swing.JTextField jTextFieldDesc;
     private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTree jTree1;
     private javax.swing.JScrollPane labelPane;
     private javax.swing.JTable labelTable;
+    private javax.swing.JScrollPane labelTopicsPane;
+    private javax.swing.JTable labelTopicsTable;
+    private javax.swing.JScrollPane mapConversationsPane;
     private javax.swing.JButton removePersonBtn;
     private javax.swing.JButton removeTopicBtn;
     private javax.swing.JButton saveBtn;
