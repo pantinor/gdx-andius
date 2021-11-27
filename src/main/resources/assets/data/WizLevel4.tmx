@@ -174,7 +174,7 @@
   </object>
   <object id="6" name="High Priest" type="MONSTER" x="336" y="2496" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -210,7 +210,7 @@
   </object>
   <object id="28" name="High Priest" type="MONSTER" x="192" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

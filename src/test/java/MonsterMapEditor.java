@@ -67,7 +67,7 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
                     mapMonsters = og.getObjects();
                 }
             }
-            InputStream is2 = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+            InputStream is2 = this.getClass().getResourceAsStream("/assets/json/monsters.json");
             String json = IOUtils.toString(is2);
 
             GsonBuilder builder = new GsonBuilder();

@@ -2178,7 +2178,7 @@
   },
   {
     "genericName": "Man In Robes",
-    "name": "Lvl 7 Mage",
+    "name": "Lvl 7 Mage 1",
     "iconId": 816,
     "type": 1,
     "goldReward": 4,
@@ -2218,7 +2218,7 @@
   },
   {
     "genericName": "Man In Leather",
-    "name": "Master Thief",
+    "name": "Master Thief 1",
     "iconId": 778,
     "type": 3,
     "goldReward": 5,
@@ -2312,7 +2312,7 @@
   },
   {
     "genericName": "Priest",
-    "name": "High Priest",
+    "name": "High Priest 1",
     "iconId": 799,
     "type": 2,
     "goldReward": 5,
@@ -2388,7 +2388,7 @@
   },
   {
     "genericName": "Man In Robes",
-    "name": "Arch Mage",
+    "name": "Arch Mage 1",
     "iconId": 793,
     "type": 1,
     "goldReward": 5,
@@ -2426,7 +2426,7 @@
   },
   {
     "genericName": "Man In Leather",
-    "name": "Master Thief",
+    "name": "Master Thief 2",
     "iconId": 752,
     "type": 3,
     "goldReward": 5,
@@ -2809,7 +2809,7 @@
   },
   {
     "genericName": "Man In Robes",
-    "name": "Lvl 7 Mage",
+    "name": "Lvl 7 Mage 2",
     "iconId": 16,
     "type": 1,
     "goldReward": 6,
@@ -3635,7 +3635,7 @@
   },
   {
     "genericName": "Priest",
-    "name": "High Priest",
+    "name": "High Priest 2",
     "iconId": 128,
     "type": 2,
     "goldReward": 8,
@@ -3718,7 +3718,7 @@
   },
   {
     "genericName": "Man In Leather",
-    "name": "Master Thief",
+    "name": "Master Thief 3",
     "iconId": 56,
     "type": 3,
     "goldReward": 8,
@@ -4169,7 +4169,7 @@
   },
   {
     "genericName": "Man In Robes",
-    "name": "Arch Mage",
+    "name": "Arch Mage 2",
     "iconId": 93,
     "type": 1,
     "goldReward": 9,
@@ -4395,7 +4395,7 @@
   },
   {
     "genericName": "Priest",
-    "name": "High Priest",
+    "name": "High Priest 3",
     "iconId": 68,
     "type": 2,
     "goldReward": 0,
@@ -4433,7 +4433,7 @@
   },
   {
     "genericName": "Man In Robes",
-    "name": "Lvl 7 Mage",
+    "name": "Lvl 7 Mage 3",
     "iconId": 570,
     "type": 1,
     "goldReward": 0,

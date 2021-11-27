@@ -203,13 +203,13 @@ public class Andius extends Game {
             EXPLMAP.put(Color.PURPLE, new Animation(.1f, getTextureArray(expl, 4, 5)));
             EXPLMAP.put(Color.YELLOW, new Animation(.1f, getTextureArray(expl, 5, 5)));
 
-            InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+            InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
             String json = IOUtils.toString(is);
 
-            is = this.getClass().getResourceAsStream("/assets/json/rewards-json.txt");
+            is = this.getClass().getResourceAsStream("/assets/json/rewards.json");
             String json2 = IOUtils.toString(is);
 
-            is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+            is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
             String json3 = IOUtils.toString(is);
 
             GsonBuilder builder = new GsonBuilder();

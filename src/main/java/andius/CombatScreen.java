@@ -105,7 +105,7 @@ public class CombatScreen extends BaseScreen {
         this.logTable.defaults().align(Align.left).pad(0);
         this.logScroll = new ScrollPane(this.logTable, Andius.skin);
         this.logScroll.setBounds(728, 30, 269, 270);
-        this.logScroll.setScrollingDisabled(true, false);
+        this.logScroll.setScrollingDisabled(false, false);
         this.hudStage = new Stage();
 
         MapProperties prop = tmap.getProperties();
@@ -203,6 +203,7 @@ public class CombatScreen extends BaseScreen {
         logTable.add(l).width(270);
         logTable.row();
         logScroll.layout();
+        logScroll.setScrollPercentX(0);
         logScroll.setScrollPercentY(100);
     }
 

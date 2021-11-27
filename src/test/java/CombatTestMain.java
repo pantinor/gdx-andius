@@ -70,7 +70,7 @@ public class CombatTestMain extends Game {
                 ctx.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
                 ctx.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
                 ctx.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
-                
+
                 ctx.saveGame.players[j].spellPresets[5] = Spells.KATINO;
 
             }
@@ -79,11 +79,11 @@ public class CombatTestMain extends Game {
             TiledMap tm = loader.load("assets/data/combat1.tmx");
 
             Monster monster = Andius.MONSTER_LEVELS.get(7).get(2);
-            //Monster monster = Andius.MONSTER_MAP.get("Kobold");
+
             Actor actor = new Actor(0, monster.name, Icons.get(monster.getIconId()));
             MutableMonster mm = new MutableMonster(monster);
-            mm.name = monster.name;
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
             CombatScreen cs = new CombatScreen(ctx, Constants.Map.WIWOLD, tm, actor);
             setScreen(cs);
 

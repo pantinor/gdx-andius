@@ -232,7 +232,7 @@
   </object>
   <object id="32" name="Master Thief" type="MONSTER" x="2640" y="1200" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -256,7 +256,7 @@
   </object>
   <object id="37" name="Master Thief" type="MONSTER" x="912" y="1056" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -274,7 +274,7 @@
   </object>
   <object id="43" name="Arch Mage" type="MONSTER" x="2352" y="912" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -286,7 +286,7 @@
   </object>
   <object id="47" name="Arch Mage" type="MONSTER" x="48" y="768" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -394,7 +394,7 @@
   </object>
   <object id="83" name="Arch Mage" type="MONSTER" x="2640" y="336" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -442,7 +442,7 @@
   </object>
   <object id="95" name="Master Thief" type="MONSTER" x="336" y="48" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 1"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

@@ -203,7 +203,7 @@
   </object>
   <object id="26" name="Master Thief" type="MONSTER" x="1776" y="2640" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -323,7 +323,7 @@
   </object>
   <object id="65" name="Master Thief" type="MONSTER" x="2640" y="2208" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -353,7 +353,7 @@
   </object>
   <object id="72" name="Master Thief" type="MONSTER" x="1056" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -425,7 +425,7 @@
   </object>
   <object id="117" name="Master Thief" type="MONSTER" x="336" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -467,7 +467,7 @@
   </object>
   <object id="129" name="Master Thief" type="MONSTER" x="336" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -503,7 +503,7 @@
   </object>
   <object id="140" name="Master Thief" type="MONSTER" x="1200" y="1200" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -647,7 +647,7 @@
   </object>
   <object id="204" name="Master Thief" type="MONSTER" x="912" y="336" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -689,7 +689,7 @@
   </object>
   <object id="225" name="Master Thief" type="MONSTER" x="1776" y="192" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -701,7 +701,7 @@
   </object>
   <object id="230" name="Master Thief" type="MONSTER" x="2640" y="192" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

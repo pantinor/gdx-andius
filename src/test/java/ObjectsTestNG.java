@@ -35,6 +35,7 @@ import java.util.StringTokenizer;
 import javax.imageio.ImageIO;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
+import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -133,16 +134,16 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    //@Test
+    @Test
     public void readJson() throws Exception {
 
-        InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
         String json = IOUtils.toString(is);
 
-        is = this.getClass().getResourceAsStream("/assets/json/rewards-json.txt");
+        is = this.getClass().getResourceAsStream("/assets/json/rewards.json");
         String json2 = IOUtils.toString(is);
 
-        is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+        is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
         String json3 = IOUtils.toString(is);
 
         GsonBuilder builder = new GsonBuilder();
@@ -187,14 +188,32 @@ public class ObjectsTestNG {
 
         Collections.sort(monsters);
 
+        java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
+        java.util.Map<Integer, java.util.List<Monster>> MONSTER_LEVELS = new HashMap<>();
+
+        for (int i = 0; i < 11; i++) {
+            MONSTER_LEVELS.put(i, new ArrayList<>());
+        }
+
         for (Monster m : monsters) {
+            if (!MONSTER_MAP.containsKey(m.name)) {
+                MONSTER_MAP.put(m.name, m);
+            } else {
+                System.err.printf("DUPLICATE %s mid %d level %d\n", m.name, m.iconId, m.getLevel());
+            }
+            MONSTER_LEVELS.get(m.getLevel()).add(m);
+        }
+
+        for (Monster m : monsters) {
+            //System.out.printf("%s mid %d level %d\n", m.name, m.iconId, m.getLevel());
+
             if (m.getMageSpellLevel() > 0 || m.getPriestSpellLevel() > 0) {
-                System.out.printf("%s\tmspl: %d\tpspl: %d\n", m.name, m.getMageSpellLevel(), m.getPriestSpellLevel());
+                //System.out.printf("%s\tmspl: %d\tpspl: %d\n", m.name, m.getMageSpellLevel(), m.getPriestSpellLevel());
                 MutableMonster mm = new MutableMonster(m);
                 SaveGame.setMonsterSpellPoints(mm);
                 SaveGame.tryLearn(mm);
-                System.out.println("\t" + Arrays.toString(mm.magePoints) + "\t" + Arrays.toString(mm.clericPoints));
-                System.out.println("\t" + mm.knownSpells);
+                //System.out.println("\t" + Arrays.toString(mm.magePoints) + "\t" + Arrays.toString(mm.clericPoints));
+                //System.out.println("\t" + mm.knownSpells);
             }
         }
     }
@@ -438,10 +457,10 @@ public class ObjectsTestNG {
     //@Test
     public void testAttack() throws Exception {
 
-        InputStream is = this.getClass().getResourceAsStream("/assets/json/items-json.txt");
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
         String json = IOUtils.toString(is);
 
-        is = this.getClass().getResourceAsStream("/assets/json/monsters-json.txt");
+        is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
         String json3 = IOUtils.toString(is);
 
         GsonBuilder builder = new GsonBuilder();
@@ -491,29 +510,13 @@ public class ObjectsTestNG {
             //Utils.attackHit(avatar, mm);
         }
     }
-    
+
     @Test
     public void testDirection() throws Exception {
-        
+
         int mask = 0;
         mask = Direction.addToMask(Direction.NORTH, mask);
-        
-        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
-        
-        mask = Direction.addToMask(Direction.NORTH_WEST, mask);
-        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
-        assertTrue(Direction.isDirInMask(Direction.NORTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
-        
-        mask = Direction.removeFromMask(mask, Direction.NORTH_WEST);
+
         assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
         assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
         assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
@@ -521,6 +524,21 @@ public class ObjectsTestNG {
         assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
         assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
 
+        mask = Direction.addToMask(Direction.NORTH_WEST, mask);
+        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
+        assertTrue(Direction.isDirInMask(Direction.NORTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
+
+        mask = Direction.removeFromMask(mask, Direction.NORTH_WEST);
+        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
+        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
 
     }
 

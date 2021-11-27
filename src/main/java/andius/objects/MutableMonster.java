@@ -25,7 +25,6 @@ public class MutableMonster extends Monster {
         try {
             HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
         } catch (Throwable t) {
-            t.printStackTrace();
         }
     }
 

@@ -95,8 +95,8 @@ public class ItemEditor extends InputAdapter implements ApplicationListener {
         );
 
         try {
-            InputStream is = this.getClass().getResourceAsStream("assets/json/items-json.txt");
-            String json = IOUtils.toString(is);//new FileInputStream(new File("assets/json/items-json.txt")));
+            InputStream is = this.getClass().getResourceAsStream("assets/json/items.json");
+            String json = IOUtils.toString(is);//new FileInputStream(new File("assets/json/items.json")));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -149,7 +149,7 @@ public class ItemEditor extends InputAdapter implements ApplicationListener {
         makeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                writeJson("items-json.txt", items);
+                writeJson("items.json", items);
             }
         }
         );

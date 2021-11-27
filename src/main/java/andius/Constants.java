@@ -221,12 +221,10 @@ public interface Constants {
                     float y = obj.getProperties().get("y", Float.class);
                     int sx = (int) (x / TILE_DIM);
                     int sy = (int) (y / TILE_DIM);
-                    TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
-                    if (iconCell == null || iconCell.getTile() == null) {
-                        int d = 0;
-                    }
                     
+                    TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
                     int iconId = iconCell.getTile().getId() - firstgid;
+                    
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 

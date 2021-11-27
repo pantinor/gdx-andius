@@ -692,13 +692,13 @@
   </object>
   <object id="240" name="tiger" type="MONSTER" x="2304" y="1152" width="48" height="48">
    <properties>
-    <property name="creature" value="Killer Wolf"/>
+    <property name="creature" value="Capybara"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="creature" value="Master Thief"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -878,13 +878,13 @@
   </object>
   <object id="272" name="cancer the crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="creature" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="273" name="leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
    <properties>
-    <property name="creature" value="Killer Wolf"/>
+    <property name="creature" value="Were Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -902,7 +902,7 @@
   </object>
   <object id="276" name="scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="creature" value="Camel Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -920,25 +920,25 @@
   </object>
   <object id="279" name="coggia houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Samurai"/>
+    <property name="creature" value="Highway Man"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="281" name="Morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief"/>
+    <property name="creature" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="282" name="hassan ben sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Samurai"/>
+    <property name="creature" value="Highway Man"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="283" name="mountain scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
+  <object id="283" name="Scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="creature" value="Camel Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>

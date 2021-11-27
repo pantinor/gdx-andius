@@ -95,7 +95,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
         try {
             Icons.init();
 
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/monsters-json.txt")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/monsters.json")));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -132,7 +132,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
                     //m.genericName = toCamelCase(m.genericName);
                     System.out.println(m.name + "\t" + m.genericName + "\t" + m.iconId);
                 }
-                writeJson("monsters-json.txt", monsters);
+                writeJson("monsters.json", monsters);
             }
         });
 

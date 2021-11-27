@@ -157,7 +157,7 @@
  <objectgroup name="people">
   <object id="4" name="High Priest" type="MONSTER" x="912" y="2640" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -175,7 +175,7 @@
   </object>
   <object id="17" name="High Priest" type="MONSTER" x="1584" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -193,25 +193,25 @@
   </object>
   <object id="27" name="Arch Mage" type="MONSTER" x="2352" y="2352" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="28" name="Arch Mage" type="MONSTER" x="624" y="2208" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="29" name="Arch Mage" type="MONSTER" x="1344" y="1440" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="30" name="High Priest" type="MONSTER" x="1104" y="1440" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -235,7 +235,7 @@
   </object>
   <object id="44" name="Arch Mage" type="MONSTER" x="2304" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -247,13 +247,13 @@
   </object>
   <object id="48" name="Arch Mage" type="MONSTER" x="1440" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="50" name="High Priest" type="MONSTER" x="336" y="1776" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -265,7 +265,7 @@
   </object>
   <object id="57" name="Arch Mage" type="MONSTER" x="2256" y="1440" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -277,7 +277,7 @@
   </object>
   <object id="65" name="Arch Mage" type="MONSTER" x="624" y="2352" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -331,13 +331,13 @@
   </object>
   <object id="101" name="High Priest" type="MONSTER" x="1872" y="960" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="105" name="Arch Mage" type="MONSTER" x="2304" y="912" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -361,7 +361,7 @@
   </object>
   <object id="120" name="High Priest" type="MONSTER" x="1824" y="672" width="48" height="48">
    <properties>
-    <property name="creature" value="High Priest"/>
+    <property name="creature" value="High Priest 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -379,7 +379,7 @@
   </object>
   <object id="124" name="Arch Mage" type="MONSTER" x="720" y="768" width="48" height="48">
    <properties>
-    <property name="creature" value="Arch Mage"/>
+    <property name="creature" value="Arch Mage 2"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
