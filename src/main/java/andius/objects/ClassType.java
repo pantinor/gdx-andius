@@ -5,27 +5,29 @@
  */
 package andius.objects;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  *
  * @author Paul
  */
 public enum ClassType {
 
-    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, Icons.FIGHTER),
-    MAGE("M", 4, 0, 11, 0, 0, 0, 0, Icons.WIZARD),
-    CLERIC("C", 8, 0, 0, 11, 0, 0, 0, Icons.CLERIC),
-    THIEF("T", 6, 0, 0, 0, 0, 11, 0, Icons.THIEF),
-    WIZARD("W", 6, 0, 12, 12, 0, 0, 0, Icons.SORCERER),
-    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, Icons.SWASHBUCKLER),
-    LORD("L", 10, 15, 12, 12, 15, 14, 15, Icons.PALADIN),
-    NINJA("N", 6, 17, 17, 17, 17, 17, 17, Icons.BRAWLER);
+    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, Icons.get(44)),
+    MAGE("M", 4, 0, 11, 0, 0, 0, 0, Icons.get(0)),
+    CLERIC("C", 8, 0, 0, 11, 0, 0, 0, Icons.get(100)),
+    THIEF("T", 6, 0, 0, 0, 0, 11, 0, Icons.get(28)),
+    WIZARD("W", 6, 0, 12, 12, 0, 0, 0, Icons.get(72)),
+    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, Icons.get(76)),
+    LORD("L", 10, 15, 12, 12, 15, 14, 15, Icons.get(8)),
+    NINJA("N", 6, 17, 17, 17, 17, 17, 17, Icons.get(84));
 
     private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
     private final String abbr;
     private final int hitDie;
-    private final Icons icon;
+    private final TextureRegion icon;
 
-    private ClassType(String abbr, int hitDie, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck, Icons icon) {
+    private ClassType(String abbr, int hitDie, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck, TextureRegion icon) {
         this.abbr = abbr;
         this.minStr = minStr;
         this.minIntell = minIntell;
@@ -69,7 +71,7 @@ public enum ClassType {
         return hitDie;
     }
 
-    public Icons getIcon() {
+    public TextureRegion getIcon() {
         return icon;
     }
 

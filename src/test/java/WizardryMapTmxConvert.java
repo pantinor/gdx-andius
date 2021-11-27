@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 import org.apache.commons.io.FileUtils;
 
 public class WizardryMapTmxConvert implements ApplicationListener {
@@ -678,12 +678,12 @@ public class WizardryMapTmxConvert implements ApplicationListener {
                     monId = cell.monsterID;
                 } else {
                     List<Monster> monsters = Andius.MONSTER_LEVELS.get(level);
-                    monId = monsters.get(rand.nextInt(monsters.size())).getMonsterID();
+                    monId = monsters.get(rand.nextInt(monsters.size())).getIconId();
                 }
                 for (Monster m : Andius.MONSTERS) {
-                    if (m.getMonsterID() == monId) {
+                    if (m.getIconId() == monId) {
 
-                        this.creatureIcons[r][c] = 761 + Icons.tile(m.getIcon());
+                        this.creatureIcons[r][c] = -1;//761 + Icons.tile(m.getIcon());
 
                         return String.format("<object id=\"%d\" name=\"%s\" type=\"MONSTER\" x=\"%d\" y=\"%d\" width=\"48\" height=\"48\">\n"
                                 + "   <properties>\n"

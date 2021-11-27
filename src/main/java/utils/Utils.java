@@ -188,7 +188,7 @@ public class Utils {
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {
-        int damage = weapon.damage.roll() + (defender.getStatus() == Status.OK ? 0 : 5);
+        int damage = weapon.damage.roll() + (defender.getStatus() == Status.OK ? 0 : 5); //add 5 points to the damage if the defender is not in OK status
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;

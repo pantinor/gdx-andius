@@ -133,7 +133,7 @@
         </data>
     </layer>
     <objectgroup name="people">
-        <object id="0" name="Burrich" type="MERCHANT" x="816" y="1200" width="48" height="48">
+        <object id="1" name="Burrich" type="MERCHANT" x="816" y="1200" width="48" height="48">
             <properties>
                 <property name="movement" value="FIXED"/>
                 <property name="inventoryType" value="HORSE"/>

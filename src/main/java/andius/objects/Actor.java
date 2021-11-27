@@ -9,6 +9,7 @@ import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import utils.Utils;
 
 /**
@@ -19,7 +20,7 @@ public class Actor {
 
     private final int id;
     private final String name;
-    private final Animation anim;
+    private final TextureRegion icon;
     private Role role;
     private int wx;
     private int wy;
@@ -30,11 +31,10 @@ public class Actor {
     private CharacterRecord player;
     private CursorActor playerCursor;
 
-    public Actor(Icons icon, int id, String name) {
+    public Actor(int id, String name, TextureRegion icon) {
         this.id = id;
         this.name = name;
-        float fr = (float) Utils.getRandomBetween(4, 9) / 10;
-        this.anim = new Animation(fr, Icons.ATLAS.findRegions(icon.toString()));
+        this.icon = icon;
     }
 
     public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
@@ -67,8 +67,8 @@ public class Actor {
         return role;
     }
 
-    public Animation getAnimation() {
-        return anim;
+    public TextureRegion getIcon() {
+        return icon;
     }
 
     public int getWx() {

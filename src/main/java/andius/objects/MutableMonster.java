@@ -46,10 +46,6 @@ public class MutableMonster extends Monster {
         this.currentHitPoints = this.maxHitPoints;
     }
 
-    public void setIcon(Icons icon) {
-        this.icon = icon;
-    }
-
     public int getCurrentHitPoints() {
         return currentHitPoints;
     }
@@ -61,7 +57,7 @@ public class MutableMonster extends Monster {
     public Status getStatus() {
         return status;
     }
-    
+
     public void resetStatus() {
         this.status = Status.OK;
         this.statusEffectsCountdown.set(0);

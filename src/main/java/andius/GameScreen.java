@@ -6,6 +6,7 @@ import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -60,7 +61,7 @@ public class GameScreen extends BaseScreen {
                 renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
                 for (Actor cr : GameScreen.this.map.getMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, cr.getWx(), cr.getWy())) {
-                        renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+                        renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY() + 8);
                     }
                 }
             }
@@ -362,7 +363,7 @@ public class GameScreen extends BaseScreen {
                     if (monsterFound != null) {
                         Monster found = Andius.MONSTER_MAP.get(monsterFound);
                         if (found != null) {
-                            Actor actor = new Actor(found.getIcon(), -1, monsterFound);
+                            Actor actor = new Actor(-1, monsterFound, Icons.get(found.getIconId()));
                             MutableMonster mm = new MutableMonster(found);
                             String msx = obj.getProperties().get("monsterSpawnX", String.class);
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);

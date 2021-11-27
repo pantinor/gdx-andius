@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -33,7 +34,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 
 public class SpriteAtlasTool extends InputAdapter implements ApplicationListener {
@@ -41,7 +41,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
     Batch batch;
 
     static int screenWidth = 1920;
-    static int screenHeight = 768;
+    static int screenHeight = 1008;
 
     int dim = 48;
     int canvasGridWidth;
@@ -96,8 +96,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
         try {
             Icons.init();
 
-            InputStream is = this.getClass().getResourceAsStream("/monsters-json.txt");
-            String json = IOUtils.toString(new FileInputStream(new File("monsters-json.txt")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/monsters-json.txt")));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -200,8 +199,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
             if (selectedMonster != null) {
                 int idx = selectedMapCoords.y * 40 + selectedMapCoords.x;
-                selectedMonster.monster.icon = selectedMonster.icon = Icons.get(idx);
-
+                //selectedMonster.monster.icon = selectedMonster.icon = Icons.get(idx);
             }
 
         }
@@ -272,12 +270,12 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
         public final String name;
         public final Monster monster;
-        public Icons icon;
+        public TextureRegion icon;
 
         public MyListItem(Monster m) {
             this.name = m.getName();
             this.monster = m;
-            this.icon = m.getIcon();
+            //this.icon = m.getIcon();
         }
 
         @Override
@@ -287,7 +285,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
         @Override
         public int compareTo(MyListItem o) {
-            return Integer.compare(this.monster.getMonsterID(), o.monster.getMonsterID());
+            return Integer.compare(this.monster.getIconId(), o.monster.getIconId());
         }
 
     }

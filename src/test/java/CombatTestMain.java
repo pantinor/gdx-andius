@@ -8,6 +8,7 @@ import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.objects.Actor;
+import andius.objects.Icons;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
@@ -79,10 +80,9 @@ public class CombatTestMain extends Game {
 
             Monster monster = Andius.MONSTER_LEVELS.get(6).get(1);
             //Monster monster = Andius.MONSTER_MAP.get("Kobold");
-            Actor actor = new Actor(monster.icon, 0, monster.name);
+            Actor actor = new Actor(0, monster.name, Icons.get(monster.getIconId()));
             MutableMonster mm = new MutableMonster(monster);
             mm.name = monster.name;
-            mm.setIcon(monster.icon);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
             CombatScreen cs = new CombatScreen(ctx, Constants.Map.WIWOLD, tm, actor);
             setScreen(cs);

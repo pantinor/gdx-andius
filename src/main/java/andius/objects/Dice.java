@@ -9,10 +9,7 @@ public class Dice {
     private int qty;
     private int sides;
     private int bonus;
-    
-    public Dice() {
-    }
-    
+  
     public Dice(int sides, int qty) {
         this.sides = sides;
         this.qty = qty;

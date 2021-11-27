@@ -55,7 +55,7 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
     private Center currentLocation;
     private final VoronoiRenderer renderer;
 
-    public static Animation castle;
+    public static Animation<TextureRegion> castle;
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
     public GameTimer gameTimer = new GameTimer();
@@ -176,6 +176,11 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
 
     @Override
     public void setCurrentMapCoords(Vector3 v) {
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
     }
 
     public class GameTimer implements Runnable {
@@ -629,8 +634,7 @@ public class VoronoiTmxWorldScreen extends BaseScreen {
                 Cell cell = (Cell) c.cell;
                 if (c.cell != null && cell.portal != null && viewBounds.contains((float) c.loc.x, (float) c.loc.y)) {
                     batch.begin();
-                    batch.draw(castle.getKeyFrame(delta, true),
-                            (float) c.loc.x, (float) (c.loc.y), 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
+                    batch.draw(castle.getKeyFrame(delta, true), (float) c.loc.x, (float) (c.loc.y), 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
                     batch.end();
                 }
             }

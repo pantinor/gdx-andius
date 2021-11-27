@@ -47,7 +47,6 @@ public class Andius extends Game {
     public static Context CTX;
 
     public static Texture backGround;
-    public static TextureAtlas heroesAtlas;
     public static TextureAtlas mapAtlas;
 
     public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
@@ -69,8 +68,8 @@ public class Andius extends Game {
 
     public static java.util.Map<Color, Animation> EXPLMAP = new HashMap<>();
 
-    public static Animation world_scr_avatar;
-    public static Animation game_scr_avatar;
+    public static Animation<TextureRegion> world_scr_avatar;
+    public static Animation<TextureRegion> game_scr_avatar;
 
     public static Hud HUD;
     public static Conversations CONVERSATIONS;
@@ -188,12 +187,13 @@ public class Andius extends Game {
                 }
             }
 
-            heroesAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/heroes-atlas.txt"));
+            Icons.init();
+
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
 
             world_scr_avatar = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
-            game_scr_avatar = new Animation(.5f, heroesAtlas.findRegions("FIGHTER_RED"));
+            game_scr_avatar = new Animation(.5f, Icons.get(48));
 
             TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
             EXPLMAP.put(Color.GRAY, new Animation(.1f, getTextureArray(expl, 0, 0)));
@@ -214,24 +214,29 @@ public class Andius extends Game {
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+            
             ITEMS = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
             }.getType());
+            
             for (Item i : ITEMS) {
                 ITEMS_MAP.put(i.name, i);
             }
+            
             REWARDS = gson.fromJson(json2, new TypeToken<java.util.List<Reward>>() {
             }.getType());
+            
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
+            
             for (int i = 0; i < 11; i++) {
                 MONSTER_LEVELS.put(i, new ArrayList<>());
             }
+            
             for (Monster m : MONSTERS) {
                 MONSTER_MAP.put(m.name, m);
                 MONSTER_LEVELS.get(m.getLevel()).add(m);
             }
 
-            Icons.init();
             Constants.Moongate.init();
             CONVERSATIONS = Conversations.init();
 
@@ -258,7 +263,7 @@ public class Andius extends Game {
     public static class ExplosionDrawable extends Actor {
 
         private float stateTime;
-        private final Animation anim;
+        private final Animation<TextureRegion> anim;
 
         public ExplosionDrawable(Animation anim) {
             this.anim = anim;

@@ -225,12 +225,13 @@ public interface Constants {
                     if (iconCell == null || iconCell.getTile() == null) {
                         int d = 0;
                     }
-                    Icons icon = Icons.get(iconCell.getTile().getId() - firstgid);
+                    
+                    int iconId = iconCell.getTile().getId() - firstgid;
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 
                     //System.out.printf("Loading actor: %s %s %s on map %d.\n",surname,role,movement,id);
-                    Actor actor = new Actor(icon, id, surname);
+                    Actor actor = new Actor(id, surname, Icons.get(iconId));
                     if (role == Role.MONSTER) {
                         try {
                             String mid = obj.getProperties().get("creature", String.class);
@@ -238,10 +239,9 @@ public interface Constants {
                             if (monster != null) {
                                 MutableMonster mm = new MutableMonster(monster);
                                 mm.name = surname;
-                                mm.setIcon(icon);
                                 actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
                             } else {
-                                System.err.printf("Cannot load actor: %s %s %s on map %s.\n", surname, role, movement, this);
+                                System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s] icon id [%s]\n", surname, role, movement, this, mid, iconId);
                             }
                         } catch (Exception e) {
                             System.err.printf("Cannot find monster: %s on map %s.\n", surname, this);
@@ -472,7 +472,6 @@ public interface Constants {
     }
 
     public enum Role {
-        NONE,
         FRIENDLY,
         TEMPLE,
         MONSTER,

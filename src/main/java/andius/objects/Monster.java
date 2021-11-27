@@ -8,9 +8,8 @@ public class Monster implements Comparable<Monster> {
 
     public String genericName;
     public String name;
-    int monsterID;
+    int iconId;
     int type;
-    public Icons icon;
     int goldReward;
     int chestReward;
     int partnerID;
@@ -38,9 +37,8 @@ public class Monster implements Comparable<Monster> {
     public void clone(Monster m) {
         this.genericName = m.genericName;
         this.name = m.name;
-        this.monsterID = m.monsterID;
+        this.iconId = m.iconId;
         this.type = m.type;
-        this.icon = m.icon;
         this.goldReward = m.goldReward;
         this.chestReward = m.chestReward;
         this.partnerID = m.partnerID;
@@ -69,16 +67,12 @@ public class Monster implements Comparable<Monster> {
         return name;
     }
 
-    public int getMonsterID() {
-        return monsterID;
+    public int getIconId() {
+        return iconId;
     }
 
     public Type getType() {
         return Type.values()[this.type];
-    }
-
-    public Icons getIcon() {
-        return icon;
     }
 
     public int getGoldReward() {

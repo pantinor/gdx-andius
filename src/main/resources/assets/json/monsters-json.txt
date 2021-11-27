@@ -2098,7 +2098,7 @@
   },
   {
     "genericName": "Strange Animal",
-    "name": "Medusa lizard",
+    "name": "Medusa Lizard",
     "monsterID": 46,
     "type": 6,
     "icon": "GRUB_MAJOR",

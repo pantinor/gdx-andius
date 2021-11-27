@@ -9,6 +9,7 @@ import static andius.Constants.DEATHMSGS;
 import static andius.Constants.TILE_DIM;
 import andius.objects.CursorActor;
 import andius.objects.Dice;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -138,7 +139,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].getIcon(), 0, crSlots[index].getIcon().name());
+            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), opponent.getIcon());
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
         }
@@ -159,7 +160,7 @@ public class CombatScreen extends BaseScreen {
             if (this.context.players()[index].isDead()) {
                 continue;
             }
-            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].classType.getIcon(), 0, context.players()[index].name);
+            andius.objects.Actor actor = new andius.objects.Actor(0, context.players()[index].name, context.players()[index].classType.getIcon());
             actor.set(this.context.players()[index], sx, sy, x, y);
 
             CursorActor cursor = new CursorActor();
@@ -278,14 +279,14 @@ public class CombatScreen extends BaseScreen {
 
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
-            renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), cr.getX(), cr.getY() + 8);
+            renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY() + 8);
         }
 
         int x = 0;
         float cx = 0, cy = 0;
         for (andius.objects.Actor p : partyMembers) {
             if (p.getPlayer().status != Status.DEAD) {
-                renderer.getBatch().draw(p.getAnimation().getKeyFrame(time, true), p.getX(), p.getY());
+                renderer.getBatch().draw(p.getIcon(), p.getX(), p.getY());
             }
             if (x == this.activeIndex) {
                 cx = p.getX();

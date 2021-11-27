@@ -11,6 +11,10 @@ public class Item implements Comparable<Item> {
         POTION_SCROLL_SPECIAL,
         RING_AMULET;
     }
+    
+    public Item() {
+        
+    }
 
     public static final Item HANDS = new Item();
 

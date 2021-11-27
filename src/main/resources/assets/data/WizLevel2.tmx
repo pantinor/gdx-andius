@@ -209,9 +209,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="16" name="Medusa lizard" type="MONSTER" x="1056" y="2496" width="48" height="48">
+  <object id="16" name="Medusa Lizard" type="MONSTER" x="1056" y="2496" width="48" height="48">
    <properties>
-    <property name="creature" value="Medusa lizard"/>
+    <property name="creature" value="Medusa Lizard"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -329,9 +329,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="75" name="Medusa lizard" type="MONSTER" x="2496" y="1488" width="48" height="48">
+  <object id="75" name="Medusa Lizard" type="MONSTER" x="2496" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Medusa lizard"/>
+    <property name="creature" value="Medusa Lizard"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -341,9 +341,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="78" name="Medusa lizard" type="MONSTER" x="1488" y="1344" width="48" height="48">
+  <object id="78" name="Medusa Lizard" type="MONSTER" x="1488" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Medusa lizard"/>
+    <property name="creature" value="Medusa Lizard"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
