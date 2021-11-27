@@ -19,7 +19,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -131,7 +130,7 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
                 for (Monster m : monsters) {
                     //m.name = toCamelCase(m.name);
                     //m.genericName = toCamelCase(m.genericName);
-                    System.out.println(m.name+"\t"+m.genericName);
+                    System.out.println(m.name + "\t" + m.genericName + "\t" + m.iconId);
                 }
                 writeJson("monsters-json.txt", monsters);
             }
@@ -142,8 +141,9 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
         table.add(makeButton).expandX().left().width(175);
         table.row();
         table.add(scrollPane).expandX().left().width(175).maxHeight(screenHeight);
-        table.setPosition(screenWidth - 175, 0);
-        table.setFillParent(true);
+        table.setBounds(screenWidth - 175, screenHeight, 175, 200);
+        table.setPosition(screenWidth - 175, 300);
+        //table.setFillParent(true);
 
         stage.addActor(table);
 
@@ -199,7 +199,8 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
             if (selectedMonster != null) {
                 int idx = selectedMapCoords.y * 40 + selectedMapCoords.x;
-                //selectedMonster.monster.icon = selectedMonster.icon = Icons.get(idx);
+                selectedMonster.monster.setIconId(idx);
+                selectedMonster.iconId = idx;
             }
 
         }
@@ -229,26 +230,6 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
     }
 
-    public static String toCamelCase(final String init) {
-        if (init == null) {
-            return null;
-        }
-
-        final StringBuilder ret = new StringBuilder(init.length());
-
-        for (final String word : init.split(" ")) {
-            if (!word.isEmpty()) {
-                ret.append(word.substring(0, 1).toUpperCase());
-                ret.append(word.substring(1).toLowerCase());
-            }
-            if (!(ret.length() == init.length())) {
-                ret.append(" ");
-            }
-        }
-
-        return ret.toString();
-    }
-
     public class MyVector {
 
         private int x;
@@ -270,17 +251,17 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
         public final String name;
         public final Monster monster;
-        public TextureRegion icon;
+        public int iconId;
 
         public MyListItem(Monster m) {
             this.name = m.getName();
             this.monster = m;
-            //this.icon = m.getIcon();
+            this.iconId = m.getIconId();
         }
 
         @Override
         public String toString() {
-            return String.format("%s - %s", name, icon);
+            return String.format("%s - %s", name, iconId);
         }
 
         @Override
