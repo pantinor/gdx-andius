@@ -280,8 +280,9 @@ public interface Constants {
 
             this.screen = (this.dim == TILE_DIM
                     ? new GameScreen(this)
-                    : new WorldScreen(this)
-                    //: new VoronoiTmxWorldScreen() //new VoronoiAzgaarMapScreen()
+                    //: new WorldScreen(this)
+                    //: new VoronoiTmxWorldScreen() 
+                    : new VoronoiAzgaarMapScreen()
                     );
 
         }
@@ -470,6 +471,7 @@ public interface Constants {
     }
 
     public enum Role {
+        NONE,
         FRIENDLY,
         TEMPLE,
         MONSTER,

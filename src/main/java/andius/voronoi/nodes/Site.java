@@ -15,7 +15,7 @@ public final class Site implements ICoord {
     private ArrayList<LR> _edgeOrientations;
     public Polygon region;
     private Point _coord;
-    public Object cell;
+    public int pointIndex;
 
     final private static float EPSILON = .005f;
     final private static int TOP = 1;

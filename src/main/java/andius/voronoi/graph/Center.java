@@ -10,7 +10,8 @@ public class Center {
     public ArrayList<Corner> corners = new ArrayList();
     public ArrayList<Center> neighbors = new ArrayList();
     public ArrayList<Edge> borders = new ArrayList();
-    public Object cell;
+    public int pointIndex;
+    public Object portal;
 
     public Center() {
     }
@@ -21,10 +22,8 @@ public class Center {
 
     @Override
     public String toString() {
-        return "Center{" + "index=" + index + ", cell=" + cell + '}';
+        return "Center{" + "loc=" + loc + ", pointIndex=" + pointIndex + '}';
     }
-
-
 
     public Center getClosestNeighbor(float x, float y) {
         int sz = this.neighbors.size();

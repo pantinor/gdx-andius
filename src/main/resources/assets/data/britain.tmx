@@ -79,8 +79,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
-  <image source="uf_heroes.png" width="1920" height="672"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="1400" columns="40">
+  <image source="uf_heroes.png" width="1920" height="1680"/>
  </tileset>
  <layer name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
@@ -94,7 +94,7 @@
  </layer>
  <layer name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgGF7gJ8vgMIMQcGWmnlmGSGZpUmgusX63paL7KQWaVPQ/PrMHM6BmmqVH+qcFCB0icTUKUAE9ypKhmqZHAhhMdckooD8YTnlzNC0PLCAn/EUHUZxJkugWVxLzDqnq8ZpFplup4QZyzQL1lfCF8XAqi4gBALJNoqUAEAAA
+   H4sIAAAAAAAACmNgGF7gJ8vgMIMQ2MlKPbOikMy6TKG5L4nUb8tMmT3UBMh+vkXFcAUBzUHkT3yAmmmWHumfFiCBynE/CugD6FGWDNU0PRLAYKpLRgH9AR/bQLuAemA0LQ8sICf8wwdRu0GSRPfHkOh2UtXjA7tINCsaqj6OCm6IJdMsLmBZ041Hz0hrJwAAWTHSRQAQAAA=
   </data>
  </layer>
  <layer name="water_edges" width="32" height="32">
