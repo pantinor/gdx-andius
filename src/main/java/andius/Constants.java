@@ -45,7 +45,7 @@ public interface Constants {
 
     public enum Map {
 
-        WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
+        WORLD("Andius", "test-world.tmx", WORLD_TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
@@ -280,9 +280,8 @@ public interface Constants {
 
             this.screen = (this.dim == TILE_DIM
                     ? new GameScreen(this)
-                    //: new WorldScreen(this)
-                    //: new VoronoiTmxWorldScreen() 
-                    : new VoronoiAzgaarMapScreen()
+                    : new WorldScreen(this)
+                    //: new VoronoiAzgaarMapScreen()
                     );
 
         }

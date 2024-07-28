@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" infinite="0" nextobjectid="60">
  <properties>
-  <property name="startX" value="23"/>
-  <property name="startY" value="53"/>
+  <property name="startX" value="82"/>
+  <property name="startY" value="95"/>
  </properties>
  <tileset firstgid="1" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
   <image source="uf_map.png" width="600" height="504"/>

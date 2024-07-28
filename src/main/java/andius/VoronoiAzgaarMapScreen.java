@@ -73,7 +73,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         try {
             //https://azgaar.github.io/Fantasy-Map-Generator/
-            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/Horsto 2021-11-27-19-57.map").read();
+            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/Fruiz 2021-12-20-16-54.map").read();
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
             String sparams = br.readLine();

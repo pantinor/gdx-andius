@@ -10,17 +10,15 @@ import utils.Utils;
 import utils.XORShiftRandom;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
-import com.badlogic.gdx.utils.Base64Coder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import org.apache.commons.io.IOUtils;
 
 public class SaveGame implements Constants {
@@ -34,10 +32,15 @@ public class SaveGame implements Constants {
     public final java.util.Map<Map, List<Integer>> removedActors = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
-        GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
-        String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
-        gzis.close();
-        String json = Base64Coder.decodeString(b64);
+        //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
+        //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
+        //gzis.close();
+        //String json = Base64Coder.decodeString(b64);
+        
+        InputStream is = new FileInputStream(file);
+        String json = IOUtils.toString(is, StandardCharsets.UTF_8);
+        is.close();
+        
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
@@ -98,11 +101,14 @@ public class SaveGame implements Constants {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         String json = gson.toJson(this);
-        String b64 = Base64Coder.encodeString(json);
+        //String b64 = Base64Coder.encodeString(json);
         FileOutputStream fos = new FileOutputStream(file);
-        GZIPOutputStream gzos = new GZIPOutputStream(fos);
-        gzos.write(b64.getBytes("UTF-8"));
-        gzos.close();
+        //GZIPOutputStream gzos = new GZIPOutputStream(fos);
+        //gzos.write(b64.getBytes("UTF-8"));
+        //gzos.close();
+        fos.write(json.getBytes("UTF-8"));
+        fos.close();
+
     }
 
     public static class CharacterRecord {

@@ -117,8 +117,10 @@ public class WorldScreen extends BaseScreen {
 
         Andius.HUD.render(batch, Andius.CTX);
 
-        //Vector3 v = getCurrentMapCoords();
+        //Vector3 v = new Vector3();
+        //setCurrentMapCoords(v);        
         //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        
         batch.end();
 
         stage.act();

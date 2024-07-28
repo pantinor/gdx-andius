@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.XORShiftRandom;
@@ -132,7 +133,10 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     
     public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
         Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), Andius.skin, "larger");
+        label.setWrap(true);
+        label.setWidth(400);
         label.setPosition(sx, sy);
+        label.setAlignment(Align.center);
         label.setColor(color);
         stage.addActor(label);
         Sounds.play(Sound.POSITIVE_EFFECT);

@@ -123,8 +123,10 @@ public class GameScreen extends BaseScreen {
         batch.draw(Andius.backGround, 0, 0);
         Andius.HUD.render(batch, Andius.CTX);
 
-//        Vector3 v = getCurrentMapCoords();
-//        Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        //Vector3 v = new Vector3();
+        //setCurrentMapCoords(v);
+        //Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
+        
         if (this.roomName != null) {
             Andius.largeFont.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
         }
