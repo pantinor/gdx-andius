@@ -95,7 +95,7 @@ public class BaseMap {
                         CombatScreen cs = new CombatScreen(CTX, map, tm, p);
                         mainGame.setScreen(cs);
                         continue;
-                    } else if (dist >= 4) {
+                    } else if (dist >= 5) {
                         //dont move until close enough
                         continue;
                     }
