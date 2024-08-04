@@ -8,15 +8,24 @@ package andius.objects;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import utils.Utils;
 
 /**
  *
  * @author Paul
  */
 public class Actor {
+
+    private static TextureRegion PLAYER_HLTH_BAR = null;
+
+    static {
+        try {
+            PLAYER_HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 124, 6);
+        } catch (Throwable t) {
+        }
+    }
 
     private final int id;
     private final String name;
@@ -30,6 +39,7 @@ public class Actor {
     private MutableMonster monster;
     private CharacterRecord player;
     private CursorActor playerCursor;
+    private TextureRegion healthBar;
 
     public Actor(int id, String name, TextureRegion icon) {
         this.id = id;
@@ -113,6 +123,28 @@ public class Actor {
 
     public CharacterRecord getPlayer() {
         return player;
+    }
+
+    public TextureRegion getHealthBar() {
+        if (healthBar == null) {
+            healthBar = new TextureRegion(PLAYER_HLTH_BAR);
+            adjustHP(player.hp);
+        }
+        return this.healthBar;
+    }
+
+    public void adjustHP(int amt) {
+        player.adjustHP(amt);
+
+        double percent = (double) player.hp / player.maxhp;
+        double bar = percent * (double) 124;
+        if (player.hp < 0) {
+            bar = 0;
+        }
+        if (bar > 124) {
+            bar = 124;
+        }
+        getHealthBar().setRegion(381, 82, (int) bar, 6);
     }
 
     public CursorActor getPlayerCursor() {

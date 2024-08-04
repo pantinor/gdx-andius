@@ -129,7 +129,7 @@ public class SpellUtil {
                 case DIAL:
                 case DIALMA:
                 case MADI:
-                    doSpellHeal(screen, seq, target.getPlayer(), spell);
+                    doSpellHeal(screen, seq, target, spell);
                     break;
                 case LATUMOFIS:
                 case DIALKO:
@@ -324,14 +324,15 @@ public class SpellUtil {
         }
     }
 
-    private static void doSpellHeal(CombatScreen screen, SequenceAction seq, CharacterRecord target, Spells spell) {
-        if (target.status != Status.DEAD) {
+    private static void doSpellHeal(CombatScreen screen, SequenceAction seq, andius.objects.Actor target, Spells spell) {
+        CharacterRecord rec = target.getPlayer();
+        if (rec.status != Status.DEAD) {
 
-            seq.addAction(Actions.run(new LogAction(screen, target.name + " is healed.")));
+            seq.addAction(Actions.run(new LogAction(screen, rec.name + " is healed.")));
 
             if (spell == Spells.MADI) {
-                target.status = Status.OK;
-                target.adjustHP(target.maxhp);
+                rec.status = Status.OK;
+                target.adjustHP(rec.maxhp);
             } else {
                 int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
                 target.adjustHP(points);
@@ -481,7 +482,7 @@ public class SpellUtil {
             seq.addAction(Actions.run(new LogAction(screen, target.getPlayer().name + " is unaffected.")));
         } else {
             int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-            target.getPlayer().adjustHP(damage);
+            target.adjustHP(damage);
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s takes %d damage.", target.getPlayer().name, damage))));
         }
 
@@ -526,7 +527,7 @@ public class SpellUtil {
             } else {
 
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-                m.getPlayer().adjustHP(damage);
+                m.adjustHP(damage);
 
                 seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
 
@@ -550,7 +551,7 @@ public class SpellUtil {
             seq.addAction(Actions.delay(.60f));
 
             int damage = Utils.getRandomBetween(minDamage, maxDamage);
-            m.getPlayer().adjustHP(damage);
+            m.adjustHP(damage);
 
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
 

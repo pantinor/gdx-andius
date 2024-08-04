@@ -62,7 +62,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CombatScreen extends BaseScreen {
 
     public static int AREA_CREATURES = 16;
-    public static int AREA_PLAYERS = 6;
     public final static int MAP_DIM = 13;
 
     private final MutableMonster[] crSlots;
@@ -77,7 +76,6 @@ public class CombatScreen extends BaseScreen {
     private final SpriteBatch batch;
     private final CombatInputProcessor cip;
     private final Viewport mapViewPort;
-    private final GlyphLayout layout = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 65, Align.left, true);
 
     public final Set<andius.objects.Actor> enemies = new LinkedHashSet<>();
     public final Set<andius.objects.Actor> partyMembers = new LinkedHashSet<>();
@@ -88,8 +86,6 @@ public class CombatScreen extends BaseScreen {
     private final ScrollPane logScroll;
     public final Stage hudStage;
     private final CombatHud hud;
-
-    int[] hud_enmy_x = new int[]{50, 89 + 40, 168 + 40, 247 + 40, 326 + 40, 405 + 40, 484 + 40, 563 + 40};
 
     public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent) {
 
@@ -300,27 +296,7 @@ public class CombatScreen extends BaseScreen {
 
         batch.begin();
         batch.draw(this.frame, 0, 0);
-
-        int y = 78;
-        int count = 0, idx = 0;
-        for (int i = 0; i < AREA_CREATURES; i++) {
-            if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
-                layout.setText(Andius.smallFont, crSlots[i].getName().toUpperCase());
-                Andius.smallFont.draw(batch, layout, hud_enmy_x[idx], y);
-                batch.draw(crSlots[i].getHealthBar(), hud_enmy_x[idx] - 1, count > 7 ? 15 : 46);
-                if (crSlots[i].getStatus() != Status.OK) {
-                    Andius.smallFont.draw(batch, crSlots[i].getStatus().toString().toLowerCase(), hud_enmy_x[idx] + 1, y - 13);
-                }
-                Andius.smallFont.draw(batch, crSlots[i].getLevel() + " (" + crSlots[i].getMaxHitPoints() + ")", hud_enmy_x[idx] + 28, y - 13);
-                count++;
-                idx++;
-                if (count == 8) {
-                    idx = 0;
-                    y = 46;
-                }
-            }
-        }
-
+        hud.render(batch, crSlots, partyMembers);
         batch.end();
 
         if (cip.active) {
@@ -643,7 +619,7 @@ public class CombatScreen extends BaseScreen {
                     if (hit) {
                         for (Dice dice : creature.getMonster().getDamage()) {
                             int damage = dice.roll();
-                            target.getPlayer().adjustHP(-damage);
+                            target.adjustHP(-damage);
                             log(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
 
                             Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));

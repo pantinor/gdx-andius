@@ -5,13 +5,18 @@
  */
 package andius;
 
+import andius.Constants.Status;
 import andius.objects.Item;
+import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -22,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +42,9 @@ public class CombatHud {
     private PlayerListing current;
     private final CombatScreen screen;
     private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
+    private final Texture[] partyHealthFrames = new Texture[6];
+    private final Texture[] monsterHealthFrames = new Texture[16];
+    private final GlyphLayout glyph = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 32, Align.left, true);
 
     public CombatHud(CombatScreen screen, Set<andius.objects.Actor> players) {
         this.screen = screen;
@@ -56,6 +65,13 @@ public class CombatHud {
 
         for (andius.objects.Actor a : players) {
             map.put(a, new PlayerListing(a));
+        }
+
+        for (int x = 0; x < partyHealthFrames.length; x++) {
+            partyHealthFrames[x] = createHealthFrame(128, 32);
+        }
+        for (int x = 0; x < monsterHealthFrames.length; x++) {
+            monsterHealthFrames[x] = createHealthFrame(86, 36);
         }
 
     }
@@ -261,6 +277,80 @@ public class CombatHud {
             tooltip.setVisible(false);
         }
 
+    }
+
+    public void render(SpriteBatch batch, MutableMonster[] crSlots, Set<andius.objects.Actor> partyMembers) {
+        int x = 8;
+        for (int i = 0; i < 6; i++) {
+            batch.draw(partyHealthFrames[i], x, Andius.SCREEN_HEIGHT - 34);
+            x += 128 + 3;
+        }
+        x = 8;
+        for (int i = 0; i < 8; i++) {
+            batch.draw(monsterHealthFrames[i], x, 44);
+            x += 86 + 1;
+        }
+        x = 8;
+        for (int i = 8; i < 16; i++) {
+            batch.draw(monsterHealthFrames[i], x, 6);
+            x += 86 + 1;
+        }
+
+        x = 8;
+        for (andius.objects.Actor p : partyMembers) {
+            String txt = String.format("%s [%d - %d] %s",
+                    p.getName(),
+                    p.getPlayer().level,
+                    p.getPlayer().maxhp,
+                    p.getPlayer().status != Status.OK ?  p.getPlayer().status.toString().toLowerCase() : "");
+
+            glyph.setText(Andius.smallFont, txt, Color.WHITE, 124, Align.left, true);
+            Andius.smallFont.draw(batch, glyph, x,  Andius.SCREEN_HEIGHT - 4);
+
+            batch.draw(p.getHealthBar(), x + 2,  Andius.SCREEN_HEIGHT - 31);
+            x += 128 + 3;
+        }
+
+        x = 10;
+        int count = 0;
+        for (int i = 0; i < 16; i++) {
+            if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
+
+                String txt = String.format("%s [%d - %d] %s",
+                        crSlots[i].getName(),
+                        crSlots[i].getLevel(),
+                        crSlots[i].getMaxHitPoints(),
+                        crSlots[i].getStatus() != Status.OK ? crSlots[i].getStatus().toString().toLowerCase() : "");
+
+                glyph.setText(Andius.smallFont, txt, Color.WHITE, 80, Align.left, true);
+                Andius.smallFont.draw(batch, glyph, x, count < 8 ? 84 : 46);
+
+                batch.draw(crSlots[i].getHealthBar(), x, count < 8 ? 46 : 8);
+
+                count++;
+                x += 86 + 1;
+                if (count == 8) {
+                    x = 10;
+                }
+            }
+        }
+    }
+
+    private Texture createHealthFrame(int w, int h) {
+
+        int lw = 2;
+
+        Pixmap pix = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+
+        pix.setColor(Color.DARK_GRAY);
+        pix.fillRectangle(0, 0, w, lw);//top
+        pix.fillRectangle(0, h - lw, w, lw);//bottom
+        pix.fillRectangle(0, 0, lw, h);//left
+        pix.fillRectangle(w - lw, 0, lw, h);//right
+
+        Texture t = new Texture(pix);
+        pix.dispose();
+        return t;
     }
 
 }

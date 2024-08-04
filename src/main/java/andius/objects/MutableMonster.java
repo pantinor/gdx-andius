@@ -23,7 +23,7 @@ public class MutableMonster extends Monster {
 
     static {
         try {
-            HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 74, 8);
+            HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 82, 6);
         } catch (Throwable t) {
         }
     }
@@ -89,14 +89,14 @@ public class MutableMonster extends Monster {
 
     public void adjustHealthBar() {
         double percent = (double) currentHitPoints / maxHitPoints;
-        double bar = percent * (double) 74;
+        double bar = percent * (double) 82;
         if (currentHitPoints < 0) {
             bar = 0;
         }
-        if (bar > 74) {
-            bar = 74;
+        if (bar > 82) {
+            bar = 82;
         }
-        getHealthBar().setRegion(381, 82, (int) bar, 8);
+        getHealthBar().setRegion(381, 82, (int) bar, 6);
     }
 
     public String getDamageTag() {
