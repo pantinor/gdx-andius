@@ -742,7 +742,7 @@
   </object>
   <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief 1"/>
+    <property name="creature" value="Orc"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -988,7 +988,7 @@
   </object>
   <object id="285" name="Small Zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Zombie"/>
+    <property name="creature" value="Undead Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -1018,7 +1018,7 @@
   </object>
   <object id="404" name="Thief" type="MONSTER" x="2016" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 4 Thief"/>
+    <property name="creature" value="Kobold"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -1037,7 +1037,7 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="75" name="Arnori" type="MERCHANT1" x="3696" y="336" width="48" height="48">
+  <object id="75" name="Arnori" type="INNKEEPER" x="3696" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="FIXED"/>
    </properties>

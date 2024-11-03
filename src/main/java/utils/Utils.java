@@ -1,6 +1,5 @@
 package utils;
 
-import andius.Constants.AttackResult;
 import andius.Constants.Status;
 import andius.Direction;
 import andius.objects.Item;

@@ -179,15 +179,16 @@ public class Monster implements Comparable<Monster> {
 
     @Override
     public int compareTo(Monster o) {
-        if (this.exp != o.exp) {
-            return Integer.compare(this.exp, o.exp);
+        if (this.hitPoints.getMax() != o.hitPoints.getMax()) {
+            return Integer.compare(this.hitPoints.getMax(), o.hitPoints.getMax());
         }
-        return Integer.compare(this.hitPoints.getMax(), o.hitPoints.getMax());
+        return Integer.compare(this.exp, o.exp);
     }
 
     @Override
     public String toString() {
-        return String.format("%s %d %d %s %s", name, exp, armourClass, hitPoints, damage);
+        return String.format("%d   %s   %s   %d   %d [%d,%d]  %s",
+                hitPoints.getMax(), hitPoints, damage, armourClass, exp, mageSpellLevel, priestSpellLevel, name);
     }
 
 }

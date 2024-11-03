@@ -56,7 +56,14 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     private JsonElement cultures;
     private JsonElement features;
 
-    private final float factor = 2.5f;
+    private JsonElement religions;
+    private JsonElement provinces;
+    private JsonElement rivers;
+    private JsonElement markers;
+    private JsonElement routes;
+    private JsonElement zones;
+
+    private final float factor = 5.5f;
 
     private final Viewport mapViewPort;
     private final Batch mapBatch, batch;
@@ -67,13 +74,14 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
     public GameTimer gameTimer = new GameTimer();
-    //public java.util.Map<Constants.Moongate, Cell> moongateMap = new HashMap<>();
+
+    public java.util.Map<Constants.Moongate, Center> moongateMap = new HashMap<>();
 
     public VoronoiAzgaarMapScreen() {
 
         try {
             //https://azgaar.github.io/Fantasy-Map-Generator/
-            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/Fruiz 2021-12-20-16-54.map").read();
+            InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/Movia 2024-11-03-13-51.map").read();
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
             String sparams = br.readLine();
@@ -109,6 +117,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             burgs = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
             }.getType());
 
+            //https://github.com/Azgaar/Fantasy-Map-Generator/blob/master/modules/io/load.js#L384C1-L407C64
             grid.biome = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.burg = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.conf = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
@@ -116,12 +125,29 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             grid.fl = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.pop = Arrays.stream(br.readLine().split(",")).mapToDouble(Double::parseDouble).toArray();
             grid.r = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
-            grid.road = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
+            br.readLine();//deprecated cells.road
             grid.s = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.state = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.religion = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
             grid.province = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
-            grid.crossroad = Arrays.stream(br.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
+            br.readLine();//deprecated cells.crossroad
+
+            religions = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
+            provinces = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
+            br.readLine();//name bases split with /
+            rivers = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
+            br.readLine();//
+            br.readLine();//
+            markers = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
+            br.readLine();//
+            routes = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
+            zones = gson.fromJson(br.readLine(), new TypeToken<JsonArray>() {
+            }.getType());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,17 +178,30 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         mapViewPort = new ScreenViewport(camera);
 
-        currentLocation = renderer.getCenterAtPoint(1);
+        JsonArray e = burgs.getAsJsonArray();
+        currentLocation = getCenter(e.get(5).getAsJsonObject());
+
         newMapPixelCoords.set((float) currentLocation.loc.x, (float) currentLocation.loc.y, 0f);
 
-//        moongateMap.put(Moongate.GATE_0, renderer.getCenterCell(6018));
-//        moongateMap.put(Moongate.GATE_1, renderer.getCenterCell(2216));
-//        moongateMap.put(Moongate.GATE_2, renderer.getCenterCell(1770));
-//        moongateMap.put(Moongate.GATE_3, renderer.getCenterCell(695));
-//        moongateMap.put(Moongate.GATE_4, renderer.getCenterCell(5199));
-//        moongateMap.put(Moongate.GATE_5, renderer.getCenterCell(5712));
-//        moongateMap.put(Moongate.GATE_6, renderer.getCenterCell(8541));
-//        moongateMap.put(Moongate.GATE_7, renderer.getCenterCell(567));
+        e = markers.getAsJsonArray();
+        List<JsonObject> mks = new ArrayList<>();
+        for (int i = 0; i < e.size(); i++) {
+            JsonObject jo = e.get(i).getAsJsonObject();
+            String type = jo.getAsJsonPrimitive("type").getAsString();
+            if (type.equals("portals") || type.equals("ruins")) {
+                mks.add(jo);
+            }
+        }
+        for (int i = 0; i < Moongate.values().length; i++) {
+            moongateMap.put(Moongate.values()[i], getCenter(mks.get(i).getAsJsonObject()));
+        }
+
+    }
+
+    private Center getCenter(JsonObject jo) {
+        float x = jo.getAsJsonPrimitive("x").getAsFloat();
+        float y = jo.getAsJsonPrimitive("y").getAsFloat();
+        return renderer.getNearestCenter(x * factor, y * factor);
     }
 
     @Override
@@ -229,10 +268,10 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         for (Constants.Moongate g : Constants.Moongate.values()) {
             TextureRegion t = g.getCurrentTexture();
             if (t != null) {
-                //Cell c = moongateMap.get(g);
-                //mapBatch.begin();
-                //mapBatch.draw(t, grid.points.get(c.index)[0], grid.points.get(c.index)[1], 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
-                //mapBatch.end();
+                Center c = moongateMap.get(g);
+                mapBatch.begin();
+                mapBatch.draw(t, grid.points.get(c.index)[0], grid.points.get(c.index)[1], 11, 2, 24f, 24f, 1.0f, 1.0f, 90, false);
+                mapBatch.end();
             }
         }
         batch.begin();
@@ -244,8 +283,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         Andius.HUD.render(batch, Andius.CTX);
 
-        Andius.font.draw(batch, String.format("%s\n", this.currentLocation), 200, Andius.SCREEN_HEIGHT - 32);
-
+        //Andius.font.draw(batch, String.format("%s\n", this.currentLocation), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
         stage.act();
@@ -319,10 +357,31 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         if (next != null) {
             if (grid.cellsType[next.pointIndex] < 0 || grid.cellsHeight[next.pointIndex] >= 70) {
-                Sounds.play(Sound.BLOCKED);
-                return null;
+                if (dir == Direction.NORTH) {
+                    next = current.getClosestNeighbor(current.loc.x, current.loc.y - 48, next);
+                }
+                if (dir == Direction.SOUTH) {
+                    next = current.getClosestNeighbor(current.loc.x, current.loc.y + 48, next);
+                }
+                if (dir == Direction.WEST) {
+                    next = current.getClosestNeighbor(current.loc.x - 48, current.loc.y, next);
+                }
+                if (dir == Direction.EAST) {
+                    next = current.getClosestNeighbor(current.loc.x + 48, current.loc.y, next);
+                }
             }
         }
+
+        if (next != null) {
+            if (grid.cellsType[next.pointIndex] < 0 || grid.cellsHeight[next.pointIndex] >= 70) {
+                next = null;
+            }
+        }
+
+        if (next == null) {
+            Sounds.play(Sound.BLOCKED);
+        }
+
         return next;
     }
 
@@ -331,17 +390,17 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         newMapPixelCoords.set((float) next.loc.x, (float) (next.loc.y), 0f);
 
         //check for active moongate portal
-//        for (Moongate g : Moongate.values()) {
-//            Cell c = moongateMap.get(g);
-//            if (c != null && c.center != null && c.center.equals(next) && g.getCurrentTexture() != null) {
-//                Sounds.play(Sound.WAVE);
-//                Moongate d = getDestinationForMoongate(g);
-//                Cell tmp = moongateMap.get(d);
-//                this.currentLocation = tmp.center;
-//                newMapPixelCoords.set(tmp.center.loc.x, tmp.center.loc.y, 0f);
-//                return;
-//            }
-//        }
+        for (Moongate g : Moongate.values()) {
+            Center c = moongateMap.get(g);
+            if (c != null && c.equals(next) && g.getCurrentTexture() != null) {
+                Sounds.play(Sound.WAVE);
+                Moongate d = getDestinationForMoongate(g);
+                Center tmp = moongateMap.get(d);
+                this.currentLocation = tmp;
+                newMapPixelCoords.set(tmp.loc.x, tmp.loc.y, 0f);
+                return;
+            }
+        }
     }
 
     @Override
@@ -436,12 +495,10 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         int[] fl;
         double[] pop;
         int[] r;
-        int[] road;
         int[] s;
         int[] state;
         int[] religion;
         int[] province;
-        int[] crossroad;
 
     }
 
@@ -543,14 +600,24 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             JsonArray e = burgs.getAsJsonArray();
             for (int i = 1; i < e.size(); i++) {
                 JsonObject burg = e.get(i).getAsJsonObject();
-                String name = burg.getAsJsonPrimitive("name").getAsString();
-                int cell = burg.getAsJsonPrimitive("cell").getAsInt();
                 float x = burg.getAsJsonPrimitive("x").getAsFloat();
                 float y = burg.getAsJsonPrimitive("y").getAsFloat();
-                System.out.printf("burg %s cell %d [%f,%f]\n", name, cell, x, y);
+                System.out.println(burg);
                 Center c = getNearestCenter(x * factor, y * factor);
                 if (c != null) {
-                    c.portal = new Portal(Constants.Map.BRITANIA, 0, 0, 15, 31, null, false, false);
+                    c.portal = new Portal(Constants.Map.LLECHY, 0, 0, 15, 31, null, false, false);
+                }
+            }
+
+            JsonArray mks = markers.getAsJsonArray();
+            for (int i = 1; i < mks.size(); i++) {
+                JsonObject mk = mks.get(i).getAsJsonObject();
+                float x = mk.getAsJsonPrimitive("x").getAsFloat();
+                float y = mk.getAsJsonPrimitive("y").getAsFloat();
+                System.out.println(mk);
+                Center c = getNearestCenter(x * factor, y * factor);
+                if (c != null) {
+                    c.object = mk;
                 }
             }
 
@@ -578,7 +645,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
             return null;
         }
 
-        public Center getNearestCenter(float x, float y) {
+        private Center getNearestCenter(float x, float y) {
             Center found = null;
             float dist = Float.MAX_VALUE;
             for (int i = 0; i < centers.size(); i++) {

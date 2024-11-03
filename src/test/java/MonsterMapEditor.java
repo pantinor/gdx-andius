@@ -58,7 +58,7 @@ public class MonsterMapEditor extends InputAdapter implements ApplicationListene
 
         try {
 
-            InputStream is = this.getClass().getResourceAsStream("/assets/data/WizLevel1.tmx");
+            InputStream is = this.getClass().getResourceAsStream("/assets/data/ali-baba.tmx");
             JAXBContext jaxbContext = JAXBContext.newInstance(Map.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             map = (Map) jaxbUnmarshaller.unmarshal(is);

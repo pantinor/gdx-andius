@@ -3,9 +3,7 @@ package andius.objects;
 import andius.Andius;
 import andius.CombatScreen;
 import andius.CombatScreen.RemoveCreatureAction;
-import andius.Constants;
 import andius.Constants.AddActorAction;
-import andius.Constants.AttackResult;
 import andius.Constants.PlaySoundAction;
 import andius.Constants.LogAction;
 import andius.Constants.Status;
@@ -28,8 +26,7 @@ public class SpellUtil {
 
     private static final Random rand = new XORShiftRandom();
 
-    public static void spellCast(CombatScreen screen, Context context, Spells spell,
-            andius.objects.Actor caster, andius.objects.Actor target) {
+    public static void spellCast(CombatScreen screen, Context context, Spells spell, andius.objects.Actor caster, andius.objects.Actor target) {
 
         SequenceAction seq = Actions.action(SequenceAction.class);
 

@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
@@ -19,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,47 +33,59 @@ public class BookScreen extends InputAdapter implements Screen {
     private final java.util.Map<Integer, Page> pages = new HashMap<>();
 
     private int currentPage = 0;
-    
+
     public BookScreen(Screen returnScreen, Skin skin) {
         this.returnScreen = returnScreen;
         this.stage = new Stage();
-        
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/sansblack.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        
+
         parameter.size = 18;
         BitmapFont fontLarger = generator.generateFont(parameter);
-        
+
         generator.dispose();
-        
+
         Label.LabelStyle labs = new Label.LabelStyle(skin.get("default", Label.LabelStyle.class));
         labs.font = fontLarger;
         labs.background = null;
-        
-        addPages(fontLarger, "/assets/data/manual.txt", labs);
-        
-        if (labels.size() % 2 != 0) {
-            labels.add(new Label("",labs));
+
+        List<String> lines = IOUtils.readLines(BookScreen.class.getResourceAsStream("/assets/data/manual.txt"));
+        addPages(fontLarger, lines, labs);
+
+        lines = new ArrayList<>();
+        lines.add("*break");
+        lines.add("Spells");
+        lines.add("");
+        for (Spells s : Spells.values()) {
+            lines.add(String.format("%s  Type: %s  Level: %d  Target: %s", s.getName(), s.getType(), s.getLevel(), s.getTarget()));
+            lines.add(s.getDescription());
+            lines.add("");
         }
-        
+        addPages(fontLarger, lines, labs);
+
+        if (labels.size() % 2 != 0) {
+            labels.add(new Label("", labs));
+        }
+
         int x = 0;
         for (Label l : labels) {
             l.setWrap(true);
             l.setAlignment(Align.topLeft, Align.left);
             l.setWidth(460);
             l.setHeight(600);
-            l.setX(x%2==0?35:525);
+            l.setX(x % 2 == 0 ? 35 : 525);
             l.setY(145);
             x++;
         }
-        
+
         int idx = 0;
-        for (int i=0;i<labels.size();i+=2) {
-            Page page = new Page(idx, labels.get(i), labels.get(i+1));
+        for (int i = 0; i < labels.size(); i += 2) {
+            Page page = new Page(idx, labels.get(i), labels.get(i + 1));
             pages.put(idx, page);
             idx++;
         }
-        
+
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
         ImageButton left = new ImageButton(imgBtnSkin, "left");
         ImageButton right = new ImageButton(imgBtnSkin, "right");
@@ -81,13 +93,13 @@ public class BookScreen extends InputAdapter implements Screen {
         left.setY(16);
         right.setX(512 + 64);
         right.setY(16);
-        
+
         left.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 pages.get(currentPage).left.remove();
                 pages.get(currentPage).right.remove();
-                currentPage --;
+                currentPage--;
                 if (currentPage < 0) {
                     currentPage = 0;
                 }
@@ -95,48 +107,46 @@ public class BookScreen extends InputAdapter implements Screen {
                 stage.addActor(pages.get(currentPage).right);
             }
         });
-        
+
         right.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 pages.get(currentPage).left.remove();
                 pages.get(currentPage).right.remove();
-                currentPage ++;
+                currentPage++;
                 if (currentPage >= pages.size()) {
-                    currentPage = pages.size()-1;
+                    currentPage = pages.size() - 1;
                 }
                 stage.addActor(pages.get(currentPage).left);
                 stage.addActor(pages.get(currentPage).right);
             }
         });
-        
+
         CheckBox.CheckBoxStyle cbs = new CheckBox.CheckBoxStyle(skin.get("default", CheckBox.CheckBoxStyle.class));
         cbs.font = fontLarger;
         cbs.fontColor = Color.BLUE;
-        
-        
+
         stage.addActor(new Image(new Texture(Gdx.files.classpath("assets/data/scroll.png"))));
         stage.addActor(pages.get(0).left);
         stage.addActor(pages.get(0).right);
-        
+
         stage.addActor(left);
         stage.addActor(right);
 
     }
-    
-    private void addPages(BitmapFont font, String fn, Label.LabelStyle labs) {
+
+    private void addPages(BitmapFont font, List<String> lines, Label.LabelStyle labs) {
         try {
-            List<String> lines = IOUtils.readLines(ClassLoader.class.getResourceAsStream(fn));
             GlyphLayout gl = new GlyphLayout(font, "");
             StringBuilder sb = new StringBuilder();
             for (String line : lines) {
-                
+
                 if (line.startsWith("*break")) {
                     labels.add(new Label(sb.toString().trim(), labs));
                     sb = new StringBuilder();
                     continue;
                 }
-                
+
                 sb.append(line).append("\n");
                 gl.setText(font, sb.toString().trim(), Color.WHITE, 450, Align.left, true);
                 if (gl.height > 600) {
@@ -145,7 +155,7 @@ public class BookScreen extends InputAdapter implements Screen {
                 }
             }
             labels.add(new Label(sb.toString().trim(), labs));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -183,23 +193,25 @@ public class BookScreen extends InputAdapter implements Screen {
     @Override
     public void dispose() {
     }
-    
+
     @Override
     public boolean keyUp(int i) {
         Andius.mainGame.setScreen(returnScreen);
         return false;
     }
-    
+
     private class Page {
+
         int page;
         Label left;
         Label right;
+
         public Page(int page, Label left, Label right) {
             this.page = page;
             this.left = left;
             this.right = right;
         }
-        
+
     }
 
 }
