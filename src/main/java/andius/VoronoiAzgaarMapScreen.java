@@ -174,7 +174,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         stage.addAction(Actions.forever(seq1));
 
         camera = new OrthographicCamera(Andius.MAP_VIEWPORT_DIM + 128, Andius.MAP_VIEWPORT_DIM + 128);
-        camera.setToOrtho(true);
+        ((OrthographicCamera) camera).setToOrtho(true);
 
         mapViewPort = new ScreenViewport(camera);
 
@@ -605,7 +605,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
                 System.out.println(burg);
                 Center c = getNearestCenter(x * factor, y * factor);
                 if (c != null) {
-                    c.portal = new Portal(Constants.Map.LLECHY, 0, 0, 15, 31, null, false, false);
+                    c.portal = new Portal(Constants.Map.CAVE, 0, 0, 15, 31, null, false, false);
                 }
             }
 
@@ -719,7 +719,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
         private void drawPolygon(Center c, Color color) {
 
             Gdx.gl.glLineWidth(1);
-            this.shape.setColor(color);
+            this.shape.setColor(c.object != null ? Color.RED : color);
 
             for (int i = 0; i < c.neighbors.size(); i++) {
                 Center n = c.neighbors.get(i);

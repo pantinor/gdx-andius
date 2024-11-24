@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" nextobjectid="112">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="18" nextobjectid="114">
  <properties>
   <property name="startX" value="16"/>
   <property name="startY" value="19"/>
@@ -85,107 +85,134 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
+ <tileset firstgid="761" name="tibian-bosses" tilewidth="48" tileheight="48" tilecount="440" columns="20">
+  <image source="tibian-bosses.png" width="960" height="1099"/>
  </tileset>
- <layer name="floor" width="24" height="24">
+ <tileset firstgid="1201" name="tibian-creatures" tilewidth="48" tileheight="48" tilecount="120" columns="20">
+  <image source="tibian-creatures.png" width="960" height="300"/>
+ </tileset>
+ <tileset firstgid="1321" name="tibian-mounts" tilewidth="48" tileheight="48" tilecount="240" columns="20">
+  <image source="tibian-mounts.png" width="960" height="600"/>
+ </tileset>
+ <tileset firstgid="1561" name="tibian-characters" tilewidth="48" tileheight="48" tilecount="80" columns="20">
+  <image source="tibian-characters.png" width="960" height="220"/>
+ </tileset>
+ <layer id="1" name="floor" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1U0Q6EMAjju5X799PEJr0GGBjj05EQ5xylFpjZ+7Ydvh/usu/XN/hH3rEXGWKBq7H79VyZcmLOvAZmdrb6Nslb4W9B3FP4WosVTqWt1oDdBTPDqfAjDdRXOJU+nb6BdequvCb4lT7Q+Oz9rH5mv7Oic9XpE8RW/8r4WvcOfnUWfJ3WEw07+aEjz8IdnOgOi+Zris/8WGfkjfJMeLPGnCc6OzXlxRqpZT22wuf70S2//+/yz+60J/D/9p59AWdZA/8ACQAA
+   H4sIAAAAAAAACu1U0Q6EMAjju5X799PEJr0GGBjj05EQ5xylFpjZ+7Ydvh/usu/XN/hH3rEXGWKBq7H79VyZcmLOvAZmdrb6Nslb4W9B3FP4WosVTqWt1oDdBTPDqfAjDdRXOJU+nb6BdequvCb4lT7Q+Oz9rH5mv7Oic9XpE8RW/8r4WvcOfnUWfJ3WEw07+aEjz8IdnOgOi+Zris/8WGfkjfJMeLPGnCc6OzXlxRqpZT22wuf70S2//+/yz+60J/D/9p59AWdZA/8ACQAA
   </data>
  </layer>
- <layer name="floor 2" width="24" height="24">
+ <layer id="2" name="floor 2" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW0AkeQMK3tGQWjYBQMDkDrPD+a30fBKKAOAAC4AMAnAAkAAA==
+   H4sIAAAAAAAACmNgGAW0AkeQMK3tGQWjYBQMDkDrPD+a30fBKKAOAAC4AMAnAAkAAA==
   </data>
  </layer>
- <layer name="props" width="24" height="24">
+ <layer id="3" name="props" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+DQPoQdz+9ALZ8NAqGFgAA58QL0QAJAAA=
+   H4sIAAAAAAAACmNgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+DQPoQdz+9ALZ8NAqGFgAA58QL0QAJAAA=
   </data>
  </layer>
- <layer name="creature" width="24" height="24">
+ <layer id="4" name="creatures" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGBgwk2WALKYD2Mk80C4YOqB3hIbVymHg75NE+OHwMPDnSAYnh3E5PQpGAQCpiwbfAAkAAA==
+   H4sIAAAAAAAACmNgGBjwkmWALKYD+DiM/UZtwMo60C4YGMA1DPz9gIh0/mo0L4yCUTAKBikAABIOCsIACQAA
   </data>
  </layer>
- <layer name="water_edges" width="24" height="24">
+ <layer id="14" name="bosses" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW0AuKMDAlijAwLtICYxvYcoKX5o2AUjALiATC/g/LkAlqZP5rfR8EooA4AANJbl10ACQAA
+   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
   </data>
  </layer>
- <layer name="shadows" width="24" height="24">
+ <layer id="16" name="mounts" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoD9QRsK4xPFhcs2kFyDWzSMFjIYFKqBVWOBK//jsp2e8jJS4J6f8GgWjYBTQHwAARxUNTAAJAAA=
+   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
   </data>
  </layer>
- <layer name="walls" width="24" height="24">
+ <layer id="15" name="characters" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VUQ6EIAxEiQfxDuwhUO5/oV0Sm8xOplA2rF9O0giGPmsZNKWUXtt3lE+c19W73xu3tag2r7DGlCHH7u9bP4zHfMxFcb7V0p53XDVVeEePn2EN8zhYeZI/itV83r/VfN6Hf/BxrnwzwzdPFIc/2huPr/pbBb+QR1UtzPf6q3yqlKE2xffyI/5UtXj65XxZ/ZEa8PyfNPb8j/yRRmuU/1fylRcifZ/h987eCj6PI9w7+b3/E/Ojfcec6Pd/pu+PtN7KudpBAAkAAA==
+   H4sIAAAAAAAACmNgGAWjYBSMglFAbeDCNtAuIB/IDGG3g4DREHf/KKAPAADOehzlAAkAAA==
   </data>
  </layer>
- <layer name="door" width="24" height="24">
+ <layer id="5" name="water_edges" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC/4S4BPKRBkxM8fBfgBteMDHYz0+BjM6X807kfDYBSMgpEEAPpt7D8ACQAA
+   H4sIAAAAAAAACmNgGAW0AuKMDAlijAwLtICYxvYcoKX5o2AUjALiATC/g/LkAlqZP5rfR8EooA4AANJbl10ACQAA
   </data>
  </layer>
- <layer name="torches" width="24" height="24">
+ <layer id="8" name="door" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA5amXBIUAnMpLH5hMBw998ooAwMdPpAtp8WbkG2fySnVVjY0iq+YWE7ksN4FIyCwQoAdtvDoQAJAAA=
+   H4sIAAAAAAAACmNgoC/4S4BPKRBkxM8fBfgBteMDHYz0+BjM6X807kfDYBSMgpEEAPpt7D8ACQAA
   </data>
  </layer>
- <layer name="webs" width="24" height="24">
+ <layer id="9" name="torches" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA26mPBIkqinnQyzaAXQ3UKOP4cTGExxMxjAQIcHNvsJpdGO0TgkGgx0/NIaYEsLncPcz/QEo3lt+AAALW+52wAJAAA=
+   H4sIAAAAAAAACmNgwA5amXBIUAnMpLH5hMBw998ooAwMdPpAtp8WbkG2fySnVVjY0iq+YWE7ksN4FIyCwQoAdtvDoQAJAAA=
   </data>
  </layer>
- <objectgroup name="portals">
+ <layer id="6" name="shadows" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgoD9QRsK4xPFhcs2kFyDWzSMFjIYFKqBVWOBK//jsp2e8jJS4J6f8GgWjYBTQHwAARxUNTAAJAAA=
+  </data>
+ </layer>
+ <layer id="10" name="webs" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgwA26mPBIkqinnQyzaAXQ3UKOP4cTGExxMxjAQIcHNvsJpdGO0TgkGgx0/NIaYEsLncPcz/QEo3lt+AAALW+52wAJAAA=
+  </data>
+ </layer>
+ <layer id="7" name="walls" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2VUQ6EIAxEiQfxDuwhUO5/oV0Sm8xOplA2rF9O0giGPmsZNKWUXtt3lE+c19W73xu3tag2r7DGlCHH7u9bP4zHfMxFcb7V0p53XDVVeEePn2EN8zhYeZI/itV83r/VfN6Hf/BxrnwzwzdPFIc/2huPr/pbBb+QR1UtzPf6q3yqlKE2xffyI/5UtXj65XxZ/ZEa8PyfNPb8j/yRRmuU/1fylRcifZ/h987eCj6PI9w7+b3/E/Ojfcec6Pd/pu+PtN7KudpBAAkAAA==
+  </data>
+ </layer>
+ <objectgroup id="11" name="portals">
   <object id="111" name="WORLD" x="768" y="912" width="48" height="48"/>
  </objectgroup>
- <objectgroup name="people">
+ <objectgroup id="12" name="people">
   <object id="93" name="goblin" type="MONSTER" x="768" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="94" name="beetle" type="MONSTER" x="288" y="48" width="48" height="48">
    <properties>
-    <property name="creature" value="Bubbly Slime"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="95" name="spider" type="MONSTER" x="624" y="144" width="48" height="48">
    <properties>
-    <property name="creature" value="Orc"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="96" name="rat" type="MONSTER" x="768" y="528" width="48" height="48">
    <properties>
-    <property name="creature" value="Bubbly Slime"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="97" name="slug" type="MONSTER" x="384" y="768" width="48" height="48">
+  <object id="97" name="merchant" type="MERCHANT" x="336" y="672" width="48" height="48">
    <properties>
-    <property name="creature" value="Bubbly Slime"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="98" name="zombie" type="MONSTER" x="336" y="528" width="48" height="48">
    <properties>
-    <property name="creature" value="Undead Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="99" name="bat" type="MONSTER" x="288" y="432" width="48" height="48">
    <properties>
-    <property name="creature" value="Bubbly Slime"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
+  <object id="112" name="healer" type="TEMPLE" x="288" y="768" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="113" name="innkeeper" type="INNKEEPER" x="288" y="864" width="48" height="48">
+   <properties>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="rooms">
+ <objectgroup id="13" name="rooms">
   <object id="100" x="576" y="432">
    <polygon points="0,0 0,336 144,336 144,576 288,576 288,384 384,384 384,0"/>
   </object>

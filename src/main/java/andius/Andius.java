@@ -186,14 +186,15 @@ public class Andius extends Game {
                     invIcons[row * tx.getWidth() / 44 + col] = inv[row][col];
                 }
             }
-
+            
             Icons.init();
+            TibianSprite.init();
 
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
 
             world_scr_avatar = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
-            game_scr_avatar = new Animation(.5f, Icons.get(48));
+            game_scr_avatar = TibianSprite.characterAnimation(TibianSprite.Character.Knight_Knight_Male);
 
             TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
             EXPLMAP.put(Color.GRAY, new Animation(.1f, getTextureArray(expl, 0, 0)));
@@ -214,24 +215,24 @@ public class Andius extends Game {
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
-            
+
             ITEMS = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
             }.getType());
-            
+
             for (Item i : ITEMS) {
                 ITEMS_MAP.put(i.name, i);
             }
-            
+
             REWARDS = gson.fromJson(json2, new TypeToken<java.util.List<Reward>>() {
             }.getType());
-            
+
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-            
+
             for (int i = 0; i < 11; i++) {
                 MONSTER_LEVELS.put(i, new ArrayList<>());
             }
-            
+
             for (Monster m : MONSTERS) {
                 MONSTER_MAP.put(m.name, m);
                 MONSTER_LEVELS.get(m.getLevel()).add(m);

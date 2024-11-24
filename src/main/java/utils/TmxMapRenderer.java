@@ -82,7 +82,11 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
         stateTime += Gdx.graphics.getDeltaTime() / 4;
 
-        if (layer.getName().equals("creature")) {
+        if (layer.getName().equals("creature")
+                || layer.getName().equals("creatures")
+                || layer.getName().equals("bosses") 
+                || layer.getName().equals("characters") 
+                || layer.getName().equals("mounts")) {
             for (CreatureLayer cl : creatureLayers) {
                 cl.render(stateTime);
             }

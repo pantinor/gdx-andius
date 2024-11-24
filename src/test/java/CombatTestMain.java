@@ -7,8 +7,8 @@ import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
+import andius.TibianSprite;
 import andius.objects.Actor;
-import andius.objects.Icons;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
@@ -80,11 +80,12 @@ public class CombatTestMain extends Game {
 
             Monster monster = Andius.MONSTER_LEVELS.get(1).get(2);
 
-            Actor actor = new Actor(0, monster.name, Icons.get(monster.getIconId()));
+            Actor actor = new Actor(0, monster.name, TibianSprite.Type.creatures, TibianSprite.creatureAnimation(TibianSprite.Creature.Barbarian_Brutetamer)); //TODO
+
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
 
-            CombatScreen cs = new CombatScreen(ctx, Constants.Map.WIWOLD, tm, actor);
+            CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor);
             setScreen(cs);
 
         } catch (Exception e) {

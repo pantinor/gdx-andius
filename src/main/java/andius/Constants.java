@@ -1,6 +1,5 @@
 package andius;
 
-import andius.objects.Icons;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
@@ -44,43 +43,42 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
-        LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
-        MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
-        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
-        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
-        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
-        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
-        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),
-        LYCAEUM("Lycaeum", "lycaeum.tmx", TILE_DIM),
-        EMPATH_ABBEY("Empath Abbey", "empathabbey.tmx", TILE_DIM),
-        SERPENTS_HOLD("Serpents Hold", "serpentshold.tmx", TILE_DIM),
-        MOONGLOW("Moonglow", "moonglow.tmx", TILE_DIM),
-        BRITAIN("Britain", "britain.tmx", TILE_DIM),
-        JHELOM("Jhelom", "jhelom.tmx", TILE_DIM),
-        YEW("Yew", "yew.tmx", TILE_DIM),
-        MINOC("Minoc", "minoc.tmx", TILE_DIM),
-        TRINSIC("Trinsic", "trinsic.tmx", TILE_DIM),
-        SKARABRAE("Skara Brae", "skarabrae.tmx", TILE_DIM),
-        MAGINCIA("Magincia", "magincia.tmx", TILE_DIM),
-        PAWS("Paws", "paws.tmx", TILE_DIM),
-        BUCCANEERS_DEN("Buccaneers Den", "buccaneersden.tmx", TILE_DIM),
-        VESPER("Vesper", "vesper.tmx", TILE_DIM),
-        COVE("Cove", "cove.tmx", TILE_DIM),
-        WIZARDRY1("Wizardy Level 1", "WizLevel1.tmx", TILE_DIM),
-        WIZARDRY2("Wizardy Level 2", "WizLevel2.tmx", TILE_DIM),
-        WIZARDRY3("Wizardy Level 3", "WizLevel3.tmx", TILE_DIM),
-        WIZARDRY4("Wizardy Level 4", "WizLevel4.tmx", TILE_DIM),
-        WIZARDRY5("Wizardy Level 5", "WizLevel5.tmx", TILE_DIM),
-        WIZARDRY6("Wizardy Level 6", "WizLevel6.tmx", TILE_DIM),
-        WIZARDRY7("Wizardy Level 7", "WizLevel7.tmx", TILE_DIM),
-        WIZARDRY8("Wizardy Level 8", "WizLevel8.tmx", TILE_DIM),
-        WIZARDRY9("Wizardy Level 9", "WizLevel9.tmx", TILE_DIM),
-        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM);
+        //        LLECHY("Llechy", "llechy.tmx", TILE_DIM),
+        //        MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
+        //        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
+        //        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
+        //        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
+        //        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
+        //        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
+        //        BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
+        //        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),
+        //        LYCAEUM("Lycaeum", "lycaeum.tmx", TILE_DIM),
+        //        EMPATH_ABBEY("Empath Abbey", "empathabbey.tmx", TILE_DIM),
+        //        SERPENTS_HOLD("Serpents Hold", "serpentshold.tmx", TILE_DIM),
+        //        MOONGLOW("Moonglow", "moonglow.tmx", TILE_DIM),
+        //        BRITAIN("Britain", "britain.tmx", TILE_DIM),
+        //        JHELOM("Jhelom", "jhelom.tmx", TILE_DIM),
+        //        YEW("Yew", "yew.tmx", TILE_DIM),
+        //        MINOC("Minoc", "minoc.tmx", TILE_DIM),
+        //        TRINSIC("Trinsic", "trinsic.tmx", TILE_DIM),
+        //        SKARABRAE("Skara Brae", "skarabrae.tmx", TILE_DIM),
+        //        MAGINCIA("Magincia", "magincia.tmx", TILE_DIM),
+        //        PAWS("Paws", "paws.tmx", TILE_DIM),
+        //        BUCCANEERS_DEN("Buccaneers Den", "buccaneersden.tmx", TILE_DIM),
+        //        VESPER("Vesper", "vesper.tmx", TILE_DIM),
+        //        COVE("Cove", "cove.tmx", TILE_DIM),
+        WIZARDRY1("Wizardy Level 1", null, 0);
+//        WIZARDRY2("Wizardy Level 2", "WizLevel2.tmx", TILE_DIM),
+//        WIZARDRY3("Wizardy Level 3", "WizLevel3.tmx", TILE_DIM),
+//        WIZARDRY4("Wizardy Level 4", "WizLevel4.tmx", TILE_DIM),
+//        WIZARDRY5("Wizardy Level 5", "WizLevel5.tmx", TILE_DIM),
+//        WIZARDRY6("Wizardy Level 6", "WizLevel6.tmx", TILE_DIM),
+//        WIZARDRY7("Wizardy Level 7", "WizLevel7.tmx", TILE_DIM),
+//        WIZARDRY8("Wizardy Level 8", "WizLevel8.tmx", TILE_DIM),
+//        WIZARDRY9("Wizardy Level 9", "WizLevel9.tmx", TILE_DIM),
+//        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM);
 
         private final String label;
         private final String tmxFile;
@@ -142,98 +140,153 @@ public interface Constants {
 
         public void init() {
 
-            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-            this.tiledMap = loader.load("assets/data/" + this.tmxFile);
-            this.baseMap = new BaseMap();
+            if (this.tmxFile != null) {
 
-            MapProperties prop = this.tiledMap.getProperties();
-            this.baseMap.setWidth(prop.get("width", Integer.class));
-            this.baseMap.setHeight(prop.get("height", Integer.class));
-            this.startX = Integer.parseInt(prop.get("startX", String.class));
-            this.startY = Integer.parseInt(prop.get("startY", String.class));
+                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                this.tiledMap = loader.load("assets/data/" + this.tmxFile);
+                this.baseMap = new BaseMap();
 
-            MapLayer portalsLayer = this.tiledMap.getLayers().get("portals");
-            if (portalsLayer != null) {
-                Iterator<MapObject> iter = portalsLayer.getObjects().iterator();
-                while (iter.hasNext()) {
-                    MapObject obj = iter.next();
-                    Map pm;
-                    try {
-                        pm = Map.valueOf(obj.getName());
-                    } catch (Exception e) {
-                        pm = this;
-                    }
-                    float x = obj.getProperties().get("x", Float.class);
-                    float y = obj.getProperties().get("y", Float.class);
-                    int sx = (int) (x / this.dim);
-                    int sy = this.baseMap.getHeight() - 1 - (int) (y / this.dim);
+                MapProperties prop = this.tiledMap.getProperties();
+                this.baseMap.setWidth(prop.get("width", Integer.class));
+                this.baseMap.setHeight(prop.get("height", Integer.class));
+                this.startX = Integer.parseInt(prop.get("startX", String.class));
+                this.startY = Integer.parseInt(prop.get("startY", String.class));
 
-                    if ("ELEVATOR".equals(obj.getName())) {
-                        Object down = obj.getProperties().get("DOWN");
-                        if (down != null) {
-                            pm = Map.valueOf((String) down);
+                MapLayer portalsLayer = this.tiledMap.getLayers().get("portals");
+                if (portalsLayer != null) {
+                    Iterator<MapObject> iter = portalsLayer.getObjects().iterator();
+                    while (iter.hasNext()) {
+                        MapObject obj = iter.next();
+                        Map pm;
+                        try {
+                            pm = Map.valueOf(obj.getName());
+                        } catch (Exception e) {
+                            pm = this;
+                        }
+                        float x = obj.getProperties().get("x", Float.class);
+                        float y = obj.getProperties().get("y", Float.class);
+                        int sx = (int) (x / this.dim);
+                        int sy = this.baseMap.getHeight() - 1 - (int) (y / this.dim);
+
+                        if ("ELEVATOR".equals(obj.getName())) {
+                            Object down = obj.getProperties().get("DOWN");
+                            if (down != null) {
+                                try {
+                                    pm = Map.valueOf((String) down);
+                                    Object dx = obj.getProperties().get("dx");
+                                    Object dy = obj.getProperties().get("dy");
+                                    this.baseMap.addPortal(pm, sx, sy,
+                                            dx != null ? Integer.parseInt((String) dx) : -1,
+                                            dy != null ? Integer.parseInt((String) dy) : -1,
+                                            null, true, false);
+                                } catch (Exception e) {
+                                    //ignore
+                                }
+                            }
+                            Object up = obj.getProperties().get("UP");
+                            if (up != null) {
+                                try {
+                                    pm = Map.valueOf((String) up);
+                                    Object ux = obj.getProperties().get("ux");
+                                    Object uy = obj.getProperties().get("uy");
+                                    this.baseMap.addPortal(pm, sx, sy,
+                                            ux != null ? Integer.parseInt((String) ux) : -1,
+                                            uy != null ? Integer.parseInt((String) uy) : -1,
+                                            null, true, true);
+                                } catch (Exception e) {
+                                    //ignore
+                                }
+                            }
+                        } else {
                             Object dx = obj.getProperties().get("dx");
                             Object dy = obj.getProperties().get("dy");
+                            List<Vector3> randoms = new ArrayList<>();
+                            for (int i = 0; i < 6; i++) {
+                                String temp = (String) obj.getProperties().get("random" + i);
+                                if (temp != null) {
+                                    String[] s = temp.split(",");
+                                    randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
+                                }
+                            }
                             this.baseMap.addPortal(pm, sx, sy,
                                     dx != null ? Integer.parseInt((String) dx) : -1,
                                     dy != null ? Integer.parseInt((String) dy) : -1,
-                                    null, true, false);
+                                    randoms.size() > 0 ? randoms : null, false, false);
                         }
-                        Object up = obj.getProperties().get("UP");
-                        if (up != null) {
-                            pm = Map.valueOf((String) up);
-                            Object ux = obj.getProperties().get("ux");
-                            Object uy = obj.getProperties().get("uy");
-                            this.baseMap.addPortal(pm, sx, sy,
-                                    ux != null ? Integer.parseInt((String) ux) : -1,
-                                    uy != null ? Integer.parseInt((String) uy) : -1,
-                                    null, true, true);
-                        }
-                    } else {
-                        Object dx = obj.getProperties().get("dx");
-                        Object dy = obj.getProperties().get("dy");
-                        List<Vector3> randoms = new ArrayList<>();
-                        for (int i = 0; i < 6; i++) {
-                            String temp = (String) obj.getProperties().get("random" + i);
-                            if (temp != null) {
-                                String[] s = temp.split(",");
-                                randoms.add(new Vector3(Integer.parseInt(s[1]), Integer.parseInt(s[2]), 0));
+                    }
+                }
+
+                MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
+                if (peopleLayer != null) {
+                    loadPeopleLayer(peopleLayer, TibianSprite.Type.bosses);
+                    loadPeopleLayer(peopleLayer, TibianSprite.Type.creatures);
+                    loadPeopleLayer(peopleLayer, TibianSprite.Type.characters);
+                    loadPeopleLayer(peopleLayer, TibianSprite.Type.mounts);
+                }
+
+                MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
+                if (roomsLayer != null) {
+                    this.roomIds = new int[this.baseMap.getWidth()][this.baseMap.getHeight()][3];
+                    Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
+                    while (iter.hasNext()) {
+                        MapObject obj = iter.next();
+                        int id = obj.getProperties().get("id", Integer.class);
+                        PolygonMapObject rmo = (PolygonMapObject) obj;
+                        for (int y = 0; y < this.baseMap.getHeight(); y++) {
+                            for (int x = 0; x < this.baseMap.getWidth(); x++) {
+                                if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, this.baseMap.getHeight() * TILE_DIM - y * TILE_DIM - TILE_DIM / 2)) {
+                                    if (this.roomIds[x][y][0] == 0) {
+                                        this.roomIds[x][y][0] = id;
+                                    } else if (this.roomIds[x][y][1] == 0) {
+                                        this.roomIds[x][y][1] = id;
+                                    } else if (this.roomIds[x][y][2] == 0) {
+                                        this.roomIds[x][y][2] = id;
+                                    } else {
+                                        throw new RuntimeException("Too many overlaps on roomids");
+                                    }
+                                }
                             }
                         }
-                        this.baseMap.addPortal(pm, sx, sy,
-                                dx != null ? Integer.parseInt((String) dx) : -1,
-                                dy != null ? Integer.parseInt((String) dy) : -1,
-                                randoms.size() > 0 ? randoms : null, false, false);
                     }
                 }
             }
 
-            MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
-            if (peopleLayer != null) {
-                TiledMapTileLayer iconLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get("creature");
-                int firstgid = this.tiledMap.getTileSets().getTileSet("heroes").getProperties().get("firstgid", Integer.class);
-                Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
-                while (iter.hasNext()) {
-                    MapObject obj = iter.next();
-                    String surname = obj.getName();
-                    int id = obj.getProperties().get("id", Integer.class);
-                    float x = obj.getProperties().get("x", Float.class);
-                    float y = obj.getProperties().get("y", Float.class);
-                    int sx = (int) (x / TILE_DIM);
-                    int sy = (int) (y / TILE_DIM);
-                    
-                    TiledMapTileLayer.Cell iconCell = iconLayer.getCell(sx, sy);
+            if (this.dim == 0) {
+                this.screen = new WizardryDungeonScreen();
+            } else if (this.dim == TILE_DIM) {
+                this.screen = new GameScreen(this);
+            } else {
+                this.screen = new WorldScreen(this);
+                //this.screen = new VoronoiAzgaarMapScreen();
+            }
+
+        }
+
+        private void loadPeopleLayer(MapLayer peopleLayer, TibianSprite.Type type) {
+            TiledMapTileLayer tileLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get(type.name());
+            int firstgid = this.tiledMap.getTileSets().getTileSet("tibian-" + type.name()).getProperties().get("firstgid", Integer.class);
+            Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
+            while (iter.hasNext()) {
+                MapObject obj = iter.next();
+                String surname = obj.getName();
+                int id = obj.getProperties().get("id", Integer.class);
+                float x = obj.getProperties().get("x", Float.class);
+                float y = obj.getProperties().get("y", Float.class);
+                int sx = (int) (x / TILE_DIM);
+                int sy = (int) (y / TILE_DIM);
+
+                TiledMapTileLayer.Cell iconCell = tileLayer.getCell(sx, sy);
+                if (iconCell != null) {
                     int iconId = iconCell.getTile().getId() - firstgid;
-                    
+
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 
-                    //System.out.printf("Loading actor: %s %s %s on map %d.\n",surname,role,movement,id);
-                    Actor actor = new Actor(id, surname, Icons.get(iconId));
+                    Actor actor = new Actor(id, surname, type, TibianSprite.animation(type, iconId));
                     if (role == Role.MONSTER) {
                         try {
                             String mid = obj.getProperties().get("creature", String.class);
-                            Monster monster = Andius.MONSTER_MAP.get(mid);
+                            Monster monster = Andius.MONSTER_MAP.get(mid != null ? mid : "Bubbly Slime");
                             if (monster != null) {
                                 MutableMonster mm = new MutableMonster(monster);
                                 mm.name = surname;
@@ -251,39 +304,6 @@ public interface Constants {
                     this.baseMap.actors.add(actor);
                 }
             }
-
-            MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
-            if (roomsLayer != null) {
-                this.roomIds = new int[this.baseMap.getWidth()][this.baseMap.getHeight()][3];
-                Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
-                while (iter.hasNext()) {
-                    MapObject obj = iter.next();
-                    int id = obj.getProperties().get("id", Integer.class);
-                    PolygonMapObject rmo = (PolygonMapObject) obj;
-                    for (int y = 0; y < this.baseMap.getHeight(); y++) {
-                        for (int x = 0; x < this.baseMap.getWidth(); x++) {
-                            if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, this.baseMap.getHeight() * TILE_DIM - y * TILE_DIM - TILE_DIM / 2)) {
-                                if (this.roomIds[x][y][0] == 0) {
-                                    this.roomIds[x][y][0] = id;
-                                } else if (this.roomIds[x][y][1] == 0) {
-                                    this.roomIds[x][y][1] = id;
-                                } else if (this.roomIds[x][y][2] == 0) {
-                                    this.roomIds[x][y][2] = id;
-                                } else {
-                                    throw new RuntimeException("Too many overlaps on roomids");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            this.screen = (this.dim == TILE_DIM
-                    ? new GameScreen(this)
-                    //: new WorldScreen(this)
-                    : new VoronoiAzgaarMapScreen()
-                    );
-
         }
 
         public void syncRemovedActors(SaveGame saveGame) {

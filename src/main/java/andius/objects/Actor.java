@@ -7,9 +7,11 @@ package andius.objects;
 
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
+import andius.TibianSprite;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -29,22 +31,25 @@ public class Actor {
 
     private final int id;
     private final String name;
-    private final TextureRegion icon;
+    private final Animation anim;
+    private TibianSprite.Type spriteType;
     private Role role;
     private int wx;
     private int wy;
     private float x;
     private float y;
+    private int dir;
     private MovementBehavior movement;
     private MutableMonster monster;
     private CharacterRecord player;
     private CursorActor playerCursor;
     private TextureRegion healthBar;
 
-    public Actor(int id, String name, TextureRegion icon) {
+    public Actor(int id, String name, TibianSprite.Type spriteType, Animation anim) {
         this.id = id;
         this.name = name;
-        this.icon = icon;
+        this.spriteType = spriteType;
+        this.anim = anim;
     }
 
     public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
@@ -78,7 +83,15 @@ public class Actor {
     }
 
     public TextureRegion getIcon() {
-        return icon;
+        return (TextureRegion) this.anim.getKeyFrames()[this.dir];
+    }
+
+    public Animation getAnimation() {
+        return anim;
+    }
+
+    public TibianSprite.Type getSpriteType() {
+        return spriteType;
     }
 
     public int getWx() {
@@ -153,6 +166,14 @@ public class Actor {
 
     public void setPlayerCursor(CursorActor playerCursor) {
         this.playerCursor = playerCursor;
+    }
+
+    public int getDirection() {
+        return dir;
+    }
+
+    public void setDirection(int dir) {
+        this.dir = dir;
     }
 
 }

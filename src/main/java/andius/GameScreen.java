@@ -38,6 +38,7 @@ public class GameScreen extends BaseScreen {
     private final TmxMapRenderer renderer;
     private final Batch batch;
     private final Viewport mapViewPort;
+    private int currentDirection;
 
     public GameScreen(Map map) {
 
@@ -58,10 +59,10 @@ public class GameScreen extends BaseScreen {
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrame(time, true), newMapPixelCoords.x, newMapPixelCoords.y - TILE_DIM + 8);
+                renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrames()[currentDirection], newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
                 for (Actor cr : GameScreen.this.map.getMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, cr.getWx(), cr.getWy())) {
-                        renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY() + 8);
+                        renderer.getBatch().draw(cr.getIcon(), cr.getX() - 20, cr.getY() + 12);
                     }
                 }
             }
@@ -74,13 +75,13 @@ public class GameScreen extends BaseScreen {
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
         }
-        
+
     }
 
     @Override
     public void show() {
         setRoomName();
-        this.map.syncRemovedActors(CTX.saveGame);
+        //this.map.syncRemovedActors(CTX.saveGame);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
@@ -126,7 +127,6 @@ public class GameScreen extends BaseScreen {
         //Vector3 v = new Vector3();
         //setCurrentMapCoords(v);
         //Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
-        
         if (this.roomName != null) {
             Andius.largeFont.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
         }
@@ -164,24 +164,28 @@ public class GameScreen extends BaseScreen {
             if (!preMove(v, Direction.NORTH)) {
                 return false;
             }
+            this.currentDirection = 2;
             newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
             v.y -= 1;
         } else if (keycode == Keys.DOWN) {
             if (!preMove(v, Direction.SOUTH)) {
                 return false;
             }
+            this.currentDirection = 0;
             newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
             v.y += 1;
         } else if (keycode == Keys.RIGHT) {
             if (!preMove(v, Direction.EAST)) {
                 return false;
             }
+            this.currentDirection = 1;
             newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
             v.x += 1;
         } else if (keycode == Keys.LEFT) {
             if (!preMove(v, Direction.WEST)) {
                 return false;
             }
+            this.currentDirection = 3;
             newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
             v.x -= 1;
         } else if (keycode == Keys.D || keycode == Keys.U) {//elevators
@@ -365,7 +369,7 @@ public class GameScreen extends BaseScreen {
                     if (monsterFound != null) {
                         Monster found = Andius.MONSTER_MAP.get(monsterFound);
                         if (found != null) {
-                            Actor actor = new Actor(-1, monsterFound, Icons.get(found.getIconId()));
+                            Actor actor = new Actor(-1, monsterFound, TibianSprite.Type.creatures, TibianSprite.creatureAnimation(TibianSprite.Creature.Barbarian_Brutetamer)); //TODO
                             MutableMonster mm = new MutableMonster(found);
                             String msx = obj.getProperties().get("monsterSpawnX", String.class);
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);

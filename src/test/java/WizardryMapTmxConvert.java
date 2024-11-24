@@ -31,18 +31,43 @@ public class WizardryMapTmxConvert implements ApplicationListener {
     private final List<Message> messages = new ArrayList<>();
 
     public enum Type {
-        FLOOR(124), DOOR(271), DARKNESS(62), SPELL_BLOCK(690),
-        STAIRS_UP(51), STAIRS_DOWN(50), ELEVATOR(194), PITFALL(683), CHUTE(575), SPINNER(688),
-        MESSAGE(596), GUARDIAN(192), MONSTER(59), SPECIAL(59), TELEPORTER(689), ROCK(387), WALL(322), NORTH_WALL(282), SOUTH_WALL(242),
-        HIDDEN_NORTH(327), HIDDEN_SOUTH(327), HIDDEN_WEST(327), HIDDEN_EAST(327);
+        FLOOR(124, ' '),
+        DOOR(271, 'D'),
+        DARKNESS(62, '~'),
+        SPELL_BLOCK(690, 'S'),
+        STAIRS_UP(51, '^'),
+        STAIRS_DOWN(50, 'v'),
+        ELEVATOR(194, 'E'),
+        PITFALL(683, 'P'),
+        CHUTE(575, 'C'),
+        SPINNER(688, 'S'),
+        MESSAGE(596, 'M'),
+        GUARDIAN(192, 'G'),
+        MONSTER(59, 'X'),
+        SPECIAL(59, 'Q'),
+        TELEPORTER(689, 'T'),
+        ROCK(387, 'R'),
+        WALL(322, '+'),
+        NORTH_WALL(282, '+'),
+        SOUTH_WALL(242, '+'),
+        HIDDEN_NORTH(327, '@'),
+        HIDDEN_SOUTH(327, '@'),
+        HIDDEN_WEST(327, '@'),
+        HIDDEN_EAST(327, '@');
         private final int id;
+        private final char dis;
 
-        private Type(int id) {
+        private Type(int id, char dis) {
             this.id = id;
+            this.dis = dis;
         }
 
         public int id() {
             return this.id;
+        }
+
+        public char display() {
+            return this.dis;
         }
     };
 
@@ -62,10 +87,12 @@ public class WizardryMapTmxConvert implements ApplicationListener {
                 messages.add(new Message(DatatypeConverter.parseHexBinary(hx)));
             }
 
-            for (int i = 0; i < LEVELS.length; i++) {
+            for (int i = 0; i < 1; i++) {
                 MazeLevel level = new MazeLevel(DatatypeConverter.parseHexBinary(LEVELS[i]), i + 1);
-                Formatter fmtter = new Formatter(3 * 20, 3 * 20, level);
-                FileUtils.writeStringToFile(new File("src/main/resources/assets/data/WizLevel" + level.level + ".tmx"), fmtter.toString());
+                System.out.println("Level " + i);
+                System.out.println(level);
+                //Formatter fmtter = new Formatter(3 * 20, 3 * 20, level);
+                //FileUtils.writeStringToFile(new File("target/WizLevel" + level.level + ".tmx"), fmtter.toString());
             }
 
         } catch (Exception e) {
@@ -252,6 +279,31 @@ public class WizardryMapTmxConvert implements ApplicationListener {
             return new MazeAddress(0, x, y);
         }
 
+        @Override
+        public String toString() {
+            char[][] map = new char[60][60];
+            for (int y = 0; y < 20; y++) {
+                for (int x = 0; x < 20; x++) {
+                    MazeCell cell = cells[x][y];
+                    cell.draw();
+                    for (int j = 0; j < 3; j++) {
+                        for (int k = 0; k < 3; k++) {
+                            Type t = cell.block[j][k];
+                            map[x * 3 + j][y * 3 + k] = t != null ? t.display() : ' ';
+                        }
+                    }
+                }
+            }
+            String ret = "";
+            for (int x = 59; x >= 0; x--) {
+                for (int y = 0; y < 60; y++) {
+                    ret += map[x][y];
+                }
+                ret += "\n";
+            }
+            return ret;
+        }
+
     }
 
     class MazeAddress {
@@ -320,7 +372,7 @@ public class WizardryMapTmxConvert implements ApplicationListener {
             this.address = address;
         }
 
-        public void draw(Formatter f) {
+        public void draw() {
 
             if (darkness) {
                 fill(Type.DARKNESS);
@@ -605,7 +657,7 @@ public class WizardryMapTmxConvert implements ApplicationListener {
             for (int r = 0; r < 20; r++) {
                 for (int c = 0; c < 20; c++) {
                     MazeCell cell = level.cells[r][c];
-                    cell.draw(this);
+                    cell.draw();
                     for (int x = 0; x < 3; x++) {
                         for (int y = 0; y < 3; y++) {
                             this.ids[r * 3 + x][c * 3 + y] = cell.block[x][y];
@@ -683,7 +735,7 @@ public class WizardryMapTmxConvert implements ApplicationListener {
                 for (Monster m : Andius.MONSTERS) {
                     if (m.getIconId() == monId) {
 
-                        this.creatureIcons[r][c] = -1;//761 + Icons.tile(m.getIcon());
+                        this.creatureIcons[r][c] = 761;//761 + Icons.tile(m.getIcon());
 
                         return String.format("<object id=\"%d\" name=\"%s\" type=\"MONSTER\" x=\"%d\" y=\"%d\" width=\"48\" height=\"48\">\n"
                                 + "   <properties>\n"

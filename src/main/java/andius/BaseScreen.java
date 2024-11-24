@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -35,7 +36,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     protected final Viewport viewport = new ScreenViewport();
 
-    protected OrthographicCamera camera;
+    protected Camera camera;
 
     protected final Vector2 currentMousePos = new Vector2();
 

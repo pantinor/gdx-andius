@@ -55,7 +55,7 @@ public class BaseMap {
         }
         return null;
     }
-    
+
     public Portal getPortal(int sx, int sy, boolean up) {
         for (Portal p : portals) {
             if (p.isElevator() && p.isUp() == up && p.getSx() == sx && p.getSy() == sy) {
@@ -85,7 +85,7 @@ public class BaseMap {
         for (Actor p : actors) {
 
             Direction dir = null;
-            
+
             switch (p.getMovement()) {
                 case ATTACK_AVATAR: {
                     int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
@@ -95,12 +95,14 @@ public class BaseMap {
                         CombatScreen cs = new CombatScreen(CTX, map, tm, p);
                         mainGame.setScreen(cs);
                         continue;
-                    } else if (dist >= 5) {
+                    } else if (dist >= 3) {
                         //dont move until close enough
                         continue;
                     }
-                    int mask = getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY);
-                    dir = Utils.getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
+                    if (Utils.randomBoolean()) {
+                        int mask = getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY);
+                        dir = Utils.getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
+                    }
                 }
                 break;
                 case FOLLOW_AVATAR: {

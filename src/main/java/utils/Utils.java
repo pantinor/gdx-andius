@@ -13,10 +13,15 @@ import java.util.Random;
 public class Utils {
 
     public static final Random RAND = new XORShiftRandom();
+    public static final Random RANDOM = new Random();
 
     //This gives you a random number in between low (inclusive) and high (exclusive)
     public static int getRandomBetween(int low, int high) {
         return RAND.nextInt(high - low) + low;
+    }
+
+    public static boolean randomBoolean() {
+        return RANDOM.nextInt(2) == 1;
     }
 
     public static int adjustValueMax(int v, int amt, int max) {
@@ -142,7 +147,7 @@ public class Utils {
 
         //System.out.printf("%s AC[%d] result: %s (%d/%d)\n", 
         //        attacker.name, defender.calculateAC(), attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
-        return attackValue >= defenseValue ;
+        return attackValue >= defenseValue;
     }
 
     public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
@@ -182,8 +187,7 @@ public class Utils {
         //System.out.printf("%s AC[%d] result: %s (%d/%d)\n",
         //        attacker.name, defender.getArmourClass(),
         //        attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
-
-        return attackValue >= defenseValue ;
+        return attackValue >= defenseValue;
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {

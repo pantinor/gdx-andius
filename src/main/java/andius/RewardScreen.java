@@ -200,27 +200,29 @@ public class RewardScreen implements Screen, Constants {
                 okChars.add(c);
             }
         }
-        
+
         int goldAmt = this.chestReward.getGoldAmt().roll();
         for (CharacterRecord c : okChars) {
             c.adjustGold(goldAmt);
             log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
         }
 
-        for (RewardElement rw : chestReward.getElements()) {
-            int odds = rw.getOdds();
-            int roll = rand.nextInt(101);
-            if (roll <= odds) {
-                CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
-                int r = rand.nextInt(rw.getItemNames().size());
-                Item found = Andius.ITEMS_MAP.get(rw.getItemNames().get(r)).clone();
-                picked.inventory.add(found);
-                log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
+        if (!okChars.isEmpty()) {
+            for (RewardElement rw : chestReward.getElements()) {
+                int odds = rw.getOdds();
+                int roll = rand.nextInt(101);
+                if (roll <= odds) {
+                    CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
+                    int r = rand.nextInt(rw.getItemNames().size());
+                    Item found = Andius.ITEMS_MAP.get(rw.getItemNames().get(r)).clone();
+                    picked.inventory.add(found);
+                    log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
+                }
             }
-        }
 
-        Sounds.play(Sound.POSITIVE_EFFECT);
-        this.chestOpened = true;
+            Sounds.play(Sound.POSITIVE_EFFECT);
+            this.chestOpened = true;
+        }
 
     }
 

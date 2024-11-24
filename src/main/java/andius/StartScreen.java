@@ -2,11 +2,10 @@ package andius;
 
 import static andius.Andius.CTX;
 import static andius.Andius.ITEMS_MAP;
-import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
-import andius.objects.Item;
 import andius.objects.SaveGame;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -88,28 +87,32 @@ public class StartScreen implements Screen, Constants {
                     }
 
                     BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
+
+                    if (CTX.saveGame.wx == 0 && CTX.saveGame.wy == 0) {
+                        CTX.saveGame.wx = Map.WORLD.getStartX();
+                        CTX.saveGame.wy = Map.WORLD.getStartY();
+                    }
+
                     scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
                     mainGame.setScreen(scr);
 
                     //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
                     //mainGame.setScreen(rs);
-                    
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("HELM").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("HELM").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
 //                        Item tmp = ITEMS_MAP.get("DAGGER OF SPEED").clone();
 //                        tmp.unidentified = true;
 //                        CTX.saveGame.players[0].inventory.add(tmp);
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SHORT SWORD").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("WERDNAS AMULET").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
-//                        CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SHORT SWORD").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("WERDNAS AMULET").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
+//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
                     //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
                     //mainGame.setScreen(es);
-                    
 //                        CTX.saveGame.players[0].hp = 5;
 //                        CTX.saveGame.players[1].hp = 0;
 //                        CTX.saveGame.players[1].status = Status.DEAD;
@@ -121,10 +124,27 @@ public class StartScreen implements Screen, Constants {
 //                        CTX.saveGame.players[0].exp = 1500;
 //                        CTX.saveGame.players[2].exp = 2500;
 //                        CTX.saveGame.players[1].exp = 3500;
-                        //InnScreen es = new InnScreen(CTX, Map.WIWOLD);
-                        //mainGame.setScreen(es);
-                        //VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
-                        //mainGame.setScreen(es);
+                    //InnScreen es = new InnScreen(CTX, Map.WIWOLD);
+                    //mainGame.setScreen(es);
+                    //VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
+                    //mainGame.setScreen(es);
+                    for (int j = 0; j < 6; j++) {
+//                        CTX.saveGame.players[j].armor = ITEMS_MAP.get("CHAIN MAIL +1").clone();
+//                        CTX.saveGame.players[j].weapon = ITEMS_MAP.get("MACE +1").clone();
+//                        CTX.saveGame.players[j].helm = ITEMS_MAP.get("HELM").clone();
+//                        CTX.saveGame.players[j].shield = ITEMS_MAP.get("LARGE SHIELD").clone();
+//                        CTX.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
+//                        CTX.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
+//                        CTX.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
+//                        CTX.saveGame.players[j].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
+//                        CTX.saveGame.players[j].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
+//                        CTX.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+//                        CTX.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+//                        CTX.saveGame.players[j].spellPresets[5] = Spells.KATINO;
+//                        for (Spells s : Spells.values()) {
+//                            CTX.saveGame.players[j].knownSpells.add(s);
+//                        }
+                    }
 
                 } catch (Exception e) {
                     CTX.setSaveGame(new SaveGame());
@@ -134,7 +154,6 @@ public class StartScreen implements Screen, Constants {
             }
         });
         journey.setBounds(600, Andius.SCREEN_HEIGHT - 410, 150, 40);
-
 
         stage = new Stage();
         stage.addActor(manual);

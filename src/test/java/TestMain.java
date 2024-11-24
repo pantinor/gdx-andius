@@ -29,7 +29,7 @@ public class TestMain extends Game {
             Andius a = new Andius();
             a.create();
             
-            Constants.Map.BRITANIA.init();
+            Constants.Map.CAVE.init();
             
             TestScreen t = new TestScreen();
             setScreen(t);

@@ -9,7 +9,6 @@ import static andius.Constants.DEATHMSGS;
 import static andius.Constants.TILE_DIM;
 import andius.objects.CursorActor;
 import andius.objects.Dice;
-import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -28,7 +27,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -135,7 +133,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), Icons.get(crSlots[index].getIconId()));
+            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getSpriteType(), this.opponent.getAnimation());
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
         }
@@ -156,7 +154,12 @@ public class CombatScreen extends BaseScreen {
             if (this.context.players()[index].isDead()) {
                 continue;
             }
-            andius.objects.Actor actor = new andius.objects.Actor(0, context.players()[index].name, context.players()[index].classType.getIcon());
+
+            andius.objects.Actor actor = new andius.objects.Actor(0,
+                    context.players()[index].name,
+                    context.players()[index].classType.getSpriteType(),
+                    context.players()[index].classType.getAnimation());
+
             actor.set(this.context.players()[index], sx, sy, x, y);
 
             CursorActor cursor = new CursorActor();
@@ -276,14 +279,14 @@ public class CombatScreen extends BaseScreen {
 
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
-            renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY() + 8);
+            renderer.getBatch().draw(cr.getIcon(), cr.getX() - 16, cr.getY() + 2);
         }
 
         int x = 0;
         float cx = 0, cy = 0;
         for (andius.objects.Actor p : partyMembers) {
             if (p.getPlayer().status != Status.DEAD) {
-                renderer.getBatch().draw(p.getIcon(), p.getX(), p.getY());
+                renderer.getBatch().draw(p.getIcon(), p.getX() - 20, p.getY() + 8);
             }
             if (x == this.activeIndex) {
                 cx = p.getX();
@@ -344,21 +347,25 @@ public class CombatScreen extends BaseScreen {
                 if (preMove(active, Direction.NORTH)) {
                     active.setWy(active.getWy() - 1);
                     active.setY(active.getY() + TILE_DIM);
+                    active.setDirection(2);
                 }
             } else if (keycode == Keys.DOWN) {
                 if (preMove(active, Direction.SOUTH)) {
                     active.setWy(active.getWy() + 1);
                     active.setY(active.getY() - TILE_DIM);
+                    active.setDirection(0);
                 }
             } else if (keycode == Keys.RIGHT) {
                 if (preMove(active, Direction.EAST)) {
                     active.setWx(active.getWx() + 1);
                     active.setX(active.getX() + TILE_DIM);
+                    active.setDirection(1);
                 }
             } else if (keycode == Keys.LEFT) {
                 if (preMove(active, Direction.WEST)) {
                     active.setWx(active.getWx() - 1);
                     active.setX(active.getX() - TILE_DIM);
+                    active.setDirection(3);
                 }
             } else if (keycode == Keys.A) {
                 Gdx.input.setInputProcessor(cip);

@@ -82,8 +82,18 @@ public class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        return String.format("%s %d %s %s", name, cost, armourClass, spell != null ? spell : "");
-        //return String.format("%s\t%d\t%d\t%s\t%d\t%d\t%s\t%d\t%d", name, type, cost, damage, armourClass, extraSwings, spell, numberUses, regeneration);
+        //return String.format("%s %d %s %s", name, cost, armourClass, spell != null ? spell : "");
+        return String.format("%s\t%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d\t%d\t%s", 
+                name, 
+                ItemType.values()[this.type],
+                cost, 
+                damage, 
+                armourClass, 
+                extraSwings, spell != null ? spell : "", 
+                numberUses, 
+                regeneration, 
+                stock,
+                usable);
     }
 
 }
