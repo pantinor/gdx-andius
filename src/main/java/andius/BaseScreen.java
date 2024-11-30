@@ -9,7 +9,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,14 +21,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import utils.XORShiftRandom;
 
 public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     protected Stage stage;
 
     protected float time = 0;
-    protected Random rand = new XORShiftRandom();
+    protected Random rand = new Random();
 
     protected int mapPixelHeight;
     public final Vector3 newMapPixelCoords = new Vector3();

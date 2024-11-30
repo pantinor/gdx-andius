@@ -20,11 +20,10 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-import utils.XORShiftRandom;
 
 public class SpellUtil {
 
-    private static final Random rand = new XORShiftRandom();
+    private static final Random rand = new Random();
 
     public static void spellCast(CombatScreen screen, Context context, Spells spell, andius.objects.Actor caster, andius.objects.Actor target) {
 

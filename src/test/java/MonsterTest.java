@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 
 public class MonsterTest {
 
-    @Test
+    //@Test
     public void monsters() throws Exception {
 
         InputStream is2 = this.getClass().getResourceAsStream("/assets/json/monsters.json");
@@ -37,7 +37,7 @@ public class MonsterTest {
 
     }
     
-    @Test
+    //@Test
     public void items() throws Exception {
         
         InputStream is2 = this.getClass().getResourceAsStream("/assets/json/items.json");

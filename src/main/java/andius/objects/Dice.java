@@ -1,36 +1,49 @@
 package andius.objects;
 
-import utils.XORShiftRandom;
+import java.util.Random;
 
 public class Dice {
-    
-    public final static XORShiftRandom rand = new XORShiftRandom();
 
-    private int qty;
-    private int sides;
-    private int bonus;
-  
-    public Dice(int sides, int qty) {
-        this.sides = sides;
+    private static final Random random = new Random();
+
+    public int qty;       // how many dice
+    public int sides;       // faces per die
+    public int bonus;      // plus
+
+    public Dice() {
+
+    }
+
+    public Dice(int qty, int sides) {
         this.qty = qty;
+        this.sides = sides;
+        this.bonus = 0;
     }
-    
+
+    public Dice(int qty, int sides, int bonus) {
+        this.qty = qty;
+        this.sides = sides;
+        this.bonus = bonus;
+    }
+
+    public int max() {
+        return qty * sides + bonus;      // each die rolls the maximum
+    }
+
+    public int min() {
+        return qty + bonus;              // each die rolls 1
+    }
+
     public int roll() {
-        int roll = 0;
-        for (int i=0;i<qty;i++) {
-            roll += rand.nextInt(sides) + 1;
+        int total = bonus;
+
+        if (sides > 0) {
+            for (int die = 0; die < qty; die++) {
+                total += random.nextInt(sides) + 1;
+            }
         }
-        roll += bonus;
-        return roll;
-    }
-    
-    public int getMax() {
-        int roll = 0;
-        for (int i=0;i<qty;i++) {
-            roll += sides;
-        }
-        roll += bonus;
-        return roll;
+
+        return total;
     }
 
     @Override
@@ -38,11 +51,15 @@ public class Dice {
         if (qty == 0) {
             return "";
         }
-        StringBuilder text = new StringBuilder();
-        text.append(String.format("%dd%d", qty, sides));
-        if (bonus > 0) {
-            text.append("+" + bonus);
+
+        if (bonus == 0) {
+            return String.format("%dd%d", qty, sides);
         }
-        return text.toString();
+
+        if (bonus < 0) {
+            return String.format("%dd%d%d", qty, sides, bonus);
+        }
+
+        return String.format("%dd%d+%d", qty, sides, bonus);
     }
 }

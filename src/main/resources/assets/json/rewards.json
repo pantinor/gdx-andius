@@ -1,1350 +1,874 @@
 [
-  {
-    "id": 0,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE"
+    {
+        "id": 0,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 2,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 2,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 0"
-  },
-  {
-    "id": 1,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM"
+    {
+        "id": 1,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 4,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 4,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 1"
-  },
-  {
-    "id": 2,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
+    {
+        "id": 2,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 6,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 6,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 2"
-  },
-  {
-    "id": 3,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1"
+    {
+        "id": 3,
+        "isChest": false,
+        "trapTypeFlags": 25,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 8,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 8,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 3"
-  },
-  {
-    "id": 4,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 4,
+        "isChest": false,
+        "trapTypeFlags": 27,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 4"
-  },
-  {
-    "id": 5,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1"
+    {
+        "id": 5,
+        "isChest": false,
+        "trapTypeFlags": 155,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 12,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 12,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 5"
-  },
-  {
-    "id": 6,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 6,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 6"
-  },
-  {
-    "id": 7,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 7,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 2,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 7"
-  },
-  {
-    "id": 8,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 8,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 4,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 8"
-  },
-  {
-    "id": 9,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 9,
+        "isChest": false,
+        "trapTypeFlags": 239,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 8,
+                        "bonus": 0
+                    }
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 9"
-  },
-  {
-    "id": 10,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE"
+    {
+        "id": 10,
+        "isChest": true,
+        "trapTypeFlags": 11,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 2,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 10,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 2,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 10"
-  },
-  {
-    "id": 11,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM"
+    {
+        "id": 11,
+        "isChest": true,
+        "trapTypeFlags": 15,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 4,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 20,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 20,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 10,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 4,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 11"
-  },
-  {
-    "id": 12,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
+    {
+        "id": 12,
+        "isChest": true,
+        "trapTypeFlags": 27,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 6,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 30,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 15,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 30,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 15,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 6,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 12"
-  },
-  {
-    "id": 13,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1"
+    {
+        "id": 13,
+        "isChest": true,
+        "trapTypeFlags": 31,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 8,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 40,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 20,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 40,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 20,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 8,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 13"
-  },
-  {
-    "id": 14,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 14,
+        "isChest": true,
+        "trapTypeFlags": 47,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 50,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 30,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 50,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 30,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 10,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 14"
-  },
-  {
-    "id": 15,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1"
+    {
+        "id": 15,
+        "isChest": true,
+        "trapTypeFlags": 143,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 12,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 50,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 20,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "LONG SWORD",
-          "SHORT SWORD",
-          "ANOINTED MACE",
-          "ANOINTED FLAIL",
-          "STAFF",
-          "DAGGER",
-          "SMALL SHIELD",
-          "LARGE SHIELD",
-          "ROBES",
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 50,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 20,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 12,
-      "sides": 5,
-      "bonus": 0
     },
-    "name": "Type 15"
-  },
-  {
-    "id": 16,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 16,
+        "isChest": true,
+        "trapTypeFlags": 121,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 75,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 25,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            },
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 52,
+                    "size": 0,
+                    "max": 0,
+                    "range": 27
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 75,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 25,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 10,
-        "itemNames": [
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO",
-          "DIADEM OF MALOR",
-          "SCROLL OF BADIAL",
-          "SHORT SWORD -2",
-          "DAGGER +2",
-          "MACE -2",
-          "STAFF -2",
-          "DAGGER OF SPEED",
-          "CURSED ROBE",
-          "LEATHER -2",
-          "CHAIN MAIL -2",
-          "BREAST PLATE -2",
-          "SHIELD -2",
-          "CURSED HELMET",
-          "BREAST PLATE +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 16"
-  },
-  {
-    "id": 17,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 17,
+        "isChest": true,
+        "trapTypeFlags": 151,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 2,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 50,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            },
+            {
+                "odds": 15,
+                "type": 1,
+                "itemReward": {
+                    "min": 52,
+                    "size": 0,
+                    "max": 0,
+                    "range": 27
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF",
-          "SCROLL OF KATINO",
-          "LEATHER +1",
-          "CHAIN MAIL +1",
-          "PLATE MAIL +1",
-          "SHIELD +1",
-          "BREAST PLATE +1",
-          "SCROLL OF BADIOS",
-          "SCROLL OF HALITO",
-          "LONG SWORD -1",
-          "SHORT SWORD -1",
-          "MACE -1",
-          "STAFF +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 50,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 15,
-        "itemNames": [
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO",
-          "DIADEM OF MALOR",
-          "SCROLL OF BADIAL",
-          "SHORT SWORD -2",
-          "DAGGER +2",
-          "MACE -2",
-          "STAFF -2",
-          "DAGGER OF SPEED",
-          "CURSED ROBE",
-          "LEATHER -2",
-          "CHAIN MAIL -2",
-          "BREAST PLATE -2",
-          "SHIELD -2",
-          "CURSED HELMET",
-          "BREAST PLATE +2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 17"
-  },
-  {
-    "id": 18,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 18,
+        "isChest": true,
+        "trapTypeFlags": 102,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 4,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 70,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            },
+            {
+                "odds": 25,
+                "type": 1,
+                "itemReward": {
+                    "min": 52,
+                    "size": 0,
+                    "max": 0,
+                    "range": 27
+                }
+            },
+            {
+                "odds": 5,
+                "type": 1,
+                "itemReward": {
+                    "min": 79,
+                    "size": 0,
+                    "max": 0,
+                    "range": 13
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 70,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 25,
-        "itemNames": [
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO",
-          "DIADEM OF MALOR",
-          "SCROLL OF BADIAL",
-          "SHORT SWORD -2",
-          "DAGGER +2",
-          "MACE -2",
-          "STAFF -2",
-          "DAGGER OF SPEED",
-          "CURSED ROBE",
-          "LEATHER -2",
-          "CHAIN MAIL -2",
-          "BREAST PLATE -2",
-          "SHIELD -2",
-          "CURSED HELMET",
-          "BREAST PLATE +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 5,
-        "itemNames": [
-          "BREAST PLATE +2",
-          "SILVER GLOVES",
-          "SWORD +3",
-          "SHORT SWORD +3",
-          "THIEVES DAGGER",
-          "BREAST PLATE +3",
-          "LORDS GARB",
-          "MURASAMA BLADE",
-          "SHURIKEN",
-          "CHAIN PROT FIRE",
-          "PLATE +3",
-          "SHIELD +3",
-          "RING OF HEALING",
-          "RING PROT UNDEAD"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 18"
-  },
-  {
-    "id": 19,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1",
-          "SHORT SWORD +1",
-          "MACE +1",
-          "STAFF OF MOGREF"
+    {
+        "id": 19,
+        "isChest": true,
+        "trapTypeFlags": 255,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 8,
+                        "bonus": 0
+                    }
+                }
+            },
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 18
+                }
+            },
+            {
+                "odds": 50,
+                "type": 1,
+                "itemReward": {
+                    "min": 52,
+                    "size": 0,
+                    "max": 0,
+                    "range": 27
+                }
+            },
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 78,
+                    "size": 0,
+                    "max": 0,
+                    "range": 13
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "DRAGON SLAYER",
-          "HELM +1",
-          "LEATHER -1",
-          "CHAIN MAIL -1",
-          "BREAST PLATE -1",
-          "SHIELD -1",
-          "JEWELED AMULET",
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA",
-          "SCROLL OF DILTO",
-          "COPPER GLOVES",
-          "LEATHER +2",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 50,
-        "itemNames": [
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO",
-          "DIADEM OF MALOR",
-          "SCROLL OF BADIAL",
-          "SHORT SWORD -2",
-          "DAGGER +2",
-          "MACE -2",
-          "STAFF -2",
-          "DAGGER OF SPEED",
-          "CURSED ROBE",
-          "LEATHER -2",
-          "CHAIN MAIL -2",
-          "BREAST PLATE -2",
-          "SHIELD -2",
-          "CURSED HELMET",
-          "BREAST PLATE +2"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 10,
-        "itemNames": [
-          "CURSED HELMET",
-          "BREAST PLATE +2",
-          "SILVER GLOVES",
-          "SWORD +3",
-          "SHORT SWORD +3",
-          "THIEVES DAGGER",
-          "BREAST PLATE +3",
-          "LORDS GARB",
-          "MURASAMA BLADE",
-          "SHURIKEN",
-          "CHAIN PROT FIRE",
-          "PLATE +3",
-          "SHIELD +3",
-          "RING OF HEALING"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 0
     },
-    "name": "Type 19"
-  },
-  {
-    "id": 20,
-    "elements": [
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "WERDNAS AMULET"
+    {
+        "id": 20,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 94,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0
+                }
+            }
         ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 94,
-      "sides": 94,
-      "bonus": 0
     },
-    "name": "Type 20"
-  },
-  {
-    "id": 21,
-    "elements": [
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "LATUMOFIS POTION"
+    {
+        "id": 21,
+        "isChest": true,
+        "trapTypeFlags": 158,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 16,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 93,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 61,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "DEADLY RING"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 100,
-        "itemNames": [
-          "ROD OF FLAME"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 16,
-      "sides": 16,
-      "bonus": 0
     },
-    "name": "Type 21"
-  },
-  {
-    "id": 22,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION"
+    {
+        "id": 22,
+        "isChest": true,
+        "trapTypeFlags": 190,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 15,
+                        "bonus": 10
+                    },
+                    "base": 5,
+                    "dice2": {
+                        "qty": 5,
+                        "sides": 5,
+                        "bonus": 5
+                    }
+                }
+            },
+            {
+                "odds": 60,
+                "type": 1,
+                "itemReward": {
+                    "min": 50,
+                    "size": 10,
+                    "max": 0,
+                    "range": 15
+                }
+            },
+            {
+                "odds": 20,
+                "type": 1,
+                "itemReward": {
+                    "min": 50,
+                    "size": 10,
+                    "max": 0,
+                    "range": 20
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 60,
-        "itemNames": [
-          "PLATE MAIL +2",
-          "SHIELD +2",
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 20,
-        "itemNames": [
-          "PLATE MAIL +2",
-          "SHIELD +2",
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO",
-          "ROD OF FLAME",
-          "CHAIN +2",
-          "PLATE MAIL +2",
-          "SHIELD +3",
-          "AMULET OF MAKANITO",
-          "DIADEM OF MALOR",
-          "SCROLL OF BADIAL",
-          "SHORT SWORD -2",
-          "DAGGER +2",
-          "MACE -2"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 15,
-      "bonus": 10
     },
-    "name": "Type 22"
-  },
-  {
-    "id": 23,
-    "elements": [
-      {
-        "type": 0,
-        "odds": 100,
-        "itemNames": [
-          "LEATHER ARMOR",
-          "CHAIN MAIL",
-          "BREAST PLATE",
-          "PLATE MAIL",
-          "HELM",
-          "DIOS POTION",
-          "LATUMOFIS POTION",
-          "LONG SWORD +1"
+    {
+        "id": 23,
+        "isChest": true,
+        "trapTypeFlags": 254,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 10
+                    },
+                    "base": 7,
+                    "dice2": {
+                        "qty": 5,
+                        "sides": 5,
+                        "bonus": 5
+                    }
+                }
+            },
+            {
+                "odds": 30,
+                "type": 1,
+                "itemReward": {
+                    "min": 40,
+                    "size": 5,
+                    "max": 5,
+                    "range": 5
+                }
+            },
+            {
+                "odds": 30,
+                "type": 1,
+                "itemReward": {
+                    "min": 50,
+                    "size": 10,
+                    "max": 1,
+                    "range": 10
+                }
+            }
         ]
-      },
-      {
-        "type": 1,
-        "odds": 30,
-        "itemNames": [
-          "SCROLL OF BADIOS",
-          "POTION OF SOPIC",
-          "LONG SWORD +2",
-          "SHORT SWORD +2",
-          "MACE +2",
-          "SCROLL OF LOMILWA"
-        ]
-      },
-      {
-        "type": 1,
-        "odds": 30,
-        "itemNames": [
-          "PLATE MAIL +2",
-          "SHIELD +2",
-          "HELM +2",
-          "POTION OF DIAL",
-          "RING OF PORFIC",
-          "WERE SLAYER",
-          "MAGE MASHER",
-          "MACE PROT POISON",
-          "STAFF OF MONTINO",
-          "BLADE CUSINART",
-          "AMULET OF MANIFO"
-        ]
-      }
-    ],
-    "goldAmt": {
-      "qty": 10,
-      "sides": 10,
-      "bonus": 10
-    },
-    "name": "Type 23"
-  }
+    }
 ]

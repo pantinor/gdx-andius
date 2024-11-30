@@ -194,7 +194,7 @@ public class Andius extends Game {
             moongateTextures = mapAtlas.findRegions("moongate");
 
             world_scr_avatar = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
-            game_scr_avatar = TibianSprite.characterAnimation(TibianSprite.Character.Knight_Knight_Male);
+            game_scr_avatar = TibianSprite.animation("Knight_Knight_Male");
 
             TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
             EXPLMAP.put(Color.GRAY, new Animation(.1f, getTextureArray(expl, 0, 0)));

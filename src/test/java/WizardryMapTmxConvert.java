@@ -725,26 +725,7 @@ public class WizardryMapTmxConvert implements ApplicationListener {
 
         private String monster(MazeCell cell, int x, int y, int r, int c) {
             if ((cell.monsterID >= 0 && cell.message == null) || cell.monsterLair) {
-                int monId = -1;
-                if (cell.monsterID >= 0) {
-                    monId = cell.monsterID;
-                } else {
-                    List<Monster> monsters = Andius.MONSTER_LEVELS.get(level);
-                    monId = monsters.get(rand.nextInt(monsters.size())).getIconId();
-                }
-                for (Monster m : Andius.MONSTERS) {
-                    if (m.getIconId() == monId) {
 
-                        this.creatureIcons[r][c] = 761;//761 + Icons.tile(m.getIcon());
-
-                        return String.format("<object id=\"%d\" name=\"%s\" type=\"MONSTER\" x=\"%d\" y=\"%d\" width=\"48\" height=\"48\">\n"
-                                + "   <properties>\n"
-                                + "    <property name=\"creature\" value=\"%s\"/>\n"
-                                + "    <property name=\"movement\" value=\"ATTACK_AVATAR\"/>\n"
-                                + "   </properties>\n"
-                                + "  </object>\n", ++objectId, m.name, x, y, m.name);
-                    }
-                }
                 return "";
             } else {
                 return "";

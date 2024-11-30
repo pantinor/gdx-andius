@@ -6,991 +6,131 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TibianSprite {
-
-    public static enum Type {
-        bosses, characters, mounts, creatures;
-    }
 
     private static TextureAtlas bossesAtlas;
     private static TextureAtlas creaturesAtlas;
     private static TextureAtlas mountsAtlas;
     private static TextureAtlas charactersAtlas;
+    private static final List<String> boNames = new ArrayList<>();
+    private static final List<String> crNames = new ArrayList<>();
+    private static final List<String> moNames = new ArrayList<>();
+    private static final List<String> chNames = new ArrayList<>();
+    private static final List<String> allNames = new ArrayList<>();
 
     public static void init() {
         bossesAtlas = new TextureAtlas(Gdx.files.classpath("assets/tibian/bosses.atlas"));
         creaturesAtlas = new TextureAtlas(Gdx.files.classpath("assets/tibian/creatures.atlas"));
         mountsAtlas = new TextureAtlas(Gdx.files.classpath("assets/tibian/mounts.atlas"));
         charactersAtlas = new TextureAtlas(Gdx.files.classpath("assets/tibian/characters.atlas"));
+
+        for (AtlasRegion r : bossesAtlas.getRegions()) {
+            if (!boNames.contains(r.name)) {
+                boNames.add(r.name);
+            }
+        }
+
+        for (AtlasRegion r : creaturesAtlas.getRegions()) {
+            if (!crNames.contains(r.name)) {
+                crNames.add(r.name);
+            }
+        }
+
+        for (AtlasRegion r : mountsAtlas.getRegions()) {
+            if (!moNames.contains(r.name)) {
+                moNames.add(r.name);
+            }
+        }
+
+        for (AtlasRegion r : charactersAtlas.getRegions()) {
+            if (!chNames.contains(r.name)) {
+                chNames.add(r.name);
+            }
+        }
+
+        boNames.stream().forEach(n -> {
+            if (!allNames.contains(n)) {
+                allNames.add(n);
+            }
+        });
+        crNames.stream().forEach(n -> {
+            if (!allNames.contains(n)) {
+                allNames.add(n);
+            }
+        });
+        moNames.stream().forEach(n -> {
+            if (!allNames.contains(n)) {
+                allNames.add(n);
+            }
+        });
+        chNames.stream().forEach(n -> {
+            if (!allNames.contains(n)) {
+                allNames.add(n);
+            }
+        });
+
+//        allNames.stream().forEach(n -> {
+//            Animation a = animation(n);
+//            System.out.printf("%s [%d]\n", n, a.getKeyFrames().length);
+//        });
+        //System.out.println(boNames.size());
+        //System.out.println(crNames.size());
+        //System.out.println(moNames.size());
+        //System.out.println(chNames.size());
+        //System.out.println(allNames.size());
+        //allNames.stream().forEach(item -> System.out.println(item));
     }
 
-    public static enum Boss {
-        Arthom_the_Hunter,
-        Evil_Mastermind,
-        Mad_Technomancer,
-        Maliz,
-        Vilear,
-        Hemming,
-        Overcharged_Disruption,
-        Heoni,
-        Sir_Nictros,
-        Grand_Master_Oberon,
-        Count_Tofifti,
-        Kroazur,
-        Ghulosh_Deathgaze,
-        Monstor,
-        Deadeye_Devious,
-        The_Spellstealer_Creator,
-        Major_Timedisplaced_Anomaly_Rascacoon,
-        The_Hunger,
-        Murcion,
-        Black_Vixen,
-        Tarantula,
-        The_Time_Guardian,
-        The_Freezing_Time_Guardian,
-        The_Scourge_of_Oblivion_Charging,
-        Dragon,
-        Morik_the_Gladiator,
-        Minor_Timedisplaced_Anomaly_Rookgaard,
-        The_Brainstealer,
-        Serpent_Spawn,
-        Feroxa_Wolf,
-        Timedisplaced_Anomaly_Banuta,
-        Munster,
-        Angry_King_Chuck,
-        Vulnerable_Cocoon,
-        Mummy,
-        Stonecracker,
-        Great_Timedisplaced_Anomaly,
-        Malofur_Mangrinder,
-        Flameborn,
-        Alptramun,
-        Versperoth,
-        A_Shielded_Astral_Glyph,
-        MoohTah_Master,
-        Kesar,
-        The_Voice_of_Ruin,
-        Countess_Sorrow,
-        Energy_Elemental,
-        The_Count_of_the_Core,
-        King_Chuck,
-        Zushuka,
-        Doctor_Perhaps,
-        Rotworm,
-        Kraknaknork,
-        The_Many,
-        Lisa,
-        The_Duke_of_the_Depths,
-        The_Monster,
-        Professor_Maxxen,
-        Major_Timedisplaced_Anomaly_Fiehonja,
-        Flamesteed,
-        The_Horned_Fox,
-        Robby_the_Reckless,
-        The_Destruction,
-        Diseased_Fred,
-        The_Primal_Menace,
-        Siramal_Creature,
-        Nargol_the_Impaler,
-        The_Welter,
-        Armenius,
-        The_Fettered_Shatterer,
-        Zavarash,
-        The_Pale_Count,
-        Annihilon,
-        Urmahlullu_the_Immaculate,
-        Chayenne,
-        Raxias,
-        Burster,
-        Mawhawk,
-        An_Observer_Eye,
-        Tormentor,
-        Devovorga,
-        Abyssador,
-        Feroxa_Werewolf,
-        The_Diamond_Blossom,
-        Zomba,
-        Sharpclaw,
-        Moohtant_Wallbreaker,
-        The_Blightfather,
-        Jesse_the_Wicked,
-        The_Armored_Voidborn,
-        Chagorz,
-        Foreman_Kneebiter,
-        Lyxoph_Creature,
-        Lethal_Lissy,
-        Despor,
-        Tentuglys_Head,
-        The_Remorseless_Corruptor,
-        The_Frog_Prince,
-        The_Red_Knight,
-        Brain_Head,
-        The_Great_Schnitzel,
-        Crystal_Spider,
-        Bakragore,
-        Golgordan,
-        The_Lily_of_Night,
-        Gaz_haragoth,
-        Scarlett_Etzel,
-        Chest,
-        Troll_Champion,
-        Twisterror,
-        Chizzoron_the_Distorter,
-        Deathstrike,
-        Lord_Azaram,
-        Deep_Terror,
-        Latrivan,
-        Rewar_the_Bloody,
-        Sharptooth,
-        The_Fire_Empowered_Duke,
-        Massive_Energy_Elemental,
-        Ferumbras_Soul_Splinter,
-        The_Sinister_Hermit_Blue,
-        The_Unarmored_Voidborn,
-        Malvaroth,
-        Glooth_Golem,
-        Skyrr_Creature,
-        Zarabustor,
-        Earl_Osam,
-        Mornenion,
-        Ekatrix,
-        Defiler,
-        Razzagorn,
-        The_Hungerer,
-        Maw,
-        Bretzecutioner,
-        The_Shielded_Thorn_Knight,
-        Urmahlullu_the_Tamed,
-        Smuggler_Baron_Silvertoe,
-        Cocoon,
-        Channeling_Earl_Osam,
-        Magnor_Mournbringer,
-        The_Rootkraken,
-        Rejana_Creature,
-        Goshnars_Greed,
-        Crultor,
-        The_Blazing_Time_Guardian,
-        Goshnars_Malice,
-        Shlorg,
-        Reflection_of_Obujos,
-        The_Lord_of_the_Lice,
-        Guard_Captain_Quaid,
-        Shadowstalker,
-        Oodok_Witchmaster,
-        Shadowpelt,
-        The_Baron_from_Below,
-        Tiquandas_Revenge,
-        Duke_Krule,
-        Shulgrax,
-        Grand_Chaplain_Gaunder,
-        Penciljack_Creature,
-        The_Astral_Source,
-        Prince_Drazzak,
-        Deathbine,
-        The_Dread_Maiden,
-        Bullwark,
-        Earth_Overlord,
-        Arbaziloth,
-        Mounted_Thorn_Knight,
-        Enusat_the_Onyx_Wing,
-        Terofar,
-        The_Evil_Eye,
-        Izcandar_Champion_of_Summer,
-        Ice_Golem,
-        The_Corruptor_of_Souls,
-        The_Enraged_Thorn_Knight,
-        Arachir_the_Ancient_One,
-        King_Zelos,
-        Spirit_of_Light,
-        Yirkas_Blue_Scales,
-        The_Pale_Worm,
-        The_Scourge_of_Oblivion,
-        Aftershock,
-        Wildness_of_Urmahlullu,
-        Ghazbaran,
-        Glooth_Bomb,
-        Brutus_Bloodbeard,
-        Fahim_the_Wise,
-        Charged_Anomaly,
-        Anmothra,
-        Dharalion,
-        Grand_Commander_Soeren,
-        Sulphur_Scuttler,
-        The_Sinister_Hermit_Yellow,
-        Gnomevil,
-        The_Flaming_Orchid,
-        The_Mutated_Pumpkin,
-        Sugar_Mommy,
-        Sugar_Daddy,
-        Tazhadur,
-        Craban,
-        Furious_Morshabaal,
-        Ashmunrah,
-        Energized_Raging_Mage,
-        Bruise_Payne,
-        Tamru_the_Black,
-        Undead_Dragon,
-        Rukor_Zad,
-        Lady_Tenebris,
-        Splasher,
-        Vemiath,
-        The_Big_Bad_One,
-        Outburst,
-        Ungreez,
-        Leviathan,
-        Foreshock,
-        Fugue,
-        Chikhaton,
-        The_Moonlight_Aster,
-        Fleabringer,
-        Vok_the_Freakish,
-        The_Hungry_Baron_from_Below,
-        Amenef_the_Burning,
-        Grimrat,
-        Jaul,
-        Timedisplaced_Anomaly_Chazorai,
-        Pirate_Ship,
-        Morshabaal,
-        Faceless_Bane,
-        The_First_Dragon,
-        Battlemaster_Zunzu,
-        Giant_Spider,
-        An_Astral_Glyph,
-        Ragiaz,
-        Mazoran,
-        Xogixath,
-        Mindmasher,
-        Owin_Creature,
-        Ghastly_Dragon,
-        Bruton,
-        Diseased_Bill,
-        Azerus,
-        Tromphonyte,
-        Doctor_Marrow,
-        Chopper,
-        Orshabaal,
-        Ayana_the_Crimson_Curse,
-        Dreadful_Disruptor,
-        Dragon_Lord,
-        Renegade_Orc,
-        Ichgahal,
-        Preceptor_Lazare,
-        Lionet,
-        Sphere_of_Wrath,
-        High_Templar_Cobrass,
-        Necropharus,
-        Last_Planegazer,
-        Bloodback,
-        The_Handmaiden,
-        The_Sandking,
-        Greedok,
-        Goshnars_Spite,
-        Black_Knight,
-        Man_in_the_Cave,
-        Urmahlullu_the_Weakened,
-        The_Manhunter,
-        Massacre,
-        Tzumrah_the_Dazzler,
-        Fleshslicer,
-        The_Abomination,
-        Lagatos,
-        Eradicator,
-        The_False_God,
-        Bragrumol,
-        Vengar,
-        Lloyd,
-        Dirtbeard,
-        Feroxa,
-        Bloom_of_Doom,
-        Count_Vlarkorth,
-        Timira_the_ManyHeaded,
-        Paiz_the_Pauperizer,
-        Zulazza_the_Corruptor,
-        Mutated_Zalamon,
-        Megasylvan_Yselda,
-        Ocyakao,
-        Grim_Reaper,
-        Kerberos,
-        Major_Timedisplaced_Anomaly_Issavi,
-        Tarbaz,
-        Hellgorak,
-        Zugurosh,
-        Ancient_Spawn_of_Morgathla,
-        Anomaly,
-        Izcandar_Champion_of_Winter,
-        Fleshcrawler,
-        Fernfang,
-        Sister_Hetai,
-        Kusuma,
-        Ahau,
-        Mahrdis,
-        Ferumbras,
-        Ushuriel,
-        Titano_Dragon,
-        Lord_Retro,
-        Lizard_Gate_Guardian,
-        Drume,
-        Dragonking_Zyrtarch,
-        Custodian,
-        Mazzinor,
-        Mozradek,
-        Ascending_Ferumbras,
-        Horadron,
-        Goshnars_Hatred,
-        Mad_Mage,
-        Madareth,
-        Lokathmor,
-        The_Fear_Feaster,
-        Realityquake,
-        Gorgo,
-        The_Scourge_of_Oblivion_Reflective,
-        Gorga,
-        Furyosa,
-        Skeleton_Warrior,
-        Xenia,
-        Lich,
-        Wisdom_of_Urmahlullu,
-        Haunted_Treeling,
-        Grandfather_Tridian,
-        Willi_Wasp,
-        Brokul,
-        Dragon_Hoard,
-        Gelidrazah_the_Frozen,
-        The_Last_Lore_Keeper,
-        Plagueroot,
-        Minor_Timedisplaced_Anomaly_Greenshore,
-        Retros_Treasure,
-        Zorvorax,
-        Charging_Outburst,
-        Death_Priest_Shargon,
-        Irahsae,
-        Maxxenius,
-        Mitmah_Vanguard,
-        Tjured_Creature,
-        Tanjis,
-        Trollwut,
-        Soul_of_Dragonking_Zyrtarch,
-        The_Scion_of_Havoc,
-        Fat_Porker,
-        The_Winter_Bloom,
-        Hairman_the_Huge,
-        Flamecaller_Zazrak,
-        Magma_Bubble,
-        Charged_Disruption,
-        Ron_the_Ripper,
-        Teneshpar,
-        Hellfire_Fighter,
-        The_Nightmare_Beast,
-        Morgaroth,
-        Gorzindel,
-        The_Bloodtusk,
-        Diabolic_Imp,
-        The_Spellstealer_Destructor,
-        Barbaria,
-        Mirade_Creature,
-        Neferi_the_Spy,
-        The_Souldespoiler,
-        Gaffir,
-        Goshnars_Megalomania,
-        Izcandar_the_Banished,
-        The_Snapper,
-        Grand_Canon_Dominus,
-        Kalyassa,
-        Esmeralda,
-        Ghulosh,
-        Timedisplaced_Anomaly_Warzone,
-        Yaga_the_Crone,
-        World_Devourer,
-        Leiden,
-        Quara_Constrictor,
-        Stone_Golem,
-        Dreadmaw,
-        Gralvalon,
-        The_Mega_Magmaoid,
-        Katex_Blood_Tongue,
-        Samael,
-        The_Unwelcome,
-        Tyrn,
-        Plagirath,
-        Captain_Jones,
-        Denson_Larika,
-        Rupture,
-        The_Mean_Masher,
-        Atab,
-        Yakchal,
-        The_Old_Whopper,
-        Fazzrah,
-        Orc_Warlord,
-        The_Shatterer,
-        Snake_God_Essence,
-        Ribstride,
-        The_Blazing_Rose,
-        Massive_Water_Elemental,
-        Enraged_Morshabaal,
-        Ravenous_Hunger,
-        Damage_Resonance,
-        Rotspit,
-        The_Rage,
-        Sir_Baeloc,
-        Ratmiral_Blackwhiskers,
-        Omrafir,
-        Lizard_Abomination,
-        Obujos,
-        The_Weakened_Count,
-        Ferumbras_Mortal_Shell,
-        Irgix_the_Flimsy,
-        Unaz_the_Mean,
-        Utua_Stone_Sting,
-        Zamulosh,
-        Raging_Mage,
-        Destabilized_Ferumbras,
-        Dark_Torturer,
-        General_Murius,
-        Merikh_the_Slaughterer,
-        The_Percht_Queen,
-        Cublarc_the_Plunderer,
-        Thaian,
-        Goshnars_Cruelty,
-        Weakened_Shlorg,
-        The_Spellstealer,
-        Darkfang,
-        Bolfrim,
-        Delany,
-        White_Pale,
-        The_Distorted_Astral_Source,
-        Groam,
-        Elvira_Hammerthrust,
-        Diseased_Dan,
-        Phrodomo,
-        Apprentice_Sheng
+    public static List<String> names() {
+        return Collections.unmodifiableList(allNames);
     }
 
-    public static enum Creature {
-        Banshee,
-        Chest,
-        Dawnfire_Asura,
-        Shark,
-        Bladespark,
-        Massive_Energy_Elemental,
-        Salamander,
-        Dworc_Voodoomaster,
-        Emberwing,
-        Demon,
-        Adult_Goanna,
-        Behemoth,
-        Ghastly_Dragon,
-        Panda,
-        Death_Blob,
-        Quara_Predator,
-        Ancient_Scarab,
-        Hellfire_Fighter,
-        Skullfrost,
-        Valkyrie,
-        Diabolic_Imp,
-        Elf_Arcanist,
-        Defiler,
-        Squirrel,
-        Barbarian_Brutetamer,
-        Massive_Earth_Elemental,
-        Enlightened_of_the_Cult,
-        Grovebeast,
-        Biting_Book,
-        Tiger,
-        Pirate_Corsair,
-        Necromancer,
-        Lizard_Templar,
-        Kongra,
-        Corym_Skirmisher,
-        Badger,
-        Mutated_Human,
-        Deepling_Scout,
-        Sphinx,
-        Blood_Crab,
-        Versperoth,
-        Wyvern,
-        Rhindeer,
-        Chakoya_Toolshaper,
-        Gnorre_Chyllson,
-        Terror_Bird,
-        Bonelord,
-        Orclops_Ravager,
-        Terrorsleep,
-        Juggernaut,
-        Elder_Wyrm,
-        Faun,
-        Mossmasher,
-        Ice_Golem,
-        Pit_Reaver,
-        Shaburak_Prince,
-        Kollos,
-        Ferumbras,
-        Killer_Caiman,
-        Crawler,
-        Sandscourge,
-        Vampire_Viscount,
-        Marid,
-        Ghazbaran,
-        Horadron,
-        Orc_Warlord,
-        Island_Troll,
-        Massive_Water_Elemental,
-        Sea_Serpent,
-        Madareth,
-        Pirat_Mate,
-        Gnomevil,
-        Assassin,
-        Gnarlhound,
-        The_Mutated_Pumpkin,
-        Calamary,
-        Mirade,
-        Warlock,
-        Werewolf,
-        Toad,
-        Thundergiant,
-        Monk,
-        Ashmunrah,
-        Thornback_Tortoise,
-        Minotaur_Guard,
-        Draken_Elite,
-        Priestess_of_the_Wild_Sun,
-        Undead_Dragon,
-        Snowbash,
-        Stampor,
-        Deathslicer,
-        Hydra,
-        Diamond_Servant,
-        Jellyfish,
-        Humongous_Fungus,
-        Bat,
-        Crystal_Spider,
-        Lava_Golem,
-        Twisted_Shaper,
-        Goblin_Scavenger,
-        Golgordan,
-        Husky,
-        Gravedigger,
-        Phantasm,
-        Dwarf_Miner
-    }
-
-    public static enum Mount {
-        Shadow_Claw,
-        Mystic_Raven,
-        Donkey,
-        Giant_Beaver_Mount,
-        Spirit_of_Purity,
-        Mystic_Jaguar_Mount,
-        Uniwheel,
-        Arctic_Unicorn,
-        Swamp_Snapper,
-        Brass_Speckled_Koi,
-        Crimson_Ray,
-        Cunning_Hyaena,
-        Doombringer,
-        Dawnbringer_Pegasus,
-        Haze,
-        Magma_Skull,
-        Floating_Augur,
-        Ripptor,
-        Cave_Tarantula,
-        Glooth_Glider,
-        Toxic_Toad,
-        Neon_Sparkid,
-        Manta_Ray_Mount,
-        Marsh_Toad,
-        Jungle_Saurian,
-        Wolpertinger,
-        Ink_Spotted_Koi,
-        Tundra_Rambler,
-        Benevolent_Coral_Rhea,
-        Glacier_Wyrm,
-        Holiday_Mammoth,
-        Tin_Lizzard,
-        Lagoon_Saurian,
-        Surly_Steer,
-        War_Bear,
-        Snow_Pelt,
-        Gloothomotive,
-        Poisonbane,
-        Gloom_Widow,
-        Finished_Cold_Percht_Sleigh,
-        Phant,
-        Walker_Mount,
-        Woodland_Prince,
-        Siegebreaker,
-        Steelbeak,
-        Singeing_Steed,
-        Festive_Mammoth,
-        Cony_Cart,
-        Pegasus,
-        Carpacosaurus,
-        Gloomwurm,
-        Obstinate_Ox,
-        Snowy_Owl,
-        Gorongra,
-        Blackpelt,
-        Shellodon,
-        The_Hellgrip,
-        Floating_Sage,
-        Nightdweller,
-        Emerald_Raven,
-        Wrathfire_Pegasus,
-        Phantasmal_Jade,
-        Death_Crawler,
-        Rapid_Boar,
-        Sea_Devil,
-        Dark_Percht_Sleigh,
-        Fleeting_Knowledge,
-        Topaz_Shrine,
-        Void_Watcher,
-        Reed_Lurker,
-        Green_Rolling_Barrel,
-        Sanguine_Frog,
-        Ironblight_Mount,
-        Coralripper,
-        Bloodcurl,
-        Bright_Percht_Sleigh_Variant,
-        Midnight_Panther_Mount,
-        Shadow_Hart,
-        Bogwurm,
-        Gold_Sphinx,
-        Flamesteed,
-        Widow_Queen,
-        Rabbit_Rickshaw,
-        Copper_Fly,
-        Shadow_Sphinx,
-        Night_Waccoon,
-        Flitterkatzen,
-        Tawny_Owl,
-        Ivory_Fang,
-        Jade_Pincer,
-        Cold_Percht_Sleigh_Variant,
-        Krakoloss,
-        Emerald_Sphinx,
-        Jackalope,
-        Prismatic_Unicorn,
-        Magic_Carpet_Mount,
-        Bumblebee,
-        Magma_Crawler_Mount,
-        White_Lion_Mount,
-        Peony,
-        Dark_Percht_Sleigh_Variant,
-        Winter_King,
-        Muffled_Snowman,
-        Tangerine_Flecked_Koi,
-        Silverneck,
-        Savanna_Ostrich,
-        Tiger_Slug,
-        Hailstorm_Fury,
-        Crimson_Fang,
-        Lady_Bug,
-        Jousting_Horse,
-        Coral_Rhea,
-        Ether_Badger,
-        Emerald_Waccoon,
-        Eventide_Nandu,
-        Jousting_Eagle,
-        Jungle_Tiger,
-        Noble_Lion_Mount,
-        Foxmouse,
-        Highland_Yak,
-        Tempest,
-        Skybreaker_Pegasus,
-        Shock_Head_Mount,
-        Platesaurian,
-        Winterstride,
-        Floating_Scholar,
-        Ursagrodon,
-        Gorgon_Hydra,
-        Blazing_Unicorn,
-        Obsidian_Shrine,
-        Rift_Watcher,
-        River_Crocovile,
-        Water_Buffalo_Mount,
-        Dandelion,
-        Voracious_Hyaena,
-        Icebreacher,
-        Bunny_Dray,
-        Ember_Saurian,
-        Corpsefire_Skull,
-        Ringtail_Waccoon,
-        Frostbringer,
-        Scorpion_King,
-        Draptor_Mount,
-        Bog_Tyrant,
-        Dreadhare,
-        Nethersteed,
-        Gryphon_Mount,
-        Tombstinger,
-        Festive_Snowman,
-        Mole_Mount,
-        Stone_Rhino_Mount,
-        Hyacinth_Mount,
-        Rune_Watcher,
-        Plumfish,
-        Azudocus,
-        Darkfire_Devourer,
-        Gnarlhound_Mount,
-        Cold_Percht_Sleigh,
-        Mint_Ibex,
-        Poppy_Ibex,
-        Dusk_Pryer,
-        Benevolent_Savanna_Ostrich,
-        Leafscuttler,
-        Bright_Percht_Sleigh,
-        Finished_Bright_Percht_Sleigh,
-        Undead_Cavebear_Mount,
-        Golden_Dragonfly,
-        Merry_Mammoth,
-        Boisterous_Bull,
-        Crystal_Wolf_Mount,
-        Red_Rolling_Barrel,
-        Radiant_Raven,
-        Benevolent_Eventide_Nandu,
-        Flying_Divan,
-        Scruffy_Hyaena,
-        Black_Sheep_Mount,
-        Cranium_Spider,
-        Ebony_Tiger,
-        Dawn_Strayer,
-        Emperor_Deer,
-        Venompaw,
-        Blue_Rolling_Barrel,
-        Dragonling_Mount,
-        Parade_Horse,
-        Zaoan_Badger,
-        Feral_Tiger,
-        Desert_King,
-        Vortexion,
-        Sparkion_Mount,
-        Floating_Kashmir,
-        Jade_Shrine,
-        Mutated_Abomination,
-        Rustwurm,
-        Slagsnare,
-        Nightmarish_Crocovile,
-        Jade_Lion,
-        Swamp_Crocovile,
-        Armoured_War_Horse,
-        Rift_Runner,
-        Hibernal_Moth_Mount,
-        Mould_Shell,
-        Rented_Horse,
-        Cinderhoof,
-        Glacier_Vagabond,
-        Cerberus_Champion,
-        Stampor_Mount,
-        Noctungra,
-        Finished_Dark_Percht_Sleigh,
-        Titanica,
-        Lacewing_Moth_Mount,
-        Battle_Badger,
-        Snow_Strider,
-        Shadow_Draptor,
-        Tamed_Panda,
-        Black_Stag,
-        War_Horse,
-        Blazebringer,
-        Dromedary_Mount,
-        Boreal_Owl,
-        Batcat,
-        Caped_Snowman,
-        Cinnamon_Ibex,
-        Frostflare,
-        Mouldpincer,
-        Antelope,
-        Racing_Bird,
-        Kingly_Deer,
-        Tourney_Horse,
-        Doom_Skull,
-        Nightstinger
-    }
-
-    public static enum Character {
-        Druid_Grove_Keeper_Female,
-        Knight_Lion_of_War_Female,
-        Sorcerer_Summoner_Male,
-        Sorcerer_Wizard_Female,
-        Knight_Mercenary_Female,
-        Knight_Crystal_Warlord_Female,
-        Knight_Crystal_Warlord_Male,
-        Druid_Dream_Warrior_Female,
-        Druid_Percht_Raider_Male,
-        Druid_Spirit_Caller_Male,
-        Knight_Arena_Champion_Male,
-        Knight_Champion_Female,
-        Paladin_Sinister_Archer_Female,
-        Druid_Herbalist_Male,
-        Sorcerer_Elementalist_Male,
-        Sorcerer_Battle_Mage_Male,
-        Sorcerer_Evoker_Female,
-        Paladin_Demon_Hunter_Female,
-        Druid_Winter_Warden_Female,
-        Knight_Knight_Male,
-        Paladin_Hunter_Female,
-        Knight_Lion_of_War_Male,
-        Druid_Shaman_Male,
-        Druid_Grove_Keeper_Male,
-        Sorcerer_Void_Master_Male,
-        Sorcerer_Conjurer_Male,
-        Druid_Herbalist_Female,
-        Sorcerer_Summoner_Female,
-        Sorcerer_Wizard_Male,
-        Druid_Druid_Female,
-        Knight_Mercenary_Male,
-        Paladin_Ranger_Female,
-        Paladin_Assassin_Female,
-        Druid_Dream_Warrior_Male,
-        Knight_Warmaster_Male,
-        Paladin_Veteran_Paladin_Male,
-        Sorcerer_Elementalist_Female,
-        Druid_Beastmaster_Male,
-        Sorcerer_Chaos_Acolyte_Female,
-        Sorcerer_Chaos_Acolyte_Male,
-        Knight_Arena_Champion_Female,
-        Knight_Warmaster_Female,
-        Knight_Demon_Female,
-        Druid_Beastmaster_Female,
-        Druid_Druid_Male,
-        Druid_Percht_Raider_Female,
-        Sorcerer_Mage_Male,
-        Paladin_Sinister_Archer_Male,
-        Paladin_Ranger_Male,
-        Knight_Nightmare_Knights_Male,
-        Knight_Nightmare_Knights_Female,
-        Paladin_Hunter_Male,
-        Druid_Winter_Warden_Male,
-        Druid_Spirit_Caller_Female,
-        Sorcerer_Conjurer_Female,
-        Knight_Warrior_Female,
-        Paladin_Assassin_Male,
-        Knight_Barbarian_Male,
-        Paladin_Veteran_Paladin_Female,
-        Sorcerer_Owl_Keeper_Male,
-        Sorcerer_Mage_Female,
-        Paladin_Demon_Hunter_Male,
-        Knight_Champion_Male,
-        Sorcerer_Evoker_Male,
-        Sorcerer_Battle_Mage_Female,
-        Druid_Shaman_Female,
-        Knight_Knight_Female,
-        Sorcerer_Owl_Keeper_Female,
-        Sorcerer_Void_Master_Female,
-        Knight_Barbarian_Female,
-        Knight_Demon_Male,
-        Knight_Warrior_Male
-    }
-
-    public static TextureRegion icon(Type t, int idx) {
-        switch (t) {
-            case bosses:
-                return bossIcon(idx);
-            case characters:
-                return characterIcon(idx);
-            case mounts:
-                return mountIcon(idx);
-            case creatures:
-                return creatureIcon(idx);
+    public static TextureRegion icon(String n) {
+        TextureRegion cr = creaturesAtlas.findRegion(n);
+        if (cr != null) {
+            return cr;
+        }
+        TextureRegion br = bossesAtlas.findRegion(n);
+        if (br != null) {
+            return br;
+        }
+        TextureRegion chr = charactersAtlas.findRegion(n);
+        if (chr != null) {
+            return chr;
+        }
+        TextureRegion mr = mountsAtlas.findRegion(n);
+        if (mr != null) {
+            return mr;
         }
         return null;
     }
 
-    public static Animation animation(Type t, int idx) {
-        switch (t) {
-            case bosses:
-                return bossAnimation(idx);
-            case characters:
-                return characterAnimation(idx);
-            case mounts:
-                return mountAnimation(idx);
-            case creatures:
-                return creatureAnimation(idx);
-        }
-        return null;
-    }
-
-    public static TextureRegion bossIcon(int idx) {
-        Boss b = Boss.values()[idx];
-        return bossesAtlas.findRegion(b.name());
-    }
-
-    public static TextureRegion bossIcon(Boss b) {
-        return bossesAtlas.findRegion(b.name());
-    }
-
-    public static Animation bossAnimation(int idx) {
-        Boss b = Boss.values()[idx];
-        Array<AtlasRegion> arr = bossesAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static Animation bossAnimation(Boss b) {
-        Array<AtlasRegion> arr = bossesAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static TextureRegion creatureIcon(int idx) {
-        Creature b = Creature.values()[idx];
-        return creaturesAtlas.findRegion(b.name());
-    }
-
-    public static TextureRegion creatureIcon(Creature b) {
-        return creaturesAtlas.findRegion(b.name());
-    }
-
-    public static Animation creatureAnimation(int idx) {
-        Creature b = Creature.values()[idx];
-        Array<AtlasRegion> arr = creaturesAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static Animation creatureAnimation(Creature b) {
-        Array<AtlasRegion> arr = creaturesAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static TextureRegion mountIcon(int idx) {
-        Mount b = Mount.values()[idx];
-        return mountsAtlas.findRegion(b.name());
-    }
-
-    public static TextureRegion mountIcon(Mount b) {
-        return mountsAtlas.findRegion(b.name());
-    }
-
-    public static Animation mountAnimation(int idx) {
-        Mount b = Mount.values()[idx];
-        Array<AtlasRegion> arr = mountsAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static Animation mountAnimation(Mount b) {
-        Array<AtlasRegion> arr = mountsAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static TextureRegion characterIcon(int idx) {
-        Character b = Character.values()[idx];
-        return charactersAtlas.findRegion(b.name());
-    }
-
-    public static TextureRegion characterIcon(Character b) {
-        return charactersAtlas.findRegion(b.name());
-    }
-
-    public static Animation characterAnimation(int idx) {
-        Character b = Character.values()[idx];
-        Array<AtlasRegion> arr = charactersAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
-    }
-
-    public static Animation characterAnimation(Character b) {
-        if (charactersAtlas == null) {
+    public static Animation animation(String n) {
+        if (creaturesAtlas == null) {
             return null;
         }
-        Array<AtlasRegion> arr = charactersAtlas.findRegions(b.name());
-        return new Animation(.5f, arr);
+
+        Array<AtlasRegion> ca = creaturesAtlas.findRegions(n);
+        if (ca != null && ca.size != 0) {
+            return new Animation(.2f, ca, Animation.PlayMode.LOOP);
+        }
+        Array<AtlasRegion> ba = bossesAtlas.findRegions(n);
+        if (ba != null && ba.size != 0) {
+            return new Animation(.2f, ba, Animation.PlayMode.LOOP);
+        }
+        Array<AtlasRegion> ch = charactersAtlas.findRegions(n);
+        if (ch != null && ch.size != 0) {
+            return new Animation(.2f, ch, Animation.PlayMode.LOOP);
+        }
+        Array<AtlasRegion> ma = mountsAtlas.findRegions(n);
+        if (ma != null && ma.size != 0) {
+            return new Animation(.2f, ma, Animation.PlayMode.LOOP);
+        }
+        return null;
     }
 
 }

@@ -57,7 +57,7 @@ public class GifExtract {
                         try (CloseableHttpResponse response = client.execute(new HttpGet(url))) {
                             HttpEntity entity = response.getEntity();
                             if (entity != null) {
-                                File myFile = new File("src/main/resources/assets/gifs/mounts/" + names[7]);
+                                File myFile = new File("src/main/resources/assets/gifs/creatures/" + names[7]);
                                 try (FileOutputStream outstream = new FileOutputStream(myFile)) {
                                     entity.writeTo(outstream);
                                 }
@@ -110,13 +110,10 @@ public class GifExtract {
 
     //@Test
     public void makeAtlases() throws Exception {
-        readGifs("creatures");
-        readGifs("bosses");
-        readGifs("mounts");
-        readGifs("characters");
+        readGifs("creatures", "arachnids", "bears", "creatures", "fighters", "outlaws", "sorcerers");
     }
 
-    private static void readGifs(String atlasName) throws Exception {
+    private static void readGifs(String atlasName, String... dirs) throws Exception {
 
         TexturePacker.Settings settings = new TexturePacker.Settings();
         settings.minWidth = 8;
@@ -138,25 +135,28 @@ public class GifExtract {
 
         java.util.Map<String, BufferedImage> indexes = new HashMap<>();
 
-        File directory = new File("src/main/resources/assets/tibian/" + atlasName);
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile()) {
-                    try {
-                        List<BufferedImage> frames = readGif(new FileInputStream(file));
-                        String name = file.getName().replace(".gif", "").replace("%27", "").replace("%28", "").replace("%29", "").replace(" ", "_");
-                        //System.out.printf("%s - frames [%d] width [%d] height [%d]\n", name, frames.length, frames[0].width, frames[0].height);
-                        packFrames(tp, name, frames);
-                        if (frames.get(0).getWidth() < 100) {
-                            indexes.put(name, frames.get(0));
+        for (String d : dirs) {
+
+            File directory = new File("src/main/resources/assets/gifs/" + d);
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        try {
+                            List<BufferedImage> frames = readGif(new FileInputStream(file));
+                            String name = file.getName().replace(".gif", "").replace("%27", "").replace("%28", "").replace("%29", "").replace(" ", "_");
+                            System.out.printf("[%s] %s - frames [%d]\n", d, name, frames.size());
+                            packFrames(tp, name, frames);
+                            if (frames.get(0).getWidth() < 100) {
+                                indexes.put(name, frames.get(0));
+                            }
+                        } catch (Exception e) {
+                            System.out.println(file.getName());
                         }
-                    } catch (Exception e) {
-                        //System.out.println(file.getName());
-                        //e.printStackTrace();
                     }
                 }
             }
+
         }
 
         tp.pack(new File("src/main/resources/assets/tibian"), atlasName + ".atlas");

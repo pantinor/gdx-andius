@@ -1,11 +1,9 @@
 package andius;
 
 import static andius.Andius.CTX;
-import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
-import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,10 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
-/**
- *
- * @author Paul
- */
 public class StartScreen implements Screen, Constants {
 
     float time = 0;

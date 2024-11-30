@@ -32,7 +32,6 @@ public class Actor {
     private final int id;
     private final String name;
     private final Animation anim;
-    private TibianSprite.Type spriteType;
     private Role role;
     private int wx;
     private int wy;
@@ -45,10 +44,9 @@ public class Actor {
     private CursorActor playerCursor;
     private TextureRegion healthBar;
 
-    public Actor(int id, String name, TibianSprite.Type spriteType, Animation anim) {
+    public Actor(int id, String name, Animation anim) {
         this.id = id;
         this.name = name;
-        this.spriteType = spriteType;
         this.anim = anim;
     }
 
@@ -88,10 +86,6 @@ public class Actor {
 
     public Animation getAnimation() {
         return anim;
-    }
-
-    public TibianSprite.Type getSpriteType() {
-        return spriteType;
     }
 
     public int getWx() {

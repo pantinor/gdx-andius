@@ -8,7 +8,8 @@ public class Monster implements Comparable<Monster> {
 
     public String genericName;
     public String name;
-    public int iconId;
+    public int monsterId;
+    private String iconId;
     int type;
     int goldReward;
     int chestReward;
@@ -67,11 +68,15 @@ public class Monster implements Comparable<Monster> {
         return name;
     }
 
-    public int getIconId() {
+    public int getMonsterId() {
+        return monsterId;
+    }
+
+    public String getIconId() {
         return iconId;
     }
 
-    public void setIconId(int iconId) {
+    public void setIconId(String iconId) {
         this.iconId = iconId;
     }
 
@@ -180,22 +185,22 @@ public class Monster implements Comparable<Monster> {
     @Override
     public int compareTo(Monster o) {
         if (this.exp == o.exp) {
-            return Integer.compare(this.hitPoints.getMax(), o.hitPoints.getMax());
+            return Integer.compare(this.hitPoints.max(), o.hitPoints.max());
         }
         return Integer.compare(this.exp, o.exp);
     }
 
     @Override
     public String toString() {
-        return String.format("%s\t%s\t%d\t%d\t%d\t%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s",
+        return String.format("%d\t%s\t%s\t%d\t%d\t%d\t%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s",
+                monsterId,
                 name,
                 Type.values()[this.type],
                 getLevel(),
                 exp,
-                hitPoints.getMax(),
+                hitPoints.max(),
                 armourClass,
                 damage,
-                
                 mageSpellLevel,
                 priestSpellLevel,
                 speed,

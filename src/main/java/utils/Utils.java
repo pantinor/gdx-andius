@@ -12,12 +12,11 @@ import java.util.Random;
 
 public class Utils {
 
-    public static final Random RAND = new XORShiftRandom();
     public static final Random RANDOM = new Random();
 
     //This gives you a random number in between low (inclusive) and high (exclusive)
     public static int getRandomBetween(int low, int high) {
-        return RAND.nextInt(high - low) + low;
+        return RANDOM.nextInt(high - low) + low;
     }
 
     public static boolean randomBoolean() {
@@ -134,7 +133,7 @@ public class Utils {
     }
 
     public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
-        int attackValue = RAND.nextInt(20) + 1;
+        int attackValue = RANDOM.nextInt(20) + 1;
         int defenseValue = 20 - defender.calculateAC() - attacker.getLevel() - (defender.status == Status.OK ? 0 : 3);
 
         if (defenseValue < 1) {
@@ -165,7 +164,7 @@ public class Utils {
         } else if (attacker.str >= 18) {
             strMod = 3;
         }
-        int attackValue = (RAND.nextInt(20) + 1) + strMod;
+        int attackValue = (RANDOM.nextInt(20) + 1) + strMod;
         int defenseValue = 21 - defender.getArmourClass() + defender.getACModifier() - (defender.getStatus() == Status.OK ? 0 : 3);
 
         if (attackValue < 1) {
@@ -200,7 +199,7 @@ public class Utils {
     public static int dealSpellDamage(int hits, int range, int bonus) {
         int points = 0;
         while (hits > 0) {
-            points += RAND.nextInt(range) + 1;
+            points += RANDOM.nextInt(range) + 1;
             hits--;
         }
         points += bonus;

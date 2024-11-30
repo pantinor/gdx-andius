@@ -133,7 +133,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getSpriteType(), this.opponent.getAnimation());
+            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getAnimation());
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
         }
@@ -157,7 +157,6 @@ public class CombatScreen extends BaseScreen {
 
             andius.objects.Actor actor = new andius.objects.Actor(0,
                     context.players()[index].name,
-                    context.players()[index].classType.getSpriteType(),
                     context.players()[index].classType.getAnimation());
 
             actor.set(this.context.players()[index], sx, sy, x, y);

@@ -6,12 +6,10 @@ import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
 import andius.objects.Conversations.Label;
 import andius.objects.Conversations.Topic;
-import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.Reward;
-import andius.objects.Reward.RewardElement;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
@@ -167,21 +165,16 @@ public class ObjectsTestNG {
 
         for (Reward r : rewards) {
 
-            int goldAmt = r.getGoldAmt().roll();
-            //System.out.println(String.format("player found %d gold with %s", goldAmt, r.getName()));
+            int goldAmt = r.goldAmount();
+            System.out.println(String.format("player found %d gold with %s", goldAmt, r.getId()));
 
-            for (RewardElement rw : r.getElements()) {
-                int odds = rw.getOdds();
-                int roll = Dice.rand.nextInt(101);
-                if (roll <= odds) {
-                    String found = rw.getItemNames().get(Dice.rand.nextInt(rw.getItemNames().size()));
-                    //System.out.println(String.format("player finds a %s", found));
+            for (Reward.RewardDetails d : r.getRewardDetails()) {
+                if (d.itemReward != null) {
+                    Item min = items.get(d.itemReward.getMin());
+                    Item mx = items.get(d.itemReward.getMax());
+                    System.out.println(String.format("player finds a %s or a %s", min.name, mx.name));
                 }
-                for (String n : rw.getItemNames()) {
-                    if (!itemMap.containsKey(n)) {
-                        System.out.println("cannot find " + n);
-                    }
-                }
+
             }
 
         }
@@ -199,7 +192,7 @@ public class ObjectsTestNG {
             if (!MONSTER_MAP.containsKey(m.name)) {
                 MONSTER_MAP.put(m.name, m);
             } else {
-                System.err.printf("DUPLICATE %s mid %d level %d\n", m.name, m.iconId, m.getLevel());
+                // System.err.printf("DUPLICATE %s mid %d level %d\n", m.name, m.iconId, m.getLevel());
             }
             MONSTER_LEVELS.get(m.getLevel()).add(m);
         }

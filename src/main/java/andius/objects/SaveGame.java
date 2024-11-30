@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
 import utils.Utils;
-import utils.XORShiftRandom;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import java.io.FileInputStream;
@@ -23,7 +22,7 @@ import org.apache.commons.io.IOUtils;
 
 public class SaveGame implements Constants {
 
-    public static final Random RANDOM = new XORShiftRandom();
+    public static final Random RANDOM = new Random();
 
     public CharacterRecord[] players;
     public int map;

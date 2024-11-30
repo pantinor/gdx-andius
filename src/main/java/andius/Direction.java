@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
-import utils.XORShiftRandom;
+import static utils.Utils.RANDOM;
 
-/**
- *
- * @author Paul
- */
 public enum Direction {
 
     WEST(1, 0x1),
@@ -71,7 +62,7 @@ public enum Direction {
         if (n == 0) {
             return null;
         }
-        int rand = new XORShiftRandom().nextInt(n);
+        int rand = RANDOM.nextInt(n);
         return d[rand];
     }
 

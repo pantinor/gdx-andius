@@ -52,33 +52,7 @@ public interface Constants {
         //        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         //        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         //        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        //        BRITANIA("Castle Britannia", "britania.tmx", TILE_DIM),
-        //        BRITANIA2("Castle Britannia", "britania2.tmx", TILE_DIM),
-        //        LYCAEUM("Lycaeum", "lycaeum.tmx", TILE_DIM),
-        //        EMPATH_ABBEY("Empath Abbey", "empathabbey.tmx", TILE_DIM),
-        //        SERPENTS_HOLD("Serpents Hold", "serpentshold.tmx", TILE_DIM),
-        //        MOONGLOW("Moonglow", "moonglow.tmx", TILE_DIM),
-        //        BRITAIN("Britain", "britain.tmx", TILE_DIM),
-        //        JHELOM("Jhelom", "jhelom.tmx", TILE_DIM),
-        //        YEW("Yew", "yew.tmx", TILE_DIM),
-        //        MINOC("Minoc", "minoc.tmx", TILE_DIM),
-        //        TRINSIC("Trinsic", "trinsic.tmx", TILE_DIM),
-        //        SKARABRAE("Skara Brae", "skarabrae.tmx", TILE_DIM),
-        //        MAGINCIA("Magincia", "magincia.tmx", TILE_DIM),
-        //        PAWS("Paws", "paws.tmx", TILE_DIM),
-        //        BUCCANEERS_DEN("Buccaneers Den", "buccaneersden.tmx", TILE_DIM),
-        //        VESPER("Vesper", "vesper.tmx", TILE_DIM),
-        //        COVE("Cove", "cove.tmx", TILE_DIM),
         WIZARDRY1("Wizardy Level 1", null, 0);
-//        WIZARDRY2("Wizardy Level 2", "WizLevel2.tmx", TILE_DIM),
-//        WIZARDRY3("Wizardy Level 3", "WizLevel3.tmx", TILE_DIM),
-//        WIZARDRY4("Wizardy Level 4", "WizLevel4.tmx", TILE_DIM),
-//        WIZARDRY5("Wizardy Level 5", "WizLevel5.tmx", TILE_DIM),
-//        WIZARDRY6("Wizardy Level 6", "WizLevel6.tmx", TILE_DIM),
-//        WIZARDRY7("Wizardy Level 7", "WizLevel7.tmx", TILE_DIM),
-//        WIZARDRY8("Wizardy Level 8", "WizLevel8.tmx", TILE_DIM),
-//        WIZARDRY9("Wizardy Level 9", "WizLevel9.tmx", TILE_DIM),
-//        WIZARDRY10("Wizardy Level 10", "WizLevel10.tmx", TILE_DIM);
 
         private final String label;
         private final String tmxFile;
@@ -218,10 +192,7 @@ public interface Constants {
 
                 MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
-                    loadPeopleLayer(peopleLayer, TibianSprite.Type.bosses);
-                    loadPeopleLayer(peopleLayer, TibianSprite.Type.creatures);
-                    loadPeopleLayer(peopleLayer, TibianSprite.Type.characters);
-                    loadPeopleLayer(peopleLayer, TibianSprite.Type.mounts);
+                    //loadPeopleLayer(peopleLayer);
                 }
 
                 MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
@@ -262,9 +233,9 @@ public interface Constants {
 
         }
 
-        private void loadPeopleLayer(MapLayer peopleLayer, TibianSprite.Type type) {
-            TiledMapTileLayer tileLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get(type.name());
-            int firstgid = this.tiledMap.getTileSets().getTileSet("tibian-" + type.name()).getProperties().get("firstgid", Integer.class);
+        private void loadPeopleLayer(MapLayer peopleLayer) {
+            TiledMapTileLayer tileLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get("xxxxx");
+            int firstgid = this.tiledMap.getTileSets().getTileSet("tibian-" + "xxxxx").getProperties().get("firstgid", Integer.class);
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
@@ -282,7 +253,7 @@ public interface Constants {
                     Role role = Role.valueOf(obj.getProperties().get("type", String.class));
                     MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
 
-                    Actor actor = new Actor(id, surname, type, TibianSprite.animation(type, iconId));
+                    Actor actor = new Actor(id, surname, TibianSprite.animation("xxxxx"));
                     if (role == Role.MONSTER) {
                         try {
                             String mid = obj.getProperties().get("creature", String.class);

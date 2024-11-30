@@ -80,7 +80,7 @@ public class CombatTestMain extends Game {
 
             Monster monster = Andius.MONSTER_LEVELS.get(1).get(2);
 
-            Actor actor = new Actor(0, monster.name, TibianSprite.Type.creatures, TibianSprite.creatureAnimation(TibianSprite.Creature.Barbarian_Brutetamer)); //TODO
+            Actor actor = new Actor(0, monster.name, TibianSprite.animation("Barbarian_Brutetamer")); //TODO
 
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);

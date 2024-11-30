@@ -1,7 +1,6 @@
 
-import andius.objects.Icons;
+import andius.TibianSprite;
 import andius.objects.Monster;
-import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -9,24 +8,25 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -42,49 +42,22 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
     static int screenWidth = 1920;
     static int screenHeight = 1008;
 
-    int dim = 48;
-    int canvasGridWidth;
-    int canvasGridHeight;
-
-    boolean initMapPosition = true;
-
-    MyVector currentMapCoords;
-    MyVector selectedMapCoords;
+    int dim = 64;
 
     BitmapFont font;
-    Sprite sprBg;
 
     Stage stage;
     Skin skin;
-    MyListItem selectedMonster;
 
-    java.util.List<MyListItem> gridItems;
-    Texture box;
+    String selectedIcon;
+    MyListItem selectedMonster;
 
     java.util.List<Monster> monsters;
 
     @Override
     public void create() {
 
-        Pixmap pixmap = new Pixmap(dim, dim, Format.RGBA8888);
-        pixmap.setColor(new Color(1, 1, 0, .8f));
-        int w = 1;
-        pixmap.fillRectangle(0, 0, w, dim);
-        pixmap.fillRectangle(dim - w, 0, w, dim);
-        pixmap.fillRectangle(w, 0, dim - 2 * w, w);
-        pixmap.fillRectangle(w, dim - w, dim - 2 * w, w);
-        box = new Texture(pixmap);
-        FileHandle fh = Gdx.files.classpath("assets/data/uf_heroes.png");
-        Texture tx = new Texture(fh);
-        canvasGridWidth = tx.getWidth() / dim;
-        canvasGridHeight = tx.getHeight() / dim;
-
-        sprBg = new Sprite(tx, 0, 0, tx.getWidth(), tx.getHeight());
-
-        gridItems = new ArrayList<>();
-
         font = new BitmapFont();
-        font.setColor(Color.WHITE);
 
         batch = new SpriteBatch();
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
@@ -92,59 +65,89 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
         final List<MyListItem> list = new List<>(skin);
 
+        TibianSprite.init();
+
+        Table animTable = new Table(skin);
+        animTable.defaults().pad(2);
+        int count = 0;
+        for (String name : TibianSprite.names()) {
+            Image im = new Image(TibianSprite.icon(name));
+            im.setName(name);
+            im.setWidth(64);
+            im.setHeight(64);
+
+            im.addListener(new ClickListener(-1) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (event.getButton() == 0) {
+                        selectedIcon = event.getTarget().getName();
+                        if (selectedMonster != null) {
+                            selectedMonster.monster.setIconId(selectedIcon);
+                        }
+                    }
+                }
+            });
+
+            animTable.add(im);
+            count++;
+            if (count > 20) {
+                count = 0;
+                animTable.row();
+            }
+        }
+
+        ScrollPane imageScrollPane = new AutoFocusScrollPane(animTable, skin);
+        imageScrollPane.setScrollingDisabled(true, false);
+        imageScrollPane.setBounds(0, screenHeight, screenWidth - 300, screenHeight);
+        imageScrollPane.setPosition(0, 0);
+
         try {
-            Icons.init();
-
             String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/monsters.json")));
-
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             monsters = gson.fromJson(json, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-
-            MyListItem[] items = new MyListItem[monsters.size()];
-            int x = 0;
-            for (Monster m : monsters) {
-                items[x] = new MyListItem(m);
-                x++;
-            }
-            list.setItems(items);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            //ignore
         }
 
-        list.addListener(new ChangeListener() {
+        MyListItem[] items = new MyListItem[monsters.size()];
+        int x = 0;
+        for (Monster m : monsters) {
+            items[x] = new MyListItem(m);
+            x++;
+        }
+        list.setItems(items);
+
+        list.addListener(new ClickListener(-1) {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                selectedMonster = list.getSelected();
+            public void clicked(InputEvent event, float x, float y) {
+                if (event.getButton() == 0) {
+                    selectedMonster = list.getSelected();
+                }
             }
         });
 
-        ScrollPane scrollPane = new ScrollPane(list, skin);
+        ScrollPane scrollPane = new AutoFocusScrollPane(list, skin);
         scrollPane.setScrollingDisabled(true, false);
 
-        TextButton makeButton = new TextButton("Make Atlas", skin, "default");
+        TextButton makeButton = new TextButton("Write JSON", skin, "default");
         makeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                for (Monster m : monsters) {
-                    //m.name = toCamelCase(m.name);
-                    //m.genericName = toCamelCase(m.genericName);
-                    System.out.println(m.name + "\t" + m.genericName + "\t" + m.iconId);
-                }
                 writeJson("monsters.json", monsters);
             }
         });
 
         Table table = new Table(skin);
         table.defaults().pad(2);
-        table.add(makeButton).expandX().left().width(175);
+        table.add(makeButton).expandX().left().width(300);
         table.row();
-        table.add(scrollPane).expandX().left().width(175).maxHeight(screenHeight);
-        table.setBounds(screenWidth - 175, screenHeight, 175, 200);
-        table.setPosition(screenWidth - 175, 300);
-        //table.setFillParent(true);
+        table.add(scrollPane).expandX().left().width(300).maxHeight(screenHeight);
+        table.setBounds(screenWidth - 300, screenHeight, 300, 800);
+        table.setPosition(screenWidth - 300, 200);
 
+        stage.addActor(imageScrollPane);
         stage.addActor(table);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(stage, this));
@@ -152,60 +155,18 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
     }
 
     @Override
+
     public void render() {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-
-        batch.draw(sprBg, 0, screenHeight - sprBg.getHeight());
-
-        font.draw(batch, "current mouse coords: " + currentMapCoords, 10, 80);
-        font.draw(batch, "selectedMapCoords: " + selectedMapCoords, 10, 60);
-        try {
-            int idx = selectedMapCoords.y * 40 + selectedMapCoords.x;
-            font.draw(batch, "touchedIcon: " + Icons.get(idx) + " " + idx, 10, 40);
-        } catch (Exception e) {
-
-        }
-        font.draw(batch, "selectedMonster: " + selectedMonster, 10, 20);
-
-        batch.end();
-
         stage.act();
         stage.draw();
-    }
 
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-
-        currentMapCoords = new MyVector(
-                Math.round(screenX / dim),
-                Math.round((screenHeight / dim) - ((screenHeight - screenY) / dim) - 1)
-        );
-
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-        int x = Math.round(screenX / dim);
-        int y = Math.round((screenHeight / dim) - ((screenHeight - screenY) / dim) - 1);
-
-        if (y <= canvasGridHeight && x <= canvasGridWidth) {
-
-            selectedMapCoords = new MyVector(x, y);
-
-            if (selectedMonster != null) {
-                int idx = selectedMapCoords.y * 40 + selectedMapCoords.x;
-                selectedMonster.monster.setIconId(idx);
-                selectedMonster.iconId = idx;
-            }
-
-        }
-
-        return false;
+        batch.begin();
+        font.draw(batch, "icon: " + selectedIcon, screenWidth - 350, screenHeight - 830);
+        font.draw(batch, "monster: " + selectedMonster, screenWidth - 350, screenHeight - 860);
+        batch.end();
     }
 
     private void writeJson(String file, java.util.List<Monster> obj) {
@@ -230,43 +191,24 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
 
     }
 
-    public class MyVector {
-
-        private int x;
-        private int y;
-
-        private MyVector(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("%s, %s", x, y);
-        }
-
-    }
-
     public class MyListItem implements Comparable<MyListItem> {
 
         public final String name;
         public final Monster monster;
-        public int iconId;
 
         public MyListItem(Monster m) {
             this.name = m.getName();
             this.monster = m;
-            this.iconId = m.getIconId();
         }
 
         @Override
         public String toString() {
-            return String.format("%s - %s", name, iconId);
+            return String.format("%s - %s", name, monster.getIconId());
         }
 
         @Override
         public int compareTo(MyListItem o) {
-            return Integer.compare(this.monster.getIconId(), o.monster.getIconId());
+            return Integer.compare(this.monster.getMonsterId(), o.monster.getMonsterId());
         }
 
     }
@@ -293,6 +235,24 @@ public class SpriteAtlasTool extends InputAdapter implements ApplicationListener
     public void resume() {
         // TODO Auto-generated method stub
 
+    }
+
+    public class AutoFocusScrollPane extends ScrollPane {
+
+        public AutoFocusScrollPane(Actor widget, Skin skin) {
+            super(widget, skin);
+            addListener(new InputListener() {
+                @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                    getStage().setScrollFocus(AutoFocusScrollPane.this);
+                }
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                    getStage().setScrollFocus(null);
+                }
+            });
+        }
     }
 
 }

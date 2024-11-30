@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import static andius.Andius.mainGame;
 import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.Reward;
-import andius.objects.Reward.RewardElement;
+import andius.objects.Reward.RewardDetails;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
@@ -29,20 +24,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.Random;
-import utils.XORShiftRandom;
+import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class RewardScreen implements Screen, Constants {
 
     public enum TrapType {
         NONE,
         POISON_NEEDLE,
         GAS_BOMB,
+        BOLT,
+        TELEPORTER,
         ANTI_MAGE,
         ANTI_PRIEST,
+        ALARM,
         CROSSBOW_BOLT,
         EXPLODING_BOX,
         SPLINTERS,
@@ -71,7 +65,7 @@ public class RewardScreen implements Screen, Constants {
     private final TextButton go;
 
     TrapType trapType = TrapType.NONE;
-    protected Random rand = new XORShiftRandom();
+    protected Random rand = new Random();
     private final java.util.List<CharacterRecord> whoTried = new java.util.ArrayList<>();
     private boolean chestOpened = false;
 
@@ -91,7 +85,17 @@ public class RewardScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        this.trapType = TrapType.values()[rand.nextInt(TrapType.values().length)];
+        int trap = chestReward.trapTypeFlags;
+        java.util.List<TrapType> tmp = new ArrayList<>();
+        for (int j = 0; j < TrapType.values().length; j++) {
+            if ((trap & 0x01) != 0) {
+                tmp.add(TrapType.values()[j]);
+            }
+            trap >>>= 1;
+        }
+        if (tmp.size() > 0) {
+            this.trapType = tmp.get(rand.nextInt(tmp.size()));
+        }
 
         final TrapType[] tt = new TrapType[TrapType.values().length - 1];
         for (int i = 1; i < TrapType.values().length; i++) {
@@ -201,27 +205,32 @@ public class RewardScreen implements Screen, Constants {
             }
         }
 
-        int goldAmt = this.chestReward.getGoldAmt().roll();
-        for (CharacterRecord c : okChars) {
-            c.adjustGold(goldAmt);
-            log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+        if (chestReward != null) {
+            for (CharacterRecord c : okChars) {
+                int goldAmt = this.chestReward.goldAmount();
+                c.adjustGold(goldAmt);
+                log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+            }
         }
 
-        if (!okChars.isEmpty()) {
-            for (RewardElement rw : chestReward.getElements()) {
-                int odds = rw.getOdds();
-                int roll = rand.nextInt(101);
-                if (roll <= odds) {
-                    CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
-                    int r = rand.nextInt(rw.getItemNames().size());
-                    Item found = Andius.ITEMS_MAP.get(rw.getItemNames().get(r)).clone();
-                    picked.inventory.add(found);
-                    log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
+        if (chestReward != null) {
+            if (!okChars.isEmpty()) {
+                for (RewardDetails d : chestReward.getRewardDetails()) {
+                    if (d.itemReward != null) {
+                        int odds = d.odds;
+                        int roll = rand.nextInt(101);
+                        if (roll <= odds) {
+                            CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
+                            int itemId = Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax());
+                            Item found = Andius.ITEMS.get(itemId).clone();
+                            picked.inventory.add(found);
+                            log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
+                        }
+                    }
                 }
+                Sounds.play(Sound.POSITIVE_EFFECT);
+                this.chestOpened = true;
             }
-
-            Sounds.play(Sound.POSITIVE_EFFECT);
-            this.chestOpened = true;
         }
 
     }
@@ -414,9 +423,9 @@ public class RewardScreen implements Screen, Constants {
                 okChars.add(c);
             }
         }
-        int goldAmt = this.goldReward.getGoldAmt().roll();
         int exp = this.expPoints / okChars.size();
         for (CharacterRecord c : okChars) {
+            int goldAmt = this.goldReward.goldAmount();
             c.adjustGold(goldAmt);
             c.awardXP(exp);
             log(String.format("%s found %d gold and %d experience points.", c.name.toUpperCase(), goldAmt, exp));

@@ -6,7 +6,6 @@ import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
-import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -369,7 +368,7 @@ public class GameScreen extends BaseScreen {
                     if (monsterFound != null) {
                         Monster found = Andius.MONSTER_MAP.get(monsterFound);
                         if (found != null) {
-                            Actor actor = new Actor(-1, monsterFound, TibianSprite.Type.creatures, TibianSprite.creatureAnimation(TibianSprite.Creature.Barbarian_Brutetamer)); //TODO
+                            Actor actor = new Actor(-1, monsterFound, TibianSprite.animation("Barbarian_Brutetamer")); //TODO
                             MutableMonster mm = new MutableMonster(found);
                             String msx = obj.getProperties().get("monsterSpawnX", String.class);
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);
