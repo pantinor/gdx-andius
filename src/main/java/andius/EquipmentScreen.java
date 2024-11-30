@@ -429,11 +429,11 @@ public class EquipmentScreen implements Screen, Constants {
 
             weaponIcon = make(ItemType.WEAPON, sp.weapon, icon(sp.weapon), 283, Andius.SCREEN_HEIGHT - 276);
             armorIcon = make(ItemType.ARMOR, sp.armor, icon(sp.armor), 283, Andius.SCREEN_HEIGHT - 220);
-            helmIcon = make(ItemType.HELM, sp.helm, icon(sp.helm), 349, Andius.SCREEN_HEIGHT - 220);
+            helmIcon = make(ItemType.HELMET, sp.helm, icon(sp.helm), 349, Andius.SCREEN_HEIGHT - 220);
             shieldIcon = make(ItemType.SHIELD, sp.shield, icon(sp.shield), 415, Andius.SCREEN_HEIGHT - 220);
-            glovesIcon = make(ItemType.GLOVES, sp.glove, icon(sp.glove), 415, Andius.SCREEN_HEIGHT - 276);
-            item1Icon = make(ItemType.RING_AMULET, sp.item1, icon(sp.item1), 322, Andius.SCREEN_HEIGHT - 333);
-            item2Icon = make(ItemType.RING_AMULET, sp.item2, icon(sp.item2), 376, Andius.SCREEN_HEIGHT - 333);
+            glovesIcon = make(ItemType.GAUNTLET, sp.glove, icon(sp.glove), 415, Andius.SCREEN_HEIGHT - 276);
+            item1Icon = make(ItemType.MISC, sp.item1, icon(sp.item1), 322, Andius.SCREEN_HEIGHT - 333);
+            item2Icon = make(ItemType.MISC, sp.item2, icon(sp.item2), 376, Andius.SCREEN_HEIGHT - 333);
 
             String d2 = String.format("%s  LVL %d  %s", character.race.toString(), character.level, character.classType.toString());
             classL = new Label(d2, Andius.skin, "larger");
@@ -596,7 +596,7 @@ public class EquipmentScreen implements Screen, Constants {
             @Override
             public boolean handle(Event event) {
                 if (selectedItem != null && event.toString().equals("touchDown")) {
-                    if (this.type.ordinal() == selectedItem.item.type && selectedItem.item.canUse(PlayerIndex.this.character.classType)) {
+                    if (this.type == selectedItem.item.type && selectedItem.item.canUse(PlayerIndex.this.character.classType)) {
                         Sounds.play(Sound.TRIGGER);
                         Item old = (Item) event.getTarget().getUserObject();
                         event.getTarget().setUserObject(selectedItem.item);
@@ -625,7 +625,7 @@ public class EquipmentScreen implements Screen, Constants {
                     }
                 } else if (event.toString().equals("enter")) {
                     Item i = (Item) event.getTarget().getUserObject();
-                    invDesc.setText(i != null ? i.name + " " + (i.numberUses > 0 ? "("+i.numberUses+")" : "") : "");
+                    invDesc.setText(i != null ? i.name : "");
                     selectedImage = (Image) event.getTarget();
                 } else if (event.toString().equals("exit")) {
                     invDesc.setText("");

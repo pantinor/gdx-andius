@@ -156,7 +156,7 @@ public class SaveGame implements Constants {
             exp = Utils.adjustValueMax(exp, amt, Integer.MAX_VALUE);
         }
 
-        public void adjustGold(int amt) {
+        public void adjustGold(long amt) {
             gold = Utils.adjustValue(gold, amt, Integer.MAX_VALUE, 0);
         }
 

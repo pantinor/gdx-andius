@@ -876,7 +876,7 @@ public class CombatScreen extends BaseScreen {
 
     private AttackVector attack(andius.objects.Actor attacker, andius.objects.Actor target) {
         Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
-        int range = weapon.range == 0 ? 1 : weapon.range;
+        int range = 1;//weapon.range == 0 ? 1 : weapon.range;
 
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
         av.result = AttackResult.MISS;
@@ -891,15 +891,15 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
-            weapon.use();
-            if (weapon.numberUses <= 0) {
-                log("Your weapon has broken!");
-                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
-                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
-                attacker.getPlayer().weapon = null;
-            }
-        }
+//        if (av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
+//            weapon.use();
+//            if (weapon.numberUses <= 0) {
+//                log("Your weapon has broken!");
+//                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
+//                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
+//                attacker.getPlayer().weapon = null;
+//            }
+//        }
 
         return av;
     }
@@ -907,7 +907,7 @@ public class CombatScreen extends BaseScreen {
     private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
 
         Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
-        int range = weapon.range == 0 ? 1 : weapon.range;
+        int range = 1;//weapon.range == 0 ? 1 : weapon.range;
 
         List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);
 
@@ -933,15 +933,15 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
-        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
-            weapon.use();
-            if (weapon.numberUses <= 0) {
-                log("Your weapon has broken!");
-                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
-                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
-                attacker.getPlayer().weapon = null;
-            }
-        }
+//        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
+//            weapon.use();
+//            if (weapon.numberUses <= 0) {
+//                log("Your weapon has broken!");
+//                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
+//                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
+//                attacker.getPlayer().weapon = null;
+//            }
+//        }
 
         return av;
     }

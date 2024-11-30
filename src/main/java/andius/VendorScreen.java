@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import static andius.Andius.ITEMS;
@@ -39,10 +34,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class VendorScreen implements Screen, Constants {
 
     private final Context context;
@@ -430,11 +421,11 @@ public class VendorScreen implements Screen, Constants {
 
             weaponIcon = make(ItemType.WEAPON, sp.weapon, icon(sp.weapon), 58, Andius.SCREEN_HEIGHT - 473);
             armorIcon = make(ItemType.ARMOR, sp.armor, icon(sp.armor), 58, Andius.SCREEN_HEIGHT - 417);
-            helmIcon = make(ItemType.HELM, sp.helm, icon(sp.helm), 124, Andius.SCREEN_HEIGHT - 417);
+            helmIcon = make(ItemType.HELMET, sp.helm, icon(sp.helm), 124, Andius.SCREEN_HEIGHT - 417);
             shieldIcon = make(ItemType.SHIELD, sp.shield, icon(sp.shield), 190, Andius.SCREEN_HEIGHT - 417);
-            glovesIcon = make(ItemType.GLOVES, sp.glove, icon(sp.glove), 190, Andius.SCREEN_HEIGHT - 473);
-            item1Icon = make(ItemType.RING_AMULET, sp.item1, icon(sp.item1), 97, Andius.SCREEN_HEIGHT - 530);
-            item2Icon = make(ItemType.RING_AMULET, sp.item2, icon(sp.item2), 151, Andius.SCREEN_HEIGHT - 530);
+            glovesIcon = make(ItemType.GAUNTLET, sp.glove, icon(sp.glove), 190, Andius.SCREEN_HEIGHT - 473);
+            item1Icon = make(ItemType.MISC, sp.item1, icon(sp.item1), 97, Andius.SCREEN_HEIGHT - 530);
+            item2Icon = make(ItemType.MISC, sp.item2, icon(sp.item2), 151, Andius.SCREEN_HEIGHT - 530);
 
             acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
             acLabel.setX(131);
@@ -506,7 +497,7 @@ public class VendorScreen implements Screen, Constants {
             @Override
             public boolean handle(Event event) {
                 if (selectedItem != null && event.toString().equals("touchDown")) {
-                    if (this.type.ordinal() == selectedItem.item.type && selectedItem.item.canUse(PlayerIndex.this.character.classType)) {
+                    if (this.type == selectedItem.item.type && selectedItem.item.canUse(PlayerIndex.this.character.classType)) {
                         Sounds.play(Sound.TRIGGER);
                         Item old = (Item) event.getTarget().getUserObject();
                         event.getTarget().setUserObject(selectedItem.item);

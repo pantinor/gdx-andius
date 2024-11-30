@@ -59,9 +59,9 @@ public class GameScreen extends BaseScreen {
             @Override
             public void render(float time) {
                 renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrames()[currentDirection], newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
-                for (Actor cr : GameScreen.this.map.getMap().actors) {
-                    if (renderer.shouldRenderCell(currentRoomId, cr.getWx(), cr.getWy())) {
-                        renderer.getBatch().draw(cr.getIcon(), cr.getX() - 20, cr.getY() + 12);
+                for (Actor a : GameScreen.this.map.getMap().actors) {
+                    if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
+                        renderer.getBatch().draw(a.getIcon(), a.getX() - 20, a.getY() + 12);
                     }
                 }
             }

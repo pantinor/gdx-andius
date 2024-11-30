@@ -39,7 +39,7 @@ public class Utils {
         return v;
     }
 
-    public static int adjustValue(int v, int amt, int max, int min) {
+    public static int adjustValue(int v, long amt, int max, int min) {
         v += amt;
         if (v > max) {
             v = max;

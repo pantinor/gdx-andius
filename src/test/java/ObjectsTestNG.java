@@ -159,7 +159,7 @@ public class ObjectsTestNG {
         java.util.Map<String, Item> itemMap = new HashMap<>();
 
         for (Item it : items) {
-            //System.out.println(it);
+            System.out.println(it);
             itemMap.put(it.name, it);
         }
 

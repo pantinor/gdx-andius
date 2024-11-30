@@ -182,7 +182,7 @@ public class CombatHud {
                 itemButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
                 itemButtons[i].setX(x);
                 itemButtons[i].setY(y);
-                itemTooltips[i] = new Label(item.name + " " + (item.numberUses > 0 ? "(" + item.numberUses + ")" : ""), Andius.skin, "hudSmallFont");
+                itemTooltips[i] = new Label(item.name, Andius.skin, "hudSmallFont");
                 itemTooltips[i].setPosition(x, y);
                 ItemListener l = new ItemListener(player, item, itemTooltips[i]);
                 itemButtons[i].addListener(l);
@@ -222,9 +222,8 @@ public class CombatHud {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (item != null && item.spell != null && item.numberUses > 0) {
-                item.numberUses--;
-                tooltip.setText(item.name + " (" + item.numberUses + ")");
+            if (item != null && item.spell != null ) {
+                tooltip.setText(item.name);
                 screen.initCast(item.spell, player);
             }
             return false;

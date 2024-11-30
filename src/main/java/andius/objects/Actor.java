@@ -31,7 +31,7 @@ public class Actor {
 
     private final int id;
     private final String name;
-    private final Animation anim;
+    private Animation anim;
     private Role role;
     private int wx;
     private int wy;
@@ -58,6 +58,10 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.monster = monster;
+        
+        if (this.monster != null) {
+            this.anim = TibianSprite.animation(this.monster.getIconId());
+        }
     }
 
     public void set(CharacterRecord player, int wx, int wy, float x, float y) {

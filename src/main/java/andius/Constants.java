@@ -192,7 +192,7 @@ public interface Constants {
 
                 MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
-                    //loadPeopleLayer(peopleLayer);
+                    loadPeopleLayer(peopleLayer);
                 }
 
                 MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
@@ -234,46 +234,50 @@ public interface Constants {
         }
 
         private void loadPeopleLayer(MapLayer peopleLayer) {
-            TiledMapTileLayer tileLayer = (TiledMapTileLayer) this.tiledMap.getLayers().get("xxxxx");
-            int firstgid = this.tiledMap.getTileSets().getTileSet("tibian-" + "xxxxx").getProperties().get("firstgid", Integer.class);
+            
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
-                String surname = obj.getName();
+                String name = obj.getName();
                 int id = obj.getProperties().get("id", Integer.class);
                 float x = obj.getProperties().get("x", Float.class);
                 float y = obj.getProperties().get("y", Float.class);
                 int sx = (int) (x / TILE_DIM);
                 int sy = (int) (y / TILE_DIM);
-
-                TiledMapTileLayer.Cell iconCell = tileLayer.getCell(sx, sy);
-                if (iconCell != null) {
-                    int iconId = iconCell.getTile().getId() - firstgid;
-
-                    Role role = Role.valueOf(obj.getProperties().get("type", String.class));
-                    MovementBehavior movement = MovementBehavior.valueOf(obj.getProperties().get("movement", String.class));
-
-                    Actor actor = new Actor(id, surname, TibianSprite.animation("xxxxx"));
-                    if (role == Role.MONSTER) {
-                        try {
-                            String mid = obj.getProperties().get("creature", String.class);
-                            Monster monster = Andius.MONSTER_MAP.get(mid != null ? mid : "Bubbly Slime");
-                            if (monster != null) {
-                                MutableMonster mm = new MutableMonster(monster);
-                                mm.name = surname;
-                                actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
-                            } else {
-                                System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s] icon id [%s]\n", surname, role, movement, this, mid, iconId);
-                            }
-                        } catch (Exception e) {
-                            System.err.printf("Cannot find monster: %s on map %s.\n", surname, this);
-                        }
-                    } else {
-                        actor.set(null, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
-                    }
-
-                    this.baseMap.actors.add(actor);
+                
+                String icon = obj.getProperties().get("icon", String.class);
+                if (icon == null) {
+                    icon = "Knight_Arena_Champion_Male";
                 }
+
+                String rl = obj.getProperties().get("type", String.class);
+                Role role = Role.valueOf(rl != null ? rl : "FRIENDLY");
+                
+                String mv = obj.getProperties().get("movement", String.class);
+                MovementBehavior movement = MovementBehavior.valueOf(mv != null ? mv : "FIXED");
+
+                Actor actor = new Actor(id, name, TibianSprite.animation(icon));
+                if (role == Role.MONSTER) {
+                    try {
+                        String mid = obj.getProperties().get("monsterID", String.class);
+                        Monster monster = Andius.MONSTER_MAP.get(mid != null ? mid : name);
+                        if (monster != null) {
+                            MutableMonster mm = new MutableMonster(monster);
+                            mm.name = name;
+                            actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                        } else {
+                            System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s] icon id [%s]\n",
+                                    name, role, movement, this, mid, icon);
+                        }
+                    } catch (Exception e) {
+                        System.err.printf("Cannot find monster: %s on map %s.\n", name, this);
+                    }
+                } else {
+                    actor.set(null, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                }
+
+                this.baseMap.actors.add(actor);
+
             }
         }
 

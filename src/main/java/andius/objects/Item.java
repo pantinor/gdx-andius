@@ -3,17 +3,11 @@ package andius.objects;
 public class Item implements Comparable<Item> {
 
     public enum ItemType {
-        WEAPON,
-        ARMOR,
-        SHIELD,
-        HELM,
-        GLOVES,
-        POTION_SCROLL_SPECIAL,
-        RING_AMULET;
+        WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET, SPECIAL, MISC;
     }
-    
+
     public Item() {
-        
+
     }
 
     public static final Item HANDS = new Item();
@@ -24,11 +18,12 @@ public class Item implements Comparable<Item> {
         HANDS.genericName = "HANDS";
     }
 
+    public int id;
     public String name;
     public String genericName;
     public int iconID;
-    public int type;
-    public int cost;
+    public ItemType type;
+    public long cost;
     public Dice damage;
     public int armourClass;
     public int extraSwings;
@@ -36,13 +31,13 @@ public class Item implements Comparable<Item> {
     public boolean cursed;
     public String usable;
     public Spells spell;
-    public int numberUses;
     public int regeneration;
-    public int range;
+    public boolean crithitm;
 
     @Override
     public Item clone() {
         Item i = new Item();
+        i.id = this.id;
         i.iconID = this.iconID;
         i.type = this.type;
         i.cost = this.cost;
@@ -55,7 +50,7 @@ public class Item implements Comparable<Item> {
         i.cursed = this.cursed;
         i.usable = this.usable;
         i.spell = this.spell;
-        i.numberUses = this.numberUses;
+        i.crithitm = this.crithitm;
         i.regeneration = this.regeneration;
         return i;
     }
@@ -65,14 +60,10 @@ public class Item implements Comparable<Item> {
         return this.usable.indexOf(ct.getAbbr()) != -1;
     }
 
-    public void use() {
-        this.numberUses--;
-    }
-
     @Override
     public int compareTo(Item o) {
         if (this.type != o.type) {
-            return Integer.compare(this.type, o.type);
+            return Integer.compare(this.type.ordinal(), o.type.ordinal());
         }
         if (this.armourClass != o.armourClass) {
             return Integer.compare(this.armourClass, o.armourClass);
@@ -83,15 +74,14 @@ public class Item implements Comparable<Item> {
     @Override
     public String toString() {
         //return String.format("%s %d %s %s", name, cost, armourClass, spell != null ? spell : "");
-        return String.format("%s\t%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d\t%d\t%s", 
-                name, 
-                ItemType.values()[this.type],
-                cost, 
-                damage, 
-                armourClass, 
-                extraSwings, spell != null ? spell : "", 
-                numberUses, 
-                regeneration, 
+        return String.format("%s\t%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d\t%s",
+                name,
+                type,
+                cost,
+                damage,
+                armourClass,
+                extraSwings, spell != null ? spell : "",
+                regeneration,
                 stock,
                 usable);
     }
