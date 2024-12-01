@@ -1,5 +1,5 @@
 package utils;
 
-public class PartyDeathException extends Exception {
+public class PartyDeathException extends RuntimeException {
 
 }

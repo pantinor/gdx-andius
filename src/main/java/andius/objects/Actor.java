@@ -10,6 +10,8 @@ import andius.Constants.Role;
 import andius.TibianSprite;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -58,7 +60,7 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.monster = monster;
-        
+
         if (this.monster != null) {
             this.anim = TibianSprite.animation(this.monster.getIconId());
         }
@@ -86,6 +88,18 @@ public class Actor {
 
     public TextureRegion getIcon() {
         return (TextureRegion) this.anim.getKeyFrames()[this.dir];
+        //TextureRegion tr = (TextureRegion) this.anim.getKeyFrames()[this.dir];
+        //return makesquare(tr.getRegionWidth(),tr.getRegionHeight());
+        //return makesquare(20, 20);
+    }
+
+    private TextureRegion makesquare(int w, int h) {
+        Pixmap pix = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+        pix.setColor(Color.PINK);
+        pix.fillRectangle(0, 0, w, h);
+        Texture t = new Texture(pix);
+        pix.dispose();
+        return new TextureRegion(t);
     }
 
     public Animation getAnimation() {

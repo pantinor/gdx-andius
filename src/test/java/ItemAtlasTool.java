@@ -1,7 +1,5 @@
 
 import andius.objects.Item;
-import andius.objects.Monster;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -82,6 +80,7 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
                             selectedIcon = Integer.parseInt(event.getTarget().getName());
                             if (selectedItem != null) {
                                 selectedItem.icon = selectedIcon;
+                                items.get(selectedItem.id).iconID = selectedIcon;
                             }
                         }
                     }
@@ -110,7 +109,7 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         MyListItem[] listItems = new MyListItem[items.size()];
         int x = 0;
         for (Item i : items) {
-            listItems[x] = new MyListItem(i.name, i.iconID);
+            listItems[x] = new MyListItem(i.id, i.name, i.iconID);
             x++;
         }
         list.setItems(listItems);
@@ -190,9 +189,11 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
     public class MyListItem implements Comparable<MyListItem> {
 
         public final String name;
+        public final int id;
         public int icon;
 
-        public MyListItem(String name, int icon) {
+        public MyListItem(int id, String name, int icon) {
+            this.id = id;
             this.name = name;
             this.icon = icon;
         }

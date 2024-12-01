@@ -18,26 +18,26 @@ public class Context {
     public void setSaveGame(SaveGame sg) {
         this.saveGame = sg;
     }
-    
+
     public CharacterRecord[] players() {
         return this.saveGame.players;
     }
 
-    public void endTurn(Constants.Map map, CharacterRecord player) throws PartyDeathException {
+    public void endTurn(Constants.Map map) throws PartyDeathException {
         int decr_interval = (map == Constants.Map.WORLD ? 40 : 10);
-        if (player.status != Constants.Status.DEAD) {
-            player.submorsels -= decr_interval;
-            if (player.submorsels < 0) {
-                player.submorsels = 400;
-                if (player.status == Constants.Status.POISONED) {
-                    //applyDamage(1, false);
-                } else {
-                    //player.hp = Utils.adjustValue(player.hp, 1, player.getMaxHP(), 0);
+        for (CharacterRecord player : this.saveGame.players) {
+            if (player.status != Constants.Status.DEAD) {
+                player.submorsels -= decr_interval;
+                if (player.submorsels < 0) {
+                    player.submorsels = 400;
+                    if (player.status == Constants.Status.POISONED) {
+                        player.adjustHP(-1);
+                    } else {
+                        //player.hp = Utils.adjustValue(player.hp, 1, player.getMaxHP(), 0);
+                    }
                 }
-
             }
         }
-
     }
 
 }

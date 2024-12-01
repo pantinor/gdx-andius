@@ -431,6 +431,7 @@ public class GameScreen extends BaseScreen {
 
         try {
             this.map.getMap().moveObjects(this.map, this, x, y);
+            CTX.endTurn(this.map);
         } catch (PartyDeathException t) {
             partyDeath();
         }

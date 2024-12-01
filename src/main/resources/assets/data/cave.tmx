@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="114">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="116">
  <properties>
   <property name="startX" value="16"/>
   <property name="startY" value="19"/>
@@ -139,17 +139,17 @@
   <object id="111" name="WORLD" x="768" y="912" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="people">
-  <object id="93" name="Lvl 3 Ninja" type="MONSTER" x="768" y="288" width="48" height="48">
+  <object id="93" name="Bushwacker" type="MONSTER" x="288" y="48" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="94" name="Were Bear" type="MONSTER" x="288" y="48" width="48" height="48">
+  <object id="94" name="Rogue" type="MONSTER" x="720" y="48" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="95" name="Lvl 3 Samurai" type="MONSTER" x="624" y="144" width="48" height="48">
+  <object id="95" name="Kobold" type="MONSTER" x="960" y="288" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -159,12 +159,12 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="98" name="Giant Toad" type="MONSTER" x="336" y="528" width="48" height="48">
+  <object id="98" name="Highway Man" type="MONSTER" x="336" y="528" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="99" name="Huge Spider" type="MONSTER" x="288" y="432" width="48" height="48">
+  <object id="99" name="Undead Kobold" type="MONSTER" x="288" y="432" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -185,6 +185,16 @@
    <properties>
     <property name="icon" value="Paladin_Demon_Hunter_Female"/>
     <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="114" name="Lvl 1 Ninja" type="MONSTER" x="768" y="240" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="115" name="Lvl 1 Mage" type="MONSTER" x="720" y="192" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
  </objectgroup>

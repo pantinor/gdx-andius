@@ -134,7 +134,17 @@ public class CombatScreen extends BaseScreen {
             }
 
             andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getAnimation());
-            actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
+            int rw = actor.getIcon().getRegionWidth();
+            int rh = actor.getIcon().getRegionHeight();
+            float dx = x + TILE_DIM / 2 - rw / 2;
+            float dy = y + TILE_DIM / 2 - rh / 2;
+            if (rw > TILE_DIM) {
+                dx = x - 20;
+            }
+            if (rh > TILE_DIM) {
+                dy = y + 10;
+            }
+            actor.set(crSlots[index], Role.MONSTER, sx, sy, dx, dy, MovementBehavior.ATTACK_AVATAR);
             enemies.add(actor);
         }
 
@@ -159,13 +169,14 @@ public class CombatScreen extends BaseScreen {
                     context.players()[index].name,
                     context.players()[index].classType.getAnimation());
 
-            actor.set(this.context.players()[index], sx, sy, x, y);
+            actor.set(this.context.players()[index], sx, sy, x - 20, y + 8);
+            actor.setDirection(2);
 
             CursorActor cursor = new CursorActor();
-            cursor.set(actor.getX(), actor.getY());
             stage.addActor(cursor);
             cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
             actor.setPlayerCursor(cursor);
+
             partyMembers.add(actor);
         }
 
@@ -278,14 +289,14 @@ public class CombatScreen extends BaseScreen {
 
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
-            renderer.getBatch().draw(cr.getIcon(), cr.getX() - 16, cr.getY() + 2);
+            renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY());
         }
 
         int x = 0;
         float cx = 0, cy = 0;
         for (andius.objects.Actor p : partyMembers) {
             if (p.getPlayer().status != Status.DEAD) {
-                renderer.getBatch().draw(p.getIcon(), p.getX() - 20, p.getY() + 8);
+                renderer.getBatch().draw(p.getIcon(), p.getX(), p.getY());
             }
             if (x == this.activeIndex) {
                 cx = p.getX();
@@ -779,8 +790,8 @@ public class CombatScreen extends BaseScreen {
         for (andius.objects.Actor p : partyMembers) {
             CursorActor ca = p.getPlayerCursor();
             ca.setVisible(false);
-            ca.setX(p.getX());
-            ca.setY(p.getY());
+            ca.setX(p.getX() + 20);
+            ca.setY(p.getY() - 15);
         }
 
         this.activeIndex++;
@@ -900,7 +911,6 @@ public class CombatScreen extends BaseScreen {
 //                attacker.getPlayer().weapon = null;
 //            }
 //        }
-
         return av;
     }
 
@@ -942,7 +952,6 @@ public class CombatScreen extends BaseScreen {
 //                attacker.getPlayer().weapon = null;
 //            }
 //        }
-
         return av;
     }
 

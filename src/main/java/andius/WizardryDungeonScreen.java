@@ -777,7 +777,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void finishTurn(int currentX, int currentY) {
-
+        CTX.endTurn(Constants.Map.WIZARDRY1);
     }
 
     private class DungeonTileModelInstance {

@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -28,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import utils.Utils;
@@ -52,7 +54,7 @@ public class TempleScreen implements Screen, Constants {
     private final Table logTable;
     private final ScrollPane logScroll;
     private final TextButton offer;
-    private final TextButton exit;
+    private final TextButton exit, pool;
     private final Image focusIndicator;
     private final TextureRegion icon;
     private PatientListing selectedPatient;
@@ -87,9 +89,9 @@ public class TempleScreen implements Screen, Constants {
             }
         }
         this.titherSelection.setItems(names);
-        this.titherSelection.addListener(new ChangeListener() {
+        this.titherSelection.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            public void clicked (InputEvent event, float x, float y) {
                 for (CharacterRecord p : TempleScreen.this.context.players()) {
                     if (titherSelection.getSelected().startsWith(p.name.toUpperCase())) {
                         tither = p;
@@ -123,7 +125,12 @@ public class TempleScreen implements Screen, Constants {
                 } else if (selectedPatient.c.status == Status.DEAD) {
                     amt = 250;
                 }
-                if (tither == null || tither.gold < amt) {
+                if (tither == null) {
+                    log("Who will Tithe?");
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
+                if (tither.gold < amt) {
                     log("CHEAP APOSTATES! OUT!");
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
@@ -158,6 +165,29 @@ public class TempleScreen implements Screen, Constants {
                     }
                 }
                 titherSelection.setItems(tithers);
+            }
+        });
+
+        this.pool = new TextButton("POOL", Andius.skin, "brown-larger");
+        this.pool.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (tither == null) {
+                    return;
+                }
+                for (CharacterRecord cr : TempleScreen.this.context.players()) {
+                    if (cr != tither) {
+                        int gold = cr.gold;
+                        cr.adjustGold(-gold);
+                        tither.adjustGold(gold);
+                    }
+                }
+                for (Cell cell : patientTable.getCells()) {
+                    if (cell.getActor() instanceof PatientListing) {
+                        PatientListing pi = (PatientListing) cell.getActor();
+                        pi.gold.setText("" + pi.c.gold);
+                    }
+                }
             }
         });
 
@@ -206,13 +236,15 @@ public class TempleScreen implements Screen, Constants {
         this.patientScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);
         this.playerSelectionLabel.setBounds(X_ALIGN, 458, 20, 100);
         this.offer.setBounds(525, 310, 65, 40);
-        this.exit.setBounds(600, 310, 65, 40);
+        this.pool.setBounds(600, 310, 65, 40);
+        this.exit.setBounds(675, 310, 65, 40);
         sp1.setBounds(X_ALIGN, 310, 175, 175);
 
         stage.addActor(sp1);
         stage.addActor(playerSelectionLabel);
         stage.addActor(exit);
         stage.addActor(offer);
+        stage.addActor(pool);
         stage.addActor(logScroll);
         stage.addActor(patientScroll);
 

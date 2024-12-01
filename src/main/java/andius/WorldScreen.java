@@ -203,7 +203,6 @@ public class WorldScreen extends BaseScreen {
             }
         }
 
-//        renderer.getFOV().calculateFOV(this.map.getMap().getShadownMap(), (int)v.x, (int)v.y, 25f);
         return false;
     }
 
@@ -231,11 +230,8 @@ public class WorldScreen extends BaseScreen {
         }
 
         TiledMapTileLayer grass = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("grass");
-        //TiledMapTileLayer mountains = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("mountains");
         TiledMapTileLayer.Cell c1 = grass.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
-        //TiledMapTileLayer.Cell c2 = mountains.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
         if (c1 == null) {
-            //Sounds.play(Sound.BLOCKED);
             return false;
         }
 
@@ -253,7 +249,8 @@ public class WorldScreen extends BaseScreen {
                 newMapPixelCoords.y = d.getY();
             }
         }
-
+        
+        CTX.endTurn(this.map);
     }
 
     @Override

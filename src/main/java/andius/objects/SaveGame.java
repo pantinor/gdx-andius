@@ -35,11 +35,11 @@ public class SaveGame implements Constants {
         //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
         //gzis.close();
         //String json = Base64Coder.decodeString(b64);
-        
+
         InputStream is = new FileInputStream(file);
         String json = IOUtils.toString(is, StandardCharsets.UTF_8);
         is.close();
-        
+
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
@@ -48,6 +48,18 @@ public class SaveGame implements Constants {
             sg.wx = Map.WORLD.getStartX();
             sg.wy = Map.WORLD.getStartY();
         }
+
+        for (CharacterRecord c : sg.players) {
+            tryLearn(c);
+            List<Spells> tmp = new ArrayList<>(c.knownSpells);
+            for (int i = 0; i < c.spellPresets.length; i++) {
+                if (tmp.isEmpty()) {
+                    break;
+                }
+                c.spellPresets[i] = tmp.remove(0);
+            }
+        }
+
         return sg;
     }
 
@@ -337,8 +349,8 @@ public class SaveGame implements Constants {
         }
     }
 
-    private static void setMinMageSpellCounts(int[] pts, List<Spells> knownSpells) {
-        pts = new int[7];
+    private static void setMinMageSpellCounts(int[] magePoints, List<Spells> knownSpells) {
+        int[] pts = new int[7];
         setSpellCount(pts, 0, 1, 4, knownSpells);
         setSpellCount(pts, 1, 5, 6, knownSpells);
         setSpellCount(pts, 2, 7, 8, knownSpells);
@@ -346,10 +358,11 @@ public class SaveGame implements Constants {
         setSpellCount(pts, 4, 12, 14, knownSpells);
         setSpellCount(pts, 5, 15, 18, knownSpells);
         setSpellCount(pts, 6, 19, 21, knownSpells);
+        System.arraycopy(pts, 0, magePoints, 0, pts.length);
     }
 
-    private static void setMinPriestSpellCounts(int[] pts, List<Spells> knownSpells) {
-        pts = new int[7];
+    private static void setMinPriestSpellCounts(int[] clericPoints, List<Spells> knownSpells) {
+        int[] pts = new int[7];
         setSpellCount(pts, 0, 22, 26, knownSpells);
         setSpellCount(pts, 1, 27, 30, knownSpells);
         setSpellCount(pts, 2, 31, 34, knownSpells);
@@ -357,6 +370,7 @@ public class SaveGame implements Constants {
         setSpellCount(pts, 4, 39, 44, knownSpells);
         setSpellCount(pts, 5, 45, 48, knownSpells);
         setSpellCount(pts, 6, 49, 50, knownSpells);
+        System.arraycopy(pts, 0, clericPoints, 0, pts.length);
     }
 
     public static void setSpellPoints(CharacterRecord rec) {

@@ -478,7 +478,7 @@ public class SpellUtil {
             seq.addAction(Actions.run(new LogAction(screen, target.getPlayer().name + " is unaffected.")));
         } else {
             int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-            target.adjustHP(damage);
+            target.adjustHP(-damage);
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s takes %d damage.", target.getPlayer().name, damage))));
         }
 
@@ -523,7 +523,7 @@ public class SpellUtil {
             } else {
 
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-                m.adjustHP(damage);
+                m.adjustHP(-damage);
 
                 seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
 
@@ -547,7 +547,7 @@ public class SpellUtil {
             seq.addAction(Actions.delay(.60f));
 
             int damage = Utils.getRandomBetween(minDamage, maxDamage);
-            m.adjustHP(damage);
+            m.adjustHP(-damage);
 
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
 

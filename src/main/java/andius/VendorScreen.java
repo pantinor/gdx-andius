@@ -165,7 +165,7 @@ public class VendorScreen implements Screen, Constants {
         );
         vendorPane = new ScrollPane(vendorTable, Andius.skin);
 
-        this.cancel = new TextButton("CNCL", Andius.skin, "brown-larger");
+        this.cancel = new TextButton("LEAVE", Andius.skin, "brown-larger");
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -184,7 +184,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.unequip = new TextButton("REMV", Andius.skin, "brown-larger");
+        this.unequip = new TextButton("UNEQUIP", Andius.skin, "brown-larger");
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -211,7 +211,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL", Andius.skin, "brown-larger");
+        this.pool = new TextButton("POOL GOLD", Andius.skin, "brown-larger");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {

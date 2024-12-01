@@ -50,13 +50,13 @@ public class ObjectsTestNG {
         }
     }
 
-    //@Test
+    @Test
     public void testReadSaveGame() throws Exception {
 
         CharacterRecord avatar = new CharacterRecord();
         avatar.name = "Steve";
         avatar.race = Race.HUMAN;
-        avatar.classType = ClassType.MAGE;
+        avatar.classType = ClassType.CLERIC;
         avatar.hp = avatar.getMoreHP();
         avatar.maxhp = avatar.hp;
         avatar.gold = Utils.getRandomBetween(100, 200);
@@ -80,7 +80,9 @@ public class ObjectsTestNG {
         }
 
         System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
-        avatar.magePoints[0]--;
+        //avatar.magePoints[0]--;
+        avatar.clericPoints[0]--;
+        avatar.clericPoints[0]--;
         System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
         SaveGame.setSpellPoints(avatar);
         System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
@@ -132,7 +134,7 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    @Test
+    //@Test
     public void readJson() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
