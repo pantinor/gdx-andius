@@ -5,6 +5,7 @@
  */
 package andius;
 
+import andius.Constants.Status;
 import andius.objects.Aura;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
@@ -26,14 +27,15 @@ public class Context {
     public void endTurn(Constants.Map map) throws PartyDeathException {
         int decr_interval = (map == Constants.Map.WORLD ? 40 : 10);
         for (CharacterRecord player : this.saveGame.players) {
-            if (player.status != Constants.Status.DEAD) {
+            if (!player.isDead()) {
                 player.submorsels -= decr_interval;
                 if (player.submorsels < 0) {
                     player.submorsels = 400;
-                    if (player.status == Constants.Status.POISONED) {
+                    
+                    player.decrementStatusEffects();
+                    
+                    if (player.status.has(Status.POISONED)) {
                         player.adjustHP(-1);
-                    } else {
-                        //player.hp = Utils.adjustValue(player.hp, 1, player.getMaxHP(), 0);
                     }
                 }
             }

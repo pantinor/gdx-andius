@@ -273,30 +273,36 @@ public class InnScreen implements Screen, Constants {
         final Label status;
         final Label hp;
         final Label gold;
+        final Label exp;
+
         final LabelStyle style;
         final CharacterRecord c;
 
         PlayerListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.largeFont, rec.status.getColor());
+            this.style = new LabelStyle(Andius.largeFont, rec.status.color());
+            
             this.name = new Label(rec.name, this.style);
             this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
             this.status = new Label(rec.status.toString(), this.style);
             this.hp = new Label(rec.hp + " / " + rec.maxhp, this.style);
             this.gold = new Label("" + rec.gold, this.style);
+            this.exp = new Label("" + rec.exp, this.style);
 
             addActor(this.name);
             addActor(this.lvlracetype);
             addActor(this.status);
             addActor(this.hp);
             addActor(this.gold);
+            addActor(this.exp);
 
             float x = getX();
             this.name.setBounds(x, getY(), 150, PAT_ITEM_HGT);
-            this.lvlracetype.setBounds(x += 150, getY(), 200, PAT_ITEM_HGT);
+            this.lvlracetype.setBounds(x += 100, getY(), 200, PAT_ITEM_HGT);
             this.status.setBounds(x += 200, getY(), 120, PAT_ITEM_HGT);
-            this.hp.setBounds(x += 120, getY(), 110, PAT_ITEM_HGT);
+            this.hp.setBounds(x += 100, getY(), 110, PAT_ITEM_HGT);
             this.gold.setBounds(x += 110, getY(), 100, PAT_ITEM_HGT);
+            this.exp.setBounds(x += 75, getY(), 100, PAT_ITEM_HGT);
 
             this.setBounds(getX(), getY(), PAT_SCR_WIDTH, PAT_ITEM_HGT);
         }

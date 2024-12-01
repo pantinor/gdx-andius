@@ -3,6 +3,7 @@ package andius;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.CLASSPTH_RSLVR;
+import static andius.WizardryData.DUNGEON_DIM;
 import static andius.WizardryData.LEVELS;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
@@ -42,13 +43,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.UBJsonReader;
-import utils.Utils;
 
 public class WizardryDungeonScreen extends BaseScreen {
 
     private static final int MAP_WIDTH = 672;
     private static final int MAP_HEIGHT = 672;
-    private static final int DUNGEON_DIM = 20;
 
     private final Environment environment = new Environment();
     private final ModelBuilder builder = new ModelBuilder();
@@ -100,7 +99,28 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void show() {
+        syncRemovedMonsters();
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+    }
+
+    private void syncRemovedMonsters() {
+        
+        List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
+        if (removedMonsters == null) {
+            removedMonsters = new ArrayList<>();
+            CTX.saveGame.removedActors.put(Map.WIZARDRY1, removedMonsters);
+        }
+
+        for (int level = 0; level < LEVELS.length; level++) {
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+                    MazeCell cell = LEVELS[level].cells[x][y];
+                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
+                        cell.tempMonsterID = -1;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -748,8 +768,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1) {
                 monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].monsterID);
             } else {
-                List<Monster> mlvl = Andius.MONSTER_LEVELS.get(currentLevel);
-                monster = mlvl.get(Utils.RANDOM.nextInt(mlvl.size()));
+                monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].tempMonsterID);
             }
 
             andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
@@ -772,6 +791,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
             LEVELS[currentLevel].cells[x][y].tempMonsterID = -1;
+            
+            List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
+            removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
         }
     }
 

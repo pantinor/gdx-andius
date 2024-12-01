@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import static andius.Andius.mainGame;
@@ -34,10 +29,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class TempleScreen implements Screen, Constants {
 
     private final Context context;
@@ -91,7 +82,7 @@ public class TempleScreen implements Screen, Constants {
         this.titherSelection.setItems(names);
         this.titherSelection.addListener(new ClickListener() {
             @Override
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 for (CharacterRecord p : TempleScreen.this.context.players()) {
                     if (titherSelection.getSelected().startsWith(p.name.toUpperCase())) {
                         tither = p;
@@ -110,44 +101,52 @@ public class TempleScreen implements Screen, Constants {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
-                if (selectedPatient.c.status == Status.OK && selectedPatient.c.hp == selectedPatient.c.maxhp) {
+                if (!selectedPatient.c.isDisabled() && selectedPatient.c.hp == selectedPatient.c.maxhp) {
                     log(selectedPatient.c.name + " IS WELL.");
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
                 int amt = 50;
-                if (selectedPatient.c.status == Status.ASHES) {
+                if (selectedPatient.c.status.has(Status.ASHES)) {
                     amt = 500;
-                } else if (selectedPatient.c.status == Status.PARALYZED) {
+                } else if (selectedPatient.c.status.has(Status.PARALYZED)) {
                     amt = 100;
-                } else if (selectedPatient.c.status == Status.STONED) {
+                } else if (selectedPatient.c.status.has(Status.STONED)) {
                     amt = 200;
-                } else if (selectedPatient.c.status == Status.DEAD) {
+                } else if (selectedPatient.c.isDead()) {
                     amt = 250;
                 }
+
                 if (tither == null) {
                     log("Who will Tithe?");
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
+
                 if (tither.gold < amt) {
                     log("CHEAP APOSTATES! OUT!");
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
+
                 log("THE DONATION WILL BE " + amt);
-                if (selectedPatient.c.status == Status.DEAD) {
+
+                if (selectedPatient.c.isDead()) {
                     selectedPatient.c.hp = 1;
                 }
-                if (selectedPatient.c.status == Status.ASHES) {
+
+                if (selectedPatient.c.status.has(Status.ASHES)) {
                     selectedPatient.c.hp = selectedPatient.c.maxhp;
                 }
-                if (selectedPatient.c.status == Status.OK) {
-                    selectedPatient.c.adjustHP(25);
-                }
-                selectedPatient.c.status = Status.OK;
+
+                selectedPatient.c.adjustHP(25);
+                
+                selectedPatient.c.status.reset();
+
                 tither.adjustGold(-amt);
+
                 Sounds.play(Sound.HEALING);
+
                 log(selectedPatient.c.name + " IS WELL.");
 
                 //update available tithers and update their status in the table listing
@@ -155,11 +154,11 @@ public class TempleScreen implements Screen, Constants {
                 for (Cell cell : patientTable.getCells()) {
                     if (cell.getActor() instanceof PatientListing) {
                         PatientListing pi = (PatientListing) cell.getActor();
-                        pi.style.fontColor = pi.c.status.getColor();
+                        pi.style.fontColor = pi.c.status.color();
                         pi.status.setText(pi.c.status.toString());
                         pi.hp.setText(pi.c.hp + " / " + pi.c.maxhp);
                         pi.gold.setText("" + pi.c.gold);
-                        if (pi.c.status == Status.OK) {
+                        if (!pi.c.isDisabled()) {
                             tithers.add(pi.c.name.toUpperCase());
                         }
                     }
@@ -271,7 +270,7 @@ public class TempleScreen implements Screen, Constants {
 
         PatientListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.largeFont, rec.status.getColor());
+            this.style = new LabelStyle(Andius.largeFont, rec.status.color());
             this.name = new Label(rec.name, this.style);
             this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
             this.status = new Label(rec.status.toString(), this.style);

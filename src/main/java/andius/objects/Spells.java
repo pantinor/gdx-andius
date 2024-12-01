@@ -136,7 +136,8 @@ public enum Spells {
     private final Sound snd;
     private final Color color;
 
-    private Spells(String name, ClassType type, int level, Sound snd, Color color, SpellTarget target, SpellArea area, int hitCount, int hitRange, int hitBonus, int icon) {
+    private Spells(String name, ClassType type, int level, Sound snd, Color color, 
+            SpellTarget target, SpellArea area, int hitCount, int hitRange, int hitBonus, int icon) {
         this.name = name;
         this.type = type;
         this.level = level;

@@ -5,7 +5,6 @@
  */
 package andius;
 
-import andius.Constants.Status;
 import andius.objects.Item;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
@@ -297,14 +296,14 @@ public class CombatHud {
 
         x = 8;
         for (andius.objects.Actor p : partyMembers) {
-            String txt = String.format("%s [%d - %d] %s",
+            String txt = String.format("%s (%d) %d %s",
                     p.getName(),
-                    p.getPlayer().level,
+                    p.getPlayer().calculateAC(),
                     p.getPlayer().maxhp,
-                    p.getPlayer().status != Status.OK ?  p.getPlayer().status.toString().toLowerCase() : "");
+                    p.getPlayer().status.isDisabled() ?  p.getPlayer().status.toString() : "");
 
             glyph.setText(Andius.smallFont, txt, Color.WHITE, 124, Align.left, true);
-            Andius.smallFont.draw(batch, glyph, x,  Andius.SCREEN_HEIGHT - 4);
+            Andius.smallFont.draw(batch, glyph, x + 3,  Andius.SCREEN_HEIGHT - 4);
 
             batch.draw(p.getHealthBar(), x + 2,  Andius.SCREEN_HEIGHT - 31);
             x += 128 + 3;
@@ -319,7 +318,7 @@ public class CombatHud {
                         crSlots[i].getName(),
                         crSlots[i].getLevel(),
                         crSlots[i].getMaxHitPoints(),
-                        crSlots[i].getStatus() != Status.OK ? crSlots[i].getStatus().toString().toLowerCase() : "");
+                        crSlots[i].status().isDisabled() ? crSlots[i].status().toString() : "");
 
                 glyph.setText(Andius.smallFont, txt, Color.WHITE, 80, Align.left, true);
                 Andius.smallFont.draw(batch, glyph, x, count < 8 ? 84 : 46);

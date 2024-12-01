@@ -19,7 +19,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class SpellUtil {
 
@@ -37,7 +36,7 @@ public class SpellUtil {
                 return;
             }
 
-            if (caster.getPlayer().silencedCountdown.get() > 0) {
+            if (caster.getPlayer().status.has(Status.SILENCED)) {
                 screen.log("Silenced!");
                 Sounds.play(Sound.NEGATIVE_EFFECT);
                 return;
@@ -56,7 +55,7 @@ public class SpellUtil {
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().setStatus(Status.ASLEEP);
+                            m.getMonster().status().set(Status.ASLEEP, 4);
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is asleep.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
@@ -95,7 +94,7 @@ public class SpellUtil {
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().setStatus(Status.PARALYZED);
+                            m.getMonster().status().set(Status.PARALYZED, 4);
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is paralyzed.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
@@ -108,7 +107,7 @@ public class SpellUtil {
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().setStatus(Status.SILENCED);
+                            m.getMonster().status().set(Status.SILENCED, 4);
                             seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is silenced.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
@@ -116,9 +115,9 @@ public class SpellUtil {
                     break;
                 case LATUMAPIC:
                     for (andius.objects.Actor m : screen.partyMembers) {
-                        if (m.getPlayer().status == Status.ASLEEP || m.getPlayer().status == Status.PARALYZED || m.getPlayer().status == Status.SILENCED) {
-                            m.getPlayer().status = Status.OK;
-                        }
+                        target.getPlayer().status.set(Status.ASLEEP, 0);
+                        target.getPlayer().status.set(Status.PARALYZED, 0);
+                        target.getPlayer().status.set(Status.SILENCED, 0);
                     }
                     break;
                 case DIOS:
@@ -128,10 +127,10 @@ public class SpellUtil {
                     doSpellHeal(screen, seq, target, spell);
                     break;
                 case LATUMOFIS:
+                    target.getPlayer().status.set(Status.POISONED, 0);
+                    break;
                 case DIALKO:
-                    if (target.getPlayer().status == Status.POISONED) {
-                        target.getPlayer().status = Status.OK;
-                    }
+                    target.getPlayer().status.increment(Status.POISONED);
                     break;
                 case MOGREF:
                 case PORFIC:
@@ -322,12 +321,9 @@ public class SpellUtil {
 
     private static void doSpellHeal(CombatScreen screen, SequenceAction seq, andius.objects.Actor target, Spells spell) {
         CharacterRecord rec = target.getPlayer();
-        if (rec.status != Status.DEAD) {
-
+        if (rec != null && !rec.isDead()) {
             seq.addAction(Actions.run(new LogAction(screen, rec.name + " is healed.")));
-
             if (spell == Spells.MADI) {
-                rec.status = Status.OK;
                 target.adjustHP(rec.maxhp);
             } else {
                 int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
@@ -338,11 +334,10 @@ public class SpellUtil {
         }
     }
 
-    public static void spellMonsterCast(CombatScreen screen, SequenceAction seq, Spells spell,
-            andius.objects.Actor caster, andius.objects.Actor target) {
+    public static void spellMonsterCast(CombatScreen screen, SequenceAction seq, Spells spell, andius.objects.Actor caster, andius.objects.Actor target) {
 
-        if (caster.getMonster().getStatus() != Status.OK) {
-            screen.log(caster.getMonster().getStatus().toString().toLowerCase() + "!");
+        if (caster.getMonster().status().isDisabled()) {
+            screen.log(caster.getMonster().name + " is disabled!");
             Sounds.play(Sound.NEGATIVE_EFFECT);
             return;
         }
@@ -387,17 +382,17 @@ public class SpellUtil {
                 break;
             case KATINO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), m.getPlayer().asleepCountdown, "asleep");
+                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.ASLEEP);
                 }
                 break;
             case MANIFO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), m.getPlayer().paralyzedCountdown, "paralyzed");
+                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.PARALYZED);
                 }
                 break;
             case MONTINO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), m.getPlayer().silencedCountdown, "silenced");
+                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.SILENCED);
                 }
                 break;
             case DIOS:
@@ -408,9 +403,9 @@ public class SpellUtil {
                 break;
             case LATUMAPIC:
                 for (andius.objects.Actor m : screen.enemies) {
-                    if (m.getMonster().getStatus() == Status.ASLEEP || m.getMonster().getStatus() == Status.PARALYZED || m.getMonster().getStatus() == Status.SILENCED) {
-                        m.getMonster().resetStatus();
-                    }
+                    m.getMonster().status().set(Status.ASLEEP, 0);
+                    m.getMonster().status().set(Status.PARALYZED, 0);
+                    m.getMonster().status().set(Status.SILENCED, 0);
                 }
                 break;
             case MOGREF:
@@ -435,14 +430,14 @@ public class SpellUtil {
 
     }
 
-    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, MutableMonster monster, CharacterRecord target, AtomicInteger counter, String effect) {
+    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, MutableMonster monster, CharacterRecord target, Status effect) {
         seq.addAction(Actions.delay(.60f));
         boolean hit = Utils.attackHit(monster, target);
         if (hit) {
             seq.addAction(Actions.run(new LogAction(screen, target.name + " is unaffected.")));
             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
         } else {
-            counter.set(4);
+            target.status.set(effect, 4);
             seq.addAction(Actions.run(new LogAction(screen, target.name + " is " + effect + ".")));
             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
         }

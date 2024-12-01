@@ -3,6 +3,9 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Sound;
+import static andius.WizardryData.DUNGEON_DIM;
+import static andius.WizardryData.LEVELS;
+import andius.WizardryData.MazeCell;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -17,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.io.IOUtils;
 
 public class SaveGame implements Constants {
@@ -28,7 +30,7 @@ public class SaveGame implements Constants {
     public int map;
     public int wx;
     public int wy;
-    public final java.util.Map<Map, List<Integer>> removedActors = new HashMap<>();
+    public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
         //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
@@ -41,23 +43,12 @@ public class SaveGame implements Constants {
         is.close();
 
         GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        Gson gson = builder.setPrettyPrinting().create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
         //set initial start
         if (sg.wx == 0 && sg.wy == 0) {
             sg.wx = Map.WORLD.getStartX();
             sg.wy = Map.WORLD.getStartY();
-        }
-
-        for (CharacterRecord c : sg.players) {
-            tryLearn(c);
-            List<Spells> tmp = new ArrayList<>(c.knownSpells);
-            for (int i = 0; i < c.spellPresets.length; i++) {
-                if (tmp.isEmpty()) {
-                    break;
-                }
-                c.spellPresets[i] = tmp.remove(0);
-            }
         }
 
         return sg;
@@ -68,17 +59,6 @@ public class SaveGame implements Constants {
         for (CharacterRecord player : players) {
             player.acmodifier1 = 0;
             player.acmodifier2 = 0;
-//            for (int i = 0; i < 7; i++) {
-//                if (player.magePoints[i] < 0) {
-//                    player.magePoints[i] = 0;
-//                }
-//                if (player.clericPoints[i] < 0) {
-//                    player.clericPoints[i] = 0;
-//                }
-//            }
-//            if (player.level == 0) {
-//                player.level = 1;
-//            }
         }
 
         for (Map map : Map.values()) {
@@ -88,21 +68,23 @@ public class SaveGame implements Constants {
                     Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
                     while (iter.hasNext()) {
                         MapObject obj = iter.next();
-                        int id = obj.getProperties().get("id", Integer.class);
+                        float x = obj.getProperties().get("x", Float.class);
+                        float y = obj.getProperties().get("y", Float.class);
+                        String hash = "M:" + x + ":" + y;
                         boolean found = false;
                         for (Actor a : map.getMap().actors) {
-                            if (a.getId() == id) {
+                            if (a.hash().equals(hash)) {
                                 found = true;
                                 break;
                             }
                         }
                         if (!found) {
-                            List<Integer> l = this.removedActors.get(map);
+                            List<String> l = this.removedActors.get(map);
                             if (l == null) {
                                 l = new ArrayList<>();
                                 this.removedActors.put(map, l);
                             }
-                            l.add(id);
+                            l.add(hash);
                         }
                     }
                 }
@@ -110,7 +92,7 @@ public class SaveGame implements Constants {
         }
 
         GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        Gson gson = builder.setPrettyPrinting().create();
         String json = gson.toJson(this);
         //String b64 = Base64Coder.encodeString(json);
         FileOutputStream fos = new FileOutputStream(file);
@@ -126,7 +108,7 @@ public class SaveGame implements Constants {
 
         public String name = null;
         public int portaitIndex = 0;
-        public Status status = Status.OK;
+        public final State status = new State();
         public int str;
         public int intell;
         public int piety;
@@ -151,6 +133,7 @@ public class SaveGame implements Constants {
 
         public List<Spells> knownSpells = new ArrayList<>();
         public Spells[] spellPresets = new Spells[10];
+
         public int[] magePoints = new int[7];
         public int[] clericPoints = new int[7];
 
@@ -159,10 +142,6 @@ public class SaveGame implements Constants {
         public int submorsels = 400;
         public int acmodifier1; //lasts for single combat
         public int acmodifier2; //lasts until next rest at inn
-
-        public final AtomicInteger paralyzedCountdown = new AtomicInteger();
-        public final AtomicInteger silencedCountdown = new AtomicInteger();
-        public final AtomicInteger asleepCountdown = new AtomicInteger();
 
         public void awardXP(int amt) {
             exp = Utils.adjustValueMax(exp, amt, Integer.MAX_VALUE);
@@ -174,9 +153,6 @@ public class SaveGame implements Constants {
 
         public void adjustHP(int amt) {
             hp = Utils.adjustValue(hp, amt, maxhp, 0);
-            if (hp <= 0) {
-                status = Status.DEAD;
-            }
         }
 
         public boolean canCast(Spells spell) {
@@ -201,51 +177,20 @@ public class SaveGame implements Constants {
         }
 
         public boolean isDisabled() {
-            boolean disabled = false;
-            switch (this.status) {
-                case OK:
-                case SILENCED:
-                case POISONED:
-                    disabled = false;
-                    break;
-                case PARALYZED:
-                case ASLEEP:
-                case STONED:
-                case AFRAID:
-                case DEAD:
-                case ASHES:
-                    disabled = true;
-                    break;
-                default:
-                    disabled = false;
-                    break;
+            if (isDead()) {
+                return true;
             }
-
-            if (this.paralyzedCountdown.get() > 0) {
-                disabled = true;
-            }
-
-            if (this.asleepCountdown.get() > 0) {
-                disabled = true;
-            }
-
-            return disabled;
+            return this.status.isDisabled();
         }
 
         public boolean isDead() {
-            return this.status == Status.DEAD;
+            return hp <= 0;
         }
 
         public void decrementStatusEffects() {
-            if (this.paralyzedCountdown.get() > 0) {
-                this.paralyzedCountdown.decrementAndGet();
-            }
-            if (this.silencedCountdown.get() > 0) {
-                this.silencedCountdown.decrementAndGet();
-            }
-            if (this.asleepCountdown.get() > 0) {
-                this.asleepCountdown.decrementAndGet();
-            }
+            this.status.decrement(Status.PARALYZED);
+            this.status.decrement(Status.SILENCED);
+            this.status.decrement(Status.ASLEEP);
         }
 
         public int calculateAC() {
@@ -463,7 +408,6 @@ public class SaveGame implements Constants {
         }
 
         return learned;
-
     }
 
     private static boolean tryLearnSpell(List<Spells> knownSpells, int attrib, int low, int high) {

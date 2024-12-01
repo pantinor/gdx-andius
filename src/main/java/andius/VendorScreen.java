@@ -287,10 +287,10 @@ public class VendorScreen implements Screen, Constants {
         this.vendorPane.setBounds(669, Andius.SCREEN_HEIGHT - 511, w, 419);
         this.buy.setBounds(578, 600, 65, 40);
         this.sell.setBounds(578, 550, 65, 40);
-        this.pool.setBounds(220, 176, 65, 40);
-        this.unequip.setBounds(220, 132, 65, 40);
-        this.exit.setBounds(220, 88, 65, 40);
-        this.cancel.setBounds(220, 44, 65, 40);
+        this.pool.setBounds(220, 176, 100, 40);
+        this.unequip.setBounds(220, 132, 100, 40);
+        this.exit.setBounds(220, 88, 100, 40);
+        this.cancel.setBounds(220, 44, 100, 40);
 
         stage.addActor(sp1);
         stage.addActor(invDesc);

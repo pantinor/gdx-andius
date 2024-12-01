@@ -295,13 +295,15 @@ public class ManageScreen implements Screen, Constants {
                         }
                     }
                     GsonBuilder builder = new GsonBuilder();
-                    Gson gson = builder.create();
+                    Gson gson = builder.setPrettyPrinting().create();
                     String json = gson.toJson(registry.getItems().toArray());
-                    String b64 = Base64Coder.encodeString(json);
+                    //String b64 = Base64Coder.encodeString(json);
                     FileOutputStream fos = new FileOutputStream(ROSTER_FILENAME);
-                    GZIPOutputStream gzos = new GZIPOutputStream(fos);
-                    gzos.write(b64.getBytes("UTF-8"));
-                    gzos.close();
+                    //GZIPOutputStream gzos = new GZIPOutputStream(fos);
+                    //gzos.write(b64.getBytes("UTF-8"));
+                    //gzos.close();
+                    fos.write(json.getBytes("UTF-8"));
+                    fos.close();
 
                     Array<CharacterRecord> sgchars = new Array<>();
                     for (PartyIndex pi : partyFormation.getItems()) {
@@ -717,7 +719,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
         font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
         font.draw(batch, "TYPE: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "STAT: " + sel.status.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "STAT: " + sel.status.toString(), x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 90 + 145;

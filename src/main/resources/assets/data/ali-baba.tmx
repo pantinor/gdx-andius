@@ -67,172 +67,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="1400" columns="40">
-  <image source="uf_heroes.png" trans="ff00ff" width="1920" height="1680"/>
- </tileset>
- <tileset firstgid="2161" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
+ <tileset firstgid="761" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
   <image source="uf_items.png" trans="ff00ff" width="1056" height="1056"/>
- </tileset>
- <tileset firstgid="2645" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
-  <image source="uf_map.png" width="600" height="504"/>
-  <tile id="17">
-   <animation>
-    <frame tileid="17" duration="500"/>
-    <frame tileid="18" duration="500"/>
-    <frame tileid="19" duration="500"/>
-    <frame tileid="20" duration="500"/>
-    <frame tileid="19" duration="500"/>
-    <frame tileid="18" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="67">
-   <animation>
-    <frame tileid="67" duration="500"/>
-    <frame tileid="68" duration="500"/>
-    <frame tileid="69" duration="500"/>
-    <frame tileid="70" duration="500"/>
-    <frame tileid="69" duration="500"/>
-    <frame tileid="68" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="92">
-   <animation>
-    <frame tileid="92" duration="500"/>
-    <frame tileid="93" duration="500"/>
-    <frame tileid="94" duration="500"/>
-    <frame tileid="95" duration="500"/>
-    <frame tileid="94" duration="500"/>
-    <frame tileid="93" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="117">
-   <animation>
-    <frame tileid="117" duration="500"/>
-    <frame tileid="118" duration="500"/>
-    <frame tileid="119" duration="500"/>
-    <frame tileid="120" duration="500"/>
-    <frame tileid="119" duration="500"/>
-    <frame tileid="118" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="260">
-   <animation>
-    <frame tileid="260" duration="200"/>
-    <frame tileid="261" duration="200"/>
-    <frame tileid="262" duration="200"/>
-    <frame tileid="263" duration="200"/>
-   </animation>
-  </tile>
-  <tile id="265">
-   <animation>
-    <frame tileid="265" duration="200"/>
-    <frame tileid="266" duration="200"/>
-    <frame tileid="267" duration="200"/>
-    <frame tileid="268" duration="200"/>
-   </animation>
-  </tile>
-  <tile id="285">
-   <animation>
-    <frame tileid="285" duration="200"/>
-    <frame tileid="286" duration="200"/>
-    <frame tileid="287" duration="200"/>
-    <frame tileid="288" duration="200"/>
-   </animation>
-  </tile>
-  <tile id="290">
-   <animation>
-    <frame tileid="290" duration="200"/>
-    <frame tileid="291" duration="200"/>
-    <frame tileid="292" duration="200"/>
-    <frame tileid="293" duration="200"/>
-   </animation>
-  </tile>
-  <tile id="388">
-   <animation>
-    <frame tileid="388" duration="300"/>
-    <frame tileid="389" duration="300"/>
-   </animation>
-  </tile>
-  <tile id="390">
-   <animation>
-    <frame tileid="390" duration="500"/>
-    <frame tileid="391" duration="500"/>
-   </animation>
-  </tile>
-  <tile id="410">
-   <animation>
-    <frame tileid="410" duration="400"/>
-    <frame tileid="411" duration="400"/>
-   </animation>
-  </tile>
-  <tile id="412">
-   <animation>
-    <frame tileid="412" duration="400"/>
-    <frame tileid="413" duration="400"/>
-   </animation>
-  </tile>
-  <tile id="414">
-   <animation>
-    <frame tileid="414" duration="400"/>
-    <frame tileid="415" duration="400"/>
-   </animation>
-  </tile>
-  <tile id="416">
-   <animation>
-    <frame tileid="416" duration="400"/>
-    <frame tileid="417" duration="400"/>
-   </animation>
-  </tile>
-  <tile id="443">
-   <animation>
-    <frame tileid="443" duration="200"/>
-    <frame tileid="444" duration="200"/>
-    <frame tileid="445" duration="200"/>
-    <frame tileid="446" duration="200"/>
-   </animation>
-  </tile>
-  <wangsets>
-   <wangset name="Terrains" type="corner" tile="-1">
-    <wangcolor name="forest" color="#ff0000" tile="178" probability="1"/>
-    <wangcolor name="meadow" color="#00ff00" tile="147" probability="1"/>
-    <wangtile tileid="127" wangid="0,0,0,1,0,1,0,0"/>
-    <wangtile tileid="128" wangid="0,0,0,1,0,1,0,0"/>
-    <wangtile tileid="129" wangid="0,0,0,1,0,1,0,0"/>
-    <wangtile tileid="144" wangid="0,2,0,2,0,0,0,2"/>
-    <wangtile tileid="147" wangid="0,2,0,2,0,2,0,2"/>
-    <wangtile tileid="151" wangid="0,0,0,1,0,0,0,0"/>
-    <wangtile tileid="152" wangid="0,1,0,1,0,1,0,0"/>
-    <wangtile tileid="153" wangid="0,0,0,1,0,1,0,0"/>
-    <wangtile tileid="154" wangid="0,0,0,1,0,1,0,1"/>
-    <wangtile tileid="155" wangid="0,0,0,0,0,1,0,0"/>
-    <wangtile tileid="166" wangid="0,0,0,2,0,0,0,0"/>
-    <wangtile tileid="167" wangid="0,0,0,2,0,2,0,0"/>
-    <wangtile tileid="168" wangid="0,0,0,0,0,2,0,0"/>
-    <wangtile tileid="169" wangid="0,2,0,2,0,2,0,0"/>
-    <wangtile tileid="175" wangid="0,1,0,1,0,0,0,0"/>
-    <wangtile tileid="176" wangid="0,1,0,1,0,0,0,0"/>
-    <wangtile tileid="177" wangid="0,1,0,1,0,0,0,0"/>
-    <wangtile tileid="178" wangid="0,1,0,1,0,1,0,1"/>
-    <wangtile tileid="179" wangid="0,0,0,0,0,1,0,1"/>
-    <wangtile tileid="180" wangid="0,0,0,0,0,1,0,1"/>
-    <wangtile tileid="181" wangid="0,0,0,0,0,1,0,1"/>
-    <wangtile tileid="191" wangid="0,2,0,2,0,0,0,0"/>
-    <wangtile tileid="193" wangid="0,0,0,0,0,2,0,2"/>
-    <wangtile tileid="194" wangid="0,2,0,0,0,2,0,2"/>
-    <wangtile tileid="201" wangid="0,1,0,0,0,0,0,0"/>
-    <wangtile tileid="202" wangid="0,1,0,1,0,0,0,1"/>
-    <wangtile tileid="203" wangid="0,1,0,0,0,0,0,1"/>
-    <wangtile tileid="204" wangid="0,1,0,0,0,1,0,1"/>
-    <wangtile tileid="205" wangid="0,0,0,0,0,0,0,1"/>
-    <wangtile tileid="216" wangid="0,2,0,0,0,0,0,0"/>
-    <wangtile tileid="217" wangid="0,2,0,0,0,0,0,2"/>
-    <wangtile tileid="218" wangid="0,0,0,0,0,0,0,2"/>
-    <wangtile tileid="219" wangid="0,0,0,2,0,2,0,2"/>
-    <wangtile tileid="227" wangid="0,1,0,0,0,0,0,1"/>
-    <wangtile tileid="228" wangid="0,1,0,0,0,0,0,1"/>
-    <wangtile tileid="229" wangid="0,1,0,0,0,0,0,1"/>
-   </wangset>
-  </wangsets>
  </tileset>
  <layer id="1" name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
@@ -246,12 +82,12 @@
  </layer>
  <layer id="3" name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dQUrDQBQA0BIQeiMFj6C46gGy6lJ06wXcCd4gJScoXiAX8g5OSStRatqmNpNk3oNh2qaLH/j5P9PCZDYDAAAAgPMts9gRAAAAXT3tuZ9/ydpnGKK3+WnvSct1GPdh3MQOhKTchXEbxkPsQEhKyLdqk3ch/6pD3x3b77qvI4s3JaHP5qHPVqHPFrFjuYQyq89rle2/rlbZ91z0FBItuq5bFwOvMUOPj//RXLf+9RqmZNdjSzWOnrXc1xXbGSBpa3UQAAAAAAAAAAAAAAAAAAAAAACYuMa+w3njsx/sOcylNXNssxdiKefoyaLOtzx2HAAAAAAwJo8HnuVw6DgAAAAAAADAGC38FwokYq3eAYn5GFjdWw4sHoAunltqWduxsTnlXD6v6tGV/sAxpnR9MV7n1jsA4HjWCQAAAAAAAP16n8eOAAAAAEjF72eLw6Wt5ByRqHf0aZdvah4ATMMXHq9fApAPAQA=
+   H4sIAAAAAAAACu3dQU6DQBQA0IbewcSTaOIRNK44AKsujW69gNeAcILGC3A0p6k1aCooCgPMe8lk2tLFJ/n8z7TJsNkAAAAAwN/tstgRAAAAQz2euZ9/zrpnmKOL7e/ek5arMO7CuI4dCEm5DeMmjPvYgZCUkG/NIe9C/jV9313a77ovC4s3JaHPFqHPNqHPlrFjGUOdHc+rys5fV1X2MZcThUSHoevWfOY1Zu7x8T/a69bvXsOanHpsrcYxsY77uvJ9BkjaXh0EAAAAAAAAAAAAAAAAAAAAAABWrrXvcNH67BN7DjO2do4d9kKs5RwTyY/5VsSOAwAAAACW5KHnWQ59xwEAAAAAAACWKPdfKJCIvXoHJOZ1ZnVvN7N4AIZ46qhlXceWZspz0R/4iTVdXwAA9LNOAAAAAAAAmNblNnYEAAAAQCq+PlscxlbJOSJR75jSKd/UPABYhzdrSerQkA8BAA==
   </data>
  </layer>
  <layer id="4" name="creature" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dL0ssURQA8AGfFj/BsxsNgqJdLDaTbjAKgn6DZ9D4wvsSgnZBg8FgMImCmATBZBC02AwLL6iwyLKzM3tn5jr39yubdmbYPXPPPefOnywDAACgrLXxj8/OeLPHQXrWA8Tc2djo2yjiueb9EYfur+LfeRUrAPCjXMjdNORS7FEz4x3E7WBAv6zj/CUy10P0dx+tO1DC3xL92NSV6WGnQs1FE4aNO/O7cpb9boxgyfwUIJdcW6939RyQiBNzcWqgTwoAQFl6NMBP9nUd31WF/Rc1N9/d9Ym3mwh6gJ0RYnUmguMnDisFYmHW+Ji0yYmmjwAgy6blIgAAAIBcmzk9lKmK14l2era/ZU0KiFCo6+e2jXEAAAAAAAAAtfMsAABStSoHAkBwc5/5dUGeBVpm2PeKjvLe2373ZrStd9f1TrPCvEsZSMGxsY6I/XbfKwA5nnpq99OW1fEAFLfXp4ZoW583lIdE+gH76kogYfcVj/WLcmxrvTWYPzfEFQAQwD9zCshOcs6DUM8zB0hR19oD0OOwxnnV2YB9XQcYm/4Y36iBWgQAAACgelVfQ0x5Ly35b3b1k4EAzq0ZEIkjeQ0AABjgVs1Azeb1TGiQe3MBAAjhP99kvwOQDwEA
+   H4sIAAAAAAAACu3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GNnrareQDwEA
   </data>
  </layer>
  <layer id="5" name="water-edges" width="158" height="110">
@@ -616,409 +452,409 @@
  <objectgroup id="11" name="people">
   <object id="220" name="Large Rat" type="MONSTER" x="5376" y="528" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="221" name="Small Rat" type="MONSTER" x="5328" y="576" width="48" height="48">
    <properties>
-    <property name="creature" value="Orc"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="222" name="Small Rat" type="MONSTER" x="5328" y="480" width="48" height="48">
    <properties>
-    <property name="creature" value="Orc"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="223" name="Cave Bear" type="MONSTER" x="5232" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Capybara"/>
+    <property name="monsterID" value="Were Bear"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="224" name="Omar" type="MONSTER" x="5424" y="864" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="225" name="Mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Highway Man"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="226" name="Unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
    <properties>
-    <property name="creature" value="Coyote"/>
+    <property name="monsterID" value="Coyote"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="227" name="Werejackal" type="MONSTER" x="4320" y="336" width="48" height="48">
    <properties>
-    <property name="creature" value="Coyote"/>
+    <property name="monsterID" value="Coyote"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="228" name="Blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
    <properties>
-    <property name="creature" value="Creeping Crud"/>
+    <property name="monsterID" value="Grave Mist"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="229" name="Dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
    <properties>
-    <property name="creature" value="Wyvern"/>
+    <property name="monsterID" value="Wyvern"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="230" name="Enchanted Sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="231" name="Very young Dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
    <properties>
-    <property name="creature" value="Dragon Puppy"/>
+    <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="232" name="Nizim al Mulik" type="MONSTER" x="2976" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="233" name="Salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="234" name="Alp Arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
    <properties>
-    <property name="creature" value="Bushwacker"/>
+    <property name="monsterID" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="235" name="Absal" type="MONSTER" x="2880" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="236" name="Abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
-    <property name="creature" value="Rogue"/>
+    <property name="monsterID" value="Rogue"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="237" name="Succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
    <properties>
-    <property name="creature" value="Priestess"/>
+    <property name="monsterID" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="238" name="Slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Creeping Crud"/>
+    <property name="monsterID" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="239" name="Barn Owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="240" name="Tiger" type="MONSTER" x="2304" y="1152" width="48" height="48">
    <properties>
-    <property name="creature" value="Capybara"/>
+    <property name="monsterID" value="Capybara"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="242" name="Malik" type="MONSTER" x="2448" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Orc"/>
+    <property name="monsterID" value="Orc"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="243" name="Sultan Shahriar" type="FRIENDLY" x="1680" y="768" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="244" name="Guard" type="FRIENDLY" x="1680" y="672" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="245" name="Guard" type="FRIENDLY" x="1680" y="864" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="246" name="Tan Rat" type="MONSTER" x="1200" y="864" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="247" name="Grey Rat" type="MONSTER" x="1200" y="816" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="248" name="Enchanted Statue" type="MONSTER" x="1344" y="672" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="249" name="Minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre Lord"/>
+    <property name="monsterID" value="Ogre Lord"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="250" name="Minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="251" name="Stone Statue" type="MONSTER" x="720" y="3744" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="252" name="Stone Statue" type="MONSTER" x="384" y="4176" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
    <properties>
-    <property name="creature" value="Grave Mist"/>
+    <property name="monsterID" value="Life Stealer"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="254" name="Stone Statue" type="MONSTER" x="672" y="4608" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="255" name="Son of Minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="256" name="Green Dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
    <properties>
-    <property name="creature" value="Wyvern"/>
+    <property name="monsterID" value="Wyvern"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="257" name="Mechanized Sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
-    <property name="creature" value="Murphy's Ghost"/>
+    <property name="monsterID" value="Murphy's Ghost"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="258" name="Whale" type="FRIENDLY" x="2400" y="3552" width="48" height="48">
    <properties>
-    <property name="creature" value="Spirit"/>
+    <property name="monsterID" value="Spirit"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="259" name="Werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Wolf"/>
+    <property name="monsterID" value="Were Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="260" name="Giant Scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
    <properties>
-    <property name="creature" value="Giant Spider"/>
+    <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="261" name="Sewer Rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="262" name="Wererat" type="MONSTER" x="2208" y="3168" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="263" name="Jungle Rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="264" name="Sword of Damacles" type="FRIENDLY" x="2448" y="3024" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="265" name="Two Edged Sword" type="FRIENDLY" x="2352" y="3024" width="48" height="48">
    <properties>
-    <property name="creature" value="Swordsman"/>
+    <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="266" name="Dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
    <properties>
-    <property name="creature" value="Wyvern"/>
+    <property name="monsterID" value="Wyvern"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="267" name="Aries the Ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="268" name="Pisces" type="FRIENDLY" x="6432" y="3408" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="269" name="Aquarius" type="FRIENDLY" x="6576" y="3408" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="270" name="Taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="272" name="Cancer the Crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
    <properties>
-    <property name="creature" value="Giant Spider"/>
+    <property name="monsterID" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="273" name="Leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Wolf"/>
+    <property name="monsterID" value="Were Wolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="274" name="Virgo" type="FRIENDLY" x="6048" y="4992" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="275" name="Libra" type="FRIENDLY" x="6288" y="4656" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="276" name="Scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
    <properties>
-    <property name="creature" value="Camel Spider"/>
+    <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="277" name="Sagittarius" type="FRIENDLY" x="6816" y="4128" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="278" name="Capricornus" type="FRIENDLY" x="6768" y="3936" width="48" height="48">
    <properties>
-    <property name="creature" value="Gargoyle"/>
+    <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="279" name="Coggia Houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
    <properties>
-    <property name="creature" value="Highway Man"/>
+    <property name="monsterID" value="Lvl 4 Thief"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="281" name="Morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
-    <property name="creature" value="Master Thief 3"/>
+    <property name="monsterID" value="Master Thief 3"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="282" name="Hassan Ben Sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
    <properties>
-    <property name="creature" value="Highway Man"/>
+    <property name="monsterID" value="Highway Man"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="283" name="Mountain Scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Camel Spider"/>
+    <property name="monsterID" value="Camel Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="284" name="Big Zombie" type="MONSTER" x="3024" y="240" width="48" height="48">
    <properties>
-    <property name="creature" value="Rotting Corpse"/>
+    <property name="monsterID" value="Zombie"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="285" name="Small Zombie" type="MONSTER" x="3072" y="288" width="48" height="48">
    <properties>
-    <property name="creature" value="Undead Kobold"/>
+    <property name="monsterID" value="Undead Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="286" name="Witless Zombie" type="MONSTER" x="3120" y="240" width="48" height="48">
    <properties>
-    <property name="creature" value="Zombie"/>
+    <property name="monsterID" value="Zombie"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="287" name="Sky Wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Dragon Puppy"/>
+    <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="288" name="Sun Wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
    <properties>
-    <property name="creature" value="Dragon Puppy"/>
+    <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="289" name="Earth Wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
    <properties>
-    <property name="creature" value="Dragon Puppy"/>
+    <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="404" name="Thief" type="MONSTER" x="2016" y="720" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -1089,7 +925,7 @@
   </object>
   <object id="407" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="5040" y="3888" width="48" height="48">
    <properties>
-    <property name="creature" value="Priestess"/>
+    <property name="monsterID" value="Priestess"/>
     <property name="movement" value="FOLLOW_AVATAR"/>
    </properties>
   </object>

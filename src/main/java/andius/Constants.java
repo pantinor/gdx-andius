@@ -15,7 +15,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -47,7 +46,7 @@ public interface Constants {
         CAVE("Cave", "cave.tmx", TILE_DIM),
         //        LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         //        MENAGERIE("Menagerie", "menagerie.tmx", TILE_DIM),
-        //        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
+        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
         //        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         //        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         //        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
@@ -234,7 +233,7 @@ public interface Constants {
         }
 
         private void loadPeopleLayer(MapLayer peopleLayer) {
-            
+
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
@@ -244,7 +243,7 @@ public interface Constants {
                 float y = obj.getProperties().get("y", Float.class);
                 int sx = (int) (x / TILE_DIM);
                 int sy = (int) (y / TILE_DIM);
-                
+
                 String icon = obj.getProperties().get("icon", String.class);
                 if (icon == null) {
                     icon = "Knight_Arena_Champion_Male";
@@ -252,7 +251,7 @@ public interface Constants {
 
                 String rl = obj.getProperties().get("type", String.class);
                 Role role = Role.valueOf(rl != null ? rl : "FRIENDLY");
-                
+
                 String mv = obj.getProperties().get("movement", String.class);
                 MovementBehavior movement = MovementBehavior.valueOf(mv != null ? mv : "FIXED");
 
@@ -282,12 +281,12 @@ public interface Constants {
         }
 
         public void syncRemovedActors(SaveGame saveGame) {
-            List<Integer> l = saveGame.removedActors.get(this);
+            List<String> l = saveGame.removedActors.get(this);
             if (l != null && this.baseMap != null) {
                 Iterator<Actor> iter = this.baseMap.actors.iterator();
                 while (iter.hasNext()) {
                     Actor a = iter.next();
-                    if (l.contains(a.getId())) {
+                    if (l.contains(a.hash())) {
                         iter.remove();
                     }
                 }
@@ -441,25 +440,28 @@ public interface Constants {
     }
 
     public enum Status {
-
-        OK(Color.WHITE),
-        AFRAID(Color.YELLOW),
-        SILENCED(Color.ORANGE),
-        ASLEEP(Color.MAGENTA),
-        POISONED(Color.GREEN),
-        PARALYZED(Color.CYAN),
-        STONED(Color.DARK_GRAY),
-        DEAD(Color.RED),
-        ASHES(Color.LIGHT_GRAY);
+        AFRAID(Color.YELLOW, "AF"),
+        SILENCED(Color.ORANGE, "SI"),
+        ASLEEP(Color.MAGENTA, "SL"),
+        POISONED(Color.GREEN, "PO"),
+        PARALYZED(Color.CYAN, "PZ"),
+        STONED(Color.DARK_GRAY, "ST"),
+        ASHES(Color.LIGHT_GRAY, "AS");
 
         private final Color color;
+        private final String display;
 
-        private Status(Color color) {
+        private Status(Color color, String display) {
             this.color = color;
+            this.display = display;
         }
 
         public Color getColor() {
             return color;
+        }
+
+        public String getDisplay() {
+            return display;
         }
 
     }

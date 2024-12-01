@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -30,8 +29,7 @@ public class MutableMonster extends Monster {
 
     private int acmodifier;
     private int currentHitPoints;
-    private Status status = Status.OK;
-    private final AtomicInteger statusEffectsCountdown = new AtomicInteger();
+    private final State status = new State();
     private final int maxHitPoints;
     private TextureRegion healthBar;
 
@@ -53,26 +51,13 @@ public class MutableMonster extends Monster {
         this.currentHitPoints = currentHitPoints;
     }
 
-    public Status getStatus() {
+    public State status() {
         return status;
     }
 
-    public void resetStatus() {
-        this.status = Status.OK;
-        this.statusEffectsCountdown.set(0);
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-        this.statusEffectsCountdown.set(4);
-    }
-
     public void decrementStatusEffectCount() {
-        if (this.statusEffectsCountdown.get() > 0) {
-            this.statusEffectsCountdown.decrementAndGet();
-        }
-        if (this.statusEffectsCountdown.get() == 0) {
-            this.status = Status.OK;
+        for (Status s : Status.values()) {
+            this.status.decrement(s);
         }
     }
 

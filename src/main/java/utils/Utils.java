@@ -134,7 +134,7 @@ public class Utils {
 
     public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
         int attackValue = RANDOM.nextInt(20) + 1;
-        int defenseValue = 20 - defender.calculateAC() - attacker.getLevel() - (defender.status == Status.OK ? 0 : 3);
+        int defenseValue = 20 - defender.calculateAC() - attacker.getLevel() - (defender.status.isDisabled() ? 3 : 0);
 
         if (defenseValue < 1) {
             defenseValue = 1;
@@ -165,7 +165,7 @@ public class Utils {
             strMod = 3;
         }
         int attackValue = (RANDOM.nextInt(20) + 1) + strMod;
-        int defenseValue = 21 - defender.getArmourClass() + defender.getACModifier() - (defender.getStatus() == Status.OK ? 0 : 3);
+        int defenseValue = 21 - defender.getArmourClass() + defender.getACModifier() - (defender.status().isDisabled() ? 3 : 0);
 
         if (attackValue < 1) {
             attackValue = 1;
@@ -190,7 +190,7 @@ public class Utils {
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {
-        int damage = weapon.damage.roll() + (defender.getStatus() == Status.OK ? 0 : 5); //add 5 points to the damage if the defender is not in OK status
+        int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();
         return damage;
@@ -199,7 +199,7 @@ public class Utils {
     public static int dealSpellDamage(int hits, int range, int bonus) {
         int points = 0;
         while (hits > 0) {
-            points += RANDOM.nextInt(range) + 1;
+            points += RANDOM.nextInt(range + 1);
             hits--;
         }
         points += bonus;

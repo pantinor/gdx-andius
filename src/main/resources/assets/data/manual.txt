@@ -307,108 +307,108 @@ XP=EXPERIENCE POINTS:  This number represents the total amount of experience
                        example, a monster worth 600 XP will yield 100 XP per
                        character in a six-character party.
 
-NAME	TYPE	LVL	EXP	HPMX	AC	DAMG	MAGE	PRST	SPED	GOLD	REWD	LVLDR	HEAL	BRTH	PARTID	GRPSZ
-Bubbly Slime	ANIMAL	0	55	4	12	[1d1]	0	0	1	0	10	0	0	0	1	2d2									
-Capybara	ANIMAL	0	520	16	8	[1d10]	0	0	1	1	11	0	0	0	17	2d4+1									
-Creeping Crud	ANIMAL	0	550	12	6	[1d3+1]	0	0	1	0	10	0	0	0	0	1d6+1									
-Vorpal Bunny	ANIMAL	1	735	20	6	[1d6, 1d8]	0	0	2	1	11	0	0	0	15	2d3+2									
-Coyote	ANIMAL	1	780	24	8	[4d4]	0	0	1	1	11	0	0	0	14	4d2									
-Giant Toad	ANIMAL	1	795	20	7	[1d4, 1d6, 2d3+2]	0	0	3	1	11	0	0	0	17	2d2+4									
-Attack Dog	ANIMAL	2	1120	32	1	[1d6]	0	0	1	3	13	0	0	0	22	1d6									
-Gaze Hound	ANIMAL	2	1235	32	-1	[1d2]	0	0	1	5	15	0	0	0	56	1d5									
-Were Bear	ANIMAL	2	1320	40	6	[3d6+1]	0	0	1	2	12	0	1	0	14	2d3+2									
-Killer Wolf	ANIMAL	3	1460	48	0	[2d4, 2d4]	0	0	2	4	14	0	0	0	35	1d6									
-Wyvern	ANIMAL	3	1540	63	3	[2d8, 1d6]	0	0	2	6	16	0	0	0	43	1d6									
-Bleeb	ANIMAL	5	3300	80	0	[1d8+1, 1d8+1]	0	0	2	7	17	0	0	0	76	1d8									
-Chimera	ANIMAL	5	3515	54	2	[1d3, 1d3, 1d4, 1d4, 2d4, 3d4]	0	0	6	6	16	0	0	1	54	1d4									
-Raver Lord	ANIMAL	6	4155	150	10	[3d12, 3d12]	5	4	2	9	19	0	2	0	82	1d1									
-Flack	ANIMAL	9	9200	180	-3	[4d8+3]	0	0	1	9	19	0	0	2	77	1d1									
-Lesser Demon	DEMON	7	5100	80	4	[2d6, 2d6, 1d3, 1d3, 1d4+4]	3	0	5	6	16	0	0	0	66	1d1									
-Greater Demon	DEMON	10	44090	88	-3	[2d12, 1d6, 1d4, 1d4, 1d4]	5	0	5	8	18	0	1	0	66	1d6									
-Dragon Fly	DRAGON	2	1275	16	4	[1d4, 1d4, 1d6]	0	0	3	2	12	0	0	1	0	1d3+1									
-Gas Dragon	DRAGON	4	2075	40	3	[1d4, 1d4, 3d6]	1	0	3	2	12	0	0	3	22	1d4									
-Dragon Puppy	DRAGON	4	2280	50	4	[1d10]	0	0	1	3	13	0	0	2	26	1d6									
-Fire Dragon	DRAGON	7	5000	96	-1	[1d4, 1d4, 4d4]	5	0	3	8	18	0	0	1	0	1d4									
-Gas Cloud	ENCHANTED	0	350	8	10	[1d4]	2	0	1	0	10	0	0	0	0	2d4									
-Creeping Coin	ENCHANTED	1	920	1	4	[1d1]	0	0	1	2	4	0	0	4	12	9d1									
-Gargoyle	ENCHANTED	4	2435	36	5	[1d3, 1d3, 1d6, 1d4]	0	0	4	3	13	0	0	0	0	1d6									
-Will O' Wisp	ENCHANTED	10	42840	80	-8	[2d8]	0	0	1	7	17	0	0	0	0	1d2									
-Orc	FIGHTER	0	235	4	10	[1d4]	0	0	1	0	10	0	0	0	2	3d2									
-Kobold	FIGHTER	0	415	7	8	[1d2+1, 1d2+1]	0	0	2	0	10	0	0	0	1	2d2+1									
-Lvl 1 Ninja	FIGHTER	1	600	10	5	[1d4, 1d4, 1d4]	0	0	3	1	11	0	0	0	13	2d4									
-Bushwacker	FIGHTER	1	620	19	8	[1d6+1, 2d4+1]	0	0	2	0	10	0	0	0	7	1d4+1									
-Lvl 3 Samurai	FIGHTER	1	795	22	5	[1d4+1, 1d6+1, 1d4+1]	1	0	3	1	11	0	0	0	12	4d2									
-Highway Man	FIGHTER	1	840	14	6	[1d2+1, 1d2+1, 1d2+1, 1d2+1]	0	0	4	0	10	0	0	0	7	2d6									
-Swordsman	FIGHTER	1	960	30	3	[2d7]	0	0	1	3	13	0	0	0	32	1d6									
-Ogre	FIGHTER	1	960	33	5	[2d6]	0	0	1	2	12	0	0	0	14	1d8									
-Lvl 8 Ninja	FIGHTER	2	1020	32	4	[2d6, 1d6]	0	0	2	6	16	0	0	0	60	1d3									
-Minor Daimyo	FIGHTER	2	1200	40	2	[1d12]	0	0	1	3	13	0	0	0	38	1d6									
-Master Ninja	FIGHTER	2	1280	40	3	[1d10+3, 1d10+3, 1d10+3]	0	0	3	7	17	0	0	0	64	1d5									
-Lvl 3 Ninja	FIGHTER	2	1360	24	3	[1d4, 1d4, 1d4, 1d4, 1d4]	0	0	5	2	12	0	0	0	13	2d4+2									
-Lvl 6 Ninja	FIGHTER	3	1520	60	6	[1d6, 1d6, 1d6]	0	0	3	4	14	0	0	0	50	1d5									
-Hatamoto	FIGHTER	3	1600	48	-1	[3d8, 3d8, 3d8]	0	0	3	8	18	0	0	0	74	1d1									
-High Ninja	FIGHTER	3	1600	48	-1	[3d8, 3d8, 3d8]	0	0	3	0	0	0	0	0	0	1d1									
-Troll	FIGHTER	3	1720	54	4	[1d4+4, 1d4+4, 1d4+4]	0	0	3	5	15	0	3	0	58	1d3									
-Lvl 10 Fighter	FIGHTER	3	1900	70	0	[1d12, 1d12]	0	0	2	6	16	0	0	0	63	1d6									
-Lvl 7 Fighter	FIGHTER	3	1900	70	0	[1d12, 1d12]	0	0	2	21	21	0	0	0	99	2d1									
-Lvl 8 Fighter	FIGHTER	4	2140	80	-1	[1d12+2, 1d12+2]	0	0	2	7	17	0	0	0	73	1d6									
-Major Daimyo	FIGHTER	4	2340	84	0	[1d10, 1d4]	0	0	2	5	15	0	0	0	47	1d5									
-Champ Samurai	FIGHTER	4	2395	100	2	[1d12+2]	1	0	1	5	15	0	0	0	52	1d6									
-High Master	FIGHTER	5	3000	60	-2	[3d12, 3d12, 3d6]	0	0	3	9	19	0	0	0	85	1d1									
-Fire Giant	GIANT	4	2115	92	3	[5d6]	0	0	1	7	17	0	0	0	68	1d4									
-Earth Giant	GIANT	10	20435	41	9	[2d8, 2d8]	0	0	2	6	16	0	0	0	0	1d5									
-Poison Giant	GIANT	10	40840	81	3	[4d10]	0	0	1	8	18	0	0	3	78	1d4									
-Frost Giant	GIANT	10	40875	58	6	[3d10]	0	0	1	8	18	0	0	0	75	1d4									
-Huge Spider	INSECT	1	600	18	6	[1d6]	0	0	1	2	12	0	0	0	27	1d8									
-Camel Spider	INSECT	1	600	18	6	[1d6]	0	0	1	3	13	0	0	0	37	1d8									
-Giant Spider	INSECT	1	960	36	4	[2d4]	0	0	1	4	14	0	0	0	25	1d6									
-Boring Beetle	INSECT	2	1120	40	3	[5d4]	0	0	1	2	12	0	0	0	25	1d8									
-Lvl 1 Mage	MAGE	0	475	5	4	[2d2]	1	0	1	1	11	0	0	0	6	1d1									
-Lvl 5 Mage	MAGE	1	620	20	10	[1d4]	3	0	1	4	14	0	0	0	41	1d6									
-Arch Mage 1	MAGE	1	790	34	9	[1d4]	2	0	1	5	15	0	0	0	53	1d6									
-Lvl 7 Mage 1	MAGE	2	1000	28	8	[1d4]	4	0	1	4	14	0	0	0	48	1d6									
-Lvl 7 Mage 3	MAGE	2	1000	28	8	[1d4]	4	0	1	0	0	0	0	0	98	2d1									
-Lvl 7 Mage 2	MAGE	2	1240	28	8	[1d4]	5	0	1	6	16	0	0	0	61	1d6									
-Lvl 10 Mage	MAGE	3	1400	40	10	[1d4]	5	0	1	7	17	0	0	0	71	1d6									
-Ogre Lord	MAGE	3	1790	64	4	[1d12]	3	0	1	5	15	0	1	0	58	1d5									
-High Wizard	MAGE	4	2395	48	4	[1d4]	6	0	1	8	18	0	0	0	72	1d1									
-Arch Mage 2	MAGE	5	3160	80	0	[1d4]	6	0	1	9	19	0	0	0	83	1d1									
-Werdna	MAGE	10	15880	120	-7	[8d5, 8d5]	7	7	2	20	20	4	5	0	95	1d1									
-Medusa Lizard	MYTHICAL	2	1040	40	6	[1d3]	0	0	1	4	14	0	0	0	43	1d6									
-Spirit	MYTHICAL	2	1245	23	2	[1d4]	3	0	1	4	14	0	1	0	33	1d6									
-Gorgon	MYTHICAL	4	2920	64	2	[2d6]	0	0	1	7	17	0	0	5	69	1d1									
-Lvl 1 Priest	PRIEST	0	515	8	5	[1d8]	0	1	1	1	11	0	0	0	4	1d4+1									
-Priestess	PRIEST	1	870	25	4	[1d6+2]	0	2	1	2	12	0	0	0	28	1d6									
-Lvl 3 Priest	PRIEST	1	990	25	4	[1d8+2]	0	2	1	1	11	0	0	0	11	2d2+3									
-Bishop	PRIEST	2	1135	32	4	[1d10]	1	3	1	3	13	0	0	0	39	1d6									
-Lvl 5 Priest	PRIEST	2	1220	40	4	[1d6+2]	0	3	1	4	14	0	0	0	48	1d5									
-Lvl 8 Priest	PRIEST	3	1720	56	3	[1d8]	0	4	1	6	16	0	0	0	61	1d5									
-Lvl 8 Bishop	PRIEST	4	2060	64	2	[1d8+4]	3	4	1	7	17	0	0	0	71	1d6									
-High Priest 1	PRIEST	4	2160	64	3	[1d8+2]	0	5	1	5	15	0	0	0	53	1d6									
-High Priest 3	PRIEST	4	2200	64	2	[1d8+4]	0	5	1	0	0	0	0	0	97	2d1									
-High Priest 2	PRIEST	5	3300	88	2	[1d8, 1d8]	0	6	2	8	18	0	0	0	70	1d1									
-Rogue	THIEF	0	380	11	10	[1d4, 2d2+1]	0	0	2	0	10	0	0	0	1	1d4+1									
-Lvl 4 Thief	THIEF	1	740	35	10	[1d6, 2d6]	0	0	2	4	14	0	0	0	38	1d6									
-Master Thief 1	THIEF	1	960	24	4	[1d6, 1d6, 2d6]	0	0	3	5	15	0	0	0	47	1d6									
-Master Thief 2	THIEF	2	1140	36	3	[1d8, 3d8]	0	0	2	5	15	0	0	0	54	1d6									
-Lvl 7 Thief	THIEF	2	1220	42	4	[1d8, 3d8]	0	0	2	6	16	0	0	0	62	1d5									
-Thief	THIEF	3	1640	54	4	[1d8, 1d3, 3d8, 2d10]	0	0	4	7	17	0	0	0	71	1d5									
-Master Thief 3	THIEF	3	1935	72	2	[1d8, 5d8]	0	0	2	8	18	0	0	0	73	1d1									
-Undead Kobold	UNDEAD	0	230	8	10	[1d4+1]	0	0	1	0	10	0	0	0	2	1d6+1									
-Zombie	UNDEAD	0	520	11	4	[1d6]	0	0	1	0	10	0	0	0	8	1d6+1									
-Rotting Corpse	UNDEAD	1	680	16	6	[1d3, 1d3, 1d6]	0	0	3	2	12	0	0	0	34	1d5									
-Shade	UNDEAD	1	875	27	7	[1d4+1]	0	0	1	3	13	1	0	0	23	1d6									
-Grave Mist	UNDEAD	2	1080	32	4	[1d4, 1d4, 1d8]	0	0	3	3	13	0	0	0	37	1d6									
-Night Stalker	UNDEAD	3	1475	43	4	[1d6]	0	0	1	6	16	1	0	0	57	2d3									
-Life Stealer	UNDEAD	4	2240	43	3	[1d4]	3	3	1	5	15	2	0	0	59	1d1									
-Vampire	UNDEAD	5	3330	88	-1	[2d8, 1d4, 1d4]	3	0	3	8	18	2	1	0	86	1d4									
-Murphy's Ghost	UNDEAD	6	4450	110	-3	[1d1+1]	0	0	1	3	3	0	1	0	77	1d1									
-Dragon Zombie	UNDEAD	7	5200	96	-2	[1d8, 1d8, 3d12]	5	0	3	8	18	0	0	4	79	1d4									
-Vampire Lord	UNDEAD	8	7320	160	-5	[1d4]	6	0	1	9	19	4	4	0	86	1d1									
-Maelific	UNDEAD	8	7460	100	-5	[1d4, 1d0+1]	7	0	2	9	19	3	3	0	88	1d0+1									
-Were Rat	WERE	1	755	25	6	[1d8]	0	0	1	2	12	0	0	0	17	1d4									
-Were Wolf	WERE	1	975	35	5	[2d4, 2d4]	0	0	2	3	13	0	0	0	26	1d6									
-Were Tiger	WERE	3	1405	40	4	[2d6, 2d6, 1d4]	0	0	3	4	14	0	1	0	36	1d8									
+ID	NAME          	TYPE      	LVL	EXP	HPMX	AC	DAMG                      	MAGE	PRST	SPED	GOLD	REWD	LVLDR	HEAL	BRTH	PARTID	GRPSZ
+0	Bubbly Slime   	ANIMAL    	0	55	4	12	[1d1]                    	0	0	1	0	10	0	0	0	1	2d2
+1	Orc            	FIGHTER   	0	235	4	10	[1d4]                    	0	0	1	0	10	0	0	0	2	3d2
+2	Kobold         	FIGHTER   	0	415	7	8	[1d2+1, 1d2+1]           	0	0	2	0	10	0	0	0	1	2d2+1
+3	Undead Kobold  	UNDEAD    	0	230	8	10	[1d4+1]                  	0	0	1	0	10	0	0	0	2	1d6+1
+4	Rogue          	THIEF     	0	380	11	10	[1d4, 2d2+1]             	0	0	2	0	10	0	0	0	1	1d4+1
+5	Bushwacker     	FIGHTER   	1	620	19	8	[1d6+1, 2d4+1]           	0	0	2	0	10	0	0	0	7	1d4+1
+6	Highway Man    	FIGHTER   	1	840	14	6	[1d2+1, 1d2+1, 1d2+1, 1d2+1]	0	0	4	0	10	0	0	0	7	2d6
+7	Zombie         	UNDEAD    	0	520	11	4	[1d6]                    	0	0	1	0	10	0	0	0	8	1d6+1
+8	Creeping Crud  	ANIMAL    	0	550	12	6	[1d3+1]                  	0	0	1	0	10	0	0	0	0	1d6+1
+9	Gas Cloud      	ENCHANTED 	0	350	8	10	[1d4]                    	2	0	1	0	10	0	0	0	0	2d4
+10	Lvl 1 Mage     	MAGE      	0	475	5	4	[2d2]                    	1	0	1	1	11	0	0	0	6	1d1
+11	Lvl 1 Priest   	PRIEST    	0	515	8	5	[1d8]                    	0	1	1	1	11	0	0	0	4	1d4+1
+12	Creeping Coin  	ENCHANTED 	1	920	1	4	[1d1]                    	0	0	1	2	4	0	0	4	12	9d1
+13	Lvl 1 Ninja    	FIGHTER   	1	600	10	5	[1d4, 1d4, 1d4]          	0	0	3	1	11	0	0	0	13	2d4
+14	Vorpal Bunny   	ANIMAL    	1	735	20	6	[1d6, 1d8]               	0	0	2	1	11	0	0	0	15	2d3+2
+15	Capybara       	ANIMAL    	0	520	16	8	[1d10]                   	0	0	1	1	11	0	0	0	17	2d4+1
+16	Giant Toad     	ANIMAL    	1	795	20	7	[1d4, 1d6, 2d3+2]        	0	0	3	1	11	0	0	0	17	2d2+4
+17	Coyote         	ANIMAL    	1	780	24	8	[4d4]                    	0	0	1	1	11	0	0	0	14	4d2
+18	Lvl 3 Priest   	PRIEST    	1	990	25	4	[1d8+2]                  	0	2	1	1	11	0	0	0	11	2d2+3
+19	Lvl 3 Samurai  	FIGHTER   	1	795	22	5	[1d4+1, 1d6+1, 1d4+1]    	1	0	3	1	11	0	0	0	12	4d2
+20	Lvl 3 Ninja    	FIGHTER   	2	1360	24	3	[1d4, 1d4, 1d4, 1d4, 1d4]	0	0	5	2	12	0	0	0	13	2d4+2
+21	Were Bear      	ANIMAL    	2	1320	40	6	[3d6+1]                  	0	0	1	2	12	0	1	0	14	2d3+2
+22	Dragon Fly     	DRAGON    	2	1275	16	4	[1d4, 1d4, 1d6]          	0	0	3	2	12	0	0	1	0	1d3+1
+23	Rotting Corpse 	UNDEAD    	1	680	16	6	[1d3, 1d3, 1d6]          	0	0	3	2	12	0	0	0	34	1d5
+24	Ogre           	FIGHTER   	1	960	33	5	[2d6]                    	0	0	1	2	12	0	0	0	14	1d8
+25	Huge Spider    	INSECT    	1	600	18	6	[1d6]                    	0	0	1	2	12	0	0	0	27	1d8
+26	Were Rat       	WERE      	1	755	25	6	[1d8]                    	0	0	1	2	12	0	0	0	17	1d4
+27	Boring Beetle  	INSECT    	2	1120	40	3	[5d4]                    	0	0	1	2	12	0	0	0	25	1d8
+28	Gas Dragon     	DRAGON    	4	2075	40	3	[1d4, 1d4, 3d6]          	1	0	3	2	12	0	0	3	22	1d4
+29	Priestess      	PRIEST    	1	870	25	4	[1d6+2]                  	0	2	1	2	12	0	0	0	28	1d6
+30	Swordsman      	FIGHTER   	1	960	30	3	[2d7]                    	0	0	1	3	13	0	0	0	32	1d6
+31	Camel Spider   	INSECT    	1	600	18	6	[1d6]                    	0	0	1	3	13	0	0	0	37	1d8
+32	Attack Dog     	ANIMAL    	2	1120	32	1	[1d6]                    	0	0	1	3	13	0	0	0	22	1d6
+33	Gargoyle       	ENCHANTED 	4	2435	36	5	[1d3, 1d3, 1d6, 1d4]     	0	0	4	3	13	0	0	0	0	1d6
+34	Grave Mist     	UNDEAD    	2	1080	32	4	[1d4, 1d4, 1d8]          	0	0	3	3	13	0	0	0	37	1d6
+35	Dragon Puppy   	DRAGON    	4	2280	50	4	[1d10]                   	0	0	1	3	13	0	0	2	26	1d6
+36	Were Wolf      	WERE      	1	975	35	5	[2d4, 2d4]               	0	0	2	3	13	0	0	0	26	1d6
+37	Shade          	UNDEAD    	1	875	27	7	[1d4+1]                  	0	0	1	3	13	1	0	0	23	1d6
+38	Bishop         	PRIEST    	2	1135	32	4	[1d10]                   	1	3	1	3	13	0	0	0	39	1d6
+39	Minor Daimyo   	FIGHTER   	2	1200	40	2	[1d12]                   	0	0	1	3	13	0	0	0	38	1d6
+40	Lvl 5 Mage     	MAGE      	1	620	20	10	[1d4]                    	3	0	1	4	14	0	0	0	41	1d6
+41	Lvl 4 Thief    	THIEF     	1	740	35	10	[1d6, 2d6]               	0	0	2	4	14	0	0	0	38	1d6
+42	Killer Wolf    	ANIMAL    	3	1460	48	0	[2d4, 2d4]               	0	0	2	4	14	0	0	0	35	1d6
+43	Spirit         	MYTHICAL  	2	1245	23	2	[1d4]                    	3	0	1	4	14	0	1	0	33	1d6
+44	Giant Spider   	INSECT    	1	960	36	4	[2d4]                    	0	0	1	4	14	0	0	0	25	1d6
+45	Were Tiger     	WERE      	3	1405	40	4	[2d6, 2d6, 1d4]          	0	0	3	4	14	0	1	0	36	1d8
+46	Medusa Lizard  	MYTHICAL  	2	1040	40	6	[1d3]                    	0	0	1	4	14	0	0	0	43	1d6
+47	Lvl 5 Priest   	PRIEST    	2	1220	40	4	[1d6+2]                  	0	3	1	4	14	0	0	0	48	1d5
+48	Lvl 6 Ninja    	FIGHTER   	3	1520	60	6	[1d6, 1d6, 1d6]          	0	0	3	4	14	0	0	0	50	1d5
+49	Lvl 7 Mage 1   	MAGE      	2	1000	28	8	[1d4]                    	4	0	1	4	14	0	0	0	48	1d6
+50	Master Thief 1 	THIEF     	1	960	24	4	[1d6, 1d6, 2d6]          	0	0	3	5	15	0	0	0	47	1d6
+51	Major Daimyo   	FIGHTER   	4	2340	84	0	[1d10, 1d4]              	0	0	2	5	15	0	0	0	47	1d5
+52	High Priest 1  	PRIEST    	4	2160	64	3	[1d8+2]                  	0	5	1	5	15	0	0	0	53	1d6
+53	Champ Samurai  	FIGHTER   	4	2395	100	2	[1d12+2]                 	1	0	1	5	15	0	0	0	52	1d6
+54	Arch Mage 1    	MAGE      	1	790	34	9	[1d4]                    	2	0	1	5	15	0	0	0	53	1d6
+55	Master Thief 2 	THIEF     	2	1140	36	3	[1d8, 3d8]               	0	0	2	5	15	0	0	0	54	1d6
+56	Gaze Hound     	ANIMAL    	2	1235	32	-1	[1d2]                    	0	0	1	5	15	0	0	0	56	1d5
+57	Ogre Lord      	MAGE      	3	1790	64	4	[1d12]                   	3	0	1	5	15	0	1	0	58	1d5
+58	Troll          	FIGHTER   	3	1720	54	4	[1d4+4, 1d4+4, 1d4+4]    	0	0	3	5	15	0	3	0	58	1d3
+59	Life Stealer   	UNDEAD    	4	2240	43	3	[1d4]                    	3	3	1	5	15	2	0	0	59	1d1
+60	Night Stalker  	UNDEAD    	3	1475	43	4	[1d6]                    	0	0	1	6	16	1	0	0	57	2d3
+61	Wyvern         	ANIMAL    	3	1540	63	3	[2d8, 1d6]               	0	0	2	6	16	0	0	0	43	1d6
+62	Lvl 8 Priest   	PRIEST    	3	1720	56	3	[1d8]                    	0	4	1	6	16	0	0	0	61	1d5
+63	Lvl 10 Fighter 	FIGHTER   	3	1900	70	0	[1d12, 1d12]             	0	0	2	6	16	0	0	0	63	1d6
+64	Lvl 7 Mage 2   	MAGE      	2	1240	28	8	[1d4]                    	5	0	1	6	16	0	0	0	61	1d6
+65	Lvl 7 Thief    	THIEF     	2	1220	42	4	[1d8, 3d8]               	0	0	2	6	16	0	0	0	62	1d5
+66	Lvl 8 Ninja    	FIGHTER   	2	1020	32	4	[2d6, 1d6]               	0	0	2	6	16	0	0	0	60	1d3
+67	Earth Giant    	GIANT     	10	20435	41	9	[2d8, 2d8]               	0	0	2	6	16	0	0	0	0	1d5
+68	Lesser Demon   	DEMON     	7	5100	80	4	[2d6, 2d6, 1d3, 1d3, 1d4+4]	3	0	5	6	16	0	0	0	66	1d1
+69	Chimera        	ANIMAL    	5	3515	54	2	[1d3, 1d3, 1d4, 1d4, 2d4, 3d4]	0	0	6	6	16	0	0	1	54	1d4
+70	Fire Giant     	GIANT     	4	2115	92	3	[5d6]                    	0	0	1	7	17	0	0	0	68	1d4
+71	Gorgon         	MYTHICAL  	4	2920	64	2	[2d6]                    	0	0	1	7	17	0	0	5	69	1d1
+72	Lvl 8 Bishop   	PRIEST    	4	2060	64	2	[1d8+4]                  	3	4	1	7	17	0	0	0	71	1d6
+73	Lvl 8 Fighter  	FIGHTER   	4	2140	80	-1	[1d12+2, 1d12+2]         	0	0	2	7	17	0	0	0	73	1d6
+74	Lvl 10 Mage    	MAGE      	3	1400	40	10	[1d4]                    	5	0	1	7	17	0	0	0	71	1d6
+75	Thief          	THIEF     	3	1640	54	4	[1d8, 1d3, 3d8, 2d10]    	0	0	4	7	17	0	0	0	71	1d5
+76	Master Ninja   	FIGHTER   	2	1280	40	3	[1d10+3, 1d10+3, 1d10+3] 	0	0	3	7	17	0	0	0	64	1d5
+77	Murphys Ghost  	UNDEAD    	6	4450	110	-3	[1d1+1]                  	0	0	1	3	3	0	1	0	77	1d1
+78	Will O Wisp    	ENCHANTED 	10	42840	80	-8	[2d8]                    	0	0	1	7	17	0	0	0	0	1d2
+79	Bleeb          	ANIMAL    	5	3300	80	0	[1d8+1, 1d8+1]           	0	0	2	7	17	0	0	0	76	1d8
+80	Frost Giant    	GIANT     	10	40875	58	6	[3d10]                   	0	0	1	8	18	0	0	0	75	1d4
+81	Fire Dragon    	DRAGON    	7	5000	96	-1	[1d4, 1d4, 4d4]          	5	0	3	8	18	0	0	1	0	1d4
+82	High Priest 2  	PRIEST    	5	3300	88	2	[1d8, 1d8]               	0	6	2	8	18	0	0	0	70	1d1
+83	High Wizard    	MAGE      	4	2395	48	4	[1d4]                    	6	0	1	8	18	0	0	0	72	1d1
+84	Master Thief 3 	THIEF     	3	1935	72	2	[1d8, 5d8]               	0	0	2	8	18	0	0	0	73	1d1
+85	Hatamoto       	FIGHTER   	3	1600	48	-1	[3d8, 3d8, 3d8]          	0	0	3	8	18	0	0	0	74	1d1
+86	Vampire        	UNDEAD    	5	3330	88	-1	[2d8, 1d4, 1d4]          	3	0	3	8	18	2	1	0	86	1d4
+87	Greater Demon  	DEMON     	10	44090	88	-3	[2d12, 1d6, 1d4, 1d4, 1d4]	5	0	5	8	18	0	1	0	66	1d6
+88	Poison Giant   	GIANT     	10	40840	81	3	[4d10]                   	0	0	1	8	18	0	0	3	78	1d4
+89	Dragon Zombie  	UNDEAD    	7	5200	96	-2	[1d8, 1d8, 3d12]         	5	0	3	8	18	0	0	4	79	1d4
+90	Raver Lord     	ANIMAL    	6	4155	150	10	[3d12, 3d12]             	5	4	2	9	19	0	2	0	82	1d1
+91	High Master    	FIGHTER   	5	3000	60	-2	[3d12, 3d12, 3d6]        	0	0	3	9	19	0	0	0	85	1d1
+92	Flack          	ANIMAL    	9	9200	180	-3	[4d8+3]                  	0	0	1	9	19	0	0	2	77	1d1
+93	Arch Mage      	MAGE      	5	3160	80	0	[1d4]                    	6	0	1	9	19	0	0	0	83	1d1
+94	Maelific       	UNDEAD    	8	7460	100	-5	[1d4, 1d0+1]             	7	0	2	9	19	3	3	0	88	1d0+1
+95	Vampire Lord   	UNDEAD    	8	7320	160	-5	[1d4]                    	6	0	1	9	19	4	4	0	86	1d1
+96	Werdna         	MAGE      	10	15880	120	-7	[8d5, 8d5]               	7	7	2	20	20	4	5	0	95	1d1
+97	High Ninja     	FIGHTER   	3	1600	48	-1	[3d8, 3d8, 3d8]          	0	0	3	0	0	0	0	0	0	1d1
+98	High Priest 3  	PRIEST    	4	2200	64	2	[1d8+4]                  	0	5	1	0	0	0	0	0	97	2d1
+99	Lvl 7 Mage 3   	MAGE      	2	1000	28	8	[1d4]                    	4	0	1	0	0	0	0	0	98	2d1
+100	Lvl 7 Fighter  	FIGHTER   	3	1900	70	0	[1d12, 1d12]             	0	0	2	21	21	0	0	0	99	2d1								
 
 *break
 ITEMS

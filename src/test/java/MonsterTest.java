@@ -30,7 +30,7 @@ public class MonsterTest {
         }.getType());
 
         Collections.sort(monsters);
-        System.out.println("NAME\tTYPE\tLVL\tEXP\tHPMX\tAC\tDAMG\tMAGE\tPRST\tSPED\tGOLD\tREWD\tLVLDR\tHEAL\tBRTH\tPARTID\tGRPSZ");
+        System.out.println("ID\tNAME          \tTYPE      \tLVL\tEXP\tHPMX\tAC\tDAMG                      \tMAGE\tPRST\tSPED\tGOLD\tREWD\tLVLDR\tHEAL\tBRTH\tPARTID\tGRPSZ");
         for (Monster m : monsters) {
             System.out.println(m);
         }

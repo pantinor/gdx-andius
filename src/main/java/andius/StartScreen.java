@@ -123,6 +123,8 @@ public class StartScreen implements Screen, Constants {
                     //VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
                     //mainGame.setScreen(es);
                     for (int j = 0; j < 6; j++) {
+                        //CTX.saveGame.players[j].exp = 1500;
+
 //                        CTX.saveGame.players[j].armor = ITEMS_MAP.get("CHAIN MAIL +1").clone();
 //                        CTX.saveGame.players[j].weapon = ITEMS_MAP.get("MACE +1").clone();
 //                        CTX.saveGame.players[j].helm = ITEMS_MAP.get("HELM").clone();

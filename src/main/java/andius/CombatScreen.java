@@ -295,7 +295,7 @@ public class CombatScreen extends BaseScreen {
         int x = 0;
         float cx = 0, cy = 0;
         for (andius.objects.Actor p : partyMembers) {
-            if (p.getPlayer().status != Status.DEAD) {
+            if (!p.getPlayer().isDead()) {
                 renderer.getBatch().draw(p.getIcon(), p.getX(), p.getY());
             }
             if (x == this.activeIndex) {
@@ -324,8 +324,14 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.begin(ShapeType.Line);
                 shapeRenderer.setColor(255, 255, 0, .50f);//yellow
                 for (andius.objects.Actor c : this.enemies) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery) < 10)) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 15) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 15)) {
                         shapeRenderer.setColor(255, 0, 0, .50f);//red
+                        break;
+                    }
+                }
+                for (andius.objects.Actor c : this.partyMembers) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 15) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 15)) {
+                        shapeRenderer.setColor(0, 255, 0, .50f);//green
                         break;
                     }
                 }
@@ -587,7 +593,7 @@ public class CombatScreen extends BaseScreen {
         } else {
             boolean anyoneAlive = false;
             for (SaveGame.CharacterRecord ch : this.context.players()) {
-                if (ch.status != Status.DEAD) {
+                if (!ch.isDead()) {
                     anyoneAlive = true;
                     break;
                 }
@@ -611,7 +617,7 @@ public class CombatScreen extends BaseScreen {
 
         try {
 
-            if (creature.getMonster().getStatus() != Status.OK && creature.getMonster().getStatus() != Status.SILENCED) {
+            if (creature.getMonster().status().isDisabled()) {
                 return;
             }
 
@@ -623,7 +629,7 @@ public class CombatScreen extends BaseScreen {
 
             CombatAction action = CombatAction.ATTACK;
             if ((creature.getMonster().getPriestSpellLevel() > 0 || creature.getMonster().getMageSpellLevel() > 0)
-                    && rand.nextInt(3) == 0 && creature.getMonster().knownSpells.size() > 0) {
+                    && rand.nextInt(3) == 0 && !creature.getMonster().knownSpells.isEmpty()) {
                 action = CombatAction.CAST;
             } else if (action == CombatAction.ATTACK && dist.get() > 1) {
                 action = CombatAction.ADVANCE;
@@ -646,7 +652,7 @@ public class CombatScreen extends BaseScreen {
 
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                             seq.addAction(Actions.run(new AddActorAction(stage, d)));
-                            if (target.getPlayer().status == Status.DEAD) {
+                            if (target.getPlayer().isDead()) {
                                 seq.addAction(Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
@@ -694,7 +700,7 @@ public class CombatScreen extends BaseScreen {
 
         for (andius.objects.Actor pm : partyMembers) {
 
-            if (pm.getPlayer().status == Status.DEAD) {
+            if (pm.getPlayer().isDead()) {
                 continue;
             }
 
@@ -1128,7 +1134,7 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor target = null;
 
             for (andius.objects.Actor c : enemies) {
-                if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery) < 10)) {
+                if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 10)) {
                     target = c;
                     break;
                 }
@@ -1136,7 +1142,7 @@ public class CombatScreen extends BaseScreen {
 
             if (target == null) {
                 for (andius.objects.Actor c : partyMembers) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery) < 10)) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 10)) {
                         target = c;
                         break;
                     }

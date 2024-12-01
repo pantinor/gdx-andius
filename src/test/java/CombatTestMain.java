@@ -63,15 +63,17 @@ public class CombatTestMain extends Game {
 //                ctx.saveGame.players[j].agility = 8;
 //                ctx.saveGame.players[j].luck = 8;
 
-                ctx.saveGame.players[j].armor = ITEMS_MAP.get("CHAIN MAIL + 1").clone();
+                ctx.saveGame.players[j].armor = ITEMS_MAP.get("ROBES").clone();
                 ctx.saveGame.players[j].weapon = ITEMS_MAP.get("MACE+1").clone();
-                ctx.saveGame.players[j].helm = ITEMS_MAP.get("HELM").clone();
-                ctx.saveGame.players[j].shield = ITEMS_MAP.get("LARGE SHIELD").clone();
-                ctx.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
-                ctx.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
-                ctx.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
+                //ctx.saveGame.players[j].helm = ITEMS_MAP.get("HELM").clone();
+                //ctx.saveGame.players[j].shield = ITEMS_MAP.get("LARGE SHIELD").clone();
+                //ctx.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
+                //ctx.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
+                //ctx.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
 
-                ctx.saveGame.players[j].spellPresets[5] = Spells.KATINO;
+                //ctx.saveGame.players[j].spellPresets[0] = Spells.DIOS;
+
+
 
             }
 

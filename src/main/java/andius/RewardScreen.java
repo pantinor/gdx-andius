@@ -239,44 +239,63 @@ public class RewardScreen implements Screen, Constants {
         switch (this.trapType) {
             case NONE:
                 break;
+            case TELEPORTER:
+                log("The party was teleported!"); //TODO
+                Sounds.play(Sound.GAZE);
+                break;
+            case ALARM:
+                log("You triggered a noisy alarm that can attract attention!");
+                Sounds.play(Sound.TRIGGER);
+                break;
             case POISON_NEEDLE:
-                log("You set " + this.trapType.toString() + " off!");
-                player.status = Status.POISONED;
+                log("Jabbed by poisoned needle!");
+                player.status.set(Status.POISONED, 1);
                 Sounds.play(Sound.POISON_EFFECT);
                 break;
             case GAS_BOMB:
-                log("You set " + this.trapType.toString() + " off!");
+                log("A gas bomb explodes in your faces!");
                 for (CharacterRecord c : this.context.players()) {
                     if (rand.nextInt(20) + 1 < c.luck) {
-                        c.status = Status.POISONED;
+                        player.status.set(Status.POISONED, 1);
                     }
                 }
                 Sounds.play(Sound.POISON_EFFECT);
                 break;
             case ANTI_MAGE:
-                log("You set " + this.trapType.toString() + " off!");
                 for (CharacterRecord c : this.context.players()) {
                     if (c.classType == ClassType.MAGE || c.classType == ClassType.WIZARD || c.classType == ClassType.SAMURAI) {
-                        if (rand.nextInt(20) + 1 < c.luck) {
-                            c.status = (rand.nextInt(2) == 0 ? Status.STONED : Status.PARALYZED);
+                        if (rand.nextInt(21) < c.luck) {
+                            log("A spell has a horrible affect on the mage " + c.name);
+                            if (rand.nextInt(2) == 0) {
+                                c.status.set(Status.STONED, 4);
+                            } else {
+                                c.status.set(Status.PARALYZED, 4);
+                            }
+                            Sounds.play(Sound.MAGIC);
                         }
                     }
                 }
                 Sounds.play(Sound.ROCKS);
                 break;
             case ANTI_PRIEST:
-                log("You set " + this.trapType.toString() + " off!");
                 for (CharacterRecord c : this.context.players()) {
                     if (c.classType == ClassType.CLERIC || c.classType == ClassType.LORD) {
                         if (rand.nextInt(20) + 1 < c.luck) {
-                            c.status = (rand.nextInt(2) == 0 ? Status.STONED : Status.PARALYZED);
+                            log("A spell has a horrible affect on the cleric " + c.name);
+                            if (rand.nextInt(2) == 0) {
+                                c.status.set(Status.STONED, 4);
+                            } else {
+                                c.status.set(Status.PARALYZED, 4);
+                            }
+                            Sounds.play(Sound.MAGIC);
                         }
                     }
                 }
                 Sounds.play(Sound.ROCKS);
                 break;
+            case BOLT:
             case CROSSBOW_BOLT: {
-                log("You set " + this.trapType.toString() + " off!");
+                log("Bolts come flying out of the wall!");
                 int damage = 0;
                 for (int i = 0; i < this.difficultyLevel; i++) {
                     damage += rand.nextInt(8) + 1;
@@ -286,7 +305,7 @@ public class RewardScreen implements Screen, Constants {
                 break;
             }
             case EXPLODING_BOX: {
-                log("You set " + this.trapType.toString() + " off!");
+                log("The box explodes!");
                 for (CharacterRecord c : this.context.players()) {
                     int damage = 0;
                     for (int i = 0; i < this.difficultyLevel; i++) {
@@ -298,7 +317,7 @@ public class RewardScreen implements Screen, Constants {
                 break;
             }
             case SPLINTERS: {
-                log("You set " + this.trapType.toString() + " off!");
+                log("Splinters come flying out into your face!");
                 for (CharacterRecord c : this.context.players()) {
                     int damage = 0;
                     for (int i = 0; i < this.difficultyLevel; i++) {
@@ -310,7 +329,7 @@ public class RewardScreen implements Screen, Constants {
                 break;
             }
             case BLADES: {
-                log("You set " + this.trapType.toString() + " off!");
+                log("Piercing blades slice across your body!");
                 for (CharacterRecord c : this.context.players()) {
                     int damage = 0;
                     for (int i = 0; i < this.difficultyLevel; i++) {
@@ -322,8 +341,8 @@ public class RewardScreen implements Screen, Constants {
                 break;
             }
             case STUNNER:
-                log("You set " + this.trapType.toString() + " off!");
-                player.status = Status.PARALYZED;
+                log("A stunning noise is emitted from the chest!");
+                player.status.set(Status.PARALYZED, 4);
                 Sounds.play(Sound.GAZE);
                 break;
         }
@@ -447,7 +466,7 @@ public class RewardScreen implements Screen, Constants {
         y -= 25;
         for (CharacterRecord c : this.context.players()) {
             x1 = X_ALIGN;
-            Andius.largeFont.setColor(c.status.getColor());
+            Andius.largeFont.setColor(c.status.color());
             if (c.hp > 0 && c.hp < 2) {
                 Andius.largeFont.setColor(Color.SALMON);
             }

@@ -55,7 +55,8 @@ public class Hud {
 
         for (CharacterRecord rec : ctxt.saveGame.players) {
 
-            Andius.smallFont.setColor(rec.status.getColor());
+            Andius.smallFont.setColor(rec.status.color());
+            
             if (rec.hp > 0 && rec.hp < 2) {
                 Andius.smallFont.setColor(Color.SALMON);
             }
@@ -67,7 +68,7 @@ public class Hud {
             String d = String.format("%s  LVL %d  %s  %s", r.name.toUpperCase(), rec.level, r.race.toString(), r.classType.toString());
             Andius.smallFont.draw(batch, d, 790, y);
 
-            d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status);
+            d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status.toString());
             Andius.smallFont.draw(batch, d, 790, y - 11);
 
             d = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);

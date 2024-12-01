@@ -80,7 +80,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show() {
         setRoomName();
-        //this.map.syncRemovedActors(CTX.saveGame);
+        this.map.syncRemovedActors(CTX.saveGame);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
@@ -431,7 +431,9 @@ public class GameScreen extends BaseScreen {
 
         try {
             this.map.getMap().moveObjects(this.map, this, x, y);
+
             CTX.endTurn(this.map);
+
         } catch (PartyDeathException t) {
             partyDeath();
         }

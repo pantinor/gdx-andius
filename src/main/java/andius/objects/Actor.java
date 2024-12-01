@@ -46,6 +46,8 @@ public class Actor {
     private CursorActor playerCursor;
     private TextureRegion healthBar;
 
+    private String hash;
+
     public Actor(int id, String name, Animation anim) {
         this.id = id;
         this.name = name;
@@ -64,6 +66,7 @@ public class Actor {
         if (this.monster != null) {
             this.anim = TibianSprite.animation(this.monster.getIconId());
         }
+        this.hash = "M:" + x + ":" + y;
     }
 
     public void set(CharacterRecord player, int wx, int wy, float x, float y) {
@@ -72,6 +75,11 @@ public class Actor {
         this.x = x;
         this.y = y;
         this.player = player;
+        this.hash = "P";
+    }
+
+    public String hash() {
+        return this.hash;
     }
 
     public int getId() {
