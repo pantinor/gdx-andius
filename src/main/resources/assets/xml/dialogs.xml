@@ -3534,7 +3534,7 @@
             <topic query="y" phrase="Of course, if it came down to it, I hope I would do it!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Browning" description="A tall mage.">
+    <conversation map="LLECHY" name="Browning" description="A tall mage.">
         <topic query="job" phrase="I strive to live an honest life! "/>
         <topic query="health" phrase="Been better. "/>
         <topic query="look" phrase="A tall mage. "/>
@@ -3548,7 +3548,7 @@
             <topic query="y" phrase="That seems unlikely!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Calabrini" description="A tall mage.">
+    <conversation map="LLECHY" name="Calabrini" description="A tall mage.">
         <topic query="job" phrase="I bear greetings from the fair city of Moonglow. "/>
         <topic query="health" phrase="Fine. "/>
         <topic query="look" phrase="A tall mage. "/>
@@ -3556,7 +3556,7 @@
         <topic query="give" phrase="He says: I do not need thy gold.  Keep it! "/>
         <topic query="join" phrase="He says: I cannot join thee. "/>
     </conversation>
-    <conversation map="MOONGLOW" name="Christen" description="A playful child.">
+    <conversation map="LLECHY" name="Christen" description="A playful child.">
         <topic query="job" phrase="I am your friend. "/>
         <topic query="health" phrase="Feeling good. "/>
         <topic query="look" phrase="A playful child. "/>
@@ -3570,7 +3570,7 @@
             <topic query="y" phrase="That makes me happy."/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Cosima" description="An elderly woman">
+    <conversation map="LLECHY" name="Cosima" description="An elderly woman">
         <topic query="job" phrase="I am an alchemist. "/>
         <topic query="health" phrase="Tired, so tired. "/>
         <topic query="look" phrase="An elderly woman "/>
@@ -3584,7 +3584,7 @@
             <topic query="y" phrase="Good!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Cromwell" description="A regal paladin.">
+    <conversation map="LLECHY" name="Cromwell" description="A regal paladin.">
         <topic query="job" phrase="I speak of the virtues of honesty! "/>
         <topic query="health" phrase="Well indeed. "/>
         <topic query="look" phrase="A regal paladin. "/>
@@ -3598,7 +3598,7 @@
             <topic query="y" phrase="Then you will need the mantra."/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Daranor" description="A hunched, insane looking man!">
+    <conversation map="LLECHY" name="Daranor" description="A hunched, insane looking man!">
         <topic query="job" phrase="I move the sun! "/>
         <topic query="health" phrase="Health? "/>
         <topic query="look" phrase="A hunched, insane looking man! "/>
@@ -3612,7 +3612,7 @@
             <topic query="y" phrase="Then we must fell the moons!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Dekker" description="A bouncy jester">
+    <conversation map="LLECHY" name="Dekker" description="A bouncy jester">
         <topic query="job" phrase="I earn an honest living, jesting! "/>
         <topic query="health" phrase="Very good. "/>
         <topic query="look" phrase="A bouncy jester "/>
@@ -3626,7 +3626,7 @@
             <topic query="y" phrase="We ought to exchange jokes sometime!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Donn Piatt" description="a stately lord in fine attire.    %0% %1%">
+    <conversation map="LLECHY" name="Donn Piatt" description="a stately lord in fine attire.    %0% %1%">
         <topic query="greeting" phrase="Good day!"/>
         <topic query="job" phrase="I am Head Counsel for this fine community."/>
         <topic query="bye" phrase="Let me know if I may ever be of service."/>
@@ -3645,7 +3645,7 @@
             <topic query="y" phrase="Thou may wish to frequent our fine pub or our herbalist, but avoid the man in the tower!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Inoo" description="An old gypsy.">
+    <conversation map="LLECHY" name="Inoo" description="An old gypsy.">
         <topic query="job" phrase="I am a fortune teller, I read palms. "/>
         <topic query="health" phrase="I predict I will be fine today! "/>
         <topic query="look" phrase="An old gypsy. "/>
@@ -3659,7 +3659,7 @@
             <topic query="y" phrase="A great quest will lead thee into the abyss where the codex awaits!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Lord Stuart the Hungry" description="a man of average build who seems rather ravenous!">
+    <conversation map="LLECHY" name="Lord Stuart the Hungry" description="a man of average build who seems rather ravenous!">
         <topic query="greeting" phrase="%0%"/>
         <topic query="job" phrase="Oh, I do love to eat!"/>
         <topic query="bye" phrase="Don't worry, I'll finish that for you!"/>
@@ -3678,7 +3678,7 @@
             <topic query="y" phrase="'Tis an enchantment of the Second Circle, and is intoned  IN XEN MANI  , requiring ginseng, garlic and mandrake root."/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Malifora" description="an old, strangely familiar gypsy. Welcome, %NAME% , 'tis good to see thee!   How may I aid thee?">
+    <conversation map="LLECHY" name="Malifora" description="an old, strangely familiar gypsy. Welcome, %NAME% , 'tis good to see thee!   How may I aid thee?">
         <topic query="job" phrase="I can see many things beyond thy keen!"/>
         <topic query="bye" phrase="%0%"/>
         <topic query="see or keen or thin" phrase="Tell me what thou seeketh."/>
@@ -3694,7 +3694,7 @@
             <topic query="y" phrase="%Gold - 015% Thy kindness shall be remembered!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Malik" description="a young gypsy child.">
+    <conversation map="LLECHY" name="Malik" description="a young gypsy child.">
         <topic query="greeting" phrase="Hi, %NAME% %0%"/>
         <topic query="job" phrase="Mostly just playing games."/>
         <topic query="bye" phrase="Farewell!"/>
@@ -3718,7 +3718,7 @@
             <topic query="default" phrase="I know a man named Saul who knows where thou canst find the powerful reagents Mandrake and Nightshade."/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Mariah" description="A young mage">
+    <conversation map="LLECHY" name="Mariah" description="A young mage">
         <topic query="job" phrase="I seek adventure! "/>
         <topic query="health" phrase="Quite good. "/>
         <topic query="look" phrase="A young mage "/>
@@ -3732,7 +3732,7 @@
             <topic query="y" phrase="I wish I could join thee!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Patric the Humble Shepherd" description="A meek shepherd.">
+    <conversation map="LLECHY" name="Patric the Humble Shepherd" description="A meek shepherd.">
         <topic query="job" phrase="I am shepherd. "/>
         <topic query="health" phrase="Pretty good. "/>
         <topic query="look" phrase="A meek shepherd. "/>
@@ -3746,7 +3746,7 @@
             <topic query="y" phrase="Doubtful!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Rebelias" description="A mystic wizard.">
+    <conversation map="LLECHY" name="Rebelias" description="A mystic wizard.">
         <topic query="job" phrase="I live an honest life. "/>
         <topic query="health" phrase="I've been better "/>
         <topic query="look" phrase="A mystic wizard. "/>
@@ -3760,7 +3760,7 @@
             <topic query="y" phrase="The quest of a lifetime!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Shakespeare" description="A wise wizard.">
+    <conversation map="LLECHY" name="Shakespeare" description="A wise wizard.">
         <topic query="job" phrase="I create tales of honesty. "/>
         <topic query="health" phrase="Getting on. "/>
         <topic query="look" phrase="A wise wizard. "/>
@@ -3774,7 +3774,7 @@
             <topic query="y" phrase="Beware corruption!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Shazom" description="A dying young wizard.">
+    <conversation map="LLECHY" name="Shazom" description="A dying young wizard.">
         <topic query="job" phrase="I am apprentice to the great wizard Nigel! "/>
         <topic query="health" phrase="I will soon die. "/>
         <topic query="look" phrase="A dying young wizard. "/>
@@ -3788,7 +3788,7 @@
             <topic query="y" phrase="Seek him out for he will teach thee."/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Tracie" description="Starving journalist">
+    <conversation map="LLECHY" name="Tracie" description="Starving journalist">
         <topic query="job" phrase="I am a writer. "/>
         <topic query="health" phrase="I feel fine... if I could just quit smoking! "/>
         <topic query="look" phrase="Starving journalist "/>
@@ -3802,7 +3802,7 @@
             <topic query="y" phrase="I can tell by the smell!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Tyrone" description="A battered mage.">
+    <conversation map="LLECHY" name="Tyrone" description="A battered mage.">
         <topic query="job" phrase="I used to search for the blue stone. "/>
         <topic query="health" phrase="Fading. "/>
         <topic query="look" phrase="A battered mage. "/>
@@ -3816,7 +3816,7 @@
             <topic query="y" phrase="Know its uses!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="William" description="A child eating a sandwich.">
+    <conversation map="LLECHY" name="William" description="A child eating a sandwich.">
         <topic query="job" phrase="Oh, not much. "/>
         <topic query="health" phrase="Pretty good. "/>
         <topic query="look" phrase="A child eating a sandwich. "/>
@@ -3830,7 +3830,7 @@
             <topic query="y" phrase="Yummy, huh!"/>
         </label>
     </conversation>
-    <conversation map="MOONGLOW" name="Zachariah" description="a stately, white-haired man of many years.">
+    <conversation map="LLECHY" name="Zachariah" description="a stately, white-haired man of many years.">
         <topic query="greeting" phrase="Welcome, %NAME% , in these dark times."/>
         <topic query="job" phrase="I study the stars."/>
         <topic query="bye" phrase="Good journeys."/>

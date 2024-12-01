@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -262,7 +263,7 @@ public class GameScreen extends BaseScreen {
             }
 
         } else if (keycode == Keys.T) {
-            Actor a = this.map.getMap().getCreatureAt((int) v.x, (int) v.y);
+            Actor a = getTalkActor(v.x, v.y);
             if (a != null) {
                 if (a.getRole() == Role.TEMPLE) {
                     TempleScreen rs = new TempleScreen(CTX, this.map);
@@ -288,6 +289,33 @@ public class GameScreen extends BaseScreen {
         finishTurn((int) v.x, (int) v.y);
 
         return false;
+    }
+
+    private Actor getTalkActor(float x, float y) {
+        Vector2[] pos = new Vector2[13];
+        pos[0] = new Vector2(x, y);
+        pos[1] = new Vector2(x - 1, y);
+        pos[2] = new Vector2(x + 1, y);
+        pos[3] = new Vector2(x, y - 1);
+        pos[4] = new Vector2(x, y + 1);
+        pos[5] = new Vector2(x + 1, y + 1);
+        pos[6] = new Vector2(x + 1, y - 1);
+        pos[7] = new Vector2(x - 1, y + 1);
+        pos[8] = new Vector2(x - 1, y - 1);
+        
+        pos[9] = new Vector2(x - 2, y);
+        pos[10] = new Vector2(x + 2, y);
+        pos[11] = new Vector2(x, y + 2);
+        pos[12] = new Vector2(x, y - 2);
+
+
+        for (int i = 0; i < pos.length; i++) {
+            Actor a = this.map.getMap().getCreatureAt((int) pos[i].x, (int) pos[i].y);
+            if (a != null) {
+                return a;
+            }
+        }
+        return null;
     }
 
     private boolean preMove(Vector3 current, Direction dir) {
