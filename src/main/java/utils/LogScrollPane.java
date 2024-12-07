@@ -49,11 +49,13 @@ public class LogScrollPane extends ScrollPane {
         Label label = new Label(text, ls);
         label.setWrap(true);
         label.setAlignment(Align.topLeft, Align.left);
-
+        label.setWidth(width - 15);
+        
         internalTable.add(label).pad(1).width(width - 10);
         internalTable.row();
 
         pack();
+        
         if (scrollBottom) {
             scrollTo(0, 0, 0, 0);
         }

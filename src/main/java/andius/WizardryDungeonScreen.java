@@ -7,8 +7,10 @@ import static andius.WizardryData.DUNGEON_DIM;
 import static andius.WizardryData.LEVELS;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
+import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
+import andius.objects.SaveGame;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
@@ -82,11 +84,11 @@ public class WizardryDungeonScreen extends BaseScreen {
     private static Texture MINI_MAP_TEXTURE;
     private static final int MINI_DIM = 10;
     private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM;
-    private static final int XALIGNMM = 32;
-    private static final int YALIGNMM = 32;
+    private static final int XALIGNMM = 16;
+    private static final int YALIGNMM = 550;
 
     private int currentLevel = 0;
-    private Vector3 currentPos;
+    private final Vector3 currentPos = new Vector3();
     private Direction currentDir = Direction.EAST;
 
     private Texture miniMap;
@@ -94,40 +96,6 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     public WizardryDungeonScreen() {
         this.stage = new Stage();
-        init();
-    }
-
-    @Override
-    public void show() {
-        syncRemovedMonsters();
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
-    }
-
-    private void syncRemovedMonsters() {
-        
-        List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
-        if (removedMonsters == null) {
-            removedMonsters = new ArrayList<>();
-            CTX.saveGame.removedActors.put(Map.WIZARDRY1, removedMonsters);
-        }
-
-        for (int level = 0; level < LEVELS.length; level++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
-                    MazeCell cell = LEVELS[level].cells[x][y];
-                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
-                        cell.tempMonsterID = -1;
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    private void init() {
 
         assets = new AssetManager(CLASSPTH_RSLVR);
         assets.load("assets/graphics/dirt.png", Texture.class);
@@ -199,6 +167,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         stage.addActor(miniMapIcon);
 
+        addButtons(Map.WIZARDRY1);
+
         setStartPosition();
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
@@ -211,9 +181,104 @@ public class WizardryDungeonScreen extends BaseScreen {
         //inputController.translateUnits = 10f;
         //createAxes();
         //Gdx.input.setInputProcessor(inputController);
+    }
 
+    private void setStartPosition() {
+        for (int y = 0; y < DUNGEON_DIM; y++) {
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
+                if (cell.stairs && cell.address.level > cell.addressTo.level) {//up stairs location
+                    setMapPixelCoords(null, x, y, currentLevel + 1);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
+        currentPos.x = x + .5f;
+        currentPos.y = .5f;
+        currentPos.z = y + .5f;
+        currentLevel = z - 1;
+    }
+
+    @Override
+    public void getCurrentMapCoords(Vector3 v) {
+        int x = (Math.round(currentPos.x) - 1);
+        int y = (Math.round(currentPos.z) - 1);
+        v.set(x, .5f, y);
+    }
+
+    @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = Map.WIZARDRY1;
+        CTX.saveGame.wx = 75;
+        CTX.saveGame.wy = 95;
+        CTX.saveGame.x = (int) v.x;
+        CTX.saveGame.y = (int) v.z;
+        CTX.saveGame.level = currentLevel + 1;
+        CTX.saveGame.direction = this.currentDir;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+
+        currentPos.x = saveGame.x + .5f;
+        currentPos.y = .5f;
+        currentPos.z = saveGame.y + .5f;
+        currentLevel = saveGame.level - 1;
+        currentDir = saveGame.direction;
+
+        camera.position.set(currentPos);
+
+        if (currentDir == Direction.EAST) {
+            camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
+        } else if (currentDir == Direction.WEST) {
+            camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
+        } else if (currentDir == Direction.NORTH) {
+            camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
+        } else if (currentDir == Direction.SOUTH) {
+            camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
+        }
+    }
+
+    @Override
+    public void log(String s) {
+        Andius.HUD.add(s);
+    }
+
+    @Override
+    public void show() {
+        syncRemovedMonsters();
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
         createMiniMap();
+        moveMiniMapIcon();
+    }
 
+    private void syncRemovedMonsters() {
+
+        List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
+        if (removedMonsters == null) {
+            removedMonsters = new ArrayList<>();
+            CTX.saveGame.removedActors.put(Map.WIZARDRY1, removedMonsters);
+        }
+
+        for (int level = 0; level < LEVELS.length; level++) {
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+                    MazeCell cell = LEVELS[level].cells[x][y];
+                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
+                        cell.tempMonsterID = -1;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void hide() {
     }
 
     private void createWallsAndDoorModels() {
@@ -314,19 +379,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
     }
 
-    private void setStartPosition() {
-        for (int y = 0; y < DUNGEON_DIM; y++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
-                if (cell.stairs && cell.address.level > cell.addressTo.level) {//up stairs location
-                    currentPos = new Vector3(x + .5f, .5f, y + .5f);
-                }
-            }
-        }
-        createMiniMap();
-        moveMiniMapIcon();
-    }
-
     @Override
     public void render(float delta) {
 
@@ -373,17 +425,17 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         batch.draw(Andius.backGround, 0, 0);
 
-        if (showMiniMap) {
-            batch.draw(MINI_MAP_TEXTURE, XALIGNMM, YALIGNMM);
-            batch.draw(miniMap, XALIGNMM, YALIGNMM);
-        }
-
         Andius.HUD.render(batch, Andius.CTX);
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
         String lbl = String.format("Level %d [%d, %d]", currentLevel + 1, x, y);
         Andius.largeFont.draw(batch, lbl, 515, Andius.SCREEN_HEIGHT - 7);
+
+        if (showMiniMap) {
+            batch.draw(MINI_MAP_TEXTURE, XALIGNMM, YALIGNMM);
+            batch.draw(miniMap, XALIGNMM, YALIGNMM);
+        }
 
         batch.end();
 
@@ -402,6 +454,26 @@ public class WizardryDungeonScreen extends BaseScreen {
         for (int x = 0; x < DUNGEON_DIM; x++) {
             for (int y = 0; y < DUNGEON_DIM; y++) {
                 MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
+
+                if (cell.itemRequired > 0) {
+                    pixmap.setColor(Color.FOREST);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
+                }
+
+                if (cell.itemObtained > 0) {
+                    pixmap.setColor(Color.LIME);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
+                }
+
+                if (cell.monsterID >= 0) {
+                    pixmap.setColor(Color.CYAN);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                }
+
+                if (cell.tempMonsterID >= 0) {
+                    pixmap.setColor(Color.TEAL);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
+                }
 
                 if (cell.darkness) {
                     pixmap.setColor(Color.PURPLE);
@@ -454,9 +526,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             pixmap.fillTriangle(cx + 0, cy + 5, cx + 5, cy + 0, cx + MINI_DIM, cy + 5);
             pixmap.fillTriangle(cx + 0, cy + 5, cx + 5, cy + MINI_DIM, cx + MINI_DIM, cy + 5);
         } else if (cell.stairs && cell.address.level > cell.addressTo.level) {//up
-            pixmap.fillTriangle(cx + 0, cy + 0, cx + 5, cy + MINI_DIM, cx + MINI_DIM, cy + 0);
-        } else if (cell.stairs && cell.address.level < cell.addressTo.level) {//down
             pixmap.fillTriangle(cx + 0, cy + MINI_DIM, cx + 5, cy + 0, cx + MINI_DIM, cy + MINI_DIM);
+        } else if (cell.stairs && cell.address.level < cell.addressTo.level) {//down
+            pixmap.fillTriangle(cx + 0, cy + 0, cx + 5, cy + MINI_DIM, cx + MINI_DIM, cy + 0);
         }
     }
 
@@ -475,19 +547,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         Texture texture = new Texture(pixmap);
         pixmap.dispose();
         return texture;
-    }
-
-    @Override
-    public void setMapPixelCoords(Vector3 v, int x, int y) {
-    }
-
-    @Override
-    public void setCurrentMapCoords(Vector3 v) {
-    }
-
-    @Override
-    public void log(String s) {
-        Andius.HUD.add(s);
     }
 
     private class MiniMapIcon extends Actor {
@@ -673,14 +732,12 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.Q) {
-            //context.saveGame(x, y, currentLevel, currentDir, dngMap);
-            log("Saved Game.");
-            return false;
-
         } else if (keycode == Keys.I) {
-
-            isTorchOn = !isTorchOn;
+            if (!LEVELS[currentLevel].cells[x][y].darkness) {
+                isTorchOn = !isTorchOn;
+            } else {
+                log("The torch fails to light and darkness remains!");
+            }
 
         } else if (keycode == Keys.G || keycode == Keys.R || keycode == Keys.W || keycode == Keys.C || keycode == Keys.S) {
 
@@ -707,7 +764,44 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private void move(MazeCell cell, Direction dir, int dx, int dy) {
 
+        boolean moved = false;
         boolean teleport = false;
+
+        if (LEVELS[currentLevel].cells[dx][dy].message != null) {
+            if (LEVELS[currentLevel].cells[dx][dy].itemRequired <= 0) {
+                animateText(LEVELS[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+            }
+        }
+
+        if (LEVELS[currentLevel].cells[dx][dy].itemRequired > 0) {
+            Item item = Andius.ITEMS.get(LEVELS[currentLevel].cells[dx][dy].itemRequired);
+            boolean owned = false;
+            for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
+                if (Andius.CTX.players()[i].inventory.contains(item)) {
+                    owned = true;
+                }
+            }
+            if (!owned) {
+                Sounds.play(Sound.NEGATIVE_EFFECT);
+                animateText(LEVELS[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+                return;
+            }
+        }
+
+        if (LEVELS[currentLevel].cells[dx][dy].itemObtained > 0) {
+            Item item = Andius.ITEMS.get(LEVELS[currentLevel].cells[dx][dy].itemObtained);
+            boolean owned = false;
+            for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
+                if (Andius.CTX.players()[i].inventory.contains(item)) {
+                    owned = true;
+                }
+            }
+            if (!owned) {
+                log("Party found " + item.genericName + ". ");
+                Andius.CTX.players()[0].inventory.add(item);
+            }
+        }
+
         if (LEVELS[currentLevel].cells[dx][dy].teleport) {
             MazeAddress to = LEVELS[currentLevel].cells[dx][dy].addressTo;
             dx = to.row;
@@ -716,73 +810,85 @@ public class WizardryDungeonScreen extends BaseScreen {
                 teleport = true;
             } else {
                 currentLevel = to.level - 1;
-                currentPos = new Vector3(dx + .5f, .5f, dy + .5f);
+                currentPos.x = dx + .5f;
+                currentPos.z = dy + .5f;
                 createMiniMap();
                 return;
             }
         }
 
-        if (LEVELS[currentLevel].cells[dx][dy].message != null) {
-            animateText(LEVELS[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
-        }
-
         if (dir == Direction.EAST && (cell.hiddenNorthDoor || !cell.northWall || teleport)) {
-            currentPos = new Vector3(dx + .5f, .5f, dy + .5f);
+            currentPos.x = dx + .5f;
+            currentPos.z = dy + .5f;
             camera.position.set(currentPos);
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
             }
             moveMiniMapIcon();
+            moved = true;
         }
 
         if (dir == Direction.WEST && (cell.hiddenSouthDoor || !cell.southWall || teleport)) {
-            currentPos = new Vector3(dx + .5f, .5f, dy + .5f);
+            currentPos.x = dx + .5f;
+            currentPos.z = dy + .5f;
             camera.position.set(currentPos);
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
             }
             moveMiniMapIcon();
+            moved = true;
         }
 
         if (dir == Direction.NORTH && (cell.hiddenWestDoor || !cell.westWall || teleport)) {
-            currentPos = new Vector3(dx + .5f, .5f, dy + .5f);
+            currentPos.x = dx + .5f;
+            currentPos.z = dy + .5f;
             camera.position.set(currentPos);
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
             }
             moveMiniMapIcon();
+            moved = true;
         }
 
         if (dir == Direction.SOUTH && (cell.hiddenEastDoor || !cell.eastWall || teleport)) {
-            currentPos = new Vector3(dx + .5f, .5f, dy + .5f);
+            currentPos.x = dx + .5f;
+            currentPos.z = dy + .5f;
             camera.position.set(currentPos);
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
             }
             moveMiniMapIcon();
+            moved = true;
         }
 
-        if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1 || LEVELS[currentLevel].cells[dx][dy].tempMonsterID != -1) {
+        if (moved) {
 
-            Monster monster = null;
-            if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1) {
-                monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].monsterID);
-            } else {
-                monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].tempMonsterID);
+            if (LEVELS[currentLevel].cells[dx][dy].darkness) {
+                isTorchOn = false;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
+            if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1 || LEVELS[currentLevel].cells[dx][dy].tempMonsterID != -1) {
 
-            MutableMonster mm = new MutableMonster(monster);
-            actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+                Monster monster = null;
+                if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1) {
+                    monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].monsterID);
+                } else {
+                    monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].tempMonsterID);
+                }
 
-            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-            TiledMap tm = loader.load("assets/data/combat1.tmx");
-            CombatScreen cs = new CombatScreen(CTX, Constants.Map.WIZARDRY1, tm, actor);
-            mainGame.setScreen(cs);
+                andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
+
+                MutableMonster mm = new MutableMonster(monster);
+                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
+                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                TiledMap tm = loader.load("assets/data/combat1.tmx");
+                CombatScreen cs = new CombatScreen(CTX, Constants.Map.WIZARDRY1, tm, actor);
+                mainGame.setScreen(cs);
+            }
+
+            finishTurn(dx, dy);
         }
-
-        finishTurn(dx, dy);
     }
 
     @Override
@@ -791,7 +897,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
             LEVELS[currentLevel].cells[x][y].tempMonsterID = -1;
-            
+
             List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
             removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
         }

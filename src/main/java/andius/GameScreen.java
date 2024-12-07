@@ -10,6 +10,7 @@ import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.Portal;
+import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -70,7 +71,7 @@ public class GameScreen extends BaseScreen {
 
         mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;
 
-        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY());
+        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
 
         if (this.map.getRoomIds() != null) {
             currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
@@ -145,20 +146,41 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
-    public void setMapPixelCoords(Vector3 v, int x, int y) {
+    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
         v.set(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
     }
 
     @Override
-    public void setCurrentMapCoords(Vector3 v) {
+    public void getCurrentMapCoords(Vector3 v) {
         Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 7, TILE_DIM * 8, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
         v.set(Math.round(tmp.x / TILE_DIM) - 3, ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM) - 0, 0);
     }
 
     @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = this.map;
+        CTX.saveGame.wx = Map.WORLD.getStartX();//TODO
+        CTX.saveGame.wy = Map.WORLD.getStartY();//TODO
+        CTX.saveGame.x = (int) v.x;
+        CTX.saveGame.y = (int) v.y;
+        CTX.saveGame.level = 0;
+        CTX.saveGame.direction = Direction.NORTH;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+        setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
+        if (this.map.getRoomIds() != null) {
+            currentRoomId = this.map.getRoomIds()[saveGame.x][saveGame.y][0];
+        }
+    }
+
+    @Override
     public boolean keyUp(int keycode) {
         Vector3 v = new Vector3();
-        setCurrentMapCoords(v);
+        getCurrentMapCoords(v);
 
         if (keycode == Keys.UP) {
             if (!preMove(v, Direction.NORTH)) {
@@ -198,7 +220,7 @@ public class GameScreen extends BaseScreen {
                     if (p.getMap().getRoomIds() != null) {
                         p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
                     }
-                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy);
+                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy, 0);
                 }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
@@ -213,7 +235,7 @@ public class GameScreen extends BaseScreen {
                     if (p.getMap().getRoomIds() != null) {
                         p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
                     }
-                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy);
+                    p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy, 0);
                 }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
@@ -302,12 +324,11 @@ public class GameScreen extends BaseScreen {
         pos[6] = new Vector2(x + 1, y - 1);
         pos[7] = new Vector2(x - 1, y + 1);
         pos[8] = new Vector2(x - 1, y - 1);
-        
+
         pos[9] = new Vector2(x - 2, y);
         pos[10] = new Vector2(x + 2, y);
         pos[11] = new Vector2(x, y + 2);
         pos[12] = new Vector2(x, y - 2);
-
 
         for (int i = 0; i < pos.length; i++) {
             Actor a = this.map.getMap().getCreatureAt((int) pos[i].x, (int) pos[i].y);
@@ -401,7 +422,7 @@ public class GameScreen extends BaseScreen {
                             String msx = obj.getProperties().get("monsterSpawnX", String.class);
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);
                             Vector3 pixelPos = new Vector3();
-                            setMapPixelCoords(pixelPos, msx != null ? Integer.valueOf(msx) : nx, msy != null ? Integer.valueOf(msy) : ny);
+                            setMapPixelCoords(pixelPos, msx != null ? Integer.valueOf(msx) : nx, msy != null ? Integer.valueOf(msy) : ny, 0);
                             actor.set(mm, Role.MONSTER,
                                     msx != null ? Integer.valueOf(msx) : nx,
                                     msy != null ? Integer.valueOf(msy) : ny,
@@ -421,7 +442,7 @@ public class GameScreen extends BaseScreen {
                 currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
                 setRoomName();
             }
-            setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y);
+            setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y, 0);
 
             for (Actor act : this.map.getMap().actors) {//so follower can follow thru portal
                 if (act.getMovement() == MovementBehavior.FOLLOW_AVATAR) {
@@ -430,7 +451,7 @@ public class GameScreen extends BaseScreen {
                         act.setWx((int) dv.x);
                         act.setWy((int) dv.y);
                         Vector3 pixelPos = new Vector3();
-                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy());
+                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy(), 0);
                         act.setX(pixelPos.x);
                         act.setY(pixelPos.y);
                     }

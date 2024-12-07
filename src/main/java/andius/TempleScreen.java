@@ -140,7 +140,7 @@ public class TempleScreen implements Screen, Constants {
                 }
 
                 selectedPatient.c.adjustHP(25);
-                
+
                 selectedPatient.c.status.reset();
 
                 tither.adjustGold(-amt);

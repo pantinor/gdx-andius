@@ -2,10 +2,8 @@ package andius.objects;
 
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
+import andius.Direction;
 import andius.Sound;
-import static andius.WizardryData.DUNGEON_DIM;
-import static andius.WizardryData.LEVELS;
-import andius.WizardryData.MazeCell;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -27,9 +25,14 @@ public class SaveGame implements Constants {
     public static final Random RANDOM = new Random();
 
     public CharacterRecord[] players;
-    public int map;
-    public int wx;
-    public int wy;
+    public Map map;
+    public int wx;//world x
+    public int wy;//world y
+    public int x;//map x
+    public int y;//map y
+    public int level;//map level
+    public Direction direction;
+    
     public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {

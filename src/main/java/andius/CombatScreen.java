@@ -5,7 +5,7 @@ import static andius.Andius.MONSTERS;
 import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
-import static andius.Constants.DEATHMSGS;
+import static andius.Constants.HITMSGS;
 import static andius.Constants.TILE_DIM;
 import andius.objects.CursorActor;
 import andius.objects.Dice;
@@ -186,7 +186,7 @@ public class CombatScreen extends BaseScreen {
         andius.objects.Actor pm = getAndSetNextActivePlayer();
         hud.set(pm, hudStage);
 
-        setMapPixelCoords(newMapPixelCoords, 6, 6);
+        setMapPixelCoords(newMapPixelCoords, 6, 6, 0);
     }
 
     @Override
@@ -257,12 +257,12 @@ public class CombatScreen extends BaseScreen {
     }
 
     @Override
-    public void setMapPixelCoords(Vector3 v, int x, int y) {
+    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
         v.set(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
     }
 
     @Override
-    public void setCurrentMapCoords(Vector3 v) {
+    public void getCurrentMapCoords(Vector3 v) {
     }
 
     @Override
@@ -324,18 +324,18 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.begin(ShapeType.Line);
                 shapeRenderer.setColor(255, 255, 0, .50f);//yellow
                 for (andius.objects.Actor c : this.enemies) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 15) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 15)) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
                         shapeRenderer.setColor(255, 0, 0, .50f);//red
                         break;
                     }
                 }
                 for (andius.objects.Actor c : this.partyMembers) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 15) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 15)) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
                         shapeRenderer.setColor(0, 255, 0, .50f);//green
                         break;
                     }
                 }
-                shapeRenderer.line(cx + TILE_DIM / 2, cy + TILE_DIM / 2, pointerx, pointery);
+                shapeRenderer.line(cx + TILE_DIM / 2 + 20, cy + TILE_DIM / 2 - 8, pointerx, pointery);
                 shapeRenderer.end();
             }
         }
@@ -503,6 +503,14 @@ public class CombatScreen extends BaseScreen {
 
     }
 
+    @Override
+    public void save(SaveGame saveGame) {
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+    }
+
     public static class RemoveCreatureAction implements Runnable {
 
         private final andius.objects.Actor cr;
@@ -515,7 +523,6 @@ public class CombatScreen extends BaseScreen {
 
         @Override
         public void run() {
-            screen.log(String.format("%s %s", cr.getMonster().name, DEATHMSGS[screen.rand.nextInt(DEATHMSGS.length)]));
             screen.enemies.remove(cr);
         }
     }
@@ -643,9 +650,13 @@ public class CombatScreen extends BaseScreen {
                         for (Dice dice : creature.getMonster().getDamage()) {
                             int damage = dice.roll();
                             target.adjustHP(-damage);
-                            log(String.format("%s strikes %s for %d damage!", creature.getMonster().name, target.getPlayer().name, damage));
+                            log(String.format("%s %s %s for %d damage!", 
+                                    creature.getMonster().name, 
+                                    HITMSGS[rand.nextInt(HITMSGS.length)],
+                                    target.getPlayer().name, 
+                                    damage));
 
-                            Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
+                            Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
                             d.setX(target.getX() + 12);
                             d.setY(target.getY() + 12);
                             d.addAction(Actions.sequence(Actions.delay(.3f), Actions.removeActor()));
@@ -840,7 +851,7 @@ public class CombatScreen extends BaseScreen {
 
         final SequenceAction seq = Actions.action(SequenceAction.class);
 
-        final ProjectileActor p = new ProjectileActor(Color.GRAY, attacker.getX(), attacker.getY());
+        final ProjectileActor p = new ProjectileActor(Color.YELLOW, attacker.getX() + 20, attacker.getY() - 8);
 
         Action after = new Action() {
             @Override
@@ -893,7 +904,7 @@ public class CombatScreen extends BaseScreen {
 
     private AttackVector attack(andius.objects.Actor attacker, andius.objects.Actor target) {
         Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
-        int range = 1;//weapon.range == 0 ? 1 : weapon.range;
+        int range = weapon.range == 0 ? 1 : weapon.range;
 
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
         av.result = AttackResult.MISS;
@@ -903,27 +914,31 @@ public class CombatScreen extends BaseScreen {
                 if (hit) {
                     av.result = AttackResult.HIT;
                     int damage = Utils.dealDamage(weapon, av.victim.getMonster());
-                    log(String.format("%s %s %s, who %s", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
+                    log(String.format("%s %s %s, who %s after %d damage.",
+                            attacker.getPlayer().name,
+                            HITMSGS[rand.nextInt(HITMSGS.length)],
+                            av.victim.getMonster().name,
+                            av.victim.getMonster().getDamageTag(),
+                            damage));
+                } else {
+                    log(String.format("%s %s %s who %s.",
+                            attacker.getPlayer().name,
+                            HITMSGS[rand.nextInt(HITMSGS.length)],
+                            av.victim.getMonster().name,
+                            av.victim.getMonster().getDamageTag()));
                 }
             }
+        } else {
+            log("No target.");
         }
 
-//        if (av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
-//            weapon.use();
-//            if (weapon.numberUses <= 0) {
-//                log("Your weapon has broken!");
-//                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
-//                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
-//                attacker.getPlayer().weapon = null;
-//            }
-//        }
         return av;
     }
 
     private AttackVector attack(andius.objects.Actor attacker, Direction dir) {
 
         Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
-        int range = 1;//weapon.range == 0 ? 1 : weapon.range;
+        int range = weapon.range == 0 ? 1 : weapon.range;
 
         List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);
 
@@ -943,21 +958,25 @@ public class CombatScreen extends BaseScreen {
                     if (hit) {
                         av.result = AttackResult.HIT;
                         int damage = Utils.dealDamage(weapon, av.victim.getMonster());
-                        log(String.format("%s %s %s, who %s", attacker.getPlayer().name, HITMSGS[rand.nextInt(HITMSGS.length)], av.victim.getMonster().name, av.victim.getMonster().getDamageTag()));
+                        log(String.format("%s %s %s, who %s after %d damage.",
+                                attacker.getPlayer().name,
+                                HITMSGS[rand.nextInt(HITMSGS.length)],
+                                av.victim.getMonster().name,
+                                av.victim.getMonster().getDamageTag(),
+                                damage));
+                    } else {
+                        log(String.format("%s %s %s who %s.",
+                                attacker.getPlayer().name,
+                                HITMSGS[rand.nextInt(HITMSGS.length)],
+                                av.victim.getMonster().name,
+                                av.victim.getMonster().getDamageTag()));
                     }
                 }
+            } else {
+                log("No target.");
             }
         }
 
-//        if (av != null && av.result != null && weapon.numberUses > 0 && weapon != Item.HANDS) {
-//            weapon.use();
-//            if (weapon.numberUses <= 0) {
-//                log("Your weapon has broken!");
-//                attacker.getPlayer().inventory.remove(attacker.getPlayer().weapon);
-//                attacker.getPlayer().inventory.add(Andius.ITEMS_MAP.get("BROKEN ITEM").clone());
-//                attacker.getPlayer().weapon = null;
-//            }
-//        }
         return av;
     }
 
@@ -1134,7 +1153,7 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor target = null;
 
             for (andius.objects.Actor c : enemies) {
-                if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 10)) {
+                if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
                     target = c;
                     break;
                 }
@@ -1142,7 +1161,7 @@ public class CombatScreen extends BaseScreen {
 
             if (target == null) {
                 for (andius.objects.Actor c : partyMembers) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 10) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 10)) {
+                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
                         target = c;
                         break;
                     }
@@ -1151,6 +1170,10 @@ public class CombatScreen extends BaseScreen {
 
             if (target == null) {
                 Sounds.play(Sound.NEGATIVE_EFFECT);
+                log(String.format("%s %s %s",
+                        player.getPlayer().name,
+                        HITMSGS[rand.nextInt(HITMSGS.length)],
+                        " at nothing."));
                 finishPlayerTurn();
                 return false;
             }

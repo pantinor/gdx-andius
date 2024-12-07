@@ -1,10 +1,12 @@
 package andius;
 
+import static andius.Andius.CTX;
 import static andius.Andius.mapAtlas;
 import static andius.Constants.MOON_PHASES;
 import static andius.Constants.MOON_SECONDS_PER_PHASE;
 import static andius.Constants.WORLD_TILE_DIM;
 import andius.objects.Portal;
+import andius.objects.SaveGame;
 import andius.voronoi.graph.Center;
 import andius.voronoi.graph.Corner;
 import andius.voronoi.graph.Edge;
@@ -216,11 +218,19 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     }
 
     @Override
-    public void setMapPixelCoords(Vector3 v, int x, int y) {
+    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
     }
 
     @Override
-    public void setCurrentMapCoords(Vector3 v) {
+    public void getCurrentMapCoords(Vector3 v) {
+    }
+
+    @Override
+    public void save(SaveGame saveGame) {
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
     }
 
     public class GameTimer implements Runnable {

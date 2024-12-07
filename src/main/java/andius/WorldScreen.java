@@ -3,6 +3,7 @@ package andius;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import andius.objects.Portal;
+import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
@@ -57,7 +58,7 @@ public class WorldScreen extends BaseScreen {
 
         mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
 
-        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY());
+        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
 
     }
 
@@ -120,7 +121,6 @@ public class WorldScreen extends BaseScreen {
         //Vector3 v = new Vector3();
         //setCurrentMapCoords(v);        
         //Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
-        
         batch.end();
 
         stage.act();
@@ -140,14 +140,30 @@ public class WorldScreen extends BaseScreen {
     }
 
     @Override
-    public void setMapPixelCoords(Vector3 v, int x, int y) {
+    public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
         v.set(x * WORLD_TILE_DIM, mapPixelHeight - y * WORLD_TILE_DIM, 0);
     }
 
     @Override
-    public void setCurrentMapCoords(Vector3 v) {
+    public void getCurrentMapCoords(Vector3 v) {
         Vector3 tmp = camera.unproject(new Vector3(WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 17, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
         v.set(Math.round(tmp.x / WORLD_TILE_DIM) - 6, ((mapPixelHeight - Math.round(tmp.y) - WORLD_TILE_DIM) / WORLD_TILE_DIM) - 3, 0);
+    }
+
+    @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = Map.WORLD;
+        CTX.saveGame.wx = (int) v.x;
+        CTX.saveGame.wy = (int) v.y;
+        CTX.saveGame.level = 0;
+        CTX.saveGame.direction = Direction.NORTH;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+        setMapPixelCoords(newMapPixelCoords, saveGame.wx, saveGame.wy, 0);
     }
 
     public class GameTimer implements Runnable {
@@ -170,7 +186,7 @@ public class WorldScreen extends BaseScreen {
     @Override
     public boolean keyUp(int keycode) {
         Vector3 v = new Vector3();
-        setCurrentMapCoords(v);
+        getCurrentMapCoords(v);
 
         if (keycode == Keys.UP) {
             if (!preMove(v, Direction.NORTH)) {
@@ -249,7 +265,7 @@ public class WorldScreen extends BaseScreen {
                 newMapPixelCoords.y = d.getY();
             }
         }
-        
+
         CTX.endTurn(this.map);
     }
 

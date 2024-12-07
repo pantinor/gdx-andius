@@ -2039,5 +2039,26 @@
     "usable": "",
     "regeneration": 0,
     "crithitm": false
+  },
+  {
+    "id": 101,
+    "name": "MAGIC BOW",
+    "genericName": "MAGIC BOW",
+    "iconID": 157,
+    "type": "SPECIAL",
+    "cost": 500000,
+    "damage": {
+      "qty": 10,
+      "sides": 5,
+      "bonus": 5
+    },
+    "armourClass": 0,
+    "extraSwings": 0,
+    "stock": 0,
+    "cursed": false,
+    "usable": "FMCTWSLN",
+    "regeneration": 0,
+    "crithitm": false,
+    "range": 10
   }
 ]

@@ -3,6 +3,7 @@ package andius;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
+import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
@@ -43,20 +44,27 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     /**
      * translate map tile coords to world pixel coords
-     * @param v
+     *
+     * @param v the vector to set the values into
      * @param x
      * @param y
+     * @param z
      */
-    public abstract void setMapPixelCoords(Vector3 v, int x, int y);
+    public abstract void setMapPixelCoords(Vector3 v, int x, int y, int z);
 
     /**
      * get the map coords at the camera center
+     *
      * @param v
      */
-    public abstract void setCurrentMapCoords(Vector3 v);
-    
+    public abstract void getCurrentMapCoords(Vector3 v);
+
+    public abstract void save(SaveGame saveGame);
+
+    public abstract void load(SaveGame saveGame);
+
     public abstract void log(String t);
-    
+
     public int currentRoomId() {
         return this.currentRoomId;
     }
@@ -76,7 +84,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     }
 
-    public final void addButtons(final Map map) {
+    public final void addButtons(Map map) {
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
 
         ImageButton inventory = new ImageButton(imgBtnSkin, "inventory");
@@ -90,7 +98,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         });
         inventory.setX(52);
         inventory.setY(5);
-        
+
         ImageButton reorder = new ImageButton(imgBtnSkin, "inventory");
         reorder.addListener(new ChangeListener() {
             @Override
@@ -107,18 +115,20 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 try {
-                    Sounds.play(Sound.TRIGGER);
-                    log("Progress Saved");
-                    Vector3 v = new Vector3();
-                    Map.WORLD.getScreen().setCurrentMapCoords(v);
-                    CTX.saveGame.map = Map.WORLD.ordinal();
-                    CTX.saveGame.wx = (int)v.x;
-                    CTX.saveGame.wy = (int)v.y;
+
+                    map.getScreen().save(CTX.saveGame);
+
                     CTX.saveGame.write(SAVE_FILENAME);
+
+                    Sounds.play(Sound.TRIGGER);
+
+                    log("Party Saved");
+
+                    mainGame.setScreen(map.getScreen());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                mainGame.setScreen(map.getScreen());
             }
         });
         save.setX(5);
@@ -129,7 +139,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         stage.addActor(save);
 
     }
-    
+
     public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
         Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), Andius.skin, "larger");
         label.setWrap(true);

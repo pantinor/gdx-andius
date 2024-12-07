@@ -5,12 +5,14 @@
  */
 package andius.objects;
 
+import static andius.Constants.DEATHMSGS;
 import andius.Constants.Status;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.ArrayList;
 import java.util.List;
+import utils.Utils;
 
 /**
  *
@@ -88,22 +90,22 @@ public class MutableMonster extends Monster {
         double percent = (double) currentHitPoints / maxHitPoints;
         if (percent > 0.99) {
             if (this.type > 4) {
-                return "who, unharmed, growls ominously.";
+                return ", unharmed, growls ominously";
             } else {
-                return "chortles merrily as the armor takes the full blow.";
+                return "chortles merrily as the armor takes the full blow";
             }
         } else if (percent > 0.75) {
-
-            return "still has lots of fight left.";
-
+            return "still has lots of fight left";
         } else if (percent > 0.50) {
             if (this.type > 4) {
-                return "whose tough hide softens the blow.";
+                return "tough hide softens the blow";
             } else {
-                return "whose armor takes some of the impact.";
+                return "armor takes some of the impact";
             }
+        } else if (percent < 0.00) {
+            return DEATHMSGS[Utils.RANDOM.nextInt(DEATHMSGS.length)];
         } else {
-            return "is feeling rather weak.";
+            return "is feeling rather weak";
         }
     }
 

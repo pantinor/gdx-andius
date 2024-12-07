@@ -27,8 +27,8 @@ public interface Constants {
     public static int WORLD_TILE_DIM = 24;
     public static int TILE_DIM = 48;
 
-    public static final String SAVE_FILENAME = "game.save";
-    public static final String ROSTER_FILENAME = "roster.save";
+    public static final String SAVE_FILENAME = "party.json";
+    public static final String ROSTER_FILENAME = "roster.json";
     public static final int STATS_NONE = 0;
     public static final int STATS_PLAYER1 = 1;
     public static final int STATS_PLAYER2 = 2;
@@ -327,18 +327,18 @@ public interface Constants {
         "bashes",
         "pounds",
         "smashes",
-        "whops",
+        "lambasts",
         "whomps",
         "smacks",
         "clouts",};
 
     public static final String[] DEATHMSGS = new String[]{
-        "shuffles off this mortal coil.",
-        "turns his toes up to the daises.",
-        "pays an obolus to Charon.",
-        "kicks the proverbial bucket.",
-        "departs the land of the living.",
-        "moans OH MA, I THINK ITS MY TIME."};
+        "shuffles off this mortal coil",
+        "turns his toes up to the daises",
+        "pays an obolus to Charon",
+        "kicks the proverbial bucket",
+        "departs the land of the living",
+        "moans OH MA, I THINK ITS MY TIME"};
 
     public enum CreatureStatus {
 

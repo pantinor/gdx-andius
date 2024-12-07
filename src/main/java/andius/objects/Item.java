@@ -33,6 +33,7 @@ public class Item implements Comparable<Item> {
     public Spells spell;
     public int regeneration;
     public boolean crithitm;
+    public int range;
 
     @Override
     public Item clone() {
@@ -52,12 +53,35 @@ public class Item implements Comparable<Item> {
         i.spell = this.spell;
         i.crithitm = this.crithitm;
         i.regeneration = this.regeneration;
+        i.range = this.range;
         return i;
     }
 
     public boolean canUse(ClassType ct) {
         //System.out.printf("classtype %s for item %s can use=%s\n", ct, this.name, this.usable.indexOf(ct.getAbbr()) != -1);
         return this.usable.indexOf(ct.getAbbr()) != -1;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Item other = (Item) obj;
+        return this.id == other.id;
     }
 
     @Override

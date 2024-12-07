@@ -80,14 +80,19 @@ public class StartScreen implements Screen, Constants {
                         CTX.setSaveGame(saveGame);
                     }
 
-                    BaseScreen scr = (BaseScreen) Map.values()[CTX.saveGame.map].getScreen();
-
                     if (CTX.saveGame.wx == 0 && CTX.saveGame.wy == 0) {
                         CTX.saveGame.wx = Map.WORLD.getStartX();
                         CTX.saveGame.wy = Map.WORLD.getStartY();
                     }
 
-                    scr.setMapPixelCoords(scr.newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy);
+                    BaseScreen scr = (BaseScreen) Map.WORLD.getScreen();
+                    scr.load(CTX.saveGame);
+
+                    if (CTX.saveGame.map != Map.WORLD) {
+                        scr = (BaseScreen) CTX.saveGame.map.getScreen();
+                        scr.load(CTX.saveGame);
+                    }
+
                     mainGame.setScreen(scr);
 
                     //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
