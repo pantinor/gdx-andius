@@ -7,10 +7,11 @@ import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.HITMSGS;
 import static andius.Constants.TILE_DIM;
-import andius.objects.CursorActor;
+import andius.objects.PlayerCursor;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
+import andius.objects.MonsterCursor;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
 import andius.objects.SaveGame;
@@ -145,6 +146,13 @@ public class CombatScreen extends BaseScreen {
                 dy = y + 10;
             }
             actor.set(crSlots[index], Role.MONSTER, sx, sy, dx, dy, MovementBehavior.ATTACK_AVATAR);
+
+            MonsterCursor cursor = new MonsterCursor();
+            cursor.setX(x);
+            cursor.setY(y);
+            stage.addActor(cursor);
+            actor.setMonsterCursor(cursor);
+
             enemies.add(actor);
         }
 
@@ -172,7 +180,7 @@ public class CombatScreen extends BaseScreen {
             actor.set(this.context.players()[index], sx, sy, x - 20, y + 8);
             actor.setDirection(2);
 
-            CursorActor cursor = new CursorActor();
+            PlayerCursor cursor = new PlayerCursor();
             stage.addActor(cursor);
             cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
             actor.setPlayerCursor(cursor);
@@ -780,21 +788,24 @@ public class CombatScreen extends BaseScreen {
         if (dir == Direction.NORTH) {
             cr.setWy(--ny);
             cr.setY(cr.getY() + TILE_DIM);
+            cr.getMonsterCursor().setY(cr.getMonsterCursor().getY() + TILE_DIM);
         }
         if (dir == Direction.SOUTH) {
             cr.setWy(++ny);
             cr.setY(cr.getY() - TILE_DIM);
+            cr.getMonsterCursor().setY(cr.getMonsterCursor().getY() - TILE_DIM);
         }
         if (dir == Direction.EAST) {
             cr.setWx(++nx);
             cr.setX(cr.getX() + TILE_DIM);
+            cr.getMonsterCursor().setX(cr.getMonsterCursor().getX() + TILE_DIM);
         }
         if (dir == Direction.WEST) {
             cr.setWx(--nx);
             cr.setX(cr.getX() - TILE_DIM);
+            cr.getMonsterCursor().setX(cr.getMonsterCursor().getX() - TILE_DIM);
         }
 
-        //System.out.println(String.format("cx=%d cy=%d tx=%d ty=%d",cr.getWx(),cr.getWy(),targetX, targetY));
         return true;
 
     }
@@ -837,7 +848,7 @@ public class CombatScreen extends BaseScreen {
     private andius.objects.Actor getAndSetNextActivePlayer() {
 
         for (andius.objects.Actor p : partyMembers) {
-            CursorActor ca = p.getPlayerCursor();
+            PlayerCursor ca = p.getPlayerCursor();
             ca.setVisible(false);
             ca.setX(p.getX() + 20);
             ca.setY(p.getY() - 15);

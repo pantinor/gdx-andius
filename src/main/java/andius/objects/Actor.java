@@ -43,7 +43,8 @@ public class Actor {
     private MovementBehavior movement;
     private MutableMonster monster;
     private CharacterRecord player;
-    private CursorActor playerCursor;
+    private PlayerCursor playerCursor;
+    private MonsterCursor monsterCursor;
     private TextureRegion healthBar;
 
     private String hash;
@@ -180,12 +181,20 @@ public class Actor {
         getHealthBar().setRegion(381, 82, (int) bar, 6);
     }
 
-    public CursorActor getPlayerCursor() {
+    public PlayerCursor getPlayerCursor() {
         return playerCursor;
     }
 
-    public void setPlayerCursor(CursorActor playerCursor) {
+    public void setPlayerCursor(PlayerCursor playerCursor) {
         this.playerCursor = playerCursor;
+    }
+
+    public MonsterCursor getMonsterCursor() {
+        return monsterCursor;
+    }
+
+    public void setMonsterCursor(MonsterCursor monsterCursor) {
+        this.monsterCursor = monsterCursor;
     }
 
     public int getDirection() {

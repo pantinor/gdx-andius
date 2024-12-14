@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  *
  * @author Paul
  */
-public class CursorActor extends com.badlogic.gdx.scenes.scene2d.Actor {
+public class PlayerCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
 
     TextureRegion textureRed;
     TextureRegion textureYellow;
@@ -26,7 +26,7 @@ public class CursorActor extends com.badlogic.gdx.scenes.scene2d.Actor {
 
     boolean visible = false;
 
-    public CursorActor() {
+    public PlayerCursor() {
         TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/cursor.png")), 48, 48);
         this.textureYellow = trs[0][0];
         this.textureBlue = trs[0][1];
