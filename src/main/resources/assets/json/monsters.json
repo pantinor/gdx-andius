@@ -540,7 +540,7 @@
   },
   {
     "genericName": "Small Object",
-    "name": "Creeping Coin",
+    "name": "Creeping Coin?",
     "monsterId": 12,
     "iconId": "Jellyfish",
     "type": 13,
@@ -3486,7 +3486,7 @@
   },
   {
     "genericName": "Unseen Entity",
-    "name": "Murphys Ghost",
+    "name": "Murphy's Ghost",
     "monsterId": 77,
     "iconId": "Captain_Jones",
     "type": 10,
@@ -3534,7 +3534,7 @@
   },
   {
     "genericName": "Unseen Entity",
-    "name": "Will O Wisp",
+    "name": "Will O' Wisp",
     "monsterId": 78,
     "iconId": "The_Mutated_Pumpkin",
     "type": 13,

@@ -317,7 +317,7 @@ public interface Constants {
         {232044, 255127, 243596, 208760, 331307, 345000, 358908, 400275},
         {400075, 439874, 419993, 359931, 581240, 605263, 629663, 702236}
     };
-
+    
     public static final String[] HITMSGS = new String[]{
         "whacks",
         "smites",

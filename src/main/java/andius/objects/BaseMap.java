@@ -92,7 +92,7 @@ public class BaseMap {
                     if (dist <= 1) {
                         TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
                         TiledMap tm = loader.load("assets/data/combat1.tmx");
-                        CombatScreen cs = new CombatScreen(CTX, map, tm, p);
+                        CombatScreen cs = new CombatScreen(CTX, map, tm, p, 1);
                         mainGame.setScreen(cs);
                         continue;
                     } else if (dist >= 3) {

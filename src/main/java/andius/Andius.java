@@ -32,7 +32,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 import utils.Hud;
@@ -82,7 +81,6 @@ public class Andius extends Game {
 
     public static java.util.List<Monster> MONSTERS;
     public static final java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<Integer, java.util.List<Monster>> MONSTER_LEVELS = new HashMap<>();
 
     public static java.util.List<Reward> REWARDS;
 
@@ -186,7 +184,7 @@ public class Andius extends Game {
                     invIcons[row * tx.getWidth() / 44 + col] = inv[row][col];
                 }
             }
-            
+
             Icons.init();
             TibianSprite.init();
 
@@ -228,16 +226,11 @@ public class Andius extends Game {
 
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-
-            for (int i = 0; i < 11; i++) {
-                MONSTER_LEVELS.put(i, new ArrayList<>());
-            }
-
+            
             for (Monster m : MONSTERS) {
                 MONSTER_MAP.put(m.name, m);
-                MONSTER_LEVELS.get(m.getLevel()).add(m);
             }
-
+            
             Constants.Moongate.init();
             CONVERSATIONS = Conversations.init();
 

@@ -59,7 +59,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CombatScreen extends BaseScreen {
 
-    public static int AREA_CREATURES = 16;
+    public static int AREA_CREATURES = 28;
     public final static int MAP_DIM = 13;
 
     private final MutableMonster[] crSlots;
@@ -85,7 +85,7 @@ public class CombatScreen extends BaseScreen {
     public final Stage hudStage;
     private final CombatHud hud;
 
-    public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent) {
+    public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent, int level) {
 
         this.contextMap = contextMap;
         this.opponent = opponent;
@@ -117,7 +117,7 @@ public class CombatScreen extends BaseScreen {
         cip = new CombatInputProcessor();
         crSlots = new MutableMonster[AREA_CREATURES];
 
-        fillCreatureTable();
+        fillCreatureTable(level);
 
         MapLayer mLayer = tmap.getLayers().get("Monster Positions");
         Iterator<MapObject> iter = mLayer.getObjects().iterator();
@@ -216,14 +216,13 @@ public class CombatScreen extends BaseScreen {
         logScroll.setScrollPercentY(100);
     }
 
-    private void fillCreatureTable() {
+    private void fillCreatureTable(int level) {
+
+        int maxGroups = Math.min(level + 1, 4);
 
         int numCreatures = this.crType.getGroupSize().roll();
-        for (int i = 0; i < numCreatures; i++) {
-            int j = 0;
-            do {
-                j = rand.nextInt(AREA_CREATURES);
-            } while (crSlots[j] != null);
+        for (int i = 0; i < numCreatures && nextOpenSlot() != -1; i++) {
+            int j = nextOpenSlot();
             crSlots[j] = new MutableMonster(this.crType);
             if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
                 SaveGame.setMonsterSpellPoints(crSlots[j]);
@@ -231,22 +230,35 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
+        addPartners(this.crType, 1, maxGroups);
+
+    }
+
+    private void addPartners(Monster monster, int groupCount, int maxGroups) {
+        if (groupCount > maxGroups) {
+            return;
+        }
+
+        if (nextOpenSlot() == -1) {
+            return;
+        }
+
+        if (monster.getPartnerID() == 0) {
+            return;
+        }
+
+        Monster partner = MONSTERS.get(monster.getPartnerID());
+
         int numPartners = 0;
-        boolean hasPartner = this.rand.nextInt(100) + 1 < this.crType.getPartnerOdds();
+        boolean hasPartner = this.rand.nextInt(100) + 1 < monster.getPartnerOdds();
         if (hasPartner) {
-            Monster partner = MONSTERS.get(this.crType.getPartnerID());
             numPartners = partner.getGroupSize().roll();
+        } else {
+            return;
         }
 
-        if (numPartners > 0 && numCreatures + numPartners > AREA_CREATURES) {
-            numPartners = AREA_CREATURES - numCreatures;
-        }
-
-        for (int i = 0; i < numPartners; i++) {
-            int j = 0;
-            do {
-                j = rand.nextInt(AREA_CREATURES);
-            } while (crSlots[j] != null);
+        for (int i = 0; i < numPartners && nextOpenSlot() != -1; i++) {
+            int j = nextOpenSlot();
             crSlots[j] = new MutableMonster(MONSTERS.get(this.crType.getPartnerID()));
             if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
                 SaveGame.setMonsterSpellPoints(crSlots[j]);
@@ -254,6 +266,16 @@ public class CombatScreen extends BaseScreen {
             }
         }
 
+        addPartners(partner, groupCount + 1, maxGroups);
+    }
+
+    private int nextOpenSlot() {
+        for (int i = 0; i < AREA_CREATURES; i++) {
+            if (crSlots[i] == null) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
@@ -635,10 +657,21 @@ public class CombatScreen extends BaseScreen {
             }
 
             CombatAction action = CombatAction.ATTACK;
-            if ((creature.getMonster().getPriestSpellLevel() > 0 || creature.getMonster().getMageSpellLevel() > 0)
-                    && rand.nextInt(3) == 0 && !creature.getMonster().knownSpells.isEmpty()) {
-                action = CombatAction.CAST;
-            } else if (action == CombatAction.ATTACK && dist.get() > 1) {
+            Spells spell = null;
+
+            if ((creature.getMonster().getMageSpellLevel() > 0) && rand.nextInt(100) < 75 && !creature.getMonster().knownSpells.isEmpty()) {
+                spell = creature.getMonster().mageSpell();
+                action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
+            }
+
+            if (action != CombatAction.CAST) {
+                if ((creature.getMonster().getPriestSpellLevel() > 0) && rand.nextInt(100) < 75 && !creature.getMonster().knownSpells.isEmpty()) {
+                    spell = creature.getMonster().priestSpell();
+                    action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
+                }
+            }
+
+            if (action == CombatAction.ATTACK && dist.get() > 1) {
                 action = CombatAction.ADVANCE;
             }
 
@@ -650,10 +683,10 @@ public class CombatScreen extends BaseScreen {
                         for (Dice dice : creature.getMonster().getDamage()) {
                             int damage = dice.roll();
                             target.adjustHP(-damage);
-                            log(String.format("%s %s %s for %d damage!", 
-                                    creature.getMonster().name, 
+                            log(String.format("%s %s %s for %d damage!",
+                                    creature.getMonster().name,
                                     HITMSGS[rand.nextInt(HITMSGS.length)],
-                                    target.getPlayer().name, 
+                                    target.getPlayer().name,
                                     damage));
 
                             Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
@@ -681,7 +714,6 @@ public class CombatScreen extends BaseScreen {
                     }
                     break;
                 case CAST: {
-                    Spells spell = creature.getMonster().knownSpells.get(rand.nextInt(creature.getMonster().knownSpells.size()));
                     log(String.format("%s casts %s", creature.getMonster().name, spell));
                     SpellUtil.spellMonsterCast(this, seq, spell, creature, target);
                     break;

@@ -1,7 +1,9 @@
 package andius;
 
+import andius.objects.Monster;
 import jakarta.xml.bind.DatatypeConverter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import utils.Utils;
@@ -87,6 +89,18 @@ public class WizardryData {
     private static final String[] MSGS = new String[]{M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M16, M17, M18, M19, M20, M21, M22, M23, M24, M25, M26, M27, M28, M29, M30, M31, M32};
     public static final List<Message> MESSAGES = new ArrayList<>();
 
+    public static final String[][] MONSTER_ENCOUNTER_LEVEL = new String[][]{
+        {"Bubbly Slime", "Bushwacker", "Kobold", "Murphy's Ghost", "Orc", "Rogue", "Undead Kobold", "Highway Man"},
+        {"Creeping Coin?", "Creeping Crud", "Gas Cloud", "Highway Man", "Lvl 1 Mage", "Lvl 1 Ninja", "Lvl 1 Priest", "Rogue", "Vorpal Bunny", "Zombie"},
+        {"Capybara", "Coyote", "Dragon Fly", "Giant Toad", "Lvl 1 Ninja", "Lvl 1 Priest", "Lvl 3 Ninja", "Lvl 3 Priest", "Lvl 3 Samurai", "Lvl 5 Mage", "Rogue", "Rotting Corpse", "Vorpal Bunny", "Were Bear"},
+        {"Attack Dog", "Boring Beetle", "Coyote", "Dragon Fly", "Dragon Puppy", "Gas Dragon", "Grave Mist", "High Ninja", "Huge Spider", "Lvl 6 Ninja", "Lvl 7 Fighter", "Lvl 7 Mage 1", "Ogre", "Priestess", "Rotting Corpse", "Shade", "Vorpal Bunny", "Were Bear", "Were Rat"},
+        {"Attack Dog", "Bishop", "Champ Samurai", "Dragon Fly", "Dragon Puppy", "Gargoyle", "Giant Spider", "Grave Mist", "Huge Spider", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 1", "Medusa Lizard", "Minor Daimyo", "Ogre", "Rotting Corpse", "Shade", "Spirit", "Swordsman", "Were Rat", "Were Wolf"},
+        {"Arch Mage", "Chimera", "Earth Giant", "Gaze Hound", "Giant Spider", "High Priest 1", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Mage", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 8 Ninja", "Lvl 8 Priest", "Life Stealer", "Master Thief 1", "Medusa Lizard", "Ogre Lord", "Spirit", "Troll", "Were Tiger", "Were Wolf"},
+        {"Arch Mage", "Champ Samurai", "Chimera", "Gorgon", "High Priest 2", "Lesser Demon", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 2", "Lvl 8 Fighter", "Lvl 8 Priest", "Life Stealer", "Major Daimyo", "Master Thief 1", "Medusa Lizard", "Night Stalker", "Ogre Lord", "Troll", "Were Tiger", "Were Wolf", "Wyvern"},
+        {"Arch Mage", "Champ Samurai", "Chimera", "Earth Giant", "Fire Dragon", "Gaze Hound", "Hatamoto", "High Master", "High Priest 2", "Lesser Demon", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 2", "Lvl 8 Ninja", "Lvl 8 Priest", "Lvl 10 Fighter", "Life Stealer", "Major Daimyo", "Master Thief 2", "Night Stalker", "Ogre Lord", "Troll", "Wyvern"},
+        {"Arch Mage", "Chimera", "Earth Giant", "Fire Dragon", "Fire Giant", "Frost Giant", "Gaze Hound", "High Master", "Lesser Demon", "Lvl 7 Mage 3", "Lvl 7 Thief", "Lvl 8 Fighter", "Lvl 8 Ninja", "Lvl 8 Priest", "Lvl 10 Fighter", "Life Stealer", "Maelific", "Master Thief 2", "Murphy's Ghost", "Night Stalker", "Ogre Lord", "Spirit", "Troll", "Wyvern"},
+        {"Arch Mage", "Bleeb", "Chimera", "Dragon Zombie", "Fire Dragon", "Fire Giant", "Flack", "Frost Giant", "Gorgon", "Greater Demon", "High Priest 3", "High Wizard", "Lvl 8 Bishop", "Lvl 8 Fighter", "Lvl 8 Ninja", "Lvl 10 Mage", "Maelific", "Master Ninja", "Master Thief 3", "Murphy's Ghost", "Poison Giant", "Raver Lord", "Thief", "Vampire", "Vampire Lord", "Werdna", "Will O' Wisp"},};
+
     static {
         for (String hx : MSGS) {
             MESSAGES.add(new Message(DatatypeConverter.parseHexBinary(hx)));
@@ -114,30 +128,14 @@ public class WizardryData {
 
             for (int x = 0; x < 20; x++) {
                 for (int y = 0; y < 20; y++) {
-                    if (cells[x][y].tempMonsterLair) {
-                        List<MazeCell> roomCells = new ArrayList<>();
-                        getConnectedRoomCells(x, y, roomCells);
-                        int sz = roomCells.size();
-                        for (MazeCell c : roomCells) {
-                            c.tempMonsterLair = false;
+                    if (cells[x][y].monsterLair) {
+                        String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
+                        int idx = Utils.RANDOM.nextInt(monsters.length);
+                        Monster m = Andius.MONSTER_MAP.get(monsters[idx]);
+                        if (m == null) {
+                            System.out.println("cannot find " + monsters[idx]);
                         }
-                        List mlvl = Andius.MONSTER_LEVELS.get(level);
-                        if (sz >= 1) {
-                            MazeCell removed = roomCells.remove(0);
-                            removed.tempMonsterID = Utils.RANDOM.nextInt(mlvl.size());
-                        }
-                        if (sz >= 4) {
-                            MazeCell removed = roomCells.remove(0);
-                            removed.tempMonsterID = Utils.RANDOM.nextInt(mlvl.size());
-                        }
-                        if (sz >= 6) {
-                            MazeCell removed = roomCells.remove(0);
-                            removed.tempMonsterID = Utils.RANDOM.nextInt(mlvl.size());
-                        }
-                        if (sz >= 9) {
-                            MazeCell removed = roomCells.remove(0);
-                            removed.tempMonsterID = Utils.RANDOM.nextInt(mlvl.size());
-                        }
+                        cells[x][y].tempMonsterID = m.monsterId;
                     }
                 }
             }
@@ -180,9 +178,6 @@ public class WizardryData {
             value = intValue(buffer[offset + 480]);
             value >>>= row % 8;
             cell.monsterLair = ((value & 1) == 1);
-            if (cell.monsterLair) {
-                cell.tempMonsterLair = true;
-            }
 
             // stairs, pits, darkness etc.
             offset = column * 10 + row / 2; // 10 bytes/column, 4 bits/row
@@ -417,7 +412,6 @@ public class WizardryData {
         int itemObtained;
 
         boolean monsterLair;
-        boolean tempMonsterLair;
         int tempMonsterID = -1;
         int monsterID = -1;
 

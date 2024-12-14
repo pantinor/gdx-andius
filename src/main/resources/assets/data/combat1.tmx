@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="48" tileheight="48" infinite="0" backgroundcolor="#00aaaa7f" nextlayerid="13" nextobjectid="112">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="48" tileheight="48" infinite="0" backgroundcolor="#00aaaa7f" nextlayerid="13" nextobjectid="124">
  <properties>
   <property name="startX" value="35"/>
   <property name="startY" value="40"/>
@@ -136,29 +136,41 @@
   </data>
  </layer>
  <objectgroup id="11" name="Monster Positions">
-  <object id="1" name="1" x="288" y="288" width="48" height="48"/>
-  <object id="94" name="2" x="144" y="288" width="48" height="48"/>
-  <object id="95" name="3" x="336" y="192" width="48" height="48"/>
-  <object id="96" name="4" x="384" y="288" width="48" height="48"/>
-  <object id="97" name="5" x="432" y="240" width="48" height="48"/>
-  <object id="98" name="6" x="528" y="240" width="48" height="48"/>
-  <object id="99" name="7" x="192" y="192" width="48" height="48"/>
-  <object id="100" name="8" x="96" y="192" width="48" height="48"/>
-  <object id="103" name="9" x="96" y="96" width="48" height="48"/>
-  <object id="104" name="10" x="192" y="96" width="48" height="48"/>
-  <object id="105" name="11" x="288" y="144" width="48" height="48"/>
-  <object id="106" name="12" x="432" y="144" width="48" height="48"/>
-  <object id="107" name="13" x="528" y="96" width="48" height="48"/>
-  <object id="108" name="14" x="240" y="48" width="48" height="48"/>
-  <object id="109" name="15" x="336" y="48" width="48" height="48"/>
-  <object id="110" name="16" x="432" y="48" width="48" height="48"/>
+  <object id="1" name="1" x="240" y="384" width="48" height="48"/>
+  <object id="94" name="2" x="144" y="384" width="48" height="48"/>
+  <object id="95" name="3" x="336" y="384" width="48" height="48"/>
+  <object id="96" name="4" x="192" y="336" width="48" height="48"/>
+  <object id="97" name="5" x="288" y="336" width="48" height="48"/>
+  <object id="98" name="6" x="96" y="336" width="48" height="48"/>
+  <object id="99" name="7" x="384" y="336" width="48" height="48"/>
+  <object id="100" name="8" x="432" y="288" width="48" height="48"/>
+  <object id="103" name="9" x="192" y="240" width="48" height="48"/>
+  <object id="104" name="10" x="240" y="336" width="48" height="48"/>
+  <object id="105" name="11" x="432" y="384" width="48" height="48"/>
+  <object id="106" name="12" x="96" y="384" width="48" height="48"/>
+  <object id="107" name="13" x="144" y="288" width="48" height="48"/>
+  <object id="108" name="14" x="336" y="288" width="48" height="48"/>
+  <object id="109" name="15" x="240" y="288" width="48" height="48"/>
+  <object id="110" name="16" x="384" y="240" width="48" height="48"/>
+  <object id="112" name="17" x="96" y="240" width="48" height="48"/>
+  <object id="113" name="18" x="240" y="240" width="48" height="48"/>
+  <object id="114" name="19" x="192" y="192" width="48" height="48"/>
+  <object id="115" name="20" x="288" y="192" width="48" height="48"/>
+  <object id="116" name="21" x="432" y="192" width="48" height="48"/>
+  <object id="117" name="22" x="240" y="144" width="48" height="48"/>
+  <object id="118" name="23" x="336" y="192" width="48" height="48"/>
+  <object id="119" name="24" x="288" y="144" width="48" height="48"/>
+  <object id="120" name="25" x="384" y="96" width="48" height="48"/>
+  <object id="121" name="26" x="144" y="144" width="48" height="48"/>
+  <object id="122" name="27" x="432" y="96" width="48" height="48"/>
+  <object id="123" name="28" x="96" y="144" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="Player Positions">
-  <object id="1" name="1" x="288" y="384" width="48" height="48"/>
-  <object id="91" name="2" x="240" y="384" width="48" height="48"/>
-  <object id="92" name="3" x="192" y="384" width="48" height="48"/>
-  <object id="93" name="4" x="336" y="384" width="48" height="48"/>
-  <object id="101" name="5" x="144" y="384" width="48" height="48"/>
-  <object id="102" name="6" x="384" y="384" width="48" height="48"/>
+  <object id="1" name="1" x="288" y="480" width="48" height="48"/>
+  <object id="91" name="2" x="240" y="480" width="48" height="48"/>
+  <object id="92" name="3" x="192" y="480" width="48" height="48"/>
+  <object id="93" name="4" x="336" y="480" width="48" height="48"/>
+  <object id="101" name="5" x="144" y="480" width="48" height="48"/>
+  <object id="102" name="6" x="384" y="480" width="48" height="48"/>
  </objectgroup>
 </map>

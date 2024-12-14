@@ -9,7 +9,9 @@ import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.objects.Item;
 import andius.objects.Monster;
+import utils.MoveCameraAction;
 import andius.objects.MutableMonster;
+import utils.PanCameraAction;
 import andius.objects.SaveGame;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +81,6 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
     private final List<ModelInstance> floor = new ArrayList<>();
     private final List<ModelInstance> ceiling = new ArrayList<>();
-    private final List<DungeonPointLight> lights = new ArrayList<>();
-
     private static Texture MINI_MAP_TEXTURE;
     private static final int MINI_DIM = 10;
     private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM;
@@ -158,9 +158,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
                     MazeCell cell = LEVELS[level].cells[x][y];
                     addBlock(level, cell, x, y);
+                    }
                 }
             }
-        }
 
         miniMapIcon = new MiniMapIcon();
         miniMapIcon.setOrigin(5, 5);
@@ -359,10 +359,6 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (cell.monsterLair) {
-            //lights.add(new DungeonPointLight(level, x + .5f, y + .5f));
-        }
-
         if (cell.stairs || cell.elevator) {
             ModelInstance instance = new ModelInstance(ladderModel, x + .5f, 0, y + .5f);
             instance.nodes.get(0).scale.set(.060f, .060f, .060f);
@@ -386,7 +382,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
         if (isTorchOn) {
-            float intensity = 4.75f + 0.25f * (float) Math.sin(delta) + .2f * MathUtils.random();
+            float intensity = MathUtils.lerp(5, 6, MathUtils.random());
             torch.set(nll.x, nll.y, nll.z, currentPos.x, currentPos.y + .35f, currentPos.z, intensity);
         } else {
             torch.set(vdll.x, vdll.y, vdll.z, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);
@@ -400,11 +396,6 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         modelBatch.render(this.torchInstance, environment);
 
-        for (DungeonPointLight l : lights) {
-            if (l.level() == currentLevel) {
-                //l.render(modelBatch, delta);
-            }
-        }
         for (ModelInstance i : floor) {
             modelBatch.render(i, environment);
         }
@@ -466,12 +457,12 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
 
                 if (cell.monsterID >= 0) {
-                    pixmap.setColor(Color.CYAN);
+                    pixmap.setColor(Color.SCARLET);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
                 }
 
                 if (cell.tempMonsterID >= 0) {
-                    pixmap.setColor(Color.TEAL);
+                    pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
                 }
 
@@ -534,7 +525,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private Texture createMiniMapIcon(Direction dir) {
         Pixmap pixmap = new Pixmap(MINI_DIM, MINI_DIM, Format.RGBA8888);
-        pixmap.setColor(1f, 0f, 0f, 1f);
+        pixmap.setColor(Color.GREEN);
         if (dir == Direction.EAST) {
             pixmap.fillTriangle(0, 0, 0, MINI_DIM, MINI_DIM, 5);
         } else if (dir == Direction.NORTH) {
@@ -609,40 +600,40 @@ public class WizardryDungeonScreen extends BaseScreen {
         int y = (Math.round(currentPos.z) - 1);
         MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
 
+        float tdur = .7f;
+
         if (keycode == Keys.LEFT) {
 
             if (currentDir == Direction.EAST) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
+                stage.addAction(new PanCameraAction(camera, tdur, 90, 0));
                 currentDir = Direction.NORTH;
             } else if (currentDir == Direction.WEST) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
+                stage.addAction(new PanCameraAction(camera, tdur, 270, 180));
                 currentDir = Direction.SOUTH;
             } else if (currentDir == Direction.NORTH) {
-                camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
+                stage.addAction(new PanCameraAction(camera, tdur, 0, -90));
                 currentDir = Direction.WEST;
             } else if (currentDir == Direction.SOUTH) {
-                camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
+                stage.addAction(new PanCameraAction(camera, tdur, 180, 90));
                 currentDir = Direction.EAST;
             }
-            //  setCreatureRotations();
             return false;
 
         } else if (keycode == Keys.RIGHT) {
 
             if (currentDir == Direction.EAST) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
+                stage.addAction(new PanCameraAction(camera, tdur, 90, 180));
                 currentDir = Direction.SOUTH;
             } else if (currentDir == Direction.WEST) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
+                stage.addAction(new PanCameraAction(camera, tdur, 270, 360));
                 currentDir = Direction.NORTH;
             } else if (currentDir == Direction.NORTH) {
-                camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
+                stage.addAction(new PanCameraAction(camera, tdur, 0, 90));
                 currentDir = Direction.EAST;
             } else if (currentDir == Direction.SOUTH) {
-                camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
+                stage.addAction(new PanCameraAction(camera, tdur, 180, 270));
                 currentDir = Direction.WEST;
             }
-            //  setCreatureRotations();
             return false;
 
         } else if (keycode == Keys.UP) {
@@ -820,7 +811,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.EAST && (cell.hiddenNorthDoor || !cell.northWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            camera.position.set(currentPos);
+            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
             }
@@ -831,7 +822,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.WEST && (cell.hiddenSouthDoor || !cell.southWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            camera.position.set(currentPos);
+            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
             }
@@ -842,7 +833,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.NORTH && (cell.hiddenWestDoor || !cell.westWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            camera.position.set(currentPos);
+            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
             }
@@ -853,7 +844,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.SOUTH && (cell.hiddenEastDoor || !cell.eastWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            camera.position.set(currentPos);
+            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
             }
@@ -883,7 +874,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
                 TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
                 TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, Constants.Map.WIZARDRY1, tm, actor);
+                CombatScreen cs = new CombatScreen(CTX, Constants.Map.WIZARDRY1, tm, actor, currentLevel + 1);
                 mainGame.setScreen(cs);
             }
 
@@ -924,41 +915,6 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         public int getLevel() {
             return level;
-        }
-
-    }
-
-    private class DungeonPointLight {
-
-        private PointLight pl;
-        private ModelInstance inst;
-        private int level;
-        private float x, y;
-
-        public DungeonPointLight(int level, float x, float y) {
-            this.pl = new PointLight();
-            environment.add(this.pl);
-
-            Model model = builder.createSphere(.1f, .1f, .1f, 10, 10, new Material(ColorAttribute.createDiffuse(1, 1, 1, 1)), Usage.Position);
-            this.inst = new ModelInstance(model, x + .5f, 1.3f, y + .5f);
-
-            this.level = level;
-            this.x = x;
-            this.y = y;
-        }
-
-        public int level() {
-            return this.level;
-        }
-
-        public void render(ModelBatch batch, float delta) {
-            float intensity = 0.00f + 0.25f * (float) Math.sin(delta) + .2f * MathUtils.random();
-
-            this.pl.set(nll.x, nll.y, nll.z,
-                    this.x + .5f, .5f, this.y + .5f,
-                    intensity);
-
-            batch.render(inst, environment);
         }
 
     }

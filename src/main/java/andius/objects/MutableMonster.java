@@ -136,4 +136,109 @@ public class MutableMonster extends Monster {
         }
     }
 
+    public Spells mageSpell() {
+        int roll = Utils.RANDOM.nextInt(100);
+        int value = 0;
+        if (roll <= 70) {
+            value = 0;
+        }
+        if (roll <= 90) {
+            value = 1;
+        }
+        if (roll <= 96) {
+            value = 2;
+        }
+        if (roll <= 97) {
+            value = 3;
+        }
+        if (roll <= 98) {
+            value = 4;
+        }
+        if (roll <= 99) {
+            value = 5;
+        }
+        if (roll <= 100) {
+            value = 6;
+        }
+
+        int spellLevel = Math.max(1, getMageSpellLevel() - value);
+        int roll2 = Utils.RANDOM.nextInt(100);
+        Spells spell = null;
+
+        if (spellLevel == 1) {
+            spell = roll2 < 66 ? Spells.KATINO : Spells.HALITO;
+        }
+        if (spellLevel == 2) {
+            spell = roll2 < 66 ? Spells.DILTO : Spells.HALITO;
+        }
+        if (spellLevel == 3) {
+            spell = roll2 < 66 ? Spells.MOLITO : Spells.MAHALITO;
+        }
+        if (spellLevel == 4) {
+            spell = roll2 < 66 ? Spells.DALTO : Spells.LAHALITO;
+        }
+        if (spellLevel == 5) {
+            spell = roll2 < 66 ? Spells.MAHALITO : Spells.MADALTO;
+        }
+        if (spellLevel == 6) {
+            spell = roll2 < 66 ? Spells.MADALTO : Spells.ZILWAN;
+        }
+        if (spellLevel == 7) {
+            spell = roll2 < 66 ? Spells.TILTOWAIT : Spells.TILTOWAIT;
+        }
+
+        if (canCast(spell)) {
+            return spell;
+        }
+
+        spell = this.knownSpells.get(Utils.RANDOM.nextInt(this.knownSpells.size()));
+
+        if (canCast(spell)) {
+            return spell;
+        }
+
+        return null;
+    }
+
+    public Spells priestSpell() {
+
+        int spellLevel = Math.max(1, getPriestSpellLevel());
+        int roll2 = Utils.RANDOM.nextInt(100);
+        Spells spell = null;
+
+        if (spellLevel == 1) {
+            spell = roll2 < 66 ? Spells.BADIOS : Spells.BADIOS;
+        }
+        if (spellLevel == 2) {
+            spell = roll2 < 66 ? Spells.MONTINO : Spells.MONTINO;
+        }
+        if (spellLevel == 3) {
+            spell = roll2 < 66 ? Spells.BADIOS : Spells.BADIAL;
+        }
+        if (spellLevel == 4) {
+            spell = roll2 < 66 ? Spells.BADIAL : Spells.BADIAL;
+        }
+        if (spellLevel == 5) {
+            spell = roll2 < 66 ? Spells.BADIALMA : Spells.BADI;
+        }
+        if (spellLevel == 6) {
+            spell = roll2 < 66 ? Spells.LORTO : Spells.MABADI;
+        }
+        if (spellLevel == 7) {
+            spell = roll2 < 66 ? Spells.MABADI : Spells.MABADI;
+        }
+
+        if (canCast(spell)) {
+            return spell;
+        }
+
+        spell = this.knownSpells.get(Utils.RANDOM.nextInt(this.knownSpells.size()));
+
+        if (canCast(spell)) {
+            return spell;
+        }
+
+        return null;
+    }
+
 }

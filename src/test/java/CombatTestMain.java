@@ -8,6 +8,7 @@ import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.TibianSprite;
+import static andius.WizardryData.MONSTER_ENCOUNTER_LEVEL;
 import andius.objects.Actor;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import utils.Utils;
 
 public class CombatTestMain extends Game {
 
@@ -76,15 +78,19 @@ public class CombatTestMain extends Game {
 
             TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
             TiledMap tm = loader.load("assets/data/combat1.tmx");
+            
+            int level = 10;
+            
+            String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
+            int idx = Utils.RANDOM.nextInt(monsters.length);
+            Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
 
-            Monster monster = Andius.MONSTER_LEVELS.get(1).get(2);
-
-            Actor actor = new Actor(0, monster.name, TibianSprite.animation("Barbarian_Brutetamer")); //TODO
+            Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
 
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
 
-            CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor);
+            CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor, level);
             setScreen(cs);
 
         } catch (Exception e) {
