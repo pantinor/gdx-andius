@@ -79,11 +79,12 @@ public class CombatTestMain extends Game {
             TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
             TiledMap tm = loader.load("assets/data/combat1.tmx");
             
-            int level = 10;
+            int level = 9;
             
             String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
             int idx = Utils.RANDOM.nextInt(monsters.length);
             Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
+            //Monster monster = Andius.MONSTERS.get(77);
 
             Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
 

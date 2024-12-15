@@ -34,6 +34,7 @@ public class Item implements Comparable<Item> {
     public int regeneration;
     public boolean crithitm;
     public int range;
+    public int hitmd;
 
     @Override
     public Item clone() {
@@ -54,11 +55,11 @@ public class Item implements Comparable<Item> {
         i.crithitm = this.crithitm;
         i.regeneration = this.regeneration;
         i.range = this.range;
+        i.hitmd = this.hitmd;
         return i;
     }
 
     public boolean canUse(ClassType ct) {
-        //System.out.printf("classtype %s for item %s can use=%s\n", ct, this.name, this.usable.indexOf(ct.getAbbr()) != -1);
         return this.usable.indexOf(ct.getAbbr()) != -1;
     }
 

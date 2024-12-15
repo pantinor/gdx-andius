@@ -63,9 +63,7 @@ public class Hud {
 
             batch.draw(Andius.faceTiles[rec.portaitIndex], 727, py);
 
-            CharacterRecord r = rec;
-
-            String d = String.format("%s  LVL %d  %s  %s", r.name.toUpperCase(), rec.level, r.race.toString(), r.classType.toString());
+            String d = String.format("%s  LVL %d  %s  %s", rec.name.toUpperCase(), rec.level, rec.race.toString(), rec.classType.toString());
             Andius.smallFont.draw(batch, d, 790, y);
 
             d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status.toString());

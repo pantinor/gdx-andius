@@ -1,7 +1,7 @@
 package utils;
 
-import andius.Constants.Status;
 import andius.Direction;
+import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
@@ -133,23 +133,32 @@ public class Utils {
     }
 
     public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
-        int attackValue = RANDOM.nextInt(20) + 1;
-        int defenseValue = 20 - defender.calculateAC() - attacker.getLevel() - (defender.status.isDisabled() ? 3 : 0);
+        int roll = RANDOM.nextInt(20) + 1;
 
-        if (defenseValue < 1) {
-            defenseValue = 1;
+        int weaponACMod = defender.weapon.armourClass;
+
+        int cth = 21 - defender.calculateAC()- weaponACMod - attacker.getLevel() - 5 - (defender.status.isDisabled() ? 3 : 0);
+
+        if (roll >= 20) {
+            return true;
         }
 
-        if (defenseValue > 19) {
-            defenseValue = 19;
+        if (roll == 1) {
+            return false;
         }
 
-        //System.out.printf("%s AC[%d] result: %s (%d/%d)\n", 
-        //        attacker.name, defender.calculateAC(), attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
-        return attackValue >= defenseValue;
+        return roll <= cth;
     }
 
     public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
+
+        int hitCalcMod = attacker.level / 3 + 2;
+        if (attacker.classType == ClassType.MAGE || attacker.classType == ClassType.THIEF || attacker.classType == ClassType.WIZARD) {
+            hitCalcMod = attacker.level / 5;
+        }
+
+        int weaponHitMd = attacker.weapon.hitmd;
+
         int strMod = 0;
         if (attacker.str <= 3) {
             strMod = -3;
@@ -164,29 +173,19 @@ public class Utils {
         } else if (attacker.str >= 18) {
             strMod = 3;
         }
-        int attackValue = (RANDOM.nextInt(20) + 1) + strMod;
-        int defenseValue = 21 - defender.getArmourClass() + defender.getACModifier() - (defender.status().isDisabled() ? 3 : 0);
 
-        if (attackValue < 1) {
-            attackValue = 1;
+        int roll = (RANDOM.nextInt(20) + 1) + strMod + hitCalcMod + weaponHitMd;
+        int cth = 21 - defender.getArmourClass() - defender.getACModifier() - (defender.status().isDisabled() ? 3 : 0);
+
+        if (roll >= 20) {
+            return true;
         }
 
-        if (attackValue > 19) {
-            attackValue = 19;
+        if (roll == 1) {
+            return false;
         }
 
-        if (defenseValue < 1) {
-            defenseValue = 1;
-        }
-
-        if (defenseValue > 19) {
-            defenseValue = 19;
-        }
-
-        //System.out.printf("%s AC[%d] result: %s (%d/%d)\n",
-        //        attacker.name, defender.getArmourClass(),
-        //        attackValue >= defenseValue ? AttackResult.HIT : AttackResult.MISS, attackValue, defenseValue);
-        return attackValue >= defenseValue;
+        return roll <= cth;
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {

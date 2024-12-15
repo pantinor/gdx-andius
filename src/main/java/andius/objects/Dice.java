@@ -26,6 +26,10 @@ public class Dice {
         this.bonus = bonus;
     }
 
+    public int getQty() {
+        return qty;
+    }
+
     public int max() {
         return qty * sides + bonus;      // each die rolls the maximum
     }

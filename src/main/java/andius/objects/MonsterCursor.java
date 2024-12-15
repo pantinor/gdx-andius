@@ -5,34 +5,38 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MonsterCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
 
-    Texture texture;
+    private static final Texture TEXTURE = getCursorTexture(Color.RED);
 
-    boolean visible = true;
+    TextureRegion health;
 
     public MonsterCursor() {
-        this.texture = getCursorTexture(Color.RED);
+        this.health = new TextureRegion(TEXTURE, 0, 0, TILE_DIM, TILE_DIM);
     }
 
-    @Override
-    public void setVisible(boolean v) {
-        this.visible = v;
+    public void adjust(int hp, int maxhp) {
+        double percent = (double) hp / maxhp;
+        double bar = percent * (double) TILE_DIM;
+        if (hp < 0) {
+            bar = 0;
+        }
+        if (bar > TILE_DIM) {
+            bar = TILE_DIM;
+        }
+        health.setRegion(0, 0, TILE_DIM, (int) bar);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-
-        if (visible) {
-            batch.draw(texture, getX(), getY());
-        }
+        batch.draw(health, getX(), getY());
     }
 
-    private Texture getCursorTexture(Color c) {
+    private static Texture getCursorTexture(Color c) {
         Pixmap pixmap = new Pixmap(TILE_DIM, TILE_DIM, Pixmap.Format.RGBA8888);
         pixmap.setColor(new Color(c.r, c.g, c.b, 0.1f));
         pixmap.fillRectangle(0, 0, TILE_DIM, TILE_DIM);

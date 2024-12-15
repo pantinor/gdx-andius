@@ -158,9 +158,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
                     MazeCell cell = LEVELS[level].cells[x][y];
                     addBlock(level, cell, x, y);
-                    }
                 }
             }
+        }
 
         miniMapIcon = new MiniMapIcon();
         miniMapIcon.setOrigin(5, 5);
@@ -290,8 +290,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW));
         Material red = new Material(ColorAttribute.createDiffuse(Color.RED));
 
-        wall = builder.createBox(1.099f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-        door = builder.createBox(1.099f, 1, 0.05f, dr, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        door = builder.createBox(1.090f, 1, 0.05f, dr, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
     }
 
     private void addBlock(int level, MazeCell cell, float x, float y) {

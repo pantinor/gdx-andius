@@ -44,8 +44,6 @@ public class Actor {
     private MutableMonster monster;
     private CharacterRecord player;
     private PlayerCursor playerCursor;
-    private MonsterCursor monsterCursor;
-    private TextureRegion healthBar;
 
     private String hash;
 
@@ -97,18 +95,6 @@ public class Actor {
 
     public TextureRegion getIcon() {
         return (TextureRegion) this.anim.getKeyFrames()[this.dir];
-        //TextureRegion tr = (TextureRegion) this.anim.getKeyFrames()[this.dir];
-        //return makesquare(tr.getRegionWidth(),tr.getRegionHeight());
-        //return makesquare(20, 20);
-    }
-
-    private TextureRegion makesquare(int w, int h) {
-        Pixmap pix = new Pixmap(w, h, Pixmap.Format.RGBA8888);
-        pix.setColor(Color.PINK);
-        pix.fillRectangle(0, 0, w, h);
-        Texture t = new Texture(pix);
-        pix.dispose();
-        return new TextureRegion(t);
     }
 
     public Animation getAnimation() {
@@ -159,26 +145,9 @@ public class Actor {
         return player;
     }
 
-    public TextureRegion getHealthBar() {
-        if (healthBar == null) {
-            healthBar = new TextureRegion(PLAYER_HLTH_BAR);
-            adjustHP(player.hp);
-        }
-        return this.healthBar;
-    }
-
     public void adjustHP(int amt) {
         player.adjustHP(amt);
-
-        double percent = (double) player.hp / player.maxhp;
-        double bar = percent * (double) 124;
-        if (player.hp < 0) {
-            bar = 0;
-        }
-        if (bar > 124) {
-            bar = 124;
-        }
-        getHealthBar().setRegion(381, 82, (int) bar, 6);
+        this.playerCursor.adjust(player.hp, player.maxhp);
     }
 
     public PlayerCursor getPlayerCursor() {
@@ -187,14 +156,6 @@ public class Actor {
 
     public void setPlayerCursor(PlayerCursor playerCursor) {
         this.playerCursor = playerCursor;
-    }
-
-    public MonsterCursor getMonsterCursor() {
-        return monsterCursor;
-    }
-
-    public void setMonsterCursor(MonsterCursor monsterCursor) {
-        this.monsterCursor = monsterCursor;
     }
 
     public int getDirection() {

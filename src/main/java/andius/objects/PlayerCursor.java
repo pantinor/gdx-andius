@@ -1,42 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.objects;
 
 import static andius.Constants.TILE_DIM;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- *
- * @author Paul
- */
 public class PlayerCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
 
-    TextureRegion textureRed;
-    TextureRegion textureYellow;
-    TextureRegion textureBlue;
-    TextureRegion texturePurple;
+    private static final Texture GREEN = getCursorTexture(Color.GREEN);
+    private static final Texture BLUE = getCursorTexture(Color.BLUE);
 
     boolean visible = false;
 
+    TextureRegion healthGreen;
+    TextureRegion healthBlue;
+
     public PlayerCursor() {
-        TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/cursor.png")), 48, 48);
-        this.textureYellow = trs[0][0];
-        this.textureBlue = trs[0][1];
-        this.textureRed = trs[1][0];
-        this.texturePurple = trs[1][1];
+        this.healthGreen = new TextureRegion(GREEN, 0, 0, TILE_DIM, TILE_DIM);
+        this.healthBlue = new TextureRegion(BLUE, 0, 0, TILE_DIM, TILE_DIM);
     }
 
-    public void set(float x, float y) {
-        setX(x);
-        setY(y);
+    public void adjust(int hp, int maxhp) {
+        double percent = (double) hp / maxhp;
+        double bar = percent * (double) TILE_DIM;
+        if (hp < 0) {
+            bar = 0;
+        }
+        if (bar > TILE_DIM) {
+            bar = TILE_DIM;
+        }
+        healthGreen.setRegion(0, 0, TILE_DIM, (int) bar);
+        healthBlue.setRegion(0, 0, TILE_DIM, (int) bar);
     }
 
     @Override
@@ -51,20 +47,16 @@ public class PlayerCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
         if (visible) {
-            batch.draw(textureYellow, getX(), getY());
+            batch.draw(healthGreen, getX(), getY());
         } else {
-            batch.draw(textureBlue, getX(), getY());
+            batch.draw(healthBlue, getX(), getY());
         }
     }
 
-    private Texture getCursorTexture() {
+    private static Texture getCursorTexture(Color c) {
         Pixmap pixmap = new Pixmap(TILE_DIM, TILE_DIM, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.YELLOW);
-        int w = 4;
-        pixmap.fillRectangle(0, 0, w, TILE_DIM);
-        pixmap.fillRectangle(TILE_DIM - w, 0, w, TILE_DIM);
-        pixmap.fillRectangle(w, 0, TILE_DIM - 2 * w, w);
-        pixmap.fillRectangle(w, TILE_DIM - w, TILE_DIM - 2 * w, w);
+        pixmap.setColor(new Color(c.r, c.g, c.b, 0.1f));
+        pixmap.fillRectangle(0, 0, TILE_DIM, TILE_DIM);
         return new Texture(pixmap);
     }
 

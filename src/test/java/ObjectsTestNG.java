@@ -134,7 +134,7 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    //@Test
+    @Test
     public void readJson() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
@@ -186,7 +186,7 @@ public class ObjectsTestNG {
         java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
         java.util.Map<Integer, java.util.List<Monster>> MONSTER_LEVELS = new HashMap<>();
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 30; i++) {
             MONSTER_LEVELS.put(i, new ArrayList<>());
         }
 
@@ -200,16 +200,7 @@ public class ObjectsTestNG {
         }
 
         for (Monster m : monsters) {
-            //System.out.printf("%s mid %d level %d\n", m.name, m.iconId, m.getLevel());
-
-            if (m.getMageSpellLevel() > 0 || m.getPriestSpellLevel() > 0) {
-                //System.out.printf("%s\tmspl: %d\tpspl: %d\n", m.name, m.getMageSpellLevel(), m.getPriestSpellLevel());
-                MutableMonster mm = new MutableMonster(m);
-                SaveGame.setMonsterSpellPoints(mm);
-                SaveGame.tryLearn(mm);
-                //System.out.println("\t" + Arrays.toString(mm.magePoints) + "\t" + Arrays.toString(mm.clericPoints));
-                //System.out.println("\t" + mm.knownSpells);
-            }
+            System.out.printf("%s mid %d level %d mlvl %d  prlvl %s\n", m.name, m.monsterId, m.getLevel(), m.getMageSpellLevel(), m.getPriestSpellLevel());
         }
     }
 

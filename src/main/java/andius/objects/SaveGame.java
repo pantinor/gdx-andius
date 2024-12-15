@@ -3,7 +3,6 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Direction;
-import andius.Sound;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -32,7 +31,7 @@ public class SaveGame implements Constants {
     public int y;//map y
     public int level;//map level
     public Direction direction;
-    
+
     public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
@@ -267,6 +266,26 @@ public class SaveGame implements Constants {
             return (this.exp - expnxtlvl);
         }
 
+        public int extraSwings() {
+            int v = this.weapon.extraSwings == 0 ? 1 : this.weapon.extraSwings;
+            if (this.classType == ClassType.FIGHTER || this.classType == ClassType.SAMURAI || this.classType == ClassType.LORD) {
+                int vc = this.level / 5 + 1;
+                if (vc > v) {
+                    return vc;
+                }
+            }
+            if (this.classType == ClassType.NINJA) {
+                int vc = this.level / 5 + 2;
+                if (vc > v) {
+                    return vc;
+                }
+            }
+            if (v > 10) {
+                v = 10;
+            }
+            return v;
+        }
+
         @Override
         public String toString() {
             return this.name.toUpperCase();
@@ -433,108 +452,4 @@ public class SaveGame implements Constants {
         return learned;
     }
 
-    public static void setMonsterSpellPoints(MutableMonster m) {
-
-        setMinMageSpellCounts(m.magePoints, m.knownSpells);
-        setMinPriestSpellCounts(m.clericPoints, m.knownSpells);
-
-        if (m.mageSpellLevel > 0) {
-            setSpellsPerLevel(m.magePoints, m.mageSpellLevel, 0, 2);
-        }
-        if (m.priestSpellLevel > 0) {
-            setSpellsPerLevel(m.clericPoints, m.priestSpellLevel, 0, 2);
-        }
-    }
-
-    public static boolean tryLearn(MutableMonster m) {
-
-        boolean learned = false;
-
-        if (m.mageSpellLevel > 0) {
-            int intell = 8;
-            if (m.mageSpellLevel == 7) {
-                intell = 18;
-            } else if (m.mageSpellLevel >= 5) {
-                intell = 16;
-            } else if (m.mageSpellLevel >= 3) {
-                intell = 12;
-            }
-            for (int i = 0; i < m.mageSpellLevel; i++) {
-                if (m.magePoints[0] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 1, 4) || learned;
-                }
-                if (m.magePoints[1] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 5, 6) || learned;
-                }
-                if (m.magePoints[2] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 7, 8) || learned;
-                }
-                if (m.magePoints[3] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 9, 11) || learned;
-                }
-                if (m.magePoints[4] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 12, 14) || learned;
-                }
-                if (m.magePoints[5] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 15, 18) || learned;
-                }
-                if (m.magePoints[6] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, intell, 19, 21) || learned;
-                }
-            }
-        }
-
-        if (m.priestSpellLevel > 0) {
-            int piety = 8;
-            if (m.priestSpellLevel == 7) {
-                piety = 18;
-            } else if (m.priestSpellLevel >= 5) {
-                piety = 16;
-            } else if (m.priestSpellLevel >= 3) {
-                piety = 12;
-            }
-            for (int i = 0; i < m.priestSpellLevel; i++) {
-                if (m.clericPoints[0] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 22, 26) || learned;
-                }
-                if (m.clericPoints[1] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 27, 30) || learned;
-                }
-                if (m.clericPoints[2] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 31, 34) || learned;
-                }
-                if (m.clericPoints[3] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 35, 38) || learned;
-                }
-                if (m.clericPoints[4] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 39, 44) || learned;
-                }
-                if (m.clericPoints[5] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 45, 48) || learned;
-                }
-                if (m.clericPoints[6] > 0) {
-                    learned = tryLearnSpell(m.knownSpells, piety, 49, 50) || learned;
-                }
-            }
-
-            Iterator<Spells> iter = m.knownSpells.iterator();
-            while (iter.hasNext()) {
-                Spells s = iter.next();
-                if (s != Spells.MANIFO) {
-                    //iter.remove();
-                }
-                if (s.getArea() != SpellArea.COMBAT) {
-                    if (s.getSound() != Sound.HEALING) {
-                        iter.remove();
-                    }
-                } else if (s == Spells.LOKTOFEIT || s == Spells.DIALKO || s == Spells.LATUMOFIS) {
-                    iter.remove();
-                }
-
-            }
-        }
-
-        return learned;
-
-    }
 }

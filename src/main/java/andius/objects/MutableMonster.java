@@ -1,48 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.objects;
 
 import static andius.Constants.DEATHMSGS;
 import andius.Constants.Status;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import java.util.ArrayList;
-import java.util.List;
 import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class MutableMonster extends Monster {
-
-    private static TextureRegion HLTH_BAR = null;
-
-    static {
-        try {
-            HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 82, 6);
-        } catch (Throwable t) {
-        }
-    }
 
     private int acmodifier;
     private int currentHitPoints;
+    private int currentMageSpellLevel;
+    private int currentPriestSpellLevel;
     private final State status = new State();
     private final int maxHitPoints;
-    private TextureRegion healthBar;
-
-    public List<Spells> knownSpells = new ArrayList<>();
-    public int[] magePoints = new int[7];
-    public int[] clericPoints = new int[7];
+    private MonsterCursor monsterCursor;
 
     public MutableMonster(Monster m) {
         clone(m);
         this.maxHitPoints = this.hitPoints.roll();
         this.currentHitPoints = this.maxHitPoints;
+        this.currentMageSpellLevel = this.mageSpellLevel;
+        this.currentPriestSpellLevel = this.priestSpellLevel;
     }
 
     public int getCurrentHitPoints() {
@@ -51,6 +28,14 @@ public class MutableMonster extends Monster {
 
     public void setCurrentHitPoints(int currentHitPoints) {
         this.currentHitPoints = currentHitPoints;
+    }
+
+    public int getCurrentMageSpellLevel() {
+        return currentMageSpellLevel;
+    }
+
+    public int getCurrentPriestSpellLevel() {
+        return currentPriestSpellLevel;
     }
 
     public State status() {
@@ -67,23 +52,16 @@ public class MutableMonster extends Monster {
         return maxHitPoints;
     }
 
-    public TextureRegion getHealthBar() {
-        if (healthBar == null) {
-            healthBar = new TextureRegion(HLTH_BAR);
-        }
-        return this.healthBar;
+    public MonsterCursor getMonsterCursor() {
+        return monsterCursor;
+    }
+
+    public void setMonsterCursor(MonsterCursor monsterCursor) {
+        this.monsterCursor = monsterCursor;
     }
 
     public void adjustHealthBar() {
-        double percent = (double) currentHitPoints / maxHitPoints;
-        double bar = percent * (double) 82;
-        if (currentHitPoints < 0) {
-            bar = 0;
-        }
-        if (bar > 82) {
-            bar = 82;
-        }
-        getHealthBar().setRegion(381, 82, (int) bar, 6);
+        this.monsterCursor.adjust(currentHitPoints, maxHitPoints);
     }
 
     public String getDamageTag() {
@@ -117,51 +95,26 @@ public class MutableMonster extends Monster {
         return acmodifier;
     }
 
-    public boolean canCast(Spells spell) {
-        if (!knownSpells.contains(spell)) {
-            return false;
-        }
-        if (spell.getType() == ClassType.MAGE) {
-            return magePoints[spell.getLevel() - 1] > 0;
-        } else {
-            return clericPoints[spell.getLevel() - 1] > 0;
-        }
-    }
-
-    public void decrMagicPts(Spells spell) {
-        if (spell.getType() == ClassType.MAGE) {
-            magePoints[spell.getLevel() - 1]--;
-        } else {
-            clericPoints[spell.getLevel() - 1]--;
-        }
-    }
-
-    public Spells mageSpell() {
+    public Spells castMageSpell() {
         int roll = Utils.RANDOM.nextInt(100);
         int value = 0;
         if (roll <= 70) {
             value = 0;
-        }
-        if (roll <= 90) {
+        } else if (roll <= 80) {
             value = 1;
-        }
-        if (roll <= 96) {
+        } else if (roll <= 90) {
             value = 2;
-        }
-        if (roll <= 97) {
+        } else if (roll <= 94) {
             value = 3;
-        }
-        if (roll <= 98) {
+        } else if (roll <= 96) {
             value = 4;
-        }
-        if (roll <= 99) {
+        } else if (roll <= 98) {
             value = 5;
-        }
-        if (roll <= 100) {
+        } else if (roll <= 100) {
             value = 6;
         }
 
-        int spellLevel = Math.max(1, getMageSpellLevel() - value);
+        int spellLevel = Math.max(1, this.currentMageSpellLevel - value);
         int roll2 = Utils.RANDOM.nextInt(100);
         Spells spell = null;
 
@@ -187,22 +140,18 @@ public class MutableMonster extends Monster {
             spell = roll2 < 66 ? Spells.TILTOWAIT : Spells.TILTOWAIT;
         }
 
-        if (canCast(spell)) {
-            return spell;
+        double tmp = ((double) 1 / (double) (this.groupSize.roll() + 2)) * 100;
+        int roll3 = Utils.RANDOM.nextInt(100);
+        if (roll3 <= tmp) {
+            this.currentMageSpellLevel--;
         }
 
-        spell = this.knownSpells.get(Utils.RANDOM.nextInt(this.knownSpells.size()));
-
-        if (canCast(spell)) {
-            return spell;
-        }
-
-        return null;
+        return spell;
     }
 
-    public Spells priestSpell() {
+    public Spells castPriestSpell() {
 
-        int spellLevel = Math.max(1, getPriestSpellLevel());
+        int spellLevel = Math.max(1, this.currentPriestSpellLevel);
         int roll2 = Utils.RANDOM.nextInt(100);
         Spells spell = null;
 
@@ -228,17 +177,13 @@ public class MutableMonster extends Monster {
             spell = roll2 < 66 ? Spells.MABADI : Spells.MABADI;
         }
 
-        if (canCast(spell)) {
-            return spell;
+        double tmp = ((double) 1 / (double) (this.groupSize.roll() + 2)) * 100;
+        int roll3 = Utils.RANDOM.nextInt(100);
+        if (roll3 <= tmp) {
+            this.currentPriestSpellLevel--;
         }
 
-        spell = this.knownSpells.get(Utils.RANDOM.nextInt(this.knownSpells.size()));
-
-        if (canCast(spell)) {
-            return spell;
-        }
-
-        return null;
+        return spell;
     }
 
 }

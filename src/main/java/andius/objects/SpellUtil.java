@@ -342,14 +342,6 @@ public class SpellUtil {
             return;
         }
 
-        if (!caster.getMonster().canCast(spell)) {
-            screen.log(caster.getMonster().name + " does not have enough magic points!");
-            Sounds.play(Sound.NEGATIVE_EFFECT);
-            return;
-        }
-
-        caster.getMonster().decrMagicPts(spell);
-
         seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
         seq.addAction(Actions.delay(0.5f));
 

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
+import static andius.Constants.TILE_DIM;
 import andius.objects.Item;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
@@ -31,19 +27,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author Paul
- */
 public class CombatHud {
 
+    private static final Texture BCKGRND = statsBackground();
     private final Map<andius.objects.Actor, PlayerListing> map = new HashMap<>();
     private PlayerListing current;
     private final CombatScreen screen;
     private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
-    private final Texture[] partyHealthFrames = new Texture[6];
-    private final Texture[] monsterHealthFrames = new Texture[16];
-    private final GlyphLayout glyph = new GlyphLayout(Andius.smallFont, "", Color.WHITE, 32, Align.left, true);
+    private final GlyphLayout glyph = new GlyphLayout(Andius.font, "", Color.WHITE, 32, Align.left, true);
 
     public CombatHud(CombatScreen screen, Set<andius.objects.Actor> players) {
         this.screen = screen;
@@ -65,14 +56,6 @@ public class CombatHud {
         for (andius.objects.Actor a : players) {
             map.put(a, new PlayerListing(a));
         }
-
-        for (int x = 0; x < partyHealthFrames.length; x++) {
-            partyHealthFrames[x] = createHealthFrame(128, 32);
-        }
-        for (int x = 0; x < monsterHealthFrames.length; x++) {
-            monsterHealthFrames[x] = createHealthFrame(86, 36);
-        }
-
     }
 
     public void set(andius.objects.Actor player, Stage stage) {
@@ -221,7 +204,7 @@ public class CombatHud {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (item != null && item.spell != null ) {
+            if (item != null && item.spell != null) {
                 tooltip.setText(item.name);
                 screen.initCast(item.spell, player);
             }
@@ -277,78 +260,53 @@ public class CombatHud {
 
     }
 
-    public void render(SpriteBatch batch, MutableMonster[] crSlots, Set<andius.objects.Actor> partyMembers) {
-        int x = 8;
-        for (int i = 0; i < 6; i++) {
-            batch.draw(partyHealthFrames[i], x, Andius.SCREEN_HEIGHT - 34);
-            x += 128 + 3;
-        }
-        x = 8;
-        for (int i = 0; i < 8; i++) {
-            batch.draw(monsterHealthFrames[i], x, 44);
-            x += 86 + 1;
-        }
-        x = 8;
-        for (int i = 8; i < 16; i++) {
-            batch.draw(monsterHealthFrames[i], x, 6);
-            x += 86 + 1;
-        }
+    public void drawStats(SpriteBatch batch, andius.objects.Actor pl) {
 
-        x = 8;
-        for (andius.objects.Actor p : partyMembers) {
-            String txt = String.format("%s (%d) %d %s",
-                    p.getName(),
-                    p.getPlayer().calculateAC(),
-                    p.getPlayer().maxhp,
-                    p.getPlayer().status.isDisabled() ?  p.getPlayer().status.toString() : "");
+        CharacterRecord rec = pl.getPlayer();
+        StringBuilder sb = new StringBuilder();
 
-            glyph.setText(Andius.smallFont, txt, Color.WHITE, 124, Align.left, true);
-            Andius.smallFont.draw(batch, glyph, x + 3,  Andius.SCREEN_HEIGHT - 4);
+        sb.append(String.format("%s  LVL %d\n", rec.name.toUpperCase(), rec.level));
+        sb.append(String.format("%s  %s\n", rec.race.toString(), rec.classType.toString()));
+        sb.append(String.format("HP: %d / %d  AC: %d\n", rec.hp, rec.maxhp, rec.calculateAC()));
+        sb.append(String.format("ST: %s\n", rec.status.toString()));
+        int[] ms = rec.magePoints;
+        int[] cs = rec.clericPoints;
+        sb.append(String.format("MG Pts: %d %d %d %d %d %d %d\n",
+                ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6]));
+        sb.append(String.format("PR Pts: %d %d %d %d %d %d %d\n",
+                cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
 
-            batch.draw(p.getHealthBar(), x + 2,  Andius.SCREEN_HEIGHT - 31);
-            x += 128 + 3;
-        }
+        int dim = TILE_DIM * 3;
 
-        x = 10;
-        int count = 0;
-        for (int i = 0; i < 16; i++) {
-            if (crSlots[i] != null && crSlots[i].getCurrentHitPoints() > 0) {
-
-                String txt = String.format("%s [%d - %d] %s",
-                        crSlots[i].getName(),
-                        crSlots[i].getLevel(),
-                        crSlots[i].getMaxHitPoints(),
-                        crSlots[i].status().isDisabled() ? crSlots[i].status().toString() : "");
-
-                glyph.setText(Andius.smallFont, txt, Color.WHITE, 80, Align.left, true);
-                Andius.smallFont.draw(batch, glyph, x, count < 8 ? 84 : 46);
-
-                batch.draw(crSlots[i].getHealthBar(), x, count < 8 ? 46 : 8);
-
-                count++;
-                x += 86 + 1;
-                if (count == 8) {
-                    x = 10;
-                }
-            }
-        }
+        glyph.setText(Andius.hudLogFont, sb.toString(), rec.status.color(), dim, Align.left, true);
+        batch.draw(BCKGRND, pl.getX() - TILE_DIM, pl.getY() - TILE_DIM * 2);
+        Andius.hudLogFont.draw(batch, glyph, pl.getX() - TILE_DIM + 4, pl.getY() + TILE_DIM - 5);
     }
 
-    private Texture createHealthFrame(int w, int h) {
+    public void drawStatsMonster(SpriteBatch batch, andius.objects.Actor mon) {
 
-        int lw = 2;
+        MutableMonster rec = mon.getMonster();
+        StringBuilder sb = new StringBuilder();
 
-        Pixmap pix = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+        sb.append(String.format("%s  \n", rec.name.toUpperCase()));
+        sb.append(String.format("LVL %d  %s\n", rec.getLevel(), rec.getType().toString()));
+        sb.append(String.format("HP: %d / %d  AC: %d\n", rec.getCurrentHitPoints(), rec.getMaxHitPoints(), rec.getArmourClass()));
+        sb.append(String.format("ST: %s\n", rec.status().toString()));
+        sb.append(String.format("MG LVL: %d \n", rec.getCurrentMageSpellLevel()));
+        sb.append(String.format("PR LVL: %d \n", rec.getPriestSpellLevel()));
 
-        pix.setColor(Color.DARK_GRAY);
-        pix.fillRectangle(0, 0, w, lw);//top
-        pix.fillRectangle(0, h - lw, w, lw);//bottom
-        pix.fillRectangle(0, 0, lw, h);//left
-        pix.fillRectangle(w - lw, 0, lw, h);//right
+        int dim = TILE_DIM * 3;
 
-        Texture t = new Texture(pix);
-        pix.dispose();
-        return t;
+        glyph.setText(Andius.hudLogFont, sb.toString(), rec.status().color(), dim, Align.left, true);
+        batch.draw(BCKGRND, mon.getX() - TILE_DIM, mon.getY() + TILE_DIM * 4);
+        Andius.hudLogFont.draw(batch, glyph, mon.getX() - TILE_DIM + 4, mon.getY() + TILE_DIM * 7 - 10);
+    }
+
+    private static Texture statsBackground() {
+        Pixmap pixmap = new Pixmap(TILE_DIM * 3, TILE_DIM * 3, Pixmap.Format.RGBA8888);
+        pixmap.setColor(new Color(0.1f, 0.1f, 0.1f, 0.7f));
+        pixmap.fillRectangle(0, 0, TILE_DIM * 3, TILE_DIM * 3);
+        return new Texture(pixmap);
     }
 
 }

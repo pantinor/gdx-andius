@@ -17,7 +17,6 @@ import andius.objects.ProjectileActor;
 import andius.objects.SaveGame;
 import andius.objects.SpellUtil;
 import andius.objects.Spells;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
 import java.util.Iterator;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
@@ -51,9 +50,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import utils.Utils;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -151,7 +147,7 @@ public class CombatScreen extends BaseScreen {
             cursor.setX(x);
             cursor.setY(y);
             stage.addActor(cursor);
-            actor.setMonsterCursor(cursor);
+            actor.getMonster().setMonsterCursor(cursor);
 
             enemies.add(actor);
         }
@@ -181,8 +177,9 @@ public class CombatScreen extends BaseScreen {
             actor.setDirection(2);
 
             PlayerCursor cursor = new PlayerCursor();
+            cursor.setX(x);
+            cursor.setY(y);
             stage.addActor(cursor);
-            cursor.addAction(forever(sequence(fadeOut(1), fadeIn(1))));
             actor.setPlayerCursor(cursor);
 
             partyMembers.add(actor);
@@ -232,10 +229,6 @@ public class CombatScreen extends BaseScreen {
         for (int i = 0; i < numCreatures && nextOpenSlot() != -1; i++) {
             int j = nextOpenSlot();
             crSlots[j] = new MutableMonster(this.crType);
-            if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
-                SaveGame.setMonsterSpellPoints(crSlots[j]);
-                SaveGame.tryLearn(crSlots[j]);
-            }
         }
 
         addPartners(this.crType, 1, maxGroups);
@@ -251,7 +244,7 @@ public class CombatScreen extends BaseScreen {
             return;
         }
 
-        if (monster.getPartnerID() == 0) {
+        if (monster.getPartnerOdds() == 0) {
             return;
         }
 
@@ -268,10 +261,6 @@ public class CombatScreen extends BaseScreen {
         for (int i = 0; i < numPartners && nextOpenSlot() != -1; i++) {
             int j = nextOpenSlot();
             crSlots[j] = new MutableMonster(MONSTERS.get(this.crType.getPartnerID()));
-            if (crSlots[j].getMageSpellLevel() > 0 || crSlots[j].getPriestSpellLevel() > 0) {
-                SaveGame.setMonsterSpellPoints(crSlots[j]);
-                SaveGame.tryLearn(crSlots[j]);
-            }
         }
 
         addPartners(partner, groupCount + 1, maxGroups);
@@ -329,8 +318,8 @@ public class CombatScreen extends BaseScreen {
                 renderer.getBatch().draw(p.getIcon(), p.getX(), p.getY());
             }
             if (x == this.activeIndex) {
-                cx = p.getX();
-                cy = p.getY();
+                cx = p.getPlayerCursor().getX() + TILE_DIM / 2;
+                cy = p.getPlayerCursor().getY() + TILE_DIM / 2;
             }
             x++;
         }
@@ -339,34 +328,59 @@ public class CombatScreen extends BaseScreen {
 
         batch.begin();
         batch.draw(this.frame, 0, 0);
-        hud.render(batch, crSlots, partyMembers);
         batch.end();
 
-        if (cip.active) {
-            int pointerx = (int) currentMousePos.x - 1 * TILE_DIM;
-            int pointery = (int) (Andius.SCREEN_HEIGHT - currentMousePos.y - 2 * TILE_DIM);
-            if (pointerx > MAP_DIM * TILE_DIM || pointerx < 0 || pointery > MAP_DIM * TILE_DIM || pointery < 0) {
-                //off map
-            } else {
-                Gdx.gl.glLineWidth(5);
+        int pointerx = (int) currentMousePos.x - 1 * TILE_DIM;
+        int pointery = (int) (Andius.SCREEN_HEIGHT - currentMousePos.y - 2 * TILE_DIM);
+
+        if (pointerx > MAP_DIM * TILE_DIM || pointerx < 0 || pointery > MAP_DIM * TILE_DIM || pointery < 0) {
+            //off map
+        } else {
+            if (cip.active) {
+                Gdx.gl.glLineWidth(3);
                 Gdx.gl.glEnable(GL20.GL_BLEND);
                 shapeRenderer.setProjectionMatrix(camera.combined);
                 shapeRenderer.begin(ShapeType.Line);
                 shapeRenderer.setColor(255, 255, 0, .50f);//yellow
                 for (andius.objects.Actor c : this.enemies) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
+                    float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    if (regx < 20 && regy < 20) {
                         shapeRenderer.setColor(255, 0, 0, .50f);//red
                         break;
                     }
                 }
                 for (andius.objects.Actor c : this.partyMembers) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
+                    float regx = Math.abs(c.getPlayerCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getPlayerCursor().getY() + TILE_DIM / 2 - pointery);
+                    if (regx < 20 && regy < 20) {
                         shapeRenderer.setColor(0, 255, 0, .50f);//green
                         break;
                     }
                 }
-                shapeRenderer.line(cx + TILE_DIM / 2 + 20, cy + TILE_DIM / 2 - 8, pointerx, pointery);
+                shapeRenderer.line(cx, cy, pointerx, pointery);
                 shapeRenderer.end();
+            } else {
+                for (andius.objects.Actor c : this.enemies) {
+                    float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    if (regx < 20 && regy < 20) {
+                        batch.begin();
+                        hud.drawStatsMonster(batch, c);
+                        batch.end();
+                        break;
+                    }
+                }
+                for (andius.objects.Actor c : this.partyMembers) {
+                    float regx = Math.abs(c.getPlayerCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getPlayerCursor().getY() + TILE_DIM / 2 - pointery);
+                    if (regx < 20 && regy < 20) {
+                        batch.begin();
+                        hud.drawStats(batch, c);
+                        batch.end();
+                        break;
+                    }
+                }
             }
         }
 
@@ -394,24 +408,28 @@ public class CombatScreen extends BaseScreen {
                     active.setWy(active.getWy() - 1);
                     active.setY(active.getY() + TILE_DIM);
                     active.setDirection(2);
+                    active.getPlayerCursor().setY(active.getPlayerCursor().getY() + TILE_DIM);
                 }
             } else if (keycode == Keys.DOWN) {
                 if (preMove(active, Direction.SOUTH)) {
                     active.setWy(active.getWy() + 1);
                     active.setY(active.getY() - TILE_DIM);
                     active.setDirection(0);
+                    active.getPlayerCursor().setY(active.getPlayerCursor().getY() - TILE_DIM);
                 }
             } else if (keycode == Keys.RIGHT) {
                 if (preMove(active, Direction.EAST)) {
                     active.setWx(active.getWx() + 1);
                     active.setX(active.getX() + TILE_DIM);
                     active.setDirection(1);
+                    active.getPlayerCursor().setX(active.getPlayerCursor().getX() + TILE_DIM);
                 }
             } else if (keycode == Keys.LEFT) {
                 if (preMove(active, Direction.WEST)) {
                     active.setWx(active.getWx() - 1);
                     active.setX(active.getX() - TILE_DIM);
                     active.setDirection(3);
+                    active.getPlayerCursor().setX(active.getPlayerCursor().getX() - TILE_DIM);
                 }
             } else if (keycode == Keys.A) {
                 Gdx.input.setInputProcessor(cip);
@@ -472,6 +490,7 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor c = iter.next();
             if (c.getMonster().getCurrentHitPoints() <= 0) {
                 iter.remove();
+                c.getMonster().getMonsterCursor().remove();
             }
         }
 
@@ -554,6 +573,7 @@ public class CombatScreen extends BaseScreen {
         @Override
         public void run() {
             screen.enemies.remove(cr);
+            cr.getMonster().getMonsterCursor().remove();
         }
     }
 
@@ -667,15 +687,15 @@ public class CombatScreen extends BaseScreen {
             CombatAction action = CombatAction.ATTACK;
             Spells spell = null;
 
-            if ((creature.getMonster().getMageSpellLevel() > 0) && rand.nextInt(100) < 75 && !creature.getMonster().knownSpells.isEmpty()) {
-                spell = creature.getMonster().mageSpell();
-                action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
+            if ((creature.getMonster().getMageSpellLevel() > 0) && rand.nextInt(100) < 75) {
+                spell = creature.getMonster().castMageSpell();
+                action = CombatAction.CAST;
             }
 
             if (action != CombatAction.CAST) {
-                if ((creature.getMonster().getPriestSpellLevel() > 0) && rand.nextInt(100) < 75 && !creature.getMonster().knownSpells.isEmpty()) {
-                    spell = creature.getMonster().priestSpell();
-                    action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
+                if ((creature.getMonster().getPriestSpellLevel() > 0) && rand.nextInt(100) < 75) {
+                    spell = creature.getMonster().castPriestSpell();
+                    action = CombatAction.CAST;
                 }
             }
 
@@ -788,22 +808,22 @@ public class CombatScreen extends BaseScreen {
         if (dir == Direction.NORTH) {
             cr.setWy(--ny);
             cr.setY(cr.getY() + TILE_DIM);
-            cr.getMonsterCursor().setY(cr.getMonsterCursor().getY() + TILE_DIM);
+            cr.getMonster().getMonsterCursor().setY(cr.getMonster().getMonsterCursor().getY() + TILE_DIM);
         }
         if (dir == Direction.SOUTH) {
             cr.setWy(++ny);
             cr.setY(cr.getY() - TILE_DIM);
-            cr.getMonsterCursor().setY(cr.getMonsterCursor().getY() - TILE_DIM);
+            cr.getMonster().getMonsterCursor().setY(cr.getMonster().getMonsterCursor().getY() - TILE_DIM);
         }
         if (dir == Direction.EAST) {
             cr.setWx(++nx);
             cr.setX(cr.getX() + TILE_DIM);
-            cr.getMonsterCursor().setX(cr.getMonsterCursor().getX() + TILE_DIM);
+            cr.getMonster().getMonsterCursor().setX(cr.getMonster().getMonsterCursor().getX() + TILE_DIM);
         }
         if (dir == Direction.WEST) {
             cr.setWx(--nx);
             cr.setX(cr.getX() - TILE_DIM);
-            cr.getMonsterCursor().setX(cr.getMonsterCursor().getX() - TILE_DIM);
+            cr.getMonster().getMonsterCursor().setX(cr.getMonster().getMonsterCursor().getX() - TILE_DIM);
         }
 
         return true;
@@ -850,8 +870,6 @@ public class CombatScreen extends BaseScreen {
         for (andius.objects.Actor p : partyMembers) {
             PlayerCursor ca = p.getPlayerCursor();
             ca.setVisible(false);
-            ca.setX(p.getX() + 20);
-            ca.setY(p.getY() - 15);
         }
 
         this.activeIndex++;
@@ -910,12 +928,7 @@ public class CombatScreen extends BaseScreen {
             Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
             d.setX(tx + 12);
             d.setY(ty + 12);
-
-            if (av.victim.getMonster().getCurrentHitPoints() <= 0) {
-                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor(), Actions.run(new RemoveCreatureAction(this, av.victim))));
-            } else {
-                d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
-            }
+            d.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
             p.addAction(Actions.sequence(
                     Actions.run(new PlaySoundAction(Sound.PC_ATTACK)),
@@ -952,7 +965,7 @@ public class CombatScreen extends BaseScreen {
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
         av.result = AttackResult.MISS;
         if (av.victim != null) {
-            for (int j = 0; j < weapon.extraSwings + 1; j++) {
+            for (int j = 0; j < attacker.getPlayer().extraSwings(); j++) {
                 boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
                 if (hit) {
                     av.result = AttackResult.HIT;
@@ -996,7 +1009,7 @@ public class CombatScreen extends BaseScreen {
             }
             if (av.victim != null) {
                 av.result = AttackResult.MISS;
-                for (int j = 0; j < weapon.extraSwings + 1; j++) {
+                for (int j = 0; j < attacker.getPlayer().extraSwings(); j++) {
                     boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
                     if (hit) {
                         av.result = AttackResult.HIT;
@@ -1196,7 +1209,9 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor target = null;
 
             for (andius.objects.Actor c : enemies) {
-                if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
+                float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                if (regx < 20 && regy < 20) {
                     target = c;
                     break;
                 }
@@ -1204,7 +1219,9 @@ public class CombatScreen extends BaseScreen {
 
             if (target == null) {
                 for (andius.objects.Actor c : partyMembers) {
-                    if ((Math.abs(c.getX() + TILE_DIM / 2 - pointerx + 20) < 20) && (Math.abs(c.getY() + TILE_DIM / 2 - pointery - 8) < 20)) {
+                    float regx = Math.abs(c.getPlayerCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getPlayerCursor().getY() + TILE_DIM / 2 - pointery);
+                    if (regx < 20 && regy < 20) {
                         target = c;
                         break;
                     }
