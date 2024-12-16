@@ -182,6 +182,41 @@ public class SpellUtil {
 
     }
 
+    public static boolean use(String item, CharacterRecord rec) {
+
+        Spells spell = null;
+        for (Spells sp : Spells.values()) {
+            if (item.toUpperCase().contains(sp.toString())) {
+                spell = sp;
+                break;
+            }
+        }
+
+        if (spell == null || rec.status.has(Status.SILENCED)) {
+            Sounds.play(Sound.NEGATIVE_EFFECT);
+            return false;
+        }
+
+        Sounds.play(spell.getSound());
+
+        switch (spell) {
+            case DIOS:
+            case DIAL:
+            case MADI:
+                doSpellHeal(rec, spell);
+                break;
+            case LATUMOFIS:
+                rec.status.set(Status.POISONED, 0);
+                break;
+            case SOPIC:
+                rec.acmodifier1 = spell.getHitBonus();
+                break;
+        }
+        
+        return true;
+
+    }
+
     private static void projectileMagicAttack(CombatScreen screen, SequenceAction seq, andius.objects.Actor attacker, Spells spell, andius.objects.Actor target) {
 
         int targetX = target.getWx();
@@ -331,6 +366,17 @@ public class SpellUtil {
             }
         } else {
             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
+        }
+    }
+
+    private static void doSpellHeal(CharacterRecord rec, Spells spell) {
+        if (rec != null && !rec.isDead()) {
+            if (spell == Spells.MADI) {
+                rec.adjustHP(rec.maxhp);
+            } else {
+                int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
+                rec.adjustHP(points);
+            }
         }
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import static andius.Andius.mainGame;
@@ -11,6 +6,7 @@ import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.SpellUtil;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -42,10 +38,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class EquipmentScreen implements Screen, Constants {
 
     private final Context context;
@@ -58,6 +50,7 @@ public class EquipmentScreen implements Screen, Constants {
 
     private final TextButton exit;
     private final TextButton drop;
+    private final TextButton use;
     private final TextButton unequip;
     private final TextButton trade;
     private final TextButton cancel;
@@ -146,36 +139,7 @@ public class EquipmentScreen implements Screen, Constants {
         spellPane = new ScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
         spellPane.setBounds(753, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
-        this.cancel = new TextButton("LEAVE", Andius.skin, "red-larger");
-        this.cancel.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                mainGame.setScreen(contextMap.getScreen());
-            }
-        });
-        this.cancel.setBounds(100, 220, 65, 40);
-
-        this.exit = new TextButton("SAVE", Andius.skin, "red-larger");
-        this.exit.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                for (PlayerIndex pi : EquipmentScreen.this.playerSelection.getItems()) {
-                    pi.save();
-                }
-                mainGame.setScreen(contextMap.getScreen());
-            }
-        });
-        this.exit.setBounds(175, 220, 65, 40);
-
-        this.trade = new TextButton("TRADE", Andius.skin, "red-larger");
-        this.trade.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                traderSlider.show();
-            }
-        });
-        this.trade.setBounds(250, 220, 65, 40);
-
+        int x = 40;
         this.unequip = new TextButton("UNEQUIP", Andius.skin, "red-larger");
         this.unequip.addListener(new ChangeListener() {
             @Override
@@ -202,8 +166,8 @@ public class EquipmentScreen implements Screen, Constants {
                 }
             }
         });
-        this.unequip.setBounds(325, 220, 65, 40);
-
+        this.unequip.setBounds(x, 290, 75, 40);
+        x += 77;
         this.drop = new TextButton("DROP", Andius.skin, "red-larger");
         this.drop.addListener(new ChangeListener() {
             @Override
@@ -218,7 +182,54 @@ public class EquipmentScreen implements Screen, Constants {
                 }
             }
         });
-        this.drop.setBounds(400, 220, 65, 40);
+        this.drop.setBounds(x, 290, 75, 40);
+        x += 77;
+        this.use = new TextButton("USE", Andius.skin, "red-larger");
+        this.use.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (selectedItem != null && selectedItem.item.type == ItemType.SPECIAL) {
+                    if (SpellUtil.use(selectedItem.item.name, selectedPlayer.character)) {
+                        selectedItem.removeActor(focusIndicator);
+                        selectedPlayer.invTable.removeActor(selectedItem);
+                        selectedItem = null;
+                    }
+                } else {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                }
+            }
+        });
+        this.use.setBounds(x, 290, 75, 40);
+        x = 40;
+        this.cancel = new TextButton("LEAVE", Andius.skin, "red-larger");
+        this.cancel.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                mainGame.setScreen(contextMap.getScreen());
+            }
+        });
+        this.cancel.setBounds(x, 240, 75, 40);
+        x += 77;
+        this.exit = new TextButton("SAVE", Andius.skin, "red-larger");
+        this.exit.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                for (PlayerIndex pi : EquipmentScreen.this.playerSelection.getItems()) {
+                    pi.save();
+                }
+                mainGame.setScreen(contextMap.getScreen());
+            }
+        });
+        this.exit.setBounds(x, 240, 75, 40);
+        x += 77;
+        this.trade = new TextButton("TRADE", Andius.skin, "red-larger");
+        this.trade.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                traderSlider.show();
+            }
+        });
+        this.trade.setBounds(x, 240, 75, 40);
 
         stage.addActor(sp1);
         stage.addActor(invPane);
@@ -227,6 +238,7 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(cancel);
         stage.addActor(trade);
         stage.addActor(drop);
+        stage.addActor(use);
         stage.addActor(invDesc);
         stage.addActor(unequip);
         stage.addActor(traderSlider);
@@ -435,14 +447,11 @@ public class EquipmentScreen implements Screen, Constants {
             item1Icon = make(ItemType.MISC, sp.item1, icon(sp.item1), 322, Andius.SCREEN_HEIGHT - 333);
             item2Icon = make(ItemType.MISC, sp.item2, icon(sp.item2), 376, Andius.SCREEN_HEIGHT - 333);
 
-            String d2 = String.format("%s  LVL %d  %s", character.race.toString(), character.level, character.classType.toString());
-            classL = new Label(d2, Andius.skin, "larger");
-            classL.setX(90);
-            classL.setY(Andius.SCREEN_HEIGHT - 420);
+            classL = new PlayerStatusLabel(character);
 
             int[] ms = character.magePoints;
             int[] cs = character.clericPoints;
-            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d", 
+            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
             spptsL = new Label(d4, Andius.skin, "larger");
             spptsL.setX(90);
@@ -812,7 +821,7 @@ public class EquipmentScreen implements Screen, Constants {
                         Sounds.play(Sound.TRIGGER);
                         for (PlayerIndex pi : playerSelection.getItems()) {
                             if (pi.character == tradeSelection.getSelected().character) {
-                                pi.invTable.add(new ItemListing(selectedItem.item, selectedItem.rec));
+                                pi.invTable.add(new ItemListing(selectedItem.item, pi.character));
                                 pi.invTable.row();
                                 break;
                             }
@@ -860,6 +869,25 @@ public class EquipmentScreen implements Screen, Constants {
             public String toString() {
                 return character.name.toUpperCase();
             }
+        }
+
+    }
+
+    private class PlayerStatusLabel extends Label {
+
+        private final CharacterRecord rec;
+
+        public PlayerStatusLabel(CharacterRecord rec) {
+            super(String.format("%s  LVL %d  %s  %s", rec.race.toString(), rec.level, rec.classType.toString(), rec.status), Andius.skin, "larger");
+            this.rec = rec;
+            setX(50);
+            setY(Andius.SCREEN_HEIGHT - 100);
+            setColor(rec.status.color());
+        }
+
+        @Override
+        public Color getColor() {
+            return rec.status.color();
         }
 
     }

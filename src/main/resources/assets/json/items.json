@@ -441,7 +441,7 @@
     },
     {
         "id": 21,
-        "name": "SCROLL/KANTINO",
+        "name": "SCROLL/KATINO",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -2106,7 +2106,7 @@
         "name": "MAGIC BOW",
         "genericName": "MAGIC BOW",
         "iconID": 157,
-        "type": "SPECIAL",
+        "type": "WEAPON",
         "cost": 500000,
         "damage": {
             "qty": 10,
