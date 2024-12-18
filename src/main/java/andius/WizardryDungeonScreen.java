@@ -138,14 +138,14 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         manhole = builder.createCylinder(.75f, .02f, .75f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
 
-        for (int x = 0; x < DUNGEON_DIM + 4; x++) {
-            for (int y = 0; y < DUNGEON_DIM + 4; y++) {
+        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
+            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
                 Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
                 floor.add(new ModelInstance(sf, new Vector3(x - 1.5f, -.5f, y - 1.5f)));
             }
         }
-        for (int x = 0; x < DUNGEON_DIM + 4; x++) {
-            for (int y = 0; y < DUNGEON_DIM + 4; y++) {
+        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
+            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
                 Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
                 ceiling.add(new ModelInstance(sf, new Vector3(x - 1.5f, 1.5f, y - 1.5f)));
             }
@@ -162,6 +162,64 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
+        //duplicate some of the outer edge tiles around the outside 
+        //so that the wrapping is not so black hole on the sides
+        //i went 2 layers duplicated on each edges + the corners
+        for (int level = 0; level < LEVELS.length; level++) {
+            {
+                int y = 0;
+                for (int x = 0; x < DUNGEON_DIM; x++) {//bottom across the top
+                    MazeCell cell = LEVELS[level].cells[x][y + DUNGEON_DIM - 1];
+                    addBlock(level, cell, x, y - 2);
+                    cell = LEVELS[level].cells[x][y + DUNGEON_DIM - 2];
+                    addBlock(level, cell, x, y - 3);
+                }
+                for (int x = 0; x < DUNGEON_DIM; x++) {//top across the bottom
+                    MazeCell cell = LEVELS[level].cells[x][y];
+                    addBlock(level, cell, x, y + DUNGEON_DIM + 1);
+                    cell = LEVELS[level].cells[x][y + 1];
+                    addBlock(level, cell, x, y + DUNGEON_DIM + 2);
+                }
+            }
+            {
+                int x = 0;
+                for (int y = 0; y < DUNGEON_DIM; y++) {//left across the right side
+                    MazeCell cell = LEVELS[level].cells[x][y];
+                    addBlock(level, cell, x + DUNGEON_DIM + 1, y);
+                    cell = LEVELS[level].cells[x + 1][y];
+                    addBlock(level, cell, x + DUNGEON_DIM + 2, y);
+                }
+                for (int y = 0; y < DUNGEON_DIM; y++) {//right across the left side
+                    MazeCell cell = LEVELS[level].cells[x + DUNGEON_DIM - 1][y];
+                    addBlock(level, cell, x - 1, y);
+                    cell = LEVELS[level].cells[x + DUNGEON_DIM - 2][y];
+                    addBlock(level, cell, x - 2, y);
+                }
+
+            }
+
+            {//copy bottom right corner to the top left corner
+                MazeCell cell = LEVELS[level].cells[DUNGEON_DIM - 1][DUNGEON_DIM - 1];
+                addBlock(level, cell, -1, -1);
+            }
+
+            {//copy bottom left corner to the top right corner
+                MazeCell cell = LEVELS[level].cells[0][DUNGEON_DIM - 1];
+                addBlock(level, cell, DUNGEON_DIM, -1);
+            }
+
+            {//copy top right corner to the bottom left corner
+                MazeCell cell = LEVELS[level].cells[DUNGEON_DIM - 1][0];
+                addBlock(level, cell, -1, DUNGEON_DIM);
+            }
+
+            {//copy top left corner to the bottom right corner
+                MazeCell cell = LEVELS[level].cells[0][0];
+                addBlock(level, cell, DUNGEON_DIM, DUNGEON_DIM);
+            }
+
+        }
+
         miniMapIcon = new MiniMapIcon();
         miniMapIcon.setOrigin(5, 5);
 
@@ -172,10 +230,11 @@ public class WizardryDungeonScreen extends BaseScreen {
         setStartPosition();
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
-        //camera.position.set(10, 10, 10);
+        //currentLevel = 2;
+        //camera.position.set(10, 20, 10);
         //camera.lookAt(10, 0, 10);
         //this.isTorchOn = true;
-        //this.showMiniMap = true;
+        //this.showMiniMap = false;
         //inputController = new CameraInputController(camera);
         //inputController.rotateLeftKey = inputController.rotateRightKey = inputController.forwardKey = inputController.backwardKey = 0;
         //inputController.translateUnits = 10f;
