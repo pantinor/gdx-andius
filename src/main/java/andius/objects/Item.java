@@ -87,27 +87,22 @@ public class Item implements Comparable<Item> {
 
     @Override
     public int compareTo(Item o) {
-        if (this.type != o.type) {
-            return Integer.compare(this.type.ordinal(), o.type.ordinal());
-        }
-        if (this.armourClass != o.armourClass) {
-            return Integer.compare(this.armourClass, o.armourClass);
-        }
-        return Long.compare(this.cost, o.cost);
+        return Long.compare(this.id, o.id);
     }
 
     @Override
     public String toString() {
-        //return String.format("%s %d %s %s", name, cost, armourClass, spell != null ? spell : "");
-        return String.format("%s\t%s\t%d\t%s\t%d\t%d\t%s\t%d\t%d\t%s",
-                name,
-                type,
-                cost,
-                damage,
-                armourClass,
-                extraSwings, spell != null ? spell : "",
-                regeneration,
-                stock,
+        return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+                String.format("%-20s", name),
+                String.format("%-8s", this.type),
+                String.format("%-8s", "" + this.cost),
+                String.format("%-2s", "" + this.damage),
+                String.format("%-2s", "" + this.armourClass),
+                String.format("%-2s", "" + this.extraSwings),
+                String.format("%-8s", spell != null ? spell : "NA"),
+                String.format("%-2s", "" + this.hitmd),
+                String.format("%-2s", "" + this.regeneration),
+                String.format("%-2s", "" + this.stock),
                 usable);
     }
 

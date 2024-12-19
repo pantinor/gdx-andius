@@ -94,7 +94,7 @@ public class CombatScreen extends BaseScreen {
         this.logs.setBounds(732, 27, 275, 273);
         this.hudStage = new Stage();
         this.hudStage.addActor(this.logs);
-        
+
         MapProperties prop = tmap.getProperties();
         mapPixelHeight = prop.get("height", Integer.class) * TILE_DIM;
 
@@ -334,7 +334,16 @@ public class CombatScreen extends BaseScreen {
                     float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
                     float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
                     if (regx < 20 && regy < 20) {
-                        shapeRenderer.setColor(255, 0, 0, .50f);//red
+                        Item weapon = cip.player.getPlayer().weapon == null ? Item.HANDS : cip.player.getPlayer().weapon;
+                        int range = weapon.range == 0 ? 1 : weapon.range;
+                        float a = Math.abs(cip.player.getWx() - c.getWx());
+                        float b = Math.abs(cip.player.getWy() - c.getWy());
+                        double distance = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+                        if ((double) range + 0.5 >= distance) {
+                            shapeRenderer.setColor(255, 0, 0, .50f);//red
+                        } else {
+                            shapeRenderer.setColor(200, 200, 200, .50f);//grey
+                        }
                         break;
                     }
                 }

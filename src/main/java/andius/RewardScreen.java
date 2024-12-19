@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.Random;
+import utils.LogScrollPane;
 import utils.Utils;
 
 public class RewardScreen implements Screen, Constants {
@@ -60,8 +61,7 @@ public class RewardScreen implements Screen, Constants {
     private final List<String> playerSelection;
     private final List<TrapType> trapSelection;
 
-    private final Table logTable;
-    private final ScrollPane logScroll;
+    private final LogScrollPane logs;
     private final TextButton go;
 
     TrapType trapType = TrapType.NONE;
@@ -162,9 +162,8 @@ public class RewardScreen implements Screen, Constants {
         Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");
         this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "larger");
 
-        this.logTable = new Table(Andius.skin);
-        this.logTable.defaults().padLeft(5).align(Align.left);
-        logScroll = new ScrollPane(this.logTable, Andius.skin);
+        this.logs = new LogScrollPane(Andius.skin, new Table(), 275);
+        this.logs.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
 
         tmp1.setBounds(X_ALIGN, 500, 175, ITEM_HGT);
         tmp2.setBounds(X_ALIGN, 475, 175, ITEM_HGT);
@@ -173,7 +172,6 @@ public class RewardScreen implements Screen, Constants {
         pselLabel.setBounds(X_ALIGN + 110, 475, 175, ITEM_HGT);
         go.setBounds(X_ALIGN + 110 + 185, 310, 65, 40);
         sp3.setBounds(X_ALIGN + 110 + 185 + 80, 298, 155, 198);
-        this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
 
         stage.addActor(tmp1);
         stage.addActor(tmp2);
@@ -182,7 +180,7 @@ public class RewardScreen implements Screen, Constants {
         stage.addActor(sp2);
         stage.addActor(sp3);
         stage.addActor(go);
-        stage.addActor(logScroll);
+        stage.addActor(this.logs);
     }
 
     private void open(CharacterRecord player) {
@@ -426,10 +424,7 @@ public class RewardScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        logTable.add(new Label(s, Andius.skin, "default"));
-        logTable.row();
-        logScroll.layout();
-        logScroll.setScrollPercentY(100);
+        this.logs.add(s);
     }
 
     @Override

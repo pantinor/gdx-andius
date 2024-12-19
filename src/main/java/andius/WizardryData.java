@@ -90,10 +90,10 @@ public class WizardryData {
     public static final List<Message> MESSAGES = new ArrayList<>();
 
     public static final String[][] MONSTER_ENCOUNTER_LEVEL = new String[][]{
-        {"Bubbly Slime", "Bushwacker", "Kobold", "Murphy's Ghost", "Orc", "Rogue", "Undead Kobold", "Highway Man"},
+        {"Bubbly Slime", "Bushwacker", "Kobold", "Orc", "Rogue", "Undead Kobold", "Highway Man"},
         {"Creeping Coin?", "Creeping Crud", "Gas Cloud", "Highway Man", "Lvl 1 Mage", "Lvl 1 Ninja", "Lvl 1 Priest", "Rogue", "Vorpal Bunny", "Zombie"},
-        {"Capybara", "Coyote", "Dragon Fly", "Giant Toad", "Lvl 1 Ninja", "Lvl 1 Priest", "Lvl 3 Ninja", "Lvl 3 Priest", "Lvl 3 Samurai", "Lvl 5 Mage", "Rogue", "Rotting Corpse", "Vorpal Bunny", "Were Bear"},
-        {"Attack Dog", "Boring Beetle", "Coyote", "Dragon Fly", "Dragon Puppy", "Gas Dragon", "Grave Mist", "High Ninja", "Huge Spider", "Lvl 6 Ninja", "Lvl 7 Fighter", "Lvl 7 Mage 1", "Ogre", "Priestess", "Rotting Corpse", "Shade", "Vorpal Bunny", "Were Bear", "Were Rat"},
+        {"Capybara", "Coyote", "Dragon Fly", "Giant Toad", "Lvl 1 Ninja", "Lvl 1 Priest", "Lvl 3 Ninja", "Lvl 3 Priest", "Lvl 3 Samurai", "Rogue", "Rotting Corpse", "Vorpal Bunny", "Were Bear"},
+        {"Attack Dog", "Boring Beetle", "Coyote", "Dragon Fly", "Dragon Puppy", "Gas Dragon", "Grave Mist", "High Ninja", "Huge Spider", "Ogre", "Priestess", "Rotting Corpse", "Shade", "Vorpal Bunny", "Were Bear", "Were Rat"},
         {"Attack Dog", "Bishop", "Champ Samurai", "Dragon Fly", "Dragon Puppy", "Gargoyle", "Giant Spider", "Grave Mist", "Huge Spider", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 1", "Medusa Lizard", "Minor Daimyo", "Ogre", "Rotting Corpse", "Shade", "Spirit", "Swordsman", "Were Rat", "Were Wolf"},
         {"Arch Mage", "Chimera", "Earth Giant", "Gaze Hound", "Giant Spider", "High Priest 1", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Mage", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 8 Ninja", "Lvl 8 Priest", "Life Stealer", "Master Thief 1", "Medusa Lizard", "Ogre Lord", "Spirit", "Troll", "Were Tiger", "Were Wolf"},
         {"Arch Mage", "Champ Samurai", "Chimera", "Gorgon", "High Priest 2", "Lesser Demon", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 2", "Lvl 8 Fighter", "Lvl 8 Priest", "Life Stealer", "Major Daimyo", "Master Thief 1", "Medusa Lizard", "Night Stalker", "Ogre Lord", "Troll", "Were Tiger", "Were Wolf", "Wyvern"},
@@ -406,14 +406,14 @@ public class WizardryData {
         int elevatorFrom;
         int elevatorTo;
 
-        int messageType;
-        Message message;
-        int itemRequired;
-        int itemObtained;
+        public int messageType;
+        public Message message;
+        public int itemRequired;
+        public int itemObtained;
 
-        boolean monsterLair;
-        int tempMonsterID = -1;
-        int monsterID = -1;
+        public boolean monsterLair;
+        public int tempMonsterID = -1;
+        public int monsterID = -1;
 
         MazeAddress address;
         MazeAddress addressTo; // if teleport/stairs/chute

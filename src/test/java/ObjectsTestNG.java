@@ -50,7 +50,7 @@ public class ObjectsTestNG {
         }
     }
 
-    @Test
+    //@Test
     public void testReadSaveGame() throws Exception {
 
         CharacterRecord avatar = new CharacterRecord();

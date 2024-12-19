@@ -16,6 +16,9 @@ public class Utils {
 
     //This gives you a random number in between low (inclusive) and high (exclusive)
     public static int getRandomBetween(int low, int high) {
+        if (low == high) {
+            return low;
+        }
         return RANDOM.nextInt(high - low) + low;
     }
 

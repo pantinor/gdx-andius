@@ -95,8 +95,9 @@ public class StartScreen implements Screen, Constants {
 
                     mainGame.setScreen(scr);
 
-                    //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, REWARDS.get(0), REWARDS.get(10));
+                    //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, Andius.REWARDS.get(20), Andius.REWARDS.get(20));
                     //mainGame.setScreen(rs);
+                    
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());

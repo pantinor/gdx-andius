@@ -1,5 +1,6 @@
 package andius.objects;
 
+import andius.Andius;
 import java.util.List;
 
 public class Reward {
@@ -36,6 +37,22 @@ public class Reward {
         return rewardDetails;
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        for (RewardDetails rd : rewardDetails) {
+            sb.append("\n").append("\t").append(rd);
+        }
+
+        return String.format("%s\t%s\t%s\t%s\t%s",
+                String.format("%-2s", this.id),
+                String.format("%-2s", "" + this.isChest),
+                String.format("%-2s", "" + this.trapTypeFlags),
+                String.format("%-2s", "" + this.goldAmount()),
+                sb);
+    }
+
     public class RewardDetails {
 
         public int odds;
@@ -60,6 +77,23 @@ public class Reward {
             public int getMax() {
                 return range == 0 ? min : min + range + 1;
             }
+
+            @Override
+            public String toString() {
+
+                return String.format("%s\t%s",
+                        String.format("%-2s", Andius.ITEMS.get(min).name),
+                        String.format("%-2s", Andius.ITEMS.get(max).name));
+            }
+        }
+
+        @Override
+        public String toString() {
+
+            return String.format("%s\t%s\t%s",
+                    String.format("%-2s", "" + odds),
+                    String.format("%-2s", "" + type),
+                    String.format("%-2s", goldReward != null ? goldReward : itemReward));
         }
     }
 

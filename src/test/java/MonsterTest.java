@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
 import andius.objects.Item;
 import andius.objects.Monster;
-import andius.objects.Spells;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -36,10 +34,10 @@ public class MonsterTest {
         }
 
     }
-    
-    //@Test
+
+    @Test
     public void items() throws Exception {
-        
+
         InputStream is2 = this.getClass().getResourceAsStream("/assets/json/items.json");
         String json = IOUtils.toString(is2);
 
@@ -50,7 +48,7 @@ public class MonsterTest {
 
         Collections.sort(items);
 
-        System.out.println("NAME\tTYPE\tCOST\tDAMG\tAC\tXTRAS\tSPELL\tUSES\tREGN\tSTCK\tUSABLE");
+        System.out.println("NAME               \tTYPE     \tCOST     \tDAMG\tAC\tSWINGS\tSPELL     \tHITMOD\tREGN\tVENDOR\tUSABLE");
         for (Item m : items) {
             System.out.println(m);
         }

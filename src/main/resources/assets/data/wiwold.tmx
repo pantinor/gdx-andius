@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="48" tileheight="48" backgroundcolor="#000000" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="48" tileheight="48" infinite="0" backgroundcolor="#000000" nextlayerid="14" nextobjectid="91">
  <properties>
   <property name="startX" value="35"/>
   <property name="startY" value="40"/>
@@ -85,60 +85,60 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="560" columns="40">
-  <image source="uf_heroes.png" width="1920" height="672"/>
+ <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="1400" columns="40">
+  <image source="uf_heroes.png" width="1920" height="1680"/>
  </tileset>
- <layer name="floor" width="48" height="48">
+ <layer id="1" name="floor" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZCw7DIAiGPdLufwj1SEuTNqFEFPCBpP6JcalMvlFwdAvh6Ojo64rE8CKv/BHMHvnzPXvlT/d8+G3kPX9y4Zo1d2qbVG0l75+hUkyhqFyBI4OxWq37z+G3VClmTyyv3Nidv5W/u/NH9Foaewv+kn+q9rj8K2u35L+WR3CNivfKc1TKD5kpO2v+2v3H8ZfWwega6s2fGkMM79rPE/ghS4mxh5/yQ62P4ufuMYs/oRle17BQPneL/6i8/AL/jPrljHQP2FvUzpVV/JzPxbWTsGAbb/z4u5I6Y3p7Ku2zWWsd287qSXrj38uvyStJTnDrf2X8R/C31rFtbX8P/Fb50+PnEvw9kvIvlYZfe86V9vXAL63vEXvXhPNXUxfU2gp+ao8fk1FbPz16erint4uB96xI2cC9cJ+4WqNyeSdZxHGkvMff+n+OHfQHx4F0nAAkAAA=
+   H4sIAAAAAAAACu2ZCw7DIAiGPdLufwj1SEuTNqFEFPCBpP6JcalMvlFwdAvh6Ojo64rE8CKv/BHMHvnzPXvlT/d8+G3kPX9y4Zo1d2qbVG0l75+hUkyhqFyBI4OxWq37z+G3VClmTyyv3Nidv5W/u/NH9Foaewv+kn+q9rj8K2u35L+WR3CNivfKc1TKD5kpO2v+2v3H8ZfWwega6s2fGkMM79rPE/ghS4mxh5/yQ62P4ufuMYs/oRle17BQPneL/6i8/AL/jPrljHQP2FvUzpVV/JzPxbWTsGAbb/z4u5I6Y3p7Ku2zWWsd287qSXrj38uvyStJTnDrf2X8R/C31rFtbX8P/Fb50+PnEvw9kvIvlYZfe86V9vXAL63vEXvXhPNXUxfU2gp+ao8fk1FbPz16erint4uB96xI2cC9cJ+4WqNyeSdZxHGkvMff+n+OHfQHx4F0nAAkAAA=
   </data>
  </layer>
- <layer name="floor 2" width="48" height="48">
+ <layer id="2" name="floor 2" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RSQ0AIQAEQbJOcYAMRCAWA/CD5apK5t/JhAAAAABwv/StLnhXbmy0OPHfP/pn0s9OSmenOL0fAAC4VwWOhaEZACQAAA==
+   H4sIAAAAAAAACu3RSQ0AIQAEQbJOcYAMRCAWA/CD5apK5t/JhAAAAABwv/StLnhXbmy0OPHfP/pn0s9OSmenOL0fAAC4VwWOhaEZACQAAA==
   </data>
  </layer>
- <layer name="props" width="48" height="48">
+ <layer id="4" name="creature" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XbQqAMAiAYdlB6mxdIFjQB0R3j6i/Ucaaud4H9k+YKBMnAuDvYhDpjuNRdJw7AKRSWSfwMuZ8fhM1d8PqfSwJ7vW8g1qaqZkMYZ9To7IWLbUrWvOh/m7/1KjMp7+IZ14CAADgjHb3zKW+EfNkd0Za9AAoxwoX1o3TACQAAA==
+   H4sIAAAAAAAACmNgGAWjYBSMglEwEGAT80C7gLpg6TDzzygYBaNgFIwCTHASWNZPGOLlPcgPEwexH44NYrcRApS6/SoLddxBDPjHRD+7RgEmGA3/4QEk6ZhnBxrwDlO/clLBX+3MqHTXEKrHmpDc3MSMKU4tQI1wHgWjgBRQQIc0pzSE8jq5ANZnmDJE/ToN6O5eZgg9CkYG8KVjXNOinAllpq8fkMFSKvhnoNw+EOAKlvDaN8T9vxfq/j2D1B9nCKTRweruUTAKRsHAAACBr18WACQAAA==
   </data>
  </layer>
- <layer name="creature" width="48" height="48">
+ <layer id="3" name="props" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwEGAT80C7gLpg6TDzzygYBaNgFIwCTHASWNZPGOLlPcgPEwexH44NYrcRApS6/SoLddxBDPjHRD+7RgEmGA3/4QEk6ZhnBxrwDlO/clLBX+3MqHTXEKrHmpDc3MSMKU4tQI1wHgWjgBRQQIc0pzSE8jq5ANZnmDJE/ToN6O5eZgg9CkYG8KVjXNOinAllpq8fkMFSKvhnoNw+EOAKlvDaN8T9vxfq/j2D1B9nCKTRweruUTAKRsHAAACBr18WACQAAA==
+   H4sIAAAAAAAACu3XbQqAMAiAYdlB6mxdIFjQB0R3j6i/Ucaaud4H9k+YKBMnAuDvYhDpjuNRdJw7AKRSWSfwMuZ8fhM1d8PqfSwJ7vW8g1qaqZkMYZ9To7IWLbUrWvOh/m7/1KjMp7+IZ14CAADgjHb3zKW+EfNkd0Za9AAoxwoX1o3TACQAAA==
   </data>
  </layer>
- <layer name="water_edges" width="48" height="48">
+ <layer id="5" name="water_edges" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UwQmAMAwF0HQHu5+jdRRHsx4E7U1BSuQ9yCE5/UOSCAAAAAD4Ti0RS4l2Vu/b7ExP9Mxjv00J8lL2/H1f1uVSNVl+7sZ/kO0nHPs4zrLdFAAA8E87JVOEtQAkAAA=
+   H4sIAAAAAAAACu3UwQmAMAwF0HQHu5+jdRRHsx4E7U1BSuQ9yCE5/UOSCAAAAAD4Ti0RS4l2Vu/b7ExP9Mxjv00J8lL2/H1f1uVSNVl+7sZ/kO0nHPs4zrLdFAAA8E87JVOEtQAkAAA=
   </data>
  </layer>
- <layer name="shadows" width="48" height="48">
+ <layer id="8" name="door" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3X2w2AMAhA0e7i/ju6QNEgVF73JH7aUEpB1wIw3SU8OIscA7lUv5PV438jzSpm2DnkM0aVet7FaI0161476JTbL72/0tzIHJvVtL11qks8y3pWmu/mv2uOmvch5Sw6l/Q3PY87qX2Hc4CXiPs9rX53/SFTP+3e6zPsxfK/4bUe5qAO6rsBxW07CQAkAAA=
+   H4sIAAAAAAAACu3WQQ6AIAxEUTyC5/JgHlvjwmi0YKKB0vG/JSwUmBZSAgAAwJ8sw31sMsaiGQXW0CP2tT6rJnfsfx9KZxRNrt/PQmtUQg/IO2fZO7+c0zcK79BeWdkkr4do2Wv1v0rvnpq8754raltDq1y9/U60vqmMmsfmKQe5efJTF70S3lYKl7k1ACQAAA==
   </data>
  </layer>
- <layer name="walls" width="48" height="48">
+ <layer id="9" name="torches" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZC27CMAyGyYUmwW6QQ3R09z/IqLRolms7f94e6i9VQBrSr6mfcLtdurRWH8E+vCu+GDfliI750/5ajJ75I7DH3vnpqzXHoy7+tXonfh7vkdg0ismKKZST8tODj81UziZ4rjp0vO7C2IochvAjkp7TDEn80p6j68yWxl9aj83kt3xSqskQxcL7bZFkH2msth5GaqNekq6h+XEM5xhP30vPcbRK+LdwtjFpnld+fi69P+7r69dmnswOpWeTbJXmDf4Zvfce/NbaLTEAncdtuSd/SwwoEWLXlAnlr+XSemrNtqgt7+G8xi58dyS/9ZtGy7pWbuY20us6Pecj8xD/6cVTOt+yS6m2LrW50fw1v7V54q/pDaif8H5N69mknG7lNcsXcz6J8NNc9h3+8rVma71rkpbeDMkVuevU8Eu1tZZDrHVr6oZe/Og5a25N3eCJv9Z+WnuKUv472Wd+7cRzJ+Ofr+OhxIf0nVSPb4P5+XhL/WjVh974Y5Djg+bzs/l5DOM9lraO5vMz+FF/s/h72Q9Sg/M9RvtF63xp/9KiXO2hKVevlPQvo6TdWzr3H9Vai63WO/Cv+H/Jm34A3OJwuwAkAAA=
+   H4sIAAAAAAAACu3XUQqAIBBFUZmdtpgW0W77DRkhI3Bu3fPlpwxPn7Ym6Q175GuKI/K1JOk7sn4idVbWT3aWyEjnL+P545vJ4Oi/szLHMxkc/XfMMVufvy1Yd6tvGzZS1jJmrbYqXfvUiq51ZiIjZvaKlNnKs76zt8qzrrw3SfqTE4nQLA4AJAAA
   </data>
  </layer>
- <layer name="door" width="48" height="48">
+ <layer id="6" name="shadows" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WQQ6AIAxEUTyC5/JgHlvjwmi0YKKB0vG/JSwUmBZSAgAAwJ8sw31sMsaiGQXW0CP2tT6rJnfsfx9KZxRNrt/PQmtUQg/IO2fZO7+c0zcK79BeWdkkr4do2Wv1v0rvnpq8754raltDq1y9/U60vqmMmsfmKQe5efJTF70S3lYKl7k1ACQAAA==
+   H4sIAAAAAAAACu3X2w2AMAhA0e7i/ju6QNEgVF73JH7aUEpB1wIw3SU8OIscA7lUv5PV438jzSpm2DnkM0aVet7FaI0161476JTbL72/0tzIHJvVtL11qks8y3pWmu/mv2uOmvch5Sw6l/Q3PY87qX2Hc4CXiPs9rX53/SFTP+3e6zPsxfK/4bUe5qAO6rsBxW07CQAkAAA=
   </data>
  </layer>
- <layer name="torches" width="48" height="48">
+ <layer id="10" name="webs" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XUQqAIBBFUZmdtpgW0W77DRkhI3Bu3fPlpwxPn7Ym6Q175GuKI/K1JOk7sn4idVbWT3aWyEjnL+P545vJ4Oi/szLHMxkc/XfMMVufvy1Yd6tvGzZS1jJmrbYqXfvUiq51ZiIjZvaKlNnKs76zt8qzrrw3SfqTE4nQLA4AJAAA
+   H4sIAAAAAAAACu3ZwQ0AIQgEQGLzp1f1NcCPGCU3U4GP3UggAqCnd5x+AVA1kx4v3aZIhujgSXL619lGZ+lMfgHgvGy2BujCfmA//8S9svsAVNjTRHx/7PVZACQAAA==
   </data>
  </layer>
- <layer name="webs" width="48" height="48">
+ <layer id="7" name="walls" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZwQ0AIQgEQGLzp1f1NcCPGCU3U4GP3UggAqCnd5x+AVA1kx4v3aZIhujgSXL619lGZ+lMfgHgvGy2BujCfmA//8S9svsAVNjTRHx/7PVZACQAAA==
+   H4sIAAAAAAAACu2ZC27CMAyGyYUmwW6QQ3R09z/IqLRolms7f94e6i9VQBrSr6mfcLtdurRWH8E+vCu+GDfliI750/5ajJ75I7DH3vnpqzXHoy7+tXonfh7vkdg0ismKKZST8tODj81UziZ4rjp0vO7C2IochvAjkp7TDEn80p6j68yWxl9aj83kt3xSqskQxcL7bZFkH2msth5GaqNekq6h+XEM5xhP30vPcbRK+LdwtjFpnld+fi69P+7r69dmnswOpWeTbJXmDf4Zvfce/NbaLTEAncdtuSd/SwwoEWLXlAnlr+XSemrNtqgt7+G8xi58dyS/9ZtGy7pWbuY20us6Pecj8xD/6cVTOt+yS6m2LrW50fw1v7V54q/pDaif8H5N69mknG7lNcsXcz6J8NNc9h3+8rVma71rkpbeDMkVuevU8Eu1tZZDrHVr6oZe/Og5a25N3eCJv9Z+WnuKUv472Wd+7cRzJ+Ofr+OhxIf0nVSPb4P5+XhL/WjVh974Y5Djg+bzs/l5DOM9lraO5vMz+FF/s/h72Q9Sg/M9RvtF63xp/9KiXO2hKVevlPQvo6TdWzr3H9Vai63WO/Cv+H/Jm34A3OJwuwAkAAA=
   </data>
  </layer>
- <objectgroup name="portals">
+ <objectgroup id="11" name="portals">
   <object id="1" name="WORLD" type="portal" x="1632" y="1920" width="48" height="48"/>
   <object id="2" name="WIWOLD_LVL_2" type="portal" x="240" y="624" width="48" height="48">
    <properties>
@@ -147,255 +147,255 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people">
+ <objectgroup id="12" name="people">
   <object id="1" name="evil spirit" type="MONSTER" x="960" y="384" width="48" height="48">
    <properties>
-    <property name="creature" value="Spirit"/>
+    <property name="monsterID" value="Spirit"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="21" name="spider" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="23" name="zombie" type="MONSTER" x="720" y="768" width="48" height="48">
+  <object id="23" name="Lvl 5 Priest" type="MONSTER" x="720" y="768" width="48" height="48">
    <properties>
-    <property name="creature" value="Zombie"/>
+    <property name="monsterID" value="Lvl 5 Priest"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="24" name="troll" type="MONSTER" x="768" y="768" width="48" height="48">
+  <object id="24" name="Lvl 7 Mage 1" type="MONSTER" x="768" y="768" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Lvl 7 Mage 1"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="26" name="troll" type="MONSTER" x="816" y="816" width="48" height="48">
+  <object id="26" name="fighter" type="MONSTER" x="816" y="816" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Lvl 7 Fighter"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="27" name="zombie" type="MONSTER" x="768" y="816" width="48" height="48">
+  <object id="27" name="Ninja" type="MONSTER" x="768" y="816" width="48" height="48">
    <properties>
-    <property name="creature" value="Zombie"/>
+    <property name="monsterID" value="Lvl 6 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="29" name="jelly" type="MONSTER" x="1104" y="912" width="48" height="48">
    <properties>
-    <property name="creature" value="Creeping Crud"/>
+    <property name="monsterID" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="30" name="shade" type="MONSTER" x="960" y="1152" width="48" height="48">
    <properties>
-    <property name="creature" value="Shade"/>
+    <property name="monsterID" value="Shade"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="31" name="evil priest" type="MONSTER" x="1008" y="1536" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Priest"/>
+    <property name="monsterID" value="Lvl 3 Priest"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="32" name="slug" type="MONSTER" x="912" y="2016" width="48" height="48">
    <properties>
-    <property name="creature" value="Creeping Crud"/>
+    <property name="monsterID" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="33" name="spider" type="MONSTER" x="1296" y="1920" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="monsterID" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="34" name="spider" type="MONSTER" x="1296" y="1968" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="monsterID" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="35" name="spider" type="MONSTER" x="1296" y="2016" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="monsterID" value="Camel Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="36" name="ninja" type="MONSTER" x="528" y="1776" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="Lvl 1 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="37" name="ninja" type="MONSTER" x="576" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="Lvl 1 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="38" name="ninja" type="MONSTER" x="528" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Ninja"/>
+    <property name="monsterID" value="Lvl 3 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="39" name="ninja" type="MONSTER" x="528" y="1872" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="Lvl 1 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="40" name="goblin" type="MONSTER" x="528" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="41" name="goblin shaman" type="MONSTER" x="480" y="1296" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Priest"/>
+    <property name="monsterID" value="Lvl 3 Priest"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="42" name="goblin" type="MONSTER" x="384" y="1296" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="43" name="goblin" type="MONSTER" x="384" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="44" name="goblin shaman" type="MONSTER" x="336" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 3 Priest"/>
+    <property name="monsterID" value="Lvl 3 Priest"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="45" name="goblin" type="MONSTER" x="288" y="1296" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="46" name="goblin" type="MONSTER" x="240" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Kobold"/>
+    <property name="monsterID" value="Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="47" name="rat" type="MONSTER" x="336" y="912" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="48" name="acolyte" type="MONSTER" x="96" y="1056" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 1 Mage"/>
+    <property name="monsterID" value="Lvl 1 Mage"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="49" name="acolyte" type="MONSTER" x="96" y="960" width="48" height="48">
    <properties>
-    <property name="creature" value="Lvl 1 Mage"/>
+    <property name="monsterID" value="Lvl 1 Mage"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="50" name="spider" type="MONSTER" x="1392" y="1968" width="48" height="48">
    <properties>
-    <property name="creature" value="Huge Spider"/>
+    <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="51" name="troll" type="MONSTER" x="1440" y="1632" width="48" height="48">
+  <object id="51" name="Ogre" type="MONSTER" x="1440" y="1632" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="52" name="troll" type="MONSTER" x="1488" y="1632" width="48" height="48">
+  <object id="52" name="Troll" type="MONSTER" x="1488" y="1632" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Troll"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="53" name="troll" type="MONSTER" x="1536" y="1632" width="48" height="48">
+  <object id="53" name="Ogre" type="MONSTER" x="1536" y="1632" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="54" name="troll" type="MONSTER" x="1536" y="1584" width="48" height="48">
+  <object id="54" name="Ogre" type="MONSTER" x="1536" y="1584" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="55" name="troll" type="MONSTER" x="1440" y="1584" width="48" height="48">
+  <object id="55" name="Ogre" type="MONSTER" x="1440" y="1584" width="48" height="48">
    <properties>
-    <property name="creature" value="Ogre"/>
+    <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="56" name="gazer" type="MONSTER" x="1488" y="1200" width="48" height="48">
    <properties>
-    <property name="creature" value="Vorpal Bunny"/>
+    <property name="monsterID" value="Vorpal Bunny"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="57" name="gazer" type="MONSTER" x="1488" y="1344" width="48" height="48">
    <properties>
-    <property name="creature" value="Vorpal Bunny"/>
+    <property name="monsterID" value="Vorpal Bunny"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="58" name="gazer" type="MONSTER" x="1776" y="1248" width="48" height="48">
    <properties>
-    <property name="creature" value="Vorpal Bunny"/>
+    <property name="monsterID" value="Vorpal Bunny"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="59" name="mummy" type="MONSTER" x="2112" y="1488" width="48" height="48">
    <properties>
-    <property name="creature" value="Undead Kobold"/>
+    <property name="monsterID" value="Undead Kobold"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="60" name="beetle" type="MONSTER" x="2016" y="1824" width="48" height="48">
    <properties>
-    <property name="creature" value="Boring Beetle"/>
+    <property name="monsterID" value="Boring Beetle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="63" name="mummy" type="MONSTER" x="1824" y="1776" width="48" height="48">
+  <object id="63" name="Lvl 7 Fighter" type="MONSTER" x="1824" y="1776" width="48" height="48">
    <properties>
-    <property name="creature" value="Undead Kobold"/>
+    <property name="monsterID" value="Lvl 7 Fighter"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="64" name="jelly" type="MONSTER" x="1056" y="1920" width="48" height="48">
    <properties>
-    <property name="creature" value="Grave Mist"/>
+    <property name="monsterID" value="Grave Mist"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="65" name="rat" type="MONSTER" x="384" y="864" width="48" height="48">
    <properties>
-    <property name="creature" value="Were Rat"/>
+    <property name="monsterID" value="Were Rat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="rooms">
+ <objectgroup id="13" name="rooms" visible="0">
   <object id="67" name="Wiwold" x="1584" y="1824">
    <polygon points="0,0 0,240 336,240 336,0 240,0 240,-48 96,-48 96,0"/>
   </object>

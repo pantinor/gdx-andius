@@ -87,7 +87,7 @@
     {
         "id": 4,
         "name": "ANOINTED FLAIL",
-        "genericName": "STICK W/CHAIN",
+        "genericName": "STICK WITH CHAIN",
         "iconID": 131,
         "type": "WEAPON",
         "cost": 150,
@@ -352,7 +352,7 @@
     },
     {
         "id": 17,
-        "name": "LONG SWORD+1",
+        "name": "LONG SWORD +1",
         "genericName": "SWORD",
         "iconID": 99,
         "type": "WEAPON",
@@ -374,7 +374,7 @@
     },
     {
         "id": 18,
-        "name": "SHORT SWORD+1",
+        "name": "SHORT SWORD +1",
         "genericName": "SWORD",
         "iconID": 96,
         "type": "WEAPON",
@@ -396,7 +396,7 @@
     },
     {
         "id": 19,
-        "name": "MACE+1",
+        "name": "MACE +1",
         "genericName": "KNOBBED STICK",
         "iconID": 113,
         "type": "WEAPON",
@@ -441,7 +441,7 @@
     },
     {
         "id": 21,
-        "name": "SCROLL/KATINO",
+        "name": "SCROLL OF KATINO",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -462,7 +462,7 @@
     },
     {
         "id": 22,
-        "name": "LEATHER + 1",
+        "name": "LEATHER +1",
         "genericName": "ARMOR",
         "iconID": 310,
         "type": "ARMOR",
@@ -482,7 +482,7 @@
     },
     {
         "id": 23,
-        "name": "CHAIN MAIL + 1",
+        "name": "CHAIN MAIL +1",
         "genericName": "ARMOR",
         "iconID": 301,
         "type": "ARMOR",
@@ -502,7 +502,7 @@
     },
     {
         "id": 24,
-        "name": "PLATE MAIL + 1",
+        "name": "PLATE MAIL +1",
         "genericName": "ARMOR",
         "iconID": 294,
         "type": "ARMOR",
@@ -522,7 +522,7 @@
     },
     {
         "id": 25,
-        "name": "SHIELD + 1",
+        "name": "SHIELD +1",
         "genericName": "SHIELD",
         "iconID": 352,
         "type": "SHIELD",
@@ -562,7 +562,7 @@
     },
     {
         "id": 27,
-        "name": "SCROLL/BADIOS",
+        "name": "SCROLL OF BADIOS",
         "genericName": "PAPER",
         "iconID": 466,
         "type": "SPECIAL",
@@ -583,7 +583,7 @@
     },
     {
         "id": 28,
-        "name": "SCROLL/HALITO",
+        "name": "SCROLL OF HALITO",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -714,7 +714,7 @@
     },
     {
         "id": 34,
-        "name": "HELM + 1",
+        "name": "HELM +1",
         "genericName": "HELM",
         "iconID": 238,
         "type": "HELMET",
@@ -835,7 +835,7 @@
     },
     {
         "id": 40,
-        "name": "SCROLL/BADIOS",
+        "name": "SCROLL OF BADIOS",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -877,7 +877,7 @@
     },
     {
         "id": 42,
-        "name": "LONG SWORD + 2",
+        "name": "LONG SWORD +2",
         "genericName": "SWORD",
         "iconID": 240,
         "type": "WEAPON",
@@ -921,7 +921,7 @@
     },
     {
         "id": 44,
-        "name": "MACE + 2",
+        "name": "MACE +2",
         "genericName": "KNOBBED STICK",
         "iconID": 185,
         "type": "WEAPON",
@@ -943,7 +943,7 @@
     },
     {
         "id": 45,
-        "name": "SCROLL/LOMILWA",
+        "name": "SCROLL OF LOMILWA",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -964,7 +964,7 @@
     },
     {
         "id": 46,
-        "name": "SCROLL/DILTO",
+        "name": "SCROLL OF DILTO",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -1005,7 +1005,7 @@
     },
     {
         "id": 48,
-        "name": "LEATHER + 2",
+        "name": "LEATHER +2",
         "genericName": "ARMOR",
         "iconID": 312,
         "type": "ARMOR",
@@ -1025,7 +1025,7 @@
     },
     {
         "id": 49,
-        "name": "CHAIN + 2",
+        "name": "CHAIN +2",
         "genericName": "ARMOR",
         "iconID": 299,
         "type": "ARMOR",
@@ -1045,7 +1045,7 @@
     },
     {
         "id": 50,
-        "name": "PLATE MAIL + 2",
+        "name": "PLATE MAIL +2",
         "genericName": "ARMOR",
         "iconID": 302,
         "type": "ARMOR",
@@ -1065,7 +1065,7 @@
     },
     {
         "id": 51,
-        "name": "SHIELD + 2",
+        "name": "SHIELD +2",
         "genericName": "SHIELD",
         "iconID": 352,
         "type": "SHIELD",
@@ -1085,7 +1085,7 @@
     },
     {
         "id": 52,
-        "name": "HELM +2 (EVIL)",
+        "name": "EVIL HELM +2",
         "genericName": "HELM",
         "iconID": 251,
         "type": "HELMET",
@@ -1214,7 +1214,7 @@
     },
     {
         "id": 58,
-        "name": "STAFF/MONTINO",
+        "name": "STAFF OF MONTINO",
         "genericName": "STAFF",
         "iconID": 152,
         "type": "WEAPON",
@@ -1237,7 +1237,7 @@
     },
     {
         "id": 59,
-        "name": "BLADE CUSINART\u0027",
+        "name": "BLADE CUSINART",
         "genericName": "SWORD",
         "iconID": 249,
         "type": "WEAPON",
@@ -1259,7 +1259,7 @@
     },
     {
         "id": 60,
-        "name": "AMULET/MANIFO",
+        "name": "AMULET OF MANIFO",
         "genericName": "AMULET",
         "iconID": 377,
         "type": "MISC",
@@ -1301,7 +1301,7 @@
     },
     {
         "id": 62,
-        "name": "EVIL CHAIN + 2",
+        "name": "EVIL CHAIN +2",
         "genericName": "CHAIN",
         "iconID": 308,
         "type": "ARMOR",
@@ -1321,7 +1321,7 @@
     },
     {
         "id": 63,
-        "name": "NEUT P-MAIL + 2",
+        "name": "NEUT P-MAIL +2",
         "genericName": "PLATE ARMOR",
         "iconID": 302,
         "type": "ARMOR",
@@ -1361,7 +1361,7 @@
     },
     {
         "id": 65,
-        "name": "AMULET/MAKANITO",
+        "name": "AMULET OF MAKANITO",
         "genericName": "AMULET",
         "iconID": 374,
         "type": "MISC",
@@ -1403,7 +1403,7 @@
     },
     {
         "id": 67,
-        "name": "SCROLL/BADIAL",
+        "name": "SCROLL OF BADIAL",
         "genericName": "SCROLL",
         "iconID": 466,
         "type": "SPECIAL",
@@ -1446,7 +1446,7 @@
     },
     {
         "id": 69,
-        "name": "DAGGER + 2",
+        "name": "DAGGER +2",
         "genericName": "DAGGER",
         "iconID": 174,
         "type": "WEAPON",
@@ -1612,7 +1612,7 @@
     },
     {
         "id": 77,
-        "name": "SHIELD - 2",
+        "name": "SHIELD -2",
         "genericName": "SHIELD",
         "iconID": 270,
         "type": "SHIELD",
@@ -1692,7 +1692,7 @@
     },
     {
         "id": 81,
-        "name": "EVIL SWORD + 3",
+        "name": "EVIL SWORD +3",
         "genericName": "SWORD",
         "iconID": 247,
         "type": "WEAPON",
@@ -1714,7 +1714,7 @@
     },
     {
         "id": 82,
-        "name": "EVIL SSWORD + 3",
+        "name": "EVIL SWORD +3",
         "genericName": "SWORD",
         "iconID": 248,
         "type": "WEAPON",
@@ -1862,7 +1862,7 @@
     },
     {
         "id": 89,
-        "name": "EVIL PLATE + 3",
+        "name": "EVIL PLATE +3",
         "genericName": "PLATE ARMOR",
         "iconID": 291,
         "type": "ARMOR",
@@ -1882,7 +1882,7 @@
     },
     {
         "id": 90,
-        "name": "SHIELD + 3",
+        "name": "SHIELD +3",
         "genericName": "SHIELD",
         "iconID": 385,
         "type": "SHIELD",
@@ -1983,8 +1983,8 @@
     },
     {
         "id": 95,
-        "name": "STATUETTE/BEAR",
-        "genericName": "STATUETTE/BEAR",
+        "name": "STATUETTE OF BEAR",
+        "genericName": "STATUETTE OF BEAR",
         "iconID": 445,
         "type": "SPECIAL",
         "cost": 0,
@@ -2003,8 +2003,8 @@
     },
     {
         "id": 96,
-        "name": "STATUETTE/FROG",
-        "genericName": "STATUETTE/FROG",
+        "name": "STATUETTE OF FROG",
+        "genericName": "STATUETTE OF FROG",
         "iconID": 449,
         "type": "SPECIAL",
         "cost": 0,

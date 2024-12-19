@@ -48,8 +48,8 @@ public interface Constants {
         ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
         //        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         //        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        //        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
-        //        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
+        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
+        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         WIZARDRY1("Wizardy Level 1", null, 0);
 
         private final String label;
