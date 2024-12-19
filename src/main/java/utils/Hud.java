@@ -3,49 +3,27 @@ package utils;
 import andius.Andius;
 import andius.Context;
 import andius.objects.SaveGame.CharacterRecord;
-import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Hud {
 
-    final List<String> logs = new FixedSizeArrayList<>(25);
-
-    static final int LOG_AREA_WIDTH = 270;
-    static final int LOG_AREA_TOP = 355;
-    static final int LOG_X = 735;
-    private GlyphLayout layout = new GlyphLayout(Andius.hudLogFont, "", Color.WHITE, LOG_AREA_WIDTH - 5, Align.left, true);
-
-    public void append(String s) {
-        synchronized (logs) {
-            if (logs.isEmpty()) {
-                logs.add("");
-            }
-            String l = logs.get(logs.size() - 1);
-            l = l + s;
-            logs.remove(logs.size() - 1);
-            logs.add(l);
-        }
+    private final LogScrollPane logs;
+    static final int LOG_AREA_WIDTH = 275;
+    
+    public Hud() {
+        logs = new LogScrollPane(Andius.skin, new Table(), LOG_AREA_WIDTH);
+        logs.setBounds(732, 30, LOG_AREA_WIDTH, 320);
     }
 
-    public void logDeleteLastChar() {
-        synchronized (logs) {
-            if (logs.isEmpty()) {
-                return;
-            }
-            String l = logs.get(logs.size() - 1);
-            l = l.substring(0, l.length() - 1);
-            logs.remove(logs.size() - 1);
-            logs.add(l);
-        }
+    public void addActor(Stage stage) {
+        stage.addActor(logs);
     }
 
-    public void add(String s) {
-        synchronized (logs) {
-            logs.add(s);
-        }
+    public void log(String s) {
+        logs.add(s);
     }
 
     public void render(Batch batch, Context ctxt) {
@@ -56,7 +34,7 @@ public class Hud {
         for (CharacterRecord rec : ctxt.saveGame.players) {
 
             Andius.smallFont.setColor(rec.status.color());
-            
+
             if (rec.hp > 0 && rec.hp < 2) {
                 Andius.smallFont.setColor(Color.SALMON);
             }
@@ -83,20 +61,5 @@ public class Hud {
 
         }
 
-        Andius.hudLogFont.setColor(Color.WHITE);
-        y = 28;
-
-        synchronized (logs) {
-            ReverseListIterator iter = new ReverseListIterator(logs);
-            while (iter.hasNext()) {
-                String next = (String) iter.next();
-                layout.setText(Andius.hudLogFont, next);
-                y += layout.height + 4;
-                if (y > LOG_AREA_TOP) {
-                    break;
-                }
-                Andius.hudLogFont.draw(batch, layout, LOG_X, y);
-            }
-        }
     }
 }

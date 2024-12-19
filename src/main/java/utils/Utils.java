@@ -50,6 +50,10 @@ public class Utils {
         return v;
     }
 
+    public static boolean distanceLessThan(float val, float x, float y) {
+        return Math.abs(x - y) <= val;
+    }
+
     public static Texture fillRectangle(int width, int height, Color color, float alpha) {
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pix.setColor(color.r, color.g, color.b, alpha);
@@ -137,7 +141,7 @@ public class Utils {
 
         int weaponACMod = defender.weapon.armourClass;
 
-        int cth = 21 - defender.calculateAC()- weaponACMod - attacker.getLevel() - 5 - (defender.status.isDisabled() ? 3 : 0);
+        int cth = 21 - defender.calculateAC() - weaponACMod - attacker.getLevel() - 5 - (defender.status.isDisabled() ? 3 : 0);
 
         if (roll >= 20) {
             return true;

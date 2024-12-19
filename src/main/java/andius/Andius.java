@@ -115,6 +115,14 @@ public class Andius extends Game {
 
         generator.dispose();
 
+        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/ultima.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        parameter.size = 48;
+        BitmapFont smallUltimaFont = generator.generateFont(parameter);
+        
+        generator.dispose();
+
         skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
         skin.remove("default-font", BitmapFont.class);
         skin.add("default-font", font, BitmapFont.class);
@@ -122,7 +130,9 @@ public class Andius extends Game {
         skin.add("title-font", titleFont, BitmapFont.class);
         smallFont = skin.get("verdana-10", BitmapFont.class);
         skin.add("small-font", smallFont, BitmapFont.class);
-
+        skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
+        skin.add("hud-log", hudLogFont, BitmapFont.class);
+        
         {
             Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
             ls.font = font;
@@ -226,11 +236,11 @@ public class Andius extends Game {
 
             MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
             }.getType());
-            
+
             for (Monster m : MONSTERS) {
                 MONSTER_MAP.put(m.name, m);
             }
-            
+
             Constants.Moongate.init();
             CONVERSATIONS = Conversations.init();
 

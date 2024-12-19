@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -39,14 +40,16 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.UBJsonReader;
+import java.util.Iterator;
 
 public class WizardryDungeonScreen extends BaseScreen {
 
@@ -55,14 +58,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private final Environment environment = new Environment();
     private final ModelBuilder builder = new ModelBuilder();
-
-    private ModelBatch modelBatch;
-    private SpriteBatch batch;
+    private final ModelBatch modelBatch;
+    private final SpriteBatch batch;
 
     private CameraInputController inputController;
-    private AssetManager assets;
+    private final AssetManager assets;
 
-    //3d models
     private Model fountainModel;
     private Model ladderModel;
     private Model chestModel;
@@ -70,12 +71,9 @@ public class WizardryDungeonScreen extends BaseScreen {
     private Model avatarModel;
     private Model wall, door, manhole;
 
-    private boolean showMiniMap = true;
-
     private final Vector3 vdll = new Vector3(.04f, .04f, .04f);
     private final Vector3 nll = new Vector3(.96f, .58f, 0.08f);
     private PointLight torch;
-    ModelInstance torchInstance;
     boolean isTorchOn = false;
 
     private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
@@ -91,29 +89,13 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final Vector3 currentPos = new Vector3();
     private Direction currentDir = Direction.EAST;
 
+    private boolean showMiniMap = true;
     private Texture miniMap;
-    private MiniMapIcon miniMapIcon;
+    private final MiniMapIcon miniMapIcon;
 
     public WizardryDungeonScreen() {
         this.stage = new Stage();
-
-        assets = new AssetManager(CLASSPTH_RSLVR);
-        assets.load("assets/graphics/dirt.png", Texture.class);
-        assets.load("assets/graphics/door.png", Texture.class);
-        assets.load("assets/graphics/mortar.png", Texture.class);
-        assets.load("assets/graphics/rock.png", Texture.class);
-
-        assets.update(2000);
-
-        //convert the collada dae format to the g3db format (do not use the obj format)
-        //export from sketchup to collada dae format, then open dae in blender and export to the fbx format, then convert fbx to the g3db like below
-        //C:\Users\Paul\Desktop\blender>fbx-conv-win32.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
-        ModelLoader<?> gloader = new G3dModelLoader(new UBJsonReader());
-        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain2.g3db"));
-        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
-        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"));
-        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"));
-        avatarModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/wizard.g3db"));
+        this.assets = new AssetManager(CLASSPTH_RSLVR);
 
         Pixmap pixmap = new Pixmap(MM_BKGRND_DIM, MM_BKGRND_DIM, Format.RGBA8888);
         pixmap.setColor(0.8f, 0.7f, 0.5f, .8f);
@@ -121,125 +103,40 @@ public class WizardryDungeonScreen extends BaseScreen {
         MINI_MAP_TEXTURE = new Texture(pixmap);
         pixmap.dispose();
 
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
-
         this.torch = new PointLight().set(1f, 0.8f, 0.6f, 4f, 4f, 4f, 5f);
-        environment.add(this.torch);
+        this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
+        this.environment.add(this.torch);
 
-        modelBatch = new ModelBatch();
-        batch = new SpriteBatch();
+        this.modelBatch = new ModelBatch();
+        this.batch = new SpriteBatch();
 
-        camera = new PerspectiveCamera(67f, MAP_WIDTH, MAP_HEIGHT);
-        camera.near = 0.1f;
-        camera.far = 1000f;
+        this.camera = new PerspectiveCamera(67f, MAP_WIDTH, MAP_HEIGHT);
+        this.camera.near = 0.1f;
+        this.camera.far = 10f;
 
-        Model torchModel = builder.createSphere(.1f, .1f, .1f, 10, 10, new Material(ColorAttribute.createDiffuse(1, 1, 1, 1)), Usage.Position);
-        this.torchInstance = new ModelInstance(torchModel);
+        load();
 
-        manhole = builder.createCylinder(.75f, .02f, .75f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
-
-        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
-            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
-                floor.add(new ModelInstance(sf, new Vector3(x - 1.5f, -.5f, y - 1.5f)));
-            }
-        }
-        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
-            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
-                ceiling.add(new ModelInstance(sf, new Vector3(x - 1.5f, 1.5f, y - 1.5f)));
-            }
-        }
-
-        createWallsAndDoorModels();
-
-        for (int level = 0; level < LEVELS.length; level++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
-                    MazeCell cell = LEVELS[level].cells[x][y];
-                    addBlock(level, cell, x, y);
-                }
-            }
-        }
-
-        //duplicate some of the outer edge tiles around the outside 
-        //so that the wrapping is not so black hole on the sides
-        //i went 2 layers duplicated on each edges + the corners
-        for (int level = 0; level < LEVELS.length; level++) {
-            {
-                int y = 0;
-                for (int x = 0; x < DUNGEON_DIM; x++) {//bottom across the top
-                    MazeCell cell = LEVELS[level].cells[x][y + DUNGEON_DIM - 1];
-                    addBlock(level, cell, x, y - 2);
-                    cell = LEVELS[level].cells[x][y + DUNGEON_DIM - 2];
-                    addBlock(level, cell, x, y - 3);
-                }
-                for (int x = 0; x < DUNGEON_DIM; x++) {//top across the bottom
-                    MazeCell cell = LEVELS[level].cells[x][y];
-                    addBlock(level, cell, x, y + DUNGEON_DIM + 1);
-                    cell = LEVELS[level].cells[x][y + 1];
-                    addBlock(level, cell, x, y + DUNGEON_DIM + 2);
-                }
-            }
-            {
-                int x = 0;
-                for (int y = 0; y < DUNGEON_DIM; y++) {//left across the right side
-                    MazeCell cell = LEVELS[level].cells[x][y];
-                    addBlock(level, cell, x + DUNGEON_DIM + 1, y);
-                    cell = LEVELS[level].cells[x + 1][y];
-                    addBlock(level, cell, x + DUNGEON_DIM + 2, y);
-                }
-                for (int y = 0; y < DUNGEON_DIM; y++) {//right across the left side
-                    MazeCell cell = LEVELS[level].cells[x + DUNGEON_DIM - 1][y];
-                    addBlock(level, cell, x - 1, y);
-                    cell = LEVELS[level].cells[x + DUNGEON_DIM - 2][y];
-                    addBlock(level, cell, x - 2, y);
-                }
-
-            }
-
-            {//copy bottom right corner to the top left corner
-                MazeCell cell = LEVELS[level].cells[DUNGEON_DIM - 1][DUNGEON_DIM - 1];
-                addBlock(level, cell, -1, -1);
-            }
-
-            {//copy bottom left corner to the top right corner
-                MazeCell cell = LEVELS[level].cells[0][DUNGEON_DIM - 1];
-                addBlock(level, cell, DUNGEON_DIM, -1);
-            }
-
-            {//copy top right corner to the bottom left corner
-                MazeCell cell = LEVELS[level].cells[DUNGEON_DIM - 1][0];
-                addBlock(level, cell, -1, DUNGEON_DIM);
-            }
-
-            {//copy top left corner to the bottom right corner
-                MazeCell cell = LEVELS[level].cells[0][0];
-                addBlock(level, cell, DUNGEON_DIM, DUNGEON_DIM);
-            }
-
-        }
-
-        miniMapIcon = new MiniMapIcon();
-        miniMapIcon.setOrigin(5, 5);
+        this.miniMapIcon = new MiniMapIcon();
+        this.miniMapIcon.setOrigin(5, 5);
 
         stage.addActor(miniMapIcon);
-
+        Andius.HUD.addActor(stage);
+        
         addButtons(Map.WIZARDRY1);
 
         setStartPosition();
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
-        //currentLevel = 2;
-        //camera.position.set(10, 20, 10);
-        //camera.lookAt(10, 0, 10);
-        //this.isTorchOn = true;
-        //this.showMiniMap = false;
-        //inputController = new CameraInputController(camera);
-        //inputController.rotateLeftKey = inputController.rotateRightKey = inputController.forwardKey = inputController.backwardKey = 0;
-        //inputController.translateUnits = 10f;
-        //createAxes();
-        //Gdx.input.setInputProcessor(inputController);
+//        currentLevel = 2;
+//        camera.position.set(10, 20, 10);
+//        camera.lookAt(10, 0, 10);
+//        this.isTorchOn = true;
+//        this.showMiniMap = false;
+//        inputController = new CameraInputController(camera);
+//        inputController.rotateLeftKey = inputController.rotateRightKey = inputController.forwardKey = inputController.backwardKey = 0;
+//        inputController.translateUnits = 10f;
+//        Gdx.input.setInputProcessor(inputController);
+//        createAxes();
     }
 
     private void setStartPosition() {
@@ -305,7 +202,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void log(String s) {
-        Andius.HUD.add(s);
+        Andius.HUD.log(s);
     }
 
     @Override
@@ -340,8 +237,24 @@ public class WizardryDungeonScreen extends BaseScreen {
     public void hide() {
     }
 
-    private void createWallsAndDoorModels() {
-        ModelBuilder builder = new ModelBuilder();
+    private void load() {
+
+        assets.load("assets/graphics/dirt.png", Texture.class);
+        assets.load("assets/graphics/door.png", Texture.class);
+        assets.load("assets/graphics/mortar.png", Texture.class);
+        assets.load("assets/graphics/rock.png", Texture.class);
+        assets.update(2000);
+
+        //convert the collada dae format to the g3db format (do not use the obj format)
+        //export from sketchup to collada dae format, then open dae in blender and export to the fbx format, then convert fbx to the g3db like below
+        //C:\Users\Paul\Desktop\blender>fbx-conv-win32.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
+        ModelLoader<?> gloader = new G3dModelLoader(new UBJsonReader());
+        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain2.g3db"));
+        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
+        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"));
+        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"));
+        avatarModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/wizard.g3db"));
+
         Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)));
         Material dr = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/door.png", Texture.class)));
         Material gr = new Material(ColorAttribute.createDiffuse(Color.GREEN));
@@ -351,6 +264,64 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
         door = builder.createBox(1.090f, 1, 0.05f, dr, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        manhole = builder.createCylinder(.75f, .02f, .75f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
+
+        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
+            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+                Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
+                floor.add(new ModelInstance(sf, new Vector3(x - 1.5f, -.5f, y - 1.5f)));
+            }
+        }
+        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
+            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+                Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
+                ceiling.add(new ModelInstance(sf, new Vector3(x - 1.5f, 1.5f, y - 1.5f)));
+            }
+        }
+
+        for (int level = 0; level < LEVELS.length; level++) {
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+                    MazeCell cell = LEVELS[level].cells[x][y];
+                    addBlock(level, cell, x, y);
+                    //duplicated for wrapping
+                    addBlock(level, cell, x + DUNGEON_DIM, y);
+                    addBlock(level, cell, x - DUNGEON_DIM, y);
+                    addBlock(level, cell, x, y + DUNGEON_DIM);
+                    addBlock(level, cell, x, y - DUNGEON_DIM);
+                    addBlock(level, cell, x + DUNGEON_DIM, y + DUNGEON_DIM);
+                    addBlock(level, cell, x - DUNGEON_DIM, y - DUNGEON_DIM);
+                    addBlock(level, cell, x + DUNGEON_DIM, y - DUNGEON_DIM);
+                    addBlock(level, cell, x - DUNGEON_DIM, y + DUNGEON_DIM);
+                }
+            }
+        }
+
+        //prune uneeded
+        Iterator<ModelInstance> iter = floor.iterator();
+        Iterator<ModelInstance> iter2 = ceiling.iterator();
+        Iterator<DungeonTileModelInstance> iter3 = modelInstances.iterator();
+        while (iter.hasNext()) {
+            ModelInstance mi = iter.next();
+            if (mi.transform.val[Matrix4.M03] > 30 || mi.transform.val[Matrix4.M23] < -10
+                    || mi.transform.val[Matrix4.M03] < -10 || mi.transform.val[Matrix4.M23] > 30) {
+                iter.remove();
+            }
+        }
+        while (iter2.hasNext()) {
+            ModelInstance mi = iter2.next();
+            if (mi.transform.val[Matrix4.M03] > 30 || mi.transform.val[Matrix4.M23] < -10
+                    || mi.transform.val[Matrix4.M03] < -10 || mi.transform.val[Matrix4.M23] > 30) {
+                iter2.remove();
+            }
+        }
+        while (iter3.hasNext()) {
+            DungeonTileModelInstance mi = iter3.next();
+            if (mi.getX() > 30 || mi.getY() < -10
+                    || mi.getX() < -10 || mi.getY() > 30) {
+                iter3.remove();
+            }
+        }
     }
 
     private void addBlock(int level, MazeCell cell, float x, float y) {
@@ -441,8 +412,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
         if (isTorchOn) {
-            float intensity = MathUtils.lerp(5, 6, MathUtils.random());
+            float intensity = 6;//MathUtils.lerp(5, 7, MathUtils.random());
             torch.set(nll.x, nll.y, nll.z, currentPos.x, currentPos.y + .35f, currentPos.z, intensity);
+            //float intensity = 120;
+            //torch.set(nll.x, nll.y, nll.z, 10, 10, 10, intensity);
         } else {
             torch.set(vdll.x, vdll.y, vdll.z, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);
         }
@@ -453,8 +426,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         modelBatch.begin(camera);
 
-        modelBatch.render(this.torchInstance, environment);
-
+        //modelBatch.render(axesInstance);
         for (ModelInstance i : floor) {
             modelBatch.render(i, environment);
         }
@@ -697,63 +669,74 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         } else if (keycode == Keys.UP) {
 
+            boolean skipProgression = false;
+
             //forward
             if (currentDir == Direction.EAST) {
                 x = x + 1;
                 if (x > DUNGEON_DIM - 1) {
                     x = 0;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.WEST) {
                 x = x - 1;
                 if (x < 0) {
                     x = DUNGEON_DIM - 1;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.NORTH) {
                 y = y - 1;
                 if (y < 0) {
                     y = DUNGEON_DIM - 1;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.SOUTH) {
                 y = y + 1;
                 if (y > DUNGEON_DIM - 1) {
                     y = 0;
+                    skipProgression = true;
                 }
             }
 
             try {
-                move(cell, currentDir, x, y);
+                move(cell, currentDir, x, y, skipProgression);
             } catch (Throwable e) {
                 partyDeath();
             }
             return false;
 
         } else if (keycode == Keys.DOWN) {
+            boolean skipProgression = false;
 
             //backwards
             if (currentDir == Direction.EAST) {
                 x = x - 1;
                 if (x < 0) {
                     x = DUNGEON_DIM - 1;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.WEST) {
                 x = x + 1;
                 if (x > DUNGEON_DIM - 1) {
                     x = 0;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.NORTH) {
                 y = y + 1;
                 if (y > DUNGEON_DIM - 1) {
                     y = 0;
+                    skipProgression = true;
                 }
             } else if (currentDir == Direction.SOUTH) {
                 y = y - 1;
                 if (y < 0) {
                     y = DUNGEON_DIM - 1;
+                    skipProgression = true;
                 }
             }
 
             try {
-                move(cell, Direction.reverse(currentDir), x, y);
+                move(cell, Direction.reverse(currentDir), x, y, skipProgression);
             } catch (Throwable e) {
                 partyDeath();
             }
@@ -812,7 +795,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         return false;
     }
 
-    private void move(MazeCell cell, Direction dir, int dx, int dy) {
+    private void move(MazeCell cell, Direction dir, int dx, int dy, boolean skipProgression) {
 
         boolean moved = false;
         boolean teleport = false;
@@ -870,6 +853,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.EAST && (cell.hiddenNorthDoor || !cell.northWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
+            if (skipProgression) {
+                this.camera.position.set(currentPos.x, .5f, currentPos.z);
+            }
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
@@ -881,6 +867,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.WEST && (cell.hiddenSouthDoor || !cell.southWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
+            if (skipProgression) {
+                this.camera.position.set(currentPos.x, .5f, currentPos.z);
+            }
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
@@ -892,6 +881,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.NORTH && (cell.hiddenWestDoor || !cell.westWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
+            if (skipProgression) {
+                this.camera.position.set(currentPos.x, .5f, currentPos.z);
+            }
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
@@ -903,6 +895,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (dir == Direction.SOUTH && (cell.hiddenEastDoor || !cell.eastWall || teleport)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
+            if (skipProgression) {
+                this.camera.position.set(currentPos.x, .5f, currentPos.z);
+            }
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
             if (dir == currentDir) {
                 camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
@@ -976,6 +971,42 @@ public class WizardryDungeonScreen extends BaseScreen {
             return level;
         }
 
+        public float getX() {
+            return this.instance.transform.val[Matrix4.M03];
+        }
+
+        public float getY() {
+            return this.instance.transform.val[Matrix4.M23];
+        }
+
+    }
+
+    final float GRID_MIN = 0;//-1 * 20;
+    final float GRID_MAX = 20;//1 * 20;
+    final float GRID_STEP = 1;
+    public Model axesModel;
+    public ModelInstance axesInstance;
+
+    private void createAxes() {
+        ModelBuilder modelBuilder = new ModelBuilder();
+        modelBuilder.begin();
+        // grid
+        MeshPartBuilder builder = modelBuilder.part("grid", GL30.GL_LINES, VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorUnpacked, new Material());
+        builder.setColor(Color.LIGHT_GRAY);
+        for (float t = GRID_MIN; t <= GRID_MAX; t += GRID_STEP) {
+            builder.line(t, 0, GRID_MIN, t, 0, GRID_MAX);
+            builder.line(GRID_MIN, 0, t, GRID_MAX, 0, t);
+        }
+        // axes
+        builder = modelBuilder.part("axes", GL30.GL_LINES, VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorUnpacked, new Material());
+        builder.setColor(Color.RED);
+        builder.line(0, 0, 0, 50, 0, 0);
+        builder.setColor(Color.GREEN);
+        builder.line(0, 0, 0, 0, 50, 0);
+        builder.setColor(Color.BLUE);
+        builder.line(0, 0, 0, 0, 0, 50);
+        axesModel = modelBuilder.end();
+        axesInstance = new ModelInstance(axesModel);
     }
 
 }

@@ -167,7 +167,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         batch = new SpriteBatch();
         stage = new Stage(viewport);
-
+        Andius.HUD.addActor(stage);
         moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
 
         SequenceAction seq1 = Actions.action(SequenceAction.class);

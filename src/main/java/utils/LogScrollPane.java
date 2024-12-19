@@ -28,9 +28,8 @@ public class LogScrollPane extends ScrollPane {
         this.internalTable = table;
         this.width = width;
 
-        this.ls = new LabelStyle(this.skin.get("default-font", BitmapFont.class), Color.WHITE);
+        this.ls = new LabelStyle(this.skin.get("hud-log", BitmapFont.class), Color.WHITE);
 
-        clear();
         setScrollingDisabled(true, false);
 
         internalTable.align(Align.topLeft);
@@ -57,6 +56,7 @@ public class LogScrollPane extends ScrollPane {
         pack();
         
         if (scrollBottom) {
+            //layout();
             scrollTo(0, 0, 0, 0);
         }
 

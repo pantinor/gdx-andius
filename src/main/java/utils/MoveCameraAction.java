@@ -1,7 +1,6 @@
 package utils;
 
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 public class MoveCameraAction extends TemporalAction {

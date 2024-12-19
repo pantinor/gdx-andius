@@ -39,7 +39,7 @@ public class WorldScreen extends BaseScreen {
         batch = new SpriteBatch();
 
         stage = new Stage(viewport);
-
+        Andius.HUD.addActor(stage);
         camera = new OrthographicCamera(Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
 
         mapViewPort = new ScreenViewport(camera);
@@ -130,7 +130,7 @@ public class WorldScreen extends BaseScreen {
 
     @Override
     public void log(String s) {
-        Andius.HUD.add(s);
+        Andius.HUD.log(s);
     }
 
     @Override

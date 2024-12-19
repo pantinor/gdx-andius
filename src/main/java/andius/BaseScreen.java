@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -141,9 +142,13 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
-        Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), Andius.skin, "larger");
+        
+        log(text);
+        
+        Label.LabelStyle ls = new Label.LabelStyle(Andius.skin.get("small-ultima", BitmapFont.class), Color.WHITE);
+        Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), ls);
         label.setWrap(true);
-        label.setWidth(400);
+        label.setWidth(700);
         label.setPosition(sx, sy);
         label.setAlignment(Align.center);
         label.setColor(color);

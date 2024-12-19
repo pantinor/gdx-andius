@@ -42,17 +42,15 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import utils.Utils;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import utils.LogScrollPane;
 
 public class CombatScreen extends BaseScreen {
 
@@ -77,8 +75,7 @@ public class CombatScreen extends BaseScreen {
     private int activeIndex = -1;
 
     private Texture frame;
-    private final Table logTable;
-    private final ScrollPane logScroll;
+    private final LogScrollPane logs;
     public final Stage hudStage;
     private final CombatHud hud;
 
@@ -92,13 +89,12 @@ public class CombatScreen extends BaseScreen {
         this.renderer = new OrthogonalTiledMapRenderer(this.tmap);
 
         this.frame = new Texture(Gdx.files.classpath("assets/data/combat_frame.png"));
-        this.logTable = new Table(Andius.skin);
-        this.logTable.defaults().align(Align.left).pad(0);
-        this.logScroll = new ScrollPane(this.logTable, Andius.skin);
-        this.logScroll.setBounds(728, 30, 269, 270);
-        this.logScroll.setScrollingDisabled(false, false);
-        this.hudStage = new Stage();
 
+        this.logs = new LogScrollPane(Andius.skin, new Table(), 275);
+        this.logs.setBounds(732, 27, 275, 273);
+        this.hudStage = new Stage();
+        this.hudStage.addActor(this.logs);
+        
         MapProperties prop = tmap.getProperties();
         mapPixelHeight = prop.get("height", Integer.class) * TILE_DIM;
 
@@ -185,8 +181,6 @@ public class CombatScreen extends BaseScreen {
             partyMembers.add(actor);
         }
 
-        hudStage.addActor(this.logScroll);
-
         hud = new CombatHud(this, this.partyMembers);
         andius.objects.Actor pm = getAndSetNextActivePlayer();
         hud.set(pm, hudStage);
@@ -212,13 +206,7 @@ public class CombatScreen extends BaseScreen {
 
     @Override
     public void log(String s) {
-        Label l = new Label(s, Andius.skin, "hudLogFont");
-        l.setWrap(true);
-        logTable.add(l).width(270);
-        logTable.row();
-        logScroll.layout();
-        logScroll.setScrollPercentX(0);
-        logScroll.setScrollPercentY(100);
+        this.logs.add(s);
     }
 
     private void fillCreatureTable(int level) {
