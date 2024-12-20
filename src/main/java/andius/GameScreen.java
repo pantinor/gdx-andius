@@ -1,7 +1,6 @@
 package andius;
 
 import static andius.Andius.CTX;
-import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
@@ -258,7 +257,7 @@ public class GameScreen extends BaseScreen {
                             while (iter2.hasNext()) {
                                 String key = iter2.next();
                                 if (key.startsWith("item")) {
-                                    Item found = Andius.ITEMS_MAP.get(obj.getProperties().get(key, String.class));
+                                    Item found = this.map.scenario().itemMap().get(obj.getProperties().get(key, String.class));
                                     sb.append("Party found ").append(found.genericName).append(". ");
                                     Andius.CTX.players()[0].inventory.add(found);
                                 }
@@ -280,7 +279,7 @@ public class GameScreen extends BaseScreen {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
             if (cell != null && cell.getTile().getId() >= 1321) { //items tileset
-                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, REWARDS.get(rand.nextInt(10)), REWARDS.get(rand.nextInt(10)));
+                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(10), rand.nextInt(10));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
                 return false;
@@ -385,7 +384,7 @@ public class GameScreen extends BaseScreen {
 
                     String itemRequired = obj.getProperties().get("itemRequired", String.class);
                     if (itemRequired != null) {
-                        Item found = Andius.ITEMS_MAP.get(itemRequired);
+                        Item found = this.map.scenario().itemMap().get(itemRequired);
                         boolean owned = false;
                         for (int i = 0; i < Andius.CTX.players().length && found != null; i++) {
                             if (Andius.CTX.players()[i].inventory.contains(found)) {
@@ -401,7 +400,7 @@ public class GameScreen extends BaseScreen {
 
                     String itemObtained = obj.getProperties().get("itemObtained", String.class);
                     if (itemObtained != null) {
-                        Item found = Andius.ITEMS_MAP.get(itemObtained);
+                        Item found = this.map.scenario().itemMap().get(itemObtained);
                         boolean owned = false;
                         for (int i = 0; i < Andius.CTX.players().length; i++) {
                             if (Andius.CTX.players()[i].inventory.contains(found)) {
@@ -417,7 +416,7 @@ public class GameScreen extends BaseScreen {
 
                     String monsterFound = obj.getProperties().get("monsterId", String.class);
                     if (monsterFound != null) {
-                        Monster found = Andius.MONSTER_MAP.get(monsterFound);
+                        Monster found = this.map.scenario().monsterMap().get(monsterFound);
                         if (found != null) {
                             Actor actor = new Actor(-1, monsterFound, TibianSprite.animation("Barbarian_Brutetamer")); //TODO
                             MutableMonster mm = new MutableMonster(found);

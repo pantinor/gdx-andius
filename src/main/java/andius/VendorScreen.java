@@ -1,7 +1,5 @@
 package andius;
 
-import static andius.Andius.ITEMS;
-import static andius.Andius.ITEMS_MAP;
 import static andius.Andius.mainGame;
 import andius.objects.ClassType;
 import andius.objects.Item;
@@ -84,7 +82,7 @@ public class VendorScreen implements Screen, Constants {
     Image vendorFocusInd;
     Label invDesc;
 
-    public VendorScreen(Context context, Role role, final Constants.Map contextMap) {
+    public VendorScreen(Context context, Role role, Constants.Map contextMap) {
         this.context = context;
 
         this.hud = new Texture(Gdx.files.classpath("assets/data/vendor.png"));
@@ -127,7 +125,7 @@ public class VendorScreen implements Screen, Constants {
 
         vendorTable = new Table(Andius.skin);
         vendorTable.align(Align.top);
-        for (Item it : ITEMS) {
+        for (Item it : contextMap.scenario().items()) {
             if (it.stock != 0) {
                 if (role == Role.MERCHANT1 && it.cost <= 500) {
                     vendorTable.add(new VendorItem(it));
@@ -263,7 +261,7 @@ public class VendorScreen implements Screen, Constants {
                     selectedPlayer.invTable.removeActor(selectedItem);
                     selectedPlayer.character.adjustGold(selectedItem.item.cost / 2);
                     selectedPlayer.goldLabel.setText("" + selectedPlayer.character.gold);
-                    Item it = ITEMS_MAP.get(selectedItem.item.name);
+                    Item it = contextMap.scenario().itemMap().get(selectedItem.item.name);
                     if (it.stock == 0) {
                         it.stock = 1;
                         vendorTable.add(new VendorItem(it));

@@ -26,6 +26,28 @@ public class Utils {
         return RANDOM.nextInt(2) == 1;
     }
 
+    public static int intValue(byte b1) {
+        return b1 & 0xFF;
+    }
+
+    public static int intValue(byte b1, byte b2) {
+        return intValue(b1) + intValue(b2) * 256;
+    }
+
+    public static int getShort(byte[] buffer, int ptr) {
+        return (buffer[ptr] & 0xFF) | ((buffer[ptr + 1] & 0xFF) << 8);
+    }
+
+    public static final int MAX_SHORT = 0xFFFF;
+
+    public static int signShort(int val) {
+        if ((val & 0x8000) != 0) {
+            return val - Short.MAX_VALUE - 1;
+        } else {
+            return val;
+        }
+    }
+
     public static int adjustValueMax(int v, int amt, int max) {
         v += amt;
         if (v > max) {

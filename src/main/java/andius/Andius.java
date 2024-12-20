@@ -2,9 +2,6 @@ package andius;
 
 import andius.objects.Icons;
 import andius.objects.Conversations;
-import andius.objects.Item;
-import andius.objects.Monster;
-import andius.objects.Reward;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -28,12 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.io.InputStream;
 import java.util.HashMap;
-import org.apache.commons.io.IOUtils;
 import utils.Hud;
 
 public class Andius extends Game {
@@ -75,14 +67,6 @@ public class Andius extends Game {
 
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
     public static TextureRegion[] invIcons = new TextureRegion[67 * 12];
-
-    public static java.util.List<Item> ITEMS;
-    public static final java.util.Map<String, Item> ITEMS_MAP = new HashMap<>();
-
-    public static java.util.List<Monster> MONSTERS;
-    public static final java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
-
-    public static java.util.List<Reward> REWARDS;
 
     public static void main(String[] args) {
 
@@ -211,35 +195,9 @@ public class Andius extends Game {
             EXPLMAP.put(Color.GREEN, new Animation(.1f, getTextureArray(expl, 1, 5)));
             EXPLMAP.put(Color.PURPLE, new Animation(.1f, getTextureArray(expl, 4, 5)));
             EXPLMAP.put(Color.YELLOW, new Animation(.1f, getTextureArray(expl, 5, 5)));
-
-            InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
-            String json = IOUtils.toString(is);
-
-            is = this.getClass().getResourceAsStream("/assets/json/rewards.json");
-            String json2 = IOUtils.toString(is);
-
-            is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
-            String json3 = IOUtils.toString(is);
-
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-
-            ITEMS = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
-            }.getType());
-
-            for (Item i : ITEMS) {
-                ITEMS_MAP.put(i.name, i);
-            }
-
-            REWARDS = gson.fromJson(json2, new TypeToken<java.util.List<Reward>>() {
-            }.getType());
-
-            MONSTERS = gson.fromJson(json3, new TypeToken<java.util.List<Monster>>() {
-            }.getType());
-
-            for (Monster m : MONSTERS) {
-                MONSTER_MAP.put(m.name, m);
-            }
+            
+            //static initializer
+            WizardryData.class.getClass();
 
             Constants.Moongate.init();
             CONVERSATIONS = Conversations.init();

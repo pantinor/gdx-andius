@@ -4,7 +4,6 @@ import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.CLASSPTH_RSLVR;
 import static andius.WizardryData.DUNGEON_DIM;
-import static andius.WizardryData.LEVELS;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.objects.Item;
@@ -30,6 +29,7 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -80,6 +80,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final List<ModelInstance> floor = new ArrayList<>();
     private final List<ModelInstance> ceiling = new ArrayList<>();
     private static Texture MINI_MAP_TEXTURE;
+    private final TextureRegion[][] arrows = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/arrows.png")), 10, 10);
+    private final Pixmap miniMapIconsPixmap;
     private static final int MINI_DIM = 10;
     private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM;
     private static final int XALIGNMM = 16;
@@ -92,8 +94,10 @@ public class WizardryDungeonScreen extends BaseScreen {
     private boolean showMiniMap = true;
     private Texture miniMap;
     private final MiniMapIcon miniMapIcon;
+    private final Constants.Map map;
 
-    public WizardryDungeonScreen() {
+    public WizardryDungeonScreen(Constants.Map map) {
+        this.map = map;
         this.stage = new Stage();
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
@@ -102,6 +106,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         pixmap.fillRectangle(0, 0, MM_BKGRND_DIM, MM_BKGRND_DIM);
         MINI_MAP_TEXTURE = new Texture(pixmap);
         pixmap.dispose();
+        arrows[3][2].getTexture().getTextureData().prepare();
+        this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
 
         this.torch = new PointLight().set(1f, 0.8f, 0.6f, 4f, 4f, 4f, 5f);
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
@@ -117,12 +123,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         load();
 
         this.miniMapIcon = new MiniMapIcon();
-        this.miniMapIcon.setOrigin(5, 5);
+        this.miniMapIcon.setOrigin(4, 4);
 
         stage.addActor(miniMapIcon);
         Andius.HUD.addActor(stage);
-        
-        addButtons(Map.WIZARDRY1);
+
+        addButtons(this.map);
 
         setStartPosition();
         camera.position.set(currentPos);
@@ -142,7 +148,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private void setStartPosition() {
         for (int y = 0; y < DUNGEON_DIM; y++) {
             for (int x = 0; x < DUNGEON_DIM; x++) {
-                MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
+                MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
                 if (cell.stairs && cell.address.level > cell.addressTo.level) {//up stairs location
                     setMapPixelCoords(null, x, y, currentLevel + 1);
                 }
@@ -169,7 +175,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     public void save(SaveGame saveGame) {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        CTX.saveGame.map = Map.WIZARDRY1;
+        CTX.saveGame.map = this.map;
         CTX.saveGame.wx = 75;
         CTX.saveGame.wy = 95;
         CTX.saveGame.x = (int) v.x;
@@ -215,16 +221,16 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private void syncRemovedMonsters() {
 
-        List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
+        List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
         if (removedMonsters == null) {
             removedMonsters = new ArrayList<>();
-            CTX.saveGame.removedActors.put(Map.WIZARDRY1, removedMonsters);
+            CTX.saveGame.removedActors.put(this.map, removedMonsters);
         }
 
-        for (int level = 0; level < LEVELS.length; level++) {
+        for (int level = 0; level < this.map.scenario().levels().length; level++) {
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
-                    MazeCell cell = LEVELS[level].cells[x][y];
+                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
                     if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
                         cell.tempMonsterID = -1;
                     }
@@ -279,10 +285,10 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        for (int level = 0; level < LEVELS.length; level++) {
+        for (int level = 0; level < this.map.scenario().levels().length; level++) {
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
-                    MazeCell cell = LEVELS[level].cells[x][y];
+                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
                     addBlock(level, cell, x, y);
                     //duplicated for wrapping
                     addBlock(level, cell, x + DUNGEON_DIM, y);
@@ -475,31 +481,54 @@ public class WizardryDungeonScreen extends BaseScreen {
         Pixmap pixmap = new Pixmap(MM_BKGRND_DIM, MM_BKGRND_DIM, Format.RGBA8888);
         for (int x = 0; x < DUNGEON_DIM; x++) {
             for (int y = 0; y < DUNGEON_DIM; y++) {
-                MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
-
-                if (cell.itemRequired > 0) {
-                    pixmap.setColor(Color.FOREST);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
+                MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
+                
+                if (cell.darkness) {
+                    pixmap.setColor(Color.PURPLE);
+                    pixmap.fillRectangle(x * MINI_DIM, y * MINI_DIM, MINI_DIM, MINI_DIM);
                 }
-
-                if (cell.itemObtained > 0) {
-                    pixmap.setColor(Color.LIME);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
-                }
-
                 if (cell.monsterID >= 0) {
-                    pixmap.setColor(Color.SCARLET);
+                    pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
                 }
 
                 if (cell.tempMonsterID >= 0) {
-                    pixmap.setColor(Color.RED);
+                    pixmap.setColor(Color.ORANGE);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
                 }
 
-                if (cell.darkness) {
-                    pixmap.setColor(Color.PURPLE);
-                    pixmap.fillRectangle(x * MINI_DIM, y * MINI_DIM, MINI_DIM, MINI_DIM);
+                if (cell.itemRequired > 0) {
+                    pixmap.setColor(Color.FOREST);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                }
+
+                if (cell.itemObtained > 0) {
+                    pixmap.setColor(Color.LIME);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                }
+
+                if (cell.pit) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM + 1,
+                            y * MINI_DIM + 1,
+                            arrows[3][0].getRegionX(),
+                            arrows[3][0].getRegionY(),
+                            arrows[3][0].getRegionWidth(),
+                            arrows[3][0].getRegionHeight()
+                    );
+                }
+
+                if (cell.teleport) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM + 1,
+                            y * MINI_DIM + 1,
+                            arrows[2][1].getRegionX(),
+                            arrows[2][1].getRegionY(),
+                            arrows[2][1].getRegionWidth(),
+                            arrows[2][1].getRegionHeight()
+                    );
                 }
 
                 pixmap.setColor(Color.DARK_GRAY);
@@ -545,46 +574,51 @@ public class WizardryDungeonScreen extends BaseScreen {
         int cy = y * MINI_DIM;
         pixmap.setColor(Color.YELLOW);
         if (cell.elevator) {
-            pixmap.fillTriangle(cx + 0, cy + 5, cx + 5, cy + 0, cx + MINI_DIM, cy + 5);
-            pixmap.fillTriangle(cx + 0, cy + 5, cx + 5, cy + MINI_DIM, cx + MINI_DIM, cy + 5);
+            pixmap.drawPixmap(
+                    this.miniMapIconsPixmap,
+                    cx,
+                    cy,
+                    arrows[3][3].getRegionX(),
+                    arrows[3][3].getRegionY(),
+                    arrows[3][3].getRegionWidth(),
+                    arrows[3][3].getRegionHeight()
+            );
         } else if (cell.stairs && cell.address.level > cell.addressTo.level) {//up
-            pixmap.fillTriangle(cx + 0, cy + MINI_DIM, cx + 5, cy + 0, cx + MINI_DIM, cy + MINI_DIM);
+            pixmap.drawPixmap(
+                    this.miniMapIconsPixmap,
+                    cx,
+                    cy,
+                    arrows[3][2].getRegionX(),
+                    arrows[3][2].getRegionY(),
+                    arrows[3][2].getRegionWidth(),
+                    arrows[3][2].getRegionHeight()
+            );
         } else if (cell.stairs && cell.address.level < cell.addressTo.level) {//down
-            pixmap.fillTriangle(cx + 0, cy + 0, cx + 5, cy + MINI_DIM, cx + MINI_DIM, cy + 0);
+            pixmap.drawPixmap(
+                    this.miniMapIconsPixmap,
+                    cx,
+                    cy,
+                    arrows[2][3].getRegionX(),
+                    arrows[2][3].getRegionY(),
+                    arrows[2][3].getRegionWidth(),
+                    arrows[2][3].getRegionHeight()
+            );
         }
-    }
-
-    private Texture createMiniMapIcon(Direction dir) {
-        Pixmap pixmap = new Pixmap(MINI_DIM, MINI_DIM, Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
-        if (dir == Direction.EAST) {
-            pixmap.fillTriangle(0, 0, 0, MINI_DIM, MINI_DIM, 5);
-        } else if (dir == Direction.NORTH) {
-            pixmap.fillTriangle(0, MINI_DIM, 5, 0, MINI_DIM, MINI_DIM);
-        } else if (dir == Direction.WEST) {
-            pixmap.fillTriangle(MINI_DIM, 0, 0, 5, MINI_DIM, MINI_DIM);
-        } else if (dir == Direction.SOUTH) {
-            pixmap.fillTriangle(0, 0, 5, MINI_DIM, MINI_DIM, 0);
-        }
-        Texture texture = new Texture(pixmap);
-        pixmap.dispose();
-        return texture;
     }
 
     private class MiniMapIcon extends Actor {
 
-        Texture north;
-        Texture south;
-        Texture east;
-        Texture west;
+        TextureRegion north;
+        TextureRegion south;
+        TextureRegion east;
+        TextureRegion west;
 
         public MiniMapIcon() {
             super();
-            //could not get rotateBy to work so needed to do it this way
-            this.north = createMiniMapIcon(Direction.NORTH);
-            this.east = createMiniMapIcon(Direction.EAST);
-            this.west = createMiniMapIcon(Direction.WEST);
-            this.south = createMiniMapIcon(Direction.SOUTH);
+            this.north = arrows[1][0];
+            this.east = arrows[0][0];
+            this.west = arrows[0][1];
+            this.south = arrows[1][1];
         }
 
         @Override
@@ -592,9 +626,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (!showMiniMap) {
                 return;
             }
-            Color color = getColor();
-            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-            Texture t = north;
+            TextureRegion t = north;
             if (currentDir == Direction.EAST) {
                 t = east;
             }
@@ -607,16 +639,10 @@ public class WizardryDungeonScreen extends BaseScreen {
             batch.draw(t, getX(), getY());
         }
 
-        public void dispose() {
-            north.dispose();
-            east.dispose();
-            west.dispose();
-            south.dispose();
-        }
     }
 
     private void moveMiniMapIcon() {
-        miniMapIcon.setX(XALIGNMM + (Math.round(currentPos.x) - 1) * MINI_DIM);
+        miniMapIcon.setX(XALIGNMM + (Math.round(currentPos.x) - 1) * MINI_DIM + 1);
         miniMapIcon.setY(YALIGNMM + MM_BKGRND_DIM - (Math.round(currentPos.z)) * MINI_DIM);
     }
 
@@ -629,7 +655,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        MazeCell cell = LEVELS[this.currentLevel].cells[x][y];
+        MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
 
         float tdur = .7f;
 
@@ -757,8 +783,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         } else if (keycode == Keys.D) {
             if (cell.elevator || (cell.stairs && cell.address.level < cell.addressTo.level)) {
                 currentLevel++;
-                if (currentLevel >= LEVELS.length) {
-                    currentLevel = LEVELS.length - 1;
+                if (currentLevel >= this.map.scenario().levels().length) {
+                    currentLevel = this.map.scenario().levels().length - 1;
                 } else {
                     createMiniMap();
                 }
@@ -766,7 +792,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             return false;
 
         } else if (keycode == Keys.I) {
-            if (!LEVELS[currentLevel].cells[x][y].darkness) {
+            if (!this.map.scenario().levels()[currentLevel].cells[x][y].darkness) {
                 isTorchOn = !isTorchOn;
             } else {
                 log("The torch fails to light and darkness remains!");
@@ -799,15 +825,16 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         boolean moved = false;
         boolean teleport = false;
+        WizardryData.MazeLevel[] levels = this.map.scenario().levels();
 
-        if (LEVELS[currentLevel].cells[dx][dy].message != null) {
-            if (LEVELS[currentLevel].cells[dx][dy].itemRequired <= 0) {
-                animateText(LEVELS[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+        if (levels[currentLevel].cells[dx][dy].message != null) {
+            if (levels[currentLevel].cells[dx][dy].itemRequired <= 0) {
+                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
             }
         }
 
-        if (LEVELS[currentLevel].cells[dx][dy].itemRequired > 0) {
-            Item item = Andius.ITEMS.get(LEVELS[currentLevel].cells[dx][dy].itemRequired);
+        if (levels[currentLevel].cells[dx][dy].itemRequired > 0) {
+            Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemRequired);
             boolean owned = false;
             for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
                 if (Andius.CTX.players()[i].inventory.contains(item)) {
@@ -816,13 +843,13 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             if (!owned) {
                 Sounds.play(Sound.NEGATIVE_EFFECT);
-                animateText(LEVELS[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
                 return;
             }
         }
 
-        if (LEVELS[currentLevel].cells[dx][dy].itemObtained > 0) {
-            Item item = Andius.ITEMS.get(LEVELS[currentLevel].cells[dx][dy].itemObtained);
+        if (levels[currentLevel].cells[dx][dy].itemObtained > 0) {
+            Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemObtained);
             boolean owned = false;
             for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
                 if (Andius.CTX.players()[i].inventory.contains(item)) {
@@ -835,8 +862,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (LEVELS[currentLevel].cells[dx][dy].teleport) {
-            MazeAddress to = LEVELS[currentLevel].cells[dx][dy].addressTo;
+        if (levels[currentLevel].cells[dx][dy].teleport) {
+            MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
             dx = to.row;
             dy = to.column;
             if (to.level == currentLevel + 1) {
@@ -908,17 +935,17 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         if (moved) {
 
-            if (LEVELS[currentLevel].cells[dx][dy].darkness) {
+            if (levels[currentLevel].cells[dx][dy].darkness) {
                 isTorchOn = false;
             }
 
-            if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1 || LEVELS[currentLevel].cells[dx][dy].tempMonsterID != -1) {
+            if (levels[currentLevel].cells[dx][dy].monsterID != -1 || levels[currentLevel].cells[dx][dy].tempMonsterID != -1) {
 
                 Monster monster = null;
-                if (LEVELS[currentLevel].cells[dx][dy].monsterID != -1) {
-                    monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].monsterID);
+                if (levels[currentLevel].cells[dx][dy].monsterID != -1) {
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].monsterID);
                 } else {
-                    monster = Andius.MONSTERS.get(LEVELS[currentLevel].cells[dx][dy].tempMonsterID);
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].tempMonsterID);
                 }
 
                 andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
@@ -928,7 +955,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
                 TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
                 TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, Constants.Map.WIZARDRY1, tm, actor, currentLevel + 1);
+                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1);
                 mainGame.setScreen(cs);
             }
 
@@ -941,16 +968,16 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (isWon) {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
-            LEVELS[currentLevel].cells[x][y].tempMonsterID = -1;
+            this.map.scenario().levels()[currentLevel].cells[x][y].tempMonsterID = -1;
 
-            List<String> removedMonsters = CTX.saveGame.removedActors.get(Map.WIZARDRY1);
+            List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
             removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
         }
     }
 
     @Override
     public void finishTurn(int currentX, int currentY) {
-        CTX.endTurn(Constants.Map.WIZARDRY1);
+        CTX.endTurn(this.map);
     }
 
     private class DungeonTileModelInstance {

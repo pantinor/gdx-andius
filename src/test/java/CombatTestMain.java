@@ -9,7 +9,10 @@ import andius.Context;
 import andius.TibianSprite;
 import andius.WizardryData;
 import static andius.WizardryData.DUNGEON_DIM;
-import static andius.WizardryData.LEVELS;
+import static andius.WizardryData.PMO_ITEMS;
+import static andius.WizardryData.PMO_LEVELS;
+import static andius.WizardryData.PMO_MONSTERS;
+import static andius.WizardryData.PMO_REWARDS;
 import andius.objects.Actor;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -21,7 +24,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import utils.Utils;
 
 public class CombatTestMain extends Game {
 
@@ -41,26 +43,26 @@ public class CombatTestMain extends Game {
             Andius a = new Andius();
             a.create();
 
-            for (int level = 0; level < LEVELS.length; level++) {
+            for (int level = 0; level < PMO_LEVELS.length; level++) {
                 System.out.println("\nLevel " + (level + 1));
                 for (int x = 0; x < DUNGEON_DIM; x++) {
                     for (int y = 0; y < DUNGEON_DIM; y++) {
-                        WizardryData.MazeCell cell = LEVELS[level].cells[x][y];
+                        WizardryData.MazeCell cell = PMO_LEVELS[level].cells[x][y];
                         if (cell.monsterID >= 0) {
-                            System.out.println("MID: " + Andius.MONSTERS.get(cell.monsterID).name);
+                            System.out.println("MID: " + PMO_MONSTERS.get(cell.monsterID).name);
                         }
                         if (cell.itemObtained > 0) {
-                            System.out.println("OBTAINED: " + Andius.ITEMS.get(cell.itemObtained).name);
+                            System.out.println("OBTAINED: " + PMO_ITEMS.get(cell.itemObtained).name);
                         }
                         if (cell.itemRequired > 0) {
-                            System.out.println("REQUIRED: " + Andius.ITEMS.get(cell.itemRequired).name);
+                            System.out.println("REQUIRED: " + PMO_ITEMS.get(cell.itemRequired).name);
                         }
                     }
                 }
             }
 
-            for (Reward r : Andius.REWARDS) {
-                System.out.println(r);
+            for (Reward r : PMO_REWARDS) {
+                //System.out.println(r);
             }
 
             Context ctx = new Context();
@@ -108,7 +110,7 @@ public class CombatTestMain extends Game {
             //String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
             //int idx = Utils.RANDOM.nextInt(monsters.length);
             //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
-            Monster monster = Andius.MONSTERS.get(77);
+            Monster monster = PMO_MONSTERS.get(77);
 
             Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
 

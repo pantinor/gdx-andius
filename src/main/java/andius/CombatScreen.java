@@ -1,8 +1,6 @@
 package andius;
 
 import andius.Andius.ExplosionDrawable;
-import static andius.Andius.MONSTERS;
-import static andius.Andius.REWARDS;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.HITMSGS;
@@ -236,7 +234,7 @@ public class CombatScreen extends BaseScreen {
             return;
         }
 
-        Monster partner = MONSTERS.get(monster.getPartnerID());
+        Monster partner = this.contextMap.scenario().monsters().get(monster.getPartnerID());
 
         int numPartners = 0;
         boolean hasPartner = this.rand.nextInt(100) + 1 < monster.getPartnerOdds();
@@ -248,7 +246,7 @@ public class CombatScreen extends BaseScreen {
 
         for (int i = 0; i < numPartners && nextOpenSlot() != -1; i++) {
             int j = nextOpenSlot();
-            crSlots[j] = new MutableMonster(MONSTERS.get(this.crType.getPartnerID()));
+            crSlots[j] = new MutableMonster(this.contextMap.scenario().monsters().get(this.crType.getPartnerID()));
         }
 
         addPartners(partner, groupCount + 1, maxGroups);
@@ -642,7 +640,7 @@ public class CombatScreen extends BaseScreen {
                     }
                 }
             }
-            mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, REWARDS.get(goldRewardId), REWARDS.get(chestRewardId)));
+            mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, goldRewardId, chestRewardId));
             this.contextMap.getScreen().endCombat(isWon, this.opponent);
         } else {
             boolean anyoneAlive = false;

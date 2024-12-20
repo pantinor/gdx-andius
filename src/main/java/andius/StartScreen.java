@@ -149,6 +149,7 @@ public class StartScreen implements Screen, Constants {
                     }
 
                 } catch (Exception e) {
+                    e.printStackTrace();
                     CTX.setSaveGame(new SaveGame());
                     mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
                 }

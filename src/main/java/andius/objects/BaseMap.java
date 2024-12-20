@@ -1,5 +1,6 @@
 package andius.objects;
 
+import andius.Andius;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import andius.CombatScreen;

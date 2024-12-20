@@ -46,15 +46,19 @@ public interface Constants {
         CAVE("Cave", "cave.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
-        //        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
-        //        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
+        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
+        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        WIZARDRY1("Wizardy Level 1", null, 0);
+        WIZARDRY1("Wizardy - Proving Ground of the Mad Overlord", WizardryData.Scenario.PMO),
+        WIZARDRY2("Wizardy - Knight of Diamonds", WizardryData.Scenario.KOD),
+        WIZARDRY3("Wizardy - Legacy of Llylgamyn", WizardryData.Scenario.LEG);
 
         private final String label;
         private final String tmxFile;
         private final int dim;
+        private final WizardryData.Scenario wizScenario;
+
         private BaseMap baseMap;
         private TiledMap tiledMap;
         private BaseScreen screen;
@@ -66,6 +70,14 @@ public interface Constants {
             this.label = label;
             this.tmxFile = tmx;
             this.dim = dim;
+            this.wizScenario = WizardryData.Scenario.PMO;
+        }
+
+        private Map(String label, WizardryData.Scenario scenario) {
+            this.label = label;
+            this.tmxFile = null;
+            this.dim = 0;
+            this.wizScenario = scenario;
         }
 
         public String getLabel() {
@@ -89,6 +101,10 @@ public interface Constants {
 
         public int getDim() {
             return dim;
+        }
+
+        public WizardryData.Scenario scenario() {
+            return wizScenario;
         }
 
         public BaseScreen getScreen() {
@@ -190,7 +206,7 @@ public interface Constants {
 
                 MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
-                    loadPeopleLayer(peopleLayer);
+                    loadPeopleLayer(peopleLayer, this.wizScenario.monsterMap());
                 }
 
                 MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
@@ -221,7 +237,7 @@ public interface Constants {
             }
 
             if (this.dim == 0) {
-                this.screen = new WizardryDungeonScreen();
+                this.screen = new WizardryDungeonScreen(this);
             } else if (this.dim == TILE_DIM) {
                 this.screen = new GameScreen(this);
             } else {
@@ -231,7 +247,7 @@ public interface Constants {
 
         }
 
-        private void loadPeopleLayer(MapLayer peopleLayer) {
+        private void loadPeopleLayer(MapLayer peopleLayer, java.util.Map<String, Monster> monsters) {
 
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {
@@ -258,7 +274,7 @@ public interface Constants {
                 if (role == Role.MONSTER) {
                     try {
                         String mid = obj.getProperties().get("monsterID", String.class);
-                        Monster monster = Andius.MONSTER_MAP.get(mid != null ? mid : name);
+                        Monster monster = monsters.get(mid != null ? mid : name);
                         if (monster != null) {
                             MutableMonster mm = new MutableMonster(monster);
                             mm.name = name;
@@ -317,7 +333,7 @@ public interface Constants {
         {232044, 255127, 243596, 208760, 331307, 345000, 358908, 400275},
         {400075, 439874, 419993, 359931, 581240, 605263, 629663, 702236}
     };
-    
+
     public static final String[] HITMSGS = new String[]{
         "whacks",
         "smites",

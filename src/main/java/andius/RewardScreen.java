@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.Random;
 import utils.LogScrollPane;
@@ -73,11 +72,11 @@ public class RewardScreen implements Screen, Constants {
     private static final int X_ALIGN = 280;
     private static final int ITEM_HGT = 25;
 
-    public RewardScreen(Context context, Map contextMap, int difficultyLevel, int expPoints, Reward goldReward, Reward chestReward) {
+    public RewardScreen(Context context, Map contextMap, int difficultyLevel, int expPoints, int goldReward, int chestReward) {
         this.context = context;
         this.contextMap = contextMap;
-        this.goldReward = goldReward;
-        this.chestReward = chestReward;
+        this.goldReward = contextMap.scenario().rewards().get(goldReward);
+        this.chestReward = contextMap.scenario().rewards().get(chestReward);
         this.difficultyLevel = difficultyLevel;
         this.expPoints = expPoints;
 
@@ -85,7 +84,7 @@ public class RewardScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        int trap = chestReward.trapTypeFlags;
+        int trap = this.chestReward.trapTypeFlags;
         java.util.List<TrapType> tmp = new ArrayList<>();
         for (int j = 0; j < TrapType.values().length; j++) {
             if ((trap & 0x01) != 0) {
@@ -220,7 +219,7 @@ public class RewardScreen implements Screen, Constants {
                         if (roll <= odds) {
                             CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
                             int itemId = Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax());
-                            Item found = Andius.ITEMS.get(itemId).clone();
+                            Item found = this.contextMap.scenario().items().get(itemId).clone();
                             picked.inventory.add(found);
                             log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
                         }
