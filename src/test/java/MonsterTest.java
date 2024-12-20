@@ -19,7 +19,7 @@ public class MonsterTest {
     //@Test
     public void monsters() throws Exception {
 
-        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/monsters.json");
+        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/leglyl-monsters.json");
         String json = IOUtils.toString(is2);
 
         GsonBuilder builder = new GsonBuilder();

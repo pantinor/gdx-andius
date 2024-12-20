@@ -10,7 +10,6 @@ import andius.TibianSprite;
 import andius.WizardryData;
 import static andius.WizardryData.DUNGEON_DIM;
 import static andius.WizardryData.LEVELS;
-import static andius.WizardryData.MONSTER_ENCOUNTER_LEVEL;
 import andius.objects.Actor;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -106,10 +105,10 @@ public class CombatTestMain extends Game {
 
             int level = 9;
 
-            String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
-            int idx = Utils.RANDOM.nextInt(monsters.length);
-            Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
-            //Monster monster = Andius.MONSTERS.get(77);
+            //String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
+            //int idx = Utils.RANDOM.nextInt(monsters.length);
+            //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
+            Monster monster = Andius.MONSTERS.get(77);
 
             Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
 

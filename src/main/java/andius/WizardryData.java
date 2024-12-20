@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import utils.Utils;
 
 public class WizardryData {
 
     public static final int DUNGEON_DIM = 20;
+    private static final Random RANDOM = new Random();
 
     //wizardry 1 proving grounds
     private static final String L1 = "555555555500545500040800500000007400005540914500005500944D00501440064000144040066400004000500300001440550100555546555500000001008100545551555500505550559900705550551500B09A50559A00301050550000605750B5990040555001000050155099590054154010400001005414640005005518540015015514A400150254804200150155149400094495105400458454140400494455040400450055020C0001000100410000000404000005002400000055551500D00055D52500D000956015005400952025007500550054581500150025581600054055D3C400010055D3C4005455000C040050000000740000554091450000550094C50050144006400014404006E40000400050010000144055010055554655550000000100810055555155550050555055950050D550551500907A5055990010105055000060555095990040557001000050155099590054154010400055555D555500000015055900014015069500454015056900850015A050004540150D6500015125045500112115054100125115014100114095004200004000405000000001010000010009004000F57F05007400555509007400155805005500254809405D001500155645000540099645000150D53471000140E534710000D8030000D801000CD809000C0000000CC089A860C021B266D81FB166180E0006003E9200000000000050000000000000000C0000000C0000000A0000000A0000B80F0000A00F0000F80F0000F80F00010000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000000000000AAAAAAAA0000A3AAAA4AAAAAAAAA0900A0AAAAAA0A0000000000000000000A0000000000000000000A7065000000000000080A0000000000000000000A0000000000000000000A0000000000000000000A0000000000000000000A0000000000000000000A00000000000000000010B16BBB8B050000000000000200FFFFFFFF01004D00B7FBB6FB00000000000000000000000000000000000007000000030004000B00120018000400000000000000000000000000000000000C00010008000F0004000400040001000000000000000000000000000000000000000400000001000000000005000000030000000000030000000013";
@@ -89,18 +91,6 @@ public class WizardryData {
     private static final String[] MSGS = new String[]{M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M16, M17, M18, M19, M20, M21, M22, M23, M24, M25, M26, M27, M28, M29, M30, M31, M32};
     public static final List<Message> MESSAGES = new ArrayList<>();
 
-    public static final String[][] MONSTER_ENCOUNTER_LEVEL = new String[][]{
-        {"Bubbly Slime", "Bushwacker", "Kobold", "Orc", "Rogue", "Undead Kobold", "Highway Man"},
-        {"Creeping Coin?", "Creeping Crud", "Gas Cloud", "Highway Man", "Lvl 1 Mage", "Lvl 1 Ninja", "Lvl 1 Priest", "Rogue", "Vorpal Bunny", "Zombie"},
-        {"Capybara", "Coyote", "Dragon Fly", "Giant Toad", "Lvl 1 Ninja", "Lvl 1 Priest", "Lvl 3 Ninja", "Lvl 3 Priest", "Lvl 3 Samurai", "Rogue", "Rotting Corpse", "Vorpal Bunny", "Were Bear"},
-        {"Attack Dog", "Boring Beetle", "Coyote", "Dragon Fly", "Dragon Puppy", "Gas Dragon", "Grave Mist", "High Ninja", "Huge Spider", "Ogre", "Priestess", "Rotting Corpse", "Shade", "Vorpal Bunny", "Were Bear", "Were Rat"},
-        {"Attack Dog", "Bishop", "Champ Samurai", "Dragon Fly", "Dragon Puppy", "Gargoyle", "Giant Spider", "Grave Mist", "Huge Spider", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 1", "Medusa Lizard", "Minor Daimyo", "Ogre", "Rotting Corpse", "Shade", "Spirit", "Swordsman", "Were Rat", "Were Wolf"},
-        {"Arch Mage", "Chimera", "Earth Giant", "Gaze Hound", "Giant Spider", "High Priest 1", "Killer Wolf", "Lvl 4 Thief", "Lvl 5 Mage", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 8 Ninja", "Lvl 8 Priest", "Life Stealer", "Master Thief 1", "Medusa Lizard", "Ogre Lord", "Spirit", "Troll", "Were Tiger", "Were Wolf"},
-        {"Arch Mage", "Champ Samurai", "Chimera", "Gorgon", "High Priest 2", "Lesser Demon", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 2", "Lvl 8 Fighter", "Lvl 8 Priest", "Life Stealer", "Major Daimyo", "Master Thief 1", "Medusa Lizard", "Night Stalker", "Ogre Lord", "Troll", "Were Tiger", "Were Wolf", "Wyvern"},
-        {"Arch Mage", "Champ Samurai", "Chimera", "Earth Giant", "Fire Dragon", "Gaze Hound", "Hatamoto", "High Master", "High Priest 2", "Lesser Demon", "Lvl 5 Priest", "Lvl 6 Ninja", "Lvl 7 Mage 2", "Lvl 8 Ninja", "Lvl 8 Priest", "Lvl 10 Fighter", "Life Stealer", "Major Daimyo", "Master Thief 2", "Night Stalker", "Ogre Lord", "Troll", "Wyvern"},
-        {"Arch Mage", "Chimera", "Earth Giant", "Fire Dragon", "Fire Giant", "Frost Giant", "Gaze Hound", "High Master", "Lesser Demon", "Lvl 7 Mage 3", "Lvl 7 Thief", "Lvl 8 Fighter", "Lvl 8 Ninja", "Lvl 8 Priest", "Lvl 10 Fighter", "Life Stealer", "Maelific", "Master Thief 2", "Murphy's Ghost", "Night Stalker", "Ogre Lord", "Spirit", "Troll", "Wyvern"},
-        {"Arch Mage", "Bleeb", "Chimera", "Dragon Zombie", "Fire Dragon", "Fire Giant", "Flack", "Frost Giant", "Gorgon", "Greater Demon", "High Priest 3", "High Wizard", "Lvl 8 Bishop", "Lvl 8 Fighter", "Lvl 8 Ninja", "Lvl 10 Mage", "Maelific", "Master Ninja", "Master Thief 3", "Murphy's Ghost", "Poison Giant", "Raver Lord", "Thief", "Vampire", "Vampire Lord", "Werdna", "Will O' Wisp"},};
-
     static {
         for (String hx : MSGS) {
             MESSAGES.add(new Message(DatatypeConverter.parseHexBinary(hx)));
@@ -115,10 +105,17 @@ public class WizardryData {
         public int level;
         byte[] buffer;
         public MazeCell[][] cells = new MazeCell[20][20];
+        public EnemyOdds[] monsterOdds = new EnemyOdds[3];
 
         public MazeLevel(byte[] buffer, int level) {
             this.level = level;
             this.buffer = buffer;
+
+            int offset = (int) 0x360;
+            for (int i = 0; i < 3; i++) {
+                monsterOdds[i] = new EnemyOdds(this.buffer, offset);
+                offset += 10;
+            }
 
             for (int x = 0; x < 20; x++) {
                 for (int y = 0; y < 20; y++) {
@@ -129,11 +126,10 @@ public class WizardryData {
             for (int x = 0; x < 20; x++) {
                 for (int y = 0; y < 20; y++) {
                     if (cells[x][y].monsterLair) {
-                        String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
-                        int idx = Utils.RANDOM.nextInt(monsters.length);
-                        Monster m = Andius.MONSTER_MAP.get(monsters[idx]);
+                        int mid = getRandomMonster();
+                        Monster m = Andius.MONSTERS.get(mid);
                         if (m == null) {
-                            System.out.println("cannot find " + monsters[idx]);
+                            System.out.println("cannot find monster id " + mid);
                         }
                         cells[x][y].tempMonsterID = m.monsterId;
                     }
@@ -312,20 +308,13 @@ public class WizardryData {
             }
         }
 
-        public void print() {
-            System.out.println();
-            System.out.println();
-
-            for (int x = 19; x >= 0; x--) {
-                for (int y = 0; y < 20; y++) {
-                    //if (cells[x][y].tile != null) {
-                    //System.out.print(cells[x][y].tile.symbol());
-                    //} else {
-                    System.out.print(" ");
-                    //}
-                }
-                System.out.println();
+        private int getRandomMonster() {
+            int encounterType = 0;
+            while (RANDOM.nextInt(4) == 2 && encounterType < 2) {
+                ++encounterType;
             }
+
+            return monsterOdds[encounterType].getRandomMonster();
         }
     }
 
@@ -528,6 +517,36 @@ public class WizardryData {
             }
         }
         return text.toString();
+    }
+
+    private static int getShort(byte[] buffer, int ptr) {
+        return (buffer[ptr] & 0xFF) | ((buffer[ptr + 1] & 0xFF) << 8);
+    }
+
+    private static class EnemyOdds {
+
+        private final int minEnemy;
+        private final int rangeSize;
+        private final int extraRangeOdds;
+        private final int totExtraRanges;
+        private final int extraRangeOffset;
+
+        public EnemyOdds(byte[] buffer, int offset) {
+            minEnemy = getShort(buffer, offset);
+            extraRangeOffset = getShort(buffer, offset + 2);
+            totExtraRanges = getShort(buffer, offset + 4);
+            rangeSize = getShort(buffer, offset + 6);
+            extraRangeOdds = getShort(buffer, offset + 8);
+        }
+
+        public int getRandomMonster() {
+            int rangeNo = 0;
+            while (RANDOM.nextInt(100) < extraRangeOdds && rangeNo < totExtraRanges) {
+                ++rangeNo;
+            }
+            return minEnemy + RANDOM.nextInt(rangeSize) + extraRangeOffset * rangeNo;
+        }
+
     }
 
 }

@@ -178,9 +178,9 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="27" name="Ninja" type="MONSTER" x="768" y="816" width="48" height="48">
+  <object id="27" name="High Priest 2" type="MONSTER" x="768" y="816" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Lvl 6 Ninja"/>
+    <property name="monsterID" value="High Priest 2"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -228,25 +228,25 @@
   </object>
   <object id="36" name="ninja" type="MONSTER" x="528" y="1776" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="Lvl 6 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="37" name="ninja" type="MONSTER" x="576" y="1824" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="Lvl 8 Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="38" name="ninja" type="MONSTER" x="528" y="1824" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Lvl 3 Ninja"/>
+    <property name="monsterID" value="Master Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="39" name="ninja" type="MONSTER" x="528" y="1872" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Lvl 1 Ninja"/>
+    <property name="monsterID" value="High Ninja"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
