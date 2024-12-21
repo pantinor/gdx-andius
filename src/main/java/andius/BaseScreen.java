@@ -141,12 +141,18 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     }
 
-    public void animateText(String text, Color color, float sx, float sy, float dx, float dy, float delay) {
+    public void animateText(String text, Color color) {
         
+        float sx = 100;
+        float sy = -100;
+        float dx = 100;
+        float dy = 400;
+        float delay = 5;
+
         log(text);
-        
+
         Label.LabelStyle ls = new Label.LabelStyle(Andius.skin.get("small-ultima", BitmapFont.class), Color.WHITE);
-        Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), ls);
+        Label label = new Label(text, ls);
         label.setWrap(true);
         label.setWidth(800);
         label.setPosition(sx, sy);

@@ -262,7 +262,7 @@ public class GameScreen extends BaseScreen {
                                     Andius.CTX.players()[0].inventory.add(found);
                                 }
                             }
-                            animateText(sb.toString(), Color.GREEN, 100, 300, 100, 400, 3);
+                            animateText(sb.toString(), Color.GREEN);
                             messagesLayer.getObjects().remove(obj);
                             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
                             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
@@ -380,7 +380,7 @@ public class GameScreen extends BaseScreen {
                 if (nx == mx && this.map.getMap().getHeight() - 1 - ny == my) {
                     String msg = obj.getProperties().get("type", String.class);
 
-                    animateText(msg, Color.WHITE, 100, 300, 100, 400, 3);
+                    animateText(msg, Color.WHITE);
 
                     String itemRequired = obj.getProperties().get("itemRequired", String.class);
                     if (itemRequired != null) {
@@ -393,7 +393,7 @@ public class GameScreen extends BaseScreen {
                         }
                         if (!owned) {
                             Sounds.play(Sound.NEGATIVE_EFFECT);
-                            animateText("Cannot pass!", Color.RED, 100, 200, 100, 300, 3);
+                            animateText("Cannot pass!", Color.RED);
                             return false;
                         }
                     }
@@ -410,7 +410,7 @@ public class GameScreen extends BaseScreen {
                         if (found != null && !owned) {
                             Sounds.play(Sound.POSITIVE_EFFECT);
                             Andius.CTX.players()[0].inventory.add(found);
-                            animateText(Andius.CTX.players()[0].name + " obtained a " + found.name + "!", Color.GREEN, 100, 200, 100, 300, 3);
+                            animateText(Andius.CTX.players()[0].name + " obtained a " + found.name + "!", Color.GREEN);
                         }
                     }
 

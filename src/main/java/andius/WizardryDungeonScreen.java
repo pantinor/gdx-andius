@@ -828,7 +828,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         WizardryData.MazeLevel[] levels = this.map.scenario().levels();
 
         if (levels[currentLevel].cells[dx][dy].message != null) {
-            animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+            animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
         }
 
         if (levels[currentLevel].cells[dx][dy].itemRequired > 0) {
@@ -841,7 +841,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             if (!owned) {
                 Sounds.play(Sound.NEGATIVE_EFFECT);
-                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
+                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
                 return;
             }
         }
