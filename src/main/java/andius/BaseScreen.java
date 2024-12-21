@@ -148,7 +148,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         Label.LabelStyle ls = new Label.LabelStyle(Andius.skin.get("small-ultima", BitmapFont.class), Color.WHITE);
         Label label = new Label(text.replace(". ", ".\n").replace("|", "\n"), ls);
         label.setWrap(true);
-        label.setWidth(700);
+        label.setWidth(800);
         label.setPosition(sx, sy);
         label.setAlignment(Align.center);
         label.setColor(color);

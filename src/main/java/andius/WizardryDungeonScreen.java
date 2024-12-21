@@ -482,7 +482,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         for (int x = 0; x < DUNGEON_DIM; x++) {
             for (int y = 0; y < DUNGEON_DIM; y++) {
                 MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
-                
+
                 if (cell.darkness) {
                     pixmap.setColor(Color.PURPLE);
                     pixmap.fillRectangle(x * MINI_DIM, y * MINI_DIM, MINI_DIM, MINI_DIM);
@@ -828,9 +828,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         WizardryData.MazeLevel[] levels = this.map.scenario().levels();
 
         if (levels[currentLevel].cells[dx][dy].message != null) {
-            if (levels[currentLevel].cells[dx][dy].itemRequired <= 0) {
-                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
-            }
+            animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN, 100, 300, 100, 400, 3);
         }
 
         if (levels[currentLevel].cells[dx][dy].itemRequired > 0) {

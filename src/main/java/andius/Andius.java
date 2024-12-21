@@ -102,7 +102,7 @@ public class Andius extends Game {
         generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/ultima.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        parameter.size = 48;
+        parameter.size = 32;
         BitmapFont smallUltimaFont = generator.generateFont(parameter);
         
         generator.dispose();
