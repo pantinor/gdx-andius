@@ -99,7 +99,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
         imageScrollPane.setPosition(0, 0);
 
         try {
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/leg-monsters.json")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/pmo-monsters.json")));
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             monsters = gson.fromJson(json, new TypeToken<java.util.List<Monster>>() {

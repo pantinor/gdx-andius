@@ -310,9 +310,6 @@ public class WizardryData {
                                         break;
                                     }
                                 }
-                                if (cell.message == null) {
-                                    System.out.printf("scenario %d message NOT found %s\n", this.scenario, ci);
-                                }
                             }
 
                             if (ci.val[2] == 2) {
@@ -320,7 +317,7 @@ public class WizardryData {
                             }
                             if (ci.val[2] == 3) {
                                 if (ci.val[0] > 0) {
-                                    cell.itemObtained = ci.val[0];//players wades to get item
+                                    cell.itemObtained = ci.val[0];
                                 }
                             }
                             if (ci.val[2] == 4) {
@@ -328,6 +325,12 @@ public class WizardryData {
                                     cell.monsterID = ci.val[0];
                                 } else if (ci.val[0] > -1200) {
                                     cell.itemObtained = ci.val[0] * -1 - 1000;
+                                } else {
+                                    int itemNo = ci.val[0];
+                                    itemNo *= -1;
+                                    itemNo -= 20000;
+                                    cell.tradeItem1 = itemNo / 100;
+                                    cell.tradeItem2 = itemNo % 100;
                                 }
                             }
                             if (ci.val[2] == 5 || ci.val[2] == 13) {
@@ -336,9 +339,8 @@ public class WizardryData {
                                 }
                             }
                             if (ci.val[2] == 14) {//item required or else teleported
-                                cell.itemRequired = ci.val[0];
+                                cell.itemRequired = ci.val[1];
                                 cell.addressTo = new MazeAddress(this.level, ci.val[0] / 100, ci.val[0] % 100);
-                                cell.teleport = true;
                             }
                             if (ci.val[2] == 8) {//return to castle
                                 cell.addressTo = new MazeAddress(0, 0, 0);
@@ -350,9 +352,6 @@ public class WizardryData {
                                         break;
                                     }
                                 }
-                                if (cell.riddleAnswer == null) {
-                                    System.out.printf("scenario %d riddle answer NOT found %s\n", this.scenario, ci);
-                                }
                             }
                             if (ci.val[2] == 11) {
                                 for (Message m : messages) {
@@ -360,9 +359,6 @@ public class WizardryData {
                                         cell.feeAmount = Integer.parseInt(m.getText());
                                         break;
                                     }
-                                }
-                                if (cell.feeAmount <= 0) {
-                                    System.out.printf("scenario %d fee NOT found %s\n", this.scenario, ci);
                                 }
                             }
                             break;
@@ -551,6 +547,8 @@ public class WizardryData {
         boolean teleport;
         boolean spellsBlocked;
         public int feeAmount;
+        public int tradeItem1;
+        public int tradeItem2;
         public String riddleAnswer;
         public Dice damage;
         public int messageType;

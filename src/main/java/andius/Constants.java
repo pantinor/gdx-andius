@@ -45,14 +45,14 @@ public interface Constants {
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
-        ALIBABA("Shahriar", "ali-baba.tmx", TILE_DIM),
+        ALIBABA("Ali Baba Shahriar", "ali-baba.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        WIZARDRY1("Wizardy - Proving Ground of the Mad Overlord", WizardryData.Scenario.PMO),
-        WIZARDRY2("Wizardy - Knight of Diamonds", WizardryData.Scenario.KOD),
-        WIZARDRY3("Wizardy - Legacy of Llylgamyn", WizardryData.Scenario.LEG);
+        WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
+        WIZARDRY2("Knight of Diamonds", WizardryData.Scenario.KOD),
+        WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG);
 
         private final String label;
         private final String tmxFile;

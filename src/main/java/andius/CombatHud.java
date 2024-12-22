@@ -293,7 +293,7 @@ public class CombatHud {
         sb.append(String.format("HP: %d / %d  AC: %d\n", rec.getCurrentHitPoints(), rec.getMaxHitPoints(), rec.getArmourClass()));
         sb.append(String.format("ST: %s\n", rec.status().toString()));
         sb.append(String.format("MG LVL: %d \n", rec.getCurrentMageSpellLevel()));
-        sb.append(String.format("PR LVL: %d \n", rec.getPriestSpellLevel()));
+        sb.append(String.format("PR LVL: %d \n", rec.getCurrentPriestSpellLevel()));
 
         int dim = TILE_DIM * 3;
 

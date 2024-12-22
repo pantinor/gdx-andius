@@ -682,13 +682,13 @@ public class CombatScreen extends BaseScreen {
             CombatAction action = CombatAction.ATTACK;
             Spells spell = null;
 
-            if ((creature.getMonster().getMageSpellLevel() > 0) && rand.nextInt(100) < 75) {
+            if (creature.getMonster().getCurrentMageSpellLevel() > 0 && !creature.getMonster().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
                 spell = creature.getMonster().castMageSpell();
                 action = CombatAction.CAST;
             }
 
             if (action != CombatAction.CAST) {
-                if ((creature.getMonster().getPriestSpellLevel() > 0) && rand.nextInt(100) < 75) {
+                if (creature.getMonster().getCurrentPriestSpellLevel() > 0 && !creature.getMonster().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
                     spell = creature.getMonster().castPriestSpell();
                     action = CombatAction.CAST;
                 }
