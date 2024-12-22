@@ -1,15 +1,12 @@
 package andius;
 
 import static andius.Andius.CTX;
-import static andius.Andius.mainGame;
 import static andius.Constants.CLASSPTH_RSLVR;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.objects.Item;
-import andius.objects.Monster;
 import utils.MoveCameraAction;
-import andius.objects.MutableMonster;
 import utils.PanCameraAction;
 import andius.objects.SaveGame;
 import java.util.ArrayList;
@@ -42,8 +39,6 @@ import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -80,12 +75,12 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final List<ModelInstance> floor = new ArrayList<>();
     private final List<ModelInstance> ceiling = new ArrayList<>();
     private static Texture MINI_MAP_TEXTURE;
-    private final TextureRegion[][] arrows = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/arrows.png")), 10, 10);
+    private final TextureRegion[][] arrows = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/arrows.png")), 15, 15);
     private final Pixmap miniMapIconsPixmap;
-    private static final int MINI_DIM = 10;
-    private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM;
-    private static final int XALIGNMM = 16;
-    private static final int YALIGNMM = 550;
+    private static final int MINI_DIM = 15;
+    private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + MINI_DIM / 2;
+    private static final int XALIGNMM = 710;
+    private static final int YALIGNMM = 450;
 
     private int currentLevel = 0;
     private final Vector3 currentPos = new Vector3();
@@ -102,7 +97,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
         Pixmap pixmap = new Pixmap(MM_BKGRND_DIM, MM_BKGRND_DIM, Format.RGBA8888);
-        pixmap.setColor(0.8f, 0.7f, 0.5f, .8f);
+        pixmap.setColor(0.8f, 0.7f, 0.5f, 1f);
         pixmap.fillRectangle(0, 0, MM_BKGRND_DIM, MM_BKGRND_DIM);
         MINI_MAP_TEXTURE = new Texture(pixmap);
         pixmap.dispose();
@@ -461,7 +456,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
 
         if (showMiniMap) {
-            batch.draw(MINI_MAP_TEXTURE, XALIGNMM, YALIGNMM);
+            batch.draw(MINI_MAP_TEXTURE, XALIGNMM - 3, YALIGNMM + 3);
             batch.draw(miniMap, XALIGNMM, YALIGNMM);
         }
 
@@ -489,58 +484,41 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
                 if (cell.monsterID >= 0) {
                     pixmap.setColor(Color.RED);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
                 }
 
                 if (cell.tempMonsterID >= 0) {
                     pixmap.setColor(Color.PINK);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                }
+
+                if (cell.message != null) {
+                    pixmap.setColor(Color.GREEN);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
                 }
 
                 if (cell.itemRequired > 0) {
                     pixmap.setColor(Color.FOREST);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
                 }
 
                 if (cell.itemObtained > 0) {
                     pixmap.setColor(Color.LIME);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
                 }
 
                 if (cell.pit) {
-                    pixmap.drawPixmap(
-                            this.miniMapIconsPixmap,
-                            x * MINI_DIM + 1,
-                            y * MINI_DIM + 1,
-                            arrows[3][0].getRegionX(),
-                            arrows[3][0].getRegionY(),
-                            arrows[3][0].getRegionWidth(),
-                            arrows[3][0].getRegionHeight()
-                    );
+                    pixmap.setColor(Color.BROWN);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
+                    pixmap.setColor(Color.WHITE);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
                 }
 
                 if (cell.teleport) {
-                    pixmap.drawPixmap(
-                            this.miniMapIconsPixmap,
-                            x * MINI_DIM + 1,
-                            y * MINI_DIM + 1,
-                            arrows[2][1].getRegionX(),
-                            arrows[2][1].getRegionY(),
-                            arrows[2][1].getRegionWidth(),
-                            arrows[2][1].getRegionHeight()
-                    );
-                }
-
-                if (cell.message != null) {
-                    pixmap.drawPixmap(
-                            this.miniMapIconsPixmap,
-                            x * MINI_DIM + 1,
-                            y * MINI_DIM + 1,
-                            arrows[1][2].getRegionX(),
-                            arrows[1][2].getRegionY(),
-                            arrows[1][2].getRegionWidth(),
-                            arrows[1][2].getRegionHeight()
-                    );
+                    pixmap.setColor(Color.FOREST);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
+                    pixmap.setColor(Color.WHITE);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 2);
                 }
 
                 pixmap.setColor(Color.DARK_GRAY);
@@ -624,10 +602,10 @@ public class WizardryDungeonScreen extends BaseScreen {
                     this.miniMapIconsPixmap,
                     cx,
                     cy,
-                    arrows[2][3].getRegionX(),
-                    arrows[2][3].getRegionY(),
-                    arrows[2][3].getRegionWidth(),
-                    arrows[2][3].getRegionHeight()
+                    arrows[3][1].getRegionX(),
+                    arrows[3][1].getRegionY(),
+                    arrows[3][1].getRegionWidth(),
+                    arrows[3][1].getRegionHeight()
             );
         }
     }
