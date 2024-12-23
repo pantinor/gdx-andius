@@ -90,7 +90,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private static final int XALIGNMM = 705;
     private static final int YALIGNMM = 415;
 
-    private int currentLevel = 0;
+    public int currentLevel = 0;
     private final Vector3 currentPos = new Vector3();
     private Direction currentDir = Direction.EAST;
 
@@ -1017,29 +1017,56 @@ public class WizardryDungeonScreen extends BaseScreen {
 
             if (levels[currentLevel].cells[dx][dy].monsterID != -1 || (levels[currentLevel].cells[dx][dy].tempMonsterID != -1 && Utils.randomBoolean())) {
 
-//                Monster monster = null;
-//                if (levels[currentLevel].cells[dx][dy].monsterID != -1) {
-//                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].monsterID);
-//                } else {
-//                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].tempMonsterID);
-//                }
-//
-//                andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
-//
-//                MutableMonster mm = new MutableMonster(monster);
-//                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
-//
-//                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-//                TiledMap tm = loader.load("assets/data/combat1.tmx");
-//                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1);
-//                mainGame.setScreen(cs);
+                Monster monster = null;
+                if (levels[currentLevel].cells[dx][dy].monsterID != -1) {
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].monsterID);
+                } else {
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[dx][dy].tempMonsterID);
+                }
+
+                andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
+
+                MutableMonster mm = new MutableMonster(monster);
+                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
+                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                TiledMap tm = loader.load("assets/data/combat1.tmx");
+                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1);
+                mainGame.setScreen(cs);
             }
 
             finishTurn(dx, dy);
         }
     }
 
-    private void teleport(MazeAddress temp) {
+    @Override
+    public void teleport(int level, int stepsX, int stepsY) {
+        int x = (Math.round(currentPos.x) - 1) + stepsX;
+        int y = (Math.round(currentPos.z) - 1) + stepsY;
+        int z = currentLevel + level + 1;
+        
+        if (x >= DUNGEON_DIM) {
+            x = DUNGEON_DIM - x;
+        }
+        if (x < 0) {
+            x = DUNGEON_DIM + x;
+        }
+        if (y >= DUNGEON_DIM) {
+            y = DUNGEON_DIM - y;
+        }
+        if (y < 0) {
+            y = DUNGEON_DIM + y;
+        }
+        if (z >= this.map.scenario().levels().length) {
+            z = this.map.scenario().levels().length - 1;
+        }
+        if (z < 0) {
+            z = 0;
+        }
+        teleport(new MazeAddress(z, x, y));
+    }
+
+    public void teleport(MazeAddress temp) {
 
         MazeAddress to;
 

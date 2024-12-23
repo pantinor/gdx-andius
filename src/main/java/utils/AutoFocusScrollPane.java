@@ -3,6 +3,7 @@ package utils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -13,12 +14,18 @@ public class AutoFocusScrollPane extends ScrollPane {
         addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                getStage().setScrollFocus(AutoFocusScrollPane.this);
+                Stage s = getStage();
+                if (s != null) {
+                    s.setScrollFocus(AutoFocusScrollPane.this);
+                }
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                getStage().setScrollFocus(null);
+                Stage s = getStage();
+                if (s != null) {
+                    s.setScrollFocus(null);
+                }
             }
         });
     }

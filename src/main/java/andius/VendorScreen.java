@@ -126,6 +126,7 @@ public class VendorScreen implements Screen, Constants {
 
         ScrollPane sp1 = new ScrollPane(this.playerSelection, Andius.skin);
         invPane = new AutoFocusScrollPane(playerSelection.getSelected().invTable, Andius.skin);
+        invPane.setScrollingDisabled(true, false);
 
         vendorTable = new Table(Andius.skin);
         vendorTable.align(Align.top);
@@ -176,6 +177,7 @@ public class VendorScreen implements Screen, Constants {
         }
         );
         vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
+        vendorPane.setScrollingDisabled(true, false);
 
         this.cancel = new TextButton("LEAVE", Andius.skin, "brown-larger");
         this.cancel.addListener(new ChangeListener() {

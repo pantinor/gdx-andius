@@ -5,6 +5,8 @@ import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.HITMSGS;
 import static andius.Constants.TILE_DIM;
+import static andius.WizardryData.DUNGEON_DIM;
+import andius.WizardryData.MazeAddress;
 import andius.objects.PlayerCursor;
 import andius.objects.Dice;
 import andius.objects.Item;
@@ -658,6 +660,24 @@ public class CombatScreen extends BaseScreen {
                 mainGame.setScreen(startScreen);
             }
         }
+    }
+
+    public void castCombatMalor() {
+        //end combat random teleport to same lavel coordinates
+        if (this.contextMap.getScreen() instanceof WizardryDungeonScreen) {
+            end();
+            WizardryDungeonScreen scr = (WizardryDungeonScreen) this.contextMap.getScreen();
+            int randx = Utils.RANDOM.nextInt(DUNGEON_DIM);
+            int randy = Utils.RANDOM.nextInt(DUNGEON_DIM);
+            scr.teleport(new MazeAddress(scr.currentLevel + 1, randx, randy));
+        } else {
+            Sounds.play(Sound.EVADE);
+        }
+    }
+
+    @Override
+    public void teleport(int level, int stepsX, int stepsY) {
+
     }
 
     @Override

@@ -42,7 +42,7 @@ import utils.Utils;
 public class EquipmentScreen implements Screen, Constants {
 
     private final Context context;
-
+    private final Map map;
     private final Texture hud;
     private final SpriteBatch batch;
     private final Stage stage;
@@ -90,9 +90,9 @@ public class EquipmentScreen implements Screen, Constants {
     Image focusIndicator, spellFocusInd;
     Label invDesc;
 
-    public EquipmentScreen(Context context, final Map contextMap) {
+    public EquipmentScreen(Context context, Map map) {
         this.context = context;
-
+        this.map = map;
         this.hud = new Texture(Gdx.files.classpath("assets/data/equipment.png"));
         this.batch = new SpriteBatch();
         this.stage = new Stage();
@@ -136,9 +136,11 @@ public class EquipmentScreen implements Screen, Constants {
 
         invPane = new AutoFocusScrollPane(playerSelection.getSelected().invTable, Andius.skin);
         invPane.setBounds(485, Andius.SCREEN_HEIGHT - 551, 246, 420);
+        invPane.setScrollingDisabled(true, false);
 
         spellPane = new AutoFocusScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
         spellPane.setBounds(753, Andius.SCREEN_HEIGHT - 551, 246, 420);
+        spellPane.setScrollingDisabled(true, false);
 
         int x = 40;
         this.unequip = new TextButton("UNEQUIP", Andius.skin, "red-larger");
@@ -190,7 +192,7 @@ public class EquipmentScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedItem != null && selectedItem.item.type == ItemType.SPECIAL) {
-                    if (SpellUtil.use(selectedItem.item.name, selectedPlayer.character)) {
+                    if (SpellUtil.useItem(selectedItem.item.name, selectedPlayer.character)) {
                         selectedItem.removeActor(focusIndicator);
                         selectedPlayer.invTable.removeActor(selectedItem);
                         selectedItem = null;
@@ -206,7 +208,7 @@ public class EquipmentScreen implements Screen, Constants {
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                mainGame.setScreen(contextMap.getScreen());
+                mainGame.setScreen(map.getScreen());
             }
         });
         this.cancel.setBounds(x, 240, 75, 40);
@@ -218,7 +220,7 @@ public class EquipmentScreen implements Screen, Constants {
                 for (PlayerIndex pi : EquipmentScreen.this.playerSelection.getItems()) {
                     pi.save();
                 }
-                mainGame.setScreen(contextMap.getScreen());
+                mainGame.setScreen(map.getScreen());
             }
         });
         this.exit.setBounds(x, 240, 75, 40);
@@ -300,6 +302,10 @@ public class EquipmentScreen implements Screen, Constants {
 
     }
 
+    private TextureRegion icon(Item it) {
+        return (it == null ? invIcons[803] : invIcons[it.iconID]);
+    }
+
     @Override
     public void render(float delta) {
 
@@ -308,9 +314,6 @@ public class EquipmentScreen implements Screen, Constants {
         batch.begin();
         batch.draw(this.hud, 0, 0);
         batch.end();
-
-        stage.act();
-        stage.draw();
 
         batch.begin();
         if (selectedImage != null) {
@@ -337,6 +340,9 @@ public class EquipmentScreen implements Screen, Constants {
         }
 
         batch.end();
+
+        stage.act();
+        stage.draw();
 
     }
 
@@ -408,7 +414,23 @@ public class EquipmentScreen implements Screen, Constants {
             spellTable.align(Align.top);
 
             for (Spells spell : character.knownSpells) {
-                spellTable.add(new SpellListing(spell));
+
+                SpellListing l = new SpellListing(spell);
+                l.cast.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                        if (spell.getArea() != SpellArea.COMBAT && character.canCast(spell)) {
+                            if (spell == Spells.MALOR) {
+                                new MalorDialog(character, map.getScreen()).show(stage);
+                            } else {
+                                SpellUtil.campCast(map.getScreen(), context, character, spell);
+                            }
+                        } else {
+                            Sounds.play(Sound.EVADE);
+                        }
+                    }
+                });
+                spellTable.add(l);
                 spellTable.row();
             }
 
@@ -433,8 +455,7 @@ public class EquipmentScreen implements Screen, Constants {
 
                     return false;
                 }
-            }
-            );
+            });
 
             avatar = new Image(Andius.faceTiles[sp.portaitIndex]);
             avatar.setX(348);
@@ -728,10 +749,6 @@ public class EquipmentScreen implements Screen, Constants {
         }
     }
 
-    private TextureRegion icon(Item it) {
-        return (it == null ? invIcons[803] : invIcons[it.iconID]);
-    }
-
     private class ItemListing extends Group {
 
         Item item;
@@ -773,18 +790,22 @@ public class EquipmentScreen implements Screen, Constants {
         Spells spell;
         final Image icon;
         final Label label;
+        final TextButton cast;
 
         SpellListing(Spells spell) {
             this.spell = spell;
 
             this.icon = new Image(invIcons[spell.getIcon()]);
             this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "larger");
+            this.cast = new TextButton("CAST", Andius.skin, "red");
 
             addActor(this.icon);
             addActor(this.label);
+            addActor(this.cast);
 
             this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
             this.label.setPosition(getX() + dim + 10, getY() + 10);
+            this.cast.setPosition(getX() + dim + 130, getY() + 10);
 
             this.setBounds(getX(), getY(), w, h);
 

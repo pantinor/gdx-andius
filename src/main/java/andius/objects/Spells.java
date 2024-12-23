@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.objects;
 
 import andius.Constants.SpellArea;
@@ -11,10 +6,6 @@ import andius.Sound;
 import com.badlogic.gdx.graphics.Color;
 import java.util.HashMap;
 
-/**
- *
- * @author Paul
- */
 public enum Spells {
 
     HALITO("Little Fire", ClassType.MAGE, 1, Sound.FIREBALL, Color.RED, SpellTarget.MONSTER, SpellArea.COMBAT, 1, 8, 0, 51),

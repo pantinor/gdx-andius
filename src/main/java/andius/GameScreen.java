@@ -47,7 +47,7 @@ public class GameScreen extends BaseScreen {
         batch = new SpriteBatch();
 
         stage = new Stage(viewport);
-        
+
         Andius.HUD.addActor(stage);
 
         camera = new OrthographicCamera(Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
@@ -508,6 +508,11 @@ public class GameScreen extends BaseScreen {
             }
         }
         this.roomName = null;
+    }
+
+    @Override
+    public void teleport(int level, int stepsX, int stepsY) {
+
     }
 
 }

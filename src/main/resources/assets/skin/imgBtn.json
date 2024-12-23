@@ -10,5 +10,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
     sm-arr-right: { imageUp:right-arrow-up, imageDown:right-arrow-down, imageOver:right-arrow-up, imageChecked:right-arrow-up, imageCheckedOver:right-arrow-up, imageDisabled:right-arrow-up },
     inventory: { imageUp:inventory-up, imageDown:inventory-down, imageOver:inventory-up, imageChecked:inventory-up, imageCheckedOver:inventory-up, imageDisabled:inventory-up },
     save: { imageUp:save-up, imageDown:save-down, imageOver:save-up, imageChecked:save-up, imageCheckedOver:save-up, imageDisabled:save-up },
+    cast: { imageUp:cast-up, imageDown:cast-down, imageOver:cast-up, imageChecked:cast-up, imageCheckedOver:cast-up, imageDisabled:cast-up },
+    reorder: { imageUp:reorder-up, imageDown:reorder-down, imageOver:reorder-up, imageChecked:reorder-up, imageCheckedOver:reorder-up, imageDisabled:reorder-up },
 }
 }

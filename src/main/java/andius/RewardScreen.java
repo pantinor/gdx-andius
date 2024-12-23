@@ -157,6 +157,10 @@ public class RewardScreen implements Screen, Constants {
         AutoFocusScrollPane sp2 = new AutoFocusScrollPane(this.playerSelection, Andius.skin);
         AutoFocusScrollPane sp3 = new AutoFocusScrollPane(this.trapSelection, Andius.skin);
 
+        sp1.setScrollingDisabled(true, false);
+        sp2.setScrollingDisabled(true, false);
+        sp3.setScrollingDisabled(true, false);
+
         Label tmp1 = new Label("A CHEST !", Andius.skin, "larger");
         Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");
         this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "larger");

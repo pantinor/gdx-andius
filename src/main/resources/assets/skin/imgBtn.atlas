@@ -128,3 +128,31 @@ save-down
   orig: 42, 42
   offset: 0, 0
   index: -1
+cast-up
+  rotate: false
+  xy: 256, 164
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+cast-down
+  rotate: false
+  xy: 299, 164
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+reorder-up
+  rotate: false
+  xy: 171, 164
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+reorder-down
+  rotate: false
+  xy: 214, 164
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1

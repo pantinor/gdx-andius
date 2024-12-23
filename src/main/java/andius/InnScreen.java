@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -143,8 +144,9 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.roomSelection, Andius.skin);
-
+        ScrollPane sp1 = new ScrollPane(this.roomSelection, Andius.skin);
+        sp1.setBounds(X_ALIGN, 340, 300, 145);
+        
         playerTable = new Table(Andius.skin);
         playerTable.defaults().align(Align.left);
         playerTable.addListener(new EventListener() {
@@ -167,6 +169,7 @@ public class InnScreen implements Screen, Constants {
         }
         );
         this.playerScroll = new AutoFocusScrollPane(playerTable, Andius.skin);
+        this.playerScroll.setScrollingDisabled(true, false);
         for (CharacterRecord p : context.players()) {
             playerTable.add(new PlayerListing(p));
             playerTable.row();
@@ -175,15 +178,15 @@ public class InnScreen implements Screen, Constants {
         this.logTable = new Table(Andius.skin);
         this.logTable.defaults().align(Align.left);
         this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
+        this.logScroll.setScrollingDisabled(true, false);
+        this.logScroll.setBounds(X_ALIGN + 300, 250, LOG_AREA_WIDTH, 395);
 
         this.playerScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);
         this.playerSelectionLabel.setBounds(X_ALIGN, 458, 20, 100);
         this.go.setBounds(X_ALIGN, 290, 60, 40);
         this.pool.setBounds(X_ALIGN + 70, 290, 60, 40);
         this.exit.setBounds(X_ALIGN + 140, 290, 60, 40);
-        sp1.setBounds(X_ALIGN, 340, 300, 145);
-        this.logScroll.setBounds(X_ALIGN + 300, 250, LOG_AREA_WIDTH, 395);
-
+        
         stage.addActor(sp1);
         stage.addActor(playerSelectionLabel);
         stage.addActor(exit);

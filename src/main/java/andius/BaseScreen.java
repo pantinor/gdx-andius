@@ -80,6 +80,8 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public abstract void finishTurn(int currentX, int currentY);
+    
+    public abstract void teleport(int level, int stepsX, int stepsY);
 
     public void endCombat(boolean isWon, andius.objects.Actor opponent) {
 
@@ -87,6 +89,17 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     public final void addButtons(Map map) {
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
+
+        ImageButton reorder = new ImageButton(imgBtnSkin, "reorder");
+        reorder.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
+                Sounds.play(Sound.TRIGGER);
+                new ReorderPartyDialog(CTX, BaseScreen.this).show(stage);
+            }
+        });
+        reorder.setX(104);
+        reorder.setY(5);
 
         ImageButton inventory = new ImageButton(imgBtnSkin, "inventory");
         inventory.addListener(new ChangeListener() {
@@ -99,17 +112,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         });
         inventory.setX(52);
         inventory.setY(5);
-
-        ImageButton reorder = new ImageButton(imgBtnSkin, "inventory");
-        reorder.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
-                Sounds.play(Sound.TRIGGER);
-                new ReorderPartyDialog(CTX, BaseScreen.this).show(stage);
-            }
-        });
-        reorder.setX(104);
-        reorder.setY(5);
 
         ImageButton save = new ImageButton(imgBtnSkin, "save");
         save.addListener(new ChangeListener() {
@@ -142,7 +144,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public void animateText(String text, Color color) {
-        
+
         float sx = 100;
         float sy = -100;
         float dx = 100;

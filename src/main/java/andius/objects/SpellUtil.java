@@ -1,6 +1,7 @@
 package andius.objects;
 
 import andius.Andius;
+import andius.BaseScreen;
 import andius.CombatScreen;
 import andius.CombatScreen.RemoveCreatureAction;
 import andius.Constants.AddActorAction;
@@ -153,7 +154,9 @@ public class SpellUtil {
                 case MAPORFIC:
                     modPartyAC2(screen, spell.getHitBonus());
                     break;
-                //TODO
+                case MALOR:
+                    screen.castCombatMalor();
+                    break;
                 case LOMILWA:
                 case CALFO:
                 case MILWA:
@@ -162,10 +165,9 @@ public class SpellUtil {
                 case LOKTOFEIT:
                 case KADORTO:
                 case HAMAN:
-                case MALOR:
                 case MAHAMAN:
                 case DUMAPIC:
-                    seq.addAction(Actions.run(new LogAction(screen, "NOT IMPLEMENTED YET SORRY")));
+                    seq.addAction(Actions.run(new LogAction(screen, "Cannot be cast during combat.")));
                     seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                     break;
             }
@@ -184,7 +186,7 @@ public class SpellUtil {
 
     }
 
-    public static boolean use(String item, CharacterRecord rec) {
+    public static boolean useItem(String item, CharacterRecord rec) {
 
         Spells spell = null;
         for (Spells sp : Spells.values()) {
@@ -216,6 +218,61 @@ public class SpellUtil {
         }
 
         return true;
+
+    }
+
+    public static void campCast(BaseScreen screen, Context context, CharacterRecord caster, Spells spell) {
+
+        try {
+
+            if (!caster.canCast(spell)) {
+                screen.log("Thou dost not have enough magic points!");
+                Sounds.play(Sound.EVADE);
+                return;
+            }
+
+            if (caster.status.has(Status.SILENCED)) {
+                screen.log("Silenced!");
+                Sounds.play(Sound.EVADE);
+                return;
+            }
+
+            caster.decrMagicPts(spell);
+
+            switch (spell) {
+                case DUMAPIC:
+                    break;
+                case DIOS:
+                    break;
+                case MILWA:
+                    break;
+                case LOMILWA:
+                    break;
+                case DIALKO:
+                    break;
+                case LATUMAPIC:
+                    break;
+                case DIAL:
+                    break;
+                case LATUMOFIS:
+                    break;
+                case MAPORFIC:
+                    break;
+                case DIALMA:
+                    break;
+                case KANDI:
+                    break;
+                case DI:
+                    break;
+                case MADI:
+                    break;
+                case KADORTO:
+                    break;
+            }
+
+        } finally {
+
+        }
 
     }
 

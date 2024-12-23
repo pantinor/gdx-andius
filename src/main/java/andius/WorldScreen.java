@@ -275,6 +275,11 @@ public class WorldScreen extends BaseScreen {
     }
 
     @Override
+    public void teleport(int level, int stepsX, int stepsY) {
+
+    }
+
+    @Override
     public void partyDeath() {
     }
 

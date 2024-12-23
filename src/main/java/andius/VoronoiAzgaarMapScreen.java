@@ -418,6 +418,11 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     }
 
     @Override
+    public void teleport(int level, int stepsX, int stepsY) {
+
+    }
+
+    @Override
     public void finishTurn(int currentX, int currentY) {
     }
 

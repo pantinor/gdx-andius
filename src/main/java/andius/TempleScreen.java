@@ -199,6 +199,13 @@ public class TempleScreen implements Screen, Constants {
         });
 
         AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.titherSelection, Andius.skin);
+        sp1.setScrollingDisabled(true, false);
+
+        this.logTable = new Table(Andius.skin);
+        this.logTable.defaults().align(Align.left);
+        this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
+        this.logScroll.setScrollingDisabled(true, false);
+        this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
 
         patientTable = new Table(Andius.skin);
         patientTable.defaults().align(Align.left);
@@ -222,16 +229,12 @@ public class TempleScreen implements Screen, Constants {
         }
         );
         this.patientScroll = new AutoFocusScrollPane(patientTable, Andius.skin);
+        this.patientScroll.setScrollingDisabled(true, false);
         for (CharacterRecord p : this.context.players()) {
             patientTable.add(new PatientListing(p));
             patientTable.row();
         }
 
-        this.logTable = new Table(Andius.skin);
-        this.logTable.defaults().align(Align.left);
-        this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
-
-        this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
         this.patientScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);
         this.playerSelectionLabel.setBounds(X_ALIGN, 458, 20, 100);
         this.offer.setBounds(525, 310, 65, 40);
