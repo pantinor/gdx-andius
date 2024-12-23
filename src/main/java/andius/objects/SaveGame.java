@@ -33,6 +33,7 @@ public class SaveGame implements Constants {
     public Direction direction;
 
     public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
+    public final List<AnsweredRiddle> riddles = new ArrayList<>();
 
     public static SaveGame read(String file) throws Exception {
         //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
@@ -450,6 +451,51 @@ public class SaveGame implements Constants {
             }
         }
         return learned;
+    }
+
+    public static class AnsweredRiddle {
+
+        public int level;
+        public int x;
+        public int y;
+
+        public AnsweredRiddle() {
+
+        }
+
+        public AnsweredRiddle(int level, int x, int y) {
+            this.level = level;
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final AnsweredRiddle other = (AnsweredRiddle) obj;
+            if (this.level != other.level) {
+                return false;
+            }
+            if (this.x != other.x) {
+                return false;
+            }
+            return this.y == other.y;
+        }
+
     }
 
 }

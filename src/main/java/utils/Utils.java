@@ -23,7 +23,7 @@ public class Utils {
     }
 
     public static boolean randomBoolean() {
-        return RANDOM.nextInt(2) == 1;
+        return RANDOM.nextInt(100) < 50;
     }
 
     public static int intValue(byte b1) {

@@ -36,6 +36,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import utils.AutoFocusScrollPane;
 import utils.Utils;
 
 public class EquipmentScreen implements Screen, Constants {
@@ -85,7 +86,7 @@ public class EquipmentScreen implements Screen, Constants {
     SpellListing selectedSpell;
     private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font, "", Color.WHITE, 226, Align.left, true);
 
-    ScrollPane invPane, spellPane;
+    AutoFocusScrollPane invPane, spellPane;
     Image focusIndicator, spellFocusInd;
     Label invDesc;
 
@@ -130,13 +131,13 @@ public class EquipmentScreen implements Screen, Constants {
         }
         this.playerSelection.setItems(names);
 
-        ScrollPane sp1 = new ScrollPane(this.playerSelection, Andius.skin);
+        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.playerSelection, Andius.skin);
         sp1.setBounds(93, Andius.SCREEN_HEIGHT - 372, 165, 241);
 
-        invPane = new ScrollPane(playerSelection.getSelected().invTable, Andius.skin);
+        invPane = new AutoFocusScrollPane(playerSelection.getSelected().invTable, Andius.skin);
         invPane.setBounds(485, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
-        spellPane = new ScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
+        spellPane = new AutoFocusScrollPane(playerSelection.getSelected().spellTable, Andius.skin);
         spellPane.setBounds(753, Andius.SCREEN_HEIGHT - 551, 246, 420);
 
         int x = 40;

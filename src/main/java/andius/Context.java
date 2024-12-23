@@ -7,13 +7,17 @@ package andius;
 
 import andius.Constants.Status;
 import andius.objects.Aura;
+import andius.objects.Item;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import java.util.ArrayList;
+import java.util.List;
 import utils.PartyDeathException;
+import utils.Utils;
 
 public class Context {
 
-    public final Aura aura = new Aura();
+    public final Aura activeSpellEffect = new Aura();
     public SaveGame saveGame;
 
     public void setSaveGame(SaveGame sg) {
@@ -24,6 +28,29 @@ public class Context {
         return this.saveGame.players;
     }
 
+    public CharacterRecord pickRandomEnabledPlayer() {
+        List<CharacterRecord> enabled = new ArrayList<>();
+        for (CharacterRecord cr : this.saveGame.players) {
+            if (!cr.isDisabled()) {
+                enabled.add(cr);
+            }
+        }
+        if (enabled.isEmpty()) {
+            return null;
+        }
+        int pick = Utils.RANDOM.nextInt(enabled.size());
+        return enabled.get(pick);
+    }
+
+    public CharacterRecord getOwner(Item item) {
+        for (int i = 0; i < this.saveGame.players.length && item != null; i++) {
+            if (this.saveGame.players[i].inventory.contains(item)) {
+                return players()[i];
+            }
+        }
+        return null;
+    }
+
     public void endTurn(Constants.Map map) throws PartyDeathException {
         int decr_interval = (map == Constants.Map.WORLD ? 40 : 10);
         for (CharacterRecord player : this.saveGame.players) {
@@ -31,9 +58,9 @@ public class Context {
                 player.submorsels -= decr_interval;
                 if (player.submorsels < 0) {
                     player.submorsels = 400;
-                    
+
                     player.decrementStatusEffects();
-                    
+
                     if (player.status.has(Status.POISONED)) {
                         player.adjustHP(-1);
                     }

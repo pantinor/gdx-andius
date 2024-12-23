@@ -24,25 +24,27 @@ public class SpellUtil {
 
     private static final Random rand = new Random();
 
-    public static void spellCast(CombatScreen screen, Context context, Spells spell, andius.objects.Actor caster, andius.objects.Actor target) {
+    public static void spellCast(CombatScreen screen, Context context, Spells spell, andius.objects.Actor caster, andius.objects.Actor target, boolean isItem) {
 
         SequenceAction seq = Actions.action(SequenceAction.class);
 
         try {
 
-            if (!caster.getPlayer().canCast(spell)) {
-                screen.log("Thou dost not have enough magic points!");
-                Sounds.play(Sound.NEGATIVE_EFFECT);
-                return;
-            }
+            if (!isItem) {
+                if (!caster.getPlayer().canCast(spell)) {
+                    screen.log("Thou dost not have enough magic points!");
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
 
-            if (caster.getPlayer().status.has(Status.SILENCED)) {
-                screen.log("Silenced!");
-                Sounds.play(Sound.NEGATIVE_EFFECT);
-                return;
-            }
+                if (caster.getPlayer().status.has(Status.SILENCED)) {
+                    screen.log("Silenced!");
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
 
-            caster.getPlayer().decrMagicPts(spell);
+                caster.getPlayer().decrMagicPts(spell);
+            }
 
             seq.addAction(Actions.run(new PlaySoundAction(spell.getSound())));
             seq.addAction(Actions.delay(0.5f));
@@ -212,7 +214,7 @@ public class SpellUtil {
                 rec.acmodifier1 = spell.getHitBonus();
                 break;
         }
-        
+
         return true;
 
     }

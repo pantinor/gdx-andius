@@ -24,12 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import utils.AutoFocusScrollPane;
 import utils.Utils;
 
 /**
@@ -48,9 +48,9 @@ public class InnScreen implements Screen, Constants {
     private final Label playerSelectionLabel;
     private final List<String> roomSelection;
     private final Table playerTable;
-    private final ScrollPane playerScroll;
+    private final AutoFocusScrollPane playerScroll;
     private final Table logTable;
-    private final ScrollPane logScroll;
+    private final AutoFocusScrollPane logScroll;
     private final TextButton go;
     private final TextButton pool;
     private final TextButton exit;
@@ -143,7 +143,7 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        ScrollPane sp1 = new ScrollPane(this.roomSelection, Andius.skin);
+        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.roomSelection, Andius.skin);
 
         playerTable = new Table(Andius.skin);
         playerTable.defaults().align(Align.left);
@@ -166,7 +166,7 @@ public class InnScreen implements Screen, Constants {
             }
         }
         );
-        this.playerScroll = new ScrollPane(playerTable, Andius.skin);
+        this.playerScroll = new AutoFocusScrollPane(playerTable, Andius.skin);
         for (CharacterRecord p : context.players()) {
             playerTable.add(new PlayerListing(p));
             playerTable.row();
@@ -174,7 +174,7 @@ public class InnScreen implements Screen, Constants {
 
         this.logTable = new Table(Andius.skin);
         this.logTable.defaults().align(Align.left);
-        this.logScroll = new ScrollPane(this.logTable, Andius.skin);
+        this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
 
         this.playerScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);
         this.playerSelectionLabel.setBounds(X_ALIGN, 458, 20, 100);

@@ -17,12 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import java.util.ArrayList;
 import java.util.Random;
+import utils.AutoFocusScrollPane;
 import utils.LogScrollPane;
 import utils.Utils;
 
@@ -153,9 +153,9 @@ public class RewardScreen implements Screen, Constants {
             }
         });
 
-        ScrollPane sp1 = new ScrollPane(this.action, Andius.skin);
-        ScrollPane sp2 = new ScrollPane(this.playerSelection, Andius.skin);
-        ScrollPane sp3 = new ScrollPane(this.trapSelection, Andius.skin);
+        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.action, Andius.skin);
+        AutoFocusScrollPane sp2 = new AutoFocusScrollPane(this.playerSelection, Andius.skin);
+        AutoFocusScrollPane sp3 = new AutoFocusScrollPane(this.trapSelection, Andius.skin);
 
         Label tmp1 = new Label("A CHEST !", Andius.skin, "larger");
         Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");

@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.mainGame;
+import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
@@ -30,6 +31,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import java.util.ArrayList;
+import java.util.Collections;
+import utils.AutoFocusScrollPane;
 import utils.Utils;
 
 public class VendorScreen implements Screen, Constants {
@@ -75,8 +79,8 @@ public class VendorScreen implements Screen, Constants {
     ItemListing selectedItem;
     VendorItem selectedVendorItem;
     PlayerIndex selectedPlayer;
-    ScrollPane invPane;
-    ScrollPane vendorPane;
+    AutoFocusScrollPane invPane;
+    AutoFocusScrollPane vendorPane;
     Table vendorTable;
     Image focusIndicator;
     Image vendorFocusInd;
@@ -121,22 +125,32 @@ public class VendorScreen implements Screen, Constants {
         this.playerSelection.setItems(names);
 
         ScrollPane sp1 = new ScrollPane(this.playerSelection, Andius.skin);
-        invPane = new ScrollPane(playerSelection.getSelected().invTable, Andius.skin);
+        invPane = new AutoFocusScrollPane(playerSelection.getSelected().invTable, Andius.skin);
 
         vendorTable = new Table(Andius.skin);
         vendorTable.align(Align.top);
-        for (Item it : contextMap.scenario().items()) {
-            if (it.stock != 0) {
-                if (role == Role.MERCHANT1 && it.cost <= 500) {
-                    vendorTable.add(new VendorItem(it));
-                    vendorTable.row();
-                } else if (role == Role.MERCHANT2 && it.cost <= 10000) {
-                    vendorTable.add(new VendorItem(it));
-                    vendorTable.row();
-                } else if (role == Role.MERCHANT) {
-                    vendorTable.add(new VendorItem(it));
-                    vendorTable.row();
+
+        java.util.List<Item> sellables = new ArrayList<>();
+        for (Scenario sc : Scenario.values()) {
+            for (Item it : sc.items()) {
+                if (it.stock != 0 && !sellables.contains(it)) {
+                    sellables.add(it);
                 }
+            }
+        }
+
+        Collections.sort(sellables, (Item it1, Item it2) -> Long.compare(it1.cost, it2.cost));
+
+        for (Item it : sellables) {
+            if (role == Role.MERCHANT1 && it.cost <= 500) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
+            } else if (role == Role.MERCHANT2 && it.cost <= 10000) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
+            } else if (role == Role.MERCHANT) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
             }
         }
 
@@ -161,7 +175,7 @@ public class VendorScreen implements Screen, Constants {
             }
         }
         );
-        vendorPane = new ScrollPane(vendorTable, Andius.skin);
+        vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
 
         this.cancel = new TextButton("LEAVE", Andius.skin, "brown-larger");
         this.cancel.addListener(new ChangeListener() {
@@ -257,22 +271,26 @@ public class VendorScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedItem != null) {
-                    selectedItem.removeActor(focusIndicator);
-                    selectedPlayer.invTable.removeActor(selectedItem);
-                    selectedPlayer.character.adjustGold(selectedItem.item.cost / 2);
-                    selectedPlayer.goldLabel.setText("" + selectedPlayer.character.gold);
-                    Item it = contextMap.scenario().itemMap().get(selectedItem.item.name);
-                    if (it.stock == 0) {
-                        it.stock = 1;
-                        vendorTable.add(new VendorItem(it));
-                        vendorTable.row();
-                    } else if (it.stock == -1) {
-                        //nothing - always in stock
+                    Item it = Scenario.getItem(selectedItem.item.id, selectedItem.item.name);
+                    if (it != null) {
+                        selectedItem.removeActor(focusIndicator);
+                        selectedPlayer.invTable.removeActor(selectedItem);
+                        selectedPlayer.character.adjustGold(selectedItem.item.cost / 2);
+                        selectedPlayer.goldLabel.setText("" + selectedPlayer.character.gold);
+                        if (it.stock == 0) {
+                            it.stock = 1;
+                            vendorTable.add(new VendorItem(it));
+                            vendorTable.row();
+                        } else if (it.stock == -1) {
+                            //nothing - always in stock
+                        } else {
+                            it.stock++;
+                        }
+                        selectedItem = null;
+                        Sounds.play(Sound.TRIGGER);
                     } else {
-                        it.stock++;
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
                     }
-                    selectedItem = null;
-                    Sounds.play(Sound.TRIGGER);
                 } else {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 }

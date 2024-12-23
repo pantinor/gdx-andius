@@ -217,6 +217,17 @@ public class WizardryData {
         public Map<String, Item> itemMap() {
             return itemMap;
         }
+        
+        public static Item getItem(int id, String name) {
+            for (Scenario sc : Scenario.values()) {
+                for (Item it : sc.items) {
+                    if (it.id == id && it.name.equals(name)) {
+                        return it;
+                    }
+                }
+            }
+            return null;
+        }
 
     }
 
@@ -317,7 +328,7 @@ public class WizardryData {
                             }
                             if (ci.val[2] == 3) {
                                 if (ci.val[0] > 0) {
-                                    cell.itemObtained = ci.val[0];
+                                    cell.itemObtained = ci.val[0];//may wade to get
                                 }
                             }
                             if (ci.val[2] == 4) {
@@ -343,7 +354,7 @@ public class WizardryData {
                                 cell.addressTo = new MazeAddress(this.level, ci.val[0] / 100, ci.val[0] % 100);
                             }
                             if (ci.val[2] == 8) {//return to castle
-                                cell.addressTo = new MazeAddress(0, 0, 0);
+                                cell.addressTo = new MazeAddress(1, 0, 0);
                             }
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
@@ -360,6 +371,13 @@ public class WizardryData {
                                         break;
                                     }
                                 }
+                            }
+                            if (ci.val[2] == 15) {
+                                cell.monsterID = ci.val[1];
+                            }
+
+                            if (ci.val[2] == 16) {
+                                cell.monsterID = ci.val[1];
                             }
                             break;
                     }

@@ -20,13 +20,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import utils.AutoFocusScrollPane;
 import utils.Utils;
 
 public class TempleScreen implements Screen, Constants {
@@ -41,9 +41,9 @@ public class TempleScreen implements Screen, Constants {
     private final Label playerSelectionLabel;
     private final List<String> titherSelection;
     private final Table patientTable;
-    private final ScrollPane patientScroll;
+    private final AutoFocusScrollPane patientScroll;
     private final Table logTable;
-    private final ScrollPane logScroll;
+    private final AutoFocusScrollPane logScroll;
     private final TextButton offer;
     private final TextButton exit, pool;
     private final Image focusIndicator;
@@ -198,7 +198,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        ScrollPane sp1 = new ScrollPane(this.titherSelection, Andius.skin);
+        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.titherSelection, Andius.skin);
 
         patientTable = new Table(Andius.skin);
         patientTable.defaults().align(Align.left);
@@ -221,7 +221,7 @@ public class TempleScreen implements Screen, Constants {
             }
         }
         );
-        this.patientScroll = new ScrollPane(patientTable, Andius.skin);
+        this.patientScroll = new AutoFocusScrollPane(patientTable, Andius.skin);
         for (CharacterRecord p : this.context.players()) {
             patientTable.add(new PatientListing(p));
             patientTable.row();
@@ -229,7 +229,7 @@ public class TempleScreen implements Screen, Constants {
 
         this.logTable = new Table(Andius.skin);
         this.logTable.defaults().align(Align.left);
-        this.logScroll = new ScrollPane(this.logTable, Andius.skin);
+        this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
 
         this.logScroll.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
         this.patientScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);

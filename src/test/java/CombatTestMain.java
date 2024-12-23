@@ -110,7 +110,7 @@ public class CombatTestMain extends Game {
             //String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
             //int idx = Utils.RANDOM.nextInt(monsters.length);
             //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
-            Monster monster = PMO_MONSTERS.get(77);
+            Monster monster = PMO_MONSTERS.get(100);
 
             Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
 

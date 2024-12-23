@@ -1,5 +1,7 @@
 package andius.objects;
 
+import java.util.Objects;
+
 public class Item implements Comparable<Item> {
 
     public enum ItemType {
@@ -66,7 +68,8 @@ public class Item implements Comparable<Item> {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + this.id;
+        hash = 19 * hash + this.id;
+        hash = 19 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -82,7 +85,7 @@ public class Item implements Comparable<Item> {
             return false;
         }
         final Item other = (Item) obj;
-        return this.id == other.id;
+        return this.id == other.id && this.name.equals(other.name);
     }
 
     @Override

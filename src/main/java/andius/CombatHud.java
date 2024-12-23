@@ -206,7 +206,7 @@ public class CombatHud {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (item != null && item.spell != null) {
                 tooltip.setText(item.name);
-                screen.initCast(item.spell, player);
+                screen.initCast(item.spell, player, true);
             }
             return false;
         }
@@ -242,7 +242,7 @@ public class CombatHud {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (spell != null) {
-                screen.initCast(spell, player);
+                screen.initCast(spell, player, false);
             }
             return false;
         }

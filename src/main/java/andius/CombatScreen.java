@@ -175,7 +175,7 @@ public class CombatScreen extends BaseScreen {
             cursor.setY(y);
             stage.addActor(cursor);
             actor.setPlayerCursor(cursor);
-
+            actor.adjustHP(0);
             partyMembers.add(actor);
         }
 
@@ -1105,7 +1105,7 @@ public class CombatScreen extends BaseScreen {
         return av;
     }
 
-    public void initCast(Spells spell, andius.objects.Actor player) {
+    public void initCast(Spells spell, andius.objects.Actor player, boolean isItem) {
         Sounds.play(Sound.TRIGGER);
         switch (spell.getTarget()) {
             case MONSTER:
@@ -1118,7 +1118,7 @@ public class CombatScreen extends BaseScreen {
             case CASTER:
             case PARTY:
             case GROUP:
-                SpellUtil.spellCast(this, context, spell, player, null);
+                SpellUtil.spellCast(this, context, spell, player, null, isItem);
                 break;
             default:
                 break;
@@ -1185,7 +1185,7 @@ public class CombatScreen extends BaseScreen {
 
             } else if (this.code == Keys.C) {
 
-                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null);
+                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, null, false);
 
             }
 
@@ -1239,7 +1239,7 @@ public class CombatScreen extends BaseScreen {
 
             } else if (this.code == Keys.C) {
 
-                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, target);
+                SpellUtil.spellCast(CombatScreen.this, CombatScreen.this.context, spell, this.player, target, false);
 
             }
 
