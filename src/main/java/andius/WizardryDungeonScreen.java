@@ -1044,7 +1044,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         int x = (Math.round(currentPos.x) - 1) + stepsX;
         int y = (Math.round(currentPos.z) - 1) + stepsY;
         int z = currentLevel + level + 1;
-        
+
         if (x >= DUNGEON_DIM) {
             x = DUNGEON_DIM - x;
         }
@@ -1056,6 +1056,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (y < 0) {
             y = DUNGEON_DIM + y;
+        }
+        if (x >= DUNGEON_DIM) {
+            x = DUNGEON_DIM - 1;
+        }
+        if (y >= DUNGEON_DIM) {
+            y = DUNGEON_DIM - 1;
         }
         if (z >= this.map.scenario().levels().length) {
             z = this.map.scenario().levels().length - 1;
