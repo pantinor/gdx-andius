@@ -293,7 +293,7 @@ public class GameScreen extends BaseScreen {
                     mainGame.setScreen(rs);
                     return false;
                 } else if (a.getRole() == Role.MERCHANT || a.getRole() == Role.MERCHANT1 || a.getRole() == Role.MERCHANT2) {
-                    VendorScreen rs = new VendorScreen(CTX, a.getRole(), this.map);
+                    VendorScreen rs = new VendorScreen(CTX, a.getRole(), this.map, a.getName());
                     mainGame.setScreen(rs);
                     return false;
                 } else if (a.getRole() == Role.INNKEEPER) {

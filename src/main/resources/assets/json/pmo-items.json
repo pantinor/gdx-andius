@@ -145,7 +145,6 @@
         "usable": "FMTSLN",
         "regeneration": 0,
         "hitmd": 1,
-
         "crithitm": false
     },
     {
@@ -192,7 +191,7 @@
         "id": 9,
         "name": "ROBES",
         "genericName": "CLOTHING",
-        "iconID": 306,
+        "iconID": 353,
         "type": "ARMOR",
         "cost": 15,
         "damage": {
@@ -1237,7 +1236,7 @@
     },
     {
         "id": 59,
-        "name": "BLADE CUSINART",
+        "name": "BLADE CUSINART'",
         "genericName": "SWORD",
         "iconID": 249,
         "type": "WEAPON",
@@ -1384,7 +1383,7 @@
         "id": 66,
         "name": "DIADEM OF MALOR",
         "genericName": "DIADEM",
-        "iconID": 191,
+        "iconID": 239,
         "type": "HELMET",
         "cost": 25000,
         "damage": {
@@ -1554,7 +1553,7 @@
         "id": 74,
         "name": "LEATHER -2",
         "genericName": "ARMOR",
-        "iconID": 354,
+        "iconID": 312,
         "type": "ARMOR",
         "cost": 8000,
         "damage": {

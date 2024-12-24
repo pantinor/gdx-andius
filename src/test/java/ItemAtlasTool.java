@@ -30,6 +30,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import org.apache.commons.io.IOUtils;
 
 public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
@@ -97,25 +99,22 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         imageScrollPane.setPosition(0, 0);
 
         try {
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/pmo-items.json")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/kod-items.json")));
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
-            java.util.List<Item> items0 = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
-            }.getType());
-
-            json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/leg-items.json")));
-            gson = builder.create();
             items = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
             }.getType());
 
-            for (Item i1 : items) {
-                for (Item i2 : items0) {
-                    if (i1.name.equals(i2.name)) {
-                        i1.iconID = i2.iconID;
+            Collections.sort(items, new Comparator<Item>() {
+                @Override
+                public int compare(Item it1, Item it2) {
+                    if (it1.type == it2.type) {
+                        return Long.compare(it1.cost, it2.cost);
                     }
-                    
+                    return Long.compare(it1.type.hashCode(), it2.type.hashCode());
                 }
-            }
+            });
+
         } catch (Exception e) {
             //ignore
         }

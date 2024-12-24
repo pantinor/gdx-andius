@@ -92,7 +92,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        this.offer = new TextButton("TITHE", Andius.skin, "brown-larger");
+        this.offer = new TextButton("TITHE", Andius.skin, "red-larger");
         this.offer.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -124,13 +124,13 @@ public class TempleScreen implements Screen, Constants {
                     return;
                 }
 
+                log("THE DONATION WILL BE " + amt);
+
                 if (tither.gold < amt) {
                     log("CHEAP APOSTATES! OUT!");
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
-
-                log("THE DONATION WILL BE " + amt);
 
                 tither.adjustGold(-amt);
 
@@ -174,7 +174,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL", Andius.skin, "brown-larger");
+        this.pool = new TextButton("POOL", Andius.skin, "red-larger");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -197,7 +197,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("EXIT", Andius.skin, "brown-larger");
+        this.exit = new TextButton("EXIT", Andius.skin, "red-larger");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {

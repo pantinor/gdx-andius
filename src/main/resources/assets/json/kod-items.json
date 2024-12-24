@@ -489,7 +489,7 @@
     },
     {
         "id": 22,
-        "name": "LEATHER + 1",
+        "name": "LEATHER +1",
         "genericName": "ARMOR",
         "iconID": 311,
         "type": "ARMOR",
@@ -511,7 +511,7 @@
     },
     {
         "id": 23,
-        "name": "CHAIN MAIL + 1",
+        "name": "CHAIN MAIL +1",
         "genericName": "ARMOR",
         "iconID": 300,
         "type": "ARMOR",
@@ -533,7 +533,7 @@
     },
     {
         "id": 24,
-        "name": "PLATE MAIL + 1",
+        "name": "PLATE MAIL +1",
         "genericName": "ARMOR",
         "iconID": 302,
         "type": "ARMOR",
@@ -555,7 +555,7 @@
     },
     {
         "id": 25,
-        "name": "SHIELD + 1",
+        "name": "SHIELD +1",
         "genericName": "SHIELD",
         "iconID": 269,
         "type": "SHIELD",
@@ -755,7 +755,7 @@
     },
     {
         "id": 34,
-        "name": "HELM + 1",
+        "name": "HELM +1",
         "genericName": "HELM",
         "iconID": 390,
         "type": "HELMET",
@@ -821,7 +821,7 @@
     },
     {
         "id": 37,
-        "name": "BREAST PLATE-1",
+        "name": "BREAST PLATE -1",
         "genericName": "ARMOR",
         "iconID": 194,
         "type": "ARMOR",
@@ -934,7 +934,7 @@
     },
     {
         "id": 42,
-        "name": "LONG SWORD + 2",
+        "name": "LONG SWORD +2",
         "genericName": "LONG SWORD",
         "iconID": 240,
         "type": "WEAPON",
@@ -978,7 +978,7 @@
     },
     {
         "id": 44,
-        "name": "MACE + 2",
+        "name": "MACE +2",
         "genericName": "KNOBBED STICK",
         "iconID": 246,
         "type": "WEAPON",
@@ -1068,7 +1068,7 @@
     },
     {
         "id": 48,
-        "name": "LEATHER + 2",
+        "name": "LEATHER +2",
         "genericName": "ARMOR",
         "iconID": 312,
         "type": "ARMOR",
@@ -1090,7 +1090,7 @@
     },
     {
         "id": 49,
-        "name": "CHAIN + 2",
+        "name": "CHAIN +2",
         "genericName": "ARMOR",
         "iconID": 300,
         "type": "ARMOR",
@@ -1112,7 +1112,7 @@
     },
     {
         "id": 50,
-        "name": "PLATE MAIL + 2",
+        "name": "PLATE MAIL +2",
         "genericName": "ARMOR",
         "iconID": 302,
         "type": "ARMOR",
@@ -1134,7 +1134,7 @@
     },
     {
         "id": 51,
-        "name": "SHIELD + 2",
+        "name": "SHIELD +2",
         "genericName": "SHIELD",
         "iconID": 352,
         "type": "SHIELD",
@@ -1156,7 +1156,7 @@
     },
     {
         "id": 52,
-        "name": "HELM +2 (EVIL)",
+        "name": "EVIL HELM +2",
         "genericName": "HELM",
         "iconID": 251,
         "type": "HELMET",
@@ -1382,7 +1382,7 @@
     },
     {
         "id": 62,
-        "name": "EVIL CHAIN + 2",
+        "name": "EVIL CHAIN +2",
         "genericName": "ARMOR",
         "iconID": 195,
         "type": "ARMOR",
@@ -1404,7 +1404,7 @@
     },
     {
         "id": 63,
-        "name": "NEUT P-MAIL + 2",
+        "name": "NEUT P-MAIL +2",
         "genericName": "ARMOR",
         "iconID": 194,
         "type": "ARMOR",
@@ -1473,7 +1473,7 @@
         "id": 66,
         "name": "DIADEM OF MALOR",
         "genericName": "DIADEM",
-        "iconID": 191,
+        "iconID": 239,
         "type": "HELMET",
         "cost": 25000,
         "damage": {
@@ -1539,7 +1539,7 @@
     },
     {
         "id": 69,
-        "name": "DAGGER + 2",
+        "name": "DAGGER +2",
         "genericName": "DAGGER",
         "iconID": 103,
         "type": "WEAPON",
@@ -1651,7 +1651,7 @@
         "id": 74,
         "name": "LEATHER -2",
         "genericName": "ARMOR",
-        "iconID": 354,
+        "iconID": 312,
         "type": "ARMOR",
         "cost": 8000,
         "damage": {
@@ -1803,7 +1803,7 @@
     },
     {
         "id": 81,
-        "name": "EVIL SWORD + 3",
+        "name": "EVIL SWORD +3",
         "genericName": "LONG SWORD",
         "iconID": 248,
         "type": "WEAPON",
@@ -1979,7 +1979,7 @@
     },
     {
         "id": 89,
-        "name": "EVIL PLATE + 3",
+        "name": "EVIL PLATE +3",
         "genericName": "ARMOR",
         "iconID": 195,
         "type": "ARMOR",
@@ -2001,7 +2001,7 @@
     },
     {
         "id": 90,
-        "name": "SHIELD + 3",
+        "name": "SHIELD +3",
         "genericName": "SHIELD",
         "iconID": 352,
         "type": "SHIELD",
@@ -2356,8 +2356,8 @@
     },
     {
         "id": 106,
-        "name": "CURSED +1 PLATE",
-        "genericName": "ARMOR\u0015",
+        "name": "CURSED PLATE +1",
+        "genericName": "ARMOR",
         "iconID": 195,
         "type": "ARMOR",
         "cost": 0,

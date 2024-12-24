@@ -5,6 +5,7 @@ import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,13 +20,10 @@ public class StartScreen implements Screen, Constants {
 
     float time = 0;
     Batch batch;
-
     TextButton manual;
     TextButton manage;
     TextButton journey;
-
     BitmapFont titleFont;
-
     Stage stage;
 
     public StartScreen() {
@@ -34,7 +32,7 @@ public class StartScreen implements Screen, Constants {
 
         batch = new SpriteBatch();
 
-        manual = new TextButton("Manual", Andius.skin, "red");
+        manual = new TextButton("Notes", Andius.skin, "red");
         manual.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -97,7 +95,6 @@ public class StartScreen implements Screen, Constants {
 
                     //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, Andius.REWARDS.get(20), Andius.REWARDS.get(20));
                     //mainGame.setScreen(rs);
-                    
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
 //                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
@@ -168,14 +165,6 @@ public class StartScreen implements Screen, Constants {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
-//        if (Exodus.playMusic) {
-//            if (Exodus.music != null) {
-//                Exodus.music.stop();
-//            }
-//            Sound snd = Sound.SPLASH;
-//            Exodus.music = Sounds.play(snd, Exodus.musicVolume);
-//        }
     }
 
     @Override
@@ -189,27 +178,30 @@ public class StartScreen implements Screen, Constants {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        camera.update();
-//
-//        splashRenderer.setView(camera.combined, 0, 0, 19 * tilePixelWidth, 8 * tilePixelHeight);
-//        splashRenderer.render();
         batch.begin();
-        //batch.draw(title, 0, 0);
         titleFont.draw(batch, "ANDIUS", 320, Andius.SCREEN_HEIGHT - 140);
         Andius.titleFont.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
-        //Andius.largeFont.draw(batch, "From the depths of shadow...he comes for VENGEANCE!", 300, Andius.SCREEN_HEIGHT - 342);
-        //Andius.largeFont.draw(batch, "LIBGDX Conversion by Paul Antinori", 350, 84);
-        //Andius.largeFont.draw(batch, "Copyright 2016 Paul Antinori", 375, 48);
         batch.end();
 
         stage.act();
         stage.draw();
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+            this.manual.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            this.manage.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+            this.journey.toggle();
+        }
+
     }
 
     @Override
     public void resize(int width, int height) {
-        //viewPort.update(width, height, false);
     }
 
     @Override

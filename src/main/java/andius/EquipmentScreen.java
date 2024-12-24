@@ -9,6 +9,7 @@ import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.SpellUtil;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -344,6 +345,26 @@ public class EquipmentScreen implements Screen, Constants {
 
         stage.act();
         stage.draw();
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            this.drop.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            this.trade.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
+            this.unequip.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            this.cancel.toggle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            this.exit.toggle();
+        }
 
     }
 

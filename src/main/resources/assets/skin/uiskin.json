@@ -33,7 +33,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: blue }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: { vScroll: scroller-fancy-back, hScrollKnob: scroller-fancy, hScroll: scroller-fancy-back, vScrollKnob: scroller-fancy}
+	default: { vScroll: scroller-fancy-back, hScrollKnob: scroller-fancy, hScroll: scroller-fancy-back, vScrollKnob: scroller-fancy, background: clear}
 },
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
