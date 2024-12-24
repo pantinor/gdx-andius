@@ -106,15 +106,16 @@ public class TempleScreen implements Screen, Constants {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
+
                 int amt = 50;
                 if (selectedPatient.c.status.has(Status.ASHES)) {
-                    amt = 500;
+                    amt = 500 * selectedPatient.c.level;
                 } else if (selectedPatient.c.status.has(Status.PARALYZED)) {
-                    amt = 100;
+                    amt = 100 * selectedPatient.c.level;
                 } else if (selectedPatient.c.status.has(Status.STONED)) {
-                    amt = 200;
+                    amt = 200 * selectedPatient.c.level;
                 } else if (selectedPatient.c.isDead()) {
-                    amt = 250;
+                    amt = 250 * selectedPatient.c.level;
                 }
 
                 if (tither == null) {
@@ -131,31 +132,37 @@ public class TempleScreen implements Screen, Constants {
 
                 log("THE DONATION WILL BE " + amt);
 
+                tither.adjustGold(-amt);
+
                 if (selectedPatient.c.isDead()) {
+                    if (Utils.RANDOM.nextInt(100) > 50 + selectedPatient.c.vitality * 3) {
+                        log("Failed to resurrect the patient!");
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        return;
+                    }
                     selectedPatient.c.hp = 1;
                 }
 
                 if (selectedPatient.c.status.has(Status.ASHES)) {
+                    if (Utils.RANDOM.nextInt(100) > 40 + selectedPatient.c.vitality * 3) {
+                        log("Failed to return the patient from ashes!");
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        return;
+                    }
                     selectedPatient.c.hp = selectedPatient.c.maxhp;
                 }
 
                 selectedPatient.c.adjustHP(25);
-
                 selectedPatient.c.status.reset();
-
-                tither.adjustGold(-amt);
-
                 Sounds.play(Sound.HEALING);
-
                 log(selectedPatient.c.name + " IS WELL.");
 
-                //update available tithers and update their status in the table listing
                 Array<String> tithers = new Array<>();
                 for (Cell cell : patientTable.getCells()) {
                     if (cell.getActor() instanceof PatientListing) {
                         PatientListing pi = (PatientListing) cell.getActor();
-                        pi.style.fontColor = pi.c.status.color();
-                        pi.status.setText(pi.c.status.toString());
+                        pi.style.fontColor = pi.c.isDead() ? Color.RED : pi.c.status.color();
+                        pi.status.setText(pi.c.isDead() ? "DEAD" : pi.c.status.toString());
                         pi.hp.setText(pi.c.hp + " / " + pi.c.maxhp);
                         pi.gold.setText("" + pi.c.gold);
                         if (!pi.c.isDisabled()) {
@@ -273,10 +280,10 @@ public class TempleScreen implements Screen, Constants {
 
         PatientListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.largeFont, rec.status.color());
+            this.style = new LabelStyle(Andius.largeFont, rec.isDead() ? Color.RED : rec.status.color());
             this.name = new Label(rec.name, this.style);
             this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
-            this.status = new Label(rec.status.toString(), this.style);
+            this.status = new Label(rec.isDead() ? "DEAD" : rec.status.toString(), this.style);
             this.hp = new Label(rec.hp + " / " + rec.maxhp, this.style);
             this.gold = new Label("" + rec.gold, this.style);
 

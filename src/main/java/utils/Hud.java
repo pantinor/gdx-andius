@@ -33,7 +33,7 @@ public class Hud {
 
         for (CharacterRecord rec : ctxt.saveGame.players) {
 
-            Andius.smallFont.setColor(rec.status.color());
+            Andius.smallFont.setColor(rec.isDead() ? Color.RED : rec.status.color());
 
             if (rec.hp > 0 && rec.hp < 2) {
                 Andius.smallFont.setColor(Color.SALMON);

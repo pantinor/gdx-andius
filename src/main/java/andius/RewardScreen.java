@@ -92,7 +92,7 @@ public class RewardScreen implements Screen, Constants {
             }
             trap >>>= 1;
         }
-        if (tmp.size() > 0) {
+        if (!tmp.isEmpty()) {
             this.trapType = tmp.get(rand.nextInt(tmp.size()));
         }
 
@@ -464,14 +464,14 @@ public class RewardScreen implements Screen, Constants {
         y -= 25;
         for (CharacterRecord c : this.context.players()) {
             x1 = X_ALIGN;
-            Andius.largeFont.setColor(c.status.color());
+            Andius.largeFont.setColor(c.isDead() ? Color.RED : c.status.color());
             if (c.hp > 0 && c.hp < 2) {
                 Andius.largeFont.setColor(Color.SALMON);
             }
             Andius.largeFont.draw(batch, c.name.toUpperCase(), x1, y);
             String d = String.format("LVL %d  %s  %s", c.level, c.race.toString(), c.classType.toString());
             Andius.largeFont.draw(batch, d, x1 += 150, y);
-            Andius.largeFont.draw(batch, "" + c.status, x1 += 200, y);
+            Andius.largeFont.draw(batch, "" + (c.isDead() ? "DEAD" : c.status), x1 += 200, y);
             Andius.largeFont.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
             y -= 25;
         }

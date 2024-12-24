@@ -36,6 +36,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.StringBuilder;
 import utils.AutoFocusScrollPane;
 import utils.Utils;
 
@@ -419,14 +420,16 @@ public class EquipmentScreen implements Screen, Constants {
                 l.cast.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        if (spell.getArea() != SpellArea.COMBAT && character.canCast(spell)) {
-                            if (spell == Spells.MALOR) {
-                                new MalorDialog(character, map.getScreen()).show(stage);
+                        if (!character.isDisabled()) {
+                            if (spell.getArea() != SpellArea.COMBAT && character.canCast(spell)) {
+                                if (spell == Spells.MALOR) {
+                                    new MalorDialog(character, map.getScreen()).show(stage);
+                                } else {
+                                    SpellUtil.campCast(map.getScreen(), context, character, spell);
+                                }
                             } else {
-                                SpellUtil.campCast(map.getScreen(), context, character, spell);
+                                Sounds.play(Sound.EVADE);
                             }
-                        } else {
-                            Sounds.play(Sound.EVADE);
                         }
                     }
                 });
@@ -900,16 +903,23 @@ public class EquipmentScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super(String.format("%s  LVL %d  %s  %s", rec.race.toString(), rec.level, rec.classType.toString(), rec.status), Andius.skin, "larger");
+            super("", Andius.skin, "larger");
             this.rec = rec;
             setX(50);
             setY(Andius.SCREEN_HEIGHT - 100);
             setColor(rec.status.color());
+            setText(getText());
+        }
+
+        @Override
+        public StringBuilder getText() {
+            return new StringBuilder(String.format("%s  LVL %d  %s  %s", rec.race.toString(), rec.level,
+                    rec.classType.toString(), rec.isDead() ? "DEAD" : rec.status));
         }
 
         @Override
         public Color getColor() {
-            return rec.status.color();
+            return rec.isDead() ? Color.RED : rec.status.color();
         }
 
     }

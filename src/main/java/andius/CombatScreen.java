@@ -397,7 +397,7 @@ public class CombatScreen extends BaseScreen {
 
         if (active != null) {
             if (active.getPlayer().isDisabled()) {
-                log("Disabled!");
+                log("Incapacitated!");
             } else if (keycode == Keys.SPACE) {
                 log("Pass");
             } else if (keycode == Keys.UP) {

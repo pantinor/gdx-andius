@@ -68,7 +68,7 @@ public enum Spells {
         desc.put(Spells.KALKI, "Reduces the armor class of all party members by 1 during combat");
         desc.put(Spells.MILWA, "Summons a softly glowing light that increases vision and reveals secret doors");
         desc.put(Spells.PORFIC, "Lowers the armor class of the caster by 4 during combat");
-        desc.put(Spells.CALFO, "Caster can determine the trap on a chest is 95% of the time");
+        desc.put(Spells.CALFO, "Caster can determine the trap on a chest 95% of the time");
         desc.put(Spells.MANIFO, "Causes some of the monsters to become temporarily paralyzed");
         desc.put(Spells.MATU, "Lowers armor class of all party members by 2 during combat");
         desc.put(Spells.MONTINO, "Silences the air around a group of monsters, making it impossible for them to cast spells");
@@ -106,7 +106,7 @@ public enum Spells {
         desc.put(Spells.MADALTO, "Causes 8-64 points of ice damage");
         desc.put(Spells.MAKANITO, "Kills any monsters of less than 8th level (about 35-40 hit points)");
         desc.put(Spells.MAMORLIS, "Causes all monsters to fear the party");
-        desc.put(Spells.HAMAN, "Has random effects, and drains the caster one level (See below)");
+        desc.put(Spells.HAMAN, "Has random effects, and drains the caster one level");
         desc.put(Spells.LAKANITO, "Kills all monsters affected by this spell, some monsters are immune");
         desc.put(Spells.MASOPIC, "Reduces the armor class of the entire party by 4");
         desc.put(Spells.ZILWAN, "Will destroy any one undead monster");
