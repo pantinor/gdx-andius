@@ -44,6 +44,7 @@ public interface Constants {
     public enum Map {
         WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
+        BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         ALIBABA("Ali Baba Shahriar", "ali-baba.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),

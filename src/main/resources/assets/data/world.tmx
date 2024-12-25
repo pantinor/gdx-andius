@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" infinite="0" nextlayerid="9" nextobjectid="65">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="24" tileheight="24" infinite="0" nextlayerid="9" nextobjectid="66">
  <properties>
   <property name="startX" value="94"/>
   <property name="startY" value="102"/>
@@ -192,7 +192,7 @@
  </layer>
  <layer id="6" name="props" width="256" height="256">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dS07DMBAA0HbRDZdgwYVyp6irLjkCqsQJukacIuI0FDWIEiUpnzaJZ96TrBZWFmiciT22VysAAAAAAAAAAAAAgDj267l7AAAAAAAAAAAA8KVaQE1TvYA+AAAAUK6D90pIzzgAADC/Jaw7AgAAAAAAAADzU9cJAAD95MoAgHwAAIAMnDUNwF98zJuYOwH2xgEAAACAQRtzJwAAAAAAAAAAAExkq2YNAAAAAAAAuBLnjcZQ+T8CAAAAAABwgTUlAAAAAAAAAAAAgBgON6wL3ag5BQAAAIBwdub9IBV3XwNAPO6WAQCA7+o2R75vP5/az8/cuXsG613784PcGoDWLfdlMC37YAAAAICfeJ67A5DAEu9JfDm2x2N77fzeHDHk8DZ3BwBYJLkgAACUR60oAAAAAAAAAAAAAAAAAAAAAAAAAHBttfMOAQAAYJD7vgAAACAf6+gAAAAAAMuijgsAcpMLwDTEGlCarXELAAAAAAAAAAAAAAAA+CX7kgAAAAAAAAAAAChRpf4NoHg7YzkAAAAAAAAAAAAAAAAAAFdS27sKAAAAFMBdwpDbYX1qAAAAAAAAAAAAAAAAAAAAAADwX3vn2QAAAAAAAAAAAHBmqK6smbYbwIKIf8inOWtAXN1Y734H4urGupiHPLLGe20vLQAAAAAAAIThLF04UfMH+TSd72r+IY9uvIt9yKW776dvHxAQT3OhAXGNvf8bAyCOsXgeeuaLf7LZBFwXHsvpPfMhvrG47nsPgCU6BHw+AwD9oj33S8qxq2B/e8oVYX7OGjvkJvaBc8YEyMk7AeQm9iE2MQ45yfEhN7EPAAAAAAAAlO4dpi9u3gAABAA=
+   H4sIAAAAAAAACu3dQU7DMBAAQHrohU9w4EP5U9RTjzwBVeIFOSNeEfEaihpEidoUSprEuzOS1cLJAq2zsdf23R0AAAAAAAAAAAAAQBy71dw9AAAAAAAAAAAA+FYtoKapXkAfAAAAKFfjvRLSMw4AAMxvCeuOAAAAAAAAAMD81HUCAMBpcmUAQD4AAEAGzpoG4Bqf8ybmToCdcQAAAADgrLW5EwAAAAAAAAAAACayUbMGAAAAAAAAjMR5ozFU/o8AAAAAAABcYE0JAAAAAAAAAAAAIIbmhnWhazWnAAAAABDO1rwfpOLuawCIx90yAADwU93lyA/d53P3+ZU7989gve9+fpRbA9C55b4MpmUfDAAAAPAbL3N3ABJY4j2Jr/v2tG9vvd+bI4ay1FfG7Pu43QAgCLkgAACUR60oAAAAAAAAAAAAAAAAAAAAAAAAADC2a+/DAAAAgAzc9wUAAAD5WEcHAAAAAFgWdVwAkJtcAKYh1oDSbIxbAAAAAAAAAAAAAAAAwB/ZlwQAAAAAAAAAAECJKvVvAMXbGssBAAAAAAAAAAAAAAAAABhJbe8qAAAAUAB3CUNuzerQAAAAAAAAAAAAAAAAAAAAAADgv3bOswEAAAAAAAAAAODIubqydtpuAAsi/iGf9qgBcfVjvf8diKsf62Ie8sga77W9tAAAAAAAABCGs3ThQM0f5NP2vqv5hzz68S72IZf+vp9T+4CAeNoLDYhr6P3fGABxDMXzuWe++CebdcB14aGc3jMf4huK61PvAbBETcDnMwBwWrTnfkk5dhXsb0+5IszPWWOH3MQ+cMyYADl5J4DcxD7EJsYhJzk+5Cb2AQAAAAAAgNJ9AORsqYwAAAQA
   </data>
  </layer>
  <objectgroup id="7" name="portals">
@@ -209,6 +209,7 @@
   <object id="62" name="WIWOLD" type="portal" x="1896" y="2328" width="24" height="24"/>
   <object id="63" name="WIZARDRY3" type="portal" x="2040" y="2280" width="24" height="24"/>
   <object id="64" name="WIZARDRY2" type="portal" x="2088" y="2280" width="24" height="24"/>
+  <object id="65" name="BOLTAC" type="portal" x="1968" y="2472" width="24" height="24"/>
  </objectgroup>
  <objectgroup id="8" name="moongates" visible="0">
   <object id="1" name="GATE_0" type="moongate" x="5376" y="3192" width="24" height="24">

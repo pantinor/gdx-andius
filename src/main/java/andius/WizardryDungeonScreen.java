@@ -67,12 +67,9 @@ public class WizardryDungeonScreen extends BaseScreen {
     private CameraInputController inputController;
     private final AssetManager assets;
 
-    private Model fountainModel;
     private Model ladderModel;
-    private Model chestModel;
-    private Model orbModel;
-    private Model avatarModel;
-    private Model wall, door, manhole;
+    private Model doorModel;
+    private Model wall, manhole;
 
     private final Vector3 vdll = new Vector3(.04f, .04f, .04f);
     private final Vector3 nll = new Vector3(.96f, .58f, 0.08f);
@@ -144,7 +141,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
 //        currentLevel = 2;
-//        camera.position.set(10, 20, 10);
+//        camera.position.set(10, 1, 10);
 //        camera.lookAt(10, 0, 10);
 //        this.isTorchOn = true;
 //        this.showMiniMap = false;
@@ -224,9 +221,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         } else if (currentDir == Direction.WEST) {
             camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
         } else if (currentDir == Direction.NORTH) {
-            camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
-        } else if (currentDir == Direction.SOUTH) {
             camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
+        } else if (currentDir == Direction.SOUTH) {
+            camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
         }
     }
 
@@ -275,31 +272,38 @@ public class WizardryDungeonScreen extends BaseScreen {
     private void load() {
 
         assets.load("assets/graphics/dirt.png", Texture.class);
-        assets.load("assets/graphics/door.png", Texture.class);
         assets.load("assets/graphics/mortar.png", Texture.class);
         assets.load("assets/graphics/rock.png", Texture.class);
+        assets.load("assets/graphics/wood-door-texture.png", Texture.class);
         assets.update(2000);
 
-        //convert the collada dae format to the g3db format (do not use the obj format)
-        //export from sketchup to collada dae format, then open dae in blender and export to the fbx format, then convert fbx to the g3db like below
-        //C:\Users\Paul\Desktop\blender>fbx-conv-win32.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
-        ModelLoader<?> gloader = new G3dModelLoader(new UBJsonReader());
-        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain2.g3db"));
-        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
-        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"));
-        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"));
-        avatarModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/wizard.g3db"));
-
         Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)));
-        Material dr = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/door.png", Texture.class)));
+        Material mortar2 = new Material(TextureAttribute.createDiffuse(Utils.reverse(assets.get("assets/graphics/mortar.png", Texture.class))));
+        Material wood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood-door-texture.png", Texture.class)));
+        Material dirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)));
         Material gr = new Material(ColorAttribute.createDiffuse(Color.GREEN));
         Material bl = new Material(ColorAttribute.createDiffuse(Color.BLUE));
         Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW));
         Material red = new Material(ColorAttribute.createDiffuse(Color.RED));
 
+        //export from blender to fbx format, then convert fbx to the g3db like below
+        //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
+        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
+        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
+        doorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
+        doorModel.nodes.get(0).scale.set(.2f, .2f, .2f);
+        doorModel.nodes.get(0).translation.set(.06f, -.5f, .015f);
+        doorModel.nodes.get(0).parts.first().material = wood;
+
         wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-        door = builder.createBox(1.090f, 1, 0.05f, dr, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        Model walldoor = builder.createBox(1.090f, 1, 0.05f, mortar2, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+
         manhole = builder.createCylinder(.75f, .02f, .75f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
+
+        builder.begin();
+        builder.node("door-wall", walldoor);
+        builder.node("door-main", doorModel);
+        doorModel = builder.end();
 
         for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
             for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
@@ -309,7 +313,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
             for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                Model sf = builder.createBox(1.1f, 1, 1.1f, new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class))), Usage.Position | Usage.TextureCoordinates | Usage.Normal);
+                Model sf = builder.createBox(1.1f, 1, 1.1f, dirt, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
                 ceiling.add(new ModelInstance(sf, new Vector3(x - 1.5f, 1.5f, y - 1.5f)));
             }
         }
@@ -387,7 +391,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             } else {
-                ModelInstance instance = new ModelInstance(door, 1 + x - .025f, z, 1 + y - .5f);
+                ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             }
@@ -398,7 +402,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             } else {
-                ModelInstance instance = new ModelInstance(door, x + .025f, z, y + .5f);
+                ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             }
@@ -409,7 +413,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             } else {
-                ModelInstance instance = new ModelInstance(door, x - .5f + 1, z, y - .025f + 1);
+                ModelInstance instance = new ModelInstance(doorModel);
+                instance.transform.setToTranslation(x - .5f + 1, z, y - .025f + 1);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             }
         }
@@ -418,8 +423,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 ModelInstance instance = new ModelInstance(wall, x + .5f, z, y + .025f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             } else {
-                ModelInstance instance = new ModelInstance(door);
-                instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, y + .025f);
+                ModelInstance instance = new ModelInstance(doorModel);
+                instance.transform.setFromEulerAngles(0, 0, 360).trn(x + .5f, z, y + .025f);
                 modelInstances.add(new DungeonTileModelInstance(instance, level));
             }
         }
@@ -449,7 +454,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (isTorchOn) {
             float intensity = 6;//MathUtils.lerp(5, 7, MathUtils.random());
             torch.set(nll.x, nll.y, nll.z, currentPos.x, currentPos.y + .35f, currentPos.z, intensity);
-            //float intensity = 120;
+            //float intensity = 500;
             //torch.set(nll.x, nll.y, nll.z, 10, 10, 10, intensity);
         } else {
             torch.set(vdll.x, vdll.y, vdll.z, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);

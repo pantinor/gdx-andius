@@ -219,4 +219,46 @@ public class Utils {
         points += bonus;
         return points;
     }
+
+    public static Texture rotate90(Texture t) {
+        if (!t.getTextureData().isPrepared()) {
+            t.getTextureData().prepare();
+        }
+        Pixmap p = t.getTextureData().consumePixmap();
+        int width = p.getWidth();
+        int height = p.getHeight();
+        Pixmap rotatedPix = new Pixmap(height, width, p.getFormat());
+
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
+                rotatedPix.drawPixel(x, y, p.getPixel(y, x));
+            }
+        }
+
+        Texture rotated = new Texture(rotatedPix);
+
+        p.dispose();
+        return rotated;
+
+    }
+
+    public static Texture reverse(Texture t) {
+        if (!t.getTextureData().isPrepared()) {
+            t.getTextureData().prepare();
+        }
+        Pixmap p = t.getTextureData().consumePixmap();
+        Pixmap newp = new Pixmap(p.getWidth(), p.getHeight(), p.getFormat());
+
+        for (int x = 0; x < p.getWidth(); x++) {
+            for (int y = 0; y < p.getHeight(); y++) {
+                newp.drawPixel(x, y, p.getPixel(p.getWidth() - 1 - x, p.getHeight() - 1 - y));
+            }
+        }
+
+        Texture newt = new Texture(newp);
+
+        p.dispose();
+        return newt;
+    }
+
 }

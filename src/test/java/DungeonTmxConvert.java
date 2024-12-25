@@ -19,7 +19,7 @@ public class DungeonTmxConvert implements ApplicationListener {
 
         try {
             Dungeon d = new Dungeon();
-            d.createDungeon(DIM, DIM, 30);
+            d.createDungeon(DIM, DIM, 24);
 
             Formatter c = new Formatter(getFloor(d), getWall(d), getDoor(d), getProp(d));
 

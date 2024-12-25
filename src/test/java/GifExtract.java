@@ -110,7 +110,8 @@ public class GifExtract {
 
     //@Test
     public void makeAtlases() throws Exception {
-        readGifs("creatures", "arachnids", "bears", "creatures", "fighters", "outlaws", "sorcerers");
+        //readGifs("creatures", "arachnids", "bears", "creatures", "fighters", "outlaws", "sorcerers");
+        readPngs("bards-tale");
     }
 
     private static void readGifs(String atlasName, String... dirs) throws Exception {
@@ -163,6 +164,50 @@ public class GifExtract {
         tileSet(indexes, "src/main/resources/assets/tibian/tibian-" + atlasName + ".png", 48);
     }
 
+    private static void readPngs(String atlasName) throws Exception {
+
+        TexturePacker.Settings settings = new TexturePacker.Settings();
+        settings.minWidth = 8;
+        settings.minHeight = 8;
+        settings.maxWidth = 2000;
+        settings.maxHeight = 4000;
+        settings.paddingX = 0;
+        settings.paddingY = 0;
+        settings.fast = true;
+        settings.pot = false;
+        settings.grid = true;
+        settings.edgePadding = false;
+        settings.bleed = false;
+        settings.debug = false;
+        settings.alias = false;
+        settings.useIndexes = true;
+
+        TexturePacker tp = new TexturePacker(settings);
+
+        java.util.Map<String, BufferedImage> indexes = new HashMap<>();
+
+        File directory = new File("src/main/resources/assets/bt");
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    try {
+                        List<BufferedImage> frames = readPNG(new FileInputStream(file));
+                        String name = file.getName().replace(".png", "").replace("%27", "").replace("%28", "").replace("%29", "").replace(" ", "_");
+                        System.out.printf("[%s] %s - frames [%d]\n", "bt", name, frames.size());
+                        packFrames(tp, name, frames);
+                        indexes.put(name, frames.get(0));
+                    } catch (Exception e) {
+                        System.out.println(file.getName());
+                    }
+                }
+            }
+        }
+
+        tp.pack(new File("src/main/resources/assets/bt"), atlasName + ".atlas");
+        tileSet(indexes, "src/main/resources/assets/bt/bt-" + atlasName + ".png", 146, 176);
+    }
+
     private static void packFrames(TexturePacker tp, String name, List<BufferedImage> frames) {
         for (int i = 0; i < frames.size(); i++) {
             BufferedImage f = frames.get(i);
@@ -170,7 +215,7 @@ public class GifExtract {
                 System.out.println("Skipping empty file " + name);
                 continue;
             }
-            if (f.getWidth() > 100 || f.getHeight() > 100) {
+            if (f.getWidth() > 200 || f.getHeight() > 200) {
                 System.out.println("Skipping large file " + name);
                 continue;
             }
@@ -209,10 +254,50 @@ public class GifExtract {
 
     }
 
+    private static void tileSet(java.util.Map<String, BufferedImage> map, String outfile, int w, int h) throws IOException {
+
+        int dim = 10;
+        int height = (map.size() * h) / dim + h;
+
+        BufferedImage output = new BufferedImage(w * dim, height, BufferedImage.TYPE_INT_ARGB);
+
+        int x = 0;
+        int y = 0;
+        int count = 0;
+
+        for (String k : map.keySet()) {
+            BufferedImage tile = map.get(k);
+            output.getGraphics().drawImage(tile, x, y, w, h, null);
+
+            x += w;
+            count++;
+            if (count >= dim) {
+                count = 0;
+                x = 0;
+                y += h;
+            }
+
+            System.out.printf("%s,\n", k);
+        }
+
+        ImageIO.write(output, "PNG", new File(outfile));
+
+        System.out.println("----");
+
+    }
+
     private static List<BufferedImage> readGif(InputStream is) throws IOException {
+        return readImage(is, "gif");
+    }
+
+    private static List<BufferedImage> readPNG(InputStream is) throws IOException {
+        return readImage(is, "png");
+    }
+
+    private static List<BufferedImage> readImage(InputStream is, String format) throws IOException {
         List<BufferedImage> frames = new ArrayList<>();
 
-        ImageReader reader = (ImageReader) ImageIO.getImageReadersByFormatName("gif").next();
+        ImageReader reader = (ImageReader) ImageIO.getImageReadersByFormatName(format).next();
         reader.setInput(ImageIO.createImageInputStream(is));
 
         int numFrames = reader.getNumImages(true);
