@@ -1,4 +1,5 @@
 
+import andius.Andius;
 import andius.TibianSprite;
 import andius.objects.Monster;
 
@@ -13,9 +14,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -23,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -55,12 +59,9 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
     public void create() {
 
         font = new BitmapFont();
-
         batch = new SpriteBatch();
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
         stage = new Stage();
-
-        final List<MyListItem> list = new List<>(skin);
 
         TibianSprite.init();
 
@@ -80,6 +81,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
                         selectedIcon = event.getTarget().getName();
                         if (selectedMonster != null) {
                             selectedMonster.monster.setIconId(selectedIcon);
+                            selectedMonster.swapImage(selectedIcon);
                         }
                     }
                 }
@@ -114,18 +116,27 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
             items[x] = new MyListItem(m);
             x++;
         }
-        list.setItems(items);
 
-        list.addListener(new ClickListener(-1) {
+        Table monsterList = new Table(Andius.skin);
+        monsterList.align(Align.top);
+
+        for (MyListItem i : items) {
+            monsterList.add(i);
+            monsterList.row();
+        }
+
+        monsterList.addListener(new ClickListener(-1) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (event.getButton() == 0) {
-                    selectedMonster = list.getSelected();
+                    if (event.getTarget().getParent() instanceof MyListItem) {
+                        selectedMonster = (MyListItem) event.getTarget().getParent();
+                    }
                 }
             }
         });
 
-        ScrollPane scrollPane = new AutoFocusScrollPane(list, skin);
+        ScrollPane scrollPane = new AutoFocusScrollPane(monsterList, skin);
         scrollPane.setScrollingDisabled(true, false);
 
         TextButton makeButton = new TextButton("Write JSON", skin, "default");
@@ -162,7 +173,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
 
         batch.begin();
         font.draw(batch, "icon: " + selectedIcon, screenWidth - 350, screenHeight - 830);
-        font.draw(batch, "monster: " + selectedMonster, screenWidth - 350, screenHeight - 860);
+        //font.draw(batch, "monster: " + selectedMonster.name, screenWidth - 350, screenHeight - 860);
         batch.end();
     }
 
@@ -188,19 +199,33 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
 
     }
 
-    public class MyListItem implements Comparable<MyListItem> {
+    public class MyListItem extends Group implements Comparable<MyListItem> {
 
-        public final String name;
+        public final Label name;
         public final Monster monster;
+        public Image icon;
 
         public MyListItem(Monster m) {
-            this.name = m.getName();
+            this.name = new Label(m.getName(), skin, "default");
             this.monster = m;
+            this.icon = new Image(TibianSprite.icon(this.monster.getIconId()));
+
+            float x = getX();
+            this.icon.setBounds(x + 3, getY() + 3, dim, dim);
+            this.name.setPosition(x += dim + 5, getY() + 10);
+
+            addActor(this.name);
+            addActor(this.icon);
+            this.setBounds(getX(), getY(), 150, 70);
         }
 
-        @Override
-        public String toString() {
-            return String.format("%s - %s", name, monster.getIconId());
+        public void swapImage(String id) {
+            float x = this.icon.getX();
+            float y = this.icon.getY();
+            this.icon.remove();
+            this.icon = new Image(TibianSprite.icon(id));
+            this.icon.setBounds(x, y, dim, dim);
+            addActor(this.icon);
         }
 
         @Override

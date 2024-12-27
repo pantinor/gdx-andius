@@ -117,7 +117,7 @@ public class CombatTestMain extends Game {
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
 
-            CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor, level);
+            CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor, level, true);
             setScreen(cs);
 
         } catch (Exception e) {

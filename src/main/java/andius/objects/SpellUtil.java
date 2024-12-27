@@ -116,7 +116,7 @@ public class SpellUtil {
                         }
                     }
                     break;
-                case LATUMAPIC:
+                case LATUMAPIC://dispel
                     for (andius.objects.Actor m : screen.partyMembers) {
                         target.getPlayer().status.set(Status.ASLEEP, 0);
                         target.getPlayer().status.set(Status.PARALYZED, 0);
@@ -527,15 +527,14 @@ public class SpellUtil {
 
     }
 
-    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, MutableMonster monster, CharacterRecord target, Status effect) {
+    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, MutableMonster monster, CharacterRecord player, Status effect) {
         seq.addAction(Actions.delay(.60f));
-        boolean hit = Utils.attackHit(monster, target);
-        if (hit) {
-            seq.addAction(Actions.run(new LogAction(screen, target.name + " is unaffected.")));
+        if (player.savingThrowSpell()) {
+            seq.addAction(Actions.run(new LogAction(screen, player.name + " made a saving throw and is unaffected!")));
             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
         } else {
-            target.status.set(effect, 4);
-            seq.addAction(Actions.run(new LogAction(screen, target.name + " is " + effect + ".")));
+            player.status.set(effect, 4);
+            seq.addAction(Actions.run(new LogAction(screen, player.name + " is " + effect + ".")));
             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
         }
     }
@@ -556,27 +555,24 @@ public class SpellUtil {
         }
     }
 
-    private static void monstersMagicAttack(CombatScreen screen, SequenceAction seq, andius.objects.Actor attacker, Spells spell, andius.objects.Actor target) {
-
-        int targetX = target.getWx();
-        int targetY = target.getWy();
-
-        int a = Math.abs(attacker.getWx() - targetX);
-        int b = Math.abs(attacker.getWy() - targetY);
+    private static void monstersMagicAttack(CombatScreen screen, SequenceAction seq, andius.objects.Actor attacker, Spells spell, andius.objects.Actor player) {
 
         ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
 
-        if (rand.nextInt(100) < attacker.getMonster().getUnaffected()) {
-            seq.addAction(Actions.run(new LogAction(screen, target.getPlayer().name + " is unaffected.")));
+        if (player.getPlayer().savingThrowSpell()) {
+            seq.addAction(Actions.run(new LogAction(screen, player.getPlayer().name + " made a saving throw and is unaffected!")));
         } else {
             int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-            target.adjustHP(-damage);
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s takes %d damage.", target.getPlayer().name, damage))));
+            if (player.getPlayer().savingThrowSpell()) {
+                damage = damage / 2;
+            }
+            player.adjustHP(-damage);
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s takes %d damage.", player.getPlayer().name, damage))));
         }
 
         Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
-        expl.setX(target.getX() + 12);
-        expl.setY(target.getY() + 12);
+        expl.setX(player.getX() + 12);
+        expl.setY(player.getY() + 12);
         expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
         seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
@@ -590,38 +586,40 @@ public class SpellUtil {
             }
         };
 
-        p.addAction(Actions.sequence(Actions.moveTo(target.getX(), target.getY(), .3f, Interpolation.sineIn), after));
+        p.addAction(Actions.sequence(Actions.moveTo(player.getX(), player.getY(), .3f, Interpolation.sineIn), after));
 
         screen.getStage().addActor(p);
     }
 
     private static void monstersGroupDamage(CombatScreen screen, andius.objects.Actor attacker, SequenceAction seq, Spells spell) {
 
-        for (andius.objects.Actor m : screen.partyMembers) {
+        for (andius.objects.Actor player : screen.partyMembers) {
 
             seq.addAction(Actions.delay(.60f));
 
-            if (rand.nextInt(100) < attacker.getMonster().getUnaffected()) {
-                seq.addAction(Actions.run(new LogAction(screen, m.getPlayer().name + " is unaffected.")));
+            if (player.getPlayer().savingThrowSpell()) {
+                seq.addAction(Actions.run(new LogAction(screen, player.getPlayer().name + " made a saving throw and is unaffected!")));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
-                expl.setX(m.getX() + 12);
-                expl.setY(m.getY() + 12);
+                expl.setX(player.getX() + 12);
+                expl.setY(player.getY() + 12);
                 expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
                 seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                 seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
 
             } else {
-
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-                m.adjustHP(-damage);
+                if (player.getPlayer().savingThrowSpell()) {
+                    damage = damage / 2;
+                }
+                player.adjustHP(-damage);
 
-                seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
+                seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, player.getPlayer().name))));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
-                expl.setX(m.getX() + 12);
-                expl.setY(m.getY() + 12);
+                expl.setX(player.getX() + 12);
+                expl.setY(player.getY() + 12);
                 expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
 
                 seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
@@ -634,22 +632,27 @@ public class SpellUtil {
 
     private static void monstersGroupDamage(CombatScreen screen, andius.objects.Actor attacker, SequenceAction seq, Spells spell, int minDamage, int maxDamage) {
 
-        for (andius.objects.Actor m : screen.partyMembers) {
+        for (andius.objects.Actor player : screen.partyMembers) {
 
-            seq.addAction(Actions.delay(.60f));
+            if (!player.getPlayer().savingThrowSpell()) {
 
-            int damage = Utils.getRandomBetween(minDamage, maxDamage);
-            m.adjustHP(-damage);
+                seq.addAction(Actions.delay(.60f));
 
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, m.getPlayer().name))));
+                int damage = Utils.getRandomBetween(minDamage, maxDamage);
+                player.adjustHP(-damage);
 
-            final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
-            expl.setX(m.getX() + 12);
-            expl.setY(m.getY() + 12);
-            expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+                seq.addAction(Actions.run(new LogAction(screen, String.format("%s deals %d damage to %s", spell, damage, player.getPlayer().name))));
 
-            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-            seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+                final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
+                expl.setX(player.getX() + 12);
+                expl.setY(player.getY() + 12);
+                expl.addAction(Actions.sequence(Actions.delay(.5f), Actions.removeActor()));
+
+                seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+                seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
+            } else {
+                seq.addAction(Actions.run(new LogAction(screen, player.getPlayer().name + " made a saving throw and is unaffected!")));
+            }
 
         }
 

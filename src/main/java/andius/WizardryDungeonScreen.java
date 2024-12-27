@@ -71,8 +71,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     private Model doorModel;
     private Model wall, manhole;
 
-    private final Vector3 vdll = new Vector3(.04f, .04f, .04f);
-    private final Vector3 nll = new Vector3(.96f, .58f, 0.08f);
+    private final Color darkness = new Color(.04f, .04f, .04f, 0xff);
+    private final Color flame = new Color(.96f, .58f, 0.08f, 0xff);
     private PointLight torch;
     boolean isTorchOn = false;
 
@@ -141,7 +141,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
 //        currentLevel = 2;
-//        camera.position.set(10, 1, 10);
+//        camera.position.set(10, 2, 10);
 //        camera.lookAt(10, 0, 10);
 //        this.isTorchOn = true;
 //        this.showMiniMap = false;
@@ -290,6 +290,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
         ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
         ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
+        ladderModel.nodes.get(0).scale.set(.260f, .260f, .260f);
+        ladderModel.nodes.get(0).translation.set(.10f, .93f, .06f);
         doorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
         doorModel.nodes.get(0).scale.set(.2f, .2f, .2f);
         doorModel.nodes.get(0).translation.set(.06f, -.5f, .015f);
@@ -298,7 +300,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
         Model walldoor = builder.createBox(1.090f, 1, 0.05f, mortar2, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
 
-        manhole = builder.createCylinder(.75f, .02f, .75f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
+        manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
 
         builder.begin();
         builder.node("door-wall", walldoor);
@@ -430,17 +432,15 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         if (cell.stairs || cell.elevator) {
-            ModelInstance instance = new ModelInstance(ladderModel, x + .5f, 0, y + .5f);
-            instance.nodes.get(0).scale.set(.060f, .060f, .060f);
-            instance.calculateTransforms();
-            modelInstances.add(new DungeonTileModelInstance(instance, level));
+            ModelInstance ladder = new ModelInstance(ladderModel, x + .5f, 0, y + .5f);
+            modelInstances.add(new DungeonTileModelInstance(ladder, level));
             if (cell.elevator) {
                 modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level));
                 modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 1, y + .5f), level));
             } else if (cell.address.level < cell.addressTo.level) {//down
                 modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level));
             } else {//up
-                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 1, y + .5f), level));
+                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .6f, 1, y + .5f), level));
             }
         }
     }
@@ -453,11 +453,11 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         if (isTorchOn) {
             float intensity = 6;//MathUtils.lerp(5, 7, MathUtils.random());
-            torch.set(nll.x, nll.y, nll.z, currentPos.x, currentPos.y + .35f, currentPos.z, intensity);
+            torch.set(flame.r, flame.g, flame.b, currentPos.x, currentPos.y + .35f, currentPos.z, intensity);
             //float intensity = 500;
             //torch.set(nll.x, nll.y, nll.z, 10, 10, 10, intensity);
         } else {
-            torch.set(vdll.x, vdll.y, vdll.z, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);
+            torch.set(darkness.r, darkness.g, darkness.b, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);
         }
 
         Gdx.gl.glViewport(32, 64, MAP_WIDTH, MAP_HEIGHT);
@@ -529,6 +529,12 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.setColor(Color.TEAL);
                     pixmap.fillTriangle(x * MINI_DIM, y * MINI_DIM, x * MINI_DIM, y * MINI_DIM + MINI_DIM, x * MINI_DIM + MINI_DIM, y * MINI_DIM + MINI_DIM);
                 }
+
+                if (cell.hasTreasureChest) {
+                    pixmap.setColor(Color.CYAN);
+                    pixmap.fillTriangle(x * MINI_DIM, y * MINI_DIM, x * MINI_DIM, y * MINI_DIM + MINI_DIM, x * MINI_DIM + MINI_DIM, y * MINI_DIM + MINI_DIM);
+                }
+
                 if (cell.monsterID >= 0) {
                     pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
@@ -865,6 +871,32 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         } else {
             log("Pass");
+
+            WizardryData.MazeLevel[] levels = this.map.scenario().levels();
+
+            boolean wandering = levels[currentLevel].cells[x][y].tempMonsterID != -1
+                    && (levels[currentLevel].cells[x][y].hasTreasureChest || Utils.randomBoolean());
+
+            if (levels[currentLevel].cells[x][y].monsterID != -1 || wandering) {
+
+                Monster monster = null;
+                if (levels[currentLevel].cells[x][y].monsterID != -1) {
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[x][y].monsterID);
+                } else {
+                    monster = this.map.scenario().monsters().get(levels[currentLevel].cells[x][y].tempMonsterID);
+                }
+
+                andius.objects.Actor actor = new andius.objects.Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
+
+                MutableMonster mm = new MutableMonster(monster);
+                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
+                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                TiledMap tm = loader.load("assets/data/combat1.tmx");
+                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, levels[currentLevel].cells[x][y].hasTreasureChest);
+                mainGame.setScreen(cs);
+                levels[currentLevel].cells[x][y].hasTreasureChest = false;
+            }
         }
 
         finishTurn(x, y);
@@ -892,7 +924,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemRequired);
             CharacterRecord owner = Andius.CTX.getOwner(item);
             if (owner == null) {
-                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
+                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
                 Sounds.play(Sound.NEGATIVE_EFFECT);
                 if (levels[currentLevel].cells[dx][dy].addressTo != null) {
                     MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
@@ -902,7 +934,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         } else {
             if (levels[currentLevel].cells[dx][dy].message != null && levels[currentLevel].cells[dx][dy].addressTo != null) {
-                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
+                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
                 MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
                 teleport(to);
                 return;
@@ -979,7 +1011,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 Item item2 = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].tradeItem2);
                 CharacterRecord owner = Andius.CTX.getOwner(item1);
                 if (owner != null) {
-                    animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+                    Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
                     log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
                     owner.inventory.remove(item1);
                     owner.inventory.add(item2);
@@ -994,7 +1026,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemObtained);
                 CharacterRecord owner = Andius.CTX.getOwner(item);
                 if (owner == null) {
-                    animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+                    Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
                     CharacterRecord cr = Andius.CTX.pickRandomEnabledPlayer();
                     log(String.format("%s found a %s", cr.name, item.genericName));
                     cr.inventory.add(item);
@@ -1017,10 +1049,13 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
             if (showMessage && levels[currentLevel].cells[dx][dy].message != null) {
-                animateText(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
             }
 
-            if (levels[currentLevel].cells[dx][dy].monsterID != -1 || (levels[currentLevel].cells[dx][dy].tempMonsterID != -1 && Utils.randomBoolean())) {
+            boolean wandering = levels[currentLevel].cells[dx][dy].tempMonsterID != -1
+                    && (levels[currentLevel].cells[dx][dy].hasTreasureChest || Utils.randomBoolean());
+
+            if (levels[currentLevel].cells[dx][dy].monsterID != -1 || wandering) {
 
                 Monster monster = null;
                 if (levels[currentLevel].cells[dx][dy].monsterID != -1) {
@@ -1036,8 +1071,9 @@ public class WizardryDungeonScreen extends BaseScreen {
 
                 TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
                 TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1);
+                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, levels[currentLevel].cells[dx][dy].hasTreasureChest);
                 mainGame.setScreen(cs);
+                levels[currentLevel].cells[dx][dy].hasTreasureChest = false;
             }
 
             finishTurn(dx, dy);
@@ -1068,12 +1104,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (y >= DUNGEON_DIM) {
             y = DUNGEON_DIM - 1;
         }
-        if (z >= this.map.scenario().levels().length) {
-            z = this.map.scenario().levels().length - 1;
-        }
-        if (z < 0) {
-            z = 0;
-        }
         teleport(new MazeAddress(z, x, y));
     }
 
@@ -1096,14 +1126,22 @@ public class WizardryDungeonScreen extends BaseScreen {
             currentPos.z = dy + .5f;
             //this.camera.position.set(currentPos.x, .5f, currentPos.z);
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
-            camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
-            moveMiniMapIcon();
         } else {//different level
             currentLevel = to.level - 1;
+            if (currentLevel >= this.map.scenario().levels().length) {
+                currentLevel = this.map.scenario().levels().length - 1;
+            }
+            if (currentLevel < 0) {
+                currentLevel = 0;
+            }
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            createMiniMap();
         }
+
+        camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
+        moveMiniMapIcon();
+        createMiniMap();
+
         Sounds.play(Sound.WAVE);
     }
 

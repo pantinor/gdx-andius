@@ -12,7 +12,7 @@ public class Hud {
 
     private final LogScrollPane logs;
     static final int LOG_AREA_WIDTH = 275;
-    
+
     public Hud() {
         logs = new LogScrollPane(Andius.skin, new Table(), LOG_AREA_WIDTH);
         logs.setBounds(732, 30, LOG_AREA_WIDTH, 320);
@@ -23,7 +23,11 @@ public class Hud {
     }
 
     public void log(String s) {
-        logs.add(s);
+        logs.add(s, Color.WHITE);
+    }
+
+    public void log(String s, Color c) {
+        logs.add(s, c);
     }
 
     public void render(Batch batch, Context ctxt) {

@@ -549,6 +549,7 @@ public interface Constants {
         ATTACK,
         ADVANCE,
         CAST,
+        BREATH,
         FLEE;
     }
 

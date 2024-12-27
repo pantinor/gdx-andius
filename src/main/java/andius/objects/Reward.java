@@ -1,8 +1,21 @@
 package andius.objects;
 
+import java.util.ArrayList;
 import java.util.List;
+import utils.Utils;
 
 public class Reward {
+
+    public enum TrapType {
+        NONE,
+        POISON_NEEDLE,
+        GAS_BOMB,
+        BOLT,
+        TELEPORTER,
+        ANTI_MAGE,
+        ANTI_PRIEST,
+        ALARM
+    }
 
     public int id;
     public boolean isChest;
@@ -18,8 +31,19 @@ public class Reward {
         return isChest;
     }
 
-    public int getTrapTypeFlags() {
-        return trapTypeFlags;
+    public TrapType getTrap() {
+        List<TrapType> tmp = new ArrayList<>();
+        for (int j = 0; j < TrapType.values().length; j++) {
+            if ((trapTypeFlags & 0x01) != 0) {
+                tmp.add(TrapType.values()[j]);
+            }
+            trapTypeFlags >>>= 1;
+        }
+        if (tmp.isEmpty()) {
+            return TrapType.NONE;
+        } else {
+            return tmp.get(Utils.RANDOM.nextInt(tmp.size()));
+        }
     }
 
     public int goldAmount() {

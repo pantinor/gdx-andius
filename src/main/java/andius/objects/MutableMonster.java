@@ -42,9 +42,37 @@ public class MutableMonster extends Monster {
         return status;
     }
 
-    public void decrementStatusEffectCount() {
+    public void processStatusAffects() {
+
+        if (this.healpts > 0) {
+            setCurrentHitPoints(this.healpts);
+            adjustHealthBar();
+        }
+
         for (Status s : Status.values()) {
-            this.status.decrement(s);
+            int roll = Utils.RANDOM.nextInt(100);
+            boolean decr = false;
+            switch (s) {
+                case AFRAID:
+                    decr = roll < Math.max(this.getLevel() * 10, 50);
+                    break;
+                case SILENCED:
+                case ASLEEP:
+                    decr = roll < Math.max(this.getLevel() * 20, 50);
+                    break;
+                case POISONED:
+                case PARALYZED:
+                    decr = roll < Math.max(this.getLevel() * 7, 50);
+                    break;
+                case STONED:
+                    break;
+                case ASHES:
+                    break;
+
+            }
+            if (decr) {
+                this.status.decrement(s);
+            }
         }
     }
 

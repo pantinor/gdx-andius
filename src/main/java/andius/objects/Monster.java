@@ -35,6 +35,15 @@ public class Monster implements Comparable<Monster> {
         WERE, UNDEAD, DEMON, INSECT, ENCHANTED;
     }
 
+    public enum Breath {
+        NONE,
+        FLAME,
+        COLD,
+        POISON,
+        DRAIN_BREATH,
+        STONE,
+    }
+
     public void clone(Monster m) {
         this.genericName = m.genericName;
         this.name = m.name;
@@ -124,8 +133,8 @@ public class Monster implements Comparable<Monster> {
         return healpts;
     }
 
-    public int getBreath() {
-        return breath;
+    public Breath breath() {
+        return Breath.values()[this.breath];
     }
 
     public int getUnaffected() {

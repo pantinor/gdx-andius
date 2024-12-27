@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.objects;
 
 import andius.TibianSprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
-/**
- *
- * @author Paul
- */
 public enum ClassType {
 
     FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, TibianSprite.animation("Knight_Knight_Male")),

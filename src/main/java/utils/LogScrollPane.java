@@ -35,10 +35,10 @@ public class LogScrollPane extends AutoFocusScrollPane {
     }
 
     public void add(String text) {
-        add(text, true);
+        add(text, Color.WHITE);
     }
 
-    public void add(String text, boolean scrollBottom) {
+    public void add(String text, Color color) {
 
         if (text == null) {
             return;
@@ -48,17 +48,14 @@ public class LogScrollPane extends AutoFocusScrollPane {
         label.setWrap(true);
         label.setAlignment(Align.topLeft, Align.left);
         label.setWidth(width - 15);
-        
+        label.setColor(color);
+
         internalTable.add(label).pad(1).width(width - 10);
         internalTable.row();
 
         pack();
-        
-        if (scrollBottom) {
-            //layout();
-            scrollTo(0, 0, 0, 0);
-        }
 
+        scrollTo(0, 0, 0, 0);
     }
 
     @Override

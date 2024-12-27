@@ -276,14 +276,14 @@ public class GameScreen extends BaseScreen {
             }
 
             //random treasure chest
-            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
-            if (cell != null && cell.getTile().getId() >= 1321) { //items tileset
-                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(10), rand.nextInt(10));
-                mainGame.setScreen(rs);
-                cell.setTile(null);
-                return false;
-            }
+//            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+//            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
+//            if (cell != null && cell.getTile().getId() >= 1321) { //items tileset
+//                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(10));
+//                mainGame.setScreen(rs);
+//                cell.setTile(null);
+//                return false;
+//            }
 
         } else if (keycode == Keys.T) {
             Actor a = getTalkActor(v.x, v.y);

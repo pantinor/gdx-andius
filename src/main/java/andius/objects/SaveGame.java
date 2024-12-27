@@ -3,6 +3,7 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Direction;
+import andius.objects.Monster.Breath;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -285,6 +286,70 @@ public class SaveGame implements Constants {
                 v = 10;
             }
             return v;
+        }
+
+        public boolean savingThrowBreath() {
+            int roll = Utils.RANDOM.nextInt(100) + 1;
+            int base = this.level / 5 + this.luck / 6;
+            int raceBonus = 0;
+            if (this.race == Race.DWARF) {
+                raceBonus += 4;
+            }
+            int classBonus = 0;
+            if (this.classType == ClassType.NINJA) {
+                classBonus += 3;
+            } else if (this.classType == ClassType.THIEF) {
+                classBonus += 3;
+            }
+            return roll < (base + raceBonus + classBonus) * 5;
+        }
+
+        public boolean savingThrowSpell() {
+            int roll = Utils.RANDOM.nextInt(100) + 1;
+            int base = this.level / 5 + this.luck / 6;
+            int raceBonus = 0;
+            if (this.race == Race.HOBBIT) {
+                raceBonus += 3;
+            }
+            int classBonus = 0;
+            if (this.classType == ClassType.MAGE) {
+                classBonus += 3;
+            } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.SAMURAI || this.classType == ClassType.NINJA) {
+                classBonus += 2;
+            }
+            return roll < (base + raceBonus + classBonus) * 5;
+        }
+
+        public boolean savingThrowPetrify() {
+            int roll = Utils.RANDOM.nextInt(100) + 1;
+            int base = this.level / 5 + this.luck / 6;
+            int raceBonus = 0;
+            if (this.race == Race.GNOME) {
+                raceBonus += 2;
+            }
+            int classBonus = 0;
+            if (this.classType == ClassType.CLERIC) {
+                classBonus += 3;
+            } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.LORD || this.classType == ClassType.NINJA) {
+                classBonus += 2;
+            }
+            return roll < (base + raceBonus + classBonus) * 5;
+        }
+
+        public boolean savingThrowDeath() {
+            int roll = Utils.RANDOM.nextInt(100) + 1;
+            int base = this.level / 5 + this.luck / 6;
+            int raceBonus = 0;
+            if (this.race == Race.HUMAN) {
+                raceBonus += 1;
+            }
+            int classBonus = 0;
+            if (this.classType == ClassType.FIGHTER || this.classType == ClassType.NINJA) {
+                classBonus += 3;
+            } else if (this.classType == ClassType.SAMURAI || this.classType == ClassType.LORD) {
+                classBonus += 2;
+            }
+            return roll < (base + raceBonus + classBonus) * 5;
         }
 
         @Override

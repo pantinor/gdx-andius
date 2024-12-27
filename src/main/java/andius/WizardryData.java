@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Random;
 import org.apache.commons.io.EndianUtils;
 import org.apache.commons.io.IOUtils;
+import utils.Utils;
 import static utils.Utils.intValue;
 
 public class WizardryData {
@@ -217,7 +218,7 @@ public class WizardryData {
         public Map<String, Item> itemMap() {
             return itemMap;
         }
-        
+
         public static Item getItem(int id, String name) {
             for (Scenario sc : Scenario.values()) {
                 for (Item it : sc.items) {
@@ -312,6 +313,7 @@ public class WizardryData {
                             break;
                         case ENCOUNTER:
                             cell.monsterID = ci.val[2];
+                            cell.hasTreasureChest = true;
                             break;
                         case MESSAGE:
                             if (ci.isMessage()) {
@@ -334,6 +336,7 @@ public class WizardryData {
                             if (ci.val[2] == 4) {
                                 if (ci.val[0] >= 0) {
                                     cell.monsterID = ci.val[0];
+                                    cell.hasTreasureChest = true;
                                 } else if (ci.val[0] > -1200) {
                                     cell.itemObtained = ci.val[0] * -1 - 1000;
                                 } else {
@@ -374,20 +377,46 @@ public class WizardryData {
                             }
                             if (ci.val[2] == 15) {
                                 cell.monsterID = ci.val[1];
+                                cell.hasTreasureChest = true;
                             }
 
                             if (ci.val[2] == 16) {
                                 cell.monsterID = ci.val[1];
+                                cell.hasTreasureChest = true;
                             }
                             break;
                     }
                 }
             }
 
-            for (int x = 0; x < 20; x++) {
-                for (int y = 0; y < 20; y++) {
+            List<List<MazeCell>> rooms = new ArrayList<>();
+
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+
+                    if (cells[x][y].tempMonsterLair) {
+                        List<MazeCell> roomCells = new ArrayList<>();
+                        getConnectedRoomCells(x, y, roomCells);
+                        for (MazeCell c : roomCells) {
+                            c.tempMonsterLair = false;
+                        }
+                        rooms.add(roomCells);
+                    }
 
                 }
+            }
+
+            int treasureCount = 10;
+            while (treasureCount > 0) {
+                if (rooms.isEmpty()) {
+                    break;
+                }
+                int pickRoom = Utils.RANDOM.nextInt(rooms.size());
+                List<MazeCell> room = rooms.remove(pickRoom);
+                int pickCell = Utils.RANDOM.nextInt(room.size());
+                MazeCell cell = room.remove(pickCell);
+                cell.hasTreasureChest = true;
+                treasureCount--;
             }
 
         }
@@ -428,6 +457,7 @@ public class WizardryData {
             value = intValue(buffer[offset + 480]);
             value >>>= row % 8;
             cell.monsterLair = ((value & 1) == 1);
+            cell.tempMonsterLair = cell.monsterLair;
 
             if (cell.eastWall && cell.eastDoor) {
                 cell.hiddenEastDoor = true;
@@ -487,6 +517,26 @@ public class WizardryData {
             }
 
             return monsterOdds[encounterType].getRandomMonster();
+        }
+
+        private void getConnectedRoomCells(int x, int y, List<MazeCell> roomCells) {
+            if (!roomCells.contains(cells[x][y])) {
+                roomCells.add(cells[x][y]);
+            } else {
+                return;
+            }
+            if (!(cells[x][y].northDoor || cells[x][y].northWall) && x + 1 < cells.length) {
+                getConnectedRoomCells(x + 1, y, roomCells);
+            }
+            if (!(cells[x][y].southDoor || cells[x][y].southWall) && x - 1 >= 0) {
+                getConnectedRoomCells(x - 1, y, roomCells);
+            }
+            if (!(cells[x][y].eastDoor || cells[x][y].eastWall) && y + 1 < cells.length) {
+                getConnectedRoomCells(x, y + 1, roomCells);
+            }
+            if (!(cells[x][y].westDoor || cells[x][y].westWall) && y - 1 >= 0) {
+                getConnectedRoomCells(x, y - 1, roomCells);
+            }
         }
     }
 
@@ -575,8 +625,12 @@ public class WizardryData {
         public int itemObtained;
 
         public boolean monsterLair;
+        public boolean tempMonsterLair;//used to determine initial rooms 
+
         public int tempMonsterID = -1;
         public int monsterID = -1;
+
+        public boolean hasTreasureChest;
 
         MazeAddress address;
         MazeAddress addressTo; // if teleport/stairs/chute

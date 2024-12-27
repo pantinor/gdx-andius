@@ -11,9 +11,11 @@ import andius.objects.PlayerCursor;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
+import andius.objects.Monster.Breath;
 import andius.objects.MonsterCursor;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
+import andius.objects.Reward;
 import andius.objects.SaveGame;
 import andius.objects.SpellUtil;
 import andius.objects.Spells;
@@ -60,6 +62,7 @@ public class CombatScreen extends BaseScreen {
     private final MutableMonster[] crSlots;
 
     public final Map contextMap;
+    public final boolean hasTreasure;
     public final andius.objects.Actor opponent;
     private final Monster crType;
     private final Context context;
@@ -79,9 +82,10 @@ public class CombatScreen extends BaseScreen {
     public final Stage hudStage;
     private final CombatHud hud;
 
-    public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent, int level) {
+    public CombatScreen(Context context, Map contextMap, TiledMap tmap, andius.objects.Actor opponent, int level, boolean hasTreasure) {
 
         this.contextMap = contextMap;
+        this.hasTreasure = hasTreasure;
         this.opponent = opponent;
         this.crType = opponent.getMonster();
         this.context = context;
@@ -642,8 +646,26 @@ public class CombatScreen extends BaseScreen {
                     }
                 }
             }
-            mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, goldRewardId, chestRewardId));
+
             this.contextMap.getScreen().endCombat(isWon, this.opponent);
+
+            if (this.hasTreasure) {
+                mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
+            } else {
+                java.util.List<SaveGame.CharacterRecord> okChars = new ArrayList<>();
+                for (SaveGame.CharacterRecord c : this.context.players()) {
+                    if (!c.isDisabled()) {
+                        okChars.add(c);
+                    }
+                }
+                Reward gold = contextMap.scenario().rewards().get(goldRewardId);
+                for (SaveGame.CharacterRecord c : okChars) {
+                    int goldAmt = gold.goldAmount();
+                    c.adjustGold(goldAmt);
+                    this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+                }
+                mainGame.setScreen(this.contextMap.getScreen());
+            }
         } else {
             boolean anyoneAlive = false;
             for (SaveGame.CharacterRecord ch : this.context.players()) {
@@ -702,6 +724,10 @@ public class CombatScreen extends BaseScreen {
             CombatAction action = CombatAction.ATTACK;
             Spells spell = null;
 
+            if (creature.getMonster().breath() != Breath.NONE && rand.nextInt(100) < 60) {
+                action = CombatAction.BREATH;
+            }
+
             if (creature.getMonster().getCurrentMageSpellLevel() > 0 && !creature.getMonster().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
                 spell = creature.getMonster().castMageSpell();
                 action = CombatAction.CAST;
@@ -719,39 +745,24 @@ public class CombatScreen extends BaseScreen {
             }
 
             switch (action) {
+                case BREATH:
+                    log(String.format("%s breathes %s", creature.getMonster().name, creature.getMonster().breath()));
+                    for (andius.objects.Actor pm : partyMembers) {
+                        int d = creature.getMonster().getCurrentHitPoints() / 2;
+                        if (pm.getPlayer().savingThrowBreath()) {
+                            log(String.format("%s made a saving throwing throw against %s", pm.getPlayer().name, creature.getMonster().breath()));
+                            d = d / 2;
+                        }
+                        damagePlayer(seq, creature, pm, d);
+                    }
+                    break;
                 case ATTACK:
                     Sounds.play(Sound.NPC_ATTACK);
                     boolean hit = Utils.attackHit(creature.getMonster(), target.getPlayer());
                     if (hit) {
                         for (Dice dice : creature.getMonster().getDamage()) {
-                            int damage = dice.roll();
-                            target.adjustHP(-damage);
-                            log(String.format("%s %s %s for %d damage!",
-                                    creature.getMonster().name,
-                                    HITMSGS[rand.nextInt(HITMSGS.length)],
-                                    target.getPlayer().name,
-                                    damage));
-
-                            Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
-                            d.setX(target.getX() + 12);
-                            d.setY(target.getY() + 12);
-                            d.addAction(Actions.sequence(Actions.delay(.3f), Actions.removeActor()));
-
-                            seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
-                            seq.addAction(Actions.run(new AddActorAction(stage, d)));
-                            if (target.getPlayer().isDead()) {
-                                seq.addAction(Actions.run(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        partyMembers.remove(target);
-                                        target.getPlayerCursor().remove();
-                                    }
-                                }));
-                            }
-
+                            damagePlayer(seq, creature, target, dice.roll());
                         }
-                        stage.addAction(seq);
-
                     } else {
                         log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
                     }
@@ -774,9 +785,37 @@ public class CombatScreen extends BaseScreen {
                 }
             }
         } finally {
-            creature.getMonster().decrementStatusEffectCount();
+            creature.getMonster().processStatusAffects();
         }
 
+    }
+
+    private void damagePlayer(SequenceAction seq, andius.objects.Actor creature, andius.objects.Actor target, int damage) {
+        target.adjustHP(-damage);
+        log(String.format("%s %s %s for %d damage!",
+                creature.getMonster().name,
+                HITMSGS[rand.nextInt(HITMSGS.length)],
+                target.getPlayer().name,
+                damage));
+
+        Actor d = new ExplosionDrawable(Andius.EXPLMAP.get(Color.RED));
+        d.setX(target.getX() + 12);
+        d.setY(target.getY() + 12);
+        d.addAction(Actions.sequence(Actions.delay(.3f), Actions.removeActor()));
+
+        seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
+        seq.addAction(Actions.run(new AddActorAction(stage, d)));
+        if (target.getPlayer().isDead()) {
+            seq.addAction(Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    partyMembers.remove(target);
+                    target.getPlayerCursor().remove();
+                }
+            }));
+        }
+
+        stage.addAction(seq);
     }
 
     private andius.objects.Actor nearestPartyMember(int fromX, int fromY, AtomicInteger dist) {
