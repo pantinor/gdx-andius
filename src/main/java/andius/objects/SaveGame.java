@@ -3,7 +3,6 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Direction;
-import andius.objects.Monster.Breath;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -66,7 +65,7 @@ public class SaveGame implements Constants {
         }
 
         for (Map map : Map.values()) {
-            if (map.getMap() != null) {
+            if (map.getBaseMap() != null) {
                 MapLayer peopleLayer = map.getTiledMap().getLayers().get("people");
                 if (peopleLayer != null) {
                     Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
@@ -76,7 +75,7 @@ public class SaveGame implements Constants {
                         float y = obj.getProperties().get("y", Float.class);
                         String hash = "M:" + x + ":" + y;
                         boolean found = false;
-                        for (Actor a : map.getMap().actors) {
+                        for (Actor a : map.getBaseMap().actors) {
                             if (a.hash().equals(hash)) {
                                 found = true;
                                 break;

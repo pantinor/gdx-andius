@@ -9,6 +9,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import jakarta.xml.bind.DatatypeConverter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -406,19 +408,36 @@ public class WizardryData {
                 }
             }
 
-            int treasureCount = 10;
-            while (treasureCount > 0) {
-                if (rooms.isEmpty()) {
-                    break;
+            Collections.sort(rooms, new Comparator<List<MazeCell>>() {
+                @Override
+                public int compare(List<MazeCell> l1, List<MazeCell> l2) {
+                    return Integer.compare(l2.size(), l1.size());
                 }
-                int pickRoom = Utils.RANDOM.nextInt(rooms.size());
-                List<MazeCell> room = rooms.remove(pickRoom);
+            });
+
+            int pickRoom = 10;
+            while (pickRoom > 0 && !rooms.isEmpty()) {
+                List<MazeCell> peek = rooms.get(0);
+                if (peek.size() == 1) {
+                    Collections.shuffle(rooms);
+                }
+                List<MazeCell> room = rooms.remove(0);
                 int pickCell = Utils.RANDOM.nextInt(room.size());
                 MazeCell cell = room.remove(pickCell);
                 cell.hasTreasureChest = true;
-                treasureCount--;
+                pickRoom--;
             }
-
+            while (pickRoom > 0) {
+                while (true) {
+                    int x = Utils.RANDOM.nextInt(DUNGEON_DIM);
+                    int y = Utils.RANDOM.nextInt(DUNGEON_DIM);
+                    if (cells[x][y].tempMonsterID > 0 && !cells[x][y].hasTreasureChest) {
+                        cells[x][y].hasTreasureChest = true;
+                        break;
+                    }
+                }
+                pickRoom--;
+            }
         }
 
         private MazeCell walls(int row, int column) {

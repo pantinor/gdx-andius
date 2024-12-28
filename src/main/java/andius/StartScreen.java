@@ -78,18 +78,14 @@ public class StartScreen implements Screen, Constants {
                         CTX.setSaveGame(saveGame);
                     }
 
-                    if (CTX.saveGame.wx == 0 && CTX.saveGame.wy == 0) {
+                    if (CTX.saveGame.map == null) {
+                        CTX.saveGame.map = Map.WORLD;
                         CTX.saveGame.wx = Map.WORLD.getStartX();
                         CTX.saveGame.wy = Map.WORLD.getStartY();
                     }
 
-                    BaseScreen scr = (BaseScreen) Map.WORLD.getScreen();
+                    BaseScreen scr = (BaseScreen) CTX.saveGame.map.getScreen();
                     scr.load(CTX.saveGame);
-
-                    if (CTX.saveGame.map != Map.WORLD) {
-                        scr = (BaseScreen) CTX.saveGame.map.getScreen();
-                        scr.load(CTX.saveGame);
-                    }
 
                     mainGame.setScreen(scr);
 

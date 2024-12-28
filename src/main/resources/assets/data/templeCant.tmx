@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" nextobjectid="22">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="12" nextobjectid="22">
  <properties>
   <property name="startX" value="1"/>
   <property name="startY" value="12"/>
@@ -85,63 +85,61 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
- </tileset>
- <layer name="floor" width="24" height="24">
+ <layer id="1" name="floor" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UXQoAIAiDu1GH7OI9BRKZ8y8IHPjotwmy1kpeDcVY+R2YKD5VBj87fzQf8fCwJY8INuchsS1/vDyQ3Ny9t10Nf8+N3K3hn7x+5SO7ewbLDXSXGy8f7QNP52R2fumNJvPJAd0ACQAA
+   H4sIAAAAAAAACu1VQQ6AMAjjR/7/E7D9SE3WSIyMih482IRgDHTQsU3kxxvQzfqw/bs5b8NXsecvhGmRv514PPz/ag8qXP29yH+uM7In6Al3VXuPSKcnumRrZHXbiDE5ZjvLgVaMJlG/NslR4XUBF84hM8tKxFzB3Bqz3hFzd1+bcNo2IiarLerd99gncVlt2BPck7g/4RfhZi3iZwwzXQHOBcz3A43wHvz4LlbS9fnIAAkAAA==
   </data>
  </layer>
- <layer name="floor 2" width="24" height="24">
+ <layer id="2" name="floor 2" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGBiwgQp4sJhPChgK5usjYVqYTw199DSfWDvIcQ+x+sg1mxj9lJqNzxxqmT1q/sCbPwpGwXADAPoWoK4ACQAA
+   H4sIAAAAAAAACmNgGBiwgQp4sJh/jigfQ9SRYz4pgBrm6yNhWphPDX30DH9i/UCOf4nVR67ZxOin1Gx85lDL7FHzB978UTAKhhsAALhYungACQAA
   </data>
  </layer>
- <layer name="props" width="24" height="24">
+ <layer id="3" name="props" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWUgrWM1FU30MCTEYGHAhhu4T8KRsEoGAWjgPYAAEzqMtUACQAA
+   H4sIAAAAAAAACmNgGAWUgrWM1FU30MCTEYGHAhhu4T8KRsEoGAWjgPYAAEzqMtUACQAA
   </data>
  </layer>
- <layer name="creature" width="24" height="24">
+ <layer id="4" name="creature" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAVDEXAyD7QLRsEoGAWjYBSMgqELAIeKIAEACQAA
+   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
   </data>
  </layer>
- <layer name="water_edges" width="24" height="24">
+ <layer id="5" name="water_edges" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGBggysjAIMLIsIBcDNS/AJ/5QDVgYAOxJ4FYbAM1F8g+QIz5hNSRq2/U/MFhPggQSmtI6sgCQH0JhOwg12xi7KDUbBgAhRm6HdB8foBa5qObhU1sJJsvimYWNN6pYv4oGAXDDQAAF9OAVAAJAAA=
+   H4sIAAAAAAAACmNgGBggysjAIMLIsIBcDNS/AJ/5QDVgYAOxJ4FYbAM1F8g+QIz5hNSRq2/U/MFhPggQSmtI6sgCQH0JhOwg12xi7KDUbBgAhRm6HdB8foBa5qObhU1sJJsvimYWNN6pYv4oGAXDDQAAF9OAVAAJAAA=
   </data>
  </layer>
- <layer name="shadows" width="24" height="24">
+ <layer id="6" name="shadows" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGBigTAU8CoYmGGpxSKw7KfEPIb3UCCtcZuAzm9S8hy5HrruHStoYBeSD0TJ9FAw0AADP48UGAAkAAA==
+   H4sIAAAAAAAACmNgGBigTAU8CoYmGGpxSKw7KfEPIb3UCCtcZuAzm9S8hy5HrruHStoYBeSD0TJ9FAw0AADP48UGAAkAAA==
   </data>
  </layer>
- <layer name="walls" width="24" height="24">
+ <layer id="7" name="walls" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VYQ6DIAyF4bocAjjD1Pu6ZTa+1LZSBj+W+JJGgu0HAg9DuCrHEF5HrMdze8cCbXq/QN7G+j4cSVq/V2Uyf/b8NU798/mP4mvr8Cs/xW9onBLPnOQci7gUSYgs5HjZJPTjyrznGUNiW0J/t9R52Fgjte9yUdY+juBnY91G8ElF+AbO1/bYOutYz3Pw3qf/QGutltej1jqPl3r5lq+16Dn3hfm3Cp7GnEd92gFTmjz4AAkAAA==
+   H4sIAAAAAAAACu2VYQ6DIAyF4bocAjjD1Pu6ZTa+1LZSBj+W+JJGgu0HAg9DuCrHEF5HrMdze8cCbXq/QN7G+j4cSVq/V2Uyf/b8NU798/mP4mvr8Cs/xW9onBLPnOQci7gUSYgs5HjZJPTjyrznGUNiW0J/t9R52Fgjte9yUdY+juBnY91G8ElF+AbO1/bYOutYz3Pw3qf/QGutltej1jqPl3r5lq+16Dn3hfm3Cp7GnEd92gFTmjz4AAkAAA==
   </data>
  </layer>
- <layer name="door" width="24" height="24">
+ <layer id="8" name="door" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
+   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
   </data>
  </layer>
- <layer name="torches" width="24" height="24">
+ <layer id="9" name="torches" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA1amchjI4vhAzOZiGPD+Oj0KBgFowACSM17pILRvDcywWi6GgXDGQAAxZtn9QAJAAA=
+   H4sIAAAAAAAACmNgwA1amchjI4vhAzOZiGPD+Oj0KBgFowACSM17pILRvDcywWi6GgXDGQAAxZtn9QAJAAA=
   </data>
  </layer>
- <layer name="webs" width="24" height="24">
+ <layer id="10" name="webs" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
+   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
   </data>
  </layer>
- <objectgroup name="people">
+ <objectgroup id="11" name="people">
   <object id="21" name="Priest of Cant" type="TEMPLE" x="672" y="192" width="48" height="48">
    <properties>
-    <property name="movement" value="FIXED"/>
+    <property name="icon" value="Druid_Winter_Warden_Male"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
  </objectgroup>

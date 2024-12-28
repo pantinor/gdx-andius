@@ -76,6 +76,9 @@ public class TempleScreen implements Screen, Constants {
         Array<String> names = new Array<>();
         for (int i = 0; i < this.context.players().length; i++) {
             if (!this.context.players()[i].isDisabled()) {
+                if (tither == null) {
+                    tither = this.context.players()[i];
+                }
                 names.add(this.context.players()[i].name.toUpperCase());
             }
         }

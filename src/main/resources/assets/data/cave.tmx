@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="116">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="120">
  <properties>
   <property name="startX" value="16"/>
   <property name="startY" value="19"/>
@@ -92,17 +92,12 @@
  </layer>
  <layer id="2" name="floor 2" width="24" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgGAW0AkeQMK3tGQWjYBQMDkDrPD+a30fBKKAOAAC4AMAnAAkAAA==
+   H4sIAAAAAAAACmNgGAWkgiIm/PKFUPkjSJiWgNbmj4JRMAqIB7TO87TO74TKN0pB4RA3HxQ+IDuw0ejAkLZOGQUUAgDLt7m+AAkAAA==
   </data>
  </layer>
  <layer id="19" name="creature" width="24" height="24">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQB8GfAKkrAACQAA
-  </data>
- </layer>
- <layer id="3" name="props" width="24" height="24">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+DQPoQdz+9ALZ8NAqGFgAA58QL0QAJAAA=
   </data>
  </layer>
  <layer id="5" name="water_edges" width="24" height="24">
@@ -113,11 +108,6 @@
  <layer id="8" name="door" width="24" height="24">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACmNgoC/4S4BPKRBkxM8fBfgBteMDHYz0+BjM6X807kfDYBSMgpEEAPpt7D8ACQAA
-  </data>
- </layer>
- <layer id="9" name="torches" width="24" height="24">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgwA5amXBIUAnMpLH5hMBw998ooAwMdPpAtp8WbkG2fySnVVjY0iq+YWE7ksN4FIyCwQoAdtvDoQAJAAA=
   </data>
  </layer>
  <layer id="6" name="shadows" width="24" height="24">
@@ -135,31 +125,41 @@
    H4sIAAAAAAAACu2VUQ6EIAxEiQfxDuwhUO5/oV0Sm8xOplA2rF9O0giGPmsZNKWUXtt3lE+c19W73xu3tag2r7DGlCHH7u9bP4zHfMxFcb7V0p53XDVVeEePn2EN8zhYeZI/itV83r/VfN6Hf/BxrnwzwzdPFIc/2huPr/pbBb+QR1UtzPf6q3yqlKE2xffyI/5UtXj65XxZ/ZEa8PyfNPb8j/yRRmuU/1fylRcifZ/h987eCj6PI9w7+b3/E/Ojfcec6Pd/pu+PtN7KudpBAAkAAA==
   </data>
  </layer>
+ <layer id="9" name="torches" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgwA5amXBIoMnhYhMybyYetfQAMPfgczMlYKD9RyqgVTgMVUDr8CCUPojNV9Swf6ilVWoCepUDIzmMR8EoGKwAAHfWh+oACQAA
+  </data>
+ </layer>
+ <layer id="3" name="props" width="24" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgoD+oYILQGUwDYDmdQDrUbwuHsB9rqeR2QvFcMYTDaCiCIiYIRgahJMZBzWic4QRDOc+PglEwkgAAtqleRwAJAAA=
+  </data>
+ </layer>
  <objectgroup id="11" name="portals">
   <object id="111" name="WORLD" x="768" y="912" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="people">
-  <object id="93" name="Bushwacker" type="MONSTER" x="288" y="48" width="48" height="48">
+  <object id="118" name="Rogue" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="94" name="Rogue" type="MONSTER" x="720" y="48" width="48" height="48">
+  <object id="115" name="Lvl 1 Mage" type="MONSTER" x="432" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="95" name="Kobold" type="MONSTER" x="960" y="288" width="48" height="48">
+  <object id="114" name="Lvl 1 Ninja" type="MONSTER" x="768" y="240" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="96" name="Lvl 1 Priest" type="MONSTER" x="768" y="528" width="48" height="48">
+  <object id="96" name="Lvl 1 Priest" type="MONSTER" x="624" y="144" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="98" name="Highway Man" type="MONSTER" x="336" y="528" width="48" height="48">
+  <object id="98" name="Undead Kobold" type="MONSTER" x="96" y="240" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -169,9 +169,39 @@
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="97" name="Dutch" type="MERCHANT" x="336" y="672" width="48" height="48">
+  <object id="95" name="Kobold" type="MONSTER" x="960" y="288" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Elementalist_Female"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="119" name="Kobold" type="MONSTER" x="288" y="96" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="94" name="Kobold" type="MONSTER" x="720" y="48" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="117" name="Orc" type="MONSTER" x="864" y="528" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="93" name="Orc" type="MONSTER" x="720" y="480" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="116" name="Bubbly Slime" type="MONSTER" x="960" y="48" width="48" height="48">
+   <properties>
+    <property name="movement" value="ATTACK_AVATAR"/>
+   </properties>
+  </object>
+  <object id="113" name="Fred" type="INNKEEPER" x="288" y="864" width="48" height="48">
+   <properties>
+    <property name="icon" value="Paladin_Demon_Hunter_Female"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -181,20 +211,10 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="113" name="Fred" type="INNKEEPER" x="288" y="864" width="48" height="48">
+  <object id="97" name="Dutch" type="MERCHANT" x="336" y="672" width="48" height="48">
    <properties>
-    <property name="icon" value="Paladin_Demon_Hunter_Female"/>
+    <property name="icon" value="Sorcerer_Elementalist_Female"/>
     <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="114" name="Lvl 1 Ninja" type="MONSTER" x="768" y="240" width="48" height="48">
-   <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
-   </properties>
-  </object>
-  <object id="115" name="Lvl 1 Mage" type="MONSTER" x="720" y="192" width="48" height="48">
-   <properties>
-    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
  </objectgroup>

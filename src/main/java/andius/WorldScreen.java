@@ -56,10 +56,25 @@ public class WorldScreen extends BaseScreen {
         renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 1f);
         mapBatch = renderer.getBatch();
 
-        mapPixelHeight = this.map.getMap().getHeight() * WORLD_TILE_DIM;
+        mapPixelHeight = this.map.getBaseMap().getHeight() * WORLD_TILE_DIM;
 
         setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
+    }
 
+    @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = Map.WORLD;
+        CTX.saveGame.wx = (int) v.x;
+        CTX.saveGame.wy = (int) v.y;
+        CTX.saveGame.level = 0;
+        CTX.saveGame.direction = Direction.NORTH;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+        setMapPixelCoords(newMapPixelCoords, saveGame.wx, saveGame.wy, 0);
     }
 
     @Override
@@ -150,22 +165,6 @@ public class WorldScreen extends BaseScreen {
         v.set(Math.round(tmp.x / WORLD_TILE_DIM) - 6, ((mapPixelHeight - Math.round(tmp.y) - WORLD_TILE_DIM) / WORLD_TILE_DIM) - 3, 0);
     }
 
-    @Override
-    public void save(SaveGame saveGame) {
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        CTX.saveGame.map = Map.WORLD;
-        CTX.saveGame.wx = (int) v.x;
-        CTX.saveGame.wy = (int) v.y;
-        CTX.saveGame.level = 0;
-        CTX.saveGame.direction = Direction.NORTH;
-    }
-
-    @Override
-    public void load(SaveGame saveGame) {
-        setMapPixelCoords(newMapPixelCoords, saveGame.wx, saveGame.wy, 0);
-    }
-
     public class GameTimer implements Runnable {
 
         public boolean active = true;
@@ -213,7 +212,7 @@ public class WorldScreen extends BaseScreen {
             newMapPixelCoords.x = newMapPixelCoords.x - WORLD_TILE_DIM;
             postMove(Direction.WEST, v.x - 1, v.y);
         } else if (keycode == Keys.E) {
-            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
+            Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y);
             if (p != null) {
                 Andius.mainGame.setScreen(p.getMap().getScreen());
             }
@@ -240,13 +239,13 @@ public class WorldScreen extends BaseScreen {
             nx = (int) current.x + 1;
         }
 
-        if (nx > this.map.getMap().getWidth() - 1 || nx < 0 || ny > this.map.getMap().getHeight() - 1 || ny < 0) {
+        if (nx > this.map.getBaseMap().getWidth() - 1 || nx < 0 || ny > this.map.getBaseMap().getHeight() - 1 || ny < 0) {
             Andius.mainGame.setScreen(Map.WORLD.getScreen());
             return false;
         }
 
         TiledMapTileLayer grass = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("grass");
-        TiledMapTileLayer.Cell c1 = grass.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
+        TiledMapTileLayer.Cell c1 = grass.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
         if (c1 == null) {
             return false;
         }

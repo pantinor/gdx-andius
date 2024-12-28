@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Iterator;
+import java.util.List;
 import utils.PartyDeathException;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
@@ -39,6 +40,7 @@ public class GameScreen extends BaseScreen {
     private final Batch batch;
     private final Viewport mapViewPort;
     private int currentDirection;
+    private boolean removedActors;
 
     public GameScreen(Map map) {
 
@@ -62,7 +64,7 @@ public class GameScreen extends BaseScreen {
             @Override
             public void render(float time) {
                 renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrames()[currentDirection], newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
-                for (Actor a : GameScreen.this.map.getMap().actors) {
+                for (Actor a : GameScreen.this.map.getBaseMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
                         renderer.getBatch().draw(a.getIcon(), a.getX() - 20, a.getY() + 12);
                     }
@@ -70,7 +72,7 @@ public class GameScreen extends BaseScreen {
             }
         });
 
-        mapPixelHeight = this.map.getMap().getHeight() * TILE_DIM;
+        mapPixelHeight = this.map.getBaseMap().getHeight() * TILE_DIM;
 
         setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
 
@@ -81,9 +83,48 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = this.map;
+        CTX.saveGame.wx = Map.WORLD.getStartX();//TODO
+        CTX.saveGame.wy = Map.WORLD.getStartY();//TODO
+        CTX.saveGame.x = (int) v.x;
+        CTX.saveGame.y = (int) v.y;
+        CTX.saveGame.level = 0;
+        CTX.saveGame.direction = Direction.NORTH;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+        setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
+        if (this.map.getRoomIds() != null) {
+            currentRoomId = this.map.getRoomIds()[saveGame.x][saveGame.y][0];
+        }
+        removeActors(saveGame);
+    }
+
+    private void removeActors(SaveGame saveGame) {
+        if (this.removedActors) {
+            return;
+        }
+        List<String> l = saveGame.removedActors.get(this.map);
+        if (l != null && this.map.getBaseMap() != null) {
+            Iterator<Actor> iter = this.map.getBaseMap().actors.iterator();
+            while (iter.hasNext()) {
+                Actor a = iter.next();
+                if (l.contains(a.hash())) {
+                    iter.remove();
+                }
+            }
+        }
+        this.removedActors = true;
+    }
+
+    @Override
     public void show() {
         setRoomName();
-        this.map.syncRemovedActors(CTX.saveGame);
+        removeActors(CTX.saveGame);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
@@ -158,27 +199,6 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
-    public void save(SaveGame saveGame) {
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        CTX.saveGame.map = this.map;
-        CTX.saveGame.wx = Map.WORLD.getStartX();//TODO
-        CTX.saveGame.wy = Map.WORLD.getStartY();//TODO
-        CTX.saveGame.x = (int) v.x;
-        CTX.saveGame.y = (int) v.y;
-        CTX.saveGame.level = 0;
-        CTX.saveGame.direction = Direction.NORTH;
-    }
-
-    @Override
-    public void load(SaveGame saveGame) {
-        setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
-        if (this.map.getRoomIds() != null) {
-            currentRoomId = this.map.getRoomIds()[saveGame.x][saveGame.y][0];
-        }
-    }
-
-    @Override
     public boolean keyUp(int keycode) {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
@@ -212,7 +232,7 @@ public class GameScreen extends BaseScreen {
             newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
             v.x -= 1;
         } else if (keycode == Keys.D || keycode == Keys.U) {//elevators
-            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y, keycode == Keys.U);
+            Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y, keycode == Keys.U);
             if (p != null && p.getMap() != this.map) {
                 Vector3 dv = p.getDest();
                 int dx = (int) dv.x;
@@ -227,7 +247,7 @@ public class GameScreen extends BaseScreen {
             }
             return false;
         } else if (keycode == Keys.E || keycode == Keys.K) {//stairs
-            Portal p = this.map.getMap().getPortal((int) v.x, (int) v.y);
+            Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y);
             if (p != null && p.getMap() != this.map && !p.isElevator()) {
                 Vector3 dv = p.getDest();
                 int dx = (int) dv.x;
@@ -250,7 +270,7 @@ public class GameScreen extends BaseScreen {
                     MapObject obj = iter.next();
                     float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
                     float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
-                    if (v.x == mx && this.map.getMap().getHeight() - v.y - 1 == my) {
+                    if (v.x == mx && this.map.getBaseMap().getHeight() - v.y - 1 == my) {
                         if ("REWARD".equals(obj.getName())) {
                             StringBuilder sb = new StringBuilder();
                             Iterator<String> iter2 = obj.getProperties().getKeys();
@@ -265,7 +285,7 @@ public class GameScreen extends BaseScreen {
                             animateText(sb.toString(), Color.GREEN);
                             messagesLayer.getObjects().remove(obj);
                             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getMap().getHeight() - 1 - (int) v.y);
+                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
                             if (cell != null) {
                                 cell.setTile(null);
                             }
@@ -284,7 +304,6 @@ public class GameScreen extends BaseScreen {
 //                cell.setTile(null);
 //                return false;
 //            }
-
         } else if (keycode == Keys.T) {
             Actor a = getTalkActor(v.x, v.y);
             if (a != null) {
@@ -332,7 +351,7 @@ public class GameScreen extends BaseScreen {
         pos[12] = new Vector2(x, y - 2);
 
         for (int i = 0; i < pos.length; i++) {
-            Actor a = this.map.getMap().getCreatureAt((int) pos[i].x, (int) pos[i].y);
+            Actor a = this.map.getBaseMap().getCreatureAt((int) pos[i].x, (int) pos[i].y);
             if (a != null) {
                 return a;
             }
@@ -358,13 +377,13 @@ public class GameScreen extends BaseScreen {
             nx = (int) current.x + 1;
         }
 
-        if (nx > this.map.getMap().getWidth() - 1 || nx < 0 || ny > this.map.getMap().getHeight() - 1 || ny < 0) {
+        if (nx > this.map.getBaseMap().getWidth() - 1 || nx < 0 || ny > this.map.getBaseMap().getHeight() - 1 || ny < 0) {
             Andius.mainGame.setScreen(Map.WORLD.getScreen());
             return false;
         }
 
         TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("floor");
-        TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getMap().getHeight() - 1 - ny);
+        TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
         if (cell == null) {
             //Sounds.play(Sound.BLOCKED);
             return false;
@@ -377,7 +396,7 @@ public class GameScreen extends BaseScreen {
                 MapObject obj = iter.next();
                 float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
                 float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
-                if (nx == mx && this.map.getMap().getHeight() - 1 - ny == my) {
+                if (nx == mx && this.map.getBaseMap().getHeight() - 1 - ny == my) {
                     String msg = obj.getProperties().get("type", String.class);
 
                     animateText(msg, Color.WHITE);
@@ -428,7 +447,7 @@ public class GameScreen extends BaseScreen {
                                     msx != null ? Integer.valueOf(msx) : nx,
                                     msy != null ? Integer.valueOf(msy) : ny,
                                     pixelPos.x, pixelPos.y, MovementBehavior.ATTACK_AVATAR);
-                            this.map.getMap().actors.add(actor);
+                            this.map.getBaseMap().actors.add(actor);
                         }
                     }
                 }
@@ -436,7 +455,7 @@ public class GameScreen extends BaseScreen {
             }
         }
 
-        Portal p = this.map.getMap().getPortal((int) nx, (int) ny);
+        Portal p = this.map.getBaseMap().getPortal((int) nx, (int) ny);
         if (p != null && p.getMap() == this.map) { //go to a portal on the same map ie ali-baba map has this
             Vector3 dv = p.getDest();
             if (this.map.getRoomIds() != null) {
@@ -445,7 +464,7 @@ public class GameScreen extends BaseScreen {
             }
             setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y, 0);
 
-            for (Actor act : this.map.getMap().actors) {//so follower can follow thru portal
+            for (Actor act : this.map.getBaseMap().actors) {//so follower can follow thru portal
                 if (act.getMovement() == MovementBehavior.FOLLOW_AVATAR) {
                     int dist = Utils.movementDistance(act.getWx(), act.getWy(), (int) nx, (int) ny);
                     if (dist < 5) {
@@ -467,7 +486,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void endCombat(boolean isWon, andius.objects.Actor opponent) {
         if (isWon) {
-            this.map.getMap().removeCreature(opponent);
+            this.map.getBaseMap().removeCreature(opponent);
         }
     }
 
@@ -480,7 +499,7 @@ public class GameScreen extends BaseScreen {
         }
 
         try {
-            this.map.getMap().moveObjects(this.map, this, x, y);
+            this.map.getBaseMap().moveObjects(this.map, this, x, y);
 
             CTX.endTurn(this.map);
 

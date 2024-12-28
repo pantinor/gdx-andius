@@ -1,6 +1,5 @@
 package andius.objects;
 
-import andius.Andius;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import andius.CombatScreen;
@@ -96,7 +95,7 @@ public class BaseMap {
                         CombatScreen cs = new CombatScreen(CTX, map, tm, p, 1, true);
                         mainGame.setScreen(cs);
                         continue;
-                    } else if (dist >= 3) {
+                    } else if (dist >= 4) {   
                         //dont move until close enough
                         continue;
                     }

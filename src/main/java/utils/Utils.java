@@ -1,5 +1,6 @@
 package utils;
 
+import andius.Constants;
 import andius.Direction;
 import andius.objects.ClassType;
 import andius.objects.Item;
@@ -150,11 +151,35 @@ public class Utils {
     public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
         int roll = RANDOM.nextInt(20) + 1;
 
-        int weaponACMod = defender.weapon.armourClass;
+        if (roll == 20) {
+            return true;
+        }
 
-        int cth = 21 - defender.calculateAC() - weaponACMod - attacker.getLevel() - 5 - (defender.status.isDisabled() ? 3 : 0);
+        if (roll == 1) {
+            return false;
+        }
+        
+        int THAC0 = 0;
+        if (attacker.getLevel() > Constants.THAC0_MONSTER.length) {
+            THAC0 = Constants.THAC0_MONSTER[Constants.THAC0_MONSTER.length - 1];
+        } else {
+            THAC0 = Constants.THAC0_MONSTER[attacker.getLevel() - 1];
+        }
 
-        if (roll >= 20) {
+        int chanceToHit = THAC0 - defender.weapon.armourClass;
+
+        chanceToHit -= defender.calculateAC();
+
+        chanceToHit += (defender.status.isDisabled() ? 3 : 0);
+
+        return roll >= chanceToHit;
+    }
+
+    public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
+
+        int roll = (RANDOM.nextInt(20) + 1);
+
+        if (roll == 20) {
             return true;
         }
 
@@ -162,17 +187,25 @@ public class Utils {
             return false;
         }
 
-        return roll <= cth;
-    }
-
-    public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
-
-        int hitCalcMod = attacker.level / 3 + 2;
-        if (attacker.classType == ClassType.MAGE || attacker.classType == ClassType.THIEF || attacker.classType == ClassType.WIZARD) {
-            hitCalcMod = attacker.level / 5;
+        int THAC0 = 0;
+        switch (attacker.classType) {
+            case FIGHTER:
+            case SAMURAI:
+            case LORD:
+            case NINJA:
+                THAC0 = Constants.THACO_FIGHTER[attacker.level];
+                break;
+            case MAGE:
+            case WIZARD:
+                THAC0 = Constants.THACO_MAGE[attacker.level];
+                break;
+            case CLERIC:
+                THAC0 = Constants.THACO_PRIEST[attacker.level];
+                break;
+            case THIEF:
+                THAC0 = Constants.THACO_THIEF[attacker.level];
+                break;
         }
-
-        int weaponHitMd = attacker.weapon.hitmd;
 
         int strMod = 0;
         if (attacker.str <= 3) {
@@ -189,18 +222,17 @@ public class Utils {
             strMod = 3;
         }
 
-        int roll = (RANDOM.nextInt(20) + 1) + strMod + hitCalcMod + weaponHitMd;
-        int cth = 21 - defender.getArmourClass() - defender.getACModifier() - (defender.status().isDisabled() ? 3 : 0);
+        THAC0 -= strMod;
 
-        if (roll >= 20) {
-            return true;
-        }
+        THAC0 -= attacker.weapon.hitmd;
 
-        if (roll == 1) {
-            return false;
-        }
+        int chanceToHit = THAC0 - defender.getArmourClass();
 
-        return roll <= cth;
+        chanceToHit -= defender.getACModifier();
+
+        chanceToHit += (defender.status().isDisabled() ? 3 : 0);
+
+        return roll >= chanceToHit;
     }
 
     public static int dealDamage(Item weapon, MutableMonster defender) {

@@ -80,7 +80,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public abstract void finishTurn(int currentX, int currentY);
-    
+
     public abstract void teleport(int level, int stepsX, int stepsY);
 
     public void endCombat(boolean isWon, andius.objects.Actor opponent) {
@@ -119,6 +119,12 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 try {
 
+                    for (Map m : Map.values()) {
+                        if (m.isLoaded()) {
+                            m.getScreen().save(CTX.saveGame);
+                        }
+                    }
+
                     map.getScreen().save(CTX.saveGame);
 
                     CTX.saveGame.write(SAVE_FILENAME);
@@ -126,8 +132,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
                     Sounds.play(Sound.TRIGGER);
 
                     log("Party Saved");
-
-                    mainGame.setScreen(map.getScreen());
 
                 } catch (Exception e) {
                     e.printStackTrace();

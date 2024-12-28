@@ -96,7 +96,8 @@ public class InnScreen implements Screen, Constants {
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (selectedPlayer == null || selectedPlayer.c.isDisabled()) {
+                if (selectedPlayer.c.isDisabled()) {
+                    log(selectedPlayer.c.name.toUpperCase() + " IS DISABLED.");
                     return;
                 }
                 if (roomSelection.getSelected().startsWith("THE STAB")) {
@@ -117,9 +118,6 @@ public class InnScreen implements Screen, Constants {
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (selectedPlayer == null) {
-                    return;
-                }
                 for (Cell cell : playerTable.getCells()) {
                     if (cell.getActor() instanceof PlayerListing) {
                         PlayerListing pi = (PlayerListing) cell.getActor();
@@ -146,7 +144,7 @@ public class InnScreen implements Screen, Constants {
 
         ScrollPane sp1 = new ScrollPane(this.roomSelection, Andius.skin);
         sp1.setBounds(X_ALIGN, 340, 300, 145);
-        
+
         playerTable = new Table(Andius.skin);
         playerTable.defaults().align(Align.left);
         playerTable.addListener(new EventListener() {
@@ -170,8 +168,14 @@ public class InnScreen implements Screen, Constants {
         );
         this.playerScroll = new AutoFocusScrollPane(playerTable, Andius.skin);
         this.playerScroll.setScrollingDisabled(true, false);
-        for (CharacterRecord p : context.players()) {
-            playerTable.add(new PlayerListing(p));
+        for (int i = 0; i < context.players().length; i++) {
+            CharacterRecord p = context.players()[i];
+            PlayerListing pl = new PlayerListing(p);
+            if (i == 0) {
+                pl.addActor(focusIndicator);
+                selectedPlayer = pl;
+            }
+            playerTable.add(pl);
             playerTable.row();
         }
 
@@ -186,7 +190,7 @@ public class InnScreen implements Screen, Constants {
         this.go.setBounds(X_ALIGN, 290, 60, 40);
         this.pool.setBounds(X_ALIGN + 70, 290, 60, 40);
         this.exit.setBounds(X_ALIGN + 140, 290, 60, 40);
-        
+
         stage.addActor(sp1);
         stage.addActor(playerSelectionLabel);
         stage.addActor(exit);
@@ -283,11 +287,11 @@ public class InnScreen implements Screen, Constants {
 
         PlayerListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.largeFont, rec.status.color());
-            
+            this.style = new LabelStyle(Andius.largeFont, rec.isDead() ? Color.RED : rec.status.color());
+
             this.name = new Label(rec.name, this.style);
             this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
-            this.status = new Label(rec.status.toString(), this.style);
+            this.status = new Label(rec.isDead() ? "DEAD" : rec.status.toString(), this.style);
             this.hp = new Label(rec.hp + " / " + rec.maxhp, this.style);
             this.gold = new Label("" + rec.gold, this.style);
             this.exp = new Label("" + rec.exp, this.style);

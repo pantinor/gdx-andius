@@ -211,6 +211,7 @@ public class CombatScreen extends BaseScreen {
     @Override
     public void log(String s) {
         this.logs.add(s);
+        this.contextMap.getScreen().log(s);
     }
 
     private void fillCreatureTable(int level) {
@@ -623,8 +624,12 @@ public class CombatScreen extends BaseScreen {
 
     public void end() {
 
+        java.util.List<SaveGame.CharacterRecord> lastMenStanding = new ArrayList<>();
         for (andius.objects.Actor player : partyMembers) {
             player.getPlayer().acmodifier1 = 0;
+            if (!player.getPlayer().isDisabled()) {
+                lastMenStanding.add(player.getPlayer());
+            }
         }
 
         boolean isWon = this.enemies.isEmpty();
@@ -649,23 +654,23 @@ public class CombatScreen extends BaseScreen {
 
             this.contextMap.getScreen().endCombat(isWon, this.opponent);
 
+            for (SaveGame.CharacterRecord c : lastMenStanding) {
+                c.awardXP(exp / lastMenStanding.size());
+                log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp / lastMenStanding.size()));
+            }
+
             if (this.hasTreasure) {
                 mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
             } else {
-                java.util.List<SaveGame.CharacterRecord> okChars = new ArrayList<>();
-                for (SaveGame.CharacterRecord c : this.context.players()) {
-                    if (!c.isDisabled()) {
-                        okChars.add(c);
-                    }
-                }
                 Reward gold = contextMap.scenario().rewards().get(goldRewardId);
-                for (SaveGame.CharacterRecord c : okChars) {
-                    int goldAmt = gold.goldAmount();
-                    c.adjustGold(goldAmt);
+                int goldAmt = gold.goldAmount();
+                for (SaveGame.CharacterRecord c : lastMenStanding) {
+                    c.adjustGold(goldAmt / lastMenStanding.size());
                     this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
                 }
                 mainGame.setScreen(this.contextMap.getScreen());
             }
+
         } else {
             boolean anyoneAlive = false;
             for (SaveGame.CharacterRecord ch : this.context.players()) {
@@ -805,6 +810,7 @@ public class CombatScreen extends BaseScreen {
 
         seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
         seq.addAction(Actions.run(new AddActorAction(stage, d)));
+        
         if (target.getPlayer().isDead()) {
             seq.addAction(Actions.run(new Runnable() {
                 @Override

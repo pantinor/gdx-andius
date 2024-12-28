@@ -33,7 +33,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import org.apache.commons.io.IOUtils;
 import utils.Utils;
 
@@ -82,7 +81,7 @@ public class ManageScreen implements Screen, Constants {
     private static final String EMPTY = "<empty>";
 
     public ManageScreen(Screen rs, Skin skin, SaveGame saveGame) {
-        
+
         this.stage = new Stage();
         this.batch = new SpriteBatch();
         this.returnScreen = rs;
@@ -115,10 +114,12 @@ public class ManageScreen implements Screen, Constants {
         }
 
         try {
-            GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file()));
-            String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
-            gzis.close();
-            String json = Base64Coder.decodeString(b64);
+            //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file()));
+            //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
+            //gzis.close();
+            //String json = Base64Coder.decodeString(b64);
+            FileInputStream fis = new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file());
+            String json = IOUtils.toString(fis, StandardCharsets.UTF_8);
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             RosterIndex[] r = gson.fromJson(json, RosterIndex[].class);
@@ -760,7 +761,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
         batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 719);
-        
+
         int[] ms = sel.magePoints;
         int[] cs = sel.clericPoints;
         String d = String.format("MG: %d %d %d %d %d %d %d    CL: %d %d %d %d %d %d %d",

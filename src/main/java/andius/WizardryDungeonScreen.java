@@ -71,8 +71,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     private Model doorModel;
     private Model wall, manhole;
 
-    private final Color darkness = new Color(.04f, .04f, .04f, 0xff);
-    private final Color flame = new Color(.96f, .58f, 0.08f, 0xff);
+    private final Color darkness = Color.DARK_GRAY;
+    private final Color flame = new Color(0xf59414ff);
     private PointLight torch;
     boolean isTorchOn = false;
 
@@ -90,6 +90,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     public int currentLevel = 0;
     private final Vector3 currentPos = new Vector3();
     private Direction currentDir = Direction.EAST;
+    private boolean loadedMazeData;
 
     private boolean showMiniMap = true;
     private Texture miniMap;
@@ -127,7 +128,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.camera.near = 0.1f;
         this.camera.far = 10f;
 
-        load();
+        init();
 
         this.miniMapIcon = new MiniMapIcon();
         this.miniMapIcon.setOrigin(4, 4);
@@ -175,18 +176,16 @@ public class WizardryDungeonScreen extends BaseScreen {
     public void getCurrentMapCoords(Vector3 v) {
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        v.set(x, .5f, y);
+        v.set(x, y, currentLevel);
     }
 
     @Override
     public void save(SaveGame saveGame) {
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
         CTX.saveGame.map = this.map;
-        CTX.saveGame.wx = 75;
-        CTX.saveGame.wy = 95;
-        CTX.saveGame.x = (int) v.x;
-        CTX.saveGame.y = (int) v.z;
+        CTX.saveGame.wx = 75;//TODO
+        CTX.saveGame.wy = 95;//TODO
+        CTX.saveGame.x = (Math.round(currentPos.x) - 1);
+        CTX.saveGame.y = (Math.round(currentPos.z) - 1);
         CTX.saveGame.level = currentLevel + 1;
         CTX.saveGame.direction = this.currentDir;
 
@@ -225,32 +224,25 @@ public class WizardryDungeonScreen extends BaseScreen {
         } else if (currentDir == Direction.SOUTH) {
             camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
         }
+
+        loadMazeData(saveGame);
     }
 
-    @Override
-    public void log(String s) {
-        Andius.HUD.log(s);
-    }
+    private void loadMazeData(SaveGame saveGame) {
 
-    @Override
-    public void show() {
-        syncSaveGameData();
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
-        createMiniMap();
-        moveMiniMapIcon();
-    }
-
-    private void syncSaveGameData() {
-
-        List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
-        if (removedMonsters == null) {
-            removedMonsters = new ArrayList<>();
-            CTX.saveGame.removedActors.put(this.map, removedMonsters);
+        if (this.loadedMazeData) {
+            return;
         }
 
-        for (SaveGame.AnsweredRiddle ar : CTX.saveGame.riddles) {
+        for (SaveGame.AnsweredRiddle ar : saveGame.riddles) {
             MazeCell cell = this.map.scenario().levels()[ar.level].cells[ar.x][ar.y];
             cell.riddleAnswer = "answered";
+        }
+
+        List<String> removedMonsters = saveGame.removedActors.get(this.map);
+        if (removedMonsters == null) {
+            removedMonsters = new ArrayList<>();
+            saveGame.removedActors.put(this.map, removedMonsters);
         }
 
         for (int level = 0; level < this.map.scenario().levels().length; level++) {
@@ -263,13 +255,28 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
         }
+
+        this.loadedMazeData = true;
+    }
+
+    @Override
+    public void log(String s) {
+        Andius.HUD.log(s);
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+        loadMazeData(CTX.saveGame);
+        createMiniMap();
+        moveMiniMapIcon();
     }
 
     @Override
     public void hide() {
     }
 
-    private void load() {
+    private void init() {
 
         assets.load("assets/graphics/dirt.png", Texture.class);
         assets.load("assets/graphics/mortar.png", Texture.class);
@@ -825,6 +832,23 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
+        } else if (keycode == Keys.F1) {//CHEAT for DEV
+            currentLevel--;
+            if (currentLevel < 0) {
+                currentLevel = 0;
+                Andius.mainGame.setScreen(Map.WORLD.getScreen());
+            } else {
+                createMiniMap();
+            }
+            return false;
+        } else if (keycode == Keys.F2) {//CHEAT for DEV
+            currentLevel++;
+            if (currentLevel >= this.map.scenario().levels().length) {
+                currentLevel = this.map.scenario().levels().length - 1;
+            } else {
+                createMiniMap();
+            }
+            return false;
         } else if (keycode == Keys.K) {
             if (cell.elevator || (cell.stairs && cell.address.level > cell.addressTo.level)) {
                 currentLevel--;
@@ -1153,6 +1177,11 @@ public class WizardryDungeonScreen extends BaseScreen {
             this.map.scenario().levels()[currentLevel].cells[x][y].tempMonsterID = -1;
 
             List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
+            if (removedMonsters == null) {
+                removedMonsters = new ArrayList<>();
+                CTX.saveGame.removedActors.put(this.map, removedMonsters);
+            }
+
             removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
         }
     }

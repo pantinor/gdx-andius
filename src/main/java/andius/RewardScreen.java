@@ -164,27 +164,27 @@ public class RewardScreen implements Screen, Constants {
 
         releaseTrapAffect(player);
 
-        java.util.List<CharacterRecord> okChars = new ArrayList<>();
+        java.util.List<CharacterRecord> lastMenStanding = new ArrayList<>();
         for (CharacterRecord c : this.context.players()) {
             if (!c.isDisabled()) {
-                okChars.add(c);
+                lastMenStanding.add(c);
             }
         }
-
-        for (CharacterRecord c : okChars) {
-            int goldAmt = this.reward.goldAmount();
-            c.adjustGold(goldAmt);
-            log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+        
+        int goldAmt = this.reward.goldAmount();
+        for (CharacterRecord c : lastMenStanding) {
+            c.adjustGold(goldAmt / lastMenStanding.size());
+            log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt / lastMenStanding.size()));
         }
 
-        if (!okChars.isEmpty()) {
+        if (!lastMenStanding.isEmpty()) {
             for (RewardDetails d : reward.getRewardDetails()) {
                 if (d.itemReward != null) {
                     int odds = d.odds;
                     int roll = rand.nextInt(101);
                     if (roll <= odds) {
-                        CharacterRecord picked = okChars.get(rand.nextInt(okChars.size()));
-                        int itemId = Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax());
+                        CharacterRecord picked = lastMenStanding.get(rand.nextInt(lastMenStanding.size()));
+                        int itemId = Math.min(Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax()), this.contextMap.scenario().items().size() - 1);
                         Item found = this.contextMap.scenario().items().get(itemId).clone();
                         picked.inventory.add(found);
                         log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
@@ -345,23 +345,12 @@ public class RewardScreen implements Screen, Constants {
 
     private void log(String s) {
         this.logs.add(s);
+        this.contextMap.getScreen().log(s);
     }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
-        java.util.List<CharacterRecord> okChars = new ArrayList<>();
-        for (CharacterRecord c : this.context.players()) {
-            if (!c.isDisabled()) {
-                okChars.add(c);
-            }
-        }
-        int exp = this.expPoints / okChars.size();
-        for (CharacterRecord c : okChars) {
-            c.awardXP(exp);
-            log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp));
-        }
     }
 
     @Override
