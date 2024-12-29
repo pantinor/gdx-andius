@@ -41,7 +41,7 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        WORLD("Andius", "world.tmx", WORLD_TILE_DIM),
+        WORLD("Andius", "sosaria.tmx", WORLD_TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),

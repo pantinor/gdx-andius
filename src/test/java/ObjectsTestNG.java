@@ -35,9 +35,11 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
+import utils.SpreadFOV;
 import utils.Utils;
 
 public class ObjectsTestNG {
@@ -525,6 +527,42 @@ public class ObjectsTestNG {
         assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
         assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
         assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
+
+    }
+
+    @Test
+    public void testFOVWrapping() throws Exception {
+
+        float[][] shadowMap = new float[][]{
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 0, 0, 0, 1, 1},
+            {0, 0, 1, 0, 0, 0, 0, 1, 0},
+            {1, 0, 1, 0, 0, 0, 0, 1, 1},
+            {1, 1, 1, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},};
+
+        SpreadFOV fov = new SpreadFOV(shadowMap);
+
+        fov.calculateFOV(4, 1, 5);
+
+        //visible
+        assertTrue(fov.light(1, 1) > 0);
+        assertTrue(fov.light(2, 1) > 0);
+        assertTrue(fov.light(3, 1) > 0);
+        assertTrue(fov.light(4, 1) > 0);
+        assertTrue(fov.light(5, 1) > 0);
+        assertTrue(fov.light(4, 0) > 0);
+
+        //not visible
+        assertTrue(fov.light(7, 1) <= 0);
+        assertTrue(fov.light(4, 3) <= 0);
+        assertTrue(fov.light(8, 1) <= 0);
+
+        float[][] m = fov.lightMap();
+        assertTrue(m[4 + 9][8] > 0);//wrapped
 
     }
 
