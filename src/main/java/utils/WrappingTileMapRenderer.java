@@ -23,12 +23,33 @@ import static com.badlogic.gdx.graphics.g2d.Batch.Y3;
 import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import static com.badlogic.gdx.graphics.g2d.Batch.C1;
+import static com.badlogic.gdx.graphics.g2d.Batch.C2;
+import static com.badlogic.gdx.graphics.g2d.Batch.C3;
+import static com.badlogic.gdx.graphics.g2d.Batch.C4;
+import static com.badlogic.gdx.graphics.g2d.Batch.U1;
+import static com.badlogic.gdx.graphics.g2d.Batch.U2;
+import static com.badlogic.gdx.graphics.g2d.Batch.U3;
+import static com.badlogic.gdx.graphics.g2d.Batch.U4;
+import static com.badlogic.gdx.graphics.g2d.Batch.V1;
+import static com.badlogic.gdx.graphics.g2d.Batch.V2;
+import static com.badlogic.gdx.graphics.g2d.Batch.V3;
+import static com.badlogic.gdx.graphics.g2d.Batch.V4;
+import static com.badlogic.gdx.graphics.g2d.Batch.X1;
+import static com.badlogic.gdx.graphics.g2d.Batch.X2;
+import static com.badlogic.gdx.graphics.g2d.Batch.X3;
+import static com.badlogic.gdx.graphics.g2d.Batch.X4;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y1;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y2;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y3;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 public class WrappingTileMapRenderer extends BatchTiledMapRenderer {
 
@@ -96,7 +117,7 @@ public class WrappingTileMapRenderer extends BatchTiledMapRenderer {
                 }
 
                 TiledMapTileLayer.Cell cell = layer.getCell(cx, cy);
-                float color = getColor(layer, batch.getColor(), col, row);
+                float color = getColor(layer, col, layerHeight - 1 - row);
 
                 if (cell == null) {
                     x += layerTileWidth;
@@ -151,28 +172,14 @@ public class WrappingTileMapRenderer extends BatchTiledMapRenderer {
 
     }
 
-    private float getColor(TiledMapTileLayer layer, Color batchColor, int col, int row) {
+    public float getColor(TiledMapTileLayer layer, int col, int row) {
 
+        Color batchColor = this.batch.getColor();
         int layerWidth = layer.getWidth();
         int layerHeight = layer.getHeight();
 
-        int cx = col;
-        if (col < 0) {
-            cx = layerWidth + col;
-        } else if (col >= layerWidth) {
-            cx = layerWidth + layerWidth + col - layerWidth;
-        } else {
-            cx = layerWidth + col;
-        }
-
-        int cy = row;
-        if (row < 0) {
-            cy = layerHeight + (layerHeight - 1 - row);
-        } else if (row >= layerHeight) {
-            cy = layerHeight + layerHeight + (layerHeight - 1 - row);
-        } else {
-            cy = layerHeight + (layerHeight - 1 - row);
-        }
+        int cx = layerWidth + col;
+        int cy = layerHeight + row;
 
         float[][] lightMap = fov.lightMap();
 
@@ -188,6 +195,52 @@ public class WrappingTileMapRenderer extends BatchTiledMapRenderer {
             return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, val);
         }
 
+    }
+    
+    private final Rectangle box = new Rectangle();
+
+    public void draw(TextureRegion region, float x, float y, float color) {
+
+        this.box.set(x, y, 5, 5);
+
+        if (this.viewBounds.contains(this.box)) {
+
+            float x1 = x;
+            float y1 = y;
+            float x2 = x1 + region.getRegionWidth() * unitScale;
+            float y2 = y1 + region.getRegionHeight() * unitScale;
+
+            float u1 = region.getU();
+            float v1 = region.getV2();
+            float u2 = region.getU2();
+            float v2 = region.getV();
+
+            vertices[X1] = x1;
+            vertices[Y1] = y1;
+            vertices[C1] = color;
+            vertices[U1] = u1;
+            vertices[V1] = v1;
+
+            vertices[X2] = x1;
+            vertices[Y2] = y2;
+            vertices[C2] = color;
+            vertices[U2] = u1;
+            vertices[V2] = v2;
+
+            vertices[X3] = x2;
+            vertices[Y3] = y2;
+            vertices[C3] = color;
+            vertices[U3] = u2;
+            vertices[V3] = v2;
+
+            vertices[X4] = x2;
+            vertices[Y4] = y1;
+            vertices[C4] = color;
+            vertices[U4] = u2;
+            vertices[V4] = v1;
+            
+            this.batch.draw(region.getTexture(), vertices, 0, 20);
+        }
     }
 
 }

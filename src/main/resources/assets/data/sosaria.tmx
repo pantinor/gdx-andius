@@ -172,7 +172,7 @@
  </layer>
  <layer id="9" name="grass" width="64" height="64">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer id="12" name="water" width="64" height="64">
@@ -182,7 +182,7 @@
  </layer>
  <layer id="11" name="meadow" width="64" height="64">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu1XWY4FIQj0/tfpC87HZBJjAFmq1Lankpe3NLIUCLyntfa07+CZvDzyb8eMgzFGFAencfh075laQPmwkw9PLXj58dhoLXeWBW+M2meWP6NvK+xJ37N6KpD8YXHAusuoO4P2cWarqkfSi9C/ggPUedbOsGp+omY8y9eI3owP0Xs6nlnVt3fBqvXWcvk5bTcc4YktGockdyIHjJ3Ew+Ot8MR3Uvzo+/mG+DUfV+0ymZmF2he1nszalSPPEPqjZ6UZjwC7/2d1WXs8Guz5n93/dvcfJG7mILJrIXVLdbtrl2XasnpU5vVGaPtvpTaYvvY+IPVG/V9dE9LcZsxTK++zcywOpLwza0Czb/2W4YDZ37OQ4rJkIzxocjN/GHmP1rkmG/Ff6rPec/3ZKjy2EXp6mUhfqNTLDBGfPTKZ+LO2V+Q+YsvT2yJ5Q/d0zQZKNtv7LH1R2RWzgXHHZzq88icBFTujXix7SGR0VmZD1v9qvXr1ZevAkhnlM7D8rdZupZ49tiTbGVT9lmRRXMzsjb9VdEV9nsl4+MgC1bMqdTuT99YDKobsOYRPWvweW7vqQMpNBZqO7P2K2Kz2PjQi/aLKA/IuIYDqJ1m7u1HNaeXcCUD2tVNy6gVzLn8JrF3hDbB2qds50HL+lTqw4pee3wQprln8Ozhg2F21I1XBsh/J6431H+X1Ng6qe7L2/GZYd+am2pDg+Y95c/x/+HLsPf45+IXEwQ+sayn7AEAAAA==
+   H4sIAAAAAAAACuVbAXLjMAjk6XX7iUv7iia9+4TTZ/TecWUa5iiDJEBIdp2d8dhxI4tdIQSKewGAF7gfnD+P59uBvC/s0HRYPo9Hdj6CVit88X1j1zUdWn+3grT/E2yfjY/bWfIrcczQQAI1eUt6VgQn0PnTcb0d8v67o48z/Pc3xJPTvpFzrsb9XXyP4OHuBc1HadsoyOd7x5bA7e7Fyq6z55vWV5bd6OcU216hb85wuzJtbPXVg7P4HOWuAW0cGQeune1P4jqTOwE1QDtH5yBof9Rm6fcjYqXHXyPrq8fmizjT9Sjust8twPuW+SOI6xbQ157he06+R1i4cS0sY09xQvazNw20se31P407729vGmSixp2wZU0ggTH0AfLmJ9UDNWzN/wG+6n0JtLu3frWsX17+r6wNXveME/knr/0A8nOZ2vzfMl88i/4pr81eczUNsjWOaCDzeLJzVC53ZUd2HxENRtcas3FkDayxLjJ3axq09s1m5jBo56g9VU0DC/ct9cgG10By17ClDid2zuxHq/NamO0TMq/G68yakvLWEv/S2jVDAxp3bh+trVmg52n8Ne6r+BzRwOrHM/dDZH5Uy1m0WseqAflzKyfiMYk+Z9RPS+G+HNcaLLWepoGFu7YOAeT4QqtG9+w/evhTzLJy58jK0y37E5Yalnh4+Vv9XcNH4b4Hsv4rwTIPPHlCdM8wGx4NWxpYY5/VZz35B2k1Yy+ppYP2noV3rlpyT63PPcG7R04oxXpLf5H8CutKjF9LsH0Nkd+kNN8pQcaIqP/zvugdqIx9xZ7818Jf1gBR/qU567UZeS+3dtq7NJ7nteKMHHviEB233tqFjzmNQ03XHlv5s1+Ue1549jm03H1RvkfgeozSoBclrpb9Wr6vq/Hi8X+EH0gOXuA7atL26P60tubxHGvUXIhyR9A7erhWZezLr4VnROeXtc8eDZ/A966iFZpNo3To1SAbrZhq2UOLcMF2vwPtsuHh3Grv0cGzZzMSPXGUPyNzjZgFrCky9mNHrJM/CaNyhZ8ALZ+8Fw20cZf3j6xBjb/8+9F00Gqov+K8h5gwol8rr8hvtJnguV2mBiW/17AavjMSVPNmwsqdsLecvxcRn275ofZu51HwC75rJt+BmPEb0pZo7S9uGR9moqbDPcHyP873AKkDavAPBBcxQQBAAAA=
   </data>
  </layer>
  <layer id="10" name="forest" width="64" height="64">
@@ -200,7 +200,7 @@
    H4sIAAAAAAAACu3bMQ6AMAgAwDq4+AgXP+Sf3Iy/MP7TyV2H0gbvXkATIA2EUiDeOLSOAMjuStpn9qTvAmht0l8hzKbeeGmRK+oFKKs+AFSUdYbKf9TO4bnTGjk7jQsAAOhLph3DkegtAECMyPlupn8X/IVdS6znhtAtIcB3NyBhksUAQAAA
   </data>
  </layer>
- <objectgroup id="4" name="portals">
+ <objectgroup id="4" name="portals" visible="0">
   <object id="1" name="LLECHY" type="portal" x="1080" y="432" width="24" height="24"/>
   <object id="2" name="WIZARDRY3" type="portal" x="240" y="1272" width="24" height="24"/>
   <object id="3" name="BOLTAC" type="portal" x="1104" y="456" width="24" height="24"/>
@@ -222,46 +222,14 @@
   <object id="19" name="WIZARDRY3" type="portal" x="1392" y="720" width="24" height="24"/>
   <object id="29" name="CAVE" type="portal" x="1152" y="552" width="24" height="24"/>
  </objectgroup>
- <objectgroup id="5" name="moongates">
-  <object id="20" name="GATE_0" type="portal" x="168" y="192" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="21" name="GATE_1" type="portal" x="1368" y="1104" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="22" name="GATE_2" type="portal" x="360" y="648" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="23" name="GATE_3" type="portal" x="864" y="1392" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="24" name="GATE_4" type="portal" x="360" y="696" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="25" name="GATE_5" type="portal" x="288" y="1320" width="24" height="24">
-   <properties>
-  
-   </properties>
-  </object>
-  <object id="26" name="GATE_6" type="portal" x="744" y="744" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
-  <object id="27" name="GATE_7" type="portal" x="1392" y="744" width="24" height="24">
-   <properties>
-
-   </properties>
-  </object>
+ <objectgroup id="5" name="moongates" visible="0">
+  <object id="20" name="GATE_0" type="portal" x="168" y="192" width="24" height="24"/>
+  <object id="21" name="GATE_1" type="portal" x="1368" y="1104" width="24" height="24"/>
+  <object id="22" name="GATE_2" type="portal" x="360" y="648" width="24" height="24"/>
+  <object id="23" name="GATE_3" type="portal" x="864" y="1392" width="24" height="24"/>
+  <object id="24" name="GATE_4" type="portal" x="360" y="696" width="24" height="24"/>
+  <object id="25" name="GATE_5" type="portal" x="288" y="1320" width="24" height="24"/>
+  <object id="26" name="GATE_6" type="portal" x="744" y="744" width="24" height="24"/>
+  <object id="27" name="GATE_7" type="portal" x="1392" y="744" width="24" height="24"/>
  </objectgroup>
 </map>

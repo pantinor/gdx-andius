@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,7 +30,7 @@ public class WorldScreen extends BaseScreen {
 
     private final Map map;
     private final WrappingTileMapRenderer renderer;
-    private final Batch mapBatch, batch;
+    private final Batch batch;
     private final Viewport mapViewPort;
     private final TextureAtlas moonPhaseAtlas;
     private static int phaseIndex = 0, phaseCount = 0, trammelphase = 0, trammelSubphase = 0, feluccaphase = 0;
@@ -47,22 +48,22 @@ public class WorldScreen extends BaseScreen {
         this.height = this.map.getBaseMap().getHeight();
         this.mapPixelHeight = height * WORLD_TILE_DIM;
 
-        batch = new SpriteBatch();
+        this.batch = new SpriteBatch();
 
-        stage = new Stage(viewport);
+        this.stage = new Stage(viewport);
         Andius.HUD.addActor(stage);
 
-        camera = new OrthographicCamera(MAP_VIEWPORT_DIM, MAP_VIEWPORT_DIM);
-        mapViewPort = new ScreenViewport(camera);
+        this.camera = new OrthographicCamera();
+        this.mapViewPort = new ScreenViewport(camera);
 
         addButtons(this.map);
 
-        moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
+        this.moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
 
         SequenceAction seq1 = Actions.action(SequenceAction.class);
         seq1.addAction(Actions.delay(.25f));
         seq1.addAction(Actions.run(gameTimer));
-        stage.addAction(Actions.forever(seq1));
+        this.stage.addAction(Actions.forever(seq1));
 
         float[][] shadowMap = new float[width][height];
         TiledMapTileLayer forest = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("forest");
@@ -76,12 +77,10 @@ public class WorldScreen extends BaseScreen {
         }
 
         SpreadFOV fov = new SpreadFOV(shadowMap);
-        renderer = new WrappingTileMapRenderer(this.map, this.map.getTiledMap(), fov, 1f);
-        mapBatch = renderer.getBatch();
+        this.renderer = new WrappingTileMapRenderer(this.map, this.map.getTiledMap(), fov, 1f);
 
         setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
-
-        renderer.getFOV().calculateFOV(this.map.getStartX(), this.map.getStartY(), 20f);
+        this.renderer.getFOV().calculateFOV(this.map.getStartX(), this.map.getStartY(), 20f);
     }
 
     @Override
@@ -112,62 +111,69 @@ public class WorldScreen extends BaseScreen {
         gameTimer.active = false;
     }
 
+    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+
     @Override
     public void render(float delta) {
 
-        time += delta;
+        this.time += delta;
 
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (renderer == null) {
+        if (this.renderer == null) {
             return;
         }
 
-        camera.position.set(
-                newMapPixelCoords.x + 7 * WORLD_TILE_DIM + 8,
-                newMapPixelCoords.y - 0 * WORLD_TILE_DIM + 0,
-                0);
+        this.camera.position.x = newMapPixelCoords.x + WORLD_TILE_DIM * 7 + 8;
+        this.camera.position.y = newMapPixelCoords.y + WORLD_TILE_DIM * 0;
 
-        camera.update();
+        this.camera.update();
 
-        renderer.setView(camera.combined,
-                camera.position.x - WORLD_TILE_DIM * 18,
-                camera.position.y - WORLD_TILE_DIM * 12,
+        this.renderer.setView(camera.combined,
+                camera.position.x - WORLD_TILE_DIM * 18 + 16,
+                camera.position.y - WORLD_TILE_DIM * 10,
                 MAP_VIEWPORT_DIM,
                 MAP_VIEWPORT_DIM);
 
-        renderer.render();
-
-        mapBatch.begin();
+        this.renderer.render();
 
         for (Moongate g : Moongate.values()) {
             TextureRegion t = g.getCurrentTexture();
             if (t != null) {
-                mapBatch.draw(t, g.getX(), g.getY());
+                float color = this.renderer.getColor((TiledMapTileLayer) this.map.getTiledMap().getLayers().get("grass"), (int) g.getMapX(), (int) g.getMapY());
+                this.renderer.getBatch().begin();
+                this.renderer.draw(t, g.getX(), g.getY(), color);
+                this.renderer.getBatch().end();
             }
         }
 
-        mapBatch.end();
-
         batch.begin();
-
+        
         batch.draw(this.frame, 0, 0);
-        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 15);
-
+        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 16);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + feluccaphase), 372, Andius.SCREEN_HEIGHT - 32, 20, 20);
 
         Andius.HUD.render(batch, Andius.CTX);
 
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 100, Andius.SCREEN_HEIGHT - 32);
+//        Vector3 v = new Vector3();
+//        getCurrentMapCoords(v);
+//        Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 100, Andius.SCREEN_HEIGHT - 32);
+//        Andius.font.draw(batch, renderer.toString(), 200, Andius.SCREEN_HEIGHT - 32);
         batch.end();
 
         stage.act();
         stage.draw();
 
+//        Rectangle vb = this.renderer.getViewBounds();
+//        Gdx.gl.glLineWidth(1);
+//        shapeRenderer.setProjectionMatrix(camera.combined);
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(255, 255, 0, .50f);//yellow
+//        shapeRenderer.box(vb.x, vb.y, 0, vb.width, vb.height, 0);
+//        shapeRenderer.box(camera.position.x, camera.position.y, 0, 24, 24, 0);
+//        shapeRenderer.end();
     }
 
     @Override
@@ -183,20 +189,15 @@ public class WorldScreen extends BaseScreen {
 
     @Override
     public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
-        v.set(x * WORLD_TILE_DIM, mapPixelHeight - y * WORLD_TILE_DIM, 0);
+        v.set(x * WORLD_TILE_DIM, mapPixelHeight - WORLD_TILE_DIM - y * WORLD_TILE_DIM, 0);
     }
 
     @Override
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(348, 384, 0), 96, 624, MAP_VIEWPORT_DIM, MAP_VIEWPORT_DIM);
+        Vector3 tmp = camera.unproject(new Vector3(348, 384, 0), 96, 624, MAP_VIEWPORT_DIM, MAP_VIEWPORT_DIM - WORLD_TILE_DIM * 2);
+        float y = Math.round((mapPixelHeight - tmp.y) / WORLD_TILE_DIM) - 34;
         float x = Math.round(tmp.x / WORLD_TILE_DIM) - 7;
-        if (Math.round(tmp.y) == -750) {//workaround for weird math at 0,0 location
-            tmp.y = mapPixelHeight + WORLD_TILE_DIM;
-            v.set(x, 0, 0);
-        } else {
-            float y = Math.round((mapPixelHeight - tmp.y) / WORLD_TILE_DIM) - 31;
-            v.set(x, y, 0);
-        }
+        v.set(x, y, 0);
     }
 
     public class GameTimer implements Runnable {

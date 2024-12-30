@@ -57,34 +57,16 @@ public class SpreadFOV {
             castLight(1, 1.0f, 0.0f, radius, 0, d.deltaX, d.deltaY, 0, startx, starty);
             castLight(1, 1.0f, 0.0f, radius, d.deltaX, 0, 0, d.deltaY, startx, starty);
         }
-
-        if (startx > 1 && starty > 1) {
-            lightMap[startx - 1][starty - 1] = 1;
-        }
-        if (starty > 1) {
-            lightMap[startx][starty - 1] = 1;
-        }
-        if (startx < lightMap.length - 1 && starty > 1) {
-            lightMap[startx + 1][starty - 1] = 1;
-        }
-
-        if (startx > 1) {
-            lightMap[startx - 1][starty] = 1;
-        }
-        if (startx < lightMap.length - 11) {
-            lightMap[startx + 1][starty] = 1;
-        }
-
-        if (startx > 1 && starty < lightMap[0].length - 1) {
-            lightMap[startx - 1][starty + 1] = 1;
-        }
-        if (starty < lightMap[0].length - 1) {
-            lightMap[startx][starty + 1] = 1;
-        }
-        if (startx < lightMap.length - 1 && starty < lightMap[0].length - 1) {
-            lightMap[startx + 1][starty + 1] = 1;
-        }
-
+        
+        //light area around start as well
+        lightMap[startx][starty + 1] = 1;
+        lightMap[startx][starty - 1] = 1;
+        lightMap[startx + 1][starty] = 1;
+        lightMap[startx + 1][starty + 1] = 1;
+        lightMap[startx + 1][starty - 1] = 1;
+        lightMap[startx - 1][starty] = 1;
+        lightMap[startx - 1][starty + 1] = 1;
+        lightMap[startx - 1][starty - 1] = 1;
     }
 
     private void castLight(int row, float start, float end, float radius, int xx, int xy, int yx, int yy, int startx, int starty) {

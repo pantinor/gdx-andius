@@ -106,7 +106,7 @@ public interface Constants {
         public WizardryData.Scenario scenario() {
             return wizScenario;
         }
-        
+
         public boolean isLoaded() {
             return this.screen != null;
         }
@@ -427,6 +427,8 @@ public interface Constants {
         }
 
         public static void init() {
+            int mapWidth = Map.WORLD.getTiledMap().getProperties().get("width", Integer.class);
+            int tileWidth = Map.WORLD.getTiledMap().getProperties().get("tilewidth", Integer.class);
             MapLayer moongatesLayer = Map.WORLD.getTiledMap().getLayers().get("moongates");
             Iterator<MapObject> iter = moongatesLayer.getObjects().iterator();
             while (iter.hasNext()) {
@@ -434,8 +436,8 @@ public interface Constants {
                 Moongate mg = Moongate.valueOf(obj.getName());
                 mg.x = obj.getProperties().get("x", Float.class);
                 mg.y = obj.getProperties().get("y", Float.class);
-                mg.mapX = mg.x / 24;
-                mg.mapY = 256 - (mg.y / 24) - 1;
+                mg.mapX = mg.x / tileWidth;
+                mg.mapY = mapWidth - (mg.y / tileWidth) - 1;
                 int c = 0;
             }
         }
