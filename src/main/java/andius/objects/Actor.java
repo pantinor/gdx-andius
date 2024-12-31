@@ -1,45 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.objects;
 
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.TibianSprite;
+import andius.TibianSprite.TibianAnimation;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class Actor {
-
-    private static TextureRegion PLAYER_HLTH_BAR = null;
-
-    static {
-        try {
-            PLAYER_HLTH_BAR = new TextureRegion(new Texture(Gdx.files.classpath("assets/skin/imgBtn.png")), 381, 82, 124, 6);
-        } catch (Throwable t) {
-        }
-    }
 
     private final int id;
     private final String name;
-    private Animation anim;
+    private TibianAnimation anim;
     private Role role;
     private int wx;
     private int wy;
     private float x;
     private float y;
-    private Vector2 iconCenter;
     private int dir;
     private MovementBehavior movement;
     private MutableMonster monster;
@@ -48,11 +26,10 @@ public class Actor {
 
     private String hash;
 
-    public Actor(int id, String name, Animation anim) {
+    public Actor(int id, String name, TibianAnimation anim) {
         this.id = id;
         this.name = name;
         this.anim = anim;
-        this.iconCenter = Utils.centerOfMass((TextureRegion) this.anim.getKeyFrames()[0]);
     }
 
     public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
@@ -66,7 +43,6 @@ public class Actor {
 
         if (this.monster != null) {
             this.anim = TibianSprite.animation(this.monster.getIconId());
-            this.iconCenter = Utils.centerOfMass((TextureRegion) this.anim.getKeyFrames()[0]);
         }
         this.hash = "M:" + x + ":" + y;
     }
@@ -81,7 +57,7 @@ public class Actor {
     }
 
     public Vector2 iconCenter() {
-        return this.iconCenter;
+        return this.anim.center;
     }
 
     public String hash() {
@@ -104,7 +80,11 @@ public class Actor {
         return (TextureRegion) this.anim.getKeyFrames()[this.dir];
     }
 
-    public Animation<TextureRegion> getAnimation() {
+    public TextureRegion getFrame(float time) {
+        return (TextureRegion) this.anim.getKeyFrame(time, true);
+    }
+
+    public TibianAnimation getAnimation() {
         return anim;
     }
 

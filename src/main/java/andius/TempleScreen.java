@@ -104,15 +104,16 @@ public class TempleScreen implements Screen, Constants {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
-                if (!selectedPatient.c.isDisabled() && selectedPatient.c.hp == selectedPatient.c.maxhp) {
-                    log(selectedPatient.c.name + " IS WELL.");
-                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                if (selectedPatient.c.isAllWell() && selectedPatient.c.hp == selectedPatient.c.maxhp) {
+                    log(selectedPatient.c.name + " IS FINE.");
                     return;
                 }
 
                 int amt = 50;
                 if (selectedPatient.c.status.has(Status.ASHES)) {
                     amt = 500 * selectedPatient.c.level;
+                } else if (selectedPatient.c.status.has(Status.POISONED)) {
+                    amt = 100 * selectedPatient.c.level;
                 } else if (selectedPatient.c.status.has(Status.PARALYZED)) {
                     amt = 100 * selectedPatient.c.level;
                 } else if (selectedPatient.c.status.has(Status.STONED)) {

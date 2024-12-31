@@ -186,6 +186,18 @@ public class SaveGame implements Constants {
             return this.status.isDisabled();
         }
 
+        public boolean isAllWell() {
+            if (isDead()) {
+                return false;
+            }
+            for (Status s : Status.values()) {
+                if (this.status.has(s)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public boolean isDead() {
             return hp <= 0;
         }

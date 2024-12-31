@@ -114,19 +114,7 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
                 for (Item i2 : items0) {
                     if (i1.name.equalsIgnoreCase(i2.name)) {
                         i1.iconID = i2.iconID;
-                    } else {
-                        String[] sp1 = i1.name.split(" ");
-                        String[] sp2 = i2.name.split(" ");
-                        for (String s1 : sp1) {
-                            for (String s2 : sp2) {
-                                if (s1.equalsIgnoreCase(s2)) {
-                                    i1.iconID = i2.iconID;
-                                }
-                            }
-                        }
-
                     }
-
                 }
             }
 
@@ -202,11 +190,19 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         batch.end();
     }
 
-    private void writeJson(String file, java.util.List<Item> obj) {
+    private void writeJson(String file, java.util.List<Item> itms) {
         try {
+
+            Collections.sort(itms, new Comparator<Item>() {
+                @Override
+                public int compare(Item it1, Item it2) {
+                    return Long.compare(it1.id, it2.id);
+                }
+            });
+
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.setPrettyPrinting().create();
-            String json = gson.toJson(obj);
+            String json = gson.toJson(itms);
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(json.getBytes("UTF-8"));
             fos.close();

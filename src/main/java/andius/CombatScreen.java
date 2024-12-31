@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapLayer;
@@ -295,7 +296,7 @@ public class CombatScreen extends BaseScreen {
             float ty = cr.getY() - TILE_DIM + TILE_DIM / 2;
             tx -= cr.iconCenter().x;
             ty += cr.iconCenter().y;
-            renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), tx, ty);
+            renderer.getBatch().draw(cr.getFrame(time), tx, ty);
         }
 
         int x = 0;
