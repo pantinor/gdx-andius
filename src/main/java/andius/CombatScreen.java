@@ -131,17 +131,7 @@ public class CombatScreen extends BaseScreen {
             }
 
             andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getAnimation());
-            int rw = actor.getIcon().getRegionWidth();
-            int rh = actor.getIcon().getRegionHeight();
-            float dx = x + TILE_DIM / 2 - rw / 2;
-            float dy = y + TILE_DIM / 2 - rh / 2;
-            if (rw > TILE_DIM) {
-                dx = x - 20;
-            }
-            if (rh > TILE_DIM) {
-                dy = y + 10;
-            }
-            actor.set(crSlots[index], Role.MONSTER, sx, sy, dx, dy, MovementBehavior.ATTACK_AVATAR);
+            actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
 
             MonsterCursor cursor = new MonsterCursor();
             cursor.setX(x);
@@ -301,7 +291,11 @@ public class CombatScreen extends BaseScreen {
 
         renderer.getBatch().begin();
         for (andius.objects.Actor cr : enemies) {
-            renderer.getBatch().draw(cr.getIcon(), cr.getX(), cr.getY());
+            float tx = cr.getX() + TILE_DIM / 2;
+            float ty = cr.getY() - TILE_DIM + TILE_DIM / 2;
+            tx -= cr.iconCenter().x;
+            ty += cr.iconCenter().y;
+            renderer.getBatch().draw(cr.getAnimation().getKeyFrame(time, true), tx, ty);
         }
 
         int x = 0;
@@ -318,6 +312,24 @@ public class CombatScreen extends BaseScreen {
         }
 
         renderer.getBatch().end();
+
+//        for (andius.objects.Actor cr : enemies) {
+//            TextureRegion tr = cr.getIcon();
+//            float tx = cr.getX() + TILE_DIM / 2;
+//            float ty = cr.getY() - TILE_DIM + TILE_DIM / 2;
+//            tx -= cr.iconCenter().x;
+//            ty += cr.iconCenter().y;
+//            Gdx.gl.glLineWidth(1);
+//            shapeRenderer.setProjectionMatrix(camera.combined);
+//            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//            shapeRenderer.setColor(255, 255, 0, .50f);//yellow
+//            shapeRenderer.box(tx, ty, 0, tr.getRegionWidth(), tr.getRegionHeight(), 0);
+//            shapeRenderer.setColor(0, 255, 0, .50f);
+//            shapeRenderer.circle(tx + tr.getRegionWidth() / 2, ty + tr.getRegionHeight() / 2, 3);
+//            shapeRenderer.setColor(255, 0, 0, .50f);
+//            shapeRenderer.circle(tx + cr.iconCenter().x, ty + cr.iconCenter().y, 3);
+//            shapeRenderer.end();
+//        }
 
         batch.begin();
         batch.draw(this.frame, 0, 0);
@@ -810,7 +822,7 @@ public class CombatScreen extends BaseScreen {
 
         seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
         seq.addAction(Actions.run(new AddActorAction(stage, d)));
-        
+
         if (target.getPlayer().isDead()) {
             seq.addAction(Actions.run(new Runnable() {
                 @Override

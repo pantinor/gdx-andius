@@ -149,7 +149,7 @@ public class WorldScreen extends BaseScreen {
         }
 
         batch.begin();
-        
+
         batch.draw(this.frame, 0, 0);
         batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), WORLD_TILE_DIM * 14, WORLD_TILE_DIM * 16);
         batch.draw(moonPhaseAtlas.findRegion("PHASE_" + trammelphase), 348, Andius.SCREEN_HEIGHT - 32, 20, 20);
@@ -329,6 +329,7 @@ public class WorldScreen extends BaseScreen {
                 Moongate d = getDestinationForMoongate(g);
                 newMapPixelCoords.x = d.getX();
                 newMapPixelCoords.y = d.getY();
+                this.renderer.getFOV().calculateFOV((int) d.getMapX(), (int) d.getMapY(), 20f);
                 break;
             }
         }

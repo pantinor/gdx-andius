@@ -99,11 +99,36 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         imageScrollPane.setPosition(0, 0);
 
         try {
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/kod-items.json")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/pmo-items.json")));
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+            java.util.List<Item> items0 = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
+            }.getType());
+
+            json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/bs-items.json")));
+            gson = builder.create();
             items = gson.fromJson(json, new TypeToken<java.util.List<Item>>() {
             }.getType());
+
+            for (Item i1 : items) {
+                for (Item i2 : items0) {
+                    if (i1.name.equalsIgnoreCase(i2.name)) {
+                        i1.iconID = i2.iconID;
+                    } else {
+                        String[] sp1 = i1.name.split(" ");
+                        String[] sp2 = i2.name.split(" ");
+                        for (String s1 : sp1) {
+                            for (String s2 : sp2) {
+                                if (s1.equalsIgnoreCase(s2)) {
+                                    i1.iconID = i2.iconID;
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+            }
 
             Collections.sort(items, new Comparator<Item>() {
                 @Override

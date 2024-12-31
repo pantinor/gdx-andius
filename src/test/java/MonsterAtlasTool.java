@@ -101,7 +101,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
         imageScrollPane.setPosition(0, 0);
 
         try {
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/pmo-monsters.json")));
+            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/bs-monsters.json")));
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             monsters = gson.fromJson(json, new TypeToken<java.util.List<Monster>>() {
@@ -208,7 +208,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
         public MyListItem(Monster m) {
             this.name = new Label(m.getName(), skin, "default");
             this.monster = m;
-            this.icon = new Image(TibianSprite.icon(this.monster.getIconId()));
+            this.icon = new Image(TibianSprite.icon(this.monster.getIconId().equals("0") ? "Deadeye_Devious" : this.monster.getIconId()));
 
             float x = getX();
             this.icon.setBounds(x + 3, getY() + 3, dim, dim);

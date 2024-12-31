@@ -9,6 +9,8 @@ import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import java.util.Random;
 
 public class Utils {
@@ -158,7 +160,7 @@ public class Utils {
         if (roll == 1) {
             return false;
         }
-        
+
         int THAC0 = 0;
         if (attacker.getLevel() > Constants.THAC0_MONSTER.length) {
             THAC0 = Constants.THAC0_MONSTER[Constants.THAC0_MONSTER.length - 1];
@@ -250,6 +252,61 @@ public class Utils {
         }
         points += bonus;
         return points;
+    }
+
+    public static Vector2 centerOfMass(TextureRegion tr) {
+        
+        int sx = tr.getRegionX();
+        int sy = tr.getRegionY();
+        int w = tr.getRegionWidth();
+        int h = tr.getRegionHeight();
+
+        if (!tr.getTexture().getTextureData().isPrepared()) {
+            tr.getTexture().getTextureData().prepare();
+        }
+        Pixmap p = tr.getTexture().getTextureData().consumePixmap();
+
+        int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+
+        for (int x = sx; x < sx + h; x++) {
+            for (int y = sy; y < sy + h; y++) {
+                if (p.getPixel(x, y) != 0) {
+                    x1 = x;
+                    break;
+                }
+            }
+        }
+        for (int x = sx + w - 1; x >= sx; x--) {
+            for (int y = sy; y < sy + h; y++) {
+                if (p.getPixel(x, y) != 0) {
+                    x2 = x;
+                    break;
+                }
+            }
+        }
+        for (int y = sy; y < sy + h; y++) {
+            for (int x = sx; x < sx + w; x++) {
+                if (p.getPixel(x, y) != 0) {
+                    y1 = y;
+                    break;
+                }
+            }
+        }
+        for (int y = sy + h - 1; y >= sy; y--) {
+            for (int x = sx; x < sx + w; x++) {
+                if (p.getPixel(x, y) != 0) {
+                    y2 = y;
+                    break;
+                }
+            }
+        }
+
+        p.dispose();
+
+        int cx = x1 + (x2 - x1) / 2 - sx;
+        int cy = y1 + (y2 - y1) / 2 - sy;
+
+        return new Vector2(cx, h - cy);
     }
 
     public static Texture rotate90(Texture t) {

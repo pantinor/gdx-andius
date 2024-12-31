@@ -52,7 +52,8 @@ public interface Constants {
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
         WIZARDRY2("Knight of Diamonds", WizardryData.Scenario.KOD),
-        WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG);
+        WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG),
+        BLACK_STONE("Black Stone", WizardryData.Scenario.BS);
 
         private final String label;
         private final String tmxFile;

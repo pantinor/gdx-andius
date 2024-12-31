@@ -138,7 +138,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         addButtons(this.map);
 
-        setStartPosition();
+        setMapPixelCoords(null, 0, 0, currentLevel + 1);
+
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
 //        currentLevel = 2;
@@ -151,17 +152,6 @@ public class WizardryDungeonScreen extends BaseScreen {
 //        inputController.translateUnits = 10f;
 //        Gdx.input.setInputProcessor(inputController);
 //        createAxes();
-    }
-
-    private void setStartPosition() {
-        for (int y = 0; y < DUNGEON_DIM; y++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
-                if (cell.stairs && cell.address.level > cell.addressTo.level) {//up stairs location
-                    setMapPixelCoords(null, x, y, currentLevel + 1);
-                }
-            }
-        }
     }
 
     @Override

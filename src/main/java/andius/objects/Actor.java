@@ -13,6 +13,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import utils.Utils;
 
 /**
  *
@@ -37,6 +39,7 @@ public class Actor {
     private int wy;
     private float x;
     private float y;
+    private Vector2 iconCenter;
     private int dir;
     private MovementBehavior movement;
     private MutableMonster monster;
@@ -49,6 +52,7 @@ public class Actor {
         this.id = id;
         this.name = name;
         this.anim = anim;
+        this.iconCenter = Utils.centerOfMass((TextureRegion) this.anim.getKeyFrames()[0]);
     }
 
     public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
@@ -62,6 +66,7 @@ public class Actor {
 
         if (this.monster != null) {
             this.anim = TibianSprite.animation(this.monster.getIconId());
+            this.iconCenter = Utils.centerOfMass((TextureRegion) this.anim.getKeyFrames()[0]);
         }
         this.hash = "M:" + x + ":" + y;
     }
@@ -73,6 +78,10 @@ public class Actor {
         this.y = y;
         this.player = player;
         this.hash = "P";
+    }
+
+    public Vector2 iconCenter() {
+        return this.iconCenter;
     }
 
     public String hash() {
@@ -95,7 +104,7 @@ public class Actor {
         return (TextureRegion) this.anim.getKeyFrames()[this.dir];
     }
 
-    public Animation getAnimation() {
+    public Animation<TextureRegion> getAnimation() {
         return anim;
     }
 

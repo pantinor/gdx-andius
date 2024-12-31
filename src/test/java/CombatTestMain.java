@@ -7,16 +7,10 @@ import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.TibianSprite;
-import andius.WizardryData;
-import static andius.WizardryData.DUNGEON_DIM;
-import static andius.WizardryData.PMO_ITEMS;
-import static andius.WizardryData.PMO_LEVELS;
 import static andius.WizardryData.PMO_MONSTERS;
-import static andius.WizardryData.PMO_REWARDS;
 import andius.objects.Actor;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
-import andius.objects.Reward;
 import andius.objects.SaveGame;
 import andius.objects.Spells;
 import com.badlogic.gdx.Game;
@@ -43,27 +37,27 @@ public class CombatTestMain extends Game {
             Andius a = new Andius();
             a.create();
 
-            for (int level = 0; level < PMO_LEVELS.length; level++) {
-                System.out.println("\nLevel " + (level + 1));
-                for (int x = 0; x < DUNGEON_DIM; x++) {
-                    for (int y = 0; y < DUNGEON_DIM; y++) {
-                        WizardryData.MazeCell cell = PMO_LEVELS[level].cells[x][y];
-                        if (cell.monsterID >= 0) {
-                            System.out.println("MID: " + PMO_MONSTERS.get(cell.monsterID).name);
-                        }
-                        if (cell.itemObtained > 0) {
-                            System.out.println("OBTAINED: " + PMO_ITEMS.get(cell.itemObtained).name);
-                        }
-                        if (cell.itemRequired > 0) {
-                            System.out.println("REQUIRED: " + PMO_ITEMS.get(cell.itemRequired).name);
-                        }
-                    }
-                }
-            }
-
-            for (Reward r : PMO_REWARDS) {
-                //System.out.println(r);
-            }
+//            for (int level = 0; level < PMO_LEVELS.length; level++) {
+//                System.out.println("\nLevel " + (level + 1));
+//                for (int x = 0; x < DUNGEON_DIM; x++) {
+//                    for (int y = 0; y < DUNGEON_DIM; y++) {
+//                        WizardryData.MazeCell cell = PMO_LEVELS[level].cells[x][y];
+//                        if (cell.monsterID >= 0) {
+//                            System.out.println("MID: " + PMO_MONSTERS.get(cell.monsterID).name);
+//                        }
+//                        if (cell.itemObtained > 0) {
+//                            System.out.println("OBTAINED: " + PMO_ITEMS.get(cell.itemObtained).name);
+//                        }
+//                        if (cell.itemRequired > 0) {
+//                            System.out.println("REQUIRED: " + PMO_ITEMS.get(cell.itemRequired).name);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            for (Reward r : PMO_REWARDS) {
+//                System.out.println(r);
+//            }
 
             Context ctx = new Context();
             SaveGame sg = SaveGame.read(SAVE_FILENAME);
@@ -110,10 +104,10 @@ public class CombatTestMain extends Game {
             //String[] monsters = MONSTER_ENCOUNTER_LEVEL[level - 1];
             //int idx = Utils.RANDOM.nextInt(monsters.length);
             //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
-            Monster monster = PMO_MONSTERS.get(100);
+            Monster monster = PMO_MONSTERS.get(3);
 
             Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
-
+            
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
 
