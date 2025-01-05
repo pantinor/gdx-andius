@@ -1,7 +1,7 @@
 package andius.objects;
 
 import andius.TibianSprite;
-import andius.TibianSprite.TibianAnimation;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 public enum ClassType {
 
@@ -17,9 +17,9 @@ public enum ClassType {
     private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
     private final String abbr;
     private final int hitDie;
-    private final TibianAnimation anim;
+    private final Animation anim;
 
-    private ClassType(String abbr, int hitDie, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck, TibianAnimation anim) {
+    private ClassType(String abbr, int hitDie, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck, Animation anim) {
         this.abbr = abbr;
         this.minStr = minStr;
         this.minIntell = minIntell;
@@ -63,7 +63,7 @@ public enum ClassType {
         return hitDie;
     }
 
-    public TibianAnimation getAnimation() {
+    public Animation getAnimation() {
         return anim;
     }
 

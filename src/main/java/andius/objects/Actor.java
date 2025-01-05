@@ -3,8 +3,8 @@ package andius.objects;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.TibianSprite;
-import andius.TibianSprite.TibianAnimation;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -12,7 +12,7 @@ public class Actor {
 
     private final int id;
     private final String name;
-    private TibianAnimation anim;
+    private Animation anim;
     private Role role;
     private int wx;
     private int wy;
@@ -26,7 +26,7 @@ public class Actor {
 
     private String hash;
 
-    public Actor(int id, String name, TibianAnimation anim) {
+    public Actor(int id, String name, Animation anim) {
         this.id = id;
         this.name = name;
         this.anim = anim;
@@ -57,7 +57,11 @@ public class Actor {
     }
 
     public Vector2 iconCenter() {
-        return this.anim.center;
+        Vector2 v = new Vector2();
+        TextureRegion tr = (TextureRegion) this.anim.getKeyFrame(0);
+        v.x = tr.getRegionWidth() / 2;
+        v.y = tr.getRegionHeight() / 2;
+        return v;
     }
 
     public String hash() {
@@ -84,7 +88,7 @@ public class Actor {
         return (TextureRegion) this.anim.getKeyFrame(time, true);
     }
 
-    public TibianAnimation getAnimation() {
+    public Animation getAnimation() {
         return anim;
     }
 

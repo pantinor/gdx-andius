@@ -1037,7 +1037,7 @@ public class CombatScreen extends BaseScreen {
 
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
         av.result = AttackResult.MISS;
-        if (av.victim != null) {
+        if (av.victim != null && av.victim.getMonster() != null) {
             for (int j = 0; j < attacker.getPlayer().extraSwings(); j++) {
                 boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
                 if (hit) {

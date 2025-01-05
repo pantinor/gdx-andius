@@ -175,7 +175,7 @@
   <object id="14" name="BLACK_STONE" type="portal" x="1104" y="168" width="24" height="24"/>
   <object id="15" name="WIZARDRY3" type="portal" x="216" y="672" width="24" height="24"/>
   <object id="16" name="WIZARDRY1" type="portal" x="1176" y="816" width="24" height="24"/>
-  <object id="17" name="WIZARDRY2" type="portal" x="456" y="1368" width="24" height="24"/>
+  <object id="17" name="WIZARDRY4" type="portal" x="456" y="1368" width="24" height="24"/>
   <object id="18" name="WIZARDRY2" type="portal" x="1392" y="1056" width="24" height="24"/>
   <object id="19" name="WIZARDRY3" type="portal" x="1392" y="720" width="24" height="24"/>
   <object id="29" name="CAVE" type="portal" x="1152" y="552" width="24" height="24"/>

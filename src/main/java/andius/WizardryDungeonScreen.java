@@ -138,7 +138,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         addButtons(this.map);
 
-        setMapPixelCoords(null, 0, 0, currentLevel + 1);
+        setMapPixelCoords(null, this.map.scenario().getStartX(), this.map.scenario().getStartY(), currentLevel + 1);
 
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
@@ -616,6 +616,31 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.stairs || cell.elevator) {
                     drawLadderTriangle(cell, pixmap, x, y);
                 }
+                if (cell.summoningCircle1) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM,
+                            y * MINI_DIM,
+                            arrows[0][0].getRegionX(),
+                            arrows[0][0].getRegionY(),
+                            arrows[0][0].getRegionWidth(),
+                            arrows[0][0].getRegionHeight()
+                    );
+                }
+                if (cell.summoningCircle2 || cell.summoningCircle3 || cell.summoningCircle4 
+                        || cell.summoningCircle5 || cell.summoningCircle6 || cell.summoningCircle7 
+                        || cell.summoningCircle8 || cell.summoningCircle9 || cell.summoningCircle10) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM,
+                            y * MINI_DIM,
+                            arrows[0][1].getRegionX(),
+                            arrows[0][1].getRegionY(),
+                            arrows[0][1].getRegionWidth(),
+                            arrows[0][1].getRegionHeight()
+                    );
+                }
+                
             }
         }
 

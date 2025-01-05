@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Item implements Comparable<Item> {
 
     public enum ItemType {
-        WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET, SPECIAL, MISC;
+        ANY, WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET, SPECIAL, MISC;
     }
 
     public Item() {
@@ -37,7 +37,7 @@ public class Item implements Comparable<Item> {
     public boolean crithitm;
     public int range;
     public int hitmd;
-
+    
     @Override
     public Item clone() {
         Item i = new Item();

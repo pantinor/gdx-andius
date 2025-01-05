@@ -492,6 +492,10 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void finishTurn(int x, int y) {
+        
+        if (x < 0 || y < 0) {
+            return;
+        }
 
         if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][1] == 0) {
             this.currentRoomId = this.map.getRoomIds()[x][y][0];

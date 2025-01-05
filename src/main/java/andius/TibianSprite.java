@@ -5,12 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import utils.Utils;
 
 public class TibianSprite {
 
@@ -111,40 +109,28 @@ public class TibianSprite {
         return null;
     }
 
-    public static TibianAnimation animation(String n) {
+    public static Animation animation(String n) {
         if (creaturesAtlas == null) {
             return null;
         }
 
         Array<AtlasRegion> ca = creaturesAtlas.findRegions(n);
         if (ca != null && ca.size != 0) {
-            return new TibianAnimation(.2f, ca, Animation.PlayMode.LOOP);
+            return new Animation(.2f, ca, Animation.PlayMode.LOOP);
         }
         Array<AtlasRegion> ba = bossesAtlas.findRegions(n);
         if (ba != null && ba.size != 0) {
-            return new TibianAnimation(.2f, ba, Animation.PlayMode.LOOP);
+            return new Animation(.2f, ba, Animation.PlayMode.LOOP);
         }
         Array<AtlasRegion> ch = charactersAtlas.findRegions(n);
         if (ch != null && ch.size != 0) {
-            return new TibianAnimation(.2f, ch, Animation.PlayMode.LOOP);
+            return new Animation(.2f, ch, Animation.PlayMode.LOOP);
         }
         Array<AtlasRegion> ma = mountsAtlas.findRegions(n);
         if (ma != null && ma.size != 0) {
-            return new TibianAnimation(.2f, ma, Animation.PlayMode.LOOP);
+            return new Animation(.2f, ma, Animation.PlayMode.LOOP);
         }
         return null;
-    }
-
-    public static class TibianAnimation extends Animation {
-        
-        //the center point of the bounding box of the pixels, not the center of the texture
-        public Vector2 center;
-
-        public TibianAnimation(float frameDuration, Array<AtlasRegion> keyFrames, PlayMode playMode) {
-            super(frameDuration, keyFrames, playMode);
-            this.center = Utils.centerOfMass(keyFrames.first());
-        }
-
     }
 
 }

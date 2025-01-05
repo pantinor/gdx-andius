@@ -22,7 +22,9 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -41,6 +43,7 @@ public class VendorScreen implements Screen, Constants {
 
     private final Context context;
     private final String vendorName;
+    private final Role vendorRole;
     private final Texture hud;
     private final SpriteBatch batch;
     private final Stage stage;
@@ -90,6 +93,7 @@ public class VendorScreen implements Screen, Constants {
     public VendorScreen(Context context, Role role, Constants.Map contextMap, String vendorName) {
         this.context = context;
         this.vendorName = vendorName;
+        this.vendorRole = role;
         this.hud = new Texture(Gdx.files.classpath("assets/data/vendor.png"));
         this.batch = new SpriteBatch();
         this.stage = new Stage();
@@ -132,63 +136,8 @@ public class VendorScreen implements Screen, Constants {
         vendorTable = new Table(Andius.skin);
         vendorTable.align(Align.top);
 
-        java.util.List<Item> sellables = new ArrayList<>();
-        for (Scenario sc : Scenario.values()) {
-            for (Item it : sc.items()) {
-                if (it.stock != 0 && !sellables.contains(it)) {
-                    sellables.add(it);
-                }
-            }
-        }
+        filterVendorItems(ItemType.ANY);
 
-        Collections.sort(sellables, new Comparator<Item>() {
-            @Override
-            public int compare(Item it1, Item it2) {
-                if (it1.type == it2.type) {
-                    if (it1.name.equalsIgnoreCase(it2.name)) {
-                        return Long.compare(it1.cost, it2.cost);
-                    } else {
-                        return it1.name.compareTo(it2.name);
-                    }
-                }
-                return it1.type.toString().compareTo(it2.type.toString());
-            }
-        });
-
-        for (Item it : sellables) {
-            if (role == Role.MERCHANT1 && it.cost <= 500) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            } else if (role == Role.MERCHANT2 && it.cost <= 10000) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            } else if (role == Role.MERCHANT) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            }
-        }
-
-        vendorTable.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-
-                if (event.toString().equals("touchDown")) {
-                    if (vendorFocusInd.getParent() != null) {
-                        vendorFocusInd.getParent().removeActor(vendorFocusInd);
-                    }
-                    if (event.getTarget() instanceof VendorItem) {
-                        selectedVendorItem = (VendorItem) event.getTarget();
-                        selectedVendorItem.addActor(vendorFocusInd);
-                    } else if (event.getTarget().getParent() instanceof VendorItem) {
-                        selectedVendorItem = (VendorItem) event.getTarget().getParent();
-                        selectedVendorItem.addActor(vendorFocusInd);
-                    }
-                }
-
-                return false;
-            }
-        }
-        );
         vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
         vendorPane.setScrollingDisabled(true, false);
 
@@ -336,6 +285,26 @@ public class VendorScreen implements Screen, Constants {
         stage.addActor(cancel);
         stage.addActor(unequip);
 
+        ButtonGroup<CheckBox> filterGroup = new ButtonGroup<>();
+        filterGroup.setMaxCheckCount(1);
+        filterGroup.setMinCheckCount(1);
+        filterGroup.setUncheckLast(true);
+
+        int y = 500;
+        for (ItemType type : ItemType.values()) {
+            CheckBox cb = new CheckBox(type.toString(), Andius.skin);
+            cb.setUserObject(type);
+            cb.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                    filterVendorItems((ItemType) actor.getUserObject());
+                }
+            });
+            cb.setPosition(625, y -= 30);
+            filterGroup.add(cb);
+            stage.addActor(cb);
+        }
+
         ChangeListener cl = new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -366,8 +335,77 @@ public class VendorScreen implements Screen, Constants {
 
     }
 
-    @Override
+    private void filterVendorItems(ItemType type) {
 
+        vendorTable.clear();
+
+        if (vendorFocusInd.getParent() != null) {
+            vendorFocusInd.getParent().removeActor(vendorFocusInd);
+        }
+
+        vendorTable.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+
+                if (event.toString().equals("touchDown")) {
+                    if (vendorFocusInd.getParent() != null) {
+                        vendorFocusInd.getParent().removeActor(vendorFocusInd);
+                    }
+                    if (event.getTarget() instanceof VendorItem) {
+                        selectedVendorItem = (VendorItem) event.getTarget();
+                        selectedVendorItem.addActor(vendorFocusInd);
+                    } else if (event.getTarget().getParent() instanceof VendorItem) {
+                        selectedVendorItem = (VendorItem) event.getTarget().getParent();
+                        selectedVendorItem.addActor(vendorFocusInd);
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        java.util.List<Item> sellables = new ArrayList<>();
+        for (Scenario sc : Scenario.values()) {
+            for (Item it : sc.items()) {
+                if (it.stock != 0 && !sellables.contains(it)) {
+                    if (type == ItemType.ANY || type.equals(it.type)) {
+                        sellables.add(it);
+                    }
+                }
+            }
+        }
+
+        Collections.sort(sellables, new Comparator<Item>() {
+            @Override
+            public int compare(Item it1, Item it2) {
+                return Long.compare(it1.cost, it2.cost);
+            }
+        });
+
+        for (Item it : sellables) {
+            if (this.vendorRole == Role.MERCHANT1 && it.cost <= 500) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
+            } else if (this.vendorRole == Role.MERCHANT2 && it.cost <= 10000) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
+            } else if (this.vendorRole == Role.MERCHANT) {
+                vendorTable.add(new VendorItem(it));
+                vendorTable.row();
+            }
+        }
+
+        if (selectedPlayer != null) {
+            for (Cell cell : vendorTable.getCells()) {
+                if (cell.getActor() instanceof VendorItem) {
+                    VendorItem vi = (VendorItem) cell.getActor();
+                    vi.setUsable(selectedPlayer.character.classType);
+                }
+            }
+        }
+    }
+
+    @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
 

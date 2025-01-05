@@ -53,7 +53,8 @@ public interface Constants {
         WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
         WIZARDRY2("Knight of Diamonds", WizardryData.Scenario.KOD),
         WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG),
-        BLACK_STONE("Black Stone", WizardryData.Scenario.BS);
+        BLACK_STONE("Black Stone", WizardryData.Scenario.BS),
+        WIZARDRY4("Return of Werdna", WizardryData.Scenario.WER);
 
         private final String label;
         private final String tmxFile;

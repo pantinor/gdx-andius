@@ -179,6 +179,10 @@ public class Utils {
 
     public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
 
+        if (defender == null) {
+            return false;
+        }
+
         int roll = (RANDOM.nextInt(20) + 1);
 
         if (roll == 20) {
@@ -255,7 +259,7 @@ public class Utils {
     }
 
     public static Vector2 centerOfMass(TextureRegion tr) {
-        
+
         int sx = tr.getRegionX();
         int sy = tr.getRegionY();
         int w = tr.getRegionWidth();

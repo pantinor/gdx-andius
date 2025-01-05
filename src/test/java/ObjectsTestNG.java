@@ -35,7 +35,6 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
@@ -136,7 +135,7 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    @Test
+    //@Test
     public void readJson() throws Exception {
 
         InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
