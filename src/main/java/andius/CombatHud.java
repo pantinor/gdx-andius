@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Constants.TILE_DIM;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
@@ -104,7 +105,7 @@ public class CombatHud {
 
             for (int i = 0; i < 10; i++) {
                 if (rec.spellPresets[i] != null && rec.knownSpells.contains(rec.spellPresets[i])) {
-                    TextureRegionDrawable t1 = new TextureRegionDrawable(Andius.invIcons[rec.spellPresets[i].getIcon()]);
+                    TextureRegionDrawable t1 = new TextureRegionDrawable(Icons.get(rec.spellPresets[i].getIcon()));
                     slotButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
                     slotTooltips[i] = new Label(rec.spellPresets[i].getTag(), Andius.skin, "hudSmallFont");
                     SpellSlotListener l = new SpellSlotListener(player, rec.spellPresets[i], i, slotTooltips[i]);

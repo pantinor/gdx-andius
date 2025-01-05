@@ -3,6 +3,7 @@ package andius;
 import static andius.Andius.mainGame;
 import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame;
@@ -10,7 +11,6 @@ import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -56,8 +56,6 @@ public class VendorScreen implements Screen, Constants {
     private final TextButton pool;
     private final TextButton unequip;
     private final TextButton cancel;
-
-    private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
 
     private final Texture redBackgrnd = Utils.fillRectangle(w, h, Color.RED, .25f);
     private final Texture clearBackgrnd = Utils.fillRectangle(w, h, Color.CLEAR, 0f);
@@ -108,20 +106,6 @@ public class VendorScreen implements Screen, Constants {
 
         invDesc = new Label("", Andius.skin, "larger");
 
-        FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
-        Texture tx = new Texture(fh);
-        int canvasGridWidth = tx.getWidth() / 44;
-        int canvasGridHeight = tx.getHeight() / 44;
-
-        TextureRegion[][] inv = TextureRegion.split(tx, 44, 44);
-        for (int row = 0; row < canvasGridHeight; row++) {
-            for (int col = 0; col < canvasGridWidth; col++) {
-                Image img = new Image(inv[row][col]);
-                img.setName("" + (row * canvasGridWidth + col));
-                invIcons[row * canvasGridWidth + col] = inv[row][col];
-            }
-        }
-
         this.playerSelection = new List<>(Andius.skin, "larger");
         PlayerIndex[] names = new PlayerIndex[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
@@ -168,7 +152,7 @@ public class VendorScreen implements Screen, Constants {
                     Item it = (Item) selectedImage.getUserObject();
                     selectedPlayer.invTable.add(new ItemListing(it, selectedPlayer.character));
                     selectedPlayer.invTable.row();
-                    selectedImage.setDrawable(new TextureRegionDrawable(icon(null)));
+                    selectedImage.setDrawable(new TextureRegionDrawable(Icons.get(it)));
                     selectedImage.setUserObject(null);
                     selectedImage = null;
 
@@ -517,13 +501,13 @@ public class VendorScreen implements Screen, Constants {
             avatar.setX(132);
             avatar.setY(Andius.SCREEN_HEIGHT - 444);
 
-            weaponIcon = make(ItemType.WEAPON, sp.weapon, icon(sp.weapon), 67, Andius.SCREEN_HEIGHT - 386);
-            armorIcon = make(ItemType.ARMOR, sp.armor, icon(sp.armor), 67, Andius.SCREEN_HEIGHT - 442);
-            helmIcon = make(ItemType.HELMET, sp.helm, icon(sp.helm), 133, Andius.SCREEN_HEIGHT - 386);
-            shieldIcon = make(ItemType.SHIELD, sp.shield, icon(sp.shield), 199, Andius.SCREEN_HEIGHT - 386);
-            glovesIcon = make(ItemType.GAUNTLET, sp.glove, icon(sp.glove), 199, Andius.SCREEN_HEIGHT - 442);
-            item1Icon = make(ItemType.MISC, sp.item1, icon(sp.item1), 106, Andius.SCREEN_HEIGHT - 499);
-            item2Icon = make(ItemType.MISC, sp.item2, icon(sp.item2), 160, Andius.SCREEN_HEIGHT - 499);
+            weaponIcon = make(ItemType.WEAPON, sp.weapon, Icons.get(sp.weapon), 67, Andius.SCREEN_HEIGHT - 386);
+            armorIcon = make(ItemType.ARMOR, sp.armor, Icons.get(sp.armor), 67, Andius.SCREEN_HEIGHT - 442);
+            helmIcon = make(ItemType.HELMET, sp.helm, Icons.get(sp.helm), 133, Andius.SCREEN_HEIGHT - 386);
+            shieldIcon = make(ItemType.SHIELD, sp.shield, Icons.get(sp.shield), 199, Andius.SCREEN_HEIGHT - 386);
+            glovesIcon = make(ItemType.GAUNTLET, sp.glove, Icons.get(sp.glove), 199, Andius.SCREEN_HEIGHT - 442);
+            item1Icon = make(ItemType.MISC, sp.item1, Icons.get(sp.item1), 106, Andius.SCREEN_HEIGHT - 499);
+            item2Icon = make(ItemType.MISC, sp.item2, Icons.get(sp.item2), 160, Andius.SCREEN_HEIGHT - 499);
 
             acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
             acLabel.setX(125);
@@ -604,7 +588,7 @@ public class VendorScreen implements Screen, Constants {
                         Sounds.play(Sound.TRIGGER);
                         Item old = (Item) event.getTarget().getUserObject();
                         event.getTarget().setUserObject(selectedItem.item);
-                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(icon(selectedItem.item)));
+                        ((Image) event.getTarget()).setDrawable(new TextureRegionDrawable(Icons.get(selectedItem.item)));
 
                         if (old != null && !old.name.equals("BROKEN ITEM")) {
                             PlayerIndex.this.invTable.add(new ItemListing(old, selectedItem.rec));
@@ -679,10 +663,6 @@ public class VendorScreen implements Screen, Constants {
         }
     }
 
-    private TextureRegion icon(Item it) {
-        return (it == null ? invIcons[803] : invIcons[it.iconID]);
-    }
-
     private class ItemListing extends Group {
 
         Item item;
@@ -696,7 +676,7 @@ public class VendorScreen implements Screen, Constants {
             this.rec = rec;
             this.item = item;
 
-            this.icon = new Image(icon(item));
+            this.icon = new Image(Icons.get(item));
             this.label = new Label(item.name, Andius.skin, "larger");
             this.price = new Label("" + item.cost / 2, Andius.skin, "larger");
 
@@ -735,7 +715,7 @@ public class VendorScreen implements Screen, Constants {
         VendorItem(Item item) {
             this.item = item;
 
-            this.icon = new Image(invIcons[item.iconID]);
+            this.icon = new Image(Icons.get(item));
             this.label = new Label(item.name, Andius.skin, "larger");
             this.price = new Label("" + item.cost, Andius.skin, "larger");
             this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));

@@ -1,17 +1,12 @@
 
 import andius.Andius;
-import andius.objects.Icons;
-import andius.objects.Monster;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import java.awt.Dimension;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import jakarta.xml.bind.DatatypeConverter;
-import org.apache.commons.io.FileUtils;
 
 public class WizardryMapTmxConvert implements ApplicationListener {
 
