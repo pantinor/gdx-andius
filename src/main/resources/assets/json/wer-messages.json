@@ -3,1141 +3,2195 @@
     {
         "id": 0,
         "text": [
-            "With a feeling of triumph, You exclaim\n\"Free at last!  Now beware, Jailers,  \nfor I come to wreak my revenge and    \nreclaim the Amulet!\"\n"
+            "With a feeling of triumph, You exclaim",
+            "\"Free at last!  Now beware, Jailers,  ",
+            "for I come to wreak my revenge and    ",
+            "reclaim the Amulet!\""
         ]
     },
     {
         "id": 1,
         "text": [
-            "Before  you, in the  secret Inner\nChamber  of the  Temple,  looms a\ngargantuan  stone  statue of  the\nDreampainter covered in writing.\n"
+            "Before  you, in the  secret Inner",
+            "Chamber  of the  Temple,  looms a",
+            "gargantuan  stone  statue of  the",
+            "Dreampainter covered in writing."
         ]
     },
     {
         "id": 2,
         "text": [
-            "\"So far, so good,\" You muse.  Now for\nthe first step in Your Master Plan of\nWorld Domination (Mark II).  \"Hmmmmm,\nwhich way seems best, right or left?\"\n"
-        ]
-    },
-    {
-        "id": 3,
-        "text": [
-            "\"I am the Guardian of the Inner Way.\nReturn thee to thy prison or die, Oh\nhas-been Wizard.  Do not try to dis-\nturb the lives of honest folk!\"\n"
+            "\"So far, so good,\" You muse.  Now for",
+            "the first step in Your Master Plan of",
+            "World Domination (Mark II).  \"Hmmmmm,",
+            "which way seems best, right or left?\""
         ]
     },
     {
         "id": 4,
         "text": [
-            "\"I am the Guardian of the Middle Way.\nCease thy wanderings,  and return  to\nyour cell.\n\nThis be your final warning, Evil One!\"\n"
-        ]
-    },
-    {
-        "id": 5,
-        "text": [
-            "\"I am the Guardian of the Outer Way.\nSuffer and die for your Infamy!\"\n"
-        ]
-    },
-    {
-        "id": 6,
-        "text": [
-            "\"I am the Guardian of the Pyramid of\nEntrapment.  Go back  to the torment\nof your dreams, Werdna.  For but one\nstep away lies Death!\"\n"
-        ]
-    },
-    {
-        "id": 7,
-        "text": [
-            "As you  kick the  thick dust  of the\ncorridor with your sandal,  you hear\nsomething go flying.  Searching, you\nfind a green stone streaked with red\nveins of a mysterious mineral.\n"
+            "\"I am the Guardian of the Inner Way.",
+            "Return thee to thy prison or die, Oh",
+            "has-been Wizard.  Do not try to dis-",
+            "turb the lives of honest folk!\""
         ]
     },
     {
         "id": 8,
         "text": [
-            "Dinner is over.  The room is empty.\nThe small chest on the table yields\na midnight blue stone streaked with\ntwinkling stars!\n"
-        ]
-    },
-    {
-        "id": 9,
-        "text": [
-            "The Catacombs ---\n\n--- Where the dead live again!\n"
-        ]
-    },
-    {
-        "id": 10,
-        "text": [
-            "Aha!  A Secret Passage!  The shrill\nscreams  of the  Dead  are  muffled\nhere.  The floor bears the marks of\nthe passage of many feet.\n"
-        ]
-    },
-    {
-        "id": 11,
-        "text": [
-            "Enter and Abandon All Hope!\n(A traditional Intourist greeting)\n"
+            "\"I am the Guardian of the Middle Way.",
+            "Cease thy wanderings,  and return  to",
+            "your cell.",
+            "",
+            "This be your final warning, Evil One!\""
         ]
     },
     {
         "id": 12,
         "text": [
-            "Dante was here!\n"
-        ]
-    },
-    {
-        "id": 13,
-        "text": [
-            "Bring your Marshmallows?\n"
-        ]
-    },
-    {
-        "id": 14,
-        "text": [
-            "The heat is getting quite unbearable.\nThe Glow ahead is intense.   What can\nbe causing it?\nA monstrous statue  rises up from the\nsullenly glowing ground and bars your\npath! Flee while there is still time!\n"
-        ]
-    },
-    {
-        "id": 15,
-        "text": [
-            "It\u0027s the Abyss!\nMay Kadorto have Mercy on your Soul!\nGo Back!  Go Back!\n"
+            "\"I am the Guardian of the Outer Way.",
+            "Suffer and die for your Infamy!\""
         ]
     },
     {
         "id": 16,
         "text": [
-            "It\u0027s the Abyss.  Boy have you really\nbought the farm this time.  Retreat!\n"
-        ]
-    },
-    {
-        "id": 17,
-        "text": [
-            "You plummet into Hell, and the flames\nlick towards you.  Slowly,  your fall\nbegins to check  itself as your Boots\nof  Levitation  begin to  arrest  the\npowerful  attraction of  the infernal\nregions!  The  heat  from the  flames\nbecomes  more  intense,  until it  is\nalmost unendurable!\nJust as your fall is arrested  and you\nbegin to  rise again,  you are able to\nreach out and pluck the  Jeweled Fruit\nfrom the Tree of Liquid Fire!\n \nUpward you rise, until the shattered\nGates of Hell are once again visible\nthrough the flames and smoke!\nFrom far below, a mocking voice calls\nout to you:  \"You are getting warmer,\nbut you aren\u0027t  nearly hot enough for\nmy tastes! HaHaHah!\"\nSuddenly,  a huge jet of flame washes\nup and over you, immolating you in an\ninstant!  There is an instant of pure\nagony, and then you feel no more!\n"
-        ]
-    },
-    {
-        "id": 18,
-        "text": [
-            "Read the other sign.  It\u0027s right\nbehind you!\n \n? ? ? ? ? ?\n"
-        ]
-    },
-    {
-        "id": 19,
-        "text": [
-            "Welcome to\n \nThe Death of a Thousand Cuts!\n"
+            "\"I am the Guardian of the Pyramid of",
+            "Entrapment.  Go back  to the torment",
+            "of your dreams, Werdna.  For but one",
+            "step away lies Death!\""
         ]
     },
     {
         "id": 20,
         "text": [
-            "Have you forgotten something?\n"
-        ]
-    },
-    {
-        "id": 21,
-        "text": [
-            "Wow!  A beautiful piece of amber!\nEmbedded within  it is the  image\nof a Dragon with wings outspread!\n"
-        ]
-    },
-    {
-        "id": 22,
-        "text": [
-            "The explosions have exposed a Golden\nVein running through the Cavern!\nFabulous wealth is here for the tak-\ning.  You  spot  a small  nugget and\nhastily grab it!\n"
-        ]
-    },
-    {
-        "id": 23,
-        "text": [
-            "You stand before the very Gates\nof Hell itself!\n \nThe flames are so  intense that\nyou must shield  your eyes from\ntheir infernal brilliance!\n \nYou may offer B)ribes,  U)se an\nItem or (Hint!) R~un away!\n"
+            "As you  kick the  thick dust  of the",
+            "corridor with your sandal,  you hear",
+            "something go flying.  Searching, you",
+            "find a green stone streaked with red",
+            "veins of a mysterious mineral."
         ]
     },
     {
         "id": 24,
         "text": [
-            "BUR\nA hideous wail of many tormented souls\nscreams forth from the Chimes, shaking\nthe very foundations of the Gates!\n"
-        ]
-    },
-    {
-        "id": 25,
-        "text": [
-            "Each gutteral word you utter from the\nDiary  takes form  and  hurls  itself\nupon the Gates like a battering ram!\n"
-        ]
-    },
-    {
-        "id": 26,
-        "text": [
-            "A brilliant light, like a small nova,\nissues forth  from the  Black Candle,\nand melts  the weakened  Gates.  They\nslowly slump to the ground to form  a\npool of glowing metal!\n \nThe Gates of Hell are open!!\n \nDo you dare to enter (Y/N) ?\n"
-        ]
-    },
-    {
-        "id": 27,
-        "text": [
-            "You enter and fall into the Abyss!\n \n**** Aaaaarrrrrrrggggghhhhhhh ****\n \nIt burns, by the gods, it burns!!!\n \nThe fires of Hell  lick and scorch\nyour flesh for what seems to be an\neternity.  Finally, the torment is\nat an end.  You begin to sink into\noblivion, grateful to whatever god\nstill  listens  to  your  prayers.\nAs  your eyes  close  for  the last\ntime,  you  see  a  Jeweled  Fruit \nhanging from a Tree of Liquid Fire.\nthen all is black.  Perhaps this is\nthe True Death, the Giver of Peace?\n\n\n\nWrong Again!\n"
+            "Dinner is over.  The room is empty.",
+            "The small chest on the table yields",
+            "a midnight blue stone streaked with",
+            "twinkling stars!"
         ]
     },
     {
         "id": 28,
         "text": [
-            "Wait!  The fires of Hell are not burn-\ning you!  Searching through your gear,\nyou  see that  the  Dreampainter\u0027s  Ka\nis absorbing the terrific heat of  the\nconflagration, shielding you.\n \nAs you continue to fall,  you pass the\nTree of Liquid Fire, with its precious\nfruit hanging  daintily upon a branch.\n\nDeeper and  deeper into  the Abyss you\ndescend, witnessing sights  which make\nyour own evil atrocities look like the\nminor peccadilloes.\n \nThe sights you see become too depraved\neven for you!  Your mind is twisted by\nthe demonic visions!  It\u0027s torture,  a\ntorture worse than the fires of Hell!!\n \nSlowly, with  demented care,  the gods\ndismember your mind!\n"
-        ]
-    },
-    {
-        "id": 29,
-        "text": [
-            "Wait!  The fires of Hell are not burn-\ning you and your fall is slowing down!\nsearching through  your gear,  you see\nthat the  Dreampainter\u0027s Ka is absorb-\ning the  terrific heat  and  shielding\nyou, and your Boots of Levitation  are\nchecking your descent.\n \nJust as your fall is arrested  and you\nbegin to  rise again,  you are able to\nreach out and pluck the  Jeweled Fruit\nfrom the Tree of Fire!\n \nUpward you rise,  until you pass  back\nthrough the shattered Gates of Hell!\n \nFrom far below, a mocking voice calls\nout to you: \"Have you forgotten some-\nthing?  HaHaHaHaHa!\"\nSlowly, the Gates of Hell reform\nfrom the puddle of slag.\n"
-        ]
-    },
-    {
-        "id": 30,
-        "text": [
-            "You throw your offering through the\nGates of Hell, only to see the Gold\nCoins melt and vaporize!\n"
+            "The Catacombs ---",
+            "",
+            "--- Where the dead live again!"
         ]
     },
     {
         "id": 31,
         "text": [
-            "Nothing happens!\n"
-        ]
-    },
-    {
-        "id": 32,
-        "text": [
-            "You are at ground level, craning your\nneck to look upward at  a magnificent\nZiggurat.  It stretches upward almost\nas far as the eye can see.\n"
-        ]
-    },
-    {
-        "id": 33,
-        "text": [
-            "You are on a first  level ledge of an\nextremely Art-Deco Ziggurat.  A close\nexamination  of the faded  cartouches\nand paintings leads you to the belief\nthat this is the fabled lost\n \n\"Temple of the Dreampainter\"\n \nwhich  was  dedicated to  one of  the\nancient creators of this world,  whom\nmen later called gods.\n"
-        ]
-    },
-    {
-        "id": 34,
-        "text": [
-            "A small sign on the left wall\nreads as follows:\n \n** PRIEST\u0027S HOLE **\n** For Emergency Use Only! **\n"
-        ]
-    },
-    {
-        "id": 35,
-        "text": [
-            "This Way To The Scenic Vista!\n(Children under the age of 90\nmust be accompanied by\nParent, Guardian, Priest\nor Demon -- NO EXCEPTIONS!)\n \n? ? ? ? ?\n"
+            "Aha!  A Secret Passage!  The shrill",
+            "screams  of the  Dead  are  muffled",
+            "here.  The floor bears the marks of",
+            "the passage of many feet."
         ]
     },
     {
         "id": 36,
         "text": [
-            "The view  from these  heights is truly\nbreathtaking.  Concentric rings of the\nTemple  stretch  out  below.   Looking\noutward,  you see  a small Orange  Rod\nthat drifts gently around  the  Temple\nin the mild breeze, occasionally  just\nwafting  close  enough  to  the Temple\nto  be  tantalizingly  out  of  reach.\n"
+            "Enter and Abandon All Hope!",
+            "(A traditional Intourist greeting)"
         ]
     },
     {
         "id": 37,
         "text": [
-            "This really is a Scenic Vista!!\nThe  ceiling is  so close  that\nyou can almost touch it.  Look-\ning upwards, you can see stairs\nfrom the top of the Temple that\nlead upwards  through the  roof\nof the level.\n \nDon\u0027t get too near the edge, it\nlooks like a long fall!\n"
+            "Dante was here!"
         ]
     },
     {
         "id": 38,
         "text": [
-            "Nothing happens!\n"
+            "Bring your Marshmallows?"
         ]
     },
     {
         "id": 39,
         "text": [
-            "It is generally regarded by most Sages\nthat taking the  \"Holy Hand Grenade of\nAunty Ock\" into  Hell is  a  bad move.\nin the past,  you have not been muchly\nimpressed with  the opinions of Sages,\nbut in this case they are DEAD ON!\n \n* * * * K A B O O O O O M * * * *\n \nIn an explosion that makes one of your\nfinest TILTOWAITS look like a wet fire\ncracker, the potent Holy Relic makes a\nvery loud noise.  It also wrecks large\nareas of the Abyss (blowing it to Hell\nand gone, naturally!)\n \nOh yes, just in case it has not dawned\nupon you---Back to your Bier you go.\n"
-        ]
-    },
-    {
-        "id": 40,
-        "text": [
-            "The Gates of Hell slowly reassemble\nthemselves from the pool of slag.\n \nFrom far away, from far below,  you\nhear a chorus of demonic laughter! \n"
-        ]
-    },
-    {
-        "id": 41,
-        "text": [
-            "A Big Blimp is  hovering  here.  Along\nits  side is  rippling  this  message:\n \nOnce in a Millennium sale...Lych-gates\n1/3 off...Never know  when you will be\nneeding one! Find yours at Boltac\u0027s...\nOnce in a Millennium sale...Lych-gates\n1/3 off......\n"
-        ]
-    },
-    {
-        "id": 42,
-        "text": [
-            "Enter the Realm of the\nWhirling Dervish\n"
-        ]
-    },
-    {
-        "id": 43,
-        "text": [
-            "What just happened here?\n"
+            "The heat is getting quite unbearable.",
+            "The Glow ahead is intense.   What can",
+            "be causing it?",
+            "A monstrous statue  rises up from the",
+            "sullenly glowing ground and bars your",
+            "path! Flee while there is still time!"
         ]
     },
     {
         "id": 44,
         "text": [
-            "While swooping around the temple, you\nare able to pluck the  Orange Rod out\nof the sky.\n"
-        ]
-    },
-    {
-        "id": 45,
-        "text": [
-            "Oops! You can\u0027t carry any more Items!\n"
+            "It\u0027s the Abyss!",
+            "May Kadorto have Mercy on your Soul!",
+            "Go Back!  Go Back!"
         ]
     },
     {
         "id": 46,
         "text": [
-            "The Item was placed in the Black Box!\n"
-        ]
-    },
-    {
-        "id": 47,
-        "text": [
-            "You can\u0027t carry any  more Items,  and\nThe  Black  Box  is  full.  Too  bad!\n"
+            "It\u0027s the Abyss.  Boy have you really",
+            "bought the farm this time.  Retreat!"
         ]
     },
     {
         "id": 48,
         "text": [
-            "You have obtained .\n"
-        ]
-    },
-    {
-        "id": 49,
-        "text": [
-            "Sigh!  There you were, with a chance\nto get a pretty nasty artifact,  and\nyou didn\u0027t  have any  space to carry\nit with!  I thought that you were  a\nMaster Wizardry Adventurer!\n"
-        ]
-    },
-    {
-        "id": 50,
-        "text": [
-            "Let me get this straight.  After all\nthe rigamarole you had to go through\nto get into Hell, you went there and\nhad no room to pick up the  Item you\nworked so hard to get to?  Sigh!\n"
-        ]
-    },
-    {
-        "id": 51,
-        "text": [
-            "Running around with every Item slot\nfull is not considered a smart ploy\nby most Master Adventurers.\n"
-        ]
-    },
-    {
-        "id": 52,
-        "text": [
-            "Searching slowly in the dusty floor,\nyou  discover  an  ancient Pentagram\ncarved into the rock.  Being careful\nthat  you  do  not  step  inside the\nCircle,  you  raise  your  arms  and\nspeak the Words of Summoning!\n"
-        ]
-    },
-    {
-        "id": 53,
-        "text": [
-            "This Way To The Egress\n \n? ? ? ? ? ? ? ?\n"
+            "You plummet into Hell, and the flames",
+            "lick towards you.  Slowly,  your fall",
+            "begins to check  itself as your Boots",
+            "of  Levitation  begin to  arrest  the",
+            "powerful  attraction of  the infernal",
+            "regions!  The  heat  from the  flames",
+            "becomes  more  intense,  until it  is",
+            "almost unendurable!",
+            "Just as your fall is arrested  and you",
+            "begin to  rise again,  you are able to",
+            "reach out and pluck the  Jeweled Fruit",
+            "from the Tree of Liquid Fire!",
+            " ",
+            "Upward you rise, until the shattered",
+            "Gates of Hell are once again visible",
+            "through the flames and smoke!",
+            "From far below, a mocking voice calls",
+            "out to you:  \"You are getting warmer,",
+            "but you aren\u0027t  nearly hot enough for",
+            "my tastes! HaHaHah!\"",
+            "Suddenly,  a huge jet of flame washes",
+            "up and over you, immolating you in an",
+            "instant!  There is an instant of pure",
+            "agony, and then you feel no more!"
         ]
     },
     {
         "id": 54,
         "text": [
-            "The cage door slams shut behind you.\nLooks like you have found a  new way\nto pass eternity.\n"
-        ]
-    },
-    {
-        "id": 55,
-        "text": [
-            "Behold - The Maze of Wandering!\n \n \nWatch where you step!\n"
+            "Read the other sign.  It\u0027s right",
+            "behind you!",
+            " ",
+            "? ? ? ? ? ?"
         ]
     },
     {
         "id": 56,
         "text": [
-            "Upward from this level there is\nno turning back!\nHave you forgotten something?\n"
+            "Welcome to",
+            " ",
+            "The Death of a Thousand Cuts!"
         ]
     },
     {
         "id": 57,
         "text": [
-            "EGRESS ? ? ? ? ? ? ?\n"
+            "Have you forgotten something?"
         ]
     },
     {
         "id": 58,
         "text": [
-            "This Way To The Egress\n \n? ? ? ? ? ? ? ?\n"
+            "Wow!  A beautiful piece of amber!",
+            "Embedded within  it is the  image",
+            "of a Dragon with wings outspread!"
         ]
     },
     {
         "id": 59,
         "text": [
-            "A floating sign hovers here, pulsing\nwith this message:\n \nWelcome to The Cosmic Cube!\nSpend a lifetime or two having fun!\n(No Deposit, No Return)\nPonder upon the  ancient  mystery  of\nThe Lady  Or  The Tigers if  you wish\nto tread the hidden ways of the Cube.\nBefore you are three doors:\n \nUpon the left door is written:\nA tiger is in the right room.\n \nUpon the center door is written:\nA tiger is in this room.\n \nUpon the right door is written:\nA lady is in this room.\nNo room  is empty,  but only one door\ntells the truth. Choose  wisely, find\nthe lady, and you will take the first\nstep upon  the  Golden  Path.  Choose\nfalsely and you will roam The  Cosmic\nCube for all eternity!\n"
-        ]
-    },
-    {
-        "id": 60,
-        "text": [
-            "This Way To The Egress\n \n? ? ? ? ? ? ? ?\n"
-        ]
-    },
-    {
-        "id": 61,
-        "text": [
-            "This Way To The Egress\n \n? ? ? ? ? ? ? ?\n"
+            "The explosions have exposed a Golden",
+            "Vein running through the Cavern!",
+            "Fabulous wealth is here for the tak-",
+            "ing.  You  spot  a small  nugget and",
+            "hastily grab it!"
         ]
     },
     {
         "id": 62,
         "text": [
-            "You stumble over the long dead body\nof some  unfortunate explorer.  His\noutstretched  hand  has  scrawled a\nfew words in the dust:\n\n\"Beware---The Cosmic Cube!\n \n---The Red S....\"\nAround his neck is a strange object\nthat looks like the Death Mask of a\nDemon.  Gingerly, searching for the\ntraps you have come to expect,  you\nremove the object.\n\nIn the distance, the silent screams\nof the Butterflies draw nearer!\n"
+            "You stand before the very Gates",
+            "of Hell itself!",
+            " ",
+            "The flames are so  intense that",
+            "you must shield  your eyes from",
+            "their infernal brilliance!",
+            " ",
+            "You may offer B)ribes,  U)se an",
+            "Item or (Hint!) R~un away!"
         ]
     },
     {
         "id": 63,
         "text": [
-            "The Creatures  of Light\nand Darkness await you!\n"
+            "A hideous wail of many tormented souls",
+            "screams forth from the Chimes, shaking",
+            "the very foundations of the Gates!"
         ]
     },
     {
         "id": 64,
         "text": [
-            "The door to the Inn is locked.\nwithout  the  Large  Brass Key\nyou cannot gain admittance.\n"
+            "Each gutteral word you utter from the",
+            "Diary  takes form  and  hurls  itself",
+            "upon the Gates like a battering ram!"
         ]
     },
     {
         "id": 65,
         "text": [
-            "\"Oh,  I say,  this is a  Meeting of\nthe Order of the Laurel!\"\nInside a  lovely gazebo  amidst the\nflowers of the  Inner Court sit the\nMasters  and   Mistresses   of  the\nLaurel, all Peers of the Realm:\nBaroness Kathryn Goodwyn, Sigismund\nVasa Care, Johannes von Nurenstein,\nGabreilla  Maddelena Pisano,  Arwen\nEvaine Merch Gwynth, and Salaamall-\nah the Corpulent.\n"
+            "A brilliant light, like a small nova,",
+            "issues forth  from the  Black Candle,",
+            "and melts  the weakened  Gates.  They",
+            "slowly slump to the ground to form  a",
+            "pool of glowing metal!",
+            " ",
+            "The Gates of Hell are open!!",
+            " ",
+            "Do you dare to enter (Y/N) ?"
         ]
     },
     {
         "id": 66,
         "text": [
-            "\"Thou hast done nothing to advance\nthe Arts in  the Realm.  The Guild\nof Limners  especially  needs  thy\naid. Do not return until thou hast\nachieved some skill or craft!\"\n"
+            "You enter and fall into the Abyss!",
+            " ",
+            "**** Aaaaarrrrrrrggggghhhhhhh ****",
+            " ",
+            "It burns, by the gods, it burns!!!",
+            " ",
+            "The fires of Hell  lick and scorch",
+            "your flesh for what seems to be an",
+            "eternity.  Finally, the torment is",
+            "at an end.  You begin to sink into",
+            "oblivion, grateful to whatever god",
+            "still  listens  to  your  prayers.",
+            "As  your eyes  close  for  the last",
+            "time,  you  see  a  Jeweled  Fruit ",
+            "hanging from a Tree of Liquid Fire.",
+            "then all is black.  Perhaps this is",
+            "the True Death, the Giver of Peace?",
+            "",
+            "",
+            "",
+            "Wrong Again!"
         ]
     },
     {
         "id": 67,
         "text": [
-            "\"Oh, thou hast the  Daub of Puce.\n\nThe Guild of Limners will be most\nhappy!  They have  been searching\nfor the  ancient recipe  for that\nexact Royal shade  for many years\nso that  they might  touch up the\nold painting of Trebor.  No other\nshade of  deep red  would do  for\nthe nose, for sure!   Advance now\nand  accept the  Accolade  of the\nLaurels!\"\n"
+            "Wait!  The fires of Hell are not burn-",
+            "ing you!  Searching through your gear,",
+            "you  see that  the  Dreampainter\u0027s  Ka",
+            "is absorbing the terrific heat of  the",
+            "conflagration, shielding you.",
+            " ",
+            "As you continue to fall,  you pass the",
+            "Tree of Liquid Fire, with its precious",
+            "fruit hanging  daintily upon a branch.",
+            "",
+            "Deeper and  deeper into  the Abyss you",
+            "descend, witnessing sights  which make",
+            "your own evil atrocities look like the",
+            "minor peccadilloes.",
+            " ",
+            "The sights you see become too depraved",
+            "even for you!  Your mind is twisted by",
+            "the demonic visions!  It\u0027s torture,  a",
+            "torture worse than the fires of Hell!!",
+            " ",
+            "Slowly, with  demented care,  the gods",
+            "dismember your mind!"
         ]
     },
     {
         "id": 68,
         "text": [
-            "\"Hi there, this is a meeting of\nthe Order of the Tyger\u0027s Cubs!!\"\n\"I am  Cormac Kyle of  Skara Brae.\nThese are my friends \u0026 companions:\nPatri  ibn  Cariadoc,  Krisha  Von\nHalstern,   Alison   Von  Halstern\nMitchell  of  Clan  Mitchell,  and\nLuke  Maximillian.   Come  on  in!\"\n"
+            "Wait!  The fires of Hell are not burn-",
+            "ing you and your fall is slowing down!",
+            "searching through  your gear,  you see",
+            "that the  Dreampainter\u0027s Ka is absorb-",
+            "ing the  terrific heat  and  shielding",
+            "you, and your Boots of Levitation  are",
+            "checking your descent.",
+            " ",
+            "Just as your fall is arrested  and you",
+            "begin to  rise again,  you are able to",
+            "reach out and pluck the  Jeweled Fruit",
+            "from the Tree of Fire!",
+            " ",
+            "Upward you rise,  until you pass  back",
+            "through the shattered Gates of Hell!",
+            " ",
+            "From far below, a mocking voice calls",
+            "out to you: \"Have you forgotten some-",
+            "thing?  HaHaHaHaHa!\"",
+            "Slowly, the Gates of Hell reform",
+            "from the puddle of slag."
         ]
     },
     {
         "id": 69,
         "text": [
-            "\"We have lost our new Page School\n banner. Have you seen it?\"\n\"We would  really like  some help,\n\"but do not mess with us,  as we\nare Royal Pages, I hope you know!\"\n"
+            "You throw your offering through the",
+            "Gates of Hell, only to see the Gold",
+            "Coins melt and vaporize!"
         ]
     },
     {
         "id": 70,
         "text": [
-            "\"Thanks for returning our banner\nto us.  Here is a ball as a just\nreward. Remember, above all else\nhave fun!!!\"\n"
+            "You are at ground level, craning your",
+            "neck to look upward at  a magnificent",
+            "Ziggurat.  It stretches upward almost",
+            "as far as the eye can see."
         ]
     },
     {
         "id": 71,
         "text": [
-            "The Von Halstern Chivalry:\n\nSir Manfred Von Halstern, Sir Magnus\nBloodaxe,   Sir  Hrymgnar  Aeulfson,\nDuke Sir Hanno Von Halstern,  Master\nFeral, and Sir Vykor stand aside for\nthe Noble Werdna!\n"
+            "You are on a first  level ledge of an",
+            "extremely Art-Deco Ziggurat.  A close",
+            "examination  of the faded  cartouches",
+            "and paintings leads you to the belief",
+            "that this is the fabled lost",
+            " ",
+            "\"Temple of the Dreampainter\"",
+            " ",
+            "which  was  dedicated to  one of  the",
+            "ancient creators of this world,  whom",
+            "men later called gods."
         ]
     },
     {
         "id": 72,
         "text": [
-            "This is the  Captains\u0027 Council.\n\n\"We see that you have obtained a\nRoyal Pardon!  You have been an\nexceptional adversary,  and you\nhave managed  to defeat  us all\nat one time  or another.  For a\nfee of 1,000,000 GP,  (consider\nit Weregild)  we will bend knee\nto you  and  pledge our Fealty.\nAfter  all,  everyone  likes to\nback a winner!\"\n"
+            "A small sign on the left wall",
+            "reads as follows:",
+            " ",
+            "** PRIEST\u0027S HOLE **",
+            "** For Emergency Use Only! **"
         ]
     },
     {
         "id": 73,
         "text": [
-            "Will you pay\n"
+            "This Way To The Scenic Vista!",
+            "(Children under the age of 90",
+            "must be accompanied by",
+            "Parent, Guardian, Priest",
+            "or Demon -- NO EXCEPTIONS!)",
+            " ",
+            "? ? ? ? ?"
         ]
     },
     {
         "id": 74,
         "text": [
-            "You don\u0027t have 1,000,000 GP!\n"
+            "The view  from these  heights is truly",
+            "breathtaking.  Concentric rings of the",
+            "Temple  stretch  out  below.   Looking",
+            "outward,  you see  a small Orange  Rod",
+            "that drifts gently around  the  Temple",
+            "in the mild breeze, occasionally  just",
+            "wafting  close  enough  to  the Temple",
+            "to  be  tantalizingly  out  of  reach."
         ]
     },
     {
         "id": 75,
         "text": [
-            "It is said that \"the longest part\nof any journey is the first step.\"\n\nWatch where you step or your trip\nmay last an eternity!\n"
+            "This really is a Scenic Vista!!",
+            "The  ceiling is  so close  that",
+            "you can almost touch it.  Look-",
+            "ing upwards, you can see stairs",
+            "from the top of the Temple that",
+            "lead upwards  through the  roof",
+            "of the level.",
+            " ",
+            "Don\u0027t get too near the edge, it",
+            "looks like a long fall!"
         ]
     },
     {
         "id": 76,
         "text": [
-            "Daylight!  You are actually above the\nground.  Ahead of you is the Castle!!\nA sign on the Castle wall reads:\nNo Flying Allowed Near The Castle.\nNo Moat Diving  From The Ramparts.\n \nThis Means YOU!!!\n"
+            "Nothing happens!"
         ]
     },
     {
         "id": 77,
         "text": [
-            "The Edge of Town\n"
+            "It is generally regarded by most Sages",
+            "that taking the  \"Holy Hand Grenade of",
+            "Aunty Ock\" into  Hell is  a  bad move.",
+            "in the past,  you have not been muchly",
+            "impressed with  the opinions of Sages,",
+            "but in this case they are DEAD ON!",
+            " ",
+            "* * * * K A B O O O O O M * * * *",
+            " ",
+            "In an explosion that makes one of your",
+            "finest TILTOWAITS look like a wet fire",
+            "cracker, the potent Holy Relic makes a",
+            "very loud noise.  It also wrecks large",
+            "areas of the Abyss (blowing it to Hell",
+            "and gone, naturally!)",
+            " ",
+            "Oh yes, just in case it has not dawned",
+            "upon you---Back to your Bier you go."
         ]
     },
     {
         "id": 78,
         "text": [
-            "The Training Grounds\n"
+            "The Gates of Hell slowly reassemble",
+            "themselves from the pool of slag.",
+            " ",
+            "From far away, from far below,  you",
+            "hear a chorus of demonic laughter! "
         ]
     },
     {
         "id": 79,
         "text": [
-            "Welcome (?) to Boltac\u0027s Trading Post\n"
+            "A Big Blimp is  hovering  here.  Along",
+            "its  side is  rippling  this  message:",
+            " ",
+            "Once in a Millennium sale...Lych-gates",
+            "1/3 off...Never know  when you will be",
+            "needing one! Find yours at Boltac\u0027s...",
+            "Once in a Millennium sale...Lych-gates",
+            "1/3 off......"
         ]
     },
     {
         "id": 80,
         "text": [
-            "The Adventurer\u0027s Inn\n1/2 Star - Mychelyn Guide\nVisa, Mordor Charge accepted\n"
+            "Enter the Realm of the",
+            "Whirling Dervish"
         ]
     },
     {
         "id": 81,
         "text": [
-            "Gilgamesh\u0027s Tavern\n\"Potent Potables\"\nStep in and step up to the bar!\n"
+            "What just happened here?"
         ]
     },
     {
         "id": 82,
         "text": [
-            "The Temple of Cant\nWe support the Fundamental Freedom\nto worship the God of *OUR* choice.\n"
+            "While swooping around the temple, you",
+            "are able to pluck the  Orange Rod out",
+            "of the sky."
         ]
     },
     {
         "id": 83,
         "text": [
-            "* * THE GREAT GOD KADORTO * *\nAll in his presence must\nabase themselves!\n"
+            "Oops! You can\u0027t carry any more Items!"
         ]
     },
     {
         "id": 84,
         "text": [
-            "The tall Donjon rises before you.\nIt is the Citadel  of the Castle.\n"
+            "The Item was placed in the Black Box!"
         ]
     },
     {
         "id": 85,
         "text": [
-            "So this is the fabulous Boltac\u0027s.\nLook at all the toys.  Too bad he\nwon\u0027t sell  to the  likes of you,\neven if you paid in Mythril!\nHmmm... isn\u0027t that  the legendary\nLych-gate  of the Archmage Phred?\nIt has  been rumored  capable  of\nrazing Castles  when in the hands\nof one who is truly Evil.  \u003cGrin\u003e\n"
+            "You can\u0027t carry any  more Items,  and",
+            "The  Black  Box  is  full.  Too  bad!"
         ]
     },
     {
         "id": 86,
         "text": [
-            "Try to steal the Lych-gate\n"
+            "You have obtained ^."
         ]
     },
     {
         "id": 87,
         "text": [
-            "You have interrupted a meeting of\nThe Ladies of the Rose.\n\nSeated around a  table sipping tea\nare their Graces Khadijah of House\nHakim,  Wanda Von Halstern,  Diana\nAlene,  and Kunegunda Henschel Von\nSchattenberg,  and their Excellen-\ncies Ecaterina Amber of Tospenwood\nand Mara Tudora Kolarova.\n"
+            "Sigh!  There you were, with a chance",
+            "to get a pretty nasty artifact,  and",
+            "you didn\u0027t  have any  space to carry",
+            "it with!  I thought that you were  a",
+            "Master Wizardry Adventurer!"
         ]
     },
     {
         "id": 88,
         "text": [
-            "\"Begone, Oh unchivalrous cur, and\ntake thy stench with thee!\"\n"
+            "Let me get this straight.  After all",
+            "the rigamarole you had to go through",
+            "to get into Hell, you went there and",
+            "had no room to pick up the  Item you",
+            "worked so hard to get to?  Sigh!"
         ]
     },
     {
         "id": 89,
         "text": [
-            "\"Begone, Oh unchivalrous cur.  No\nmatter how sweet thou might seem,\nwe know thee by thy deeds!\"\n"
+            "Running around with every Item slot",
+            "full is not considered a smart ploy",
+            "by most Master Adventurers."
         ]
     },
     {
         "id": 90,
         "text": [
-            "\"Tales of thy  chivalrous action\ntowards  thy  most bitter  enemy,\nTrebor,  have  reached  us.  Yet,\nbring not thy foul stench amongst\nwomen of quality!\"\n"
+            "Searching slowly in the dusty floor,",
+            "you  discover  an  ancient Pentagram",
+            "carved into the rock.  Being careful",
+            "that  you  do  not  step  inside the",
+            "Circle,  you  raise  your  arms  and",
+            "speak the Words of Summoning!"
         ]
     },
     {
         "id": 91,
         "text": [
-            "\"Tales of  thy  chivalrous action\ntowards  thy  most  bitter enemy,\nTrebor, have reached us, and thou\nhast also bathed away  the stench\nof thy past.\"\n\"Advance and receive our Token of\nGrace.  Keep  it on  thy  person\nat all times,  for it is a Royal\nPardon for thy crimes,  and none\nshall  bother  thee  whilst thee\nwear it!\"\n"
+            "This Way To The Egress",
+            " ",
+            "? ? ? ? ? ? ? ?"
         ]
     },
     {
         "id": 92,
         "text": [
-            "Herein meets\nThe Order of the Pelican!\nMaster El of the Two Knives is\naddressing  the  Order.  Other\nMasters  and  Mistresses here,\nall  Peers of the Realm,  are:\nAravis Katheryn Delclare, Jae-\nlla of Armida, Alisoun Maccoul\nof Elphane,  Steffan ap Cenydd\nof  Silverwing,  and  Anne  of\nHatfield.\n"
+            "The cage door slams shut behind you.",
+            "Looks like you have found a  new way",
+            "to pass eternity."
         ]
     },
     {
         "id": 93,
         "text": [
-            "\"Get out!  Thou hast done no\nservice for this Realm!\"\n"
+            "Behold - The Maze of Wandering!",
+            " ",
+            " ",
+            "Watch where you step!"
         ]
     },
     {
         "id": 94,
         "text": [
-            "Advance and  take this Cap,  that\nall might know of the service  ye\nhave performed  for the  Realm by\nrestoring  the  fabled  Temple of\nthe  Dreampainter   to  its  full\nglory!\"\n"
+            "Upward from this level there is",
+            "no turning back!",
+            "Have you forgotten something?"
         ]
     },
     {
         "id": 95,
         "text": [
-            "Just as you are about to dive into\nthe  beautifully clear  water, the\nlifeguard  comes  running over and\ngrabs  you by the  neck  and seat.\nAs you sail  through the  air, you\nhear,  \"Begone,  thou art much too\nsoiled  and  stained  to  bathe in\nThe Royal Pool.  Do not  come back\nuntil  thy hast  cleansed thyself!\"\n"
+            "EGRESS ? ? ? ? ? ? ?"
         ]
     },
     {
         "id": 96,
         "text": [
-            "Halt! No further may thee travel\nunless thou hast decided to seek\nthy destiny in the Amulet!\n"
+            "This Way To The Egress",
+            " ",
+            "? ? ? ? ? ? ? ?"
         ]
     },
     {
         "id": 97,
         "text": [
-            "Is this thy wish\n"
+            "A floating sign hovers here, pulsing",
+            "with this message:",
+            " ",
+            "Welcome to The Cosmic Cube!",
+            "Spend a lifetime or two having fun!",
+            "(No Deposit, No Return)",
+            "Ponder upon the  ancient  mystery  of",
+            "The Lady  Or  The Tigers if  you wish",
+            "to tread the hidden ways of the Cube.",
+            "Before you are three doors:",
+            " ",
+            "Upon the left door is written:",
+            "A tiger is in the right room.",
+            " ",
+            "Upon the center door is written:",
+            "A tiger is in this room.",
+            " ",
+            "Upon the right door is written:",
+            "A lady is in this room.",
+            "No room  is empty,  but only one door",
+            "tells the truth. Choose  wisely, find",
+            "the lady, and you will take the first",
+            "step upon  the  Golden  Path.  Choose",
+            "falsely and you will roam The  Cosmic",
+            "Cube for all eternity!"
         ]
     },
     {
         "id": 98,
         "text": [
-            "Then thou hast to get past us,\nfor we guard this Portal!\n"
+            "This Way To The Egress",
+            " ",
+            "? ? ? ? ? ? ? ?"
         ]
     },
     {
         "id": 99,
         "text": [
-            "In this study meets the Council of\nBarons.  Seated  in front  of  the\nfireplace  are the  most  powerful\nBarons of the Realm:  Sir Patri du\nChat Gris,  Baroness  Elspeth Keyf\nof Neddingham, Baron Yosef Alaric,\nBaron Eofn ap Erwyn, Baron Leonard\nthe Younger,  and  Baron  Algernon\nHartesmond.\nA Page comes running in with a cup\nof Mead and a large parchment.\n\n\"This  document  pledges  you  to\nreinstate our  traditional Rights\nand Privileges stolen by Trebor!\"\n"
+            "This Way To The Egress",
+            " ",
+            "? ? ? ? ? ? ? ?"
         ]
     },
     {
         "id": 100,
         "text": [
-            "Will you sign it\n"
-        ]
-    },
-    {
-        "id": 101,
-        "text": [
-            "\"In return for your pledge, we in\nturn give  our  Oath  of  Loyalty\nand  support.  Take this  Ring of\nGood  Counsel and  wear it  as  a\ntoken of our mutual Fealty!\"\n"
+            "You stumble over the long dead body",
+            "of some  unfortunate explorer.  His",
+            "outstretched  hand  has  scrawled a",
+            "few words in the dust:",
+            "",
+            "\"Beware---The Cosmic Cube!",
+            " ",
+            "---The Red S....\"",
+            "Around his neck is a strange object",
+            "that looks like the Death Mask of a",
+            "Demon.  Gingerly, searching for the",
+            "traps you have come to expect,  you",
+            "remove the object.",
+            "",
+            "In the distance, the silent screams",
+            "of the Butterflies draw nearer!"
         ]
     },
     {
         "id": 102,
         "text": [
-            "\"Then to Hell with you and your\ninfernal arrogance,\"  proclaims\nBaroness Elspeth,  as she sends\nyou on your way  with a wave of\nher hand!\n"
+            "The Creatures  of Light",
+            "and Darkness await you!"
         ]
     },
     {
         "id": 103,
         "text": [
-            "Your Maintenance Cap instills in\nyou the  knowledge  you  need to\nrepair the fountain!\n"
+            "The door to the Inn is locked.",
+            "without  the  Large  Brass Key",
+            "you cannot gain admittance."
         ]
     },
     {
         "id": 104,
         "text": [
-            "Before you is  a small grotto,\nfilled with sparkling water. A\nlarge number of clawprints can\nbe seen  around the pool,  but\nthere is no creature in sight.\nYou have found the Ron Wartow  Not-\nYet-Memorial Wading Pool,  which is\ndedicated to the Elite who  jump to\nbrilliant, logical conclusions, but\nalas, are wrong!  Ponder  this from\n\"the Wartowliedtod\" before bathing:\n\"Oh, will he ever return?      \n Will he ever return?\n His fate is still unlearned!\"\n"
+            "\"Oh,  I say,  this is a  Meeting of",
+            "the Order of the Laurel!\"",
+            "Inside a  lovely gazebo  amidst the",
+            "flowers of the  Inner Court sit the",
+            "Masters  and   Mistresses   of  the",
+            "Laurel, all Peers of the Realm:",
+            "Baroness Kathryn Goodwyn, Sigismund",
+            "Vasa Care, Johannes von Nurenstein,",
+            "Gabreilla  Maddelena Pisano,  Arwen",
+            "Evaine Merch Gwynth, and Salaamall-",
+            "ah the Corpulent."
         ]
     },
     {
         "id": 105,
         "text": [
-            "As you desperately paddle out of\nthe Pool, your hand falls upon a\nForked Stick that is floating in\nthe pool, apparently unharmed by\nthe Acid.\n"
+            "\"Thou hast done nothing to advance",
+            "the Arts in  the Realm.  The Guild",
+            "of Limners  especially  needs  thy",
+            "aid. Do not return until thou hast",
+            "achieved some skill or craft!\""
         ]
     },
     {
         "id": 106,
         "text": [
-            "Before you is a small Pool of\nShimmering Liquid, surrounded\nby a grove of Majestic Oaks. \n"
+            "\"Oh, thou hast the  Daub of Puce.",
+            "",
+            "The Guild of Limners will be most",
+            "happy!  They have  been searching",
+            "for the  ancient recipe  for that",
+            "exact Royal shade  for many years",
+            "so that  they might  touch up the",
+            "old painting of Trebor.  No other",
+            "shade of  deep red  would do  for",
+            "the nose, for sure!   Advance now",
+            "and  accept the  Accolade  of the",
+            "Laurels!\""
         ]
     },
     {
         "id": 107,
         "text": [
-            "You have found one of the many\nmajestic  fountains  that  are\nscattered about the Castle.  A\nsign next to this one reads:\n \n\"Fountain Closed For Repairs.\"\n\"   No Wading At Any Time.   \"\n\"Keep Off The Grass As Well!\"\n"
+            "\"Hi there, this is a meeting of",
+            "the Order of the Tyger\u0027s Cubs!!\"",
+            "\"I am  Cormac Kyle of  Skara Brae.",
+            "These are my friends \u0026 companions:",
+            "Patri  ibn  Cariadoc,  Krisha  Von",
+            "Halstern,   Alison   Von  Halstern",
+            "Mitchell  of  Clan  Mitchell,  and",
+            "Luke  Maximillian.   Come  on  in!\""
         ]
     },
     {
         "id": 108,
         "text": [
-            "You have found one of the many\nmajestic  fountains  that  are\nscattered about the Castle.  A\nsign next to this one reads:\n \n\"Fountain Open For Public Bathing.\"\n\"   Lifeguard Must Be On Duty!   \"\n \nThere is no lifeguard in sight...\n"
+            "\"We have lost our new Page School",
+            " banner. Have you seen it?\"",
+            "\"We would  really like  some help,",
+            "\"but do not mess with us,  as we",
+            "are Royal Pages, I hope you know!\""
         ]
     },
     {
         "id": 109,
         "text": [
-            "As you bathe in this Pool, you feel\nstrangely refreshed.  You emerge in\nthe very pink of good health.  Your\nMonster allies take one look at the\nnew YOU, sparkling clean,  smelling\nof wild flowers and with a blush on\nyour cheeks, and flee in terror!!!!\n"
+            "\"Thanks for returning our banner",
+            "to us.  Here is a ball as a just",
+            "reward. Remember, above all else",
+            "have fun!!!\""
         ]
     },
     {
         "id": 110,
         "text": [
-            "Argggghh!!  This Pool is full of\nAcid, leached from the Oaks.  IT\nBURNS!\n"
+            "The Von Halstern Chivalry:",
+            "",
+            "Sir Manfred Von Halstern, Sir Magnus",
+            "Bloodaxe,   Sir  Hrymgnar  Aeulfson,",
+            "Duke Sir Hanno Von Halstern,  Master",
+            "Feral, and Sir Vykor stand aside for",
+            "the Noble Werdna!"
         ]
     },
     {
         "id": 111,
         "text": [
-            "As you bathe in this Pool, you are\nenveloped by a feeling of forebod-\ning.  Suddenly, the weight of your\npast Evil deeds descends upon your\nstooped shoulders again!\n"
+            "This is the  Captains\u0027 Council.",
+            "",
+            "\"We see that you have obtained a",
+            "Royal Pardon!  You have been an",
+            "exceptional adversary,  and you",
+            "have managed  to defeat  us all",
+            "at one time  or another.  For a",
+            "fee of 1,000,000 GP,  (consider",
+            "it Weregild)  we will bend knee",
+            "to you  and  pledge our Fealty.",
+            "After  all,  everyone  likes to",
+            "back a winner!\""
         ]
     },
     {
         "id": 112,
         "text": [
-            "As you bathe yourself in the Pool,\nit is as if the Evil of  your Soul\nhas been somewhat cleansed!\n"
+            "Will you pay"
         ]
     },
     {
         "id": 113,
         "text": [
-            "A pleasant dip, but nothing seems\nto have happened...\n"
+            "You don\u0027t have 1,000,000 GP!"
         ]
     },
     {
         "id": 114,
         "text": [
-            "A Hoplite advances upon you. Stops.\nSalutes. He yells into your  ear in\nbad Attic Latin...\n \n\"Halt, and give the Password, Sir!\"\n"
-        ]
-    },
-    {
-        "id": 115,
-        "text": [
-            "$TREBOR SUX\n"
-        ]
-    },
-    {
-        "id": 116,
-        "text": [
-            "Everywhere there is a brilliance that\nis  intolerable to  look  upon.  From\nsomewhere comes a deep voice...\n \n\"I am Attainment.  I am that  part of\nthe body that is above  all the rest,\nyet beyond mere touch.  What am I?\"  \n"
-        ]
-    },
-    {
-        "id": 117,
-        "text": [
-            "$CRANIUM\n$BRAIN\n"
-        ]
-    },
-    {
-        "id": 118,
-        "text": [
-            "Feeling like you are floating in a\nvast sky,  you enter  this room of\npure soft blue.  The being dressed\nin a diaphanous blue kirtle speaks\nto you...\n \n\"I am Devotion.  I am also that part\nof the face upon which the Moon doth\nrise.  What am I?\"\n"
-        ]
-    },
-    {
-        "id": 119,
-        "text": [
-            "$LEFT CHEEK\n"
+            "It is said that \"the longest part",
+            "of any journey is the first step.\"",
+            "",
+            "Watch where you step or your trip",
+            "may last an eternity!"
         ]
     },
     {
         "id": 120,
         "text": [
-            "Blood-red crimson is the color of this\nroom.  Nothing is heard,  but then the\nbeing dressed in crimson robes  writes\nin fiery letters in the air...\n \n\"I am the Virtue  of Silence,  and the\nVice of  Avarice.  I am  that part  of\nthe face upon which the sun rises each\nday.  What am I?\"\n"
+            "Daylight!  You are actually above the",
+            "ground.  Ahead of you is the Castle!!",
+            "A sign on the Castle wall reads:",
+            "No Flying Allowed Near The Castle.",
+            "No Moat Diving  From The Ramparts.",
+            " ",
+            "This Means YOU!!!"
         ]
     },
     {
         "id": 121,
         "text": [
-            "$RIGHT CHEEK\n"
+            "The Edge of Town"
         ]
     },
     {
         "id": 122,
         "text": [
-            "Somber is this  room.  Everywhere  a\ndeep violet  absorbs all.  The being\nhere intones...\n \n\"I am Obedience, yet I also beat the\nDrum of Bigotry.  I hold  the shield\nthat protects.  What am I?\"\n"
+            "The Training Grounds"
         ]
     },
     {
         "id": 123,
         "text": [
-            "$LEFT ARM\n$LEFT HAND\n"
+            "Welcome (?) to Boltac\u0027s Trading Post"
         ]
     },
     {
         "id": 124,
         "text": [
-            "Orange are the walls and orange is the\nbrigandine of the being who greets you\nin this room...\n \n\"I am Courage, but I am  also Cruelty.\nI hold the sword, yet I can  also hold\nthe whip.  What am I?\"\n"
+            "The Adventurer\u0027s Inn",
+            "1/2 Star - Mychelyn Guide",
+            "Visa, Mordor Charge accepted"
         ]
     },
     {
         "id": 125,
         "text": [
-            "$RIGHT ARM\n$RIGHT HAND\n"
+            "Gilgamesh\u0027s Tavern",
+            "\"Potent Potables\"",
+            "Step in and step up to the bar!"
         ]
     },
     {
         "id": 126,
         "text": [
-            "This entire room seems to be carved\nout of a single huge slab  of clear\nrose-pink quartz.  The being in the\nroom wears armor of the same trans-\nlucent color...\n \n\"I am Devotion  To Great Work,  but\nas Pride I can ruin all.  Within me\nbeats the  great heart,  the mighty\nengine.  What am I?\"\n"
+            "The Temple of Cant",
+            "We support the Fundamental Freedom",
+            "to worship the God of *OUR* choice."
         ]
     },
     {
         "id": 127,
         "text": [
-            "$BREAST\n$CHEST\n"
+            "* * THE GREAT GOD KADORTO * *",
+            "All in his presence must",
+            "abase themselves!"
         ]
     },
     {
         "id": 128,
         "text": [
-            "Amber glow the walls here.  Amber too\nis the houppelande of the being\nwaiting here...\n \n\"I am Unselfishness, yet I am Lust. I\nam the  foundation of  the body  upon\nwhich the main rests.  What am I?\"\n"
+            "The tall Donjon rises before you.",
+            "It is the Citadel  of the Castle."
         ]
     },
     {
         "id": 129,
         "text": [
-            "$HIPS\n"
+            "So this is the fabulous Boltac\u0027s.",
+            "Look at all the toys.  Too bad he",
+            "won\u0027t sell  to the  likes of you,",
+            "even if you paid in Mythril!",
+            "Hmmm... isn\u0027t that  the legendary",
+            "Lych-gate  of the Archmage Phred?",
+            "It has  been rumored  capable  of",
+            "razing Castles  when in the hands",
+            "of one who is truly Evil.  \u003cGrin\u003e"
         ]
     },
     {
         "id": 130,
         "text": [
-            "Regalness pervades this room.  The\nwalls and pillars are of a violet-\npurple.  The being here is swathed\nin the Royal Cloth of Tyre...\n \n\"I am Truthfulness on one hand, and\nFalsehood on the other.  I symbolize\nthe parts of the body  that are its\nmain support.  What am I?\"\n"
+            "Try to steal the Lych-gate"
         ]
     },
     {
         "id": 131,
         "text": [
-            "$LEGS\n"
+            "You have interrupted a meeting of",
+            "The Ladies of the Rose.",
+            "",
+            "Seated around a  table sipping tea",
+            "are their Graces Khadijah of House",
+            "Hakim,  Wanda Von Halstern,  Diana",
+            "Alene,  and Kunegunda Henschel Von",
+            "Schattenberg,  and their Excellen-",
+            "cies Ecaterina Amber of Tospenwood",
+            "and Mara Tudora Kolarova."
         ]
     },
     {
         "id": 132,
         "text": [
-            "The walls of this room are all indigo.\nBefore you stands a being wrapped in a\ndazzling indigo toga...\n \n\"I am Independence yet I am  Idleness.\nI symbolize  the part  that  fuels the\nthe body with energy. What am I?\"\n"
+            "\"Begone, Oh unchivalrous cur, and",
+            "take thy stench with thee!\""
         ]
     },
     {
         "id": 133,
         "text": [
-            "$STOMACH\n"
+            "\"Begone, Oh unchivalrous cur.  No",
+            "matter how sweet thou might seem,",
+            "we know thee by thy deeds!\""
         ]
     },
     {
         "id": 134,
         "text": [
-            "You are in a yellow room.  Before you\nstands a being  dressed from  head to\ntoe in deepest yellow...\n \n\"I am Discrimination at my best,  and\nAvarice at my worst.  I symbolize the\npart of the body upon which  all  the\nrest stands.  What part am I?\"\n"
+            "\"Tales of thy  chivalrous action",
+            "towards  thy  most bitter  enemy,",
+            "Trebor,  have  reached  us.  Yet,",
+            "bring not thy foul stench amongst",
+            "women of quality!\""
         ]
     },
     {
         "id": 135,
         "text": [
-            "$FEET\n"
+            "\"Tales of  thy  chivalrous action",
+            "towards  thy  most  bitter enemy,",
+            "Trebor, have reached us, and thou",
+            "hast also bathed away  the stench",
+            "of thy past.\"",
+            "\"Advance and receive our Token of",
+            "Grace.  Keep  it on  thy  person",
+            "at all times,  for it is a Royal",
+            "Pardon for thy crimes,  and none",
+            "shall  bother  thee  whilst thee",
+            "wear it!\""
         ]
     },
     {
         "id": 136,
         "text": [
-            "Beyond this doorway lies the Great\nVoid,  the absence of all.  Only a\nGreat Seeker may venture into this\nendless emptiness.  Unless you are\nproperly  prepared,  you will  not\nsurvive.  Enter  if  you  have the\nmeans to cross the Void, otherwise\nbe content in  the Mysteries  that\nyou have learned so far.  Are  you\nready (Y/N)?\n"
+            "Herein meets",
+            "The Order of the Pelican!",
+            "Master El of the Two Knives is",
+            "addressing  the  Order.  Other",
+            "Masters  and  Mistresses here,",
+            "all  Peers of the Realm,  are:",
+            "Aravis Katheryn Delclare, Jae-",
+            "lla of Armida, Alisoun Maccoul",
+            "of Elphane,  Steffan ap Cenydd",
+            "of  Silverwing,  and  Anne  of",
+            "Hatfield."
         ]
     },
     {
         "id": 137,
         "text": [
-            "YN\n"
+            "\"Get out!  Thou hast done no",
+            "service for this Realm!\""
         ]
     },
     {
         "id": 138,
         "text": [
-            "The answer to the Greatest Question\nis also  the  simplest.  Upon  what\nPaths have you trod? Where are you?\n"
+            "Advance and  take this Cap,  that",
+            "all might know of the service  ye",
+            "have performed  for the  Realm by",
+            "restoring  the  fabled  Temple of",
+            "the  Dreampainter   to  its  full",
+            "glory!\""
         ]
     },
     {
         "id": 139,
         "text": [
-            "$TREE OF LIFE\n"
+            "Just as you are about to dive into",
+            "the  beautifully clear  water, the",
+            "lifeguard  comes  running over and",
+            "grabs  you by the  neck  and seat.",
+            "As you sail  through the  air, you",
+            "hear,  \"Begone,  thou art much too",
+            "soiled  and  stained  to  bathe in",
+            "The Royal Pool.  Do not  come back",
+            "until  thy hast  cleansed thyself!\""
         ]
     },
     {
         "id": 140,
         "text": [
-            "All the colors  of the  Universe\nradiate off  the walls and floor\nof this room.  The being here is\ndressed  in  a miparti...\n \n\"I am Knowledge.  as a Seeker of\nTruth,  I present you  with this\ngift.  With it, you can cut  the\nVeils of Illusion.  Now go.  You\nhave a destiny to fulfill!\n"
+            "Halt! No further may thee travel",
+            "unless thou hast decided to seek",
+            "thy destiny in the Amulet!"
         ]
     },
     {
         "id": 141,
         "text": [
-            "Assembled  before you  are the great\nDukes of the  Realm:  Duke Akbar ibn\nMurad  Al-ben  Muhammed  ibm  Hakim,\nDuke Siegfried  Von  Halstern,  Duke\nCariadoc of the Bow, Duke  Vissevald\nSelkriksson,  Barak  Duke  Hasdrubal\nand Duke Ronald Wilmot.\n"
+            "Is this thy wish"
         ]
     },
     {
         "id": 142,
         "text": [
-            "Duke Akbar,  as Senior Duke present,\nchallenges you:\n\n\"We note that thou comest before us\nbearing a  God-given Sword  and the\nsupport of  the Peers,  Mercenaries\nand Barons of the Realm.  Thou hast\nalso lain  the tormented  spirit of\nour late mad Overlord to rest.\"\n\"Each of  us  has  been Champion  of\nthe  Realm  and  has  won  countless\nvictories upon  the Field of  Honor.\nArt thou willing  to prove thy cour-\nage and nobility by accepting single\ncombat from  each of us here assemb-\nled?   Remember,  by  the  rules  of\nthe list, thou can use  neither  thy\nallies nor thy  Arts Magical in this\ncontest--- May God Defend The Right!\n"
+            "Then thou hast to get past us,",
+            "for we guard this Portal!"
         ]
     },
     {
         "id": 143,
         "text": [
-            "Do thee accept our challenge\n"
+            "In this study meets the Council of",
+            "Barons.  Seated  in front  of  the",
+            "fireplace  are the  most  powerful",
+            "Barons of the Realm:  Sir Patri du",
+            "Chat Gris,  Baroness  Elspeth Keyf",
+            "of Neddingham, Baron Yosef Alaric,",
+            "Baron Eofn ap Erwyn, Baron Leonard",
+            "the Younger,  and  Baron  Algernon",
+            "Hartesmond.",
+            "A Page comes running in with a cup",
+            "of Mead and a large parchment.",
+            "",
+            "\"This  document  pledges  you  to",
+            "reinstate our  traditional Rights",
+            "and Privileges stolen by Trebor!\""
         ]
     },
     {
         "id": 144,
         "text": [
-            "\"By thy willingness to accept the\nchallenge, in conditions most un-\nfavorable  to thyself,  thou hast\nproven  thy  willingness  to live\n(and die) by the Chivalric Codes!\"\nLooking around at his fellow Dukes,\nDuke  Akbar  continues, \"because of\nall that thou hast become, and  for\nthe many fine deeds  thou hast done\nfor the good of the Realm,  we have\ndecided to  offer to thee Rulership\nof all of  our  lands  and  estates\nin the hope  that thou  wilt govern\njustly, and reunite our strife-torn\nDominions.  We would have an end to\nthis constant  warring between  our\npeople and  the many  Monsters that\ndwell in the Planes adjoining ours.\nThou art our best hope to stride the\nWorlds.  Wilt thee give up thy Quest\nfor  the mystical Amulet and  accept\nthe title of Overlord  with  all its\npower and  responsibility?  Consider\nour  offer carefully,  for only once\nwill it be offered! Wilt thee assume\nnow the Throne  and take the Crown?\"\n"
+            "\"In return for your pledge, we in",
+            "turn give  our  Oath  of  Loyalty",
+            "and  support.  Take this  Ring of",
+            "Good  Counsel and  wear it  as  a",
+            "token of our mutual Fealty!\""
         ]
     },
     {
         "id": 145,
         "text": [
-            "Assume the Throne\n"
+            "\"Then to Hell with you and your",
+            "infernal arrogance,\"  proclaims",
+            "Baroness Elspeth,  as she sends",
+            "you on your way  with a wave of",
+            "her hand!"
         ]
     },
     {
         "id": 146,
         "text": [
-            "\"Then may the gods support thee in\nthy Quest.  Good luck to thee!\"\n"
+            "Your Maintenance Cap instills in",
+            "you the  knowledge  you  need to",
+            "repair the fountain!"
         ]
     },
     {
         "id": 147,
         "text": [
-            "\"Craven coward, thou shalt die like\nthe cur thou art!  To arms!!\"\n"
+            "Before you is  a small grotto,",
+            "filled with sparkling water. A",
+            "large number of clawprints can",
+            "be seen  around the pool,  but",
+            "there is no creature in sight.",
+            "You have found the Ron Wartow  Not-",
+            "Yet-Memorial Wading Pool,  which is",
+            "dedicated to the Elite who  jump to",
+            "brilliant, logical conclusions, but",
+            "alas, are wrong!  Ponder  this from",
+            "\"the Wartowliedtod\" before bathing:",
+            "\"Oh, will he ever return?      ",
+            " Will he ever return?",
+            " His fate is still unlearned!\""
         ]
     },
     {
         "id": 148,
         "text": [
-            "The assembled Peers and Commoners\nshout their approval!\n\n\"Long live The Overlord Werdna!!\"\n\n\"Vivant!! Vivant!! Vivant!!\"\nThen  a  hauntingly  familiar voice\nwhispers in your ear,\n\n\"Remember - a favor owed...someday...\nBe Seeing You! \u003cCackle\u003e \u003cCackle\u003e\"\n ** Future Historical Footnote **\n\nUnder your benign and enlightened\nRulership, the Realm will enter a\nGolden Age of Peace and Plenty.\n\nThe evil acts of the past will be\nforgiven,  and  your  people will\nsurely remember you fondly!\n\nBut even so,  as the  years pass,\nyou will always wonder...\n\n\n\n\n\n\"Have You Forgotten Something?\"\n"
+            "As you desperately paddle out of",
+            "the Pool, your hand falls upon a",
+            "Forked Stick that is floating in",
+            "the pool, apparently unharmed by",
+            "the Acid."
         ]
     },
     {
         "id": 149,
         "text": [
-            "You see an old Witch stirring a\nlarge cauldron:\n\n\"So nice of you to wander by (Heh,\nHeh, Heh), my fine fellow. Are you\nenjoying your travels? \u003cSnicker\u003e\"\n\"A man  with  your  aspirations\nshould  definitely  have some of\nmy famous  \u0027Blue Blood Special\u0027.\nIf you  have the  makings,  I\u0027ll\nbe glad to brew you a batch!\"\n"
-        ]
-    },
-    {
-        "id": 150,
-        "text": [
-            "\"Let\u0027s see now what parts\nof the recipe you have..\"\n"
+            "Before you is a small Pool of",
+            "Shimmering Liquid, surrounded",
+            "by a grove of Majestic Oaks. "
         ]
     },
     {
         "id": 151,
         "text": [
-            "You need \nYou have \nCamphor        \nRabbit\u0027s Fur   \nFe s-sub-2     \nTannic Acid    \nSpanish Unguent\na Blender      \n"
+            "You have found one of the many",
+            "majestic  fountains  that  are",
+            "scattered about the Castle.  A",
+            "sign next to this one reads:",
+            " ",
+            "\"Fountain Closed For Repairs.\"",
+            "\"   No Wading At Any Time.   \"",
+            "\"Keep Off The Grass As Well!\""
         ]
     },
     {
         "id": 152,
         "text": [
-            "\"My my! You will have to go find\nsome  more  ingredients before I\ncan help you.\"\n\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\"\n"
+            "You have found one of the many",
+            "majestic  fountains  that  are",
+            "scattered about the Castle.  A",
+            "sign next to this one reads:",
+            " ",
+            "\"Fountain Open For Public Bathing.\"",
+            "\"   Lifeguard Must Be On Duty!   \"",
+            " ",
+            "There is no lifeguard in sight..."
         ]
     },
     {
         "id": 153,
         "text": [
-            "\"Well, you have been an industr-\nious young man!  You have all of\nthe ingredients of my recipe!\n\n\"I\u0027ll be  happy to make my brew,\nbut naturally,  I will require a\ntoken of payment.  Not money, of\ncourse...just a favor at a later\ndate. \u003cCackle\u003e\"\n"
+            "As you bathe in this Pool, you feel",
+            "strangely refreshed.  You emerge in",
+            "the very pink of good health.  Your",
+            "Monster allies take one look at the",
+            "new YOU, sparkling clean,  smelling",
+            "of wild flowers and with a blush on",
+            "your cheeks, and flee in terror!!!!"
         ]
     },
     {
         "id": 154,
         "text": [
-            "Accept the deal\n"
+            "Argggghh!!  This Pool is full of",
+            "Acid, leached from the Oaks.  IT",
+            "BURNS!"
         ]
     },
     {
         "id": 155,
         "text": [
-            "\"Bubble, bubble, toil and trouble,\nCauldron boil and cauldron bubble!\"\n\n\"Oh, don\u0027t mind  the theatrics, it\nis all part of the union contract.\nWe have to keep up  our image, you\nknow.  Just hold on a minute and I\nwill get your \u0027Blue Blood Special\u0027\nout of the refrigerator...\"\n\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\"\n"
+            "As you bathe in this Pool, you are",
+            "enveloped by a feeling of forebod-",
+            "ing.  Suddenly, the weight of your",
+            "past Evil deeds descends upon your",
+            "stooped shoulders again!"
         ]
     },
     {
         "id": 156,
         "text": [
-            "Aha!  A hidden room jutting out of\nthe Donjon\u0027s  side.  What a  great\nview of the town from here. In the\nroom is a wizened old scholar...\n\"Greetings, Werdna.  I am  Master\nBertram, Curator of the Overlord\u0027s\nTreasure Room. I have an item that\nyou dearly  require.  Tell me what\nit is, and it shall be yours!\"\n"
+            "As you bathe yourself in the Pool,",
+            "it is as if the Evil of  your Soul",
+            "has been somewhat cleansed!"
         ]
     },
     {
         "id": 157,
         "text": [
-            "$MYTHRIL GAUNTLET\n$MYTHRIL GLOVE\n"
+            "A pleasant dip, but nothing seems",
+            "to have happened..."
         ]
     },
     {
         "id": 158,
         "text": [
-            "You are truly to be counted\namongst the Wise.\n"
+            "A Hoplite advances upon you. Stops.",
+            "Salutes. He yells into your  ear in",
+            "bad Attic Latin...",
+            " ",
+            "\"Halt, and give the Password, Sir!\""
         ]
     },
     {
         "id": 159,
         "text": [
-            "Guarding the  doorway  into the\nInner Sanctum  of the Temple is\nLord Hawkwind  of  Skara  Brae,\nElfin Ninja--the last member of\nthe Softalk  All-Stars.  He ob-\nserves  you with  calm disdain.\n\n\"Thou shalt not pass this way,\nthis day or ever!\"\n"
+            "$TREBOR SUX"
         ]
     },
     {
         "id": 160,
         "text": [
-            "LORD HAWKWIND noticeth it not!\n"
+            "Everywhere there is a brilliance that",
+            "is  intolerable to  look  upon.  From",
+            "somewhere comes a deep voice...",
+            " ",
+            "\"I am Attainment.  I am that  part of",
+            "the body that is above  all the rest,",
+            "yet beyond mere touch.  What am I?\"  "
         ]
     },
     {
         "id": 161,
         "text": [
-            "LORD HAWKWIND !\nLaughs\nChuckles\nSnickers\nReads \"Pikestaff\"\nAnswers His Mail\nFiles His Nails\nSends Out For Sushi\nIgnores You\nPets His Dragons\nPays For The Sushi\nFeeds Sushi To His Dragons\nPretends To Take A Nap\nReally Falls Asleep (From Boredom)\nWakes Up\nBrushes His Teeth\nBrews Tea\nOils His Blade\nSays His Morning Prayers\nPetitions To Offer You Up As A Sacrifice\nFills Out Sacrificial Order Form In Triplicate\nGets Approval For Your Sacrifice\nBinds And Gags You\nPuts You On The Sacrificial Altar\nAnoints You With Sacrificial Oils\nSacrifices You To Kadorto\n"
+            "$CRANIUM",
+            "$BRAIN"
         ]
     },
     {
         "id": 162,
         "text": [
-            "Parry \nBind  \nPlace \nAnoint\nSacrif\n"
+            "Feeling like you are floating in a",
+            "vast sky,  you enter  this room of",
+            "pure soft blue.  The being dressed",
+            "in a diaphanous blue kirtle speaks",
+            "to you...",
+            " ",
+            "\"I am Devotion.  I am also that part",
+            "of the face upon which the Moon doth",
+            "rise.  What am I?\""
         ]
     },
     {
         "id": 163,
         "text": [
-            "Kadorto  is pleased that the pious\nLord  Hawkwind  has  offered  up a\nSacrifice, but considers you to be\na very poor substitute for a Goat!\nVL\n"
+            "$LEFT CHEEK"
         ]
     },
     {
         "id": 164,
         "text": [
-            "Amid the clutter of empty Mead bot-\ntles and wine flasks  pitched up on\nthe roof of Gilgamesh\u0027s Tavern, you\ndiscover a packrat\u0027s nest.\n"
+            "Blood-red crimson is the color of this",
+            "room.  Nothing is heard,  but then the",
+            "being dressed in crimson robes  writes",
+            "in fiery letters in the air...",
+            " ",
+            "\"I am the Virtue  of Silence,  and the",
+            "Vice of  Avarice.  I am  that part  of",
+            "the face upon which the sun rises each",
+            "day.  What am I?\""
         ]
     },
     {
         "id": 165,
         "text": [
-            "Rummage in the nest\n"
+            "$RIGHT CHEEK"
         ]
     },
     {
         "id": 166,
         "text": [
-            "Trash,  trinkets, toys, tribbles,\nGreat Uncle Ted, a Black Hole, an\nold copy of  Terror of Tiny Town,\nlots of junk!\nHey, wait a minute!  A  Black Hole?\nHmm, something is pulsating within!\n"
+            "Somber is this  room.  Everywhere  a",
+            "deep violet  absorbs all.  The being",
+            "here intones...",
+            " ",
+            "\"I am Obedience, yet I also beat the",
+            "Drum of Bigotry.  I hold  the shield",
+            "that protects.  What am I?\""
         ]
     },
     {
         "id": 167,
         "text": [
-            "Reach in and grab for it\n"
+            "$LEFT ARM",
+            "$LEFT HAND"
         ]
     },
     {
         "id": 168,
         "text": [
-            "Good idea!  You could have lost\na hand that way!\n"
+            "Orange are the walls and orange is the",
+            "brigandine of the being who greets you",
+            "in this room...",
+            " ",
+            "\"I am Courage, but I am  also Cruelty.",
+            "I hold the sword, yet I can  also hold",
+            "the whip.  What am I?\""
         ]
     },
     {
         "id": 169,
         "text": [
-            "The nest has been  disturbed and\nthere is nothing  left in it but\nGreat Uncle Ted,  who always was\nthe last to leave!\n"
+            "$RIGHT ARM",
+            "$RIGHT HAND"
         ]
     },
     {
         "id": 170,
         "text": [
-            "\"Cream!  Vanishing Cream!  Get your\nVanishing Cream  here!   It\u0027s going\nfast!  Only a few  jars left!  Only\n50,000 GP a jar!   Truly the buy of\na lifetime - You\u0027ll  curse  the day\nyou didn\u0027t get some!\"\n"
+            "This entire room seems to be carved",
+            "out of a single huge slab  of clear",
+            "rose-pink quartz.  The being in the",
+            "room wears armor of the same trans-",
+            "lucent color...",
+            " ",
+            "\"I am Devotion  To Great Work,  but",
+            "as Pride I can ruin all.  Within me",
+            "beats the  great heart,  the mighty",
+            "engine.  What am I?\""
         ]
     },
     {
         "id": 171,
         "text": [
-            "Buy Cream before it vanishes\n??????????\n"
+            "$BREAST",
+            "$CHEST"
         ]
     },
     {
         "id": 172,
         "text": [
-            "In the corner are scattered some\nsmall White Spheres.   They look\nsomewhat like marbles.\n"
+            "Amber glow the walls here.  Amber too",
+            "is the houppelande of the being",
+            "waiting here...",
+            " ",
+            "\"I am Unselfishness, yet I am Lust. I",
+            "am the  foundation of  the body  upon",
+            "which the main rests.  What am I?\""
         ]
     },
     {
         "id": 173,
         "text": [
-            "Pick up a marble\n??????????\n"
+            "$HIPS"
         ]
     },
     {
         "id": 174,
         "text": [
-            "\"Psst...Hay Meester...You wanna\nbuy some you know what?  Cheap!\nOnly 100 GP!\"\n"
+            "Regalness pervades this room.  The",
+            "walls and pillars are of a violet-",
+            "purple.  The being here is swathed",
+            "in the Royal Cloth of Tyre...",
+            " ",
+            "\"I am Truthfulness on one hand, and",
+            "Falsehood on the other.  I symbolize",
+            "the parts of the body  that are its",
+            "main support.  What am I?\""
         ]
     },
     {
         "id": 175,
         "text": [
-            "Buy some \"You Know What\"\n????d?????\n"
+            "$LEGS"
         ]
     },
     {
         "id": 176,
         "text": [
-            "\"What do you seek the most,\n Oh Pilgrim?\"              \n"
+            "The walls of this room are all indigo.",
+            "Before you stands a being wrapped in a",
+            "dazzling indigo toga...",
+            " ",
+            "\"I am Independence yet I am  Idleness.",
+            "I symbolize  the part  that  fuels the",
+            "the body with energy. What am I?\""
         ]
     },
     {
         "id": 177,
         "text": [
-            "$AMULET\n"
+            "$STOMACH"
         ]
     },
     {
         "id": 178,
         "text": [
-            "Relax...Sit back...Close your eyes.\nYou are trying too hard.\n\nLet the Energies that surround you\nhere  resonate  within  your body.\nReflect upon each of the Oracle\u0027s\nvisions--one holds the answer.\n"
+            "You are in a yellow room.  Before you",
+            "stands a being  dressed from  head to",
+            "toe in deepest yellow...",
+            " ",
+            "\"I am Discrimination at my best,  and",
+            "Avarice at my worst.  I symbolize the",
+            "part of the body upon which  all  the",
+            "rest stands.  What part am I?\""
         ]
     },
     {
         "id": 179,
         "text": [
-            "You need to reflect more before you\nmay seek this Path!\n"
+            "$FEET"
         ]
     },
     {
         "id": 180,
         "text": [
-            "Before you looms the giant statue of\nthe Almighty Kadorto.   You are  not\neven as tall as his little toe!\n\nAs you crane your neck backwards and\nlook up,  you see the object of your\nlong search.  The mystical Amulet is\ndangling from the closed fist of the\nstatue!\n\"At last!\" you cry,  but your joy is\nshort-lived. There is no way that you\ncan see to reach the Amulet!\nFighting back  a growing  feeling of\ndesperation,  you try everything you\ncan think  of to get to  the Amulet.\nEvery spell you know is useless! You\nrummage  through your items,  trying\neach in turn,  hoping that  one will\nbe of aid!\n"
+            "Beyond this doorway lies the Great",
+            "Void,  the absence of all.  Only a",
+            "Great Seeker may venture into this",
+            "endless emptiness.  Unless you are",
+            "properly  prepared,  you will  not",
+            "survive.  Enter  if  you  have the",
+            "means to cross the Void, otherwise",
+            "be content in  the Mysteries  that",
+            "you have learned so far.  Are  you",
+            "ready (Y/N)?"
         ]
     },
     {
         "id": 181,
         "text": [
-            "Alas,  nothing seems to work.  the\nPriests of the Temple laugh at you\nopenly.  Says one, \"Oh fool, we of\nKadorto  let all make  attempts at\npossessing the Amulet, so sure are\nwe that only a  God could take it!\nNow begone!  Try again tomorrow!\n"
+            "YN"
         ]
     },
     {
         "id": 182,
         "text": [
-            "What  luck!  Your  Holy  Limp Wrist\nReliquary  casts  a  DIALKO  spell!\nWith  a  feeling  of  triumph,  you\nwatch as the  DIALKO takes  effect.\nThe hand of the statue softens  and\nopens, freeing the Amulet.  To your\namazement, the DIALKO spreads  out.\nThe newly  awakened God  yawns and\npeers down  at you  with a look of\nutter contempt.\n\n\"Insect!  So you want  this pretty\nbauble?  You have no idea what the\npowers of this Amulet are, or what\nits real purpose is.  Here!  Catch\nit!\"\nKadorto throws  the Amulet at you\nwith a disdainful flip of his huge\nwrist!\n"
+            "The answer to the Greatest Question",
+            "is also  the  simplest.  Upon  what",
+            "Paths have you trod? Where are you?"
         ]
     },
     {
         "id": 183,
         "text": [
-            "You reach out and catch the Amulet!\n\nYou have it in your hand!\n\nWait a moment..\n\nYou have it in your hand!\nYOUR BARE HAND!\n\n* * p o o f* *\n"
+            "$TREE OF LIFE"
         ]
     },
     {
         "id": 184,
         "text": [
-            "You reach out and catch the Amulet!\n\nYou have it in your hand!\n\nThe Mythril Gauntlet protects you\nfrom its raging energies!\n\"Hmmmm...,\" intones Kadorto, \"Think\nyou\u0027re clever, don\u0027t you?  Well, to\nkeep the Amulet,  you  will have to\ndefeat me!\"\n\n\"Tell me, are you a God?\"\nThinking quickly, you reply, \"Yes!\",\nwhich seems to be the right answer.\n\n#\"Then die like a God!\"\n"
+            "All the colors  of the  Universe",
+            "radiate off  the walls and floor",
+            "of this room.  The being here is",
+            "dressed  in  a miparti...",
+            " ",
+            "\"I am Knowledge.  as a Seeker of",
+            "Truth,  I present you  with this",
+            "gift.  With it, you can cut  the",
+            "Veils of Illusion.  Now go.  You",
+            "have a destiny to fulfill!"
         ]
     },
     {
         "id": 185,
         "text": [
-            "Kadorto looks you over closely, and\nthen declares:\n\n\"You come before Me armed with mere\ntoys!  Hah! Hah! Hah!  Back to your\nBier old fool!\"\n"
+            "Assembled  before you  are the great",
+            "Dukes of the  Realm:  Duke Akbar ibn",
+            "Murad  Al-ben  Muhammed  ibm  Hakim,",
+            "Duke Siegfried  Von  Halstern,  Duke",
+            "Cariadoc of the Bow, Duke  Vissevald",
+            "Selkriksson,  Barak  Duke  Hasdrubal",
+            "and Duke Ronald Wilmot."
         ]
     },
     {
         "id": 186,
         "text": [
-            "You draw your Green Sword  and begin\nthe battle.   Old  forgotten  powers\nawaken and the sword leaps to attack\nthe pompous Kadorto.  The sword par-\nries  thunderbolt after  thunderbolt\nwhile you bide your time looking for\nan opening...\nThere it is!  A quick  thrust to the\nankle!  Kadorto  looks  puzzled as a\nthread of green  lightning snakes up\nhis legs.  In a flash,  he becomes a\ntowering statue of green stone!\nFascinated beyond all caution,  you\nreach out  to feel the statue.  The\nentire statue crumbles to dust when\nyou touch it!   The room  is filled\nwith choking dust.   You try to run\noutside,  but  you  can\u0027t hold your\nbreath long enough.  As  you inhale\nthe dust, you hear a smug laugh and\nKadorto\u0027s voice whispers \"Gotcha!!\"\nYou feel  yourself  stretching  and\ngrowing rapidly.  You are very diz-\nzy... the room is spinning around!!\nYou sit down.   Ah, that feels much\nbetter!  You try to stand.  What???\nYou  can\u0027t move!   You can  see and\nhear, but you cannot move!\nThe frightened Priests return in the\nmorning and find  that a miracle has\nhappened!  A somewhat different Kad-\norto, all green, sits on the Throne,\nthe Amulet clutched in his fist!\nThere you sit, playing God, aware\nof  each  slow  second\u0027s passing,\nhoping that some greedy fool will\ncome and try to steal the Amulet,\nreleasing  you.  Centuries  pass,\nand you realize that you got what\nyou always wanted,  the adulation\nand worship of  many people.  How\nironic...\n#But you always  have this nagging\ndoubt.. You always wonder..\n#Have You Forgotten Something?\n"
+            "Duke Akbar,  as Senior Duke present,",
+            "challenges you:",
+            "",
+            "\"We note that thou comest before us",
+            "bearing a  God-given Sword  and the",
+            "support of  the Peers,  Mercenaries",
+            "and Barons of the Realm.  Thou hast",
+            "also lain  the tormented  spirit of",
+            "our late mad Overlord to rest.\"",
+            "\"Each of  us  has  been Champion  of",
+            "the  Realm  and  has  won  countless",
+            "victories upon  the Field of  Honor.",
+            "Art thou willing  to prove thy cour-",
+            "age and nobility by accepting single",
+            "combat from  each of us here assemb-",
+            "led?   Remember,  by  the  rules  of",
+            "the list, thou can use  neither  thy",
+            "allies nor thy  Arts Magical in this",
+            "contest--- May God Defend The Right!"
         ]
     },
     {
         "id": 187,
         "text": [
-            "You draw your Blue Sword and begin the\nbattle.  Ancient forces are pulled in-\nto the battle,  and your  sword begins\nto glow fiercely.  Kadorto lunges down\nat you, but you leap nimbly aside. His\nblow makes rubble of the marble floor!\nFaster and faster  your spinning blade\nweaves a deadly pattern in your hands!\nYou leap  high onto  the  foot of  the\nThrone.   Kadorto  is just  recovering\nfrom  his  attack  and  is still  bent\nover.  On its own volition,  the sword\nlicks out and touches Kadorto\u0027s chest!\nThe sword scores a Critical Hit!\nKadorto utters a strange gurgle, some-\nwhat like a laugh, then with a shimmer\nof distorting light, he vanishes!\nThe Priests enter and proclaim you the\nnew God!  \"What size  and shape  would\nyou like, Oh God?\", they ask.  \"My own\nwill be sufficient!\", you reply.   The\nPriests are not overly impressed.\n\"How quaint,\" says one, glancing up at\nthe  empty  Throne,  \"At least Kadorto\nknew how to look like a God.  Well, we\nwill do  the best  with what  we have.\nWait  until you  see the new  robes we\nwill design  for you,  the  Ceremonies\nand Processionals!  We will  take good\ncare of  you,  Oh Werdna!  Your  every\nwish is our command!\"\nThe years  pass quickly as  you settle\ninto the God business.  Using the pow-\ner of the Amulet, you raise huge temp-\nles, spacious retreats,  and luxurious\nmonasteries for your loyal Priests.\nOh, the people  grumble under the bur-\nden of their tithing.  Perhaps you are\npushing things  a little.  \"But no,\" a\npriest whispers  into your ear, \"Yours\nis the greater glory.  The people love\nYou  for it, and You must guide them.\"\n#But yet,  even though  you are a God,\nnow and then, you wonder...\n#Have You Forgotten Something?\n"
+            "\"By thy willingness to accept the",
+            "challenge, in conditions most un-",
+            "favorable  to thyself,  thou hast",
+            "proven  thy  willingness  to live",
+            "(and die) by the Chivalric Codes!\"",
+            "Looking around at his fellow Dukes,",
+            "Duke  Akbar  continues, \"because of",
+            "all that thou hast become, and  for",
+            "the many fine deeds  thou hast done",
+            "for the good of the Realm,  we have",
+            "decided to  offer to thee Rulership",
+            "of all of  our  lands  and  estates",
+            "in the hope  that thou  wilt govern",
+            "justly, and reunite our strife-torn",
+            "Dominions.  We would have an end to",
+            "this constant  warring between  our",
+            "people and  the many  Monsters that",
+            "dwell in the Planes adjoining ours.",
+            "Thou art our best hope to stride the",
+            "Worlds.  Wilt thee give up thy Quest",
+            "for  the mystical Amulet and  accept",
+            "the title of Overlord  with  all its",
+            "power and  responsibility?  Consider",
+            "our  offer carefully,  for only once",
+            "will it be offered! Wilt thee assume",
+            "now the Throne  and take the Crown?\""
         ]
     },
     {
         "id": 188,
         "text": [
-            "You draw your Dragon\u0027s Claw.   It hums\nwith anticipation.   Kadorto laughs at\nyou, \"What will you do with that?\"\nActually,  you are not quite sure, but\nit  has  sustained  you  through  many\ntrials,  lending you its  strength and\nenergy.  Kadorto  sends down  a pillar\nof flame...  and the blade absorbs it!\nHe throws a bolt of lightning, only to\nsee the blade cleave it in half!\nYou feel filled with energy!!  You let\nfly with a mighty blow, and your sword\nstrikes true,  slicing  deep into  the\nbig toe of Kadorto!  You feel his life\nforce  flowing  into  you through  the\nsword.  As it does,  you begin to grow\nand he begins to shrink!  Finally, you\nare the tall God,  and he is  the puny\nmortal.  \"Thank you, free at last\", he\ncroaks as he expires!\nYou laugh as the Priests scurry around\nremoving the  remains.   Finally, they\nall assemble  in front of you, abasing\nthemselves  and  raising  their voices\nupward in supplication:\n\"All pray to you, Oh Great God Werdna.\nWe rejoice the  weak  pacifist Kadorto\nhas been defeated! Take  up the sacred\nAmulet.  Lead us,  oh mighty one, into\nglorious battle.  Make the world trem-\nble at  your every step!   Let us fill\nthe  altars with  sacrifices,  and the\ntemple with gold and slaves!\"\nThe years  pass by in a  blur of fire,\nblood and destruction.  Large areas of\nthe world lie  desolate.  Your Priests\nbloat you with  sacrifices and praise.\nAfter this,  there are other Planes to\nconquer, other Planes whose energy can\nfeed your  lust for  power!  You  have\nall your desires, all your dreams ful-\nfilled!  But yet......every  once in a\nlong while, you wonder...\n#Have You Forgotten Something?\n"
+            "\"Then may the gods support thee in",
+            "thy Quest.  Good luck to thee!\""
         ]
     },
     {
         "id": 189,
         "text": [
-            "You draw  your Dagger  of Clear Light,\nand face Kadorto unafraid, for you are\nwhole and secure  in your Knowledge of\nThe Tree  of Life.   Kadorto stops his\nlaughing when he sees your blade.\n#\"No, no, not that!\", he cries!\nThe Kris blazes  forth.  In its  clear\npenetrating light,  no lie or illusion\ncan remain.   Kadorto\u0027s motions become\njerky, and smoke begins to pour out of\nhis knees  and elbows.  His head  pops\nopen,  and a singed high Priest climbs\nout of a concealed control cabin.\nNow you see the real truth! Kadorto is\na fake,  an invention of  the Priests,\na cunning  device to  perpetuate their\nsocial position  and control over men!\nYou laugh at the ridiculous sight of a\nhigh Priest with his robes smoldering.\nIt feels good to be alive.You take out\nthe Amulet,  and  in the  light of the\nKris,  you see it  for what  it really\nis: a dangerous trap for those unwary,\na joke  of the Gods.\nFor it  is  neither  Good or Evil, but\nfashioned out of  pure chaos.  You vow\nto \"return it\" to its Makers,  and you\nare sure the  Kris of Truth  will  aid\nyou.   But that can wait for tomorrow.\nToday is to be enjoyed!\nOutside,  into the beautiful sunshine,\nyou  walk.  Feeling  at last  free and\nalive. You have returned to the world.\nYou  look back  at  the  temple for a\nmoment, and wonder...\n#Have You Forgotten Something?\nYou laugh,  for you know that you have\nnot.  You are master of your fate, and\nthe winding paths of the  Tree Of Life\nilluminate  the shape of your destiny!\n* * * Congratulations * * *\n\nYou have returned.  You have found the\npath of fulfillment! Give us a call at\n(315)393-6633 and tell us about it!\n\nThe authors of this program would like\nto congratulate you on your skill.  In\nrecognition of your ability, we confer\nupon you the rank of:\n\nWizardry Grandmaster Adventurer\n#PS: Have You Forgotten Something?\n#PPS: Don\u0027t worry, you haven\u0027t.\nPPPS: Don\u0027t tell anyone else how to\nwin.  Let it be as much a challenge\nto them as it was to you!\nPPPPS: This really is\nThe End Of The Game!\n#PPPPPS: Trust Us!\n#PPPPPPS: Really!\n#PPPPPPPS: You have done it all!\n#\"Be Seeing You! \u003cgrin\u003e\"\n"
+            "\"Craven coward, thou shalt die like",
+            "the cur thou art!  To arms!!\""
+        ]
+    },
+    {
+        "id": 190,
+        "text": [
+            "The assembled Peers and Commoners",
+            "shout their approval!",
+            "",
+            "\"Long live The Overlord Werdna!!\"",
+            "",
+            "\"Vivant!! Vivant!! Vivant!!\"",
+            "Then  a  hauntingly  familiar voice",
+            "whispers in your ear,",
+            "",
+            "\"Remember - a favor owed...someday...",
+            "Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\"",
+            " ** Future Historical Footnote **",
+            "",
+            "Under your benign and enlightened",
+            "Rulership, the Realm will enter a",
+            "Golden Age of Peace and Plenty.",
+            "",
+            "The evil acts of the past will be",
+            "forgiven,  and  your  people will",
+            "surely remember you fondly!",
+            "",
+            "But even so,  as the  years pass,",
+            "you will always wonder...",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\"Have You Forgotten Something?\""
+        ]
+    },
+    {
+        "id": 191,
+        "text": [
+            "You see an old Witch stirring a",
+            "large cauldron:",
+            "",
+            "\"So nice of you to wander by (Heh,",
+            "Heh, Heh), my fine fellow. Are you",
+            "enjoying your travels? \u003cSnicker\u003e\"",
+            "\"A man  with  your  aspirations",
+            "should  definitely  have some of",
+            "my famous  \u0027Blue Blood Special\u0027.",
+            "If you  have the  makings,  I\u0027ll",
+            "be glad to brew you a batch!\""
+        ]
+    },
+    {
+        "id": 192,
+        "text": [
+            "\"Let\u0027s see now what parts",
+            "of the recipe you have..\""
+        ]
+    },
+    {
+        "id": 193,
+        "text": [
+            "You need ^",
+            "You have ^",
+            "Camphor        ",
+            "Rabbit\u0027s Fur   ",
+            "Fe s-sub-2     ",
+            "Tannic Acid    ",
+            "Spanish Unguent",
+            "a Blender      "
+        ]
+    },
+    {
+        "id": 194,
+        "text": [
+            "\"My my! You will have to go find",
+            "some  more  ingredients before I",
+            "can help you.\"",
+            "\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\""
+        ]
+    },
+    {
+        "id": 195,
+        "text": [
+            "\"Well, you have been an industr-",
+            "ious young man!  You have all of",
+            "the ingredients of my recipe!",
+            "",
+            "\"I\u0027ll be  happy to make my brew,",
+            "but naturally,  I will require a",
+            "token of payment.  Not money, of",
+            "course...just a favor at a later",
+            "date. \u003cCackle\u003e\""
+        ]
+    },
+    {
+        "id": 196,
+        "text": [
+            "\"Bubble, bubble, toil and trouble,",
+            "Cauldron boil and cauldron bubble!\"",
+            "",
+            "\"Oh, don\u0027t mind  the theatrics, it",
+            "is all part of the union contract.",
+            "We have to keep up  our image, you",
+            "know.  Just hold on a minute and I",
+            "will get your \u0027Blue Blood Special\u0027",
+            "out of the refrigerator...\"",
+            "\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\""
+        ]
+    },
+    {
+        "id": 197,
+        "text": [
+            "Aha!  A hidden room jutting out of",
+            "the Donjon\u0027s  side.  What a  great",
+            "view of the town from here. In the",
+            "room is a wizened old scholar...",
+            "\"Greetings, Werdna.  I am  Master",
+            "Bertram, Curator of the Overlord\u0027s",
+            "Treasure Room. I have an item that",
+            "you dearly  require.  Tell me what",
+            "it is, and it shall be yours!\""
+        ]
+    },
+    {
+        "id": 198,
+        "text": [
+            "$MYTHRIL GAUNTLET",
+            "$MYTHRIL GLOVE"
+        ]
+    },
+    {
+        "id": 199,
+        "text": [
+            "You are truly to be counted",
+            "amongst the Wise."
+        ]
+    },
+    {
+        "id": 200,
+        "text": [
+            "Guarding the  doorway  into the",
+            "Inner Sanctum  of the Temple is",
+            "Lord Hawkwind  of  Skara  Brae,",
+            "Elfin Ninja--the last member of",
+            "the Softalk  All-Stars.  He ob-",
+            "serves  you with  calm disdain.",
+            "",
+            "\"Thou shalt not pass this way,",
+            "this day or ever!\""
+        ]
+    },
+    {
+        "id": 201,
+        "text": [
+            "LORD HAWKWIND ^!",
+            "Laughs",
+            "Chuckles",
+            "Snickers",
+            "Reads \"Pikestaff\"",
+            "Answers His Mail",
+            "Files His Nails",
+            "Sends Out For Sushi",
+            "Ignores You",
+            "Pets His Dragons",
+            "Pays For The Sushi",
+            "Feeds Sushi To His Dragons",
+            "Pretends To Take A Nap",
+            "Really Falls Asleep (From Boredom)",
+            "Wakes Up",
+            "Brushes His Teeth",
+            "Brews Tea",
+            "Oils His Blade",
+            "Says His Morning Prayers",
+            "Petitions To Offer You Up As A Sacrifice",
+            "Fills Out Sacrificial Order Form In Triplicate",
+            "Gets Approval For Your Sacrifice",
+            "Binds And Gags You",
+            "Puts You On The Sacrificial Altar",
+            "Anoints You With Sacrificial Oils",
+            "Sacrifices You To Kadorto"
+        ]
+    },
+    {
+        "id": 202,
+        "text": [
+            "Parry ",
+            "Bind  ",
+            "Place ",
+            "Anoint",
+            "Sacrif"
+        ]
+    },
+    {
+        "id": 203,
+        "text": [
+            "Kadorto  is pleased that the pious",
+            "Lord  Hawkwind  has  offered  up a",
+            "Sacrifice, but considers you to be",
+            "a very poor substitute for a Goat!",
+            "VL"
+        ]
+    },
+    {
+        "id": 204,
+        "text": [
+            "Amid the clutter of empty Mead bot-",
+            "tles and wine flasks  pitched up on",
+            "the roof of Gilgamesh\u0027s Tavern, you",
+            "discover a packrat\u0027s nest."
+        ]
+    },
+    {
+        "id": 205,
+        "text": [
+            "Trash,  trinkets, toys, tribbles,",
+            "Great Uncle Ted, a Black Hole, an",
+            "old copy of  Terror of Tiny Town,",
+            "lots of junk!",
+            "Hey, wait a minute!  A  Black Hole?",
+            "Hmm, something is pulsating within!"
+        ]
+    },
+    {
+        "id": 206,
+        "text": [
+            "Good idea!  You could have lost",
+            "a hand that way!"
+        ]
+    },
+    {
+        "id": 207,
+        "text": [
+            "The nest has been  disturbed and",
+            "there is nothing  left in it but",
+            "Great Uncle Ted,  who always was",
+            "the last to leave!"
+        ]
+    },
+    {
+        "id": 208,
+        "text": [
+            "\"Cream!  Vanishing Cream!  Get your",
+            "Vanishing Cream  here!   It\u0027s going",
+            "fast!  Only a few  jars left!  Only",
+            "50,000 GP a jar!   Truly the buy of",
+            "a lifetime - You\u0027ll  curse  the day",
+            "you didn\u0027t get some!\""
+        ]
+    },
+    {
+        "id": 210,
+        "text": [
+            "In the corner are scattered some",
+            "small White Spheres.   They look",
+            "somewhat like marbles."
+        ]
+    },
+    {
+        "id": 212,
+        "text": [
+            "\"Psst...Hay Meester...You wanna",
+            "buy some you know what?  Cheap!",
+            "Only 100 GP!\""
+        ]
+    },
+    {
+        "id": 214,
+        "text": [
+            "\"What do you seek the most,",
+            " Oh Pilgrim?\"              "
+        ]
+    },
+    {
+        "id": 215,
+        "text": [
+            "$AMULET"
+        ]
+    },
+    {
+        "id": 216,
+        "text": [
+            "Relax...Sit back...Close your eyes.",
+            "You are trying too hard.",
+            "",
+            "Let the Energies that surround you",
+            "here  resonate  within  your body.",
+            "Reflect upon each of the Oracle\u0027s",
+            "visions--one holds the answer."
+        ]
+    },
+    {
+        "id": 217,
+        "text": [
+            "You need to reflect more before you",
+            "may seek this Path!"
+        ]
+    },
+    {
+        "id": 220,
+        "text": [
+            "Before you looms the giant statue of",
+            "the Almighty Kadorto.   You are  not",
+            "even as tall as his little toe!",
+            "",
+            "As you crane your neck backwards and",
+            "look up,  you see the object of your",
+            "long search.  The mystical Amulet is",
+            "dangling from the closed fist of the",
+            "statue!",
+            "\"At last!\" you cry,  but your joy is",
+            "short-lived. There is no way that you",
+            "can see to reach the Amulet!",
+            "Fighting back  a growing  feeling of",
+            "desperation,  you try everything you",
+            "can think  of to get to  the Amulet.",
+            "Every spell you know is useless! You",
+            "rummage  through your items,  trying",
+            "each in turn,  hoping that  one will",
+            "be of aid!"
+        ]
+    },
+    {
+        "id": 221,
+        "text": [
+            "Alas,  nothing seems to work.  the",
+            "Priests of the Temple laugh at you",
+            "openly.  Says one, \"Oh fool, we of",
+            "Kadorto  let all make  attempts at",
+            "possessing the Amulet, so sure are",
+            "we that only a  God could take it!",
+            "Now begone!  Try again tomorrow!"
+        ]
+    },
+    {
+        "id": 222,
+        "text": [
+            "What  luck!  Your  Holy  Limp Wrist",
+            "Reliquary  casts  a  DIALKO  spell!",
+            "With  a  feeling  of  triumph,  you",
+            "watch as the  DIALKO takes  effect.",
+            "The hand of the statue softens  and",
+            "opens, freeing the Amulet.  To your",
+            "amazement, the DIALKO spreads  out.",
+            "The newly  awakened God  yawns and",
+            "peers down  at you  with a look of",
+            "utter contempt.",
+            "",
+            "\"Insect!  So you want  this pretty",
+            "bauble?  You have no idea what the",
+            "powers of this Amulet are, or what",
+            "its real purpose is.  Here!  Catch",
+            "it!\"",
+            "Kadorto throws  the Amulet at you",
+            "with a disdainful flip of his huge",
+            "wrist!"
+        ]
+    },
+    {
+        "id": 223,
+        "text": [
+            "You reach out and catch the Amulet!",
+            "",
+            "You have it in your hand!",
+            "",
+            "Wait a moment..",
+            "",
+            "You have it in your hand!",
+            "YOUR BARE HAND!",
+            "",
+            "* * p o o f* *"
+        ]
+    },
+    {
+        "id": 224,
+        "text": [
+            "You reach out and catch the Amulet!",
+            "",
+            "You have it in your hand!",
+            "",
+            "The Mythril Gauntlet protects you",
+            "from its raging energies!",
+            "\"Hmmmm...,\" intones Kadorto, \"Think",
+            "you\u0027re clever, don\u0027t you?  Well, to",
+            "keep the Amulet,  you  will have to",
+            "defeat me!\"",
+            "",
+            "\"Tell me, are you a God?\"",
+            "Thinking quickly, you reply, \"Yes!\",",
+            "which seems to be the right answer.",
+            "",
+            "#\"Then die like a God!\""
+        ]
+    },
+    {
+        "id": 225,
+        "text": [
+            "Kadorto looks you over closely, and",
+            "then declares:",
+            "",
+            "\"You come before Me armed with mere",
+            "toys!  Hah! Hah! Hah!  Back to your",
+            "Bier old fool!\""
+        ]
+    },
+    {
+        "id": 226,
+        "text": [
+            "You draw your Green Sword  and begin",
+            "the battle.   Old  forgotten  powers",
+            "awaken and the sword leaps to attack",
+            "the pompous Kadorto.  The sword par-",
+            "ries  thunderbolt after  thunderbolt",
+            "while you bide your time looking for",
+            "an opening...",
+            "There it is!  A quick  thrust to the",
+            "ankle!  Kadorto  looks  puzzled as a",
+            "thread of green  lightning snakes up",
+            "his legs.  In a flash,  he becomes a",
+            "towering statue of green stone!",
+            "Fascinated beyond all caution,  you",
+            "reach out  to feel the statue.  The",
+            "entire statue crumbles to dust when",
+            "you touch it!   The room  is filled",
+            "with choking dust.   You try to run",
+            "outside,  but  you  can\u0027t hold your",
+            "breath long enough.  As  you inhale",
+            "the dust, you hear a smug laugh and",
+            "Kadorto\u0027s voice whispers \"Gotcha!!\"",
+            "You feel  yourself  stretching  and",
+            "growing rapidly.  You are very diz-",
+            "zy... the room is spinning around!!",
+            "You sit down.   Ah, that feels much",
+            "better!  You try to stand.  What???",
+            "You  can\u0027t move!   You can  see and",
+            "hear, but you cannot move!",
+            "The frightened Priests return in the",
+            "morning and find  that a miracle has",
+            "happened!  A somewhat different Kad-",
+            "orto, all green, sits on the Throne,",
+            "the Amulet clutched in his fist!",
+            "There you sit, playing God, aware",
+            "of  each  slow  second\u0027s passing,",
+            "hoping that some greedy fool will",
+            "come and try to steal the Amulet,",
+            "releasing  you.  Centuries  pass,",
+            "and you realize that you got what",
+            "you always wanted,  the adulation",
+            "and worship of  many people.  How",
+            "ironic...",
+            "#But you always  have this nagging",
+            "doubt.. You always wonder..",
+            "#Have You Forgotten Something?"
+        ]
+    },
+    {
+        "id": 227,
+        "text": [
+            "You draw your Blue Sword and begin the",
+            "battle.  Ancient forces are pulled in-",
+            "to the battle,  and your  sword begins",
+            "to glow fiercely.  Kadorto lunges down",
+            "at you, but you leap nimbly aside. His",
+            "blow makes rubble of the marble floor!",
+            "Faster and faster  your spinning blade",
+            "weaves a deadly pattern in your hands!",
+            "You leap  high onto  the  foot of  the",
+            "Throne.   Kadorto  is just  recovering",
+            "from  his  attack  and  is still  bent",
+            "over.  On its own volition,  the sword",
+            "licks out and touches Kadorto\u0027s chest!",
+            "The sword scores a Critical Hit!",
+            "Kadorto utters a strange gurgle, some-",
+            "what like a laugh, then with a shimmer",
+            "of distorting light, he vanishes!",
+            "The Priests enter and proclaim you the",
+            "new God!  \"What size  and shape  would",
+            "you like, Oh God?\", they ask.  \"My own",
+            "will be sufficient!\", you reply.   The",
+            "Priests are not overly impressed.",
+            "\"How quaint,\" says one, glancing up at",
+            "the  empty  Throne,  \"At least Kadorto",
+            "knew how to look like a God.  Well, we",
+            "will do  the best  with what  we have.",
+            "Wait  until you  see the new  robes we",
+            "will design  for you,  the  Ceremonies",
+            "and Processionals!  We will  take good",
+            "care of  you,  Oh Werdna!  Your  every",
+            "wish is our command!\"",
+            "The years  pass quickly as  you settle",
+            "into the God business.  Using the pow-",
+            "er of the Amulet, you raise huge temp-",
+            "les, spacious retreats,  and luxurious",
+            "monasteries for your loyal Priests.",
+            "Oh, the people  grumble under the bur-",
+            "den of their tithing.  Perhaps you are",
+            "pushing things  a little.  \"But no,\" a",
+            "priest whispers  into your ear, \"Yours",
+            "is the greater glory.  The people love",
+            "You  for it, and You must guide them.\"",
+            "#But yet,  even though  you are a God,",
+            "now and then, you wonder...",
+            "#Have You Forgotten Something?"
+        ]
+    },
+    {
+        "id": 228,
+        "text": [
+            "You draw your Dragon\u0027s Claw.   It hums",
+            "with anticipation.   Kadorto laughs at",
+            "you, \"What will you do with that?\"",
+            "Actually,  you are not quite sure, but",
+            "it  has  sustained  you  through  many",
+            "trials,  lending you its  strength and",
+            "energy.  Kadorto  sends down  a pillar",
+            "of flame...  and the blade absorbs it!",
+            "He throws a bolt of lightning, only to",
+            "see the blade cleave it in half!",
+            "You feel filled with energy!!  You let",
+            "fly with a mighty blow, and your sword",
+            "strikes true,  slicing  deep into  the",
+            "big toe of Kadorto!  You feel his life",
+            "force  flowing  into  you through  the",
+            "sword.  As it does,  you begin to grow",
+            "and he begins to shrink!  Finally, you",
+            "are the tall God,  and he is  the puny",
+            "mortal.  \"Thank you, free at last\", he",
+            "croaks as he expires!",
+            "You laugh as the Priests scurry around",
+            "removing the  remains.   Finally, they",
+            "all assemble  in front of you, abasing",
+            "themselves  and  raising  their voices",
+            "upward in supplication:",
+            "\"All pray to you, Oh Great God Werdna.",
+            "We rejoice the  weak  pacifist Kadorto",
+            "has been defeated! Take  up the sacred",
+            "Amulet.  Lead us,  oh mighty one, into",
+            "glorious battle.  Make the world trem-",
+            "ble at  your every step!   Let us fill",
+            "the  altars with  sacrifices,  and the",
+            "temple with gold and slaves!\"",
+            "The years  pass by in a  blur of fire,",
+            "blood and destruction.  Large areas of",
+            "the world lie  desolate.  Your Priests",
+            "bloat you with  sacrifices and praise.",
+            "After this,  there are other Planes to",
+            "conquer, other Planes whose energy can",
+            "feed your  lust for  power!  You  have",
+            "all your desires, all your dreams ful-",
+            "filled!  But yet......every  once in a",
+            "long while, you wonder...",
+            "#Have You Forgotten Something?"
+        ]
+    },
+    {
+        "id": 229,
+        "text": [
+            "You draw  your Dagger  of Clear Light,",
+            "and face Kadorto unafraid, for you are",
+            "whole and secure  in your Knowledge of",
+            "The Tree  of Life.   Kadorto stops his",
+            "laughing when he sees your blade.",
+            "#\"No, no, not that!\", he cries!",
+            "The Kris blazes  forth.  In its  clear",
+            "penetrating light,  no lie or illusion",
+            "can remain.   Kadorto\u0027s motions become",
+            "jerky, and smoke begins to pour out of",
+            "his knees  and elbows.  His head  pops",
+            "open,  and a singed high Priest climbs",
+            "out of a concealed control cabin.",
+            "Now you see the real truth! Kadorto is",
+            "a fake,  an invention of  the Priests,",
+            "a cunning  device to  perpetuate their",
+            "social position  and control over men!",
+            "You laugh at the ridiculous sight of a",
+            "high Priest with his robes smoldering.",
+            "It feels good to be alive.You take out",
+            "the Amulet,  and  in the  light of the",
+            "Kris,  you see it  for what  it really",
+            "is: a dangerous trap for those unwary,",
+            "a joke  of the Gods.",
+            "For it  is  neither  Good or Evil, but",
+            "fashioned out of  pure chaos.  You vow",
+            "to \"return it\" to its Makers,  and you",
+            "are sure the  Kris of Truth  will  aid",
+            "you.   But that can wait for tomorrow.",
+            "Today is to be enjoyed!",
+            "Outside,  into the beautiful sunshine,",
+            "you  walk.  Feeling  at last  free and",
+            "alive. You have returned to the world.",
+            "You  look back  at  the  temple for a",
+            "moment, and wonder...",
+            "#Have You Forgotten Something?",
+            "You laugh,  for you know that you have",
+            "not.  You are master of your fate, and",
+            "the winding paths of the  Tree Of Life",
+            "illuminate  the shape of your destiny!",
+            "* * * Congratulations * * *",
+            "",
+            "You have returned.  You have found the",
+            "path of fulfillment! Give us a call at",
+            "(315)393-6633 and tell us about it!",
+            "",
+            "The authors of this program would like",
+            "to congratulate you on your skill.  In",
+            "recognition of your ability, we confer",
+            "upon you the rank of:",
+            "",
+            "Wizardry Grandmaster Adventurer",
+            "#PS: Have You Forgotten Something?",
+            "#PPS: Don\u0027t worry, you haven\u0027t.",
+            "PPPS: Don\u0027t tell anyone else how to",
+            "win.  Let it be as much a challenge",
+            "to them as it was to you!",
+            "PPPPS: This really is",
+            "The End Of The Game!",
+            "#PPPPPS: Trust Us!",
+            "#PPPPPPS: Really!",
+            "#PPPPPPPS: You have done it all!",
+            "#\"Be Seeing You! \u003cgrin\u003e\""
+        ]
+    },
+    {
+        "id": 230,
+        "text": [
+            "",
+            "Wizardry Grandmaster Adventurer",
+            "#PS: Have You Forgotten Something?",
+            "#PPS: Don\u0027t worry, you haven\u0027t.",
+            "PPPS: Don\u0027t tell anyone else how to",
+            "win.  Let it be as much a challenge",
+            "to them as it was to you!",
+            "PPPPS: This really is",
+            "The End Of The Game!",
+            "#PPPPPS: Trust Us!",
+            "#PPPPPPS: Really!",
+            "#PPPPPPPS: You have done it all!",
+            "#\"Be Seeing You! \u003cgrin\u003e\""
+        ]
+    },
+    {
+        "id": 231,
+        "text": [
+            "* * * Congratulations * * *",
+            "",
+            "You have completed",
+            "#The  Return  Of  Werdna!",
+            "The authors of this program would like",
+            "to congratulate you on your skill.  In",
+            "recognition of your ability, we confer",
+            "upon you the rank of:",
+            "",
+            "Wizardry Master Adventurer",
+            "We hope you are satisfied with",
+            "your fate. If not, then consid-",
+            "er that anything is possible...",
+            "#...Even if highly improbable!",
+            "It is those \"what if\" nexuses",
+            "that  change  our  destinies.",
+            "Freedom  of choice  is one of",
+            "the great gifts of Lord Maya!",
+            "Suppose  you  had  chosen  to",
+            "take  a  different  Item,  or",
+            "tread yet another  Path?  How",
+            "altered  would be  your fate?",
+            "Go and find your Dreams!",
+            "But remember to only seek",
+            "what you will be happy to",
+            "find! \u003cgrin\u003e",
+            "#Be Seeing You!"
         ]
     }
+
 ]

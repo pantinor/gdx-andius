@@ -1,6 +1,7 @@
 package andius;
 
 import andius.objects.Dice;
+import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Reward;
@@ -83,7 +84,9 @@ public class WizardryData {
     private static final String WER_CASTLE_2 = "0000000000F80000000000FE5000000005CC5000540505BE00000000000300001400000C0000140000A20000540500010000584501A10000004000A30000544601DE0000140000070000580500D80000040000DE0000400400C600004004001E0000400400015000000005CC5000000005DC0000000000C80000000000DC0000000000F81001000011F90000041000060000041000B90000401000B60000041000EC0000140000D800000450040D00000450046400004012008D0000041100000000000000030000000000000000401A00CB0000401A000F0000000000DA1001000011010000000000A40000000000BA0000000000A25000000005C35000540505B20000000000000000140000B20000140000000000540500A20000584501010000004000DC0000544601A80000140000F80000580500DE0000000000A20000400400DE0000400400BB0000400400DC5000000005105000000005CD0000000000A10000000000BE0000000000020000000000A64400004004A20000010400010000010400000000100400000000010400000000050000010000011401000000011401A60000900400CD0000410400000000000000010000000000200000900600000000900600DA0000000000004400004004BE0000000000060000000000C6000000AA1280045B00000000128014CC000000C50000D00000009001000200C600BEC12100BEC100003820AA003ED0DB000210DA003EC0040038C0A10038D0BE12BEA4F2000000C61280042E0000505440444444444444444404A4000A00000000A0004A04FF404444444404FF40A4C04A00F4FFFF740C4A04440400F4FFFF4444400404000040F4FF04404004040000F4FFFF044040040400002444444044400404000084000074404004040000040000C449400404000040040044444B0404000054000004404004040000144444004040040400003400000440400404000040646704404004440400406460444440A4C04A00040000A40C4A04FF404444444404FF40A4000A00B00000A0004A404444444444444444048028B21BBBBB01900000000000002700000012000000010000000000FEFFFEFFFFFF0000000000000000010000000100FFFF7D00000000008C008F00D801D901000000000000000000000000FFFF010027000C00E2877E87360143015802580274870000000000000000000000000100000000000000000001000000000000000000010000000000";
     private static final String WER_CASTLE_3 = "0000000000F80000000000FE0000000000CC0000540500BE00000000000300009406000C0000140000A20000580500010000004001A10000004006A30000000001DE0000000000070000000000D80000000000DE0000000000C600000000001E0000000000010000000000CC0000000000DC0000000000C80000000000DC0000000000F80000000000F90000041000060000041000B90000401100B60000041100EC0000000000D800000040040D00000000086400000000008D0000000000000000000000030000000000000000000000CB00000000000F0000000000DA0000000000010000000000A40000000000BA0000000000A20000000000C30000540500B20000000000000000940600B20000140000000000580500A20000004001010000004002DC0000000005A80000000000F80000000000DE0000000000A20000000000DE0000000000BB0000000000DC0000000000100000000000CD0000000000A10000000000BE0000000000020000000000A60000000000A20000010400010000010400000000500400000000410400000000000000010000001001000000000007A60000000000CD0000000000000000000000010000000000200000000000000000000000DA0000000000000000000000BE0000000000060000000000C6000000AA0000005B00000000003E10CC003E00C50038D000003E9001000200C600BEC12100BEC100003820AA003ED0DB000010DA0000C0040000C0A10000D0BE0000A0F2000000C60000002E000050540000000000000000000000880000000000008800802B080000000080B20800880000000000008800000000000000040000000000000000300000000000000000600050000000000000001999990000000000000079000029000000000000090000C9ED000000000090090099000000000000F900000900000000000080999900000000000000000000000000000000000000000000000000000000000000000000880000000000008800802B080000000080A208008800000000000088000000000000000000000080B1BB2B22BB5BBB000000000000FEFFE07400001500270000000000FEFFFEFF00000000C6000000000000000000E701C80000007E000100FFFFFEFFE601E001B9000100C500CC000000FFFF1A8758020C009A020C00010027004F0058025802370101000A0039010000000000000100000000000000000001000000000000000000010000000000";
     private static final String WER_LVL_11 = "0000000000F80050515101FE0005040404CC40A496A201BE10010000000344001404500C1004411014A20010000400010000280000A10509411490A35010000005DE5010000005070909811490D80000280000DE0010000400C610044110141E4400140450011001000000CC40A496A501DC0005040404C80000000000DC0010142804F80021281418F94054455515061051455515B94450114505B61444555541EC1454554541D814544545410D11510145116421620145218D1151014511001454454541031454554541001444555541CB44501145050F1051455515DA4054455515010021281818A40010142804BA0050515501A20005040404C340A495A201B21001000000004400140450B21004411014000010000400A20000280000010909811490DC5010000005A85010000005F80505411490DE0000180000A20010000400DE1004411014BB4400140450DC10010000001040A496A601CD0005040404A10050515501BE0000000000020004050501A64004050505A21055515505014454515505001154445141000551555550000555555150010555515150004454405144A68854405144CD4454405144000555515150010555555150200551555550001154445141DA4454515505001055515505BE4004050606060004050501C6FFFF0FAA3F020E5B0F200C0027261DCC33260DC53900D1001D4197015D6107C65D61C7214C00C300000020AA4C00D3DB5D6117DA5D61C7041D41C7A13900D1BE3326ADF227260DC60F000C2E3F025E5400000000000000000000000000000000E00000000000000F00F000F0000000000010000003860000000000000000000E0000000000000000E00E00000000000000E0E00000000000000000E0040000000000000000E000000000000000000000000000000F000F000200D00BC00A000000000000050000F000000000F0E0000000000000000000E0000000000000000000E0E0000000000000000000E00E0000000000000000000E000000000010000000070000000000F000009FF000000000000000000000000040444444B4BB44B50000070007000C000C000C000C000C000F000E0000000F000F000C000000A10000000A000A0006000A000E0006000E000A00B400B600B8000A000A000000A0000000060005000600060006000500050006002E012F0130010500050000000A000000000000000100000000000000000001000000000000000000010000000000";
+    private static final String WER_LVL_15 = "5555555511000005000105005005410014005015414004005055410404000051101414000004500401000004441051004040001005004400040010004000000004001050150000000050151400000040451000001050140451000011111440001041000000000005140054004050510510005015041010001000000040001001004154001004044441005441404454000454010050004000450014001050510111000010515400004055051140004015100400000001044454001050554145000004054101000040154005001150505045000000100400000055005000001040004004000050450445000000010001000000151104000001014014005415410004005055444105001450001414000104551001005404401111004440541405004000001510004410041005000155150400005055151454005540050400004051140541001110101440000001500400000001001444000410114010004410100514000000000000001010100001001010544405000011050510005411144515000054440014004400001015005115545000000400001500005150011110005010040010000101004404000154150010000040015004000051054005001014545055830100410004B055410110040011001000000001150004105D00000010000005010800112A020044490100043303000A180000818008006008080041C400001B56000049A0010020110000E007050022010200980288A94945AAB15F0011B191880200424870844D00C284AA02C88400010000000800000000000300500000090040000000080009000090000A00340908008000304000000000990000000000080000000000000007000000A0600A00390000080000000000809A000400000040A09000009003000AA040000080000000000000000800000000008000A000F044440400000A00050000F0F49000A00000000000404F000000080000030A04D004800909400000F00000F0000000000009049000000000050000000000000000000000A0A008040000303000090F00000000000020000010B1B9BB44B4BB4000000600020000000000FFFF00000000FFFFFFFFFFFF000000000D000000FFFF000011000B000000000000009300BF0003000100010000006400D20000000000000005000F000E890000CE0003003801010001000000E10013013A01000002008C00000000000F0000009B0000000000050000000C000000000002000000";
 
+    
     private static final String[] PMO_LEVEL_DATA = new String[]{L1, L2, L3, L4, L5, L6, L7, L8, L9, L10};
     public static final MazeLevel[] PMO_LEVELS = new MazeLevel[PMO_LEVEL_DATA.length];
 
@@ -96,27 +99,29 @@ public class WizardryData {
     private static final String[] BS_LEVEL_DATA = new String[]{BSL1, BSL2, BSL3, BSL4, BSL5, BSL6, BSL7, BSL8};
     public static final MazeLevel[] BS_LEVELS = new MazeLevel[BS_LEVEL_DATA.length];
 
-    private static final String[] WER_LEVEL_DATA = new String[]{
-        WER_PYRAMID_ENTRAP_10, WER_CATACOMBS_9, WER_LAND_CUTS_8,
-        WER_TEMPLE_DREAM_7, WER_REALM_WHIRL_6, WER_LAND_CREAT_5, WER_MAZE_WANDER_4, WER_COSMIC_3, WER_COSMIC_2,
-        WER_COSMIC_1, WER_CASTLE_1, WER_CASTLE_2, WER_CASTLE_3, WER_LVL_11};
+    private static final String[] WER_LEVEL_DATA = new String[]{WER_CASTLE_1, WER_COSMIC_1, WER_COSMIC_2, WER_COSMIC_3, WER_MAZE_WANDER_4,
+        WER_LAND_CREAT_5, WER_REALM_WHIRL_6, WER_TEMPLE_DREAM_7, WER_LAND_CUTS_8, WER_CATACOMBS_9,
+        WER_PYRAMID_ENTRAP_10, WER_LVL_11, WER_CASTLE_2, WER_CASTLE_3, WER_LVL_15};
     public static final MazeLevel[] WER_LEVELS = new MazeLevel[WER_LEVEL_DATA.length];
 
-    public static java.util.List<Item> PMO_ITEMS, KOD_ITEMS, LEG_ITEMS, BS_ITEMS, WER_ITEMS;
+    public static List<Item> PMO_ITEMS, KOD_ITEMS, LEG_ITEMS, BS_ITEMS, WER_ITEMS;
     public static final java.util.Map<String, Item> PMO_ITEMS_MAP = new HashMap<>();
     public static final java.util.Map<String, Item> KOD_ITEMS_MAP = new HashMap<>();
     public static final java.util.Map<String, Item> LEG_ITEMS_MAP = new HashMap<>();
     public static final java.util.Map<String, Item> BS_ITEMS_MAP = new HashMap<>();
     public static final java.util.Map<String, Item> WER_ITEMS_MAP = new HashMap<>();
 
-    public static java.util.List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS;
+    public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS;
     public static final java.util.Map<String, Monster> PMO_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> KOD_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> LEG_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> BS_MONSTER_MAP = new HashMap<>();
 
-    public static java.util.List<Reward> PMO_REWARDS, KOD_REWARDS, LEG_REWARDS, BS_REWARDS;
-    public static java.util.List<Message> PMO_MESSAGES, KOD_MESSAGES, LEG_MESSAGES, BS_MESSAGES, WER_MESSAGES;
+    public static List<DoGooder> WER4_CHARS;
+    public static final java.util.Map<String, DoGooder> WER4_CHAR_MAP = new HashMap<>();
+
+    public static List<Reward> PMO_REWARDS, KOD_REWARDS, LEG_REWARDS, BS_REWARDS;
+    public static List<Message> PMO_MESSAGES, KOD_MESSAGES, LEG_MESSAGES, BS_MESSAGES, WER_MESSAGES;
 
     static {
         try {
@@ -142,6 +147,7 @@ public class WizardryData {
 
             String j17 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-items.json"));
             String j18 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-messages.json"));
+            String j19 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-characters.json"));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -185,7 +191,10 @@ public class WizardryData {
             }.getType());
             WER_MESSAGES = gson.fromJson(j18, new TypeToken<List<Message>>() {
             }.getType());
-            
+
+            WER4_CHARS = gson.fromJson(j19, new TypeToken<List<DoGooder>>() {
+            }.getType());
+
             for (Item i : PMO_ITEMS) {
                 PMO_ITEMS_MAP.put(i.name, i);
             }
@@ -200,6 +209,10 @@ public class WizardryData {
 
             for (Item i : BS_ITEMS) {
                 BS_ITEMS_MAP.put(i.name, i);
+            }
+
+            for (DoGooder i : WER4_CHARS) {
+                WER4_CHAR_MAP.put(i.name, i);
             }
 
             for (Item i : WER_ITEMS) {
@@ -252,16 +265,19 @@ public class WizardryData {
         KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, KOD_MONSTER_MAP, KOD_ITEMS_MAP),
         LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, LEG_MONSTER_MAP, LEG_ITEMS_MAP),
         BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, BS_MONSTER_MAP, BS_ITEMS_MAP),
-        WER(WER_ITEMS, BS_MONSTERS, BS_REWARDS, WER_MESSAGES, WER_LEVELS, BS_MONSTER_MAP, WER_ITEMS_MAP, 9, 9);
+        WER(WER_ITEMS, null, BS_REWARDS, WER_MESSAGES, WER_LEVELS, null, WER_ITEMS_MAP, 11, 9, 9);
 
-        private final java.util.List<Item> items;
-        private final java.util.List<Monster> monsters;
-        private final java.util.List<Reward> rewards;
-        private final java.util.List<Message> messages;
+        private final List<Item> items;
+        private final List<Monster> monsters;
+        private final List<Reward> rewards;
+        private final List<Message> messages;
         private final MazeLevel[] levels;
         private final java.util.Map<String, Monster> monsterMap;
         private final java.util.Map<String, Item> itemMap;
-        private final int startX, startY;
+        private final int startLevel, startX, startY;
+
+        private final java.util.Map<String, DoGooder> characterMap;
+        private final List<DoGooder> characters;
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
                 MazeLevel[] levels, Map<String, Monster> monsterMap, Map<String, Item> itemMap) {
@@ -272,12 +288,15 @@ public class WizardryData {
             this.levels = levels;
             this.monsterMap = monsterMap;
             this.itemMap = itemMap;
+            this.startLevel = 1;
             this.startX = 0;
             this.startY = 0;
+            this.characterMap = null;
+            this.characters = null;
         }
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
-                MazeLevel[] levels, Map<String, Monster> monsterMap, Map<String, Item> itemMap, int startX, int startY) {
+                MazeLevel[] levels, Map<String, Monster> monsterMap, Map<String, Item> itemMap, int startLevel, int startX, int startY) {
             this.items = items;
             this.monsters = monsters;
             this.rewards = rewards;
@@ -285,8 +304,15 @@ public class WizardryData {
             this.levels = levels;
             this.monsterMap = monsterMap;
             this.itemMap = itemMap;
+            this.startLevel = startLevel;
             this.startX = startX;
             this.startY = startY;
+            this.characterMap = WER4_CHAR_MAP;
+            this.characters = WER4_CHARS;
+        }
+
+        public int getStartLevel() {
+            return startLevel;
         }
 
         public int getStartX() {
@@ -305,6 +331,10 @@ public class WizardryData {
             return monsters;
         }
 
+        public List<DoGooder> characters() {
+            return characters;
+        }
+
         public List<Reward> rewards() {
             return rewards;
         }
@@ -319,6 +349,10 @@ public class WizardryData {
 
         public Map<String, Monster> monsterMap() {
             return monsterMap;
+        }
+
+        public Map<String, DoGooder> characterMap() {
+            return characterMap;
         }
 
         public Map<String, Item> itemMap() {
@@ -345,7 +379,7 @@ public class WizardryData {
         public MazeCell[][] cells = new MazeCell[DUNGEON_DIM][DUNGEON_DIM];
     }
 
-    public static class MazeLevelV1 extends MazeLevel {
+    private static class MazeLevelV1 extends MazeLevel {
 
         private byte[] buffer;
         private CellInfo[] cellInfo;
@@ -366,13 +400,13 @@ public class WizardryData {
 
                     cells[x][y] = walls(x, y);
 
-                    if (cells[x][y].monsterLair) {
+                    if (cells[x][y].lair) {
                         int mid = getRandomMonster();
                         Monster m = mid < monsters.size() ? monsters.get(mid) : null;
                         if (m == null) {
                             System.out.println("cannot find monster id " + mid);
                         } else {
-                            cells[x][y].tempMonsterID = m.monsterId;
+                            cells[x][y].wanderingEncounterID = m.monsterId;
                         }
                     }
 
@@ -407,7 +441,7 @@ public class WizardryData {
                             cell.teleport = true;
                             break;
                         case DAMAGE:
-                            cell.damage = new Dice(ci.val[0], ci.val[1], ci.val[2]);
+                            cell.damage = new Dice(ci.val[1], ci.val[2], ci.val[0]);
                             break;
                         case ELEVATOR:
                             cell.elevator = true;
@@ -422,7 +456,7 @@ public class WizardryData {
                             cell.spellsBlocked = true;
                             break;
                         case ENCOUNTER:
-                            cell.monsterID = ci.val[2];
+                            cell.encounterID = ci.val[2];
                             cell.hasTreasureChest = true;
                             break;
                         case MESSAGE:
@@ -445,7 +479,7 @@ public class WizardryData {
                             }
                             if (ci.val[2] == 4) {
                                 if (ci.val[0] >= 0) {
-                                    cell.monsterID = ci.val[0];
+                                    cell.encounterID = ci.val[0];
                                     cell.hasTreasureChest = true;
                                 } else if (ci.val[0] > -1200) {
                                     cell.itemObtained = ci.val[0] * -1 - 1000;
@@ -472,7 +506,7 @@ public class WizardryData {
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
                                     if (m.match(ci.val[0])) {
-                                        cell.riddleAnswer = m.getText();
+                                        cell.riddleAnswers = m.getRiddleAnswers();
                                         break;
                                     }
                                 }
@@ -486,12 +520,12 @@ public class WizardryData {
                                 }
                             }
                             if (ci.val[2] == 15) {
-                                cell.monsterID = ci.val[1];
+                                cell.encounterID = ci.val[1];
                                 cell.hasTreasureChest = true;
                             }
 
                             if (ci.val[2] == 16) {
-                                cell.monsterID = ci.val[1];
+                                cell.encounterID = ci.val[1];
                                 cell.hasTreasureChest = true;
                             }
                             break;
@@ -504,11 +538,11 @@ public class WizardryData {
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
 
-                    if (cells[x][y].tempMonsterLair) {
+                    if (cells[x][y].tempLair) {
                         List<MazeCell> roomCells = new ArrayList<>();
                         getConnectedRoomCells(x, y, roomCells);
                         for (MazeCell c : roomCells) {
-                            c.tempMonsterLair = false;
+                            c.tempLair = false;
                         }
                         rooms.add(roomCells);
                     }
@@ -539,7 +573,7 @@ public class WizardryData {
                 while (true) {
                     int x = Utils.RANDOM.nextInt(DUNGEON_DIM);
                     int y = Utils.RANDOM.nextInt(DUNGEON_DIM);
-                    if (cells[x][y].tempMonsterID > 0 && !cells[x][y].hasTreasureChest) {
+                    if (cells[x][y].wanderingEncounterID > 0 && !cells[x][y].hasTreasureChest) {
                         cells[x][y].hasTreasureChest = true;
                         break;
                     }
@@ -583,8 +617,8 @@ public class WizardryData {
             offset = column * 4 + row / 8;
             value = intValue(buffer[offset + 480]);
             value >>>= row % 8;
-            cell.monsterLair = ((value & 1) == 1);
-            cell.tempMonsterLair = cell.monsterLair;
+            cell.lair = ((value & 1) == 1);
+            cell.tempLair = cell.lair;
 
             if (cell.eastWall && cell.eastDoor) {
                 cell.hiddenEastDoor = true;
@@ -667,7 +701,7 @@ public class WizardryData {
         }
     }
 
-    public static class MazeLevelV4 extends MazeLevel {
+    private static class MazeLevelV4 extends MazeLevel {
 
         private byte[] buffer;
         private CellInfo[] cellInfo;
@@ -682,19 +716,19 @@ public class WizardryData {
             this.cellInfoLocations = getCellInfoLocations(buffer, 0 + 0x230);
             this.cellInfo = getCellInfo(buffer, 0 + 0x2F8);
             this.monsterOdds = getMonsterOdds(buffer, 0 + 0x360);
-
+            
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
 
                     cells[x][y] = walls(x, y);
 
-                    if (cells[x][y].monsterLair) {
+                    if (cells[x][y].lair) {
                         int mid = getRandomMonster();
                         Monster m = mid < monsters.size() ? monsters.get(mid) : null;
                         if (m == null) {
                             //System.out.println("cannot find monster id " + mid);
                         } else {
-                            cells[x][y].tempMonsterID = m.monsterId;
+                            cells[x][y].wanderingEncounterID = m.monsterId;
                         }
                     }
 
@@ -703,11 +737,11 @@ public class WizardryData {
                     int idx = cellInfoLocations[y][x];
                     CellInfo ci = cellInfo[idx];
 
-                    if (ci.type == CellType.CHUTE || ci.type == CellType.STAIRS) {
+                    if (ci.type == CellType.CHUTE || ci.type == CellType.STAIRS || ci.type == CellType.TELEPORT) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
-                    if (ci.type != CellType.NORMAL && level == 1) {
-                        System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                    if (level == 4) {
+                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
 
                     switch (ci.type) {
@@ -736,7 +770,7 @@ public class WizardryData {
                             cell.teleport = true;
                             break;
                         case DAMAGE:
-                            cell.damage = new Dice(ci.val[0], ci.val[1], ci.val[2]);
+                            cell.damage = new Dice(ci.val[1], ci.val[2], ci.val[0]);
                             break;
                         case ELEVATOR:
                             cell.elevator = true;
@@ -751,21 +785,17 @@ public class WizardryData {
                             cell.spellsBlocked = true;
                             break;
                         case ENCOUNTER:
-                            cell.monsterID = ci.val[2];
-                            cell.hasTreasureChest = true;
+                            cell.encounterID = ci.val[2];
                             break;
                         case MESSAGE:
-                            if (ci.val[2] == 1) {
-                                if (ci.isMessage()) {
-                                    for (Message m : messages) {
-                                        if (m.match(ci.val[1])) {
-                                            cell.message = m;
-                                            break;
-                                        }
+                            if (ci.isMessage()) {
+                                for (Message m : messages) {
+                                    if (m.match(ci.val[1])) {
+                                        cell.message = m;
+                                        break;
                                     }
                                 }
                             }
-
                             if (ci.val[2] == 2) {
                                 cell.itemObtained = ci.val[0];//blue ribbon
                             }
@@ -776,8 +806,7 @@ public class WizardryData {
                             }
                             if (ci.val[2] == 4) {
                                 if (ci.val[0] >= 0) {
-                                    cell.monsterID = ci.val[0];
-                                    cell.hasTreasureChest = true;
+                                    cell.encounterID = ci.val[0];
                                 } else if (ci.val[0] > -1200) {
                                     cell.itemObtained = ci.val[0] * -1 - 1000;
                                 } else {
@@ -800,7 +829,7 @@ public class WizardryData {
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
                                     if (m.match(ci.val[0])) {
-                                        cell.riddleAnswer = m.getText();
+                                        cell.riddleAnswers = m.getRiddleAnswers();
                                         break;
                                     }
                                 }
@@ -814,8 +843,7 @@ public class WizardryData {
                                 }
                             }
                             if (ci.val[2] == 600) {
-                                cell.monsterID = ci.val[1];
-                                cell.hasTreasureChest = true;
+                                cell.encounterID = ci.val[1];
                             }
                             if (ci.val[2] == -30120) {
                                 cell.summoningCircle1 = true;
@@ -889,8 +917,8 @@ public class WizardryData {
             offset = column * 4 + row / 8;
             value = intValue(buffer[offset + 480]);
             value >>>= row % 8;
-            cell.monsterLair = ((value & 1) == 1);
-            cell.tempMonsterLair = cell.monsterLair;
+            cell.lair = ((value & 1) == 1);
+            cell.tempLair = cell.lair;
 
             if (cell.eastWall && cell.eastDoor) {
                 cell.hiddenEastDoor = true;
@@ -1031,18 +1059,18 @@ public class WizardryData {
         public int feeAmount;
         public int tradeItem1;
         public int tradeItem2;
-        public String riddleAnswer;
+        public List<String> riddleAnswers;
         public Dice damage;
         public int messageType;
         public Message message;
         public int itemRequired;
         public int itemObtained;
 
-        public boolean monsterLair;
-        public boolean tempMonsterLair;//used to determine initial rooms 
+        public boolean lair;
+        private boolean tempLair;
 
-        public int tempMonsterID = -1;
-        public int monsterID = -1;
+        public int encounterID = -1;
+        public int wanderingEncounterID = -1;
 
         public boolean hasTreasureChest;
         public boolean summoningCircle1;
@@ -1111,6 +1139,10 @@ public class WizardryData {
             return t.toString();
         }
 
+        public List<String> getRiddleAnswers() {
+            return this.text;
+        }
+
     }
 
     private static class EncounterOdds {
@@ -1135,6 +1167,11 @@ public class WizardryData {
                 ++rangeNo;
             }
             return minEnemy + RANDOM.nextInt(rangeSize) + extraRangeOffset * rangeNo;
+        }
+
+        @Override
+        public String toString() {
+            return "EncounterOdds{" + "minEnemy=" + minEnemy + ", rangeSize=" + rangeSize + ", extraRangeOdds=" + extraRangeOdds + ", totExtraRanges=" + totExtraRanges + ", extraRangeOffset=" + extraRangeOffset + '}';
         }
 
     }

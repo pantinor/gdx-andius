@@ -2,8 +2,8 @@ package utils;
 
 import andius.Constants;
 import andius.Direction;
-import andius.objects.ClassType;
 import andius.objects.Item;
+import andius.objects.Mutable;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
@@ -150,7 +150,7 @@ public class Utils {
         return dirmask;
     }
 
-    public static boolean attackHit(MutableMonster attacker, CharacterRecord defender) {
+    public static boolean attackHit(Mutable attacker, CharacterRecord defender) {
         int roll = RANDOM.nextInt(20) + 1;
 
         if (roll == 20) {
@@ -173,11 +173,13 @@ public class Utils {
         chanceToHit -= defender.calculateAC();
 
         chanceToHit += (defender.status.isDisabled() ? 3 : 0);
+        
+        chanceToHit += attacker.hitModifier();
 
         return roll >= chanceToHit;
     }
 
-    public static boolean attackHit(CharacterRecord attacker, MutableMonster defender) {
+    public static boolean attackHit(CharacterRecord attacker, Mutable defender) {
 
         if (defender == null) {
             return false;
@@ -230,7 +232,7 @@ public class Utils {
 
         THAC0 -= strMod;
 
-        THAC0 -= attacker.weapon.hitmd;
+        THAC0 -= attacker.weapon.wephitmd;
 
         int chanceToHit = THAC0 - defender.getArmourClass();
 
@@ -241,7 +243,7 @@ public class Utils {
         return roll >= chanceToHit;
     }
 
-    public static int dealDamage(Item weapon, MutableMonster defender) {
+    public static int dealDamage(Item weapon, Mutable defender) {
         int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
         defender.adjustHealthBar();

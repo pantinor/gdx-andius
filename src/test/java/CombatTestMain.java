@@ -106,7 +106,7 @@ public class CombatTestMain extends Game {
             //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
             Monster monster = PMO_MONSTERS.get(3);
 
-            Actor actor = new Actor(0, monster.name, TibianSprite.animation(monster.getIconId()));
+            Actor actor = new Actor(monster.name, null);
             
             MutableMonster mm = new MutableMonster(monster);
             actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);

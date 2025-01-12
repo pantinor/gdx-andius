@@ -437,7 +437,7 @@ public class GameScreen extends BaseScreen {
                     if (monsterFound != null) {
                         Monster found = this.map.scenario().monsterMap().get(monsterFound);
                         if (found != null) {
-                            Actor actor = new Actor(-1, monsterFound, TibianSprite.animation("Barbarian_Brutetamer")); //TODO
+                            Actor actor = new Actor(monsterFound, null);
                             MutableMonster mm = new MutableMonster(found);
                             String msx = obj.getProperties().get("monsterSpawnX", String.class);
                             String msy = obj.getProperties().get("monsterSpawnY", String.class);

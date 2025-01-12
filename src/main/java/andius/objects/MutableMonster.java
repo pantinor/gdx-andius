@@ -1,10 +1,13 @@
 package andius.objects;
 
+import andius.Constants.Breath;
+import andius.Constants.CharacterType;
 import static andius.Constants.DEATHMSGS;
 import andius.Constants.Status;
+import java.util.List;
 import utils.Utils;
 
-public class MutableMonster extends Monster {
+public class MutableMonster implements Mutable {
 
     private int acmodifier;
     private int currentHitPoints;
@@ -13,39 +16,96 @@ public class MutableMonster extends Monster {
     private final State status = new State();
     private final int maxHitPoints;
     private MonsterCursor monsterCursor;
+    private Monster monster;
 
     public MutableMonster(Monster m) {
-        clone(m);
-        this.maxHitPoints = this.hitPoints.roll();
+        this.monster = m;
+        this.maxHitPoints = this.monster.hitPoints.roll();
         this.currentHitPoints = this.maxHitPoints;
-        this.currentMageSpellLevel = this.mageSpellLevel;
-        this.currentPriestSpellLevel = this.priestSpellLevel;
+        this.currentMageSpellLevel = this.monster.mageSpellLevel;
+        this.currentPriestSpellLevel = this.monster.priestSpellLevel;
     }
 
+    @Override
+    public Object baseType() {
+        return this.monster;
+    }
+
+    @Override
+    public int getUnaffected() {
+        return this.monster.getUnaffected();
+    }
+
+    @Override
+    public String name() {
+        return this.monster.getName();
+    }
+
+    @Override
+    public String icon() {
+        return this.monster.getIconId();
+    }
+
+    @Override
+    public CharacterType getType() {
+        return this.monster.getType();
+    }
+
+    @Override
+    public List<Dice> getDamage() {
+        return this.monster.getDamage();
+    }
+
+    @Override
+    public int hitModifier() {
+        return 0;
+    }
+
+    @Override
+    public int getArmourClass() {
+        return this.monster.armourClass;
+    }
+
+    @Override
+    public int getLevel() {
+        return this.monster.getLevel();
+    }
+
+    @Override
+    public Breath breath() {
+        return this.monster.breath();
+    }
+
+    @Override
     public int getCurrentHitPoints() {
         return currentHitPoints;
     }
 
+    @Override
     public void setCurrentHitPoints(int currentHitPoints) {
         this.currentHitPoints = currentHitPoints;
     }
 
+    @Override
     public int getCurrentMageSpellLevel() {
         return currentMageSpellLevel;
     }
 
+    @Override
     public int getCurrentPriestSpellLevel() {
         return currentPriestSpellLevel;
     }
 
+    @Override
     public State status() {
         return status;
     }
 
+    @Override
     public void processStatusAffects() {
 
-        if (this.healpts > 0) {
-            setCurrentHitPoints(this.healpts);
+        if (this.monster.healpts > 0) {
+            setCurrentHitPoints(this.monster.healpts);
             adjustHealthBar();
         }
 
@@ -76,26 +136,31 @@ public class MutableMonster extends Monster {
         }
     }
 
+    @Override
     public int getMaxHitPoints() {
         return maxHitPoints;
     }
 
+    @Override
     public MonsterCursor getMonsterCursor() {
         return monsterCursor;
     }
 
+    @Override
     public void setMonsterCursor(MonsterCursor monsterCursor) {
         this.monsterCursor = monsterCursor;
     }
 
+    @Override
     public void adjustHealthBar() {
         this.monsterCursor.adjust(currentHitPoints, maxHitPoints);
     }
 
+    @Override
     public String getDamageTag() {
         double percent = (double) currentHitPoints / maxHitPoints;
         if (percent > 0.99) {
-            if (this.type > 4) {
+            if (this.monster.type > 4) {
                 return ", unharmed, growls ominously";
             } else {
                 return "chortles merrily as the armor takes the full blow";
@@ -103,7 +168,7 @@ public class MutableMonster extends Monster {
         } else if (percent > 0.75) {
             return "still has lots of fight left";
         } else if (percent > 0.50) {
-            if (this.type > 4) {
+            if (this.monster.type > 4) {
                 return "tough hide softens the blow";
             } else {
                 return "armor takes some of the impact";
@@ -115,14 +180,17 @@ public class MutableMonster extends Monster {
         }
     }
 
+    @Override
     public void setACModifier(int acmodifier) {
         this.acmodifier = acmodifier;
     }
 
+    @Override
     public int getACModifier() {
         return acmodifier;
     }
 
+    @Override
     public Spells castMageSpell() {
         int roll = Utils.RANDOM.nextInt(100);
         int value = 0;
@@ -168,7 +236,7 @@ public class MutableMonster extends Monster {
             spell = roll2 < 66 ? Spells.TILTOWAIT : Spells.TILTOWAIT;
         }
 
-        double tmp = ((double) 1 / (double) (this.groupSize.roll() + 2)) * 100;
+        double tmp = ((double) 1 / (double) (this.monster.groupSize.roll() + 2)) * 100;
         int roll3 = Utils.RANDOM.nextInt(100);
         if (roll3 <= tmp) {
             this.currentMageSpellLevel--;
@@ -177,6 +245,7 @@ public class MutableMonster extends Monster {
         return spell;
     }
 
+    @Override
     public Spells castPriestSpell() {
 
         int spellLevel = Math.max(1, this.currentPriestSpellLevel);
@@ -205,7 +274,7 @@ public class MutableMonster extends Monster {
             spell = roll2 < 66 ? Spells.MABADI : Spells.MABADI;
         }
 
-        double tmp = ((double) 1 / (double) (this.groupSize.roll() + 2)) * 100;
+        double tmp = ((double) 1 / (double) (this.monster.groupSize.roll() + 2)) * 100;
         int roll3 = Utils.RANDOM.nextInt(100);
         if (roll3 <= tmp) {
             this.currentPriestSpellLevel--;

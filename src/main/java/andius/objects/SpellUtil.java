@@ -54,12 +54,12 @@ public class SpellUtil {
                 case KATINO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().status().set(Status.ASLEEP, 4);
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is asleep.")));
+                            m.getEnemy().status().set(Status.ASLEEP, 4);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is asleep.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
                     }
@@ -93,12 +93,12 @@ public class SpellUtil {
                 case MANIFO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().status().set(Status.PARALYZED, 4);
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is paralyzed.")));
+                            m.getEnemy().status().set(Status.PARALYZED, 4);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is paralyzed.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
                     }
@@ -106,12 +106,12 @@ public class SpellUtil {
                 case MONTINO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
-                            m.getMonster().status().set(Status.SILENCED, 4);
-                            seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is silenced.")));
+                            m.getEnemy().status().set(Status.SILENCED, 4);
+                            seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is silenced.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                         }
                     }
@@ -286,12 +286,12 @@ public class SpellUtil {
 
         ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
 
-        if (rand.nextInt(100) < target.getMonster().getUnaffected()
-                || (spell == Spells.ZILWAN && target.getMonster().getType() != Monster.Type.UNDEAD)) {
-            seq.addAction(Actions.run(new LogAction(screen, target.getMonster().name + " is unaffected.")));
+        if (rand.nextInt(100) < target.getEnemy().getUnaffected()
+                || (spell == Spells.ZILWAN && !target.getEnemy().getType().equals("UNDEAD"))) {
+            seq.addAction(Actions.run(new LogAction(screen, target.getEnemy().name() + " is unaffected.")));
         } else {
-            spellDamage(spell, target.getMonster());
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s %s", target.getMonster().name, target.getMonster().getDamageTag()))));
+            spellDamage(spell, target.getEnemy());
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s %s", target.getEnemy().name(), target.getEnemy().getDamageTag()))));
         }
 
         Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
@@ -301,7 +301,7 @@ public class SpellUtil {
 
         seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
 
-        if (target.getMonster().getCurrentHitPoints() <= 0) {
+        if (target.getEnemy().getCurrentHitPoints() <= 0) {
             seq.addAction(Actions.run(new RemoveCreatureAction(screen, target)));
         }
 
@@ -319,7 +319,7 @@ public class SpellUtil {
         screen.getStage().addActor(p);
     }
 
-    private static void spellDamage(Spells spell, MutableMonster m) {
+    private static void spellDamage(Spells spell, Mutable m) {
         int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
         m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
         m.adjustHealthBar();
@@ -331,8 +331,8 @@ public class SpellUtil {
 
             seq.addAction(Actions.delay(.60f));
 
-            if (rand.nextInt(100) < m.getMonster().getUnaffected()) {
-                seq.addAction(Actions.run(new LogAction(screen, m.getMonster().name + " is unaffected.")));
+            if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
                 expl.setX(m.getX() + 12);
@@ -345,10 +345,10 @@ public class SpellUtil {
             } else {
 
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
-                m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
-                m.getMonster().adjustHealthBar();
+                m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
+                m.getEnemy().adjustHealthBar();
 
-                seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()))));
+                seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
                 expl.setX(m.getX() + 12);
@@ -358,7 +358,7 @@ public class SpellUtil {
                 seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
                 seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
 
-                if (m.getMonster().getCurrentHitPoints() <= 0) {
+                if (m.getEnemy().getCurrentHitPoints() <= 0) {
                     seq.addAction(Actions.run(new RemoveCreatureAction(screen, m)));
                 }
 
@@ -374,10 +374,10 @@ public class SpellUtil {
             seq.addAction(Actions.delay(.60f));
 
             int damage = Utils.getRandomBetween(minDamage, maxDamage);
-            m.getMonster().setCurrentHitPoints(m.getMonster().getCurrentHitPoints() - damage);
-            m.getMonster().adjustHealthBar();
+            m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
+            m.getEnemy().adjustHealthBar();
 
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getMonster().name, m.getMonster().getDamageTag()))));
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
 
             final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
             expl.setX(m.getX() + 12);
@@ -387,7 +387,7 @@ public class SpellUtil {
             seq.addAction(Actions.run(new PlaySoundAction(Sound.NPC_STRUCK)));
             seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
 
-            if (m.getMonster().getCurrentHitPoints() <= 0) {
+            if (m.getEnemy().getCurrentHitPoints() <= 0) {
                 seq.addAction(Actions.run(new RemoveCreatureAction(screen, m)));
             }
 
@@ -409,7 +409,7 @@ public class SpellUtil {
 
     private static void modMonsterAC(CombatScreen screen, int acmod) {
         for (andius.objects.Actor m : screen.enemies) {
-            m.getMonster().setACModifier(-acmod);
+            m.getEnemy().setACModifier(-acmod);
         }
     }
 
@@ -441,8 +441,8 @@ public class SpellUtil {
 
     public static void spellMonsterCast(CombatScreen screen, SequenceAction seq, Spells spell, andius.objects.Actor caster, andius.objects.Actor target) {
 
-        if (caster.getMonster().status().isDisabled()) {
-            screen.log(caster.getMonster().name + " is disabled!");
+        if (caster.getEnemy().status().isDisabled()) {
+            screen.log(caster.getEnemy().name() + " is disabled!");
             Sounds.play(Sound.NEGATIVE_EFFECT);
             return;
         }
@@ -479,36 +479,36 @@ public class SpellUtil {
                 break;
             case KATINO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.ASLEEP);
+                    monsterCastEffect(screen, seq, caster.getEnemy(), m.getPlayer(), Status.ASLEEP);
                 }
                 break;
             case MANIFO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.PARALYZED);
+                    monsterCastEffect(screen, seq, caster.getEnemy(), m.getPlayer(), Status.PARALYZED);
                 }
                 break;
             case MONTINO:
                 for (andius.objects.Actor m : screen.partyMembers) {
-                    monsterCastEffect(screen, seq, caster.getMonster(), m.getPlayer(), Status.SILENCED);
+                    monsterCastEffect(screen, seq, caster.getEnemy(), m.getPlayer(), Status.SILENCED);
                 }
                 break;
             case DIOS:
             case DIAL:
             case DIALMA:
             case MADI:
-                doMonsterHeal(screen, seq, caster.getMonster(), spell);
+                doMonsterHeal(screen, seq, caster.getEnemy(), spell);
                 break;
             case LATUMAPIC:
                 for (andius.objects.Actor m : screen.enemies) {
-                    m.getMonster().status().set(Status.ASLEEP, 0);
-                    m.getMonster().status().set(Status.PARALYZED, 0);
-                    m.getMonster().status().set(Status.SILENCED, 0);
+                    m.getEnemy().status().set(Status.ASLEEP, 0);
+                    m.getEnemy().status().set(Status.PARALYZED, 0);
+                    m.getEnemy().status().set(Status.SILENCED, 0);
                 }
                 break;
             case MOGREF:
             case SOPIC:
             case PORFIC:
-                caster.getMonster().setACModifier(caster.getMonster().getACModifier() + spell.getHitBonus());
+                caster.getEnemy().setACModifier(caster.getEnemy().getACModifier() + spell.getHitBonus());
                 break;
             case DILTO:
             case MORLIS:
@@ -527,7 +527,7 @@ public class SpellUtil {
 
     }
 
-    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, MutableMonster monster, CharacterRecord player, Status effect) {
+    private static void monsterCastEffect(CombatScreen screen, SequenceAction seq, Mutable monster, CharacterRecord player, Status effect) {
         seq.addAction(Actions.delay(.60f));
         if (player.savingThrowSpell()) {
             seq.addAction(Actions.run(new LogAction(screen, player.name + " made a saving throw and is unaffected!")));
@@ -539,9 +539,9 @@ public class SpellUtil {
         }
     }
 
-    private static void doMonsterHeal(CombatScreen screen, SequenceAction seq, MutableMonster target, Spells spell) {
+    private static void doMonsterHeal(CombatScreen screen, SequenceAction seq, Mutable target, Spells spell) {
         if (target.getCurrentHitPoints() > 0) {
-            seq.addAction(Actions.run(new LogAction(screen, target.name + " is healed.")));
+            seq.addAction(Actions.run(new LogAction(screen, target.name() + " is healed.")));
             if (spell == Spells.MADI) {
                 target.setCurrentHitPoints(target.getMaxHitPoints());
             } else {

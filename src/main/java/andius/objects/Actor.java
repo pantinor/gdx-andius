@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Actor {
 
-    private final int id;
     private final String name;
     private Animation anim;
     private Role role;
@@ -20,30 +19,30 @@ public class Actor {
     private float y;
     private int dir;
     private MovementBehavior movement;
-    private MutableMonster monster;
+    private Mutable enemy;
     private CharacterRecord player;
     private PlayerCursor playerCursor;
 
     private String hash;
 
-    public Actor(int id, String name, Animation anim) {
-        this.id = id;
+    public Actor(String name, Animation anim) {
         this.name = name;
         this.anim = anim;
     }
 
-    public void set(MutableMonster monster, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
+    public void set(Mutable enemy, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
         this.x = x;
         this.y = y;
         this.movement = movement;
-        this.monster = monster;
+        this.enemy = enemy;
 
-        if (this.monster != null) {
-            this.anim = TibianSprite.animation(this.monster.getIconId());
+        if (this.enemy != null) {
+            this.anim = TibianSprite.animation(this.enemy.icon());
         }
+
         this.hash = "M:" + x + ":" + y;
     }
 
@@ -66,10 +65,6 @@ public class Actor {
 
     public String hash() {
         return this.hash;
-    }
-
-    public int getId() {
-        return this.id;
     }
 
     public String getName() {
@@ -128,8 +123,8 @@ public class Actor {
         return movement;
     }
 
-    public MutableMonster getMonster() {
-        return monster;
+    public Mutable getEnemy() {
+        return this.enemy;
     }
 
     public CharacterRecord getPlayer() {

@@ -276,14 +276,13 @@ public interface Constants {
                 String mv = obj.getProperties().get("movement", String.class);
                 MovementBehavior movement = MovementBehavior.valueOf(mv != null ? mv : "FIXED");
 
-                Actor actor = new Actor(id, name, TibianSprite.animation(icon));
+                Actor actor = new Actor(name, null);
                 if (role == Role.MONSTER) {
                     try {
                         String mid = obj.getProperties().get("monsterID", String.class);
                         Monster monster = monsters.get(mid != null ? mid : name);
                         if (monster != null) {
                             MutableMonster mm = new MutableMonster(monster);
-                            mm.name = name;
                             actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
                         } else {
                             System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s] icon id [%s]\n",
@@ -293,7 +292,8 @@ public interface Constants {
                         System.err.printf("Cannot find monster: %s on map %s.\n", name, this);
                     }
                 } else {
-                    actor.set(null, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                    MutableMonster mm = null;
+                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
                 }
 
                 this.baseMap.actors.add(actor);
@@ -354,6 +354,20 @@ public interface Constants {
         "kicks the proverbial bucket",
         "departs the land of the living",
         "moans OH MA, I THINK ITS MY TIME"};
+
+    public enum CharacterType {
+        FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,
+        WERE, UNDEAD, DEMON, INSECT, ENCHANTED;
+    }
+
+    public enum Breath {
+        NONE,
+        FLAME,
+        COLD,
+        POISON,
+        DRAIN_BREATH,
+        STONE,
+    }
 
     public enum CreatureStatus {
 

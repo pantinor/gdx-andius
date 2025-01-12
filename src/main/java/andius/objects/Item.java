@@ -34,10 +34,12 @@ public class Item implements Comparable<Item> {
     public String usable;
     public Spells spell;
     public int regeneration;
-    public boolean crithitm;
+    public boolean autokill;
     public int range;
-    public int hitmd;
-    
+    public int wephitmd;
+    public int special;
+    public String alignment;
+
     @Override
     public Item clone() {
         Item i = new Item();
@@ -54,10 +56,12 @@ public class Item implements Comparable<Item> {
         i.cursed = this.cursed;
         i.usable = this.usable;
         i.spell = this.spell;
-        i.crithitm = this.crithitm;
+        i.autokill = this.autokill;
         i.regeneration = this.regeneration;
         i.range = this.range;
-        i.hitmd = this.hitmd;
+        i.wephitmd = this.wephitmd;
+        i.special = this.special;
+        i.alignment = this.alignment;
         return i;
     }
 
@@ -103,7 +107,7 @@ public class Item implements Comparable<Item> {
                 String.format("%-2s", "" + this.armourClass),
                 String.format("%-2s", "" + this.extraSwings),
                 String.format("%-8s", spell != null ? spell : "NA"),
-                String.format("%-2s", "" + this.hitmd),
+                String.format("%-2s", "" + this.wephitmd),
                 String.format("%-2s", "" + this.regeneration),
                 String.format("%-2s", "" + this.stock),
                 usable);

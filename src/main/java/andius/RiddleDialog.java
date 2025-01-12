@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
+import java.util.List;
 import utils.LogScrollPane;
 
 public class RiddleDialog extends Window implements Constants {
@@ -69,11 +70,19 @@ public class RiddleDialog extends Window implements Constants {
                         return;
                     }
 
-                    String answer = tf.getText().trim();
+                    String response = tf.getText().trim().toLowerCase();
 
-                    if (answer.equalsIgnoreCase(cell.riddleAnswer)) {
+                    boolean correct = false;
+                    for (String answer : cell.riddleAnswers) {
+                        if (answer.toLowerCase().contains(response)) {
+                            correct = true;
+                            break;
+                        }
+                    }
+
+                    if (correct) {
                         scrollPane.add("Correct!");
-                        cell.riddleAnswer = "answered";
+                        cell.riddleAnswers.clear();
                         hide();
                     } else {
                         scrollPane.add(cell.message.getText());

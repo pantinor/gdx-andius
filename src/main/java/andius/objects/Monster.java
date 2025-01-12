@@ -1,6 +1,8 @@
 package andius.objects;
 
 import andius.Constants.Ability;
+import andius.Constants.Breath;
+import andius.Constants.CharacterType;
 import andius.Constants.Resistance;
 import java.util.List;
 
@@ -29,20 +31,6 @@ public class Monster implements Comparable<Monster> {
     Dice groupSize;
     Dice hitPoints;
     List<Dice> damage;
-
-    public enum Type {
-        FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,
-        WERE, UNDEAD, DEMON, INSECT, ENCHANTED;
-    }
-
-    public enum Breath {
-        NONE,
-        FLAME,
-        COLD,
-        POISON,
-        DRAIN_BREATH,
-        STONE,
-    }
 
     public void clone(Monster m) {
         this.genericName = m.genericName;
@@ -89,8 +77,8 @@ public class Monster implements Comparable<Monster> {
         this.iconId = iconId;
     }
 
-    public Type getType() {
-        return Type.values()[this.type];
+    public CharacterType getType() {
+        return CharacterType.values()[this.type];
     }
 
     public int getGoldReward() {
@@ -179,7 +167,7 @@ public class Monster implements Comparable<Monster> {
         return String.format("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s",
                 monsterId,
                 String.format("%-15s", name),
-                String.format("%-10s", Type.values()[this.type]),
+                String.format("%-10s", CharacterType.values()[this.type]),
                 String.format("%-4s", "" + getLevel()),
                 String.format("%-4s", "" + exp),
                 String.format("%-3s", "" + hitPoints.max()),

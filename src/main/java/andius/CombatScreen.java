@@ -7,12 +7,15 @@ import static andius.Constants.HITMSGS;
 import static andius.Constants.TILE_DIM;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
+import static andius.WizardryData.WER4_CHARS;
 import andius.objects.PlayerCursor;
 import andius.objects.Dice;
+import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
-import andius.objects.Monster.Breath;
 import andius.objects.MonsterCursor;
+import andius.objects.Mutable;
+import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
 import andius.objects.Reward;
@@ -30,7 +33,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapLayer;
@@ -60,12 +62,11 @@ public class CombatScreen extends BaseScreen {
     public static int AREA_CREATURES = 28;
     public final static int MAP_DIM = 13;
 
-    private final MutableMonster[] crSlots;
+    private final Mutable[] crSlots;
 
     public final Map contextMap;
     public final boolean hasTreasure;
     public final andius.objects.Actor opponent;
-    private final Monster crType;
     private final Context context;
     private final TiledMap tmap;
     private final OrthogonalTiledMapRenderer renderer;
@@ -88,7 +89,6 @@ public class CombatScreen extends BaseScreen {
         this.contextMap = contextMap;
         this.hasTreasure = hasTreasure;
         this.opponent = opponent;
-        this.crType = opponent.getMonster();
         this.context = context;
         this.tmap = tmap;
         this.renderer = new OrthogonalTiledMapRenderer(this.tmap);
@@ -113,9 +113,18 @@ public class CombatScreen extends BaseScreen {
         batch = new SpriteBatch();
 
         cip = new CombatInputProcessor();
-        crSlots = new MutableMonster[AREA_CREATURES];
+        crSlots = new Mutable[AREA_CREATURES];
 
-        fillCreatureTable(level);
+        if (this.opponent.getEnemy() instanceof MutableMonster) {
+            Monster m = (Monster) opponent.getEnemy().baseType();
+            fillCreatureTable(level, m);
+        } else {
+            DoGooder dg = (DoGooder) opponent.getEnemy().baseType();
+            fillCreatureTable(dg);
+            if (!dg.slogan.isEmpty()) {
+                log("You are about to battle with " + dg.slogan.replace("|", " ... "));
+            }
+        }
 
         MapLayer mLayer = tmap.getLayers().get("Monster Positions");
         Iterator<MapObject> iter = mLayer.getObjects().iterator();
@@ -131,14 +140,14 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(0, crSlots[index].getName(), this.opponent.getAnimation());
+            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].name(), null);
             actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
 
             MonsterCursor cursor = new MonsterCursor();
             cursor.setX(x);
             cursor.setY(y);
             stage.addActor(cursor);
-            actor.getMonster().setMonsterCursor(cursor);
+            actor.getEnemy().setMonsterCursor(cursor);
 
             enemies.add(actor);
         }
@@ -160,9 +169,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(0,
-                    context.players()[index].name,
-                    context.players()[index].classType.getAnimation());
+            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].name, context.players()[index].classType.getAnimation());
 
             actor.set(this.context.players()[index], sx, sy, x - 20, y + 8);
             actor.setDirection(2);
@@ -205,18 +212,14 @@ public class CombatScreen extends BaseScreen {
         this.contextMap.getScreen().log(s);
     }
 
-    private void fillCreatureTable(int level) {
-
+    private void fillCreatureTable(int level, Monster monster) {
         int maxGroups = Math.min(level + 1, 4);
-
-        int numCreatures = this.crType.getGroupSize().roll();
+        int numCreatures = monster.getGroupSize().roll();
         for (int i = 0; i < numCreatures && nextOpenSlot() != -1; i++) {
             int j = nextOpenSlot();
-            crSlots[j] = new MutableMonster(this.crType);
+            crSlots[j] = new MutableMonster(monster);
         }
-
-        addPartners(this.crType, 1, maxGroups);
-
+        addPartners(monster, 1, maxGroups);
     }
 
     private void addPartners(Monster monster, int groupCount, int maxGroups) {
@@ -244,10 +247,20 @@ public class CombatScreen extends BaseScreen {
 
         for (int i = 0; i < numPartners && nextOpenSlot() != -1; i++) {
             int j = nextOpenSlot();
-            crSlots[j] = new MutableMonster(this.contextMap.scenario().monsters().get(this.crType.getPartnerID()));
+            crSlots[j] = new MutableMonster(this.contextMap.scenario().monsters().get(monster.getPartnerID()));
         }
 
         addPartners(partner, groupCount + 1, maxGroups);
+    }
+
+    private void fillCreatureTable(DoGooder c) {
+        for (int i = 0; i < c.partyMembers.length; i++) {
+            int j = nextOpenSlot();
+            if (j != -1) {
+                DoGooder dg = WER4_CHARS.get(c.partyMembers[i]);
+                crSlots[j] = new MutableCharacter(dg);
+            }
+        }
     }
 
     private int nextOpenSlot() {
@@ -331,7 +344,6 @@ public class CombatScreen extends BaseScreen {
 //            shapeRenderer.circle(tx + cr.iconCenter().x, ty + cr.iconCenter().y, 3);
 //            shapeRenderer.end();
 //        }
-
         batch.begin();
         batch.draw(this.frame, 0, 0);
         batch.end();
@@ -349,8 +361,8 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.begin(ShapeType.Line);
                 shapeRenderer.setColor(255, 255, 0, .50f);//yellow
                 for (andius.objects.Actor c : this.enemies) {
-                    float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                    float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
                     if (regx < 20 && regy < 20) {
                         Item weapon = cip.player.getPlayer().weapon == null ? Item.HANDS : cip.player.getPlayer().weapon;
                         int range = weapon.range == 0 ? 1 : weapon.range;
@@ -377,8 +389,8 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.end();
             } else {
                 for (andius.objects.Actor c : this.enemies) {
-                    float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                    float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
                     if (regx < 20 && regy < 20) {
                         batch.begin();
                         hud.drawStatsMonster(batch, c);
@@ -503,9 +515,9 @@ public class CombatScreen extends BaseScreen {
         Iterator<andius.objects.Actor> iter = this.enemies.iterator();
         while (iter.hasNext()) {
             andius.objects.Actor c = iter.next();
-            if (c.getMonster().getCurrentHitPoints() <= 0) {
+            if (c.getEnemy().getCurrentHitPoints() <= 0) {
                 iter.remove();
-                c.getMonster().getMonsterCursor().remove();
+                c.getEnemy().getMonsterCursor().remove();
             }
         }
 
@@ -588,7 +600,7 @@ public class CombatScreen extends BaseScreen {
         @Override
         public void run() {
             screen.enemies.remove(cr);
-            cr.getMonster().getMonsterCursor().remove();
+            cr.getEnemy().getMonsterCursor().remove();
         }
     }
 
@@ -651,36 +663,52 @@ public class CombatScreen extends BaseScreen {
             int chestRewardId = 0;
             int exp = 0;
 
-            for (Monster m : crSlots) {
-                if (m != null) {
-                    if (m.getExp() > exp) {
-                        exp = m.getExp();
-                    }
-                    if (m.getGoldReward() > goldRewardId) {
-                        goldRewardId = m.getGoldReward();
-                    }
-                    if (m.getChestReward() > chestRewardId) {
-                        chestRewardId = m.getChestReward();
+            if (this.opponent.getEnemy() instanceof MutableMonster) {
+                for (Mutable mm : crSlots) {
+                    if (mm != null) {
+                        Monster m = (Monster) mm.baseType();
+                        if (m.getExp() > exp) {
+                            exp = m.getExp();
+                        }
+                        if (m.getGoldReward() > goldRewardId) {
+                            goldRewardId = m.getGoldReward();
+                        }
+                        if (m.getChestReward() > chestRewardId) {
+                            chestRewardId = m.getChestReward();
+                        }
                     }
                 }
-            }
 
-            this.contextMap.getScreen().endCombat(isWon, this.opponent);
+                this.contextMap.getScreen().endCombat(isWon, this.opponent);
 
-            for (SaveGame.CharacterRecord c : lastMenStanding) {
-                c.awardXP(exp / lastMenStanding.size());
-                log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp / lastMenStanding.size()));
-            }
-
-            if (this.hasTreasure) {
-                mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
-            } else {
-                Reward gold = contextMap.scenario().rewards().get(goldRewardId);
-                int goldAmt = gold.goldAmount();
                 for (SaveGame.CharacterRecord c : lastMenStanding) {
-                    c.adjustGold(goldAmt / lastMenStanding.size());
-                    this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+                    c.awardXP(exp / lastMenStanding.size());
+                    log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp / lastMenStanding.size()));
                 }
+
+                if (this.hasTreasure) {
+                    mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
+                } else {
+                    Reward gold = contextMap.scenario().rewards().get(goldRewardId);
+                    int goldAmt = gold.goldAmount();
+                    for (SaveGame.CharacterRecord c : lastMenStanding) {
+                        c.adjustGold(goldAmt / lastMenStanding.size());
+                        this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+                    }
+                    mainGame.setScreen(this.contextMap.getScreen());
+                }
+            } else {
+
+                for (Mutable mm : crSlots) {
+                    if (mm != null) {
+                        DoGooder dg = (DoGooder) mm.baseType();
+                        if (dg != null) {
+
+                        }
+                    }
+                }
+
+                this.contextMap.getScreen().endCombat(isWon, this.opponent);
                 mainGame.setScreen(this.contextMap.getScreen());
             }
 
@@ -709,7 +737,7 @@ public class CombatScreen extends BaseScreen {
             WizardryDungeonScreen scr = (WizardryDungeonScreen) this.contextMap.getScreen();
             int randx = Utils.RANDOM.nextInt(DUNGEON_DIM);
             int randy = Utils.RANDOM.nextInt(DUNGEON_DIM);
-            scr.teleport(new MazeAddress(scr.currentLevel + 1, randx, randy));
+            scr.teleport(new MazeAddress(scr.currentLevel + 1, randx, randy), true);
         } else {
             Sounds.play(Sound.EVADE);
         }
@@ -729,7 +757,7 @@ public class CombatScreen extends BaseScreen {
 
         try {
 
-            if (creature.getMonster().status().isDisabled()) {
+            if (creature.getEnemy().status().isDisabled()) {
                 return;
             }
 
@@ -742,18 +770,18 @@ public class CombatScreen extends BaseScreen {
             CombatAction action = CombatAction.ATTACK;
             Spells spell = null;
 
-            if (creature.getMonster().breath() != Breath.NONE && rand.nextInt(100) < 60) {
+            if (creature.getEnemy().breath() != Breath.NONE && rand.nextInt(100) < 60) {
                 action = CombatAction.BREATH;
             }
 
-            if (creature.getMonster().getCurrentMageSpellLevel() > 0 && !creature.getMonster().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
-                spell = creature.getMonster().castMageSpell();
+            if (creature.getEnemy().getCurrentMageSpellLevel() > 0 && !creature.getEnemy().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
+                spell = creature.getEnemy().castMageSpell();
                 action = CombatAction.CAST;
             }
 
             if (action != CombatAction.CAST) {
-                if (creature.getMonster().getCurrentPriestSpellLevel() > 0 && !creature.getMonster().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
-                    spell = creature.getMonster().castPriestSpell();
+                if (creature.getEnemy().getCurrentPriestSpellLevel() > 0 && !creature.getEnemy().status().has(Status.SILENCED) && rand.nextInt(100) < 75) {
+                    spell = creature.getEnemy().castPriestSpell();
                     action = CombatAction.CAST;
                 }
             }
@@ -764,11 +792,11 @@ public class CombatScreen extends BaseScreen {
 
             switch (action) {
                 case BREATH:
-                    log(String.format("%s breathes %s", creature.getMonster().name, creature.getMonster().breath()));
+                    log(String.format("%s breathes %s", creature.getEnemy().name(), creature.getEnemy().breath()));
                     for (andius.objects.Actor pm : partyMembers) {
-                        int d = creature.getMonster().getCurrentHitPoints() / 2;
+                        int d = creature.getEnemy().getCurrentHitPoints() / 2;
                         if (pm.getPlayer().savingThrowBreath()) {
-                            log(String.format("%s made a saving throwing throw against %s", pm.getPlayer().name, creature.getMonster().breath()));
+                            log(String.format("%s made a saving throwing throw against %s", pm.getPlayer().name, creature.getEnemy().breath()));
                             d = d / 2;
                         }
                         damagePlayer(seq, creature, pm, d);
@@ -776,17 +804,17 @@ public class CombatScreen extends BaseScreen {
                     break;
                 case ATTACK:
                     Sounds.play(Sound.NPC_ATTACK);
-                    boolean hit = Utils.attackHit(creature.getMonster(), target.getPlayer());
+                    boolean hit = Utils.attackHit(creature.getEnemy(), target.getPlayer());
                     if (hit) {
-                        for (Dice dice : creature.getMonster().getDamage()) {
+                        for (Dice dice : creature.getEnemy().getDamage()) {
                             damagePlayer(seq, creature, target, dice.roll());
                         }
                     } else {
-                        log(String.format("%s misses %s", creature.getMonster().name, target.getPlayer().name));
+                        log(String.format("%s misses %s", creature.getEnemy().name(), target.getPlayer().name));
                     }
                     break;
                 case CAST: {
-                    log(String.format("%s casts %s", creature.getMonster().name, spell));
+                    log(String.format("%s casts %s", creature.getEnemy().name(), spell));
                     SpellUtil.spellMonsterCast(this, seq, spell, creature, target);
                     break;
                 }
@@ -795,7 +823,7 @@ public class CombatScreen extends BaseScreen {
                     moveCreature(action, creature, target.getWx(), target.getWy());
                     if (creature.getWx() >= MAP_DIM || creature.getWy() < 0
                             || creature.getWy() >= MAP_DIM || creature.getWy() < 0) {
-                        log(String.format("%s Flees!", creature.getMonster().getName()));
+                        log(String.format("%s Flees!", creature.getEnemy().name()));
                         Sounds.play(Sound.EVADE);
                         return;
                     }
@@ -803,7 +831,7 @@ public class CombatScreen extends BaseScreen {
                 }
             }
         } finally {
-            creature.getMonster().processStatusAffects();
+            creature.getEnemy().processStatusAffects();
         }
 
     }
@@ -811,7 +839,7 @@ public class CombatScreen extends BaseScreen {
     private void damagePlayer(SequenceAction seq, andius.objects.Actor creature, andius.objects.Actor target, int damage) {
         target.adjustHP(-damage);
         log(String.format("%s %s %s for %d damage!",
-                creature.getMonster().name,
+                creature.getEnemy().name(),
                 HITMSGS[rand.nextInt(HITMSGS.length)],
                 target.getPlayer().name,
                 damage));
@@ -881,22 +909,22 @@ public class CombatScreen extends BaseScreen {
         if (dir == Direction.NORTH) {
             cr.setWy(--ny);
             cr.setY(cr.getY() + TILE_DIM);
-            cr.getMonster().getMonsterCursor().setY(cr.getMonster().getMonsterCursor().getY() + TILE_DIM);
+            cr.getEnemy().getMonsterCursor().setY(cr.getEnemy().getMonsterCursor().getY() + TILE_DIM);
         }
         if (dir == Direction.SOUTH) {
             cr.setWy(++ny);
             cr.setY(cr.getY() - TILE_DIM);
-            cr.getMonster().getMonsterCursor().setY(cr.getMonster().getMonsterCursor().getY() - TILE_DIM);
+            cr.getEnemy().getMonsterCursor().setY(cr.getEnemy().getMonsterCursor().getY() - TILE_DIM);
         }
         if (dir == Direction.EAST) {
             cr.setWx(++nx);
             cr.setX(cr.getX() + TILE_DIM);
-            cr.getMonster().getMonsterCursor().setX(cr.getMonster().getMonsterCursor().getX() + TILE_DIM);
+            cr.getEnemy().getMonsterCursor().setX(cr.getEnemy().getMonsterCursor().getX() + TILE_DIM);
         }
         if (dir == Direction.WEST) {
             cr.setWx(--nx);
             cr.setX(cr.getX() - TILE_DIM);
-            cr.getMonster().getMonsterCursor().setX(cr.getMonster().getMonsterCursor().getX() - TILE_DIM);
+            cr.getEnemy().getMonsterCursor().setX(cr.getEnemy().getMonsterCursor().getX() - TILE_DIM);
         }
 
         return true;
@@ -1037,24 +1065,24 @@ public class CombatScreen extends BaseScreen {
 
         AttackVector av = getDirectionalActionPath(target, attacker.getWx(), attacker.getWy(), range);
         av.result = AttackResult.MISS;
-        if (av.victim != null && av.victim.getMonster() != null) {
+        if (av.victim != null && av.victim.getEnemy() != null) {
             for (int j = 0; j < attacker.getPlayer().extraSwings(); j++) {
-                boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
+                boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getEnemy());
                 if (hit) {
                     av.result = AttackResult.HIT;
-                    int damage = Utils.dealDamage(weapon, av.victim.getMonster());
+                    int damage = Utils.dealDamage(weapon, av.victim.getEnemy());
                     log(String.format("%s %s %s, who %s after %d damage.",
                             attacker.getPlayer().name,
                             HITMSGS[rand.nextInt(HITMSGS.length)],
-                            av.victim.getMonster().name,
-                            av.victim.getMonster().getDamageTag(),
+                            av.victim.getEnemy().name(),
+                            av.victim.getEnemy().getDamageTag(),
                             damage));
                 } else {
                     log(String.format("%s %s %s who %s.",
                             attacker.getPlayer().name,
                             HITMSGS[rand.nextInt(HITMSGS.length)],
-                            av.victim.getMonster().name,
-                            av.victim.getMonster().getDamageTag()));
+                            av.victim.getEnemy().name(),
+                            av.victim.getEnemy().getDamageTag()));
                 }
             }
         } else {
@@ -1083,22 +1111,22 @@ public class CombatScreen extends BaseScreen {
             if (av.victim != null) {
                 av.result = AttackResult.MISS;
                 for (int j = 0; j < attacker.getPlayer().extraSwings(); j++) {
-                    boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getMonster());
+                    boolean hit = Utils.attackHit(attacker.getPlayer(), av.victim.getEnemy());
                     if (hit) {
                         av.result = AttackResult.HIT;
-                        int damage = Utils.dealDamage(weapon, av.victim.getMonster());
+                        int damage = Utils.dealDamage(weapon, av.victim.getEnemy());
                         log(String.format("%s %s %s, who %s after %d damage.",
                                 attacker.getPlayer().name,
                                 HITMSGS[rand.nextInt(HITMSGS.length)],
-                                av.victim.getMonster().name,
-                                av.victim.getMonster().getDamageTag(),
+                                av.victim.getEnemy().name(),
+                                av.victim.getEnemy().getDamageTag(),
                                 damage));
                     } else {
                         log(String.format("%s %s %s who %s.",
                                 attacker.getPlayer().name,
                                 HITMSGS[rand.nextInt(HITMSGS.length)],
-                                av.victim.getMonster().name,
-                                av.victim.getMonster().getDamageTag()));
+                                av.victim.getEnemy().name(),
+                                av.victim.getEnemy().getDamageTag()));
                     }
                 }
             } else {
@@ -1282,8 +1310,8 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor target = null;
 
             for (andius.objects.Actor c : enemies) {
-                float regx = Math.abs(c.getMonster().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                float regy = Math.abs(c.getMonster().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
+                float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
                 if (regx < 20 && regy < 20) {
                     target = c;
                     break;

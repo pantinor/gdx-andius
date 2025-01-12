@@ -33,7 +33,7 @@ public class SaveGame implements Constants {
     public Direction direction;
 
     public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
-    public final List<AnsweredRiddle> riddles = new ArrayList<>();
+    public final java.util.Map<Map, List<AnsweredRiddle>> riddles = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
         //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));

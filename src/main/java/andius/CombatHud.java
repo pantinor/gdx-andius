@@ -3,7 +3,7 @@ package andius;
 import static andius.Constants.TILE_DIM;
 import andius.objects.Icons;
 import andius.objects.Item;
-import andius.objects.MutableMonster;
+import andius.objects.Mutable;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
@@ -286,11 +286,11 @@ public class CombatHud {
 
     public void drawStatsMonster(SpriteBatch batch, andius.objects.Actor mon) {
 
-        MutableMonster rec = mon.getMonster();
+        Mutable rec = mon.getEnemy();
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("%s  \n", rec.name.toUpperCase()));
-        sb.append(String.format("LVL %d  %s\n", rec.getLevel(), rec.getType().toString()));
+        sb.append(String.format("%s  \n", rec.name().toUpperCase()));
+        sb.append(String.format("LVL %d  %s\n", rec.getLevel(), rec.getType()));
         sb.append(String.format("HP: %d / %d  AC: %d\n", rec.getCurrentHitPoints(), rec.getMaxHitPoints(), rec.getArmourClass()));
         sb.append(String.format("ST: %s\n", rec.status().toString()));
         sb.append(String.format("MG LVL: %d \n", rec.getCurrentMageSpellLevel()));
