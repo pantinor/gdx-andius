@@ -357,7 +357,7 @@ public interface Constants {
 
     public enum CharacterType {
         FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,
-        WERE, UNDEAD, DEMON, INSECT, ENCHANTED;
+        WERE, UNDEAD, DEMON, INSECT, ENCHANTED, NINJA, BISHOP, LORD, SAMURAI;
     }
 
     public enum Breath {

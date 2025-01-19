@@ -21,6 +21,7 @@ public class Item implements Comparable<Item> {
     }
 
     public int id;
+    public int scenarioID;
     public String name;
     public String genericName;
     public int iconID;

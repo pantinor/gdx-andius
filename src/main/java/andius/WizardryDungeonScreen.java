@@ -6,6 +6,8 @@ import static andius.Constants.CLASSPTH_RSLVR;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
+import static andius.WizardryData.PMO_MONSTERS;
+import static andius.WizardryData.WER_LEVEL_DESC;
 import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -510,8 +512,13 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y);
-        Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
+        if (this.map == Map.WIZARDRY4) {
+            String lbl = String.format(WER_LEVEL_DESC[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y);
+            Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
+        } else {
+            String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y);
+            Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
+        }
 
         if (showMiniMap) {
             batch.draw(MINI_MAP_TEXTURE, XALIGNMM - 10, Andius.SCREEN_HEIGHT - MINI_MAP_TEXTURE.getHeight() - 36);
@@ -572,8 +579,15 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
 
                 if (cell.message != null) {
-                    pixmap.setColor(Color.GREEN);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM,
+                            y * MINI_DIM,
+                            arrows[0][0].getRegionX(),
+                            arrows[0][0].getRegionY(),
+                            arrows[0][0].getRegionWidth(),
+                            arrows[0][0].getRegionHeight()
+                    );
                 }
 
                 if (cell.itemRequired > 0) {
@@ -667,18 +681,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.stairs || cell.elevator) {
                     drawLadderTriangle(cell, pixmap, x, y);
                 }
-                if (cell.summoningCircle1) {
-                    pixmap.drawPixmap(
-                            this.miniMapIconsPixmap,
-                            x * MINI_DIM,
-                            y * MINI_DIM,
-                            arrows[0][0].getRegionX(),
-                            arrows[0][0].getRegionY(),
-                            arrows[0][0].getRegionWidth(),
-                            arrows[0][0].getRegionHeight()
-                    );
-                }
-                if (cell.summoningCircle2 || cell.summoningCircle3 || cell.summoningCircle4
+
+                if (cell.summoningCircle1 || cell.summoningCircle2 || cell.summoningCircle3 || cell.summoningCircle4
                         || cell.summoningCircle5 || cell.summoningCircle6 || cell.summoningCircle7
                         || cell.summoningCircle8 || cell.summoningCircle9 || cell.summoningCircle10) {
                     pixmap.drawPixmap(
@@ -713,26 +717,29 @@ public class WizardryDungeonScreen extends BaseScreen {
                     arrows[3][2].getRegionWidth(),
                     arrows[3][2].getRegionHeight()
             );
-        } else if (cell.stairs && cell.address.level > cell.addressTo.level) {//up
-            pixmap.drawPixmap(
-                    this.miniMapIconsPixmap,
-                    cx,
-                    cy,
-                    arrows[3][0].getRegionX(),
-                    arrows[3][0].getRegionY(),
-                    arrows[3][0].getRegionWidth(),
-                    arrows[3][0].getRegionHeight()
-            );
-        } else if (cell.stairs && cell.address.level < cell.addressTo.level) {//down
-            pixmap.drawPixmap(
-                    this.miniMapIconsPixmap,
-                    cx,
-                    cy,
-                    arrows[3][1].getRegionX(),
-                    arrows[3][1].getRegionY(),
-                    arrows[3][1].getRegionWidth(),
-                    arrows[3][1].getRegionHeight()
-            );
+
+        } else if (cell.stairs) {
+            if (cell.address.level > cell.addressTo.level) {//up
+                pixmap.drawPixmap(
+                        this.miniMapIconsPixmap,
+                        cx,
+                        cy,
+                        arrows[3][0].getRegionX(),
+                        arrows[3][0].getRegionY(),
+                        arrows[3][0].getRegionWidth(),
+                        arrows[3][0].getRegionHeight()
+                );
+            } else {//down
+                pixmap.drawPixmap(
+                        this.miniMapIconsPixmap,
+                        cx,
+                        cy,
+                        arrows[3][1].getRegionX(),
+                        arrows[3][1].getRegionY(),
+                        arrows[3][1].getRegionWidth(),
+                        arrows[3][1].getRegionHeight()
+                );
+            }
         }
     }
 
@@ -944,21 +951,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         } else {
             log("Pass");
 
-            WizardryData.MazeLevel[] levels = this.map.scenario().levels();
-
-            boolean wandering = levels[currentLevel].cells[x][y].wanderingEncounterID != -1
-                    && (levels[currentLevel].cells[x][y].hasTreasureChest || Utils.randomBoolean());
-
-            if (levels[currentLevel].cells[x][y].encounterID != -1 || wandering) {
-
-                andius.objects.Actor actor = getEnemyActor(levels[currentLevel].cells[x][y].encounterID != -1
-                        ? levels[currentLevel].cells[x][y].encounterID
-                        : levels[currentLevel].cells[x][y].wanderingEncounterID);
-                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-                TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
-                mainGame.setScreen(cs);
+            try {
+                move(cell, currentDir, x, y, true);
+            } catch (Throwable e) {
+                partyDeath();
             }
+
         }
 
         finishTurn(x, y);
@@ -1114,39 +1112,49 @@ public class WizardryDungeonScreen extends BaseScreen {
                 Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
             }
 
-            boolean wandering = levels[currentLevel].cells[dx][dy].wanderingEncounterID != -1
-                    && (levels[currentLevel].cells[dx][dy].hasTreasureChest || Utils.randomBoolean());
-
-            if (levels[currentLevel].cells[dx][dy].encounterID != -1 || wandering) {
-
-                andius.objects.Actor actor = getEnemyActor(levels[currentLevel].cells[dx][dy].encounterID != -1
-                        ? levels[currentLevel].cells[dx][dy].encounterID
-                        : levels[currentLevel].cells[dx][dy].wanderingEncounterID);
-                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-                TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
-                mainGame.setScreen(cs);
-
-            }
+            fight(levels[currentLevel].cells[dx][dy], this.map.scenario().levels()[currentLevel].cells[dx][dy].defeated);
 
             finishTurn(dx, dy);
         }
     }
 
-    private andius.objects.Actor getEnemyActor(int encounterID) {
-        andius.objects.Actor actor = null;
+    private void fight(MazeCell cell, List<Integer> defeated) {
         if (this.map == Map.WIZARDRY4) {
-            DoGooder dogooder = this.map.scenario().characters().get(encounterID);
-            actor = new andius.objects.Actor(dogooder.name, null);
-            MutableCharacter dg = new MutableCharacter(dogooder);
-            actor.set(dg, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
+            boolean wandering = cell.wanderingEncounterID != -1 && !defeated.contains(cell.wanderingEncounterID) && Utils.randomBoolean();
+            if ((cell.encounterID != -1 && !defeated.contains(cell.encounterID)) || wandering) {
+                int encounterID = cell.encounterID != -1 ? cell.encounterID : cell.wanderingEncounterID;
+                DoGooder dogooder = this.map.scenario().characters().get(encounterID);
+
+                List<MutableMonster> mms = new ArrayList<>();
+                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
+                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
+
+                Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], mms, dogooder);
+                mainGame.setScreen(cs);
+            }
         } else {
-            Monster monster = this.map.scenario().monsters().get(encounterID);
-            actor = new andius.objects.Actor(monster.name, null);
-            MutableMonster mm = new MutableMonster(monster);
-            actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+            boolean wandering = cell.wanderingEncounterID != -1 && (cell.hasTreasureChest || Utils.randomBoolean());
+            if (cell.encounterID != -1 || wandering) {
+                int encounterID = cell.encounterID != -1 ? cell.encounterID : cell.wanderingEncounterID;
+                Monster monster = this.map.scenario().monsters().get(encounterID);
+                andius.objects.Actor actor = new andius.objects.Actor(monster.name, null);
+                MutableMonster mm = new MutableMonster(monster);
+                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+
+                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                TiledMap tm = loader.load("assets/data/combat1.tmx");
+                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
+                mainGame.setScreen(cs);
+            }
         }
-        return actor;
     }
 
     @Override
@@ -1223,7 +1231,16 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (isWon) {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
-            this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID = -1;
+
+            if (this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID > 0) {
+                this.map.scenario().levels()[currentLevel].cells[x][y].defeated.add(this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID);
+                this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+            }
+
+            if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
+                this.map.scenario().levels()[currentLevel].cells[x][y].defeated.add(this.map.scenario().levels()[currentLevel].cells[x][y].encounterID);
+                this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+            }
 
             List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
             if (removedMonsters == null) {

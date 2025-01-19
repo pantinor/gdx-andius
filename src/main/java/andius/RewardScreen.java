@@ -225,7 +225,7 @@ public class RewardScreen implements Screen, Constants {
             }
             case ANTI_MAGE -> {
                 for (CharacterRecord c : this.context.players()) {
-                    if (c.classType == ClassType.MAGE || c.classType == ClassType.WIZARD || c.classType == ClassType.SAMURAI) {
+                    if (c.classType == ClassType.MAGE || c.classType == ClassType.BISHOP || c.classType == ClassType.SAMURAI) {
                         if (rand.nextInt(21) < c.luck) {
                             log("A spell has a horrible affect on the mage " + c.name);
                             if (rand.nextInt(2) == 0) {
@@ -241,7 +241,7 @@ public class RewardScreen implements Screen, Constants {
             }
             case ANTI_PRIEST -> {
                 for (CharacterRecord c : this.context.players()) {
-                    if (c.classType == ClassType.CLERIC || c.classType == ClassType.LORD) {
+                    if (c.classType == ClassType.PRIEST || c.classType == ClassType.LORD) {
                         if (rand.nextInt(20) + 1 < c.luck) {
                             log("A spell has a horrible affect on the cleric " + c.name);
                             if (rand.nextInt(2) == 0) {

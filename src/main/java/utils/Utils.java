@@ -4,7 +4,6 @@ import andius.Constants;
 import andius.Direction;
 import andius.objects.Item;
 import andius.objects.Mutable;
-import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -150,6 +149,33 @@ public class Utils {
         return dirmask;
     }
 
+    public static boolean attackHit(Mutable attacker, Mutable defender) {
+        int roll = RANDOM.nextInt(20) + 1;
+
+        if (roll == 20) {
+            return true;
+        }
+
+        if (roll == 1) {
+            return false;
+        }
+
+        int THAC0 = 0;
+        if (attacker.getLevel() > Constants.THAC0_MONSTER.length) {
+            THAC0 = Constants.THAC0_MONSTER[Constants.THAC0_MONSTER.length - 1];
+        } else {
+            THAC0 = Constants.THAC0_MONSTER[attacker.getLevel() - 1];
+        }
+
+        int chanceToHit = THAC0 - defender.getArmourClass();
+
+        chanceToHit += (defender.status().isDisabled() ? 3 : 0);
+
+        chanceToHit += attacker.hitModifier();
+
+        return roll >= chanceToHit;
+    }
+
     public static boolean attackHit(Mutable attacker, CharacterRecord defender) {
         int roll = RANDOM.nextInt(20) + 1;
 
@@ -173,7 +199,7 @@ public class Utils {
         chanceToHit -= defender.calculateAC();
 
         chanceToHit += (defender.status.isDisabled() ? 3 : 0);
-        
+
         chanceToHit += attacker.hitModifier();
 
         return roll >= chanceToHit;
@@ -204,10 +230,10 @@ public class Utils {
                 THAC0 = Constants.THACO_FIGHTER[attacker.level];
                 break;
             case MAGE:
-            case WIZARD:
+            case BISHOP:
                 THAC0 = Constants.THACO_MAGE[attacker.level];
                 break;
-            case CLERIC:
+            case PRIEST:
                 THAC0 = Constants.THACO_PRIEST[attacker.level];
                 break;
             case THIEF:
@@ -246,7 +272,7 @@ public class Utils {
     public static int dealDamage(Item weapon, Mutable defender) {
         int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
         defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
-        defender.adjustHealthBar();
+        defender.adjustHealthCursor();
         return damage;
     }
 

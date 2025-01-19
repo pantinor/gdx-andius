@@ -15,7 +15,7 @@ public class MutableMonster implements Mutable {
     private int currentPriestSpellLevel;
     private final State status = new State();
     private final int maxHitPoints;
-    private MonsterCursor monsterCursor;
+    private HealthCursor healthCursor;
     private Monster monster;
 
     public MutableMonster(Monster m) {
@@ -47,8 +47,13 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public CharacterType getType() {
+    public CharacterType getMonsterType() {
         return this.monster.getType();
+    }
+
+    @Override
+    public ClassType getType() {
+        return null;
     }
 
     @Override
@@ -97,6 +102,11 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
+    public boolean isDead() {
+        return this.currentHitPoints <= 0;
+    }
+
+    @Override
     public State status() {
         return status;
     }
@@ -106,7 +116,7 @@ public class MutableMonster implements Mutable {
 
         if (this.monster.healpts > 0) {
             setCurrentHitPoints(this.monster.healpts);
-            adjustHealthBar();
+            adjustHealthCursor();
         }
 
         for (Status s : Status.values()) {
@@ -142,18 +152,18 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public MonsterCursor getMonsterCursor() {
-        return monsterCursor;
+    public HealthCursor getHealthCursor() {
+        return healthCursor;
     }
 
     @Override
-    public void setMonsterCursor(MonsterCursor monsterCursor) {
-        this.monsterCursor = monsterCursor;
+    public void setHealthCursor(HealthCursor healthCursor) {
+        this.healthCursor = healthCursor;
     }
 
     @Override
-    public void adjustHealthBar() {
-        this.monsterCursor.adjust(currentHitPoints, maxHitPoints);
+    public void adjustHealthCursor() {
+        this.healthCursor.adjust(currentHitPoints, maxHitPoints);
     }
 
     @Override

@@ -205,12 +205,12 @@ public class ManageScreen implements Screen, Constants {
                 sel.gold = Utils.getRandomBetween(100, 200);
                 sel.portaitIndex = pidx;
 
-                if (sel.classType == ClassType.MAGE || sel.classType == ClassType.WIZARD) {
+                if (sel.classType == ClassType.MAGE || sel.classType == ClassType.BISHOP) {
                     sel.knownSpells.add(Spells.values()[1]);
                     sel.knownSpells.add(Spells.values()[3]);
                     sel.magePoints[0] = 2;
                 }
-                if (sel.classType == ClassType.CLERIC) {
+                if (sel.classType == ClassType.PRIEST) {
                     sel.knownSpells.add(Spells.values()[23]);
                     sel.knownSpells.add(Spells.values()[24]);
                     sel.clericPoints[0] = 2;

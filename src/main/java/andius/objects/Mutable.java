@@ -16,10 +16,12 @@ public interface Mutable {
 
     public Object baseType();
 
-    public CharacterType getType();
+    public ClassType getType();
+
+    public CharacterType getMonsterType();
 
     public List<Dice> getDamage();
-    
+
     public int hitModifier();
 
     public int getCurrentHitPoints();
@@ -36,15 +38,17 @@ public interface Mutable {
 
     public State status();
 
+    public boolean isDead();
+
     public void processStatusAffects();
 
     public int getMaxHitPoints();
 
-    public MonsterCursor getMonsterCursor();
+    public HealthCursor getHealthCursor();
 
-    public void setMonsterCursor(MonsterCursor monsterCursor);
+    public void setHealthCursor(HealthCursor monsterCursor);
 
-    public void adjustHealthBar();
+    public void adjustHealthCursor();
 
     public String getDamageTag();
 

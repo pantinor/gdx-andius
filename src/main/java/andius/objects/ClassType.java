@@ -7,9 +7,9 @@ public enum ClassType {
 
     FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, TibianSprite.animation("Knight_Knight_Male")),
     MAGE("M", 4, 0, 11, 0, 0, 0, 0, TibianSprite.animation("Sorcerer_Conjurer_Male")),
-    CLERIC("C", 8, 0, 0, 11, 0, 0, 0, TibianSprite.animation("Druid_Grove_Keeper_Male")),
+    PRIEST("C", 8, 0, 0, 11, 0, 0, 0, TibianSprite.animation("Druid_Grove_Keeper_Male")),
     THIEF("T", 6, 0, 0, 0, 0, 11, 0, TibianSprite.animation("Paladin_Demon_Hunter_Male")),
-    WIZARD("W", 6, 0, 12, 12, 0, 0, 0, TibianSprite.animation("Sorcerer_Wizard_Male")),
+    BISHOP("W", 6, 0, 12, 12, 0, 0, 0, TibianSprite.animation("Sorcerer_Wizard_Male")),
     SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, TibianSprite.animation("Knight_Warmaster_Male")),
     LORD("L", 10, 15, 12, 12, 15, 14, 15, TibianSprite.animation("Knight_Arena_Champion_Male")),
     NINJA("N", 6, 17, 17, 17, 17, 17, 17, TibianSprite.animation("Paladin_Assassin_Male"));

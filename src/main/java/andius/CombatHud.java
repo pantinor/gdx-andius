@@ -290,7 +290,7 @@ public class CombatHud {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("%s  \n", rec.name().toUpperCase()));
-        sb.append(String.format("LVL %d  %s\n", rec.getLevel(), rec.getType()));
+        sb.append(String.format("LVL %d  %s\n", rec.getLevel(), rec.getMonsterType()));
         sb.append(String.format("HP: %d / %d  AC: %d\n", rec.getCurrentHitPoints(), rec.getMaxHitPoints(), rec.getArmourClass()));
         sb.append(String.format("ST: %s\n", rec.status().toString()));
         sb.append(String.format("MG LVL: %d \n", rec.getCurrentMageSpellLevel()));

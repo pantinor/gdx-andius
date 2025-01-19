@@ -18,7 +18,7 @@ public class MutableCharacter implements Mutable {
     private final int[] mageSpellsLevels = new int[7];
     private final int[] priestSpellLevels = new int[7];
     private final State status = new State();
-    private MonsterCursor characterCursor;
+    private HealthCursor healthCursor;
     private DoGooder dogooder;
 
     public MutableCharacter(DoGooder c) {
@@ -41,12 +41,21 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public CharacterType getType() {
+    public ClassType getType() {
         return this.dogooder.characterClass;
     }
 
     @Override
+    public CharacterType getMonsterType() {
+        return null;
+    }
+
+    @Override
     public String icon() {
+
+        if (this.dogooder.characterClass == null) {
+
+        }
 
         switch (this.dogooder.characterClass) {
             case FIGHTER:
@@ -57,25 +66,13 @@ public class MutableCharacter implements Mutable {
                 return Utils.randomBoolean() ? "The_Hag" : "Barbaria";
             case THIEF:
                 return Utils.randomBoolean() ? "Deadeye_Devious" : "Ron_The_Ripper";
-            case MIDGET:
-                return "Foreman_Kneebiter";
-            case GIANT:
-                return Utils.randomBoolean() ? "Malofur_Mangrinder" : "Angry_King_Chuck";
-            case MYTHICAL:
-                return Utils.randomBoolean() ? "The_Rootkraken" : "Timira_the_ManyHeaded";
-            case DRAGON:
-                return Utils.randomBoolean() ? "Kalyassa" : "Vemiath";
-            case ANIMAL:
-                return Utils.randomBoolean() ? "Tiger" : "Bear";
-            case WERE:
-                return Utils.randomBoolean() ? "Werebear" : "Bloodback";
-            case UNDEAD:
-                return Utils.randomBoolean() ? "Grand_Master_Oberon" : "Grand_Commander_Soeren";
-            case DEMON:
-                return Utils.randomBoolean() ? "Demon" : "Morgaroth";
-            case INSECT:
-                return Utils.randomBoolean() ? "Crawler" : "Giant_Spider";
-            case ENCHANTED:
+            case NINJA:
+                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
+            case BISHOP:
+                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
+            case LORD:
+                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
+            case SAMURAI:
                 return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
         }
 
@@ -131,6 +128,14 @@ public class MutableCharacter implements Mutable {
         this.currentHitPoints = currentHitPoints;
     }
 
+    public int[] getMageSpellLevels() {
+        return this.mageSpellsLevels;
+    }
+
+    public int[] getPriestSpellLevels() {
+        return this.priestSpellLevels;
+    }
+
     @Override
     public int getCurrentMageSpellLevel() {
         for (int i = 6; i >= 0; i--) {
@@ -152,6 +157,11 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
+    public boolean isDead() {
+        return this.currentHitPoints <= 0;
+    }
+
+    @Override
     public State status() {
         return status;
     }
@@ -161,7 +171,7 @@ public class MutableCharacter implements Mutable {
 
         if (this.dogooder.healPts > 0) {
             setCurrentHitPoints(this.dogooder.healPts);
-            adjustHealthBar();
+            adjustHealthCursor();
         }
 
         for (Status s : Status.values()) {
@@ -197,18 +207,18 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public MonsterCursor getMonsterCursor() {
-        return characterCursor;
+    public HealthCursor getHealthCursor() {
+        return healthCursor;
     }
 
     @Override
-    public void setMonsterCursor(MonsterCursor monsterCursor) {
-        this.characterCursor = monsterCursor;
+    public void setHealthCursor(HealthCursor healthCursor) {
+        this.healthCursor = healthCursor;
     }
 
     @Override
-    public void adjustHealthBar() {
-        this.characterCursor.adjust(currentHitPoints, this.dogooder.hpMax);
+    public void adjustHealthCursor() {
+        this.healthCursor.adjust(currentHitPoints, this.dogooder.hpMax);
     }
 
     @Override
@@ -261,7 +271,7 @@ public class MutableCharacter implements Mutable {
 
         for (int i = spLvl; i >= 0; i--) {
             for (Spells s : this.dogooder.knownSpells) {
-                if (s.getType() == ClassType.CLERIC && s.getLevel() == i + 1) {
+                if (s.getType() == ClassType.PRIEST && s.getLevel() == i + 1) {
                     priestSpellLevels[spLvl]--;
                     return s;
                 }

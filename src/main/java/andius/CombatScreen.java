@@ -147,7 +147,7 @@ public class CombatScreen extends BaseScreen {
             cursor.setX(x);
             cursor.setY(y);
             stage.addActor(cursor);
-            actor.getEnemy().setMonsterCursor(cursor);
+            actor.getEnemy().setHealthCursor(cursor);
 
             enemies.add(actor);
         }
@@ -361,8 +361,8 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.begin(ShapeType.Line);
                 shapeRenderer.setColor(255, 255, 0, .50f);//yellow
                 for (andius.objects.Actor c : this.enemies) {
-                    float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                    float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    float regx = Math.abs(c.getEnemy().getHealthCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getEnemy().getHealthCursor().getY() + TILE_DIM / 2 - pointery);
                     if (regx < 20 && regy < 20) {
                         Item weapon = cip.player.getPlayer().weapon == null ? Item.HANDS : cip.player.getPlayer().weapon;
                         int range = weapon.range == 0 ? 1 : weapon.range;
@@ -389,8 +389,8 @@ public class CombatScreen extends BaseScreen {
                 shapeRenderer.end();
             } else {
                 for (andius.objects.Actor c : this.enemies) {
-                    float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                    float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                    float regx = Math.abs(c.getEnemy().getHealthCursor().getX() + TILE_DIM / 2 - pointerx);
+                    float regy = Math.abs(c.getEnemy().getHealthCursor().getY() + TILE_DIM / 2 - pointery);
                     if (regx < 20 && regy < 20) {
                         batch.begin();
                         hud.drawStatsMonster(batch, c);
@@ -517,7 +517,7 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor c = iter.next();
             if (c.getEnemy().getCurrentHitPoints() <= 0) {
                 iter.remove();
-                c.getEnemy().getMonsterCursor().remove();
+                c.getEnemy().getHealthCursor().remove();
             }
         }
 
@@ -600,7 +600,7 @@ public class CombatScreen extends BaseScreen {
         @Override
         public void run() {
             screen.enemies.remove(cr);
-            cr.getEnemy().getMonsterCursor().remove();
+            cr.getEnemy().getHealthCursor().remove();
         }
     }
 
@@ -663,52 +663,37 @@ public class CombatScreen extends BaseScreen {
             int chestRewardId = 0;
             int exp = 0;
 
-            if (this.opponent.getEnemy() instanceof MutableMonster) {
-                for (Mutable mm : crSlots) {
-                    if (mm != null) {
-                        Monster m = (Monster) mm.baseType();
-                        if (m.getExp() > exp) {
-                            exp = m.getExp();
-                        }
-                        if (m.getGoldReward() > goldRewardId) {
-                            goldRewardId = m.getGoldReward();
-                        }
-                        if (m.getChestReward() > chestRewardId) {
-                            chestRewardId = m.getChestReward();
-                        }
+            for (Mutable mm : crSlots) {
+                if (mm != null) {
+                    Monster m = (Monster) mm.baseType();
+                    if (m.getExp() > exp) {
+                        exp = m.getExp();
+                    }
+                    if (m.getGoldReward() > goldRewardId) {
+                        goldRewardId = m.getGoldReward();
+                    }
+                    if (m.getChestReward() > chestRewardId) {
+                        chestRewardId = m.getChestReward();
                     }
                 }
+            }
 
-                this.contextMap.getScreen().endCombat(isWon, this.opponent);
+            this.contextMap.getScreen().endCombat(isWon, this.opponent);
 
-                for (SaveGame.CharacterRecord c : lastMenStanding) {
-                    c.awardXP(exp / lastMenStanding.size());
-                    log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp / lastMenStanding.size()));
-                }
+            for (SaveGame.CharacterRecord c : lastMenStanding) {
+                c.awardXP(exp / lastMenStanding.size());
+                log(String.format("%s gained %d experience points.", c.name.toUpperCase(), exp / lastMenStanding.size()));
+            }
 
-                if (this.hasTreasure) {
-                    mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
-                } else {
-                    Reward gold = contextMap.scenario().rewards().get(goldRewardId);
-                    int goldAmt = gold.goldAmount();
-                    for (SaveGame.CharacterRecord c : lastMenStanding) {
-                        c.adjustGold(goldAmt / lastMenStanding.size());
-                        this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
-                    }
-                    mainGame.setScreen(this.contextMap.getScreen());
-                }
+            if (this.hasTreasure) {
+                mainGame.setScreen(new RewardScreen(this.context, this.contextMap, 1, exp, chestRewardId));
             } else {
-
-                for (Mutable mm : crSlots) {
-                    if (mm != null) {
-                        DoGooder dg = (DoGooder) mm.baseType();
-                        if (dg != null) {
-
-                        }
-                    }
+                Reward gold = contextMap.scenario().rewards().get(goldRewardId);
+                int goldAmt = gold.goldAmount();
+                for (SaveGame.CharacterRecord c : lastMenStanding) {
+                    c.adjustGold(goldAmt / lastMenStanding.size());
+                    this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
                 }
-
-                this.contextMap.getScreen().endCombat(isWon, this.opponent);
                 mainGame.setScreen(this.contextMap.getScreen());
             }
 
@@ -909,22 +894,22 @@ public class CombatScreen extends BaseScreen {
         if (dir == Direction.NORTH) {
             cr.setWy(--ny);
             cr.setY(cr.getY() + TILE_DIM);
-            cr.getEnemy().getMonsterCursor().setY(cr.getEnemy().getMonsterCursor().getY() + TILE_DIM);
+            cr.getEnemy().getHealthCursor().setY(cr.getEnemy().getHealthCursor().getY() + TILE_DIM);
         }
         if (dir == Direction.SOUTH) {
             cr.setWy(++ny);
             cr.setY(cr.getY() - TILE_DIM);
-            cr.getEnemy().getMonsterCursor().setY(cr.getEnemy().getMonsterCursor().getY() - TILE_DIM);
+            cr.getEnemy().getHealthCursor().setY(cr.getEnemy().getHealthCursor().getY() - TILE_DIM);
         }
         if (dir == Direction.EAST) {
             cr.setWx(++nx);
             cr.setX(cr.getX() + TILE_DIM);
-            cr.getEnemy().getMonsterCursor().setX(cr.getEnemy().getMonsterCursor().getX() + TILE_DIM);
+            cr.getEnemy().getHealthCursor().setX(cr.getEnemy().getHealthCursor().getX() + TILE_DIM);
         }
         if (dir == Direction.WEST) {
             cr.setWx(--nx);
             cr.setX(cr.getX() - TILE_DIM);
-            cr.getEnemy().getMonsterCursor().setX(cr.getEnemy().getMonsterCursor().getX() - TILE_DIM);
+            cr.getEnemy().getHealthCursor().setX(cr.getEnemy().getHealthCursor().getX() - TILE_DIM);
         }
 
         return true;
@@ -1310,8 +1295,8 @@ public class CombatScreen extends BaseScreen {
             andius.objects.Actor target = null;
 
             for (andius.objects.Actor c : enemies) {
-                float regx = Math.abs(c.getEnemy().getMonsterCursor().getX() + TILE_DIM / 2 - pointerx);
-                float regy = Math.abs(c.getEnemy().getMonsterCursor().getY() + TILE_DIM / 2 - pointery);
+                float regx = Math.abs(c.getEnemy().getHealthCursor().getX() + TILE_DIM / 2 - pointerx);
+                float regy = Math.abs(c.getEnemy().getHealthCursor().getY() + TILE_DIM / 2 - pointery);
                 if (regx < 20 && regy < 20) {
                     target = c;
                     break;

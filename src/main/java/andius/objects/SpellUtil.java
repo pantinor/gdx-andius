@@ -5,6 +5,7 @@ import andius.BaseScreen;
 import andius.CombatScreen;
 import andius.CombatScreen.RemoveCreatureAction;
 import andius.Constants.AddActorAction;
+import andius.Constants.CharacterType;
 import andius.Constants.PlaySoundAction;
 import andius.Constants.LogAction;
 import andius.Constants.Status;
@@ -287,7 +288,7 @@ public class SpellUtil {
         ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
 
         if (rand.nextInt(100) < target.getEnemy().getUnaffected()
-                || (spell == Spells.ZILWAN && !target.getEnemy().getType().equals("UNDEAD"))) {
+                || (spell == Spells.ZILWAN && !target.getEnemy().getMonsterType().equals(CharacterType.UNDEAD))) {
             seq.addAction(Actions.run(new LogAction(screen, target.getEnemy().name() + " is unaffected.")));
         } else {
             spellDamage(spell, target.getEnemy());
@@ -322,7 +323,7 @@ public class SpellUtil {
     private static void spellDamage(Spells spell, Mutable m) {
         int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
         m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
-        m.adjustHealthBar();
+        m.adjustHealthCursor();
     }
 
     private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, Spells spell) {
@@ -346,7 +347,7 @@ public class SpellUtil {
 
                 int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
                 m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
-                m.getEnemy().adjustHealthBar();
+                m.getEnemy().adjustHealthCursor();
 
                 seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
 
@@ -375,7 +376,7 @@ public class SpellUtil {
 
             int damage = Utils.getRandomBetween(minDamage, maxDamage);
             m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
-            m.getEnemy().adjustHealthBar();
+            m.getEnemy().adjustHealthCursor();
 
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
 
@@ -549,7 +550,7 @@ public class SpellUtil {
                 int current = target.getCurrentHitPoints() + healAmt;
                 target.setCurrentHitPoints(current > target.getMaxHitPoints() ? target.getMaxHitPoints() : current);
             }
-            target.adjustHealthBar();
+            target.adjustHealthCursor();
         } else {
             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
         }

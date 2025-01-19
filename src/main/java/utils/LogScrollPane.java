@@ -31,7 +31,7 @@ public class LogScrollPane extends AutoFocusScrollPane {
 
         setScrollingDisabled(true, false);
 
-        internalTable.align(Align.topLeft);
+        internalTable.bottom().left();
     }
 
     public void add(String text) {

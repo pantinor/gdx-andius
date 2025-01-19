@@ -27,7 +27,7 @@ public class WizardryData {
     public static final int DUNGEON_DIM = 20;
     private static final Random RANDOM = new Random();
 
-    private enum CellType {
+    public enum CellType {
         NORMAL, STAIRS, PIT, CHUTE, SPINNER, DARK, TELEPORT, DAMAGE, ELEVATOR, ROCK, NOSPELL, MESSAGE, ENCOUNTER
     }
 
@@ -86,7 +86,6 @@ public class WizardryData {
     private static final String WER_LVL_11 = "0000000000F80050515101FE0005040404CC40A496A201BE10010000000344001404500C1004411014A20010000400010000280000A10509411490A35010000005DE5010000005070909811490D80000280000DE0010000400C610044110141E4400140450011001000000CC40A496A501DC0005040404C80000000000DC0010142804F80021281418F94054455515061051455515B94450114505B61444555541EC1454554541D814544545410D11510145116421620145218D1151014511001454454541031454554541001444555541CB44501145050F1051455515DA4054455515010021281818A40010142804BA0050515501A20005040404C340A495A201B21001000000004400140450B21004411014000010000400A20000280000010909811490DC5010000005A85010000005F80505411490DE0000180000A20010000400DE1004411014BB4400140450DC10010000001040A496A601CD0005040404A10050515501BE0000000000020004050501A64004050505A21055515505014454515505001154445141000551555550000555555150010555515150004454405144A68854405144CD4454405144000555515150010555555150200551555550001154445141DA4454515505001055515505BE4004050606060004050501C6FFFF0FAA3F020E5B0F200C0027261DCC33260DC53900D1001D4197015D6107C65D61C7214C00C300000020AA4C00D3DB5D6117DA5D61C7041D41C7A13900D1BE3326ADF227260DC60F000C2E3F025E5400000000000000000000000000000000E00000000000000F00F000F0000000000010000003860000000000000000000E0000000000000000E00E00000000000000E0E00000000000000000E0040000000000000000E000000000000000000000000000000F000F000200D00BC00A000000000000050000F000000000F0E0000000000000000000E0000000000000000000E0E0000000000000000000E00E0000000000000000000E000000000010000000070000000000F000009FF000000000000000000000000040444444B4BB44B50000070007000C000C000C000C000C000F000E0000000F000F000C000000A10000000A000A0006000A000E0006000E000A00B400B600B8000A000A000000A0000000060005000600060006000500050006002E012F0130010500050000000A000000000000000100000000000000000001000000000000000000010000000000";
     private static final String WER_LVL_15 = "5555555511000005000105005005410014005015414004005055410404000051101414000004500401000004441051004040001005004400040010004000000004001050150000000050151400000040451000001050140451000011111440001041000000000005140054004050510510005015041010001000000040001001004154001004044441005441404454000454010050004000450014001050510111000010515400004055051140004015100400000001044454001050554145000004054101000040154005001150505045000000100400000055005000001040004004000050450445000000010001000000151104000001014014005415410004005055444105001450001414000104551001005404401111004440541405004000001510004410041005000155150400005055151454005540050400004051140541001110101440000001500400000001001444000410114010004410100514000000000000001010100001001010544405000011050510005411144515000054440014004400001015005115545000000400001500005150011110005010040010000101004404000154150010000040015004000051054005001014545055830100410004B055410110040011001000000001150004105D00000010000005010800112A020044490100043303000A180000818008006008080041C400001B56000049A0010020110000E007050022010200980288A94945AAB15F0011B191880200424870844D00C284AA02C88400010000000800000000000300500000090040000000080009000090000A00340908008000304000000000990000000000080000000000000007000000A0600A00390000080000000000809A000400000040A09000009003000AA040000080000000000000000800000000008000A000F044440400000A00050000F0F49000A00000000000404F000000080000030A04D004800909400000F00000F0000000000009049000000000050000000000000000000000A0A008040000303000090F00000000000020000010B1B9BB44B4BB4000000600020000000000FFFF00000000FFFFFFFFFFFF000000000D000000FFFF000011000B000000000000009300BF0003000100010000006400D20000000000000005000F000E890000CE0003003801010001000000E10013013A01000002008C00000000000F0000009B0000000000050000000C000000000002000000";
 
-    
     private static final String[] PMO_LEVEL_DATA = new String[]{L1, L2, L3, L4, L5, L6, L7, L8, L9, L10};
     public static final MazeLevel[] PMO_LEVELS = new MazeLevel[PMO_LEVEL_DATA.length];
 
@@ -99,6 +98,10 @@ public class WizardryData {
     private static final String[] BS_LEVEL_DATA = new String[]{BSL1, BSL2, BSL3, BSL4, BSL5, BSL6, BSL7, BSL8};
     public static final MazeLevel[] BS_LEVELS = new MazeLevel[BS_LEVEL_DATA.length];
 
+    public static final String[] WER_LEVEL_DESC = new String[]{"Castle 1", "Cosmic Cube 1", "Cosmic Cube 2", "Cosmic Cube 3",
+        "Maze of Wandering - Hideout of the Dreampainter", "Land of the Creatures of Light and Darkness", "Realm of the Whirling Dervish",
+        "Last Two Stones and Dreampainter Temple", "Land of a Thousand Cuts", "The Catacombs", "Pyramid of Entrapment",
+        "Grandmaster Ending - Castle and Level 11", "Castle 2", "Castle 3", "Unknown Level 15"};
     private static final String[] WER_LEVEL_DATA = new String[]{WER_CASTLE_1, WER_COSMIC_1, WER_COSMIC_2, WER_COSMIC_3, WER_MAZE_WANDER_4,
         WER_LAND_CREAT_5, WER_REALM_WHIRL_6, WER_TEMPLE_DREAM_7, WER_LAND_CUTS_8, WER_CATACOMBS_9,
         WER_PYRAMID_ENTRAP_10, WER_LVL_11, WER_CASTLE_2, WER_CASTLE_3, WER_LVL_15};
@@ -211,12 +214,12 @@ public class WizardryData {
                 BS_ITEMS_MAP.put(i.name, i);
             }
 
-            for (DoGooder i : WER4_CHARS) {
-                WER4_CHAR_MAP.put(i.name, i);
-            }
-
             for (Item i : WER_ITEMS) {
                 WER_ITEMS_MAP.put(i.name, i);
+            }
+
+            for (DoGooder i : WER4_CHARS) {
+                WER4_CHAR_MAP.put(i.name, i);
             }
 
             for (Monster m : PMO_MONSTERS) {
@@ -252,7 +255,7 @@ public class WizardryData {
             }
 
             for (int i = 0; i < WER_LEVEL_DATA.length; i++) {
-                WER_LEVELS[i] = new MazeLevelV4(5, DatatypeConverter.parseHexBinary(WER_LEVEL_DATA[i]), i + 1, BS_MONSTERS, WER_MESSAGES);
+                WER_LEVELS[i] = new MazeLevelV4(5, DatatypeConverter.parseHexBinary(WER_LEVEL_DATA[i]), i + 1, WER4_CHARS, WER_MESSAGES);
             }
         } catch (Throwable t) {
             t.printStackTrace();
@@ -293,6 +296,9 @@ public class WizardryData {
             this.startY = 0;
             this.characterMap = null;
             this.characters = null;
+            for (Item i : items) {
+                i.scenarioID = this.ordinal();
+            }
         }
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
@@ -309,6 +315,9 @@ public class WizardryData {
             this.startY = startY;
             this.characterMap = WER4_CHAR_MAP;
             this.characters = WER4_CHARS;
+            for (Item i : items) {
+                i.scenarioID = this.ordinal();
+            }
         }
 
         public int getStartLevel() {
@@ -708,7 +717,7 @@ public class WizardryData {
         private byte[][] cellInfoLocations;
         private EncounterOdds[] monsterOdds = new EncounterOdds[3];
 
-        public MazeLevelV4(int scenario, byte[] buffer, int level, List<Monster> monsters, List<Message> messages) {
+        public MazeLevelV4(int scenario, byte[] buffer, int level, List<DoGooder> characters, List<Message> messages) {
             this.level = level;
             this.buffer = buffer;
             this.scenario = scenario;
@@ -716,21 +725,11 @@ public class WizardryData {
             this.cellInfoLocations = getCellInfoLocations(buffer, 0 + 0x230);
             this.cellInfo = getCellInfo(buffer, 0 + 0x2F8);
             this.monsterOdds = getMonsterOdds(buffer, 0 + 0x360);
-            
+
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
 
                     cells[x][y] = walls(x, y);
-
-                    if (cells[x][y].lair) {
-                        int mid = getRandomMonster();
-                        Monster m = mid < monsters.size() ? monsters.get(mid) : null;
-                        if (m == null) {
-                            //System.out.println("cannot find monster id " + mid);
-                        } else {
-                            cells[x][y].wanderingEncounterID = m.monsterId;
-                        }
-                    }
 
                     MazeCell cell = cells[x][y];
 
@@ -739,6 +738,9 @@ public class WizardryData {
 
                     if (ci.type == CellType.CHUTE || ci.type == CellType.STAIRS || ci.type == CellType.TELEPORT) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                    }
+                    if (ci.type == CellType.MESSAGE) {
+                        System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
                     if (level == 4) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
@@ -842,6 +844,9 @@ public class WizardryData {
                                     }
                                 }
                             }
+                            if (ci.val[0] > 0) {
+                                cell.encounterID = ci.val[0];
+                            }
                             if (ci.val[2] == 600) {
                                 cell.encounterID = ci.val[1];
                             }
@@ -877,6 +882,17 @@ public class WizardryData {
                             }
                             break;
                     }
+
+                    if (cells[x][y].lair && cell.encounterID < 0) {
+                        int mid = getRandomMonster();
+                        DoGooder m = mid < characters.size() ? characters.get(mid) : null;
+                        if (m == null) {
+                            System.out.println("cannot find monster id " + mid);
+                        } else {
+                            cells[x][y].wanderingEncounterID = m.id;
+                        }
+                    }
+
                 }
             }
 
@@ -1026,7 +1042,7 @@ public class WizardryData {
 
         @Override
         public String toString() {
-            return level + "/" + row + "/" + column;
+            return level + "\t" + row + "\t" + column;
         }
     }
 
@@ -1047,15 +1063,15 @@ public class WizardryData {
         boolean hiddenEastDoor;
         boolean hiddenWestDoor;
 
-        boolean darkness;
-        boolean stairs;
-        boolean pit;
-        boolean spinner;
-        boolean chute;
-        boolean elevator;
-        boolean rock;
-        boolean teleport;
-        boolean spellsBlocked;
+        public boolean darkness;
+        public boolean stairs;
+        public boolean pit;
+        public boolean spinner;
+        public boolean chute;
+        public boolean elevator;
+        public boolean rock;
+        public boolean teleport;
+        public boolean spellsBlocked;
         public int feeAmount;
         public int tradeItem1;
         public int tradeItem2;
@@ -1071,6 +1087,7 @@ public class WizardryData {
 
         public int encounterID = -1;
         public int wanderingEncounterID = -1;
+        public final List<Integer> defeated = new ArrayList<>();
 
         public boolean hasTreasureChest;
         public boolean summoningCircle1;
@@ -1084,10 +1101,10 @@ public class WizardryData {
         public boolean summoningCircle9;
         public boolean summoningCircle10;
 
-        MazeAddress address;
-        MazeAddress addressTo; // if teleport/stairs/chute
-        int elevatorFrom;
-        int elevatorTo;
+        public MazeAddress address;
+        public MazeAddress addressTo; // if teleport/stairs/chute
+        public int elevatorFrom;
+        public int elevatorTo;
 
         public MazeCell(MazeAddress address) {
             this.address = address;
@@ -1213,6 +1230,114 @@ public class WizardryData {
             String hx3 = String.format("%04x", cb3);
             return String.format("%-8s  [%5d  %4d  %4d] [%s %s %s]", type, val[0], val[1], val[2], hx1, hx2, hx3);
         }
+    }
+
+    //Corrections for the wiz4 address issues using this as the 
+    //source of the information (https://www.tk421.net/wizardry/wiz4maps.shtml)
+    private static final int[][] wiz4Addrs = new int[][]{
+        {3, 17, 18, 1, 19, 19},
+        {1, 17, 15, 2, 12, 19},
+        {2, 15, 11, 1, 17, 2},
+        {2, 10, 18, 3, 14, 19},
+        {3, 16, 19, 1, 19, 6},
+        {3, 17, 19, 1, 3, 16},
+        {3, 18, 19, 1, 13, 14},
+        {3, 19, 19, 2, 14, 1},
+        {3, 16, 17, 2, 7, 5},
+        {1, 16, 16, 3, 8, 14},
+        {1, 12, 3, 3, 8, 14},
+        {1, 14, 6, 2, 12, 19},
+        {1, 12, 6, 2, 12, 19},
+        {1, 18, 7, 3, 8, 14},
+        {1, 15, 19, 1, 11, 15},
+        {1, 11, 13, 3, 8, 14},
+        {1, 7, 12, 3, 10, 16},
+        {1, 8, 5, 2, 12, 19},
+        {1, 12, 0, 3, 11, 13},
+        {1, 5, 8, 3, 8, 3},
+        {1, 9, 3, 2, 4, 1},
+        {1, 2, 8, 2, 16, 19},
+        {1, 9, 9, 3, 5, 11},
+        {1, 13, 16, 2, 14, 1},
+        {1, 13, 14, 1, 19, 19},
+        {1, 15, 11, 3, 11, 13},
+        {1, 1, 3, 3, 11, 13},
+        {1, 2, 1, 3, 10, 6},
+        {1, 9, 7, 3, 11, 13},
+        {1, 16, 15, 0, 0, 1},
+        {3, 13, 14, 2, 9, 0},
+        {3, 19, 14, 1, 19, 6},
+        {2, 2, 18, 1, 7, 0},
+        {2, 8, 10, 3, 9, 10},
+        {2, 8, 14, 1, 9, 13},
+        {2, 9, 10, 2, 19, 5},
+        {2, 11, 8, 1, 7, 0},
+        {2, 16, 6, 1, 19, 9},
+        {3, 0, 18, 2, 14, 1},
+        {3, 1, 15, 2, 9, 0},
+        {3, 1, 16, 2, 7, 3},
+        {3, 2, 1, 2, 7, 12},
+        {3, 2, 10, 1, 9, 0},
+        {3, 2, 15, 3, 8, 12},
+        {3, 2, 16, 1, 19, 19},
+        {3, 2, 18, 1, 19, 19},
+        {3, 8, 19, 3, 8, 12},
+        {3, 10, 18, 1, 19, 6},
+        {3, 11, 12, 2, 9, 14},
+        {3, 12, 9, 3, 16, 12},
+        {3, 13, 18, 2, 14, 1},
+        {3, 16, 1, 3, 11, 8},
+        {3, 18, 1, 2, 9, 0},
+        {3, 5, 1, 1, 19, 19},
+        {3, 16, 14, 1, 19, 19},
+        {0, 0, 1, 1, 16, 15},
+        {0, 11, 14, 12, 12, 14},
+        {0, 15, 2, 12, 15, 3},
+        {0, 15, 9, 12, 15, 8},
+        {5, 3, 18, 5, 2, 11},
+        {5, 8, 13, 5, 0, 16},
+        {12, 3, 3, 13, 2, 2},
+        {12, 3, 16, 13, 2, 17},
+        {12, 12, 14, 0, 11, 14},
+        {12, 15, 3, 0, 15, 2},
+        {12, 15, 8, 0, 15, 9},
+        {12, 15, 9, 13, 15, 8},
+        {12, 16, 3, 13, 16, 2},
+        {12, 16, 16, 13, 16, 17},
+        {13, 3, 2, 12, 3, 3},
+        {13, 3, 17, 12, 3, 16},
+        {13, 15, 8, 12, 15, 9},
+        {13, 16, 2, 12, 16, 3},
+        {13, 16, 17, 12, 16, 16},};
+
+    static {
+        wiz4AddressCorrections(WER_LEVELS);
+    }
+
+    private static void wiz4AddressCorrections(MazeLevel[] levels) {
+        for (int i = 0; i < wiz4Addrs.length; i++) {
+            MazeLevel fromLevel = levels[wiz4Addrs[i][0]];
+            MazeLevel toLevel = levels[wiz4Addrs[i][3]];
+            MazeCell cell = fromLevel.cells[wiz4Addrs[i][1]][wiz4Addrs[i][2]];
+            if (cell.addressTo != null) {
+                cell.addressTo = new MazeAddress(wiz4Addrs[i][3] + 1, wiz4Addrs[i][4], wiz4Addrs[i][5]);
+            } else {
+                System.out.printf("unexpected null cell addressTo on %d,%d,%d\n", wiz4Addrs[i][0], wiz4Addrs[i][1], wiz4Addrs[i][2]);
+            }
+        }
+
+        for (MazeLevel l : levels) {
+            //System.out.println(WER_LEVEL_DESC[l.level - 1]);
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+                    WizardryData.MazeCell c = l.cells[x][y];
+                    if (c.addressTo != null) {
+                        //System.out.printf("%d,%d,%d %s\n", l.level, x, y, c.addressTo);
+                    }
+                }
+            }
+        }
+
     }
 
 }

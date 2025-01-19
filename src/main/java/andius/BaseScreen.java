@@ -237,4 +237,9 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     public void resume() {
     }
 
+    @Override
+    public boolean touchCancelled(int i, int i1, int i2, int i3) {
+        return false;
+    }
+
 }

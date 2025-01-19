@@ -1,7 +1,7 @@
 package andius.objects;
 
 public enum Race {
-
+    NORACE(8, 8, 8, 8, 8, 8),
     HUMAN(8, 8, 5, 8, 8, 9),
     ELF(7, 10, 10, 6, 9, 6),
     DWARF(10, 7, 10, 10, 5, 6),

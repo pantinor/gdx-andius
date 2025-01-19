@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class PlayerCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
+public class PlayerCursor extends HealthCursor {
 
     private static final Texture GREEN = getCursorTexture(Color.GREEN);
     private static final Texture BLUE = getCursorTexture(Color.BLUE);
@@ -22,6 +22,7 @@ public class PlayerCursor extends com.badlogic.gdx.scenes.scene2d.Actor {
         this.healthBlue = new TextureRegion(BLUE, 0, 0, TILE_DIM, TILE_DIM);
     }
 
+    @Override
     public void adjust(int hp, int maxhp) {
         double percent = (double) hp / maxhp;
         double bar = percent * (double) TILE_DIM;

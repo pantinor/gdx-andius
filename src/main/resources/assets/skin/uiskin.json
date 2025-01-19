@@ -16,7 +16,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 	dim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
 	dimmer: { name: white, color: { r: 0, g: 0, b: 0, a: 0.35 } },
 	dimmest: { name: white, color: { r: 0, g: 0, b: 0, a: 0.10 } },
-	black: { name: white, color: { r: 0, g: 0, b: 0, a: 1 } }
+	black: { name: white, color: { r: 0, g: 0, b: 0, a: 1 } },
+        log-background: { name: white, color: { r: .1, g: .1, b: .1, a: 1 } }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	default: { down: default-round-down, up: default-round },

@@ -145,6 +145,8 @@ public class SaveGame implements Constants {
         public int submorsels = 400;
         public int acmodifier1; //lasts for single combat
         public int acmodifier2; //lasts until next rest at inn
+        
+        public transient HealthCursor healthCursor;
 
         public void awardXP(int amt) {
             exp = Utils.adjustValueMax(exp, amt, Integer.MAX_VALUE);
@@ -325,7 +327,7 @@ public class SaveGame implements Constants {
             int classBonus = 0;
             if (this.classType == ClassType.MAGE) {
                 classBonus += 3;
-            } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.SAMURAI || this.classType == ClassType.NINJA) {
+            } else if (this.classType == ClassType.BISHOP || this.classType == ClassType.SAMURAI || this.classType == ClassType.NINJA) {
                 classBonus += 2;
             }
             return roll < (base + raceBonus + classBonus) * 5;
@@ -339,9 +341,9 @@ public class SaveGame implements Constants {
                 raceBonus += 2;
             }
             int classBonus = 0;
-            if (this.classType == ClassType.CLERIC) {
+            if (this.classType == ClassType.PRIEST) {
                 classBonus += 3;
-            } else if (this.classType == ClassType.WIZARD || this.classType == ClassType.LORD || this.classType == ClassType.NINJA) {
+            } else if (this.classType == ClassType.BISHOP || this.classType == ClassType.LORD || this.classType == ClassType.NINJA) {
                 classBonus += 2;
             }
             return roll < (base + raceBonus + classBonus) * 5;
@@ -425,10 +427,10 @@ public class SaveGame implements Constants {
         if (rec.classType == ClassType.MAGE) {
             setSpellsPerLevel(rec.magePoints, rec.level, 0, 2);
         }
-        if (rec.classType == ClassType.CLERIC) {
+        if (rec.classType == ClassType.PRIEST) {
             setSpellsPerLevel(rec.clericPoints, rec.level, 0, 2);
         }
-        if (rec.classType == ClassType.WIZARD) {
+        if (rec.classType == ClassType.BISHOP) {
             setSpellsPerLevel(rec.magePoints, rec.level, 0, 4);
             setSpellsPerLevel(rec.clericPoints, rec.level, 3, 4);
         }

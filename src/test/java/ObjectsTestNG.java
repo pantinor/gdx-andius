@@ -1,5 +1,9 @@
 
 import andius.Direction;
+import andius.WizardryData;
+import static andius.WizardryData.DUNGEON_DIM;
+import andius.WizardryData.MazeLevel;
+import static andius.WizardryData.WER_LEVEL_DESC;
 import andius.objects.ClassType;
 import andius.objects.Race;
 import andius.objects.Conversations;
@@ -43,6 +47,24 @@ import utils.Utils;
 
 public class ObjectsTestNG {
 
+    @Test
+    public void testMazeData() throws Exception {
+        WizardryData.Scenario sc = WizardryData.Scenario.WER;
+
+        for (MazeLevel l : sc.levels()) {
+            System.out.println(WER_LEVEL_DESC[l.level - 1]);
+            for (int x = 0; x < DUNGEON_DIM; x++) {
+                for (int y = 0; y < DUNGEON_DIM; y++) {
+                    WizardryData.MazeCell c = l.cells[x][y];
+                    if (c.stairs || c.chute || c.teleport) {
+                        String hx = String.format("%04x", (short) c.addressTo.column);
+
+                    }
+                }
+            }
+        }
+    }
+
     //@Test
     public void testScript() throws Exception {
         Conversations convs = Conversations.init();
@@ -57,7 +79,7 @@ public class ObjectsTestNG {
         CharacterRecord avatar = new CharacterRecord();
         avatar.name = "Steve";
         avatar.race = Race.HUMAN;
-        avatar.classType = ClassType.CLERIC;
+        avatar.classType = ClassType.PRIEST;
         avatar.hp = avatar.getMoreHP();
         avatar.maxhp = avatar.hp;
         avatar.gold = Utils.getRandomBetween(100, 200);
@@ -69,12 +91,12 @@ public class ObjectsTestNG {
         avatar.piety = 12;
         avatar.level = 1;
 
-        if (avatar.classType == ClassType.MAGE || avatar.classType == ClassType.WIZARD) {
+        if (avatar.classType == ClassType.MAGE || avatar.classType == ClassType.BISHOP) {
             avatar.knownSpells.add(Spells.values()[1]);
             avatar.knownSpells.add(Spells.values()[3]);
             avatar.magePoints[0] = 2;
         }
-        if (avatar.classType == ClassType.CLERIC) {
+        if (avatar.classType == ClassType.PRIEST) {
             avatar.knownSpells.add(Spells.values()[23]);
             avatar.knownSpells.add(Spells.values()[24]);
             avatar.clericPoints[0] = 2;

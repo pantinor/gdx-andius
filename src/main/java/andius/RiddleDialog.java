@@ -74,7 +74,7 @@ public class RiddleDialog extends Window implements Constants {
 
                     boolean correct = false;
                     for (String answer : cell.riddleAnswers) {
-                        if (answer.toLowerCase().contains(response)) {
+                        if (response.toLowerCase().contains(answer)) {
                             correct = true;
                             break;
                         }
