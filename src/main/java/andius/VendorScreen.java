@@ -104,9 +104,9 @@ public class VendorScreen implements Screen, Constants {
         vendorFocusInd.setWidth(w);
         vendorFocusInd.setHeight(h);
 
-        invDesc = new Label("", Andius.skin, "larger");
+        invDesc = new Label("", Andius.skin, "default");
 
-        this.playerSelection = new List<>(Andius.skin, "larger");
+        this.playerSelection = new List<>(Andius.skin, "default");
         PlayerIndex[] names = new PlayerIndex[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = new PlayerIndex(this.context.players()[i]);
@@ -411,10 +411,10 @@ public class VendorScreen implements Screen, Constants {
         if (selectedImage != null) {
             batch.draw(highlighter, selectedImage.getX() - 3, selectedImage.getY() - 4);
         }
-        Andius.largeFont.draw(batch, this.vendorName, 447, 750);
-        Andius.largeFont.draw(batch, "AC", 70, Andius.SCREEN_HEIGHT - 530);
-        Andius.largeFont.draw(batch, "DAMG", 60, Andius.SCREEN_HEIGHT - 574);
-        Andius.largeFont.draw(batch, "GOLD", 60, Andius.SCREEN_HEIGHT - 616);
+        Andius.font.draw(batch, this.vendorName, 447, 750);
+        Andius.font.draw(batch, "AC", 70, Andius.SCREEN_HEIGHT - 530);
+        Andius.font.draw(batch, "DAMG", 60, Andius.SCREEN_HEIGHT - 574);
+        Andius.font.draw(batch, "GOLD", 60, Andius.SCREEN_HEIGHT - 616);
 
         batch.end();
 
@@ -509,15 +509,15 @@ public class VendorScreen implements Screen, Constants {
             item1Icon = make(ItemType.MISC, sp.item1, Icons.get(sp.item1), 106, Andius.SCREEN_HEIGHT - 499);
             item2Icon = make(ItemType.MISC, sp.item2, Icons.get(sp.item2), 160, Andius.SCREEN_HEIGHT - 499);
 
-            acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
+            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default");
             acLabel.setX(125);
             acLabel.setY(Andius.SCREEN_HEIGHT - 557);
 
-            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "larger");
+            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default");
             damageLabel.setX(125);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 600);
 
-            goldLabel = new Label("" + character.gold, Andius.skin, "larger");
+            goldLabel = new Label("" + character.gold, Andius.skin, "default");
             goldLabel.setX(125);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 645);
 
@@ -677,8 +677,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "larger");
-            this.price = new Label("" + item.cost / 2, Andius.skin, "larger");
+            this.label = new Label(item.name, Andius.skin, "default");
+            this.price = new Label("" + item.cost / 2, Andius.skin, "default");
 
             this.canusebkgnd = new Image();
             boolean canUse = item.canUse(rec.classType);
@@ -716,8 +716,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "larger");
-            this.price = new Label("" + item.cost, Andius.skin, "larger");
+            this.label = new Label(item.name, Andius.skin, "default");
+            this.price = new Label("" + item.cost, Andius.skin, "default");
             this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
 
             addActor(this.icon);
@@ -769,7 +769,7 @@ public class VendorScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super("", Andius.skin, "larger");
+            super("", Andius.skin, "default");
             this.rec = rec;
             setColor(rec.status.color());
             setText(getText());

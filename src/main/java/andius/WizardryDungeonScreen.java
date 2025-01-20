@@ -11,7 +11,6 @@ import static andius.WizardryData.WER_LEVEL_DESC;
 import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
-import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import utils.MoveCameraAction;
 import utils.PanCameraAction;
@@ -563,17 +562,12 @@ public class WizardryDungeonScreen extends BaseScreen {
                     );
                 }
 
-                if (cell.hasTreasureChest) {
-                    pixmap.setColor(Color.CYAN);
-                    pixmap.fillTriangle(x * MINI_DIM, y * MINI_DIM, x * MINI_DIM, y * MINI_DIM + MINI_DIM, x * MINI_DIM + MINI_DIM, y * MINI_DIM + MINI_DIM);
-                }
-
                 if (cell.encounterID >= 0) {
                     pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
                 }
 
-                if (cell.wanderingEncounterID >= 0) {
+                if (cell.lair) {
                     pixmap.setColor(Color.PINK);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
                 }
@@ -1112,7 +1106,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
             }
 
-            fight(levels[currentLevel].cells[dx][dy], this.map.scenario().levels()[currentLevel].cells[dx][dy].defeated);
+            fight(levels[currentLevel].cells[dx][dy], this.map.scenario().levels()[currentLevel].defeated);
 
             finishTurn(dx, dy);
         }
@@ -1121,9 +1115,18 @@ public class WizardryDungeonScreen extends BaseScreen {
     private void fight(MazeCell cell, List<Integer> defeated) {
         if (this.map == Map.WIZARDRY4) {
 
-            boolean wandering = cell.wanderingEncounterID != -1 && !defeated.contains(cell.wanderingEncounterID) && Utils.randomBoolean();
-            if ((cell.encounterID != -1 && !defeated.contains(cell.encounterID)) || wandering) {
-                int encounterID = cell.encounterID != -1 ? cell.encounterID : cell.wanderingEncounterID;
+            int wanderingEncounterID = -1;
+            if (cell.lair && cell.encounterID < 0 && Utils.randomBoolean()) {
+                wanderingEncounterID = this.map.scenario().levels()[currentLevel].getRandomMonster();
+                if (defeated.contains(wanderingEncounterID)) {
+                    wanderingEncounterID = -1;
+                }
+            }
+
+            if ((cell.encounterID != -1 && !defeated.contains(cell.encounterID)) || wanderingEncounterID != -1) {
+
+                int encounterID = cell.encounterID != -1 ? cell.encounterID : wanderingEncounterID;
+
                 DoGooder dogooder = this.map.scenario().characters().get(encounterID);
 
                 List<MutableMonster> mms = new ArrayList<>();
@@ -1227,19 +1230,21 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     @Override
-    public void endCombat(boolean isWon, andius.objects.Actor opponent) {
+    public void endCombat(boolean isWon, Object opponent) {
         if (isWon) {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
 
-            if (this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID > 0) {
-                this.map.scenario().levels()[currentLevel].cells[x][y].defeated.add(this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID);
-                this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
-            }
+            DoGooder dg = (DoGooder) opponent;
 
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
-                this.map.scenario().levels()[currentLevel].cells[x][y].defeated.add(this.map.scenario().levels()[currentLevel].cells[x][y].encounterID);
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+            } else {
+                for (int id : dg.partyMembers) {
+                    if (!this.map.scenario().levels()[currentLevel].defeated.contains(id)) {
+                        this.map.scenario().levels()[currentLevel].defeated.add(id);
+                    }
+                }
             }
 
             List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);

@@ -81,8 +81,11 @@ public class Andius extends Game {
     @Override
     public void create() {
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/gnuolane.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/sansblack.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        parameter.size = 12;
+        smallFont = generator.generateFont(parameter);
 
         parameter.size = 16;
         hudLogFont = generator.generateFont(parameter);
@@ -103,7 +106,15 @@ public class Andius extends Game {
 
         parameter.size = 24;
         BitmapFont smallUltimaFont = generator.generateFont(parameter);
-        
+
+        generator.dispose();
+
+        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/gnuolane.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        parameter.size = 18;
+        font = generator.generateFont(parameter);
+
         generator.dispose();
 
         skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
@@ -111,11 +122,10 @@ public class Andius extends Game {
         skin.add("default-font", font, BitmapFont.class);
         skin.add("larger-font", largeFont, BitmapFont.class);
         skin.add("title-font", titleFont, BitmapFont.class);
-        smallFont = skin.get("verdana-10", BitmapFont.class);
         skin.add("small-font", smallFont, BitmapFont.class);
         skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
         skin.add("hud-log", hudLogFont, BitmapFont.class);
-        
+
         {
             Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
             ls.font = font;
@@ -186,7 +196,7 @@ public class Andius extends Game {
             EXPLMAP.put(Color.GREEN, new Animation(.1f, getTextureArray(expl, 1, 5)));
             EXPLMAP.put(Color.PURPLE, new Animation(.1f, getTextureArray(expl, 4, 5)));
             EXPLMAP.put(Color.YELLOW, new Animation(.1f, getTextureArray(expl, 5, 5)));
-            
+
             //static initializer
             WizardryData.class.getClass();
 

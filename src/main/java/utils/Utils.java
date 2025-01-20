@@ -276,16 +276,6 @@ public class Utils {
         return damage;
     }
 
-    public static int dealSpellDamage(int hits, int range, int bonus) {
-        int points = 0;
-        while (hits > 0) {
-            points += RANDOM.nextInt(range + 1);
-            hits--;
-        }
-        points += bonus;
-        return points;
-    }
-
     public static Vector2 centerOfMass(TextureRegion tr) {
 
         int sx = tr.getRegionX();

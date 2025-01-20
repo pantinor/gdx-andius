@@ -276,7 +276,7 @@ public interface Constants {
                 String mv = obj.getProperties().get("movement", String.class);
                 MovementBehavior movement = MovementBehavior.valueOf(mv != null ? mv : "FIXED");
 
-                Actor actor = new Actor(name, null);
+                Actor actor = new Actor(name, TibianSprite.animation(icon));
                 if (role == Role.MONSTER) {
                     try {
                         String mid = obj.getProperties().get("monsterID", String.class);

@@ -321,7 +321,7 @@ public class SpellUtil {
     }
 
     private static void spellDamage(Spells spell, Mutable m) {
-        int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+        int damage = spell.damage();
         m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
         m.adjustHealthCursor();
     }
@@ -345,7 +345,7 @@ public class SpellUtil {
 
             } else {
 
-                int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+                int damage = spell.damage();
                 m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
                 m.getEnemy().adjustHealthCursor();
 
@@ -421,7 +421,7 @@ public class SpellUtil {
             if (spell == Spells.MADI) {
                 target.adjustHP(rec.maxhp);
             } else {
-                int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
+                int points = spell.damage();
                 target.adjustHP(points);
             }
         } else {
@@ -434,7 +434,7 @@ public class SpellUtil {
             if (spell == Spells.MADI) {
                 rec.adjustHP(rec.maxhp);
             } else {
-                int points = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
+                int points = spell.damage();
                 rec.adjustHP(points);
             }
         }
@@ -546,7 +546,7 @@ public class SpellUtil {
             if (spell == Spells.MADI) {
                 target.setCurrentHitPoints(target.getMaxHitPoints());
             } else {
-                int healAmt = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), 0);
+                int healAmt = spell.damage();
                 int current = target.getCurrentHitPoints() + healAmt;
                 target.setCurrentHitPoints(current > target.getMaxHitPoints() ? target.getMaxHitPoints() : current);
             }
@@ -563,7 +563,7 @@ public class SpellUtil {
         if (player.getPlayer().savingThrowSpell()) {
             seq.addAction(Actions.run(new LogAction(screen, player.getPlayer().name + " made a saving throw and is unaffected!")));
         } else {
-            int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+            int damage = spell.damage();
             if (player.getPlayer().savingThrowSpell()) {
                 damage = damage / 2;
             }
@@ -610,7 +610,7 @@ public class SpellUtil {
                 seq.addAction(Actions.run(new AddActorAction(screen.getStage(), expl)));
 
             } else {
-                int damage = Utils.dealSpellDamage(spell.getHitCount(), spell.getHitRange(), spell.getHitBonus());
+                int damage = spell.damage();
                 if (player.getPlayer().savingThrowSpell()) {
                     damage = damage / 2;
                 }

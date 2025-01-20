@@ -66,13 +66,13 @@ public class TempleScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        this.playerSelectionLabel = new Label("WHO WILL TITHE ?", Andius.skin, "larger");
+        this.playerSelectionLabel = new Label("WHO WILL TITHE ?", Andius.skin, "default");
 
         focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
         focusIndicator.setWidth(PAT_SCR_WIDTH);
         focusIndicator.setHeight(PAT_ITEM_HGT);
 
-        this.titherSelection = new List<>(Andius.skin, "larger");
+        this.titherSelection = new List<>(Andius.skin, "default");
         Array<String> names = new Array<>();
         for (int i = 0; i < this.context.players().length; i++) {
             if (!this.context.players()[i].isDisabled()) {
@@ -266,7 +266,7 @@ public class TempleScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        logTable.add(new Label(s, Andius.skin, "larger"));
+        logTable.add(new Label(s, Andius.skin, "default"));
         logTable.row();
         logScroll.layout();
         logScroll.setScrollPercentY(100);

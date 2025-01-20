@@ -14,16 +14,16 @@ public enum Spells {
     DUMAPIC("Clarity", ClassType.MAGE, 1, Sound.MEDITATION, Color.BLUE, SpellTarget.NONE, SpellArea.CAMP, 0, 0, 0, 33),
     DILTO("Darkness", ClassType.MAGE, 2, Sound.STEAL_ESSENCE, Color.PURPLE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 2, 88),
     SOPIC("Glass", ClassType.MAGE, 2, Sound.MAGIC, Color.BLUE, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 4, 85),
-    MAHALITO("Big fire", ClassType.MAGE, 3, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 4, 6, 1, 79),
+    MAHALITO("Big fire", ClassType.MAGE, 3, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 4, 6, 0, 79),
     MOLITO("Spark storm", ClassType.MAGE, 3, Sound.FLAME_WAVE, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 3, 6, 0, 46),
     MORLIS("Fear", ClassType.MAGE, 4, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 3, 89),
     DALTO("Blizzard Blast", ClassType.MAGE, 4, Sound.WIND, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 6, 6, 2, 1),
-    LAHALITO("Flame storm", ClassType.MAGE, 4, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 6, 6, 1, 81),
+    LAHALITO("Flame storm", ClassType.MAGE, 4, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 6, 6, 0, 81),
     MAMORLIS("Terror", ClassType.MAGE, 5, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 4, 90),
-    MAKANITO("Deadly Air", ClassType.MAGE, 5, Sound.SLEEP, Color.PURPLE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 0, 43),
+    MAKANITO("Deadly Air", ClassType.MAGE, 5, Sound.SLEEP, Color.PURPLE, SpellTarget.GROUP, SpellArea.COMBAT, 8, 1, 0, 43),
     MADALTO("Frost", ClassType.MAGE, 5, Sound.WIND, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 8, 8, 2, 21),
-    LAKANITO("Suffocation", ClassType.MAGE, 6, Sound.WEAKNESS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 0, 28),
-    ZILWAN("Turn Undead", ClassType.MAGE, 6, Sound.RAGE, Color.YELLOW, SpellTarget.MONSTER, SpellArea.COMBAT, 10, 200, 0, 14),
+    LAKANITO("Suffocation", ClassType.MAGE, 6, Sound.WEAKNESS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 8, 8, 0, 28),
+    ZILWAN("Turn Undead", ClassType.MAGE, 6, Sound.RAGE, Color.YELLOW, SpellTarget.MONSTER, SpellArea.COMBAT, 10, 10, 0, 14),
     MASOPIC("Big glass", ClassType.MAGE, 6, Sound.MAGIC, Color.BLUE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 4, 5),
     HAMAN("Change", ClassType.MAGE, 6, Sound.MEDITATION, Color.BLUE, SpellTarget.VARIABLE, SpellArea.COMBAT, 0, 0, 0, 72),
     MALOR("Teleport", ClassType.MAGE, 7, Sound.MEDITATION, Color.BLUE, SpellTarget.PARTY, SpellArea.COMBAT_OR_CAMP, 0, 0, 0, 94),
@@ -120,22 +120,20 @@ public enum Spells {
     private final int level;
     private final SpellTarget target;
     private final SpellArea area;
-    private final int hitCount;
-    private final int hitRange;
-    private final int hitBonus;
     private final int icon;
     private final Sound snd;
     private final Color color;
+    private final Dice damage;
+    private final int hitBonus;
 
-    private Spells(String name, ClassType type, int level, Sound snd, Color color, 
+    private Spells(String name, ClassType type, int level, Sound snd, Color color,
             SpellTarget target, SpellArea area, int hitCount, int hitRange, int hitBonus, int icon) {
         this.name = name;
         this.type = type;
         this.level = level;
         this.target = target;
         this.area = area;
-        this.hitCount = hitCount;
-        this.hitRange = hitRange;
+        this.damage = new Dice(hitCount, hitRange, 0);
         this.hitBonus = hitBonus;
         this.icon = icon;
         this.snd = snd;
@@ -166,12 +164,8 @@ public enum Spells {
         return area;
     }
 
-    public int getHitCount() {
-        return hitCount;
-    }
-
-    public int getHitRange() {
-        return hitRange;
+    public int damage() {
+        return this.damage.roll();
     }
 
     public int getHitBonus() {

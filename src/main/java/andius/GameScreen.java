@@ -484,15 +484,15 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
-    public void endCombat(boolean isWon, andius.objects.Actor opponent) {
+    public void endCombat(boolean isWon, Object opponent) {
         if (isWon) {
-            this.map.getBaseMap().removeCreature(opponent);
+            this.map.getBaseMap().removeCreature((andius.objects.Actor) opponent);
         }
     }
 
     @Override
     public void finishTurn(int x, int y) {
-        
+
         if (x < 0 || y < 0) {
             return;
         }

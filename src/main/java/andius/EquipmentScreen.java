@@ -109,7 +109,7 @@ public class EquipmentScreen implements Screen, Constants {
 
         traderSlider = new TradeSliderBox();
 
-        invDesc = new Label("", Andius.skin, "larger");
+        invDesc = new Label("", Andius.skin, "default");
         invDesc.setBounds(284, Andius.SCREEN_HEIGHT - 170, w, h);
 
         FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
@@ -126,7 +126,7 @@ public class EquipmentScreen implements Screen, Constants {
             }
         }
 
-        this.playerSelection = new List<>(Andius.skin, "larger");
+        this.playerSelection = new List<>(Andius.skin, "default");
         PlayerIndex[] names = new PlayerIndex[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = new PlayerIndex(this.context.players()[i]);
@@ -248,9 +248,9 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(unequip);
         stage.addActor(traderSlider);
 
-        Label inventory = new Label("Inventory", Andius.skin, "larger");
-        Label splBk = new Label("Known Spells", Andius.skin, "larger");
-        Label presets = new Label("Spell Presets", Andius.skin, "larger");
+        Label inventory = new Label("Inventory", Andius.skin, "default");
+        Label splBk = new Label("Known Spells", Andius.skin, "default");
+        Label presets = new Label("Spell Presets", Andius.skin, "default");
         inventory.setBounds(512, Andius.SCREEN_HEIGHT - 160, 20, 100);
         splBk.setBounds(770, Andius.SCREEN_HEIGHT - 160, 20, 100);
         presets.setBounds(826, Andius.SCREEN_HEIGHT - 735, 20, 100);
@@ -499,55 +499,55 @@ public class EquipmentScreen implements Screen, Constants {
             int[] cs = character.clericPoints;
             String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            spptsL = new Label(d4, Andius.skin, "larger");
+            spptsL = new Label(d4, Andius.skin, "default");
             spptsL.setX(90);
             spptsL.setY(Andius.SCREEN_HEIGHT - 600);
 
-            acLabel = new Label("" + character.calculateAC(), Andius.skin, "larger");
+            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default");
             acLabel.setX(360);
             acLabel.setY(Andius.SCREEN_HEIGHT - 393);
 
-            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "larger");
+            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default");
             damageLabel.setX(360);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 437);
 
-            goldLabel = new Label("" + character.gold, Andius.skin, "larger");
+            goldLabel = new Label("" + character.gold, Andius.skin, "default");
             goldLabel.setX(360);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 480);
 
-            expL = new Label("" + character.exp, Andius.skin, "larger");
+            expL = new Label("" + character.exp, Andius.skin, "default");
             expL.setX(115);
             expL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            hpL = new Label("" + character.hp, Andius.skin, "larger");
+            hpL = new Label("" + character.hp, Andius.skin, "default");
             hpL.setX(115);
             hpL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            mxhpL = new Label("" + character.maxhp, Andius.skin, "larger");
+            mxhpL = new Label("" + character.maxhp, Andius.skin, "default");
             mxhpL.setX(115);
             mxhpL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
-            strL = new Label("" + character.str, Andius.skin, "larger");
+            strL = new Label("" + character.str, Andius.skin, "default");
             strL.setX(287);
             strL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            intL = new Label("" + character.intell, Andius.skin, "larger");
+            intL = new Label("" + character.intell, Andius.skin, "default");
             intL.setX(287);
             intL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            ptyL = new Label("" + character.piety, Andius.skin, "larger");
+            ptyL = new Label("" + character.piety, Andius.skin, "default");
             ptyL.setX(287);
             ptyL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
-            vitL = new Label("" + character.vitality, Andius.skin, "larger");
+            vitL = new Label("" + character.vitality, Andius.skin, "default");
             vitL.setX(427);
             vitL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            agiL = new Label("" + character.agility, Andius.skin, "larger");
+            agiL = new Label("" + character.agility, Andius.skin, "default");
             agiL.setX(427);
             agiL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            lckL = new Label("" + character.luck, Andius.skin, "larger");
+            lckL = new Label("" + character.luck, Andius.skin, "default");
             lckL.setX(427);
             lckL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
@@ -786,7 +786,7 @@ public class EquipmentScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(icon(item));
-            this.label = new Label(item.name, Andius.skin, "larger");
+            this.label = new Label(item.name, Andius.skin, "default");
             this.canusebkgnd = new Image();
 
             boolean canUse = item.canUse(rec.classType);
@@ -820,7 +820,7 @@ public class EquipmentScreen implements Screen, Constants {
             this.spell = spell;
 
             this.icon = new Image(invIcons[spell.getIcon()]);
-            this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "larger");
+            this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "default");
             this.cast = new TextButton("CAST", Andius.skin, "red");
 
             addActor(this.icon);
@@ -849,7 +849,7 @@ public class EquipmentScreen implements Screen, Constants {
             background.setBounds(getX(), getY(), width, height);
             addActor(background);
 
-            this.tradeSelection = new List<>(Andius.skin, "larger");
+            this.tradeSelection = new List<>(Andius.skin, "default");
             TradeIndex[] names = new TradeIndex[context.players().length];
             for (int i = 0; i < context.players().length; i++) {
                 names[i] = new TradeIndex(context.players()[i]);
@@ -924,7 +924,7 @@ public class EquipmentScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super("", Andius.skin, "larger");
+            super("", Andius.skin, "default");
             this.rec = rec;
             setX(50);
             setY(Andius.SCREEN_HEIGHT - 100);

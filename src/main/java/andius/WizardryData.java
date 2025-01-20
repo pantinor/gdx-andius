@@ -386,6 +386,9 @@ public class WizardryData {
         public int level;
         public int scenario;
         public MazeCell[][] cells = new MazeCell[DUNGEON_DIM][DUNGEON_DIM];
+        public final List<Integer> defeated = new ArrayList<>();
+
+        public abstract int getRandomMonster();
     }
 
     private static class MazeLevelV1 extends MazeLevel {
@@ -680,7 +683,8 @@ public class WizardryData {
             return enemyCalc;
         }
 
-        private int getRandomMonster() {
+        @Override
+        public int getRandomMonster() {
             int encounterType = 0;
             while (RANDOM.nextInt(4) == 2 && encounterType < 2) {
                 ++encounterType;
@@ -740,7 +744,7 @@ public class WizardryData {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
                     if (ci.type == CellType.MESSAGE) {
-                        System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
                     if (level == 4) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
@@ -882,20 +886,8 @@ public class WizardryData {
                             }
                             break;
                     }
-
-                    if (cells[x][y].lair && cell.encounterID < 0) {
-                        int mid = getRandomMonster();
-                        DoGooder m = mid < characters.size() ? characters.get(mid) : null;
-                        if (m == null) {
-                            System.out.println("cannot find monster id " + mid);
-                        } else {
-                            cells[x][y].wanderingEncounterID = m.id;
-                        }
-                    }
-
                 }
             }
-
         }
 
         private MazeCell walls(int row, int column) {
@@ -987,7 +979,8 @@ public class WizardryData {
             return enemyCalc;
         }
 
-        private int getRandomMonster() {
+        @Override
+        public int getRandomMonster() {
             int encounterType = 0;
             while (RANDOM.nextInt(4) == 2 && encounterType < 2) {
                 ++encounterType;
@@ -1087,9 +1080,9 @@ public class WizardryData {
 
         public int encounterID = -1;
         public int wanderingEncounterID = -1;
-        public final List<Integer> defeated = new ArrayList<>();
 
         public boolean hasTreasureChest;
+        
         public boolean summoningCircle1;
         public boolean summoningCircle2;
         public boolean summoningCircle3;

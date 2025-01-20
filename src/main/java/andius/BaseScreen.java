@@ -83,8 +83,8 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     public abstract void teleport(int level, int stepsX, int stepsY);
 
-    public void endCombat(boolean isWon, andius.objects.Actor opponent) {
-
+    public void endCombat(boolean isWon, Object opponent) {
+        
     }
 
     public final void addButtons(Map map) {

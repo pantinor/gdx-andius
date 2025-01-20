@@ -72,7 +72,7 @@ public class RewardScreen implements Screen, Constants {
         this.trapSelection = new List<>(Andius.skin, "default");
         this.trapSelection.setItems(TrapType.values());
 
-        this.action = new List<>(Andius.skin, "larger");
+        this.action = new List<>(Andius.skin, "default");
         this.action.setItems(new String[]{"OPEN", "INSPECT", "CALFO", "DISARM", "LEAVE"});
         this.action.addListener(new ChangeListener() {
             @Override
@@ -85,7 +85,7 @@ public class RewardScreen implements Screen, Constants {
             }
         });
 
-        this.playerSelection = new List<>(Andius.skin, "larger");
+        this.playerSelection = new List<>(Andius.skin, "default");
         String[] names = new String[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = this.context.players()[i].name.toUpperCase();
@@ -125,9 +125,9 @@ public class RewardScreen implements Screen, Constants {
         sp2.setScrollingDisabled(true, false);
         sp3.setScrollingDisabled(true, false);
 
-        Label tmp1 = new Label("A CHEST !", Andius.skin, "larger");
-        Label tmp2 = new Label("YOU MAY :", Andius.skin, "larger");
-        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "larger");
+        Label tmp1 = new Label("A CHEST !", Andius.skin, "default");
+        Label tmp2 = new Label("YOU MAY :", Andius.skin, "default");
+        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "default");
 
         this.logs = new LogScrollPane(Andius.skin, new Table(), 275);
         this.logs.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);

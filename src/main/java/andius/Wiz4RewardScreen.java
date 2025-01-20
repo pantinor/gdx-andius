@@ -7,13 +7,13 @@ import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -25,6 +25,8 @@ public class Wiz4RewardScreen implements Screen, Constants {
     private final Stage stage;
     public final CharacterRecord player;
     public final DoGooder opponent;
+
+    private final List<ItemLabel> items;
     private final AutoFocusScrollPane itemsScroll;
     private final LogScrollPane logs;
     private final TextButton take;
@@ -47,8 +49,8 @@ public class Wiz4RewardScreen implements Screen, Constants {
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH);
         this.logs.setBounds(320, 10, LOG_WIDTH, LOG_HEIGHT);
 
-        List<ItemLabel> items = new List(Andius.skin);
-        this.itemsScroll = new AutoFocusScrollPane(items, Andius.skin);
+        this.items = new List(Andius.skin);
+        this.itemsScroll = new AutoFocusScrollPane(this.items, Andius.skin);
         this.itemsScroll.setScrollingDisabled(true, false);
 
         for (int id : opponent.partyMembers) {
@@ -69,25 +71,30 @@ public class Wiz4RewardScreen implements Screen, Constants {
                 mainGame.setScreen(Map.WIZARDRY4.getScreen());
             }
         });
-        this.exit.setBounds(400, 450, 75, 40);
+        this.exit.setBounds(400, 450, 80, 40);
 
         this.take = new TextButton("TAKE", Andius.skin, "red-larger");
         this.take.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                ItemLabel l = items.getSelected();
-                if (l != null) {
-                    player.inventory.add(l.item);
-                }
+                take();
             }
         });
-        this.take.setBounds(500, 450, 75, 40);
+        this.take.setBounds(500, 450, 80, 40);
 
         this.stage.addActor(this.itemsScroll);
         this.stage.addActor(this.logs);
         this.stage.addActor(exit);
         this.stage.addActor(take);
 
+    }
+
+    private void take() {
+        ItemLabel l = this.items.getSelected();
+        if (l != null) {
+            player.inventory.add(l.item);
+            this.items.getItems().removeValue(l, true);
+        }
     }
 
     private class ItemLabel extends Label {
@@ -117,6 +124,13 @@ public class Wiz4RewardScreen implements Screen, Constants {
 
         stage.act();
         stage.draw();
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            mainGame.setScreen(Map.WIZARDRY4.getScreen());
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            take();
+        }
     }
 
     @Override

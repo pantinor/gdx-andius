@@ -126,6 +126,12 @@ public class MutableCharacter implements Mutable {
     @Override
     public void setCurrentHitPoints(int currentHitPoints) {
         this.currentHitPoints = currentHitPoints;
+        if (this.currentHitPoints < 0) {
+            this.currentHitPoints = 0;
+        }
+        if (this.currentHitPoints > this.getMaxHitPoints()) {
+            this.currentHitPoints = this.getMaxHitPoints();
+        }
     }
 
     public int[] getMageSpellLevels() {

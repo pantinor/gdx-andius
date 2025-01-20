@@ -76,13 +76,13 @@ public class InnScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        this.playerSelectionLabel = new Label("WE HAVE :", Andius.skin, "larger");
+        this.playerSelectionLabel = new Label("WE HAVE :", Andius.skin, "default");
 
         focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
         focusIndicator.setWidth(PAT_SCR_WIDTH);
         focusIndicator.setHeight(PAT_ITEM_HGT);
 
-        this.roomSelection = new List<>(Andius.skin, "larger");
+        this.roomSelection = new List<>(Andius.skin, "default");
         Array<String> names = new Array<>();
         names.add("THE STABLES (FREE!)");
         names.add("COTS. 10 GP/WEEK.");

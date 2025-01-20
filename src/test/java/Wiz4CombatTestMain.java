@@ -55,7 +55,7 @@ public class Wiz4CombatTestMain extends Game {
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(372)));
+            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[3], mms, WER4_CHARS.get(180)));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
 
         } catch (Exception e) {

@@ -1,7 +1,6 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: { 
 	default-font: { file: assets/fonts/Arial_12.fnt },
-	verdana-10: { file: assets/fonts/verdana10.fnt }
 },
 com.badlogic.gdx.graphics.Color: {
 	green: { a: 1, b: 0, g: 1, r: 0 },
