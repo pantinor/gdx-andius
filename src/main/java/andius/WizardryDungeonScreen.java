@@ -513,10 +513,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         int y = (Math.round(currentPos.z) - 1);
         if (this.map == Map.WIZARDRY4) {
             String lbl = String.format(WER_LEVEL_DESC[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y);
-            Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
+            Andius.font12.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
         } else {
             String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y);
-            Andius.largeFont.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
+            Andius.font12.draw(batch, lbl, 300, Andius.SCREEN_HEIGHT - 7);
         }
 
         if (showMiniMap) {
@@ -1235,14 +1235,15 @@ public class WizardryDungeonScreen extends BaseScreen {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
 
-            DoGooder dg = (DoGooder) opponent;
-
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
             } else {
-                for (int id : dg.partyMembers) {
-                    if (!this.map.scenario().levels()[currentLevel].defeated.contains(id)) {
-                        this.map.scenario().levels()[currentLevel].defeated.add(id);
+                if (this.map == Map.WIZARDRY4) {
+                    DoGooder dg = (DoGooder) opponent;
+                    for (int id : dg.partyMembers) {
+                        if (!this.map.scenario().levels()[currentLevel].defeated.contains(id)) {
+                            this.map.scenario().levels()[currentLevel].defeated.add(id);
+                        }
                     }
                 }
             }

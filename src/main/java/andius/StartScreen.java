@@ -32,17 +32,7 @@ public class StartScreen implements Screen, Constants {
 
         batch = new SpriteBatch();
 
-        manual = new TextButton("Notes", Andius.skin, "red");
-        manual.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Sounds.play(Sound.TRIGGER);
-                Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Andius.skin));
-            }
-        });
-        manual.setBounds(200, Andius.SCREEN_HEIGHT - 410, 150, 40);
-
-        manage = new TextButton("Manage", Andius.skin, "red");
+        manage = new TextButton("Manage", Andius.skin, "default-24");
         manage.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -62,9 +52,9 @@ public class StartScreen implements Screen, Constants {
                 }
             }
         });
-        manage.setBounds(400, Andius.SCREEN_HEIGHT - 410, 150, 40);
+        manage.setBounds(360, Andius.SCREEN_HEIGHT - 400, 220, 40);
 
-        journey = new TextButton("Journey Onward", Andius.skin, "red");
+        journey = new TextButton("Journey Onward", Andius.skin, "default-24");
         journey.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -149,10 +139,20 @@ public class StartScreen implements Screen, Constants {
 
             }
         });
-        journey.setBounds(600, Andius.SCREEN_HEIGHT - 410, 150, 40);
+        journey.setBounds(360, Andius.SCREEN_HEIGHT - 450, 220, 40);
+
+//        manual = new TextButton("Notes", Andius.skin, "default-24");
+//        manual.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+//                Sounds.play(Sound.TRIGGER);
+//                Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Andius.skin));
+//            }
+//        });
+//        manual.setBounds(360, Andius.SCREEN_HEIGHT - 500, 220, 40);
 
         stage = new Stage();
-        stage.addActor(manual);
+        //stage.addActor(manual);
         stage.addActor(manage);
         stage.addActor(journey);
 
@@ -176,7 +176,7 @@ public class StartScreen implements Screen, Constants {
 
         batch.begin();
         titleFont.draw(batch, "ANDIUS", 320, Andius.SCREEN_HEIGHT - 140);
-        Andius.titleFont.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
+        Andius.font72.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
         batch.end();
 
         stage.act();

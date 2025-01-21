@@ -58,10 +58,10 @@ public class ConversationDialog extends Window implements Constants {
         add(this.internalTable).expand().fill();
         row();
 
-        scrollPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
+        scrollPane = new LogScrollPane(Andius.skin, new Table(Andius.skin), WIDTH);
         scrollPane.setHeight(HEIGHT);
 
-        input = new TextField("", Andius.skin);
+        input = new TextField("", Andius.skin, "default-16");
         input.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField tf, char key) {

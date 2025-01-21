@@ -71,7 +71,7 @@ public class ReorderPartyDialog extends Window implements Constants {
             }
         });
 
-        this.playerSelection = new List<>(Andius.skin, "default");
+        this.playerSelection = new List<>(Andius.skin, "default-12");
         this.playerSelection.setItems(ctx.players());
 
         ScrollPane sp = new ScrollPane(this.playerSelection, Andius.skin);

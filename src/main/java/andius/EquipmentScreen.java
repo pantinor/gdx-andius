@@ -86,7 +86,7 @@ public class EquipmentScreen implements Screen, Constants {
     ItemListing selectedItem;
     PlayerIndex selectedPlayer;
     SpellListing selectedSpell;
-    private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font, "", Color.WHITE, 226, Align.left, true);
+    private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
 
     AutoFocusScrollPane invPane, spellPane;
     Image focusIndicator, spellFocusInd;
@@ -109,7 +109,7 @@ public class EquipmentScreen implements Screen, Constants {
 
         traderSlider = new TradeSliderBox();
 
-        invDesc = new Label("", Andius.skin, "default");
+        invDesc = new Label("", Andius.skin, "default-16");
         invDesc.setBounds(284, Andius.SCREEN_HEIGHT - 170, w, h);
 
         FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
@@ -126,7 +126,7 @@ public class EquipmentScreen implements Screen, Constants {
             }
         }
 
-        this.playerSelection = new List<>(Andius.skin, "default");
+        this.playerSelection = new List<>(Andius.skin, "default-16");
         PlayerIndex[] names = new PlayerIndex[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = new PlayerIndex(this.context.players()[i]);
@@ -145,7 +145,7 @@ public class EquipmentScreen implements Screen, Constants {
         spellPane.setScrollingDisabled(true, false);
 
         int x = 40;
-        this.unequip = new TextButton("UNEQUIP", Andius.skin, "red-larger");
+        this.unequip = new TextButton("UNEQUIP", Andius.skin, "default-16-red");
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -173,7 +173,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.unequip.setBounds(x, 290, 75, 40);
         x += 77;
-        this.drop = new TextButton("DROP", Andius.skin, "red-larger");
+        this.drop = new TextButton("DROP", Andius.skin, "default-16-red");
         this.drop.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -189,7 +189,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.drop.setBounds(x, 290, 75, 40);
         x += 77;
-        this.use = new TextButton("USE", Andius.skin, "red-larger");
+        this.use = new TextButton("USE", Andius.skin, "default-16-red");
         this.use.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -206,7 +206,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.use.setBounds(x, 290, 75, 40);
         x = 40;
-        this.cancel = new TextButton("LEAVE", Andius.skin, "red-larger");
+        this.cancel = new TextButton("LEAVE", Andius.skin, "default-16-red");
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -215,7 +215,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.cancel.setBounds(x, 240, 75, 40);
         x += 77;
-        this.exit = new TextButton("SAVE", Andius.skin, "red-larger");
+        this.exit = new TextButton("SAVE", Andius.skin, "default-16-red");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -227,7 +227,7 @@ public class EquipmentScreen implements Screen, Constants {
         });
         this.exit.setBounds(x, 240, 75, 40);
         x += 77;
-        this.trade = new TextButton("TRADE", Andius.skin, "red-larger");
+        this.trade = new TextButton("TRADE", Andius.skin, "default-16-red");
         this.trade.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -248,9 +248,11 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(unequip);
         stage.addActor(traderSlider);
 
-        Label inventory = new Label("Inventory", Andius.skin, "default");
-        Label splBk = new Label("Known Spells", Andius.skin, "default");
-        Label presets = new Label("Spell Presets", Andius.skin, "default");
+        this.stage.setDebugAll(true);
+
+        Label inventory = new Label("Inventory", Andius.skin, "default-16");
+        Label splBk = new Label("Known Spells", Andius.skin, "default-16");
+        Label presets = new Label("Spell Presets", Andius.skin, "default-16");
         inventory.setBounds(512, Andius.SCREEN_HEIGHT - 160, 20, 100);
         splBk.setBounds(770, Andius.SCREEN_HEIGHT - 160, 20, 100);
         presets.setBounds(826, Andius.SCREEN_HEIGHT - 735, 20, 100);
@@ -321,24 +323,25 @@ public class EquipmentScreen implements Screen, Constants {
         if (selectedImage != null) {
             batch.draw(highlighter, selectedImage.getX() - 3, selectedImage.getY() - 4);
         }
-        Andius.largeFont.draw(batch, "AC", 310, Andius.SCREEN_HEIGHT - 393 + 24);
-        Andius.largeFont.draw(batch, "DAMG", 300, Andius.SCREEN_HEIGHT - 437 + 24);
-        Andius.largeFont.draw(batch, "GOLD", 300, Andius.SCREEN_HEIGHT - 480 + 24);
+        
+        Andius.font12.draw(batch, "AC", 310, Andius.SCREEN_HEIGHT - 393 + 24);
+        Andius.font12.draw(batch, "DAMG", 300, Andius.SCREEN_HEIGHT - 437 + 24);
+        Andius.font12.draw(batch, "GOLD", 300, Andius.SCREEN_HEIGHT - 480 + 24);
 
-        Andius.largeFont.draw(batch, "EXP", 76, Andius.SCREEN_HEIGHT - 620);
-        Andius.largeFont.draw(batch, "HP", 82, Andius.SCREEN_HEIGHT - 666);
-        Andius.largeFont.draw(batch, "MAXHP", 50, Andius.SCREEN_HEIGHT - 710);
+        Andius.font12.draw(batch, "EXP", 76, Andius.SCREEN_HEIGHT - 620);
+        Andius.font12.draw(batch, "HP", 82, Andius.SCREEN_HEIGHT - 666);
+        Andius.font12.draw(batch, "MAXHP", 50, Andius.SCREEN_HEIGHT - 710);
 
-        Andius.largeFont.draw(batch, "STR", 240, Andius.SCREEN_HEIGHT - 620);
-        Andius.largeFont.draw(batch, "INT", 242, Andius.SCREEN_HEIGHT - 666);
-        Andius.largeFont.draw(batch, "PTY", 240, Andius.SCREEN_HEIGHT - 710);
+        Andius.font12.draw(batch, "STR", 240, Andius.SCREEN_HEIGHT - 620);
+        Andius.font12.draw(batch, "INT", 242, Andius.SCREEN_HEIGHT - 666);
+        Andius.font12.draw(batch, "PTY", 240, Andius.SCREEN_HEIGHT - 710);
 
-        Andius.largeFont.draw(batch, "VIT", 387, Andius.SCREEN_HEIGHT - 620);
-        Andius.largeFont.draw(batch, "AGI", 387, Andius.SCREEN_HEIGHT - 666);
-        Andius.largeFont.draw(batch, "LCK", 385, Andius.SCREEN_HEIGHT - 710);
+        Andius.font12.draw(batch, "VIT", 387, Andius.SCREEN_HEIGHT - 620);
+        Andius.font12.draw(batch, "AGI", 387, Andius.SCREEN_HEIGHT - 666);
+        Andius.font12.draw(batch, "LCK", 385, Andius.SCREEN_HEIGHT - 710);
 
         if (selectedSpell != null) {
-            Andius.font.draw(batch, SPDESCLAYOUT, 520, Andius.SCREEN_HEIGHT - 579);
+            Andius.font12.draw(batch, SPDESCLAYOUT, 520, Andius.SCREEN_HEIGHT - 579);
         }
 
         batch.end();
@@ -468,11 +471,11 @@ public class EquipmentScreen implements Screen, Constants {
                         }
                         if (event.getTarget() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget();
-                            SPDESCLAYOUT.setText(Andius.font, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
+                            SPDESCLAYOUT.setText(Andius.font12, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         } else if (event.getTarget().getParent() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget().getParent();
-                            SPDESCLAYOUT.setText(Andius.font, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
+                            SPDESCLAYOUT.setText(Andius.font12, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         }
                     }
@@ -499,55 +502,55 @@ public class EquipmentScreen implements Screen, Constants {
             int[] cs = character.clericPoints;
             String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            spptsL = new Label(d4, Andius.skin, "default");
+            spptsL = new Label(d4, Andius.skin, "default-16");
             spptsL.setX(90);
             spptsL.setY(Andius.SCREEN_HEIGHT - 600);
 
-            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default");
+            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default-16");
             acLabel.setX(360);
             acLabel.setY(Andius.SCREEN_HEIGHT - 393);
 
-            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default");
+            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default-16");
             damageLabel.setX(360);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 437);
 
-            goldLabel = new Label("" + character.gold, Andius.skin, "default");
+            goldLabel = new Label("" + character.gold, Andius.skin, "default-16");
             goldLabel.setX(360);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 480);
 
-            expL = new Label("" + character.exp, Andius.skin, "default");
+            expL = new Label("" + character.exp, Andius.skin, "default-16");
             expL.setX(115);
             expL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            hpL = new Label("" + character.hp, Andius.skin, "default");
+            hpL = new Label("" + character.hp, Andius.skin, "default-16");
             hpL.setX(115);
             hpL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            mxhpL = new Label("" + character.maxhp, Andius.skin, "default");
+            mxhpL = new Label("" + character.maxhp, Andius.skin, "default-16");
             mxhpL.setX(115);
             mxhpL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
-            strL = new Label("" + character.str, Andius.skin, "default");
+            strL = new Label("" + character.str, Andius.skin, "default-16");
             strL.setX(287);
             strL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            intL = new Label("" + character.intell, Andius.skin, "default");
+            intL = new Label("" + character.intell, Andius.skin, "default-16");
             intL.setX(287);
             intL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            ptyL = new Label("" + character.piety, Andius.skin, "default");
+            ptyL = new Label("" + character.piety, Andius.skin, "default-16");
             ptyL.setX(287);
             ptyL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
-            vitL = new Label("" + character.vitality, Andius.skin, "default");
+            vitL = new Label("" + character.vitality, Andius.skin, "default-16");
             vitL.setX(427);
             vitL.setY(Andius.SCREEN_HEIGHT - 620 - 23);
 
-            agiL = new Label("" + character.agility, Andius.skin, "default");
+            agiL = new Label("" + character.agility, Andius.skin, "default-16");
             agiL.setX(427);
             agiL.setY(Andius.SCREEN_HEIGHT - 666 - 23);
 
-            lckL = new Label("" + character.luck, Andius.skin, "default");
+            lckL = new Label("" + character.luck, Andius.skin, "default-16");
             lckL.setX(427);
             lckL.setY(Andius.SCREEN_HEIGHT - 710 - 23);
 
@@ -600,7 +603,7 @@ public class EquipmentScreen implements Screen, Constants {
             im.setX(x);
             im.setY(y);
             im.setUserObject(spell);
-            slotTooltips[slot] = new Label(spell != null && character.knownSpells.contains(spell) ? spell.getTag() : "", Andius.skin, "hudSmallFont");
+            slotTooltips[slot] = new Label(spell != null && character.knownSpells.contains(spell) ? spell.getTag() : "", Andius.skin, "default-16");
             slotTooltips[slot].setX(x);
             slotTooltips[slot].setY(y + 44);
             im.addListener(new SpellChangeListener(spell, slot, slotTooltips[slot]));
@@ -786,7 +789,7 @@ public class EquipmentScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(icon(item));
-            this.label = new Label(item.name, Andius.skin, "default");
+            this.label = new Label(item.name, Andius.skin, "default-16");
             this.canusebkgnd = new Image();
 
             boolean canUse = item.canUse(rec.classType);
@@ -820,8 +823,8 @@ public class EquipmentScreen implements Screen, Constants {
             this.spell = spell;
 
             this.icon = new Image(invIcons[spell.getIcon()]);
-            this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "default");
-            this.cast = new TextButton("CAST", Andius.skin, "red");
+            this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "default-16");
+            this.cast = new TextButton("CAST", Andius.skin, "default-16-red");
 
             addActor(this.icon);
             addActor(this.label);
@@ -849,7 +852,7 @@ public class EquipmentScreen implements Screen, Constants {
             background.setBounds(getX(), getY(), width, height);
             addActor(background);
 
-            this.tradeSelection = new List<>(Andius.skin, "default");
+            this.tradeSelection = new List<>(Andius.skin, "default-16");
             TradeIndex[] names = new TradeIndex[context.players().length];
             for (int i = 0; i < context.players().length; i++) {
                 names[i] = new TradeIndex(context.players()[i]);
@@ -924,7 +927,7 @@ public class EquipmentScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super("", Andius.skin, "default");
+            super("", Andius.skin, "default-16");
             this.rec = rec;
             setX(50);
             setY(Andius.SCREEN_HEIGHT - 100);

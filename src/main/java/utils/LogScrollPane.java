@@ -27,7 +27,7 @@ public class LogScrollPane extends AutoFocusScrollPane {
         this.internalTable = table;
         this.width = width;
 
-        this.ls = new LabelStyle(this.skin.get("hud-log", BitmapFont.class), Color.WHITE);
+        this.ls = new LabelStyle(this.skin.get("font16", BitmapFont.class), Color.WHITE);
 
         setScrollingDisabled(true, false);
 

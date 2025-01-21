@@ -69,10 +69,10 @@ public class RewardScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        this.trapSelection = new List<>(Andius.skin, "default");
+        this.trapSelection = new List<>(Andius.skin, "default-12");
         this.trapSelection.setItems(TrapType.values());
 
-        this.action = new List<>(Andius.skin, "default");
+        this.action = new List<>(Andius.skin, "default-12");
         this.action.setItems(new String[]{"OPEN", "INSPECT", "CALFO", "DISARM", "LEAVE"});
         this.action.addListener(new ChangeListener() {
             @Override
@@ -85,14 +85,14 @@ public class RewardScreen implements Screen, Constants {
             }
         });
 
-        this.playerSelection = new List<>(Andius.skin, "default");
+        this.playerSelection = new List<>(Andius.skin, "default-12");
         String[] names = new String[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = this.context.players()[i].name.toUpperCase();
         }
         this.playerSelection.setItems(names);
 
-        this.go = new TextButton("GO", Andius.skin, "red-larger");
+        this.go = new TextButton("GO", Andius.skin, "default-12-red");
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -125,9 +125,9 @@ public class RewardScreen implements Screen, Constants {
         sp2.setScrollingDisabled(true, false);
         sp3.setScrollingDisabled(true, false);
 
-        Label tmp1 = new Label("A CHEST !", Andius.skin, "default");
-        Label tmp2 = new Label("YOU MAY :", Andius.skin, "default");
-        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "default");
+        Label tmp1 = new Label("A CHEST !", Andius.skin, "default-12");
+        Label tmp2 = new Label("YOU MAY :", Andius.skin, "default-12");
+        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "default-12");
 
         this.logs = new LogScrollPane(Andius.skin, new Table(), 275);
         this.logs.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
@@ -361,26 +361,26 @@ public class RewardScreen implements Screen, Constants {
 
         int x1 = X_ALIGN;
         int y = 245;
-        Andius.largeFont.draw(batch, "Name", x1, y);
-        Andius.largeFont.draw(batch, "Class", x1 += 150, y);
-        Andius.largeFont.draw(batch, "Status", x1 += 200, y);
-        Andius.largeFont.draw(batch, "Hit Points", x1 += 120, y);
+        Andius.font12.draw(batch, "Name", x1, y);
+        Andius.font12.draw(batch, "Class", x1 += 150, y);
+        Andius.font12.draw(batch, "Status", x1 += 200, y);
+        Andius.font12.draw(batch, "Hit Points", x1 += 120, y);
         y -= 25;
         for (CharacterRecord c : this.context.players()) {
             x1 = X_ALIGN;
-            Andius.largeFont.setColor(c.isDead() ? Color.RED : c.status.color());
+            Andius.font12.setColor(c.isDead() ? Color.RED : c.status.color());
             if (c.hp > 0 && c.hp < 2) {
-                Andius.largeFont.setColor(Color.SALMON);
+                Andius.font12.setColor(Color.SALMON);
             }
-            Andius.largeFont.draw(batch, c.name.toUpperCase(), x1, y);
+            Andius.font12.draw(batch, c.name.toUpperCase(), x1, y);
             String d = String.format("LVL %d  %s  %s", c.level, c.race.toString(), c.classType.toString());
-            Andius.largeFont.draw(batch, d, x1 += 150, y);
-            Andius.largeFont.draw(batch, "" + (c.isDead() ? "DEAD" : c.status), x1 += 200, y);
-            Andius.largeFont.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
+            Andius.font12.draw(batch, d, x1 += 150, y);
+            Andius.font12.draw(batch, "" + (c.isDead() ? "DEAD" : c.status), x1 += 200, y);
+            Andius.font12.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
             y -= 25;
         }
 
-        Andius.largeFont.setColor(Color.WHITE);
+        Andius.font12.setColor(Color.WHITE);
 
         batch.end();
         stage.act();

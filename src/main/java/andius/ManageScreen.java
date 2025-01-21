@@ -26,13 +26,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Base64Coder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.IOUtils;
 import utils.Utils;
 
@@ -86,7 +84,7 @@ public class ManageScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.returnScreen = rs;
 
-        font = Andius.font;
+        font = Andius.font16;
 
         bkgnd = new Texture(Gdx.files.classpath("assets/data/roster.png"));
 
@@ -104,7 +102,7 @@ public class ManageScreen implements Screen, Constants {
             mbrs[i] = new PartyIndex(r, i + 1);
         }
 
-        partyFormation = new List<>(skin);
+        partyFormation = new List<>(skin, "default-16");
         partyFormation.setItems(mbrs);
 
         RosterIndex[] recs = new RosterIndex[20];
@@ -136,7 +134,7 @@ public class ManageScreen implements Screen, Constants {
             }
         }
 
-        registry = new List<>(skin);
+        registry = new List<>(skin, "default-16");
         registry.setItems(recs);
 
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
@@ -145,9 +143,9 @@ public class ManageScreen implements Screen, Constants {
         clear = new ImageButton(imgBtnSkin, "clear");
         add = new ImageButton(imgBtnSkin, "right");
         remove = new ImageButton(imgBtnSkin, "left");
-        cancel = new TextButton("CANCEL", skin, "red");
-        reset = new TextButton("RESET", skin, "red");
-        save = new TextButton("SAVE", skin, "red");
+        cancel = new TextButton("CANCEL", skin, "default-16");
+        reset = new TextButton("RESET", skin, "default-16");
+        save = new TextButton("SAVE", skin, "default-16");
         iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
         partyIconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
@@ -165,9 +163,9 @@ public class ManageScreen implements Screen, Constants {
         remove.setX(335);
         remove.setY(Andius.SCREEN_HEIGHT - 500);
 
-        save.setBounds(300, Andius.SCREEN_HEIGHT - 50, 65, 40);
-        cancel.setBounds(390, Andius.SCREEN_HEIGHT - 50, 65, 40);
-        reset.setBounds(735, Andius.SCREEN_HEIGHT - 347, 65, 40);
+        save.setBounds(300, Andius.SCREEN_HEIGHT - 50, 80, 40);
+        cancel.setBounds(390, Andius.SCREEN_HEIGHT - 50, 80, 40);
+        reset.setBounds(735, Andius.SCREEN_HEIGHT - 347, 80, 40);
 
         iconLeft.setX(769);
         iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
@@ -383,7 +381,7 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        rosText = new Label("Roster", skin);
+        rosText = new Label("Roster", skin, "default-16");
         rosText.setX(80);
         rosText.setY(Andius.SCREEN_HEIGHT - 55);
 
@@ -399,7 +397,7 @@ public class ManageScreen implements Screen, Constants {
         sp2.setWidth(160);
         sp2.setHeight(464);
 
-        nameField = new TextField("", skin);
+        nameField = new TextField("", skin, "default-16");
         strMinus = new ImageButton(imgBtnSkin, "minus");
         strPlus = new ImageButton(imgBtnSkin, "plus");
         intMinus = new ImageButton(imgBtnSkin, "minus");
@@ -413,11 +411,13 @@ public class ManageScreen implements Screen, Constants {
         luMinus = new ImageButton(imgBtnSkin, "minus");
         luPlus = new ImageButton(imgBtnSkin, "plus");
 
-        profSelect = new List<>(skin);
+        profSelect = new List<>(skin, "default-16");
         ScrollPane classPane = new ScrollPane(profSelect, skin);
 
-        raceSelect = new SelectBox<>(skin);
-        raceSelect.setItems(Race.values());
+        raceSelect = new SelectBox<>(skin, "default-16");
+        Array<Race> arr = new Array<>();
+        arr.addAll(Race.HUMAN, Race.DWARF, Race.ELF, Race.GNOME, Race.HOBBIT);
+        raceSelect.setItems(arr);
         raceSelect.setSelected(Race.HUMAN);
 
         stVal = Race.HUMAN.getInitialStrength();
@@ -578,12 +578,12 @@ public class ManageScreen implements Screen, Constants {
         agMinus.setX(x);
         luMinus.setX(x);
 
-        strPlus.setX(x + 35);
-        intPlus.setX(x + 35);
-        piPlus.setX(x + 35);
-        vitPlus.setX(x + 35);
-        agPlus.setX(x + 35);
-        luPlus.setX(x + 35);
+        strPlus.setX(x + 46);
+        intPlus.setX(x + 46);
+        piPlus.setX(x + 46);
+        vitPlus.setX(x + 46);
+        agPlus.setX(x + 46);
+        luPlus.setX(x + 46);
 
         classPane.setX(715);
         classPane.setY(Andius.SCREEN_HEIGHT - 300);
@@ -645,6 +645,8 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(sp2);
         stage.addActor(rosText);
 
+        //this.stage.setDebugAll(true);
+
     }
 
     private void checkClasses() {
@@ -666,14 +668,6 @@ public class ManageScreen implements Screen, Constants {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
-//        if (Exodus.playMusic) {
-//            if (Exodus.music != null) {
-//                Exodus.music.stop();
-//            }
-//            Sound snd = Sound.M2;
-//            Exodus.music = Sounds.play(snd, Exodus.musicVolume);
-//        }
     }
 
     @Override
@@ -764,7 +758,7 @@ public class ManageScreen implements Screen, Constants {
 
         int[] ms = sel.magePoints;
         int[] cs = sel.clericPoints;
-        String d = String.format("MG: %d %d %d %d %d %d %d    CL: %d %d %d %d %d %d %d",
+        String d = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                 ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
         font.draw(batch, d, 504, 60);
 
@@ -810,7 +804,7 @@ public class ManageScreen implements Screen, Constants {
 
         @Override
         public String toString() {
-            return " " + index + " - " + character.name;
+            return " " + index + " - " + character.name.toUpperCase();
         }
     }
 
@@ -826,7 +820,7 @@ public class ManageScreen implements Screen, Constants {
 
         @Override
         public String toString() {
-            return " Active Player " + index + " : " + character.name;
+            return " Active Player " + index + " : " + character.name.toUpperCase();
         }
     }
 

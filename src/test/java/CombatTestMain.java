@@ -63,7 +63,7 @@ public class CombatTestMain extends Game {
             SaveGame sg = SaveGame.read(SAVE_FILENAME);
             ctx.setSaveGame(sg);
 
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < ctx.saveGame.players.length; j++) {
 //                ctx.saveGame.players[j].level = 1;
 //                ctx.saveGame.players[j].hp = 12;
 //                ctx.saveGame.players[j].maxhp = 12;

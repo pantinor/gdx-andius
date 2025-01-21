@@ -35,7 +35,7 @@ public class CombatHud {
     private PlayerListing current;
     private final CombatScreen screen;
     private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
-    private final GlyphLayout glyph = new GlyphLayout(Andius.font, "", Color.WHITE, 32, Align.left, true);
+    private final GlyphLayout glyph = new GlyphLayout(Andius.font12, "", Color.WHITE, 32, Align.left, true);
 
     public CombatHud(CombatScreen screen, Set<andius.objects.Actor> players) {
         this.screen = screen;
@@ -98,16 +98,16 @@ public class CombatHud {
             this.player = player;
             this.rec = player.getPlayer();
             this.icon = new Image(Andius.faceTiles[rec.portaitIndex]);
-            this.l1 = new Label("", Andius.skin, "hudLogFont");
-            this.l2 = new Label("", Andius.skin, "hudLogFont");
-            this.l3 = new Label("", Andius.skin, "hudLogFont");
-            this.l4 = new Label("", Andius.skin, "hudLogFont");
+            this.l1 = new Label("", Andius.skin, "default-16");
+            this.l2 = new Label("", Andius.skin, "default-16");
+            this.l3 = new Label("", Andius.skin, "default-16");
+            this.l4 = new Label("", Andius.skin, "default-16");
 
             for (int i = 0; i < 10; i++) {
                 if (rec.spellPresets[i] != null && rec.knownSpells.contains(rec.spellPresets[i])) {
                     TextureRegionDrawable t1 = new TextureRegionDrawable(Icons.get(rec.spellPresets[i].getIcon()));
                     slotButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
-                    slotTooltips[i] = new Label(rec.spellPresets[i].getTag(), Andius.skin, "hudSmallFont");
+                    slotTooltips[i] = new Label(rec.spellPresets[i].getTag(), Andius.skin, "default-12");
                     SpellSlotListener l = new SpellSlotListener(player, rec.spellPresets[i], i, slotTooltips[i]);
                     slotButtons[i].addListener(l);
                     addActor(slotTooltips[i]);
@@ -126,7 +126,7 @@ public class CombatHud {
             this.l1.setPosition(x + 60, 112 + 56);
             this.l2.setPosition(x + 60, 112 + 40);
             this.l3.setPosition(x + 60, 112 + 24);
-            this.l4.setPosition(x + 40, -12);
+            this.l4.setPosition(x + 0, -12);
 
             x = getX() + 15;
             for (int i = 0; i < 5; i++) {
@@ -165,7 +165,7 @@ public class CombatHud {
                 itemButtons[i] = new ImageButton(t1, t1.tint(Color.LIGHT_GRAY));
                 itemButtons[i].setX(x);
                 itemButtons[i].setY(y);
-                itemTooltips[i] = new Label(item.name, Andius.skin, "hudSmallFont");
+                itemTooltips[i] = new Label(item.name, Andius.skin, "default-12");
                 itemTooltips[i].setPosition(x, y);
                 ItemListener l = new ItemListener(player, item, itemTooltips[i]);
                 itemButtons[i].addListener(l);
@@ -272,16 +272,16 @@ public class CombatHud {
         sb.append(String.format("ST: %s\n", rec.status.toString()));
         int[] ms = rec.magePoints;
         int[] cs = rec.clericPoints;
-        sb.append(String.format("MG Pts: %d %d %d %d %d %d %d\n",
+        sb.append(String.format("M: %d %d %d %d %d %d %d\n",
                 ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6]));
-        sb.append(String.format("PR Pts: %d %d %d %d %d %d %d\n",
+        sb.append(String.format("P: %d %d %d %d %d %d %d\n",
                 cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
 
         int dim = TILE_DIM * 3;
 
-        glyph.setText(Andius.hudLogFont, sb.toString(), rec.status.color(), dim, Align.left, true);
+        glyph.setText(Andius.font12, sb.toString(), rec.status.color(), dim, Align.left, true);
         batch.draw(BCKGRND, pl.getX() - TILE_DIM, pl.getY() - TILE_DIM * 2);
-        Andius.hudLogFont.draw(batch, glyph, pl.getX() - TILE_DIM + 4, pl.getY() + TILE_DIM - 5);
+        Andius.font12.draw(batch, glyph, pl.getX() - TILE_DIM + 4, pl.getY() + TILE_DIM - 5);
     }
 
     public void drawStatsMonster(SpriteBatch batch, andius.objects.Actor mon) {
@@ -298,9 +298,9 @@ public class CombatHud {
 
         int dim = TILE_DIM * 3;
 
-        glyph.setText(Andius.hudLogFont, sb.toString(), rec.status().color(), dim, Align.left, true);
+        glyph.setText(Andius.font12, sb.toString(), rec.status().color(), dim, Align.left, true);
         batch.draw(BCKGRND, mon.getX() - TILE_DIM, mon.getY() + TILE_DIM * 4);
-        Andius.hudLogFont.draw(batch, glyph, mon.getX() - TILE_DIM + 4, mon.getY() + TILE_DIM * 7 - 10);
+        Andius.font12.draw(batch, glyph, mon.getX() - TILE_DIM + 4, mon.getY() + TILE_DIM * 7 - 10);
     }
 
     private static Texture statsBackground() {

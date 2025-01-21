@@ -46,7 +46,7 @@ public class BookScreen extends InputAdapter implements Screen {
 
         generator.dispose();
 
-        Label.LabelStyle labs = new Label.LabelStyle(skin.get("default", Label.LabelStyle.class));
+        Label.LabelStyle labs = new Label.LabelStyle(skin.get("default-16", Label.LabelStyle.class));
         labs.font = fontLarger;
         labs.background = null;
 
@@ -122,7 +122,7 @@ public class BookScreen extends InputAdapter implements Screen {
             }
         });
 
-        CheckBox.CheckBoxStyle cbs = new CheckBox.CheckBoxStyle(skin.get("default", CheckBox.CheckBoxStyle.class));
+        CheckBox.CheckBoxStyle cbs = new CheckBox.CheckBoxStyle(skin.get("default-16", CheckBox.CheckBoxStyle.class));
         cbs.font = fontLarger;
         cbs.fontColor = Color.BLUE;
 

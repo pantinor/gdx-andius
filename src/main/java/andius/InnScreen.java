@@ -24,13 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import utils.AutoFocusScrollPane;
+import utils.LogScrollPane;
 import utils.Utils;
 
 /**
@@ -51,14 +50,14 @@ public class InnScreen implements Screen, Constants {
     private final Table playerTable;
     private final AutoFocusScrollPane playerScroll;
     private final Table logTable;
-    private final AutoFocusScrollPane logScroll;
+    private final LogScrollPane logScroll;
     private final TextButton go;
     private final TextButton pool;
     private final TextButton exit;
     private final Image focusIndicator;
     private PlayerListing selectedPlayer;
 
-    private static final int LOG_AREA_WIDTH = 400;
+    private static final int LOG_AREA_WIDTH = 500;
     private static final int X_ALIGN = 200;
     private static final int PAT_SCR_WIDTH = 650;
     private static final int PAT_ITEM_HGT = 27;
@@ -76,13 +75,13 @@ public class InnScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
-        this.playerSelectionLabel = new Label("WE HAVE :", Andius.skin, "default");
+        this.playerSelectionLabel = new Label("WE HAVE :", Andius.skin, "default-16");
 
         focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
         focusIndicator.setWidth(PAT_SCR_WIDTH);
         focusIndicator.setHeight(PAT_ITEM_HGT);
 
-        this.roomSelection = new List<>(Andius.skin, "default");
+        this.roomSelection = new List<>(Andius.skin, "default-16");
         Array<String> names = new Array<>();
         names.add("THE STABLES (FREE!)");
         names.add("COTS. 10 GP/WEEK.");
@@ -92,7 +91,7 @@ public class InnScreen implements Screen, Constants {
 
         this.roomSelection.setItems(names);
 
-        this.go = new TextButton("BUY", Andius.skin, "red-larger");
+        this.go = new TextButton("BUY", Andius.skin, "default-16-red");
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -114,7 +113,7 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL", Andius.skin, "red-larger");
+        this.pool = new TextButton("POOL", Andius.skin, "default-16-red");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -134,7 +133,7 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("EXIT", Andius.skin, "red-larger");
+        this.exit = new TextButton("EXIT", Andius.skin, "default-16-red");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -142,11 +141,11 @@ public class InnScreen implements Screen, Constants {
             }
         });
 
-        ScrollPane sp1 = new ScrollPane(this.roomSelection, Andius.skin);
+        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.roomSelection, Andius.skin);
         sp1.setBounds(X_ALIGN, 340, 300, 145);
 
         playerTable = new Table(Andius.skin);
-        playerTable.defaults().align(Align.left);
+        playerTable.top().left();
         playerTable.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -180,12 +179,11 @@ public class InnScreen implements Screen, Constants {
         }
 
         this.logTable = new Table(Andius.skin);
-        this.logTable.defaults().align(Align.left);
-        this.logScroll = new AutoFocusScrollPane(this.logTable, Andius.skin);
-        this.logScroll.setScrollingDisabled(true, false);
+        this.logTable.bottom().left();
+        this.logScroll = new LogScrollPane(Andius.skin, this.logTable, LOG_AREA_WIDTH);
         this.logScroll.setBounds(X_ALIGN + 300, 250, LOG_AREA_WIDTH, 395);
 
-        this.playerScroll.setBounds(X_ALIGN, 35, PAT_SCR_WIDTH, 200);
+        this.playerScroll.setBounds(X_ALIGN, 25, PAT_SCR_WIDTH, 180);
         this.playerSelectionLabel.setBounds(X_ALIGN, 458, 20, 100);
         this.go.setBounds(X_ALIGN, 290, 60, 40);
         this.pool.setBounds(X_ALIGN + 70, 290, 60, 40);
@@ -198,6 +196,8 @@ public class InnScreen implements Screen, Constants {
         stage.addActor(pool);
         stage.addActor(logScroll);
         stage.addActor(playerScroll);
+
+        //this.stage.setDebugAll(true);
 
         log("WELCOME TO THE " + contextMap.getLabel().toUpperCase());
 
@@ -267,10 +267,7 @@ public class InnScreen implements Screen, Constants {
     }
 
     private void log(String s) {
-        logTable.add(new Label(s, Andius.skin, "default"));
-        logTable.row();
-        logScroll.layout();
-        logScroll.setScrollPercentY(100);
+      this.logScroll.add(s);
     }
 
     private class PlayerListing extends Group {
@@ -287,9 +284,9 @@ public class InnScreen implements Screen, Constants {
 
         PlayerListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.largeFont, rec.isDead() ? Color.RED : rec.status.color());
+            this.style = new LabelStyle(Andius.font16, rec.isDead() ? Color.RED : rec.status.color());
 
-            this.name = new Label(rec.name, this.style);
+            this.name = new Label(rec.name.toUpperCase(), this.style);
             this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
             this.status = new Label(rec.isDead() ? "DEAD" : rec.status.toString(), this.style);
             this.hp = new Label(rec.hp + " / " + rec.maxhp, this.style);
@@ -326,7 +323,7 @@ public class InnScreen implements Screen, Constants {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(this.hud, 0, 0);
-        Andius.largeFont.draw(batch, "WHO WILL STAY ?", X_ALIGN, 245);
+        Andius.font16.draw(batch, "WHO WILL STAY ?", X_ALIGN, 245);
         batch.end();
         stage.act();
         stage.draw();

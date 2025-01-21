@@ -171,7 +171,7 @@ public class GameScreen extends BaseScreen {
         //setCurrentMapCoords(v);
         //Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
         if (this.roomName != null) {
-            Andius.largeFont.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
+            Andius.font12.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
         }
 
         batch.end();

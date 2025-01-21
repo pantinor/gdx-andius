@@ -42,11 +42,11 @@ public class Andius extends Game {
 
     public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
 
-    public static BitmapFont font;
-    public static BitmapFont smallFont;
-    public static BitmapFont largeFont;
-    public static BitmapFont hudLogFont;
-    public static BitmapFont titleFont;
+    public static BitmapFont font12;
+    public static BitmapFont font16;
+    public static BitmapFont font18;
+    public static BitmapFont font24;
+    public static BitmapFont font72;
 
     public static Andius mainGame;
     public static StartScreen startScreen;
@@ -85,19 +85,19 @@ public class Andius extends Game {
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
         parameter.size = 12;
-        smallFont = generator.generateFont(parameter);
+        font12 = generator.generateFont(parameter);
 
         parameter.size = 16;
-        hudLogFont = generator.generateFont(parameter);
+        font16 = generator.generateFont(parameter);
 
         parameter.size = 18;
-        font = generator.generateFont(parameter);
+        font18 = generator.generateFont(parameter);
 
         parameter.size = 24;
-        largeFont = generator.generateFont(parameter);
+        font24 = generator.generateFont(parameter);
 
         parameter.size = 72;
-        titleFont = generator.generateFont(parameter);
+        font72 = generator.generateFont(parameter);
 
         generator.dispose();
 
@@ -109,62 +109,53 @@ public class Andius extends Game {
 
         generator.dispose();
 
-        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/gnuolane.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        parameter.size = 18;
-        font = generator.generateFont(parameter);
-
-        generator.dispose();
-
         skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
         skin.remove("default-font", BitmapFont.class);
-        skin.add("default-font", font, BitmapFont.class);
-        skin.add("larger-font", largeFont, BitmapFont.class);
-        skin.add("title-font", titleFont, BitmapFont.class);
-        skin.add("small-font", smallFont, BitmapFont.class);
+        skin.add("font12", font12, BitmapFont.class);
+        skin.add("font16", font16, BitmapFont.class);
+        skin.add("font24", font24, BitmapFont.class);
+        skin.add("font72", font72, BitmapFont.class);
         skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
-        skin.add("hud-log", hudLogFont, BitmapFont.class);
 
         {
-            Label.LabelStyle ls = skin.get("default", Label.LabelStyle.class);
-            ls.font = font;
-            Label.LabelStyle ls2 = skin.get("hudLogFont", Label.LabelStyle.class);
-            ls2.font = hudLogFont;
-            Label.LabelStyle ls3 = skin.get("hudSmallFont", Label.LabelStyle.class);
-            ls3.font = smallFont;
-            TextButton.TextButtonStyle tbs = skin.get("default", TextButton.TextButtonStyle.class);
-            tbs.font = font;
-            TextButton.TextButtonStyle tbsred = skin.get("red", TextButton.TextButtonStyle.class);
-            tbsred.font = font;
-            TextButton.TextButtonStyle tbsbr = skin.get("brown", TextButton.TextButtonStyle.class);
-            tbsbr.font = font;
-            SelectBox.SelectBoxStyle sbs = skin.get("default", SelectBox.SelectBoxStyle.class);
-            sbs.font = font;
-            sbs.listStyle.font = font;
-            CheckBox.CheckBoxStyle cbs = skin.get("default", CheckBox.CheckBoxStyle.class);
-            cbs.font = font;
-            List.ListStyle lis = skin.get("default", List.ListStyle.class);
-            lis.font = font;
-            TextField.TextFieldStyle tfs = skin.get("default", TextField.TextFieldStyle.class);
-            tfs.font = font;
+            Label.LabelStyle ls = skin.get("default-12", Label.LabelStyle.class);
+            ls.font = font12;
+            TextButton.TextButtonStyle tbs = skin.get("default-12", TextButton.TextButtonStyle.class);
+            tbs.font = font12;
+            TextButton.TextButtonStyle tbsred = skin.get("default-12-red", TextButton.TextButtonStyle.class);
+            tbsred.font = font12;
+            SelectBox.SelectBoxStyle sbs = skin.get("default-12", SelectBox.SelectBoxStyle.class);
+            sbs.font = font12;
+            sbs.listStyle.font = font12;
+            CheckBox.CheckBoxStyle cbs = skin.get("default-12", CheckBox.CheckBoxStyle.class);
+            cbs.font = font12;
+            List.ListStyle lis = skin.get("default-12", List.ListStyle.class);
+            lis.font = font12;
+            TextField.TextFieldStyle tfs = skin.get("default-12", TextField.TextFieldStyle.class);
+            tfs.font = font12;
         }
         {
-            Label.LabelStyle ls = skin.get("larger", Label.LabelStyle.class);
-            ls.font = largeFont;
-            TextButton.TextButtonStyle tbs = skin.get("larger", TextButton.TextButtonStyle.class);
-            tbs.font = largeFont;
-            TextButton.TextButtonStyle tbsred = skin.get("red-larger", TextButton.TextButtonStyle.class);
-            tbsred.font = largeFont;
-            TextButton.TextButtonStyle tbsbr = skin.get("brown-larger", TextButton.TextButtonStyle.class);
-            tbsbr.font = largeFont;
-            SelectBox.SelectBoxStyle sbs = skin.get("larger", SelectBox.SelectBoxStyle.class);
-            sbs.font = largeFont;
-            sbs.listStyle.font = largeFont;
-            List.ListStyle lis = skin.get("larger", List.ListStyle.class);
-            lis.font = largeFont;
-            TextField.TextFieldStyle tfs = skin.get("larger", TextField.TextFieldStyle.class);
-            tfs.font = largeFont;
+            Label.LabelStyle ls = skin.get("default-16", Label.LabelStyle.class);
+            ls.font = font16;
+            TextButton.TextButtonStyle tbs = skin.get("default-16", TextButton.TextButtonStyle.class);
+            tbs.font = font16;
+            TextButton.TextButtonStyle tbsred = skin.get("default-16-red", TextButton.TextButtonStyle.class);
+            tbsred.font = font16;
+            SelectBox.SelectBoxStyle sbs = skin.get("default-16", SelectBox.SelectBoxStyle.class);
+            sbs.font = font16;
+            sbs.listStyle.font = font16;
+            List.ListStyle lis = skin.get("default-16", List.ListStyle.class);
+            lis.font = font16;
+            TextField.TextFieldStyle tfs = skin.get("default-16", TextField.TextFieldStyle.class);
+            tfs.font = font16;
+        }
+        {
+            Label.LabelStyle ls = skin.get("default-24", Label.LabelStyle.class);
+            ls.font = font24;
+            TextButton.TextButtonStyle tbs = skin.get("default-24", TextButton.TextButtonStyle.class);
+            tbs.font = font24;
+            TextButton.TextButtonStyle tbsred = skin.get("default-24-red", TextButton.TextButtonStyle.class);
+            tbsred.font = font24;
         }
 
         HUD = new Hud();

@@ -145,7 +145,7 @@ public enum Spells {
     }
 
     public String getTag() {
-        return this.level + " " + this.toString().toUpperCase() + " " + name + " " + target.toString();
+        return this.level + " " + this.toString();
     }
 
     public ClassType getType() {

@@ -104,9 +104,9 @@ public class VendorScreen implements Screen, Constants {
         vendorFocusInd.setWidth(w);
         vendorFocusInd.setHeight(h);
 
-        invDesc = new Label("", Andius.skin, "default");
+        invDesc = new Label("", Andius.skin, "default-16");
 
-        this.playerSelection = new List<>(Andius.skin, "default");
+        this.playerSelection = new List<>(Andius.skin, "default-16");
         PlayerIndex[] names = new PlayerIndex[this.context.players().length];
         for (int i = 0; i < this.context.players().length; i++) {
             names[i] = new PlayerIndex(this.context.players()[i]);
@@ -125,7 +125,7 @@ public class VendorScreen implements Screen, Constants {
         vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
         vendorPane.setScrollingDisabled(true, false);
 
-        this.cancel = new TextButton("LEAVE", Andius.skin, "red-larger");
+        this.cancel = new TextButton("LEAVE", Andius.skin, "default-16-red");
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -133,7 +133,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("SAVE", Andius.skin, "red-larger");
+        this.exit = new TextButton("SAVE", Andius.skin, "default-16-red");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -144,7 +144,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.unequip = new TextButton("UNEQUIP", Andius.skin, "red-larger");
+        this.unequip = new TextButton("UNEQUIP", Andius.skin, "default-16-red");
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -171,7 +171,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL GOLD", Andius.skin, "red-larger");
+        this.pool = new TextButton("POOL GOLD", Andius.skin, "default-16-red");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -187,7 +187,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.buy = new TextButton("BUY", Andius.skin, "red-larger");
+        this.buy = new TextButton("BUY", Andius.skin, "default-16-red");
         this.buy.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -214,7 +214,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.sell = new TextButton("SELL", Andius.skin, "red-larger");
+        this.sell = new TextButton("SELL", Andius.skin, "default-16-red");
         this.sell.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -276,7 +276,7 @@ public class VendorScreen implements Screen, Constants {
 
         int y = 500;
         for (ItemType type : ItemType.values()) {
-            CheckBox cb = new CheckBox(type.toString(), Andius.skin);
+            CheckBox cb = new CheckBox(type.toString(), Andius.skin, "default-16");
             cb.setUserObject(type);
             cb.addListener(new ChangeListener() {
                 @Override
@@ -411,10 +411,10 @@ public class VendorScreen implements Screen, Constants {
         if (selectedImage != null) {
             batch.draw(highlighter, selectedImage.getX() - 3, selectedImage.getY() - 4);
         }
-        Andius.font.draw(batch, this.vendorName, 447, 750);
-        Andius.font.draw(batch, "AC", 70, Andius.SCREEN_HEIGHT - 530);
-        Andius.font.draw(batch, "DAMG", 60, Andius.SCREEN_HEIGHT - 574);
-        Andius.font.draw(batch, "GOLD", 60, Andius.SCREEN_HEIGHT - 616);
+        Andius.font12.draw(batch, this.vendorName, 447, 750);
+        Andius.font12.draw(batch, "AC", 70, Andius.SCREEN_HEIGHT - 530);
+        Andius.font12.draw(batch, "DAMG", 60, Andius.SCREEN_HEIGHT - 574);
+        Andius.font12.draw(batch, "GOLD", 60, Andius.SCREEN_HEIGHT - 616);
 
         batch.end();
 
@@ -509,15 +509,15 @@ public class VendorScreen implements Screen, Constants {
             item1Icon = make(ItemType.MISC, sp.item1, Icons.get(sp.item1), 106, Andius.SCREEN_HEIGHT - 499);
             item2Icon = make(ItemType.MISC, sp.item2, Icons.get(sp.item2), 160, Andius.SCREEN_HEIGHT - 499);
 
-            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default");
+            acLabel = new Label("" + character.calculateAC(), Andius.skin, "default-16");
             acLabel.setX(125);
             acLabel.setY(Andius.SCREEN_HEIGHT - 557);
 
-            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default");
+            damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default-16");
             damageLabel.setX(125);
             damageLabel.setY(Andius.SCREEN_HEIGHT - 600);
 
-            goldLabel = new Label("" + character.gold, Andius.skin, "default");
+            goldLabel = new Label("" + character.gold, Andius.skin, "default-16");
             goldLabel.setX(125);
             goldLabel.setY(Andius.SCREEN_HEIGHT - 645);
 
@@ -677,8 +677,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "default");
-            this.price = new Label("" + item.cost / 2, Andius.skin, "default");
+            this.label = new Label(item.name, Andius.skin, "default-16");
+            this.price = new Label("" + item.cost / 2, Andius.skin, "default-16");
 
             this.canusebkgnd = new Image();
             boolean canUse = item.canUse(rec.classType);
@@ -716,8 +716,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "default");
-            this.price = new Label("" + item.cost, Andius.skin, "default");
+            this.label = new Label(item.name, Andius.skin, "default-16");
+            this.price = new Label("" + item.cost, Andius.skin, "default-16");
             this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
 
             addActor(this.icon);
@@ -769,7 +769,7 @@ public class VendorScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super("", Andius.skin, "default");
+            super("", Andius.skin, "default-16");
             this.rec = rec;
             setColor(rec.status.color());
             setText(getText());
