@@ -117,47 +117,31 @@ public class Andius extends Game {
         skin.add("font72", font72, BitmapFont.class);
         skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
 
-        {
-            Label.LabelStyle ls = skin.get("default-12", Label.LabelStyle.class);
-            ls.font = font12;
-            TextButton.TextButtonStyle tbs = skin.get("default-12", TextButton.TextButtonStyle.class);
-            tbs.font = font12;
-            TextButton.TextButtonStyle tbsred = skin.get("default-12-red", TextButton.TextButtonStyle.class);
-            tbsred.font = font12;
-            SelectBox.SelectBoxStyle sbs = skin.get("default-12", SelectBox.SelectBoxStyle.class);
-            sbs.font = font12;
-            sbs.listStyle.font = font12;
-            CheckBox.CheckBoxStyle cbs = skin.get("default-12", CheckBox.CheckBoxStyle.class);
-            cbs.font = font12;
-            List.ListStyle lis = skin.get("default-12", List.ListStyle.class);
-            lis.font = font12;
-            TextField.TextFieldStyle tfs = skin.get("default-12", TextField.TextFieldStyle.class);
-            tfs.font = font12;
-        }
-        {
-            Label.LabelStyle ls = skin.get("default-16", Label.LabelStyle.class);
-            ls.font = font16;
-            TextButton.TextButtonStyle tbs = skin.get("default-16", TextButton.TextButtonStyle.class);
-            tbs.font = font16;
-            TextButton.TextButtonStyle tbsred = skin.get("default-16-red", TextButton.TextButtonStyle.class);
-            tbsred.font = font16;
-            SelectBox.SelectBoxStyle sbs = skin.get("default-16", SelectBox.SelectBoxStyle.class);
-            sbs.font = font16;
-            sbs.listStyle.font = font16;
-            List.ListStyle lis = skin.get("default-16", List.ListStyle.class);
-            lis.font = font16;
-            TextField.TextFieldStyle tfs = skin.get("default-16", TextField.TextFieldStyle.class);
-            tfs.font = font16;
-        }
-        {
-            Label.LabelStyle ls = skin.get("default-24", Label.LabelStyle.class);
-            ls.font = font24;
-            TextButton.TextButtonStyle tbs = skin.get("default-24", TextButton.TextButtonStyle.class);
-            tbs.font = font24;
-            TextButton.TextButtonStyle tbsred = skin.get("default-24-red", TextButton.TextButtonStyle.class);
-            tbsred.font = font24;
-        }
+        skin.get("default-12", Label.LabelStyle.class).font = font12;
+        skin.get("default-12", TextButton.TextButtonStyle.class).font = font12;
+        skin.get("default-12-red", TextButton.TextButtonStyle.class).font = font12;
+        skin.get("default-12-green", TextButton.TextButtonStyle.class).font = font12;
+        skin.get("default-12-yellow", TextButton.TextButtonStyle.class).font = font12;
+        skin.get("default-12", CheckBox.CheckBoxStyle.class).font = font12;
 
+        skin.get("default-16", Label.LabelStyle.class).font = font16;
+        skin.get("default-16", TextButton.TextButtonStyle.class).font = font16;
+        skin.get("default-16-red", TextButton.TextButtonStyle.class).font = font16;
+        skin.get("default-16-green", TextButton.TextButtonStyle.class).font = font16;
+        skin.get("default-16-yellow", TextButton.TextButtonStyle.class).font = font16;
+        skin.get("default-16", CheckBox.CheckBoxStyle.class).font = font16;
+
+        skin.get("default-24", Label.LabelStyle.class).font = font24;
+        skin.get("default-24", TextButton.TextButtonStyle.class).font = font24;
+        skin.get("default-24-red", TextButton.TextButtonStyle.class).font = font24;
+        skin.get("default-24-green", TextButton.TextButtonStyle.class).font = font24;
+        skin.get("default-24-yellow", TextButton.TextButtonStyle.class).font = font24;
+        
+        skin.get("default-16", SelectBox.SelectBoxStyle.class).font = font16;
+        skin.get("default-16", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
+        skin.get("default-16", List.ListStyle.class).font = font16;
+        skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
+        
         HUD = new Hud();
 
         try {

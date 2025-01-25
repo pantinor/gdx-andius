@@ -88,6 +88,30 @@ bluefield
   orig: 14, 14
   offset: 0, 0
   index: -1
+redfield
+  rotate: false
+  xy: 112, 4
+  size: 14, 14
+  split: 3, 3, 3, 3
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+greenfield
+  rotate: false
+  xy: 128, 4
+  size: 14, 14
+  split: 3, 3, 3, 3
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+yellowfield
+  rotate: false
+  xy: 144, 5
+  size: 14, 14
+  split: 3, 3, 3, 3
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 check-on
   rotate: false
   xy: 125, 35
@@ -215,48 +239,6 @@ journal-check-on
   xy: 90, 5
   size: 20, 20
   orig: 20, 20
-  offset: 0, 0
-  index: -1
-red-off
-  rotate: false
-  xy: 0, 130
-  size: 50, 30
-  orig: 50, 30
-  offset: 0, 0
-  index: -1
-red-over
-  rotate: false
-  xy: 50, 130
-  size: 50, 30
-  orig: 50, 30
-  offset: 0, 0
-  index: -1
-red-on
-  rotate: false
-  xy: 0, 160
-  size: 50, 30
-  orig: 50, 30
-  offset: 0, 0
-  index: -1
-brown-off
-  rotate: false
-  xy: 0, 190
-  size: 50, 30
-  orig: 50, 30
-  offset: 0, 0
-  index: -1
-brown-over
-  rotate: false
-  xy: 50, 190
-  size: 50, 30
-  orig: 50, 30
-  offset: 0, 0
-  index: -1
-brown-on
-  rotate: false
-  xy: 0, 220
-  size: 50, 30
-  orig: 50, 30
   offset: 0, 0
   index: -1
 scroller-fancy

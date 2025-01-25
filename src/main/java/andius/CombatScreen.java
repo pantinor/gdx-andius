@@ -7,15 +7,12 @@ import static andius.Constants.HITMSGS;
 import static andius.Constants.TILE_DIM;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
-import static andius.WizardryData.WER4_CHARS;
 import andius.objects.PlayerCursor;
 import andius.objects.Dice;
-import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MonsterCursor;
 import andius.objects.Mutable;
-import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.ProjectileActor;
 import andius.objects.Reward;
@@ -118,12 +115,6 @@ public class CombatScreen extends BaseScreen {
         if (this.opponent.getEnemy() instanceof MutableMonster) {
             Monster m = (Monster) opponent.getEnemy().baseType();
             fillCreatureTable(level, m);
-        } else {
-            DoGooder dg = (DoGooder) opponent.getEnemy().baseType();
-            fillCreatureTable(dg);
-            if (!dg.slogan.isEmpty()) {
-                log("You are about to battle with " + dg.slogan.replace("|", " ... "));
-            }
         }
 
         MapLayer mLayer = tmap.getLayers().get("Monster Positions");
@@ -251,16 +242,6 @@ public class CombatScreen extends BaseScreen {
         }
 
         addPartners(partner, groupCount + 1, maxGroups);
-    }
-
-    private void fillCreatureTable(DoGooder c) {
-        for (int i = 0; i < c.partyMembers.length; i++) {
-            int j = nextOpenSlot();
-            if (j != -1) {
-                DoGooder dg = WER4_CHARS.get(c.partyMembers[i]);
-                crSlots[j] = new MutableCharacter(dg);
-            }
-        }
     }
 
     private int nextOpenSlot() {

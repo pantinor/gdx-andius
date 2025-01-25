@@ -87,7 +87,9 @@ public class SaveGame implements Constants {
                                 l = new ArrayList<>();
                                 this.removedActors.put(map, l);
                             }
-                            l.add(hash);
+                            if (!l.contains(hash)) {
+                                l.add(hash);
+                            }
                         }
                     }
                 }

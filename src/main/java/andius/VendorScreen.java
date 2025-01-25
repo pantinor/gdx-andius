@@ -1,5 +1,7 @@
 package andius;
 
+import static andius.Andius.SCREEN_HEIGHT;
+import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -37,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import utils.AutoFocusScrollPane;
+import utils.FrameMaker;
 import utils.Utils;
 
 public class VendorScreen implements Screen, Constants {
@@ -44,7 +48,7 @@ public class VendorScreen implements Screen, Constants {
     private final Context context;
     private final String vendorName;
     private final Role vendorRole;
-    private final Texture hud;
+    private final Texture background;
     private final SpriteBatch batch;
     private final Stage stage;
 
@@ -92,9 +96,11 @@ public class VendorScreen implements Screen, Constants {
         this.context = context;
         this.vendorName = vendorName;
         this.vendorRole = role;
-        this.hud = new Texture(Gdx.files.classpath("assets/data/vendor.png"));
         this.batch = new SpriteBatch();
         this.stage = new Stage();
+        //this.stage.setDebugAll(true);
+
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         focusIndicator = new Image(Utils.fillRectangle(w, h, Color.YELLOW, .35f));
         focusIndicator.setWidth(w);
@@ -125,7 +131,7 @@ public class VendorScreen implements Screen, Constants {
         vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
         vendorPane.setScrollingDisabled(true, false);
 
-        this.cancel = new TextButton("LEAVE", Andius.skin, "default-16-red");
+        this.cancel = new TextButton("LEAVE", Andius.skin, "default-16");
         this.cancel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -133,7 +139,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("SAVE", Andius.skin, "default-16-red");
+        this.exit = new TextButton("SAVE", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -144,7 +150,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.unequip = new TextButton("UNEQUIP", Andius.skin, "default-16-red");
+        this.unequip = new TextButton("UNEQUIP", Andius.skin, "default-16");
         this.unequip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -171,7 +177,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL GOLD", Andius.skin, "default-16-red");
+        this.pool = new TextButton("POOL GOLD", Andius.skin, "default-16");
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -187,7 +193,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.buy = new TextButton("BUY", Andius.skin, "default-16-red");
+        this.buy = new TextButton("BUY", Andius.skin, "default-16-green");
         this.buy.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -214,7 +220,7 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.sell = new TextButton("SELL", Andius.skin, "default-16-red");
+        this.sell = new TextButton("SELL", Andius.skin, "default-16-green");
         this.sell.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -245,18 +251,20 @@ public class VendorScreen implements Screen, Constants {
             }
         });
 
-        this.playerPane.setBounds(77, Andius.SCREEN_HEIGHT - 289, 159, 235);
         this.invDesc.setBounds(90, 440, w, 25);
-        this.invPane.setBounds(326, 23, w, 690);
-        this.vendorPane.setBounds(713, 23, w, 690);
 
-        this.buy.setBounds(630, 600, 65, 40);
-        this.sell.setBounds(630, 550, 65, 40);
+        fm.setBounds(this.playerPane, 50, Andius.SCREEN_HEIGHT - 289, 155, 235);
+        fm.setBounds(this.invPane, 280, 23, w, 690);
+        fm.setBounds(this.vendorPane, 713, 23, w, 690);
 
-        this.pool.setBounds(40, 70, 100, 40);
-        this.unequip.setBounds(160, 70, 100, 40);
-        this.exit.setBounds(40, 20, 100, 40);
-        this.cancel.setBounds(160, 20, 100, 40);
+        this.buy.setBounds(600, 600, 70, 30);
+        this.sell.setBounds(600, 550, 70, 30);
+
+        this.pool.setBounds(30, 70, 100, 30);
+        this.exit.setBounds(30, 30, 100, 30);
+
+        this.unequip.setBounds(150, 70, 100, 30);
+        this.cancel.setBounds(150, 30, 100, 30);
 
         stage.addActor(playerPane);
         stage.addActor(invDesc);
@@ -284,7 +292,7 @@ public class VendorScreen implements Screen, Constants {
                     filterVendorItems((ItemType) actor.getUserObject());
                 }
             });
-            cb.setPosition(625, y -= 30);
+            cb.setPosition(590, y -= 30);
             filterGroup.add(cb);
             stage.addActor(cb);
         }
@@ -317,6 +325,20 @@ public class VendorScreen implements Screen, Constants {
         playerSelection.addListener(cl);
         cl.changed(null, null);
 
+        fm.setBounds(null, 50, 125, 150, 80);
+
+        fm.setBounds(null, 40, 375, 48, 48);
+        fm.setBounds(null, 110, 375, 48, 48);
+        fm.setBounds(null, 180, 375, 48, 48);
+
+        fm.setBounds(null, 40, 305, 48, 48);
+        fm.setBounds(null, 110, 305, 48, 48);
+        fm.setBounds(null, 180, 305, 48, 48);
+
+        fm.setBounds(null, 40, 235, 48, 48);
+        fm.setBounds(null, 180, 235, 48, 48);
+
+        this.background = fm.build();
     }
 
     private void filterVendorItems(ItemType type) {
@@ -401,7 +423,7 @@ public class VendorScreen implements Screen, Constants {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(this.hud, 0, 0);
+        batch.draw(this.background, 0, 0);
         batch.end();
 
         stage.act();
@@ -411,10 +433,11 @@ public class VendorScreen implements Screen, Constants {
         if (selectedImage != null) {
             batch.draw(highlighter, selectedImage.getX() - 3, selectedImage.getY() - 4);
         }
-        Andius.font12.draw(batch, this.vendorName, 447, 750);
-        Andius.font12.draw(batch, "AC", 70, Andius.SCREEN_HEIGHT - 530);
-        Andius.font12.draw(batch, "DAMG", 60, Andius.SCREEN_HEIGHT - 574);
-        Andius.font12.draw(batch, "GOLD", 60, Andius.SCREEN_HEIGHT - 616);
+
+        Andius.font16.draw(batch, this.vendorName.toUpperCase(), 400, 750);
+        Andius.font16.draw(batch, "AC", 60, 190);
+        Andius.font16.draw(batch, "DAMG", 60, 170);
+        Andius.font16.draw(batch, "GOLD", 60, 150);
 
         batch.end();
 
@@ -498,32 +521,29 @@ public class VendorScreen implements Screen, Constants {
             );
 
             avatar = new Image(Andius.faceTiles[sp.portaitIndex]);
-            avatar.setX(132);
-            avatar.setY(Andius.SCREEN_HEIGHT - 444);
 
-            weaponIcon = make(ItemType.WEAPON, sp.weapon, Icons.get(sp.weapon), 67, Andius.SCREEN_HEIGHT - 386);
-            armorIcon = make(ItemType.ARMOR, sp.armor, Icons.get(sp.armor), 67, Andius.SCREEN_HEIGHT - 442);
-            helmIcon = make(ItemType.HELMET, sp.helm, Icons.get(sp.helm), 133, Andius.SCREEN_HEIGHT - 386);
-            shieldIcon = make(ItemType.SHIELD, sp.shield, Icons.get(sp.shield), 199, Andius.SCREEN_HEIGHT - 386);
-            glovesIcon = make(ItemType.GAUNTLET, sp.glove, Icons.get(sp.glove), 199, Andius.SCREEN_HEIGHT - 442);
-            item1Icon = make(ItemType.MISC, sp.item1, Icons.get(sp.item1), 106, Andius.SCREEN_HEIGHT - 499);
-            item2Icon = make(ItemType.MISC, sp.item2, Icons.get(sp.item2), 160, Andius.SCREEN_HEIGHT - 499);
+            armorIcon = make(ItemType.ARMOR, sp.armor, Icons.get(sp.armor), 40 + 2, 375 + 2);
+            helmIcon = make(ItemType.HELMET, sp.helm, Icons.get(sp.helm), 110 + 2, 375 + 2);
+            shieldIcon = make(ItemType.SHIELD, sp.shield, Icons.get(sp.shield), 180 + 2, 375 + 2);
+
+            weaponIcon = make(ItemType.WEAPON, sp.weapon, Icons.get(sp.weapon), 40, 305 + 2);
+            avatar.setPosition(110, 305);
+            glovesIcon = make(ItemType.GAUNTLET, sp.glove, Icons.get(sp.glove), 180, 305 + 2);
+
+            item1Icon = make(ItemType.MISC, sp.item1, Icons.get(sp.item1), 40 + 2, 235 + 2);
+            item2Icon = make(ItemType.MISC, sp.item2, Icons.get(sp.item2), 180 + 2, 235 + 2);
 
             acLabel = new Label("" + character.calculateAC(), Andius.skin, "default-16");
-            acLabel.setX(125);
-            acLabel.setY(Andius.SCREEN_HEIGHT - 557);
+            acLabel.setPosition(130, 174);
 
             damageLabel = new Label(character.weapon != null ? character.weapon.damage.toString() : "1d2", Andius.skin, "default-16");
-            damageLabel.setX(125);
-            damageLabel.setY(Andius.SCREEN_HEIGHT - 600);
+            damageLabel.setPosition(130, 154);
 
             goldLabel = new Label("" + character.gold, Andius.skin, "default-16");
-            goldLabel.setX(125);
-            goldLabel.setY(Andius.SCREEN_HEIGHT - 645);
+            goldLabel.setPosition(130, 134);
 
             this.status = new PlayerStatusLabel(character);
-            this.status.setX(64);
-            this.status.setY(740);
+            this.status.setPosition(50, 740);
 
             icons[0] = avatar;
             icons[1] = weaponIcon;
@@ -779,6 +799,12 @@ public class VendorScreen implements Screen, Constants {
         public com.badlogic.gdx.utils.StringBuilder getText() {
             return new com.badlogic.gdx.utils.StringBuilder(String.format("%s  LVL %d  %s  %s", rec.race.toString(), rec.level,
                     rec.classType.toString(), rec.isDead() ? "DEAD" : rec.status));
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            setText(getText());
+            super.draw(batch, parentAlpha);
         }
 
         @Override

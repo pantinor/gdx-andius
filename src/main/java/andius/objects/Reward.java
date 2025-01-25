@@ -14,7 +14,12 @@ public class Reward {
         TELEPORTER,
         ANTI_MAGE,
         ANTI_PRIEST,
-        ALARM
+        ALARM;
+        
+        @Override
+        public String toString() {
+            return this.name().replace("_", " ").toUpperCase();
+        }
     }
 
     public int id;

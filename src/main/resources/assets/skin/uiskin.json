@@ -7,6 +7,7 @@ com.badlogic.gdx.graphics.Color: {
 	white: { a: 1, b: 1, g: 1, r: 1 },
 	blue: { a: 1, b: 1, g: 0, r: 0 },
 	red: { a: 1, b: 0, g: 0, r: 1 },
+	yellow: { a: 1, b: 0, g: 1, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
@@ -20,17 +21,26 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	default: { down: default-round-down, up: default-round },
-	red: { down: red-off, up: red-on },
+	blue: { down: textfield, up: bluefield },
+        red: { down: textfield, up: redfield },
+	green: { down: textfield, up: greenfield },
+	yellow: { down: textfield, up: yellowfield },
 	toggle: { down: default-round-down, checked: default-round-down, up: default-round }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default-12: { down: textfield, up: bluefield, over: textfield, font: default-font, fontColor: white, downFontColor: blue },
-	default-12-red: { down: red-off, up: red-on, font: default-font, over: red-over, fontColor: white, downFontColor: red },
+	default-12-red: { down: textfield, up: redfield, over: textfield, font: default-font, fontColor: white, downFontColor: red },
+        default-12-green: { down: textfield, up: greenfield, over: textfield, font: default-font, fontColor: white, downFontColor: green },
+	default-12-yellow: { down: textfield, up: yellowfield, over: textfield, font: default-font, fontColor: white, downFontColor: yellow },
 	default-16: { down: textfield, up: bluefield, over: textfield, font: default-font, fontColor: white, downFontColor: blue },
-        default-16-red: { down: red-off, up: red-on, font: default-font, over: red-over, fontColor: white, downFontColor: red },
-	default-24: { down: textfield, up: bluefield, over: textfield, font: default-font, fontColor: white, downFontColor: blue },
-        default-24-red: { down: red-off, up: red-on, font: default-font, over: red-over, fontColor: white, downFontColor: red }
-},
+	default-16-red: { down: textfield, up: redfield, over: textfield, font: default-font, fontColor: white, downFontColor: red },
+        default-16-green: { down: textfield, up: greenfield, over: textfield, font: default-font, fontColor: white, downFontColor: green },
+	default-16-yellow: { down: textfield, up: yellowfield, over: textfield, font: default-font, fontColor: white, downFontColor: yellow },	
+        default-24: { down: textfield, up: bluefield, over: textfield, font: default-font, fontColor: white, downFontColor: blue },
+	default-24-red: { down: textfield, up: redfield, over: textfield, font: default-font, fontColor: white, downFontColor: red },
+        default-24-green: { down: textfield, up: greenfield, over: textfield, font: default-font, fontColor: white, downFontColor: green },
+	default-24-yellow: { down: textfield, up: yellowfield, over: textfield, font: default-font, fontColor: white, downFontColor: yellow },
+    },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: scroller-fancy-back, hScrollKnob: scroller-fancy, hScroll: scroller-fancy-back, vScrollKnob: scroller-fancy, background: clear}
 },

@@ -32,7 +32,7 @@ public class Hud {
 
     public void render(Batch batch, Context ctxt) {
 
-        int y = Andius.SCREEN_HEIGHT - 50;
+        int y = Andius.SCREEN_HEIGHT - 56;
         int py = Andius.SCREEN_HEIGHT - 103;
 
         for (CharacterRecord rec : ctxt.saveGame.players) {
@@ -49,16 +49,16 @@ public class Hud {
             Andius.font12.draw(batch, d, 790, y);
 
             d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status.toString());
-            Andius.font12.draw(batch, d, 790, y - 11);
+            Andius.font12.draw(batch, d, 790, y - 12);
 
             d = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);
-            Andius.font12.draw(batch, d, 790, y - 22);
+            Andius.font12.draw(batch, d, 790, y - 24);
 
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
             d = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
                     ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            Andius.font12.draw(batch, d, 790, y - 33);
+            Andius.font12.draw(batch, d, 790, y - 36);
 
             y -= 60;
             py -= 60;

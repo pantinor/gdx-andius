@@ -1,7 +1,12 @@
 
 import andius.Andius;
+import andius.Constants;
+import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
+import andius.EquipmentScreen;
+import andius.RewardScreen;
+import andius.VendorScreen;
 import andius.Wiz4CombatScreen;
 import andius.Wiz4RewardScreen;
 import static andius.WizardryData.PMO_MONSTERS;
@@ -55,8 +60,12 @@ public class Wiz4CombatTestMain extends Game {
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[3], mms, WER4_CHARS.get(180)));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(180)));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
+            //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
+            //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
+            //setScreen(new RewardScreen(ctx, Constants.Map.WORLD, 1, 0, 5));
+            //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
 
         } catch (Exception e) {
             e.printStackTrace();
