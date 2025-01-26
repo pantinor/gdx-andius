@@ -47,6 +47,29 @@ import utils.Utils;
 
 public class ObjectsTestNG {
 
+    //@Test
+    public void testCompareArrays() throws Exception {
+
+        
+        
+        byte[] array1 = IOUtils.readFully(new FileInputStream("D:\\applewin\\paul-formatted-2.dsk"), 143360);
+        byte[] array2 = IOUtils.readFully(new FileInputStream("D:\\applewin\\paul-formatted.dsk"), 143360);
+
+        boolean areEqual = Arrays.equals(array1, array2);
+        System.out.println("Arrays are equal: " + areEqual);
+
+        int length = Math.min(array1.length, array2.length);
+        for (int i = 0; i < length; i++) {
+            if (array1[i] != array2[i]) {
+                System.out.printf("Difference at index %s: %s  %s\n", Integer.toHexString(i) ,String.format("%02X", array1[i]), String.format("%02X", array2[i]));
+            }
+        }
+
+        if (array1.length != array2.length) {
+            System.out.println("Arrays have different lengths.");
+        }
+    }
+
     @Test
     public void testMazeData() throws Exception {
         WizardryData.Scenario sc = WizardryData.Scenario.WER;
@@ -58,7 +81,6 @@ public class ObjectsTestNG {
                     WizardryData.MazeCell c = l.cells[x][y];
                     if (c.stairs || c.chute || c.teleport) {
                         String hx = String.format("%04x", (short) c.addressTo.column);
-
                     }
                 }
             }

@@ -457,9 +457,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (cell.summoningCircle1 || cell.summoningCircle2 || cell.summoningCircle3 || cell.summoningCircle4
-                || cell.summoningCircle5 || cell.summoningCircle6 || cell.summoningCircle7
-                || cell.summoningCircle8 || cell.summoningCircle9 || cell.summoningCircle10) {
+        if (cell.summoningCircle != null) {
             ModelInstance penta = new ModelInstance(pentagram, x + .5f, 0, y + .5f);
             modelInstances.add(new DungeonTileModelInstance(penta, level));
         }
@@ -676,9 +674,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                     drawLadderTriangle(cell, pixmap, x, y);
                 }
 
-                if (cell.summoningCircle1 || cell.summoningCircle2 || cell.summoningCircle3 || cell.summoningCircle4
-                        || cell.summoningCircle5 || cell.summoningCircle6 || cell.summoningCircle7
-                        || cell.summoningCircle8 || cell.summoningCircle9 || cell.summoningCircle10) {
+                if (cell.summoningCircle != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
                             x * MINI_DIM,

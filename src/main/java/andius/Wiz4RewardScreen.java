@@ -49,7 +49,7 @@ public class Wiz4RewardScreen implements Screen, Constants {
         this.player = player;
         this.batch = new SpriteBatch();
         this.stage = new Stage();
-        this.stage.setDebugAll(true);
+        //this.stage.setDebugAll(true);
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 

@@ -31,6 +31,10 @@ public class WizardryData {
         NORMAL, STAIRS, PIT, CHUTE, SPINNER, DARK, TELEPORT, DAMAGE, ELEVATOR, ROCK, NOSPELL, MESSAGE, ENCOUNTER
     }
 
+    public enum SummoningCircle {
+        CIRCLE1, CIRCLE2, CIRCLE3, CIRCLE4, CIRCLE5, CIRCLE6, CIRCLE7, CIRCLE8, CIRCLE9, CIRCLE10;
+    }
+
     //wizardry 1 proving grounds
     private static final String L1 = "555555555500545500040800500000007400005540914500005500944D00501440064000144040066400004000500300001440550100555546555500000001008100545551555500505550559900705550551500B09A50559A00301050550000605750B5990040555001000050155099590054154010400001005414640005005518540015015514A400150254804200150155149400094495105400458454140400494455040400450055020C0001000100410000000404000005002400000055551500D00055D52500D000956015005400952025007500550054581500150025581600054055D3C400010055D3C4005455000C040050000000740000554091450000550094C50050144006400014404006E40000400050010000144055010055554655550000000100810055555155550050555055950050D550551500907A5055990010105055000060555095990040557001000050155099590054154010400055555D555500000015055900014015069500454015056900850015A050004540150D6500015125045500112115054100125115014100114095004200004000405000000001010000010009004000F57F05007400555509007400155805005500254809405D001500155645000540099645000150D53471000140E534710000D8030000D801000CD809000C0000000CC089A860C021B266D81FB166180E0006003E9200000000000050000000000000000C0000000C0000000A0000000A0000B80F0000A00F0000F80F0000F80F00010000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000000000000AAAAAAAA0000A3AAAA4AAAAAAAAA0900A0AAAAAA0A0000000000000000000A0000000000000000000A7065000000000000080A0000000000000000000A0000000000000000000A0000000000000000000A0000000000000000000A0000000000000000000A00000000000000000010B16BBB8B050000000000000200FFFFFFFF01004D00B7FBB6FB00000000000000000000000000000000000007000000030004000B00120018000400000000000000000000000000000000000C00010008000F000400040004000100000000000000000000000000000000000000040000000100000000000500000003000000000003000000";
     private static final String L2 = "0555455555000055010000005555065405007401005001004049454101000054454101004001005001005405005405001041650105001405140010000010295414000050155514001405541510001041011055005605006515000000005405005555155001005756164001000000005005009D95155415001101500000001102540000000110510410000554521410004508801A1600450450141000050090041000051050000000455102061900455055056500858049096A00455000026500455144411900051040510000410040014000410040055000020000155500111151155000111151054000010040010000005D010000005555065805005401005001004049454101000054454101004001005001005405005405001041650105001405140010000010295414000050155514001405541510001041011055005605006715000000005405005555255001005756164003000000005005009D95155415000555455555004C00140040008400150040000044140144000195140544001102A0864500110114054400010018014400010414004000519480414600115455415900216052825A0011248040590051145150460001045014400010005000500010005001540000004045550044445405540044446401500000005000400000000000000000000003000000030000180081A8180020B2000010B13E0000003E0032923E0606007E0656003E0006003E0002003E400000070000000700000000000000FF030000FF030000000000000000000000000000000000000000000000000000000000000000A0AAAA00000000000000A0AAAA000000000000E0AFAAAB00000000000000A0AAAA00000000000000A0AAAA0000000000000000000000000000200000030000000000000000000000000C000000009000000000000000000000000000000000000D100080000000000000000000700000000000000000006000000000000000000050000000000000000000000040000000000000000000000000000000000000000000000000000000000000000010BBB1BB82B5BBBB00000100610062000300FFFFFFFFFFFF000000000000B5FBB9FBB8FB5F00600000000A00200024000B0029002B002D0008000400000012002F0032008A008A0000000000050005000F000100010001000200010000000400040004000500050007000000000005000000080000000000050000000A000000000005000000";
@@ -114,11 +118,12 @@ public class WizardryData {
     public static final java.util.Map<String, Item> BS_ITEMS_MAP = new HashMap<>();
     public static final java.util.Map<String, Item> WER_ITEMS_MAP = new HashMap<>();
 
-    public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS;
+    public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS, WER_MONSTERS;
     public static final java.util.Map<String, Monster> PMO_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> KOD_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> LEG_MONSTER_MAP = new HashMap<>();
     public static final java.util.Map<String, Monster> BS_MONSTER_MAP = new HashMap<>();
+    public static final java.util.Map<String, Monster> WER_MONSTER_MAP = new HashMap<>();
 
     public static List<DoGooder> WER4_CHARS;
     public static final java.util.Map<String, DoGooder> WER4_CHAR_MAP = new HashMap<>();
@@ -151,6 +156,7 @@ public class WizardryData {
             String j17 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-items.json"));
             String j18 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-messages.json"));
             String j19 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-characters.json"));
+            String j20 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/wer-monsters.json"));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -173,6 +179,8 @@ public class WizardryData {
             LEG_MONSTERS = gson.fromJson(j10, new TypeToken<List<Monster>>() {
             }.getType());
             BS_MONSTERS = gson.fromJson(j14, new TypeToken<List<Monster>>() {
+            }.getType());
+            WER_MONSTERS = gson.fromJson(j20, new TypeToken<List<Monster>>() {
             }.getType());
 
             PMO_REWARDS = gson.fromJson(j3, new TypeToken<List<Reward>>() {
@@ -237,6 +245,9 @@ public class WizardryData {
             for (Monster m : BS_MONSTERS) {
                 BS_MONSTER_MAP.put(m.name, m);
             }
+            for (Monster m : WER_MONSTERS) {
+                WER_MONSTER_MAP.put(m.name, m);
+            }
 
             for (int i = 0; i < PMO_LEVEL_DATA.length; i++) {
                 PMO_LEVELS[i] = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, PMO_MONSTERS, PMO_MESSAGES);
@@ -268,7 +279,7 @@ public class WizardryData {
         KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, KOD_MONSTER_MAP, KOD_ITEMS_MAP),
         LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, LEG_MONSTER_MAP, LEG_ITEMS_MAP),
         BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, BS_MONSTER_MAP, BS_ITEMS_MAP),
-        WER(WER_ITEMS, null, BS_REWARDS, WER_MESSAGES, WER_LEVELS, null, WER_ITEMS_MAP, 11, 9, 9);
+        WER(WER_ITEMS, WER_MONSTERS, null, WER_MESSAGES, WER_LEVELS, WER_MONSTER_MAP, WER_ITEMS_MAP, 11, 9, 9);
 
         private final List<Item> items;
         private final List<Monster> monsters;
@@ -746,9 +757,9 @@ public class WizardryData {
                     if (ci.type == CellType.MESSAGE) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
-                    if (level == 4) {
-                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
-                    }
+                    //if (level == 4) {
+                    //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                    //}
 
                     switch (ci.type) {
                         case NORMAL:
@@ -854,35 +865,35 @@ public class WizardryData {
                             if (ci.val[2] == 600) {
                                 cell.encounterID = ci.val[1];
                             }
-                            if (ci.val[2] == -30120) {
-                                cell.summoningCircle1 = true;
+                            if (ci.val[2] == 200 || (ci.val[2] == -30220 && ((x == 4 && y == 0) || (x == 18 && y == 14))) || (ci.val[2] == -30120 && x == 14 && y == 1)) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE1;
                             }
-                            if (ci.val[2] == -30220) {
-                                cell.summoningCircle2 = true;
+                            if (ci.val[2] == 201 || (ci.val[2] == -30120 && x == 11 && y == 5)) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE2;
                             }
-                            if (ci.val[2] == 207) {
-                                cell.summoningCircle3 = true;
+                            if (ci.val[2] == 202 || (ci.val[2] == -30120 && x == 3 && y == 2)) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE3;
                             }
-                            if (ci.val[2] == 200) {
-                                cell.summoningCircle4 = true;
-                            }
-                            if (ci.val[2] == 206) {
-                                cell.summoningCircle5 = true;
-                            }
-                            if (ci.val[2] == -30480) {
-                                cell.summoningCircle6 = true;
+                            if (ci.val[2] == 203 || (ci.val[2] == -30120 && x == 4 && y == 19)) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE4;
                             }
                             if (ci.val[2] == 204) {
-                                cell.summoningCircle7 = true;
+                                cell.summoningCircle = SummoningCircle.CIRCLE5;
                             }
-                            if (ci.val[2] == 203) {
-                                cell.summoningCircle8 = true;
+                            if (ci.val[2] == -30480 && x == 5 && y == 5) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE6;
                             }
-                            if (ci.val[2] == 202) {
-                                cell.summoningCircle9 = true;
+                            if (ci.val[2] == 206) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE7;
                             }
-                            if (ci.val[2] == 201) {
-                                cell.summoningCircle10 = true;
+                            if (ci.val[2] == 207) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE8;
+                            }
+                            if (ci.val[2] == -30220 && ((x == 9 && y == 8) || (x == 4 && y == 16))) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE9;
+                            }
+                            if (ci.val[2] == -30120 && ((x == 9 && y == 8) || (x == 3 && y == 16) || (x == 14 && y == 16))) {
+                                cell.summoningCircle = SummoningCircle.CIRCLE10;
                             }
                             break;
                     }
@@ -1082,17 +1093,8 @@ public class WizardryData {
         public int wanderingEncounterID = -1;
 
         public boolean hasTreasureChest;
-        
-        public boolean summoningCircle1;
-        public boolean summoningCircle2;
-        public boolean summoningCircle3;
-        public boolean summoningCircle4;
-        public boolean summoningCircle5;
-        public boolean summoningCircle6;
-        public boolean summoningCircle7;
-        public boolean summoningCircle8;
-        public boolean summoningCircle9;
-        public boolean summoningCircle10;
+
+        public SummoningCircle summoningCircle;
 
         public MazeAddress address;
         public MazeAddress addressTo; // if teleport/stairs/chute
