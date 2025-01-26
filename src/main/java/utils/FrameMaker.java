@@ -24,6 +24,13 @@ public class FrameMaker {
         this.pix.fillRectangle(0, 0, w, h);
     }
 
+    public FrameMaker(int w, int h, Color bck) {
+        this.height = h;
+        this.pix = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+        this.pix.setColor(bck);
+        this.pix.fillRectangle(0, 0, w, h);
+    }
+
     public FrameMaker setBounds(Actor a, float x, float y, float w, float h) {
 
         if (a != null) {
@@ -47,6 +54,11 @@ public class FrameMaker {
         this.pix.setColor(DARKEST);
         this.pix.fillRectangle(ix, iy, iw, ih);
 
+        return this;
+    }
+
+    public FrameMaker drawPixmap(Pixmap pixmap, int x, int y) {
+        this.pix.drawPixmap(pixmap, x, y);
         return this;
     }
 

@@ -366,7 +366,12 @@ public interface Constants {
         COLD,
         POISON,
         DRAIN_BREATH,
-        STONE,
+        STONE;
+
+        @Override
+        public String toString() {
+            return this.name().replace("_", " ").toUpperCase();
+        }
     }
 
     public enum CreatureStatus {

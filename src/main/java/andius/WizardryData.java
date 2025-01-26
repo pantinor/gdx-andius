@@ -32,7 +32,33 @@ public class WizardryData {
     }
 
     public enum SummoningCircle {
-        CIRCLE1, CIRCLE2, CIRCLE3, CIRCLE4, CIRCLE5, CIRCLE6, CIRCLE7, CIRCLE8, CIRCLE9, CIRCLE10;
+        CIRCLE1(0, 11),
+        CIRCLE2(12, 23),
+        CIRCLE3(24, 35),
+        CIRCLE4(36, 47),
+        CIRCLE5(48, 59),
+        CIRCLE6(60, 71),
+        CIRCLE7(72, 83),
+        CIRCLE8(84, 95),
+        CIRCLE9(96, 107),
+        CIRCLE10(108, 119);
+
+        private final int rangeLow;
+        private final int rangeHigh;
+
+        private SummoningCircle(int rangeLow, int rangeHigh) {
+            this.rangeLow = rangeLow;
+            this.rangeHigh = rangeHigh;
+        }
+
+        public int low() {
+            return rangeLow;
+        }
+
+        public int high() {
+            return rangeHigh;
+        }
+
     }
 
     //wizardry 1 proving grounds
@@ -754,8 +780,8 @@ public class WizardryData {
                     if (ci.type == CellType.CHUTE || ci.type == CellType.STAIRS || ci.type == CellType.TELEPORT) {
                         //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
                     }
-                    if (ci.type == CellType.MESSAGE) {
-                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                    if (ci.type == CellType.MESSAGE && ci.val[0] == -2) {
+                        //System.out.printf("[%d,%d,%d]   \t with %s\n", level, x, y, ci);
                     }
                     //if (level == 4) {
                     //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
@@ -805,66 +831,56 @@ public class WizardryData {
                             cell.encounterID = ci.val[2];
                             break;
                         case MESSAGE:
-                            if (ci.isMessage()) {
-                                for (Message m : messages) {
-                                    if (m.match(ci.val[1])) {
-                                        cell.message = m;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (ci.val[2] == 2) {
-                                cell.itemObtained = ci.val[0];//blue ribbon
-                            }
+
                             if (ci.val[2] == 3) {
                                 if (ci.val[0] > 0) {
-                                    cell.itemObtained = ci.val[0];//may wade to get
+                                    cell.itemObtained = ci.val[0];//wading to get
                                 }
                             }
-                            if (ci.val[2] == 4) {
-                                if (ci.val[0] >= 0) {
-                                    cell.encounterID = ci.val[0];
-                                } else if (ci.val[0] > -1200) {
-                                    cell.itemObtained = ci.val[0] * -1 - 1000;
-                                } else {
-                                    int itemNo = ci.val[0];
-                                    itemNo *= -1;
-                                    itemNo -= 20000;
-                                    cell.tradeItem1 = itemNo / 100;
-                                    cell.tradeItem2 = itemNo % 100;
-                                }
+
+                            if (ci.val[0] == -2 && ci.val[2] >= 100 && ci.val[2] < 200) {
+                                cell.itemObtained = ci.val[2] - 100 + 1;
                             }
+
+                            if (x == 18 && y == 9 && ci.val[2] == -30480) {
+                                cell.itemObtained = 89;//oxygen mask
+                                cell.message = getMessage(messages, 100);
+                            }
+
                             if (ci.val[2] == 5 || ci.val[2] == 13) {
                                 if (ci.val[0] > 0) {
                                     cell.itemRequired = ci.val[0];
                                 }
                             }
-                            if (ci.val[2] == 14) {//item required or else teleported
-                                cell.itemRequired = ci.val[1];
-                                cell.addressTo = new MazeAddress(this.level, ci.val[0] / 100, ci.val[0] % 100);
-                            }
+
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
                                     if (m.match(ci.val[0])) {
                                         cell.riddleAnswers = m.getRiddleAnswers();
+
+                                        if (ci.val[1] == 214) {
+                                            cell.itemObtainedFromRiddle = 56;
+                                        }
+
                                         break;
                                     }
                                 }
                             }
-                            if (ci.val[2] == 11) {
-                                for (Message m : messages) {
-                                    if (m.match(ci.val[0])) {
-                                        cell.feeAmount = Integer.parseInt(m.getText());
-                                        break;
-                                    }
+
+                            if (ci.val[2] == 4) {
+                                if (ci.val[0] >= 0) {
+                                    cell.encounterID = ci.val[0];
                                 }
                             }
+
                             if (ci.val[0] > 0) {
                                 cell.encounterID = ci.val[0];
                             }
+
                             if (ci.val[2] == 600) {
                                 cell.encounterID = ci.val[1];
                             }
+
                             if (ci.val[2] == 200 || (ci.val[2] == -30220 && ((x == 4 && y == 0) || (x == 18 && y == 14))) || (ci.val[2] == -30120 && x == 14 && y == 1)) {
                                 cell.summoningCircle = SummoningCircle.CIRCLE1;
                             }
@@ -895,6 +911,18 @@ public class WizardryData {
                             if (ci.val[2] == -30120 && ((x == 9 && y == 8) || (x == 3 && y == 16) || (x == 14 && y == 16))) {
                                 cell.summoningCircle = SummoningCircle.CIRCLE10;
                             }
+
+                            if (ci.val[1] >= 0 && ci.val[2] >= 0 && ci.val[2] <= 231 && cell.summoningCircle == null) {
+                                cell.message = getMessage(messages, ci.val[1]);
+                                if (cell.message == null && cell.summoningCircle == null && cell.encounterID == -1) {
+                                    cell.tbd = true;
+                                }
+                            }
+
+                            if (ci.val[0] == 0 && ci.val[1] == 0 && ci.val[2] < 0) {
+                                cell.tbd = true;
+                            }
+
                             break;
                     }
                 }
@@ -1076,10 +1104,13 @@ public class WizardryData {
         public boolean rock;
         public boolean teleport;
         public boolean spellsBlocked;
+        public boolean tbd;
+
         public int feeAmount;
         public int tradeItem1;
         public int tradeItem2;
         public List<String> riddleAnswers;
+        public int itemObtainedFromRiddle;
         public Dice damage;
         public int messageType;
         public Message message;
@@ -1127,6 +1158,15 @@ public class WizardryData {
             return Objects.equals(this.address, other.address);
         }
 
+    }
+
+    public static Message getMessage(List<Message> messages, int id) {
+        for (Message m : messages) {
+            if (m.match(id)) {
+                return m;
+            }
+        }
+        return null;
     }
 
     public static class Message {

@@ -6,10 +6,12 @@ import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.EquipmentScreen;
 import andius.RewardScreen;
+import andius.SummoningCircleScreen;
 import andius.VendorScreen;
 import andius.Wiz4CombatScreen;
 import andius.Wiz4RewardScreen;
 import static andius.WizardryData.PMO_MONSTERS;
+import andius.WizardryData.SummoningCircle;
 import static andius.WizardryData.WER4_CHARS;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
@@ -60,12 +62,13 @@ public class Wiz4CombatTestMain extends Game {
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
             mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
 
-            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(180)));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(353)));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WORLD, 1, 0, 5));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
+            setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
 
         } catch (Exception e) {
             e.printStackTrace();

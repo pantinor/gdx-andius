@@ -27,6 +27,10 @@ public class Utils {
     public static boolean randomBoolean() {
         return RANDOM.nextInt(100) < 50;
     }
+    
+    public static boolean percentChance(int percent) {
+        return RANDOM.nextInt(100 + 1) > percent;
+    }
 
     public static int intValue(byte b1) {
         return b1 & 0xFF;

@@ -1195,7 +1195,7 @@
     {
         "id": 159,
         "text": [
-            "$TREBOR SUX"
+            "TREBOR SUX"
         ]
     },
     {
@@ -1213,8 +1213,8 @@
     {
         "id": 161,
         "text": [
-            "$CRANIUM",
-            "$BRAIN"
+            "CRANIUM",
+            "BRAIN"
         ]
     },
     {
@@ -1234,7 +1234,7 @@
     {
         "id": 163,
         "text": [
-            "$LEFT CHEEK"
+            "LEFT CHEEK"
         ]
     },
     {
@@ -1254,7 +1254,7 @@
     {
         "id": 165,
         "text": [
-            "$RIGHT CHEEK"
+            "RIGHT CHEEK"
         ]
     },
     {
@@ -1272,8 +1272,8 @@
     {
         "id": 167,
         "text": [
-            "$LEFT ARM",
-            "$LEFT HAND"
+            "LEFT ARM",
+            "LEFT HAND"
         ]
     },
     {
@@ -1291,8 +1291,8 @@
     {
         "id": 169,
         "text": [
-            "$RIGHT ARM",
-            "$RIGHT HAND"
+            "RIGHT ARM",
+            "RIGHT HAND"
         ]
     },
     {
@@ -1313,8 +1313,8 @@
     {
         "id": 171,
         "text": [
-            "$BREAST",
-            "$CHEST"
+            "BREAST",
+            "CHEST"
         ]
     },
     {
@@ -1332,7 +1332,7 @@
     {
         "id": 173,
         "text": [
-            "$HIPS"
+            "HIPS"
         ]
     },
     {
@@ -1352,7 +1352,7 @@
     {
         "id": 175,
         "text": [
-            "$LEGS"
+            "LEGS"
         ]
     },
     {
@@ -1370,7 +1370,7 @@
     {
         "id": 177,
         "text": [
-            "$STOMACH"
+            "STOMACH"
         ]
     },
     {
@@ -1389,7 +1389,7 @@
     {
         "id": 179,
         "text": [
-            "$FEET"
+            "FEET"
         ]
     },
     {
@@ -1424,7 +1424,7 @@
     {
         "id": 183,
         "text": [
-            "$TREE OF LIFE"
+            "TREE OF LIFE"
         ]
     },
     {
@@ -1648,8 +1648,8 @@
     {
         "id": 198,
         "text": [
-            "$MYTHRIL GAUNTLET",
-            "$MYTHRIL GLOVE"
+            "MYTHRIL GAUNTLET",
+            "MYTHRIL GLOVE"
         ]
     },
     {
@@ -1797,7 +1797,7 @@
     {
         "id": 215,
         "text": [
-            "$AMULET"
+            "AMULET"
         ]
     },
     {

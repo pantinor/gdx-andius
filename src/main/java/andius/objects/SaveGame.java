@@ -144,10 +144,12 @@ public class SaveGame implements Constants {
 
         public List<Item> inventory = new ArrayList<>();
 
+        public List<MutableMonster> summonedMonsters = new ArrayList<>();
+
         public int submorsels = 400;
         public int acmodifier1; //lasts for single combat
         public int acmodifier2; //lasts until next rest at inn
-        
+
         public transient HealthCursor healthCursor;
 
         public void awardXP(int amt) {
@@ -163,9 +165,37 @@ public class SaveGame implements Constants {
         }
 
         public boolean canCast(Spells spell) {
+
+            if (weapon != null && weapon.spell != null) {
+                if (weapon.spell == spell) {
+                    return true;
+                }
+            }
+
+            if (item1 != null && item1.spell != null) {
+                if (item1.spell == spell) {
+                    return true;
+                }
+            }
+
+            if (item2 != null && item2.spell != null) {
+                if (item2.spell == spell) {
+                    return true;
+                }
+            }
+
+            for (Item i : inventory) {
+                if (i.spell != null) {
+                    if (i.spell == spell) {
+                        return true;
+                    }
+                }
+            }
+
             if (!knownSpells.contains(spell)) {
                 return false;
             }
+
             if (spell.getType() == ClassType.MAGE) {
                 return magePoints[spell.getLevel() - 1] > 0;
             } else {

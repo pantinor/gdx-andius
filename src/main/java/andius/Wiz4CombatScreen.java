@@ -78,6 +78,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private final Texture background;
 
     private int round = 1;
+    private boolean suprised = false;
 
     public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent) {
 
@@ -94,7 +95,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
-        this.stage.addActor(this.logs);
 
         this.monstersTable = new Table(Andius.skin);
         this.monstersTable.top().left();
@@ -128,6 +128,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         for (Spells s : player.knownSpells) {
             addSpell(s);
+        }
+        if (player.weapon != null && player.weapon.spell != null) {
+            addSpell(player.weapon);
         }
         if (player.item1 != null && player.item1.spell != null) {
             addSpell(player.item1);
@@ -177,16 +180,33 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.stage.addActor(this.fight);
         this.stage.addActor(this.flee);
         this.stage.addActor(this.cast);
+        this.stage.addActor(this.logs);
 
         this.stage.addActor(this.monstersScroll);
         this.stage.addActor(this.enemiesScroll);
         this.stage.addActor(this.spellsScroll);
 
-        if (!this.opponent.slogan.isEmpty()) {
-            log("You are about to battle with " + this.opponent.slogan.replace("|", " ... "));
+        this.background = fm.build();
+
+        this.suprised = !Utils.percentChance(16);
+
+        if (this.suprised) {
+            if (!this.opponent.slogan.isEmpty()) {
+                log("You were suprised by " + this.opponent.slogan.replace("|", " ... "));
+            } else {
+                log("You were suprised by " + this.opponent.name);
+            }
+            for (MutableCharacter mm : enemies) {
+                enemyFight(mm);
+            }
+        } else {
+            if (!this.opponent.slogan.isEmpty()) {
+                log("You are about to battle " + this.opponent.slogan.replace("|", " ... "));
+            } else {
+                log("You are about to battle " + this.opponent.name);
+            }
         }
 
-        this.background = fm.build();
     }
 
     private void cast() {
@@ -224,36 +244,73 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private void fight() {
 
-        MutableCharacter defender = pickEnemy();
-        if (defender != null) {
-            if (!player.isDisabled()) {
-                boolean hit = Utils.attackHit(player, defender);
-                if (hit) {
-                    Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                    int damage = Utils.dealDamage(weapon, defender);
-                    log(String.format("%s %s %s, who %s after %d damage.",
-                            player.name,
-                            HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                            defender.name(),
-                            defender.getDamageTag(),
-                            damage));
-                } else {
-                    log(String.format("%s misses %s", player.name, defender.name()));
-                }
+        if (suprised) {
+
+            for (MutableCharacter mm : enemies) {
+                enemyFight(mm);
             }
-            if (player.isDead()) {
+
+            for (MutableMonster mm : monsters) {
+                monsterFight(mm);
+            }
+
+            MutableCharacter defender = pickEnemy();
+            if (defender != null) {
+                if (!player.isDisabled()) {
+                    boolean hit = Utils.attackHit(player, defender);
+                    if (hit) {
+                        Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
+                        int damage = Utils.dealDamage(weapon, defender);
+                        log(String.format("%s %s %s, who %s after %d damage.",
+                                player.name.toUpperCase(),
+                                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                defender.name(),
+                                defender.getDamageTag(),
+                                damage));
+                    } else {
+                        log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
+                    }
+                }
+                if (player.isDead()) {
+                    end();
+                }
+            } else {
                 end();
             }
+
         } else {
-            end();
-        }
 
-        for (MutableMonster mm : monsters) {
-            monsterFight(mm);
-        }
+            MutableCharacter defender = pickEnemy();
+            if (defender != null) {
+                if (!player.isDisabled()) {
+                    boolean hit = Utils.attackHit(player, defender);
+                    if (hit) {
+                        Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
+                        int damage = Utils.dealDamage(weapon, defender);
+                        log(String.format("%s %s %s, who %s after %d damage.",
+                                player.name.toUpperCase(),
+                                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                defender.name(),
+                                defender.getDamageTag(),
+                                damage));
+                    } else {
+                        log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
+                    }
+                }
+                if (player.isDead()) {
+                    end();
+                }
+            } else {
+                end();
+            }
 
-        for (MutableCharacter mm : enemies) {
-            enemyFight(mm);
+            for (MutableMonster mm : monsters) {
+                monsterFight(mm);
+            }
+
+            for (MutableCharacter mm : enemies) {
+                enemyFight(mm);
+            }
         }
 
         log("------------ end of round " + round);
@@ -384,7 +441,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                             damage(player, dmg);
                         }
                     } else {
-                        log(String.format("%s misses %s", attacker.name(), player.name));
+                        log(String.format("%s misses %s", attacker.name(), player.name.toUpperCase()));
                     }
                 }
                 break;
@@ -437,7 +494,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         } else {
             player.adjustHP(-damage);
             player.healthCursor.adjust(player.hp, player.maxhp);
-            log(String.format("%s was hit for %d damage!", player.name, damage));
+            log(String.format("%s was hit for %d damage!", player.name.toUpperCase(), damage));
         }
     }
 
@@ -445,10 +502,18 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         if (caster instanceof CharacterRecord) {
             if (player.isDisabled()) {
-                log(player.name + " cannot cast spell in current state!");
+                log(player.name.toUpperCase() + " cannot cast spell in current state!");
                 return;
             }
-            log(player.name + " casts " + spell);
+            if (!player.canCast(spell)) {
+                log(player.name.toUpperCase() + " dost not have enough magic points!");
+                return;
+            }
+
+            log(player.name.toUpperCase() + " casts " + spell);
+
+            player.decrMagicPts(spell);
+
         } else {
             Mutable m = (Mutable) caster;
             if (m.status().isDisabled()) {
@@ -456,6 +521,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 return;
             }
             log(m.name() + " casts " + spell);
+
+            m.decrementSpellPoints(spell);
         }
 
         switch (spell) {
@@ -553,7 +620,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             } else {
                 if (player.savingThrowSpell()) {
-                    log(player.name + " made a saving throw versus " + spell + " and is unaffected!");
+                    log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int dmg = spell.damage();
                     damage(player, dmg);
@@ -584,7 +651,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
             if (player.savingThrowSpell()) {
-                log(player.name + " made a saving throw versus " + spell + " and is unaffected!");
+                log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 int dmg = spell.damage();
                 damage(player, dmg);
@@ -634,7 +701,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
             if (player.savingThrowSpell()) {
-                log(player.name + " made a saving throw versus " + spell + " and is unaffected!");
+                log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 int pointsLeft = Utils.getRandomBetween(1, 8);
                 player.hp = pointsLeft;
@@ -663,7 +730,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
             if (player.savingThrowSpell()) {
-                log(player.name + " made a saving throw versus " + spell + " and is unaffected!");
+                log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 player.status.set(effect, 4);
             }
@@ -741,7 +808,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     public void dispose() {
     }
 
-    public void log(String s) {
+    public final void log(String s) {
         this.logs.add(s);
     }
 
@@ -796,11 +863,38 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     }
 
+    private class PlayerMagicPointsLabel extends Label {
+
+        private final CharacterRecord rec;
+
+        public PlayerMagicPointsLabel(CharacterRecord rec) {
+            super("", Andius.skin, "default-16");
+            this.rec = rec;
+            setText(getText());
+        }
+
+        @Override
+        public com.badlogic.gdx.utils.StringBuilder getText() {
+            int[] ms = rec.magePoints;
+            int[] cs = rec.clericPoints;
+            return new com.badlogic.gdx.utils.StringBuilder(
+                    String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            setText(getText());
+            super.draw(batch, parentAlpha);
+        }
+
+    }
+
     private class PlayerListing extends Group {
 
         final Label l1;
         final PlayerStatusLabel l2;
-        final Label l3;
+        final PlayerMagicPointsLabel l3;
         final ListingBackground bckgrnd;
         final SaveGame.CharacterRecord c;
 
@@ -808,18 +902,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.c = rec;
             this.bckgrnd = new ListingBackground();
             rec.healthCursor = this.bckgrnd;
+            rec.healthCursor.adjust(rec.hp, rec.maxhp);
 
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new PlayerStatusLabel(rec);
-            this.l3 = new Label("", Andius.skin, "default-16");
+            this.l3 = new PlayerMagicPointsLabel(rec);
 
             String d1 = String.format("%s  %s  LVL %d  %s", rec.name.toUpperCase(), rec.race.toString(), rec.level, rec.classType.toString());
-            int[] ms = rec.magePoints;
-            int[] cs = rec.clericPoints;
-            String d3 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                    ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
             this.l1.setText(d1);
-            this.l3.setText(d3);
 
             addActor(this.bckgrnd);
             addActor(this.l1);
@@ -866,11 +956,34 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     }
 
+    private class MonsterMagicPointsLabel extends Label {
+
+        private final MutableMonster mm;
+
+        public MonsterMagicPointsLabel(MutableMonster mm) {
+            super("", Andius.skin, "default-16");
+            this.mm = mm;
+            setText(getText());
+        }
+
+        @Override
+        public com.badlogic.gdx.utils.StringBuilder getText() {
+            return new com.badlogic.gdx.utils.StringBuilder(String.format("MG: %d  PR: %d ", mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel()));
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            setText(getText());
+            super.draw(batch, parentAlpha);
+        }
+
+    }
+
     private class MonsterListing extends Group {
 
         final Label l1;
         final MonsterStatusLabel l2;
-        final Label l3;
+        final MonsterMagicPointsLabel l3;
         final ListingBackground bckgrnd;
 
         final Monster m;
@@ -881,15 +994,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.m = (Monster) mm.baseType();
             this.bckgrnd = new ListingBackground();
             mm.setHealthCursor(this.bckgrnd);
+            this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new MonsterStatusLabel(mm);
-            this.l3 = new Label("", Andius.skin, "default-16");
+            this.l3 = new MonsterMagicPointsLabel(mm);
 
             String d1 = String.format("%s  LVL %d", m.name.toUpperCase(), mm.getLevel());
-            String d3 = String.format("MG: %d  PR: %d ", mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel());
             this.l1.setText(d1);
-            this.l3.setText(d3);
 
             addActor(this.bckgrnd);
             addActor(this.l1);
@@ -937,11 +1049,38 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     }
 
+    private class DoGooderMagicPointsLabel extends Label {
+
+        private final MutableCharacter mm;
+
+        public DoGooderMagicPointsLabel(MutableCharacter mm) {
+            super("", Andius.skin, "default-16");
+            this.mm = mm;
+            setText(getText());
+        }
+
+        @Override
+        public com.badlogic.gdx.utils.StringBuilder getText() {
+            int[] ms = mm.getMageSpellLevels();
+            int[] cs = mm.getPriestSpellLevels();
+            return new com.badlogic.gdx.utils.StringBuilder(
+                    String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            setText(getText());
+            super.draw(batch, parentAlpha);
+        }
+
+    }
+
     private class DoGooderListing extends Group {
 
         final Label l1;
         final DoGooderStatusLabel l2;
-        final Label l3;
+        final DoGooderMagicPointsLabel l3;
         final ListingBackground bckgrnd;
 
         final DoGooder m;
@@ -950,21 +1089,17 @@ public class Wiz4CombatScreen implements Screen, Constants {
         DoGooderListing(MutableCharacter mm) {
             this.mm = mm;
             this.m = (DoGooder) mm.baseType();
+            
             this.bckgrnd = new ListingBackground();
             mm.setHealthCursor(this.bckgrnd);
+            this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new DoGooderStatusLabel(mm);
-            this.l3 = new Label("", Andius.skin, "default-16");
+            this.l3 = new DoGooderMagicPointsLabel(mm);
 
             String d1 = String.format("%s  %s  LVL %d  %s", m.name.toUpperCase(), m.race, mm.getLevel(), m.characterClass);
-            int[] ms = mm.getMageSpellLevels();
-            int[] cs = mm.getPriestSpellLevels();
-            String d3 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                    ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-
             this.l1.setText(d1);
-            this.l3.setText(d3);
 
             addActor(this.bckgrnd);
             addActor(this.l1);

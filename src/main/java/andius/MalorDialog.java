@@ -58,7 +58,7 @@ public class MalorDialog extends Window implements Constants {
         logPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
         logPane.setHeight(HEIGHT);
 
-        input = new TextField("", Andius.skin);
+        input = new TextField("", Andius.skin, "default-16");
         input.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField tf, char key) {

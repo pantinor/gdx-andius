@@ -6,7 +6,6 @@ import static andius.Constants.CLASSPTH_RSLVR;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
-import static andius.WizardryData.PMO_MONSTERS;
 import static andius.WizardryData.WER_LEVEL_DESC;
 import andius.objects.DoGooder;
 import andius.objects.Item;
@@ -98,7 +97,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private boolean showMiniMap = true;
     private Texture miniMap;
     private final MiniMapIcon miniMapIcon;
-    private final Constants.Map map;
+    public final Constants.Map map;
 
     public WizardryDungeonScreen(Constants.Map map) {
         this.map = map;
@@ -582,14 +581,26 @@ public class WizardryDungeonScreen extends BaseScreen {
                     );
                 }
 
+                if (cell.tbd) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM,
+                            y * MINI_DIM,
+                            arrows[3][3].getRegionX(),
+                            arrows[3][3].getRegionY(),
+                            arrows[3][3].getRegionWidth(),
+                            arrows[3][3].getRegionHeight()
+                    );
+                }
+
                 if (cell.itemRequired > 0) {
                     pixmap.setColor(Color.FOREST);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
                 }
 
                 if (cell.itemObtained > 0) {
-                    pixmap.setColor(Color.LIME);
-                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4);
+                    pixmap.setColor(Color.TEAL);
+                    pixmap.fillRectangle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 4, 4);
                 }
 
                 if (cell.pit) {
@@ -854,6 +865,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             try {
                 move(cell, currentDir, x, y, skipProgression);
             } catch (Throwable e) {
+                e.printStackTrace();
                 partyDeath();
             }
             return false;
@@ -924,13 +936,16 @@ public class WizardryDungeonScreen extends BaseScreen {
                 log("The torch fails to light and darkness remains!");
             }
 
-        } else if (keycode == Keys.G || keycode == Keys.R || keycode == Keys.W || keycode == Keys.C || keycode == Keys.S) {
-
         } else if (keycode == Keys.P) {
 
             showMiniMap = !showMiniMap;
 
-        } else if (keycode == Keys.V) {
+        } else if (keycode == Keys.S) {
+
+            if (cell.summoningCircle != null) {
+                SummoningCircleScreen ssc = new SummoningCircleScreen(CTX.saveGame.players[0], cell.summoningCircle);
+                mainGame.setScreen(ssc);
+            }
 
         } else if (keycode == Keys.M) {
 
@@ -1125,18 +1140,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
                 DoGooder dogooder = this.map.scenario().characters().get(encounterID);
 
-                List<MutableMonster> mms = new ArrayList<>();
-                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-                mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-
-                Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], mms, dogooder);
+                Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder);
                 mainGame.setScreen(cs);
             }
         } else {
@@ -1233,6 +1237,11 @@ public class WizardryDungeonScreen extends BaseScreen {
 
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+                if (this.map == Map.WIZARDRY4) {
+                    if (currentLevel == 6 && x == 2 && y == 13) {
+                        teleport(new MazeAddress(7, 4, 17), true);
+                    }
+                }
             } else {
                 if (this.map == Map.WIZARDRY4) {
                     DoGooder dg = (DoGooder) opponent;

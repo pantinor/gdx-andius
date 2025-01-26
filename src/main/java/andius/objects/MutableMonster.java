@@ -15,7 +15,7 @@ public class MutableMonster implements Mutable {
     private int currentPriestSpellLevel;
     private final State status = new State();
     private final int maxHitPoints;
-    private HealthCursor healthCursor;
+    private transient HealthCursor healthCursor;
     private Monster monster;
 
     public MutableMonster(Monster m) {
@@ -100,6 +100,24 @@ public class MutableMonster implements Mutable {
     @Override
     public int getCurrentMageSpellLevel() {
         return currentMageSpellLevel;
+    }
+
+    @Override
+    public void decrementSpellPoints(Spells spell) {
+        float chance = (1 / (this.monster.getGroupSize().roll() + 2)) * 100;
+        if (Utils.RANDOM.nextInt(100) < chance) {
+            if (spell.getType() == ClassType.MAGE) {
+                this.currentMageSpellLevel--;
+                if (currentMageSpellLevel < 0) {
+                    this.currentMageSpellLevel = 0;
+                }
+            } else {
+                this.currentPriestSpellLevel--;
+                if (currentPriestSpellLevel < 0) {
+                    this.currentPriestSpellLevel = 0;
+                }
+            }
+        }
     }
 
     @Override

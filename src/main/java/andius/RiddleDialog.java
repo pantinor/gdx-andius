@@ -57,7 +57,7 @@ public class RiddleDialog extends Window implements Constants {
         scrollPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
         scrollPane.setHeight(HEIGHT);
 
-        input = new TextField("", Andius.skin);
+        input = new TextField("", Andius.skin, "default-16");
         input.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField tf, char key) {
@@ -73,8 +73,12 @@ public class RiddleDialog extends Window implements Constants {
 
                     boolean correct = false;
                     for (String answer : cell.riddleAnswers) {
-                        if (response.toLowerCase().contains(answer)) {
+                        if (response.equalsIgnoreCase(answer)) {
                             correct = true;
+                            if (cell.itemObtainedFromRiddle > 0) {
+                                screen.log(ctx.saveGame.players[0].name.toUpperCase() + " found an item!");
+                                ctx.saveGame.players[0].inventory.add(screen.map.scenario().items().get(cell.itemObtainedFromRiddle));
+                            }
                             break;
                         }
                     }

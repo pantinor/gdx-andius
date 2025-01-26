@@ -31,6 +31,8 @@ public interface Mutable {
     public int getCurrentMageSpellLevel();
 
     public int getCurrentPriestSpellLevel();
+    
+    public void decrementSpellPoints(Spells spell);
 
     public Breath breath();
 

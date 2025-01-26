@@ -143,6 +143,17 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
+    public void decrementSpellPoints(Spells spell) {
+        if (spell.getType() == ClassType.MAGE) {
+            if (mageSpellsLevels[spell.getLevel() - 1] > 0) {
+                mageSpellsLevels[spell.getLevel() - 1]--;
+            }
+        } else if (priestSpellLevels[spell.getLevel() - 1] > 0) {
+            priestSpellLevels[spell.getLevel() - 1]--;
+        }
+    }
+
+    @Override
     public int getCurrentMageSpellLevel() {
         for (int i = 6; i >= 0; i--) {
             if (mageSpellsLevels[i] > 0) {
