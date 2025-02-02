@@ -43,6 +43,7 @@ public class Andius extends Game {
     public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
 
     public static BitmapFont font12;
+    public static BitmapFont font14;
     public static BitmapFont font16;
     public static BitmapFont font18;
     public static BitmapFont font24;
@@ -87,6 +88,9 @@ public class Andius extends Game {
         parameter.size = 12;
         font12 = generator.generateFont(parameter);
 
+        parameter.size = 14;
+        font14 = generator.generateFont(parameter);
+
         parameter.size = 16;
         font16 = generator.generateFont(parameter);
 
@@ -112,6 +116,7 @@ public class Andius extends Game {
         skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
         skin.remove("default-font", BitmapFont.class);
         skin.add("font12", font12, BitmapFont.class);
+        skin.add("font14", font14, BitmapFont.class);
         skin.add("font16", font16, BitmapFont.class);
         skin.add("font24", font24, BitmapFont.class);
         skin.add("font72", font72, BitmapFont.class);
@@ -136,12 +141,12 @@ public class Andius extends Game {
         skin.get("default-24-red", TextButton.TextButtonStyle.class).font = font24;
         skin.get("default-24-green", TextButton.TextButtonStyle.class).font = font24;
         skin.get("default-24-yellow", TextButton.TextButtonStyle.class).font = font24;
-        
+
         skin.get("default-16", SelectBox.SelectBoxStyle.class).font = font16;
         skin.get("default-16", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
         skin.get("default-16", List.ListStyle.class).font = font16;
         skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
-        
+
         HUD = new Hud();
 
         try {

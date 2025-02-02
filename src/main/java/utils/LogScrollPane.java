@@ -27,7 +27,7 @@ public class LogScrollPane extends AutoFocusScrollPane {
         this.internalTable = table;
         this.width = width;
 
-        this.ls = new LabelStyle(this.skin.get("font16", BitmapFont.class), Color.WHITE);
+        this.ls = new LabelStyle(this.skin.get("font14", BitmapFont.class), Color.WHITE);
 
         setScrollingDisabled(true, false);
 
@@ -47,10 +47,9 @@ public class LogScrollPane extends AutoFocusScrollPane {
         Label label = new Label(text, ls);
         label.setWrap(true);
         label.setAlignment(Align.topLeft, Align.left);
-        label.setWidth(width - 15);
         label.setColor(color);
 
-        internalTable.add(label).pad(1).width(width - 10);
+        internalTable.add(label).pad(1).width(width - 3);
         internalTable.row();
 
         pack();

@@ -202,6 +202,12 @@ public class EquipmentScreen implements Screen, Constants {
                         selectedPlayer.invTable.removeActor(selectedItem);
                         selectedItem = null;
                     }
+                    if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
+                        selectedItem.removeActor(focusIndicator);
+                        selectedPlayer.invTable.removeActor(selectedItem);
+                        selectedItem = null;
+                        map.getScreen().teleport(0, -1, 0);
+                    }
                 } else {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 }

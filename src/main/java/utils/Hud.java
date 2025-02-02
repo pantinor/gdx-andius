@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class Hud {
 
     private final LogScrollPane logs;
-    static final int LOG_AREA_WIDTH = 275;
+    static final int LOG_AREA_WIDTH = 270;
 
     public Hud() {
         logs = new LogScrollPane(Andius.skin, new Table(), LOG_AREA_WIDTH);
-        logs.setBounds(732, 30, LOG_AREA_WIDTH, 320);
+        logs.setBounds(728, 30, LOG_AREA_WIDTH, 320);
     }
 
     public void addActor(Stage stage) {

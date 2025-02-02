@@ -1,7 +1,9 @@
 package andius;
 
+import andius.objects.Dialog;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
+import andius.objects.Function;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Reward;
@@ -129,8 +131,8 @@ public class WizardryData {
     public static final MazeLevel[] BS_LEVELS = new MazeLevel[BS_LEVEL_DATA.length];
 
     public static final String[] WER_LEVEL_DESC = new String[]{"Castle 1", "Cosmic Cube 1", "Cosmic Cube 2", "Cosmic Cube 3",
-        "Maze of Wandering - Hideout of the Dreampainter", "Land of the Creatures of Light and Darkness", "Realm of the Whirling Dervish",
-        "Last Two Stones and Dreampainter Temple", "Land of a Thousand Cuts", "The Catacombs", "Pyramid of Entrapment",
+        "Maze of Wandering", "Land of the Creatures of Light and Darkness", "Realm of the Whirling Dervish",
+        "Temple of the Dreampainter ", "Land of a Thousand Cuts", "The Catacombs", "Pyramid of Entrapment",
         "Grandmaster Ending - Castle and Level 11", "Castle 2", "Castle 3", "Unknown Level 15"};
     private static final String[] WER_LEVEL_DATA = new String[]{WER_CASTLE_1, WER_COSMIC_1, WER_COSMIC_2, WER_COSMIC_3, WER_MAZE_WANDER_4,
         WER_LAND_CREAT_5, WER_REALM_WHIRL_6, WER_TEMPLE_DREAM_7, WER_LAND_CUTS_8, WER_CATACOMBS_9,
@@ -426,6 +428,69 @@ public class WizardryData {
         public final List<Integer> defeated = new ArrayList<>();
 
         public abstract int getRandomMonster();
+
+        public boolean rotate(MazeCell cell) {
+
+            if (!cell.spinner || cell.rotateDirection == -1) {
+                return false;
+            }
+
+            boolean northWall = cell.northWall;
+            boolean southWall = cell.southWall;
+            boolean eastWall = cell.eastWall;
+            boolean westWall = cell.westWall;
+
+            boolean northDoor = cell.northDoor;
+            boolean southDoor = cell.southDoor;
+            boolean eastDoor = cell.eastDoor;
+            boolean westDoor = cell.westDoor;
+
+            boolean clockwise = cell.rotateDirection == 1;
+
+            if (clockwise) {
+                cell.northWall = eastWall;
+                cell.eastWall = southWall;
+                cell.southWall = westWall;
+                cell.westWall = northWall;
+                cell.northDoor = eastDoor;
+                cell.eastDoor = southDoor;
+                cell.southDoor = westDoor;
+                cell.westDoor = northDoor;
+            } else {
+                cell.northWall = westWall;
+                cell.westWall = southWall;
+                cell.southWall = eastWall;
+                cell.eastWall = northWall;
+                cell.northDoor = westDoor;
+                cell.westDoor = southDoor;
+                cell.southDoor = eastDoor;
+                cell.eastDoor = northDoor;
+            }
+
+            if (cell.eastWall && cell.eastDoor) {
+                cell.hiddenEastDoor = true;
+            } else {
+                cell.hiddenEastDoor = false;
+            }
+            if (cell.westWall && cell.westDoor) {
+                cell.hiddenWestDoor = true;
+            } else {
+                cell.hiddenWestDoor = false;
+            }
+            if (cell.northWall && cell.northDoor) {
+                cell.hiddenNorthDoor = true;
+            } else {
+                cell.hiddenNorthDoor = false;
+            }
+            if (cell.southWall && cell.southDoor) {
+                cell.hiddenSouthDoor = true;
+            } else {
+                cell.hiddenSouthDoor = false;
+            }
+
+            return true;
+        }
+
     }
 
     private static class MazeLevelV1 extends MazeLevel {
@@ -555,7 +620,7 @@ public class WizardryData {
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
                                     if (m.match(ci.val[0])) {
-                                        cell.riddleAnswers = m.getRiddleAnswers();
+                                        cell.riddleAnswers = m.text();
                                         break;
                                     }
                                 }
@@ -783,9 +848,9 @@ public class WizardryData {
                     if (ci.type == CellType.MESSAGE && ci.val[0] == -2) {
                         //System.out.printf("[%d,%d,%d]   \t with %s\n", level, x, y, ci);
                     }
-                    //if (level == 4) {
-                    //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
-                    //}
+                    if (ci.type == CellType.SPINNER) {
+                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
+                    }
 
                     switch (ci.type) {
                         case NORMAL:
@@ -803,7 +868,17 @@ public class WizardryData {
                             cell.chute = true;
                             break;
                         case SPINNER:
-                            cell.spinner = true;
+                            if (ci.val[0] == 0 || ci.val[2] == 4) {
+                                cell.spinner = true;
+                            }
+                            if (ci.val[0] == -1 && (ci.val[2] == 0 || ci.val[2] == 1)) {
+                                cell.spinner = true;
+                                cell.rotateDirection = ci.val[1];
+                                if (cell.northWall && cell.eastWall && cell.southWall && cell.westWall) {
+                                    cell.northWall = false; //a workaround for cage issue with rotators
+                                    cell.northDoor = false;
+                                }
+                            }
                             break;
                         case DARK:
                             cell.darkness = true;
@@ -847,6 +922,10 @@ public class WizardryData {
                                 cell.message = getMessage(messages, 100);
                             }
 
+                            if (x == 9 && y == 0 && ci.val[2] == 187) {
+                                cell.itemObtained = 88;//golden pyrite
+                            }
+
                             if (ci.val[2] == 5 || ci.val[2] == 13) {
                                 if (ci.val[0] > 0) {
                                     cell.itemRequired = ci.val[0];
@@ -856,12 +935,10 @@ public class WizardryData {
                             if (ci.val[2] == 10) {
                                 for (Message m : messages) {
                                     if (m.match(ci.val[0])) {
-                                        cell.riddleAnswers = m.getRiddleAnswers();
-
+                                        cell.riddleAnswers = m.text();
                                         if (ci.val[1] == 214) {
                                             cell.itemObtainedFromRiddle = 56;
                                         }
-
                                         break;
                                     }
                                 }
@@ -919,9 +996,11 @@ public class WizardryData {
                                 }
                             }
 
-                            if (ci.val[0] == 0 && ci.val[1] == 0 && ci.val[2] < 0) {
+                            if (ci.val[0] == 0 && ci.val[1] == 0 && ci.val[2] < 0 && cell.summoningCircle == null) {
                                 cell.tbd = true;
                             }
+
+                            mazeOfWanderingHelper(x, y, cell, ci, messages);
 
                             break;
                     }
@@ -1098,7 +1177,9 @@ public class WizardryData {
         public boolean darkness;
         public boolean stairs;
         public boolean pit;
+        public boolean cage;
         public boolean spinner;
+        public int rotateDirection = -1;
         public boolean chute;
         public boolean elevator;
         public boolean rock;
@@ -1116,6 +1197,7 @@ public class WizardryData {
         public Message message;
         public int itemRequired;
         public int itemObtained;
+        public Function function;
 
         public boolean lair;
         private boolean tempLair;
@@ -1191,7 +1273,7 @@ public class WizardryData {
             return t.toString();
         }
 
-        public List<String> getRiddleAnswers() {
+        public List<String> text() {
             return this.text;
         }
 
@@ -1267,8 +1349,34 @@ public class WizardryData {
         }
     }
 
-    //Corrections for the wiz4 address issues using this as the 
-    //source of the information (https://www.tk421.net/wizardry/wiz4maps.shtml)
+    private static void mazeOfWanderingHelper(int x, int y, MazeCell cell, CellInfo ci, List<Message> messages) {
+        if (ci.type == CellType.MESSAGE) {
+
+            if (x == 14 && y == 5 && ci.val[1] == 191) {
+                cell.function = (Context ctx, BaseScreen screen) -> new WitchInMazeDialog(ctx, screen);
+            }
+
+            if (ci.val[2] == -30450) {
+                if (x == 2 && y == 1) {
+                    cell.message = getMessage(messages, 93);
+                }
+                if ((x == 3 && y == 3) || (x == 15 && y == 3) || (x == 14 && y == 8) || (x == 2 && y == 14) || (x == 13 && y == 18) || (x == 11 && y == 6)) {
+                    cell.message = getMessage(messages, 92);
+                    cell.cage = true;
+                }
+                if (x == 15 && y == 18) {
+                    cell.message = getMessage(messages, 94);
+                }
+                cell.tbd = false;
+            }
+
+            if (ci.val[0] == 13 && ci.val[1] == 210) {
+                cell.itemObtained = 13;//aromatic ball white sphere
+                cell.message = getMessage(messages, 210);
+            }
+        }
+    }
+
     private static final int[][] wiz4Addrs = new int[][]{
         {3, 17, 18, 1, 19, 19},
         {1, 17, 15, 2, 12, 19},
@@ -1368,6 +1476,30 @@ public class WizardryData {
                     WizardryData.MazeCell c = l.cells[x][y];
                     if (c.addressTo != null) {
                         //System.out.printf("%d,%d,%d %s\n", l.level, x, y, c.addressTo);
+                    }
+                    if (x == 8 && y == 5 && l.level == 8) {
+                        c.hiddenEastDoor = true;//dreampainter room access with winged boots
+                    }
+                    if (x == 8 && y == 6 && l.level == 8) {
+                        c.itemRequired = 5;
+                    }
+                    if (x == 14 && y == 13 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 31);
+                    }
+                    if (x == 6 && y == 11 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 36);
+                    }
+                    if (x == 6 && y == 10 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 37);
+                    }
+                    if (x == 7 && y == 10 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 38);
+                    }
+                    if (x == 10 && y == 10 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 44);
+                    }
+                    if (x == 10 && y == 9 && l.level == 10) {
+                        c.function = (Context ctx, BaseScreen screen) -> new GatesOfHellDialog(ctx, screen);
                     }
                 }
             }

@@ -102,6 +102,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     public WizardryDungeonScreen(Constants.Map map) {
         this.map = map;
         this.stage = new Stage();
+        //this.stage.setDebugAll(true);
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
         int dim = MM_BKGRND_DIM + MINI_DIM;
@@ -378,87 +379,108 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void addBlock(int level, MazeCell cell, float x, float y) {
+        addBlock(level, cell, x, y, false);
+    }
+
+    private void addBlock(int level, MazeCell cell, float x, float y, boolean clear) {
+
+        if (clear) {
+            Iterator<DungeonTileModelInstance> iter = modelInstances.iterator();
+            while (iter.hasNext()) {
+                DungeonTileModelInstance i = iter.next();
+                if (i.getLevel() == level && i.getCx() == x && i.getCy() == y) {
+                    iter.remove();
+                }
+            }
+        }
+
         float z = 0.5f;
         if (cell.northWall) {
             ModelInstance instance = new ModelInstance(wall);
             instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-            modelInstances.add(new DungeonTileModelInstance(instance, level));
+            modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
         }
         if (cell.southWall) {
             ModelInstance instance = new ModelInstance(wall);
             instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-            modelInstances.add(new DungeonTileModelInstance(instance, level));
+            modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
         }
         if (cell.eastWall) {
             ModelInstance instance = new ModelInstance(wall);
             instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
-            modelInstances.add(new DungeonTileModelInstance(instance, level));
+            modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
         }
         if (cell.westWall) {
             ModelInstance instance = new ModelInstance(wall, x + .5f, z, y + .025f);
-            modelInstances.add(new DungeonTileModelInstance(instance, level));
+            modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
         }
 
         if (cell.northDoor) {
             if (cell.northWall) {
                 ModelInstance instance = new ModelInstance(wall);
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             } else {
                 ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             }
         }
         if (cell.southDoor) {
             if (cell.southWall) {
                 ModelInstance instance = new ModelInstance(wall);
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             } else {
                 ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             }
         }
         if (cell.eastDoor) {
             if (cell.eastWall) {
                 ModelInstance instance = new ModelInstance(wall);
                 instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             } else {
                 ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setToTranslation(x - .5f + 1, z, y - .025f + 1);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             }
         }
         if (cell.westDoor) {
             if (cell.westWall) {
                 ModelInstance instance = new ModelInstance(wall, x + .5f, z, y + .025f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             } else {
                 ModelInstance instance = new ModelInstance(doorModel);
                 instance.transform.setFromEulerAngles(0, 0, 360).trn(x + .5f, z, y + .025f);
-                modelInstances.add(new DungeonTileModelInstance(instance, level));
+                modelInstances.add(new DungeonTileModelInstance(instance, level, x, y));
             }
         }
 
         if (cell.stairs || cell.elevator) {
             ModelInstance ladder = new ModelInstance(ladderModel, x + .5f, 0, y + .5f);
-            modelInstances.add(new DungeonTileModelInstance(ladder, level));
+            modelInstances.add(new DungeonTileModelInstance(ladder, level, x, y));
             if (cell.elevator) {
-                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level));
-                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 1, y + .5f), level));
+                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level, x, y));
+                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 1, y + .5f), level, x, y));
             } else if (cell.address.level < cell.addressTo.level) {//down
-                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level));
+                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .5f, 0, y + .5f), level, x, y));
             } else {//up
-                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .6f, 1, y + .5f), level));
+                modelInstances.add(new DungeonTileModelInstance(new ModelInstance(manhole, x + .6f, 1, y + .5f), level, x, y));
             }
         }
 
         if (cell.summoningCircle != null) {
             ModelInstance penta = new ModelInstance(pentagram, x + .5f, 0, y + .5f);
-            modelInstances.add(new DungeonTileModelInstance(penta, level));
+            modelInstances.add(new DungeonTileModelInstance(penta, level, x, y));
+        }
+    }
+
+    private void rotateBlock(int level, MazeCell cell, float x, float y) {
+        if (this.map.scenario().levels()[level].rotate(cell)) {
+            addBlock(level, cell, x, y, true);
         }
     }
 
@@ -558,7 +580,6 @@ public class WizardryDungeonScreen extends BaseScreen {
                             arrows[2][3].getRegionHeight()
                     );
                 }
-
                 if (cell.encounterID >= 0) {
                     pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
@@ -569,7 +590,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
                 }
 
-                if (cell.message != null) {
+                if (cell.message != null || cell.function != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
                             x * MINI_DIM,
@@ -619,7 +640,17 @@ public class WizardryDungeonScreen extends BaseScreen {
                             arrows[1][0].getRegionHeight()
                     );
                 }
-
+                if (cell.cage) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x * MINI_DIM,
+                            y * MINI_DIM,
+                            arrows[1][1].getRegionX(),
+                            arrows[1][1].getRegionY(),
+                            arrows[1][1].getRegionWidth(),
+                            arrows[1][1].getRegionHeight()
+                    );
+                }
                 if (cell.spinner) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
@@ -957,7 +988,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             log("Pass");
 
             try {
-                move(cell, currentDir, x, y, true);
+                pass(x, y);
             } catch (Throwable e) {
                 partyDeath();
             }
@@ -969,51 +1000,57 @@ public class WizardryDungeonScreen extends BaseScreen {
         return false;
     }
 
-    private void move(MazeCell cell, Direction dir, int dx, int dy, boolean skipProgression) {
+    private void move(MazeCell currentCell, Direction dir, int dx, int dy, boolean skipProgression) {
 
         WizardryData.MazeLevel[] levels = this.map.scenario().levels();
+        MazeCell destinationCell = levels[currentLevel].cells[dx][dy];
 
-        if (levels[currentLevel].cells[dx][dy].teleport) {
-            MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
+        if (destinationCell.teleport) {
+            MazeAddress to = destinationCell.addressTo;
             teleport(to, true);
             return;
         }
 
-        if (levels[currentLevel].cells[dx][dy].chute) {
-            MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
+        if (destinationCell.chute) {
+            MazeAddress to = destinationCell.addressTo;
             teleport(to, true);
             return;
         }
 
-        if (levels[currentLevel].cells[dx][dy].itemRequired > 0) {
-            Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemRequired);
+        if (destinationCell.itemRequired > 0) {
+            Item item = this.map.scenario().items().get(destinationCell.itemRequired);
             CharacterRecord owner = Andius.CTX.getOwner(item);
             if (owner == null) {
-                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
+                Andius.HUD.log(destinationCell.message.getText(), Color.YELLOW);
                 Sounds.play(Sound.NEGATIVE_EFFECT);
-                if (levels[currentLevel].cells[dx][dy].addressTo != null) {
-                    MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
+                if (destinationCell.addressTo != null) {
+                    MazeAddress to = destinationCell.addressTo;
                     teleport(to, true);
                 }
                 return;
             }
         } else {
-            if (levels[currentLevel].cells[dx][dy].message != null && levels[currentLevel].cells[dx][dy].addressTo != null) {
-                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.YELLOW);
-                MazeAddress to = levels[currentLevel].cells[dx][dy].addressTo;
+            if (destinationCell.message != null && destinationCell.addressTo != null) {
+                Andius.HUD.log(destinationCell.message.getText(), Color.YELLOW);
+                MazeAddress to = destinationCell.addressTo;
                 teleport(to, true);
                 return;
             }
         }
 
-        if (levels[currentLevel].cells[dx][dy].riddleAnswers != null && !levels[currentLevel].cells[dx][dy].riddleAnswers.isEmpty()) {
-            new RiddleDialog(CTX, this, levels[currentLevel].cells[dx][dy]).show(this.stage);
+        if (destinationCell.riddleAnswers != null && !destinationCell.riddleAnswers.isEmpty()) {
+            new RiddleDialog(CTX, this, destinationCell).show(this.stage);
+            return;
+        }
+
+        if (destinationCell.function != null) {
+            destinationCell.function.getDialog(CTX, this).show(this.stage);
             return;
         }
 
         boolean moved = false;
 
-        if (dir == Direction.EAST && (cell.hiddenNorthDoor || !cell.northWall)) {
+        if (dir == Direction.EAST && (currentCell.hiddenNorthDoor || !currentCell.northWall)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
             if (skipProgression) {
@@ -1026,7 +1063,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             moved = true;
         }
 
-        if (dir == Direction.WEST && (cell.hiddenSouthDoor || !cell.southWall)) {
+        if (dir == Direction.WEST && (currentCell.hiddenSouthDoor || !currentCell.southWall)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
             if (skipProgression) {
@@ -1039,7 +1076,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             moved = true;
         }
 
-        if (dir == Direction.NORTH && (cell.hiddenWestDoor || !cell.westWall)) {
+        if (dir == Direction.NORTH && (currentCell.hiddenWestDoor || !currentCell.westWall)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
             if (skipProgression) {
@@ -1052,7 +1089,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             moved = true;
         }
 
-        if (dir == Direction.SOUTH && (cell.hiddenEastDoor || !cell.eastWall)) {
+        if (dir == Direction.SOUTH && (currentCell.hiddenEastDoor || !currentCell.eastWall)) {
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
             if (skipProgression) {
@@ -1071,12 +1108,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
             boolean showMessage = true;
 
-            if (levels[currentLevel].cells[dx][dy].tradeItem1 > 0) {
-                Item item1 = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].tradeItem1);
-                Item item2 = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].tradeItem2);
+            if (destinationCell.tradeItem1 > 0) {
+                Item item1 = this.map.scenario().items().get(destinationCell.tradeItem1);
+                Item item2 = this.map.scenario().items().get(destinationCell.tradeItem2);
                 CharacterRecord owner = Andius.CTX.getOwner(item1);
                 if (owner != null) {
-                    Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+                    Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
                     log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
                     owner.inventory.remove(item1);
                     owner.inventory.add(item2);
@@ -1087,11 +1124,11 @@ public class WizardryDungeonScreen extends BaseScreen {
                 showMessage = false;
             }
 
-            if (levels[currentLevel].cells[dx][dy].itemObtained > 0) {
-                Item item = this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemObtained);
+            if (destinationCell.itemObtained > 0) {
+                Item item = this.map.scenario().items().get(destinationCell.itemObtained);
                 CharacterRecord owner = Andius.CTX.getOwner(item);
                 if (owner == null) {
-                    Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+                    Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
                     CharacterRecord cr = Andius.CTX.pickRandomEnabledPlayer();
                     log(String.format("%s found a %s", cr.name, item.genericName));
                     cr.inventory.add(item);
@@ -1100,27 +1137,137 @@ public class WizardryDungeonScreen extends BaseScreen {
                 showMessage = false;
             }
 
-            if (levels[currentLevel].cells[dx][dy].riddleAnswers != null && levels[currentLevel].cells[dx][dy].riddleAnswers.isEmpty()) {
+            if (destinationCell.riddleAnswers != null && destinationCell.riddleAnswers.isEmpty()) {
                 showMessage = false;
             }
 
-            if (levels[currentLevel].cells[dx][dy].itemRequired > 0
-                    && Andius.CTX.getOwner(this.map.scenario().items().get(levels[currentLevel].cells[dx][dy].itemRequired)) != null) {
+            if (destinationCell.itemRequired > 0 && Andius.CTX.getOwner(this.map.scenario().items().get(destinationCell.itemRequired)) != null) {
                 showMessage = false;
             }
 
-            if (levels[currentLevel].cells[dx][dy].darkness) {
+            if (destinationCell.darkness) {
                 isTorchOn = false;
             }
 
-            if (showMessage && levels[currentLevel].cells[dx][dy].message != null) {
-                Andius.HUD.log(levels[currentLevel].cells[dx][dy].message.getText(), Color.GREEN);
+            if (showMessage && destinationCell.message != null) {
+                Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
             }
 
-            fight(levels[currentLevel].cells[dx][dy], this.map.scenario().levels()[currentLevel].defeated);
+            if (destinationCell.rotateDirection != -1) {
+                rotateBlock(currentLevel, destinationCell, dx, dy);
+                createMiniMap();
+            }
+
+            fight(destinationCell, this.map.scenario().levels()[currentLevel].defeated);
 
             finishTurn(dx, dy);
         }
+    }
+
+    private void pass(int x, int y) {
+
+        WizardryData.MazeLevel[] levels = this.map.scenario().levels();
+        MazeCell currentCell = levels[currentLevel].cells[x][y];
+
+        if (currentCell.teleport) {
+            MazeAddress to = currentCell.addressTo;
+            teleport(to, true);
+            return;
+        }
+
+        if (currentCell.chute) {
+            MazeAddress to = currentCell.addressTo;
+            teleport(to, true);
+            return;
+        }
+
+        if (currentCell.itemRequired > 0) {
+            Item item = this.map.scenario().items().get(currentCell.itemRequired);
+            CharacterRecord owner = Andius.CTX.getOwner(item);
+            if (owner == null) {
+                Andius.HUD.log(currentCell.message.getText(), Color.YELLOW);
+                Sounds.play(Sound.NEGATIVE_EFFECT);
+                if (currentCell.addressTo != null) {
+                    MazeAddress to = currentCell.addressTo;
+                    teleport(to, true);
+                }
+                return;
+            }
+        } else {
+            if (currentCell.message != null && currentCell.addressTo != null) {
+                Andius.HUD.log(currentCell.message.getText(), Color.YELLOW);
+                MazeAddress to = currentCell.addressTo;
+                teleport(to, true);
+                return;
+            }
+        }
+
+        if (currentCell.riddleAnswers != null && !currentCell.riddleAnswers.isEmpty()) {
+            new RiddleDialog(CTX, this, currentCell).show(this.stage);
+            return;
+        }
+
+        if (currentCell.function != null) {
+            currentCell.function.getDialog(CTX, this).show(this.stage);
+            return;
+        }
+
+        boolean showMessage = true;
+
+        if (currentCell.tradeItem1 > 0) {
+            Item item1 = this.map.scenario().items().get(currentCell.tradeItem1);
+            Item item2 = this.map.scenario().items().get(currentCell.tradeItem2);
+            CharacterRecord owner = Andius.CTX.getOwner(item1);
+            if (owner != null) {
+                Andius.HUD.log(currentCell.message.getText(), Color.GREEN);
+                log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
+                owner.inventory.remove(item1);
+                owner.inventory.add(item2);
+                Sounds.play(Sound.POSITIVE_EFFECT);
+            } else {
+                Sounds.play(Sound.NEGATIVE_EFFECT);
+            }
+            showMessage = false;
+        }
+
+        if (currentCell.itemObtained > 0) {
+            Item item = this.map.scenario().items().get(currentCell.itemObtained);
+            CharacterRecord owner = Andius.CTX.getOwner(item);
+            if (owner == null) {
+                Andius.HUD.log(currentCell.message.getText(), Color.GREEN);
+                CharacterRecord cr = Andius.CTX.pickRandomEnabledPlayer();
+                log(String.format("%s found a %s", cr.name, item.genericName));
+                cr.inventory.add(item);
+                Sounds.play(Sound.POSITIVE_EFFECT);
+            }
+            showMessage = false;
+        }
+
+        if (currentCell.riddleAnswers != null && currentCell.riddleAnswers.isEmpty()) {
+            showMessage = false;
+        }
+
+        if (currentCell.itemRequired > 0 && Andius.CTX.getOwner(this.map.scenario().items().get(currentCell.itemRequired)) != null) {
+            showMessage = false;
+        }
+
+        if (currentCell.darkness) {
+            isTorchOn = false;
+        }
+
+        if (showMessage && currentCell.message != null) {
+            Andius.HUD.log(currentCell.message.getText(), Color.GREEN);
+        }
+
+        if (currentCell.rotateDirection != -1) {
+            rotateBlock(currentLevel, currentCell, x, y);
+            createMiniMap();
+        }
+
+        fight(currentCell, this.map.scenario().levels()[currentLevel].defeated);
+
+        finishTurn(x, y);
+
     }
 
     private void fight(MazeCell cell, List<Integer> defeated) {
@@ -1272,10 +1419,14 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         private ModelInstance instance;
         private int level;
+        private float cx;
+        private float cy;
 
-        public DungeonTileModelInstance(ModelInstance instance, int level) {
+        public DungeonTileModelInstance(ModelInstance instance, int level, float x, float y) {
             this.instance = instance;
             this.level = level;
+            this.cx = x;
+            this.cy = y;
         }
 
         public ModelInstance getInstance() {
@@ -1292,6 +1443,14 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         public float getY() {
             return this.instance.transform.val[Matrix4.M23];
+        }
+
+        public float getCx() {
+            return cx;
+        }
+
+        public float getCy() {
+            return cy;
         }
 
     }
