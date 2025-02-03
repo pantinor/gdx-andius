@@ -23,8 +23,8 @@ import utils.LogScrollPane;
 
 public abstract class Dialog extends Window implements Constants {
 
-    private static int WIDTH = 300;
-    private static int HEIGHT = 300;
+    private static int WIDTH = 400;
+    private static int HEIGHT = 400;
 
     private Actor previousKeyboardFocus, previousScrollFocus;
     private final FocusListener focusListener;

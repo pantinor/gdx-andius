@@ -476,8 +476,8 @@ public interface Constants {
 
     public enum Status {
         AFRAID(Color.YELLOW, "AF"),
-        SILENCED(Color.ORANGE, "SI"),
-        ASLEEP(Color.MAGENTA, "SL"),
+        SILENCED(Color.MAGENTA, "SI"),
+        ASLEEP(Color.SKY, "SL"),
         POISONED(Color.GREEN, "PO"),
         PARALYZED(Color.CYAN, "PZ"),
         STONED(Color.DARK_GRAY, "ST"),

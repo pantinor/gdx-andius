@@ -81,13 +81,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
     private final List<ModelInstance> floor = new ArrayList<>();
     private final List<ModelInstance> ceiling = new ArrayList<>();
-    private static Texture MINI_MAP_TEXTURE;
+
     private final TextureRegion[][] arrows = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/arrows.png")), 15, 15);
-    private final Pixmap miniMapIconsPixmap;
-    private static final int MINI_DIM = 15;
-    private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + MINI_DIM / 2;
-    private static final int XALIGNMM = 705;
-    private static final int YALIGNMM = 415;
 
     public int currentLevel = 0;
     private final Vector3 currentPos = new Vector3();
@@ -96,7 +91,14 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private boolean showMiniMap = true;
     private Texture miniMap;
+    private static Texture MINI_MAP_BACKGROUND;
     private final MiniMapIcon miniMapIcon;
+    private final Pixmap miniMapIconsPixmap;
+    private static final int MINI_DIM = 15;
+    private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + MINI_DIM / 2;
+    private static final int XALIGNMM = 705;
+    private static final int YALIGNMM = 338;
+
     public final Constants.Map map;
 
     public WizardryDungeonScreen(Constants.Map map) {
@@ -105,18 +107,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.stage.setDebugAll(true);
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
-        int dim = MM_BKGRND_DIM + MINI_DIM;
-        Pixmap pixmap = new Pixmap(dim, dim, Format.RGBA8888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fillRectangle(0, 0, dim, dim);
-        pixmap.setColor(0x404040ff);
-        pixmap.fillRectangle(2, 2, dim - 4, dim - 4);
-        pixmap.setColor(0x606060ff);
-        pixmap.fillRectangle(4, 4, dim - 8, dim - 8);
-        pixmap.setColor(0xabababff);
-        pixmap.fillRectangle(6, 6, dim - 12, dim - 12);
+        MINI_MAP_BACKGROUND = Utils.fillRectangle(MM_BKGRND_DIM, MM_BKGRND_DIM, Color.LIGHT_GRAY, 1);
 
-        MINI_MAP_TEXTURE = new Texture(pixmap);
         arrows[3][2].getTexture().getTextureData().prepare();
         this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
 
@@ -539,7 +531,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         if (showMiniMap) {
-            batch.draw(MINI_MAP_TEXTURE, XALIGNMM - 10, Andius.SCREEN_HEIGHT - MINI_MAP_TEXTURE.getHeight() - 36);
+            batch.draw(MINI_MAP_BACKGROUND, XALIGNMM - 3, YALIGNMM + 3);
             batch.draw(miniMap, XALIGNMM, YALIGNMM);
         }
 

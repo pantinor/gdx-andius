@@ -51,6 +51,31 @@ public class Context {
         return null;
     }
 
+    public void poolGold(CharacterRecord player) {
+        for (CharacterRecord cr : this.saveGame.players) {
+            if (cr != player) {
+                int gold = cr.gold;
+                cr.adjustGold(-gold);
+                player.adjustGold(gold);
+            }
+        }
+    }
+
+    public boolean partyHasItem(int id, int scenarioID) {
+        for (CharacterRecord rec : this.saveGame.players) {
+            if (rec.itemOwned(id, scenarioID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeItemFromParty(int id, int scenarioID) {
+        for (CharacterRecord rec : this.saveGame.players) {
+            rec.removeItem(id, scenarioID);
+        }
+    }
+
     public void endTurn(Constants.Map map) throws PartyDeathException {
         int decr_interval = (map == Constants.Map.WORLD ? 40 : 10);
         for (CharacterRecord player : this.saveGame.players) {

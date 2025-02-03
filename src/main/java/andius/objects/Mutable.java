@@ -26,7 +26,7 @@ public interface Mutable {
 
     public int getCurrentHitPoints();
 
-    public void setCurrentHitPoints(int currentHitPoints);
+    public void adjustHitPoints(int points);
 
     public int getCurrentMageSpellLevel();
 

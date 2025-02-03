@@ -5,6 +5,7 @@ import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.WizardryData.WER4_CHARS;
+import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
 import andius.objects.HealthCursor;
@@ -26,6 +27,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -38,6 +40,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
@@ -76,6 +79,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private static final Texture GREEN = Utils.fillRectangle(LISTING_WIDTH, LINE_HEIGHT * 3, Color.GREEN, .2f);
 
     private final Texture background;
+    private final TextureAtlas iconAtlas;
 
     private int round = 1;
     private boolean suprised = false;
@@ -88,6 +92,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
 
         Table logTable = new Table(Andius.skin);
         logTable.setBackground("log-background");
@@ -211,6 +217,11 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private void cast() {
 
+        List<Mutable> shuffled = new ArrayList();
+        shuffled.addAll(this.monsters);
+        shuffled.addAll(this.enemies);
+        Collections.shuffle(shuffled);
+
         MutableCharacter defender = pickEnemy();
         if (defender != null) {
             SpellLabel sp = this.spells.getSelected();
@@ -218,9 +229,21 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 Spells spell = sp.spell != null ? sp.spell : sp.item.spell;
                 DoGooderListing dgl = (DoGooderListing) selected.getParent();
                 if (dgl != null) {
-                    spellCast(spell, player, dgl.mm);
+                    spellCast(spell, player, dgl.mm, sp.item != null);
                 } else {
-                    spellCast(spell, player, null);
+                    spellCast(spell, player, null, sp.item != null);
+                }
+                if (sp.item != null && sp.item.genericName.equals("POTION")) {
+                    this.spells.getItems().removeValue(sp, false);
+                    player.removeItem(sp.item.id, sp.item.scenarioID);
+                } else if (sp.item != null && sp.item.changeChance > 0) {
+                    boolean decayed = Utils.percentChance(sp.item.changeChance);
+                    if (decayed) {
+                        Item changeTo = WER_ITEMS.get(sp.item.changeTo);
+                        player.removeItem(sp.item.id, sp.item.scenarioID);
+                        player.inventory.add(changeTo);
+                        this.spells.getItems().removeValue(sp, false);
+                    }
                 }
             }
             if (player.isDead()) {
@@ -230,12 +253,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
             end();
         }
 
-        for (MutableMonster mm : monsters) {
-            monsterFight(mm);
-        }
-
-        for (MutableCharacter mm : enemies) {
-            enemyFight(mm);
+        for (Mutable m : shuffled) {
+            if (m instanceof MutableMonster) {
+                monsterFight((MutableMonster) m);
+            } else {
+                enemyFight((MutableCharacter) m);
+            }
         }
 
         log("------------ end of round " + round);
@@ -244,72 +267,40 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private void fight() {
 
-        if (suprised) {
+        List<Mutable> shuffled = new ArrayList();
+        shuffled.addAll(this.monsters);
+        shuffled.addAll(this.enemies);
+        Collections.shuffle(shuffled);
 
-            for (MutableCharacter mm : enemies) {
-                enemyFight(mm);
-            }
-
-            for (MutableMonster mm : monsters) {
-                monsterFight(mm);
-            }
-
-            MutableCharacter defender = pickEnemy();
-            if (defender != null) {
-                if (!player.isDisabled()) {
-                    boolean hit = Utils.attackHit(player, defender);
-                    if (hit) {
-                        Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                        int damage = Utils.dealDamage(weapon, defender);
-                        log(String.format("%s %s %s, who %s after %d damage.",
-                                player.name.toUpperCase(),
-                                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                                defender.name(),
-                                defender.getDamageTag(),
-                                damage));
-                    } else {
-                        log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
-                    }
+        MutableCharacter defender = pickEnemy();
+        if (defender != null) {
+            if (!player.isDisabled()) {
+                boolean hit = Utils.attackHit(player, defender);
+                if (hit) {
+                    Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
+                    int damage = Utils.dealDamage(weapon, defender);
+                    log(String.format("%s %s %s, who %s after %d damage.",
+                            player.name.toUpperCase(),
+                            HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                            defender.name(),
+                            defender.getDamageTag(),
+                            damage));
+                } else {
+                    log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
                 }
-                if (player.isDead()) {
-                    end();
-                }
-            } else {
+            }
+            if (player.isDead()) {
                 end();
             }
-
         } else {
+            end();
+        }
 
-            MutableCharacter defender = pickEnemy();
-            if (defender != null) {
-                if (!player.isDisabled()) {
-                    boolean hit = Utils.attackHit(player, defender);
-                    if (hit) {
-                        Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                        int damage = Utils.dealDamage(weapon, defender);
-                        log(String.format("%s %s %s, who %s after %d damage.",
-                                player.name.toUpperCase(),
-                                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                                defender.name(),
-                                defender.getDamageTag(),
-                                damage));
-                    } else {
-                        log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
-                    }
-                }
-                if (player.isDead()) {
-                    end();
-                }
+        for (Mutable m : shuffled) {
+            if (m instanceof MutableMonster) {
+                monsterFight((MutableMonster) m);
             } else {
-                end();
-            }
-
-            for (MutableMonster mm : monsters) {
-                monsterFight(mm);
-            }
-
-            for (MutableCharacter mm : enemies) {
-                enemyFight(mm);
+                enemyFight((MutableCharacter) m);
             }
         }
 
@@ -334,6 +325,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void monsterFight(MutableMonster attacker) {
+
+        attacker.processStatusAffects();
 
         if (attacker.isDead() || attacker.status().isDisabled()) {
             return;
@@ -368,7 +361,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                         log(String.format("%s made a saving throwing throw against %s", defender.name(), attacker.breath()));
                         dmg = dmg / 2;
                     }
-                    damage(defender, dmg);
+                    damage(attacker, defender, dmg);
                 }
                 break;
             case ATTACK:
@@ -378,7 +371,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(defender, dmg);
+                            damage(attacker, defender, dmg);
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name()));
@@ -389,7 +382,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 MutableCharacter target = pickEnemy();
                 if (target != null) {
                     log(String.format("%s casts %s", attacker.name(), spell));
-                    spellCast(spell, attacker, target);
+                    spellCast(spell, attacker, target, false);
                 }
                 break;
             }
@@ -398,6 +391,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void enemyFight(MutableCharacter attacker) {
+
+        attacker.processStatusAffects();
 
         if (attacker.isDead() || attacker.status().isDisabled()) {
             return;
@@ -422,13 +417,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         switch (action) {
             case ATTACK:
+                log(String.format("%s is attacking!", attacker.name()));
                 MutableMonster defender = pickMonster();
                 if (roll > 15 && defender != null) {
                     boolean hit = Utils.attackHit(attacker, defender);
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(defender, dmg);
+                            damage(attacker, defender, dmg);
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name()));
@@ -438,7 +434,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(player, dmg);
+                            damage(attacker, player, dmg);
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), player.name.toUpperCase()));
@@ -449,9 +445,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 MutableMonster target = pickMonster();
                 log(String.format("%s casts %s", attacker.name(), spell));
                 if (roll > 15 && target != null) {
-                    spellCast(spell, attacker, target);
+                    spellCast(spell, attacker, target, false);
                 } else {
-                    spellCast(spell, attacker, player);
+                    spellCast(spell, attacker, player, false);
                 }
                 break;
             }
@@ -485,34 +481,49 @@ public class Wiz4CombatScreen implements Screen, Constants {
         return notDead.get(Utils.RANDOM.nextInt(notDead.size()));
     }
 
-    private void damage(Object victim, int damage) {
-        if (victim instanceof Mutable) {
-            Mutable m = (Mutable) victim;
-            m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
+    private void damage(Object attacker, Object defender, int damage) {
+
+        if (damage <= 0) {
+            return;
+        }
+
+        String attName = null;
+        if (attacker instanceof Mutable) {
+            Mutable a = (Mutable) attacker;
+            attName = a.name();
+        } else {
+            attName = player.name.toUpperCase();
+        }
+
+        if (defender instanceof Mutable) {
+            Mutable m = (Mutable) defender;
+            m.adjustHitPoints(-damage);
             m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
-            log(String.format("%s was hit for %d damage!", m.name(), damage));
+            log(String.format("%s strikes %s who was hit for %d damage!", attName, m.name(), damage));
         } else {
             player.adjustHP(-damage);
             player.healthCursor.adjust(player.hp, player.maxhp);
-            log(String.format("%s was hit for %d damage!", player.name.toUpperCase(), damage));
+            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage));
         }
     }
 
-    public void spellCast(Spells spell, Object caster, Object target) {
+    private void spellCast(Spells spell, Object caster, Object target, boolean item) {
 
         if (caster instanceof CharacterRecord) {
             if (player.isDisabled()) {
                 log(player.name.toUpperCase() + " cannot cast spell in current state!");
                 return;
             }
-            if (!player.canCast(spell)) {
-                log(player.name.toUpperCase() + " dost not have enough magic points!");
-                return;
+
+            if (!item) {
+                if (!player.canCast(spell)) {
+                    log(player.name.toUpperCase() + " dost not have enough magic points!");
+                    return;
+                }
+                player.decrMagicPts(spell);
             }
 
             log(player.name.toUpperCase() + " casts " + spell);
-
-            player.decrMagicPts(spell);
 
         } else {
             Mutable m = (Mutable) caster;
@@ -573,7 +584,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             case PORFIC:
                 if (caster instanceof CharacterRecord) {
                     if (player.acmodifier1 == 0) {
-                        player.acmodifier1 -= spell.getHitBonus();
+                        player.acmodifier1 = spell.getHitBonus();
                     }
                 } else {
                     Mutable m = (Mutable) caster;
@@ -606,7 +617,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 int dmg = spell.damage();
-                damage(mc, dmg);
+                damage(caster, mc, dmg);
             }
         }
         if (caster instanceof MutableCharacter) {
@@ -616,45 +627,50 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int dmg = spell.damage();
-                    damage(mm, dmg);
+                    damage(caster, mm, dmg);
                 }
             } else {
                 if (player.savingThrowSpell()) {
                     log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int dmg = spell.damage();
-                    damage(player, dmg);
+                    damage(caster, player, dmg);
                 }
             }
         }
     }
 
     private void spellGroupDamage(Object caster, Spells spell) {
+        int groupDamage = spell.damage();
         if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
-            for (MutableCharacter mc : this.enemies) {
-                DoGooder dg = (DoGooder) mc.baseType();
-                if (dg.savingThrowSpell()) {
-                    log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
-                } else {
-                    int dmg = spell.damage();
-                    damage(mc, dmg);
+            while (groupDamage > 0) {
+                for (MutableCharacter mc : this.enemies) {
+                    DoGooder dg = (DoGooder) mc.baseType();
+                    if (dg.savingThrowSpell()) {
+                        log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
+                    } else {
+                        damage(caster, mc, 1);
+                    }
+                    groupDamage--;
                 }
             }
         }
         if (caster instanceof MutableCharacter) {
-            for (MutableMonster mm : this.monsters) {
-                if (Utils.RANDOM.nextInt(100) < mm.getUnaffected()) {
-                    log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
-                } else {
-                    int dmg = spell.damage();
-                    damage(mm, dmg);
+            while (groupDamage > 0) {
+                for (MutableMonster mm : this.monsters) {
+                    if (Utils.RANDOM.nextInt(100) < mm.getUnaffected()) {
+                        log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
+                    } else {
+                        damage(caster, mm, 1);
+                    }
+                    groupDamage--;
                 }
-            }
-            if (player.savingThrowSpell()) {
-                log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
-            } else {
-                int dmg = spell.damage();
-                damage(player, dmg);
+                if (player.savingThrowSpell()) {
+                    log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
+                } else {
+                    damage(caster, player, 1);
+                }
+                groupDamage--;
             }
         }
     }
@@ -662,17 +678,22 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private void spellGroupHeal(Object caster, Spells spell) {
         if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
             for (MutableMonster mm : this.monsters) {
-                int dmg = spell.damage();
-                mm.setCurrentHitPoints(mm.getCurrentHitPoints() - dmg);
-                mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
+                if (!mm.isDead()) {
+                    int dmg = spell.damage();
+                    mm.adjustHitPoints(dmg);
+                    mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
+                }
             }
             player.adjustHP(spell.damage());
+            player.healthCursor.adjust(player.hp, player.maxhp);
         }
         if (caster instanceof MutableCharacter) {
             for (MutableCharacter mm : this.enemies) {
-                int dmg = spell.damage();
-                mm.setCurrentHitPoints(mm.getCurrentHitPoints() - dmg);
-                mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
+                if (!mm.isDead()) {
+                    int dmg = spell.damage();
+                    mm.adjustHitPoints(dmg);
+                    mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
+                }
             }
         }
     }
@@ -685,7 +706,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int pointsLeft = Utils.getRandomBetween(1, 8);
-                    mc.setCurrentHitPoints(pointsLeft);
+                    mc.adjustHitPoints(mc.getCurrentHitPoints() - pointsLeft);
                     mc.getHealthCursor().adjust(mc.getCurrentHitPoints(), mc.getMaxHitPoints());
                 }
             }
@@ -696,7 +717,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int pointsLeft = Utils.getRandomBetween(1, 8);
-                    mm.setCurrentHitPoints(pointsLeft);
+                    mm.adjustHitPoints(mm.getCurrentHitPoints() - pointsLeft);
                     mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
                 }
             }
@@ -717,6 +738,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (dg.savingThrowSpell()) {
                     log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
+                    log(dg.name + " is " + effect);
                     mc.status().set(effect, 4);
                 }
             }
@@ -726,12 +748,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (Utils.RANDOM.nextInt(100) < mm.getUnaffected()) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
+                    log(mm.name() + " is " + effect);
                     mm.status().set(effect, 4);
                 }
             }
             if (player.savingThrowSpell()) {
                 log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
+                log(player.name.toUpperCase() + " is " + effect);
                 player.status.set(effect, 4);
             }
         }
@@ -745,7 +769,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
             if (player.acmodifier1 == 0) {
-                player.acmodifier1 -= spell.getHitBonus();
+                player.acmodifier1 = spell.getHitBonus();
             }
         }
         if (caster instanceof MutableCharacter) {
@@ -1078,6 +1102,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private class DoGooderListing extends Group {
 
+        final Image icon;
         final Label l1;
         final DoGooderStatusLabel l2;
         final DoGooderMagicPointsLabel l3;
@@ -1089,10 +1114,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
         DoGooderListing(MutableCharacter mm) {
             this.mm = mm;
             this.m = (DoGooder) mm.baseType();
-            
+
             this.bckgrnd = new ListingBackground();
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
+
+            this.icon = new Image(iconAtlas.findRegion(this.m.iconID));
 
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new DoGooderStatusLabel(mm);
@@ -1102,6 +1129,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.l1.setText(d1);
 
             addActor(this.bckgrnd);
+            addActor(this.icon);
             addActor(this.l1);
             addActor(this.l2);
             addActor(this.l3);
@@ -1110,6 +1138,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
             this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
             this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
+            this.icon.setPosition(247, 2);
 
             this.setSize(LISTING_WIDTH, LINE_HEIGHT * 3f);
 

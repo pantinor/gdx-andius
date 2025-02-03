@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import andius.objects.ClassType;
 import andius.objects.Portal;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
@@ -52,7 +53,7 @@ public class WorldScreen extends BaseScreen {
 
         this.stage = new Stage(viewport);
         Andius.HUD.addActor(stage);
-
+        
         this.camera = new OrthographicCamera();
         this.mapViewPort = new ScreenViewport(camera);
 
@@ -230,7 +231,15 @@ public class WorldScreen extends BaseScreen {
         } else if (keycode == Keys.E) {
             Portal p = this.map.getBaseMap().getPortal((int) currentPosition.x, (int) currentPosition.y);
             if (p != null) {
-                Andius.mainGame.setScreen(p.getMap().getScreen());
+                if (p.getMap() == Map.WIZARDRY4) {
+                    if (Andius.CTX.players().length == 1 && Andius.CTX.players()[0].classType == ClassType.MAGE) {
+                        Andius.mainGame.setScreen(p.getMap().getScreen());
+                    } else {
+                        log("An impenetrable force of energy bars your party's passage in the entrance! A solitary mage might have more luck...");
+                    }
+                } else {
+                    Andius.mainGame.setScreen(p.getMap().getScreen());
+                }
             }
             return false;
         }

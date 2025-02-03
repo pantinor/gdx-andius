@@ -241,19 +241,3 @@ journal-check-on
   orig: 20, 20
   offset: 0, 0
   index: -1
-scroller-fancy
-  rotate: false
-  xy: 46, 5
-  size: 14, 14
-  split: 3, 3, 3, 3
-  orig: 14, 14
-  offset: 0, 0
-  index: -1
-scroller-fancy-back
-  rotate: false
-  xy: 109, 2
-  size: 14, 14
-  split: 3, 3, 3, 3
-  orig: 14, 14
-  offset: 0, 0
-  index: -1

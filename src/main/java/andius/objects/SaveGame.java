@@ -3,6 +3,7 @@ package andius.objects;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Direction;
+import andius.WizardryData.SummoningCircle;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -143,7 +144,8 @@ public class SaveGame implements Constants {
         public int[] clericPoints = new int[7];
 
         public List<Item> inventory = new ArrayList<>();
-
+        
+        public List<SummoningCircle> summoningCircles = new ArrayList<>();
         public List<MutableMonster> summonedMonsters = new ArrayList<>();
 
         public int submorsels = 400;
@@ -162,6 +164,67 @@ public class SaveGame implements Constants {
 
         public void adjustHP(int amt) {
             hp = Utils.adjustValue(hp, amt, maxhp, 0);
+        }
+
+        public boolean itemOwned(int id, int scenarioID) {
+            for (Item i : inventory) {
+                if (i.id == id && i.scenarioID == scenarioID) {
+                    return true;
+                }
+            }
+            if (armor != null && armor.id == id && armor.scenarioID == scenarioID) {
+                return true;
+            }
+            if (weapon != null && weapon.id == id && weapon.scenarioID == scenarioID) {
+                return true;
+            }
+            if (helm != null && helm.id == id && helm.scenarioID == scenarioID) {
+                return true;
+            }
+            if (shield != null && shield.id == id && shield.scenarioID == scenarioID) {
+                return true;
+            }
+            if (glove != null && glove.id == id && glove.scenarioID == scenarioID) {
+                return true;
+            }
+            if (item1 != null && item1.id == id && item1.scenarioID == scenarioID) {
+                return true;
+            }
+            if (item2 != null && item2.id == id && item2.scenarioID == scenarioID) {
+                return true;
+            }
+            return false;
+        }
+
+        public void removeItem(int id, int scenarioID) {
+            Iterator<Item> iter = inventory.iterator();
+            while(iter.hasNext()) {
+                Item i = iter.next();
+                if (i.id == id && i.scenarioID == scenarioID) {
+                    iter.remove();
+                }
+            }
+            if (armor != null && armor.id == id && armor.scenarioID == scenarioID) {
+                armor = null;
+            }
+            if (weapon != null && weapon.id == id && weapon.scenarioID == scenarioID) {
+                weapon = null;
+            }
+            if (helm != null && helm.id == id && helm.scenarioID == scenarioID) {
+                helm = null;
+            }
+            if (shield != null && shield.id == id && shield.scenarioID == scenarioID) {
+                shield = null;
+            }
+            if (glove != null && glove.id == id && glove.scenarioID == scenarioID) {
+                glove = null;
+            }
+            if (item1 != null && item1.id == id && item1.scenarioID == scenarioID) {
+                item1 = null;
+            }
+            if (item2 != null && item2.id == id && item2.scenarioID == scenarioID) {
+                item2 = null;
+            }
         }
 
         public boolean canCast(Spells spell) {

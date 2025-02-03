@@ -275,7 +275,7 @@ public class Utils {
 
     public static int dealDamage(Item weapon, Mutable defender) {
         int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
-        defender.setCurrentHitPoints(defender.getCurrentHitPoints() - damage);
+        defender.adjustHitPoints(-damage);
         defender.adjustHealthCursor();
         return damage;
     }

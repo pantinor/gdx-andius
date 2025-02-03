@@ -6,9 +6,7 @@
 package utils;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
@@ -18,20 +16,21 @@ public class LogScrollPane extends AutoFocusScrollPane {
     private final Table internalTable;
     private final int width;
     private final Skin skin;
-    private final LabelStyle ls;
+    private final String fontStyle;
+
+    public LogScrollPane(Skin skin, Table table, int width, String fontStyle) {
+        super(table, skin);
+
+        this.skin = skin;
+        this.fontStyle = fontStyle;
+        this.internalTable = table;
+        this.internalTable.bottom().left();
+        this.width = width;
+        setScrollingDisabled(true, false);
+    }
 
     public LogScrollPane(Skin skin, Table table, int width) {
-
-        super(table, skin);
-        this.skin = skin;
-        this.internalTable = table;
-        this.width = width;
-
-        this.ls = new LabelStyle(this.skin.get("font14", BitmapFont.class), Color.WHITE);
-
-        setScrollingDisabled(true, false);
-
-        internalTable.bottom().left();
+        this(skin, table, width, "default-16");
     }
 
     public void add(String text) {
@@ -44,12 +43,12 @@ public class LogScrollPane extends AutoFocusScrollPane {
             return;
         }
 
-        Label label = new Label(text, ls);
+        Label label = new Label(text, this.skin, this.fontStyle);
         label.setWrap(true);
         label.setAlignment(Align.topLeft, Align.left);
         label.setColor(color);
 
-        internalTable.add(label).pad(1).width(width - 3);
+        internalTable.add(label).pad(1).width(width - 10);
         internalTable.row();
 
         pack();

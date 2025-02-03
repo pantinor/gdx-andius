@@ -4,6 +4,7 @@ import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import andius.objects.ClassType;
+import andius.objects.Icons;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame;
@@ -87,14 +88,14 @@ public class EquipmentScreen implements Screen, Constants {
         pix.dispose();
     }
 
-    ItemListing selectedItem;
-    PlayerIndex selectedPlayer;
-    SpellListing selectedSpell;
+    private ItemListing selectedItem;
+    private PlayerIndex selectedPlayer;
+    private SpellListing selectedSpell;
     private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
 
-    AutoFocusScrollPane invPane, spellPane;
-    Image focusIndicator, spellFocusInd;
-    Label invDesc;
+    private AutoFocusScrollPane invPane, spellPane;
+    private Image focusIndicator, spellFocusInd;
+    private Label invDesc;
 
     public EquipmentScreen(Context context, Map map) {
         this.context = context;
@@ -116,7 +117,7 @@ public class EquipmentScreen implements Screen, Constants {
         traderSlider = new TradeSliderBox();
 
         invDesc = new Label("", Andius.skin, "default-16");
-        invDesc.setBounds(284, Andius.SCREEN_HEIGHT - 170, w, h);
+        invDesc.setBounds(284, Andius.SCREEN_HEIGHT - 415, w, h);
 
         FileHandle fh = Gdx.files.classpath("assets/data/inventory.png");
         Texture tx = new Texture(fh);
@@ -196,18 +197,15 @@ public class EquipmentScreen implements Screen, Constants {
         this.use.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (selectedItem != null && selectedItem.item.type == ItemType.SPECIAL) {
+                if (selectedItem != null && selectedItem.item != null && selectedItem.item.type == ItemType.SPECIAL) {
                     if (SpellUtil.useItem(selectedItem.item.name, selectedPlayer.character)) {
-                        selectedItem.removeActor(focusIndicator);
-                        selectedPlayer.invTable.removeActor(selectedItem);
-                        selectedItem = null;
-                    }
-                    if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
-                        selectedItem.removeActor(focusIndicator);
-                        selectedPlayer.invTable.removeActor(selectedItem);
-                        selectedItem = null;
+                    } else if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
                         map.getScreen().teleport(0, -1, 0);
                     }
+                    selectedPlayer.character.removeItem(selectedItem.item.id, selectedItem.item.scenarioID);
+                    selectedItem.removeActor(focusIndicator);
+                    selectedPlayer.invTable.removeActor(selectedItem);
+                    selectedItem = null;
                 } else {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 }
@@ -240,7 +238,9 @@ public class EquipmentScreen implements Screen, Constants {
         this.trade.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                traderSlider.show();
+                if (context.players().length > 1) {
+                    traderSlider.show();
+                }
             }
         });
         this.trade.setBounds(x, 240, 80, 40);
@@ -332,7 +332,7 @@ public class EquipmentScreen implements Screen, Constants {
     }
 
     private TextureRegion icon(Item it) {
-        return (it == null ? invIcons[803] : invIcons[it.iconID]);
+        return Icons.get(it);
     }
 
     @Override
@@ -793,7 +793,7 @@ public class EquipmentScreen implements Screen, Constants {
 
     private class ItemListing extends Group {
 
-        Item item;
+        final Item item;
         final Image icon;
         final Label label;
         final Image canusebkgnd;

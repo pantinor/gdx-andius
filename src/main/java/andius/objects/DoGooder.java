@@ -8,6 +8,7 @@ import utils.Utils;
 public class DoGooder {
 
     public int id;
+    public String iconID;
     public String name;
     public Race race;
     public ClassType characterClass;
@@ -22,6 +23,7 @@ public class DoGooder {
     public int hpLeft;
     public int hpMax;
     public int armourClass;
+    public int maxlevac;
     public int[] attributes;
     public int[] saveVs;
     public int charlev;

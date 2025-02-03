@@ -34,23 +34,25 @@ public class WizardryData {
     }
 
     public enum SummoningCircle {
-        CIRCLE1(0, 11),
-        CIRCLE2(12, 23),
-        CIRCLE3(24, 35),
-        CIRCLE4(36, 47),
-        CIRCLE5(48, 59),
-        CIRCLE6(60, 71),
-        CIRCLE7(72, 83),
-        CIRCLE8(84, 95),
-        CIRCLE9(96, 107),
-        CIRCLE10(108, 119);
+        CIRCLE1(0, 11, "First"),
+        CIRCLE2(12, 23, "Second"),
+        CIRCLE3(24, 35, "Third"),
+        CIRCLE4(36, 47, "Fourth"),
+        CIRCLE5(48, 59, "Fifth"),
+        CIRCLE6(60, 71, "Sixth"),
+        CIRCLE7(72, 83, "Seventh"),
+        CIRCLE8(84, 95, "Eighth"),
+        CIRCLE9(96, 107, "Ninth"),
+        CIRCLE10(108, 119, "Tenth");
 
         private final int rangeLow;
         private final int rangeHigh;
+        private final String display;
 
-        private SummoningCircle(int rangeLow, int rangeHigh) {
+        private SummoningCircle(int rangeLow, int rangeHigh, String display) {
             this.rangeLow = rangeLow;
             this.rangeHigh = rangeHigh;
+            this.display = display;
         }
 
         public int low() {
@@ -59,6 +61,10 @@ public class WizardryData {
 
         public int high() {
             return rangeHigh;
+        }
+
+        public String display() {
+            return display;
         }
 
     }
@@ -1266,8 +1272,12 @@ public class WizardryData {
         public String getText() {
             StringBuilder t = new StringBuilder();
             for (String line : text) {
-                t.append(line.startsWith("^") ? line.substring(1) : line);
-                t.append("\n");
+                if (line.equals(" ")) {
+                    t.append("\n\n");
+                } else {
+                    t.append(line.replace("^", ""));
+                    t.append(" ");
+                }
             }
             t.deleteCharAt(t.length() - 1);
             return t.toString();
@@ -1480,26 +1490,37 @@ public class WizardryData {
                     if (x == 8 && y == 5 && l.level == 8) {
                         c.hiddenEastDoor = true;//dreampainter room access with winged boots
                     }
+                    if (x == 1 && y == 2 && l.level == 10) {
+                        c.message = getMessage(WER_MESSAGES, 28);
+                        c.tbd = false;
+                    }
                     if (x == 8 && y == 6 && l.level == 8) {
                         c.itemRequired = 5;
+                        c.tbd = false;
                     }
                     if (x == 14 && y == 13 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 31);
+                        c.tbd = false;
                     }
                     if (x == 6 && y == 11 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 36);
+                        c.tbd = false;
                     }
                     if (x == 6 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 37);
+                        c.tbd = false;
                     }
                     if (x == 7 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 38);
+                        c.tbd = false;
                     }
                     if (x == 10 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 44);
+                        c.tbd = false;
                     }
                     if (x == 10 && y == 9 && l.level == 10) {
                         c.function = (Context ctx, BaseScreen screen) -> new GatesOfHellDialog(ctx, screen);
+                        c.tbd = false;
                     }
                 }
             }

@@ -44,7 +44,7 @@ public class Icons {
     }
 
     private static int getId(Item it) {
-        if (it == null) {
+        if (it == null || it.name == null) {
             return 803;
         }
         String n = it.name.toLowerCase();

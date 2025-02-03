@@ -60,13 +60,19 @@ public class StartScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
 
                 try {
-                    Sounds.play(Sound.TRIGGER);
 
                     if (CTX == null) {
                         CTX = new Context();
                         SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
                         CTX.setSaveGame(saveGame);
                     }
+
+                    if (CTX.pickRandomEnabledPlayer() == null) {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        return;
+                    }
+
+                    Sounds.play(Sound.TRIGGER);
 
                     if (CTX.saveGame.map == null) {
                         CTX.saveGame.map = Map.WORLD;
@@ -150,7 +156,6 @@ public class StartScreen implements Screen, Constants {
 //            }
 //        });
 //        manual.setBounds(360, Andius.SCREEN_HEIGHT - 500, 220, 40);
-
         stage = new Stage();
         //stage.addActor(manual);
         stage.addActor(manage);

@@ -124,14 +124,8 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public void setCurrentHitPoints(int currentHitPoints) {
-        this.currentHitPoints = currentHitPoints;
-        if (this.currentHitPoints < 0) {
-            this.currentHitPoints = 0;
-        }
-        if (this.currentHitPoints > this.getMaxHitPoints()) {
-            this.currentHitPoints = this.getMaxHitPoints();
-        }
+    public void adjustHitPoints(int amt) {
+        this.currentHitPoints = Utils.adjustValue(this.currentHitPoints, amt, this.getMaxHitPoints(), 0);
     }
 
     public int[] getMageSpellLevels() {
@@ -187,8 +181,12 @@ public class MutableCharacter implements Mutable {
     public void processStatusAffects() {
 
         if (this.dogooder.healPts > 0) {
-            setCurrentHitPoints(this.dogooder.healPts);
-            adjustHealthCursor();
+            int roll = Utils.RANDOM.nextInt(100);
+            boolean heal = roll < Math.max(this.getLevel() * 20, 50);
+            if (heal) {
+                adjustHitPoints(this.dogooder.healPts);
+                adjustHealthCursor();
+            }
         }
 
         for (Status s : Status.values()) {

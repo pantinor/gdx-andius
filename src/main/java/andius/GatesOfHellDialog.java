@@ -6,6 +6,7 @@ import andius.objects.Dialog;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -14,33 +15,14 @@ public class GatesOfHellDialog extends Dialog {
     public GatesOfHellDialog(Context ctx, BaseScreen screen) {
         super(ctx, screen);
 
-        final AtomicBoolean chimesOwned = new AtomicBoolean();
-        final AtomicBoolean diaryOwned = new AtomicBoolean();
-        final AtomicBoolean candleOwned = new AtomicBoolean();
-        final AtomicBoolean kaOwned = new AtomicBoolean();
-        final AtomicBoolean bootsEquipped = new AtomicBoolean();
-        final AtomicBoolean hhgOwned = new AtomicBoolean();
+        final AtomicBoolean chimesOwned = new AtomicBoolean(ctx.partyHasItem(102, 4));
+        final AtomicBoolean diaryOwned = new AtomicBoolean(ctx.partyHasItem(101, 4));
+        final AtomicBoolean candleOwned = new AtomicBoolean(ctx.partyHasItem(103, 4));
+        final AtomicBoolean kaOwned = new AtomicBoolean(ctx.partyHasItem(6, 4));
+        final AtomicBoolean hhgOwned = new AtomicBoolean(ctx.partyHasItem(4, 4));
 
+        final AtomicBoolean bootsEquipped = new AtomicBoolean();
         for (CharacterRecord rec : ctx.players()) {
-            for (Item i : rec.inventory) {
-                if (i.scenarioID == 4) {
-                    if (i.id == 101) {
-                        diaryOwned.set(true);
-                    }
-                    if (i.id == 102) {
-                        chimesOwned.set(true);
-                    }
-                    if (i.id == 103) {
-                        candleOwned.set(true);
-                    }
-                    if (i.id == 6) {
-                        kaOwned.set(true);
-                    }
-                    if (i.id == 4) {
-                        hhgOwned.set(true);
-                    }
-                }
-            }
             if (rec.item1 != null && rec.item1.id == 5 && rec.item1.scenarioID == 4) {
                 bootsEquipped.set(true);
             }
@@ -54,7 +36,7 @@ public class GatesOfHellDialog extends Dialog {
         final AtomicBoolean candleUsed = new AtomicBoolean();
 
         if (hhgOwned.get()) {
-            scrollPane.add("The gates of hell remain shut!");
+            scrollPane.add("The gates of hell remain shut!", Color.SCARLET);
             input.setTextFieldListener(new TextField.TextFieldListener() {
                 @Override
                 public void keyTyped(TextField tf, char key) {
@@ -68,8 +50,7 @@ public class GatesOfHellDialog extends Dialog {
             });
         } else {
 
-            scrollPane.add(getMessage(Scenario.WER.messages(), 62).getText());
-
+            scrollPane.add(getMessage(Scenario.WER.messages(), 62).getText(), Color.SCARLET);
             scrollPane.add(" ");
 
             input.setTextFieldListener(new TextField.TextFieldListener() {
@@ -82,70 +63,68 @@ public class GatesOfHellDialog extends Dialog {
                         }
 
                         String response = tf.getText().trim().toLowerCase();
+                        scrollPane.add(response, Color.WHITE);
+                        scrollPane.add(" ");
 
-                        if (response.startsWith("b")) {
-                            scrollPane.add(getMessage(Scenario.WER.messages(), 69).getText());
-                        }
-
-                        if (response.startsWith("u")) {
-                            scrollPane.add("Which item will you use?");
+                        if (response.equals("bribe")) {
+                            scrollPane.add(getMessage(Scenario.WER.messages(), 69).getText(), Color.SCARLET);
+                            ctx.poolGold(ctx.players()[0]);
+                            ctx.players()[0].adjustGold(-200);
+                            Sounds.play(Sound.NEGATIVE_EFFECT);
+                        } else if (response.equals("use")) {
                             for (CharacterRecord rec : ctx.players()) {
                                 for (Item i : rec.inventory) {
                                     if (i.scenarioID == 4 && (i.type == ItemType.SPECIAL || i.type == ItemType.MISC)) {
-                                        scrollPane.add(i.name);
+                                        scrollPane.add(i.name, Color.GREEN);
                                     }
                                 }
                             }
-                        }
-
-                        if (response.startsWith("r")) {
+                            scrollPane.add(" ");
+                            scrollPane.add("Which item will you use?", Color.WHITE);
+                        } else if (response.equals("run")) {
                             hide();
-                        }
-
-                        if (response.contains("chimes")) {
+                        } else if (response.equals("chimes")) {
                             if (chimesOwned.get()) {
-                                scrollPane.add(getMessage(Scenario.WER.messages(), 63).getText());
+                                scrollPane.add(getMessage(Scenario.WER.messages(), 63).getText(), Color.SCARLET);
                                 chimesUsed.set(true);
-                                scrollPane.add(" ");
-                                scrollPane.add("What else will you use?");
+                                ctx.removeItemFromParty(102, 4);
+                                Sounds.play(Sound.TRIGGER);
+                                scrollPane.add("What else will you use?", Color.WHITE);
                             } else {
-                                scrollPane.add("You don't have that!");
+                                scrollPane.add("You don't have that!", Color.WHITE);
                             }
-                        }
-
-                        if (response.contains("diary")) {
+                        } else if (response.equals("diary")) {
                             if (chimesUsed.get()) {
                                 if (diaryOwned.get()) {
-                                    scrollPane.add(getMessage(Scenario.WER.messages(), 64).getText());
+                                    scrollPane.add(getMessage(Scenario.WER.messages(), 64).getText(), Color.SCARLET);
                                     diaryUsed.set(true);
-                                    scrollPane.add(" ");
-                                    scrollPane.add("What else will you use?");
+                                    ctx.removeItemFromParty(101, 4);
+                                    Sounds.play(Sound.TRIGGER);
+                                    scrollPane.add("What else will you use?", Color.WHITE);
                                 } else {
-                                    scrollPane.add("You don't have that!");
+                                    scrollPane.add("You don't have that!", Color.WHITE);
                                 }
                             } else {
-                                scrollPane.add("No effect!");
+                                scrollPane.add("No effect!", Color.WHITE);
                             }
-                        }
-
-                        if (response.contains("candle")) {
+                        } else if (response.equals("candle")) {
                             if (diaryUsed.get()) {
                                 if (candleOwned.get()) {
-                                    scrollPane.add(getMessage(Scenario.WER.messages(), 65).getText());
+                                    scrollPane.add(getMessage(Scenario.WER.messages(), 65).getText(), Color.SCARLET);
                                     candleUsed.set(true);
+                                    ctx.removeItemFromParty(103, 4);
+                                    Sounds.play(Sound.TRIGGER);
                                 } else {
-                                    scrollPane.add("You don't have that!");
+                                    scrollPane.add("You don't have that!", Color.WHITE);
                                 }
                             } else {
-                                scrollPane.add("No effect!");
+                                scrollPane.add("No effect!", Color.WHITE);
                             }
-                        }
-
-                        if (candleUsed.get() && response.startsWith("y")) {
-                            scrollPane.add(getMessage(Scenario.WER.messages(), 66).getText());
+                        } else if (candleUsed.get() && response.equals("yes")) {
+                            scrollPane.add(getMessage(Scenario.WER.messages(), 66).getText(), Color.SCARLET);
                             if (kaOwned.get()) {
                                 if (bootsEquipped.get()) {
-                                    scrollPane.add(getMessage(Scenario.WER.messages(), 68).getText());
+                                    scrollPane.add(getMessage(Scenario.WER.messages(), 68).getText(), Color.GREEN);
                                     Sounds.play(Sound.DIVINE_INTERVENTION);
 
                                     Item hhg = Scenario.WER.items().get(4);
@@ -153,7 +132,7 @@ public class GatesOfHellDialog extends Dialog {
                                     screen.log(ctx.players()[0].name.toUpperCase() + " obtained " + hhg.genericName);
 
                                 } else {
-                                    scrollPane.add(getMessage(Scenario.WER.messages(), 67).getText());
+                                    scrollPane.add(getMessage(Scenario.WER.messages(), 67).getText(), Color.SCARLET);
                                     Sounds.play(Sound.INFERNO);
                                     ctx.players()[0].adjustHP(-1 * ctx.players()[0].maxhp);
                                 }
@@ -161,10 +140,10 @@ public class GatesOfHellDialog extends Dialog {
                                 Sounds.play(Sound.INFERNO);
                                 ctx.players()[0].adjustHP(-1 * ctx.players()[0].maxhp);
                             }
-                        }
-
-                        if (candleUsed.get() && response.startsWith("n")) {
+                        } else if (candleUsed.get() && response.equals("no")) {
                             hide();
+                        } else {
+                            scrollPane.add("Nothing happens", Color.WHITE);
                         }
 
                         tf.setText("");

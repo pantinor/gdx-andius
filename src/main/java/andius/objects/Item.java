@@ -16,8 +16,10 @@ public class Item implements Comparable<Item> {
 
     static {
         Dice d = new Dice(2, 1);
+        HANDS.name = "HANDS";
         HANDS.damage = d;
         HANDS.genericName = "HANDS";
+        HANDS.usable = "FMCTWSLN";
     }
 
     public int id;
@@ -40,6 +42,8 @@ public class Item implements Comparable<Item> {
     public int wephitmd;
     public int special;
     public String alignment;
+    public int changeTo;
+    public int changeChance;
 
     @Override
     public Item clone() {
@@ -63,6 +67,8 @@ public class Item implements Comparable<Item> {
         i.wephitmd = this.wephitmd;
         i.special = this.special;
         i.alignment = this.alignment;
+        i.changeTo = this.changeTo;
+        i.changeChance = this.changeChance;
         return i;
     }
 

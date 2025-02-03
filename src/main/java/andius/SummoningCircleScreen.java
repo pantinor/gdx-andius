@@ -45,6 +45,16 @@ public class SummoningCircleScreen implements Screen, Constants {
         this.batch = new SpriteBatch();
         this.stage = new Stage();
 
+        if (!player.summoningCircles.contains(summoningId)) {
+            player.summoningCircles.add(summoningId);
+            player.level = summoningId.ordinal() + 1;
+        }
+
+        this.player.adjustHP(this.player.maxhp);
+
+        SaveGame.setSpellPoints(this.player);
+        SaveGame.tryLearn(this.player);
+
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT, new Color(0x080808ff));
 
         this.monsters = new List(Andius.skin, "default-16");
@@ -101,7 +111,7 @@ public class SummoningCircleScreen implements Screen, Constants {
         fm.setBounds(this.select3, x += 150, 530, 130, 20);
         this.summon.setBounds(x += 150, 530 - 4, 100, 30);
         this.exit.setBounds(x, 485, 100, 30);
-        
+
         fm.setBounds(this.monstersScroll, 750, 100, 200, 200);
 
         this.stage.addActor(this.monstersScroll);
@@ -142,10 +152,6 @@ public class SummoningCircleScreen implements Screen, Constants {
             this.player.summonedMonsters.add(new MutableMonster(m3));
         }
 
-        this.player.adjustHP(this.player.maxhp);
-
-        SaveGame.setSpellPoints(this.player);
-
         Array<MonsterItem> ms = new Array<>();
         for (MutableMonster mm : player.summonedMonsters) {
             ms.add(new MonsterItem((Monster) mm.baseType()));
@@ -167,7 +173,7 @@ public class SummoningCircleScreen implements Screen, Constants {
         batch.begin();
         batch.draw(this.background, 0, 0);
 
-        Andius.font24.draw(batch, "The Pentagram Glows...", 350, 700);
+        Andius.font24.draw(batch, "The " + this.summoningId.display() + " Level Pentagram Glows...", 350, 700);
         Andius.font24.draw(batch, "and the Gate Opens!", 350, 670);
         Andius.font24.draw(batch, "Call Forth 3 Groups of Monsters!", 300, 620);
 

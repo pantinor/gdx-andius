@@ -202,20 +202,25 @@ public class SpellUtil {
             return false;
         }
 
-        Sounds.play(spell.getSound());
-
         switch (spell) {
             case DIOS:
             case DIAL:
             case MADI:
+                Sounds.play(spell.getSound());
                 doSpellHeal(rec, spell);
                 break;
             case LATUMOFIS:
+                Sounds.play(spell.getSound());
                 rec.status.set(Status.POISONED, 0);
                 break;
             case SOPIC:
+            case PORFIC:
+                Sounds.play(spell.getSound());
                 rec.acmodifier1 = spell.getHitBonus();
                 break;
+            default:
+                Sounds.play(Sound.NEGATIVE_EFFECT);
+                return false;
         }
 
         return true;
@@ -322,7 +327,7 @@ public class SpellUtil {
 
     private static void spellDamage(Spells spell, Mutable m) {
         int damage = spell.damage();
-        m.setCurrentHitPoints(m.getCurrentHitPoints() - damage);
+        m.adjustHitPoints(-damage);
         m.adjustHealthCursor();
     }
 
@@ -346,7 +351,7 @@ public class SpellUtil {
             } else {
 
                 int damage = spell.damage();
-                m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
+                m.getEnemy().adjustHitPoints(-damage);
                 m.getEnemy().adjustHealthCursor();
 
                 seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
@@ -375,7 +380,7 @@ public class SpellUtil {
             seq.addAction(Actions.delay(.60f));
 
             int damage = Utils.getRandomBetween(minDamage, maxDamage);
-            m.getEnemy().setCurrentHitPoints(m.getEnemy().getCurrentHitPoints() - damage);
+            m.getEnemy().adjustHitPoints(-damage);
             m.getEnemy().adjustHealthCursor();
 
             seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
@@ -436,6 +441,7 @@ public class SpellUtil {
             } else {
                 int points = spell.damage();
                 rec.adjustHP(points);
+                rec.healthCursor.adjust(rec.hp, rec.maxhp);
             }
         }
     }
@@ -544,11 +550,10 @@ public class SpellUtil {
         if (target.getCurrentHitPoints() > 0) {
             seq.addAction(Actions.run(new LogAction(screen, target.name() + " is healed.")));
             if (spell == Spells.MADI) {
-                target.setCurrentHitPoints(target.getMaxHitPoints());
+                target.adjustHitPoints(target.getMaxHitPoints());
             } else {
                 int healAmt = spell.damage();
-                int current = target.getCurrentHitPoints() + healAmt;
-                target.setCurrentHitPoints(current > target.getMaxHitPoints() ? target.getMaxHitPoints() : current);
+                target.adjustHitPoints(healAmt);
             }
             target.adjustHealthCursor();
         } else {

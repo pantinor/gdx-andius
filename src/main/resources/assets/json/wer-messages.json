@@ -216,15 +216,13 @@
     {
         "id": 62,
         "text": [
-            "You stand before the very Gates",
-            "of Hell itself!",
+            "You stand before the very Gates of Hell itself!",
             " ",
             "The flames are so  intense that",
             "you must shield  your eyes from",
             "their infernal brilliance!",
             " ",
-            "You may offer B)ribes,  U)se an",
-            "Item or (Hint!) R~un away!"
+            "You may offer Bribes, Use an Item or (Hint!) Run away!"
         ]
     },
     {
@@ -254,7 +252,7 @@
             " ",
             "The Gates of Hell are open!!",
             " ",
-            "Do you dare to enter (Y/N) ?"
+            "Do you dare to enter (Yes/No) ?"
         ]
     },
     {
@@ -277,9 +275,9 @@
             "hanging from a Tree of Liquid Fire.",
             "then all is black.  Perhaps this is",
             "the True Death, the Giver of Peace?",
-            "",
-            "",
-            "",
+            " ",
+            " ",
+            " ",
             "Wrong Again!"
         ]
     },
@@ -295,7 +293,7 @@
             "As you continue to fall,  you pass the",
             "Tree of Liquid Fire, with its precious",
             "fruit hanging  daintily upon a branch.",
-            "",
+            " ",
             "Deeper and  deeper into  the Abyss you",
             "descend, witnessing sights  which make",
             "your own evil atrocities look like the",
