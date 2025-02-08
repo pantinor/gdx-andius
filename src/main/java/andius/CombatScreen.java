@@ -1037,18 +1037,9 @@ public class CombatScreen extends BaseScreen {
                 if (hit) {
                     av.result = AttackResult.HIT;
                     int damage = Utils.dealDamage(weapon, av.victim.getEnemy());
-                    log(String.format("%s %s %s, who %s after %d damage.",
-                            attacker.getPlayer().name,
-                            HITMSGS[rand.nextInt(HITMSGS.length)],
-                            av.victim.getEnemy().name(),
-                            av.victim.getEnemy().getDamageTag(),
-                            damage));
+                    log(av.victim.getEnemy().getDamageDescription(attacker.getPlayer().name, damage));
                 } else {
-                    log(String.format("%s %s %s who %s.",
-                            attacker.getPlayer().name,
-                            HITMSGS[rand.nextInt(HITMSGS.length)],
-                            av.victim.getEnemy().name(),
-                            av.victim.getEnemy().getDamageTag()));
+                    log(String.format("%s misses %s", attacker.getPlayer().name.toUpperCase(), av.victim.getEnemy().name().toUpperCase()));
                 }
             }
         } else {
@@ -1081,18 +1072,9 @@ public class CombatScreen extends BaseScreen {
                     if (hit) {
                         av.result = AttackResult.HIT;
                         int damage = Utils.dealDamage(weapon, av.victim.getEnemy());
-                        log(String.format("%s %s %s, who %s after %d damage.",
-                                attacker.getPlayer().name,
-                                HITMSGS[rand.nextInt(HITMSGS.length)],
-                                av.victim.getEnemy().name(),
-                                av.victim.getEnemy().getDamageTag(),
-                                damage));
+                        log(av.victim.getEnemy().getDamageDescription(attacker.getPlayer().name, damage));
                     } else {
-                        log(String.format("%s %s %s who %s.",
-                                attacker.getPlayer().name,
-                                HITMSGS[rand.nextInt(HITMSGS.length)],
-                                av.victim.getEnemy().name(),
-                                av.victim.getEnemy().getDamageTag()));
+                        log(String.format("%s misses %s", attacker.getPlayer().name.toUpperCase(), av.victim.getEnemy().name().toUpperCase()));
                     }
                 }
             } else {

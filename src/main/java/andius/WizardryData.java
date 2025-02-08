@@ -1262,6 +1262,19 @@ public class WizardryData {
         private int id;
         private final List<String> text = new ArrayList<>();
 
+        public Message() {
+
+        }
+
+        public Message(Message... messages) {
+            for (Message m : messages) {
+                for (String s : m.text) {
+                    this.text.add(s);
+                }
+                this.text.add(" ");
+            }
+        }
+
         public boolean match(int messageNum) {
             if (id == messageNum) {
                 return true;
@@ -1520,6 +1533,24 @@ public class WizardryData {
                     }
                     if (x == 10 && y == 9 && l.level == 10) {
                         c.function = (Context ctx, BaseScreen screen) -> new GatesOfHellDialog(ctx, screen);
+                        c.tbd = false;
+                    }
+                    if (x == 19 && y == 8 && l.level == 9) {
+                        c.message = getMessage(WER_MESSAGES, 56);
+                        c.tbd = false;
+                    }
+                    if (x == 19 && y == 10 && l.level == 9) {
+                        c.message = getMessage(WER_MESSAGES, 54);
+                        c.tbd = false;
+                    }
+                    if (x == 0 && y == 1 && l.level == 9) {
+                        c.message = getMessage(WER_MESSAGES, 57);
+                        c.tbd = false;
+                    }
+                    if (x == 1 && y == 14 && l.level == 9) {
+                        Message wadePool = new Message(getMessage(WER_MESSAGES, 149), getMessage(WER_MESSAGES, 154), getMessage(WER_MESSAGES, 148));
+                        c.message = wadePool;
+                        c.itemObtained = 12;
                         c.tbd = false;
                     }
                 }

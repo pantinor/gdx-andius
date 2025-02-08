@@ -3,6 +3,7 @@ package andius.objects;
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
 import static andius.Constants.DEATHMSGS;
+import static andius.Constants.HITMSGS;
 import andius.Constants.Status;
 import java.util.List;
 import utils.Utils;
@@ -189,27 +190,36 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public String getDamageTag() {
+    public String getDamageDescription(String attackerName, int damage) {
+
+        String tag;
         double percent = (double) currentHitPoints / maxHitPoints;
         if (percent > 0.99) {
             if (this.monster.type > 4) {
-                return ", unharmed, growls ominously";
+                tag = "who appears unharmed and growls ominously";
             } else {
-                return "chortles merrily as the armor takes the full blow";
+                tag = "who chortles merrily as the armor takes the full blow";
             }
         } else if (percent > 0.75) {
-            return "still has lots of fight left";
+            tag = "who still has lots of fight left";
         } else if (percent > 0.50) {
             if (this.monster.type > 4) {
-                return "tough hide softens the blow";
+                tag = "whose tough hide softens the blow";
             } else {
-                return "armor takes some of the impact";
+                tag = "whose armor takes some of the impact";
             }
         } else if (percent < 0.00) {
-            return DEATHMSGS[Utils.RANDOM.nextInt(DEATHMSGS.length)];
+            tag = DEATHMSGS[Utils.RANDOM.nextInt(DEATHMSGS.length)];
         } else {
-            return "is feeling rather weak";
+            tag = "who is feeling rather weak";
         }
+
+        return String.format("%s %s %s, %s after %d damage.",
+                attackerName.toUpperCase(),
+                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                name().toUpperCase(),
+                tag,
+                damage);
     }
 
     @Override

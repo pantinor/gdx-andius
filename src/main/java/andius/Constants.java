@@ -538,24 +538,11 @@ public interface Constants {
     }
 
     public enum Resistance {
-        NONE,
-        MAGIC,
-        LVLDRAIN,
-        STONING,
-        POISON,
-        COLD,
-        FIRE;
+        NONE, FIRE, COLD, POISON, LVLDRAIN, STONING, MAGIC;
     }
 
     public enum Ability {
-        NONE,
-        LVLDRAIN,
-        RUN,
-        SLEEP,
-        AUTOKILL,
-        PARALYZE,
-        POISON,
-        STONE;
+        STONE, POISON, PARALYZE, AUTOKILL, SLEEP, RUN, CALLFORHELP;
     }
 
     public enum AttackResult {

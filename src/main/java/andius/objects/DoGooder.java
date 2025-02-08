@@ -1,5 +1,6 @@
 package andius.objects;
 
+import andius.Constants.Ability;
 import andius.Constants.Resistance;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Item.ItemType;
@@ -28,9 +29,10 @@ public class DoGooder {
     public int[] saveVs;
     public int charlev;
     public Spells[] knownSpells;
-    public Resistance[] resistance;
-    public String slogan;
     public int[][] spellAllowance;
+    public Resistance[] resistance;
+    public Ability[] ability;
+    public String slogan;
 
     public boolean savingThrowBreath() {
         int roll = Utils.RANDOM.nextInt(100) + 1;

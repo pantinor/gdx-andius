@@ -31,7 +31,7 @@ public interface Mutable {
     public int getCurrentMageSpellLevel();
 
     public int getCurrentPriestSpellLevel();
-    
+
     public void decrementSpellPoints(Spells spell);
 
     public Breath breath();
@@ -52,7 +52,7 @@ public interface Mutable {
 
     public void adjustHealthCursor();
 
-    public String getDamageTag();
+    public String getDamageDescription(String attackerName, int damage);
 
     public void setACModifier(int acmodifier);
 

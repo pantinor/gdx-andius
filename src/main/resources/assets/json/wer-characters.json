@@ -1992,7 +1992,7 @@
     },
     {
         "id": 26,
-        "iconID": "middle",
+        "iconID": "fig1",
         "name": "Blue Sonja",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -3584,7 +3584,7 @@
     },
     {
         "id": 47,
-        "iconID": "middle",
+        "iconID": "fig1",
         "name": "Ice Fighter",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -5228,7 +5228,7 @@
     },
     {
         "id": 68,
-        "iconID": "middle",
+        "iconID": "fig1",
         "name": "Bugnews",
         "race": "DWARF",
         "characterClass": "FIGHTER",
@@ -6791,7 +6791,7 @@
     },
     {
         "id": 88,
-        "iconID": "middle",
+        "iconID": "fig2",
         "name": "Electro",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -7988,7 +7988,7 @@
     },
     {
         "id": 102,
-        "iconID": "middle",
+        "iconID": "fig2",
         "name": "Cadidelhop",
         "race": "DWARF",
         "characterClass": "FIGHTER",
@@ -8135,6 +8135,7 @@
     {
         "id": 104,
         "name": "Fearless Farley",
+        "iconID": "fig2",
         "race": "DWARF",
         "characterClass": "FIGHTER",
         "alignment": "GOOD",
@@ -9616,7 +9617,7 @@
     },
     {
         "id": 123,
-        "iconID": "middle",
+        "iconID": "fig2",
         "name": "Sultan",
         "race": "ELF",
         "characterClass": "FIGHTER",
@@ -14077,7 +14078,7 @@
     },
     {
         "id": 177,
-        "iconID": "middle",
+        "iconID": "fig3",
         "name": "Desert Hawk",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -19772,7 +19773,7 @@
     },
     {
         "id": 238,
-        "iconID": "middle",
+        "iconID": "fig3",
         "name": "Mjolnir",
         "race": "ELF",
         "characterClass": "FIGHTER",
@@ -26300,7 +26301,7 @@
     },
     {
         "id": 318,
-        "iconID": "middle",
+        "iconID": "fig3",
         "name": "Hawk Man",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -31249,6 +31250,7 @@
     {
         "id": 377,
         "name": "Jesse The Smith",
+        "iconID": "mag2",
         "race": "GNOME",
         "characterClass": "MAGE",
         "alignment": "NEUTRAL",
@@ -31754,6 +31756,7 @@
     {
         "id": 383,
         "name": "Mistress Flavia",
+        "iconID": "lor2",
         "race": "NORACE",
         "characterClass": "LORD",
         "alignment": "GOOD",
@@ -36754,6 +36757,7 @@
     {
         "id": 453,
         "name": "",
+        "iconID": "fig1",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
         "alignment": "NEUTRAL",
@@ -39494,6 +39498,7 @@
         "id": 493,
         "name": "Rack Jobber",
         "race": "HUMAN",
+        "iconID": "fig3",
         "characterClass": "FIGHTER",
         "alignment": "EVIL",
         "items": [],
@@ -39836,7 +39841,8 @@
     },
     {
         "id": 498,
-        "name": "Grd. Inquisitor",
+        "name": "Grand Inquisitor",
+        "iconID": "bis3",
         "race": "HUMAN",
         "characterClass": "BISHOP",
         "alignment": "EVIL",

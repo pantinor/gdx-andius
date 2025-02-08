@@ -198,7 +198,7 @@ public class Utils {
             THAC0 = Constants.THAC0_MONSTER[attacker.getLevel() - 1];
         }
 
-        int chanceToHit = THAC0 - defender.weapon.armourClass;
+        int chanceToHit = THAC0 - (defender.weapon != null ? defender.weapon.armourClass : 0);
 
         chanceToHit -= defender.calculateAC();
 
@@ -262,7 +262,7 @@ public class Utils {
 
         THAC0 -= strMod;
 
-        THAC0 -= attacker.weapon.wephitmd;
+        THAC0 -= attacker.weapon != null ? attacker.weapon.wephitmd : 0;
 
         int chanceToHit = THAC0 - defender.getArmourClass();
 

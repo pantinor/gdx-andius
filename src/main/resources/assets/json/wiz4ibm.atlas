@@ -326,14 +326,14 @@ tiger
   orig: 48, 40
   offset: 0, 0
   index: -1
-t
+t_1
   rotate: false
   xy: 48, 360
   size: 48, 40
   orig: 48, 40
   offset: 0, 0
   index: 1
-t
+t_2
   rotate: false
   xy: 96, 360
   size: 48, 40

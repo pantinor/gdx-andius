@@ -98,4 +98,18 @@ public class State {
         }
     }
 
+    public String toLongString() {
+        displays.clear();
+        for (Status s : Status.values()) {
+            if (has(s)) {
+                displays.add(s.toString());
+            }
+        }
+        if (displays.isEmpty()) {
+            return "OK";
+        } else {
+            return displays.toString().replace("[", "").replace("]", "").replace(",", " and ");
+        }
+    }
+
 }

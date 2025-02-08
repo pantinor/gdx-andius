@@ -296,8 +296,10 @@ public class SpellUtil {
                 || (spell == Spells.ZILWAN && !target.getEnemy().getMonsterType().equals(CharacterType.UNDEAD))) {
             seq.addAction(Actions.run(new LogAction(screen, target.getEnemy().name() + " is unaffected.")));
         } else {
-            spellDamage(spell, target.getEnemy());
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s %s", target.getEnemy().name(), target.getEnemy().getDamageTag()))));
+            int damage = spell.damage();
+            target.getEnemy().adjustHitPoints(-damage);
+            target.getEnemy().adjustHealthCursor();
+            seq.addAction(Actions.run(new LogAction(screen, target.getEnemy().getDamageDescription(attacker.getName(), damage))));
         }
 
         Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
@@ -325,12 +327,6 @@ public class SpellUtil {
         screen.getStage().addActor(p);
     }
 
-    private static void spellDamage(Spells spell, Mutable m) {
-        int damage = spell.damage();
-        m.adjustHitPoints(-damage);
-        m.adjustHealthCursor();
-    }
-
     private static void spellGroupDamage(CombatScreen screen, SequenceAction seq, Spells spell) {
 
         for (andius.objects.Actor m : screen.enemies) {
@@ -354,7 +350,7 @@ public class SpellUtil {
                 m.getEnemy().adjustHitPoints(-damage);
                 m.getEnemy().adjustHealthCursor();
 
-                seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
+                seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s", spell, m.getEnemy().name()))));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
                 expl.setX(m.getX() + 12);
@@ -383,7 +379,7 @@ public class SpellUtil {
             m.getEnemy().adjustHitPoints(-damage);
             m.getEnemy().adjustHealthCursor();
 
-            seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s %s", spell, m.getEnemy().name(), m.getEnemy().getDamageTag()))));
+            seq.addAction(Actions.run(new LogAction(screen, String.format("%s affects %s", spell, m.getEnemy().name()))));
 
             final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(spell.getColor()));
             expl.setX(m.getX() + 12);

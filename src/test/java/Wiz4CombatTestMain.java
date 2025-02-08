@@ -13,11 +13,14 @@ import andius.Wiz4RewardScreen;
 import static andius.WizardryData.PMO_MONSTERS;
 import andius.WizardryData.SummoningCircle;
 import static andius.WizardryData.WER4_CHARS;
+import andius.objects.DoGooder;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +64,15 @@ public class Wiz4CombatTestMain extends Game {
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
+            TextureAtlas iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(75)));
+            for (DoGooder dg : WER4_CHARS) {
+                if (dg.iconID == null || iconAtlas.findRegion(dg.iconID) == null) {
+                    System.out.println(dg.name + " " + dg.iconID);
+                }
+            }
+
+            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(375)));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));

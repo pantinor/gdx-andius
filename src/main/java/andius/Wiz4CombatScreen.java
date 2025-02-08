@@ -138,6 +138,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
         if (player.weapon != null && player.weapon.spell != null) {
             addSpell(player.weapon);
         }
+        if (player.helm != null && player.helm.spell != null) {
+            addSpell(player.helm);
+        }
+        if (player.armor != null && player.armor.spell != null) {
+            addSpell(player.armor);
+        }
         if (player.item1 != null && player.item1.spell != null) {
             addSpell(player.item1);
         }
@@ -179,7 +185,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.flee.setBounds(x += 100, 426, 80, 40);
 
         fm.setBounds(this.monstersScroll, 10, 14, LISTING_WIDTH, TABLE_HEIGHT);
-        fm.setBounds(this.spellsScroll, 340, 530, 200, 220);
+        fm.setBounds(this.spellsScroll, 340, 530, 300, 220);
         fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
         fm.setBounds(this.enemiesScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT);
 
@@ -198,18 +204,18 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         if (this.suprised) {
             if (!this.opponent.slogan.isEmpty()) {
-                log("You were suprised by " + this.opponent.slogan.replace("|", " ... "));
+                log("You were suprised by " + this.opponent.slogan.replace("|", " ... "), Color.YELLOW);
             } else {
-                log("You were suprised by " + this.opponent.name);
+                log("You were suprised by " + this.opponent.name, Color.YELLOW);
             }
             for (MutableCharacter mm : enemies) {
                 enemyFight(mm);
             }
         } else {
             if (!this.opponent.slogan.isEmpty()) {
-                log("You are about to battle " + this.opponent.slogan.replace("|", " ... "));
+                log("You are about to battle " + this.opponent.slogan.replace("|", " ... "), Color.YELLOW);
             } else {
-                log("You are about to battle " + this.opponent.name);
+                log("You are about to battle " + this.opponent.name, Color.YELLOW);
             }
         }
 
@@ -261,7 +267,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
-        log("------------ end of round " + round);
+        log("------------ end of round " + round, Color.YELLOW);
         round++;
     }
 
@@ -279,14 +285,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (hit) {
                     Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
                     int damage = Utils.dealDamage(weapon, defender);
-                    log(String.format("%s %s %s, who %s after %d damage.",
-                            player.name.toUpperCase(),
-                            HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                            defender.name(),
-                            defender.getDamageTag(),
-                            damage));
+                    log(defender.getDamageDescription(player.name, damage), Color.SCARLET);
                 } else {
-                    log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()));
+                    log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                 }
             }
             if (player.isDead()) {
@@ -304,7 +305,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
-        log("------------ end of round " + round);
+        log("------------ end of round " + round, Color.YELLOW);
         round++;
 
     }
@@ -328,7 +329,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         attacker.processStatusAffects();
 
-        if (attacker.isDead() || attacker.status().isDisabled()) {
+        if (attacker.isDead()) {
+            return;
+        }
+
+        if (attacker.status().isDisabled()) {
+            log(attacker.name().toUpperCase() + " is " + attacker.status().toLongString(), attacker.status().color());
             return;
         }
 
@@ -381,7 +387,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             case CAST: {
                 MutableCharacter target = pickEnemy();
                 if (target != null) {
-                    log(String.format("%s casts %s", attacker.name(), spell));
+                    log(String.format("%s casts %s", attacker.name(), spell), Color.SKY);
                     spellCast(spell, attacker, target, false);
                 }
                 break;
@@ -394,7 +400,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         attacker.processStatusAffects();
 
-        if (attacker.isDead() || attacker.status().isDisabled()) {
+        if (attacker.isDead()) {
+            return;
+        }
+
+        if (attacker.status().isDisabled()) {
+            log(attacker.name().toUpperCase() + " is " + attacker.status().toLongString(), attacker.status().color());
             return;
         }
 
@@ -417,7 +428,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         switch (action) {
             case ATTACK:
-                log(String.format("%s is attacking!", attacker.name()));
                 MutableMonster defender = pickMonster();
                 if (roll > 15 && defender != null) {
                     boolean hit = Utils.attackHit(attacker, defender);
@@ -443,7 +453,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 break;
             case CAST: {
                 MutableMonster target = pickMonster();
-                log(String.format("%s casts %s", attacker.name(), spell));
+                log(String.format("%s casts %s", attacker.name(), spell), Color.SKY);
                 if (roll > 15 && target != null) {
                     spellCast(spell, attacker, target, false);
                 } else {
@@ -499,11 +509,11 @@ public class Wiz4CombatScreen implements Screen, Constants {
             Mutable m = (Mutable) defender;
             m.adjustHitPoints(-damage);
             m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
-            log(String.format("%s strikes %s who was hit for %d damage!", attName, m.name(), damage));
+            log(m.getDamageDescription(attName, damage), Color.SCARLET);
         } else {
             player.adjustHP(-damage);
             player.healthCursor.adjust(player.hp, player.maxhp);
-            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage));
+            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage), Color.SCARLET);
         }
     }
 
@@ -517,13 +527,13 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
             if (!item) {
                 if (!player.canCast(spell)) {
-                    log(player.name.toUpperCase() + " dost not have enough magic points!");
+                    log(player.name.toUpperCase() + " does not have enough magic points!");
                     return;
                 }
                 player.decrMagicPts(spell);
             }
 
-            log(player.name.toUpperCase() + " casts " + spell);
+            log(player.name.toUpperCase() + " casts " + spell, Color.SKY);
 
         } else {
             Mutable m = (Mutable) caster;
@@ -531,7 +541,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 log(m.name() + " cannot cast spell in current state!");
                 return;
             }
-            log(m.name() + " casts " + spell);
+            log(m.name() + " casts " + spell, Color.SKY);
 
             m.decrementSpellPoints(spell);
         }
@@ -738,7 +748,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (dg.savingThrowSpell()) {
                     log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    log(dg.name + " is " + effect);
                     mc.status().set(effect, 4);
                 }
             }
@@ -748,14 +757,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (Utils.RANDOM.nextInt(100) < mm.getUnaffected()) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    log(mm.name() + " is " + effect);
                     mm.status().set(effect, 4);
                 }
             }
             if (player.savingThrowSpell()) {
                 log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
-                log(player.name.toUpperCase() + " is " + effect);
                 player.status.set(effect, 4);
             }
         }
@@ -832,8 +839,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
     public void dispose() {
     }
 
-    public final void log(String s) {
+    private void log(String s) {
         this.logs.add(s);
+    }
+
+    private void log(String s, Color c) {
+        this.logs.add(s, c);
     }
 
     @Override
@@ -882,7 +893,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         @Override
         public Color getColor() {
-            return rec.isDead() ? Color.RED : rec.status.color();
+            return rec.isDead() ? Color.SCARLET : rec.status.color();
         }
 
     }
@@ -975,7 +986,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         @Override
         public Color getColor() {
-            return mm.getCurrentHitPoints() <= 0 ? Color.RED : mm.status().color();
+            return mm.getCurrentHitPoints() <= 0 ? Color.SCARLET : mm.status().color();
         }
 
     }
@@ -1068,7 +1079,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         @Override
         public Color getColor() {
-            return mm.getCurrentHitPoints() <= 0 ? Color.RED : mm.status().color();
+            return mm.getCurrentHitPoints() <= 0 ? Color.SCARLET : mm.status().color();
         }
 
     }

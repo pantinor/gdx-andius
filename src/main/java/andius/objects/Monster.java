@@ -11,26 +11,26 @@ public class Monster implements Comparable<Monster> {
     public String genericName;
     public String name;
     public int monsterId;
-    private String iconId;
-    int type;
-    int goldReward;
-    int chestReward;
-    int partnerID;
-    int partnerOdds;
-    int armourClass;
-    int speed;
-    int mageSpellLevel;
-    int priestSpellLevel;
-    int levelDrain;
-    int healpts;
-    int breath;
-    int unaffected;
-    List<Resistance> resists;
-    List<Ability> ability;
-    int exp;
-    Dice groupSize;
-    Dice hitPoints;
-    List<Dice> damage;
+    public String iconId;
+    public int type;
+    public int goldReward;
+    public int chestReward;
+    public int partnerID;
+    public int partnerOdds;
+    public int armourClass;
+    public int speed;
+    public int mageSpellLevel;
+    public int priestSpellLevel;
+    public int levelDrain;
+    public int healpts;
+    public int breath;
+    public int unaffected;
+    public Resistance[] resistance;
+    public Ability[] ability;
+    public int exp;
+    public Dice groupSize;
+    public Dice hitPoints;
+    public List<Dice> damage;
 
     public void clone(Monster m) {
         this.genericName = m.genericName;
@@ -49,7 +49,7 @@ public class Monster implements Comparable<Monster> {
         this.healpts = m.healpts;
         this.breath = m.breath;
         this.unaffected = m.unaffected;
-        this.resists = m.resists;
+        this.resistance = m.resistance;
         this.ability = m.ability;
         this.exp = m.exp;
         this.groupSize = m.groupSize;
@@ -147,14 +147,6 @@ public class Monster implements Comparable<Monster> {
 
     public List<Dice> getDamage() {
         return damage;
-    }
-
-    public List<Resistance> getResists() {
-        return resists;
-    }
-
-    public List<Ability> getAbility() {
-        return ability;
     }
 
     @Override
