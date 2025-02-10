@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.SpellArea;
 import andius.Constants.SpellTarget;
-import andius.Sound;
 import com.badlogic.gdx.graphics.Color;
 import java.util.HashMap;
 
@@ -186,6 +185,10 @@ public enum Spells {
 
     public Color getColor() {
         return color;
+    }
+    
+    public String label() {
+        return String.format("%d %s %s %s", this.level, this, this.damage, this.target == SpellTarget.GROUP ? "GRP" : "");
     }
 
 }

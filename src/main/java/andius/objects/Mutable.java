@@ -36,7 +36,7 @@ public interface Mutable {
 
     public Breath breath();
 
-    public int getUnaffected();
+    public boolean isUnaffected(Spells spell, CharacterType type);
 
     public State status();
 

@@ -2,8 +2,8 @@ package andius.objects;
 
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
-import andius.Direction;
 import andius.WizardryData.SummoningCircle;
+import andius.objects.Item.ItemType;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -144,7 +144,7 @@ public class SaveGame implements Constants {
         public int[] clericPoints = new int[7];
 
         public List<Item> inventory = new ArrayList<>();
-        
+
         public List<SummoningCircle> summoningCircles = new ArrayList<>();
         public List<MutableMonster> summonedMonsters = new ArrayList<>();
 
@@ -163,42 +163,45 @@ public class SaveGame implements Constants {
         }
 
         public void adjustHP(int amt) {
-            hp = Utils.adjustValue(hp, amt, maxhp, 0);
+            this.hp = Utils.adjustValue(hp, amt, maxhp, 0);
+            if (this.healthCursor != null) {
+                this.healthCursor.adjust(this.hp, this.maxhp);
+            }
         }
 
-        public boolean itemOwned(int id, int scenarioID) {
+        public Item itemOwned(int id, int scenarioID) {
             for (Item i : inventory) {
                 if (i.id == id && i.scenarioID == scenarioID) {
-                    return true;
+                    return i;
                 }
             }
             if (armor != null && armor.id == id && armor.scenarioID == scenarioID) {
-                return true;
+                return armor;
             }
             if (weapon != null && weapon.id == id && weapon.scenarioID == scenarioID) {
-                return true;
+                return weapon;
             }
             if (helm != null && helm.id == id && helm.scenarioID == scenarioID) {
-                return true;
+                return helm;
             }
             if (shield != null && shield.id == id && shield.scenarioID == scenarioID) {
-                return true;
+                return shield;
             }
             if (glove != null && glove.id == id && glove.scenarioID == scenarioID) {
-                return true;
+                return glove;
             }
             if (item1 != null && item1.id == id && item1.scenarioID == scenarioID) {
-                return true;
+                return item1;
             }
             if (item2 != null && item2.id == id && item2.scenarioID == scenarioID) {
-                return true;
+                return item2;
             }
-            return false;
+            return null;
         }
 
         public void removeItem(int id, int scenarioID) {
             Iterator<Item> iter = inventory.iterator();
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 Item i = iter.next();
                 if (i.id == id && i.scenarioID == scenarioID) {
                     iter.remove();
@@ -394,6 +397,60 @@ public class SaveGame implements Constants {
                 v = 10;
             }
             return v;
+        }
+
+        public int attackHitModifier() {
+            int mod = 0;
+            if (weapon != null) {
+                mod += weapon.wephitmd;
+            }
+            return mod;
+        }
+
+        public int defenseHitModifier() {
+            int mod = 0;
+            if (armor != null) {
+                mod += armor.wephitmd;
+            }
+            if (helm != null) {
+                mod += helm.wephitmd;
+            }
+            if (shield != null) {
+                mod += shield.wephitmd;
+            }
+            if (glove != null) {
+                mod += glove.wephitmd;
+            }
+            return mod;
+        }
+
+        public int regenerationPoints() {
+            int mod = 0;
+            if (weapon != null) {
+                mod += weapon.regeneration;
+            }
+            if (armor != null) {
+                mod += armor.regeneration;
+            }
+            if (helm != null) {
+                mod += helm.regeneration;
+            }
+            if (shield != null) {
+                mod += shield.regeneration;
+            }
+            if (glove != null) {
+                mod += glove.regeneration;
+            }
+            if (item1 != null) {
+                mod += item1.regeneration;
+            }
+            if (item2 != null) {
+                mod += item2.regeneration;
+            }
+            for (Item i : inventory) {
+                mod += i.regeneration;
+            }
+            return mod;
         }
 
         public boolean savingThrowBreath() {

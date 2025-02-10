@@ -1,5 +1,7 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;

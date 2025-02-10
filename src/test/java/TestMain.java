@@ -2,7 +2,7 @@
 import andius.Andius;
 import andius.Constants;
 import andius.Context;
-import andius.ConversationDialog;
+import andius.dialogs.ConversationDialog;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

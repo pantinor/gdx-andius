@@ -1,5 +1,9 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.objects.Direction;
+import andius.dialogs.ConversationDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;

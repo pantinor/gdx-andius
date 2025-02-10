@@ -10,8 +10,6 @@ import andius.Constants.PlaySoundAction;
 import andius.Constants.LogAction;
 import andius.Constants.Status;
 import andius.Context;
-import andius.Sound;
-import andius.Sounds;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -55,7 +53,8 @@ public class SpellUtil {
                 case KATINO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                        boolean unaffected = m.getEnemy().isUnaffected(spell, caster.getEnemy().getMonsterType());
+                        if (unaffected) {
                             seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
@@ -94,7 +93,8 @@ public class SpellUtil {
                 case MANIFO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                        boolean unaffected = m.getEnemy().isUnaffected(spell, caster.getEnemy().getMonsterType());
+                        if (unaffected) {
                             seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
@@ -107,7 +107,8 @@ public class SpellUtil {
                 case MONTINO:
                     for (andius.objects.Actor m : screen.enemies) {
                         seq.addAction(Actions.delay(.60f));
-                        if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+                        boolean unaffected = m.getEnemy().isUnaffected(spell, caster.getEnemy().getMonsterType());
+                        if (unaffected) {
                             seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
                             seq.addAction(Actions.run(new PlaySoundAction(Sound.EVADE)));
                         } else {
@@ -291,9 +292,9 @@ public class SpellUtil {
         int b = Math.abs(attacker.getWy() - targetY);
 
         ProjectileActor p = new ProjectileActor(spell.getColor(), attacker.getX(), attacker.getY());
+        boolean unaffected = target.getEnemy().isUnaffected(spell, attacker.getEnemy().getMonsterType());
 
-        if (rand.nextInt(100) < target.getEnemy().getUnaffected()
-                || (spell == Spells.ZILWAN && !target.getEnemy().getMonsterType().equals(CharacterType.UNDEAD))) {
+        if (unaffected || (spell == Spells.ZILWAN && !target.getEnemy().getMonsterType().equals(CharacterType.UNDEAD))) {
             seq.addAction(Actions.run(new LogAction(screen, target.getEnemy().name() + " is unaffected.")));
         } else {
             int damage = spell.damage();
@@ -332,8 +333,8 @@ public class SpellUtil {
         for (andius.objects.Actor m : screen.enemies) {
 
             seq.addAction(Actions.delay(.60f));
-
-            if (rand.nextInt(100) < m.getEnemy().getUnaffected()) {
+            boolean unaffected = m.getEnemy().isUnaffected(spell, null);
+            if (unaffected) {
                 seq.addAction(Actions.run(new LogAction(screen, m.getEnemy().name() + " is unaffected.")));
 
                 final Actor expl = new Andius.ExplosionDrawable(Andius.EXPLMAP.get(Color.GRAY));
@@ -437,7 +438,6 @@ public class SpellUtil {
             } else {
                 int points = spell.damage();
                 rec.adjustHP(points);
-                rec.healthCursor.adjust(rec.hp, rec.maxhp);
             }
         }
     }

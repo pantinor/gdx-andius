@@ -1,4 +1,4 @@
-package andius;
+package andius.objects;
 
 import static utils.Utils.RANDOM;
 

@@ -5,7 +5,6 @@ import static andius.Andius.mainGame;
 import andius.CombatScreen;
 import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Map;
-import andius.Direction;
 import andius.GameScreen;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

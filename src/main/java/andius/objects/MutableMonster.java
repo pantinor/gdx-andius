@@ -4,6 +4,7 @@ import andius.Constants.Breath;
 import andius.Constants.CharacterType;
 import static andius.Constants.DEATHMSGS;
 import static andius.Constants.HITMSGS;
+import andius.Constants.Resistance;
 import andius.Constants.Status;
 import java.util.List;
 import utils.Utils;
@@ -33,8 +34,23 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public int getUnaffected() {
-        return this.monster.getUnaffected();
+    public boolean isUnaffected(Spells spell, CharacterType type) {
+        if (this.monster.resistance.contains(Resistance.FIRE)) {
+            if (spell.equals(Spells.LITOKAN) || spell.equals(Spells.MAHAMAN) || spell.equals(Spells.LAHALITO)) {
+                return true;
+            }
+        }
+        if (this.monster.resistance.contains(Resistance.COLD)) {
+            if (spell.equals(Spells.DALTO) || spell.equals(Spells.MADALTO)) {
+                return true;
+            }
+        }
+        if (this.monster.resistance.contains(Resistance.NONE)) {
+            if (spell.equals(Spells.LORTO) || spell.equals(Spells.MALIKTO) || spell.equals(Spells.MOLITO) || spell.equals(Spells.TILTOWAIT)) {
+                return true;
+            }
+        }
+        return Utils.RANDOM.nextInt(100) < this.monster.getUnaffected();
     }
 
     @Override

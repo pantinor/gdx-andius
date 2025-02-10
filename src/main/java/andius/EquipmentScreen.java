@@ -1,5 +1,8 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.dialogs.MalorDialog;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
@@ -199,6 +202,7 @@ public class EquipmentScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedItem != null && selectedItem.item != null && selectedItem.item.type == ItemType.SPECIAL) {
                     if (SpellUtil.useItem(selectedItem.item.name, selectedPlayer.character)) {
+                        
                     } else if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
                         map.getScreen().teleport(0, -1, 0);
                     }

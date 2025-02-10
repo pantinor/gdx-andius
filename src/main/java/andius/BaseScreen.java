@@ -1,5 +1,8 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.dialogs.ReorderPartyDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;

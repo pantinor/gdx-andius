@@ -1,4 +1,4 @@
-package andius;
+package andius.objects;
 
 public enum Sound {
 

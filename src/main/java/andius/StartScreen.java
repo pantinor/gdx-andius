@@ -1,5 +1,7 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
@@ -61,11 +63,9 @@ public class StartScreen implements Screen, Constants {
 
                 try {
 
-                    if (CTX == null) {
-                        CTX = new Context();
-                        SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
-                        CTX.setSaveGame(saveGame);
-                    }
+                    CTX = new Context();
+                    SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
+                    CTX.setSaveGame(saveGame);
 
                     if (CTX.pickRandomEnabledPlayer() == null) {
                         Sounds.play(Sound.NEGATIVE_EFFECT);
@@ -84,58 +84,6 @@ public class StartScreen implements Screen, Constants {
                     scr.load(CTX.saveGame);
 
                     mainGame.setScreen(scr);
-
-                    //RewardScreen rs = new RewardScreen(CTX, Map.WIWOLD, 1, 230, Andius.REWARDS.get(20), Andius.REWARDS.get(20));
-                    //mainGame.setScreen(rs);
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("CHAIN MAIL +1").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("MACE +1").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("STAFF").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("HELM").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
-//                        Item tmp = ITEMS_MAP.get("DAGGER OF SPEED").clone();
-//                        tmp.unidentified = true;
-//                        CTX.saveGame.players[0].inventory.add(tmp);
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SHORT SWORD").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("WERDNAS AMULET").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("SCROLL OF BADIOS").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("PLATE MAIL +1").clone());
-//                    CTX.saveGame.players[0].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
-                    //EquipmentScreen es = new EquipmentScreen(CTX, Map.WIWOLD);
-                    //mainGame.setScreen(es);
-//                        CTX.saveGame.players[0].hp = 5;
-//                        CTX.saveGame.players[1].hp = 0;
-//                        CTX.saveGame.players[1].status = Status.DEAD;
-//                        CTX.saveGame.players[2].hp = 5;
-//                        CTX.saveGame.players[2].status = Status.PARALYZED;
-//                        CTX.saveGame.players[3].gold = 500;
-//                        TempleScreen rs = new TempleScreen(CTX, Map.WIWOLD);
-//                        mainGame.setScreen(rs);
-//                        CTX.saveGame.players[0].exp = 1500;
-//                        CTX.saveGame.players[2].exp = 2500;
-//                        CTX.saveGame.players[1].exp = 3500;
-                    //InnScreen es = new InnScreen(CTX, Map.WIWOLD);
-                    //mainGame.setScreen(es);
-                    //VendorScreen es = new VendorScreen(CTX, Role.MERCHANT1, Map.WIWOLD);
-                    //mainGame.setScreen(es);
-                    for (int j = 0; j < 6; j++) {
-                        //CTX.saveGame.players[j].exp = 1500;
-
-//                        CTX.saveGame.players[j].armor = ITEMS_MAP.get("CHAIN MAIL +1").clone();
-//                        CTX.saveGame.players[j].weapon = ITEMS_MAP.get("MACE +1").clone();
-//                        CTX.saveGame.players[j].helm = ITEMS_MAP.get("HELM").clone();
-//                        CTX.saveGame.players[j].shield = ITEMS_MAP.get("LARGE SHIELD").clone();
-//                        CTX.saveGame.players[j].glove = ITEMS_MAP.get("SILVER GLOVES").clone();
-//                        CTX.saveGame.players[j].item1 = ITEMS_MAP.get("ROD OF FLAME").clone();
-//                        CTX.saveGame.players[j].item2 = ITEMS_MAP.get("WERDNAS AMULET").clone();
-//                        CTX.saveGame.players[j].inventory.add(ITEMS_MAP.get("DAGGER OF SPEED").clone());
-//                        CTX.saveGame.players[j].inventory.add(ITEMS_MAP.get("LEATHER +1").clone());
-//                        CTX.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-//                        CTX.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-//                        CTX.saveGame.players[j].spellPresets[5] = Spells.KATINO;
-//                        for (Spells s : Spells.values()) {
-//                            CTX.saveGame.players[j].knownSpells.add(s);
-//                        }
-                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,6 +1,6 @@
 
 import andius.Andius;
-import andius.TibianSprite;
+import andius.objects.TibianSprite;
 import andius.objects.Monster;
 
 import com.badlogic.gdx.ApplicationListener;

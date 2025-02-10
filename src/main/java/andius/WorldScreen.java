@@ -1,5 +1,8 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.objects.Direction;
 import static andius.Andius.CTX;
 import andius.objects.ClassType;
 import andius.objects.Portal;

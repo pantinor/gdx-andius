@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package andius;
+package andius.dialogs;
 
 /**
  *
  * @author Paul
  */
+import andius.Andius;
+import andius.BaseScreen;
+import andius.Constants;
+import andius.Context;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;

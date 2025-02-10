@@ -1,5 +1,8 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.objects.Direction;
 import andius.Andius.ExplosionDrawable;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;

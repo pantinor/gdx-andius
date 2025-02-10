@@ -5,6 +5,8 @@
  */
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import static andius.Andius.mainGame;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;

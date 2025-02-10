@@ -1,5 +1,9 @@
-package andius;
+package andius.dialogs;
 
+import andius.BaseScreen;
+import andius.Context;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
 import static andius.WizardryData.getMessage;
 import andius.objects.Dialog;

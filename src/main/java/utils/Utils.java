@@ -1,7 +1,7 @@
 package utils;
 
 import andius.Constants;
-import andius.Direction;
+import andius.objects.Direction;
 import andius.objects.Item;
 import andius.objects.Mutable;
 import andius.objects.SaveGame.CharacterRecord;
@@ -27,9 +27,9 @@ public class Utils {
     public static boolean randomBoolean() {
         return RANDOM.nextInt(100) < 50;
     }
-    
+
     public static boolean percentChance(int percent) {
-        return RANDOM.nextInt(100 + 1) > percent;
+        return RANDOM.nextInt(100 + 1) <= percent;
     }
 
     public static int intValue(byte b1) {
@@ -202,6 +202,8 @@ public class Utils {
 
         chanceToHit -= defender.calculateAC();
 
+        chanceToHit -= defender.defenseHitModifier();
+
         chanceToHit += (defender.status.isDisabled() ? 3 : 0);
 
         chanceToHit += attacker.hitModifier();
@@ -262,7 +264,7 @@ public class Utils {
 
         THAC0 -= strMod;
 
-        THAC0 -= attacker.weapon != null ? attacker.weapon.wephitmd : 0;
+        THAC0 -= attacker.attackHitModifier();
 
         int chanceToHit = THAC0 - defender.getArmourClass();
 
@@ -274,6 +276,11 @@ public class Utils {
     }
 
     public static int dealDamage(Item weapon, Mutable defender) {
+        if (weapon.autokill && RANDOM.nextInt(100) < 15) {
+            defender.adjustHitPoints(defender.getMaxHitPoints());
+            defender.adjustHealthCursor();
+            return defender.getMaxHitPoints();
+        }
         int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
         defender.adjustHitPoints(-damage);
         defender.adjustHealthCursor();

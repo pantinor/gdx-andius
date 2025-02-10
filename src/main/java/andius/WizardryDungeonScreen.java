@@ -1,5 +1,9 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
+import andius.objects.Direction;
+import andius.dialogs.RiddleDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.CLASSPTH_RSLVR;
@@ -949,7 +953,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             return false;
         } else if (keycode == Keys.K) {
             if (cell.elevator || (cell.stairs)) {
-                teleport(cell.addressTo, true);
+                teleport(cell.addressTo, false);
             }
             return false;
         } else if (keycode == Keys.I) {
@@ -1007,6 +1011,13 @@ public class WizardryDungeonScreen extends BaseScreen {
             MazeAddress to = destinationCell.addressTo;
             teleport(to, true);
             return;
+        }
+
+        if (destinationCell.damage != null) {
+            if (CTX.partyHasItem(5, 4) == null) {
+                CTX.damageGroup(destinationCell.damage);
+                Sounds.play(Sound.PC_STRUCK);
+            }
         }
 
         if (destinationCell.itemRequired > 0) {
@@ -1379,6 +1390,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (this.map == Map.WIZARDRY4) {
                     if (currentLevel == 6 && x == 2 && y == 13) {
                         teleport(new MazeAddress(7, 4, 17), true);
+                    }
+                    if (currentLevel == 6 && x == 2 && y == 8) {
+                        teleport(new MazeAddress(7, 6, 2), true);
                     }
                 }
             } else {

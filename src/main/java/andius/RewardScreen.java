@@ -1,5 +1,7 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import static andius.Andius.mainGame;
 import andius.Constants.Status;
 import andius.objects.ClassType;

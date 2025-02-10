@@ -1,11 +1,15 @@
-package andius;
+package andius.dialogs;
 
-import andius.objects.Conversations.Conversation;
-import andius.objects.Conversations.Label;
-import andius.objects.Conversations.Topic;
+import andius.Andius;
+import andius.BaseScreen;
+import andius.Constants;
+import andius.objects.SaveGame.CharacterRecord;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,22 +22,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
-import java.util.TreeMap;
 import utils.LogScrollPane;
 
-public class ConversationDialog extends Window implements Constants {
+public class MalorDialog extends Window implements Constants {
 
     public static int WIDTH = 300;
-    public static int HEIGHT = 400;
+    public static int HEIGHT = 150;
 
     Actor previousKeyboardFocus, previousScrollFocus;
     private final FocusListener focusListener;
-    private final GameScreen screen;
-    private final Conversation conv;
+    private final BaseScreen mapScreen;
     private final Table internalTable;
     private final TextField input;
-    private final LogScrollPane scrollPane;
-    private Label previousLabel;
+    private final LogScrollPane logPane;
 
     protected InputListener ignoreTouchDown = new InputListener() {
         @Override
@@ -43,10 +44,9 @@ public class ConversationDialog extends Window implements Constants {
         }
     };
 
-    public ConversationDialog(Context ctx, GameScreen screen, Conversation conv) {
+    public MalorDialog(CharacterRecord caster, BaseScreen sc) {
         super("", Andius.skin.get("dialog", Window.WindowStyle.class));
-        this.screen = screen;
-        this.conv = conv;
+        this.mapScreen = sc;
 
         setSkin(Andius.skin);
         setModal(true);
@@ -58,14 +58,13 @@ public class ConversationDialog extends Window implements Constants {
         add(this.internalTable).expand().fill();
         row();
 
-        scrollPane = new LogScrollPane(Andius.skin, new Table(Andius.skin), WIDTH);
-        scrollPane.setHeight(HEIGHT);
+        logPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
+        logPane.setHeight(HEIGHT);
 
         input = new TextField("", Andius.skin, "default-16");
         input.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField tf, char key) {
-
                 if (key == '\r') {
 
                     if (tf.getText().length() == 0) {
@@ -73,56 +72,28 @@ public class ConversationDialog extends Window implements Constants {
                         return;
                     }
 
-                    String query = tf.getText();
+                    String coordinates = tf.getText().trim();
 
-                    if (previousLabel != null) {
+                    String regex = "^-?\\d+,-?\\d+,-?\\d+$";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(coordinates);
 
-                        Topic lt = previousLabel.matchTopic(query);
-                        if (lt != null) {
-                            Wrapper w = new Wrapper(lt.getPhrase());
-                            recurseLabels(w);
-                            previousLabel = w.active;
-                            scrollPane.add(w.phrase);
-                        } else {
-
-                            lt = previousLabel.matchTopic("default");
-                            if (lt != null) {
-                                Wrapper w = new Wrapper(lt.getPhrase());
-                                recurseLabels(w);
-                                previousLabel = w.active;
-                                scrollPane.add(w.phrase);
-                            } else {
-                                scrollPane.add("That I cannot help thee with.");
-                                previousLabel = null;
-                            }
-                            
-                        }
-
-                    } else if (query.contains("name")) {
-
-                        scrollPane.add(conv.getName());
-
+                    if (matcher.matches()) {
+                        String[] coords = coordinates.split(",");
+                        int northsouth = Integer.parseInt(coords[0]);
+                        int eastwest = Integer.parseInt(coords[1]);
+                        int vertical = Integer.parseInt(coords[2]);
+                        mapScreen.teleport(vertical, northsouth, eastwest);
+                        hide();
+                        input.setTextFieldListener(null);
                     } else {
-
-                        Topic t = conv.matchTopic(query);
-                        if (t != null) {
-                            Wrapper w = new Wrapper(t.getPhrase());
-                            recurseLabels(w);
-                            previousLabel = w.active;
-                            scrollPane.add(w.phrase);
-                        } else {
-
-                            scrollPane.add("That I cannot help thee with.");
-
-                        }
+                        logPane.add("Nothing is happening");
                     }
-
-                    tf.setText("");
                 }
             }
         });
 
-        internalTable.add(scrollPane).maxWidth(WIDTH).width(WIDTH);
+        internalTable.add(logPane).maxWidth(WIDTH).width(WIDTH);
         internalTable.row();
         internalTable.add(input).maxWidth(WIDTH).width(WIDTH);
 
@@ -143,66 +114,22 @@ public class ConversationDialog extends Window implements Constants {
 
             private void focusChanged(FocusListener.FocusEvent event) {
                 Stage stage = getStage();
-                if (isModal() && stage != null && stage.getRoot().getChildren().size > 0 && stage.getRoot().getChildren().peek() == ConversationDialog.this) {
+                if (isModal() && stage != null && stage.getRoot().getChildren().size > 0 && stage.getRoot().getChildren().peek() == MalorDialog.this) {
                     Actor newFocusedActor = event.getRelatedActor();
-                    if (newFocusedActor != null && !newFocusedActor.isDescendantOf(ConversationDialog.this) && !(newFocusedActor.equals(previousKeyboardFocus) || newFocusedActor.equals(previousScrollFocus))) {
+                    if (newFocusedActor != null && !newFocusedActor.isDescendantOf(MalorDialog.this) && !(newFocusedActor.equals(previousKeyboardFocus) || newFocusedActor.equals(previousScrollFocus))) {
                         event.cancel();
                     }
                 }
             }
         };
-
-        Topic greeting = conv.matchTopic("greeting");
-        if (greeting != null) {
-            Wrapper w = new Wrapper(greeting.getPhrase());
-            recurseLabels(w);
-            previousLabel = w.active;
-            scrollPane.add(w.phrase);
-        }
         
-        if (conv.getDescription() != null) {
-            Wrapper w = new Wrapper(conv.getDescription());
-            recurseLabels(w);
-            previousLabel = w.active;
-            scrollPane.add("You meet " + w.phrase);
-        }
-
-    }
-
-    private static class Wrapper {
-
-        String phrase;
-        Label active;
-
-        public Wrapper(String phrase) {
-            this.phrase = phrase;
-        }
-    }
-
-    private void recurseLabels(Wrapper w) {
-
-        if (w.phrase.contains("%") && this.conv.getLabels() != null) {
-
-            java.util.Map<Integer, Label> order = new TreeMap<>();
-
-            for (Label label : this.conv.getLabels()) {
-                int x = w.phrase.indexOf("%" + label.getId() + "%");
-                if (x >= 0) {
-                    order.put(x, label);
-                }
-            }
-
-            if (!order.isEmpty()) {
-
-                for (Label l : order.values()) {
-                    w.phrase = w.phrase.replace("%" + l.getId() + "%", l.getQuery());
-                    w.active = l;
-                }
-
-                recurseLabels(w);
-            }
-        }
-
+        logPane.add("Enter the desired number of steps one wishes to travel as East (+) West (-), North (-) South (+) and vertical directions as X,Y,Z.");
+        Vector3 v = new Vector3();
+        mapScreen.getCurrentMapCoords(v);
+        logPane.add("Current coordinates are");
+        logPane.add(String.format("East/West [%d]", (int) v.x));
+        logPane.add(String.format("North/South [%d]", (int) v.y));
+        logPane.add(String.format("Up/Down [%d]", (int) v.z));
     }
 
     public void show(Stage stage) {
@@ -253,7 +180,7 @@ public class ConversationDialog extends Window implements Constants {
             remove();
         }
 
-        Gdx.input.setInputProcessor(new InputMultiplexer(screen, stage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(mapScreen, stage));
     }
 
 }

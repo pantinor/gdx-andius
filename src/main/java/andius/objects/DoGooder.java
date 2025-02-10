@@ -1,9 +1,10 @@
 package andius.objects;
 
-import andius.Constants.Ability;
-import andius.Constants.Resistance;
+import andius.Constants.CharacterType;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Item.ItemType;
+import java.util.ArrayList;
+import java.util.List;
 import utils.Utils;
 
 public class DoGooder {
@@ -30,8 +31,8 @@ public class DoGooder {
     public int charlev;
     public Spells[] knownSpells;
     public int[][] spellAllowance;
-    public Resistance[] resistance;
-    public Ability[] ability;
+    public List<CharacterType> protection = new ArrayList<>();
+    public List<CharacterType> purposed = new ArrayList<>();
     public String slogan;
 
     public boolean savingThrowBreath() {

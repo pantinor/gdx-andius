@@ -4,6 +4,7 @@ import andius.Constants.Ability;
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
 import andius.Constants.Resistance;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Monster implements Comparable<Monster> {
@@ -25,8 +26,8 @@ public class Monster implements Comparable<Monster> {
     public int healpts;
     public int breath;
     public int unaffected;
-    public Resistance[] resistance;
-    public Ability[] ability;
+    public List<Resistance> resistance = new ArrayList<>();
+    public List<Ability> ability = new ArrayList<>();
     public int exp;
     public Dice groupSize;
     public Dice hitPoints;

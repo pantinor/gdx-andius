@@ -1,5 +1,7 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Race;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;

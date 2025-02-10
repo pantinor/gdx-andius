@@ -1,6 +1,8 @@
-package andius;
+package andius.dialogs;
 
+import andius.Context;
 import andius.WizardryData.MazeCell;
+import andius.WizardryDungeonScreen;
 import andius.objects.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 

@@ -1,5 +1,7 @@
 package andius;
 
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
@@ -8,6 +10,7 @@ import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -25,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
+import utils.Utils;
 
 public class SummoningCircleScreen implements Screen, Constants {
 
@@ -48,12 +52,65 @@ public class SummoningCircleScreen implements Screen, Constants {
         if (!player.summoningCircles.contains(summoningId)) {
             player.summoningCircles.add(summoningId);
             player.level = summoningId.ordinal() + 1;
+            player.str = Utils.adjustValueMax(player.str, 1, 18);
+            player.intell = Utils.adjustValueMax(player.intell, 1, 18);
+            player.piety = Utils.adjustValueMax(player.piety, 1, 18);
+            player.vitality = Utils.adjustValueMax(player.vitality, 1, 18);
+            player.agility = Utils.adjustValueMax(player.agility, 1, 18);
+            player.luck = Utils.adjustValueMax(player.luck, 1, 18);
+            player.maxhp = player.level * 10;
+            for (int i = 0; i <= 6; i++) {
+                if (i + 1 > player.level) {
+                    break;
+                }
+                player.magePoints[i] = 9;
+            }
+            player.knownSpells.clear();
+            if (player.magePoints[0] > 0) {
+                for (int i = 1; i <= 4; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[1] > 0) {
+                for (int i = 5; i <= 6; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[2] > 0) {
+                for (int i = 7; i <= 8; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[3] > 0) {
+                for (int i = 9; i <= 11; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[4] > 0) {
+                for (int i = 12; i <= 14; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[5] > 0) {
+                for (int i = 15; i <= 18; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+            if (player.magePoints[6] > 0) {
+                for (int i = 19; i <= 21; i++) {
+                    player.knownSpells.add(Spells.values()[i - 1]);
+                }
+            }
+        }
+
+        for (int i = 0; i <= 6; i++) {
+            if (i + 1 > player.level) {
+                break;
+            }
+            player.magePoints[i] = 9;
         }
 
         this.player.adjustHP(this.player.maxhp);
-
-        SaveGame.setSpellPoints(this.player);
-        SaveGame.tryLearn(this.player);
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT, new Color(0x080808ff));
 

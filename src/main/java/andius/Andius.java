@@ -1,5 +1,6 @@
 package andius;
 
+import andius.objects.TibianSprite;
 import andius.objects.Conversations;
 import andius.objects.Icons;
 import com.badlogic.gdx.Files;

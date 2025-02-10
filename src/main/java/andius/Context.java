@@ -7,6 +7,7 @@ package andius;
 
 import andius.Constants.Status;
 import andius.objects.Aura;
+import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
@@ -61,13 +62,18 @@ public class Context {
         }
     }
 
-    public boolean partyHasItem(int id, int scenarioID) {
-        for (CharacterRecord rec : this.saveGame.players) {
-            if (rec.itemOwned(id, scenarioID)) {
-                return true;
-            }
+    public void damageGroup(Dice dice) {
+        for (CharacterRecord cr : this.saveGame.players) {
+            int dmg = dice.roll();
+            cr.adjustHP(-dmg);
         }
-        return false;
+    }
+
+    public Item partyHasItem(int id, int scenarioID) {
+        for (CharacterRecord rec : this.saveGame.players) {
+            return rec.itemOwned(id, scenarioID);
+        }
+        return null;
     }
 
     public void removeItemFromParty(int id, int scenarioID) {
@@ -89,6 +95,8 @@ public class Context {
                     if (player.status.has(Status.POISONED)) {
                         player.adjustHP(-1);
                     }
+                    
+                    player.adjustHP(player.regenerationPoints());
                 }
             }
         }

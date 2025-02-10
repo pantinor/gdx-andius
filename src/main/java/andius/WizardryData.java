@@ -1,6 +1,8 @@
 package andius;
 
-import andius.objects.Dialog;
+import andius.dialogs.WitchInMazeDialog;
+import andius.dialogs.GatesOfHellDialog;
+import andius.dialogs.ZigguratAltarDialog;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
 import andius.objects.Function;
@@ -865,6 +867,9 @@ public class WizardryData {
                             cell.stairs = true;
                             cell.addressTo = new MazeAddress(ci.val[0], ci.val[1], ci.val[2]);
                             break;
+                        case DAMAGE:
+                            cell.damage = new Dice(ci.val[1], ci.val[2], ci.val[0]);
+                            break;
                         case PIT:
                             cell.pit = true;
                             cell.damage = new Dice(ci.val[0], ci.val[1], ci.val[2]);
@@ -893,9 +898,6 @@ public class WizardryData {
                             cell.addressTo = new MazeAddress(ci.val[0], ci.val[1], ci.val[2]);
                             cell.teleport = true;
                             break;
-                        case DAMAGE:
-                            cell.damage = new Dice(ci.val[1], ci.val[2], ci.val[0]);
-                            break;
                         case ELEVATOR:
                             cell.elevator = true;
                             cell.addressTo = new MazeAddress(ci.val[1], x, y);
@@ -921,15 +923,6 @@ public class WizardryData {
 
                             if (ci.val[0] == -2 && ci.val[2] >= 100 && ci.val[2] < 200) {
                                 cell.itemObtained = ci.val[2] - 100 + 1;
-                            }
-
-                            if (x == 18 && y == 9 && ci.val[2] == -30480) {
-                                cell.itemObtained = 89;//oxygen mask
-                                cell.message = getMessage(messages, 100);
-                            }
-
-                            if (x == 9 && y == 0 && ci.val[2] == 187) {
-                                cell.itemObtained = 88;//golden pyrite
                             }
 
                             if (ci.val[2] == 5 || ci.val[2] == 13) {
@@ -1500,15 +1493,8 @@ public class WizardryData {
                     if (c.addressTo != null) {
                         //System.out.printf("%d,%d,%d %s\n", l.level, x, y, c.addressTo);
                     }
-                    if (x == 8 && y == 5 && l.level == 8) {
-                        c.hiddenEastDoor = true;//dreampainter room access with winged boots
-                    }
                     if (x == 1 && y == 2 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 28);
-                        c.tbd = false;
-                    }
-                    if (x == 8 && y == 6 && l.level == 8) {
-                        c.itemRequired = 5;
                         c.tbd = false;
                     }
                     if (x == 14 && y == 13 && l.level == 10) {
@@ -1547,12 +1533,74 @@ public class WizardryData {
                         c.message = getMessage(WER_MESSAGES, 57);
                         c.tbd = false;
                     }
+                    if (x == 9 && y == 0 && l.level == 9) {
+                        c.itemObtained = 88;//golden pyrite
+                    }
                     if (x == 1 && y == 14 && l.level == 9) {
                         Message wadePool = new Message(getMessage(WER_MESSAGES, 149), getMessage(WER_MESSAGES, 154), getMessage(WER_MESSAGES, 148));
                         c.message = wadePool;
                         c.itemObtained = 12;
                         c.tbd = false;
                     }
+                    if (x == 0 && y == 1 && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 71);
+                        c.tbd = false;
+                    }
+                    if (((x == 2 && (y == 0 || y == 19)) || (x == 4 && (y == 1 || y == 18))) && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 70);
+                        c.tbd = false;
+                    }
+                    if (x == 8 && y == 6 && l.level == 8) {
+                        c.itemRequired = 5;//winged boots
+                        c.tbd = false;
+                    }
+                    if (x == 8 && y == 5 && l.level == 8) {
+                        c.hiddenEastDoor = true;//dreampainter room
+                    }
+                    if (x == 14 && y == 8 && l.level == 8) {
+                        c.itemRequired = 103;//black candle
+                        c.tbd = false;
+                    }
+                    if (x == 18 && y == 9 && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 72);
+                        c.tbd = false;
+                        c.lair = false;
+                    }
+                    if (x == 18 && y == 10 && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 73);
+                        c.tbd = false;
+                        c.lair = false;
+                    }
+                    if (x == 19 && y == 9 && l.level == 8) {
+                        c.function = (Context ctx, BaseScreen screen) -> new ZigguratAltarDialog(ctx, screen);
+                        c.tbd = false;
+                        c.lair = false;
+                    }
+                    if (x == 19 && y == 10 && l.level == 8) {
+                        c.lair = false;
+                    }
+                    if (x == 18 && y == 8 && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 74);
+                        c.tbd = false;
+                    }
+                    if (x == 18 && y == 11 && l.level == 8) {
+                        c.message = getMessage(WER_MESSAGES, 75);
+                        c.tbd = false;
+                    }
+                    if (x == 1 && y == 0 && l.level == 6) {
+                        c.message = getMessage(WER_MESSAGES, 102);
+                        c.tbd = false;
+                    }
+                    if (x == 0 && y == 1 && l.level == 6) {
+                        c.message = getMessage(WER_MESSAGES, 102);
+                        c.tbd = false;
+                    }
+                    if (x == 18 && y == 9 && l.level == 6) {
+                        c.itemObtained = 89;//oxygen mask
+                        c.message = getMessage(WER_MESSAGES, 100);
+                        c.tbd = false;
+                    }
+
                 }
             }
         }

@@ -6,7 +6,7 @@ import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Role;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
-import andius.TibianSprite;
+import andius.objects.TibianSprite;
 import static andius.WizardryData.PMO_MONSTERS;
 import andius.objects.Actor;
 import andius.objects.Monster;

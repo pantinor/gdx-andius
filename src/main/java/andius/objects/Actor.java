@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
-import andius.TibianSprite;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -155,8 +154,7 @@ public class Actor {
     }
 
     public void adjustHP(int amt) {
-        player.adjustHP(amt);
-        this.playerCursor.adjust(player.hp, player.maxhp);
+        this.player.adjustHP(amt);
     }
 
     public PlayerCursor getPlayerCursor() {

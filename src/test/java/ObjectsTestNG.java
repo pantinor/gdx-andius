@@ -1,5 +1,5 @@
 
-import andius.Direction;
+import andius.objects.Direction;
 import andius.WizardryData;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeLevel;

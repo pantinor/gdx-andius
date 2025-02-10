@@ -4,7 +4,6 @@ import andius.Constants.Breath;
 import andius.Constants.CharacterType;
 import static andius.Constants.DEATHMSGS;
 import static andius.Constants.HITMSGS;
-import andius.Constants.Resistance;
 import andius.Constants.Status;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Item.ItemType;
@@ -48,6 +47,9 @@ public class MutableCharacter implements Mutable {
 
     @Override
     public CharacterType getMonsterType() {
+        if (null != getType()) {
+            CharacterType.valueOf(getType().toString());
+        }
         return null;
     }
 
@@ -311,12 +313,12 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public int getUnaffected() {
-        for (int i = 0; i < this.dogooder.resistance.length; i++) {
-            if (this.dogooder.resistance[i] == Resistance.MAGIC) {
-                return 0;
-            }
+    public boolean isUnaffected(Spells spell, CharacterType type) {
+        if (this.dogooder.protection.contains(type)) {
+            return Utils.RANDOM.nextInt(100) < 50;
+        } else if (this.dogooder.purposed.contains(type)) {
+            return Utils.RANDOM.nextInt(100) < 50;
         }
-        return 15;
+        return false;
     }
 }

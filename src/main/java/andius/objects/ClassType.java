@@ -1,6 +1,5 @@
 package andius.objects;
 
-import andius.TibianSprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 public enum ClassType {

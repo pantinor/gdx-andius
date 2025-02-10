@@ -1,5 +1,8 @@
 package andius;
 
+import andius.objects.TibianSprite;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;

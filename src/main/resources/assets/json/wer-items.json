@@ -1032,7 +1032,7 @@
     },
     {
         "id": 41,
-        "name": "STAFF OF KATINO",
+        "name": "SCROLL OF KATINO",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1041,7 +1041,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 500,
         "damage": {
             "qty": 0,
@@ -1184,7 +1184,7 @@
     },
     {
         "id": 47,
-        "name": "STAFF OF BADIOS",
+        "name": "SCROLL OF BADIOS",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1193,7 +1193,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 500,
         "damage": {
             "qty": 0,
@@ -1210,7 +1210,7 @@
     },
     {
         "id": 48,
-        "name": "STAFF OF HALITO",
+        "name": "SCROLL OF HALITO",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1219,7 +1219,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 500,
         "damage": {
             "qty": 0,
@@ -1337,7 +1337,7 @@
     },
     {
         "id": 53,
-        "name": "STAFF OF BADIAL",
+        "name": "SCROLL OF BADIAL",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1346,7 +1346,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 500,
         "damage": {
             "qty": 0,
@@ -1491,7 +1491,7 @@
     },
     {
         "id": 59,
-        "name": "STAFF OF DILTO",
+        "name": "SCROLL OF DILTO",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1500,7 +1500,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 2500,
         "damage": {
             "qty": 0,
@@ -2029,7 +2029,7 @@
     },
     {
         "id": 80,
-        "name": "STAFF OF BADIAL",
+        "name": "SCROLL OF BADIAL",
         "type": "SPECIAL",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -2038,7 +2038,7 @@
         "changeChance": 100,
         "armourClass": 0,
         "wephitmd": 0,
-        "genericName": "STAFF",
+        "genericName": "SCROLL",
         "cost": 8000,
         "damage": {
             "qty": 0,

@@ -1,5 +1,9 @@
-package andius;
+package andius.dialogs;
 
+import andius.BaseScreen;
+import andius.Context;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
 import static andius.WizardryData.getMessage;
 import andius.objects.Dialog;
@@ -15,11 +19,11 @@ public class GatesOfHellDialog extends Dialog {
     public GatesOfHellDialog(Context ctx, BaseScreen screen) {
         super(ctx, screen);
 
-        final AtomicBoolean chimesOwned = new AtomicBoolean(ctx.partyHasItem(102, 4));
-        final AtomicBoolean diaryOwned = new AtomicBoolean(ctx.partyHasItem(101, 4));
-        final AtomicBoolean candleOwned = new AtomicBoolean(ctx.partyHasItem(103, 4));
-        final AtomicBoolean kaOwned = new AtomicBoolean(ctx.partyHasItem(6, 4));
-        final AtomicBoolean hhgOwned = new AtomicBoolean(ctx.partyHasItem(4, 4));
+        final AtomicBoolean chimesOwned = new AtomicBoolean(ctx.partyHasItem(102, 4) != null);
+        final AtomicBoolean diaryOwned = new AtomicBoolean(ctx.partyHasItem(101, 4) != null);
+        final AtomicBoolean candleOwned = new AtomicBoolean(ctx.partyHasItem(103, 4) != null);
+        final AtomicBoolean kaOwned = new AtomicBoolean(ctx.partyHasItem(6, 4) != null);
+        final AtomicBoolean hhgOwned = new AtomicBoolean(ctx.partyHasItem(4, 4) != null);
 
         final AtomicBoolean bootsEquipped = new AtomicBoolean();
         for (CharacterRecord rec : ctx.players()) {
