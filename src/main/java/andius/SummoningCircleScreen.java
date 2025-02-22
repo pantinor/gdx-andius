@@ -8,7 +8,6 @@ import static andius.Andius.mainGame;
 import andius.WizardryData.SummoningCircle;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
-import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
@@ -126,8 +125,14 @@ public class SummoningCircleScreen implements Screen, Constants {
         this.monsters.setItems(ms);
 
         Array<MonsterItem> arr = new Array<>();
-        for (int i = this.summoningId.low(); i <= this.summoningId.high(); i++) {
-            arr.add(new MonsterItem(WizardryData.Scenario.WER.monsters().get(i)));
+        for (int j = SummoningCircle.values().length - 1; j >= 0; j--) {
+            SummoningCircle sc = SummoningCircle.values()[j];
+            if (sc.ordinal() <= this.summoningId.ordinal()) {
+                arr.add(new MonsterItem("--- " + sc.display() + " Level"));
+                for (int i = sc.low(); i <= sc.high(); i++) {
+                    arr.add(new MonsterItem(WizardryData.Scenario.WER.monsters().get(i)));
+                }
+            }
         }
 
         select1 = new SelectBox<>(Andius.skin, "default-16");
@@ -185,17 +190,22 @@ public class SummoningCircleScreen implements Screen, Constants {
 
     public void summon() {
 
-        Sounds.play(Sound.SPIRITS);
-
         Monster m1 = this.select1.getSelected().m;
         Monster m2 = this.select2.getSelected().m;
         Monster m3 = this.select3.getSelected().m;
 
+        this.player.summonedMonsters.clear();
+        this.monsters.getItems().clear();
+
+        if (m1 == null || m2 == null || m3 == null) {
+            return;
+        }
+
+        Sounds.play(Sound.SPIRITS);
+
         int roll1 = m1.getGroupSize().roll();
         int roll2 = m2.getGroupSize().roll();
         int roll3 = m3.getGroupSize().roll();
-
-        this.player.summonedMonsters.clear();
 
         for (int i = 1; i <= roll1; i++) {
             this.player.summonedMonsters.add(new MutableMonster(m1));
@@ -270,14 +280,24 @@ public class SummoningCircleScreen implements Screen, Constants {
     private class MonsterItem {
 
         private final Monster m;
+        private String dividerLabel;
 
         public MonsterItem(Monster m) {
             this.m = m;
         }
 
+        public MonsterItem(String label) {
+            this.dividerLabel = label;
+            this.m = null;
+        }
+
         @Override
         public String toString() {
-            return this.m.name.toUpperCase();
+            if (this.m != null) {
+                return this.m.name.toUpperCase();
+            } else {
+                return dividerLabel;
+            }
         }
 
     }

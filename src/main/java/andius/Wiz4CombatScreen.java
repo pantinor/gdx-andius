@@ -4,6 +4,7 @@ import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
+import andius.WizardryData.MazeCell;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.ClassType;
@@ -85,12 +86,16 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private int round = 1;
     private boolean suprised = false;
+    MazeCell destCell, fromCell;
 
-    public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent) {
+    public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent, MazeCell destCell, MazeCell fromCell) {
 
         this.opponent = opponent;
         this.player = player;
         this.monsters = monsters;
+        this.destCell = destCell;
+        this.fromCell = fromCell;
+
         this.batch = new SpriteBatch();
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -181,7 +186,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                end();
+                end(true);
             }
         });
         this.flee.setBounds(x += 100, 426, 80, 40);
@@ -242,7 +247,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 enemyFight(mm);
             }
             if (player.isDead()) {
-                end();
+                end(false);
             }
         } else {
             if (!this.opponent.slogan.isEmpty()) {
@@ -305,9 +310,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         if (!alive) {
-            end();
+            end(false);
         } else if (player.isDead()) {
-            end();
+            end(false);
         }
 
         log("------------ end of round " + round, Color.YELLOW);
@@ -353,9 +358,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         if (!alive) {
-            end();
+            end(false);
         } else if (player.isDead()) {
-            end();
+            end(false);
         }
 
         log("------------ end of round " + round, Color.YELLOW);
@@ -363,12 +368,17 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     }
 
-    public void end() {
+    public void end(boolean fled) {
         player.acmodifier1 = 0;
 
         this.fight.remove();
         this.cast.remove();
         this.flee.remove();
+
+        if (fled) {
+            WizardryDungeonScreen sc = (WizardryDungeonScreen) Map.WIZARDRY4.getScreen();
+            sc.teleport(this.fromCell.address, false);
+        }
 
         this.stage.addActor(this.exit);
     }
@@ -405,9 +415,16 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
+        if (attacker.monster().ability.contains(Ability.CALLFORHELP)
+                && attacker.getPercentDamaged() < 0.50
+                && Utils.RANDOM.nextInt(100) < 75
+                && Utils.percentChance(attacker.getLevel() * 5)) {
+            action = CombatAction.CALL_FOR_HELP;
+        }
+
         switch (action) {
             case BREATH:
-                log(String.format("%s breathes %s", attacker.name(), attacker.breath()));
+                log(String.format("%s breathes %s", attacker.name(), attacker.breath()), Color.BROWN);
                 for (MutableCharacter defender : enemies) {
                     int dmg = attacker.getCurrentHitPoints() / 2;
                     DoGooder dg = (DoGooder) defender.baseType();
@@ -438,6 +455,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     log(String.format("%s casts %s", attacker.name(), spell), Color.SKY);
                     spellCast(spell, attacker, target, false);
                 }
+                break;
+            }
+            case CALL_FOR_HELP: {
+                log(String.format("%s called for help!", attacker.name()), Color.GOLDENROD);
+                MutableMonster clone = new MutableMonster(attacker.monster());
+                this.monsters.add(clone);
                 break;
             }
         }
@@ -573,7 +596,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             log(m.getDamageDescription(attName, damage), Color.SCARLET);
         } else {
             player.adjustHP(-damage);
-            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage), Color.SCARLET);
+            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage), Color.RED);
         }
     }
 
@@ -671,7 +694,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
             case MAPORFIC:
                 spellGroupACModify(caster, spell);
                 break;
-
+            case DIALKO:
+                player.status.set(Status.PARALYZED, 0);
+                player.status.set(Status.ASLEEP, 0);
+                for (MutableMonster m : player.summonedMonsters) {
+                    m.status().set(Status.PARALYZED, 0);
+                    m.status().set(Status.ASLEEP, 0);
+                }
+                break;
         }
 
     }
@@ -742,7 +772,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     }
                     groupDamage--;
                 }
-                if (player.savingThrowSpell()) {
+                if (player.armor != null && player.armor.id == 89 && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
+                    log(player.name.toUpperCase() + " was saved by oxygen mask versus " + spell + " and is unaffected!");
+                } else if (player.savingThrowSpell()) {
                     log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     damage(caster, player, 1);
@@ -928,13 +960,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         stage.act();
         stage.draw();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            fight();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            cast();
-        }
 
     }
 

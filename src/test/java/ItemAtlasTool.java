@@ -62,7 +62,7 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
         stage = new Stage();
 
-        final List<MyListItem> list = new List<>(skin);
+        final List<MyListItem> list = new List<>(skin, "default-16");
 
         TextureRegion[][] itemTextures = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/inventory.png")), 44, 44);
 
@@ -152,7 +152,7 @@ public class ItemAtlasTool extends InputAdapter implements ApplicationListener {
         ScrollPane scrollPane = new AutoFocusScrollPane(list, skin);
         scrollPane.setScrollingDisabled(true, false);
 
-        TextButton makeButton = new TextButton("Write JSON", skin, "default");
+        TextButton makeButton = new TextButton("Write JSON", skin, "default-16");
         makeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {

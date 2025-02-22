@@ -1,22 +1,16 @@
 
 import andius.Andius;
+import andius.Constants;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
-import andius.Wiz4CombatScreen;
+import andius.EquipmentScreen;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.DoGooder;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Wiz4CombatTestMain extends Game {
 
@@ -50,6 +44,14 @@ public class Wiz4CombatTestMain extends Game {
 
             ctx.players()[0].inventory.add(WER_ITEMS.get(7));
 
+            for (DoGooder dg : WER4_CHARS) {
+                for (int i : dg.items) {
+                    if (i == 11) {
+                        int x = 0;
+                    }
+                }
+            }
+
 //            List<MutableMonster> mms = new ArrayList<>();
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
@@ -79,9 +81,9 @@ public class Wiz4CombatTestMain extends Game {
 //
 //            String json = gson.toJson(WER4_CHARS);
 //            System.out.println(json);
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(375)));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(375)));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
-            //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
+            setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WORLD, 1, 0, 5));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));

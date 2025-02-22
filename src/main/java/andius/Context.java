@@ -71,7 +71,22 @@ public class Context {
 
     public Item partyHasItem(int id, int scenarioID) {
         for (CharacterRecord rec : this.saveGame.players) {
-            return rec.itemOwned(id, scenarioID);
+            Item it = rec.itemOwned(id, scenarioID);
+            if (it != null) {
+                return it;
+            }
+        }
+        return null;
+    }
+
+    public Item partyHasAnyOfTheseItems(List<Integer> items, int scenarioID) {
+        for (int id : items) {
+            for (CharacterRecord rec : this.saveGame.players) {
+                Item it = rec.itemOwned(id, scenarioID);
+                if (it != null) {
+                    return it;
+                }
+            }
         }
         return null;
     }
@@ -95,10 +110,13 @@ public class Context {
                     if (player.status.has(Status.POISONED)) {
                         player.adjustHP(-1);
                     }
-                    
+
                     player.adjustHP(player.regenerationPoints());
                 }
             }
+        }
+        if (pickRandomEnabledPlayer() == null) {
+            throw new PartyDeathException();
         }
     }
 

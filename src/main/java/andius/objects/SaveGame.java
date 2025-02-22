@@ -448,7 +448,7 @@ public class SaveGame implements Constants {
                 mod += item2.regeneration;
             }
             for (Item i : inventory) {
-                mod += i.regeneration;
+                //mod += i.regeneration;
             }
             return mod;
         }

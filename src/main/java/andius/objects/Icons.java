@@ -124,6 +124,9 @@ public class Icons {
                 if (n.contains("rod")) {
                     return 215;
                 }
+                if (n.contains("boot")) {
+                    return 211;
+                }
                 return 420;
             default:
                 return 803;

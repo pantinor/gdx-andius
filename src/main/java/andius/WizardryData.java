@@ -1,7 +1,10 @@
 package andius;
 
+import andius.dialogs.BathInPoolDialog;
+import andius.dialogs.BuyStTreborsRumpDialog;
 import andius.dialogs.WitchInMazeDialog;
 import andius.dialogs.GatesOfHellDialog;
+import andius.dialogs.VanishingCreamDialog;
 import andius.dialogs.ZigguratAltarDialog;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
@@ -850,16 +853,6 @@ public class WizardryData {
                     int idx = cellInfoLocations[y][x];
                     CellInfo ci = cellInfo[idx];
 
-                    if (ci.type == CellType.CHUTE || ci.type == CellType.STAIRS || ci.type == CellType.TELEPORT) {
-                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
-                    }
-                    if (ci.type == CellType.MESSAGE && ci.val[0] == -2) {
-                        //System.out.printf("[%d,%d,%d]   \t with %s\n", level, x, y, ci);
-                    }
-                    if (ci.type == CellType.SPINNER) {
-                        //System.out.printf("[%d,%d,%d] with %s\n", level, x, y, ci);
-                    }
-
                     switch (ci.type) {
                         case NORMAL:
                             break;
@@ -981,7 +974,7 @@ public class WizardryData {
                             if (ci.val[2] == 207) {
                                 cell.summoningCircle = SummoningCircle.CIRCLE8;
                             }
-                            if (ci.val[2] == -30220 && ((x == 9 && y == 8) || (x == 4 && y == 16))) {
+                            if (ci.val[2] == -30220 && ((x == 0 && y == 2) || (x == 13 && y == 6) || (x == 9 && y == 8) || (x == 4 && y == 16))) {
                                 cell.summoningCircle = SummoningCircle.CIRCLE9;
                             }
                             if (ci.val[2] == -30120 && ((x == 9 && y == 8) || (x == 3 && y == 16) || (x == 14 && y == 16))) {
@@ -1037,13 +1030,6 @@ public class WizardryData {
             cell.northWall = ((value & 1) == 1);
             value >>>= 1;
             cell.northDoor = ((value & 1) == 1);
-
-            // monster table
-            offset = column * 4 + row / 8;
-            value = intValue(buffer[offset + 480]);
-            value >>>= row % 8;
-            cell.lair = ((value & 1) == 1);
-            cell.tempLair = cell.lair;
 
             if (cell.eastWall && cell.eastDoor) {
                 cell.hiddenEastDoor = true;
@@ -1192,7 +1178,6 @@ public class WizardryData {
         public List<String> riddleAnswers;
         public int itemObtainedFromRiddle;
         public Dice damage;
-        public int messageType;
         public Message message;
         public int itemRequired;
         public int itemObtained;
@@ -1202,9 +1187,12 @@ public class WizardryData {
         private boolean tempLair;
 
         public int encounterID = -1;
-        public int wanderingEncounterID = -1;
-
+        public int encounterTakeItem = -1;
+        public int encounterGiveItem = -1;
+        public Message encounterTradeSuccessMessage;
+        public List<Integer> fightIfDoNotOwnAnyOfItems = new ArrayList<>();
         public boolean hasTreasureChest;
+        public int wanderingEncounterID = -1;
 
         public SummoningCircle summoningCircle;
 
@@ -1257,6 +1245,10 @@ public class WizardryData {
 
         public Message() {
 
+        }
+
+        public Message(String text) {
+            this.text.add(text);
         }
 
         public Message(Message... messages) {
@@ -1421,7 +1413,7 @@ public class WizardryData {
         {1, 13, 14, 1, 19, 19},
         {1, 15, 11, 3, 11, 13},
         {1, 1, 3, 3, 11, 13},
-        {1, 2, 1, 3, 10, 6},
+        {1, 2, 1, 3, 10, 16},
         {1, 9, 7, 3, 11, 13},
         {1, 16, 15, 0, 0, 1},
         {3, 13, 14, 2, 9, 0},
@@ -1436,7 +1428,7 @@ public class WizardryData {
         {3, 1, 15, 2, 9, 0},
         {3, 1, 16, 2, 7, 3},
         {3, 2, 1, 2, 7, 12},
-        {3, 2, 10, 1, 9, 0},
+        {3, 2, 10, 1, 0, 3},
         {3, 2, 15, 3, 8, 12},
         {3, 2, 16, 1, 19, 19},
         {3, 2, 18, 1, 19, 19},
@@ -1470,10 +1462,10 @@ public class WizardryData {
         {13, 16, 17, 12, 16, 16},};
 
     static {
-        wiz4AddressCorrections(WER_LEVELS);
+        wiz4Customization(WER_LEVELS);
     }
 
-    private static void wiz4AddressCorrections(MazeLevel[] levels) {
+    private static void wiz4Customization(MazeLevel[] levels) {
         for (int i = 0; i < wiz4Addrs.length; i++) {
             MazeLevel fromLevel = levels[wiz4Addrs[i][0]];
             MazeLevel toLevel = levels[wiz4Addrs[i][3]];
@@ -1537,8 +1529,7 @@ public class WizardryData {
                         c.itemObtained = 88;//golden pyrite
                     }
                     if (x == 1 && y == 14 && l.level == 9) {
-                        Message wadePool = new Message(getMessage(WER_MESSAGES, 149), getMessage(WER_MESSAGES, 154), getMessage(WER_MESSAGES, 148));
-                        c.message = wadePool;
+                        c.message = new Message(getMessage(WER_MESSAGES, 149), getMessage(WER_MESSAGES, 154), getMessage(WER_MESSAGES, 148));
                         c.itemObtained = 12;
                         c.tbd = false;
                     }
@@ -1600,7 +1591,140 @@ public class WizardryData {
                         c.message = getMessage(WER_MESSAGES, 100);
                         c.tbd = false;
                     }
-
+                    if (x == 12 && y == 15 && l.level == 2) {
+                        c.message = getMessage(WER_MESSAGES, 97);
+                    }
+                    if (x == 14 && y == 3 && l.level == 3) {
+                        c.function = (Context ctx, BaseScreen screen) -> new VanishingCreamDialog(ctx, screen);
+                        c.tbd = false;
+                        c.lair = false;
+                        c.encounterID = -1;
+                        c.message = null;
+                    }
+                    if (x == 2 && y == 13 && l.level == 2) {
+                        c.function = (Context ctx, BaseScreen screen) -> new BuyStTreborsRumpDialog(ctx, screen);
+                        c.tbd = false;
+                        c.lair = false;
+                        c.encounterID = -1;
+                        c.message = null;
+                    }
+                    if (x == 15 && y == 18 && l.level == 2) {
+                        c.message = new Message("<- <- <- This way to the Egress");
+                    }
+                    if (x == 15 && y == 15 && l.level == 2) {
+                        c.message = new Message("Egress  -> -> ->");
+                    }
+                    if (x == 0 && y == 0 && l.level == 1) {
+                        c.message = getMessage(WER_MESSAGES, 120);
+                        c.tbd = false;
+                    }
+                    if (x == 3 && y == 6 && l.level == 1) {
+                        c.message = getMessage(WER_MESSAGES, 121);
+                        c.tradeItem1 = 5;
+                        c.tradeItem2 = 65;//lose the winged boots for traversing the castle so pits are not voided
+                        c.tbd = false;
+                    }
+                    if (x == 3 && y == 9 && l.level == 1) {
+                        c.message = getMessage(WER_MESSAGES, 122);
+                        c.encounterID = 402;//training squad 3
+                        c.tbd = false;
+                    }
+                    if (x == 3 && y == 12 && l.level == 1) {
+                        c.message = getMessage(WER_MESSAGES, 129);
+                        c.tbd = false;//boltacs
+                    }
+                    if (x == 4 && y == 12 && l.level == 1) {
+                        c.encounterID = 408;//anti shoplifting unit
+                        c.tbd = false;
+                    }
+                    if (x == 10 && y == 16 && l.level == 1) {
+                        c.message = getMessage(WER_MESSAGES, 124);
+                        c.tbd = false;//adv inn
+                    }
+                    if (x == 9 && y == 16 && l.level == 1) {
+                        c.encounterID = -1;
+                        c.lair = false;
+                    }
+                    if (x == 9 && y == 13 && l.level == 1) {//von halstern chivalry
+                        c.message = new Message(getMessage(WER_MESSAGES, 110), getMessage(WER_MESSAGES, 111));
+                        c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
+                        c.encounterGiveItem = 110;//rallying horn
+                        c.encounterTradeSuccessMessage = new Message("");
+                        c.encounterID = 442;
+                        c.tbd = false;
+                    }
+                    if (x == 9 && y == 12 && l.level == 1) {
+                        c.elevator = false;
+                        c.stairs = true;
+                        c.addressTo = new MazeAddress(13, 9, 12);
+                        c.elevatorFrom = 0;
+                        c.elevatorTo = 0;
+                        c.lair = false;
+                    }
+                    if (x == 9 && y == 12 && l.level == 13) {
+                        c.elevator = false;
+                        c.stairs = true;
+                        c.addressTo = new MazeAddress(1, 9, 12);
+                        c.elevatorFrom = 0;
+                        c.elevatorTo = 0;
+                        c.lair = false;
+                    }
+                    if (x == 16 && y == 13 && l.level == 1) {
+                        c.message = new Message(getMessage(WER_MESSAGES, 152), getMessage(WER_MESSAGES, 155));
+                        c.itemObtained = -1;
+                        c.tbd = false;
+                        c.encounterID = -1;
+                        c.lair = false;
+                    }
+                    if (x == 16 && y == 5 && l.level == 1) {
+                        c.function = (Context ctx, BaseScreen screen) -> new BathInPoolDialog(ctx, screen);
+                        c.tbd = false;
+                        c.lair = false;
+                        c.encounterID = -1;
+                        c.message = null;
+                    }
+                    if (x == 13 && y == 14 && l.level == 13) {//tiger cubs
+                        c.message = new Message(getMessage(WER_MESSAGES, 107), getMessage(WER_MESSAGES, 108));
+                        c.encounterTradeSuccessMessage = getMessage(WER_MESSAGES, 109);
+                        c.encounterTakeItem = 19;//pennencaux
+                        c.encounterGiveItem = 109;//gold orb
+                        c.encounterID = 436;
+                        c.tbd = false;
+                    }
+                    if (x == 11 && y == 14 && l.level == 13) {//order of laurel
+                        c.message = new Message(getMessage(WER_MESSAGES, 104), getMessage(WER_MESSAGES, 105));
+                        c.encounterTradeSuccessMessage = getMessage(WER_MESSAGES, 106);
+                        c.encounterTakeItem = 18;//dabpuce
+                        c.encounterGiveItem = 108;//arrow truth
+                        c.encounterID = 430;
+                        c.tbd = false;
+                    }
+                    if (x == 13 && y == 15 && l.level == 13) {//order of pelicans
+                        c.message = new Message(getMessage(WER_MESSAGES, 136));
+                        c.encounterTradeSuccessMessage = getMessage(WER_MESSAGES, 138);
+                        c.fightIfDoNotOwnAnyOfItems.add(7);
+                        c.fightIfDoNotOwnAnyOfItems.add(8);
+                        c.fightIfDoNotOwnAnyOfItems.add(9);//east wind sword, west wind sword dragons claw
+                        c.encounterGiveItem = 20;//maint cap
+                        c.encounterID = 424;
+                        c.tbd = false;
+                    }
+                    if (x == 11 && y == 15 && l.level == 13) {//ladies of the rose
+                        c.message = new Message(getMessage(WER_MESSAGES, 131), getMessage(WER_MESSAGES, 134));
+                        c.encounterTradeSuccessMessage = getMessage(WER_MESSAGES, 135);
+                        c.encounterTakeItem = 120;//bar of soap
+                        c.encounterGiveItem = 17;//crystal rose
+                        c.encounterID = 418;
+                        c.tbd = false;
+                    }
+                    if (x == 17 && y == 9 && l.level == 14) {
+                        c.itemObtainedFromRiddle = 112;//mythril gloves
+                        c.encounterID = -1;
+                        c.tbd = false;
+                        c.northWall = false;
+                        c.eastWall = false;
+                        c.westWall = false;
+                    }
                 }
             }
         }

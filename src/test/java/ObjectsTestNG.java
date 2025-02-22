@@ -47,13 +47,114 @@ import utils.Utils;
 
 public class ObjectsTestNG {
 
+    @Test
+    public void wiz4code() throws Exception {
+
+        int[][] col1 = new int[][]{
+            {1080, 8771},
+            {1211, 1280},
+            {1386, 6528},
+            {1556, 8090},
+            {1607, 9125},
+            {1735, 8696},
+            {2138, 4261},
+            {2293, 1026},
+            {2338, 6375},
+            {2395, 6353},
+            {2470, 3160},
+            {2788, 2544},
+            {2892, 5107},
+            {2919, 3105},
+            {2990, 1102},
+            {3137, 3205},
+            {3303, 6727},
+            {3463, 4306},
+            {3587, 7452},
+            {3852, 4943}};
+
+        int[][] col2 = new int[][]{
+            {1086, 0},
+            {1219, 1488},
+            {1516, 7814},
+            {1588, 9399},
+            {1669, 1330},
+            {1753, 6704},
+            {2194, 9354},
+            {2301, 7565},
+            {2362, 3161},
+            {2437, 6150},
+            {2480, 2293},
+            {2800, 1764},
+            {2897, 4925},
+            {2922, 3479},
+            {3014, 5023},
+            {3243, 8265},
+            {3369, 7684},
+            {3538, 7509},
+            {3779, 6269},
+            {3868, 3350}};
+        int[][] col3 = new int[][]{
+            {1193, 0},
+            {1282, 8510},
+            {1529, 9475},
+            {1602, 1451},
+            {1712, 9012},
+            {1757, 8556},
+            {2219, 8449},
+            {2313, 9190},
+            {2377, 8896},
+            {2451, 8981},
+            {2770, 8866},
+            {2812, 9871},
+            {2910, 1315},
+            {2941, 1190},
+            {3032, 8839},
+            {3278, 9832},
+            {3414, 9682},
+            {3547, 1065},
+            {3816, 1374},
+            {3996, 9299}};
+
+        int sum = 0;
+
+        int c1 = 1211;
+        int c2 = 3014;
+        int c3 = 3547;
+
+        for (int i = 0; i < col1.length; i++) {
+            if (col1[i][0] == c1) {
+                sum += col1[i][1];
+                break;
+            }
+        }
+
+        for (int i = 0; i < col2.length; i++) {
+            if (col2[i][0] == c2) {
+                sum += col2[i][1];
+                break;
+            }
+        }
+
+        for (int i = 0; i < col3.length; i++) {
+            if (col3[i][0] == c3) {
+                sum += col3[i][1];
+                break;
+            }
+        }
+
+        while (sum > 9999) {
+            sum -= 9000;
+        }
+
+        System.out.println("Code is " + sum);
+
+    }
+
     //@Test
     public void testCompareArrays() throws Exception {
 
-        
-        
-        byte[] array1 = IOUtils.readFully(new FileInputStream("D:\\applewin\\paul-formatted-2.dsk"), 143360);
-        byte[] array2 = IOUtils.readFully(new FileInputStream("D:\\applewin\\paul-formatted.dsk"), 143360);
+        byte[] array1 = IOUtils.readFully(new FileInputStream("D:\\applewin\\wiz4_d1.dsk"), 143360);
+        byte[] array2 = IOUtils.readFully(new FileInputStream("D:\\applewin\\wiz4_d1 - Copy.dsk"), 143360);
 
         boolean areEqual = Arrays.equals(array1, array2);
         System.out.println("Arrays are equal: " + areEqual);
@@ -61,7 +162,7 @@ public class ObjectsTestNG {
         int length = Math.min(array1.length, array2.length);
         for (int i = 0; i < length; i++) {
             if (array1[i] != array2[i]) {
-                System.out.printf("Difference at index %s: %s  %s\n", Integer.toHexString(i) ,String.format("%02X", array1[i]), String.format("%02X", array2[i]));
+                System.out.printf("Difference at index %s: %s  %s\n", Integer.toHexString(i), String.format("%02X", array1[i]), String.format("%02X", array2[i]));
             }
         }
 

@@ -4,6 +4,7 @@ import andius.Context;
 import andius.WizardryData.MazeCell;
 import andius.WizardryDungeonScreen;
 import andius.objects.Dialog;
+import andius.objects.Item;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class RiddleDialog extends Dialog {
@@ -34,8 +35,9 @@ public class RiddleDialog extends Dialog {
                         if (response.equalsIgnoreCase(answer)) {
                             correct = true;
                             if (cell.itemObtainedFromRiddle > 0) {
-                                screen.log(ctx.saveGame.players[0].name.toUpperCase() + " found an item!");
-                                ctx.saveGame.players[0].inventory.add(screen.map.scenario().items().get(cell.itemObtainedFromRiddle));
+                                Item it = screen.map.scenario().items().get(cell.itemObtainedFromRiddle);
+                                screen.log(ctx.players()[0].name.toUpperCase() + " obtained " + it.genericName);
+                                ctx.saveGame.players[0].inventory.add(it);
                             }
                             break;
                         }

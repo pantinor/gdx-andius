@@ -2661,7 +2661,7 @@
     },
     {
         "id": 105,
-        "name": "ST.TREBOR RUMP",
+        "name": "ST.TREBOR'S RUMP",
         "type": "MISC",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -3035,6 +3035,31 @@
         "stock": 0,
         "usable": "M",
         "regeneration": -3,
+        "range": 0,
+        "autokill": false
+    },
+    {
+        "id": 120,
+        "name": "BAR OF SOAP",
+        "type": "MISC",
+        "alignment": "UNALIGN",
+        "cursed": false,
+        "special": 39,
+        "changeTo": 0,
+        "changeChance": 0,
+        "armourClass": 0,
+        "wephitmd": 0,
+        "genericName": "IRISH SPRING\u0027",
+        "cost": 0,
+        "damage": {
+            "qty": 0,
+            "sides": 0,
+            "bonus": 0
+        },
+        "extraSwings": 0,
+        "stock": 0,
+        "usable": "M",
+        "regeneration": 0,
         "range": 0,
         "autokill": false
     }

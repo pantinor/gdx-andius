@@ -84,7 +84,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     public abstract void finishTurn(int currentX, int currentY);
 
-    public abstract void teleport(int level, int stepsX, int stepsY);
+    public abstract void teleport(int level, int north, int east);
 
     public void endCombat(boolean isWon, Object opponent) {
         

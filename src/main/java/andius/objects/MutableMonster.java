@@ -32,6 +32,10 @@ public class MutableMonster implements Mutable {
     public Object baseType() {
         return this.monster;
     }
+    
+    public Monster monster() {
+        return this.monster;
+    }
 
     @Override
     public boolean isUnaffected(Spells spell, CharacterType type) {
@@ -203,6 +207,10 @@ public class MutableMonster implements Mutable {
     @Override
     public void adjustHealthCursor() {
         this.healthCursor.adjust(currentHitPoints, maxHitPoints);
+    }
+
+    public double getPercentDamaged() {
+        return (double) currentHitPoints / maxHitPoints;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package andius.objects;
 
 import andius.Andius;
+import static andius.Andius.CTX;
 import andius.BaseScreen;
 import andius.CombatScreen;
 import andius.CombatScreen.RemoveCreatureAction;
@@ -188,20 +189,9 @@ public class SpellUtil {
 
     }
 
-    public static boolean useItem(String item, CharacterRecord rec) {
+    public static boolean useItem(Item item, CharacterRecord rec) {
 
-        Spells spell = null;
-        for (Spells sp : Spells.values()) {
-            if (item.toUpperCase().contains(sp.toString())) {
-                spell = sp;
-                break;
-            }
-        }
-
-        if (spell == null || rec.status.has(Status.SILENCED)) {
-            Sounds.play(Sound.NEGATIVE_EFFECT);
-            return false;
-        }
+        Spells spell = item.spell;
 
         switch (spell) {
             case DIOS:
@@ -213,6 +203,16 @@ public class SpellUtil {
             case LATUMOFIS:
                 Sounds.play(spell.getSound());
                 rec.status.set(Status.POISONED, 0);
+                break;
+            case DIALKO:
+                for (CharacterRecord p : CTX.players()) {
+                    p.status.set(Status.PARALYZED, 0);
+                    p.status.set(Status.ASLEEP, 0);
+                    for (MutableMonster m : p.summonedMonsters) {
+                        m.status().set(Status.PARALYZED, 0);
+                        m.status().set(Status.ASLEEP, 0);
+                    }
+                }
                 break;
             case SOPIC:
             case PORFIC:

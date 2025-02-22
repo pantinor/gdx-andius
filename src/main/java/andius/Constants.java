@@ -559,6 +559,7 @@ public interface Constants {
         ADVANCE,
         CAST,
         BREATH,
+        CALL_FOR_HELP,
         FLEE;
     }
 

@@ -104,10 +104,17 @@ public class Item implements Comparable<Item> {
         return Long.compare(this.id, o.id);
     }
 
+    public String briefDescription() {
+        return String.format("%s %s - %s",
+                this.type,
+                this.cursed ? "- Cursed" : "",
+                spell != null ? spell + " - " + spell.getDescription() : "None");
+    }
+
     @Override
     public String toString() {
         return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
-                String.format("%-20s", name),
+                String.format("%-20s", this.name),
                 String.format("%-8s", this.type),
                 String.format("%-8s", "" + this.cost),
                 String.format("%-2s", "" + this.damage),

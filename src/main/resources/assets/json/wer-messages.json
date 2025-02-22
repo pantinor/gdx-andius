@@ -687,26 +687,25 @@
         "id": 104,
         "text": [
             "\"Oh,  I say,  this is a  Meeting of",
-            "the Order of the Laurel!\"",
+            "the Order of the Laurel!\"\n\n",
             "Inside a  lovely gazebo  amidst the",
             "flowers of the  Inner Court sit the",
             "Masters  and   Mistresses   of  the",
-            "Laurel, all Peers of the Realm:",
+            "Laurel, all Peers of the Realm:\n",
             "Baroness Kathryn Goodwyn, Sigismund",
             "Vasa Care, Johannes von Nurenstein,",
             "Gabreilla  Maddelena Pisano,  Arwen",
-            "Evaine Merch Gwynth, and Salaamall-",
-            "ah the Corpulent."
+            "Evaine Merch Gwynth, and Salaamallah the Corpulent."
         ]
     },
     {
         "id": 105,
         "text": [
-            "\"Thou hast done nothing to advance",
-            "the Arts in  the Realm.  The Guild",
+            "\"Thou must have advanced ",
+            "the Arts in the Realm.  The Guild",
             "of Limners  especially  needs  thy",
             "aid. Do not return until thou hast",
-            "achieved some skill or craft!\""
+            "achieved some skill or craft! \n\nHave you visited the Witch in the Maze of Wandering?\""
         ]
     },
     {
@@ -963,11 +962,7 @@
             "addressing  the  Order.  Other",
             "Masters  and  Mistresses here,",
             "all  Peers of the Realm,  are:",
-            "Aravis Katheryn Delclare, Jae-",
-            "lla of Armida, Alisoun Maccoul",
-            "of Elphane,  Steffan ap Cenydd",
-            "of  Silverwing,  and  Anne  of",
-            "Hatfield."
+            "Aravis Katheryn Delclare, Jaella of Armida, Alisoun Maccoul of Elphane, Steffan ap Cenydd of  Silverwing, and Anne of Hatfield."
         ]
     },
     {
@@ -1113,11 +1108,11 @@
         "text": [
             "You have found one of the many",
             "majestic  fountains  that  are",
-            "scattered about the Castle.  A",
+            "scattered about the Castle.  \n\nA",
             "sign next to this one reads:",
             " ",
-            "\"Fountain Closed For Repairs.\"",
-            "\"   No Wading At Any Time.   \"",
+            "\"Fountain Closed For Repairs.\"\n",
+            "\"   No Wading At Any Time.   \"\n",
             "\"Keep Off The Grass As Well!\""
         ]
     },
@@ -1126,12 +1121,12 @@
         "text": [
             "You have found one of the many",
             "majestic  fountains  that  are",
-            "scattered about the Castle.  A",
+            "scattered about the Castle.  \n\nA",
             "sign next to this one reads:",
             " ",
-            "\"Fountain Open For Public Bathing.\"",
-            "\"   Lifeguard Must Be On Duty!   \"",
-            " ",
+            "\"Fountain Open For Public Bathing.\"\n",
+            "\"   Lifeguard Must Be On Duty!   \"\n",
+            " \n",
             "There is no lifeguard in sight..."
         ]
     },
@@ -1140,7 +1135,7 @@
         "text": [
             "As you bathe in this Pool, you feel",
             "strangely refreshed.  You emerge in",
-            "the very pink of good health.  Your",
+            "the very pink of good health.\n\nYour",
             "Monster allies take one look at the",
             "new YOU, sparkling clean,  smelling",
             "of wild flowers and with a blush on",
@@ -1632,14 +1627,14 @@
     {
         "id": 197,
         "text": [
-            "Aha!  A hidden room jutting out of",
-            "the Donjon\u0027s  side.  What a  great",
-            "view of the town from here. In the",
-            "room is a wizened old scholar...",
+            "Aha! \n\n A hidden room jutting out of",
+            "the Donjon\u0027s  side.  \nWhat a  great",
+            "view of the town from here. \n\nIn the",
+            "room is a wizened old scholar...\n\n",
             "\"Greetings, Werdna.  I am  Master",
             "Bertram, Curator of the Overlord\u0027s",
-            "Treasure Room. I have an item that",
-            "you dearly  require.  Tell me what",
+            "Treasure Room. \n\nI have an item that",
+            "you dearly  require.  \n\nTell me what",
             "it is, and it shall be yours!\""
         ]
     },
@@ -1647,7 +1642,9 @@
         "id": 198,
         "text": [
             "MYTHRIL GAUNTLET",
-            "MYTHRIL GLOVE"
+            "MYTHRIL GAUNTLETS",
+            "MYTHRIL GLOVE",
+            "MYTHRIL GLOVES"
         ]
     },
     {
@@ -1766,7 +1763,7 @@
             "fast!  Only a few  jars left!  Only",
             "50,000 GP a jar!   Truly the buy of",
             "a lifetime - You\u0027ll  curse  the day",
-            "you didn\u0027t get some!\""
+            "you didn\u0027t get some!  Open to trades!\""
         ]
     },
     {

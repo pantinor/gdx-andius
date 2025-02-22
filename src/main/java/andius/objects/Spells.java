@@ -89,9 +89,9 @@ public enum Spells {
         desc.put(Spells.LORTO, "Causes sharp blades to slice through a group, causing 6 to 36 points of damage");
         desc.put(Spells.MABADI, "Causes all but 1 to 8 hit points to be removed from a target");
         desc.put(Spells.MADI, "Causes all hit points to be restored and cures any condition except death");
-        desc.put(Spells.KADORTO, "Restores the dead to life, and restores all hit points, even if the character is ashes. However, if the spell fails, the character is permanently lost.");
+        desc.put(Spells.KADORTO, "Restores the dead to life, and restores all hit points, even if the character is ashes.");
         desc.put(Spells.MALIKTO, "Causes 12 to 72 hit points of damage to all monsters");
-        desc.put(Spells.DUMAPIC, "Informs you of the party's exact position from the stairs to the castle");
+        desc.put(Spells.DUMAPIC, "Informs you of the party's exact position.");
         desc.put(Spells.HALITO, "Causes a fireball to hit a monster for 1-8 points of fire damage");
         desc.put(Spells.KATINO, "Causes most of the monsters in a group to fall asleep");
         desc.put(Spells.MOGREF, "Reduces the casters armor class by 2 for the encounter");
@@ -110,7 +110,7 @@ public enum Spells {
         desc.put(Spells.MASOPIC, "Reduces the armor class of the entire party by 4");
         desc.put(Spells.ZILWAN, "Will destroy any one undead monster");
         desc.put(Spells.MAHAMAN, "Does something random, stronger than Haman. Drains the caster one experience level, and is forgotten when cast.");
-        desc.put(Spells.MALOR, "Teleports the party randomly within the current level when used in melee, but when cast in camp, you can decide exactly where you want to go. If a party teleports into stone it is LOST forever, so the spell is best used in conjunction with DUMAPIC.");
+        desc.put(Spells.MALOR, "Teleports the party to given coordinates or randomly if cast in combat.  Best used in conjunction with DUMAPIC.");
         desc.put(Spells.TILTOWAIT, "Does 10-100 hit points of damage to all monsters.");
     }
 

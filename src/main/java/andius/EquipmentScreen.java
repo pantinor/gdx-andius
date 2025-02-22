@@ -2,10 +2,12 @@ package andius;
 
 import andius.objects.Sound;
 import andius.objects.Sounds;
-import andius.dialogs.MalorDialog;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
+import andius.WizardryData.MazeCell;
+import static andius.WizardryData.WER_ITEMS;
+import andius.dialogs.TeleportDialog;
 import andius.objects.ClassType;
 import andius.objects.Icons;
 import andius.objects.Item;
@@ -27,6 +29,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -94,11 +97,13 @@ public class EquipmentScreen implements Screen, Constants {
     private ItemListing selectedItem;
     private PlayerIndex selectedPlayer;
     private SpellListing selectedSpell;
-    private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
 
     private AutoFocusScrollPane invPane, spellPane;
     private Image focusIndicator, spellFocusInd;
     private Label invDesc;
+
+    private final GlyphLayout SPDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
+    private final GlyphLayout ITEMDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
 
     public EquipmentScreen(Context context, Map map) {
         this.context = context;
@@ -200,16 +205,59 @@ public class EquipmentScreen implements Screen, Constants {
         this.use.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (selectedItem != null && selectedItem.item != null && selectedItem.item.type == ItemType.SPECIAL) {
-                    if (SpellUtil.useItem(selectedItem.item.name, selectedPlayer.character)) {
-                        
-                    } else if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
-                        map.getScreen().teleport(0, -1, 0);
+                if (selectedItem != null && selectedItem.item != null) {
+                    boolean used = false;
+
+                    if (selectedItem.item.spell != null) {
+                        SpellUtil.useItem(selectedItem.item, selectedPlayer.character);
+                        used = true;
                     }
-                    selectedPlayer.character.removeItem(selectedItem.item.id, selectedItem.item.scenarioID);
-                    selectedItem.removeActor(focusIndicator);
-                    selectedPlayer.invTable.removeActor(selectedItem);
-                    selectedItem = null;
+
+                    if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
+                        map.getScreen().teleport(0, -1, 0);//get out of jail free card
+                        used = true;
+                    }
+
+                    if (selectedItem.item.id == 4 && selectedItem.item.scenarioID == 4) {//HHG
+                        Vector3 v = new Vector3();
+                        map.getScreen().getCurrentMapCoords(v);
+                        if (v.x == 15 && v.y == 15 && v.z == 1) {
+                            if (context.partyHasItem(11, 4) != null) {//cleansing oil
+                                WizardryDungeonScreen sc = (WizardryDungeonScreen) map.getScreen();
+                                MazeCell cell1 = sc.cell(15, 15, 1);
+                                MazeCell cell2 = sc.cell(16, 15, 1);
+                                cell1.northWall = false;
+                                cell2.southWall = false;
+                                sc.addBlock(1, cell1, 15, 15, true);
+                                sc.addBlock(1, cell2, 16, 15, true);
+                                Sounds.play(Sound.EXPLOSION);
+                                selectedPlayer.character.removeItem(4, 4);
+                                mainGame.setScreen(map.getScreen());
+                            } else {
+                                Sounds.play(Sound.NEGATIVE_EFFECT);
+                            }
+                        } else {
+                            Sounds.play(Sound.NEGATIVE_EFFECT);
+                        }
+                    }
+
+                    if (used && selectedItem.item.changeChance > 0) {
+                        boolean decayed = Utils.percentChance(selectedItem.item.changeChance);
+                        if (decayed) {
+                            Item changeTo = WER_ITEMS.get(selectedItem.item.changeTo);
+                            selectedPlayer.character.removeItem(selectedItem.item.id, selectedItem.item.scenarioID);
+                            if (changeTo.id != 0) {
+                                selectedPlayer.character.inventory.add(changeTo);
+                            }
+                            selectedItem.removeActor(focusIndicator);
+                            selectedPlayer.invTable.removeActor(selectedItem);
+                            selectedItem = null;
+                        }
+                    }
+
+                    if (!used) {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                    }
                 } else {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 }
@@ -270,7 +318,7 @@ public class EquipmentScreen implements Screen, Constants {
         Label presets = new Label("Spell Presets", Andius.skin, "default-16");
         inventory.setBounds(512, Andius.SCREEN_HEIGHT - 160, 20, 100);
         splBk.setBounds(770, Andius.SCREEN_HEIGHT - 160, 20, 100);
-        presets.setBounds(826, Andius.SCREEN_HEIGHT - 735, 20, 100);
+        presets.setBounds(826, 45, 20, 100);
         stage.addActor(inventory);
         stage.addActor(splBk);
         stage.addActor(presets);
@@ -370,7 +418,11 @@ public class EquipmentScreen implements Screen, Constants {
         Andius.font16.draw(batch, "LCK", x, y - 100);
 
         if (selectedSpell != null) {
-            Andius.font12.draw(batch, SPDESCLAYOUT, 520, Andius.SCREEN_HEIGHT - 579);
+            Andius.font12.draw(batch, SPDESCLAYOUT, 775, 75);
+        }
+
+        if (selectedItem != null) {
+            Andius.font12.draw(batch, ITEMDESCLAYOUT, 500, Andius.SCREEN_HEIGHT - 579);
         }
 
         batch.end();
@@ -454,9 +506,11 @@ public class EquipmentScreen implements Screen, Constants {
                         if (event.getTarget() instanceof ItemListing) {
                             selectedItem = (ItemListing) event.getTarget();
                             selectedItem.addActor(focusIndicator);
+                            ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
                         } else if (event.getTarget().getParent() instanceof ItemListing) {
                             selectedItem = (ItemListing) event.getTarget().getParent();
                             selectedItem.addActor(focusIndicator);
+                            ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
                         }
                     }
 
@@ -476,7 +530,7 @@ public class EquipmentScreen implements Screen, Constants {
                         if (!character.isDisabled()) {
                             if (spell.getArea() != SpellArea.COMBAT && character.canCast(spell)) {
                                 if (spell == Spells.MALOR) {
-                                    new MalorDialog(character, map.getScreen()).show(stage);
+                                    new TeleportDialog(context, map.getScreen()).show(stage);
                                 } else {
                                     SpellUtil.campCast(map.getScreen(), context, character, spell);
                                 }
