@@ -4,13 +4,20 @@ import andius.Constants;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.EquipmentScreen;
+import andius.WizardryCombatScreen;
+import static andius.WizardryData.PMO_ITEMS_MAP;
+import static andius.WizardryData.PMO_MONSTERS;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.WER_ITEMS;
+import andius.objects.ClassType;
 import andius.objects.DoGooder;
 import andius.objects.SaveGame;
+import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import utils.Utils;
 
 public class Wiz4CombatTestMain extends Game {
 
@@ -31,27 +38,44 @@ public class Wiz4CombatTestMain extends Game {
             a.create();
 
             Context ctx = new Context();
-            SaveGame sg = SaveGame.read(SAVE_FILENAME);
-            ctx.setSaveGame(sg);
+            //SaveGame sg = SaveGame.read(SAVE_FILENAME);
+            //ctx.setSaveGame(sg);
+            ctx.setSaveGame(new SaveGame());
+            ctx.saveGame.players = new CharacterRecord[6];
 
-            for (int j = 0; j < 6; j++) {
-//                ctx.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-//                ctx.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
-//                for (Spells s : Spells.values()) {
-//                    ctx.saveGame.players[j].knownSpells.add(s);
-//                }
+            for (int j = 0; j < ctx.saveGame.players.length; j++) {
+                ctx.saveGame.players[j] = new CharacterRecord();
+                ctx.saveGame.players[j].name = "player" + j;
+                ctx.saveGame.players[j].classType = ClassType.MAGE;
+                ctx.saveGame.players[j].level = 1;
+                ctx.saveGame.players[j].hp = 12;
+                ctx.saveGame.players[j].maxhp = 12;
+                ctx.saveGame.players[j].gold = 3000;
+
+                ctx.saveGame.players[j].str = 8;
+                ctx.saveGame.players[j].intell = 8;
+                ctx.saveGame.players[j].piety = 8;
+                ctx.saveGame.players[j].vitality = 8;
+                ctx.saveGame.players[j].agility = 8;
+                ctx.saveGame.players[j].luck = 8;
+
+                ctx.saveGame.players[j].armor = PMO_ITEMS_MAP.get("ROBES");
+                ctx.saveGame.players[j].weapon = PMO_ITEMS_MAP.get("STAFF");
+                //ctx.saveGame.players[j].weapon = PMO_ITEMS_MAP.get("MAGIC BOW");
+                //ctx.saveGame.players[j].helm = PMO_ITEMS_MAP.get("HELM");
+                //ctx.saveGame.players[j].shield = PMO_ITEMS_MAP.get("LARGE SHIELD");
+                //ctx.saveGame.players[j].glove = PMO_ITEMS_MAP.get("SILVER GLOVES");
+                //ctx.saveGame.players[j].item1 = PMO_ITEMS_MAP.get("ROD OF FLAME");
+                //ctx.saveGame.players[j].item2 = PMO_ITEMS_MAP.get("WERDNAS AMULET");
+
+                ctx.saveGame.players[j].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+                ctx.saveGame.players[j].clericPoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+                
+                ctx.saveGame.players[j].knownSpells.add(Spells.values()[Utils.RANDOM.nextInt(Spells.values().length)]);
+                
             }
 
-            ctx.players()[0].inventory.add(WER_ITEMS.get(7));
-
-            for (DoGooder dg : WER4_CHARS) {
-                for (int i : dg.items) {
-                    if (i == 11) {
-                        int x = 0;
-                    }
-                }
-            }
-
+            //ctx.players()[0].inventory.add(WER_ITEMS.get(7));
 //            List<MutableMonster> mms = new ArrayList<>();
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
@@ -82,8 +106,9 @@ public class Wiz4CombatTestMain extends Game {
 //            String json = gson.toJson(WER4_CHARS);
 //            System.out.println(json);
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(375)));
+            setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(6), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
-            setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
+            //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WORLD, 1, 0, 5));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));

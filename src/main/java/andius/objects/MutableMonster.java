@@ -32,7 +32,7 @@ public class MutableMonster implements Mutable {
     public Object baseType() {
         return this.monster;
     }
-    
+
     public Monster monster() {
         return this.monster;
     }
@@ -206,7 +206,9 @@ public class MutableMonster implements Mutable {
 
     @Override
     public void adjustHealthCursor() {
-        this.healthCursor.adjust(currentHitPoints, maxHitPoints);
+        if (this.healthCursor != null) {
+            this.healthCursor.adjust(currentHitPoints, maxHitPoints);
+        }
     }
 
     public double getPercentDamaged() {

@@ -29,6 +29,15 @@ public class Context {
         return this.saveGame.players;
     }
 
+    public boolean allDead() {
+        for (CharacterRecord cr : this.saveGame.players) {
+            if (!cr.isDead()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public CharacterRecord pickRandomEnabledPlayer() {
         List<CharacterRecord> enabled = new ArrayList<>();
         for (CharacterRecord cr : this.saveGame.players) {

@@ -17,7 +17,6 @@ import static andius.WizardryData.getMessage;
 import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
-import andius.objects.MutableMonster;
 import utils.MoveCameraAction;
 import utils.PanCameraAction;
 import andius.objects.SaveGame;
@@ -84,10 +83,11 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private final Color darkness = Color.DARK_GRAY;
     private final Color flame = new Color(0xf59414ff);
-    private final Color daylight = new Color(1f, 0.95f, 0.8f, 1f); // Soft warm white color
 
     private PointLight torch;
     boolean isTorchOn = false;
+    private DirectionalLight directionalLightDown;
+    private DirectionalLight directionalLightUp;
 
     private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
     private final List<ModelInstance> floor = new ArrayList<>();
@@ -132,7 +132,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.environment.add(this.torch);
 
         this.outside.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1.f));
-        this.outside.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.5f);
+        this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 1f, 0.8f, 0.5f);
+        this.outside.add(this.directionalLightDown);
+        this.outside.add(this.directionalLightUp);
 
         this.modelBatch = new ModelBatch();
         this.batch = new SpriteBatch();
@@ -180,6 +183,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
         v.set(x, y, currentLevel);
+    }
+
+    public MazeCell currentCell() {
+        int x = (Math.round(currentPos.x) - 1);
+        int y = (Math.round(currentPos.z) - 1);
+        return this.map.scenario().levels()[currentLevel].cells[x][y];
     }
 
     public MazeCell cell(int x, int y, int z) {
@@ -341,6 +350,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         Model grassModel = builder.createBox(1.1f, 0.1f, 1.1f, grazz, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
         Model ceilingModel = builder.createBox(1.1f, 0.1f, 1.1f, dirt, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
 
+        Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
+        sky.nodes.get(0).scale.set(.14f, .14f, .14f);
+        sky.nodes.get(0).translation.set(10, -3, 10);
+
         for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
             for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
                 floor.add(new ModelInstance(floorModel, x - 1.5f, -.05f, y - 1.5f));
@@ -396,6 +409,19 @@ public class WizardryDungeonScreen extends BaseScreen {
                     addCastleCell(this.wiz4CastleLevel13ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, -1.75f);
                     addCastleCell(this.wiz4CastleLevel13ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, -.65f);
                     addCastleCell(this.wiz4CastleLevel13ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, .5f);
+                }
+            }
+
+            ModelInstance sk = new ModelInstance(sky);
+            this.wiz4CastleLevel0ModelInstances.add(sk);
+            this.wiz4CastleLevel12ModelInstances.add(sk);
+            this.wiz4CastleLevel13ModelInstances.add(sk);
+
+            for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
+                for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+                    wiz4CastleLevel0ModelInstances.add(new ModelInstance(grassModel, x, -.06f, y));
+                    wiz4CastleLevel12ModelInstances.add(new ModelInstance(grassModel, x, -1.16f, y));
+                    wiz4CastleLevel13ModelInstances.add(new ModelInstance(grassModel, x, -2.26f, y));
                 }
             }
 
@@ -1539,18 +1565,19 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
         } else {
-            boolean wandering = destCell.wanderingEncounterID != -1 && (destCell.hasTreasureChest || Utils.randomBoolean());
+            boolean treasure = destCell.hasTreasureChest || Utils.percentChance(33);
+            boolean wandering = destCell.wanderingEncounterID != -1 && treasure;
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
-                andius.objects.Actor actor = new andius.objects.Actor(monster.name, null);
-                MutableMonster mm = new MutableMonster(monster);
-                actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
-
-                TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-                TiledMap tm = loader.load("assets/data/combat1.tmx");
-                CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
-                mainGame.setScreen(cs);
+                //andius.objects.Actor actor = new andius.objects.Actor(monster.name, null);
+                //MutableMonster mm = new MutableMonster(monster);
+                //actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+                //TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+                //TiledMap tm = loader.load("assets/data/combat1.tmx");
+                //CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
+                //mainGame.setScreen(cs);
+                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
             }
         }
     }
@@ -1631,6 +1658,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             int x = (Math.round(currentPos.x) - 1);
             int y = (Math.round(currentPos.z) - 1);
 
+            this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID = -1;
+
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
                 if (this.map == Map.WIZARDRY4) {
@@ -1646,19 +1675,22 @@ public class WizardryDungeonScreen extends BaseScreen {
                     DoGooder dg = (DoGooder) opponent;
                     for (int id : dg.partyMembers) {
                         if (!this.map.scenario().levels()[currentLevel].defeated.contains(id)) {
+                            //this is not persisted to save file
                             this.map.scenario().levels()[currentLevel].defeated.add(id);
                         }
                     }
                 }
             }
 
-            List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
-            if (removedMonsters == null) {
-                removedMonsters = new ArrayList<>();
-                CTX.saveGame.removedActors.put(this.map, removedMonsters);
+            if (this.map != Map.WIZARDRY4) {
+                List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
+                if (removedMonsters == null) {
+                    removedMonsters = new ArrayList<>();
+                    CTX.saveGame.removedActors.put(this.map, removedMonsters);
+                }
+                //pesisted to save file
+                removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
             }
-
-            removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
         }
     }
 

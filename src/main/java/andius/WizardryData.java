@@ -2,6 +2,7 @@ package andius;
 
 import andius.dialogs.BathInPoolDialog;
 import andius.dialogs.BuyStTreborsRumpDialog;
+import andius.dialogs.DukesDialog;
 import andius.dialogs.WitchInMazeDialog;
 import andius.dialogs.GatesOfHellDialog;
 import andius.dialogs.VanishingCreamDialog;
@@ -1645,11 +1646,25 @@ public class WizardryData {
                         c.encounterID = -1;
                         c.lair = false;
                     }
-                    if (x == 9 && y == 13 && l.level == 1) {//von halstern chivalry
-                        c.message = new Message(getMessage(WER_MESSAGES, 110), getMessage(WER_MESSAGES, 111));
+                    if (x == 16 && y == 9 && l.level == 1) {//captains council
+                        c.message = getMessage(WER_MESSAGES, 111);
                         c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
                         c.encounterGiveItem = 110;//rallying horn
                         c.encounterTradeSuccessMessage = new Message("");
+                        c.encounterID = 454;
+                        c.tbd = false;
+                    }
+                    if (x == 16 && y == 9 && l.level == 13) {//council of barons
+                        c.message = new Message(getMessage(WER_MESSAGES, 143), getMessage(WER_MESSAGES, 144));
+                        c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
+                        c.encounterGiveItem = 111;//signet ring
+                        c.encounterTradeSuccessMessage = new Message("");
+                        c.encounterID = 460;
+                        c.tbd = false;
+                    }
+                    if (x == 9 && y == 13 && l.level == 1) {//von halstern chivalry
+                        c.message = new Message(getMessage(WER_MESSAGES, 110));
+                        c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
                         c.encounterID = 442;
                         c.tbd = false;
                     }
@@ -1717,6 +1732,13 @@ public class WizardryData {
                         c.encounterID = 418;
                         c.tbd = false;
                     }
+                    if (x == 15 && y == 9 && l.level == 14) {//Great Dukes of the Realm
+                        c.function = (Context ctx, BaseScreen screen) -> new DukesDialog(ctx, screen);
+                        c.tbd = false;
+                        c.lair = false;
+                        c.encounterID = -1;
+                        c.message = null;
+                    }
                     if (x == 17 && y == 9 && l.level == 14) {
                         c.itemObtainedFromRiddle = 112;//mythril gloves
                         c.encounterID = -1;
@@ -1724,6 +1746,11 @@ public class WizardryData {
                         c.northWall = false;
                         c.eastWall = false;
                         c.westWall = false;
+                    }
+                    if (x == 9 && y == 11 && l.level == 14) {
+                        c.message = new Message(getMessage(WER_MESSAGES, 204), getMessage(WER_MESSAGES, 205));
+                        c.itemObtained = 14;//void transducer
+                        c.tbd = false;
                     }
                 }
             }

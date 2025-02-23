@@ -1,9 +1,9 @@
 
-import static andius.WizardryData.DUNGEON_DIM;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
@@ -18,17 +18,24 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.ArrayList;
 import java.util.List;
+import utils.Utils;
 
 public class GridWithAxes implements ApplicationListener, InputProcessor {
 
     private ModelBuilder builder = new ModelBuilder();
     private ModelBatch modelBatch;
-    private ModelBatch shadowBatch;
+    private DirectionalLight directionalLightDown;
+    private DirectionalLight directionalLightUp;
+    private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
     private CameraInputController inputController;
     private PerspectiveCamera cam;
@@ -49,7 +56,7 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
 
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.near = 0.1f;
-        cam.far = 10;
+        cam.far = 1000;
         cam.update();
 
         inputController = new CameraInputController(cam);
@@ -60,9 +67,14 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
 
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1.f));
-        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.5f);
+        this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 1f, 0.8f, 0.5f);
+        environment.add(this.directionalLightDown);
+        environment.add(this.directionalLightUp);
 
         modelBatch = new ModelBatch();
+
+        shapeRenderer = new ShapeRenderer();
 
         createAxes();
 
@@ -98,6 +110,10 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, 2.85f, 0 + .5f));
         this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 3.35f, 0 + .5f));
 
+        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
+        Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
+        sky.nodes.get(0).scale.set(.02f, .02f, .02f);
+        this.modelInstances.add(new ModelInstance(sky));
     }
 
     @Override
@@ -116,6 +132,20 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         }
 
         modelBatch.end();
+
+        Vector3 startPoint = new Vector3(0, 0, 0);
+        Vector3 directionDown = new Vector3(directionalLightDown.direction).nor();
+        Vector3 directionUp = new Vector3(directionalLightUp.direction).nor();
+        Vector3 endPointDown = new Vector3(startPoint).add(directionDown.scl(100));
+        Vector3 endPointUp = new Vector3(startPoint).add(directionUp.scl(100));
+
+        shapeRenderer.setProjectionMatrix(cam.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.line(startPoint, endPointDown);
+        shapeRenderer.setColor(Color.GREEN);
+        shapeRenderer.line(startPoint, endPointUp);
+        shapeRenderer.end();
     }
 
     final float GRID_MIN = -3.5f;
