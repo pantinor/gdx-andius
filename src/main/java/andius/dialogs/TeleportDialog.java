@@ -2,13 +2,7 @@ package andius.dialogs;
 
 import andius.BaseScreen;
 import andius.Context;
-import andius.objects.Sound;
-import andius.objects.Sounds;
-import andius.WizardryData.Scenario;
-import static andius.WizardryData.getMessage;
 import andius.objects.Dialog;
-import andius.objects.Item;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import java.util.regex.Matcher;
@@ -23,7 +17,7 @@ public class TeleportDialog extends Dialog {
         Vector3 v = new Vector3();
         screen.getCurrentMapCoords(v);
         scrollPane.add("Current coordinates are");
-        scrollPane.add(String.format("Level [%d]", (int) v.z));
+        scrollPane.add(String.format("Level [%d]", (int) v.z + 1));
         scrollPane.add(String.format("North [%d]", (int) v.x));
         scrollPane.add(String.format("East [%d]", (int) v.y));
 
@@ -48,9 +42,8 @@ public class TeleportDialog extends Dialog {
                         int vertical = Integer.parseInt(coords[0]);
                         int northsouth = Integer.parseInt(coords[1]);
                         int eastwest = Integer.parseInt(coords[2]);
-                        screen.teleport(vertical, northsouth, eastwest);
                         hide();
-                        input.setTextFieldListener(null);
+                        screen.teleport(vertical, northsouth, eastwest);
                     } else {
                         scrollPane.add("Nothing is happening");
                     }

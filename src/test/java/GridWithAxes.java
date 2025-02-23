@@ -42,6 +42,8 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
     private Environment environment;
     private final List<ModelInstance> modelInstances = new ArrayList<>();
 
+    ModelInstance letterMInstance;
+
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "GridWithAxes";
@@ -78,7 +80,7 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
 
         createAxes();
 
-        cam.position.set(-1, 1, 0);
+        cam.position.set(2f, 2f, 2f);
         cam.lookAt(0, 0, 0);
 
         Material gr = new Material(ColorAttribute.createDiffuse(Color.GREEN));
@@ -90,31 +92,36 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         Model boxModel = builder.createBox(1.0f, 1.0f, 1.0f, bl, VertexAttributes.Usage.Position | VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.Normal);
         Model ceilingModel = builder.createBox(1.2f, 0.1f, 1.2f, red, VertexAttributes.Usage.Position | VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.Normal);
 
-        this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -2.25f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, -1.75f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, -1.25f, 0 + .5f));
-
-        this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -1.15f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, -.65f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, -.15f, 0 + .5f));
-
-        this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -.05f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, .5f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 1.05f, 0 + .5f));
-
-        this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, 1.15f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, 1.7f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 2.25f, 0 + .5f));
-
-        this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, 2.35f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, 2.85f, 0 + .5f));
-        this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 3.35f, 0 + .5f));
-
+        //this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -2.25f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, -1.75f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, -1.25f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -1.15f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, -.65f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, -.15f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, -.05f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, .5f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 1.05f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, 1.15f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, 1.7f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 2.25f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(floorModel, 0 + .5f, 2.35f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(boxModel, 0 + .5f, 2.85f, 0 + .5f));
+        //this.modelInstances.add(new ModelInstance(ceilingModel, 0 + .5f, 3.35f, 0 + .5f));
         ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
         Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
         sky.nodes.get(0).scale.set(.02f, .02f, .02f);
-        this.modelInstances.add(new ModelInstance(sky));
+        //this.modelInstances.add(new ModelInstance(sky));
+
+        Model letterM = gloader.loadModel(Gdx.files.classpath("assets/graphics/letter-m.g3db"));
+        letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
+        letterM.nodes.get(0).translation.set(0, 0, 0);
+        letterM.nodes.get(0).parts.first().material = gr;
+        letterMInstance = new ModelInstance(letterM, .5f, .5f, .5f);
+        this.modelInstances.add(letterMInstance);
+
     }
+
+    Vector3 tmp = new Vector3();
 
     @Override
     public void render() {
@@ -123,6 +130,7 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
+        letterMInstance.transform.rotate(Vector3.Y, 45f * Gdx.graphics.getDeltaTime());
         modelBatch.begin(cam);
 
         modelBatch.render(axesInstance);
@@ -133,23 +141,23 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
 
         modelBatch.end();
 
-        Vector3 startPoint = new Vector3(0, 0, 0);
-        Vector3 directionDown = new Vector3(directionalLightDown.direction).nor();
-        Vector3 directionUp = new Vector3(directionalLightUp.direction).nor();
-        Vector3 endPointDown = new Vector3(startPoint).add(directionDown.scl(100));
-        Vector3 endPointUp = new Vector3(startPoint).add(directionUp.scl(100));
-
-        shapeRenderer.setProjectionMatrix(cam.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.line(startPoint, endPointDown);
-        shapeRenderer.setColor(Color.GREEN);
-        shapeRenderer.line(startPoint, endPointUp);
-        shapeRenderer.end();
+//        Vector3 startPoint = new Vector3(0, 0, 0);
+//        Vector3 directionDown = new Vector3(directionalLightDown.direction).nor();
+//        Vector3 directionUp = new Vector3(directionalLightUp.direction).nor();
+//        Vector3 endPointDown = new Vector3(startPoint).add(directionDown.scl(100));
+//        Vector3 endPointUp = new Vector3(startPoint).add(directionUp.scl(100));
+//
+//        shapeRenderer.setProjectionMatrix(cam.combined);
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.RED);
+//        shapeRenderer.line(startPoint, endPointDown);
+//        shapeRenderer.setColor(Color.GREEN);
+//        shapeRenderer.line(startPoint, endPointUp);
+//        shapeRenderer.end();
     }
 
-    final float GRID_MIN = -3.5f;
-    final float GRID_MAX = 3.5f;
+    final float GRID_MIN = -1f;
+    final float GRID_MAX = 1f;
     final float GRID_STEP = .1f;
     public Model axesModel;
     public ModelInstance axesInstance;

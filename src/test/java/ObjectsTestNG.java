@@ -176,12 +176,15 @@ public class ObjectsTestNG {
         WizardryData.Scenario sc = WizardryData.Scenario.WER;
 
         for (MazeLevel l : sc.levels()) {
-            System.out.println(WER_LEVEL_DESC[l.level - 1]);
+            System.out.printf("%d - %s\n", l.level - 1, WER_LEVEL_DESC[l.level - 1]);
             for (int x = 0; x < DUNGEON_DIM; x++) {
                 for (int y = 0; y < DUNGEON_DIM; y++) {
                     WizardryData.MazeCell c = l.cells[x][y];
                     if (c.stairs || c.chute || c.teleport) {
                         String hx = String.format("%04x", (short) c.addressTo.column);
+                    }
+                    if (c.summoningCircle != null) {
+                        System.out.printf("\t%d - %d %s\n", x, y, c.summoningCircle);
                     }
                 }
             }

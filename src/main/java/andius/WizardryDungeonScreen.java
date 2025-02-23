@@ -76,7 +76,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private Model ladderModel;
     private Model doorModel, pentagram;
-    private Model wall, manhole;
+    private Model wall, manhole, letterM;
 
     private final Environment environment = new Environment();
     private final Environment outside = new Environment();
@@ -90,12 +90,12 @@ public class WizardryDungeonScreen extends BaseScreen {
     private DirectionalLight directionalLightUp;
 
     private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
-    private final List<ModelInstance> floor = new ArrayList<>();
-    private final List<ModelInstance> ceiling = new ArrayList<>();
+    private final List<DungeonTileModelInstance> floor = new ArrayList<>();
+    private final List<DungeonTileModelInstance> ceiling = new ArrayList<>();
 
-    private final List<ModelInstance> wiz4CastleLevel0ModelInstances = new ArrayList<>();
-    private final List<ModelInstance> wiz4CastleLevel12ModelInstances = new ArrayList<>();
-    private final List<ModelInstance> wiz4CastleLevel13ModelInstances = new ArrayList<>();
+    private final List<DungeonTileModelInstance> wiz4CastleLevel0ModelInstances = new ArrayList<>();
+    private final List<DungeonTileModelInstance> wiz4CastleLevel12ModelInstances = new ArrayList<>();
+    private final List<DungeonTileModelInstance> wiz4CastleLevel13ModelInstances = new ArrayList<>();
 
     private final TextureRegion[][] arrows = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/arrows.png")), 15, 15);
 
@@ -335,6 +335,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         pentagram.nodes.get(0).rotation.set(0, 0, 0, 1);
         pentagram.nodes.get(0).translation.set(0, -.17f, 0);
         pentagram.nodes.get(0).parts.first().material = red;
+        letterM = gloader.loadModel(Gdx.files.classpath("assets/graphics/letter-m.g3db"));
+        letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
+        letterM.nodes.get(0).translation.set(0, 0, 0);
+        letterM.nodes.get(0).parts.first().material = gr;
 
         wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
         Model walldoor = builder.createBox(1.090f, 1, 0.05f, mortar2, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
@@ -356,12 +360,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
             for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                floor.add(new ModelInstance(floorModel, x - 1.5f, -.05f, y - 1.5f));
+                floor.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, x - 1.5f, -.05f, y - 1.5f));
             }
         }
         for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
             for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                ceiling.add(new ModelInstance(ceilingModel, x - 1.5f, 1.05f, y - 1.5f));
+                ceiling.add(new DungeonTileModelInstance(ceilingModel, 0, 0f, 0f, x - 1.5f, 1.05f, y - 1.5f));
             }
         }
 
@@ -412,16 +416,16 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
 
-            ModelInstance sk = new ModelInstance(sky);
+            DungeonTileModelInstance sk = new DungeonTileModelInstance(sky, 0, 0, 0);
             this.wiz4CastleLevel0ModelInstances.add(sk);
             this.wiz4CastleLevel12ModelInstances.add(sk);
             this.wiz4CastleLevel13ModelInstances.add(sk);
 
             for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
                 for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
-                    wiz4CastleLevel0ModelInstances.add(new ModelInstance(grassModel, x, -.06f, y));
-                    wiz4CastleLevel12ModelInstances.add(new ModelInstance(grassModel, x, -1.16f, y));
-                    wiz4CastleLevel13ModelInstances.add(new ModelInstance(grassModel, x, -2.26f, y));
+                    wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -.06f, y));
+                    wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -1.16f, y));
+                    wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -2.26f, y));
                 }
             }
 
@@ -448,29 +452,21 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         //prune uneeded
-        Iterator<ModelInstance> iter = floor.iterator();
-        Iterator<ModelInstance> iter2 = ceiling.iterator();
-        Iterator<DungeonTileModelInstance> iter3 = modelInstances.iterator();
-        while (iter.hasNext()) {
-            ModelInstance mi = iter.next();
-            if (mi.transform.val[Matrix4.M03] > 30 || mi.transform.val[Matrix4.M23] < -10
-                    || mi.transform.val[Matrix4.M03] < -10 || mi.transform.val[Matrix4.M23] > 30) {
-                iter.remove();
-            }
-        }
-        while (iter2.hasNext()) {
-            ModelInstance mi = iter2.next();
-            if (mi.transform.val[Matrix4.M03] > 30 || mi.transform.val[Matrix4.M23] < -10
-                    || mi.transform.val[Matrix4.M03] < -10 || mi.transform.val[Matrix4.M23] > 30) {
-                iter2.remove();
-            }
-        }
-        while (iter3.hasNext()) {
-            DungeonTileModelInstance dmi = iter3.next();
-            if (dmi.getX() > 30 || dmi.getY() < -10 || dmi.getX() < -10 || dmi.getY() > 30) {
-                iter3.remove();
-            }
-        }
+        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
+                || mi.transform.val[Matrix4.M23] < -10
+                || mi.transform.val[Matrix4.M03] < -10
+                || mi.transform.val[Matrix4.M23] > 30);
+
+        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
+                || mi.transform.val[Matrix4.M23] < -10
+                || mi.transform.val[Matrix4.M03] < -10
+                || mi.transform.val[Matrix4.M23] > 30);
+
+        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
+                || mi.transform.val[Matrix4.M23] < -10
+                || mi.transform.val[Matrix4.M03] < -10
+                || mi.transform.val[Matrix4.M23] > 30);
+
     }
 
     private void addBlock(int level, MazeCell cell, float x, float y) {
@@ -549,7 +545,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 modelInstances.add(instance);
             } else {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 0, 360).trn(x + .5f, z, y + .025f);
+                instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
                 modelInstances.add(instance);
             }
         }
@@ -569,6 +565,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (cell.summoningCircle != null) {
             modelInstances.add(new DungeonTileModelInstance(pentagram, level, x, y, x + .5f, 0, y + .5f));
         }
+        if (cell.message != null || cell.function != null) {
+            modelInstances.add(new DungeonTileModelInstance(letterM, level, x, y, x + .5f, .5f, y + .5f, true));
+        }
     }
 
     private void rotateBlock(int level, MazeCell cell, float x, float y) {
@@ -577,22 +576,22 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
     }
 
-    private void castleFloorAndCeiling(List<ModelInstance> list, TiledMapTileLayer layer, Model flm, Model grm, float z) {
+    private void castleFloorAndCeiling(List<DungeonTileModelInstance> list, TiledMapTileLayer layer, Model flm, Model grm, float z) {
         for (int x = 0; x < DUNGEON_DIM; x++) {
             for (int y = 0; y < DUNGEON_DIM; y++) {
                 TiledMapTileLayer.Cell c = layer.getCell(x, DUNGEON_DIM - 1 - y);
                 if (c != null) {
                     if (c.getTile().getId() == 993) {
-                        list.add(new ModelInstance(grm, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
+                        list.add(new DungeonTileModelInstance(grm, 0, 0, 0, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
                     } else {
-                        list.add(new ModelInstance(flm, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
+                        list.add(new DungeonTileModelInstance(flm, 0, 0, 0, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
                     }
                 }
             }
         }
     }
 
-    private void addCastleCell(List<ModelInstance> list, int level, MazeCell cell, float x, float y, float z) {
+    private void addCastleCell(List<DungeonTileModelInstance> list, int level, MazeCell cell, float x, float y, float z) {
 
         if (cell.northWall) {
             DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
@@ -648,12 +647,11 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.westDoor) {
             if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-                instance.transform.setToTranslation(x + .5f, z, y + .025f);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y, x + .5f, z, y + .025f);
                 list.add(instance);
             } else {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 0, 360).trn(x + .5f, z, y + .025f);
+                instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
                 list.add(instance);
             }
         }
@@ -667,6 +665,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
+        if (cell.message != null || cell.function != null) {
+            list.add(new DungeonTileModelInstance(letterM, level, x, y, x + .5f, z, y + .5f, true));
+        }
     }
 
     @Override
@@ -701,21 +702,21 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             for (DungeonTileModelInstance i : modelInstances) {
                 if (i.getLevel() == currentLevel) {
-                    modelBatch.render(i, environment);
+                    i.render(modelBatch, environment);
                 }
             }
         } else {
             if (this.currentLevel == 0) {
-                for (ModelInstance i : wiz4CastleLevel0ModelInstances) {
-                    modelBatch.render(i, outside);
+                for (DungeonTileModelInstance i : wiz4CastleLevel0ModelInstances) {
+                    i.render(modelBatch, outside);
                 }
             } else if (this.currentLevel == 12) {
-                for (ModelInstance i : this.wiz4CastleLevel12ModelInstances) {
-                    modelBatch.render(i, outside);
+                for (DungeonTileModelInstance i : this.wiz4CastleLevel12ModelInstances) {
+                    i.render(modelBatch, outside);
                 }
             } else if (this.currentLevel == 13) {
-                for (ModelInstance i : this.wiz4CastleLevel13ModelInstances) {
-                    modelBatch.render(i, outside);
+                for (DungeonTileModelInstance i : this.wiz4CastleLevel13ModelInstances) {
+                    i.render(modelBatch, outside);
                 }
             }
         }
@@ -786,7 +787,10 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.setColor(Color.RED);
                     pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 5);
                 }
-
+                if (cell.wanderingEncounterID != -1) {
+                    pixmap.setColor(Color.PINK);
+                    pixmap.fillCircle(x * MINI_DIM + MINI_DIM / 2, y * MINI_DIM + MINI_DIM / 2, 3);
+                }
                 if (cell.message != null || cell.function != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
@@ -1169,6 +1173,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             try {
                 move(cell, Direction.reverse(currentDir), x, y, skipProgression);
             } catch (Throwable e) {
+                e.printStackTrace();
                 partyDeath();
             }
             return false;
@@ -1226,6 +1231,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             try {
                 pass(x, y);
             } catch (Throwable e) {
+                e.printStackTrace();
                 partyDeath();
             }
 
@@ -1257,6 +1263,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (CTX.partyHasItem(5, 4) == null) {//winged boots
                 CTX.damageGroup(destinationCell.damage);
                 Sounds.play(Sound.PC_STRUCK);
+                if (this.map == Map.WIZARDRY4 && (this.currentLevel == 12 || this.currentLevel == 13)) {
+                    teleport(new MazeAddress(0, dx, dy), false);
+                }
             }
         }
 
@@ -1545,9 +1554,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                         Sounds.play(Sound.POSITIVE_EFFECT);
                     }
                 } else {
-                    DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
-                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                    mainGame.setScreen(cs);
+                    //DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
+                    //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                    //mainGame.setScreen(cs);
                 }
             } else {
                 int wanderingEncounterID = -1;
@@ -1557,9 +1566,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                         wanderingEncounterID = -1;
                     }
                     if (wanderingEncounterID > 0) {
-                        DoGooder dogooder = this.map.scenario().characters().get(wanderingEncounterID);
-                        Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                        mainGame.setScreen(cs);
+                        //DoGooder dogooder = this.map.scenario().characters().get(wanderingEncounterID);
+                        //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                        //mainGame.setScreen(cs);
                     }
                 }
             }
@@ -1577,7 +1586,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 //TiledMap tm = loader.load("assets/data/combat1.tmx");
                 //CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
                 //mainGame.setScreen(cs);
-                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
+                //mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
             }
         }
     }
@@ -1604,6 +1613,35 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (level < 0) {
             level = 0;
+        }
+        if (this.map == Map.WIZARDRY4) {
+            //Malor works differently in W4, where you are allowed to malor depends on how far you have progressed in the game.
+            boolean failed = false;
+            if (level == 9 && CTX.saveGame.players[0].level < 2) {
+                failed = true;
+            } else if (level == 8 && CTX.saveGame.players[0].level < 3) {
+                failed = true;
+            } else if (level == 7 && CTX.saveGame.players[0].level < 4) {
+                failed = true;
+            } else if (level == 6 && CTX.saveGame.players[0].level < 5) {
+                failed = true;
+            } else if (level == 5 && CTX.saveGame.players[0].level < 6) {
+                failed = true;
+            } else if (level == 4 && CTX.saveGame.players[0].level < 7) {
+                failed = true;
+            } else if (level == 3 && CTX.saveGame.players[0].level < 8) {
+                failed = true;
+            } else if (level == 2 && CTX.saveGame.players[0].level < 9) {
+                failed = true;
+            } else if (level == 1 && CTX.saveGame.players[0].level < 10) {
+                failed = true;
+            } else if ((level == 0 || level >= 11) && !CTX.saveGame.riddles.get(Map.WIZARDRY4).contains(new AnsweredRiddle(0, 1, 9))) {
+                failed = true;//trebur sux riddle must be answered before malor can be used to the castle levels and beyond
+            }
+            if (failed) {
+                Sounds.play(Sound.FLEE);
+                return;
+            }
         }
         teleport(new MazeAddress(level, x, y), true);
     }
@@ -1704,12 +1742,18 @@ public class WizardryDungeonScreen extends BaseScreen {
         private final int level;
         private final float cx;
         private final float cy;
+        private boolean rotates;
 
         public DungeonTileModelInstance(Model model, int level, float cx, float cy) {
             super(model);
             this.level = level;
             this.cx = cx;
             this.cy = cy;
+        }
+
+        public DungeonTileModelInstance(Model model, int level, float cx, float cy, float x, float y, float z, boolean rotates) {
+            this(model, level, cx, cy, x, y, z);
+            this.rotates = rotates;
         }
 
         public DungeonTileModelInstance(Model model, int level, float cx, float cy, float x, float y, float z) {
@@ -1724,20 +1768,19 @@ public class WizardryDungeonScreen extends BaseScreen {
             return level;
         }
 
-        public float getX() {
-            return this.transform.val[Matrix4.M03];
-        }
-
-        public float getY() {
-            return this.transform.val[Matrix4.M23];
-        }
-
         public float getCx() {
             return cx;
         }
 
         public float getCy() {
             return cy;
+        }
+
+        public void render(ModelBatch batch, Environment env) {
+            if (this.rotates) {
+                this.transform.rotate(Vector3.Y, 45f * Gdx.graphics.getDeltaTime());
+            }
+            batch.render(this, env);
         }
 
     }

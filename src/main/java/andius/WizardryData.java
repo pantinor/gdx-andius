@@ -1619,10 +1619,13 @@ public class WizardryData {
                         c.message = getMessage(WER_MESSAGES, 120);
                         c.tbd = false;
                     }
+                    if (x == 1 && y == 9 && l.level == 1) {
+                        c.encounterID = -1;
+                    }
                     if (x == 3 && y == 6 && l.level == 1) {
                         c.message = getMessage(WER_MESSAGES, 121);
                         c.tradeItem1 = 5;
-                        c.tradeItem2 = 65;//lose the winged boots for traversing the castle so pits are not voided
+                        c.tradeItem2 = 0;//lose the winged boots for traversing the castle so pits are not voided
                         c.tbd = false;
                     }
                     if (x == 3 && y == 9 && l.level == 1) {
