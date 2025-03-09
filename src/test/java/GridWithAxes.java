@@ -117,7 +117,14 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         letterM.nodes.get(0).translation.set(0, 0, 0);
         letterM.nodes.get(0).parts.first().material = gr;
         letterMInstance = new ModelInstance(letterM, .5f, .5f, .5f);
-        this.modelInstances.add(letterMInstance);
+        //this.modelInstances.add(letterMInstance);
+
+        Model metalDoor = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
+        metalDoor.nodes.get(0).scale.set(.3f, .3f, .3f);
+        metalDoor.nodes.get(0).translation.set(0, 0, 0);
+        //metalDoor.nodes.get(0).parts.first().material = bl;
+        ModelInstance mdoor = new ModelInstance(metalDoor, .5f, 0, .5f);
+        this.modelInstances.add(mdoor);
 
     }
 
@@ -130,7 +137,7 @@ public class GridWithAxes implements ApplicationListener, InputProcessor {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
-        letterMInstance.transform.rotate(Vector3.Y, 45f * Gdx.graphics.getDeltaTime());
+        //letterMInstance.transform.rotate(Vector3.Y, 45f * Gdx.graphics.getDeltaTime());
         modelBatch.begin(cam);
 
         modelBatch.render(axesInstance);

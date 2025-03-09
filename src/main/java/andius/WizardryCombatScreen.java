@@ -84,7 +84,7 @@ public class WizardryCombatScreen implements Screen, Constants {
     private final TextureAtlas iconAtlas;
 
     private int round = 1;
-    private boolean suprised = false;
+    private int suprised = 0;
     private MazeCell destCell, fromCell;
     private final boolean hasTreasure;
 
@@ -275,18 +275,15 @@ public class WizardryCombatScreen implements Screen, Constants {
 
         this.background = fm.build();
 
-        this.suprised = !Utils.percentChance(16);
-
-        if (this.suprised) {
-            log("You were ambushed by " + this.opponent.name, Color.YELLOW);
-            for (MutableMonster mm : monsters) {
-                monsterFight(mm);
-            }
-            if (player.isDead()) {
-                end(false);
-            }
+        if (Utils.percentChance(20)) {
+            this.suprised = 1;
+            log("You suprised " + this.opponent.name, Color.YELLOW);
+        } else if (Utils.percentChance(20)) {
+            this.suprised = 2;
+            log("You were suprised by " + this.opponent.name, Color.YELLOW);
         } else {
-            log("You are about to battle " + this.opponent.name, Color.YELLOW);
+            this.suprised = 0;
+            log("You encounter " + this.opponent.name, Color.YELLOW);
         }
 
     }
@@ -329,9 +326,20 @@ public class WizardryCombatScreen implements Screen, Constants {
     private void cast() {
 
         List<Object> shuffled = new ArrayList();
-        shuffled.addAll(this.monsters);
-        shuffled.addAll(this.players);
-        Collections.shuffle(shuffled);
+
+        if (this.suprised == 1) {
+            shuffled.addAll(this.players);
+            shuffled.addAll(this.monsters);
+        } else if (this.suprised == 2) {
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.players);
+        } else {
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.players);
+            Collections.shuffle(shuffled);
+        }
+
+        this.suprised = 0;
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord player) {
@@ -386,9 +394,20 @@ public class WizardryCombatScreen implements Screen, Constants {
     private void fight() {
 
         List<Object> shuffled = new ArrayList();
-        shuffled.addAll(this.monsters);
-        shuffled.addAll(this.players);
-        Collections.shuffle(shuffled);
+
+        if (this.suprised == 1) {
+            shuffled.addAll(this.players);
+            shuffled.addAll(this.monsters);
+        } else if (this.suprised == 2) {
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.players);
+        } else {
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.players);
+            Collections.shuffle(shuffled);
+        }
+
+        this.suprised = 0;
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord player) {
@@ -651,6 +670,10 @@ public class WizardryCombatScreen implements Screen, Constants {
             case MADI:
                 spellGroupHeal(caster, spell);
                 break;
+            case HAMAN:
+            case MAHAMAN:
+                //TODO - randomized affects
+                break;
             case LATUMAPIC:
                 //nothing - supposed to identify monsters
                 break;
@@ -666,15 +689,17 @@ public class WizardryCombatScreen implements Screen, Constants {
                     m.setACModifier(m.getACModifier() + spell.getHitBonus());
                 }
                 break;
-            case DILTO:
-            case MORLIS:
-            case MAMORLIS:
             case KALKI:
             case MATU:
             case BAMATU:
             case MASOPIC:
             case MAPORFIC:
-                spellGroupACModify(caster, spell);
+                spellGroupACModify(caster, spell.getHitBonus());
+                break;
+            case DILTO:
+            case MORLIS:
+            case MAMORLIS:
+                spellGroupEnemyACModify(caster, spell.getHitBonus());
                 break;
             case DIALKO:
                 for (CharacterRecord p : players) {
@@ -815,19 +840,28 @@ public class WizardryCombatScreen implements Screen, Constants {
         }
     }
 
-    private void spellGroupACModify(Object caster, Spells spell) {
+    private void spellGroupACModify(Object caster, int modifier) {
+        if (caster instanceof CharacterRecord) {
+            for (CharacterRecord p : this.players) {
+                p.acmodifier1 = modifier;
+            }
+        }
+        if (caster instanceof MutableMonster) {
+            for (MutableMonster mm : this.monsters) {
+                mm.setACModifier(modifier);
+            }
+        }
+    }
+
+    private void spellGroupEnemyACModify(Object caster, int modifier) {
         if (caster instanceof MutableMonster) {
             for (CharacterRecord p : this.players) {
-                if (p.acmodifier1 == 0) {
-                    p.acmodifier1 = spell.getHitBonus();
-                }
+                p.acmodifier1 = modifier;
             }
         }
         if (caster instanceof CharacterRecord) {
             for (MutableMonster mm : this.monsters) {
-                if (mm.getACModifier() == 0) {
-                    mm.setACModifier(spell.getHitBonus());
-                }
+                mm.setACModifier(modifier);
             }
         }
     }
@@ -1000,7 +1034,7 @@ public class WizardryCombatScreen implements Screen, Constants {
                 public void clicked(InputEvent event, float x, float y) {
                     selectedPlayer.remove();
                     PlayerListing.this.addActor(selectedPlayer);
-                    
+
                     spells.getItems().clear();
 
                     for (Spells s : player.knownSpells) {

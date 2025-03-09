@@ -54,7 +54,7 @@ public class MutableMonster implements Mutable {
                 return true;
             }
         }
-        return Utils.RANDOM.nextInt(100) < this.monster.getUnaffected();
+        return this.monster.getUnaffected() > Utils.RANDOM.nextInt(100);
     }
 
     @Override
@@ -295,7 +295,7 @@ public class MutableMonster implements Mutable {
             spell = roll2 < 66 ? Spells.DALTO : Spells.LAHALITO;
         }
         if (spellLevel == 5) {
-            spell = roll2 < 66 ? Spells.MAHALITO : Spells.MADALTO;
+            spell = roll2 < 66 ? Spells.LAHALITO : Spells.MADALTO;
         }
         if (spellLevel == 6) {
             spell = roll2 < 66 ? Spells.MADALTO : Spells.ZILWAN;

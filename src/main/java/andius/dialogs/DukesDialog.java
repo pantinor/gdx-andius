@@ -6,8 +6,6 @@ import andius.BaseScreen;
 import andius.Context;
 import andius.Wiz4CombatScreen;
 import andius.WizardryData;
-import andius.objects.Sound;
-import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.getMessage;

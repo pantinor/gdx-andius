@@ -177,6 +177,9 @@ public class Utils {
 
         chanceToHit += attacker.hitModifier();
 
+        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] HMOD [%d] chance to  hit [%d] hit [%s]\n",
+                attacker.name(), defender.name(), roll, THAC0, defender.getArmourClass(), attacker.hitModifier(), chanceToHit, roll >= chanceToHit);
+
         return roll >= chanceToHit;
     }
 
@@ -207,6 +210,9 @@ public class Utils {
         chanceToHit += (defender.status.isDisabled() ? 3 : 0);
 
         chanceToHit += attacker.hitModifier();
+
+        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DHMOD [%d] chance to  hit [%d] hit [%s]\n",
+                attacker.name(), defender.name, roll, THAC0, defender.calculateAC(), attacker.hitModifier(), defender.defenseHitModifier(), chanceToHit, roll >= chanceToHit);
 
         return roll >= chanceToHit;
     }
@@ -271,6 +277,9 @@ public class Utils {
         chanceToHit -= defender.getACModifier();
 
         chanceToHit += (defender.status().isDisabled() ? 3 : 0);
+
+        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DACMOD [%d] chance to  hit [%d] hit [%s]\n",
+                attacker.name, defender.name(), roll, THAC0, defender.getArmourClass(), attacker.attackHitModifier(), defender.getACModifier(), chanceToHit, roll >= chanceToHit);
 
         return roll >= chanceToHit;
     }

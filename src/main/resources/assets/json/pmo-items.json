@@ -1625,7 +1625,7 @@
         "special": -1,
         "changeTo": 0,
         "changeChance": 0,
-        "armourClass": 5,
+        "armourClass": 6,
         "wephitmd": 0,
         "genericName": "SHIELD",
         "cost": 25000,

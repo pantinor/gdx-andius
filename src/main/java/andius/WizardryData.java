@@ -571,7 +571,6 @@ public class WizardryData {
                             break;
                         case ELEVATOR:
                             cell.elevator = true;
-                            cell.addressTo = new MazeAddress(ci.val[1], x, y);
                             cell.elevatorFrom = ci.val[2];
                             cell.elevatorTo = ci.val[1];
                             break;
@@ -1198,7 +1197,7 @@ public class WizardryData {
         public SummoningCircle summoningCircle;
 
         public MazeAddress address;
-        public MazeAddress addressTo; // if teleport/stairs/chute
+        public MazeAddress addressTo;
         public int elevatorFrom;
         public int elevatorTo;
 
@@ -1466,6 +1465,34 @@ public class WizardryData {
         wiz4Customization(WER_LEVELS);
     }
 
+    public static String[] HAWKWIND_REPLIES = new String[]{
+        "Laughs",
+        "Chuckles",
+        "Snickers",
+        "Reads \"Pikestaff\"",
+        "Answers His Mail",
+        "Files His Nails",
+        "Sends Out For Sushi",
+        "Ignores You",
+        "Pets His Dragons",
+        "Pays For The Sushi",
+        "Feeds Sushi To His Dragons",
+        "Pretends To Take A Nap",
+        "Really Falls Asleep (From Boredom)",
+        "Wakes Up",
+        "Brushes His Teeth",
+        "Brews Tea",
+        "Oils His Blade",
+        "Says His Morning Prayers",
+        "Petitions To Offer You Up As A Sacrifice",
+        "Fills Out Sacrificial Order Form In Triplicate",
+        "Gets Approval For Your Sacrifice",
+        "Binds And Gags You",
+        "Puts You On The Sacrificial Altar",
+        "Anoints You With Sacrificial Oils",
+        "Sacrifices You To Kadorto"
+    };
+
     private static void wiz4Customization(MazeLevel[] levels) {
         for (int i = 0; i < wiz4Addrs.length; i++) {
             MazeLevel fromLevel = levels[wiz4Addrs[i][0]];
@@ -1675,17 +1702,21 @@ public class WizardryData {
                         c.elevator = false;
                         c.stairs = true;
                         c.addressTo = new MazeAddress(13, 9, 12);
-                        c.elevatorFrom = 0;
-                        c.elevatorTo = 0;
-                        c.lair = false;
                     }
                     if (x == 9 && y == 12 && l.level == 13) {
                         c.elevator = false;
                         c.stairs = true;
                         c.addressTo = new MazeAddress(1, 9, 12);
-                        c.elevatorFrom = 0;
-                        c.elevatorTo = 0;
-                        c.lair = false;
+                    }
+                    if (x == 9 && y == 7 && l.level == 13) {
+                        c.elevator = false;
+                        c.stairs = true;
+                        c.addressTo = new MazeAddress(14, 9, 7);
+                    }
+                    if (x == 9 && y == 7 && l.level == 14) {
+                        c.elevator = false;
+                        c.stairs = true;
+                        c.addressTo = new MazeAddress(13, 9, 7);
                     }
                     if (x == 16 && y == 13 && l.level == 1) {
                         c.message = new Message(getMessage(WER_MESSAGES, 152), getMessage(WER_MESSAGES, 155));
@@ -1754,6 +1785,22 @@ public class WizardryData {
                         c.message = new Message(getMessage(WER_MESSAGES, 204), getMessage(WER_MESSAGES, 205));
                         c.itemObtained = 14;//void transducer
                         c.tbd = false;
+                    }
+                    if (x == 9 && y == 11 && l.level == 13) {
+                        c.encounterID = -1;
+                    }
+                    if (x == 9 && y == 8 && l.level == 13) {
+                        c.encounterID = 448;//all stars
+                    }
+                    if (x == 9 && y == 6 && l.level == 14) {
+                        c.encounterID = -1;
+                    }
+                    if (x == 11 && y == 5 && l.level == 14) {
+                        c.encounterID = 487;//temple priests
+                    }
+                    if (x == 12 && y == 4 && l.level == 14) {
+                        c.message = new Message(getMessage(WER_MESSAGES, 200));
+                        c.encounterID = 499;//hawkwind
                     }
                 }
             }

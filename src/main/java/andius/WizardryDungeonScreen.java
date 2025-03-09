@@ -74,7 +74,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private CameraInputController inputController;
     private final AssetManager assets;
 
-    private Model ladderModel;
+    private Model ladderModel, elevatorModel;
     private Model doorModel, pentagram;
     private Model wall, manhole, letterM;
 
@@ -330,6 +330,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         doorModel.nodes.get(0).scale.set(.2f, .2f, .2f);
         doorModel.nodes.get(0).translation.set(.06f, -.5f, .015f);
         doorModel.nodes.get(0).parts.first().material = wood;
+        elevatorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
+        elevatorModel.nodes.get(0).scale.set(.3f, .3f, .3f);
+        elevatorModel.nodes.get(0).translation.set(0, 0, 0);
         pentagram = gloader.loadModel(Gdx.files.classpath("assets/graphics/pentagram.g3db"));
         pentagram.nodes.get(0).scale.set(.2f, .2f, .2f);
         pentagram.nodes.get(0).rotation.set(0, 0, 0, 1);
@@ -550,18 +553,17 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (cell.stairs || cell.elevator) {
+        if (cell.stairs) {
             modelInstances.add(new DungeonTileModelInstance(ladderModel, level, x, y, x + .5f, 0, y + .5f));
-            if (cell.elevator) {
-                modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, 0, y + .5f));
-                modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, 1, y + .5f));
-            } else if (cell.address.level < cell.addressTo.level) {//down
+            if (cell.address.level < cell.addressTo.level) {//down
                 modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, 0, y + .5f));
             } else {//up
                 modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .6f, 1, y + .5f));
             }
         }
-
+        if (cell.elevator) {
+            modelInstances.add(new DungeonTileModelInstance(elevatorModel, level, x, y, x + .5f, 0, y + .5f));
+        }
         if (cell.summoningCircle != null) {
             modelInstances.add(new DungeonTileModelInstance(pentagram, level, x, y, x + .5f, 0, y + .5f));
         }
@@ -656,7 +658,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (cell.stairs || cell.elevator) {
+        if (cell.stairs) {
             list.add(new DungeonTileModelInstance(ladderModel, level, x, y, x + .5f, z - .5f, y + .5f));
             if (level == 13 || cell.address.level > cell.addressTo.level) {//down
                 list.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, z - .5f, y + .5f));
@@ -664,7 +666,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                 list.add(new DungeonTileModelInstance(manhole, level, x, y, x + .6f, z + .5f, y + .5f));
             }
         }
-
+        if (cell.elevator) {
+            modelInstances.add(new DungeonTileModelInstance(elevatorModel, level, x, y, x + .5f, z, y + .5f));
+        }
         if (cell.message != null || cell.function != null) {
             list.add(new DungeonTileModelInstance(letterM, level, x, y, x + .5f, z, y + .5f, true));
         }
@@ -941,37 +945,28 @@ public class WizardryDungeonScreen extends BaseScreen {
         int cy = y * MINI_DIM;
         pixmap.setColor(Color.YELLOW);
         if (cell.elevator) {
-            pixmap.drawPixmap(
-                    this.miniMapIconsPixmap,
-                    cx,
-                    cy,
-                    arrows[3][2].getRegionX(),
-                    arrows[3][2].getRegionY(),
-                    arrows[3][2].getRegionWidth(),
-                    arrows[3][2].getRegionHeight()
-            );
-
+            pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][2].getRegionX(), arrows[3][2].getRegionY(), arrows[3][2].getRegionWidth(), arrows[3][2].getRegionHeight());
         } else if (cell.stairs) {
-            if (cell.address.level > cell.addressTo.level) {//up
-                pixmap.drawPixmap(
-                        this.miniMapIconsPixmap,
-                        cx,
-                        cy,
-                        arrows[3][0].getRegionX(),
-                        arrows[3][0].getRegionY(),
-                        arrows[3][0].getRegionWidth(),
-                        arrows[3][0].getRegionHeight()
-                );
-            } else {//down
-                pixmap.drawPixmap(
-                        this.miniMapIconsPixmap,
-                        cx,
-                        cy,
-                        arrows[3][1].getRegionX(),
-                        arrows[3][1].getRegionY(),
-                        arrows[3][1].getRegionWidth(),
-                        arrows[3][1].getRegionHeight()
-                );
+            if (this.map == Map.WIZARDRY4) {
+                if (cell.address.level == 1 || cell.address.level >= 12) {
+                    if (cell.address.level > cell.addressTo.level) {//down
+                        pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][1].getRegionX(), arrows[3][1].getRegionY(), arrows[3][1].getRegionWidth(), arrows[3][1].getRegionHeight());
+                    } else {//up
+                        pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][0].getRegionX(), arrows[3][0].getRegionY(), arrows[3][0].getRegionWidth(), arrows[3][0].getRegionHeight());
+                    }
+                } else {
+                    if (cell.address.level < cell.addressTo.level) {//down
+                        pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][1].getRegionX(), arrows[3][1].getRegionY(), arrows[3][1].getRegionWidth(), arrows[3][1].getRegionHeight());
+                    } else {//up
+                        pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][0].getRegionX(), arrows[3][0].getRegionY(), arrows[3][0].getRegionWidth(), arrows[3][0].getRegionHeight());
+                    }
+                }
+            } else {
+                if (cell.address.level > cell.addressTo.level) {//up
+                    pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][0].getRegionX(), arrows[3][0].getRegionY(), arrows[3][0].getRegionWidth(), arrows[3][0].getRegionHeight());
+                } else {//down
+                    pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][1].getRegionX(), arrows[3][1].getRegionY(), arrows[3][1].getRegionWidth(), arrows[3][1].getRegionHeight());
+                }
             }
         }
     }
@@ -1136,6 +1131,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             try {
                 move(cell, currentDir, x, y, skipProgression);
             } catch (Throwable e) {
+                e.printStackTrace();
                 partyDeath();
             }
             return false;
@@ -1196,8 +1192,24 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
         } else if (keycode == Keys.K) {
-            if (cell.elevator || (cell.stairs)) {
+            if (cell.stairs) {
                 teleport(cell.addressTo, false);
+            }
+            return false;
+        } else if (keycode == Keys.NUM_1) {
+            if (cell.elevator) {//up
+                if (currentLevel + 1 - 1 >= cell.elevatorFrom && currentLevel + 1 - 1 <= cell.elevatorTo) {
+                    currentLevel--;
+                    createMiniMap();
+                }
+            }
+            return false;
+        } else if (keycode == Keys.NUM_2) {
+            if (cell.elevator) {//down
+                if (currentLevel + 1 + 1 >= cell.elevatorFrom && currentLevel + 1 + 1 <= cell.elevatorTo) {
+                    currentLevel++;
+                    createMiniMap();
+                }
             }
             return false;
         } else if (keycode == Keys.I) {
@@ -1243,6 +1255,12 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void move(MazeCell currentCell, Direction dir, int dx, int dy, boolean skipProgression) {
+
+        boolean canMove = canMove(currentCell, dir);
+
+        if (!canMove) {
+            return;
+        }
 
         WizardryData.MazeLevel[] levels = this.map.scenario().levels();
         MazeCell destinationCell = levels[currentLevel].cells[dx][dy];
@@ -1295,125 +1313,116 @@ public class WizardryDungeonScreen extends BaseScreen {
             return;
         }
 
-        boolean moved = false;
+        currentPos.x = dx + .5f;
+        currentPos.z = dy + .5f;
 
-        if (dir == Direction.EAST && (currentCell.hiddenNorthDoor || !currentCell.northWall)) {
-            currentPos.x = dx + .5f;
-            currentPos.z = dy + .5f;
-            if (skipProgression) {
-                this.camera.position.set(currentPos.x, .5f, currentPos.z);
-            }
-            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
-            if (dir == currentDir) {
-                camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
-            }
-            moved = true;
+        if (skipProgression) {
+            this.camera.position.set(currentPos.x, .5f, currentPos.z);
         }
 
-        if (dir == Direction.WEST && (currentCell.hiddenSouthDoor || !currentCell.southWall)) {
-            currentPos.x = dx + .5f;
-            currentPos.z = dy + .5f;
-            if (skipProgression) {
-                this.camera.position.set(currentPos.x, .5f, currentPos.z);
-            }
-            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
-            if (dir == currentDir) {
-                camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
-            }
-            moved = true;
-        }
+        stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
 
-        if (dir == Direction.NORTH && (currentCell.hiddenWestDoor || !currentCell.westWall)) {
-            currentPos.x = dx + .5f;
-            currentPos.z = dy + .5f;
-            if (skipProgression) {
-                this.camera.position.set(currentPos.x, .5f, currentPos.z);
-            }
-            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
-            if (dir == currentDir) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
-            }
-            moved = true;
-        }
-
-        if (dir == Direction.SOUTH && (currentCell.hiddenEastDoor || !currentCell.eastWall)) {
-            currentPos.x = dx + .5f;
-            currentPos.z = dy + .5f;
-            if (skipProgression) {
-                this.camera.position.set(currentPos.x, .5f, currentPos.z);
-            }
-            stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
-            if (dir == currentDir) {
-                camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
-            }
-            moved = true;
-        }
-
-        if (moved) {
-
-            moveMiniMapIcon();
-
-            boolean showMessage = true;
-
-            if (destinationCell.tradeItem1 > 0) {
-                Item item1 = this.map.scenario().items().get(destinationCell.tradeItem1);
-                Item item2 = this.map.scenario().items().get(destinationCell.tradeItem2);
-                CharacterRecord owner = Andius.CTX.getOwner(item1);
-                if (owner != null) {
-                    Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
-                    log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
-                    owner.inventory.remove(item1);
-                    owner.inventory.add(item2);
-                    Sounds.play(Sound.POSITIVE_EFFECT);
-                } else {
-                    Sounds.play(Sound.NEGATIVE_EFFECT);
+        switch (dir) {
+            case EAST:
+                if (dir == currentDir) {
+                    camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
                 }
-                showMessage = false;
-            }
-
-            if (destinationCell.itemObtained > 0) {
-                Item item = this.map.scenario().items().get(destinationCell.itemObtained);
-                CharacterRecord owner = Andius.CTX.getOwner(item);
-                if (owner == null) {
-                    Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
-                    CharacterRecord cr = Andius.CTX.pickRandomEnabledPlayer();
-                    log(String.format("%s found a %s", cr.name, item.genericName));
-                    cr.inventory.add(item);
-                    Sounds.play(Sound.POSITIVE_EFFECT);
+                break;
+            case WEST:
+                if (dir == currentDir) {
+                    camera.lookAt(currentPos.x - 1, currentPos.y, currentPos.z);
                 }
-                showMessage = false;
-            }
+                break;
+            case NORTH:
+                if (dir == currentDir) {
+                    camera.lookAt(currentPos.x, currentPos.y, currentPos.z - 1);
+                }
+                break;
+            case SOUTH:
+                if (dir == currentDir) {
+                    camera.lookAt(currentPos.x, currentPos.y, currentPos.z + 1);
+                }
+                break;
+        }
 
-            if (destinationCell.riddleAnswers != null && destinationCell.riddleAnswers.isEmpty()) {
-                showMessage = false;
-            }
+        moveMiniMapIcon();
 
-            if (destinationCell.itemRequired > 0 && Andius.CTX.getOwner(this.map.scenario().items().get(destinationCell.itemRequired)) != null) {
-                showMessage = false;
-            }
+        boolean showMessage = true;
 
-            if (destinationCell.darkness) {
-                isTorchOn = false;
-            }
-
-            if (showMessage && destinationCell.message != null) {
+        if (destinationCell.tradeItem1 > 0) {
+            Item item1 = this.map.scenario().items().get(destinationCell.tradeItem1);
+            Item item2 = this.map.scenario().items().get(destinationCell.tradeItem2);
+            CharacterRecord owner = Andius.CTX.getOwner(item1);
+            if (owner != null) {
                 Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
-            } else if (destinationCell.summoningCircle != null) {
-                Andius.HUD.log(getMessage(WER_MESSAGES, 90).getText(), Color.GREEN);
+                log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
+                owner.inventory.remove(item1);
+                owner.inventory.add(item2);
+                Sounds.play(Sound.POSITIVE_EFFECT);
+            } else {
+                Sounds.play(Sound.NEGATIVE_EFFECT);
             }
+            showMessage = false;
+        }
 
-            if (destinationCell.function != null) {
-                destinationCell.function.getDialog(CTX, this).show(this.stage);
+        if (destinationCell.itemObtained > 0) {
+            Item item = this.map.scenario().items().get(destinationCell.itemObtained);
+            CharacterRecord owner = Andius.CTX.getOwner(item);
+            if (owner == null) {
+                Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
+                CharacterRecord cr = Andius.CTX.pickRandomEnabledPlayer();
+                log(String.format("%s found a %s", cr.name, item.genericName));
+                cr.inventory.add(item);
+                Sounds.play(Sound.POSITIVE_EFFECT);
             }
+            showMessage = false;
+        }
 
-            if (destinationCell.rotateDirection != -1) {
-                rotateBlock(currentLevel, destinationCell, dx, dy);
-                createMiniMap();
-            }
+        if (destinationCell.riddleAnswers != null && destinationCell.riddleAnswers.isEmpty()) {
+            showMessage = false;
+        }
 
-            fight(destinationCell, currentCell, this.map.scenario().levels()[currentLevel].defeated);
+        if (destinationCell.itemRequired > 0 && Andius.CTX.getOwner(this.map.scenario().items().get(destinationCell.itemRequired)) != null) {
+            showMessage = false;
+        }
 
-            finishTurn(dx, dy);
+        if (destinationCell.darkness) {
+            isTorchOn = false;
+        }
+
+        if (showMessage && destinationCell.message != null) {
+            Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
+        } else if (destinationCell.summoningCircle != null) {
+            Andius.HUD.log(getMessage(WER_MESSAGES, 90).getText(), Color.GREEN);
+        }
+
+        if (destinationCell.function != null) {
+            destinationCell.function.getDialog(CTX, this).show(this.stage);
+        }
+
+        if (destinationCell.rotateDirection != -1) {
+            rotateBlock(currentLevel, destinationCell, dx, dy);
+            createMiniMap();
+        }
+
+        fight(destinationCell, currentCell, this.map.scenario().levels()[currentLevel].defeated);
+
+        finishTurn(dx, dy);
+
+    }
+
+    private boolean canMove(MazeCell currentCell, Direction dir) {
+        switch (dir) {
+            case EAST:
+                return currentCell.hiddenNorthDoor || !currentCell.northWall;
+            case WEST:
+                return currentCell.hiddenSouthDoor || !currentCell.southWall;
+            case NORTH:
+                return currentCell.hiddenWestDoor || !currentCell.westWall;
+            case SOUTH:
+                return currentCell.hiddenEastDoor || !currentCell.eastWall;
+            default:
+                return false;
         }
     }
 
@@ -1554,9 +1563,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                         Sounds.play(Sound.POSITIVE_EFFECT);
                     }
                 } else {
-                    //DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
-                    //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                    //mainGame.setScreen(cs);
+                    DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
+                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                    mainGame.setScreen(cs);
                 }
             } else {
                 int wanderingEncounterID = -1;
@@ -1566,9 +1575,9 @@ public class WizardryDungeonScreen extends BaseScreen {
                         wanderingEncounterID = -1;
                     }
                     if (wanderingEncounterID > 0) {
-                        //DoGooder dogooder = this.map.scenario().characters().get(wanderingEncounterID);
-                        //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                        //mainGame.setScreen(cs);
+                        DoGooder dogooder = this.map.scenario().characters().get(wanderingEncounterID);
+                        Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                        mainGame.setScreen(cs);
                     }
                 }
             }
@@ -1579,14 +1588,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
-                //andius.objects.Actor actor = new andius.objects.Actor(monster.name, null);
-                //MutableMonster mm = new MutableMonster(monster);
-                //actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
-                //TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-                //TiledMap tm = loader.load("assets/data/combat1.tmx");
-                //CombatScreen cs = new CombatScreen(CTX, this.map, tm, actor, currentLevel + 1, false);
-                //mainGame.setScreen(cs);
-                //mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
+                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
             }
         }
     }

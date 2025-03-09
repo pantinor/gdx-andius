@@ -84,7 +84,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private final TextureAtlas iconAtlas;
 
     private int round = 1;
-    private boolean suprised = false;
+    private int suprised = 0;
     MazeCell destCell, fromCell;
 
     public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent, MazeCell destCell, MazeCell fromCell) {
@@ -234,26 +234,17 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         this.background = fm.build();
 
-        this.suprised = !Utils.percentChance(16);
+        String disp = !this.opponent.slogan.isEmpty() ? this.opponent.slogan.replace("|", "  ") : this.opponent.name;
 
-        if (this.suprised) {
-            if (!this.opponent.slogan.isEmpty()) {
-                log("You were ambushed by " + this.opponent.slogan.replace("|", " ... "), Color.YELLOW);
-            } else {
-                log("You were ambushed by " + this.opponent.name, Color.YELLOW);
-            }
-            for (MutableCharacter mm : enemies) {
-                enemyFight(mm);
-            }
-            if (player.isDead()) {
-                end(false);
-            }
+        if (Utils.percentChance(20)) {
+            this.suprised = 1;
+            log("You suprised " + disp, Color.YELLOW);
+        } else if (Utils.percentChance(20)) {
+            this.suprised = 2;
+            log("You were suprised by " + disp, Color.YELLOW);
         } else {
-            if (!this.opponent.slogan.isEmpty()) {
-                log("You are about to battle " + this.opponent.slogan.replace("|", "  "), Color.YELLOW);
-            } else {
-                log("You are about to battle " + this.opponent.name, Color.YELLOW);
-            }
+            this.suprised = 0;
+            log("You encounter " + disp, Color.YELLOW);
         }
 
     }
@@ -261,10 +252,23 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private void cast() {
 
         List<Object> shuffled = new ArrayList();
-        shuffled.addAll(this.monsters);
-        shuffled.addAll(this.enemies);
-        shuffled.add(player);
-        Collections.shuffle(shuffled);
+
+        if (this.suprised == 1) {
+            shuffled.add(player);
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.enemies);
+        } else if (this.suprised == 2) {
+            shuffled.addAll(this.enemies);
+            shuffled.addAll(this.monsters);
+            shuffled.add(player);
+        } else {
+            shuffled.add(player);
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.enemies);
+            Collections.shuffle(shuffled);
+        }
+
+        this.suprised = 0;
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord) {
@@ -321,10 +325,23 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private void fight() {
 
         List<Object> shuffled = new ArrayList();
-        shuffled.addAll(this.monsters);
-        shuffled.addAll(this.enemies);
-        shuffled.add(player);
-        Collections.shuffle(shuffled);
+
+        if (this.suprised == 1) {
+            shuffled.add(player);
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.enemies);
+        } else if (this.suprised == 2) {
+            shuffled.addAll(this.enemies);
+            shuffled.addAll(this.monsters);
+            shuffled.add(player);
+        } else {
+            shuffled.add(player);
+            shuffled.addAll(this.monsters);
+            shuffled.addAll(this.enemies);
+            Collections.shuffle(shuffled);
+        }
+
+        this.suprised = 0;
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord) {
@@ -683,15 +700,17 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     m.setACModifier(m.getACModifier() + spell.getHitBonus());
                 }
                 break;
-            case DILTO:
-            case MORLIS:
-            case MAMORLIS:
             case KALKI:
             case MATU:
             case BAMATU:
             case MASOPIC:
             case MAPORFIC:
-                spellGroupACModify(caster, spell);
+                spellGroupACModify(caster, spell.getHitBonus());
+                break;
+            case DILTO:
+            case MORLIS:
+            case MAMORLIS:
+                spellGroupEnemyACModify(caster, spell.getHitBonus());
                 break;
             case DIALKO:
                 player.status.set(Status.PARALYZED, 0);
@@ -869,23 +888,31 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
     }
 
-    private void spellGroupACModify(Object caster, Spells spell) {
+    private void spellGroupACModify(Object caster, int modifier) {
         if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
             for (MutableMonster mm : this.monsters) {
-                if (mm.getACModifier() == 0) {
-                    mm.setACModifier(spell.getHitBonus());
-                }
+                mm.setACModifier(modifier);
             }
-            if (player.acmodifier1 == 0) {
-                player.acmodifier1 = spell.getHitBonus();
-            }
+            player.acmodifier1 = modifier;
         }
         if (caster instanceof MutableCharacter) {
             for (MutableCharacter mm : this.enemies) {
-                if (mm.getACModifier() == 0) {
-                    mm.setACModifier(spell.getHitBonus());
-                }
+                mm.setACModifier(modifier);
             }
+        }
+    }
+
+    private void spellGroupEnemyACModify(Object caster, int modifier) {
+        if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
+            for (MutableCharacter mm : this.enemies) {
+                mm.setACModifier(modifier);
+            }
+        }
+        if (caster instanceof MutableCharacter) {
+            for (MutableMonster mm : this.monsters) {
+                mm.setACModifier(modifier);
+            }
+            player.acmodifier1 = modifier;
         }
     }
 
@@ -945,6 +972,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void log(String s, Color c) {
+        System.out.println(s);
         this.logs.add(s, c);
     }
 
