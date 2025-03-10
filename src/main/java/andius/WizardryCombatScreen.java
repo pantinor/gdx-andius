@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -52,9 +53,11 @@ public class WizardryCombatScreen implements Screen, Constants {
     private final Batch batch;
 
     private final com.badlogic.gdx.scenes.scene2d.ui.List<SpellLabel> spells;
+    private final com.badlogic.gdx.scenes.scene2d.ui.List<ActionLabel> actions;
     private final Table monstersTable;
     private final Table playersTable;
     private final AutoFocusScrollPane playersScroll;
+    private final AutoFocusScrollPane actionsScroll;
     private final AutoFocusScrollPane monstersScroll;
     private final AutoFocusScrollPane spellsScroll;
 
@@ -65,8 +68,8 @@ public class WizardryCombatScreen implements Screen, Constants {
     public final List<CharacterRecord> players = new ArrayList<>();
 
     private final LogScrollPane logs;
-    private final TextButton cast;
     private final TextButton fight;
+    private final TextButton reset;
     private final TextButton flee;
     private final TextButton exit;
 
@@ -74,7 +77,7 @@ public class WizardryCombatScreen implements Screen, Constants {
     private static final int LISTING_WIDTH = 300;
     private static final int LINE_HEIGHT = 17;
     private static final int LOG_WIDTH = 370;
-    private static final int LOG_HEIGHT = 400;
+    private static final int LOG_HEIGHT = 455;
 
     private final Image selectedMonster = new Image(Utils.fillRectangle(LISTING_WIDTH, LINE_HEIGHT * 3, Color.RED, .25f));
     private final Image selectedPlayer = new Image(Utils.fillRectangle(LISTING_WIDTH, LINE_HEIGHT * 3, Color.YELLOW, .25f));
@@ -101,7 +104,7 @@ public class WizardryCombatScreen implements Screen, Constants {
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
+        this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wizIcons.atlas"));
 
         Table logTable = new Table(Andius.skin);
         logTable.setBackground("log-background");
@@ -120,10 +123,17 @@ public class WizardryCombatScreen implements Screen, Constants {
         this.playersScroll = new AutoFocusScrollPane(playersTable, Andius.skin);
         this.playersScroll.setScrollingDisabled(true, false);
 
-        for (CharacterRecord p : this.ctx.players()) {
+        this.actions = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16");
+        this.actionsScroll = new AutoFocusScrollPane(this.actions, Andius.skin);
+        this.actionsScroll.setScrollingDisabled(true, false);
+
+        for (int i = 0; i < this.ctx.players().length; i++) {
+            CharacterRecord p = this.ctx.players()[i];
             this.players.add(p);
-            this.playersTable.add(new PlayerListing(p)).pad(3);
+            this.playersTable.add(new PlayerListing(i, p)).pad(3);
             this.playersTable.row();
+
+            addAction(p);
         }
 
         addMonsters(level, opponent);
@@ -163,7 +173,23 @@ public class WizardryCombatScreen implements Screen, Constants {
             }
         }
 
-        int x = 365;
+        this.spells.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                PlayerListing pl = (PlayerListing) selectedPlayer.getParent();
+                SpellLabel sl = spells.getSelected();
+                if (pl != null && sl != null) {
+                    if (sl.spell != null) {
+                        setAction(pl.index, sl.spell);
+                    }
+                    if (sl.item != null) {
+                        setAction(pl.index, sl.item);
+                    }
+                }
+            }
+        });
+
+        int x = 345;
         this.fight = new TextButton("FIGHT", Andius.skin, "default-16");
         this.fight.addListener(new ChangeListener() {
             @Override
@@ -171,16 +197,21 @@ public class WizardryCombatScreen implements Screen, Constants {
                 fight();
             }
         });
-        this.fight.setBounds(x, 426, 80, 40);
+        this.fight.setBounds(x, 480, 80, 40);
 
-        this.cast = new TextButton("CAST", Andius.skin, "default-16");
-        this.cast.addListener(new ChangeListener() {
+        this.reset = new TextButton("RESET", Andius.skin, "default-16");
+        this.reset.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                cast();
+                actions.getItems().clear();
+                actions.clear();
+
+                for (CharacterRecord p : ctx.players()) {
+                    addAction(p);
+                }
             }
         });
-        this.cast.setBounds(x += 100, 426, 80, 40);
+        this.reset.setBounds(x += 100, 480, 80, 40);
 
         this.flee = new TextButton("FLEE", Andius.skin, "default-16");
         this.flee.addListener(new ChangeListener() {
@@ -189,7 +220,7 @@ public class WizardryCombatScreen implements Screen, Constants {
                 end(true);
             }
         });
-        this.flee.setBounds(x += 100, 426, 80, 40);
+        this.flee.setBounds(x += 100, 480, 80, 40);
 
         this.exit = new TextButton("EXIT", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -253,20 +284,22 @@ public class WizardryCombatScreen implements Screen, Constants {
                 }
             }
         });
-        this.exit.setBounds(x, 426, 80, 40);
+        this.exit.setBounds(x, 480, 80, 40);
 
-        fm.setBounds(this.playersScroll, 10, 14, LISTING_WIDTH, TABLE_HEIGHT);
+        fm.setBounds(this.playersScroll, 10, 412, LISTING_WIDTH, 345);
+        fm.setBounds(this.actionsScroll, 10, 14, LISTING_WIDTH, 370);
         fm.setBounds(this.spellsScroll, 340, 530, 300, 220);
         fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
         fm.setBounds(this.monstersScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT - 35);
 
         this.stage.addActor(this.fight);
         this.stage.addActor(this.flee);
-        this.stage.addActor(this.cast);
+        this.stage.addActor(this.reset);
         this.stage.addActor(this.logs);
 
         this.stage.addActor(this.monstersScroll);
         this.stage.addActor(this.playersScroll);
+        this.stage.addActor(this.actionsScroll);
         this.stage.addActor(this.spellsScroll);
 
         Label l = new Label(this.opponent.name, Andius.skin, "default-16");
@@ -323,74 +356,6 @@ public class WizardryCombatScreen implements Screen, Constants {
         addPartners(partner, groupCount + 1, maxGroups);
     }
 
-    private void cast() {
-
-        List<Object> shuffled = new ArrayList();
-
-        if (this.suprised == 1) {
-            shuffled.addAll(this.players);
-            shuffled.addAll(this.monsters);
-        } else if (this.suprised == 2) {
-            shuffled.addAll(this.monsters);
-            shuffled.addAll(this.players);
-        } else {
-            shuffled.addAll(this.monsters);
-            shuffled.addAll(this.players);
-            Collections.shuffle(shuffled);
-        }
-
-        this.suprised = 0;
-
-        for (Object m : shuffled) {
-            if (m instanceof CharacterRecord player) {
-                player.adjustHP(player.regenerationPoints());
-                MutableMonster defender = pickMonster();
-                if (defender != null) {
-                    SpellLabel sp = this.spells.getSelected();
-                    if (sp != null) {
-                        Spells spell = sp.spell != null ? sp.spell : sp.item.spell;
-                        MonsterListing dgl = (MonsterListing) selectedMonster.getParent();
-                        if (dgl != null) {
-                            spellCast(spell, player, dgl.mm, sp.item != null);
-                        } else {
-                            spellCast(spell, player, null, sp.item != null);
-                        }
-                        if (sp.item != null && sp.item.changeChance > 0) {
-                            boolean decayed = Utils.percentChance(sp.item.changeChance);
-                            if (decayed) {
-                                Item changeTo = WER_ITEMS.get(sp.item.changeTo);
-                                player.removeItem(sp.item.id, sp.item.scenarioID);
-                                if (changeTo.id != 0) {
-                                    player.inventory.add(changeTo);
-                                }
-                                this.spells.getItems().removeValue(sp, false);
-                                this.spells.getSelection().clear();
-                            }
-                        }
-                    }
-                }
-            } else if (m instanceof MutableMonster mm) {
-                monsterFight(mm);
-            }
-        }
-
-        boolean alive = false;
-        for (MutableMonster c : this.monsters) {
-            if (!c.isDead()) {
-                alive = true;
-            }
-        }
-
-        if (!alive) {
-            end(false);
-        } else if (this.ctx.allDead()) {
-            end(false);
-        }
-
-        log("------------ end of round " + round, Color.YELLOW);
-        round++;
-    }
-
     private void fight() {
 
         List<Object> shuffled = new ArrayList();
@@ -411,17 +376,40 @@ public class WizardryCombatScreen implements Screen, Constants {
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord player) {
-                player.adjustHP(player.regenerationPoints());
+                ActionLabel action = getAction(player);
+
                 MutableMonster defender = pickMonster();
+                if (action.target != null) {
+                    defender = action.target;
+                }
+
                 if (defender != null) {
                     if (!player.isDisabled()) {
-                        boolean hit = Utils.attackHit(player, defender);
-                        if (hit) {
-                            Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                            int damage = Utils.dealDamage(weapon, defender);
-                            log(defender.getDamageDescription(player.name, damage), Color.SCARLET);
+
+                        if (action.spell != null || action.item != null) {
+                            Spells spell = action.spell != null ? action.spell : action.item.spell;
+                            spellCast(spell, player, defender, action.item != null);
+                            if (action.item != null && action.item.changeChance > 0) {
+                                boolean decayed = Utils.percentChance(action.item.changeChance);
+                                if (decayed) {
+                                    Item changeTo = WER_ITEMS.get(action.item.changeTo);
+                                    player.removeItem(action.item.id, action.item.scenarioID);
+                                    if (changeTo.id != 0) {
+                                        player.inventory.add(changeTo);
+                                    }
+                                    //this.spells.getItems().removeValue(action, false);
+                                    //this.spells.getSelection().clear();
+                                }
+                            }
                         } else {
-                            log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
+                            boolean hit = Utils.attackHit(player, defender);
+                            if (hit) {
+                                Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
+                                int damage = Utils.dealDamage(weapon, defender);
+                                log(defender.getDamageDescription(player.name, damage), Color.SCARLET);
+                            } else {
+                                log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
+                            }
                         }
                     }
                 }
@@ -429,6 +417,8 @@ public class WizardryCombatScreen implements Screen, Constants {
                 monsterFight(mm);
             }
         }
+        
+        this.ctx.endTurn();
 
         boolean alive = false;
         for (MutableMonster c : this.monsters) {
@@ -455,7 +445,7 @@ public class WizardryCombatScreen implements Screen, Constants {
         }
 
         this.fight.remove();
-        this.cast.remove();
+        this.reset.remove();
         this.flee.remove();
 
         if (fled) {
@@ -904,6 +894,73 @@ public class WizardryCombatScreen implements Screen, Constants {
         }
     }
 
+    private class ActionLabel extends Label {
+
+        final CharacterRecord player;
+        Spells spell;
+        Item item;
+        MutableMonster target;
+
+        public ActionLabel(CharacterRecord player) {
+            super("", Andius.skin, "default-16");
+            this.player = player;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.player.name.toUpperCase()).append(" - ");
+            if (this.spell != null) {
+                sb.append(this.spell).append(" - ");
+            }
+            if (this.item != null) {
+                sb.append(this.item.spell).append(" - ");
+            }
+            if (this.target != null) {
+                Monster m = (Monster) this.target.baseType();
+                sb.append(m.name.toUpperCase());
+            } else {
+                sb.append("ANY");
+            }
+            return sb.toString();
+        }
+
+    }
+
+    private void addAction(CharacterRecord player) {
+        ActionLabel label = new ActionLabel(player);
+        actions.getItems().add(label);
+    }
+
+    private void setAction(int index, Spells s) {
+        ActionLabel al = this.actions.getItems().get(index);
+        if (al != null && (s.getArea() == SpellArea.COMBAT || s.getArea() == SpellArea.ANY_TIME)) {
+            al.spell = s;
+        }
+    }
+
+    private void setAction(int index, Item i) {
+        ActionLabel al = this.actions.getItems().get(index);
+        if (al != null && (i.spell.getArea() == SpellArea.COMBAT || i.spell.getArea() == SpellArea.ANY_TIME)) {
+            al.item = i;
+        }
+    }
+
+    private void setAction(int index, MutableMonster target) {
+        ActionLabel al = this.actions.getItems().get(index);
+        al.target = target;
+    }
+
+    private ActionLabel getAction(CharacterRecord player) {
+        for (int i = 0; i < this.actions.getItems().size; i++) {
+            ActionLabel al = this.actions.getItems().get(i);
+            if (al.player == player) {
+                return al;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(new InputMultiplexer(this.stage));
@@ -998,13 +1055,15 @@ public class WizardryCombatScreen implements Screen, Constants {
 
     private class PlayerListing extends Group {
 
+        final int index;
         final Label l1;
         final PlayerStatusLabel l2;
         final PlayerMagicPointsLabel l3;
         final ListingBackground bckgrnd;
         final CharacterRecord player;
 
-        PlayerListing(SaveGame.CharacterRecord rec) {
+        PlayerListing(int index, CharacterRecord rec) {
+            this.index = index;
             this.player = rec;
             this.bckgrnd = new ListingBackground();
             rec.healthCursor = this.bckgrnd;
@@ -1122,6 +1181,7 @@ public class WizardryCombatScreen implements Screen, Constants {
 
     private class MonsterListing extends Group {
 
+        final Image icon;
         final Label l1;
         final MonsterStatusLabel l2;
         final MonsterMagicPointsLabel l3;
@@ -1137,14 +1197,24 @@ public class WizardryCombatScreen implements Screen, Constants {
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
+            AtlasRegion ar = iconAtlas.findRegion("" + this.m.getIconId());
+
+            if (ar == null) {
+                iconAtlas.findRegion("0");
+            }
+
+            this.icon = new Image(ar);
+
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new MonsterStatusLabel(mm);
             this.l3 = new MonsterMagicPointsLabel(mm);
+            this.icon.setPosition(247, 2);
 
             String d1 = String.format("%s  LVL %d", m.name.toUpperCase(), mm.getLevel());
             this.l1.setText(d1);
 
             addActor(this.bckgrnd);
+            addActor(this.icon);
             addActor(this.l1);
             addActor(this.l2);
             addActor(this.l3);
@@ -1161,6 +1231,11 @@ public class WizardryCombatScreen implements Screen, Constants {
                 public void clicked(InputEvent event, float x, float y) {
                     selectedMonster.remove();
                     MonsterListing.this.addActor(selectedMonster);
+
+                    PlayerListing pl = (PlayerListing) selectedPlayer.getParent();
+                    if (pl != null) {
+                        setAction(pl.index, MonsterListing.this.mm);
+                    }
                 }
             });
 

@@ -1588,7 +1588,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
-                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, null, null));
+                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster, currentLevel + 1, treasure, destCell, fromCell));
             }
         }
     }

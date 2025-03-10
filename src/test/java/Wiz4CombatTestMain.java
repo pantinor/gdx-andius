@@ -111,7 +111,7 @@ public class Wiz4CombatTestMain extends Game {
 //            String json = gson.toJson(WER4_CHARS);
 //            System.out.println(json);
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(442), null, null));
-            setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(4), 1, true, null, null));
+            setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(9), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));

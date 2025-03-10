@@ -1,7 +1,6 @@
 
 import andius.Andius;
 import andius.objects.TibianSprite;
-import andius.objects.Monster;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -9,31 +8,29 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.utils.Align;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import org.apache.commons.io.IOUtils;
 import utils.AutoFocusScrollPane;
 
 public class MonsterAtlasTool extends InputAdapter implements ApplicationListener {
@@ -53,7 +50,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
     String selectedIcon;
     MyListItem selectedMonster;
 
-    java.util.List<Monster> monsters;
+    final MyListItem[] items = new MyListItem[20];
 
     @Override
     public void create() {
@@ -80,7 +77,6 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
                     if (event.getButton() == 0) {
                         selectedIcon = event.getTarget().getName();
                         if (selectedMonster != null) {
-                            selectedMonster.monster.setIconId(selectedIcon);
                             selectedMonster.swapImage(selectedIcon);
                         }
                     }
@@ -100,28 +96,12 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
         imageScrollPane.setBounds(0, screenHeight, screenWidth - 300, screenHeight);
         imageScrollPane.setPosition(0, 0);
 
-        try {
-            String json = IOUtils.toString(new FileInputStream(new File("src/main/resources/assets/json/bs-monsters.json")));
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            monsters = gson.fromJson(json, new TypeToken<java.util.List<Monster>>() {
-            }.getType());
-        } catch (Exception e) {
-            //ignore
-        }
-
-        MyListItem[] items = new MyListItem[monsters.size()];
-        int x = 0;
-        for (Monster m : monsters) {
-            items[x] = new MyListItem(m);
-            x++;
-        }
-
         Table monsterList = new Table(Andius.skin);
         monsterList.align(Align.top);
 
-        for (MyListItem i : items) {
-            monsterList.add(i);
+        for (int i = 0; i < 20; i++) {
+            items[i] = new MyListItem(i);
+            monsterList.add(items[i]);
             monsterList.row();
         }
 
@@ -139,11 +119,11 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
         ScrollPane scrollPane = new AutoFocusScrollPane(monsterList, skin);
         scrollPane.setScrollingDisabled(true, false);
 
-        TextButton makeButton = new TextButton("Write JSON", skin, "default");
+        TextButton makeButton = new TextButton("Write JSON", skin, "default-16");
         makeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                writeJson("monsters.json", monsters);
+                pack();
             }
         });
 
@@ -165,29 +145,9 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
     @Override
 
     public void render() {
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.act();
         stage.draw();
-
-        batch.begin();
-        font.draw(batch, "icon: " + selectedIcon, screenWidth - 350, screenHeight - 830);
-        //font.draw(batch, "monster: " + selectedMonster.name, screenWidth - 350, screenHeight - 860);
-        batch.end();
-    }
-
-    private void writeJson(String file, java.util.List<Monster> obj) {
-        try {
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.setPrettyPrinting().create();
-            String json = gson.toJson(obj);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(json.getBytes("UTF-8"));
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {
@@ -201,62 +161,113 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
 
     public class MyListItem extends Group implements Comparable<MyListItem> {
 
-        public final Label name;
-        public final Monster monster;
+        public final int iconId;
+        public final Label id;
         public Image icon;
+        public String name;
 
-        public MyListItem(Monster m) {
-            this.name = new Label(m.getName(), skin, "default");
-            this.monster = m;
-            this.icon = new Image(TibianSprite.icon(this.monster.getIconId().equals("0") ? "Deadeye_Devious" : this.monster.getIconId()));
+        public MyListItem(int id) {
+            this.iconId = id;
+            this.id = new Label("" + id, skin, "default-16");
+            this.icon = new Image(TibianSprite.icon("Deadeye_Devious"));
 
             float x = getX();
             this.icon.setBounds(x + 3, getY() + 3, dim, dim);
-            this.name.setPosition(x += dim + 5, getY() + 10);
+            this.id.setPosition(x += dim + 5, getY() + 10);
 
-            addActor(this.name);
+            addActor(this.id);
             addActor(this.icon);
             this.setBounds(getX(), getY(), 150, 70);
         }
 
-        public void swapImage(String id) {
+        public void swapImage(String name) {
+            this.name = name;
             float x = this.icon.getX();
             float y = this.icon.getY();
             this.icon.remove();
-            this.icon = new Image(TibianSprite.icon(id));
+            this.icon = new Image(TibianSprite.icon(name));
             this.icon.setBounds(x, y, dim, dim);
             addActor(this.icon);
         }
 
         @Override
         public int compareTo(MyListItem o) {
-            return Integer.compare(this.monster.getMonsterId(), o.monster.getMonsterId());
+            return Integer.compare(this.iconId, o.iconId);
         }
 
+        public BufferedImage convertPixmapToBufferedImage() {
+
+            TextureRegion tr = TibianSprite.icon(this.name);
+
+            int sx = tr.getRegionX();
+            int sy = tr.getRegionY();
+            int w = tr.getRegionWidth();
+            int h = tr.getRegionHeight();
+
+            if (!tr.getTexture().getTextureData().isPrepared()) {
+                tr.getTexture().getTextureData().prepare();
+            }
+            
+            Pixmap pixmap = tr.getTexture().getTextureData().consumePixmap();
+
+            BufferedImage bufferedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            for (int x = 0; x < w; x++) {
+                for (int y = 0; y < h; y++) {
+                    int value = pixmap.getPixel(x + sx, y + sy);
+                    Color color = new Color(value);
+                    int rgba = Color.argb8888(color);
+                    bufferedImage.setRGB(x, y, rgba);
+                }
+            }
+            return bufferedImage;
+        }
+    }
+
+    public void pack() {
+
+        TexturePacker.Settings settings = new TexturePacker.Settings();
+        settings.minWidth = 8;
+        settings.minHeight = 8;
+        settings.maxWidth = 256;
+        settings.maxHeight = 4000;
+        settings.paddingX = 0;
+        settings.paddingY = 0;
+        settings.fast = true;
+        settings.pot = false;
+        settings.grid = true;
+        settings.edgePadding = false;
+        settings.bleed = false;
+        settings.debug = false;
+        settings.alias = false;
+        settings.useIndexes = true;
+
+        TexturePacker tp = new TexturePacker(settings);
+
+        try {
+            for (MyListItem i : this.items) {
+                tp.addImage(i.convertPixmapToBufferedImage(), "" + i.iconId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tp.pack(new File("src/main/resources/assets/json"), "wizIcons.atlas");
     }
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
-
     }
 
 }

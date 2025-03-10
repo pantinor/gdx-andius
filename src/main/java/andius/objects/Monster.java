@@ -12,7 +12,7 @@ public class Monster implements Comparable<Monster> {
     public String genericName;
     public String name;
     public int monsterId;
-    public String iconId;
+    public int iconId;
     public int type;
     public int goldReward;
     public int chestReward;
@@ -70,11 +70,11 @@ public class Monster implements Comparable<Monster> {
         return monsterId;
     }
 
-    public String getIconId() {
+    public int getIconId() {
         return iconId;
     }
 
-    public void setIconId(String iconId) {
+    public void setIconId(int iconId) {
         this.iconId = iconId;
     }
 

@@ -107,12 +107,12 @@ public class Context {
     }
 
     public void endTurn(Constants.Map map) throws PartyDeathException {
-        int decr_interval = (map == Constants.Map.WORLD ? 40 : 10);
+        int decr_interval = (map == Constants.Map.WORLD ? 20 : 10);
         for (CharacterRecord player : this.saveGame.players) {
             if (!player.isDead()) {
                 player.submorsels -= decr_interval;
                 if (player.submorsels < 0) {
-                    player.submorsels = 400;
+                    player.submorsels = 100;
 
                     player.decrementStatusEffects();
 
@@ -126,6 +126,26 @@ public class Context {
         }
         if (pickRandomEnabledPlayer() == null) {
             throw new PartyDeathException();
+        }
+    }
+
+    public void endTurn() {
+        int decr_interval = 100;
+        for (CharacterRecord player : this.saveGame.players) {
+            if (!player.isDead()) {
+                player.submorsels -= decr_interval;
+                if (player.submorsels < 0) {
+                    player.submorsels = 100;
+
+                    player.decrementStatusEffects();
+
+                    if (player.status.has(Status.POISONED)) {
+                        player.adjustHP(-1);
+                    }
+
+                    player.adjustHP(player.regenerationPoints());
+                }
+            }
         }
     }
 

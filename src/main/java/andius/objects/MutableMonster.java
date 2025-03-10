@@ -63,7 +63,7 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public String icon() {
+    public int icon() {
         return this.monster.getIconId();
     }
 
@@ -119,18 +119,15 @@ public class MutableMonster implements Mutable {
 
     @Override
     public void decrementSpellPoints(Spells spell) {
-        float chance = (1 / (this.monster.getGroupSize().roll() + 2)) * 100;
-        if (Utils.RANDOM.nextInt(100) < chance) {
-            if (spell.getType() == ClassType.MAGE) {
-                this.currentMageSpellLevel--;
-                if (currentMageSpellLevel < 0) {
-                    this.currentMageSpellLevel = 0;
-                }
-            } else {
-                this.currentPriestSpellLevel--;
-                if (currentPriestSpellLevel < 0) {
-                    this.currentPriestSpellLevel = 0;
-                }
+        if (spell.getType() == ClassType.MAGE) {
+            this.currentMageSpellLevel--;
+            if (currentMageSpellLevel < 0) {
+                this.currentMageSpellLevel = 0;
+            }
+        } else {
+            this.currentPriestSpellLevel--;
+            if (currentPriestSpellLevel < 0) {
+                this.currentPriestSpellLevel = 0;
             }
         }
     }

@@ -1,0 +1,146 @@
+
+wizIcons.png
+size: 256,320
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0
+  rotate: false
+  xy: 11, 8
+  size: 50, 45
+  orig: 50, 45
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 93, 28
+  size: 36, 38
+  orig: 36, 38
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 155, 29
+  size: 37, 35
+  orig: 37, 35
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 203, 19
+  size: 41, 45
+  orig: 41, 45
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 12, 95
+  size: 38, 33
+  orig: 38, 33
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 76, 80
+  size: 51, 48
+  orig: 51, 48
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 144, 77
+  size: 48, 50
+  orig: 48, 50
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 195, 84
+  size: 61, 44
+  orig: 61, 44
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 0, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 74, 155
+  size: 44, 37
+  orig: 44, 37
+  offset: 0, 0
+  index: -1
+10
+  rotate: false
+  xy: 128, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+11
+  rotate: false
+  xy: 192, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+12
+  rotate: false
+  xy: 0, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+13
+  rotate: false
+  xy: 64, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+14
+  rotate: false
+  xy: 128, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+15
+  rotate: false
+  xy: 192, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+16
+  rotate: false
+  xy: 0, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+17
+  rotate: false
+  xy: 64, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+18
+  rotate: false
+  xy: 128, 260
+  size: 32, 23
+  orig: 32, 23
+  offset: 0, 0
+  index: -1
+19
+  rotate: false
+  xy: 193, 285
+  size: 31, 35
+  orig: 31, 35
+  offset: 0, 0
+  index: -1

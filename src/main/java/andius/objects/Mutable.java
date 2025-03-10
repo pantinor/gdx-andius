@@ -8,7 +8,7 @@ public interface Mutable {
 
     public String name();
 
-    public String icon();
+    public int icon();
 
     public int getArmourClass();
 

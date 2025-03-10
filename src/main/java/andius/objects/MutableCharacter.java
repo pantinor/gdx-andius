@@ -54,32 +54,8 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public String icon() {
-
-        if (this.dogooder.characterClass == null) {
-
-        }
-
-        switch (this.dogooder.characterClass) {
-            case FIGHTER:
-                return Utils.randomBoolean() ? "Burning_Gladiator" : (Utils.randomBoolean() ? "Barbarian_Headsplitter" : "Barbarian_Skullhunter");
-            case MAGE:
-                return Utils.randomBoolean() ? "Infernalist" : (Utils.randomBoolean() ? "Dark_Sorcerer" : "Raging_Mage");
-            case PRIEST:
-                return Utils.randomBoolean() ? "The_Hag" : "Barbaria";
-            case THIEF:
-                return Utils.randomBoolean() ? "Deadeye_Devious" : "Ron_The_Ripper";
-            case NINJA:
-                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
-            case BISHOP:
-                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
-            case LORD:
-                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
-            case SAMURAI:
-                return Utils.randomBoolean() ? "Void_Watcher" : "Energy_Elemental";
-        }
-
-        return "Paladin_Hunter_Male";
+    public int icon() {
+        return 0;
     }
 
     @Override

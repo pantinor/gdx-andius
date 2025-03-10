@@ -38,11 +38,6 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.enemy = enemy;
-
-        if (this.enemy != null) {
-            this.anim = TibianSprite.animation(this.enemy.icon());
-        }
-
         this.hash = "M:" + x + ":" + y;
     }
 

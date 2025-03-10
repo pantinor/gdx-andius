@@ -148,7 +148,7 @@ public class SaveGame implements Constants {
         public List<SummoningCircle> summoningCircles = new ArrayList<>();
         public List<MutableMonster> summonedMonsters = new ArrayList<>();
 
-        public int submorsels = 400;
+        public int submorsels = 100;
         public int acmodifier1; //lasts for single combat
         public int acmodifier2; //lasts until next rest at inn
 
