@@ -814,7 +814,7 @@ public class WizardryCombatScreen implements Screen, Constants {
                 if (p.savingThrowSpell()) {
                     log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    p.status.set(effect, 4);
+                    p.status.set(effect, 3);
                 }
             }
         }
@@ -824,7 +824,7 @@ public class WizardryCombatScreen implements Screen, Constants {
                 if (unaffected) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mm.status().set(effect, 4);
+                    mm.status().set(effect, 1);
                 }
             }
         }
@@ -936,6 +936,7 @@ public class WizardryCombatScreen implements Screen, Constants {
         ActionLabel al = this.actions.getItems().get(index);
         if (al != null && (s.getArea() == SpellArea.COMBAT || s.getArea() == SpellArea.ANY_TIME)) {
             al.spell = s;
+            al.item = null;
         }
     }
 
@@ -943,6 +944,7 @@ public class WizardryCombatScreen implements Screen, Constants {
         ActionLabel al = this.actions.getItems().get(index);
         if (al != null && (i.spell.getArea() == SpellArea.COMBAT || i.spell.getArea() == SpellArea.ANY_TIME)) {
             al.item = i;
+            al.spell = null;
         }
     }
 

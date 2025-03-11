@@ -70,6 +70,7 @@ public class EquipmentScreen implements Screen, Constants {
     private final TextButton cancel;
 
     private final TradeSliderBox traderSlider;
+    private final CastTargetSliderBox castTargetSlider;
 
     private final TextureRegion[] invIcons = new TextureRegion[67 * 12];
 
@@ -123,6 +124,7 @@ public class EquipmentScreen implements Screen, Constants {
         spellFocusInd.setHeight(50);
 
         traderSlider = new TradeSliderBox();
+        castTargetSlider = new CastTargetSliderBox();
 
         invDesc = new Label("", Andius.skin, "default-16");
         invDesc.setBounds(284, Andius.SCREEN_HEIGHT - 415, w, h);
@@ -291,6 +293,7 @@ public class EquipmentScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (context.players().length > 1) {
+                    traderSlider.setZIndex(Integer.MAX_VALUE);
                     traderSlider.show();
                 }
             }
@@ -312,6 +315,7 @@ public class EquipmentScreen implements Screen, Constants {
         stage.addActor(invDesc);
         stage.addActor(unequip);
         stage.addActor(traderSlider);
+        stage.addActor(castTargetSlider);
 
         Label inventory = new Label("Inventory", Andius.skin, "default-16");
         Label splBk = new Label("Known Spells", Andius.skin, "default-16");
@@ -356,7 +360,6 @@ public class EquipmentScreen implements Screen, Constants {
                 spellPane.setWidget(selectedPlayer.spellTable);
             }
         };
-
         playerSelection.addListener(cl);
         cl.changed(null, null);
 
@@ -470,7 +473,7 @@ public class EquipmentScreen implements Screen, Constants {
         final Label goldLabel;
 
         final Label classL;
-        final Label spptsL;
+        final PlayerMagicPointsLabel spptsL;
         final Label expL;
         final Label hpL;
         final Label mxhpL;
@@ -522,24 +525,7 @@ public class EquipmentScreen implements Screen, Constants {
             spellTable.align(Align.top);
 
             for (Spells spell : character.knownSpells) {
-
                 SpellListing l = new SpellListing(spell);
-                l.cast.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        if (!character.isDisabled()) {
-                            if (spell.getArea() != SpellArea.COMBAT && character.canCast(spell)) {
-                                if (spell == Spells.MALOR) {
-                                    new TeleportDialog(context, map.getScreen()).show(stage);
-                                } else {
-                                    SpellUtil.campCast(map.getScreen(), context, character, spell);
-                                }
-                            } else {
-                                Sounds.play(Sound.EVADE);
-                            }
-                        }
-                    }
-                });
                 spellTable.add(l);
                 spellTable.row();
             }
@@ -583,13 +569,9 @@ public class EquipmentScreen implements Screen, Constants {
             classL = new PlayerStatusLabel(character);
             classL.setPosition(250, 610);
 
-            int[] ms = character.magePoints;
-            int[] cs = character.clericPoints;
-            String d4 = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                    ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            spptsL = new Label(d4, Andius.skin, "default-16");
+            spptsL = new PlayerMagicPointsLabel(this.character);
             spptsL.setX(40);
-            spptsL.setY(186);
+            spptsL.setY(197);
 
             expL = new Label("" + character.exp, Andius.skin, "default-16");
             expL.setPosition(115, 164);
@@ -890,22 +872,37 @@ public class EquipmentScreen implements Screen, Constants {
         Spells spell;
         final Image icon;
         final Label label;
-        final TextButton cast;
+        TextButton cast;
 
         SpellListing(Spells spell) {
             this.spell = spell;
 
             this.icon = new Image(invIcons[spell.getIcon()]);
             this.label = new Label(String.format("%d - %s", spell.getLevel(), spell.toString().toUpperCase()), Andius.skin, "default-16");
-            this.cast = new TextButton("CAST", Andius.skin, "default-16-red");
 
             addActor(this.icon);
             addActor(this.label);
-            addActor(this.cast);
 
             this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
             this.label.setPosition(getX() + dim + 10, getY() + 14);
-            this.cast.setBounds(getX() + dim + 130, getY() + 10, 60, 25);
+
+            if (spell.getArea() != SpellArea.COMBAT && spell.getArea() != SpellArea.LOOTING) {
+                this.cast = new TextButton("CAST", Andius.skin, "default-16-red");
+                this.cast.setBounds(getX() + dim + 130, getY() + 10, 60, 25);
+                addActor(this.cast);
+                this.cast.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                        if (spell == Spells.MALOR) {
+                            new TeleportDialog(context, map.getScreen()).show(stage);
+                        } else {
+                            castTargetSlider.spell = spell;
+                            castTargetSlider.setZIndex(Integer.MAX_VALUE);
+                            castTargetSlider.show();
+                        }
+                    }
+                });
+            }
 
             this.setBounds(getX(), getY(), w, h);
 
@@ -916,7 +913,7 @@ public class EquipmentScreen implements Screen, Constants {
     private class TradeSliderBox extends Group {
 
         final int width = 200;
-        final int height = 240;
+        final int height = 150;
         private final List<TradeIndex> tradeSelection;
 
         TradeSliderBox() {
@@ -938,19 +935,19 @@ public class EquipmentScreen implements Screen, Constants {
                     if (event.toString().equals("touchDown")) {
                         if (selectedItem == null || selectedPlayer.character == tradeSelection.getSelected().character) {
                             Sounds.play(Sound.NEGATIVE_EFFECT);
-                            return false;
-                        }
-                        Sounds.play(Sound.TRIGGER);
-                        for (PlayerIndex pi : playerSelection.getItems()) {
-                            if (pi.character == tradeSelection.getSelected().character) {
-                                pi.invTable.add(new ItemListing(selectedItem.item, pi.character));
-                                pi.invTable.row();
-                                break;
+                        } else {
+                            Sounds.play(Sound.TRIGGER);
+                            for (PlayerIndex pi : playerSelection.getItems()) {
+                                if (pi.character == tradeSelection.getSelected().character) {
+                                    pi.invTable.add(new ItemListing(selectedItem.item, pi.character));
+                                    pi.invTable.row();
+                                    break;
+                                }
                             }
+                            selectedItem.removeActor(focusIndicator);
+                            selectedPlayer.invTable.removeActor(selectedItem);
+                            selectedItem = null;
                         }
-                        selectedItem.removeActor(focusIndicator);
-                        selectedPlayer.invTable.removeActor(selectedItem);
-                        selectedItem = null;
                         TradeSliderBox.this.hide();
                     }
                     return false;
@@ -961,14 +958,14 @@ public class EquipmentScreen implements Screen, Constants {
             tradePane.setBounds(getX(), getY(), width, height);
             addActor(tradePane);
 
-            setBounds(Andius.SCREEN_WIDTH, 200, width, height);
+            setBounds(Andius.SCREEN_WIDTH, 50, width, height);
         }
 
         void show() {
             if (getActions().size > 0) {
                 clearActions();
             }
-            setPosition(Andius.SCREEN_WIDTH, 200);
+            setPosition(Andius.SCREEN_WIDTH, 50);
             addAction(Actions.sequence(Actions.show(), Actions.moveBy(-width, 0, 1f, Interpolation.sine)));
         }
 
@@ -984,6 +981,78 @@ public class EquipmentScreen implements Screen, Constants {
             final SaveGame.CharacterRecord character;
 
             public TradeIndex(CharacterRecord character) {
+                this.character = character;
+            }
+
+            @Override
+            public String toString() {
+                return character.name.toUpperCase();
+            }
+        }
+
+    }
+
+    private class CastTargetSliderBox extends Group {
+
+        final int width = 200;
+        final int height = 150;
+        private final List<TargetIndex> targetSelection;
+        private Spells spell;
+
+        CastTargetSliderBox() {
+
+            Image background = new Image(Utils.fillRectangle(width, height, Color.SKY, .75f));
+            background.setBounds(getX(), getY(), width, height);
+            addActor(background);
+
+            this.targetSelection = new List<>(Andius.skin, "default-16");
+            TargetIndex[] names = new TargetIndex[context.players().length];
+            for (int i = 0; i < context.players().length; i++) {
+                names[i] = new TargetIndex(context.players()[i]);
+            }
+            this.targetSelection.setItems(names);
+
+            this.targetSelection.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+                    if (event.toString().equals("touchDown")) {
+                        if (spell != null && selectedPlayer.character != null && targetSelection.getSelected().character != null) {
+                            SpellUtil.campCast(selectedPlayer.character, spell, targetSelection.getSelected().character);
+                        }
+                        CastTargetSliderBox.this.hide();
+                    }
+                    return false;
+                }
+            });
+
+            ScrollPane tradePane = new ScrollPane(this.targetSelection, Andius.skin);
+            tradePane.setBounds(getX(), getY(), width, height);
+            addActor(tradePane);
+
+            setBounds(Andius.SCREEN_WIDTH, 50, width, height);
+            setZIndex(Integer.MAX_VALUE);
+        }
+
+        void show() {
+            if (getActions().size > 0) {
+                clearActions();
+            }
+            setPosition(Andius.SCREEN_WIDTH, 50);
+            addAction(Actions.sequence(Actions.show(), Actions.moveBy(-width, 0, 1f, Interpolation.sine)));
+        }
+
+        void hide() {
+            if (getActions().size > 0) {
+                clearActions();
+            }
+            addAction(Actions.sequence(Actions.moveBy(width, 0, 1f, Interpolation.sine), Actions.hide()));
+        }
+
+        private class TargetIndex {
+
+            final SaveGame.CharacterRecord character;
+
+            public TargetIndex(CharacterRecord character) {
                 this.character = character;
             }
 
@@ -1021,6 +1090,33 @@ public class EquipmentScreen implements Screen, Constants {
         @Override
         public Color getColor() {
             return rec.isDead() ? Color.RED : rec.status.color();
+        }
+
+    }
+
+    private class PlayerMagicPointsLabel extends Label {
+
+        private final CharacterRecord rec;
+
+        public PlayerMagicPointsLabel(CharacterRecord rec) {
+            super("", Andius.skin, "default-16");
+            this.rec = rec;
+            setText(getText());
+        }
+
+        @Override
+        public com.badlogic.gdx.utils.StringBuilder getText() {
+            int[] ms = rec.magePoints;
+            int[] cs = rec.clericPoints;
+            return new com.badlogic.gdx.utils.StringBuilder(
+                    String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            setText(getText());
+            super.draw(batch, parentAlpha);
         }
 
     }

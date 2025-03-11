@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import utils.Utils;
 import andius.objects.SaveGame.CharacterRecord;
+import static andius.objects.Spells.DIOS;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -228,59 +229,72 @@ public class SpellUtil {
 
     }
 
-    public static void campCast(BaseScreen screen, Context context, CharacterRecord caster, Spells spell) {
+    public static void campCast(CharacterRecord caster, Spells spell, CharacterRecord target) {
 
-        try {
-
-            if (!caster.canCast(spell)) {
-                screen.log("Thou dost not have enough magic points!");
-                Sounds.play(Sound.EVADE);
-                return;
-            }
-
-            if (caster.status.has(Status.SILENCED)) {
-                screen.log("Silenced!");
-                Sounds.play(Sound.EVADE);
-                return;
-            }
-
-            caster.decrMagicPts(spell);
-
-            switch (spell) {
-                case DUMAPIC:
-                    break;
-                case DIOS:
-                    break;
-                case MILWA:
-                    break;
-                case LOMILWA:
-                    break;
-                case DIALKO:
-                    break;
-                case LATUMAPIC:
-                    break;
-                case DIAL:
-                    break;
-                case LATUMOFIS:
-                    break;
-                case MAPORFIC:
-                    break;
-                case DIALMA:
-                    break;
-                case KANDI:
-                    break;
-                case DI:
-                    break;
-                case MADI:
-                    break;
-                case KADORTO:
-                    break;
-            }
-
-        } finally {
-
+        if (caster.isDisabled()) {
+            Sounds.play(Sound.EVADE);
+            return;
         }
 
+        if (!caster.canCast(spell)) {
+            Sounds.play(Sound.EVADE);
+            return;
+        }
+
+        if (caster.status.has(Status.SILENCED)) {
+            Sounds.play(Sound.EVADE);
+            return;
+        }
+
+        caster.decrMagicPts(spell);
+
+        switch (spell) {
+            case DUMAPIC:
+            case MILWA:
+            case LOMILWA:
+            case KANDI:
+                Sounds.play(Sound.EVADE);
+                break;
+            case DIOS://heal
+            case DIALMA://greatly heal
+            case MADI://healing
+            case DIAL://more heal
+                doSpellHeal(target, spell);
+                break;
+            case DIALKO://dispel affects
+                target.status.set(Status.ASLEEP, 0);
+                target.status.set(Status.PARALYZED, 0);
+            case LATUMAPIC://dispel affects
+                target.status.set(Status.SILENCED, 0);
+                target.status.set(Status.AFRAID, 0);
+                target.status.set(Status.PARALYZED, 0);
+                break;
+            case LATUMOFIS://cure poison
+                target.status.set(Status.POISONED, 0);
+                break;
+            case MAPORFIC://big shield
+                target.acmodifier2 = spell.getHitBonus();
+                break;
+            case DI://life
+                if (target.isDead()) {
+                    if (Utils.RANDOM.nextInt(100) > 50 + target.vitality * 3) {
+                        Sounds.play(Sound.EVADE);
+                    } else {
+                        target.hp = 1;
+                    }
+                } else {
+                    Sounds.play(Sound.EVADE);
+                }
+                break;
+            case KADORTO://resurect
+                if (target.isDead()) {
+                    target.adjustHP(target.maxhp);
+                    target.status.reset();
+                } else {
+                    Sounds.play(Sound.EVADE);
+                }
+                break;
+        }
     }
 
     private static void projectileMagicAttack(CombatScreen screen, SequenceAction seq, andius.objects.Actor attacker, Spells spell, andius.objects.Actor target) {
@@ -431,13 +445,13 @@ public class SpellUtil {
         }
     }
 
-    private static void doSpellHeal(CharacterRecord rec, Spells spell) {
-        if (rec != null && !rec.isDead()) {
+    private static void doSpellHeal(CharacterRecord target, Spells spell) {
+        if (target != null && !target.isDead()) {
             if (spell == Spells.MADI) {
-                rec.adjustHP(rec.maxhp);
+                target.adjustHP(target.maxhp);
             } else {
                 int points = spell.damage();
-                rec.adjustHP(points);
+                target.adjustHP(points);
             }
         }
     }

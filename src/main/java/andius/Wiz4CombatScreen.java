@@ -1,5 +1,6 @@
 package andius;
 
+import static andius.Andius.CTX;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
@@ -272,7 +273,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord) {
-                player.adjustHP(player.regenerationPoints());
                 MutableCharacter defender = pickEnemy();
                 if (defender != null) {
                     SpellLabel sp = this.spells.getSelected();
@@ -304,6 +304,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 enemyFight((MutableCharacter) m);
             }
         }
+
+        CTX.endTurn();
 
         boolean alive = false;
         for (MutableCharacter c : this.enemies) {
@@ -345,7 +347,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         for (Object m : shuffled) {
             if (m instanceof CharacterRecord) {
-                player.adjustHP(player.regenerationPoints());
                 MutableCharacter defender = pickEnemy();
                 if (defender != null) {
                     if (!player.isDisabled()) {
@@ -365,6 +366,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 enemyFight((MutableCharacter) m);
             }
         }
+
+        CTX.endTurn();
 
         boolean alive = false;
         for (MutableCharacter c : this.enemies) {
@@ -867,7 +870,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (!mc.status().isDisabled() && dg.savingThrowSpell()) {
                     log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mc.status().set(effect, 4);
+                    mc.status().set(effect, 1);
                 }
             }
         }
@@ -877,13 +880,13 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (unaffected) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mm.status().set(effect, 4);
+                    mm.status().set(effect, 1);
                 }
             }
             if (player.savingThrowSpell()) {
                 log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
-                player.status.set(effect, 4);
+                player.status.set(effect, 3);
             }
         }
     }
