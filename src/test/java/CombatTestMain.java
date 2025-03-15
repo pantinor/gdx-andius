@@ -106,10 +106,10 @@ public class CombatTestMain extends Game {
             //Monster monster = Andius.MONSTER_MAP.get(monsters[idx]);
             Monster monster = PMO_MONSTERS.get(3);
 
-            Actor actor = new Actor(monster.name, null);
+            Actor actor = new Actor(monster.name);
             
             MutableMonster mm = new MutableMonster(monster);
-            actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR);
+            actor.set(mm, Role.MONSTER, 1, 1, 1, 1, Constants.MovementBehavior.ATTACK_AVATAR, null);
 
             CombatScreen cs = new CombatScreen(ctx, Constants.Map.CAVE, tm, actor, level, true);
             setScreen(cs);

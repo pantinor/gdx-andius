@@ -263,22 +263,22 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        List<String> removedMonsters = saveGame.removedActors.get(this.map);
-        if (removedMonsters == null) {
-            removedMonsters = new ArrayList<>();
-            saveGame.removedActors.put(this.map, removedMonsters);
-        }
-
-        for (int level = 0; level < this.map.scenario().levels().length; level++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
-                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
-                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
-                        cell.wanderingEncounterID = -1;
-                    }
-                }
-            }
-        }
+//        List<String> removedMonsters = saveGame.removedActors.get(this.map);
+//        if (removedMonsters == null) {
+//            removedMonsters = new ArrayList<>();
+//            saveGame.removedActors.put(this.map, removedMonsters);
+//        }
+//
+//        for (int level = 0; level < this.map.scenario().levels().length; level++) {
+//            for (int x = 0; x < DUNGEON_DIM; x++) {
+//                for (int y = 0; y < DUNGEON_DIM; y++) {
+//                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
+//                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
+//                        cell.wanderingEncounterID = -1;
+//                    }
+//                }
+//            }
+//        }
 
         this.loadedMazeData = true;
     }
@@ -1723,13 +1723,13 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
             if (this.map != Map.WIZARDRY4) {
-                List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
-                if (removedMonsters == null) {
-                    removedMonsters = new ArrayList<>();
-                    CTX.saveGame.removedActors.put(this.map, removedMonsters);
-                }
+                //List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
+                //if (removedMonsters == null) {
+                //    removedMonsters = new ArrayList<>();
+                //    CTX.saveGame.removedActors.put(this.map, removedMonsters);
+                //}
                 //pesisted to save file
-                removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
+                //removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
             }
         }
     }

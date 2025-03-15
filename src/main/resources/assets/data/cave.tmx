@@ -139,7 +139,7 @@
   <object id="111" name="WORLD" x="768" y="912" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="people">
-  <object id="118" name="Rogue" type="MONSTER" x="768" y="336" width="48" height="48">
+  <object id="118" name="bushwacker" type="MONSTER" x="768" y="336" width="48" height="48">
    <properties>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>

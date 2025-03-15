@@ -63,7 +63,7 @@ public class ReorderPartyDialog extends Window implements Constants {
         setModal(true);
         defaults().pad(10);
 
-        TextButton close = new TextButton("X", Andius.skin);
+        TextButton close = new TextButton("X", Andius.skin, "default-16");
         getTitleTable().add(close).height(getPadTop());
         close.addListener(new EventListener() {
             @Override

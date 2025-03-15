@@ -138,121 +138,115 @@
  <objectgroup id="11" name="people">
   <object id="1" name="Jason" type="INNKEEPER" x="864" y="96" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="2" name="William" type="FRIENDLY" x="1296" y="816" width="48" height="48">
+  <object id="2" name="William" type="FRIENDLY" x="1392" y="768" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="3" name="Dekker" type="FRIENDLY" x="144" y="480" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Adventurer"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="4" name="Calabrini" type="FRIENDLY" x="336" y="768" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Nomad_Blue"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="5" name="Inoo" type="FRIENDLY" x="1008" y="1392" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Glooth_Brigand"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="6" name="Daranor" type="FRIENDLY" x="528" y="1200" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="7" name="Tyrone" type="FRIENDLY" x="768" y="480" width="48" height="48">
-   <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Dwarf_Miner"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="8" name="Browning" type="FRIENDLY" x="192" y="1296" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Sorcerer_Elementalist_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="9" name="Shakespeare" type="FRIENDLY" x="288" y="1344" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Sorcerer_Conjurer_Male"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="10" name="Shazom" type="FRIENDLY" x="1344" y="1056" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Feverish_Citizen"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="11" name="Patric the Humble Shepherd" type="FRIENDLY" x="1344" y="960" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Misguided_Bully"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="12" name="Kalab" type="MERCHANT2" x="288" y="1200" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Hero"/>
     <property name="movement" value="FOLLOW_AVATAR"/>
    </properties>
   </object>
-  <object id="13" name="Osric" type="TEMPLE" x="1248" y="1344" width="48" height="48">
+  <object id="13" name="Osric" type="TEMPLE" x="1344" y="1296" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Bandit"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="14" name="Nifadas" type="MERCHANT" x="1296" y="624" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="15" name="Christen" type="FRIENDLY" x="1152" y="240" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Stalker"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="16" name="Rebelias" type="FRIENDLY" x="960" y="336" width="48" height="48">
+  <object id="16" name="Rebelias" type="FRIENDLY" x="960" y="288" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Sorcerer_Mage_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="17" name="Cromwell" type="FRIENDLY" x="864" y="336" width="48" height="48">
+  <object id="17" name="Cromwell" type="FRIENDLY" x="864" y="288" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Paladin_Ranger_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="19" name="Tracie" type="FRIENDLY" x="1344" y="144" width="48" height="48">
+  <object id="19" name="Tracie" type="FRIENDLY" x="1344" y="96" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Dark_Druid"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="20" name="Mariah" type="FRIENDLY" x="144" y="336" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Sorcerer_Mage_Female"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="21" name="Tyrone" type="FRIENDLY" x="768" y="720" width="48" height="48">
    <properties>
-    <property name="icon" value="Sorcerer_Battle_Mage_Male"/>
+    <property name="icon" value="Crazed_Beggar"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>

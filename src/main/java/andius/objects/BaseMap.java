@@ -2,13 +2,10 @@ package andius.objects;
 
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
-import andius.CombatScreen;
-import static andius.Constants.CLASSPTH_RSLVR;
 import andius.Constants.Map;
 import andius.GameScreen;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import andius.WizardryCombatScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,7 @@ public class BaseMap {
     private int height;
     private final List<Portal> portals = new ArrayList<>();
     public final List<Actor> actors = new ArrayList<>();
+    private Actor combatActor;
 
     //used to keep the pace of wandering to every 2 moves instead of every move, 
     //otherwise cannot catch up and talk to the character
@@ -73,8 +71,11 @@ public class BaseMap {
         return null;
     }
 
-    public void removeCreature(Actor cr) {
-        actors.remove(cr);
+    public void removeCombatActor() {
+        if (this.combatActor != null) {
+            actors.remove(this.combatActor);
+            this.combatActor = null;
+        }
     }
 
     public void moveObjects(Map map, GameScreen screen, int avatarX, int avatarY) throws PartyDeathException {
@@ -89,12 +90,12 @@ public class BaseMap {
                 case ATTACK_AVATAR: {
                     int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
                     if (dist <= 1) {
-                        TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-                        TiledMap tm = loader.load("assets/data/combat1.tmx");
-                        CombatScreen cs = new CombatScreen(CTX, map, tm, p, 1, true);
+                        this.combatActor = p;
+                        Monster m = (Monster) p.getEnemy().baseType();
+                        WizardryCombatScreen cs = new WizardryCombatScreen(CTX, map, m, m.getLevel(), true, null, null);
                         mainGame.setScreen(cs);
-                        continue;
-                    } else if (dist >= 4) {   
+                        return;
+                    } else if (dist >= 4) {
                         //dont move until close enough
                         continue;
                     }

@@ -67,9 +67,6 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="items" tilewidth="48" tileheight="48" tilecount="484" columns="22">
-  <image source="uf_items.png" trans="ff00ff" width="1056" height="1056"/>
- </tileset>
  <layer id="1" name="floor" width="158" height="110">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu2dTY4cNRhAnRUBjjBnyBqkLLNFnIEVGVaB7aBM5wREWeUGBCQWOcIcjbLS1nicz/8uu+x6T/rk+m9P1+vPruouj1IAADArd5WhnDJnPzgntc6Vegewt3dK7esbHs9JK+9S1ikV96TEdc2vTkjLpG1gDHt5Jy1XVplTH9929vYh75SwHu/G0qKPl+tiSn1S6mcfL+QV+W5NSrxMPUbqNrE2Fe/Wo5V3ucey98sB585Bihsl/pj9Pmzxfou/nPjglCbMtvDIf5FYFcm7lOsCs5/xy/Xv/TWkdfBIqnd/eOImIY6IL9/F+mi2d7kBj9R6p6nxrkVfrSdHqMMKtPBO4/NrNe+gDS28q3EH785JzDvjns+731WdN7nejXAv9Jqxey6xz9xZadXOGmLnSFp2dOdi9wF9nikl7/fNM6Web/Hds5Y1nYuW/TvpWsKe9nlnT4/0ruQz4Jv3HU/z/MS+GfbyLvWaNnaeenlX0t7ntq+mNPnuW/zrQqidtaeP0M7mOuZOx9ZpyHv13G/x7lperuW9tdxdZnPU/nWK77HPjHQck+++x7tqJN/uheVKKO+c+SOR8pnwuRlqZ6ENbh5z3ZO2c5287F/N5qT07VzvoB1SjnsnLLe9k/LjKuBYH0LtrOSivc/F2hcgB/u6wsy707F8N2M7C2Px5Ts7j7nzhpw2ifYLbELtq5T3NK3u1eIi5BK79tvLud6u8tmYA995qvGu9Dsu6XXIy+tQ6kXJ8aVjxeqQU1e8mwe8gxHsfc5yHIvVAe/6U/qex9730d7F6pBS19g2UA6f9bS/dfX3oDd4ByPAOxgB3sEI8O4pjPfUl5VdygHv+lCT70r3Tb2PMSLn4l0fas853kEJe3n3InH/FnVoCd71gXz3FLzrA949Be/6MNq70v3xDlYC72AEeAcjwDsAMLwZXQE4HW+s6AXjXcAo73Dv3LTyzjfGhc0lcTtYn1be2WNGSeNHXRRjS8EjLb1znZNcW3EsPchnr/6dO+aUO24o3p2bva8rfLkO785Nr+tZ95oC785N7/sotLOg4b4xjOLV6ApMxtH/V/kReZURIIN3+eztnfQ/gOx7KSuAd/n08i40fvfs4F0+vb0L/b+9WcG7cnxe1fbrbNdeqDW/o8C7fGLPb9U+00U7O569nsurIeeZ1xLwbjx7PhNaiu+Z1VbPsp7VuyM5OIN3qevga26sMjTd28lYP2rv3BOqV836Fcgdx+BGfe3RUb3TxHKLu429bM+66Phni09bfL5O/+upC3xhJu80sZymAutqz799P07y7rMVn6x1Hytfd0Vm806TMh5NbPnra9xu8du1vA28pnsP2D22zm8m3/19DfKdn1m9c+elXOdub6/TrhnvjHu+MRhC3z3QvytjRu9cQjnO1xYb3147ISE5l5tr8e8pK3inCZ1b6RrD5Dud44x/vnbWl+fwrg7fPTvXRXf6KOScd1Pa/TtdGg8lpO9Z8a4e935KLFbDznualN+WpHinPPMzouv/dos/Gx7z7N7dWpH6m6aca2ql5vfOOPf2GobY+xDK+yXe5bzvZ25vVvl7tXMm59mUeKcj1zkTeAealvnuhy1+usaPwvqU1wttE0L6fa30fMFKv8lYgZJ84nr1s1IPL7fy5Zfp6v5dTp18v+eWlt9nHhvaU9rOakq8K3291Hxn/5Y79JwBjKWld1s7+8vWxj7o2KYfenrny3XSWEh4N56jXVfU5Du7X6eUfwykVZ4hnZmW+a7FfZTadlbKd7Sza3H2+8YwBryDEdw4pbTONw9Qyp1TSut880dmprqeAV9fX5r2LTsCLa5joB94ByPwnRe8gz3BOxgB3sEIUs7TDN7BXKQ4hXfQGpyCo4B30Bv64TACrgFhBHgHI8A5GAHOAQAArM3/N9fZBZAPAQA=
@@ -82,7 +79,7 @@
  </layer>
  <layer id="3" name="props" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dQU6DQBQA0IbewcSTaOIRNK44AKsujW69gNeAcILGC3A0p6k1aCooCgPMe8lk2tLFJ/n8z7TJsNkAAAAAwN/tstgRAAAAQz2euZ9/zrpnmKOL7e/ek5arMO7CuI4dCEm5DeMmjPvYgZCUkG/NIe9C/jV9313a77ovC4s3JaHPFqHPNqHPlrFjGUOdHc+rys5fV1X2MZcThUSHoevWfOY1Zu7x8T/a69bvXsOanHpsrcYxsY77uvJ9BkjaXh0EAAAAAAAAAAAAAAAAAAAAAABWrrXvcNH67BN7DjO2do4d9kKs5RwTyY/5VsSOAwAAAACW5KHnWQ59xwEAAAAAAACWKPdfKJCIvXoHJOZ1ZnVvN7N4AIZ46qhlXceWZspz0R/4iTVdXwAA9LNOAAAAAAAAmNblNnYEAAAAQCq+PlscxlbJOSJR75jSKd/UPABYhzdrSerQkA8BAA==
+   H4sIAAAAAAAACu3dTU6DQBQA4GYupYlH0LjiAKSLLo1uvYDXgHCCxgtwNKepNWgqKNrhZ74vmUyBLh7J4w0DybDZAAAAAMDf7cLUEQAAAGM9nrmffw79PczRNvxum7xcxXYX2/XUgZCV29huYrufOhCyEvOtPeRdzL926L9Le677srB4cxLH2TKOs20cZ6upY7mEJhzPqw7nr6s6fPRVopDoMXbeWsy8xsw9Pv5Hd9763W9Yk9MY28hxEuu5r6vee4Cs7dVBAAAAAAAAAAAAAAAAAAAAAABg5TrrDpedfZ9Yc5hL6+bYYS3ERs6RSHHMt3LqOAAAAABgSR4GvuUwdBwAAAAAAABgiQrvQoFM7NU7IDOvM6t7u5nFAzDGU08t6zu2NCnPxfjAT6zp+gIAYJh5AgAAAAAAQFpb72cAAACARL5+WxwurZZzTES9I6VTvql5ALAOb4P5I1KQDwEA
   </data>
  </layer>
  <layer id="4" name="creature" width="158" height="110">
@@ -112,7 +109,7 @@
  </layer>
  <layer id="9" name="doors" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dS07DMBQF0JQNIDbAPpAYM0Gsi/V0DYiVMGbKrCpColIbNSRx/MXnTPgUiYJv7PecNhkGoFWH0k+AokqN/92u0C+mCsYfwtw6dihEvdifGsZcvdCfmGO+NsM1ZJ72rc2weY6S1s57epE+PCceZ/NeeWoeSnDsQ3pqtbpM1VTj71uXWWI/c3yvzdHWdVlu+/A+k5Pc9V2JejLV2mrNjsf/khocz3JYcyZD1m9rPluFrN/2kNpQ83wHkMP9TelnMC3FHG3er8NTxbmDlpjT6nMYfYQcTvsP9iHIaTzfrXmd5rWffZBfFlgy332syNKL3BHJV+Is5a77U7/2njiME0A6c/s69n3aVPu4ze3r2PdpUw/jVvuxxf/Uw7EFAAAxhZxr0u9Rgn4PYBj23mcBcEFvQgl6EwDox6M+HPjlPTr04E3OAQAAAAA4Y9+YH86TAQAAIfQS1EQe2/fawBie7qXjnjrkdLqXjnvqbGMvnFCuc5DWXA3Xa43nOgfxqd8IycDW3KjfCMmA3BCipj0V9R0Ac467vz+ferwX1kpS29rr9rDH8tnB35jb1l63h155F+EaeCHZlfflrNHXhWQ3Rt6hZebeOoTcvy21lD2wuRdYSl9BCfoKAID/59r5//FjU18DlxwjAACQj2sKUIJrCgAAAAAAAEAZ3w28avOQDwEA
+   H4sIAAAAAAAACu3dO07DQBQFUIcNIDbAPqjoaBDrYj1ZA2Il1LR0URASkRIrxvZ4vsw5DZ8gEZjrmffGiT0MQKsOpZ8ARZUa/7tdoV9MFYw/hLl17FCIerE/NYy5eqE/Mcd8bYZryDztW5th8xwlrZ339CJ9eE48zua98tQ8lODYh/TUanWZqqnG37cus8R+5vhem6Ot67Lc9uF9Jie567sS9WSqtdWaHY//JTU4nuWw5kyGrN/WfLYKWb/tIbWh5vkOIIf7m9LPYFqKOdq8X4eninMHLTGn1ecw+gg5nPYf7EOQ03i+W/M6zWs/+yC/LLBkvvtYkaUXuSOSr8RZyl33p37tPXEYJ4B05vZ17Pu0qfZxm9vXse/Tph7GrfZji/+ph2MLAABiCjnXpN+jBP0ewDDsvc8C4ILehBL0JgDQj0d9OPDLe3TowZucAwAAAABwxr4xP5wnAwAAQuglqIk8tu+1gTE83UvHPXXI6XQvHffU2cZeOKFc5yCtuRqu1xrPdQ7iU78RkoGtuVG/EZIBuSFETXsq6jsA5hx3f38+9XgvrJWktrXX7WGP5bODvzG3rb1uD73yLsI18EKyK+/LWaOvC8lujLxDy8y9dQi5f1tqKXtgcy+wlL6CEvQVAAD/z7Xz/+PHpr4GLjlGAAAgH9cUoATXFAAAAAAAAIAyvgFI8Kv2kA8BAA==
   </data>
  </layer>
  <objectgroup id="10" name="portals">
@@ -452,25 +449,25 @@
  <objectgroup id="11" name="people">
   <object id="220" name="Large Rat" type="MONSTER" x="5376" y="528" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="221" name="Small Rat" type="MONSTER" x="5328" y="576" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="222" name="Small Rat" type="MONSTER" x="5328" y="480" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="223" name="Cave Bear" type="MONSTER" x="5232" y="288" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Bear"/>
+    <property name="monsterID" value="WereBear"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -482,7 +479,7 @@
   </object>
   <object id="225" name="Mahmud" type="MONSTER" x="5472" y="1008" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Highway Man"/>
+    <property name="monsterID" value="HighwayMan"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -602,13 +599,13 @@
   </object>
   <object id="246" name="Tan Rat" type="MONSTER" x="1200" y="864" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="247" name="Grey Rat" type="MONSTER" x="1200" y="816" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -644,7 +641,7 @@
   </object>
   <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Life Stealer"/>
+    <property name="monsterID" value="LifeStealer"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -692,7 +689,7 @@
   </object>
   <object id="261" name="Sewer Rat" type="MONSTER" x="2160" y="3120" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -704,7 +701,7 @@
   </object>
   <object id="263" name="Jungle Rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -758,7 +755,7 @@
   </object>
   <object id="273" name="Leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Wolf"/>
+    <property name="monsterID" value="WereWolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -806,13 +803,13 @@
   </object>
   <object id="282" name="Hassan Ben Sabbah" type="MONSTER" x="6096" y="4944" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Highway Man"/>
+    <property name="monsterID" value="HighwayMan"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="283" name="Mountain Scorpion" type="MONSTER" x="3888" y="288" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Camel Spider"/>
+    <property name="monsterID" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>

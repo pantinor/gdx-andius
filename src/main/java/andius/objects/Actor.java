@@ -3,34 +3,31 @@ package andius.objects;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import java.util.Objects;
 
 public class Actor {
 
     private final String name;
-    private Animation anim;
+    private TextureRegion tr;
     private Role role;
     private int wx;
     private int wy;
     private float x;
     private float y;
     private int dir;
-    private MovementBehavior movement;
+    private MovementBehavior movement = MovementBehavior.FIXED;
     private Mutable enemy;
     private CharacterRecord player;
     private PlayerCursor playerCursor;
 
     private String hash;
 
-    public Actor(String name, Animation anim) {
+    public Actor(String name) {
         this.name = name;
-        this.anim = anim;
     }
 
-    public void set(Mutable enemy, Role role, int wx, int wy, float x, float y, MovementBehavior movement) {
+    public void set(Mutable enemy, Role role, int wx, int wy, float x, float y, MovementBehavior movement, TextureRegion tr) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
@@ -38,6 +35,7 @@ public class Actor {
         this.y = y;
         this.movement = movement;
         this.enemy = enemy;
+        this.tr = tr;
         this.hash = "M:" + x + ":" + y;
     }
 
@@ -48,14 +46,6 @@ public class Actor {
         this.y = y;
         this.player = player;
         this.hash = "P:" + x + ":" + y;
-    }
-
-    public Vector2 iconCenter() {
-        Vector2 v = new Vector2();
-        TextureRegion tr = (TextureRegion) this.anim.getKeyFrame(0);
-        v.x = tr.getRegionWidth() / 2;
-        v.y = tr.getRegionHeight() / 2;
-        return v;
     }
 
     public String hash() {
@@ -93,15 +83,7 @@ public class Actor {
     }
 
     public TextureRegion getIcon() {
-        return (TextureRegion) this.anim.getKeyFrames()[this.dir];
-    }
-
-    public TextureRegion getFrame(float time) {
-        return (TextureRegion) this.anim.getKeyFrame(time, true);
-    }
-
-    public Animation getAnimation() {
-        return anim;
+        return this.tr;
     }
 
     public int getWx() {

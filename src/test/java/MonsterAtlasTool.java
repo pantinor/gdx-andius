@@ -146,6 +146,11 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
 
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        font.draw(batch, "icon: " + selectedIcon, screenWidth - 350, screenHeight - 830);
+        batch.end();
+
         stage.act();
         stage.draw();
     }
@@ -207,7 +212,7 @@ public class MonsterAtlasTool extends InputAdapter implements ApplicationListene
             if (!tr.getTexture().getTextureData().isPrepared()) {
                 tr.getTexture().getTextureData().prepare();
             }
-            
+
             Pixmap pixmap = tr.getTexture().getTextureData().consumePixmap();
 
             BufferedImage bufferedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);

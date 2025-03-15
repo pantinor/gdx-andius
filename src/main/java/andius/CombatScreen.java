@@ -134,8 +134,8 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].name(), null);
-            actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR);
+            andius.objects.Actor actor = new andius.objects.Actor(crSlots[index].name());
+            actor.set(crSlots[index], Role.MONSTER, sx, sy, x, y, MovementBehavior.ATTACK_AVATAR, null);
 
             MonsterCursor cursor = new MonsterCursor();
             cursor.setX(x);
@@ -163,7 +163,7 @@ public class CombatScreen extends BaseScreen {
                 continue;
             }
 
-            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].name, context.players()[index].classType.getAnimation());
+            andius.objects.Actor actor = new andius.objects.Actor(context.players()[index].name);
 
             actor.set(this.context.players()[index], sx, sy, x - 20, y + 8);
             actor.setDirection(2);
@@ -291,9 +291,7 @@ public class CombatScreen extends BaseScreen {
         for (andius.objects.Actor cr : enemies) {
             float tx = cr.getX() + TILE_DIM / 2;
             float ty = cr.getY() - TILE_DIM + TILE_DIM / 2;
-            tx -= cr.iconCenter().x;
-            ty += cr.iconCenter().y;
-            renderer.getBatch().draw(cr.getFrame(time), tx, ty);
+            renderer.getBatch().draw(cr.getIcon(), tx, ty);
         }
 
         int x = 0;

@@ -10,8 +10,6 @@ import static andius.Constants.TILE_DIM;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
 import andius.objects.Item;
-import andius.objects.Monster;
-import andius.objects.MutableMonster;
 import andius.objects.Portal;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
@@ -70,7 +68,7 @@ public class GameScreen extends BaseScreen {
                 renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrames()[currentDirection], newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                        renderer.getBatch().draw(a.getIcon(), a.getX() - 20, a.getY() + 12);
+                        renderer.getBatch().draw(a.getIcon(), a.getX() - 0, a.getY() + 0);
                     }
                 }
             }
@@ -302,8 +300,8 @@ public class GameScreen extends BaseScreen {
             //random treasure chest
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
-            if (cell != null && cell.getTile() != null && cell.getTile().getId() == 790) { //items tileset
-                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(10));
+            if (cell != null && cell.getTile() != null && cell.getTile().getId() == (609 + 1)) { //gold pile tile id
+                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(24));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
                 return false;
@@ -436,24 +434,6 @@ public class GameScreen extends BaseScreen {
                             animateText(Andius.CTX.players()[0].name + " obtained a " + found.name + "!", Color.GREEN);
                         }
                     }
-
-                    String monsterFound = obj.getProperties().get("monsterId", String.class);
-                    if (monsterFound != null) {
-                        Monster found = this.map.scenario().monsterMap().get(monsterFound);
-                        if (found != null) {
-                            Actor actor = new Actor(monsterFound, null);
-                            MutableMonster mm = new MutableMonster(found);
-                            String msx = obj.getProperties().get("monsterSpawnX", String.class);
-                            String msy = obj.getProperties().get("monsterSpawnY", String.class);
-                            Vector3 pixelPos = new Vector3();
-                            setMapPixelCoords(pixelPos, msx != null ? Integer.valueOf(msx) : nx, msy != null ? Integer.valueOf(msy) : ny, 0);
-                            actor.set(mm, Role.MONSTER,
-                                    msx != null ? Integer.valueOf(msx) : nx,
-                                    msy != null ? Integer.valueOf(msy) : ny,
-                                    pixelPos.x, pixelPos.y, MovementBehavior.ATTACK_AVATAR);
-                            this.map.getBaseMap().actors.add(actor);
-                        }
-                    }
                 }
 
             }
@@ -490,7 +470,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void endCombat(boolean isWon, Object opponent) {
         if (isWon) {
-            this.map.getBaseMap().removeCreature((andius.objects.Actor) opponent);
+            this.map.getBaseMap().removeCombatActor();
         }
     }
 

@@ -1,17 +1,18 @@
 package andius;
 
-import andius.objects.TibianSprite;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
+import andius.objects.TibianSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -258,20 +259,17 @@ public interface Constants {
 
         private void loadPeopleLayer(MapLayer peopleLayer, java.util.Map<String, Monster> monsters) {
 
+            TextureAtlas iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wizIcons.atlas"));
+
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
-                String name = obj.getName();
+                String name = obj.getName().toUpperCase();
                 int id = obj.getProperties().get("id", Integer.class);
                 float x = obj.getProperties().get("x", Float.class);
                 float y = obj.getProperties().get("y", Float.class);
                 int sx = (int) (x / TILE_DIM);
                 int sy = (int) (y / TILE_DIM);
-
-                String icon = obj.getProperties().get("icon", String.class);
-                if (icon == null) {
-                    icon = "Knight_Arena_Champion_Male";
-                }
 
                 String rl = obj.getProperties().get("type", String.class);
                 Role role = Role.valueOf(rl != null ? rl : "FRIENDLY");
@@ -279,24 +277,47 @@ public interface Constants {
                 String mv = obj.getProperties().get("movement", String.class);
                 MovementBehavior movement = MovementBehavior.valueOf(mv != null ? mv : "FIXED");
 
-                Actor actor = new Actor(name, TibianSprite.animation(icon));
+                Actor actor = new Actor(name);
                 if (role == Role.MONSTER) {
                     try {
-                        String mid = obj.getProperties().get("monsterID", String.class);
-                        Monster monster = monsters.get(mid != null ? mid : name);
+                        Monster monster = monsters.get(name);
+                        
+                        if (monster == null) {
+                            String mid = obj.getProperties().get("monsterID", String.class);
+                            monster = monsters.get(mid.toUpperCase());
+                        }
+
                         if (monster != null) {
                             MutableMonster mm = new MutableMonster(monster);
-                            actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+
+                            TextureRegion tr = null;
+                            String icon = obj.getProperties().get("icon", String.class);
+                            if (icon != null) {
+                                tr = TibianSprite.icon(icon);
+                            } else {
+                                tr = iconAtlas.findRegion("" + monster.getIconId());
+                                if (tr == null) {
+                                    tr = iconAtlas.findRegion("0");
+                                }
+                            }
+
+                            actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, tr);
                         } else {
-                            System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s] icon id [%s]\n",
-                                    name, role, movement, this, mid, icon);
+                            System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s]\n", name, role, movement, this, name);
                         }
                     } catch (Exception e) {
+                        e.printStackTrace();
                         System.err.printf("Cannot find monster: %s on map %s.\n", name, this);
                     }
                 } else {
+
+                    String icon = obj.getProperties().get("icon", String.class);
+                    if (icon == null) {
+                        icon = "Knight_Arena_Champion_Male";
+                    }
+
                     MutableMonster mm = null;
-                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement);
+                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, TibianSprite.icon(icon));
                 }
 
                 this.baseMap.actors.add(actor);

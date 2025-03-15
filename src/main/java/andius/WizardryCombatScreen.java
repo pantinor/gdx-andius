@@ -448,7 +448,7 @@ public class WizardryCombatScreen implements Screen, Constants {
         this.reset.remove();
         this.flee.remove();
 
-        if (fled) {
+        if (fled && this.fromCell != null) {
             WizardryDungeonScreen sc = (WizardryDungeonScreen) Map.WIZARDRY4.getScreen();
             sc.teleport(this.fromCell.address, false);
         }
@@ -1202,7 +1202,7 @@ public class WizardryCombatScreen implements Screen, Constants {
             AtlasRegion ar = iconAtlas.findRegion("" + this.m.getIconId());
 
             if (ar == null) {
-                iconAtlas.findRegion("0");
+                ar = iconAtlas.findRegion("0");
             }
 
             this.icon = new Image(ar);
