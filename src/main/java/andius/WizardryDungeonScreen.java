@@ -150,7 +150,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.miniMapIcon.setOrigin(4, 4);
 
         stage.addActor(miniMapIcon);
-        Andius.HUD.addActor(stage);
 
         addButtons(this.map);
 
@@ -279,7 +278,6 @@ public class WizardryDungeonScreen extends BaseScreen {
 //                }
 //            }
 //        }
-
         this.loadedMazeData = true;
     }
 
@@ -290,6 +288,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void show() {
+        Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
         loadMazeData(CTX.saveGame);
         createMiniMap();

@@ -170,7 +170,6 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
 
         batch = new SpriteBatch();
         stage = new Stage(viewport);
-        Andius.HUD.addActor(stage);
         moonPhaseAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/moon-atlas.txt"));
 
         SequenceAction seq1 = Actions.action(SequenceAction.class);
@@ -212,6 +211,7 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     @Override
     public void show() {
         gameTimer.active = true;
+        Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 

@@ -55,8 +55,7 @@ public class WorldScreen extends BaseScreen {
         this.batch = new SpriteBatch();
 
         this.stage = new Stage(viewport);
-        Andius.HUD.addActor(stage);
-        
+
         this.camera = new OrthographicCamera();
         this.mapViewPort = new ScreenViewport(camera);
 
@@ -107,6 +106,7 @@ public class WorldScreen extends BaseScreen {
     @Override
     public void show() {
         gameTimer.active = true;
+        Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 

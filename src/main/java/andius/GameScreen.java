@@ -52,8 +52,6 @@ public class GameScreen extends BaseScreen {
 
         stage = new Stage(viewport);
 
-        Andius.HUD.addActor(stage);
-
         camera = new OrthographicCamera(Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
 
         mapViewPort = new ScreenViewport(camera);
@@ -127,6 +125,7 @@ public class GameScreen extends BaseScreen {
     public void show() {
         setRoomName();
         removeActors(CTX.saveGame);
+        Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
     }
 
