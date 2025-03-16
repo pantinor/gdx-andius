@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="12" nextobjectid="1">
  <properties>
   <property name="startX" value="15"/>
   <property name="startY" value="30"/>
@@ -79,63 +79,61 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="761" name="heroes" tilewidth="48" tileheight="48" tilecount="520" columns="40">
-  <image source="uf_heroes.png" width="1920" height="624"/>
- </tileset>
- <layer name="floor" width="32" height="32">
+ <layer id="1" name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC72XQWrEMAxFfbgeaJoDJLteppuuB2YzB+i0N+oEbPg8viSHphV8AomtZ1m2HLcW29a1Gm34vkmftXin/Xe7GDW0I1P7u2+OtaLPKvx3Efn04XxG88PvUfw79wX8GXNxV0zmJ4p/xiJWNv86T4Pv8v9aqDXPcuuVuWnyVHN8mo6BvCgX2Ry5vUD+vYvvM16Ui2hcEf8Ozcy/26vV/lH+5SA/i921cWPQ2Gfj/41xDLstXbP8BX3cu6y+shY5frb/FvRb8G7wo/rKPRlZNOfkOkX1tVp/kT66ZvhV/Mz/Uf6MzZyv2Vl8RvzuTGE9Iv8sU39ZTST/bGnMrgb9B1/jH3mszuKz+Zuwh9z5F1nku2rfEDfl+KxlGf8quvUnfSqPeWDb76c+n3r059cE/ybsq2mjbF175F/AfnTNxj/G4uLnnlf76/yrVfcPztV4vhmxlrmc0n91/+D6HL4zfrSmnf/q/hHtE8ev9pTzX8Xv4jnCr+431f1Dc3qE7+53zn/1z+P+qbP8R/eczP8Pa+p6CgAQAAA=
+   H4sIAAAAAAAACr2XQWrEMAxFfbgeaJoDJLteppuuB2YzB+i0N+oEbPg8viSHphV8AomtZ1m2HLcW29a1Gm34vkmftXin/Xe7GDW0I1P7u2+OtaLPKvx3Efn04XxG88PvUfw79wX8GXNxV0zmJ4p/xiJWNv86T4Pv8v9aqDXPcuuVuWnyVHN8mo6BvCgX2Ry5vUD+vYvvM16Ui2hcEf8Ozcy/26vV/lH+5SA/i921cWPQ2Gfj/41xDLstXbP8BX3cu6y+shY5frb/FvRb8G7wo/rKPRlZNOfkOkX1tVp/kT66ZvhV/Mz/Uf6MzZyv2Vl8RvzuTGE9Iv8sU39ZTST/bGnMrgb9B1/jH3mszuKz+Zuwh9z5F1nku2rfEDfl+KxlGf8quvUnfSqPeWDb76c+n3r059cE/ybsq2mjbF175F/AfnTNxj/G4uLnnlf76/yrVfcPztV4vhmxlrmc0n91/+D6HL4zfrSmnf/q/hHtE8ev9pTzX8Xv4jnCr+431f1Dc3qE7+53zn/1z+P+qbP8R/eczP8Pa+p6CgAQAAA=
   </data>
  </layer>
- <layer name="floor 2" width="32" height="32">
+ <layer id="2" name="floor 2" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoB6oI1KMmoAc82ntplEw+MFoGhgFww0UQfFA2EuM2CgYBaNgFIyCUTDUQAETddWNglEwGAAANkDUCAAQAAA=
+   H4sIAAAAAAAACmNgoB6oI1KMmoAc82ntplEw+MFoGhgFww0UQfFA2EuM2CgYBaNgFIyCUTDUQAETddWNglEwGAAANkDUCAAQAAA=
   </data>
  </layer>
- <layer name="props" width="32" height="32">
+ <layer id="3" name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwWEAhE3n6qoD6KsnUi2w3qfZjs5NSdwxmsHCA/bZ4gO0faP/DQOIAu6N0kITDKKAd2ADE8owQehSMglEwCoYTAAB+Jv3fABAAAA==
+   H4sIAAAAAAAACmNgGAWjYBSMglEwWEAhE3n6qoD6KsnUi2w3qfZjs5NSdwxmsHCA/bZ4gO0faP/DQOIAu6N0kITDKKAd2ADE8owQehSMglEwCoYTAAB+Jv3fABAAAA==
   </data>
  </layer>
- <layer name="creature" width="32" height="32">
+ <layer id="4" name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQ0AAAgDsCVowb9FThQQnlZBEy50fQ8AAABgDUYsKkIAEAAA
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
   </data>
  </layer>
- <layer name="water_edges" width="32" height="32">
+ <layer id="5" name="water_edges" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2UgQmAIBBFcwedohUOWuVGc5RGy1M+WCCYiiLcAymQeF/7ehyKoiiKotTgTBx+ld+aOO5V/rB2dgv9yhhW9ljcVxiUujQ1A9zS4XCOOLx7W8hwmvezF/HAneVhmrQH9HHnGWb4d7o35F+1dtOlO7rp2xw5H39ywEsD9tlmvUSO0powBy+lHNybwSVv9fmAd3TPkKO0Jszt1G/hAYRN4+gAEAAA
+   H4sIAAAAAAAACu2UgQmAIBBFcwedohUOWuVGc5RGy1M+WCCYiiLcAymQeF/7ehyKoiiKotTgTBx+ld+aOO5V/rB2dgv9yhhW9ljcVxiUujQ1A9zS4XCOOLx7W8hwmvezF/HAneVhmrQH9HHnGWb4d7o35F+1dtOlO7rp2xw5H39ywEsD9tlmvUSO0powBy+lHNybwSVv9fmAd3TPkKO0Jszt1G/hAYRN4+gAEAAA
   </data>
  </layer>
- <layer name="shadows" width="32" height="32">
+ <layer id="6" name="shadows" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VWQoAIAhEu4v3v2PfheJMFG3zQAgycnKplP2YY0J4dfFajaB6dmq2YC3mw+YZ6ZFXe2cF2azRG7bcNqOZ2DJtqJ3Kr3+Kd18UgyX7vW+We3a2szEInihfTD8jvqMzgTmzsqcR/eIuKlbZzY4AEAAA
+   H4sIAAAAAAAACu2VWQoAIAhEu4v3v2PfheJMFG3zQAgycnKplP2YY0J4dfFajaB6dmq2YC3mw+YZ6ZFXe2cF2azRG7bcNqOZ2DJtqJ3Kr3+Kd18UgyX7vW+We3a2szEInihfTD8jvqMzgTmzsqcR/eIuKlbZzY4AEAAA
   </data>
  </layer>
- <layer name="walls" width="32" height="32">
+ <layer id="7" name="walls" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1X0QrDMAjMXvoRgXX//7CfG6PP62CCEy+erWUMKkiCGK+5qEmnS2t91dmM06pZuTtrPJsWhMPiR/GjNSP8R4t1r4zwGT0Sv5ucsPMq/DePS/vmU8dGnPcd+JIDHezHzq8ftd9VKQi/g3kF/ww+41+F/2w8r2yNZmuXzW1dI0jFh+mvR/Cf6a+aT1SX2sbgoxpF+LbPyKjjZfoPOueIf0aY/Mvyn8Vn8k8kOjtrW8waGaO9oZj2eyN8mwNzsFfkj+JH+NXyT/jeudteoIXxz+DL+6abkXmvMHc6gy+5c1Nvhex7dWv+ZfrmyB7xj+p5Sz+L/K2P2FCterWNePH87Hl59+/e/49Iovgn/u/xvZ5ViT+KP7rPKiSK/wJwF9jHABAAAA==
+   H4sIAAAAAAAACu1X0QrDMAjMXvoRgXX//7CfG6PP62CCEy+erWUMKkiCGK+5qEmnS2t91dmM06pZuTtrPJsWhMPiR/GjNSP8R4t1r4zwGT0Sv5ucsPMq/DePS/vmU8dGnPcd+JIDHezHzq8ftd9VKQi/g3kF/ww+41+F/2w8r2yNZmuXzW1dI0jFh+mvR/Cf6a+aT1SX2sbgoxpF+LbPyKjjZfoPOueIf0aY/Mvyn8Vn8k8kOjtrW8waGaO9oZj2eyN8mwNzsFfkj+JH+NXyT/jeudteoIXxz+DL+6abkXmvMHc6gy+5c1Nvhex7dWv+ZfrmyB7xj+p5Sz+L/K2P2FCterWNePH87Hl59+/e/49Iovgn/u/xvZ5ViT+KP7rPKiSK/wJwF9jHABAAAA==
   </data>
  </layer>
- <layer name="door" width="32" height="32">
+ <layer id="8" name="door" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGgCS8aBtd93gO0fzoB9AMIWZKf0aJxSFfwdYPsFR+NzFIyCUTBAgNzyj1rlJrnl32i5OQpGwfAHACzDHuEAEAAA
+   H4sIAAAAAAAACmNgGAWjYGgCS8aBtd93gO0fzoB9AMIWZKf0aJxSFfwdYPsFR+NzFIyCUTBAgNzyj1rlJrnl32i5OQpGwfAHACzDHuEAEAAA
   </data>
  </layer>
- <layer name="torches" width="32" height="32">
+ <layer id="9" name="torches" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UPQ4AEAyAUXFTh3EItzU1pCEx0CLfW1pLB/0JAcDNchznVkoc52ikLzpakb7o+BuP+e/9+q8vkRlIzrs2e8PPzvura6zU3Hl/mTMAJ1VEbTxPABAAAA==
+   H4sIAAAAAAAACu3UPQ4AEAyAUXFTh3EItzU1pCEx0CLfW1pLB/0JAcDNchznVkoc52ikLzpakb7o+BuP+e/9+q8vkRlIzrs2e8PPzvura6zU3Hl/mTMAJ1VEbTxPABAAAA==
   </data>
  </layer>
- <layer name="webs" width="32" height="32">
+ <layer id="10" name="webs" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
   </data>
  </layer>
- <objectgroup name="people">
+ <objectgroup id="11" name="people">
   <object id="1" name="Jason" type="MERCHANT" x="1056" y="96" width="48" height="48">
    <properties>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
  </objectgroup>

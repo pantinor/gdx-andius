@@ -1144,20 +1144,20 @@ public class WizardryData {
 
     public static class MazeCell {
 
-        boolean northWall;
-        boolean southWall;
-        boolean eastWall;
-        boolean westWall;
+        public boolean northWall;
+        public boolean southWall;
+        public boolean eastWall;
+        public boolean westWall;
 
-        boolean northDoor;
-        boolean southDoor;
-        boolean eastDoor;
-        boolean westDoor;
+        public boolean northDoor;
+        public boolean southDoor;
+        public boolean eastDoor;
+        public boolean westDoor;
 
-        boolean hiddenNorthDoor;
-        boolean hiddenSouthDoor;
-        boolean hiddenEastDoor;
-        boolean hiddenWestDoor;
+        public boolean hiddenNorthDoor;
+        public boolean hiddenSouthDoor;
+        public boolean hiddenEastDoor;
+        public boolean hiddenWestDoor;
 
         public boolean darkness;
         public boolean stairs;

@@ -17,3 +17,4 @@ A fun personal RPG project.  Mashup of the early Sir-Tech Wizardry mazes with so
 
 ![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview7.png)
 
+![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview8.png)
