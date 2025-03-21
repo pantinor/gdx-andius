@@ -6,6 +6,7 @@ import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -79,6 +80,12 @@ public class StartScreen implements Screen, Constants {
                         CTX.saveGame.wx = Map.WORLD.getStartX();
                         CTX.saveGame.wy = Map.WORLD.getStartY();
                     }
+
+//                    CTX.saveGame.players[5].level = 10;
+//                    CTX.saveGame.players[5].magePoints = new int[]{5, 5, 5, 5, 5, 5, 5};
+//                    for (Spells s : Spells.values()) {
+//                        CTX.saveGame.players[5].knownSpells.add(s);
+//                    }
 
                     BaseScreen scr = (BaseScreen) CTX.saveGame.map.getScreen();
                     scr.load(CTX.saveGame);

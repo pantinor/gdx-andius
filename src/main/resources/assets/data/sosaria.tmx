@@ -130,12 +130,12 @@
  </layer>
  <layer id="9" name="grass" width="64" height="64">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu1Y246sMAzj/1+ZDz5aadFWObaTkJThZgnNCGiaq5OyLC9eHI/12wq8eBHA5/eyWMn9Cs5UE+vyZ+OH3F+Ha4/8Tfb4/ww+tXqt4r59JyLb2jvKtXnF/JHZL4t1wbFVukf28ewer2p+WZ2rsLaPcYrIR75DeaSe78XetapGMzJZTFn8VU508wOD9T+KSzbnlZ0sv1TezQLSy8Y7Yr/iCpVDEY6cCc/2ZcH6ReQgjkfw+HE2IryuuIrld0Z/tt7T6Qgo7ma8leUvxoFng9fDI5yJciLCQ9+Cym+vt2f2QP78Nrw4R/rZnn2i/NHlI7RX1GYW/4wNbB3zYdfMPO7P7Ge6eX6I1AKbOdVcwHxeAbLRm2dYH/D0ZRwaqSXvvaoPlHzEf4obmU+UHOXvDSoHqrWAdMysVXms4h3NhQ0q/6roksVqifFllAcYJ2V7rqd7F1S9qhrx/qN99sasI28iYPFU+dDNc0ovBtWD9+6Fah/1CntvBjz59r7VMQuU++Mz5ptZsbeyrU6s/1Tiwnj26NhbnyJ/bFD52rU36o0ZVPyE+g/Sz97z7I/oxPgvgvHdiv2Im2aDcXwmp6p9gfXiWf1mWf6vH8srGaicjaz15rRuH7CZF/UDu64baJZUc0gFkflV2ejt39GL1TyiepH3XM1+Ub6L2FeNEeoBykcslquRqeo9y/ee/l1gteHliyeT+biDZ2bwNdIX2ZGRp66zQvFjVSbzYSf/dqF7Jre2fYZfxMN3BOLCq9VHFdFZZMa+2fdn1iI7DyCesLrfKT9sX0U1cCZenIHIeWRmbZwFbIbccHf7f8B6xJPgnUueANQTnugDdo56CtS8WJF5FLrPDxVeRD31iqjYb89dV8TdeGCc99R3ArtmZvyielRhcznS566Su9HvhKOtd/kWEKlR9r3nybPvixcv9uEfBNxvgQBAAAA=
+   H4sIAAAAAAAACu1Y246sMAzj/1+ZDz5aadFWObaTkJThZgnNCGiaq5OyLC9eHI/12wq8eBHA5/eyWMn9Cs5UE+vyZ+OH3F+Ha4/8Tfb4/ww+tXqt4r59JyLb2jvKtXnF/JHZL4t1wbFVukf28ewer2p+WZ2rsLaPcYrIR75DeaSe78XetapGMzJZTFn8VU508wOD9T+KSzbnlZ0sv1TezQLSy8Y7Yr/iCpVDEY6cCc/2ZcH6ReQgjkfw+HE2IryuuIrld0Z/tt7T6Qgo7ma8leUvxoFng9fDI5yJciLCQ9+Cym+vt2f2QP78Nrw4R/rZnn2i/NHlI7RX1GYW/4wNbB3zYdfMPO7P7Ge6eX6I1AKbOdVcwHxeAbLRm2dYH/D0ZRwaqSXvvaoPlHzEf4obmU+UHOXvDSoHqrWAdMysVXms4h3NhQ0q/6roksVqifFllAcYJ2V7rqd7F1S9qhrx/qN99sasI28iYPFU+dDNc0ovBtWD9+6Fah/1CntvBjz59r7VMQuU++Mz5ptZsbeyrU6s/1Tiwnj26NhbnyJ/bFD52rU36o0ZVPyE+g/Sz97z7I/oxPgvgvHdiv2Im2aDcXwmp6p9gfXiWf1mWf6vH8srGaicjaz15rRuH7CZF/UDu64baJZUc0gFkflV2ejt39GL1TyiepH3XM1+Ub6L2FeNEeoBykcslquRqeo9y/ee/l1gteHliyeT+biDZ2bwNdIX2ZGRp66zQvFjVSbzYSf/dqF7Jre2fYZfxMN3BOLCq9VHFdFZZMa+2fdn1iI7DyCesLrfKT9sX0U1cCZenIHIeWRmbZwFbIbccHf7f8B6xJPgnUueANQTnugDdo56CtS8WJF5FLrPDxVeRDPnFVGx3567roi78cCYi+o7gV0zM35RPaqwuRzpc1fJ3eh3wtHWu3wLiNQo+97z5Nn3xYsX+/APqzVqDwBAAAA=
   </data>
  </layer>
  <layer id="12" name="water" width="64" height="64">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2Va27EIAyEuSj3v0YV7Z/IAj/wYJvQkVC7m2DmGzDb2k/9kiFJ8342w+4MKCMqA0QNdA5cHhH+s7PwaGWN7phrXXc3/04vGm9WNs358wqVu/U9bZaa/vMKUcOy1oyf9trsfVoL5SdCGv7WeP5RTpb1qZcoSf3FnQXEnbjjPrVohQHJ/675rh0lxP2/kp3kKUIrHAj+KtrJP+M8gb81mQExMoXoYQ9rdhYR/LP3K0jya517Wu8/Wu3Nr/A/sp7NE+62nfrnvzuDm/m9v/mny8p/cgYj77fxU/838Hfm/1v4UeNUjfadPr+Bn+PYxV8pP84Dmr3aGcre++wMZmtH9H5V/sj7vwJ7Jn+mOI6v81Pvs88nZiB5or6/2AOUjfOM4N+RAer3dfac+y6bfebJMkfTA/Tz6tDKOtfKj/CBZPfW4u4ojzQMHn7tHMsztKS6K/vm7SNNXZSQ/AjO3ftNhTr/1fdZ0mi9SPZsfrpuhZGpbPZs/kcoz5XYLbWz+HfKWh/lu8o57+Svdo6FX/oumvu9nsQ/8ray/1KNaGny51gq8Xvmc3M159nSA9x8jU9pn1akvadGPiwZdGE+t7bmblmVNXvKhOJHDI332TONEGfhhKFVts/MHLK9Vcgh21eFHP4AXgfYHQBAAAA=
+   H4sIAAAAAAAACu2VWY7EIAxEuSj3v8Yo6p/IAi9QXghTEpruSTD1Cky39lO/ZEjSvJ/N4J0BZURlgKiBzoHLI8J/dhY7Wlmjb8y1ruvN7+lF483Kpjl/u0Llbn1Pm6Wm/3aFqGFZa8ZPe232Pq2F8hMhDX9rPP8oJ8v61EuUpP7izgLiTvS4Ty1aYUDyv2u+a0cJcf+vZCd5itAKB4K/ijz5Z5wn8LcmMyBGphA9vMOanUUE/+z9CpL8Wuee1vuPVnvzK/yPrGfzhLvNU//8d2dwM//ub/7psvKfnMHI+2381P8N/J35fAs/apyq0b7T5zfwcxxe/JXy4zyg2audoey9z85gtnZE71flj7z/K7Bn8meK4/g6P/U++35iBpIn6vuLPUDZOM8Ifo8MUL+vs+fc/7LZZ54sczQ9QL+vDq2sc638CB9I9t1a3B21Iw3DDr92juUZWlLdlX3b7SNNXZSQ/AhO7/2mQp3/6vssabReJHs2P123wshUNns2/yOU50rsltpZ/J6y1kf5rnLOO/mrnePBH6X3ehL/yNsKv1QjWpr8OZZK/Dvzubkzjyt3gDRf41PapxVp+3Tkw5JBF+Zza0u5eu0/50PyZ+VHDI332TONEGfhhKFVts/MHLK9Vcgh21eFHP4AQ0KZJABAAAA=
   </data>
  </layer>
  <layer id="11" name="meadow" width="64" height="64">
@@ -165,7 +165,7 @@
   <object id="4" name="CANT" type="portal" x="816" y="384" width="24" height="24"/>
   <object id="5" name="ALIBABA" type="portal" x="144" y="312" width="24" height="24"/>
   <object id="6" name="ALIBABA" type="portal" x="168" y="1056" width="24" height="24"/>
-  <object id="7" name="WIZARDRY2" type="portal" x="432" y="744" width="24" height="24"/>
+  <object id="7" name="DRAGON_QUEST" type="portal" x="432" y="744" width="24" height="24"/>
   <object id="8" name="BARAD_ENELETH" type="portal" x="1176" y="1392" width="24" height="24"/>
   <object id="9" name="BARAD_ENELETH" type="portal" x="1128" y="1392" width="24" height="24"/>
   <object id="10" name="WIWOLD" type="portal" x="888" y="1272" width="24" height="24"/>
@@ -176,7 +176,7 @@
   <object id="15" name="WIZARDRY3" type="portal" x="216" y="672" width="24" height="24"/>
   <object id="16" name="WIZARDRY1" type="portal" x="1176" y="816" width="24" height="24"/>
   <object id="17" name="WIZARDRY4" type="portal" x="456" y="1368" width="24" height="24"/>
-  <object id="18" name="WIZARDRY2" type="portal" x="1392" y="1056" width="24" height="24"/>
+  <object id="18" name="DRAGON_QUEST" type="portal" x="1392" y="1056" width="24" height="24"/>
   <object id="19" name="WIZARDRY3" type="portal" x="1392" y="720" width="24" height="24"/>
   <object id="29" name="CAVE" type="portal" x="1152" y="552" width="24" height="24"/>
  </objectgroup>

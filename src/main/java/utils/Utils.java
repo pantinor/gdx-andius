@@ -137,16 +137,16 @@ public class Utils {
 
         /* add x directions that lead towards to_x to the mask */
         if (dx < 0) {
-            dirmask |= Direction.EAST.getMask();
+            dirmask |= Direction.EAST.mask();
         } else if (dx > 0) {
-            dirmask |= Direction.WEST.getMask();
+            dirmask |= Direction.WEST.mask();
         }
 
         /* add y directions that lead towards to_y to the mask */
         if (dy < 0) {
-            dirmask |= Direction.SOUTH.getMask();
+            dirmask |= Direction.SOUTH.mask();
         } else if (dy > 0) {
-            dirmask |= Direction.NORTH.getMask();
+            dirmask |= Direction.NORTH.mask();
         }
 
         /* return the result */

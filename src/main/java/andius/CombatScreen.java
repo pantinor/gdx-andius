@@ -1055,7 +1055,7 @@ public class CombatScreen extends BaseScreen {
         Item weapon = attacker.getPlayer().weapon == null ? Item.HANDS : attacker.getPlayer().weapon;
         int range = weapon.range == 0 ? 1 : weapon.range;
 
-        List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.getMask(), attacker.getWx(), attacker.getWy(), 0, range);
+        List<AttackVector> path = getDirectionalActionPath(MAP_DIM, MAP_DIM, dir.mask(), attacker.getWx(), attacker.getWy(), 0, range);
 
         AttackVector av = null;
         for (int i = 0; i < path.size(); i++) {
