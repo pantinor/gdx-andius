@@ -1,17 +1,10 @@
 
 import andius.Andius;
 import andius.Constants;
-import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
 import andius.EquipmentScreen;
-import andius.Wiz4CombatScreen;
-import andius.WizardryCombatScreen;
 import static andius.WizardryData.PMO_ITEMS_MAP;
-import static andius.WizardryData.PMO_MONSTERS;
-import static andius.WizardryData.WER4_CHARS;
-import static andius.WizardryData.WER_ITEMS;
 import andius.objects.ClassType;
-import andius.objects.DoGooder;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
