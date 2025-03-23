@@ -503,7 +503,7 @@
     },
     {
         "id": 20,
-        "name": "TSILVER DAGGER",
+        "name": "SILVER DAGGER",
         "type": "WEAPON",
         "alignment": "UNALIGN",
         "cursed": false,
@@ -1364,7 +1364,7 @@
     },
     {
         "id": 54,
-        "name": "TSILVER GLOVES",
+        "name": "SILVER GLOVES",
         "type": "GAUNTLET",
         "alignment": "UNALIGN",
         "cursed": false,

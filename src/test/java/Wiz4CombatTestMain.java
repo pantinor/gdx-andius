@@ -1,8 +1,9 @@
 
 import andius.Andius;
 import andius.Constants;
+import andius.Constants.Role;
 import andius.Context;
-import andius.EquipmentScreen;
+import andius.VendorScreen;
 import static andius.WizardryData.PMO_ITEMS_MAP;
 import andius.objects.ClassType;
 import andius.objects.SaveGame;
@@ -40,19 +41,19 @@ public class Wiz4CombatTestMain extends Game {
                 for (int j = 0; j < ctx.saveGame.players.length; j++) {
                     ctx.saveGame.players[j] = new CharacterRecord();
                     ctx.saveGame.players[j].name = "player" + j;
-                    ctx.saveGame.players[j].classType = ClassType.values()[Utils.getRandomBetween(0,7)];
-                    int lvl = Utils.getRandomBetween(1,7);
+                    ctx.saveGame.players[j].classType = ClassType.values()[Utils.getRandomBetween(0, 7)];
+                    int lvl = Utils.getRandomBetween(1, 7);
                     ctx.saveGame.players[j].level = lvl;
                     ctx.saveGame.players[j].hp = 12 * lvl;
                     ctx.saveGame.players[j].maxhp = 12 * lvl;
                     ctx.saveGame.players[j].gold = 3000;
 
-                    ctx.saveGame.players[j].str = Utils.getRandomBetween(10,17);
-                    ctx.saveGame.players[j].intell = Utils.getRandomBetween(10,17);
-                    ctx.saveGame.players[j].piety = Utils.getRandomBetween(10,17);
-                    ctx.saveGame.players[j].vitality = Utils.getRandomBetween(10,17);
-                    ctx.saveGame.players[j].agility = Utils.getRandomBetween(10,17);
-                    ctx.saveGame.players[j].luck = Utils.getRandomBetween(10,17);
+                    ctx.saveGame.players[j].str = Utils.getRandomBetween(10, 17);
+                    ctx.saveGame.players[j].intell = Utils.getRandomBetween(10, 17);
+                    ctx.saveGame.players[j].piety = Utils.getRandomBetween(10, 17);
+                    ctx.saveGame.players[j].vitality = Utils.getRandomBetween(10, 17);
+                    ctx.saveGame.players[j].agility = Utils.getRandomBetween(10, 17);
+                    ctx.saveGame.players[j].luck = Utils.getRandomBetween(10, 17);
 
                     ctx.saveGame.players[j].armor = PMO_ITEMS_MAP.get("ROBES");
                     ctx.saveGame.players[j].weapon = PMO_ITEMS_MAP.get("STAFF");
@@ -89,27 +90,13 @@ public class Wiz4CombatTestMain extends Game {
 //            for (DoGooder dg : WER4_CHARS) {
 //                icons.put(dg.id, dg.iconID);
 //            }
-//
-//            GsonBuilder builder = new GsonBuilder();
-//            Gson gson = builder.setPrettyPrinting().create();
-//            String json = gson.toJson(icons);
-//            System.out.println(json);
-//            Map<Integer, String> icons = gson.fromJson(ICON_JSON, new TypeToken<Map<Integer, String>>() {
-//            }.getType());
-//
-//            for (DoGooder dg : WER4_CHARS) {
-//                dg.iconID = icons.get(dg.id);
-//            }
-//
-//            String json = gson.toJson(WER4_CHARS);
-//            System.out.println(json);
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(442), null, null));
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(9), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
-            setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
+            //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
-            //setScreen(new RewardScreen(ctx, Constants.Map.WORLD, 1, 0, 5));
-            //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
+            //setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 10));
+            setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
 
         } catch (Exception e) {

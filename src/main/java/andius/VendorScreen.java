@@ -689,7 +689,8 @@ public class VendorScreen implements Screen, Constants {
 
         Item item;
         final Image icon;
-        final Label label;
+        final Label name;
+        final Label detail;
         final Label price;
         final Image canusebkgnd;
         final CharacterRecord rec;
@@ -699,7 +700,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "default-16");
+            this.name = new Label(item.name, Andius.skin, "default-16");
+            this.detail = new Label(item.vendorDescription(), Andius.skin, "default-12");
             this.price = new Label("" + item.cost / 2, Andius.skin, "default-16");
 
             this.canusebkgnd = new Image();
@@ -711,14 +713,15 @@ public class VendorScreen implements Screen, Constants {
             }
 
             addActor(this.icon);
-            addActor(this.label);
+            addActor(this.name);
+            addActor(this.detail);
             addActor(this.price);
             addActor(this.canusebkgnd);
 
-            float x = getX();
-            this.icon.setBounds(x + 3, getY() + 3, dim, dim);
-            this.label.setPosition(x += 54, getY() + 10);
-            this.price.setPosition(x += 175, getY() + 10);
+            this.icon.setBounds(3, 3, dim, dim);
+            this.name.setPosition(54, 20);
+            this.detail.setPosition(54, 3);
+            this.price.setPosition(230, 20);
             this.canusebkgnd.setBounds(getX(), getY(), w, h);
             this.setBounds(getX(), getY(), w, h);
 
@@ -730,7 +733,8 @@ public class VendorScreen implements Screen, Constants {
 
         final Item item;
         final Image icon;
-        final Label label;
+        final Label name;
+        final Label detail;
         final Label price;
         final Image canusebkgnd = new Image();
 
@@ -738,19 +742,21 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.label = new Label(item.name, Andius.skin, "default-16");
+            this.name = new Label(item.name, Andius.skin, "default-16");
+            this.detail = new Label(item.vendorDescription(), Andius.skin, "default-12");
             this.price = new Label("" + item.cost, Andius.skin, "default-16");
             this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
 
             addActor(this.icon);
-            addActor(this.label);
+            addActor(this.name);
+            addActor(this.detail);
             addActor(this.price);
             addActor(this.canusebkgnd);
 
-            float x = getX();
-            this.icon.setBounds(x + 3, getY() + 3, dim, dim);
-            this.label.setPosition(x += 54, getY() + 10);
-            this.price.setPosition(x += 175, getY() + 10);
+            this.icon.setBounds(3, 3, dim, dim);
+            this.name.setPosition(54, 20);
+            this.detail.setPosition(54, 3);
+            this.price.setPosition(230, 20);
             this.canusebkgnd.setBounds(getX(), getY(), w, h);
             this.setBounds(getX(), getY(), w, h);
         }

@@ -44,6 +44,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
 import utils.LogScrollPane;
@@ -768,6 +769,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private void spellGroupDamage(Object caster, Spells spell) {
         int groupDamage = spell.damage();
         if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
+            java.util.Map<MutableCharacter, Integer> grpDamageMap = this.enemies.stream().collect(Collectors.toMap(key -> key, key -> 0));
             while (groupDamage > 0) {
                 for (MutableCharacter mc : this.enemies) {
                     DoGooder dg = (DoGooder) mc.baseType();
@@ -776,20 +778,30 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     if (!mc.status().isDisabled() && (dg.savingThrowSpell() || unaffected)) {
                         log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                     } else {
-                        damage(caster, mc, 1);
+                        int dmg = grpDamageMap.get(mc);
+                        grpDamageMap.put(mc, dmg + 1);
                     }
                     groupDamage--;
                 }
             }
+            for (MutableCharacter mc : grpDamageMap.keySet()) {
+                int dmg = grpDamageMap.get(mc);
+                if (dmg > 0) {
+                    damage(caster, mc, dmg);
+                }
+            }
         }
         if (caster instanceof MutableCharacter) {
+            java.util.Map<MutableMonster, Integer> grpDamageMap = monsters.stream().collect(Collectors.toMap(key -> key, key -> 0));
+            int playerDmg = 0;
             while (groupDamage > 0) {
                 for (MutableMonster mm : this.monsters) {
                     boolean unaffected = mm.isUnaffected(spell, ((MutableCharacter) caster).getMonsterType());
                     if (unaffected) {
                         log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                     } else {
-                        damage(caster, mm, 1);
+                        int dmg = grpDamageMap.get(mm);
+                        grpDamageMap.put(mm, dmg + 1);
                     }
                     groupDamage--;
                 }
@@ -798,9 +810,18 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 } else if (player.savingThrowSpell()) {
                     log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    damage(caster, player, 1);
+                    playerDmg++;
                 }
                 groupDamage--;
+            }
+            for (MutableMonster mm : grpDamageMap.keySet()) {
+                int dmg = grpDamageMap.get(mm);
+                if (dmg > 0) {
+                    damage(caster, mm, dmg);
+                }
+            }
+            if (playerDmg > 0) {
+                damage(caster, player, playerDmg);
             }
         }
     }

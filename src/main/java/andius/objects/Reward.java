@@ -38,11 +38,12 @@ public class Reward {
 
     public TrapType getTrap() {
         List<TrapType> tmp = new ArrayList<>();
+        int tempTrapFlags = this.trapTypeFlags;
         for (int j = 0; j < TrapType.values().length; j++) {
-            if ((trapTypeFlags & 0x01) != 0) {
+            if ((tempTrapFlags & 0x01) != 0) {
                 tmp.add(TrapType.values()[j]);
             }
-            trapTypeFlags >>>= 1;
+            tempTrapFlags >>>= 1;
         }
         if (tmp.isEmpty()) {
             return TrapType.NONE;

@@ -41,6 +41,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
 import utils.LogScrollPane;
@@ -267,10 +268,10 @@ public class WizardryCombatScreen implements Screen, Constants {
                         }
 
                         if (WizardryCombatScreen.this.hasTreasure) {
-                            mainGame.setScreen(new RewardScreen(WizardryCombatScreen.this.ctx, WizardryCombatScreen.this.contextMap, 1, exp, chestRewardId));
+                            mainGame.setScreen(new RewardScreen(WizardryCombatScreen.this.ctx, WizardryCombatScreen.this.contextMap, chestRewardId));
                         } else {
-                            Reward gold = contextMap.scenario().rewards().get(goldRewardId);
-                            int goldAmt = gold.goldAmount();
+                            Reward reward = contextMap.scenario().rewards().get(goldRewardId);
+                            int goldAmt = reward.goldAmount();
                             for (SaveGame.CharacterRecord c : lastMenStanding) {
                                 c.adjustGold(goldAmt / lastMenStanding.size());
                                 WizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
@@ -417,7 +418,7 @@ public class WizardryCombatScreen implements Screen, Constants {
                 monsterFight(mm);
             }
         }
-        
+
         this.ctx.endTurn();
 
         boolean alive = false;
@@ -735,19 +736,28 @@ public class WizardryCombatScreen implements Screen, Constants {
     private void spellGroupDamage(Object caster, Spells spell) {
         int groupDamage = spell.damage();
         if (caster instanceof CharacterRecord p) {
+            java.util.Map<MutableMonster, Integer> grpDamageMap = monsters.stream().collect(Collectors.toMap(key -> key, key -> 0));
             while (groupDamage > 0) {
                 for (MutableMonster mm : this.monsters) {
                     boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
                     if (!mm.status().isDisabled() && unaffected) {
                         log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                     } else {
-                        damage(caster, mm, 1);
+                        int dmg = grpDamageMap.get(mm);
+                        grpDamageMap.put(mm, dmg + 1);
                     }
                     groupDamage--;
                 }
             }
+            for (MutableMonster mm : grpDamageMap.keySet()) {
+                int dmg = grpDamageMap.get(mm);
+                if (dmg > 0) {
+                    damage(caster, mm, dmg);
+                }
+            }
         }
         if (caster instanceof MutableMonster) {
+            java.util.Map<CharacterRecord, Integer> grpDamageMap = this.players.stream().collect(Collectors.toMap(key -> key, key -> 0));
             while (groupDamage > 0) {
                 for (CharacterRecord p : this.players) {
                     if (p.armor != null && p.armor.id == 89 && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
@@ -755,9 +765,16 @@ public class WizardryCombatScreen implements Screen, Constants {
                     } else if (p.savingThrowSpell()) {
                         log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                     } else {
-                        damage(caster, p, 1);
+                        int dmg = grpDamageMap.get(p);
+                        grpDamageMap.put(p, dmg + 1);
                     }
                     groupDamage--;
+                }
+            }
+            for (CharacterRecord p : grpDamageMap.keySet()) {
+                int dmg = grpDamageMap.get(p);
+                if (dmg > 0) {
+                    damage(caster, p, dmg);
                 }
             }
         }

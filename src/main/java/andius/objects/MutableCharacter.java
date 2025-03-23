@@ -217,25 +217,10 @@ public class MutableCharacter implements Mutable {
 
     @Override
     public String getDamageDescription(String attackerName, int damage) {
-        String tag;
-        double percent = (double) currentHitPoints / this.dogooder.hpMax;
-        if (percent > 0.99) {
-            tag = "who chortles merrily as the armor takes the full blow";
-        } else if (percent > 0.75) {
-            tag = "who still has lots of fight left";
-        } else if (percent > 0.50) {
-            tag = "whose armor takes some of the impact";
-        } else if (percent < 0.00) {
-            tag = DEATHMSGS[Utils.RANDOM.nextInt(DEATHMSGS.length)];
-        } else {
-            tag = "who is feeling rather weak";
-        }
-
-        return String.format("%s %s %s, %s after %d damage.",
+        return String.format("%s %s %s for %d damage.",
                 attackerName.toUpperCase(),
                 HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
                 name().toUpperCase(),
-                tag,
                 damage);
     }
 

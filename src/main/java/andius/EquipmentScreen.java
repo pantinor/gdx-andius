@@ -319,13 +319,11 @@ public class EquipmentScreen implements Screen, Constants {
 
         Label inventory = new Label("Inventory", Andius.skin, "default-16");
         Label splBk = new Label("Known Spells", Andius.skin, "default-16");
-        Label presets = new Label("Spell Presets", Andius.skin, "default-16");
         inventory.setBounds(512, Andius.SCREEN_HEIGHT - 160, 20, 100);
         splBk.setBounds(770, Andius.SCREEN_HEIGHT - 160, 20, 100);
-        presets.setBounds(826, 45, 20, 100);
+        
         stage.addActor(inventory);
         stage.addActor(splBk);
-        stage.addActor(presets);
 
         ChangeListener cl = new ChangeListener() {
             @Override
@@ -336,21 +334,9 @@ public class EquipmentScreen implements Screen, Constants {
                     for (Actor a : selectedPlayer.icons) {
                         a.remove();
                     }
-                    for (Actor a : selectedPlayer.slots) {
-                        a.remove();
-                    }
-                    for (Actor a : selectedPlayer.slotTooltips) {
-                        a.remove();
-                    }
                 }
                 selectedPlayer = playerSelection.getSelected();
                 for (Actor a : selectedPlayer.icons) {
-                    stage.addActor(a);
-                }
-                for (Actor a : selectedPlayer.slots) {
-                    stage.addActor(a);
-                }
-                for (Actor a : selectedPlayer.slotTooltips) {
                     stage.addActor(a);
                 }
                 invPane.clearChildren();
@@ -421,7 +407,7 @@ public class EquipmentScreen implements Screen, Constants {
         Andius.font16.draw(batch, "LCK", x, y - 100);
 
         if (selectedSpell != null) {
-            Andius.font12.draw(batch, SPDESCLAYOUT, 775, 75);
+            Andius.font14.draw(batch, SPDESCLAYOUT, 750, 175);
         }
 
         if (selectedItem != null) {
@@ -485,8 +471,6 @@ public class EquipmentScreen implements Screen, Constants {
         final Label lckL;
 
         final Actor[] icons = new Actor[22];
-        final Image[] slots = new Image[10];
-        final Label[] slotTooltips = new Label[10];
 
         PlayerIndex(SaveGame.CharacterRecord sp) {
             this.character = sp;
@@ -540,11 +524,11 @@ public class EquipmentScreen implements Screen, Constants {
                         }
                         if (event.getTarget() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget();
-                            SPDESCLAYOUT.setText(Andius.font12, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
+                            SPDESCLAYOUT.setText(Andius.font14, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         } else if (event.getTarget().getParent() instanceof SpellListing) {
                             selectedSpell = (SpellListing) event.getTarget().getParent();
-                            SPDESCLAYOUT.setText(Andius.font12, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
+                            SPDESCLAYOUT.setText(Andius.font14, selectedSpell.spell.getDescription(), Color.WHITE, 226, Align.left, true);
                             selectedSpell.addActor(spellFocusInd);
                         }
                     }
@@ -631,17 +615,6 @@ public class EquipmentScreen implements Screen, Constants {
             icons[19] = lckL;
             icons[20] = classL;
             icons[21] = spptsL;
-
-            int x = 762;
-            for (int i = 0; i < 5; i++) {
-                slots[i] = make(character.spellPresets[i], x, Andius.SCREEN_HEIGHT - 614, i);
-                x = x + 44 + 3;
-            }
-            x = 762;
-            for (int i = 0; i < 5; i++) {
-                slots[i + 5] = make(character.spellPresets[i + 5], x, Andius.SCREEN_HEIGHT - 660, i + 5);
-                x = x + 44 + 3;
-            }
         }
 
         private Image make(ItemType type, Item it, TextureRegion tr, int x, int y) {
@@ -650,18 +623,6 @@ public class EquipmentScreen implements Screen, Constants {
             im.setY(y);
             im.setUserObject(it);
             im.addListener(new InvItemChangeListener(type));
-            return im;
-        }
-
-        private Image make(Spells spell, int x, int y, int slot) {
-            Image im = new Image(spell != null && character.knownSpells.contains(spell) ? invIcons[spell.getIcon()] : invIcons[803]);
-            im.setX(x);
-            im.setY(y);
-            im.setUserObject(spell);
-            slotTooltips[slot] = new Label(spell != null && character.knownSpells.contains(spell) ? spell.getTag() : "", Andius.skin, "default-16");
-            slotTooltips[slot].setX(x);
-            slotTooltips[slot].setY(y + 44);
-            im.addListener(new SpellChangeListener(spell, slot, slotTooltips[slot]));
             return im;
         }
 
@@ -680,14 +641,6 @@ public class EquipmentScreen implements Screen, Constants {
                 if (a instanceof ItemListing) {
                     ItemListing il = (ItemListing) a;
                     character.inventory.add(il.item);
-                }
-            }
-
-            for (int i = 0; i < 10; i++) {
-                if (slots[i].getUserObject() != null) {
-                    character.spellPresets[i] = (Spells) slots[i].getUserObject();
-                } else {
-                    character.spellPresets[i] = null;
                 }
             }
 
@@ -835,7 +788,8 @@ public class EquipmentScreen implements Screen, Constants {
 
         final Item item;
         final Image icon;
-        final Label label;
+        final Label name;
+        final Label detail;
         final Image canusebkgnd;
         final CharacterRecord rec;
 
@@ -844,7 +798,8 @@ public class EquipmentScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(icon(item));
-            this.label = new Label(item.name, Andius.skin, "default-16");
+            this.name = new Label(item.name, Andius.skin, "default-16");
+            this.detail = new Label(item.vendorDescription(), Andius.skin, "default-12");
             this.canusebkgnd = new Image();
 
             boolean canUse = item.canUse(rec.classType);
@@ -855,11 +810,13 @@ public class EquipmentScreen implements Screen, Constants {
             }
 
             addActor(this.icon);
-            addActor(this.label);
+            addActor(this.name);
+            addActor(this.detail);
             addActor(this.canusebkgnd);
 
-            this.icon.setBounds(getX() + 3, getY() + 3, dim, dim);
-            this.label.setPosition(getX() + dim + 10, getY() + 14);
+            this.icon.setBounds(3, 3, dim, dim);
+            this.name.setPosition(dim + 10, 20);
+            this.detail.setPosition(dim + 10, 3);
             this.canusebkgnd.setBounds(getX(), getY(), w, h);
             this.setBounds(getX(), getY(), w, h);
 

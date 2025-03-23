@@ -87,8 +87,6 @@ public class GameScreen extends BaseScreen {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
         CTX.saveGame.map = this.map;
-        CTX.saveGame.wx = Map.WORLD.getStartX();//TODO
-        CTX.saveGame.wy = Map.WORLD.getStartY();//TODO
         CTX.saveGame.x = (int) v.x;
         CTX.saveGame.y = (int) v.y;
         CTX.saveGame.level = 0;
@@ -300,7 +298,7 @@ public class GameScreen extends BaseScreen {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
             if (cell != null && cell.getTile() != null && cell.getTile().getId() == (609 + 1)) { //gold pile tile id
-                RewardScreen rs = new RewardScreen(CTX, this.map, 1, 0, rand.nextInt(24));
+                RewardScreen rs = new RewardScreen(CTX, this.map, rand.nextInt(24));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
                 return false;

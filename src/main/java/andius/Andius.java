@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -129,6 +130,8 @@ public class Andius extends Game {
         skin.get("default-12-green", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12-yellow", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12", CheckBox.CheckBoxStyle.class).font = font12;
+        
+        skin.get("default-14", Label.LabelStyle.class).font = font14;
 
         skin.get("default-16", Label.LabelStyle.class).font = font16;
         skin.get("default-16", TextButton.TextButtonStyle.class).font = font16;

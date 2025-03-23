@@ -111,6 +111,34 @@ public class Item implements Comparable<Item> {
                 spell != null ? spell + " - " + spell.getDescription() : "None");
     }
 
+    public String vendorDescription() {
+        switch (this.type) {
+            case WEAPON:
+                return String.format("%s %s %s %s %s",
+                        damage,
+                        extraSwings > 0 ? "xs:" + extraSwings : "",
+                        wephitmd > 0 ? "hitmod:" + wephitmd : "",
+                        regeneration > 0 ? "regen:" + regeneration : "",
+                        spell != null ? "sp:" + spell : "");
+            case ARMOR:
+            case SHIELD:
+            case HELMET:
+            case GAUNTLET:
+                return String.format("AC:%s %s %s",
+                        armourClass,
+                        regeneration > 0 ? "regen:" + regeneration : "",
+                        spell != null ? "sp:" + spell : "");
+            case SPECIAL:
+            case MISC:
+                return String.format("%s %s",
+                        regeneration > 0 ? "regen:" + regeneration : "",
+                        spell != null ? "sp:" + spell : "");
+        }
+        return String.format("%s %s",
+                regeneration > 0 ? "regen:" + regeneration : "",
+                spell != null ? "sp:" + spell : "");
+    }
+
     @Override
     public String toString() {
         return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",

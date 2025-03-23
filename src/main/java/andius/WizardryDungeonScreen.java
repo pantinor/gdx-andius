@@ -113,7 +113,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private static final int MINI_DIM = 15;
     private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + 8;
     private static final int XALIGNMM = 705;
-    private static final int YALIGNMM = 340;
+    private static final int YALIGNMM = 380;
 
     public final Constants.Map map;
 
@@ -198,8 +198,6 @@ public class WizardryDungeonScreen extends BaseScreen {
     @Override
     public void save(SaveGame saveGame) {
         CTX.saveGame.map = this.map;
-        CTX.saveGame.wx = 75;//TODO
-        CTX.saveGame.wy = 95;//TODO
         CTX.saveGame.x = (Math.round(currentPos.x) - 1);
         CTX.saveGame.y = (Math.round(currentPos.z) - 1);
         CTX.saveGame.level = currentLevel + 1;
@@ -798,7 +796,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 5);
                 }
                 if (cell.wanderingEncounterID != -1) {
-                    pixmap.setColor(Color.PINK);
+                    pixmap.setColor(cell.hasTreasureChest ? Color.MAGENTA : Color.PINK);
                     pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 3);
                 }
                 if (cell.message != null || cell.function != null) {
@@ -1590,8 +1588,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
         } else {
-            boolean treasure = destCell.hasTreasureChest || Utils.percentChance(33);
-            boolean wandering = destCell.wanderingEncounterID != -1 && treasure;
+            boolean treasure = destCell.hasTreasureChest;
+            boolean wandering = destCell.wanderingEncounterID != -1 && Utils.percentChance(33);
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
@@ -1707,7 +1705,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
             this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID = -1;
 
-            if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID > 0) {
+            if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID >= 0) {
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
                 if (this.map == Map.WIZARDRY4) {
                     if (currentLevel == 6 && x == 2 && y == 13) {

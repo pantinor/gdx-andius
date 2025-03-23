@@ -33,10 +33,8 @@ import utils.Utils;
 public class RewardScreen implements Screen, Constants {
 
     private final Context context;
-    private final Map contextMap;
+    private final Map map;
     private final Reward reward;
-    private final int difficultyLevel;
-    private final int expPoints;
 
     private final Texture hud;
     private final SpriteBatch batch;
@@ -59,19 +57,17 @@ public class RewardScreen implements Screen, Constants {
     private static final int X_ALIGN = 280;
     private static final int ITEM_HGT = 25;
 
-    public RewardScreen(Context context, Map contextMap, int difficultyLevel, int exp, int rewardId) {
+    public RewardScreen(Context context, Map map, int rewardId) {
         this.context = context;
-        this.contextMap = contextMap;
-        this.reward = contextMap.scenario().rewards().get(rewardId);
-        this.difficultyLevel = difficultyLevel;
-        this.expPoints = exp;
+        this.map = map;
+        this.reward = map.scenario().rewards().get(rewardId);
         this.trap = this.reward.getTrap();
 
         this.hud = new Texture(Gdx.files.classpath("assets/data/treasure.png"));
         this.batch = new SpriteBatch();
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
-        
+
         this.trapSelection = new List<>(Andius.skin, "default-16");
         this.trapSelection.setItems(TrapType.values());
 
@@ -187,8 +183,8 @@ public class RewardScreen implements Screen, Constants {
                     int roll = rand.nextInt(101);
                     if (roll <= odds) {
                         CharacterRecord picked = lastMenStanding.get(rand.nextInt(lastMenStanding.size()));
-                        int itemId = Math.min(Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax()), this.contextMap.scenario().items().size() - 1);
-                        Item found = this.contextMap.scenario().items().get(itemId).clone();
+                        int itemId = Math.min(Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax()), this.map.scenario().items().size() - 1);
+                        Item found = this.map.scenario().items().get(itemId).clone();
                         picked.inventory.add(found);
                         log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));
                     }
@@ -203,6 +199,7 @@ public class RewardScreen implements Screen, Constants {
     private void releaseTrapAffect(CharacterRecord player) {
         switch (this.trap) {
             case NONE -> {
+                log("Nothing happened...");
             }
             case TELEPORTER -> {
                 log("The party was teleported!"); //TODO
@@ -210,7 +207,7 @@ public class RewardScreen implements Screen, Constants {
             }
             case ALARM -> {
                 log("You triggered a noisy alarm that can attract attention!");
-                Sounds.play(Sound.TRIGGER);
+                Sounds.play(Sound.TRIGGER);//TODO combat
             }
             case POISON_NEEDLE -> {
                 log("Jabbed by poisoned needle!");
@@ -218,9 +215,9 @@ public class RewardScreen implements Screen, Constants {
                 Sounds.play(Sound.POISON_EFFECT);
             }
             case GAS_BOMB -> {
-                log("A gas bomb explodes in your faces!");
+                log("A gas bomb explodes in your face!");
                 for (CharacterRecord c : this.context.players()) {
-                    if (rand.nextInt(20) + 1 < c.luck) {
+                    if (rand.nextInt(21) < c.luck) {
                         player.status.set(Status.POISONED, 1);
                     }
                 }
@@ -245,7 +242,7 @@ public class RewardScreen implements Screen, Constants {
             case ANTI_PRIEST -> {
                 for (CharacterRecord c : this.context.players()) {
                     if (c.classType == ClassType.PRIEST || c.classType == ClassType.LORD) {
-                        if (rand.nextInt(20) + 1 < c.luck) {
+                        if (rand.nextInt(21) < c.luck) {
                             log("A spell has a horrible affect on the cleric " + c.name);
                             if (rand.nextInt(2) == 0) {
                                 c.status.set(Status.STONED, 4);
@@ -260,10 +257,7 @@ public class RewardScreen implements Screen, Constants {
             }
             case BOLT -> {
                 log("Bolts come flying out of the wall!");
-                int damage = 0;
-                for (int i = 0; i < this.difficultyLevel; i++) {
-                    damage += rand.nextInt(8) + 1;
-                }
+                int damage = rand.nextInt(8) + 1;
                 player.adjustHP(-damage);
                 Sounds.play(Sound.CROSSBOW);
             }
@@ -296,12 +290,12 @@ public class RewardScreen implements Screen, Constants {
 
         log(String.format("%s inspected..", player.name.toUpperCase()));
 
-        if (rand.nextInt(100) + 1 < chance) {
+        if (rand.nextInt(101) < chance) {
             log(String.format("and finds %s!", this.trap));
-        } else if (rand.nextInt(20) + 1 > player.agility) {
+        } else if (rand.nextInt(21) > player.agility) {
             releaseTrapAffect(player);
         } else {
-            log(String.format("and finds %s.", TrapType.values()[rand.nextInt(TrapType.values().length)].toString()));
+            log(String.format("and thinks it is %s.", TrapType.values()[rand.nextInt(TrapType.values().length)].toString()));
         }
     }
 
@@ -328,12 +322,12 @@ public class RewardScreen implements Screen, Constants {
             log("Cannot disarm!");
             return;
         }
-        int mod = (player.classType == ClassType.THIEF || player.classType == ClassType.NINJA ? 1 : 0);
+        int chance = (player.classType == ClassType.THIEF || player.classType == ClassType.NINJA ? 75 : 10);
         if (attemptingTrap == this.trap) {
-            if (rand.nextInt(70) + 1 < player.level - this.difficultyLevel + 50 * mod) {
+            if (rand.nextInt(101) <= chance) {
                 log("You disarmed it!");
                 Sounds.play(Sound.TRIGGER);
-            } else if (rand.nextInt(20) + 1 < player.agility) {
+            } else if (rand.nextInt(101) > player.agility * 5) {
                 log("Disarm failed!");
                 releaseTrapAffect(player);
             }
@@ -343,12 +337,12 @@ public class RewardScreen implements Screen, Constants {
     }
 
     private void leave() {
-        mainGame.setScreen(this.contextMap.getScreen());
+        mainGame.setScreen(this.map.getScreen());
     }
 
     private void log(String s) {
         this.logs.add(s);
-        this.contextMap.getScreen().log(s);
+        this.map.getScreen().log(s);
     }
 
     @Override

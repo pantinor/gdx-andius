@@ -81,9 +81,6 @@ public class WorldScreen extends BaseScreen {
 
         SpreadFOV fov = new SpreadFOV(shadowMap);
         this.renderer = new WrappingTileMapRenderer(this.map, this.map.getTiledMap(), fov, 1f);
-
-        setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
-        this.renderer.getFOV().calculateFOV(this.map.getStartX(), this.map.getStartY(), 20f);
     }
 
     @Override
@@ -91,16 +88,13 @@ public class WorldScreen extends BaseScreen {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
         CTX.saveGame.map = Map.WORLD;
-        CTX.saveGame.wx = (int) v.x;
-        CTX.saveGame.wy = (int) v.y;
         CTX.saveGame.level = 0;
         CTX.saveGame.direction = Direction.NORTH;
     }
 
     @Override
     public void load(SaveGame saveGame) {
-        setMapPixelCoords(newMapPixelCoords, saveGame.wx, saveGame.wy, 0);
-        renderer.getFOV().calculateFOV(saveGame.wx, saveGame.wy, 20f);
+
     }
 
     @Override
@@ -108,6 +102,9 @@ public class WorldScreen extends BaseScreen {
         gameTimer.active = true;
         Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+
+        setMapPixelCoords(newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy, 0);
+        renderer.getFOV().calculateFOV(CTX.saveGame.wx, CTX.saveGame.wy, 20f);
     }
 
     @Override
@@ -161,10 +158,9 @@ public class WorldScreen extends BaseScreen {
 
         Andius.HUD.render(batch, Andius.CTX);
 
-//        Vector3 v = new Vector3();
-//        getCurrentMapCoords(v);
-//        Andius.font.draw(batch, String.format("%s, %s\n", v.x, v.y), 100, Andius.SCREEN_HEIGHT - 32);
-//        Andius.font.draw(batch, renderer.toString(), 200, Andius.SCREEN_HEIGHT - 32);
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        Andius.font14.draw(batch, String.format("North [%s], South [%s]\n", (int) v.y, (int) v.x), 300, Andius.SCREEN_HEIGHT - 45);
         batch.end();
 
         stage.act();
@@ -334,6 +330,9 @@ public class WorldScreen extends BaseScreen {
 
     private void postMove(Vector3 position) {
 
+        CTX.saveGame.wx = (int) position.x;
+        CTX.saveGame.wy = (int) position.y;
+
         //check for active moongate portal
         for (Moongate g : Moongate.values()) {
             if (g.getCurrentTexture() != null && position.x == g.getMapX() && position.y == g.getMapY()) {
@@ -355,8 +354,9 @@ public class WorldScreen extends BaseScreen {
     }
 
     @Override
-    public void teleport(int level, int stepsX, int stepsY) {
-
+    public void teleport(int level, int north, int east) {
+        setMapPixelCoords(newMapPixelCoords, east, north, 0);
+        this.renderer.getFOV().calculateFOV(east, north, 20f);
     }
 
     @Override

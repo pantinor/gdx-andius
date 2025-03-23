@@ -68,6 +68,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
     default-12: { font: default-font, fontColor: white, background: clear },
+    default-14: { font: default-font, fontColor: white, background: clear },
     default-16: { font: default-font, fontColor: white, background: clear },
     default-24: { font: default-font, fontColor: white, background: clear }
 },
