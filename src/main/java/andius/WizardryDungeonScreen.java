@@ -308,7 +308,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         assets.update(2000);
 
         Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)));
-        Material mortar2 = new Material(TextureAttribute.createDiffuse(Utils.reverse(assets.get("assets/graphics/mortar.png", Texture.class))));
+        TextureRegion flipped = new TextureRegion(assets.get("assets/graphics/mortar.png", Texture.class));
+        flipped.flip(true, true);
+        Material mortarRotated = new Material(TextureAttribute.createDiffuse(flipped));
         Material wood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood-door-texture.png", Texture.class)));
         Material dirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)));
         Material rock = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)));
@@ -340,14 +342,11 @@ public class WizardryDungeonScreen extends BaseScreen {
         letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
         letterM.nodes.get(0).translation.set(0, 0, 0);
         letterM.nodes.get(0).parts.first().material = gr;
-
-        wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-        Model walldoor = builder.createBox(1.090f, 1, 0.05f, mortar2, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-
         manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
-
+        wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        Model doorWall = builder.createBox(1.090f, 1, 0.05f, mortarRotated, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
         builder.begin();
-        builder.node("door-wall", walldoor);
+        builder.node("door-wall", doorWall);
         builder.node("door-main", doorModel);
         doorModel = builder.end();
 
@@ -489,7 +488,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         float z = 0.5f;
         if (cell.northWall) {
             DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-            instance.transform.setFromEulerAngles(90, 0, 0).trn(x + 1 - .025f, z, y + .5f);
+            instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
             modelInstances.add(instance);
         }
         if (cell.southWall) {
@@ -499,7 +498,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.eastWall) {
             DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-            instance.transform.setFromEulerAngles(0, 0, 0).trn(x + .5f, z, y - .025f + 1);
+            instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
             modelInstances.add(instance);
         }
         if (cell.westWall) {
@@ -510,7 +509,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (cell.northDoor) {
             if (cell.northWall) {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(x + 1 - .025f, z, y + .5f);
+                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
                 modelInstances.add(instance);
             } else {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
@@ -532,7 +531,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (cell.eastDoor) {
             if (cell.eastWall) {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-                instance.transform.setFromEulerAngles(0, 0, 0).trn(x + .5f, z, y - .025f + 1);
+                instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
                 modelInstances.add(instance);
             } else {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
