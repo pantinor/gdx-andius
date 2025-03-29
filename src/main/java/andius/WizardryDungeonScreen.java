@@ -110,10 +110,10 @@ public class WizardryDungeonScreen extends BaseScreen {
     private static Texture MINI_MAP_BACKGROUND;
     private final MiniMapIcon miniMapIcon;
     private final Pixmap miniMapIconsPixmap;
-    private static final int MINI_DIM = 15;
+    private static final int MINI_DIM = 24;
     private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + 8;
-    private static final int XALIGNMM = 705;
-    private static final int YALIGNMM = 380;
+    private static final int XALIGNMM = 520;
+    private static final int YALIGNMM = 230;
 
     public final Constants.Map map;
 
@@ -123,7 +123,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.stage.setDebugAll(true);
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
-        MINI_MAP_BACKGROUND = Utils.fillRectangle(MM_BKGRND_DIM + 7, MM_BKGRND_DIM + 7, Color.LIGHT_GRAY, 1);
+        MINI_MAP_BACKGROUND = Utils.fillRectangle(MM_BKGRND_DIM + 7, MM_BKGRND_DIM + 7, new Color(0x009900ff), 1);
 
         arrows[3][2].getTexture().getTextureData().prepare();
         this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
@@ -761,6 +761,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         int yup = MM_BKGRND_DIM - 4;
+        int wt = 3;
 
         Pixmap pixmap = new Pixmap(MM_BKGRND_DIM, MM_BKGRND_DIM, Format.RGBA8888);
 
@@ -782,8 +783,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.chute) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[2][3].getRegionX(),
                             arrows[2][3].getRegionY(),
                             arrows[2][3].getRegionWidth(),
@@ -798,11 +799,22 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.setColor(cell.hasTreasureChest ? Color.MAGENTA : Color.PINK);
                     pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 3);
                 }
+
+                if (cell.itemRequired > 0) {
+                    pixmap.setColor(Color.FIREBRICK);
+                    pixmap.fillRectangle(x, yup - y, MINI_DIM, MINI_DIM);
+                }
+
+                if (cell.itemObtained > 0) {
+                    pixmap.setColor(Color.CHARTREUSE);
+                    pixmap.fillRectangle(x, yup - y, MINI_DIM, MINI_DIM);
+                }
+
                 if (cell.message != null || cell.function != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[0][0].getRegionX(),
                             arrows[0][0].getRegionY(),
                             arrows[0][0].getRegionWidth(),
@@ -813,23 +825,13 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.tbd) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[3][3].getRegionX(),
                             arrows[3][3].getRegionY(),
                             arrows[3][3].getRegionWidth(),
                             arrows[3][3].getRegionHeight()
                     );
-                }
-
-                if (cell.itemRequired > 0) {
-                    pixmap.setColor(Color.FOREST);
-                    pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 4);
-                }
-
-                if (cell.itemObtained > 0) {
-                    pixmap.setColor(Color.TEAL);
-                    pixmap.fillRectangle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 4, 4);
                 }
 
                 if (cell.pit) {
@@ -840,8 +842,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 } else if (cell.damage != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[1][0].getRegionX(),
                             arrows[1][0].getRegionY(),
                             arrows[1][0].getRegionWidth(),
@@ -851,8 +853,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.cage) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[1][1].getRegionX(),
                             arrows[1][1].getRegionY(),
                             arrows[1][1].getRegionWidth(),
@@ -862,8 +864,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.spinner) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[2][2].getRegionX(),
                             arrows[2][2].getRegionY(),
                             arrows[2][2].getRegionWidth(),
@@ -872,52 +874,52 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
 
                 if (cell.teleport) {
-                    pixmap.setColor(Color.FOREST);
+                    pixmap.setColor(new Color(0xcc9900ff));
                     pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 5);
                     pixmap.setColor(Color.WHITE);
                     pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 2);
                 }
 
-                pixmap.setColor(Color.DARK_GRAY);
-                if (cell.northWall) {
-                    pixmap.fillRectangle(x, yup - y - 1, MINI_DIM, 1);
+                pixmap.setColor(Color.WHITE);
+                if (cell.northWall || cell.northDoor || cell.hiddenNorthDoor) {
+                    pixmap.fillRectangle(x, yup - y, MINI_DIM, wt);
                 }
-                if (cell.southWall) {
-                    pixmap.fillRectangle(x, yup - y + MINI_DIM, MINI_DIM, 1);
+                if (cell.southWall || cell.southDoor || cell.hiddenSouthDoor) {
+                    pixmap.fillRectangle(x, yup - y + MINI_DIM - wt, MINI_DIM, wt);
                 }
-                if (cell.eastWall) {
-                    pixmap.fillRectangle(x + MINI_DIM - 1, yup - y, 1, MINI_DIM);
+                if (cell.eastWall || cell.eastDoor || cell.hiddenEastDoor) {
+                    pixmap.fillRectangle(x + MINI_DIM - wt, yup - y, wt, MINI_DIM);
                 }
-                if (cell.westWall) {
-                    pixmap.fillRectangle(x, yup - y, 1, MINI_DIM);
+                if (cell.westWall || cell.westDoor || cell.hiddenWestDoor) {
+                    pixmap.fillRectangle(x, yup - y, wt, MINI_DIM);
                 }
 
-                pixmap.setColor(Color.PINK);
+                pixmap.setColor(new Color(0xcc9900ff));
                 if (cell.hiddenNorthDoor) {
-                    pixmap.fillRectangle(x, yup - y - 1, MINI_DIM, 1);
+                    pixmap.fillRectangle(x + 2 * wt, yup - y, MINI_DIM - 4 * wt, wt);
                 }
                 if (cell.hiddenSouthDoor) {
-                    pixmap.fillRectangle(x, yup - y + MINI_DIM, MINI_DIM, 1);
+                    pixmap.fillRectangle(x + 2 * wt, yup - y + MINI_DIM - wt, MINI_DIM - 4 * wt, wt);
                 }
                 if (cell.hiddenEastDoor) {
-                    pixmap.fillRectangle(x + MINI_DIM - 1, yup - y, 1, MINI_DIM);
+                    pixmap.fillRectangle(x + MINI_DIM - wt, yup - y + 2 * wt, wt, MINI_DIM - 4 * wt);
                 }
                 if (cell.hiddenWestDoor) {
-                    pixmap.fillRectangle(x, yup - y, 1, MINI_DIM);
+                    pixmap.fillRectangle(x, yup - y + 2 * wt, wt, MINI_DIM - 4 * wt);
                 }
 
-                pixmap.setColor(Color.YELLOW);
+                pixmap.setColor(Color.RED);
                 if (cell.northDoor && !cell.hiddenNorthDoor) {
-                    pixmap.fillRectangle(x, yup - y - 1, MINI_DIM, 1);
+                    pixmap.fillRectangle(x + 2 * wt, yup - y, MINI_DIM - 4 * wt, wt);
                 }
                 if (cell.southDoor && !cell.hiddenSouthDoor) {
-                    pixmap.fillRectangle(x, yup - y + MINI_DIM, MINI_DIM, 1);
+                    pixmap.fillRectangle(x + 2 * wt, yup - y + MINI_DIM - wt, MINI_DIM - 4 * wt, wt);
                 }
                 if (cell.eastDoor && !cell.hiddenEastDoor) {
-                    pixmap.fillRectangle(x + MINI_DIM - 1, yup - y, 1, MINI_DIM);
+                    pixmap.fillRectangle(x + MINI_DIM - wt, yup - y + 2 * wt, wt, MINI_DIM - 4 * wt);
                 }
                 if (cell.westDoor && !cell.hiddenWestDoor) {
-                    pixmap.fillRectangle(x, yup - y, 1, MINI_DIM);
+                    pixmap.fillRectangle(x, yup - y + 2 * wt, wt, MINI_DIM - 4 * wt);
                 }
 
                 if (cell.stairs || cell.elevator) {
@@ -927,8 +929,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 if (cell.summoningCircle != null) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
-                            x,
-                            yup - y,
+                            x + 4,
+                            yup - y + 4,
                             arrows[0][1].getRegionX(),
                             arrows[0][1].getRegionY(),
                             arrows[0][1].getRegionWidth(),
@@ -945,8 +947,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private void drawLadderTriangle(MazeCell cell, Pixmap pixmap, int e, int n) {
         int yup = MM_BKGRND_DIM - 4;
-        int cx = 4 + e * MINI_DIM;
-        int cy = yup - n * MINI_DIM - MINI_DIM;
+        int cx = 4 + e * MINI_DIM + 4;
+        int cy = yup - n * MINI_DIM - MINI_DIM + 4;
         pixmap.setColor(Color.YELLOW);
         if (cell.elevator) {
             pixmap.drawPixmap(this.miniMapIconsPixmap, cx, cy, arrows[3][2].getRegionX(), arrows[3][2].getRegionY(), arrows[3][2].getRegionWidth(), arrows[3][2].getRegionHeight());
@@ -1011,8 +1013,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void moveMiniMapIcon() {
-        miniMapIcon.setX(XALIGNMM + (Math.round(currentPos.z) - 1) * MINI_DIM + 4);
-        miniMapIcon.setY(YALIGNMM + (Math.round(currentPos.x)) * MINI_DIM - 10);
+        miniMapIcon.setX(XALIGNMM + (Math.round(currentPos.z) - 1) * MINI_DIM + 8);
+        miniMapIcon.setY(YALIGNMM + (Math.round(currentPos.x)) * MINI_DIM - 16);
     }
 
     @Override
