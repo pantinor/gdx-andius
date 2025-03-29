@@ -780,6 +780,10 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.setColor(Color.BROWN);
                     pixmap.fillRectangle(x, yup - y, MINI_DIM, MINI_DIM);
                 }
+                if (cell.spellsBlocked) {
+                    pixmap.setColor(Color.VIOLET);
+                    pixmap.fillRectangle(x, yup - y, MINI_DIM, MINI_DIM);
+                }
                 if (cell.chute) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
