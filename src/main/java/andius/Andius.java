@@ -78,7 +78,6 @@ public class Andius extends Game {
         cfg.height = SCREEN_HEIGHT;
         cfg.addIcon("assets/data/icon.png", Files.FileType.Classpath);
         new LwjglApplication(new Andius(), cfg);
-
     }
 
     @Override
