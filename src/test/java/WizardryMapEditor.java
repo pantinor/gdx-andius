@@ -2,6 +2,9 @@
 import andius.WizardryData;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeCell;
+import andius.WizardryData.MazeLevelV1;
+import static andius.WizardryData.PMO_MESSAGES;
+import static andius.WizardryData.PMO_MONSTERS;
 import andius.WizardryData.Scenario;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -30,6 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.StringBuilder;
+import jakarta.xml.bind.DatatypeConverter;
 import java.util.ArrayList;
 import java.util.List;
 import utils.FrameMaker;
@@ -126,9 +130,13 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         WizardryData.Scenario sc = WizardryData.Scenario.PMO;
 
+        String ULT_EX_PERINIAN_0 = "55554515000000000000000050141501000002020004000006021400000000203010000054647400000000000204000000145600000054010000000000005404000008400020000019005020000040000200000000504605000000000000000000000000000000000000000000000000000000000000000081024000000001414010000011000010000011110101000001113D010000011111110000298002100000110001010000010429100000010001110000010081020000044100110000014110100000810211100000010180020000000000000000000000000000000000000000000000000000000000000000541405050000000000000000424654000000020200140000142034000000002030000000045556000000500002040000000054000000001000000000590054240000080000200000004042010000400002000000155555150000000000000000000000000000000000000000000000000000000000000000A0000410000001414010000001000011000011110110000010111F0100000111111100000AA00011000041000110000001100A1100000010011100000004A0100000040401110000100401110000A004111000001000A01000000000000000000000000000000000000000000000000000000000000000004901000080080000840000000020000000020000404400000401000000000000400000000100000000200000900000000004000000400000800B00000000000000000000000000000000000000000000050000000001001211111011100111011110111110000000000010101111101010101011001011110010101000101011111110111010101010101111000000000000101011111000111110110010111110110110000010101111000000101011101011110000001100000010111101110001101110101111001000011000101011110000001110101110111100100000000000131111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111190111B000000000000000000000002001B0002000000000000000000000000000000000000000000000000000E000E00C800000000000000000000000000000000000000000000000000000000000E000200000000000000000000000000000000000000000000000F00000000000A0000000E00000000000A0000001400000000000A000A00";
+        MazeLevelV1 ml = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(ULT_EX_PERINIAN_0), 1, PMO_MONSTERS, PMO_MESSAGES);
+
         for (int e = 0; e < DUNGEON_DIM; e++) {
             for (int n = 0; n < DUNGEON_DIM; n++) {
-                WizardryData.MazeCell c = sc.levels()[0].cells[n][e];
+                //WizardryData.MazeCell c = sc.levels()[0].cells[n][e];
+                WizardryData.MazeCell c = ml.cells[n][e];
                 cells[n][e].set(c);
             }
         }
@@ -322,7 +330,11 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 sb.append("TEP");
             }
             if (cell.stairs) {
-                sb.append("STA");
+                if (cell.address.level > cell.addressTo.level) {//up
+                    sb.append("UP");
+                } else {//down           
+                    sb.append("DWN");
+                }
             }
             if (cell.elevator) {
                 sb.append("ELV");
@@ -624,7 +636,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         stage.draw();
 
         batch.begin();
-        font.draw(batch, "" + currentNorth + "," + currentEast, 400, 907);
+        font.draw(batch, String.format("(%d,%d)  %s", currentNorth, currentEast, selectedCell.cell.addressTo), 400, 907);
         batch.end();
     }
 

@@ -21,6 +21,7 @@ public class Hud {
     public void addActor(Stage stage) {
         logs.remove();
         stage.addActor(logs);
+        logs.setZIndex(0);
     }
 
     public void log(String s) {

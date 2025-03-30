@@ -351,5 +351,11 @@
             "  \"LAIR OF THE EVIL WIZARD WERDNA\"",
             "        THE WIZARD IS **IN**"
         ]
+    },
+    {
+        "id": 200,
+        "text": [
+            "You found an item in the treasure chest!"
+        ]
     }
 ]

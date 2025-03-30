@@ -59,7 +59,14 @@ public interface Constants {
         WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG),
         BLACK_STONE("Black Stone", WizardryData.Scenario.BS),
         DRAGON_QUEST("Dragon Quest", WizardryData.Scenario.DQ),
-        WIZARDRY4("Return of Werdna", WizardryData.Scenario.WER);
+        WIZARDRY4("Return of Werdna", WizardryData.Scenario.WER),
+        PERINEAN("Ultima III Exodus Perinean", WizardryData.Scenario.EXODUS_D1),
+        DARDIN("Ultima III Exodus Dardin", WizardryData.Scenario.EXODUS_D2),
+        MINE("Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_D3),
+        FIRE("Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_D4),
+        DOOM("Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_D5),
+        SNAKE("Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_D6),
+        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_D7);
 
         private final String label;
         private final String tmxFile;
@@ -282,7 +289,7 @@ public interface Constants {
                 if (role == Role.MONSTER) {
                     try {
                         Monster monster = monsters.get(name);
-                        
+
                         if (monster == null) {
                             String mid = obj.getProperties().get("monsterID", String.class);
                             monster = monsters.get(mid.toUpperCase());
@@ -379,6 +386,12 @@ public interface Constants {
         "kicks the proverbial bucket",
         "departs the land of the living",
         "moans OH MA, I THINK ITS MY TIME"};
+
+    public static final String[] PIT_DAMAGE_MSGS = new String[]{
+        "Hello, could someone bring me a ladder... and a medic?",
+        "Gravity: 1, Party: 0.",
+        "On the bright side, you've officially hit rock bottom.",
+        "Well, You didn’t fall for it; you leaped right into it... involuntarily."};
 
     public enum CharacterType {
         FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,

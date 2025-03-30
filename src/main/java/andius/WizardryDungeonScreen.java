@@ -11,7 +11,6 @@ import static andius.Constants.CLASSPTH_RSLVR;
 import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
-import static andius.WizardryData.WER_LEVEL_DESC;
 import static andius.WizardryData.WER_MESSAGES;
 import static andius.WizardryData.getMessage;
 import static andius.objects.Direction.*;
@@ -147,10 +146,9 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         init();
 
+        this.stage.addActor(new MiniMapActor());
         this.miniMapIcon = new MiniMapIcon();
-        this.miniMapIcon.setOrigin(4, 4);
-
-        stage.addActor(miniMapIcon);
+        this.stage.addActor(miniMapIcon);
 
         addButtons(this.map);
 
@@ -734,17 +732,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        if (this.map == Map.WIZARDRY4) {
-            String lbl = String.format(WER_LEVEL_DESC[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
+        if (this.map.scenario().getLevelDescriptions() != null) {
+            String lbl = String.format(this.map.scenario().getLevelDescriptions()[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
             Andius.font16.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
         } else {
             String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
             Andius.font16.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
-        }
-
-        if (showMiniMap) {
-            batch.draw(MINI_MAP_BACKGROUND, XALIGNMM - 3, YALIGNMM - 3);
-            batch.draw(miniMap, XALIGNMM, YALIGNMM);
         }
 
         batch.end();
@@ -1012,6 +1005,19 @@ public class WizardryDungeonScreen extends BaseScreen {
                 t = south;
             }
             batch.draw(t, getX(), getY());
+        }
+
+    }
+
+    private class MiniMapActor extends Actor {
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            if (!showMiniMap) {
+                return;
+            }
+            batch.draw(MINI_MAP_BACKGROUND, XALIGNMM - 3, YALIGNMM - 3);
+            batch.draw(miniMap, XALIGNMM, YALIGNMM);
         }
 
     }
@@ -1290,6 +1296,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (destinationCell.damage != null) {
             if (CTX.partyHasItem(5, 4) == null) {//winged boots
                 CTX.damageGroup(destinationCell.damage);
+                log(PIT_DAMAGE_MSGS[Utils.RANDOM.nextInt(PIT_DAMAGE_MSGS.length)]);
                 Sounds.play(Sound.PC_STRUCK);
                 if (this.map == Map.WIZARDRY4 && (this.currentLevel == 12 || this.currentLevel == 13)) {
                     teleport(new MazeAddress(0, dx, dy), false);
@@ -1662,8 +1669,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         MazeAddress to;
 
-        if (addr.level <= 0 && addr.row == 0 && addr.column == 0) {
-            //return to castle
+        if (addr.level <= 0) {
             setMapPixelCoords(null, this.map.scenario().getStartX(), this.map.scenario().getStartY(), this.map.scenario().getStartLevel());
             Andius.mainGame.setScreen(Map.WORLD.getScreen());
             return;
