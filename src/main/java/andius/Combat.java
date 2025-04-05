@@ -1,8 +1,6 @@
-package utils;
+package andius;
 
-import andius.Constants;
 import andius.Constants.Map;
-import andius.Context;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -16,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import utils.Utils;
 
 public abstract class Combat implements Constants {
 

@@ -38,7 +38,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import java.util.ArrayList;
 import java.util.List;
 import utils.AutoFocusScrollPane;
-import utils.Combat;
 import utils.FrameMaker;
 import utils.LogScrollPane;
 import utils.Utils;

@@ -31,8 +31,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
-import utils.Combat;
-import utils.Combat.Action;
+import andius.Combat;
+import andius.Combat.Action;
 import utils.Utils;
 
 public class MonsterTest {

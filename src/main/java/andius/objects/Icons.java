@@ -15,6 +15,7 @@ public class Icons {
 
     private static final TextureRegion[] LOOKUP_TABLE = new TextureRegion[840];
     private static TextureRegion[][] REGIONS;
+    public static final int QUESTION_MARK = 803;
 
     public static void init() {
 
@@ -45,7 +46,7 @@ public class Icons {
 
     private static int getId(Item it) {
         if (it == null || it.name == null) {
-            return 803;
+            return QUESTION_MARK;
         }
         String n = it.name.toLowerCase();
         switch (it.type) {
@@ -129,7 +130,7 @@ public class Icons {
                 }
                 return 420;
             default:
-                return 803;
+                return QUESTION_MARK;
         }
     }
 

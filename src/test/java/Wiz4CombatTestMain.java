@@ -1,10 +1,9 @@
 
 import andius.Andius;
+import andius.CampScreen;
 import andius.Constants;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
-import andius.WizardryCombatScreen;
-import static andius.WizardryData.PMO_MONSTERS;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -32,6 +31,8 @@ public class Wiz4CombatTestMain extends Game {
             SaveGame sg = SaveGame.read(SAVE_FILENAME);
             ctx.setSaveGame(sg);
             
+            ctx.saveGame.players[3].hp = 0;
+
 //            ctx.setSaveGame(new SaveGame());
 //            ctx.saveGame.players = new CharacterRecord[6];
 //            if (true) {
@@ -70,7 +71,6 @@ public class Wiz4CombatTestMain extends Game {
 //
 //                }
 //            }
-
             //ctx.players()[0].inventory.add(WER_ITEMS.get(7));
 //            List<MutableMonster> mms = new ArrayList<>();
 //            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
@@ -88,14 +88,14 @@ public class Wiz4CombatTestMain extends Game {
 //                icons.put(dg.id, dg.iconID);
 //            }
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(442), null, null));
-            setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(9), 1, true, null, null));
+            //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(9), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
+            setScreen(new CampScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 10));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
-
         } catch (Exception e) {
             e.printStackTrace();
         }

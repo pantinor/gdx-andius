@@ -109,7 +109,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
                 Sounds.play(Sound.TRIGGER);
-                EquipmentScreen es = new EquipmentScreen(CTX, map);
+                CampScreen es = new CampScreen(CTX, map);
                 mainGame.setScreen(es);
             }
         });
