@@ -124,6 +124,7 @@ public enum Spells {
     private final Color color;
     private final Dice damage;
     private final int hitBonus;
+    private final int hitCount;
 
     private Spells(String name, ClassType type, int level, Sound snd, Color color,
             SpellTarget target, SpellArea area, int hitCount, int hitRange, int hitBonus, int icon) {
@@ -133,6 +134,7 @@ public enum Spells {
         this.target = target;
         this.area = area;
         this.damage = new Dice(hitCount, hitRange, 0);
+        this.hitCount = hitCount;
         this.hitBonus = hitBonus;
         this.icon = icon;
         this.snd = snd;
@@ -167,6 +169,10 @@ public enum Spells {
         return this.damage.roll();
     }
 
+    public int getHitCount() {
+        return hitCount;
+    }
+
     public int getHitBonus() {
         return hitBonus;
     }
@@ -186,7 +192,7 @@ public enum Spells {
     public Color getColor() {
         return color;
     }
-    
+
     public String label() {
         return String.format("%d %s %s %s", this.level, this, this.damage, this.target == SpellTarget.GROUP ? "GRP" : "");
     }

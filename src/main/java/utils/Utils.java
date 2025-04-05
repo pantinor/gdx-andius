@@ -177,8 +177,8 @@ public class Utils {
 
         chanceToHit += attacker.hitModifier();
 
-        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] HMOD [%d] chance to  hit [%d] hit [%s]\n",
-                attacker.name(), defender.name(), roll, THAC0, defender.getArmourClass(), attacker.hitModifier(), chanceToHit, roll >= chanceToHit);
+        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] HMOD [%d] chance to  hit [%d] hit [%s]\n",
+        //        attacker.name(), defender.name(), roll, THAC0, defender.getArmourClass(), attacker.hitModifier(), chanceToHit, roll >= chanceToHit);
 
         return roll >= chanceToHit;
     }
@@ -211,8 +211,8 @@ public class Utils {
 
         chanceToHit += attacker.hitModifier();
 
-        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DHMOD [%d] chance to  hit [%d] hit [%s]\n",
-                attacker.name(), defender.name, roll, THAC0, defender.calculateAC(), attacker.hitModifier(), defender.defenseHitModifier(), chanceToHit, roll >= chanceToHit);
+        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DHMOD [%d] chance to  hit [%d] hit [%s]\n",
+        //        attacker.name(), defender.name, roll, THAC0, defender.calculateAC(), attacker.hitModifier(), defender.defenseHitModifier(), chanceToHit, roll >= chanceToHit);
 
         return roll >= chanceToHit;
     }
@@ -239,17 +239,17 @@ public class Utils {
             case SAMURAI:
             case LORD:
             case NINJA:
-                THAC0 = Constants.THACO_FIGHTER[attacker.level];
+                THAC0 = Constants.THACO_FIGHTER[attacker.level < Constants.THACO_FIGHTER.length ? attacker.level : Constants.THACO_FIGHTER.length - 1];
                 break;
             case MAGE:
             case BISHOP:
-                THAC0 = Constants.THACO_MAGE[attacker.level];
+                THAC0 = Constants.THACO_MAGE[attacker.level < Constants.THACO_MAGE.length ? attacker.level : Constants.THACO_MAGE.length - 1];
                 break;
             case PRIEST:
-                THAC0 = Constants.THACO_PRIEST[attacker.level];
+                THAC0 = Constants.THACO_PRIEST[attacker.level < Constants.THACO_PRIEST.length ? attacker.level : Constants.THACO_PRIEST.length - 1];
                 break;
             case THIEF:
-                THAC0 = Constants.THACO_THIEF[attacker.level];
+                THAC0 = Constants.THACO_THIEF[attacker.level < Constants.THACO_THIEF.length ? attacker.level : Constants.THACO_THIEF.length - 1];
                 break;
         }
 
@@ -278,8 +278,8 @@ public class Utils {
 
         chanceToHit += (defender.status().isDisabled() ? 3 : 0);
 
-        System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DACMOD [%d] chance to  hit [%d] hit [%s]\n",
-                attacker.name, defender.name(), roll, THAC0, defender.getArmourClass(), attacker.attackHitModifier(), defender.getACModifier(), chanceToHit, roll >= chanceToHit);
+        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DACMOD [%d] chance to  hit [%d] hit [%s]\n",
+        //        attacker.name, defender.name(), roll, THAC0, defender.getArmourClass(), attacker.attackHitModifier(), defender.getACModifier(), chanceToHit, roll >= chanceToHit);
 
         return roll >= chanceToHit;
     }
