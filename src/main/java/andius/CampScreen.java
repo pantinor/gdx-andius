@@ -259,7 +259,7 @@ public class CampScreen implements Screen, Constants {
                         boolean decayed = Utils.percentChance(selectedItem.item.changeChance);
                         if (decayed) {
                             Item changeTo = map.scenario().items().get(selectedItem.item.changeTo);
-                            selectedPlayer.p.removeItem(selectedItem.item.id, selectedItem.item.scenarioID);
+                            selectedPlayer.p.inventory.remove(selectedItem.item);
                             if (changeTo.id != 0) {
                                 selectedPlayer.p.inventory.add(changeTo);
                             }

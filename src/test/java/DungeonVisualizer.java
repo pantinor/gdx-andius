@@ -127,7 +127,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         builder.node("door-main", doorModel);
         doorModel = builder.end();
 
-        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
+        WizardryData.Scenario sc = WizardryData.Scenario.WER;
 
         for (int e = -1; e < DUNGEON_DIM + 1; e++) {
             for (int n = -1; n < DUNGEON_DIM + 1; n++) {
@@ -137,7 +137,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
         for (int e = 0; e < DUNGEON_DIM; e++) {
             for (int n = 0; n < DUNGEON_DIM; n++) {
-                WizardryData.MazeCell cell = sc.levels()[0].cells[n][e];
+                WizardryData.MazeCell cell = sc.levels()[8].cells[n][e];
                 addBlock(0, cell, n, e);
             }
         }

@@ -12,6 +12,8 @@ import andius.objects.MutableMonster;
 import andius.objects.Reward;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -28,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -91,7 +94,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
         Table logTable = new Table(Andius.skin);
         logTable.setBackground("log-background");
+
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH);
+        setLogs(this.logs);
 
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
@@ -379,6 +384,11 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     @Override
     public void log(String s, Color c) {
         this.logs.add(s, c);
+    }
+
+    @Override
+    public void playSound(Sound sound) {
+        Sounds.play(sound);
     }
 
     @Override
@@ -682,6 +692,50 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void addMonster(MutableMonster mm) {
+        super.addMonster(mm);
+
+        this.monstersTable.add(new MonsterListing(mm)).pad(3);
+        this.monstersTable.row();
+    }
+
+    @Override
+    public void removeMonster(MutableMonster mm) {
+        super.removeMonster(mm);
+
+        Cell found = null;
+        for (Cell cell : this.monstersTable.getCells()) {
+            Actor actor = cell.getActor();
+            if (actor instanceof MonsterListing ml) {
+                if (ml.mm == mm) {
+                    found = cell;
+                    break;
+                }
+            }
+        }
+
+        if (found != null) {
+
+            found.getActor().remove();
+            monstersTable.getCells().removeValue(found, true);
+
+            List<Actor> cells = new ArrayList<>();
+            for (Cell c : monstersTable.getCells().toArray(Cell.class)) {
+                cells.add(c.getActor());
+            }
+
+            monstersTable.reset();
+
+            for (Actor a : cells) {
+                monstersTable.add(a).pad(3);
+                monstersTable.row();
+            }
+
+            monstersTable.layout();
+        }
     }
 
 }

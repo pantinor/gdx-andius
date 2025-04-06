@@ -1,15 +1,29 @@
 package utils;
 
 import andius.Constants;
+import static andius.Constants.Ability.AUTOKILL;
+import static andius.Constants.Ability.PARALYZE;
+import static andius.Constants.Ability.POISON;
+import static andius.Constants.Ability.SLEEP;
+import static andius.Constants.Ability.STONE;
+import andius.Constants.Status;
 import andius.objects.Direction;
+import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Mutable;
+import andius.objects.MutableCharacter;
+import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import java.util.Random;
 
 public class Utils {
@@ -179,7 +193,6 @@ public class Utils {
 
         //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] HMOD [%d] chance to  hit [%d] hit [%s]\n",
         //        attacker.name(), defender.name(), roll, THAC0, defender.getArmourClass(), attacker.hitModifier(), chanceToHit, roll >= chanceToHit);
-
         return roll >= chanceToHit;
     }
 
@@ -213,7 +226,6 @@ public class Utils {
 
         //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DHMOD [%d] chance to  hit [%d] hit [%s]\n",
         //        attacker.name(), defender.name, roll, THAC0, defender.calculateAC(), attacker.hitModifier(), defender.defenseHitModifier(), chanceToHit, roll >= chanceToHit);
-
         return roll >= chanceToHit;
     }
 
@@ -280,7 +292,6 @@ public class Utils {
 
         //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DACMOD [%d] chance to  hit [%d] hit [%s]\n",
         //        attacker.name, defender.name(), roll, THAC0, defender.getArmourClass(), attacker.attackHitModifier(), defender.getACModifier(), chanceToHit, roll >= chanceToHit);
-
         return roll >= chanceToHit;
     }
 
@@ -294,6 +305,123 @@ public class Utils {
         defender.adjustHitPoints(-damage);
         defender.adjustHealthCursor();
         return damage;
+    }
+
+    public static boolean inflict(MutableMonster attacker, MutableCharacter defender, Loggable logs) {
+
+        if (defender == null) {
+            return false;
+        }
+
+        for (Constants.Ability ability : attacker.monster().ability) {
+            switch (ability) {
+                case AUTOKILL:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        DoGooder dg = (DoGooder) defender.baseType();
+                        if (dg.savingThrowDeath()) {
+                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name(), "DEATH"), Color.YELLOW);
+                        } else {
+                            defender.adjustHitPoints(defender.getCurrentHitPoints());
+                            defender.getHealthCursor().adjust(defender.getCurrentHitPoints(), defender.getMaxHitPoints());
+                            logs.add(String.format("%s was instantly killed by %s!", defender.name(), attacker.name()), Color.SCARLET);
+                            return true;
+                        }
+                    }
+                    break;
+                case STONE:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        DoGooder dg = (DoGooder) defender.baseType();
+                        if (dg.savingThrowPetrify()) {
+                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name(), "PETRIFICATION"), Status.STONED.getColor());
+                        } else {
+                            defender.status().set(Status.STONED, 100);
+                            logs.add(String.format("%s was petrified by %s!", defender.name(), attacker.name()), Status.STONED.getColor());
+                            return true;
+                        }
+                    }
+                    break;
+                case POISON:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        defender.status().set(Status.POISONED, 5);
+                        logs.add(String.format("%s was poisoned by %s!", defender.name(), attacker.name()), Status.POISONED.getColor());
+                        return true;
+                    }
+                    break;
+                case PARALYZE:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        defender.status().set(Status.PARALYZED, 3);
+                        logs.add(String.format("%s was paralyzed by %s!", defender.name(), attacker.name()), Status.PARALYZED.getColor());
+                        return true;
+                    }
+                    break;
+                case SLEEP:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.RANDOM.nextInt(100) < 15) {
+                        defender.status().set(Status.ASLEEP, 3);
+                        logs.add(String.format("%s was slept by %s!", defender.name(), attacker.name()), Status.ASLEEP.getColor());
+                        return true;
+                    }
+                    break;
+            }
+
+        }
+        return false;
+    }
+
+    public static boolean inflict(MutableMonster attacker, CharacterRecord defender, Loggable logs) {
+
+        if (defender == null) {
+            return false;
+        }
+
+        for (Constants.Ability ability : attacker.monster().ability) {
+            switch (ability) {
+                case AUTOKILL:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        if (defender.savingThrowDeath()) {
+                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name, "DEATH"), Color.YELLOW);
+                        } else {
+                            defender.adjustHP(-defender.hp);
+                            logs.add(String.format("%s was instantly killed by %s!", defender.name, attacker.name()), Color.SCARLET);
+                            return true;
+                        }
+                    }
+                    break;
+                case STONE:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        if (defender.savingThrowPetrify()) {
+                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name, "PETRIFICATION"), Status.STONED.getColor());
+                        } else {
+                            defender.status.set(Status.STONED, 100);
+                            logs.add(String.format("%s was petrified by %s!", defender.name, attacker.name()), Status.STONED.getColor());
+                            return true;
+                        }
+                    }
+                    break;
+                case POISON:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        defender.status.set(Status.POISONED, 5);
+                        logs.add(String.format("%s was poisoned by %s!", defender.name, attacker.name()), Status.POISONED.getColor());
+                        return true;
+                    }
+                    break;
+                case PARALYZE:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                        defender.status.set(Status.PARALYZED, 3);
+                        logs.add(String.format("%s was paralyzed by %s!", defender.name, attacker.name()), Status.PARALYZED.getColor());
+                        return true;
+                    }
+                    break;
+                case SLEEP:
+                    if (attacker.getPercentDamaged() < 0.50 && Utils.RANDOM.nextInt(100) < 15) {
+                        defender.status.set(Status.ASLEEP, 3);
+                        logs.add(String.format("%s was slept by %s!", defender.name, attacker.name()), Status.ASLEEP.getColor());
+                        return true;
+                    }
+                    break;
+            }
+
+        }
+        return false;
     }
 
     public static Vector2 centerOfMass(TextureRegion tr) {
@@ -390,6 +518,14 @@ public class Utils {
 
         p.dispose();
         return newt;
+    }
+
+    public static void animateText(Stage stage, Skin skin, String style, String text, Color color, float sx, float sy, float dx, float dy) {
+        Label label = new Label(text, skin, style);
+        label.setPosition(sx, sy);
+        label.setColor(color);
+        stage.addActor(label);
+        label.addAction(sequence(Actions.moveTo(dx, dy, 3f), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
 }

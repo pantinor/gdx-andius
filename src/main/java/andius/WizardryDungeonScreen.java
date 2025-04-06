@@ -1037,16 +1037,16 @@ public class WizardryDungeonScreen extends BaseScreen {
         //for peeking
         boolean d = (currentDir == EAST || currentDir == WEST);
         switch (keycode) {
-            case Keys.W:
+            case Keys.NUMPAD_3:
                 camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), 30f);
                 break;
-            case Keys.A:
+            case Keys.NUMPAD_7:
                 camera.rotate(new Vector3(0, 1, 0), 30f);
                 break;
-            case Keys.S:
+            case Keys.NUMPAD_1:
                 camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), -30f);
                 break;
-            case Keys.D:
+            case Keys.NUMPAD_9:
                 camera.rotate(new Vector3(0, 1, 0), -30f);
                 break;
         }
@@ -1059,16 +1059,16 @@ public class WizardryDungeonScreen extends BaseScreen {
         //for peeking
         boolean d = (currentDir == EAST || currentDir == WEST);
         switch (keycode) {
-            case Keys.W:
+            case Keys.NUMPAD_3:
                 camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), -30f);
                 break;
-            case Keys.A:
+            case Keys.NUMPAD_7:
                 camera.rotate(new Vector3(0, 1, 0), -30f);
                 break;
-            case Keys.S:
+            case Keys.NUMPAD_1:
                 camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), 30f);
                 break;
-            case Keys.D:
+            case Keys.NUMPAD_9:
                 camera.rotate(new Vector3(0, 1, 0), 30f);
                 break;
         }
@@ -1079,7 +1079,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         float tdur = .7f;
 
-        if (keycode == Keys.LEFT) {
+        if (keycode == Keys.LEFT || keycode == Keys.NUMPAD_4) {
 
             if (currentDir == EAST) {
                 stage.addAction(new PanCameraAction(camera, tdur, EAST.degree(), NORTH.degree()));
@@ -1096,7 +1096,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.RIGHT) {
+        } else if (keycode == Keys.RIGHT || keycode == Keys.NUMPAD_6) {
 
             if (currentDir == EAST) {
                 stage.addAction(new PanCameraAction(camera, tdur, EAST.degree(), SOUTH.degree()));
@@ -1113,7 +1113,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.UP) {
+        } else if (keycode == Keys.UP || keycode == Keys.NUMPAD_8) {
 
             boolean skipProgression = false;
 
@@ -1152,7 +1152,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.DOWN) {
+        } else if (keycode == Keys.DOWN || keycode == Keys.NUMPAD_2) {
             boolean skipProgression = false;
 
             //backwards
@@ -1212,7 +1212,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 teleport(cell.addressTo, false);
             }
             return false;
-        } else if (keycode == Keys.NUM_1) {
+        } else if (keycode == Keys.NUM_1 || keycode == Keys.PAGE_DOWN) {
             if (cell.elevator) {//up
                 if (currentLevel + 1 - 1 >= cell.elevatorFrom && currentLevel + 1 - 1 <= cell.elevatorTo) {
                     currentLevel--;
@@ -1220,7 +1220,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
             return false;
-        } else if (keycode == Keys.NUM_2) {
+        } else if (keycode == Keys.NUM_2 || keycode == Keys.PAGE_UP) {
             if (cell.elevator) {//down
                 if (currentLevel + 1 + 1 >= cell.elevatorFrom && currentLevel + 1 + 1 <= cell.elevatorTo) {
                     currentLevel++;
@@ -1234,6 +1234,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             } else {
                 log("The torch fails to light and darkness remains!");
             }
+        } else if (keycode == Keys.ESCAPE) {
+
+            Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
 
         } else if (keycode == Keys.P) {
 
@@ -1245,12 +1248,6 @@ public class WizardryDungeonScreen extends BaseScreen {
                 SummoningCircleScreen ssc = new SummoningCircleScreen(CTX.saveGame.players[0], cell.summoningCircle);
                 mainGame.setScreen(ssc);
             }
-
-        } else if (keycode == Keys.M) {
-
-        } else if (keycode == Keys.Z) {
-
-            return false;
 
         } else if (keycode == Keys.SPACE) {
 

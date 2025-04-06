@@ -7,6 +7,8 @@ import andius.objects.Monster;
 import andius.objects.Mutable;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Spells;
 import static andius.objects.Spells.*;
 import com.badlogic.gdx.graphics.Color;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import utils.Loggable;
 import utils.Utils;
 
 public abstract class Combat implements Constants {
@@ -27,6 +30,7 @@ public abstract class Combat implements Constants {
 
     private int round = 1;
     private int suprised = 0;
+    private Loggable logs;
 
     public Combat(Context context, Map contextMap, Monster opponent, int level) {
 
@@ -49,6 +53,10 @@ public abstract class Combat implements Constants {
         } else {
             this.suprised = 0;
         }
+    }
+
+    public void setLogs(Loggable logs) {
+        this.logs = logs;
     }
 
     private void addMonsters(int level, Monster monster) {
@@ -204,11 +212,20 @@ public abstract class Combat implements Constants {
             }
         }
 
+        //if (Utils.inflict(attacker, pickPlayer(), this.logs)) {
+        //    return;
+        //}
+
         if (attacker.monster().ability.contains(Ability.CALLFORHELP)
                 && attacker.getPercentDamaged() < 0.50
                 && Utils.RANDOM.nextInt(100) < 75
                 && Utils.percentChance(attacker.getLevel() * 5)) {
             action = CombatAction.CALL_FOR_HELP;
+        } else if (attacker.monster().ability.contains(Ability.RUN)
+                && attacker.getPercentDamaged() < 0.50
+                && Utils.RANDOM.nextInt(100) < 75
+                && Utils.percentChance(attacker.getLevel() * 5)) {
+            action = CombatAction.FLEE;
         }
 
         switch (action) {
@@ -245,10 +262,17 @@ public abstract class Combat implements Constants {
                 }
                 break;
             }
+            case FLEE: {
+                log(String.format("%s fled!", attacker.name()), Color.SKY);
+                removeMonster(attacker);
+                playSound(Sound.FLEE);
+                break;
+            }
             case CALL_FOR_HELP: {
                 log(String.format("%s called for help!", attacker.name()), Color.GOLDENROD);
-                MutableMonster clone = new MutableMonster(attacker.monster());
-                this.monsters.add(clone);
+                MutableMonster added = new MutableMonster(attacker.monster());
+                addMonster(added);
+                playSound(Sound.GIGGLE);
                 break;
             }
         }
@@ -563,7 +587,7 @@ public abstract class Combat implements Constants {
                 if (unaffected) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mm.status().set(effect, 1);
+                    mm.status().set(effect, 3);
                 }
             }
         }
@@ -598,6 +622,8 @@ public abstract class Combat implements Constants {
     public abstract void log(String s);
 
     public abstract void log(String s, Color c);
+    
+    public abstract void playSound(Sound sound);
 
     public class Action {
 
@@ -668,4 +694,12 @@ public abstract class Combat implements Constants {
         return null;
     }
 
+    public void addMonster(MutableMonster added) {
+        this.monsters.add(added);
+
+    }
+
+    public void removeMonster(MutableMonster removed) {
+        this.monsters.remove(removed);
+    }
 }

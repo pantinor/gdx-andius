@@ -393,6 +393,20 @@ public interface Constants {
         "On the bright side, you've officially hit rock bottom.",
         "Well, You didn’t fall for it; you leaped right into it... involuntarily."};
 
+    public static final String HELP_KEYS = """
+              MOVE LEFT - RIGHT - UP - DOWN
+              MOVE NUMPAD4 - NUMPAD6 - NUMPAD8 - NUMPAD2
+              PEEK NUMPAD7 - NUMPAD9 - NUMPAD1 - NUMPAD3
+              ELEVATOR BUTTONS 1 -2 - PGUP - PGDWN
+              KLIMB - K
+              ENTER - E
+              GET - G
+              TALK - T
+              IGNITE TORCH - I
+              PASS TURN - SPACE
+              SUMMONING CIRCLE - S
+              TOGGLE MAP - P""";
+
     public enum CharacterType {
         FIGHTER, MAGE, PRIEST, THIEF, MIDGET, GIANT, MYTHICAL, DRAGON, ANIMAL,
         WERE, UNDEAD, DEMON, INSECT, ENCHANTED, NINJA, BISHOP, LORD, SAMURAI;

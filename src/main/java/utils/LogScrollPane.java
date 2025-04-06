@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
-public class LogScrollPane extends AutoFocusScrollPane {
+public class LogScrollPane extends AutoFocusScrollPane implements Loggable {
 
     private final Table internalTable;
     private final int width;
@@ -33,10 +33,12 @@ public class LogScrollPane extends AutoFocusScrollPane {
         this(skin, table, width, "default-16");
     }
 
+    @Override
     public void add(String text) {
         add(text, Color.WHITE);
     }
 
+    @Override
     public void add(String text, Color color) {
 
         if (text == null) {

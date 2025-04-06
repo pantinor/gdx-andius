@@ -17,7 +17,6 @@ import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
-import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.graphics.Color;
 import com.google.gson.Gson;
@@ -33,6 +32,12 @@ import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import andius.Combat;
 import andius.Combat.Action;
+import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Sound;
+import java.util.stream.IntStream;
+import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
+import utils.Loggable;
 import utils.Utils;
 
 public class MonsterTest {
@@ -86,7 +91,7 @@ public class MonsterTest {
         return data;
     }
 
-    //@Test(dataProvider = "maps")
+    @Test(dataProvider = "maps")
     public void testFights(Constants.Map map) throws Exception {
 
         if (map.getTmxFile() != null) {
@@ -94,7 +99,7 @@ public class MonsterTest {
         }
 
         int maxLevel = 20;
-        int[][] results = new int[map.scenario().monsters().size()][maxLevel];
+        int[][][] results = new int[map.scenario().monsters().size()][maxLevel][2];
 
         Spells[] spellsArray = Spells.values();
 
@@ -103,13 +108,23 @@ public class MonsterTest {
                 Monster monster = map.scenario().monsters().get(m);
                 Context ctx = new Context();
                 ctx.setSaveGame(new SaveGame());
-                ctx.saveGame.players = new SaveGame.CharacterRecord[6];
+                ctx.saveGame.players = new CharacterRecord[6];
                 ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
                 ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
                 ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
                 ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
                 ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
                 ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+
+                Loggable logs = new Loggable() {
+                    @Override
+                    public void add(String s) {
+                    }
+
+                    @Override
+                    public void add(String s, Color c) {
+                    }
+                };
 
                 Combat combat = new Combat(ctx, map, monster, 1) {
                     @Override
@@ -119,10 +134,16 @@ public class MonsterTest {
                     @Override
                     public void log(String s, Color c) {
                     }
+
+                    @Override
+                    public void playSound(Sound sound) {
+                    }
                 };
 
+                combat.setLogs(logs);
+
                 int round = 0;
-                while (round < 50) {
+                while (round < 100) {
 
                     round++;
 
@@ -173,31 +194,153 @@ public class MonsterTest {
                     combat.fight();
                 }
 
-                if (ctx.allDead()) {
-                    results[m][lvl] = 0;
-                } else {
-                    results[m][lvl] = 1;
-                }
+                results[m][lvl][0] = ctx.allDead() ? 0 : 1;
+                results[m][lvl][1] = round;
 
-                if (round == 50) {
+                if (round == 100) {
                     System.out.println("Tough fight cannot win with " + monster.getName() + " at level " + lvl);
-                    results[m][lvl] = -9;
-                    break;
+                    results[m][lvl][0] = -100;
                 }
             }
         }
 
-        printResults(map, results);
+        sortResults(map, results);
+    }
+
+    private void printResults(Constants.Map map, int[][][] results) {
+        System.out.println("Results for Scenario " + map.scenario());
+
+        int[] wins = new int[map.scenario().monsters().size()];
+        for (int i = 0; i < wins.length; i++) {
+            int[][] leveltally = results[i];
+            int sum = 0;
+            for (int j = 0; j < leveltally.length; j++) {
+                sum += leveltally[j][0];
+            }
+            wins[i] = sum;
+        }
+
+        int[] rounds = new int[map.scenario().monsters().size()];
+        for (int i = 0; i < rounds.length; i++) {
+            int[][] leveltally = results[i];
+            int sum = 0;
+            for (int j = 0; j < leveltally.length; j++) {
+                sum += leveltally[j][1];
+            }
+            rounds[i] = sum;
+        }
+
+        int[][] indicesWithSums = new int[map.scenario().monsters().size()][2];
+        for (int i = 0; i < indicesWithSums.length; i++) {
+            indicesWithSums[i][0] = i;
+            indicesWithSums[i][1] = wins[i];
+        }
+
+        Arrays.sort(indicesWithSums, (a, b) -> Integer.compare(b[1], a[1]));
+
+        for (int i = 0; i < indicesWithSums.length; i++) {
+            int monsterId = indicesWithSums[i][0];
+            int[][] row = results[monsterId];
+            StringBuilder rowBuilder = new StringBuilder(String.format("Monster ID %d [", monsterId));
+
+            for (int[] pair : row) {
+                rowBuilder.append(String.format("%d ", pair[0]));
+            }
+
+            rowBuilder.append("] [");
+
+            for (int[] pair : row) {
+                rowBuilder.append(String.format("%d ", pair[1]));
+            }
+
+            rowBuilder.append(String.format("] %s level %d",
+                    map.scenario().monsters().get(monsterId).getName(),
+                    map.scenario().monsters().get(monsterId).getLevel()));
+
+            System.out.println(rowBuilder);
+        }
+    }
+
+    private void sortResults(Constants.Map map, int[][][] results) {
+
+        System.out.println("\n\nResults for Scenario " + map.scenario());
+
+        int monsterCount = results.length;
+
+        int[][] aggregateData = new int[monsterCount][4];
+        for (int monsterID = 0; monsterID < monsterCount; monsterID++) {
+            int totalWins = 0;
+            int totalRounds = 0;
+
+            for (int level = 0; level < results[monsterID].length; level++) {
+                totalWins += results[monsterID][level][0];   // Wins
+                totalRounds += results[monsterID][level][1]; // Rounds
+            }
+
+            aggregateData[monsterID][0] = monsterID;       // MonsterID
+            aggregateData[monsterID][1] = totalWins;      // Total Wins
+            aggregateData[monsterID][2] = totalRounds;    // Total Rounds
+        }
+
+        Arrays.sort(aggregateData, (a, b) -> {
+            // Sort by total wins (descending)
+            int winComparison = Integer.compare(b[1], a[1]);
+            if (winComparison != 0) {
+                return winComparison;
+            }
+
+            // Sort by total rounds (descending)
+            int roundComparison = Integer.compare(b[2], a[2]);
+            if (roundComparison != 0) {
+                return roundComparison;
+            }
+
+            // Sort by monsterID (ascending, as a fallback)
+            return Integer.compare(a[0], b[0]);
+        });
+
+        for (int i = 0; i < aggregateData.length; i++) {
+            String name = map.scenario().monsters().get(aggregateData[i][0]).getName();
+            System.out.println(name + ", Wins: " + aggregateData[i][1] + ", Rounds: " + aggregateData[i][2]);
+        }
     }
 
     //@Test
-    public void testGeneratePlayer() throws Exception {
-        CharacterRecord p = generatePlayer(1, ClassType.FIGHTER, "fred");
+    public void testGenerateSaveGameTeamAtLevel() throws Exception {
+        int lvl = 2;
+        Context ctx = new Context();
+        ctx.setSaveGame(new SaveGame());
+        ctx.saveGame.players = new CharacterRecord[6];
+        ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
+        ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
+        ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
+        ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
+        ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
+        ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+
+        ctx.saveGame.write("party-team.json");
     }
 
-    private SaveGame.CharacterRecord generatePlayer(int lvl, ClassType ctype, String name) {
+    //@Test
+    public void testGenerateSaveGameMageOnlyAtLevel() throws Exception {
+        Context ctx = new Context();
+        ctx.setSaveGame(new SaveGame());
+        ctx.saveGame.players = new CharacterRecord[1];
 
-        SaveGame.CharacterRecord p = new SaveGame.CharacterRecord();
+        int level = 6;
+        ctx.saveGame.players[0] = generatePlayer(level, ClassType.MAGE, "jane");
+
+        assertEquals(ctx.saveGame.players[0].level, level);
+
+        ctx.saveGame.map = Constants.Map.WORLD;
+        ctx.saveGame.wx = 10;
+        ctx.saveGame.wy = 54;
+        ctx.saveGame.write("party-mage.json");
+    }
+
+    private CharacterRecord generatePlayer(int lvl, ClassType ctype, String name) {
+
+        CharacterRecord p = new CharacterRecord();
 
         p.name = name;
         p.classType = ctype;
@@ -214,7 +357,7 @@ public class MonsterTest {
             }
         }
 
-        p.exp = tmp;
+        p.exp = tmp - 5;
 
         p.str = Utils.getRandomBetween(10, 18);
         p.intell = Utils.getRandomBetween(10, 18);
@@ -277,29 +420,6 @@ public class MonsterTest {
         }
 
         return p;
-    }
-
-    private void printResults(Constants.Map map, int[][] results) {
-
-        System.out.println("Results for Scenario " + map.scenario());
-
-        Integer[] indices = new Integer[map.scenario().monsters().size()];
-        for (int i = 0; i < indices.length; i++) {
-            indices[i] = i;
-        }
-
-        Arrays.sort(indices, Comparator.comparingInt(i -> Arrays.stream(results[(int) i]).sum()).reversed());
-
-        for (int index : indices) {
-            int[] row = results[index];
-            System.out.println(String.format("%d [%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d] %s %d",
-                    index,
-                    row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                    row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19],
-                    map.scenario().monsters().get(index).getName(),
-                    map.scenario().monsters().get(index).getLevel())
-            );
-        }
     }
 
 }

@@ -230,8 +230,8 @@ public class GameScreen extends BaseScreen {
             this.currentDirection = 3;
             newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
             v.x -= 1;
-        } else if (keycode == Keys.D || keycode == Keys.U) {//elevators
-            Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y, keycode == Keys.U);
+        } else if (keycode == Keys.NUM_1 || keycode == Keys.PAGE_DOWN || keycode == Keys.NUM_2 || keycode == Keys.PAGE_UP) {//elevators
+            Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y, (keycode == Keys.NUM_2 || keycode == Keys.PAGE_UP));
             if (p != null && p.getMap() != this.map) {
                 Vector3 dv = p.getDest();
                 int dx = (int) dv.x;
@@ -325,6 +325,10 @@ public class GameScreen extends BaseScreen {
                     }
                 }
             }
+            
+        } else if (keycode == Keys.ESCAPE) {
+
+            Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
         }
 
         finishTurn((int) v.x, (int) v.y);

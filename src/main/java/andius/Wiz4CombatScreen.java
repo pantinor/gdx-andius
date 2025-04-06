@@ -19,6 +19,8 @@ import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Spells;
 import static andius.objects.Spells.*;
 import com.badlogic.gdx.Gdx;
@@ -35,6 +37,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -435,16 +438,25 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
+        if (Utils.inflict(attacker, pickEnemy(), logs)) {
+            return;
+        }
+
         if (attacker.monster().ability.contains(Ability.CALLFORHELP)
                 && attacker.getPercentDamaged() < 0.50
                 && Utils.RANDOM.nextInt(100) < 75
                 && Utils.percentChance(attacker.getLevel() * 5)) {
             action = CombatAction.CALL_FOR_HELP;
+        } else if (attacker.monster().ability.contains(Ability.RUN)
+                && attacker.getPercentDamaged() < 0.50
+                && Utils.RANDOM.nextInt(100) < 75
+                && Utils.percentChance(attacker.getLevel() * 5)) {
+            action = CombatAction.FLEE;
         }
 
         switch (action) {
             case BREATH:
-                log(String.format("%s breathes %s", attacker.name(), attacker.breath()), Color.BROWN);
+                log(String.format("%s breathes %s", attacker.name(), attacker.breath()), Color.YELLOW);
                 for (MutableCharacter defender : enemies) {
                     int dmg = attacker.getCurrentHitPoints() / 2;
                     DoGooder dg = (DoGooder) defender.baseType();
@@ -477,10 +489,20 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
                 break;
             }
+            case FLEE: {
+                log(String.format("%s fled!", attacker.name()), Color.SKY);
+                this.monsters.remove(attacker);
+                removeMonsterFromTable(attacker);
+                Sounds.play(Sound.FLEE);
+                break;
+            }
             case CALL_FOR_HELP: {
-                log(String.format("%s called for help!", attacker.name()), Color.GOLDENROD);
+                log(String.format("%s called for help!", attacker.name()), Color.RED);
                 MutableMonster clone = new MutableMonster(attacker.monster());
                 this.monsters.add(clone);
+                this.monstersTable.add(new MonsterListing(clone)).pad(3);
+                this.monstersTable.row();
+                Sounds.play(Sound.GIGGLE);
                 break;
             }
         }
@@ -564,17 +586,16 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     }
 
-    private MutableCharacter pickEnemy() {
-        List<MutableCharacter> notDead = new ArrayList<>();
-        for (MutableCharacter m : enemies) {
-            if (m.getCurrentHitPoints() > 0) {
-                notDead.add(m);
+    public MutableCharacter pickEnemy() {
+        MutableCharacter weakest = null;
+        for (MutableCharacter c : enemies) {
+            if (c.getCurrentHitPoints() > 0) {
+                if (weakest == null || c.getCurrentHitPoints() < weakest.getCurrentHitPoints()) {
+                    weakest = c;
+                }
             }
         }
-        if (notDead.isEmpty()) {
-            return null;
-        }
-        return notDead.get(Utils.RANDOM.nextInt(notDead.size()));
+        return weakest;
     }
 
     private Object pickMonster() {
@@ -891,7 +912,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (!mc.status().isDisabled() && dg.savingThrowSpell()) {
                     log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mc.status().set(effect, 1);
+                    mc.status().set(effect, 3);
                 }
             }
         }
@@ -901,7 +922,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (unaffected) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mm.status().set(effect, 1);
+                    mm.status().set(effect, 3);
                 }
             }
             if (player.savingThrowSpell()) {
@@ -996,7 +1017,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void log(String s, Color c) {
-        System.out.println(s);
         this.logs.add(s, c);
     }
 
@@ -1339,6 +1359,40 @@ public class Wiz4CombatScreen implements Screen, Constants {
             batch.draw(healthGreen, getX(), getY());
         }
 
+    }
+
+    private void removeMonsterFromTable(MutableMonster mm) {
+
+        Cell found = null;
+        for (Cell cell : this.monstersTable.getCells()) {
+            Actor actor = cell.getActor();
+            if (actor instanceof MonsterListing ml) {
+                if (ml.mm == mm) {
+                    found = cell;
+                    break;
+                }
+            }
+        }
+        
+        if (found != null) {
+
+            found.getActor().remove();
+            monstersTable.getCells().removeValue(found, true);
+
+            List<Actor> cells = new ArrayList<>();
+            for (Cell c : monstersTable.getCells().toArray(Cell.class)) {
+                cells.add(c.getActor());
+            }
+
+            monstersTable.reset();
+
+            for (Actor a : cells) {
+                monstersTable.add(a).pad(3);
+                monstersTable.row();
+            }
+
+            monstersTable.layout();
+        }
     }
 
     @Override
