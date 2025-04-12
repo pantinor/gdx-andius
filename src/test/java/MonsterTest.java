@@ -25,7 +25,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.testng.SkipException;
@@ -34,7 +33,6 @@ import andius.Combat;
 import andius.Combat.Action;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;
-import java.util.stream.IntStream;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 import utils.Loggable;
@@ -108,13 +106,13 @@ public class MonsterTest {
                 Monster monster = map.scenario().monsters().get(m);
                 Context ctx = new Context();
                 ctx.setSaveGame(new SaveGame());
-                ctx.saveGame.players = new CharacterRecord[6];
+                ctx.saveGame.players = new CharacterRecord[2];
                 ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
                 ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
-                ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
-                ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
-                ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
-                ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+                //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
+                //ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
+                //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
+                //ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
 
                 Loggable logs = new Loggable() {
                     @Override

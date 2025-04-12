@@ -617,7 +617,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new MonsterStatusLabel(mm);
             this.l3 = new MonsterMagicPointsLabel(mm);
-            this.icon.setPosition(247, 2);
+            this.icon.setPosition(220, 2);
 
             String d1 = String.format("%s  LVL %d", m.name.toUpperCase(), mm.getLevel());
             this.l1.setText(d1);

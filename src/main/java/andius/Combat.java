@@ -8,7 +8,6 @@ import andius.objects.Mutable;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;
-import andius.objects.Sounds;
 import andius.objects.Spells;
 import static andius.objects.Spells.*;
 import com.badlogic.gdx.graphics.Color;
@@ -212,9 +211,9 @@ public abstract class Combat implements Constants {
             }
         }
 
-        //if (Utils.inflict(attacker, pickPlayer(), this.logs)) {
-        //    return;
-        //}
+        if (Utils.inflict(attacker, pickPlayer(), this.logs)) {
+            return;
+        }
 
         if (attacker.monster().ability.contains(Ability.CALLFORHELP)
                 && attacker.getPercentDamaged() < 0.50

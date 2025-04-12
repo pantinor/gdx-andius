@@ -438,7 +438,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
-        if (Utils.inflict(attacker, pickEnemy(), logs)) {
+        if (Utils.inflict(attacker, pickRandomEnemy(), logs)) {
             return;
         }
 
@@ -596,6 +596,24 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
         return weakest;
+    }
+
+    private MutableCharacter pickRandomEnemy() {
+
+        List<MutableCharacter> shuffled = new ArrayList();
+        for (MutableCharacter m : enemies) {
+            if (m.getCurrentHitPoints() > 0) {
+                shuffled.add(m);
+            }
+        }
+        
+        Collections.shuffle(shuffled);
+
+        if (shuffled.isEmpty()) {
+            return null;
+        }
+
+        return shuffled.get(0);
     }
 
     private Object pickMonster() {
@@ -1373,7 +1391,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
         }
-        
+
         if (found != null) {
 
             found.getActor().remove();
