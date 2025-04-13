@@ -1,12 +1,12 @@
 
 import andius.WizardryData;
-import static andius.WizardryData.DUNGEON_DIM;
+import andius.WizardryData.CellType;
+import static andius.WizardryData.CellType.ROCK;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevelV1;
 import static andius.WizardryData.PMO_MESSAGES;
 import static andius.WizardryData.PMO_MONSTERS;
 import andius.WizardryData.Scenario;
-import andius.objects.Dice;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -96,8 +96,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
     private int currentNorth;
     private int currentEast;
 
-    private final MazeCellActor[][] cells = new MazeCellActor[DUNGEON_DIM][DUNGEON_DIM];
-
+    private MazeCellActor[][] cells;
     private MazeCellActor selectedCell;
     private Special[] specials;
 
@@ -132,8 +131,12 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        for (int e = 0; e < DUNGEON_DIM; e++) {
-            for (int n = 0; n < DUNGEON_DIM; n++) {
+        int dim = 16;
+
+        cells = new MazeCellActor[dim][dim];
+
+        for (int e = 0; e < dim; e++) {
+            for (int n = 0; n < dim; n++) {
                 cells[n][e] = new MazeCellActor(n, e);
                 stage.addActor(cells[n][e]);
             }
@@ -141,13 +144,13 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         WizardryData.Scenario sc = WizardryData.Scenario.WER;
 
-        String SDATA = "5505001500000008150000000019000000001500000800000000081900000000590000000845000000005900500100000050010000000000000000005001000000000000000000000400000000002000000000006400000400000000000000000000000000000000000000000000000000000000000000000100000100000004010100000001010100000101010400000101040100000100C10300000441001000000100101000000110101000000110101000001110101000001110101000002910101000001140401000000140400400000000000000000000000000000000000000000000000000000000000000005509000000000008000000000000001900000000190800000015080000001900540500000844010000000000000000005401000000000000000000000000000000000000000000006411110100002000000000005540401400000000000000000000000000000000000000000000000000000000000000000004001000000004101000000010101000001010100400001010041000001000F01000000404011000000001001100000001011100000100011100000101011100000101011100000A010111000011404010000040404010000000000000000000000000000000000000000000000000000000000000000005500000000000002050000000000000000000000041000002010000101400000100000000100000104000001840000040100000010000000000000000000000000000000000000000000000000000000E00001111112010111111110111221202121111111100102212201011110010A010221201111111D0100010011100101111001011110000001011110111002110111110111100001011112212101111000010001522121011111011110010221210111110001B0018221210111110001000102212101111000010001022121011111010110111011110111100C011911141011311111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111901BB1BB1B1BB101000000005400070007000000000000000000070067000700070066000700000000000000C8000E000B0002000100030004000700CB0004000300CA00000000000000000002000E000E000C000C000C000C000E0002000A000E0002000000000046000A0001000A0023004A000A0001000A00230056000000000009000000";
+        String SDATA = "0000000000005505001500000008150000000019000000001500000800000000081900000000590000000845000000005900500100000050010000000000000000005001000000000000000000000400000000002000000000006400000400000000000000000000000000000000000000000000000000000000000000000100000100000004010100000001010100000101010400000101040100000100C10300000441001000000100101000000110101000000110101000001110101000001110101000002910101000001140401000000140400400000000000000000000000000000000000000000000000000000000000000005509000000000008000000000000001900000000190800000015080000001900540500000844010000000000000000005401000000000000000000000000000000000000000000006411110100002000000000005540401400000000000000000000000000000000000000000000000000000000000000000004001000000004101000000010101000001010100400001010041000001000F01000000404011000000001001100000001011100000100011100000101011100000101011100000A01011100001140401000004040401000000000000000000000000000000000000000000000000000000000000008500000204400000050000001200000000000000003000000010000020000004811000001000000C00800000001000044000000010000000008000000000000000000000000000000000000111111111111111111110E00001111112010111111110111221202121111111100102212201011110010A010221201111111D0100010011100101111001011110000001011110111002110111110111100001011112212101111000010001522121011111011110810221210111110001B0016221210111110001009102212101111000010001022121011111010110111011110111100C0117111410113111111111111111111111111111111111111111111111111111111111111111111111111111111111111901FE11EEE1DD101000000000000070007000000000007000000000067000700070066000700000000000000C8000E000B0002000100070004000300CB0004000300CA00000000000000000002000F000F000C000C000F000C000C0003000B000F0002000100000046000A0001000A0023004A000A0001000A00230056000000000009000000";
         byte[] data = DatatypeConverter.parseHexBinary(SDATA);
-        MazeLevelV1 ml = new MazeLevelV1(1, data, 1, PMO_MONSTERS, PMO_MESSAGES);
+        MazeLevelV1 ml = new MazeLevelV1(1, data, 1, dim, PMO_MONSTERS, PMO_MESSAGES);
         specials = getSpecials(data, 0x2F8);
 
-        for (int e = 0; e < DUNGEON_DIM; e++) {
-            for (int n = 0; n < DUNGEON_DIM; n++) {
+        for (int e = 0; e < dim; e++) {
+            for (int n = 0; n < dim; n++) {
                 //WizardryData.MazeCell c = sc.levels()[8].cells[n][e];
                 WizardryData.MazeCell c = ml.cells[n][e];
                 cells[n][e].set(c);
@@ -322,7 +325,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 sb.append("LR");
             }
             if (cell.encounterID >= 0) {
-                sb.append("MID");
+                sb.append("MON");
             }
             if (cell.message != null) {
                 sb.append("MSG");
@@ -335,6 +338,12 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             }
             if (cell.fountainType > 0) {
                 sb.append("FNT");
+            }
+            if (cell.markType > 0) {
+                sb.append("MRK");
+            }
+            if (cell.chestType > 0) {
+                sb.append("CHST");
             }
             if (cell.pit) {
                 sb.append("PIT");
@@ -709,18 +718,9 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         return specials;
     }
 
-    private enum Square {
-        NORMAL, STAIRS, PIT, CHUTE, SPINNER, DARK, TRANSFER, OUCHY, BUTTONZ, ROCKWATE, FIZZLE,
-        SCNMSG, ENCOUNTE
-    }
-
-    private static final String[] auxTypes = {"", "", "TRYGET", "WHOWADE", "DOSEARCH",
-        "ITM2PASS", "CHKALIGN", "CHKAUX0", "BCK2SHOP", "LOOKOUT", "RIDDLES", "FEEIS", "",
-        "PICTMESS", "ITMORTEL", "SPCMONST(CE)", "SPCMONST(CG)"};
-
     private class Special {
 
-        private final Square square;
+        private final CellType square;
         private final int[] aux = new int[3];
         private final List<Location> locations = new ArrayList<>();
 
@@ -729,7 +729,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             byte b = buffer[offset + (index) / 2];
             int val = index % 2 == 0 ? b & 0x0F : (b & 0xF0) >>> 4;
 
-            square = Square.values()[val];
+            square = CellType.values()[val];
 
             aux[0] = EndianUtils.readSwappedShort(buffer, offset + 8 + index * 2);
             aux[1] = EndianUtils.readSwappedShort(buffer, offset + 40 + index * 2);
@@ -744,33 +744,18 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             java.lang.StringBuilder description = new java.lang.StringBuilder();
 
             switch (square) {
-                case SCNMSG:
-
+                case MESSAGE:
                     switch (aux[2]) {
                         case 1:
-                            switch (aux[0]) {
-                                case 0:
-                                    description.append("Never shown");
-                                    break;
-                                case -1:
-                                    description.append("Always shown");
-                                    break;
-                                default:
-                                    description.append(aux[0] + " left");
-                                    break;
-                            }
                             break;
-
                         case 2:
                             description.append("Obtain : " + aux[0]);
                             break;
-
                         case 3:
                             if (aux[0] > 0) {
                                 description.append("Wade : " + aux[0]);
                             }
                             break;
-
                         case 4:
                             if (aux[0] >= 0) {
                                 description.append("Encounter : " + aux[0]);
@@ -780,122 +765,81 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                                 description.append("Trade : " + aux[0] + " for " + aux[1]);
                             }
                             break;
-
                         case 5:
                             description.append("Access requires : " + aux[0]);
                             break;
-
                         case 6:
                             description.append("Check alignment");
                             break;
-
                         case 7:
-                            description.append("Check AUX0");
                             break;
-
                         case 8:
                             description.append("Return to castle");
                             break;
-
                         case 9:
                             description.append(String.format("Look out : surrounded by fights"));
                             break;
-
                         case 10:
                             description.append("Answer : " + aux[0]);
                             break;
-
                         case 11:
                             description.append("Pay : " + aux[0]);
                             break;
-
                         case 12:
-                            description.append("12 = ??");
                             break;
-
                         case 13:
-                            if (aux[0] > 0) {
-                                description.append("Requires : " + aux[0]);
-                            } else {
-                                description.append("PICTMESS but aux[0] = 0");
-                            }
                             break;
-
                         case 14:
                             int east = aux[0] / 100;
                             int north = aux[0] % 100;
                             String item = "" + aux[1];
                             description.append(String.format("Required : %s else teleport N%d E%d", item, north, east));
                             break;
-
                         case 15:
-                            description.append("SPCMONST (CRYSEVIL) : " + aux[1]);
                             break;
-
                         case 16:
-                            description.append("SPCMONST (CRYSGOOD) : " + aux[1]);
                             break;
-
                         case 200:
                         case 201:
                             description.append("Summoning circle");
                             break;
                     }
                     break;
-
                 case STAIRS:
                     Location location = new Location(aux);
                     description.append(String.format("Stairs to : %s", location));
                     break;
-
                 case PIT:
-                    if (locations.isEmpty()) {
-                        description.append("Never occurs");
-                    } else {
-                        description.append(String.format("Pit - %s (if agility < 1d25+%d)", new Dice(aux[0], aux[1], aux[2]), 0));
-                    }
                     break;
-
                 case CHUTE:
                     location = new Location(aux);
                     description.append(String.format("Chute to : %s", location));
                     break;
-
                 case SPINNER:
-                    description.append("Spinner");
                     break;
-
                 case DARK:
                     break;
-
-                case TRANSFER:
+                case TELEPORT:
                     location = new Location(aux);
                     description.append(String.format("Teleport to : %s", location));
                     break;
-
-                case OUCHY:
-                    description.append(String.format("Ouch - %s (if agility < 1d25+%d)", new Dice(aux[0], aux[1], aux[2]), 0));
+                case DAMAGE:
                     break;
-
-                case BUTTONZ:
+                case ELEVATOR:
                     description.append(String.format("Elevator levels : %d to %d", aux[2], aux[1]));
                     break;
-
-                case ROCKWATE:
-                    description.append("Rock/water");
+                case ROCK:
                     break;
-
-                case FIZZLE:
-                    description.append("Spells fizzle out");
+                case MARK:
                     break;
-
-                case ENCOUNTE:
-                    int monster = aux[2];
-                    String when = aux[0] == -1 ? "always" : aux[0] + " left";
-                    description.append(String.format("%s (%s)", monster, when));
-                    location = locations.get(0);
+                case FOUNTAIN:
                     break;
-
+                case CHEST:
+                    break;
+                case NOSPELL:
+                    break;
+                case ENCOUNTER:
+                    break;
                 case NORMAL:
                     break;
             }

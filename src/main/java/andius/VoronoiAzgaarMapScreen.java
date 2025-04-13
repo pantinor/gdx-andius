@@ -53,6 +53,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Some prototype alternative screen based on Voronoi triangles. Interesting
+ * because it can load the map formats the Azgaar generator as well. Never
+ * really hooked this up officially.
+ *
+ * Refer https://azgaar.github.io/Fantasy-Map-Generator/
+ */
 public class VoronoiAzgaarMapScreen extends BaseScreen {
 
     private Grid grid;
@@ -85,7 +92,6 @@ public class VoronoiAzgaarMapScreen extends BaseScreen {
     public VoronoiAzgaarMapScreen() {
 
         try {
-            //https://azgaar.github.io/Fantasy-Map-Generator/
             InputStream fstream = Gdx.files.classpath("assets/azgaarMaps/Movia 2024-11-03-13-51.map").read();
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 

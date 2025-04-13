@@ -1,7 +1,6 @@
 
 import andius.objects.Direction;
 import andius.WizardryData;
-import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeLevel;
 import static andius.WizardryData.WER_LEVEL_DESC;
 import andius.objects.ClassType;
@@ -177,8 +176,8 @@ public class ObjectsTestNG {
 
         for (MazeLevel l : sc.levels()) {
             System.out.printf("%d - %s\n", l.level - 1, WER_LEVEL_DESC[l.level - 1]);
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
+            for (int x = 0; x < sc.dim(); x++) {
+                for (int y = 0; y < sc.dim(); y++) {
                     WizardryData.MazeCell c = l.cells[x][y];
                     if (c.stairs || c.chute || c.teleport) {
                         String hx = String.format("%04x", (short) c.addressTo.column);

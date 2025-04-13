@@ -60,13 +60,13 @@ public interface Constants {
         BLACK_STONE("Black Stone", WizardryData.Scenario.BS),
         DRAGON_QUEST("Dragon Quest", WizardryData.Scenario.DQ),
         WIZARDRY4("Return of Werdna", WizardryData.Scenario.WER),
-        PERINEAN("Ultima III Exodus Perinean", WizardryData.Scenario.EXODUS_D1),
-        DARDIN("Ultima III Exodus Dardin", WizardryData.Scenario.EXODUS_D2),
-        MINE("Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_D3),
-        FIRE("Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_D4),
-        DOOM("Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_D5),
-        SNAKE("Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_D6),
-        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_D7);
+        PERINEAN("Ultima III Exodus Perinean Depths", WizardryData.Scenario.EXODUS_PERIN),
+        DARDIN("Ultima III Exodus Dardin's Pit", WizardryData.Scenario.EXODUS_DARDIN),
+        MINE("Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_MINE),
+        FIRE("Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_FIRE),
+        DOOM("Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_DOOM),
+        SNAKE("Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
+        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME);
 
         private final String label;
         private final String tmxFile;

@@ -8,7 +8,6 @@ import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import static andius.Constants.CLASSPTH_RSLVR;
-import static andius.WizardryData.DUNGEON_DIM;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import static andius.WizardryData.WER_MESSAGES;
@@ -106,13 +105,15 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private boolean showMiniMap = true;
     private Texture miniMap;
-    private static Texture MINI_MAP_BACKGROUND;
     private final MiniMapIcon miniMapIcon;
     private final Pixmap miniMapIconsPixmap;
+    private final int miniMapBackgroundDimension;
+    private final int dim;//dimension of the map
+    private final int xalignMM;
+    private final int yalignMM;
+    
+    private static Texture MINI_MAP_BACKGROUND;
     private static final int MINI_DIM = 24;
-    private static final int MM_BKGRND_DIM = MINI_DIM * DUNGEON_DIM + 8;
-    private static final int XALIGNMM = 520;
-    private static final int YALIGNMM = 230;
 
     public final Constants.Map map;
 
@@ -122,7 +123,11 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.stage.setDebugAll(true);
         this.assets = new AssetManager(CLASSPTH_RSLVR);
 
-        MINI_MAP_BACKGROUND = Utils.fillRectangle(MM_BKGRND_DIM + 7, MM_BKGRND_DIM + 7, new Color(0x009900ff), 1);
+        this.dim = map.scenario().dim();
+        this.miniMapBackgroundDimension = MINI_DIM * this.dim + 8;
+        this.xalignMM = Andius.SCREEN_WIDTH - this.miniMapBackgroundDimension - 10;
+        this.yalignMM = Andius.SCREEN_HEIGHT - this.miniMapBackgroundDimension - 10;
+        MINI_MAP_BACKGROUND = Utils.fillRectangle(miniMapBackgroundDimension + 7, miniMapBackgroundDimension + 7, new Color(0x009900ff), 1);
 
         arrows[3][2].getTexture().getTextureData().prepare();
         this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
@@ -202,8 +207,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         CTX.saveGame.direction = this.currentDir;
 
         for (int level = 0; level < this.map.scenario().levels().length; level++) {
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
+            for (int x = 0; x < this.dim; x++) {
+                for (int y = 0; y < this.dim; y++) {
                     MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
                     List<AnsweredRiddle> riddles = CTX.saveGame.riddles.get(this.map);
                     if (riddles == null) {
@@ -266,8 +271,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 //        }
 //
 //        for (int level = 0; level < this.map.scenario().levels().length; level++) {
-//            for (int x = 0; x < DUNGEON_DIM; x++) {
-//                for (int y = 0; y < DUNGEON_DIM; y++) {
+//            for (int x = 0; x < this.dim; x++) {
+//                for (int y = 0; y < this.dim; y++) {
 //                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
 //                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
 //                        cell.wanderingEncounterID = -1;
@@ -362,13 +367,13 @@ public class WizardryDungeonScreen extends BaseScreen {
         sky.nodes.get(0).scale.set(.14f, .14f, .14f);
         sky.nodes.get(0).translation.set(10, -3, 10);
 
-        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
-            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
+            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
                 floor.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, x - 1.5f, -.05f, y - 1.5f));
             }
         }
-        for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
-            for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
+            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
                 ceiling.add(new DungeonTileModelInstance(ceilingModel, 0, 0f, 0f, x - 1.5f, 1.05f, y - 1.5f));
             }
         }
@@ -404,8 +409,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor3, floorModel, grassModel, -.05f);
             castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling3, ceilingModel, null, 1.05f);
 
-            for (int x = 0; x < DUNGEON_DIM; x++) {
-                for (int y = 0; y < DUNGEON_DIM; y++) {
+            for (int x = 0; x < this.dim; x++) {
+                for (int y = 0; y < this.dim; y++) {
                     addCastleCell(this.wiz4CastleLevel0ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, .5f);
                     addCastleCell(this.wiz4CastleLevel0ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, 1.7f);
                     addCastleCell(this.wiz4CastleLevel0ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, 2.85f);
@@ -425,8 +430,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             this.wiz4CastleLevel12ModelInstances.add(sk);
             this.wiz4CastleLevel13ModelInstances.add(sk);
 
-            for (int x = -DUNGEON_DIM * 2; x < DUNGEON_DIM * 2; x++) {
-                for (int y = -DUNGEON_DIM * 2; y < DUNGEON_DIM * 2; y++) {
+            for (int x = -this.dim * 2; x < this.dim * 2; x++) {
+                for (int y = -this.dim * 2; y < this.dim * 2; y++) {
                     wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -.06f, y));
                     wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -1.16f, y));
                     wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -2.26f, y));
@@ -436,20 +441,20 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         for (int level = 0; level < this.map.scenario().levels().length; level++) {
-            for (int e = 0; e < DUNGEON_DIM; e++) {
-                for (int n = 0; n < DUNGEON_DIM; n++) {
+            for (int e = 0; e < this.dim; e++) {
+                for (int n = 0; n < this.dim; n++) {
                     MazeCell cell = this.map.scenario().levels()[level].cells[n][e];
                     addBlock(level, cell, n, e);
                     if (this.map != Map.WIZARDRY4 || (level == 4 || level == 6 || level == 8)) {
                         //duplicated for wrapping
-                        addBlock(level, cell, n + DUNGEON_DIM, e);
-                        addBlock(level, cell, n - DUNGEON_DIM, e);
-                        addBlock(level, cell, n, e + DUNGEON_DIM);
-                        addBlock(level, cell, n, e - DUNGEON_DIM);
-                        addBlock(level, cell, n + DUNGEON_DIM, e + DUNGEON_DIM);
-                        addBlock(level, cell, n - DUNGEON_DIM, e - DUNGEON_DIM);
-                        addBlock(level, cell, n + DUNGEON_DIM, e - DUNGEON_DIM);
-                        addBlock(level, cell, n - DUNGEON_DIM, e + DUNGEON_DIM);
+                        addBlock(level, cell, n + this.dim, e);
+                        addBlock(level, cell, n - this.dim, e);
+                        addBlock(level, cell, n, e + this.dim);
+                        addBlock(level, cell, n, e - this.dim);
+                        addBlock(level, cell, n + this.dim, e + this.dim);
+                        addBlock(level, cell, n - this.dim, e - this.dim);
+                        addBlock(level, cell, n + this.dim, e - this.dim);
+                        addBlock(level, cell, n - this.dim, e + this.dim);
                     }
                 }
             }
@@ -588,14 +593,14 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void castleFloorAndCeiling(List<DungeonTileModelInstance> list, TiledMapTileLayer layer, Model flm, Model grm, float z) {
-        for (int x = 0; x < DUNGEON_DIM; x++) {
-            for (int y = 0; y < DUNGEON_DIM; y++) {
-                TiledMapTileLayer.Cell c = layer.getCell(x, DUNGEON_DIM - 1 - y);
+        for (int x = 0; x < this.dim; x++) {
+            for (int y = 0; y < this.dim; y++) {
+                TiledMapTileLayer.Cell c = layer.getCell(x, this.dim - 1 - y);
                 if (c != null) {
                     if (c.getTile().getId() == 993) {
-                        list.add(new DungeonTileModelInstance(grm, 0, 0, 0, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
+                        list.add(new DungeonTileModelInstance(grm, 0, 0, 0, this.dim - 1 - y + .5f, z, x + .5f));
                     } else {
-                        list.add(new DungeonTileModelInstance(flm, 0, 0, 0, DUNGEON_DIM - 1 - y + .5f, z, x + .5f));
+                        list.add(new DungeonTileModelInstance(flm, 0, 0, 0, this.dim - 1 - y + .5f, z, x + .5f));
                     }
                 }
             }
@@ -767,13 +772,13 @@ public class WizardryDungeonScreen extends BaseScreen {
             miniMap.dispose();
         }
 
-        int yup = MM_BKGRND_DIM - 4;
+        int yup = miniMapBackgroundDimension - 4;
         int wt = 3;
 
-        Pixmap pixmap = new Pixmap(MM_BKGRND_DIM, MM_BKGRND_DIM, Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(miniMapBackgroundDimension, miniMapBackgroundDimension, Format.RGBA8888);
 
-        for (int e = 0; e < DUNGEON_DIM; e++) {
-            for (int n = 0; n < DUNGEON_DIM; n++) {
+        for (int e = 0; e < this.dim; e++) {
+            for (int n = 0; n < this.dim; n++) {
                 MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[n][e];
 
                 int x = 4 + e * MINI_DIM;
@@ -963,7 +968,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void drawLadderTriangle(MazeCell cell, Pixmap pixmap, int e, int n) {
-        int yup = MM_BKGRND_DIM - 4;
+        int yup = miniMapBackgroundDimension - 4;
         int cx = 4 + e * MINI_DIM + 4;
         int cy = yup - n * MINI_DIM - MINI_DIM + 4;
         pixmap.setColor(Color.YELLOW);
@@ -1036,15 +1041,15 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (!showMiniMap) {
                 return;
             }
-            batch.draw(MINI_MAP_BACKGROUND, XALIGNMM - 3, YALIGNMM - 3);
-            batch.draw(miniMap, XALIGNMM, YALIGNMM);
+            batch.draw(MINI_MAP_BACKGROUND, xalignMM - 3, yalignMM - 3);
+            batch.draw(miniMap, xalignMM, yalignMM);
         }
 
     }
 
     private void moveMiniMapIcon() {
-        miniMapIcon.setX(XALIGNMM + (Math.round(currentPos.z) - 1) * MINI_DIM + 8);
-        miniMapIcon.setY(YALIGNMM + (Math.round(currentPos.x)) * MINI_DIM - 16);
+        miniMapIcon.setX(xalignMM + (Math.round(currentPos.z) - 1) * MINI_DIM + 8);
+        miniMapIcon.setY(yalignMM + (Math.round(currentPos.x)) * MINI_DIM - 16);
     }
 
     @Override
@@ -1140,26 +1145,26 @@ public class WizardryDungeonScreen extends BaseScreen {
             //forward
             if (currentDir == EAST) {
                 y = y + 1;
-                if (y > DUNGEON_DIM - 1) {
+                if (y > this.dim - 1) {
                     y = 0;
                     skipProgression = true;
                 }
             } else if (currentDir == WEST) {
                 y = y - 1;
                 if (y < 0) {
-                    y = DUNGEON_DIM - 1;
+                    y = this.dim - 1;
                     skipProgression = true;
                 }
             } else if (currentDir == NORTH) {
                 x = x + 1;
-                if (x > DUNGEON_DIM - 1) {
+                if (x > this.dim - 1) {
                     x = 0;
                     skipProgression = true;
                 }
             } else if (currentDir == SOUTH) {
                 x = x - 1;
                 if (x < 0) {
-                    x = DUNGEON_DIM - 1;
+                    x = this.dim - 1;
                     skipProgression = true;
                 }
             }
@@ -1179,24 +1184,24 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (currentDir == EAST) {
                 y = y - 1;
                 if (y < 0) {
-                    y = DUNGEON_DIM - 1;
+                    y = this.dim - 1;
                     skipProgression = true;
                 }
             } else if (currentDir == WEST) {
                 y = y + 1;
-                if (y > DUNGEON_DIM - 1) {
+                if (y > this.dim - 1) {
                     y = 0;
                     skipProgression = true;
                 }
             } else if (currentDir == NORTH) {
                 x = x - 1;
                 if (x < 0) {
-                    x = DUNGEON_DIM - 1;
+                    x = this.dim - 1;
                     skipProgression = true;
                 }
             } else if (currentDir == SOUTH) {
                 x = x + 1;
-                if (x > DUNGEON_DIM - 1) {
+                if (x > this.dim - 1) {
                     x = 0;
                     skipProgression = true;
                 }
@@ -1637,23 +1642,23 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void teleport(int level, int x, int y) {
-        if (x >= DUNGEON_DIM) {
-            x = DUNGEON_DIM - x;
+        if (x >= this.dim) {
+            x = this.dim - x;
         }
         if (x < 0) {
-            x = DUNGEON_DIM + x;
+            x = this.dim + x;
         }
-        if (y >= DUNGEON_DIM) {
-            y = DUNGEON_DIM - y;
+        if (y >= this.dim) {
+            y = this.dim - y;
         }
         if (y < 0) {
-            y = DUNGEON_DIM + y;
+            y = this.dim + y;
         }
-        if (x >= DUNGEON_DIM) {
-            x = DUNGEON_DIM - 1;
+        if (x >= this.dim) {
+            x = this.dim - 1;
         }
-        if (y >= DUNGEON_DIM) {
-            y = DUNGEON_DIM - 1;
+        if (y >= this.dim) {
+            y = this.dim - 1;
         }
         if (level < 0) {
             level = 0;

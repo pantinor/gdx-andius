@@ -1,6 +1,5 @@
 
 import andius.WizardryData;
-import static andius.WizardryData.DUNGEON_DIM;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -79,13 +78,16 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         environment = new Environment();
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
 
-        PointLight light1 = new PointLight().set(flame, 2.5f, .5f, 2.5f, 1f);
-        environment.add(light1);
-
-        PointLight light2 = new PointLight().set(flame, 16.5f, .5f, 16.5f, .5f);
-        environment.add(light2);
-
-        PointLight light3 = new PointLight().set(flame, 8.5f, .5f, 8.5f, .5f);
+//        PointLight light1 = new PointLight().set(flame, 2.5f, .5f, 2.5f, 1f);
+//        environment.add(light1);
+//
+//        PointLight light2 = new PointLight().set(flame, 16.5f, .5f, 16.5f, .5f);
+//        environment.add(light2);
+//
+//        PointLight light3 = new PointLight().set(flame, 8.5f, .5f, 8.5f, .5f);
+//        environment.add(light3);
+        
+        PointLight light3 = new PointLight().set(flame, 8.5f, 5f, 8.5f, 100f);
         environment.add(light3);
 
         modelBatch = new ModelBatch();
@@ -127,17 +129,17 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         builder.node("door-main", doorModel);
         doorModel = builder.end();
 
-        WizardryData.Scenario sc = WizardryData.Scenario.WER;
+        WizardryData.Scenario sc = WizardryData.Scenario.EXODUS_DARDIN;
 
-        for (int e = -1; e < DUNGEON_DIM + 1; e++) {
-            for (int n = -1; n < DUNGEON_DIM + 1; n++) {
+        for (int e = -1; e < sc.dim() + 1; e++) {
+            for (int n = -1; n < sc.dim() + 1; n++) {
                 modelInstances.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, e + .5f, -.5f, n + .5f));
             }
         }
 
-        for (int e = 0; e < DUNGEON_DIM; e++) {
-            for (int n = 0; n < DUNGEON_DIM; n++) {
-                WizardryData.MazeCell cell = sc.levels()[8].cells[n][e];
+        for (int e = 0; e < sc.dim(); e++) {
+            for (int n = 0; n < sc.dim(); n++) {
+                WizardryData.MazeCell cell = sc.levels()[3].cells[n][e];
                 addBlock(0, cell, n, e);
             }
         }
