@@ -2544,5 +2544,106 @@
         "regeneration": 0,
         "range": 0,
         "autokill": false
+    },
+    {
+        "id": 104,
+        "name": "MARK OF SNAKE",
+        "type": "SPECIAL",
+        "alignment": "UNALIGN",
+        "cursed": false,
+        "special": 0,
+        "changeTo": 0,
+        "changeChance": 0,
+        "armourClass": 0,
+        "wephitmd": 0,
+        "genericName": "A MARK",
+        "cost": 0,
+        "damage": {
+            "qty": 0,
+            "sides": 0,
+            "bonus": 0
+        },
+        "extraSwings": 0,
+        "stock": 0,
+        "usable": "",
+        "regeneration": 0,
+        "range": 0,
+        "autokill": false
+    },
+    {
+        "id": 102,
+        "name": "MARK OF FIRE",
+        "type": "SPECIAL",
+        "alignment": "UNALIGN",
+        "cursed": false,
+        "special": 0,
+        "changeTo": 0,
+        "changeChance": 0,
+        "armourClass": 0,
+        "wephitmd": 0,
+        "genericName": "A MARK",
+        "cost": 0,
+        "damage": {
+            "qty": 0,
+            "sides": 0,
+            "bonus": 0
+        },
+        "extraSwings": 0,
+        "stock": 0,
+        "usable": "",
+        "regeneration": 0,
+        "range": 0,
+        "autokill": false
+    },
+    {
+        "id": 101,
+        "name": "MARK OF KINGS",
+        "type": "SPECIAL",
+        "alignment": "UNALIGN",
+        "cursed": false,
+        "special": 0,
+        "changeTo": 0,
+        "changeChance": 0,
+        "armourClass": 0,
+        "wephitmd": 0,
+        "genericName": "A MARK",
+        "cost": 0,
+        "damage": {
+            "qty": 0,
+            "sides": 0,
+            "bonus": 0
+        },
+        "extraSwings": 0,
+        "stock": 0,
+        "usable": "",
+        "regeneration": 0,
+        "range": 0,
+        "autokill": false
+    },
+    {
+        "id": 103,
+        "name": "MARK OF FORCE",
+        "type": "SPECIAL",
+        "alignment": "UNALIGN",
+        "cursed": false,
+        "special": 0,
+        "changeTo": 0,
+        "changeChance": 0,
+        "armourClass": 0,
+        "wephitmd": 0,
+        "genericName": "A MARK",
+        "cost": 0,
+        "damage": {
+            "qty": 0,
+            "sides": 0,
+            "bonus": 0
+        },
+        "extraSwings": 0,
+        "stock": 0,
+        "usable": "",
+        "regeneration": 0,
+        "range": 0,
+        "autokill": false
     }
+    
 ]

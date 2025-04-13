@@ -78,6 +78,15 @@ public class Context {
         }
     }
 
+    public boolean partyHasItem(Item item) {
+        for (CharacterRecord rec : this.saveGame.players) {
+            if (rec.itemOwned(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Item partyHasItem(int id, int scenarioID) {
         for (CharacterRecord rec : this.saveGame.players) {
             Item it = rec.itemOwned(id, scenarioID);

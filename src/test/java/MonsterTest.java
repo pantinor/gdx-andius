@@ -303,9 +303,9 @@ public class MonsterTest {
         }
     }
 
-    //@Test
+    @Test
     public void testGenerateSaveGameTeamAtLevel() throws Exception {
-        int lvl = 2;
+        int lvl = 3;
         Context ctx = new Context();
         ctx.setSaveGame(new SaveGame());
         ctx.saveGame.players = new CharacterRecord[6];
@@ -345,6 +345,7 @@ public class MonsterTest {
         p.level = 1;
         p.hp = 12;
         p.gold = 3000;
+        p.portaitIndex = Utils.RANDOM.nextInt(36);
 
         int tmp = 0;
         if (lvl <= 12) {

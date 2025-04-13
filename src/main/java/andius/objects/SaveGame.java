@@ -49,7 +49,7 @@ public class SaveGame implements Constants {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
-        
+
         return sg;
     }
 
@@ -161,6 +161,36 @@ public class SaveGame implements Constants {
             if (this.healthCursor != null) {
                 this.healthCursor.adjust(this.hp, this.maxhp);
             }
+        }
+
+        public boolean itemOwned(Item item) {
+            for (Item i : inventory) {
+                if (i.equals(item)) {
+                    return true;
+                }
+            }
+            if (armor != null && armor.equals(item)) {
+                return true;
+            }
+            if (weapon != null && weapon.equals(item)) {
+                return true;
+            }
+            if (helm != null && helm.equals(item)) {
+                return true;
+            }
+            if (shield != null && shield.equals(item)) {
+                return true;
+            }
+            if (glove != null && glove.equals(item)) {
+                return true;
+            }
+            if (item1 != null && item1.equals(item)) {
+                return true;
+            }
+            if (item2 != null && item2.equals(item)) {
+                return true;
+            }
+            return false;
         }
 
         public Item itemOwned(int id, int scenarioID) {

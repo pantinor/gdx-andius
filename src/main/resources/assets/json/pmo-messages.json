@@ -357,5 +357,29 @@
         "text": [
             "You found an item in the treasure chest!"
         ]
+    },
+    {
+        "id": 201,
+        "text": [
+            "You found a Yellow Mark which brings great favor with kings and will raise your Experiential Prowess."
+        ]
+    },
+    {
+        "id": 202,
+        "text": [
+            "You found a Red Mark warm to the touch.  It will grant the ability to pass unharmed through Lava."
+        ]
+    },
+    {
+        "id": 203,
+        "text": [
+            "You found a Blue Mark cold to the touch.  It will grant the ability to pass unharmed through Force Fields."
+        ]
+    },
+    {
+        "id": 204,
+        "text": [
+            "You found a Green Mark cold to the touch.  It will be necessary to have this mark to pass the Great Earth Serpent."
+        ]
     }
 ]

@@ -76,7 +76,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private Model ladderModel, elevatorModel;
     private Model doorModel, pentagram;
-    private Model wall, manhole, letterM;
+    private Model wall, manhole, letterM, fountainModel, orbModel, chestModel;
 
     private final Environment environment = new Environment();
     private final Environment outside = new Environment();
@@ -340,6 +340,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
         letterM.nodes.get(0).translation.set(0, 0, 0);
         letterM.nodes.get(0).parts.first().material = gr;
+        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
+        fountainModel.nodes.get(0).scale.set(.010f, .010f, .010f);
+        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.YELLOW, 1));
+        orbModel.nodes.get(0).scale.set(.0025f, .0025f, .0025f);
+        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
+        chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
         manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
         wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
         Model doorWall = builder.createBox(1.090f, 1, 0.05f, mortarRotated, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
@@ -562,9 +568,17 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (cell.summoningCircle != null) {
             modelInstances.add(new DungeonTileModelInstance(pentagram, level, x, y, x + .5f, 0, y + .5f));
         }
-        if (cell.message != null || cell.function != null) {
+        if (cell.chestType >= 0) {
+            modelInstances.add(new DungeonTileModelInstance(chestModel, level, x, y, x + .5f, 0, y + .5f));
+        }
+        if (cell.markType >= 0) {
+            modelInstances.add(new DungeonTileModelInstance(orbModel, level, x, y, x + .5f, .5f, y + .5f));
+        } else if (cell.fountainType >= 0) {
+            modelInstances.add(new DungeonTileModelInstance(fountainModel, level, x, y, x + .5f, 0, y + .5f));
+        } else if (cell.message != null || cell.function != null) {
             modelInstances.add(new DungeonTileModelInstance(letterM, level, x, y, x + .5f, .5f, y + .5f, true));
         }
+
     }
 
     private void rotateBlock(int level, MazeCell cell, float x, float y) {
@@ -734,10 +748,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         int y = (Math.round(currentPos.z) - 1);
         if (this.map.scenario().getLevelDescriptions() != null) {
             String lbl = String.format(this.map.scenario().getLevelDescriptions()[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font16.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
+            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
         } else {
             String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font16.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
+            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
         }
 
         batch.end();
@@ -807,19 +821,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                     pixmap.fillRectangle(x, yup - y, MINI_DIM, MINI_DIM);
                 }
 
-                if (cell.message != null || cell.function != null) {
-                    pixmap.drawPixmap(
-                            this.miniMapIconsPixmap,
-                            x + 4,
-                            yup - y + 4,
-                            arrows[0][0].getRegionX(),
-                            arrows[0][0].getRegionY(),
-                            arrows[0][0].getRegionWidth(),
-                            arrows[0][0].getRegionHeight()
-                    );
-                }
-
-                if (cell.tbd) {
+                if (cell.chestType >= 0) {
                     pixmap.drawPixmap(
                             this.miniMapIconsPixmap,
                             x + 4,
@@ -828,6 +830,24 @@ public class WizardryDungeonScreen extends BaseScreen {
                             arrows[3][3].getRegionY(),
                             arrows[3][3].getRegionWidth(),
                             arrows[3][3].getRegionHeight()
+                    );
+                }
+
+                if (cell.fountainType >= 0) {
+                    pixmap.setColor(Color.SKY);
+                    pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 5);
+                } else if (cell.markType >= 0) {
+                    pixmap.setColor(Color.YELLOW);
+                    pixmap.fillCircle(x + MINI_DIM / 2, yup - y + MINI_DIM / 2, 5);
+                } else if (cell.message != null || cell.function != null) {
+                    pixmap.drawPixmap(
+                            this.miniMapIconsPixmap,
+                            x + 4,
+                            yup - y + 4,
+                            arrows[0][0].getRegionX(),
+                            arrows[0][0].getRegionY(),
+                            arrows[0][0].getRegionWidth(),
+                            arrows[0][0].getRegionHeight()
                     );
                 }
 
@@ -1214,7 +1234,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             return false;
         } else if (keycode == Keys.NUM_1 || keycode == Keys.PAGE_DOWN) {
             if (cell.elevator) {//up
-                if (currentLevel + 1 - 1 >= cell.elevatorFrom && currentLevel + 1 - 1 <= cell.elevatorTo) {
+                if (currentLevel == 0) {
+                    Andius.mainGame.setScreen(Map.WORLD.getScreen());
+                } else if (currentLevel + 1 - 1 >= cell.elevatorFrom && currentLevel + 1 - 1 <= cell.elevatorTo) {
                     currentLevel--;
                     createMiniMap();
                 }
@@ -1412,6 +1434,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         if (destinationCell.function != null) {
             destinationCell.function.getDialog(CTX, this).show(this.stage);
+        }
+
+        if (destinationCell.chestType > 0) {
+            mainGame.setScreen(new RewardScreen(Andius.CTX, this.map, Utils.RANDOM.nextInt(10, 20)));
+            destinationCell.chestType = -1;
+            addBlock(destinationCell.address.level - 1, destinationCell, destinationCell.address.row, destinationCell.address.column, true);
         }
 
         if (destinationCell.rotateDirection != -1) {

@@ -52,6 +52,7 @@ public class RewardScreen implements Screen, Constants {
     protected Random rand = new Random();
     private final java.util.List<CharacterRecord> whoTried = new java.util.ArrayList<>();
     private boolean chestOpened = false;
+    private boolean chestDisarmed = false;
 
     private static final int LOG_AREA_WIDTH = 650;
     private static final int X_ALIGN = 280;
@@ -161,7 +162,9 @@ public class RewardScreen implements Screen, Constants {
             return;
         }
 
-        releaseTrapAffect(player);
+        if (!this.chestDisarmed) {
+            releaseTrapAffect(player);
+        }
 
         java.util.List<CharacterRecord> lastMenStanding = new ArrayList<>();
         for (CharacterRecord c : this.context.players()) {
@@ -312,6 +315,7 @@ public class RewardScreen implements Screen, Constants {
         }
         log("Calfo disarmed " + this.trap);
         this.trap = TrapType.NONE;
+        this.chestDisarmed = true;
         Sounds.play(Sound.TRIGGER);
         player.clericPoints[Spells.CALFO.getLevel() - 1] -= 1;
     }
@@ -325,13 +329,16 @@ public class RewardScreen implements Screen, Constants {
         int chance = (player.classType == ClassType.THIEF || player.classType == ClassType.NINJA ? 75 : 10);
         if (attemptingTrap == this.trap) {
             if (rand.nextInt(101) <= chance) {
-                log("You disarmed it!");
+                log(player.name.toUpperCase() + " disarmed " + this.trap + "!");
+                this.chestDisarmed = true;
+                this.trap = TrapType.NONE;
                 Sounds.play(Sound.TRIGGER);
             } else if (rand.nextInt(101) > player.agility * 5) {
-                log("Disarm failed!");
+                log(player.name.toUpperCase() + " failed to disarm " + this.trap + "!");
                 releaseTrapAffect(player);
             }
         } else {
+            log(player.name.toUpperCase() + " disarmed " + attemptingTrap + " but released " + this.trap + " instead!");
             releaseTrapAffect(player);
         }
     }
@@ -359,7 +366,8 @@ public class RewardScreen implements Screen, Constants {
         int x1 = X_ALIGN;
         int y = 245;
         Andius.font16.draw(batch, "Name", x1, y);
-        Andius.font16.draw(batch, "Class", x1 += 150, y);
+        Andius.font16.draw(batch, "Class", x1 += 80, y);
+        Andius.font16.draw(batch, "Disarm Chance", x1 += 120, y);
         Andius.font16.draw(batch, "Status", x1 += 200, y);
         Andius.font16.draw(batch, "Hit Points", x1 += 120, y);
         y -= 25;
@@ -370,8 +378,8 @@ public class RewardScreen implements Screen, Constants {
                 Andius.font16.setColor(Color.SALMON);
             }
             Andius.font16.draw(batch, c.name.toUpperCase(), x1, y);
-            String d = String.format("LVL %d  %s  %s", c.level, c.race.toString(), c.classType.toString());
-            Andius.font16.draw(batch, d, x1 += 150, y);
+            Andius.font16.draw(batch, String.format("%s", c.classType.toString()), x1 += 80, y);
+            Andius.font16.draw(batch, String.format("%d%%", (c.classType == ClassType.THIEF || c.classType == ClassType.NINJA ? 75 : 10)), x1 += 120, y);
             Andius.font16.draw(batch, "" + (c.isDead() ? "DEAD" : c.status), x1 += 200, y);
             Andius.font16.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
             y -= 25;

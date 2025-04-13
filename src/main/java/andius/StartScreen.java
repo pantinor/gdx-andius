@@ -3,6 +3,8 @@ package andius;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import static andius.Andius.CTX;
+import static andius.Andius.SCREEN_HEIGHT;
+import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
@@ -10,29 +12,41 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import java.io.File;
+import utils.AutoFocusScrollPane;
+import utils.FrameMaker;
 
 public class StartScreen implements Screen, Constants {
 
-    float time = 0;
-    Batch batch;
-    TextButton manual;
-    TextButton manage;
-    TextButton journey;
-    BitmapFont titleFont;
-    Stage stage;
+    private final Batch batch;
+    private final TextButton manage;
+    private final TextButton journey;
+    private final BitmapFont titleFont;
+    private final Stage stage;
+    private final Texture background;
 
     public StartScreen() {
 
         titleFont = new BitmapFont(Gdx.files.classpath("assets/fonts/exodus.fnt"));
 
         batch = new SpriteBatch();
+
+        List saveGameSelection = new List<>(Andius.skin, "default-16");
+        Object[] jsonFiles = new File(".").list((File dir, String name) -> name.startsWith("party") && name.endsWith(".json"));
+        saveGameSelection.setItems(jsonFiles);
+        AutoFocusScrollPane savedGamePane = new AutoFocusScrollPane(saveGameSelection, Andius.skin);
+
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+        fm.setBounds(savedGamePane, 360, 185, 220, 100);
 
         manage = new TextButton("Manage", Andius.skin, "default-24");
         manage.addListener(new ChangeListener() {
@@ -64,7 +78,9 @@ public class StartScreen implements Screen, Constants {
                 try {
 
                     CTX = new Context();
-                    SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
+                    
+                    String fname = (String) saveGameSelection.getSelected();
+                    SaveGame saveGame = SaveGame.read(fname);
                     CTX.setSaveGame(saveGame);
 
                     if (CTX.pickRandomEnabledPlayer() == null) {
@@ -95,19 +111,12 @@ public class StartScreen implements Screen, Constants {
         });
         journey.setBounds(360, Andius.SCREEN_HEIGHT - 450, 220, 40);
 
-//        manual = new TextButton("Notes", Andius.skin, "default-24");
-//        manual.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-//                Sounds.play(Sound.TRIGGER);
-//                Andius.mainGame.setScreen(new BookScreen(StartScreen.this, Andius.skin));
-//            }
-//        });
-//        manual.setBounds(360, Andius.SCREEN_HEIGHT - 500, 220, 40);
         stage = new Stage();
-        //stage.addActor(manual);
         stage.addActor(manage);
         stage.addActor(journey);
+        stage.addActor(savedGamePane);
+
+        this.background = fm.build();
 
     }
 
@@ -122,22 +131,18 @@ public class StartScreen implements Screen, Constants {
 
     @Override
     public void render(float delta) {
-        time += Gdx.graphics.getDeltaTime();
 
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(this.background, 0, 0);
         titleFont.draw(batch, "ANDIUS", 320, Andius.SCREEN_HEIGHT - 140);
         Andius.font72.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
         batch.end();
 
         stage.act();
         stage.draw();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            this.manual.toggle();
-        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             this.manage.toggle();
