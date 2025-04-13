@@ -745,6 +745,7 @@ public class WizardryData {
                         case ENCOUNTER:
                             cell.encounterID = ci.val[2];
                             cell.hasTreasureChest = true;
+                            break;
                         case MARK:
                             cell.function = (Context ctx, BaseScreen screen) -> new MarkDialog(ctx, screen, ci.val[0], getMessage(messages, ci.val[1]), ci.val[2]);
                             cell.markType = ci.val[2];

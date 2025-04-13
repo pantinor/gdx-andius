@@ -84,7 +84,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final Color flame = new Color(0xf59414ff);
 
     private PointLight torch;
-    boolean isTorchOn = false;
+    boolean isTorchOn = true;
     private DirectionalLight directionalLightDown;
     private DirectionalLight directionalLightUp;
 
@@ -103,7 +103,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private Direction currentDir = NORTH;
     private boolean loadedMazeData;
 
-    private boolean showMiniMap = true;
+    private boolean showMiniMap = false;
     private Texture miniMap;
     private final MiniMapIcon miniMapIcon;
     private final Pixmap miniMapIconsPixmap;
