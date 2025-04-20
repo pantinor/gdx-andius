@@ -7,11 +7,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Hud {
 
     private final LogScrollPane logs;
     static final int LOG_AREA_WIDTH = 270;
+    private final List<Integer> magicPoints = new ArrayList<>();
 
     public Hud() {
         logs = new LogScrollPane(Andius.skin, new Table(), LOG_AREA_WIDTH);
@@ -58,9 +62,18 @@ public class Hud {
 
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            d = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
-                    ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-            Andius.font12.draw(batch, d, 790, y - 36);
+            magicPoints.clear();
+            Arrays.stream(ms).forEach(magicPoints::add);
+            Arrays.stream(cs).forEach(magicPoints::add);
+            int sum = magicPoints.stream().mapToInt(Integer::intValue).sum();
+            if (sum > 0) {
+                d = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
+                        ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
+                Color tmp = Andius.font12.getColor();
+                Andius.font12.setColor(Color.SKY);
+                Andius.font12.draw(batch, d, 790, y - 36);
+                Andius.font12.setColor(tmp);
+            }
 
             y -= 60;
             py -= 60;

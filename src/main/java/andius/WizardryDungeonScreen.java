@@ -1747,7 +1747,10 @@ public class WizardryDungeonScreen extends BaseScreen {
             this.map.scenario().levels()[currentLevel].cells[x][y].wanderingEncounterID = -1;
 
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID >= 0) {
-                this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+                this.map.scenario().levels()[currentLevel].cells[x][y].encounterOccurences -= 1;
+                if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterOccurences == 0) {
+                    this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
+                }
                 if (this.map == Map.WIZARDRY4) {
                     if (currentLevel == 6 && x == 2 && y == 13) {
                         teleport(new MazeAddress(7, 4, 17), true);

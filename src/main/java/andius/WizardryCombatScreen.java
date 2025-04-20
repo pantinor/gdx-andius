@@ -247,7 +247,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                         for (CharacterRecord p : lastMenStanding) {
                             if (!p.isDead()) {
                                 p.awardXP(exp / lastMenStanding.size());
-                                log(String.format("%s gained %d experience points.", p.name.toUpperCase(), exp / lastMenStanding.size()));
+                                WizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s gained %d experience points.", p.name.toUpperCase(), exp / lastMenStanding.size()));
                             }
                         }
 

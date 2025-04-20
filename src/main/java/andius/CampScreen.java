@@ -43,6 +43,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import java.util.ArrayList;
+import java.util.Arrays;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
 import utils.Utils;
@@ -213,7 +215,7 @@ public class CampScreen implements Screen, Constants {
                 }
             }
         });
-        this.drop.setBounds(x, 250, 80, 40);
+        this.drop.setBounds(x, 200, 80, 40);
         x += 84;
         this.use = new TextButton("USE", Andius.skin, "default-16");
         this.use.addListener(new ChangeListener() {
@@ -279,7 +281,7 @@ public class CampScreen implements Screen, Constants {
                 }
             }
         });
-        this.use.setBounds(x, 250, 80, 40);
+        this.use.setBounds(x, 200, 80, 40);
         x = 350;
         this.exit = new TextButton("EXIT", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -288,7 +290,7 @@ public class CampScreen implements Screen, Constants {
                 mainGame.setScreen(map.getScreen());
             }
         });
-        this.exit.setBounds(x, 200, 80, 40);
+        this.exit.setBounds(x, 150, 80, 40);
         x += 84;
         this.trade = new TextButton("TRADE", Andius.skin, "default-16");
         this.trade.addListener(new ChangeListener() {
@@ -300,7 +302,7 @@ public class CampScreen implements Screen, Constants {
                 }
             }
         });
-        this.trade.setBounds(x, 200, 80, 40);
+        this.trade.setBounds(x, 150, 80, 40);
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -341,6 +343,17 @@ public class CampScreen implements Screen, Constants {
         batch.end();
 
         batch.begin();
+
+        if (selectedPlayer != null) {
+            int x = 360;
+            Andius.font14.draw(batch, selectedPlayer.p.weapon != null ? selectedPlayer.p.weapon.name : "-", 285, x);
+            Andius.font14.draw(batch, selectedPlayer.p.armor != null ? selectedPlayer.p.armor.name : "-", 285, x -= 15);
+            Andius.font14.draw(batch, selectedPlayer.p.helm != null ? selectedPlayer.p.helm.name : "-", 285, x -= 15);
+            Andius.font14.draw(batch, selectedPlayer.p.shield != null ? selectedPlayer.p.shield.name : "-", 285, x -= 15);
+            Andius.font14.draw(batch, selectedPlayer.p.glove != null ? selectedPlayer.p.glove.name : "-", 285, x -= 15);
+            Andius.font14.draw(batch, selectedPlayer.p.item1 != null ? selectedPlayer.p.item1.name : "-", 285, x -= 15);
+            Andius.font14.draw(batch, selectedPlayer.p.item2 != null ? selectedPlayer.p.item2.name : "-", 285, x -= 15);
+        }
 
         if (selectedSpell != null) {
             Andius.font14.draw(batch, SPDESCLAYOUT, 650, 130);
@@ -467,6 +480,8 @@ public class CampScreen implements Screen, Constants {
 
         private class PlayerLabel extends Label {
 
+            private final java.util.List<Integer> magicPoints = new ArrayList<>();
+
             public PlayerLabel() {
                 super("", Andius.skin, "default-12");
                 setColor(p.status.color());
@@ -484,9 +499,15 @@ public class CampScreen implements Screen, Constants {
 
                 int[] ms = p.magePoints;
                 int[] cs = p.clericPoints;
-                sb.append(String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
-                        ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
-
+                magicPoints.clear();
+                Arrays.stream(ms).forEach(magicPoints::add);
+                Arrays.stream(cs).forEach(magicPoints::add);
+                int sum = magicPoints.stream().mapToInt(Integer::intValue).sum();
+                if (sum > 0) {
+                    sb.append(String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+                }
+                
                 return sb;
             }
 

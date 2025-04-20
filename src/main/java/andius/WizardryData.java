@@ -744,6 +744,7 @@ public class WizardryData {
                             break;
                         case ENCOUNTER:
                             cell.encounterID = ci.val[2];
+                            cell.encounterOccurences = ci.val[0];
                             cell.hasTreasureChest = true;
                             break;
                         case MARK:
@@ -1362,6 +1363,7 @@ public class WizardryData {
         private boolean tempLair;
 
         public int encounterID = -1;
+        public int encounterOccurences = -1;
         public int encounterTakeItem = -1;
         public int encounterGiveItem = -1;
         public Message encounterTradeSuccessMessage;

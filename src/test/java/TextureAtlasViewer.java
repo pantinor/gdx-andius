@@ -7,20 +7,20 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.TextureAtlasData.Region;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import java.util.HashMap;
 
 public class TextureAtlasViewer extends InputAdapter implements ApplicationListener {
 
@@ -41,6 +41,34 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
 
     }
 
+    private class AnimatedLabelGroup extends Group {
+
+        private Label label;
+        private Animation<TextureRegion> animation;
+        private float stateTime;
+
+        public AnimatedLabelGroup(Label label, Animation<TextureRegion> animation) {
+            this.label = label;
+            this.animation = animation;
+            this.stateTime = 0f;
+
+            addActor(label);
+
+            setBounds(0, 0, 0, 32);
+
+            this.label.setBounds(0, 0, 32, 32);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            super.draw(batch, parentAlpha);
+            stateTime += parentAlpha;
+            TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
+            batch.draw(currentFrame, getX() + 200, getY(), 32, 32);
+        }
+
+    }
+
     @Override
     public void create() {
 
@@ -49,41 +77,35 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
         stage = new Stage();
 
-        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/gifs/bosses.atlas"));
-                
-        List<Label> regionLabels = new List(skin);
-        Array<Label> tmp = new Array<>();
-        for (TextureAtlas.AtlasRegion r : atlas.getRegions()) {
-            if (r.index > 0) {
-                continue;
-            }
-            Label l = new Label(r.name, skin);
-            l.setUserObject(r);
-            tmp.add(l);
-        }
-        regionLabels.setItems(tmp);
+        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/tibian/tileset16.atlas"));
 
-        ScrollPane sp1 = new ScrollPane(regionLabels, skin);
+        Table animTable = new Table(skin);
+        animTable.left().setFillParent(true);
 
-        TextButton makeButton = new TextButton("Make XML", skin, "default");
-        makeButton.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                try {
-
-                } catch (Exception e) {
-
+        java.util.Map<String, Animation> animations = new HashMap<>();
+        Array<String> processedNames = new Array<>();
+        for (TextureAtlas.AtlasRegion region : atlas.getRegions()) {
+            String regionName = region.name;
+            if (!processedNames.contains(regionName, false)) {
+                Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions(regionName);
+                if (frames.size > 0) {
+                    Animation<TextureRegion> animation = new Animation(8.0f, frames, Animation.PlayMode.LOOP);
+                    animations.put(regionName, animation);
+                    processedNames.add(regionName);
                 }
-                return false;
             }
         }
-        );
 
+        for (String r : animations.keySet()) {
+            AnimatedLabelGroup a = new AnimatedLabelGroup(new Label(r, skin, "default-16"), animations.get(r));
+            animTable.add(a);
+            animTable.row();
+        }
+
+        ScrollPane sp1 = new ScrollPane(animTable, skin, "default");
         sp1.setBounds(50, 50, 300, 700);
 
         stage.addActor(sp1);
-
-        stage.addActor(makeButton);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(stage, this));
     }
@@ -96,7 +118,6 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        font.draw(batch, "temp", 600, 10);
         batch.end();
 
         stage.act();

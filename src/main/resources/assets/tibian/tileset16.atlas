@@ -1,0 +1,4206 @@
+
+tileset16.png
+size: 256,608
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+CluckingChicken
+  rotate: false
+  xy: 0, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CluckingChicken
+  rotate: false
+  xy: 16, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CluckingChicken
+  rotate: false
+  xy: 32, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CluckingChicken
+  rotate: false
+  xy: 48, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CoralCrab
+  rotate: false
+  xy: 64, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CoralCrab
+  rotate: false
+  xy: 80, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CoralCrab
+  rotate: false
+  xy: 96, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CoralCrab
+  rotate: false
+  xy: 112, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CroakingToad
+  rotate: false
+  xy: 128, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CroakingToad
+  rotate: false
+  xy: 144, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CroakingToad
+  rotate: false
+  xy: 160, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CroakingToad
+  rotate: false
+  xy: 176, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DaintyPig
+  rotate: false
+  xy: 192, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DaintyPig
+  rotate: false
+  xy: 208, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DaintyPig
+  rotate: false
+  xy: 224, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DaintyPig
+  rotate: false
+  xy: 240, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HonkingGoose
+  rotate: false
+  xy: 0, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HonkingGoose
+  rotate: false
+  xy: 16, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HonkingGoose
+  rotate: false
+  xy: 32, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HonkingGoose
+  rotate: false
+  xy: 48, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LeapingFrog
+  rotate: false
+  xy: 64, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LeapingFrog
+  rotate: false
+  xy: 80, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LeapingFrog
+  rotate: false
+  xy: 96, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LeapingFrog
+  rotate: false
+  xy: 112, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MadBoar
+  rotate: false
+  xy: 128, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MadBoar
+  rotate: false
+  xy: 144, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MadBoar
+  rotate: false
+  xy: 160, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MadBoar
+  rotate: false
+  xy: 176, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MeowingCat
+  rotate: false
+  xy: 192, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MeowingCat
+  rotate: false
+  xy: 208, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MeowingCat
+  rotate: false
+  xy: 224, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MeowingCat
+  rotate: false
+  xy: 240, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PasturingSheep
+  rotate: false
+  xy: 0, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PasturingSheep
+  rotate: false
+  xy: 16, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PasturingSheep
+  rotate: false
+  xy: 32, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PasturingSheep
+  rotate: false
+  xy: 48, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SlowTurtle
+  rotate: false
+  xy: 64, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SlowTurtle
+  rotate: false
+  xy: 80, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SlowTurtle
+  rotate: false
+  xy: 96, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SlowTurtle
+  rotate: false
+  xy: 112, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SnowFox
+  rotate: false
+  xy: 128, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SnowFox
+  rotate: false
+  xy: 144, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SnowFox
+  rotate: false
+  xy: 160, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SnowFox
+  rotate: false
+  xy: 176, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SpikeyPorcupine
+  rotate: false
+  xy: 192, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SpikeyPorcupine
+  rotate: false
+  xy: 208, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SpikeyPorcupine
+  rotate: false
+  xy: 224, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SpikeyPorcupine
+  rotate: false
+  xy: 240, 32
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+StinkySkunk
+  rotate: false
+  xy: 0, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+StinkySkunk
+  rotate: false
+  xy: 16, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+StinkySkunk
+  rotate: false
+  xy: 32, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+StinkySkunk
+  rotate: false
+  xy: 48, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+TimberWolf
+  rotate: false
+  xy: 64, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+TimberWolf
+  rotate: false
+  xy: 80, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+TimberWolf
+  rotate: false
+  xy: 96, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+TimberWolf
+  rotate: false
+  xy: 112, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+TinyChick
+  rotate: false
+  xy: 128, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+TinyChick
+  rotate: false
+  xy: 144, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+TinyChick
+  rotate: false
+  xy: 160, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+TinyChick
+  rotate: false
+  xy: 176, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AntleredRascal
+  rotate: false
+  xy: 192, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AntleredRascal
+  rotate: false
+  xy: 208, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AntleredRascal
+  rotate: false
+  xy: 224, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AntleredRascal
+  rotate: false
+  xy: 240, 48
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ClawedAbomination
+  rotate: false
+  xy: 0, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ClawedAbomination
+  rotate: false
+  xy: 16, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ClawedAbomination
+  rotate: false
+  xy: 32, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ClawedAbomination
+  rotate: false
+  xy: 48, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CrimsonImp
+  rotate: false
+  xy: 64, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CrimsonImp
+  rotate: false
+  xy: 80, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CrimsonImp
+  rotate: false
+  xy: 96, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CrimsonImp
+  rotate: false
+  xy: 112, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DepravedBlackguard
+  rotate: false
+  xy: 128, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DepravedBlackguard
+  rotate: false
+  xy: 144, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DepravedBlackguard
+  rotate: false
+  xy: 160, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DepravedBlackguard
+  rotate: false
+  xy: 176, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FledglingDemon
+  rotate: false
+  xy: 192, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FledglingDemon
+  rotate: false
+  xy: 208, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FledglingDemon
+  rotate: false
+  xy: 224, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FledglingDemon
+  rotate: false
+  xy: 240, 64
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FloatingEye
+  rotate: false
+  xy: 0, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FloatingEye
+  rotate: false
+  xy: 16, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FloatingEye
+  rotate: false
+  xy: 32, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FloatingEye
+  rotate: false
+  xy: 48, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FoulGouger
+  rotate: false
+  xy: 64, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FoulGouger
+  rotate: false
+  xy: 80, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FoulGouger
+  rotate: false
+  xy: 96, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FoulGouger
+  rotate: false
+  xy: 112, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GrinningGremlin
+  rotate: false
+  xy: 128, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GrinningGremlin
+  rotate: false
+  xy: 144, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GrinningGremlin
+  rotate: false
+  xy: 160, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GrinningGremlin
+  rotate: false
+  xy: 176, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+NefariousScamp
+  rotate: false
+  xy: 192, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+NefariousScamp
+  rotate: false
+  xy: 208, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+NefariousScamp
+  rotate: false
+  xy: 224, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+NefariousScamp
+  rotate: false
+  xy: 240, 80
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PitBalor
+  rotate: false
+  xy: 0, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PitBalor
+  rotate: false
+  xy: 16, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PitBalor
+  rotate: false
+  xy: 32, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PitBalor
+  rotate: false
+  xy: 48, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PointedDemonspawn
+  rotate: false
+  xy: 64, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PointedDemonspawn
+  rotate: false
+  xy: 80, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PointedDemonspawn
+  rotate: false
+  xy: 96, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PointedDemonspawn
+  rotate: false
+  xy: 112, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+RascallyDemonling
+  rotate: false
+  xy: 128, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+RascallyDemonling
+  rotate: false
+  xy: 144, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+RascallyDemonling
+  rotate: false
+  xy: 160, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+RascallyDemonling
+  rotate: false
+  xy: 176, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SkeweringStalker
+  rotate: false
+  xy: 192, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SkeweringStalker
+  rotate: false
+  xy: 208, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SkeweringStalker
+  rotate: false
+  xy: 224, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SkeweringStalker
+  rotate: false
+  xy: 240, 96
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+TaintedScoundrel
+  rotate: false
+  xy: 0, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+TaintedScoundrel
+  rotate: false
+  xy: 16, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+TaintedScoundrel
+  rotate: false
+  xy: 32, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+TaintedScoundrel
+  rotate: false
+  xy: 48, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+WarpSkull
+  rotate: false
+  xy: 64, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+WarpSkull
+  rotate: false
+  xy: 80, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+WarpSkull
+  rotate: false
+  xy: 96, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+WarpSkull
+  rotate: false
+  xy: 112, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AdultGreenDragon
+  rotate: false
+  xy: 128, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AdultGreenDragon
+  rotate: false
+  xy: 144, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AdultGreenDragon
+  rotate: false
+  xy: 160, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AdultGreenDragon
+  rotate: false
+  xy: 176, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AdultWhiteDragon
+  rotate: false
+  xy: 192, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AdultWhiteDragon
+  rotate: false
+  xy: 208, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AdultWhiteDragon
+  rotate: false
+  xy: 224, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AdultWhiteDragon
+  rotate: false
+  xy: 240, 112
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AquaDrake
+  rotate: false
+  xy: 0, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AquaDrake
+  rotate: false
+  xy: 16, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AquaDrake
+  rotate: false
+  xy: 32, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AquaDrake
+  rotate: false
+  xy: 48, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BabyBrassDragon
+  rotate: false
+  xy: 64, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BabyBrassDragon
+  rotate: false
+  xy: 80, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BabyBrassDragon
+  rotate: false
+  xy: 96, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BabyBrassDragon
+  rotate: false
+  xy: 112, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BabyCopperDragon
+  rotate: false
+  xy: 128, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BabyCopperDragon
+  rotate: false
+  xy: 144, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BabyCopperDragon
+  rotate: false
+  xy: 160, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BabyCopperDragon
+  rotate: false
+  xy: 176, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BabyGreenDragon
+  rotate: false
+  xy: 192, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BabyGreenDragon
+  rotate: false
+  xy: 208, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BabyGreenDragon
+  rotate: false
+  xy: 224, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BabyGreenDragon
+  rotate: false
+  xy: 240, 128
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BabyWhiteDragon
+  rotate: false
+  xy: 0, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BabyWhiteDragon
+  rotate: false
+  xy: 16, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BabyWhiteDragon
+  rotate: false
+  xy: 32, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BabyWhiteDragon
+  rotate: false
+  xy: 48, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+JuvenileBronzeDragon
+  rotate: false
+  xy: 64, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+JuvenileBronzeDragon
+  rotate: false
+  xy: 80, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+JuvenileBronzeDragon
+  rotate: false
+  xy: 96, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+JuvenileBronzeDragon
+  rotate: false
+  xy: 112, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MatureBronzeDragon
+  rotate: false
+  xy: 128, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MatureBronzeDragon
+  rotate: false
+  xy: 144, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MatureBronzeDragon
+  rotate: false
+  xy: 160, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MatureBronzeDragon
+  rotate: false
+  xy: 176, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MudWyvern
+  rotate: false
+  xy: 192, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MudWyvern
+  rotate: false
+  xy: 208, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MudWyvern
+  rotate: false
+  xy: 224, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MudWyvern
+  rotate: false
+  xy: 240, 144
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PoisonDrake
+  rotate: false
+  xy: 0, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PoisonDrake
+  rotate: false
+  xy: 16, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PoisonDrake
+  rotate: false
+  xy: 32, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PoisonDrake
+  rotate: false
+  xy: 48, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PygmyWyvern
+  rotate: false
+  xy: 64, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PygmyWyvern
+  rotate: false
+  xy: 80, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PygmyWyvern
+  rotate: false
+  xy: 96, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PygmyWyvern
+  rotate: false
+  xy: 112, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ViridianDrake
+  rotate: false
+  xy: 128, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ViridianDrake
+  rotate: false
+  xy: 144, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ViridianDrake
+  rotate: false
+  xy: 160, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ViridianDrake
+  rotate: false
+  xy: 176, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+YoungBrassDragon
+  rotate: false
+  xy: 192, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+YoungBrassDragon
+  rotate: false
+  xy: 208, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+YoungBrassDragon
+  rotate: false
+  xy: 224, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+YoungBrassDragon
+  rotate: false
+  xy: 240, 160
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+YoungRedDragon
+  rotate: false
+  xy: 0, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+YoungRedDragon
+  rotate: false
+  xy: 16, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+YoungRedDragon
+  rotate: false
+  xy: 32, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+YoungRedDragon
+  rotate: false
+  xy: 48, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BlessedGladiator
+  rotate: false
+  xy: 64, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BlessedGladiator
+  rotate: false
+  xy: 80, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BlessedGladiator
+  rotate: false
+  xy: 96, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BlessedGladiator
+  rotate: false
+  xy: 112, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BoldManAtArms
+  rotate: false
+  xy: 128, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BoldManAtArms
+  rotate: false
+  xy: 144, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BoldManAtArms
+  rotate: false
+  xy: 160, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BoldManAtArms
+  rotate: false
+  xy: 176, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DeterminedSoldier
+  rotate: false
+  xy: 192, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DeterminedSoldier
+  rotate: false
+  xy: 208, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DeterminedSoldier
+  rotate: false
+  xy: 224, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DeterminedSoldier
+  rotate: false
+  xy: 240, 176
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DevoutAcolyte
+  rotate: false
+  xy: 0, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DevoutAcolyte
+  rotate: false
+  xy: 16, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DevoutAcolyte
+  rotate: false
+  xy: 32, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DevoutAcolyte
+  rotate: false
+  xy: 48, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DivinePlanetar
+  rotate: false
+  xy: 64, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DivinePlanetar
+  rotate: false
+  xy: 80, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DivinePlanetar
+  rotate: false
+  xy: 96, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DivinePlanetar
+  rotate: false
+  xy: 112, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FavoredCleric
+  rotate: false
+  xy: 128, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FavoredCleric
+  rotate: false
+  xy: 144, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FavoredCleric
+  rotate: false
+  xy: 160, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FavoredCleric
+  rotate: false
+  xy: 176, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FloatingCherub
+  rotate: false
+  xy: 192, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FloatingCherub
+  rotate: false
+  xy: 208, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FloatingCherub
+  rotate: false
+  xy: 224, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FloatingCherub
+  rotate: false
+  xy: 240, 192
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GentleShepard
+  rotate: false
+  xy: 0, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GentleShepard
+  rotate: false
+  xy: 16, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GentleShepard
+  rotate: false
+  xy: 32, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GentleShepard
+  rotate: false
+  xy: 48, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HolyCrusader
+  rotate: false
+  xy: 64, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HolyCrusader
+  rotate: false
+  xy: 80, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HolyCrusader
+  rotate: false
+  xy: 96, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HolyCrusader
+  rotate: false
+  xy: 112, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+JovialFriar
+  rotate: false
+  xy: 128, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+JovialFriar
+  rotate: false
+  xy: 144, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+JovialFriar
+  rotate: false
+  xy: 160, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+JovialFriar
+  rotate: false
+  xy: 176, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ResoluteAngel
+  rotate: false
+  xy: 192, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ResoluteAngel
+  rotate: false
+  xy: 208, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ResoluteAngel
+  rotate: false
+  xy: 224, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ResoluteAngel
+  rotate: false
+  xy: 240, 208
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+RighteousDeva
+  rotate: false
+  xy: 0, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+RighteousDeva
+  rotate: false
+  xy: 16, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+RighteousDeva
+  rotate: false
+  xy: 32, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+RighteousDeva
+  rotate: false
+  xy: 48, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SwordArchon
+  rotate: false
+  xy: 64, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SwordArchon
+  rotate: false
+  xy: 80, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SwordArchon
+  rotate: false
+  xy: 96, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SwordArchon
+  rotate: false
+  xy: 112, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+VeteranSwordsman
+  rotate: false
+  xy: 128, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+VeteranSwordsman
+  rotate: false
+  xy: 144, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+VeteranSwordsman
+  rotate: false
+  xy: 160, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+VeteranSwordsman
+  rotate: false
+  xy: 176, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ZealousPriest
+  rotate: false
+  xy: 192, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ZealousPriest
+  rotate: false
+  xy: 208, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ZealousPriest
+  rotate: false
+  xy: 224, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ZealousPriest
+  rotate: false
+  xy: 240, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BestialLizardfolkIdleSide
+  rotate: false
+  xy: 0, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BestialLizardfolkIdleSide
+  rotate: false
+  xy: 16, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BestialLizardfolkIdleSide
+  rotate: false
+  xy: 32, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BestialLizardfolkIdleSide
+  rotate: false
+  xy: 48, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GoblinArcher
+  rotate: false
+  xy: 64, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GoblinArcher
+  rotate: false
+  xy: 80, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GoblinArcher
+  rotate: false
+  xy: 96, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GoblinArcher
+  rotate: false
+  xy: 112, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GoblinFanatic
+  rotate: false
+  xy: 128, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GoblinFanatic
+  rotate: false
+  xy: 144, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GoblinFanatic
+  rotate: false
+  xy: 160, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GoblinFanatic
+  rotate: false
+  xy: 176, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GoblinFighter
+  rotate: false
+  xy: 192, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GoblinFighter
+  rotate: false
+  xy: 208, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GoblinFighter
+  rotate: false
+  xy: 224, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GoblinFighter
+  rotate: false
+  xy: 240, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GoblinOccultist
+  rotate: false
+  xy: 0, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GoblinOccultist
+  rotate: false
+  xy: 16, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GoblinOccultist
+  rotate: false
+  xy: 32, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GoblinOccultist
+  rotate: false
+  xy: 48, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GoblinWolfRider
+  rotate: false
+  xy: 64, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GoblinWolfRider
+  rotate: false
+  xy: 80, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GoblinWolfRider
+  rotate: false
+  xy: 96, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GoblinWolfRider
+  rotate: false
+  xy: 112, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HalflingAssassin
+  rotate: false
+  xy: 128, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HalflingAssassin
+  rotate: false
+  xy: 144, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HalflingAssassin
+  rotate: false
+  xy: 160, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HalflingAssassin
+  rotate: false
+  xy: 176, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HalflingBard
+  rotate: false
+  xy: 192, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HalflingBard
+  rotate: false
+  xy: 208, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HalflingBard
+  rotate: false
+  xy: 224, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HalflingBard
+  rotate: false
+  xy: 240, 256
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HalflingRanger
+  rotate: false
+  xy: 0, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HalflingRanger
+  rotate: false
+  xy: 16, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HalflingRanger
+  rotate: false
+  xy: 32, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HalflingRanger
+  rotate: false
+  xy: 48, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HalflingRogue
+  rotate: false
+  xy: 64, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HalflingRogue
+  rotate: false
+  xy: 80, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HalflingRogue
+  rotate: false
+  xy: 96, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HalflingRogue
+  rotate: false
+  xy: 112, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HalflingSlinger
+  rotate: false
+  xy: 128, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HalflingSlinger
+  rotate: false
+  xy: 144, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HalflingSlinger
+  rotate: false
+  xy: 160, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HalflingSlinger
+  rotate: false
+  xy: 176, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LizardfolkArcher
+  rotate: false
+  xy: 192, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LizardfolkArcher
+  rotate: false
+  xy: 208, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LizardfolkArcher
+  rotate: false
+  xy: 224, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LizardfolkArcher
+  rotate: false
+  xy: 240, 272
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LizardfolkGladiator
+  rotate: false
+  xy: 0, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LizardfolkGladiator
+  rotate: false
+  xy: 16, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LizardfolkGladiator
+  rotate: false
+  xy: 32, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LizardfolkGladiator
+  rotate: false
+  xy: 48, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LizardfolkScout
+  rotate: false
+  xy: 64, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LizardfolkScout
+  rotate: false
+  xy: 80, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LizardfolkScout
+  rotate: false
+  xy: 96, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LizardfolkScout
+  rotate: false
+  xy: 112, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LizardfolkSpearman
+  rotate: false
+  xy: 128, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LizardfolkSpearman
+  rotate: false
+  xy: 144, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LizardfolkSpearman
+  rotate: false
+  xy: 160, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LizardfolkSpearman
+  rotate: false
+  xy: 176, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AdventurousAdolescent
+  rotate: false
+  xy: 192, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AdventurousAdolescent
+  rotate: false
+  xy: 208, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AdventurousAdolescent
+  rotate: false
+  xy: 224, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AdventurousAdolescent
+  rotate: false
+  xy: 240, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BoisterousYouth
+  rotate: false
+  xy: 0, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BoisterousYouth
+  rotate: false
+  xy: 16, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BoisterousYouth
+  rotate: false
+  xy: 32, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BoisterousYouth
+  rotate: false
+  xy: 48, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ElfBladedancer
+  rotate: false
+  xy: 64, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ElfBladedancer
+  rotate: false
+  xy: 80, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ElfBladedancer
+  rotate: false
+  xy: 96, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ElfBladedancer
+  rotate: false
+  xy: 112, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ElfEnchanter
+  rotate: false
+  xy: 128, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ElfEnchanter
+  rotate: false
+  xy: 144, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ElfEnchanter
+  rotate: false
+  xy: 160, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ElfEnchanter
+  rotate: false
+  xy: 176, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ElfLord
+  rotate: false
+  xy: 192, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ElfLord
+  rotate: false
+  xy: 208, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ElfLord
+  rotate: false
+  xy: 224, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ElfLord
+  rotate: false
+  xy: 240, 304
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ElfSharpshooter
+  rotate: false
+  xy: 0, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ElfSharpshooter
+  rotate: false
+  xy: 16, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ElfSharpshooter
+  rotate: false
+  xy: 32, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ElfSharpshooter
+  rotate: false
+  xy: 48, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ElfWayfarer
+  rotate: false
+  xy: 64, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ElfWayfarer
+  rotate: false
+  xy: 80, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ElfWayfarer
+  rotate: false
+  xy: 96, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ElfWayfarer
+  rotate: false
+  xy: 112, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+JoyfulKid
+  rotate: false
+  xy: 128, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+JoyfulKid
+  rotate: false
+  xy: 144, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+JoyfulKid
+  rotate: false
+  xy: 160, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+JoyfulKid
+  rotate: false
+  xy: 176, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MerfolkAquamancer
+  rotate: false
+  xy: 192, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MerfolkAquamancer
+  rotate: false
+  xy: 208, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MerfolkAquamancer
+  rotate: false
+  xy: 224, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MerfolkAquamancer
+  rotate: false
+  xy: 240, 320
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MerfolkImpaler
+  rotate: false
+  xy: 0, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MerfolkImpaler
+  rotate: false
+  xy: 16, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MerfolkImpaler
+  rotate: false
+  xy: 32, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MerfolkImpaler
+  rotate: false
+  xy: 48, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MerfolkJavelineer
+  rotate: false
+  xy: 64, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MerfolkJavelineer
+  rotate: false
+  xy: 80, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MerfolkJavelineer
+  rotate: false
+  xy: 96, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MerfolkJavelineer
+  rotate: false
+  xy: 112, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MerfolkMystic
+  rotate: false
+  xy: 128, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MerfolkMystic
+  rotate: false
+  xy: 144, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MerfolkMystic
+  rotate: false
+  xy: 160, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MerfolkMystic
+  rotate: false
+  xy: 176, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MerfolkScout
+  rotate: false
+  xy: 192, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MerfolkScout
+  rotate: false
+  xy: 208, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MerfolkScout
+  rotate: false
+  xy: 224, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MerfolkScout
+  rotate: false
+  xy: 240, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+OverworkedVillager
+  rotate: false
+  xy: 0, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+OverworkedVillager
+  rotate: false
+  xy: 16, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+OverworkedVillager
+  rotate: false
+  xy: 32, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+OverworkedVillager
+  rotate: false
+  xy: 48, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PlayfulChild
+  rotate: false
+  xy: 64, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PlayfulChild
+  rotate: false
+  xy: 80, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PlayfulChild
+  rotate: false
+  xy: 96, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PlayfulChild
+  rotate: false
+  xy: 112, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AdeptNecromancer
+  rotate: false
+  xy: 128, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AdeptNecromancer
+  rotate: false
+  xy: 144, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AdeptNecromancer
+  rotate: false
+  xy: 160, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AdeptNecromancer
+  rotate: false
+  xy: 176, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CorruptedTreant
+  rotate: false
+  xy: 192, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CorruptedTreant
+  rotate: false
+  xy: 208, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CorruptedTreant
+  rotate: false
+  xy: 224, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CorruptedTreant
+  rotate: false
+  xy: 240, 352
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DeftSorceress
+  rotate: false
+  xy: 0, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DeftSorceress
+  rotate: false
+  xy: 16, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DeftSorceress
+  rotate: false
+  xy: 32, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DeftSorceress
+  rotate: false
+  xy: 48, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+EarthElemental
+  rotate: false
+  xy: 64, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+EarthElemental
+  rotate: false
+  xy: 80, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+EarthElemental
+  rotate: false
+  xy: 96, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+EarthElemental
+  rotate: false
+  xy: 112, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ExpertDruid
+  rotate: false
+  xy: 128, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ExpertDruid
+  rotate: false
+  xy: 144, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ExpertDruid
+  rotate: false
+  xy: 160, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ExpertDruid
+  rotate: false
+  xy: 176, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FireElemental
+  rotate: false
+  xy: 192, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FireElemental
+  rotate: false
+  xy: 208, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FireElemental
+  rotate: false
+  xy: 224, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FireElemental
+  rotate: false
+  xy: 240, 368
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FlutteringPixie
+  rotate: false
+  xy: 0, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FlutteringPixie
+  rotate: false
+  xy: 16, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FlutteringPixie
+  rotate: false
+  xy: 32, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FlutteringPixie
+  rotate: false
+  xy: 48, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GlowingWisp
+  rotate: false
+  xy: 64, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GlowingWisp
+  rotate: false
+  xy: 80, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GlowingWisp
+  rotate: false
+  xy: 96, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GlowingWisp
+  rotate: false
+  xy: 112, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GrizzledTreant
+  rotate: false
+  xy: 128, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GrizzledTreant
+  rotate: false
+  xy: 144, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GrizzledTreant
+  rotate: false
+  xy: 160, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GrizzledTreant
+  rotate: false
+  xy: 176, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+IceGolem
+  rotate: false
+  xy: 192, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+IceGolem
+  rotate: false
+  xy: 208, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+IceGolem
+  rotate: false
+  xy: 224, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+IceGolem
+  rotate: false
+  xy: 240, 384
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+IronGolem
+  rotate: false
+  xy: 0, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+IronGolem
+  rotate: false
+  xy: 16, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+IronGolem
+  rotate: false
+  xy: 32, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+IronGolem
+  rotate: false
+  xy: 48, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MagicalFairy
+  rotate: false
+  xy: 64, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MagicalFairy
+  rotate: false
+  xy: 80, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MagicalFairy
+  rotate: false
+  xy: 96, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MagicalFairy
+  rotate: false
+  xy: 112, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+NovicePyromancer
+  rotate: false
+  xy: 128, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+NovicePyromancer
+  rotate: false
+  xy: 144, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+NovicePyromancer
+  rotate: false
+  xy: 160, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+NovicePyromancer
+  rotate: false
+  xy: 176, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+VileWitch
+  rotate: false
+  xy: 192, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+VileWitch
+  rotate: false
+  xy: 208, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+VileWitch
+  rotate: false
+  xy: 224, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+VileWitch
+  rotate: false
+  xy: 240, 400
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+WaterElemental
+  rotate: false
+  xy: 0, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+WaterElemental
+  rotate: false
+  xy: 16, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+WaterElemental
+  rotate: false
+  xy: 32, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+WaterElemental
+  rotate: false
+  xy: 48, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BlindedGrimlock
+  rotate: false
+  xy: 64, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BlindedGrimlock
+  rotate: false
+  xy: 80, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BlindedGrimlock
+  rotate: false
+  xy: 96, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BlindedGrimlock
+  rotate: false
+  xy: 112, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BloodshotEye
+  rotate: false
+  xy: 128, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BloodshotEye
+  rotate: false
+  xy: 144, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BloodshotEye
+  rotate: false
+  xy: 160, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BloodshotEye
+  rotate: false
+  xy: 176, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BrawnyOgre
+  rotate: false
+  xy: 192, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BrawnyOgre
+  rotate: false
+  xy: 208, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BrawnyOgre
+  rotate: false
+  xy: 224, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BrawnyOgre
+  rotate: false
+  xy: 240, 416
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CrimsonSlaad
+  rotate: false
+  xy: 0, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CrimsonSlaad
+  rotate: false
+  xy: 16, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CrimsonSlaad
+  rotate: false
+  xy: 32, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CrimsonSlaad
+  rotate: false
+  xy: 48, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CrushingCyclops
+  rotate: false
+  xy: 64, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CrushingCyclops
+  rotate: false
+  xy: 80, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CrushingCyclops
+  rotate: false
+  xy: 96, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CrushingCyclops
+  rotate: false
+  xy: 112, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DeathSlime
+  rotate: false
+  xy: 128, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DeathSlime
+  rotate: false
+  xy: 144, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DeathSlime
+  rotate: false
+  xy: 160, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DeathSlime
+  rotate: false
+  xy: 176, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FungalMyconid
+  rotate: false
+  xy: 192, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FungalMyconid
+  rotate: false
+  xy: 208, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FungalMyconid
+  rotate: false
+  xy: 224, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FungalMyconid
+  rotate: false
+  xy: 240, 432
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HumongousEttin
+  rotate: false
+  xy: 0, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+HumongousEttin
+  rotate: false
+  xy: 16, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+HumongousEttin
+  rotate: false
+  xy: 32, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+HumongousEttin
+  rotate: false
+  xy: 48, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MurkySlaad
+  rotate: false
+  xy: 64, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MurkySlaad
+  rotate: false
+  xy: 80, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MurkySlaad
+  rotate: false
+  xy: 96, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MurkySlaad
+  rotate: false
+  xy: 112, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+OchreJelly
+  rotate: false
+  xy: 128, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+OchreJelly
+  rotate: false
+  xy: 144, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+OchreJelly
+  rotate: false
+  xy: 160, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+OchreJelly
+  rotate: false
+  xy: 176, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+OcularWatcher
+  rotate: false
+  xy: 192, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+OcularWatcher
+  rotate: false
+  xy: 208, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+OcularWatcher
+  rotate: false
+  xy: 224, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+OcularWatcher
+  rotate: false
+  xy: 240, 448
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+RedCap
+  rotate: false
+  xy: 0, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+RedCap
+  rotate: false
+  xy: 16, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+RedCap
+  rotate: false
+  xy: 32, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+RedCap
+  rotate: false
+  xy: 48, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ShriekerMushroom
+  rotate: false
+  xy: 64, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ShriekerMushroom
+  rotate: false
+  xy: 80, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ShriekerMushroom
+  rotate: false
+  xy: 96, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ShriekerMushroom
+  rotate: false
+  xy: 112, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+StoneTroll
+  rotate: false
+  xy: 128, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+StoneTroll
+  rotate: false
+  xy: 144, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+StoneTroll
+  rotate: false
+  xy: 160, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+StoneTroll
+  rotate: false
+  xy: 176, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SwampTroll
+  rotate: false
+  xy: 192, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SwampTroll
+  rotate: false
+  xy: 208, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SwampTroll
+  rotate: false
+  xy: 224, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SwampTroll
+  rotate: false
+  xy: 240, 464
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BoundCadaver
+  rotate: false
+  xy: 0, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BoundCadaver
+  rotate: false
+  xy: 16, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BoundCadaver
+  rotate: false
+  xy: 32, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BoundCadaver
+  rotate: false
+  xy: 48, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BrittleArcher
+  rotate: false
+  xy: 64, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BrittleArcher
+  rotate: false
+  xy: 80, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BrittleArcher
+  rotate: false
+  xy: 96, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BrittleArcher
+  rotate: false
+  xy: 112, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+CarcassFeeder
+  rotate: false
+  xy: 128, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+CarcassFeeder
+  rotate: false
+  xy: 144, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+CarcassFeeder
+  rotate: false
+  xy: 160, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+CarcassFeeder
+  rotate: false
+  xy: 176, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DecrepitBones
+  rotate: false
+  xy: 192, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DecrepitBones
+  rotate: false
+  xy: 208, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DecrepitBones
+  rotate: false
+  xy: 224, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DecrepitBones
+  rotate: false
+  xy: 240, 480
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DismemberedCrawler
+  rotate: false
+  xy: 0, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DismemberedCrawler
+  rotate: false
+  xy: 16, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DismemberedCrawler
+  rotate: false
+  xy: 32, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DismemberedCrawler
+  rotate: false
+  xy: 48, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GhastlyEye
+  rotate: false
+  xy: 64, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GhastlyEye
+  rotate: false
+  xy: 80, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GhastlyEye
+  rotate: false
+  xy: 96, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GhastlyEye
+  rotate: false
+  xy: 112, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GiantRoyalScarab
+  rotate: false
+  xy: 128, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GiantRoyalScarab
+  rotate: false
+  xy: 144, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GiantRoyalScarab
+  rotate: false
+  xy: 160, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GiantRoyalScarab
+  rotate: false
+  xy: 176, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+GraveRevenant
+  rotate: false
+  xy: 192, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+GraveRevenant
+  rotate: false
+  xy: 208, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+GraveRevenant
+  rotate: false
+  xy: 224, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+GraveRevenant
+  rotate: false
+  xy: 240, 496
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MutilatedStumbler
+  rotate: false
+  xy: 0, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MutilatedStumbler
+  rotate: false
+  xy: 16, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MutilatedStumbler
+  rotate: false
+  xy: 32, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MutilatedStumbler
+  rotate: false
+  xy: 48, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+RoyalScarab
+  rotate: false
+  xy: 64, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+RoyalScarab
+  rotate: false
+  xy: 80, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+RoyalScarab
+  rotate: false
+  xy: 96, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+RoyalScarab
+  rotate: false
+  xy: 112, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SandGhoul
+  rotate: false
+  xy: 128, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SandGhoul
+  rotate: false
+  xy: 144, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SandGhoul
+  rotate: false
+  xy: 160, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SandGhoul
+  rotate: false
+  xy: 176, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SkitteringHand
+  rotate: false
+  xy: 192, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SkitteringHand
+  rotate: false
+  xy: 208, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SkitteringHand
+  rotate: false
+  xy: 224, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SkitteringHand
+  rotate: false
+  xy: 240, 512
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ToxicHound
+  rotate: false
+  xy: 0, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ToxicHound
+  rotate: false
+  xy: 16, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ToxicHound
+  rotate: false
+  xy: 32, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ToxicHound
+  rotate: false
+  xy: 48, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+UnravelingCrawler
+  rotate: false
+  xy: 64, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+UnravelingCrawler
+  rotate: false
+  xy: 80, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+UnravelingCrawler
+  rotate: false
+  xy: 96, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+UnravelingCrawler
+  rotate: false
+  xy: 112, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+VampireBat
+  rotate: false
+  xy: 128, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+VampireBat
+  rotate: false
+  xy: 144, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+VampireBat
+  rotate: false
+  xy: 160, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+VampireBat
+  rotate: false
+  xy: 176, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+AcidAnt
+  rotate: false
+  xy: 192, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+AcidAnt
+  rotate: false
+  xy: 208, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+AcidAnt
+  rotate: false
+  xy: 224, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+AcidAnt
+  rotate: false
+  xy: 240, 528
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+BloatedBedbug
+  rotate: false
+  xy: 0, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+BloatedBedbug
+  rotate: false
+  xy: 16, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+BloatedBedbug
+  rotate: false
+  xy: 32, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+BloatedBedbug
+  rotate: false
+  xy: 48, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+DungBeetle
+  rotate: false
+  xy: 64, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+DungBeetle
+  rotate: false
+  xy: 80, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+DungBeetle
+  rotate: false
+  xy: 96, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+DungBeetle
+  rotate: false
+  xy: 112, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+EngorgedTick
+  rotate: false
+  xy: 128, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+EngorgedTick
+  rotate: false
+  xy: 144, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+EngorgedTick
+  rotate: false
+  xy: 160, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+EngorgedTick
+  rotate: false
+  xy: 176, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+FamishedTick
+  rotate: false
+  xy: 192, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+FamishedTick
+  rotate: false
+  xy: 208, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+FamishedTick
+  rotate: false
+  xy: 224, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+FamishedTick
+  rotate: false
+  xy: 240, 544
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ForagingMaggot
+  rotate: false
+  xy: 0, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+ForagingMaggot
+  rotate: false
+  xy: 16, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ForagingMaggot
+  rotate: false
+  xy: 32, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ForagingMaggot
+  rotate: false
+  xy: 48, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+InfectedMouse
+  rotate: false
+  xy: 64, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+InfectedMouse
+  rotate: false
+  xy: 80, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+InfectedMouse
+  rotate: false
+  xy: 96, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+InfectedMouse
+  rotate: false
+  xy: 112, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+LavaAnt
+  rotate: false
+  xy: 128, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+LavaAnt
+  rotate: false
+  xy: 144, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+LavaAnt
+  rotate: false
+  xy: 160, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+LavaAnt
+  rotate: false
+  xy: 176, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+MawingBeaver
+  rotate: false
+  xy: 192, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+MawingBeaver
+  rotate: false
+  xy: 208, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+MawingBeaver
+  rotate: false
+  xy: 224, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+MawingBeaver
+  rotate: false
+  xy: 240, 560
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+PlagueBat
+  rotate: false
+  xy: 0, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+PlagueBat
+  rotate: false
+  xy: 16, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+PlagueBat
+  rotate: false
+  xy: 32, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+PlagueBat
+  rotate: false
+  xy: 48, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+RhinoBeetle
+  rotate: false
+  xy: 64, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+RhinoBeetle
+  rotate: false
+  xy: 80, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+RhinoBeetle
+  rotate: false
+  xy: 96, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+RhinoBeetle
+  rotate: false
+  xy: 112, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SoldierAnt
+  rotate: false
+  xy: 128, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SoldierAnt
+  rotate: false
+  xy: 144, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SoldierAnt
+  rotate: false
+  xy: 160, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SoldierAnt
+  rotate: false
+  xy: 176, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+SwoopingBat
+  rotate: false
+  xy: 192, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+SwoopingBat
+  rotate: false
+  xy: 208, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+SwoopingBat
+  rotate: false
+  xy: 224, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+SwoopingBat
+  rotate: false
+  xy: 240, 576
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+TaintedCockroach
+  rotate: false
+  xy: 0, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+TaintedCockroach
+  rotate: false
+  xy: 16, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+TaintedCockroach
+  rotate: false
+  xy: 32, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+TaintedCockroach
+  rotate: false
+  xy: 48, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+TunnelingMole
+  rotate: false
+  xy: 64, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+TunnelingMole
+  rotate: false
+  xy: 80, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+TunnelingMole
+  rotate: false
+  xy: 96, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+TunnelingMole
+  rotate: false
+  xy: 112, 592
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3

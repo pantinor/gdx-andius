@@ -1,5 +1,6 @@
 
 import andius.Andius;
+import andius.CampScreen;
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import static andius.Constants.SAVE_FILENAME;
@@ -45,18 +46,18 @@ public class Wiz4CombatTestMain extends Game {
             Andius.CTX = new Context();
             Context ctx = Andius.CTX;
 
-            //SaveGame sg = SaveGame.read(SAVE_FILENAME);
-            //ctx.setSaveGame(sg);
+            SaveGame sg = SaveGame.read(SAVE_FILENAME);
+            ctx.setSaveGame(sg);
 
-            int lvl = 2;
-            ctx.setSaveGame(new SaveGame());
-            ctx.saveGame.players = new CharacterRecord[6];
-            ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
-            ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
-            ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
-            ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
-            ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
-            ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+//            int lvl = 2;
+//            ctx.setSaveGame(new SaveGame());
+//            ctx.saveGame.players = new CharacterRecord[6];
+//            ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
+//            ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
+//            ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
+//            ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
+//            ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
+//            ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
 
 //
 //                    for (Spells s : Spells.values()) {
@@ -85,9 +86,9 @@ public class Wiz4CombatTestMain extends Game {
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(77), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
-            //setScreen(new CampScreen(ctx, Constants.Map.WORLD));
+            setScreen(new CampScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
-            setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 18));
+            //setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 18));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
         } catch (Exception e) {

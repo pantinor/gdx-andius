@@ -1,6 +1,10 @@
 
 import andius.WizardryData;
 import andius.objects.DoGooder;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -384,6 +388,79 @@ public class GifExtract {
             frames.add(frame);
         }
         return frames;
+    }
+
+    //@Test
+    public void copyPNGs() throws Exception {
+
+        String sourceDir = "D:\\work\\gdx-andius\\tileset16";
+
+        TexturePacker.Settings settings = new TexturePacker.Settings();
+        settings.minWidth = 8;
+        settings.minHeight = 8;
+        settings.maxWidth = 256;
+        settings.maxHeight = 4000;
+        settings.paddingX = 0;
+        settings.paddingY = 0;
+        settings.fast = true;
+        settings.pot = false;
+        settings.grid = true;
+        settings.edgePadding = false;
+        settings.bleed = false;
+        settings.debug = false;
+        settings.alias = false;
+        settings.useIndexes = true;
+
+        TexturePacker tp = new TexturePacker(settings);
+
+        List<File> pngFiles = findPngFiles(sourceDir);
+
+        for (File file : pngFiles) {
+            BufferedImage[] subImages = splitImage(file);
+            for (int i = 0; i < subImages.length; i++) {
+                tp.addImage(subImages[i], file.getName().replace(".png", "") + "_" + i);
+
+            }
+        }
+
+        tp.pack(new File("src/main/resources/assets/tibian"), "tileset16.atlas");
+
+    }
+
+    private static BufferedImage[] splitImage(File pngFile) throws Exception {
+        BufferedImage[] subImages = new BufferedImage[4];
+        BufferedImage originalImage = ImageIO.read(pngFile);
+        for (int i = 0; i < 4; i++) {
+            subImages[i] = originalImage.getSubimage(i * 16, 0, 16, 16);
+        }
+        return subImages;
+    }
+
+    private static List<File> findPngFiles(String directoryPath) {
+        List<File> pngFiles = new ArrayList<>();
+        File directory = new File(directoryPath);
+
+        if (directory.exists() && directory.isDirectory()) {
+            recurseDirectory(directory, pngFiles);
+        } else {
+            System.err.println("Invalid directory path: " + directoryPath);
+        }
+
+        return pngFiles;
+    }
+
+    private static void recurseDirectory(File directory, List<File> pngFiles) {
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    recurseDirectory(file, pngFiles); // Recurse into subdirectories
+                } else if (file.isFile() && file.getName().endsWith(".png")) {
+                    pngFiles.add(file); // Add PNG file to the list
+                }
+            }
+        }
     }
 
 }
