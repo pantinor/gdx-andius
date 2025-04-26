@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
-import static andius.Constants.DEATHMSGS;
 import static andius.Constants.HITMSGS;
 import andius.Constants.Resistance;
 import andius.Constants.Status;
@@ -213,12 +212,12 @@ public class MutableMonster implements Mutable {
     }
 
     @Override
-    public String getDamageDescription(String attackerName, int damage) {
-        return String.format("%s %s %s for %d damage.",
+    public String getDamageDescription(String attackerName, int damage, String type) {
+        return String.format("%s %s %s for %d damage with %s.",
                 attackerName.toUpperCase(),
                 HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
                 name().toUpperCase(),
-                damage);
+                damage, type);
     }
 
     @Override

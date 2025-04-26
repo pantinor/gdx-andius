@@ -10,7 +10,6 @@ import andius.WizardryData.Scenario;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.getMessage;
 import andius.WizardryDungeonScreen;
-import andius.objects.Dialog;
 import andius.objects.DoGooder;
 import andius.objects.Item;
 import com.badlogic.gdx.graphics.Color;

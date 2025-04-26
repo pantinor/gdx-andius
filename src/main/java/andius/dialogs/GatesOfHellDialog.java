@@ -6,7 +6,6 @@ import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
 import static andius.WizardryData.getMessage;
-import andius.objects.Dialog;
 import andius.objects.Item;
 import andius.objects.Item.ItemType;
 import andius.objects.SaveGame.CharacterRecord;

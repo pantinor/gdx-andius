@@ -2,7 +2,6 @@ package andius.dialogs;
 
 import andius.BaseScreen;
 import andius.Context;
-import andius.objects.Dialog;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;
 import andius.objects.Sounds;

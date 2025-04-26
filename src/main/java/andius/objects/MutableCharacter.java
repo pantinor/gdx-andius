@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
-import static andius.Constants.DEATHMSGS;
 import static andius.Constants.HITMSGS;
 import andius.Constants.Status;
 import static andius.WizardryData.WER_ITEMS;
@@ -78,17 +77,23 @@ public class MutableCharacter implements Mutable {
     @Override
     public List<Dice> getDamage() {
         List<Dice> d = new ArrayList<>();
-
-        for (int i : this.dogooder.items) {
-            for (Item it : WER_ITEMS) {
-                if (it.id == i && it.type == ItemType.WEAPON) {
-                    d.add(it.damage);
-                    return d;
+        if (this.dogooder.swingCount > 0) {
+            for (int i = 0; i < this.dogooder.swingCount; i++) {
+                d.add(this.dogooder.hpdamrc);
+            }
+        } else {
+            for (int i : this.dogooder.items) {
+                for (Item it : WER_ITEMS) {
+                    if (it.id == i && it.type == ItemType.WEAPON) {
+                        d.add(it.damage);
+                        return d;
+                    }
                 }
             }
+            if (d.isEmpty()) {
+                d.add(Item.HANDS.damage);
+            }
         }
-
-        d.add(Item.HANDS.damage);
         return d;
     }
 
@@ -216,12 +221,12 @@ public class MutableCharacter implements Mutable {
     }
 
     @Override
-    public String getDamageDescription(String attackerName, int damage) {
-        return String.format("%s %s %s for %d damage.",
+    public String getDamageDescription(String attackerName, int damage, String type) {
+        return String.format("%s %s %s for %d damage with %s.",
                 attackerName.toUpperCase(),
                 HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
                 name().toUpperCase(),
-                damage);
+                damage, type);
     }
 
     @Override
@@ -246,6 +251,12 @@ public class MutableCharacter implements Mutable {
                     return s;
                 }
             }
+            for (Spells s : Spells.values()) {
+                if (s.getType() == ClassType.MAGE && s.getLevel() == i + 1) {
+                    mageSpellsLevels[spLvl]--;
+                    return s;
+                }
+            }
         }
 
         return null;
@@ -258,6 +269,12 @@ public class MutableCharacter implements Mutable {
 
         for (int i = spLvl; i >= 0; i--) {
             for (Spells s : this.dogooder.knownSpells) {
+                if (s.getType() == ClassType.PRIEST && s.getLevel() == i + 1) {
+                    priestSpellLevels[spLvl]--;
+                    return s;
+                }
+            }
+            for (Spells s : Spells.values()) {
                 if (s.getType() == ClassType.PRIEST && s.getLevel() == i + 1) {
                     priestSpellLevels[spLvl]--;
                     return s;

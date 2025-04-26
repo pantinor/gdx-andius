@@ -355,10 +355,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (defender != null) {
                     if (!player.isDisabled()) {
                         boolean hit = Utils.attackHit(player, defender);
-                        if (hit) {
+                        if (hit && !defender.name().equals("Hawkwind")) {
                             Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
                             int damage = Utils.dealDamage(weapon, defender);
-                            log(defender.getDamageDescription(player.name, damage), Color.SCARLET);
+                            log(defender.getDamageDescription(player.name, damage, weapon.name), Color.SCARLET);
                         } else {
                             log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                         }
@@ -461,10 +461,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     int dmg = attacker.getCurrentHitPoints() / 2;
                     DoGooder dg = (DoGooder) defender.baseType();
                     if (dg.savingThrowBreath()) {
-                        log(String.format("%s made a saving throwing throw against %s", defender.name(), attacker.breath()));
                         dmg = dmg / 2;
                     }
-                    damage(attacker, defender, dmg);
+                    damage(attacker, defender, dmg, attacker.breath().toString());
                 }
                 break;
             case ATTACK:
@@ -474,7 +473,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(attacker, defender, dmg);
+                            damage(attacker, defender, dmg, "arms");
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name()));
@@ -525,13 +524,13 @@ public class Wiz4CombatScreen implements Screen, Constants {
         CombatAction action = CombatAction.ATTACK;
         Spells spell = null;
 
-        if (attacker.getCurrentMageSpellLevel() > 0 && !attacker.status().has(Status.SILENCED) && Utils.RANDOM.nextInt(100) < 75) {
+        if (attacker.getCurrentMageSpellLevel() > 0 && !attacker.status().has(Status.SILENCED) && Utils.RANDOM.nextInt(100) < 85) {
             spell = attacker.castMageSpell();
             action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
         }
 
         if (action != CombatAction.CAST) {
-            if (attacker.getCurrentPriestSpellLevel() > 0 && !attacker.status().has(Status.SILENCED) && Utils.RANDOM.nextInt(100) < 75) {
+            if (attacker.getCurrentPriestSpellLevel() > 0 && !attacker.status().has(Status.SILENCED) && Utils.RANDOM.nextInt(100) < 85) {
                 spell = attacker.castPriestSpell();
                 action = spell != null ? CombatAction.CAST : CombatAction.ATTACK;
             }
@@ -549,7 +548,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                                 if (attacker.getType() == ClassType.NINJA && Utils.RANDOM.nextInt(100) < 15) {
                                     dmg = defender.getMaxHitPoints();
                                 }
-                                damage(attacker, defender, dmg);
+                                damage(attacker, defender, dmg, "arms");
                             }
                         } else {
                             log(String.format("%s misses %s", attacker.name(), defender.name()));
@@ -562,7 +561,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                                 if (attacker.getType() == ClassType.NINJA && Utils.RANDOM.nextInt(100) < 15) {
                                     dmg = player.maxhp;
                                 }
-                                damage(attacker, player, dmg);
+                                damage(attacker, player, dmg, "arms");
                             }
                         } else {
                             log(String.format("%s misses %s", attacker.name(), player.name.toUpperCase()));
@@ -571,7 +570,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
                 break;
             case CAST: {
-                log(String.format("%s casts %s", attacker.name(), spell), Color.SKY);
                 Object def2 = pickMonster();
                 if (def2 != null) {
                     if (def2 instanceof MutableMonster defender) {
@@ -606,7 +604,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 shuffled.add(m);
             }
         }
-        
+
         Collections.shuffle(shuffled);
 
         if (shuffled.isEmpty()) {
@@ -634,28 +632,44 @@ public class Wiz4CombatScreen implements Screen, Constants {
         return shuffled.get(0);
     }
 
-    private void damage(Object attacker, Object defender, int damage) {
+    private void damage(Object attacker, Object defender, int damage, String type) {
 
         if (damage <= 0) {
             return;
         }
 
-        String attName = null;
-        if (attacker instanceof Mutable) {
-            Mutable a = (Mutable) attacker;
+        String attName;
+        if (attacker instanceof Mutable a) {
             attName = a.name();
         } else {
             attName = player.name.toUpperCase();
         }
 
-        if (defender instanceof Mutable) {
-            Mutable m = (Mutable) defender;
-            m.adjustHitPoints(-damage);
-            m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
-            log(m.getDamageDescription(attName, damage), Color.SCARLET);
+        if (defender instanceof Mutable m) {
+            if (m.name().equals("Hawkwind")) {
+                if (attacker instanceof Mutable a) {
+                    if (a.name().equals("Dink")) {
+                        damage = Utils.getRandomBetween(300, 500);
+                        m.adjustHitPoints(-damage);
+                        m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
+                        log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
+                        if (m.isDead()) {
+                            log("As mighty Achilles fell to Paris arrow, so does Lord Hawkwind fall to the stab of a lowly Dink!  Long will Skara Brae be mourning his passing!", Color.WHITE);
+                        }
+                    } else {
+                        log(String.format("%s attacks %s who noticeth it not!", attName, "Lord Hawkwind"), Color.SKY);
+                    }
+                } else {
+                    log(String.format("%s attacks %s who noticeth it not!", attName, "Lord Hawkwind"), Color.SKY);
+                }
+            } else {
+                m.adjustHitPoints(-damage);
+                m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
+                log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
+            }
         } else {
             player.adjustHP(-damage);
-            log(String.format("%s strikes %s who was hit for %d damage!", attName, player.name.toUpperCase(), damage), Color.RED);
+            log(String.format("%s strikes %s who was hit for %d damage with %s!", attName, player.name.toUpperCase(), damage, type), Color.RED);
         }
     }
 
@@ -778,7 +792,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 int dmg = spell.damage();
-                damage(caster, mc, dmg);
+                damage(caster, mc, dmg, spell.getName());
             }
         }
         if (caster instanceof MutableCharacter) {
@@ -792,14 +806,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (spell.equals(Spells.ZILWAN) && mm.getMonsterType() != CharacterType.UNDEAD) {
                     dmg = 0;
                 }
-                damage(caster, mm, dmg);
+                damage(caster, mm, dmg, spell.getName());
 
             } else {
                 if (player.savingThrowSpell()) {
                     log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
                     int dmg = spell.damage();
-                    damage(caster, player, dmg);
+                    damage(caster, player, dmg, spell.getName());
                 }
             }
         }
@@ -815,7 +829,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     CharacterType ct = caster instanceof MutableMonster ? ((MutableMonster) caster).getMonsterType() : CharacterType.valueOf(player.classType.toString());
                     boolean unaffected = mc.isUnaffected(spell, ct);
                     if (!mc.status().isDisabled() && (dg.savingThrowSpell() || unaffected)) {
-                        log(dg.name + " made a saving throw versus " + spell + " and is unaffected!");
+
                     } else {
                         int dmg = grpDamageMap.get(mc);
                         grpDamageMap.put(mc, dmg + 1);
@@ -826,7 +840,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             for (MutableCharacter mc : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(mc);
                 if (dmg > 0) {
-                    damage(caster, mc, dmg);
+                    damage(caster, mc, dmg, spell.getName());
                 }
             }
         }
@@ -837,7 +851,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 for (MutableMonster mm : this.monsters) {
                     boolean unaffected = mm.isUnaffected(spell, ((MutableCharacter) caster).getMonsterType());
                     if (unaffected) {
-                        log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
+
                     } else {
                         int dmg = grpDamageMap.get(mm);
                         grpDamageMap.put(mm, dmg + 1);
@@ -845,9 +859,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     groupDamage--;
                 }
                 if (player.armor != null && player.armor.id == 89 && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
-                    log(player.name.toUpperCase() + " was saved by oxygen mask versus " + spell + " and is unaffected!");
+                    
                 } else if (player.savingThrowSpell()) {
-                    log(player.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
+                    
                 } else {
                     playerDmg++;
                 }
@@ -856,11 +870,11 @@ public class Wiz4CombatScreen implements Screen, Constants {
             for (MutableMonster mm : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(mm);
                 if (dmg > 0) {
-                    damage(caster, mm, dmg);
+                    damage(caster, mm, dmg, spell.getName());
                 }
             }
             if (playerDmg > 0) {
-                damage(caster, player, playerDmg);
+                damage(caster, player, playerDmg, spell.getName());
             }
         }
     }

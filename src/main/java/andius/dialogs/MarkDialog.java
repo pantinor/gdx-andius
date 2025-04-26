@@ -4,7 +4,6 @@ import andius.BaseScreen;
 import andius.Context;
 import andius.WizardryData.Message;
 import andius.WizardryData.Scenario;
-import andius.objects.Dialog;
 import andius.objects.Item;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;

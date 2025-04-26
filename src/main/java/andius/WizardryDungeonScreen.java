@@ -111,7 +111,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final int dim;//dimension of the map
     private final int xalignMM;
     private final int yalignMM;
-    
+
     private static Texture MINI_MAP_BACKGROUND;
     private static final int MINI_DIM = 24;
 
@@ -1289,7 +1289,12 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         }
 
-        finishTurn(x, y);
+        try {
+            finishTurn(x, y);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            partyDeath();
+        }
 
         return false;
     }
@@ -1323,7 +1328,11 @@ public class WizardryDungeonScreen extends BaseScreen {
                 log(PIT_DAMAGE_MSGS[Utils.RANDOM.nextInt(PIT_DAMAGE_MSGS.length)]);
                 Sounds.play(Sound.PC_STRUCK);
                 if (this.map == Map.WIZARDRY4 && (this.currentLevel == 12 || this.currentLevel == 13)) {
-                    teleport(new MazeAddress(0, dx, dy), false);
+                    if (dx == 9 && dy == 8 && this.currentLevel == 13) {
+                        //on ledge
+                    } else {
+                        teleport(new MazeAddress(0, dx, dy), false);
+                    }
                 }
             }
         }
@@ -1349,7 +1358,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (destinationCell.riddleAnswers != null && !destinationCell.riddleAnswers.isEmpty()) {
+        if (destinationCell.riddleAnswers != null && destinationCell.function == null && !destinationCell.riddleAnswers.isEmpty()) {
             new RiddleDialog(CTX, this, destinationCell).show(this.stage);
             return;
         }
@@ -1511,7 +1520,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        if (currentCell.riddleAnswers != null && !currentCell.riddleAnswers.isEmpty()) {
+        if (currentCell.riddleAnswers != null && currentCell.function == null && !currentCell.riddleAnswers.isEmpty()) {
             new RiddleDialog(CTX, this, currentCell).show(this.stage);
             return;
         }
@@ -1704,7 +1713,19 @@ public class WizardryDungeonScreen extends BaseScreen {
             Andius.mainGame.setScreen(Map.WORLD.getScreen());
             return;
         } else {
-            to = addr;
+            if (this.map == Map.WIZARDRY4 && addr.level == 12) {//root of the world level 12
+                if (currentLevel == 10 && CTX.partyHasItem(14, 4) != null) {//need void transducer
+                    to = new MazeAddress(12, 0, 10);
+                } else if (currentLevel == 11) {
+                    //ok if already on 12
+                    to = addr;
+                } else {
+                    Sounds.play(Sound.FLEE);
+                    return;
+                }
+            } else {
+                to = addr;
+            }
         }
 
         int dx = to.row;

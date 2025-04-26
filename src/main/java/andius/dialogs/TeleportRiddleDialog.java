@@ -1,20 +1,20 @@
 package andius.dialogs;
 
+import andius.BaseScreen;
 import andius.Context;
+import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
+import andius.WizardryData.Message;
 import andius.WizardryDungeonScreen;
-import andius.objects.Item;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
-public class RiddleDialog extends Dialog {
+public class TeleportRiddleDialog extends Dialog {
 
     private final WizardryDungeonScreen screen;
-    private final MazeCell cell;
 
-    public RiddleDialog(Context ctx, WizardryDungeonScreen screen, MazeCell cell) {
-        super(ctx, screen);
-        this.screen = screen;
-        this.cell = cell;
+    public TeleportRiddleDialog(Context ctx, BaseScreen sc, MazeCell cell, Message message, MazeAddress teleportTo) {
+        super(ctx, sc);
+        this.screen = (WizardryDungeonScreen) sc;
 
         input.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
@@ -22,40 +22,34 @@ public class RiddleDialog extends Dialog {
 
                 if (key == '\r') {
 
-                    if (tf.getText().length() == 0) {
-                        hide();
-                        return;
-                    }
-
                     String response = tf.getText().trim().toLowerCase();
 
                     boolean correct = false;
                     for (String answer : cell.riddleAnswers) {
                         if (response.equalsIgnoreCase(answer)) {
                             correct = true;
-                            if (cell.itemObtainedFromRiddle > 0) {
-                                Item it = screen.map.scenario().items().get(cell.itemObtainedFromRiddle);
-                                screen.log(ctx.players()[0].name.toUpperCase() + " obtained " + it.genericName);
-                                ctx.saveGame.players[0].inventory.add(it);
-                            }
                             break;
                         }
                     }
 
+                    tf.setText("");
+
                     if (correct) {
                         scrollPane.add("Correct!");
-                        cell.riddleAnswers.clear();
+                        cell.message = null;
+                        cell.function = null;
+                        cell.riddleAnswers = null;
                         hide();
                     } else {
-                        scrollPane.add(cell.message.getText());
+                        hide();
+                        screen.teleport(teleportTo, true);
                     }
 
-                    tf.setText("");
                 }
             }
         });
 
-        scrollPane.add(this.cell.message.getText());
+        scrollPane.add(message.getText());
     }
 
 }

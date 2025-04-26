@@ -1,9 +1,11 @@
-package andius.objects;
+package andius.dialogs;
 
 import andius.Andius;
 import andius.BaseScreen;
 import andius.Constants;
 import andius.Context;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -42,10 +44,19 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
 
     @Override
     public com.badlogic.gdx.scenes.scene2d.ui.Dialog show(Stage stage, Action action) {
+        Gdx.input.setInputProcessor(stage);
         com.badlogic.gdx.scenes.scene2d.ui.Dialog d = super.show(stage, action);
         stage.setKeyboardFocus(input);
         return d;
     }
+
+    @Override
+    public void hide() {
+        super.hide();
+        Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+    }
+    
+    
     
     
 

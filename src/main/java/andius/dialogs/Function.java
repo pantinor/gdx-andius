@@ -1,4 +1,4 @@
-package andius.objects;
+package andius.dialogs;
 
 import andius.BaseScreen;
 import andius.Context;

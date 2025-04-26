@@ -141,7 +141,7 @@ public abstract class Combat implements Constants {
                             if (hit) {
                                 Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
                                 int damage = Utils.dealDamage(weapon, defender);
-                                log(defender.getDamageDescription(player.name, damage), Color.SCARLET);
+                                log(defender.getDamageDescription(player.name, damage, weapon.name), Color.SCARLET);
                             } else {
                                 log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                             }
@@ -236,7 +236,7 @@ public abstract class Combat implements Constants {
                         log(String.format("%s made a saving throwing throw against %s", defender.name, attacker.breath()));
                         dmg = dmg / 2;
                     }
-                    damage(attacker, defender, dmg);
+                    damage(attacker, defender, dmg, attacker.breath().toString());
                 }
                 break;
             case ATTACK:
@@ -246,7 +246,7 @@ public abstract class Combat implements Constants {
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(attacker, defender, dmg);
+                            damage(attacker, defender, dmg, "arms");
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name));
@@ -307,7 +307,7 @@ public abstract class Combat implements Constants {
         return shuffled.get(0);
     }
 
-    private void damage(Object attacker, Object defender, int damage) {
+    private void damage(Object attacker, Object defender, int damage, String type) {
 
         if (damage <= 0) {
             return;
@@ -325,7 +325,7 @@ public abstract class Combat implements Constants {
             if (m.getHealthCursor() != null) {
                 m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
             }
-            log(m.getDamageDescription(attName, damage), Color.SCARLET);
+            log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
         } else if (defender instanceof CharacterRecord p) {
             p.adjustHP(-damage);
             log(String.format("%s strikes %s who was hit for %d damage!", attName, p.name.toUpperCase(), damage), Color.RED);
@@ -459,7 +459,7 @@ public abstract class Combat implements Constants {
             if (spell.equals(Spells.ZILWAN) && mm.getMonsterType() != CharacterType.UNDEAD) {
                 dmg = 0;
             }
-            damage(caster, mm, dmg);
+            damage(caster, mm, dmg, spell.getName());
         }
         if (caster instanceof MutableMonster) {
             CharacterRecord p = (CharacterRecord) target;
@@ -467,7 +467,7 @@ public abstract class Combat implements Constants {
                 log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
             } else {
                 int dmg = spell.damage();
-                damage(caster, p, dmg);
+                damage(caster, p, dmg, spell.getName());
             }
         }
     }
@@ -480,7 +480,7 @@ public abstract class Combat implements Constants {
                 for (MutableMonster mm : this.monsters) {
                     boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
                     if (!mm.status().isDisabled() && unaffected) {
-                        log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
+
                     } else {
                         int dmg = grpDamageMap.get(mm);
                         grpDamageMap.put(mm, dmg + 1);
@@ -491,7 +491,7 @@ public abstract class Combat implements Constants {
             for (MutableMonster mm : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(mm);
                 if (dmg > 0) {
-                    damage(caster, mm, dmg);
+                    damage(caster, mm, dmg, spell.getName());
                 }
             }
         }
@@ -513,7 +513,7 @@ public abstract class Combat implements Constants {
             for (CharacterRecord p : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(p);
                 if (dmg > 0) {
-                    damage(caster, p, dmg);
+                    damage(caster, p, dmg, spell.getName());
                 }
             }
         }
@@ -621,7 +621,7 @@ public abstract class Combat implements Constants {
     public abstract void log(String s);
 
     public abstract void log(String s, Color c);
-    
+
     public abstract void playSound(Sound sound);
 
     public class Action {

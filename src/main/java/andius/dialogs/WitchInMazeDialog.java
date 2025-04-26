@@ -6,7 +6,6 @@ import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
 import static andius.WizardryData.getMessage;
-import andius.objects.Dialog;
 import andius.objects.Item;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;

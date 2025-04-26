@@ -5,7 +5,6 @@ import andius.Context;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.WizardryData.Scenario;
-import andius.objects.Dialog;
 import andius.objects.Item;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;

@@ -6,12 +6,14 @@ import andius.dialogs.DukesDialog;
 import andius.dialogs.FountainDialog;
 import andius.dialogs.WitchInMazeDialog;
 import andius.dialogs.GatesOfHellDialog;
+import andius.dialogs.KadortoDialog;
 import andius.dialogs.MarkDialog;
+import andius.dialogs.TeleportRiddleDialog;
 import andius.dialogs.VanishingCreamDialog;
 import andius.dialogs.ZigguratAltarDialog;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
-import andius.objects.Function;
+import andius.dialogs.Function;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Reward;
@@ -249,7 +251,7 @@ public class WizardryData {
     public static final String[] WER_LEVEL_DESC = new String[]{"Castle 1", "Cosmic Cube 1", "Cosmic Cube 2", "Cosmic Cube 3",
         "Maze of Wandering", "Land of the Creatures of Light and Darkness", "Realm of the Whirling Dervish",
         "Temple of the Dreampainter ", "Land of a Thousand Cuts", "The Catacombs", "Pyramid of Entrapment",
-        "Grandmaster Ending - Castle and Level 11", "Castle 2", "Castle 3", "Unknown Level 15"};
+        "Roots of the World", "Castle 2", "Castle 3", "Unknown Level 15"};
     private static final String[] WER_LEVEL_DATA = new String[]{WER_CASTLE_1, WER_COSMIC_1, WER_COSMIC_2, WER_COSMIC_3, WER_MAZE_WANDER_4,
         WER_LAND_CREAT_5, WER_REALM_WHIRL_6, WER_TEMPLE_DREAM_7, WER_LAND_CUTS_8, WER_CATACOMBS_9,
         WER_PYRAMID_ENTRAP_10, WER_LVL_11, WER_CASTLE_2, WER_CASTLE_3, WER_LVL_15};
@@ -1976,10 +1978,65 @@ public class WizardryData {
                         c.encounterID = 487;//temple priests
                     }
                     if (x == 12 && y == 4 && l.level == 14) {
-                        c.message = new Message(getMessage(WER_MESSAGES, 200));
+                        c.message = getMessage(WER_MESSAGES, 200);
                         c.encounterID = 499;//hawkwind
                     }
+                    if (x == 13 && y == 6 && l.level == 14) {
+                        c.function = (Context ctx, BaseScreen screen) -> new KadortoDialog(ctx, screen);
+                    }
+                    if (l.level == 12) {
+                        c.encounterID = -1;//no encounters here
+                        c.message = null;
+                    }
                 }
+            }
+
+            if (l.level == 12) {
+
+                l.cells[0][10].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[0][10], getMessage(WER_MESSAGES, 178), new MazeAddress(11, 9, 10));
+                l.cells[0][10].riddleAnswers = getMessage(WER_MESSAGES, 179).text();//feet
+
+                l.cells[4][10].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[4][10], getMessage(WER_MESSAGES, 176), new MazeAddress(11, 9, 10));
+                l.cells[4][10].riddleAnswers = getMessage(WER_MESSAGES, 177).text();//stomach
+
+                l.cells[6][2].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[6][2], getMessage(WER_MESSAGES, 174), new MazeAddress(11, 9, 10));
+                l.cells[6][2].riddleAnswers = getMessage(WER_MESSAGES, 175).text();//legs
+
+                l.cells[7][18].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[7][18], getMessage(WER_MESSAGES, 172), new MazeAddress(11, 9, 10));
+                l.cells[7][18].riddleAnswers = getMessage(WER_MESSAGES, 173).text();//hips
+
+                l.cells[9][12].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[9][12], getMessage(WER_MESSAGES, 170), new MazeAddress(11, 9, 10));
+                l.cells[9][12].riddleAnswers = getMessage(WER_MESSAGES, 171).text();//chest
+
+                l.cells[11][2].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[11][2], getMessage(WER_MESSAGES, 168), new MazeAddress(11, 9, 10));
+                l.cells[11][2].riddleAnswers = getMessage(WER_MESSAGES, 169).text();//right hand
+
+                l.cells[12][18].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[12][18], getMessage(WER_MESSAGES, 166), new MazeAddress(11, 9, 10));
+                l.cells[12][18].riddleAnswers = getMessage(WER_MESSAGES, 167).text();//left hand
+
+                l.cells[15][2].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[15][2], getMessage(WER_MESSAGES, 164), new MazeAddress(11, 9, 10));
+                l.cells[15][2].riddleAnswers = getMessage(WER_MESSAGES, 165).text();//right cheek
+
+                l.cells[15][18].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[15][18], getMessage(WER_MESSAGES, 162), new MazeAddress(11, 9, 10));
+                l.cells[15][18].riddleAnswers = getMessage(WER_MESSAGES, 163).text();//left cheek
+
+                l.cells[19][11].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[19][11], getMessage(WER_MESSAGES, 160), new MazeAddress(11, 9, 10));
+                l.cells[19][11].riddleAnswers = getMessage(WER_MESSAGES, 161).text();//brain
+
+                l.cells[18][10].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[18][10], getMessage(WER_MESSAGES, 180), new MazeAddress(11, 9, 10));
+                l.cells[18][10].riddleAnswers = getMessage(WER_MESSAGES, 181).text();//are you ready?
+
+                l.cells[17][10].function = (Context ctx, BaseScreen screen) -> new TeleportRiddleDialog(ctx, screen, l.cells[17][10], getMessage(WER_MESSAGES, 182), new MazeAddress(11, 9, 10));
+                l.cells[17][10].riddleAnswers = getMessage(WER_MESSAGES, 183).text();//tree of life
+
+                l.cells[14][10].message = getMessage(WER_MESSAGES, 184);
+                l.cells[14][10].itemObtained = 15;//kris of truth
+
+                l.cells[13][18].addressTo = new MazeAddress(12, 14, 1);
+                l.cells[13][18].teleport = true;
+
+                l.cells[16][10].addressTo = new MazeAddress(12, 13, 10);
+                l.cells[16][10].teleport = true;
             }
         }
 

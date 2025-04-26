@@ -1,14 +1,13 @@
 
 import andius.Andius;
-import andius.CampScreen;
-import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import static andius.Constants.SAVE_FILENAME;
 import andius.Context;
-import andius.RewardScreen;
-import andius.WizardryCombatScreen;
+import andius.Wiz4CombatScreen;
 import static andius.WizardryData.PMO_ITEMS_MAP;
 import static andius.WizardryData.PMO_MONSTERS;
+import static andius.WizardryData.WER4_CHARS;
+import static andius.WizardryData.WER_MONSTERS;
 import andius.objects.ClassType;
 import static andius.objects.ClassType.BISHOP;
 import static andius.objects.ClassType.FIGHTER;
@@ -18,11 +17,14 @@ import static andius.objects.ClassType.NINJA;
 import static andius.objects.ClassType.PRIEST;
 import static andius.objects.ClassType.SAMURAI;
 import static andius.objects.ClassType.THIEF;
+import andius.objects.MutableMonster;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import java.util.ArrayList;
+import java.util.List;
 import utils.Utils;
 
 public class Wiz4CombatTestMain extends Game {
@@ -58,35 +60,30 @@ public class Wiz4CombatTestMain extends Game {
 //            ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
 //            ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
 //            ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
-
 //
 //                    for (Spells s : Spells.values()) {
 //                        ctx.saveGame.players[j].knownSpells.add(s);
 //                    }
 //
-//                }
-//            }
-            //ctx.players()[0].inventory.add(WER_ITEMS.get(7));
-//            List<MutableMonster> mms = new ArrayList<>();
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(3)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(4)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-//            mms.add(new MutableMonster(PMO_MONSTERS.get(6)));
-//            TextureAtlas iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
-//            Map<Integer, String> icons = new HashMap<>();
-//            for (DoGooder dg : WER4_CHARS) {
-//                icons.put(dg.id, dg.iconID);
-//            }
-            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(5), null, null));
+//            ctx.players()[0].inventory.add(WER_ITEMS.get(7));
+            List<MutableMonster> mms = new ArrayList<>();
+            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(6)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(0)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(0)));
+
+            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(448), null, null));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(499), null, null));
+
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(77), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
             //setScreen(new EquipmentScreen(ctx, Constants.Map.WORLD));
-            setScreen(new CampScreen(ctx, Constants.Map.WORLD));
+            //setScreen(new CampScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 18));
             //setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
