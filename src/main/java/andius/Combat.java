@@ -321,14 +321,18 @@ public abstract class Combat implements Constants {
         }
 
         if (defender instanceof MutableMonster m) {
-            m.adjustHitPoints(-damage);
-            if (m.getHealthCursor() != null) {
-                m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
+            if (!m.isDead()) {
+                m.adjustHitPoints(-damage);
+                if (m.getHealthCursor() != null) {
+                    m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
+                }
+                log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
             }
-            log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
         } else if (defender instanceof CharacterRecord p) {
-            p.adjustHP(-damage);
-            log(String.format("%s strikes %s who was hit for %d damage!", attName, p.name.toUpperCase(), damage), Color.RED);
+            if (!p.isDead()) {
+                p.adjustHP(-damage);
+                log(String.format("%s strikes %s who was hit for %d damage!", attName, p.name.toUpperCase(), damage), Color.RED);
+            }
         }
     }
 
@@ -394,6 +398,21 @@ public abstract class Combat implements Constants {
             case MONTINO:
                 spellGroupAffect(caster, spell, Status.SILENCED);
                 break;
+            case DILTO:
+            case MORLIS:
+            case MAMORLIS:
+                spellGroupAffect(caster, spell, Status.AFRAID);
+                break;
+            case DIALKO:
+                for (CharacterRecord p : players) {
+                    p.status.set(Status.PARALYZED, 0);
+                    p.status.set(Status.ASLEEP, 0);
+                }
+                for (MutableMonster m : monsters) {
+                    m.status().set(Status.PARALYZED, 0);
+                    m.status().set(Status.ASLEEP, 0);
+                }
+                break;
             case DIOS:
             case DIAL:
             case DIALMA:
@@ -425,21 +444,6 @@ public abstract class Combat implements Constants {
             case MASOPIC:
             case MAPORFIC:
                 spellGroupACModify(caster, spell.getHitBonus());
-                break;
-            case DILTO:
-            case MORLIS:
-            case MAMORLIS:
-                spellGroupEnemyACModify(caster, spell.getHitBonus());
-                break;
-            case DIALKO:
-                for (CharacterRecord p : players) {
-                    p.status.set(Status.PARALYZED, 0);
-                    p.status.set(Status.ASLEEP, 0);
-                }
-                for (MutableMonster m : monsters) {
-                    m.status().set(Status.PARALYZED, 0);
-                    m.status().set(Status.ASLEEP, 0);
-                }
                 break;
         }
 
@@ -576,7 +580,7 @@ public abstract class Combat implements Constants {
                 if (p.savingThrowSpell()) {
                     log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    p.status.set(effect, 3);
+                    p.status.set(effect, Math.abs(spell.getHitBonus()));
                 }
             }
         }
@@ -586,7 +590,7 @@ public abstract class Combat implements Constants {
                 if (unaffected) {
                     log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
                 } else {
-                    mm.status().set(effect, 3);
+                    mm.status().set(effect, Math.abs(spell.getHitBonus()));
                 }
             }
         }

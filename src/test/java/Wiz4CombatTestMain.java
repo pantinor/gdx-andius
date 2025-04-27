@@ -67,18 +67,18 @@ public class Wiz4CombatTestMain extends Game {
 //
 //            ctx.players()[0].inventory.add(WER_ITEMS.get(7));
             List<MutableMonster> mms = new ArrayList<>();
-            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(3)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(4)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(6)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(0)));
-            mms.add(new MutableMonster(WER_MONSTERS.get(0)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
+            mms.add(new MutableMonster(WER_MONSTERS.get(108)));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(448), null, null));
-            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(499), null, null));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], ctx.saveGame.players[0].summonedMonsters, WER4_CHARS.get(448), null, null));
+            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(454), null, null));
 
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(77), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));

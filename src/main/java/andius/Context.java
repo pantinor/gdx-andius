@@ -6,6 +6,13 @@
 package andius;
 
 import andius.Constants.Status;
+import static andius.Constants.Status.AFRAID;
+import static andius.Constants.Status.ASHES;
+import static andius.Constants.Status.ASLEEP;
+import static andius.Constants.Status.PARALYZED;
+import static andius.Constants.Status.POISONED;
+import static andius.Constants.Status.SILENCED;
+import static andius.Constants.Status.STONED;
 import andius.objects.Aura;
 import andius.objects.Dice;
 import andius.objects.Item;
@@ -139,20 +146,39 @@ public class Context {
     }
 
     public void endTurn() {
-        int decr_interval = 50;
         for (CharacterRecord player : this.saveGame.players) {
             if (!player.isDead()) {
-                player.submorsels -= decr_interval;
-                if (player.submorsels < 0) {
-                    player.submorsels = 100;
 
-                    player.decrementStatusEffects();
+                player.adjustHP(player.regenerationPoints());
+
+                for (Status s : Status.values()) {
+                    int roll = Utils.RANDOM.nextInt(100);
+                    boolean decr = false;
+                    switch (s) {
+                        case AFRAID:
+                            decr = roll < Math.max(player.level * 10, 50);
+                            break;
+                        case SILENCED:
+                        case ASLEEP:
+                            decr = roll < Math.max(player.level * 20, 50);
+                            break;
+                        case POISONED:
+                        case PARALYZED:
+                            decr = roll < Math.max(player.level * 7, 50);
+                            break;
+                        case STONED:
+                            break;
+                        case ASHES:
+                            break;
+
+                    }
+                    if (decr) {
+                        player.status.decrement(s);
+                    }
 
                     if (player.status.has(Status.POISONED)) {
                         player.adjustHP(-1);
                     }
-
-                    player.adjustHP(player.regenerationPoints());
                 }
             }
         }

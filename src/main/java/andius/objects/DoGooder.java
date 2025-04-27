@@ -36,8 +36,8 @@ public class DoGooder {
     public String slogan;
 
     public boolean savingThrowBreath() {
-        int roll = Utils.RANDOM.nextInt(100) + 1;
-        int base = this.charlev / 5;
+        int roll = Utils.RANDOM.nextInt(20) + 1;
+        int base = Math.max(20 - this.charlev / 5 - this.attributes[5] / 6, 1);
         int raceBonus = 0;
         if (this.race == Race.DWARF) {
             raceBonus += 4;
@@ -48,12 +48,12 @@ public class DoGooder {
         } else if (this.characterClass == ClassType.THIEF) {
             classBonus += 3;
         }
-        return roll < (base + raceBonus + classBonus) * 5;
+        return roll > Math.max(base - raceBonus - classBonus, 1);
     }
 
     public boolean savingThrowSpell() {
-        int roll = Utils.RANDOM.nextInt(100) + 1;
-        int base = this.charlev / 5;
+        int roll = Utils.RANDOM.nextInt(20) + 1;
+        int base = Math.max(20 - this.charlev / 5 - this.attributes[5] / 6, 1);
         int raceBonus = 0;
         if (this.race == Race.HOBBIT) {
             raceBonus += 3;
@@ -64,12 +64,12 @@ public class DoGooder {
         } else if (this.characterClass == ClassType.BISHOP || this.characterClass == ClassType.SAMURAI || this.characterClass == ClassType.NINJA) {
             classBonus += 2;
         }
-        return roll < (base + raceBonus + classBonus) * 5;
+        return roll > Math.max(base - raceBonus - classBonus, 1);
     }
 
     public boolean savingThrowPetrify() {
-        int roll = Utils.RANDOM.nextInt(100) + 1;
-        int base = this.charlev / 5;
+        int roll = Utils.RANDOM.nextInt(20) + 1;
+        int base = Math.max(20 - this.charlev / 5 - this.attributes[5] / 6, 1);
         int raceBonus = 0;
         if (this.race == Race.GNOME) {
             raceBonus += 2;
@@ -80,12 +80,12 @@ public class DoGooder {
         } else if (this.characterClass == ClassType.BISHOP || this.characterClass == ClassType.LORD || this.characterClass == ClassType.NINJA) {
             classBonus += 2;
         }
-        return roll < (base + raceBonus + classBonus) * 5;
+        return roll > Math.max(base - raceBonus - classBonus, 1);
     }
 
     public boolean savingThrowDeath() {
-        int roll = Utils.RANDOM.nextInt(100) + 1;
-        int base = this.charlev / 5;
+        int roll = Utils.RANDOM.nextInt(20) + 1;
+        int base = Math.max(20 - this.charlev / 5 - this.attributes[5] / 6, 1);
         int raceBonus = 0;
         if (this.race == Race.HUMAN) {
             raceBonus += 1;
@@ -96,7 +96,7 @@ public class DoGooder {
         } else if (this.characterClass == ClassType.SAMURAI || this.characterClass == ClassType.LORD) {
             classBonus += 2;
         }
-        return roll < (base + raceBonus + classBonus) * 5;
+        return roll > Math.max(base - raceBonus - classBonus, 1);
     }
 
     @Override

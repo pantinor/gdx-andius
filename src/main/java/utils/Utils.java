@@ -280,6 +280,10 @@ public class Utils {
             strMod = 3;
         }
 
+        if (attacker.status.has(Status.AFRAID)) {
+            strMod = -3;
+        }
+
         THAC0 -= strMod;
 
         THAC0 -= attacker.attackHitModifier();

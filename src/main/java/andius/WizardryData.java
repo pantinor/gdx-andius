@@ -1158,13 +1158,6 @@ public class WizardryData {
 
                             if (ci.val[1] >= 0 && ci.val[2] >= 0 && ci.val[2] <= 231 && cell.summoningCircle == null) {
                                 cell.message = getMessage(messages, ci.val[1]);
-                                if (cell.message == null && cell.summoningCircle == null && cell.encounterID == -1) {
-                                    cell.tbd = true;
-                                }
-                            }
-
-                            if (ci.val[0] == 0 && ci.val[1] == 0 && ci.val[2] < 0 && cell.summoningCircle == null) {
-                                cell.tbd = true;
                             }
 
                             mazeOfWanderingHelper(x, y, cell, ci, messages);
@@ -1345,7 +1338,6 @@ public class WizardryData {
         public boolean rock;
         public boolean teleport;
         public boolean spellsBlocked;
-        public boolean tbd;
 
         public int feeAmount;
         public int tradeItem1;
@@ -1554,7 +1546,6 @@ public class WizardryData {
                 if (x == 15 && y == 18) {
                     cell.message = getMessage(messages, 94);
                 }
-                cell.tbd = false;
             }
 
             if (ci.val[0] == 13 && ci.val[1] == 210) {
@@ -1694,43 +1685,33 @@ public class WizardryData {
                     }
                     if (x == 1 && y == 2 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 28);
-                        c.tbd = false;
                     }
                     if (x == 14 && y == 13 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 31);
-                        c.tbd = false;
                     }
                     if (x == 6 && y == 11 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 36);
-                        c.tbd = false;
                     }
                     if (x == 6 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 37);
-                        c.tbd = false;
                     }
                     if (x == 7 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 38);
-                        c.tbd = false;
                     }
                     if (x == 10 && y == 10 && l.level == 10) {
                         c.message = getMessage(WER_MESSAGES, 44);
-                        c.tbd = false;
                     }
                     if (x == 10 && y == 9 && l.level == 10) {
                         c.function = (Context ctx, BaseScreen screen) -> new GatesOfHellDialog(ctx, screen);
-                        c.tbd = false;
                     }
                     if (x == 19 && y == 8 && l.level == 9) {
                         c.message = getMessage(WER_MESSAGES, 56);
-                        c.tbd = false;
                     }
                     if (x == 19 && y == 10 && l.level == 9) {
                         c.message = getMessage(WER_MESSAGES, 54);
-                        c.tbd = false;
                     }
                     if (x == 0 && y == 1 && l.level == 9) {
                         c.message = getMessage(WER_MESSAGES, 57);
-                        c.tbd = false;
                     }
                     if (x == 9 && y == 0 && l.level == 9) {
                         c.itemObtained = 88;//golden pyrite
@@ -1738,40 +1719,34 @@ public class WizardryData {
                     if (x == 1 && y == 14 && l.level == 9) {
                         c.message = new Message(getMessage(WER_MESSAGES, 149), getMessage(WER_MESSAGES, 154), getMessage(WER_MESSAGES, 148));
                         c.itemObtained = 12;
-                        c.tbd = false;
                     }
                     if (x == 0 && y == 1 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 71);
-                        c.tbd = false;
+
                     }
                     if (((x == 2 && (y == 0 || y == 19)) || (x == 4 && (y == 1 || y == 18))) && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 70);
-                        c.tbd = false;
                     }
                     if (x == 8 && y == 6 && l.level == 8) {
                         c.itemRequired = 5;//winged boots
-                        c.tbd = false;
                     }
                     if (x == 8 && y == 5 && l.level == 8) {
                         c.hiddenEastDoor = true;//dreampainter room
                     }
                     if (x == 14 && y == 8 && l.level == 8) {
                         c.itemRequired = 103;//black candle
-                        c.tbd = false;
                     }
                     if (x == 18 && y == 9 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 72);
-                        c.tbd = false;
+
                         c.lair = false;
                     }
                     if (x == 18 && y == 10 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 73);
-                        c.tbd = false;
                         c.lair = false;
                     }
                     if (x == 19 && y == 9 && l.level == 8) {
                         c.function = (Context ctx, BaseScreen screen) -> new ZigguratAltarDialog(ctx, screen);
-                        c.tbd = false;
                         c.lair = false;
                     }
                     if (x == 19 && y == 10 && l.level == 8) {
@@ -1779,38 +1754,31 @@ public class WizardryData {
                     }
                     if (x == 18 && y == 8 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 74);
-                        c.tbd = false;
                     }
                     if (x == 18 && y == 11 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 75);
-                        c.tbd = false;
                     }
                     if (x == 1 && y == 0 && l.level == 6) {
                         c.message = getMessage(WER_MESSAGES, 102);
-                        c.tbd = false;
                     }
                     if (x == 0 && y == 1 && l.level == 6) {
                         c.message = getMessage(WER_MESSAGES, 102);
-                        c.tbd = false;
                     }
                     if (x == 18 && y == 9 && l.level == 6) {
                         c.itemObtained = 89;//oxygen mask
                         c.message = getMessage(WER_MESSAGES, 100);
-                        c.tbd = false;
                     }
                     if (x == 12 && y == 15 && l.level == 2) {
                         c.message = getMessage(WER_MESSAGES, 97);
                     }
                     if (x == 14 && y == 3 && l.level == 3) {
                         c.function = (Context ctx, BaseScreen screen) -> new VanishingCreamDialog(ctx, screen);
-                        c.tbd = false;
                         c.lair = false;
                         c.encounterID = -1;
                         c.message = null;
                     }
                     if (x == 2 && y == 13 && l.level == 2) {
                         c.function = (Context ctx, BaseScreen screen) -> new BuyStTreborsRumpDialog(ctx, screen);
-                        c.tbd = false;
                         c.lair = false;
                         c.encounterID = -1;
                         c.message = null;
@@ -1823,7 +1791,6 @@ public class WizardryData {
                     }
                     if (x == 0 && y == 0 && l.level == 1) {
                         c.message = getMessage(WER_MESSAGES, 120);
-                        c.tbd = false;
                     }
                     if (x == 1 && y == 9 && l.level == 1) {
                         c.encounterID = -1;
@@ -1832,24 +1799,19 @@ public class WizardryData {
                         c.message = getMessage(WER_MESSAGES, 121);
                         c.tradeItem1 = 5;
                         c.tradeItem2 = 0;//lose the winged boots for traversing the castle so pits are not voided
-                        c.tbd = false;
                     }
                     if (x == 3 && y == 9 && l.level == 1) {
                         c.message = getMessage(WER_MESSAGES, 122);
                         c.encounterID = 402;//training squad 3
-                        c.tbd = false;
                     }
                     if (x == 3 && y == 12 && l.level == 1) {
-                        c.message = getMessage(WER_MESSAGES, 129);
-                        c.tbd = false;//boltacs
+                        c.message = getMessage(WER_MESSAGES, 129);//boltacs
                     }
                     if (x == 4 && y == 12 && l.level == 1) {
                         c.encounterID = 408;//anti shoplifting unit
-                        c.tbd = false;
                     }
                     if (x == 10 && y == 16 && l.level == 1) {
-                        c.message = getMessage(WER_MESSAGES, 124);
-                        c.tbd = false;//adv inn
+                        c.message = getMessage(WER_MESSAGES, 124); //adv inn
                     }
                     if (x == 9 && y == 16 && l.level == 1) {
                         c.encounterID = -1;
@@ -1861,7 +1823,7 @@ public class WizardryData {
                         c.encounterGiveItem = 110;//rallying horn
                         c.encounterTradeSuccessMessage = new Message("");
                         c.encounterID = 454;
-                        c.tbd = false;
+
                     }
                     if (x == 16 && y == 9 && l.level == 13) {//council of barons
                         c.message = new Message(getMessage(WER_MESSAGES, 143), getMessage(WER_MESSAGES, 144));
@@ -1869,13 +1831,11 @@ public class WizardryData {
                         c.encounterGiveItem = 111;//signet ring
                         c.encounterTradeSuccessMessage = new Message("");
                         c.encounterID = 460;
-                        c.tbd = false;
                     }
                     if (x == 9 && y == 13 && l.level == 1) {//von halstern chivalry
                         c.message = new Message(getMessage(WER_MESSAGES, 110));
                         c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
                         c.encounterID = 442;
-                        c.tbd = false;
                     }
                     if (x == 9 && y == 12 && l.level == 1) {
                         c.elevator = false;
@@ -1900,13 +1860,11 @@ public class WizardryData {
                     if (x == 16 && y == 13 && l.level == 1) {
                         c.message = new Message(getMessage(WER_MESSAGES, 152), getMessage(WER_MESSAGES, 155));
                         c.itemObtained = -1;
-                        c.tbd = false;
                         c.encounterID = -1;
                         c.lair = false;
                     }
                     if (x == 16 && y == 5 && l.level == 1) {
                         c.function = (Context ctx, BaseScreen screen) -> new BathInPoolDialog(ctx, screen);
-                        c.tbd = false;
                         c.lair = false;
                         c.encounterID = -1;
                         c.message = null;
@@ -1917,7 +1875,6 @@ public class WizardryData {
                         c.encounterTakeItem = 19;//pennencaux
                         c.encounterGiveItem = 109;//gold orb
                         c.encounterID = 436;
-                        c.tbd = false;
                     }
                     if (x == 11 && y == 14 && l.level == 13) {//order of laurel
                         c.message = new Message(getMessage(WER_MESSAGES, 104), getMessage(WER_MESSAGES, 105));
@@ -1925,7 +1882,6 @@ public class WizardryData {
                         c.encounterTakeItem = 18;//dabpuce
                         c.encounterGiveItem = 108;//arrow truth
                         c.encounterID = 430;
-                        c.tbd = false;
                     }
                     if (x == 13 && y == 15 && l.level == 13) {//order of pelicans
                         c.message = new Message(getMessage(WER_MESSAGES, 136));
@@ -1935,7 +1891,6 @@ public class WizardryData {
                         c.fightIfDoNotOwnAnyOfItems.add(9);//east wind sword, west wind sword dragons claw
                         c.encounterGiveItem = 20;//maint cap
                         c.encounterID = 424;
-                        c.tbd = false;
                     }
                     if (x == 11 && y == 15 && l.level == 13) {//ladies of the rose
                         c.message = new Message(getMessage(WER_MESSAGES, 131), getMessage(WER_MESSAGES, 134));
@@ -1943,11 +1898,9 @@ public class WizardryData {
                         c.encounterTakeItem = 120;//bar of soap
                         c.encounterGiveItem = 17;//crystal rose
                         c.encounterID = 418;
-                        c.tbd = false;
                     }
                     if (x == 15 && y == 9 && l.level == 14) {//Great Dukes of the Realm
                         c.function = (Context ctx, BaseScreen screen) -> new DukesDialog(ctx, screen);
-                        c.tbd = false;
                         c.lair = false;
                         c.encounterID = -1;
                         c.message = null;
@@ -1955,7 +1908,6 @@ public class WizardryData {
                     if (x == 17 && y == 9 && l.level == 14) {
                         c.itemObtainedFromRiddle = 112;//mythril gloves
                         c.encounterID = -1;
-                        c.tbd = false;
                         c.northWall = false;
                         c.eastWall = false;
                         c.westWall = false;
@@ -1963,13 +1915,12 @@ public class WizardryData {
                     if (x == 9 && y == 11 && l.level == 14) {
                         c.message = new Message(getMessage(WER_MESSAGES, 204), getMessage(WER_MESSAGES, 205));
                         c.itemObtained = 14;//void transducer
-                        c.tbd = false;
                     }
                     if (x == 9 && y == 11 && l.level == 13) {
                         c.encounterID = -1;
                     }
                     if (x == 9 && y == 8 && l.level == 13) {
-                        c.encounterID = 448;//all stars
+                        c.encounterID = 448;//soft talk all stars
                     }
                     if (x == 9 && y == 6 && l.level == 14) {
                         c.encounterID = -1;

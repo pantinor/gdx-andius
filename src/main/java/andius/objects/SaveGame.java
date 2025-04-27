@@ -478,8 +478,8 @@ public class SaveGame implements Constants {
         }
 
         public boolean savingThrowBreath() {
-            int roll = Utils.RANDOM.nextInt(100) + 1;
-            int base = this.level / 5 + this.luck / 6;
+            int roll = Utils.RANDOM.nextInt(20) + 1;
+            int base = Math.max(20 - this.level / 5 - this.luck / 6, 1);
             int raceBonus = 0;
             if (this.race == Race.DWARF) {
                 raceBonus += 4;
@@ -490,12 +490,12 @@ public class SaveGame implements Constants {
             } else if (this.classType == ClassType.THIEF) {
                 classBonus += 3;
             }
-            return roll < (base + raceBonus + classBonus) * 5;
+            return roll > Math.max(base - raceBonus - classBonus, 1);
         }
 
         public boolean savingThrowSpell() {
-            int roll = Utils.RANDOM.nextInt(100) + 1;
-            int base = this.level / 5 + this.luck / 6;
+            int roll = Utils.RANDOM.nextInt(20) + 1;
+            int base = Math.max(20 - this.level / 5 - this.luck / 6, 1);
             int raceBonus = 0;
             if (this.race == Race.HOBBIT) {
                 raceBonus += 3;
@@ -506,12 +506,12 @@ public class SaveGame implements Constants {
             } else if (this.classType == ClassType.BISHOP || this.classType == ClassType.SAMURAI || this.classType == ClassType.NINJA) {
                 classBonus += 2;
             }
-            return roll < (base + raceBonus + classBonus) * 5;
+            return roll > Math.max(base - raceBonus - classBonus, 1);
         }
 
         public boolean savingThrowPetrify() {
-            int roll = Utils.RANDOM.nextInt(100) + 1;
-            int base = this.level / 5 + this.luck / 6;
+            int roll = Utils.RANDOM.nextInt(20) + 1;
+            int base = Math.max(20 - this.level / 5 - this.luck / 6, 1);
             int raceBonus = 0;
             if (this.race == Race.GNOME) {
                 raceBonus += 2;
@@ -522,12 +522,12 @@ public class SaveGame implements Constants {
             } else if (this.classType == ClassType.BISHOP || this.classType == ClassType.LORD || this.classType == ClassType.NINJA) {
                 classBonus += 2;
             }
-            return roll < (base + raceBonus + classBonus) * 5;
+            return roll > Math.max(base - raceBonus - classBonus, 1);
         }
 
         public boolean savingThrowDeath() {
-            int roll = Utils.RANDOM.nextInt(100) + 1;
-            int base = this.level / 5 + this.luck / 6;
+            int roll = Utils.RANDOM.nextInt(20) + 1;
+            int base = Math.max(20 - this.level / 5 - this.luck / 6, 1);
             int raceBonus = 0;
             if (this.race == Race.HUMAN) {
                 raceBonus += 1;
@@ -538,7 +538,7 @@ public class SaveGame implements Constants {
             } else if (this.classType == ClassType.SAMURAI || this.classType == ClassType.LORD) {
                 classBonus += 2;
             }
-            return roll < (base + raceBonus + classBonus) * 5;
+            return roll > Math.max(base - raceBonus - classBonus, 1);
         }
 
         @Override

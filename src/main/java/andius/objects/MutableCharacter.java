@@ -241,47 +241,40 @@ public class MutableCharacter implements Mutable {
 
     @Override
     public Spells castMageSpell() {
-
         int spLvl = getCurrentMageSpellLevel();
-
         for (int i = spLvl; i >= 0; i--) {
             for (Spells s : this.dogooder.knownSpells) {
                 if (s.getType() == ClassType.MAGE && s.getLevel() == i + 1) {
-                    mageSpellsLevels[spLvl]--;
+                    mageSpellsLevels[i]--;
                     return s;
                 }
             }
-            for (Spells s : Spells.values()) {
-                if (s.getType() == ClassType.MAGE && s.getLevel() == i + 1) {
-                    mageSpellsLevels[spLvl]--;
-                    return s;
-                }
+
+            Spells tmp = Spells.randomCombatSpell(ClassType.MAGE, i + 1);
+            if (tmp != null) {
+                mageSpellsLevels[i]--;
+                return tmp;
             }
         }
-
         return null;
     }
 
     @Override
     public Spells castPriestSpell() {
-
         int spLvl = getCurrentPriestSpellLevel();
-
         for (int i = spLvl; i >= 0; i--) {
             for (Spells s : this.dogooder.knownSpells) {
                 if (s.getType() == ClassType.PRIEST && s.getLevel() == i + 1) {
-                    priestSpellLevels[spLvl]--;
+                    priestSpellLevels[i]--;
                     return s;
                 }
             }
-            for (Spells s : Spells.values()) {
-                if (s.getType() == ClassType.PRIEST && s.getLevel() == i + 1) {
-                    priestSpellLevels[spLvl]--;
-                    return s;
-                }
+            Spells tmp = Spells.randomCombatSpell(ClassType.PRIEST, i + 1);
+            if (tmp != null) {
+                priestSpellLevels[i]--;
+                return tmp;
             }
         }
-
         return null;
     }
 
