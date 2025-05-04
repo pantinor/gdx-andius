@@ -1,5 +1,7 @@
 package andius.objects;
 
+import andius.Constants.CharacterType;
+import andius.Constants.Resistance;
 import java.util.Objects;
 
 public class Item implements Comparable<Item> {
@@ -44,6 +46,9 @@ public class Item implements Comparable<Item> {
     public String alignment;
     public int changeTo;
     public int changeChance;
+    public int wepvsty2Flags;             // protection
+    public int wepvsty3Flags;             // resistance
+    public int wepvstyFlags;              // purposed
 
     @Override
     public Item clone() {
@@ -69,11 +74,29 @@ public class Item implements Comparable<Item> {
         i.alignment = this.alignment;
         i.changeTo = this.changeTo;
         i.changeChance = this.changeChance;
+        i.wepvsty2Flags = this.wepvsty2Flags;
+        i.wepvsty3Flags = this.wepvsty3Flags;
+        i.wepvstyFlags = this.wepvstyFlags;
         return i;
     }
 
     public boolean canUse(ClassType ct) {
         return this.usable.indexOf(ct.getAbbr()) != -1;
+    }
+
+    public boolean purposed(CharacterType type) {
+        int bitIndex = type.ordinal();
+        return ((wepvstyFlags >>> bitIndex) & 1) != 0;
+    }
+
+    public boolean protection(CharacterType type) {
+        int bitIndex = type.ordinal();
+        return ((wepvsty2Flags >>> bitIndex) & 1) != 0;
+    }
+
+    public boolean resistance(Resistance type) {
+        int bitIndex = type.ordinal();
+        return ((wepvsty3Flags >>> bitIndex) & 1) != 0;
     }
 
     @Override

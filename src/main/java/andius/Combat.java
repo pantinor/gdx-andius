@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import utils.Loggable;
 import utils.Utils;
+import static utils.Utils.RANDOM;
 
 public abstract class Combat implements Constants {
 
@@ -79,7 +80,7 @@ public abstract class Combat implements Constants {
         Monster partner = this.contextMap.scenario().monsters().get(monster.getPartnerID());
 
         int numPartners = 0;
-        boolean hasPartner = Utils.RANDOM.nextInt(100) + 1 < monster.getPartnerOdds();
+        boolean hasPartner = Utils.RANDOM.nextInt(100) + 1 <= monster.getPartnerOdds();
         if (hasPartner) {
             numPartners = partner.getGroupSize().roll();
         } else {
@@ -136,15 +137,41 @@ public abstract class Combat implements Constants {
                                     }
                                 }
                             }
+                        } else if (action.dispel) {
+                            for (MutableMonster mon : monsters) {
+                                if (mon.getCurrentHitPoints() > 0 && mon.getMonsterType() == CharacterType.UNDEAD) {
+                                    int roll = RANDOM.nextInt(100) + 1;
+                                    if (roll < 50 + (player.level * 5) - (mon.getLevel() * 10)) {
+                                        log(String.format("%s dispels %s and sends it back to the abyss!", player.name.toUpperCase(), defender.name()), Color.SKY);
+                                    } else {
+                                        log(String.format("%s failed to dispel %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
+                                    }
+                                }
+                            }
                         } else {
-                            boolean hit = Utils.attackHit(player, defender);
-                            if (hit) {
-                                Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                                int damage = Utils.dealDamage(weapon, defender);
-                                log(defender.getDamageDescription(player.name, damage, weapon.name), Color.SCARLET);
+                            int hpDamage = 0;
+                            int hitsCount = 0;
+                            Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
+
+                            for (int i = 0; i < player.extraSwings(); i++) {
+                                boolean hit = Utils.attackHit(player, defender);
+                                if (hit) {
+                                    hitsCount++;
+                                    hpDamage += Utils.dealDamage(player, weapon, defender);
+                                }
+                            }
+
+                            if (hpDamage > 0) {
+                                log(String.format("%s %s %s %d times for %d damage with %s.",
+                                        player.name.toUpperCase(),
+                                        HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                        defender.name().toUpperCase(),
+                                        hitsCount,
+                                        hpDamage, weapon.name), Color.SCARLET);
                             } else {
                                 log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                             }
+
                         }
                     }
                 }
@@ -293,18 +320,49 @@ public abstract class Combat implements Constants {
     public CharacterRecord pickPlayer() {
 
         List<CharacterRecord> shuffled = new ArrayList();
+
         for (CharacterRecord p : players) {
             if (!p.isDead()) {
                 shuffled.add(p);
             }
         }
+
         Collections.shuffle(shuffled);
 
         if (shuffled.isEmpty()) {
             return null;
         }
 
-        return shuffled.get(0);
+        if (shuffled.size() == 1) {
+            return shuffled.get(0);
+        }
+
+        CharacterRecord[] players = ctx.players();
+
+        while (true) {
+            int roll = RANDOM.nextInt(15);
+            int playerIndex = switch (roll) {
+                case 0, 1, 2, 3 ->
+                    0;
+                case 4, 5, 6, 7 ->
+                    1;
+                case 8, 9, 10, 11 ->
+                    2;
+                case 12 ->
+                    3;
+                case 13 ->
+                    4;
+                case 14 ->
+                    5;
+                default ->
+                    -1;
+            };
+
+            if (playerIndex >= 0 && players[playerIndex] != null && !players[playerIndex].isDead()) {
+                return players[playerIndex];
+            }
+        }
+
     }
 
     private void damage(Object attacker, Object defender, int damage, String type) {
@@ -326,7 +384,11 @@ public abstract class Combat implements Constants {
                 if (m.getHealthCursor() != null) {
                     m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
                 }
-                log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
+                log(String.format("%s %s %s for %d damage with %s.",
+                        attName.toUpperCase(),
+                        HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                        m.name().toUpperCase(),
+                        damage, type), Color.SCARLET);
             }
         } else if (defender instanceof CharacterRecord p) {
             if (!p.isDead()) {
@@ -633,6 +695,7 @@ public abstract class Combat implements Constants {
         public final CharacterRecord player;
         public Spells spell;
         public Item item;
+        public boolean dispel;
         public MutableMonster target;
 
         public Action(CharacterRecord player) {
@@ -648,6 +711,9 @@ public abstract class Combat implements Constants {
             }
             if (this.item != null) {
                 sb.append(this.item.spell).append(" - ");
+            }
+            if (this.dispel) {
+                sb.append("Dispel Undead").append(" - ");
             }
             if (this.target != null) {
                 Monster m = (Monster) this.target.baseType();
@@ -679,6 +745,13 @@ public abstract class Combat implements Constants {
         if (al != null && (i.spell.getArea() == SpellArea.COMBAT || i.spell.getArea() == SpellArea.ANY_TIME)) {
             al.item = i;
             al.spell = null;
+        }
+    }
+
+    public final void setAction(int index, boolean dispel) {
+        Action al = this.actions.get(index);
+        if (al != null) {
+            al.dispel = dispel;
         }
     }
 

@@ -37,6 +37,7 @@ import javax.imageio.ImageIO;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import org.apache.commons.io.IOUtils;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -709,6 +710,70 @@ public class ObjectsTestNG {
 
         float[][] m = fov.lightMap();
         assertTrue(m[4 + 9][8] > 0);//wrapped
+
+    }
+
+    //@Test
+    public void parseDisassembledPascal() throws Exception {
+
+        FileInputStream fstream = new FileInputStream("D:\\Wizardry_i_SourceCode\\WizardryCode\\Wiz1WizardryPascal.txt");
+
+        java.util.Map<Integer, List<String>> groupedLines = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(fstream))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.trim().split("\\s+", 3);
+                if (parts.length < 3) {
+                    continue;
+                }
+                int key = Integer.parseInt(parts[1]);
+                String content = parts[2];
+
+                groupedLines.computeIfAbsent(key, k -> new ArrayList<>()).add(content);
+            }
+
+        }
+
+        java.util.Map<Integer, java.util.Map<Integer, List<String>>> groups = new HashMap<>();
+
+        for (int j : groupedLines.keySet()) {
+
+            java.util.Map<Integer, List<String>> subLines = new HashMap<>();
+
+            for (String line : groupedLines.get(j)) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.trim().split("\\s+", 3);
+                if (parts.length < 3) {
+                    continue;
+                }
+
+                int key = Integer.parseInt(parts[0].split(":")[0]);
+                String content = parts[2];
+
+                subLines.computeIfAbsent(key, k -> new ArrayList<>()).add(content);
+            }
+
+            groups.put(j, subLines);
+
+        }
+
+        for (int k : groups.keySet()) {
+            for (int j : groups.get(k).keySet()) {
+                System.out.printf("%d - %d - ", k, j, groups.get(k).get(j));
+                for (String line : groups.get(k).get(j)) {
+                    System.out.print(line + ";");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
 
     }
 

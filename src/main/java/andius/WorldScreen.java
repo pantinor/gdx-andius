@@ -4,7 +4,9 @@ import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.objects.Direction;
 import static andius.Andius.CTX;
+import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
+import andius.objects.Item;
 import andius.objects.Portal;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
@@ -292,8 +294,15 @@ public class WorldScreen extends BaseScreen {
 
         TiledMapTileLayer forest = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("forest");
         TiledMapTileLayer.Cell c3 = forest.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
+        
+        Item wingedboots = CTX.partyHasItem(5, Scenario.WER.ordinal());
+        Item markSnake = CTX.partyHasItem(104, Scenario.PMO.ordinal());
+        Item markFire = CTX.partyHasItem(105, Scenario.PMO.ordinal());
+        Item markForce = CTX.partyHasItem(103, Scenario.PMO.ordinal());
 
-        if (c1 == null && c2 == null && c3 == null) {
+        boolean canFly = (wingedboots != null || markSnake != null || markFire != null || markForce != null);
+
+        if (c1 == null && c2 == null && c3 == null && !canFly) {
             return null;
         }
 

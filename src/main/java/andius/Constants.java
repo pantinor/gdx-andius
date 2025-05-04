@@ -343,12 +343,6 @@ public interface Constants {
         ATTACK_AVATAR;
     }
 
-    public static final int[] THACO_PRIEST = new int[]{20, 20, 20, 18, 18, 18, 16, 16, 16, 14, 14, 14, 12, 12, 12, 10, 10, 10, 8, 8};
-    public static final int[] THACO_THIEF = new int[]{20, 20, 19, 19, 18, 18, 17, 17, 16, 16, 15, 15, 14, 14, 13, 13, 12, 12, 11, 11};
-    public static final int[] THACO_FIGHTER = new int[]{20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    public static final int[] THACO_MAGE = new int[]{20, 20, 20, 19, 19, 19, 18, 18, 18, 17, 17, 17, 16, 16, 16, 15, 15, 15, 14, 14};
-    public static final int[] THAC0_MONSTER = new int[]{20, 19, 19, 17, 17, 15, 15, 13, 13, 11, 11, 9, 9, 7, 7, 5, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
-
     public static final int[][] LEVEL_PROGRESSION_TABLE = new int[][]{
         {289709, 318529, 304132, 260639, 438479, 456601, 475008, 529756},
         {1000, 1100, 1050, 900, 1200, 1250, 1300, 1450},

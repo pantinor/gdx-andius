@@ -2,8 +2,16 @@ package andius.objects;
 
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
+import static andius.WizardryData.PMO_ITEMS_MAP;
 import andius.WizardryData.SummoningCircle;
-import andius.objects.Item.ItemType;
+import static andius.objects.ClassType.BISHOP;
+import static andius.objects.ClassType.FIGHTER;
+import static andius.objects.ClassType.LORD;
+import static andius.objects.ClassType.MAGE;
+import static andius.objects.ClassType.NINJA;
+import static andius.objects.ClassType.PRIEST;
+import static andius.objects.ClassType.SAMURAI;
+import static andius.objects.ClassType.THIEF;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
@@ -546,6 +554,104 @@ public class SaveGame implements Constants {
             return this.name.toUpperCase();
         }
 
+    }
+
+    public static CharacterRecord generatePlayer(int lvl, ClassType ctype, String name) {
+
+        CharacterRecord p = new CharacterRecord();
+
+        p.name = name;
+        p.classType = ctype;
+        p.level = 1;
+        p.hp = p.maxhp = 12;
+        p.gold = Utils.getRandomBetween(100, 200);
+        p.portaitIndex = Utils.RANDOM.nextInt(36);
+
+        if (lvl == 1) {
+            p.exp = 0;
+
+            if (ctype == ClassType.MAGE || ctype == ClassType.BISHOP) {
+                p.knownSpells.add(Spells.values()[1]);
+                p.knownSpells.add(Spells.values()[3]);
+                p.magePoints[0] = 2;
+            }
+            if (ctype == ClassType.PRIEST) {
+                p.knownSpells.add(Spells.values()[23]);
+                p.knownSpells.add(Spells.values()[24]);
+                p.clericPoints[0] = 2;
+            }
+
+        } else if (lvl <= 12) {
+            p.exp = LEVEL_PROGRESSION_TABLE[lvl][ctype.ordinal()] - 5;
+        } else {
+            for (int i = 13; i <= lvl; i++) {
+                p.exp += LEVEL_PROGRESSION_TABLE[0][ctype.ordinal()];
+            }
+            p.exp -= 5;
+        }
+
+        p.str = Utils.getRandomBetween(10, 18);
+        p.intell = Utils.getRandomBetween(10, 18);
+        p.piety = Utils.getRandomBetween(10, 18);
+        p.vitality = Utils.getRandomBetween(10, 18);
+        p.agility = Utils.getRandomBetween(10, 18);
+        p.luck = Utils.getRandomBetween(10, 18);
+
+        int expnextlvl = p.checkAndSetLevel();
+        while (expnextlvl >= 0) {
+            p.maxhp += p.getMoreHP();
+
+            p.str = SaveGame.gainOrLose(p.str);
+            p.intell = SaveGame.gainOrLose(p.intell);
+            p.piety = SaveGame.gainOrLose(p.piety);
+            p.vitality = SaveGame.gainOrLose(p.vitality);
+            p.agility = SaveGame.gainOrLose(p.agility);
+            p.luck = SaveGame.gainOrLose(p.luck);
+
+            SaveGame.setSpellPoints(p);
+
+            SaveGame.tryLearn(p);
+
+            expnextlvl = p.checkAndSetLevel();
+        }
+
+        SaveGame.setSpellPoints(p);
+
+        p.hp = p.maxhp;
+
+        switch (ctype) {
+            case SAMURAI:
+            case LORD:
+            case FIGHTER:
+                p.armor = PMO_ITEMS_MAP.get("CHAIN MAIL");
+                p.weapon = PMO_ITEMS_MAP.get("LONG SWORD");
+                p.shield = PMO_ITEMS_MAP.get("SMALL SHIELD");
+                //p.glove = PMO_ITEMS_MAP.get("SILVER GLOVES");
+                break;
+            case MAGE:
+                p.armor = PMO_ITEMS_MAP.get("ROBES");
+                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                break;
+            case PRIEST:
+                p.armor = PMO_ITEMS_MAP.get("CHAIN MAIL");
+                p.weapon = PMO_ITEMS_MAP.get("ANOINTED FLAIL");
+                p.shield = PMO_ITEMS_MAP.get("SMALL SHIELD");
+                break;
+            case THIEF:
+                p.armor = PMO_ITEMS_MAP.get("LEATHER ARMOR");
+                p.weapon = PMO_ITEMS_MAP.get("SHORT SWORD");
+                break;
+            case BISHOP:
+                p.armor = PMO_ITEMS_MAP.get("ROBES");
+                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                break;
+            case NINJA:
+                p.armor = PMO_ITEMS_MAP.get("ROBES");
+                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                break;
+        }
+
+        return p;
     }
 
     public static int gainOrLose(int attrib) {

@@ -52,8 +52,6 @@ public interface Mutable {
 
     public void adjustHealthCursor();
 
-    public String getDamageDescription(String attackerName, int damage, String type);
-
     public void setACModifier(int acmodifier);
 
     public int getACModifier();

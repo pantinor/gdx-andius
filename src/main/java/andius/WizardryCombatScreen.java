@@ -5,6 +5,7 @@ import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import andius.WizardryData.MazeCell;
+import andius.objects.ClassType;
 import andius.objects.HealthCursor;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -171,6 +172,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                     if (sl.item != null) {
                         setAction(pl.index, sl.item);
                     }
+                    if (sl.dispel) {
+                        setAction(pl.index, true);
+                    }
                 }
             }
         });
@@ -313,21 +317,34 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
         final Spells spell;
         final Item item;
+        final boolean dispel;
 
         public SpellLabel(Spells spell) {
             super(spell.toString(), Andius.skin, "default-16");
             this.item = null;
             this.spell = spell;
+            this.dispel = false;
         }
 
         public SpellLabel(Item it) {
             super(it.name, Andius.skin, "default-16");
             this.item = it;
             this.spell = null;
+            this.dispel = false;
+        }
+
+        public SpellLabel() {
+            super("Dispel Undead", Andius.skin, "default-16");
+            this.item = null;
+            this.spell = null;
+            this.dispel = true;
         }
 
         @Override
         public String toString() {
+            if (this.dispel) {
+                return "Dispel Undead";
+            }
             return this.spell != null ? this.spell.label() : this.item.name + " - " + this.item.spell;
         }
 
@@ -507,6 +524,11 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
                     for (Spells s : player.knownSpells) {
                         addSpell(s);
+                    }
+                    if (player.classType == ClassType.PRIEST
+                            || (player.classType == ClassType.LORD && player.level >= 3)
+                            || (player.classType == ClassType.BISHOP && player.level >= 8)) {
+                        spellsList.getItems().add(new SpellLabel());
                     }
                     if (player.weapon != null && player.weapon.spell != null) {
                         addSpell(player.weapon);

@@ -1,9 +1,7 @@
 
 import andius.Constants;
-import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Constants.SpellArea;
 import andius.Context;
-import static andius.WizardryData.PMO_ITEMS_MAP;
 import andius.objects.ClassType;
 import static andius.objects.ClassType.BISHOP;
 import static andius.objects.ClassType.FIGHTER;
@@ -36,7 +34,6 @@ import andius.objects.Sound;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 import utils.Loggable;
-import utils.Utils;
 
 public class MonsterTest {
 
@@ -107,8 +104,8 @@ public class MonsterTest {
                 Context ctx = new Context();
                 ctx.setSaveGame(new SaveGame());
                 ctx.saveGame.players = new CharacterRecord[2];
-                ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
-                ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
+                ctx.saveGame.players[0] = SaveGame.generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
+                ctx.saveGame.players[1] = SaveGame.generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
                 //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
                 //ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
                 //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
@@ -305,16 +302,16 @@ public class MonsterTest {
 
     @Test
     public void testGenerateSaveGameTeamAtLevel() throws Exception {
-        int lvl = 3;
+        int lvl = 1;
         Context ctx = new Context();
         ctx.setSaveGame(new SaveGame());
         ctx.saveGame.players = new CharacterRecord[6];
-        ctx.saveGame.players[0] = generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
-        ctx.saveGame.players[1] = generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
-        ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
-        ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
-        ctx.saveGame.players[4] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
-        ctx.saveGame.players[5] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+        ctx.saveGame.players[0] = SaveGame.generatePlayer(lvl, ClassType.FIGHTER, "FRED");
+        ctx.saveGame.players[1] = SaveGame.generatePlayer(lvl, ClassType.FIGHTER, "SAM");
+        ctx.saveGame.players[2] = SaveGame.generatePlayer(lvl, ClassType.FIGHTER, "JACK");
+        ctx.saveGame.players[3] = SaveGame.generatePlayer(lvl, ClassType.PRIEST, "JOE");
+        ctx.saveGame.players[4] = SaveGame.generatePlayer(lvl, ClassType.MAGE, "JANE");
+        ctx.saveGame.players[5] = SaveGame.generatePlayer(lvl, ClassType.THIEF, "FRANK");
 
         ctx.saveGame.write("party-team.json");
     }
@@ -326,7 +323,7 @@ public class MonsterTest {
         ctx.saveGame.players = new CharacterRecord[1];
 
         int level = 6;
-        ctx.saveGame.players[0] = generatePlayer(level, ClassType.MAGE, "jane");
+        ctx.saveGame.players[0] = SaveGame.generatePlayer(level, ClassType.MAGE, "jane");
 
         assertEquals(ctx.saveGame.players[0].level, level);
 
@@ -334,91 +331,6 @@ public class MonsterTest {
         ctx.saveGame.wx = 10;
         ctx.saveGame.wy = 54;
         ctx.saveGame.write("party-mage.json");
-    }
-
-    private CharacterRecord generatePlayer(int lvl, ClassType ctype, String name) {
-
-        CharacterRecord p = new CharacterRecord();
-
-        p.name = name;
-        p.classType = ctype;
-        p.level = 1;
-        p.hp = 12;
-        p.gold = 3000;
-        p.portaitIndex = Utils.RANDOM.nextInt(36);
-
-        int tmp = 0;
-        if (lvl <= 12) {
-            tmp = LEVEL_PROGRESSION_TABLE[lvl][ctype.ordinal()];
-        } else {
-            for (int i = 13; i <= lvl; i++) {
-                tmp += LEVEL_PROGRESSION_TABLE[0][ctype.ordinal()];
-            }
-        }
-
-        p.exp = tmp - 5;
-
-        p.str = Utils.getRandomBetween(10, 18);
-        p.intell = Utils.getRandomBetween(10, 18);
-        p.piety = Utils.getRandomBetween(10, 18);
-        p.vitality = Utils.getRandomBetween(10, 18);
-        p.agility = Utils.getRandomBetween(10, 18);
-        p.luck = Utils.getRandomBetween(10, 18);
-
-        int expnextlvl = p.checkAndSetLevel();
-        while (expnextlvl >= 0) {
-            p.maxhp += p.getMoreHP();
-
-            p.str = SaveGame.gainOrLose(p.str);
-            p.intell = SaveGame.gainOrLose(p.intell);
-            p.piety = SaveGame.gainOrLose(p.piety);
-            p.vitality = SaveGame.gainOrLose(p.vitality);
-            p.agility = SaveGame.gainOrLose(p.agility);
-            p.luck = SaveGame.gainOrLose(p.luck);
-
-            SaveGame.setSpellPoints(p);
-
-            SaveGame.tryLearn(p);
-
-            expnextlvl = p.checkAndSetLevel();
-        }
-
-        SaveGame.setSpellPoints(p);
-
-        p.hp = p.maxhp;
-
-        switch (ctype) {
-            case SAMURAI:
-            case LORD:
-            case FIGHTER:
-                p.armor = PMO_ITEMS_MAP.get("PLATE MAIL");
-                p.weapon = PMO_ITEMS_MAP.get("LONG SWORD");
-                p.helm = PMO_ITEMS_MAP.get("HELM");
-                //p.glove = PMO_ITEMS_MAP.get("SILVER GLOVES");
-                break;
-            case MAGE:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
-                break;
-            case PRIEST:
-                p.armor = PMO_ITEMS_MAP.get("BREAST PLATE");
-                p.weapon = PMO_ITEMS_MAP.get("ANOINTED FLAIL");
-                break;
-            case THIEF:
-                p.armor = PMO_ITEMS_MAP.get("LEATHER + 1");
-                p.weapon = PMO_ITEMS_MAP.get("SHORT SWORD");
-                break;
-            case BISHOP:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
-                break;
-            case NINJA:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
-                break;
-        }
-
-        return p;
     }
 
 }

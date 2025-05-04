@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
-import static andius.Constants.HITMSGS;
 import andius.Constants.Resistance;
 import andius.Constants.Status;
 import java.util.List;
@@ -209,15 +208,6 @@ public class MutableMonster implements Mutable {
 
     public double getPercentDamaged() {
         return (double) currentHitPoints / maxHitPoints;
-    }
-
-    @Override
-    public String getDamageDescription(String attackerName, int damage, String type) {
-        return String.format("%s %s %s for %d damage with %s.",
-                attackerName.toUpperCase(),
-                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                name().toUpperCase(),
-                damage, type);
     }
 
     @Override

@@ -2,7 +2,6 @@ package andius.objects;
 
 import andius.Constants.Breath;
 import andius.Constants.CharacterType;
-import static andius.Constants.HITMSGS;
 import andius.Constants.Status;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Item.ItemType;
@@ -218,15 +217,6 @@ public class MutableCharacter implements Mutable {
     @Override
     public void adjustHealthCursor() {
         this.healthCursor.adjust(currentHitPoints, this.dogooder.hpMax);
-    }
-
-    @Override
-    public String getDamageDescription(String attackerName, int damage, String type) {
-        return String.format("%s %s %s for %d damage with %s.",
-                attackerName.toUpperCase(),
-                HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                name().toUpperCase(),
-                damage, type);
     }
 
     @Override

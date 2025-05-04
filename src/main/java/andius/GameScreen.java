@@ -298,7 +298,7 @@ public class GameScreen extends BaseScreen {
             TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
             if (cell != null && cell.getTile() != null && cell.getTile().getId() == (609 + 1)) { //gold pile tile id
-                RewardScreen rs = new RewardScreen(CTX, this.map, rand.nextInt(24));
+                RewardScreen rs = new RewardScreen(CTX, this.map, rand.nextInt(20));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
                 return false;

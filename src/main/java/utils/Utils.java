@@ -169,145 +169,49 @@ public class Utils {
 
     public static boolean attackHit(Mutable attacker, Mutable defender) {
         int roll = RANDOM.nextInt(20) + 1;
+        int chanceToHit = 20 - defender.getArmourClass() + defender.getACModifier() - attacker.hitModifier();
+        chanceToHit = Math.max(1, Math.min(chanceToHit, 19));
+        return roll >= chanceToHit;
+    }
 
-        if (roll == 20) {
-            return true;
-        }
-
-        if (roll == 1) {
-            return false;
-        }
-
-        int THAC0 = 0;
-        if (attacker.getLevel() > Constants.THAC0_MONSTER.length) {
-            THAC0 = Constants.THAC0_MONSTER[Constants.THAC0_MONSTER.length - 1];
-        } else {
-            THAC0 = Constants.THAC0_MONSTER[attacker.getLevel() - 1];
-        }
-
-        int chanceToHit = THAC0 - defender.getArmourClass();
-
-        chanceToHit += (defender.status().isDisabled() ? 3 : 0);
-
-        chanceToHit += attacker.hitModifier();
-
-        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] HMOD [%d] chance to  hit [%d] hit [%s]\n",
-        //        attacker.name(), defender.name(), roll, THAC0, defender.getArmourClass(), attacker.hitModifier(), chanceToHit, roll >= chanceToHit);
+    public static boolean attackHit(CharacterRecord attacker, Mutable defender) {
+        int roll = RANDOM.nextInt(20) + 1;
+        int chanceToHit = 20 - defender.getArmourClass() + defender.getACModifier() - attacker.attackHitModifier();
+        chanceToHit = Math.max(1, Math.min(chanceToHit, 19));
         return roll >= chanceToHit;
     }
 
     public static boolean attackHit(Mutable attacker, CharacterRecord defender) {
         int roll = RANDOM.nextInt(20) + 1;
-
-        if (roll == 20) {
-            return true;
-        }
-
-        if (roll == 1) {
-            return false;
-        }
-
-        int THAC0 = 0;
-        if (attacker.getLevel() > Constants.THAC0_MONSTER.length) {
-            THAC0 = Constants.THAC0_MONSTER[Constants.THAC0_MONSTER.length - 1];
-        } else {
-            THAC0 = Constants.THAC0_MONSTER[attacker.getLevel() - 1];
-        }
-
-        int chanceToHit = THAC0 - (defender.weapon != null ? defender.weapon.armourClass : 0);
-
-        chanceToHit -= defender.calculateAC();
-
-        chanceToHit -= defender.defenseHitModifier();
-
-        chanceToHit += (defender.status.isDisabled() ? 3 : 0);
-
-        chanceToHit += attacker.hitModifier();
-
-        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DHMOD [%d] chance to  hit [%d] hit [%s]\n",
-        //        attacker.name(), defender.name, roll, THAC0, defender.calculateAC(), attacker.hitModifier(), defender.defenseHitModifier(), chanceToHit, roll >= chanceToHit);
+        int chanceToHit = 20 - defender.calculateAC() - defender.defenseHitModifier() - attacker.hitModifier();
+        chanceToHit = Math.max(1, Math.min(chanceToHit, 19));
         return roll >= chanceToHit;
     }
 
-    public static boolean attackHit(CharacterRecord attacker, Mutable defender) {
+    public static int dealDamage(CharacterRecord attacker, Item weapon, Mutable defender) {
 
-        if (defender == null) {
-            return false;
+        if (weapon.autokill) {
+            int critChance = Math.min(attacker.level * 2, 50);
+            if (RANDOM.nextInt(100) < critChance && RANDOM.nextInt(35) > defender.getLevel() + 10) {
+                defender.adjustHitPoints(defender.getMaxHitPoints());
+                defender.adjustHealthCursor();
+                return defender.getMaxHitPoints();
+            }
         }
 
-        int roll = (RANDOM.nextInt(20) + 1);
+        int damage = weapon.damage.roll();
 
-        if (roll == 20) {
-            return true;
+        if (defender.status().has(Status.ASLEEP)) {
+            damage = damage * 2;
         }
 
-        if (roll == 1) {
-            return false;
+        if (weapon.purposed(defender.getMonsterType())) {
+            damage = damage * 2;
         }
 
-        int THAC0 = 0;
-        switch (attacker.classType) {
-            case FIGHTER:
-            case SAMURAI:
-            case LORD:
-            case NINJA:
-                THAC0 = Constants.THACO_FIGHTER[attacker.level < Constants.THACO_FIGHTER.length ? attacker.level : Constants.THACO_FIGHTER.length - 1];
-                break;
-            case MAGE:
-            case BISHOP:
-                THAC0 = Constants.THACO_MAGE[attacker.level < Constants.THACO_MAGE.length ? attacker.level : Constants.THACO_MAGE.length - 1];
-                break;
-            case PRIEST:
-                THAC0 = Constants.THACO_PRIEST[attacker.level < Constants.THACO_PRIEST.length ? attacker.level : Constants.THACO_PRIEST.length - 1];
-                break;
-            case THIEF:
-                THAC0 = Constants.THACO_THIEF[attacker.level < Constants.THACO_THIEF.length ? attacker.level : Constants.THACO_THIEF.length - 1];
-                break;
-        }
-
-        int strMod = 0;
-        if (attacker.str <= 3) {
-            strMod = -3;
-        } else if (attacker.str == 4) {
-            strMod = -2;
-        } else if (attacker.str == 5) {
-            strMod = -1;
-        } else if (attacker.str == 16) {
-            strMod = 1;
-        } else if (attacker.str == 17) {
-            strMod = 2;
-        } else if (attacker.str >= 18) {
-            strMod = 3;
-        }
-
-        if (attacker.status.has(Status.AFRAID)) {
-            strMod = -3;
-        }
-
-        THAC0 -= strMod;
-
-        THAC0 -= attacker.attackHitModifier();
-
-        int chanceToHit = THAC0 - defender.getArmourClass();
-
-        chanceToHit -= defender.getACModifier();
-
-        chanceToHit += (defender.status().isDisabled() ? 3 : 0);
-
-        //System.out.printf("attacker [%s] defender [%s] rolled [%d] THACO [%d] AC [%d] AHMOD [%d] DACMOD [%d] chance to  hit [%d] hit [%s]\n",
-        //        attacker.name, defender.name(), roll, THAC0, defender.getArmourClass(), attacker.attackHitModifier(), defender.getACModifier(), chanceToHit, roll >= chanceToHit);
-        return roll >= chanceToHit;
-    }
-
-    public static int dealDamage(Item weapon, Mutable defender) {
-        if (weapon.autokill && RANDOM.nextInt(100) < 15) {
-            defender.adjustHitPoints(defender.getMaxHitPoints());
-            defender.adjustHealthCursor();
-            return defender.getMaxHitPoints();
-        }
-        int damage = weapon.damage.roll() + (defender.status().isDisabled() ? 5 : 0); //add 5 points to the damage if the defender is not in OK status
         defender.adjustHitPoints(-damage);
         defender.adjustHealthCursor();
+
         return damage;
     }
 

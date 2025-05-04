@@ -74,10 +74,6 @@ public class Monster implements Comparable<Monster> {
         return iconId;
     }
 
-    public void setIconId(int iconId) {
-        this.iconId = iconId;
-    }
-
     public CharacterType getType() {
         return CharacterType.values()[this.type];
     }

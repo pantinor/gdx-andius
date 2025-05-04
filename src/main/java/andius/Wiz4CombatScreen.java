@@ -354,8 +354,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
                         boolean hit = Utils.attackHit(player, defender);
                         if (hit && !defender.name().equals("Hawkwind")) {
                             Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
-                            int damage = Utils.dealDamage(weapon, defender);
-                            log(defender.getDamageDescription(player.name, damage, weapon.name), Color.SCARLET);
+                            int damage = Utils.dealDamage(player, weapon, defender);
+                            log(String.format("%s %s %s for %d damage with %s.",
+                                    player.name.toUpperCase(),
+                                    HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                    defender.name().toUpperCase(),
+                                    damage, weapon.name), Color.SCARLET);
                         } else {
                             log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                         }
@@ -668,7 +672,11 @@ public class Wiz4CombatScreen implements Screen, Constants {
                             damage = Utils.getRandomBetween(300, 500);
                             m.adjustHitPoints(-damage);
                             m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
-                            log(m.getDamageDescription(attName, damage, type), Color.SCARLET);
+                            log(String.format("%s %s %s for %d damage with %s.",
+                                    attName.toUpperCase(),
+                                    HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                    m.name().toUpperCase(),
+                                    damage, type), Color.SCARLET);
                             if (m.isDead()) {
                                 log("As mighty Achilles fell to Paris arrow, so does Lord Hawkwind fall to the stab of a lowly Dink!  Long will Skara Brae be mourning his passing!", Color.WHITE);
                             }
@@ -681,7 +689,11 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 } else {
                     m.adjustHitPoints(-damage);
                     m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
-                    log(m.getDamageDescription(attName, damage, type), attacker instanceof MutableMonster ? Color.CORAL : Color.SCARLET);
+                    log(String.format("%s %s %s for %d damage with %s.",
+                            attName.toUpperCase(),
+                            HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                            m.name().toUpperCase(),
+                            damage, type), attacker instanceof MutableMonster ? Color.CORAL : Color.SCARLET);
                 }
             }
         } else {
