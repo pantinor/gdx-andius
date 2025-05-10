@@ -130,7 +130,7 @@
   </data>
  </layer>
  <objectgroup id="11" name="people">
-  <object id="1" name="Jason" type="MERCHANT" x="1056" y="96" width="48" height="48">
+  <object id="1" name="Jason" type="MERCHANT_DQ" x="1056" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Hero"/>
     <property name="movement" value="WANDER"/>

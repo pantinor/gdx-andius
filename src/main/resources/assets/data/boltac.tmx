@@ -139,7 +139,7 @@
   <object id="111" name="WIWOLD" x="192" y="384" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="people">
-  <object id="97" name="Welcome to Boltac's Trading Post" type="MERCHANT" x="768" y="480" width="48" height="48">
+  <object id="97" name="Welcome to Boltac's Trading Post" type="MERCHANT_PMO" x="768" y="480" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>

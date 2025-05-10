@@ -258,12 +258,6 @@ public class WizardryData {
     public static final MazeLevel[] WER_LEVELS = new MazeLevel[WER_LEVEL_DATA.length];
 
     public static List<Item> PMO_ITEMS, KOD_ITEMS, LEG_ITEMS, BS_ITEMS, WER_ITEMS, DQ_ITEMS;
-    public static final java.util.Map<String, Item> PMO_ITEMS_MAP = new HashMap<>();
-    public static final java.util.Map<String, Item> KOD_ITEMS_MAP = new HashMap<>();
-    public static final java.util.Map<String, Item> LEG_ITEMS_MAP = new HashMap<>();
-    public static final java.util.Map<String, Item> BS_ITEMS_MAP = new HashMap<>();
-    public static final java.util.Map<String, Item> WER_ITEMS_MAP = new HashMap<>();
-    public static final java.util.Map<String, Item> DQ_ITEMS_MAP = new HashMap<>();
 
     public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS, WER_MONSTERS, DQ_MONSTERS;
     public static final java.util.Map<String, Monster> PMO_MONSTER_MAP = new HashMap<>();
@@ -367,25 +361,6 @@ public class WizardryData {
             WER4_CHARS = gson.fromJson(j19, new TypeToken<List<DoGooder>>() {
             }.getType());
 
-            for (Item i : PMO_ITEMS) {
-                PMO_ITEMS_MAP.put(i.name, i);
-            }
-            for (Item i : KOD_ITEMS) {
-                KOD_ITEMS_MAP.put(i.name, i);
-            }
-            for (Item i : LEG_ITEMS) {
-                LEG_ITEMS_MAP.put(i.name, i);
-            }
-            for (Item i : BS_ITEMS) {
-                BS_ITEMS_MAP.put(i.name, i);
-            }
-            for (Item i : WER_ITEMS) {
-                WER_ITEMS_MAP.put(i.name, i);
-            }
-            for (Item i : DQ_ITEMS) {
-                DQ_ITEMS_MAP.put(i.name, i);
-            }
-
             for (DoGooder i : WER4_CHARS) {
                 WER4_CHAR_MAP.put(i.name, i);
             }
@@ -455,19 +430,19 @@ public class WizardryData {
     }
 
     public static enum Scenario {
-        PMO(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, PMO_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, null),
-        KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, KOD_MONSTER_MAP, KOD_ITEMS_MAP, null),
-        LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, LEG_MONSTER_MAP, LEG_ITEMS_MAP, null),
-        BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, BS_MONSTER_MAP, BS_ITEMS_MAP, null),
-        WER(WER_ITEMS, WER_MONSTERS, null, WER_MESSAGES, WER_LEVELS, WER_MONSTER_MAP, WER_ITEMS_MAP, 11, 9, 9, WER_LEVEL_DESC),
-        DQ(DQ_ITEMS, DQ_MONSTERS, DQ_REWARDS, DQ_MESSAGES, DQ_LEVELS, DQ_MONSTER_MAP, DQ_ITEMS_MAP, DQ_LEVEL_DESC),
-        EXODUS_PERIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX1_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, PERINIAN_LEVEL_DESC),
-        EXODUS_DARDIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX2_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, DARDIN_LEVEL_DESC),
-        EXODUS_MINE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX3_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, MINE_LEVEL_DESC),
-        EXODUS_FIRE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX4_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, FIRE_LEVEL_DESC),
-        EXODUS_DOOM(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX5_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, DOOM_LEVEL_DESC),
-        EXODUS_SNAKE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX6_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, SNAKE_LEVEL_DESC),
-        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, PMO_MONSTER_MAP, PMO_ITEMS_MAP, 1, 14, 1, TIME_LEVEL_DESC);
+        PMO(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, PMO_LEVELS, PMO_MONSTER_MAP, null),
+        KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, KOD_MONSTER_MAP, null),
+        LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, LEG_MONSTER_MAP, null),
+        BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, BS_MONSTER_MAP, null),
+        WER(WER_ITEMS, WER_MONSTERS, null, WER_MESSAGES, WER_LEVELS, WER_MONSTER_MAP, 11, 9, 9, WER_LEVEL_DESC),
+        DQ(DQ_ITEMS, DQ_MONSTERS, DQ_REWARDS, DQ_MESSAGES, DQ_LEVELS, DQ_MONSTER_MAP, DQ_LEVEL_DESC),
+        EXODUS_PERIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX1_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, PERINIAN_LEVEL_DESC),
+        EXODUS_DARDIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX2_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, DARDIN_LEVEL_DESC),
+        EXODUS_MINE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX3_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, MINE_LEVEL_DESC),
+        EXODUS_FIRE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX4_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, FIRE_LEVEL_DESC),
+        EXODUS_DOOM(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX5_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, DOOM_LEVEL_DESC),
+        EXODUS_SNAKE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX6_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, SNAKE_LEVEL_DESC),
+        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, TIME_LEVEL_DESC);
 
         private final List<Item> items;
         private final List<Monster> monsters;
@@ -475,7 +450,6 @@ public class WizardryData {
         private final List<Message> messages;
         private final MazeLevel[] levels;
         private final java.util.Map<String, Monster> monsterMap;
-        private final java.util.Map<String, Item> itemMap;
         private final int startLevel, startX, startY;
         private final String[] levelDescriptions;
 
@@ -483,14 +457,13 @@ public class WizardryData {
         private final List<DoGooder> characters;
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
-                MazeLevel[] levels, Map<String, Monster> monsterMap, Map<String, Item> itemMap, String[] levelDescriptions) {
+                MazeLevel[] levels, Map<String, Monster> monsterMap, String[] levelDescriptions) {
             this.items = items;
             this.monsters = monsters;
             this.rewards = rewards;
             this.messages = messages;
             this.levels = levels;
             this.monsterMap = monsterMap;
-            this.itemMap = itemMap;
             this.startLevel = 1;
             this.startX = 0;
             this.startY = 0;
@@ -503,15 +476,13 @@ public class WizardryData {
         }
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
-                MazeLevel[] levels, Map<String, Monster> monsterMap, Map<String, Item> itemMap,
-                int startLevel, int startX, int startY, String[] levelDescriptions) {
+                MazeLevel[] levels, Map<String, Monster> monsterMap, int startLevel, int startX, int startY, String[] levelDescriptions) {
             this.items = items;
             this.monsters = monsters;
             this.rewards = rewards;
             this.messages = messages;
             this.levels = levels;
             this.monsterMap = monsterMap;
-            this.itemMap = itemMap;
             this.startLevel = startLevel;
             this.startX = startX;
             this.startY = startY;
@@ -567,16 +538,19 @@ public class WizardryData {
             return characterMap;
         }
 
-        public Map<String, Item> itemMap() {
-            return itemMap;
+        public Item item(int id) {
+            for (Item it : items) {
+                if (it.id == id) {
+                    return it;
+                }
+            }
+            return null;
         }
 
-        public static Item getItem(int id, String name) {
-            for (Scenario sc : Scenario.values()) {
-                for (Item it : sc.items) {
-                    if (it.id == id && it.name.equals(name)) {
-                        return it;
-                    }
+        public Item item(String name) {
+            for (Item it : items) {
+                if (it.name.equalsIgnoreCase(name)) {
+                    return it;
                 }
             }
             return null;

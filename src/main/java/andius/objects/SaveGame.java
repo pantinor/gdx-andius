@@ -2,7 +2,7 @@ package andius.objects;
 
 import andius.Constants;
 import static andius.Constants.LEVEL_PROGRESSION_TABLE;
-import static andius.WizardryData.PMO_ITEMS_MAP;
+import andius.WizardryData.Scenario;
 import andius.WizardryData.SummoningCircle;
 import static andius.objects.ClassType.BISHOP;
 import static andius.objects.ClassType.FIGHTER;
@@ -623,35 +623,35 @@ public class SaveGame implements Constants {
             case SAMURAI:
             case LORD:
             case FIGHTER:
-                p.armor = PMO_ITEMS_MAP.get("CHAIN MAIL");
-                p.weapon = PMO_ITEMS_MAP.get("LONG SWORD");
-                p.shield = PMO_ITEMS_MAP.get("SMALL SHIELD");
+                p.armor = Scenario.PMO.item("CHAIN MAIL");
+                p.weapon = Scenario.PMO.item("LONG SWORD");
+                p.shield = Scenario.PMO.item("SMALL SHIELD");
                 //p.glove = PMO_ITEMS_MAP.get("SILVER GLOVES");
                 break;
             case MAGE:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                p.armor = Scenario.PMO.item("ROBES");
+                p.weapon = Scenario.PMO.item("STAFF");
                 break;
             case PRIEST:
-                p.armor = PMO_ITEMS_MAP.get("CHAIN MAIL");
-                p.weapon = PMO_ITEMS_MAP.get("ANOINTED FLAIL");
-                p.shield = PMO_ITEMS_MAP.get("SMALL SHIELD");
+                p.armor = Scenario.PMO.item("CHAIN MAIL");
+                p.weapon = Scenario.PMO.item("ANOINTED FLAIL");
+                p.shield = Scenario.PMO.item("SMALL SHIELD");
                 break;
             case THIEF:
-                p.armor = PMO_ITEMS_MAP.get("LEATHER ARMOR");
-                p.weapon = PMO_ITEMS_MAP.get("SHORT SWORD");
+                p.armor = Scenario.PMO.item("LEATHER ARMOR");
+                p.weapon = Scenario.PMO.item("SHORT SWORD");
                 break;
             case BISHOP:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                p.armor = Scenario.PMO.item("ROBES");
+                p.weapon = Scenario.PMO.item("STAFF");
                 break;
             case NINJA:
-                p.armor = PMO_ITEMS_MAP.get("ROBES");
-                p.weapon = PMO_ITEMS_MAP.get("STAFF");
+                p.armor = Scenario.PMO.item("ROBES");
+                p.weapon = Scenario.PMO.item("STAFF");
                 break;
         }
         
-        p.inventory.add(PMO_ITEMS_MAP.get("ROBES"));
+        p.inventory.add(Scenario.PMO.item("ROBES"));
 
         return p;
     }

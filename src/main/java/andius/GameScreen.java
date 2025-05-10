@@ -7,6 +7,12 @@ import andius.dialogs.ConversationDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
+import static andius.WizardryData.BS_ITEMS;
+import static andius.WizardryData.DQ_ITEMS;
+import static andius.WizardryData.KOD_ITEMS;
+import static andius.WizardryData.LEG_ITEMS;
+import static andius.WizardryData.PMO_ITEMS;
+import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
 import andius.objects.Item;
@@ -276,7 +282,7 @@ public class GameScreen extends BaseScreen {
                             while (iter2.hasNext()) {
                                 String key = iter2.next();
                                 if (key.startsWith("item")) {
-                                    Item found = this.map.scenario().itemMap().get(obj.getProperties().get(key, String.class));
+                                    Item found = this.map.scenario().item((obj.getProperties().get(key, String.class)));
                                     sb.append("Party found ").append(found.genericName).append(". ");
                                     Andius.CTX.players()[0].inventory.add(found);
                                 }
@@ -310,8 +316,28 @@ public class GameScreen extends BaseScreen {
                     TempleScreen rs = new TempleScreen(CTX, this.map);
                     mainGame.setScreen(rs);
                     return false;
-                } else if (a.getRole() == Role.MERCHANT || a.getRole() == Role.MERCHANT1 || a.getRole() == Role.MERCHANT2) {
-                    VendorScreen rs = new VendorScreen(CTX, a.getRole(), this.map, a.getName());
+                } else if (a.getRole() == Role.MERCHANT_PMO) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, PMO_ITEMS, a.getName());
+                    mainGame.setScreen(rs);
+                    return false;
+                } else if (a.getRole() == Role.MERCHANT_KOD) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, KOD_ITEMS, a.getName());
+                    mainGame.setScreen(rs);
+                    return false;
+                } else if (a.getRole() == Role.MERCHANT_LEG) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, LEG_ITEMS, a.getName());
+                    mainGame.setScreen(rs);
+                    return false;
+                } else if (a.getRole() == Role.MERCHANT_WER) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, WER_ITEMS, a.getName());
+                    mainGame.setScreen(rs);
+                    return false;
+                } else if (a.getRole() == Role.MERCHANT_DQ) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, DQ_ITEMS, a.getName());
+                    mainGame.setScreen(rs);
+                    return false;
+                } else if (a.getRole() == Role.MERCHANT_BS) {
+                    VendorScreen rs = new VendorScreen(CTX, this.map, BS_ITEMS, a.getName());
                     mainGame.setScreen(rs);
                     return false;
                 } else if (a.getRole() == Role.INNKEEPER) {
@@ -325,7 +351,7 @@ public class GameScreen extends BaseScreen {
                     }
                 }
             }
-            
+
         } else if (keycode == Keys.ESCAPE) {
 
             Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
@@ -406,7 +432,7 @@ public class GameScreen extends BaseScreen {
 
                     String itemRequired = obj.getProperties().get("itemRequired", String.class);
                     if (itemRequired != null) {
-                        Item found = this.map.scenario().itemMap().get(itemRequired);
+                        Item found = this.map.scenario().item(itemRequired);
                         boolean owned = false;
                         for (int i = 0; i < Andius.CTX.players().length && found != null; i++) {
                             if (Andius.CTX.players()[i].inventory.contains(found)) {
@@ -422,7 +448,7 @@ public class GameScreen extends BaseScreen {
 
                     String itemObtained = obj.getProperties().get("itemObtained", String.class);
                     if (itemObtained != null) {
-                        Item found = this.map.scenario().itemMap().get(itemObtained);
+                        Item found = this.map.scenario().item(itemObtained);
                         boolean owned = false;
                         for (int i = 0; i < Andius.CTX.players().length; i++) {
                             if (Andius.CTX.players()[i].inventory.contains(found)) {

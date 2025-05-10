@@ -1,9 +1,9 @@
 
 import andius.Andius;
 import andius.Constants;
-import andius.Constants.Role;
 import andius.Context;
 import andius.VendorScreen;
+import static andius.WizardryData.DQ_ITEMS;
 import static andius.WizardryData.WER_MONSTERS;
 import andius.objects.ClassType;
 import andius.objects.MutableMonster;
@@ -72,7 +72,7 @@ public class Wiz4CombatTestMain extends Game {
             //setScreen(new CampScreen(ctx, Constants.Map.WORLD));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(180)));
             //setScreen(new RewardScreen(ctx, Constants.Map.WIZARDRY1, 18));
-            setScreen(new VendorScreen(ctx, Role.MERCHANT2, Constants.Map.CAVE, "paul"));
+            setScreen(new VendorScreen(ctx, Constants.Map.CAVE, DQ_ITEMS, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
             //setScreen(new ManageScreen(null, Andius.skin, new SaveGame()));
         } catch (Exception e) {

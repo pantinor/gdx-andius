@@ -5,7 +5,6 @@ import andius.objects.Sounds;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
-import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
 import andius.objects.Icons;
 import andius.objects.Item;
@@ -39,9 +38,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
 import utils.Utils;
@@ -49,8 +48,8 @@ import utils.Utils;
 public class VendorScreen implements Screen, Constants {
 
     private final Context context;
+    private final List<Item> vendorItems;
     private final String vendorName;
-    private final Role vendorRole;
 
     private final Texture background;
     private final SpriteBatch batch;
@@ -86,10 +85,10 @@ public class VendorScreen implements Screen, Constants {
     private static final int DIM = 44;
     private static final int PDIM = 60;
 
-    public VendorScreen(Context context, Role role, Constants.Map contextMap, String vendorName) {
+    public VendorScreen(Context context, Constants.Map contextMap, List<Item> vendorItems, String vendorName) {
         this.context = context;
+        this.vendorItems = vendorItems;
         this.vendorName = vendorName;
-        this.vendorRole = role;
         this.batch = new SpriteBatch();
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
@@ -230,7 +229,7 @@ public class VendorScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedItem != null) {
-                    Item it = Scenario.getItem(selectedItem.item.id, selectedItem.item.name);
+                    Item it = item(selectedItem.item.id);
                     if (it != null) {
                         selectedItem.removeActor(vendorFocusIndicator);
                         selectedPlayer.invTable.removeActor(selectedItem);
@@ -346,12 +345,10 @@ public class VendorScreen implements Screen, Constants {
         });
 
         java.util.List<Item> sellables = new ArrayList<>();
-        for (Scenario sc : Scenario.values()) {
-            for (Item it : sc.items()) {
-                if (it.stock != 0 && !sellables.contains(it)) {
-                    if (type == ItemType.ANY || type.equals(it.type)) {
-                        sellables.add(it);
-                    }
+        for (Item it : vendorItems) {
+            if (it.stock != 0 && !sellables.contains(it)) {
+                if (type == ItemType.ANY || type.equals(it.type)) {
+                    sellables.add(it);
                 }
             }
         }
@@ -364,16 +361,8 @@ public class VendorScreen implements Screen, Constants {
         });
 
         for (Item it : sellables) {
-            if (this.vendorRole == Role.MERCHANT1 && it.cost <= 500) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            } else if (this.vendorRole == Role.MERCHANT2 && it.cost <= 10000) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            } else if (this.vendorRole == Role.MERCHANT) {
-                vendorTable.add(new VendorItem(it));
-                vendorTable.row();
-            }
+            vendorTable.add(new VendorItem(it));
+            vendorTable.row();
         }
 
         if (selectedPlayer != null) {
@@ -779,6 +768,24 @@ public class VendorScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+    }
+
+    public Item item(int id) {
+        for (Item it : vendorItems) {
+            if (it.id == id) {
+                return it;
+            }
+        }
+        return null;
+    }
+
+    public Item item(String name) {
+        for (Item it : vendorItems) {
+            if (it.name.equalsIgnoreCase(name)) {
+                return it;
+            }
+        }
+        return null;
     }
 
 }

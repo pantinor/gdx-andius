@@ -855,19 +855,19 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="72" name="Bollrun" type="MERCHANT" x="2640" y="2160" width="48" height="48">
+  <object id="72" name="Bollrun" type="INNKEEPER" x="2640" y="2160" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="73" name="Buring" type="MERCHANT1" x="2304" y="1056" width="48" height="48">
+  <object id="73" name="Buring" type="MERCHANT_WER" x="2304" y="1056" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="74" name="Aemar" type="MERCHANT" x="2112" y="1200" width="48" height="48">
+  <object id="74" name="Aemar" type="MERCHANT_PMO" x="2112" y="1200" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
@@ -879,55 +879,55 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="76" name="Krabbi" type="MERCHANT1" x="3408" y="1392" width="48" height="48">
+  <object id="76" name="Krabbi" type="MERCHANT_KOD" x="3408" y="1392" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="77" name="Garming" type="MERCHANT1" x="4080" y="1488" width="48" height="48">
+  <object id="77" name="Garming" type="MERCHANT_DQ" x="4080" y="1488" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="79" name="Snirm" type="MERCHANT" x="3600" y="3120" width="48" height="48">
+  <object id="79" name="Snirm" type="MERCHANT_BS" x="3600" y="3120" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="80" name="Hikar" type="MERCHANT2" x="3360" y="3120" width="48" height="48">
+  <object id="80" name="Hikar" type="TEMPLE" x="3360" y="3120" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="96" name="Almgar" type="MERCHANT" x="7152" y="3936" width="48" height="48">
+  <object id="96" name="Almgar" type="TEMPLE" x="7152" y="3936" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="116" name="Otrir" type="MERCHANT1" x="5376" y="768" width="48" height="48">
+  <object id="116" name="Otrir" type="MERCHANT_PMO" x="5376" y="768" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="121" name="Hangar" type="MERCHANT" x="3648" y="2736" width="48" height="48">
+  <object id="121" name="Hangar" type="MERCHANT_DQ" x="3648" y="2736" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="139" name="Hlorgar" type="MERCHANT" x="2640" y="3552" width="48" height="48">
+  <object id="139" name="Hlorgar" type="TEMPLE" x="2640" y="3552" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="193" name="Stalf" type="MERCHANT2" x="192" y="4224" width="48" height="48">
+  <object id="193" name="Stalf" type="MERCHANT_WER" x="192" y="4224" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>

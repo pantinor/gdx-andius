@@ -553,9 +553,12 @@ public interface Constants {
         TEMPLE,
         MONSTER,
         INNKEEPER,
-        MERCHANT,
-        MERCHANT1,
-        MERCHANT2;
+        MERCHANT_PMO,
+        MERCHANT_KOD,
+        MERCHANT_LEG,
+        MERCHANT_WER,
+        MERCHANT_DQ,
+        MERCHANT_BS;
     }
 
     public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {
