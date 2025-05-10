@@ -650,6 +650,8 @@ public class SaveGame implements Constants {
                 p.weapon = PMO_ITEMS_MAP.get("STAFF");
                 break;
         }
+        
+        p.inventory.add(PMO_ITEMS_MAP.get("ROBES"));
 
         return p;
     }

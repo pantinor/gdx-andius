@@ -198,7 +198,7 @@ public class CampScreen implements Screen, Constants {
         spellPane.setScrollingDisabled(true, false);
 
         int x = 350;
-        this.drop = new TextButton("DROP", Andius.skin, "default-16");
+        this.drop = new TextButton("DROP", Andius.skin, "default-16-green");
         this.drop.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -217,7 +217,7 @@ public class CampScreen implements Screen, Constants {
         });
         this.drop.setBounds(x, 200, 80, 40);
         x += 84;
-        this.use = new TextButton("USE", Andius.skin, "default-16");
+        this.use = new TextButton("USE", Andius.skin, "default-16-green");
         this.use.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -292,7 +292,7 @@ public class CampScreen implements Screen, Constants {
         });
         this.exit.setBounds(x, 150, 80, 40);
         x += 84;
-        this.trade = new TextButton("TRADE", Andius.skin, "default-16");
+        this.trade = new TextButton("TRADE", Andius.skin, "default-16-green");
         this.trade.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -507,7 +507,7 @@ public class CampScreen implements Screen, Constants {
                     sb.append(String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
                             ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
                 }
-                
+
                 return sb;
             }
 
@@ -707,9 +707,9 @@ public class CampScreen implements Screen, Constants {
 
             if (current != null) {
                 p.inventory.add(current);
+                Sounds.play(Sound.TRIGGER);
             }
 
-            Sounds.play(Sound.TRIGGER);
         }
 
     }
