@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" infinite="0" nextlayerid="15" nextobjectid="421">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="158" height="110" tilewidth="48" tileheight="48" infinite="0" nextlayerid="15" nextobjectid="424">
  <properties>
   <property name="startX" value="49"/>
   <property name="startY" value="18"/>
@@ -504,13 +504,13 @@
   <object id="229" name="Dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
    <properties>
     <property name="monsterID" value="Wyvern"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="230" name="Enchanted Sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
    <properties>
     <property name="monsterID" value="Swordsman"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="231" name="Very young Dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
@@ -612,7 +612,7 @@
   <object id="248" name="Enchanted Statue" type="MONSTER" x="1344" y="672" width="48" height="48">
    <properties>
     <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="249" name="Minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
@@ -624,19 +624,19 @@
   <object id="250" name="Minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
    <properties>
     <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="251" name="Stone Statue" type="MONSTER" x="720" y="3744" width="48" height="48">
    <properties>
     <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="252" name="Stone Statue" type="MONSTER" x="384" y="4176" width="48" height="48">
    <properties>
     <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
@@ -648,7 +648,7 @@
   <object id="254" name="Stone Statue" type="MONSTER" x="672" y="4608" width="48" height="48">
    <properties>
     <property name="monsterID" value="Gargoyle"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="255" name="Son of Minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
@@ -720,7 +720,7 @@
   <object id="266" name="Dragon" type="MONSTER" x="2448" y="2880" width="48" height="48">
    <properties>
     <property name="monsterID" value="Wyvern"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="267" name="Aries the Ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
@@ -797,7 +797,7 @@
   </object>
   <object id="281" name="Morgiana" type="FRIENDLY" x="6144" y="5040" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Master Thief 3"/>
+    <property name="icon" value="Glooth_Bandit"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -849,10 +849,10 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="404" name="Thief" type="MONSTER" x="2016" y="720" width="48" height="48">
+  <object id="404" name="Captain of the Thieves" type="FRIENDLY" x="2016" y="720" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Kobold"/>
-    <property name="movement" value="FIXED"/>
+    <property name="icon" value="Cobra Assassin"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="72" name="Bollrun" type="INNKEEPER" x="2640" y="2160" width="48" height="48">
@@ -929,14 +929,32 @@
   </object>
   <object id="193" name="Stalf" type="MERCHANT_WER" x="192" y="4224" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="Stalker"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="407" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="5040" y="3888" width="48" height="48">
+  <object id="407" name="Ghost of Cassim" type="FRIENDLY" x="3072" y="768" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Priestess"/>
+    <property name="icon" value="Irgix_the_Flimsy"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="422" name="Baba Mustafa" type="FRIENDLY" x="5472" y="288" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dark_Druid"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="421" name="Princess Buddir Al-Buddoor" type="FRIENDLY" x="5040" y="3888" width="48" height="48">
+   <properties>
+    <property name="icon" value="Nomad_Female"/>
     <property name="movement" value="FOLLOW_AVATAR"/>
+   </properties>
+  </object>
+  <object id="423" name="Qasim's Wife" type="FRIENDLY" x="2688" y="1056" width="48" height="48">
+   <properties>
+    <property name="icon" value="Goldhanded_Cultist_Bride"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
  </objectgroup>

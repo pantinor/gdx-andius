@@ -1629,7 +1629,7 @@
         <topic query="give" phrase="It says: I do not need thy gold.  Keep it! "/>
         <topic query="join" phrase="It says: I cannot join thee. "/>
     </conversation>
-    <conversation map="Cove" name="Ambrose" description="a frail and injured fighter.">
+    <conversation map="COVE" name="Ambrose" description="a frail and injured fighter.">
         <topic query="job" phrase="I am resting."/>
         <topic query="bye" phrase="Good luck, thou shalt need it!"/>
         <topic query="rest" phrase="A long and brutal battle 'twas."/>
@@ -1642,7 +1642,7 @@
             <topic query="y" phrase="Remember only the Mystic arms work near great evil. Only such evil could hold our lord!"/>
         </label>
     </conversation>
-    <conversation map="Cove" name="Ava" description="a pretty young girl.">
+    <conversation map="COVE" name="Ava" description="a pretty young girl.">
         <topic query="greeting" phrase="Welcome, %NAME% ."/>
         <topic query="job" phrase="My sister and I care for this temple."/>
         <topic query="bye" phrase="Lead a life of Virtue."/>
@@ -1669,7 +1669,7 @@
             <topic query="default" phrase="Virtue makes no mistakes. We shall tell thee what we know of the Shard of Falsehood. Ask my sister of her vision!"/>
         </label>
     </conversation>
-    <conversation map="Cove" name="Leona" description="a pretty young girl.">
+    <conversation map="COVE" name="Leona" description="a pretty young girl.">
         <topic query="job" phrase="We care for the temple."/>
         <topic query="bye" phrase="Bye."/>
         <topic query="temp" phrase="The Temple of Virtue."/>
@@ -4916,61 +4916,134 @@
             <topic query="y" phrase="Good!"/>
         </label>
     </conversation>
-    <conversation map="Shahriar" name="Morgiana" description="A clever slave-girl.">
-        <topic query="job" phrase="I am a slave from Cassim's household. I am being held prisoner here and will gratefully serve my rescuers."/>
-        <topic query="bye" phrase="Stay safe!"/>
+    
+    <conversation map="ALIBABA" name="Ali Baba" description="The humble woodcutter turned wealthy man, who uncovered the secret of the thieves' cave.">
+        <topic query="job" phrase="I once gathered wood in the forest, but fate led me to great treasure."/>
+        <topic query="thieves or bandits" phrase="I saw them enter the cave and learned their secret! But I knew I had to be careful."/>
+        <topic query="magic or words" phrase="The words to open the cave are 'Khul jaa, Simsim!' And to close it, 'Band ho jaa, Simsim!'"/>
+        <topic query="gold or treasure" phrase="I took only what my donkeys could carry, fearing the thieves would return."/>
+        <topic query="cave or secret" phrase="Generations of thieves have hidden their loot there, and now only I know the secret."/>
+        <topic query="fear or escape" phrase="I hid in a tree, watching closely before daring to approach the cave."/>
+        <topic query="qasim or brother" phrase="My brother's greed consumed him, and he paid the price with his life."/>
+        <topic query="mourning or loss" phrase="His widow grieved, and I took her under my care to protect her and her son."/>
+        <topic query="robbers or leader" phrase="The thieves came for revenge, but Morgiana saved my life, twice! I owe her everything."/>
+        <topic query="wisdom or wealth" phrase="Riches can be a blessing or a curse—only those who use them wisely will find peace."/>
+        <topic query="marriage or morgiana" phrase="She proved herself not just a servant but a true protector. I gave her my nephew’s hand in marriage."/>
+        <topic query="future or legacy" phrase="I taught my sons the secret of the cave, ensuring our family's prosperity while staying vigilant."/>
+        <topic query="bye" phrase="Take care, and may you always choose wisdom over greed."/>
+    </conversation>
+
+    <conversation map="ALIBABA" name="Morgiana" description="The clever and loyal slave-girl who saved Ali Baba’s life.">
+        <topic query="job" phrase="I was a servant in Qasim’s household, but now I serve Ali Baba, who trusts me like family."/>
+        <topic query="save or danger" phrase="Twice I saved Ali Baba! Once from the thieves in the oil jars, and again from their treacherous captain."/>
+        <topic query="oil or jars" phrase="I suspected the oil merchant’s deception and poured boiling oil into the jars. It was the only way to ensure our safety."/>
+        <topic query="captain or revenge" phrase="The leader of the thieves came disguised as a merchant, but I saw through his lies."/>
+        <topic query="ali or marry" phrase="After proving my loyalty, Ali Baba granted me my freedom and gave me his nephew’s hand in marriage."/>
+        <topic query="dagger or dance" phrase="I used my skills as a dancer to conceal my plan—when the moment was right, I struck the Captain down before he could harm my master."/>
+        <topic query="cunning or plan" phrase="I marked all the neighboring doors so the thieves could never find our home again!" />
+        <topic query="loyal or trust" phrase="Ali Baba and his family rely on me for their safety. I would do anything to protect them."/>
+        <topic query="fear or escape" phrase="I was always watchful, knowing the thieves might return. I had to act before it was too late."/>
+        <topic query="slave or freedom" phrase="I once belonged to Qasim’s household, but after saving Ali Baba, I was granted my freedom."/>
+        <topic query="thieves or bandits" phrase="They underestimated me, believing me just a servant, but I saw their schemes clearly."/>
+        <topic query="cave or treasure" phrase="Ali Baba discovered the cave of gold, but it also brought great danger upon him."/>
+        <topic query="wisdom or cleverness" phrase="It wasn’t strength but careful planning that allowed me to defeat our enemies."/>
+        <topic query="future or safety" phrase="With Ali Baba’s trust and my husband’s love, I will ensure our home remains protected."/>
+        <topic query="bye" phrase="Stay safe, and never forget to watch the shadows for hidden dangers."/>
         <topic query="cass" phrase="He was killed by thieves and quartered."/>
         <topic query="kill or quar" phrase="But I had Baba Mustafa the tailor stitch his body back together to give him a proper burial!"/>
         <topic query="tail or baba" phrase="He was blindfolded when he did it."/>
         <topic query="his or mast" phrase="Yes, 'tis very sad, though I hope for his return, so I may once again place roast pheasant before him!"/>
         <topic query="roas or phea" phrase="'Twas his favorite."/>
-        <topic query="stoc" phrase="We have many delicacies from every region of the Kingdom!"/>
-        <topic query="deli" phrase="We even have pheasant!"/>
-        <topic query="king or regi" phrase="All over!"/>
+        <topic query="bye" phrase="Take care, and may you always choose wisdom over greed."/>
     </conversation>
-    <conversation map="Shahriar" name="Princess Buddir Al-Buddoor" description="The beautiful daughter of the Sultan.">
-        <topic query="job" phrase="I am the daughter of the sultan."/>
-        <topic query="bye" phrase="Stay safe!"/>
-        <topic query="cass" phrase="He was killed by thieves and quartered."/>
-        <topic query="kill or quar" phrase="But I had Baba Mustafa the tailor stitch his body back together to give him a proper burial!"/>
-        <topic query="tail or baba" phrase="He was blindfolded when he did it."/>
-        <topic query="his or mast" phrase="Yes, 'tis very sad, though I hope for his return, so I may once again place roast pheasant before him!"/>
-        <topic query="roas or phea" phrase="'Twas his favorite."/>
-        <topic query="stoc" phrase="We have many delicacies from every region of the Kingdom!"/>
-        <topic query="deli" phrase="We even have pheasant!"/>
-        <topic query="king or regi" phrase="All over!"/>
+
+    <conversation map="ALIBABA" name="Ghost of Cassim" description="Ali Baba's elder brother, whose greed sealed his doom.">
+        <topic query="job" phrase="I was a wealthy merchant, inheriting riches that made me respecte but never satisfied."/>
+        <topic query="gold or rich" phrase="Wealth was my obsession. I sought more than what I had, never content with my fortune."/>
+        <topic query="greed or mistake" phrase="Ali Baba was cautious, but I let my greed lead me straight into danger."/>
+        <topic query="cave or treasure or fortu" phrase="I saw wonders inside—gold beyond measure! But I was trapped and would never leave that cave alive."/>
+        <topic query="magic or word" phrase="The cave door only obeyed those who knew the words, and in my excitement, I forgot them."/>
+        <topic query="robb or thie or danger" phrase="I heard them returning, and I knew at once that my mistake had cost me everything."/>
+        <topic query="cost or death" phrase="The robbers showed me no mercy. My life ended within their treasure hoard,  If only I could have another chance to see my wife, child and brother."/>
+        <topic query="wife or widow" phrase="She wept for me, but my foolishness left her alone in a world of uncertainty."/>
+        <topic query="ali or broth or regret" phrase="I mocked Ali Baba for his modest life, yet he was wiser than I ever was."/>
+        <topic query="trap or danger" phrase="Trapped in the cave, I begged my memory to recall the words that would free me."/>
+        <topic query="escape or revenge or anger" phrase="Had I escaped, I would have found a way to make the robbers pay for what they did."/>
+        <topic query="child or future or lesson" phrase="My son took over my shop. May he be wiser than I was and not let greed blind him."/>
+        <topic query="bye" phrase="Go in peace, but beware the price of unchecked ambition. Do not repeat my mistakes. Wealth means nothing if it costs you your life."/>
     </conversation>
-    <conversation map="Shahriar" name="Sultan Shahriar" description="the Sultan of Shahriar.">
-        <topic query="job" phrase="I am the Sultan! May Allah have mecy on this wretched father, there are traitors in my midst. The Princess Buddir al-Buddoor has been kidnapped! Tell the elite corps immediately!"/>
-        <topic query="bye" phrase="Farewell, and stay on the Path!"/>
-        <topic query="princ" phrase="0%"/>
-        <label id="0" query="The Princess Buddir al-Buddoor has been kidnapped! Can you rescue her?">
-            <topic query="default" phrase="I see."/>
-            <topic query="y" phrase="%1%"/>
-        </label>
-        <label id="1" query="The Princess Buddir al-Buddoor has been kidnapped! Can you rescue her?">
-            <topic query="default" phrase="%1%"/>
-            <topic query="y" phrase="%2%"/>
-            <topic query="n" phrase="Thou art wiser than I thought! %5%"/>
-        </label>
-        <label id="2" query="Doth the evil and hatred within him make thee better than he?">
-            <topic query="default" phrase="%2%"/>
-            <topic query="y" phrase="%3%"/>
-            <topic query="n" phrase="%4%"/>
-        </label>
-        <label id="3" query="Art thou proud of this fact?">
-            <topic query="default" phrase="Then there may be hope for thee yet."/>
-            <topic query="y" phrase="%Karma - 1% Thou art not truly an Avatar!"/>
-        </label>
-        <label id="4" query="Then how dost thou judge him? Dost thou know all there is to know about him?">
-            <topic query="default" phrase="Then perhaps thou shouldst reserve judgement!"/>
-            <topic query="y" phrase="%Karma - 1% Doubtful, at best!"/>
-        </label>
-        <label id="5" query="Dost thou need the Mantra of Humility?">
-            <topic query="default" phrase="Thou must be doing well!"/>
-            <topic query="y" phrase="Then it is thine!   LUM  is the chant which thou dost seek!"/>
-        </label>
+   
+    <conversation map="ALIBABA" name="Captain of the Thieves" description="The ruthless and cunning leader of the forty robbers, sworn to revenge.">
+        <topic query="job" phrase="I am the mastermind behind the most feared band of thieves in the land and I will have my revenge! My plan was foiled!" />
+        <topic query="revenge or plan" phrase="Ali Baba stole from me—I will have my vengeance! My disguise was perfect and I waited with my men for an ambush." />
+        <topic query="merchant or disguise" phrase="I entered the city in secret, waiting for my chance to strike." />
+        <topic query="morgiana or girl" phrase="That wretched woman foiled my plans twice—I underestimated her!" />
+        <topic query="oil or ambush" phrase="I had my men hide in the oil jars, awaiting the perfect moment to attack." />
+        <topic query="fail or regret" phrase="I barely escaped with my life... but I would not give up!" />
+        <topic query="cave or gold or treasure" phrase="That cave was my domain, filled with wealth stolen over generations!" />
+        <topic query="thieves or betrayal or defeat" phrase="I trusted my thieves to follow orders, yet my plans crumbled before me as my men met their death and downfall." />
+        <topic query="death or downfall" phrase="My men burned alive in the jars, all thanks to that cursed slave-girl!" />
+        <topic query="strategy or deception" phrase="I marked Ali Baba’s door, but somehow, all the doors bore the same sign!" />
+        <topic query="rage or fury" phrase="No one outsmarts the Captain of the Thieves! They will regret crossing me!" />
+        <topic query="future or legacy or empire" phrase="I will rebuild my empire, stronger than before. No one will dare challenge me!" />
+        <topic query="bye" phrase="Beware—you may think you're safe, but I never forget a betrayal!" />
     </conversation>
+
+    <conversation map="ALIBABA" name="Qasim's Wife" description="The grieving widow whose husband's greed led to tragedy.">
+        <topic query="job" phrase="I was the mistress of Qasim’s household, managing his affairs and ensuring our family’s well-being."/>
+        <topic query="griev or loss or mourn" phrase="My husband sought great riches, but instead he found his death. My child and I grieve for him still."/>
+        <topic query="rich or gold or wealth" phrase="I wished only to weigh the coins—but had I known what it would lead to, I would never have borrowed those scales."/>
+        <topic query="ali or protection" phrase="Ali Baba took me in after my husband’s passing, ensuring that my son would have a future."/>
+        <topic query="husband or secrets or fear" phrase="I learned the truth of my husband’s death, but I dared not speak a word of it to anyone."/>
+        <topic query="morgi or girl or cunning or wisdom" phrase="Morgiana saw what I did not—she knew the dangers we faced before they struck."/>
+        <topic query="child or future or son" phrase="My child has inherited his father’s shop, and with Ali Baba’s guidance, I pray he does not repeat his mistakes."/>
+        <topic query="fortune or greed or regret" phrase="Had Qasim been satisfied with his fortune, he would still be alive."/>
+        <topic query="truth or suspicion" phrase="I knew something was wrong when Qasim did not return, and my fears proved to be true."/>
+        <topic query="thie or revenge or justice" phrase="The thieves were ruthless, but thanks to Morgiana, they did not escape punishment."/>
+        <topic query="bye" phrase="Take heed—some riches are more trouble than they’re worth."/>
+    </conversation>
+
+    <conversation map="ALIBABA" name="Baba Mustafa" description="An aged tailor who unknowingly helped the thieves.">
+        <topic query="job" phrase="I am a humble tailor, skilled in stitching fine garments and shrouds alike."/>
+        <topic query="tailor or sew" phrase="I have stitched cloth for many years, but I never thought I would sew a man back together!"/>
+        <topic query="blindfold or mystery" phrase="They covered my eyes before leading me to the house—I never saw where I went."/>
+        <topic query="gold or payment" phrase="They paid me well for my work, though I wondered at the secrecy of it all."/>
+        <topic query="death or thieves" phrase="I never knew the truth of that corpse until much later... how strange it all was!" />
+        <topic query="robbers or deception" phrase="I simply did my work as requested, but I had no idea of their wicked plans."/>
+        <topic query="fear or regret" phrase="Had I known what I was truly involved in, I might have refused their gold!" />
+        <topic query="cunning or trick" phrase="The woman was wise—she fooled the thieves before they could harm her master!" />
+        <topic query="truth or secret" phrase="I only stitched what was given to me. The story behind it remained unknown to me for some time." />
+        <topic query="bye" phrase="May your clothes be ever finely stitched, and your secrets never tangled."/>
+    </conversation>
+    
+    <conversation map="ALIBABA" name="Princess Buddir Al-Buddoor" description="The beautiful daughter of the Sultan, noble and wise.">
+        <topic query="job" phrase="I am the daughter of the Sultan, blessed with privilege but bound by duty."/>
+        <topic query="kingdom or rule" phrase="Our empire stretches far and wide, ruled with wisdom and strength."/>
+        <topic query="sultan or father" phrase="My father is a man of great power, but his heart carries the weight of the throne."/>
+        <topic query="wealth or riches" phrase="Gold and jewels surround me, but true wealth lies in knowledge and wisdom."/>
+        <topic query="marriage or fate" phrase="A princess’s hand is often promised for alliances, but I dream of love beyond duty."/>
+        <topic query="ali or thieves" phrase="Their tale has reached the halls of the palace—one of fortune, danger, and cunning."/>
+        <topic query="wisdom or leadership" phrase="To rule is not merely to wield power, but to understand the hearts of the people."/>
+        <topic query="danger or betrayal" phrase="Palace walls hold as many secrets as the streets—one must always be wary."/>
+        <topic query="future or destiny" phrase="Every path is written by fate, but the wise find ways to shape their own."/>
+        <topic query="loyalty or honor" phrase="Trust is the greatest treasure, but few prove themselves worthy of it."/>
+        <topic query="bye" phrase="May the stars guide your path and fortune smile upon you."/>
+    </conversation>
+   
+    <conversation map="ALIBABA" name="Sultan Shahriar" description="The mighty ruler, seeking justice and the rescue of his beloved daughter.">
+        <topic query="job" phrase="I am the Sultan, protector of the realm, and keeper of justice and wisdom."/>
+        <topic query="kingdom or rule" phrase="My lands stretch far and wide, bound together by strength and loyalty."/>
+        <topic query="princess or daughter" phrase="Princess Buddir Al-Buddoor is the light of my palace—now stolen away by merciless hands!" />
+        <topic query="rescue or mission" phrase="Ali Baba, I summon you to aid in her rescue! Bring my daughter back safely!" />
+        <topic query="wisdom or leadership" phrase="A ruler must see beyond gold and power—justice is the true foundation of strength."/>
+        <topic query="thieves or danger" phrase="These bandits will not escape my wrath! They have stolen from me, and they will answer for it."/>
+        <topic query="gold or riches" phrase="Wealth means nothing if my bloodline is threatened. I would give it all to see my daughter safe."/>
+        <topic query="honor or loyalty" phrase="A kingdom is nothing without those who uphold justice and serve with integrity."/>
+        <topic query="betrayal or vengeance" phrase="Those who have wronged my family will face the sword or live in shame forever."/>
+        <topic query="future or legacy" phrase="A strong ruler ensures his kingdom’s survival, but only through wisdom and unwavering resolve."/>
+        <topic query="bye" phrase="Go forth, and may justice guide your blade!" />
+    </conversation>
+    
     <conversation map="Sin'Vraal's hut" name="Sin'Vraal" description="a huge, horned, leather-winged daemon.">
         <topic query="job" phrase="I once served the mighty Astaroth, but that was long ago."/>
         <topic query="bye" phrase="I bid thee a safe journey."/>
