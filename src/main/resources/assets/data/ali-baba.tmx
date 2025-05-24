@@ -99,7 +99,7 @@
  </layer>
  <layer id="7" name="shadows" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3c646cIBgA0GlfxYdt0wfuvybNpk06S0FRELmck2x0Z7zz+YEw8fUCYFRb4d8rmOauw7rEAMD/dWju8kefH23vSt0eW++VmFffz69V2YqhueSUZ26eKz2Os7lqS8wzryuxGMZTjbpQfcpV2mP0qqTvkT9cq388j/andIxhBjOdy+pWjWE4Q+z3Q76itpxxppbu3N+3r/nL/vi7bOr++vXFfUeekrbmR5xd2Q9l3NefY+9MHFLPaHF45Rhj66TiLfx8lOvC/UrukzDXyX1tzNAP9/3tuSI8xr1z2Iur2Hc9X4MVxMp2NLE8F+Y7npeKtRFjLvRTrD0mVYfs1S0zxBwAtLIl5qEHJb/p671PBuBJOXkzN6/KzfNQZgBtHOVUOfdZ2jbQF/cYAMD4tOdgXiXjTLXG//XlAAAAJTwfAAAAcDdjVIzMWCwAAAAAAKvS932e8QRmJJYBANrS3qI3YnIOI5TfFkyBMcTep/U+/9Q9Hdvv2fd+UVfJ+9ZGKo8ejnXm60tablnWLP+jbWjfrSOMg9R8ar3cmBRLxITxVjNOxBx79p457thXKl9q3/FBmdOCPDOGFfsDcp5NZz7/s1Y//97d+XzTi9g5tspbOduWL4i5Ggdih9mczZ9wp6OxKZ5xpX1Xa6zy7n2KLaAG+QcAAKhhC6ax71L/Q669/rRwbCD87H36tJV+PwMAAL3T/gYAmIu2HT3Q1w+sQp6jNTEHAPP5DW4MpCmQDwEA
+   H4sIAAAAAAAACu3c626bMBgGYLpb4WI77YL3r1JVbdJSzwaDDfjwPFIVmoRwevkwdpRlAaBXa+HfEjzmzsO8ZADg/2to7vv3nt/7vDPX9th8S2La9X58dx1bGRpLzvHMrXOl63G0Vq2JacZ1JothnmpcC11POUt7jFaV9D3yh331j/vR9pSOMYxgpG2Z3awZhiNkvx3qFbXljDPd6crlvf/If++vv+9NnV8fb8478pS0Nb9ydmY5lHFef8/ekRxST285PLOOsXlSeQuf72W/cL2S8ySsdWrfPUboh/v5cl8RruPWNmzlKvZay/tgBrFj25tYnQvrHc9LZa3HzIV+y9pjUteQrWvLCJkDgLusiWloQcl3+lrvkwHIdUUdy6mbuXVVbR7HXgYAqGOvpqq5z9K2gbY4xwAA+qc9B+MqGWeqNf6vLwcAACjh/gAAAICrGaOiZ8ZiAQAAAACYlb7v44wnMCJZBgC4l/YWrZHJMfRw/NbgEehD7Pe0XqefOqdjyz36u1/UVfJ7az0djxbWdeT9S1rusax5/Pc+Q/tuHmEOUtOp+XIzKUvEhHmrmROZY8vWPccVy0rVS+07vjjm3EGd6cOM/QE596Yjb/9Rs29/6668v2lFbBvvqls5n61eEHM2B7LDaI7WT7jS3tgUzzjTvqs1Vnn1MmULqEH9AQAAaliDx9hrqf8h11Z/Wjg2ED73+vi0mb4/AwAArdP+BgAYi7YdLdDXD8xCneNuMgcA4/kEetBPupAPAQA=
   </data>
  </layer>
  <layer id="8" name="lights" width="158" height="110">
@@ -109,7 +109,7 @@
  </layer>
  <layer id="9" name="doors" width="158" height="110">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3dO07DQBQFUIcNIDbAPqjoaBDrYj1ZA2Il1LR0URASkRIrxvZ4vsw5DZ8gEZjrmffGiT0MQKsOpZ8ARZUa/7tdoV9MFYw/hLl17FCIerE/NYy5eqE/Mcd8bYZryDztW5th8xwlrZ339CJ9eE48zua98tQ8lODYh/TUanWZqqnG37cus8R+5vhem6Ot67Lc9uF9Jie567sS9WSqtdWaHY//JTU4nuWw5kyGrN/WfLYKWb/tIbWh5vkOIIf7m9LPYFqKOdq8X4eninMHLTGn1ecw+gg5nPYf7EOQ03i+W/M6zWs/+yC/LLBkvvtYkaUXuSOSr8RZyl33p37tPXEYJ4B05vZ17Pu0qfZxm9vXse/Tph7GrfZji/+ph2MLAABiCjnXpN+jBP0ewDDsvc8C4ILehBL0JgDQj0d9OPDLe3TowZucAwAAAABwxr4xP5wnAwAAQuglqIk8tu+1gTE83UvHPXXI6XQvHffU2cZeOKFc5yCtuRqu1xrPdQ7iU78RkoGtuVG/EZIBuSFETXsq6jsA5hx3f38+9XgvrJWktrXX7WGP5bODvzG3rb1uD73yLsI18EKyK+/LWaOvC8lujLxDy8y9dQi5f1tqKXtgcy+wlL6CEvQVAAD/z7Xz/+PHpr4GLjlGAAAgH9cUoATXFAAAAAAAAIAyvgFI8Kv2kA8BAA==
+   H4sIAAAAAAAACu3d3U3DMBAA4JYFEAuwB0+88YKYi3k6A2IcRqiKkKjURg1JnNg+4+974adIFHw+3zmts9sBrTrWfgJUVWv8H/aVfjEhGH9Ic2/uUIl6sT8Rxly90J8tx3xpDEeIedq3NIblOWpamvf0In14zTzO8l59ah5qMPchP7VaLGM11fD71mXmOEzM76VxtHZdFrd9+JyIk9L1XY16Mtfaas3ejv8lEZwu4jByTKas39Z81kpZv+0htSFyvgMo4fGu9jMYlyNHy/sxvASOO2iJnBbPcfARSjjvP9iHoKRhvlvyOs1bP/skfplh63z3Ju7YSO66vHTdn/u19wAQ3dS+jn2fNkUft6k+x75Pm3oYt+hzi/+ph7kFAABbSrnWpN+jBv0ewG538D4LgCt6E2rQmwBAP5714cAv76WiBx/iHAAAAACAC/aN+eE6GQAAkEIvQSTisX3vDYzh+V467qlDSed76binzjr2wknlnIO8pmq4Xms85xxsT/1GSgysjRv1GykxIG5IEWlPRX0HwJTT/u/Pxx7vhbWS3Nb2uj3ssXx18DeWtrbX7aFX3m9wBl5K7Ir3+azRt6XE7hbxDi2Te2NIuX9bbjl7YLkXmEtfQQ36CgCA/+fW9f/hY2NfA9fMEQAAKMeZAtTgTAEAAAAAAACo4xtPskABkA8BAA==
   </data>
  </layer>
  <objectgroup id="10" name="portals">
@@ -467,6 +467,7 @@
   </object>
   <object id="223" name="Cave Bear" type="MONSTER" x="5232" y="288" width="48" height="48">
    <properties>
+    <property name="icon" value="Bear"/>
     <property name="monsterID" value="WereBear"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -485,6 +486,7 @@
   </object>
   <object id="226" name="Unicorn" type="FRIENDLY" x="4752" y="912" width="48" height="48">
    <properties>
+    <property name="icon" value="Arctic_Unicorn"/>
     <property name="monsterID" value="Coyote"/>
     <property name="movement" value="WANDER"/>
    </properties>
@@ -497,42 +499,49 @@
   </object>
   <object id="228" name="Blob" type="MONSTER" x="5424" y="1536" width="48" height="48">
    <properties>
+    <property name="icon" value="Sulphur_Scuttler"/>
     <property name="monsterID" value="Grave Mist"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="229" name="Dragon" type="MONSTER" x="4704" y="1536" width="48" height="48">
    <properties>
+    <property name="icon" value="Dragon_Lord"/>
     <property name="monsterID" value="Wyvern"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="230" name="Enchanted Sword" type="MONSTER" x="4656" y="1584" width="48" height="48">
    <properties>
+    <property name="icon" value="The_Rage"/>
     <property name="monsterID" value="Swordsman"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="231" name="Very young Dragon" type="MONSTER" x="4128" y="1584" width="48" height="48">
    <properties>
+    <property name="icon" value="Titano_Dragon"/>
     <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="232" name="Nizim al Mulik" type="MONSTER" x="2976" y="1488" width="48" height="48">
    <properties>
+    <property name="icon" value="Achad"/>
     <property name="monsterID" value="Rogue"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="233" name="Salaman" type="MONSTER" x="3120" y="1536" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Rogue"/>
+    <property name="icon" value="Cobra_Assassin"/>
+    <property name="monsterID" value="highwayman"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="234" name="Alp Arsalan" type="MONSTER" x="2880" y="1536" width="48" height="48">
    <properties>
+    <property name="icon" value="Cobra_Scout"/>
     <property name="monsterID" value="Bushwacker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -545,30 +554,34 @@
   </object>
   <object id="236" name="Abdullah" type="FRIENDLY" x="3216" y="1632" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Rogue"/>
+    <property name="icon" value="Crypt_Defiler"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="237" name="Succubus" type="MONSTER" x="2016" y="1728" width="48" height="48">
    <properties>
+    <property name="icon" value="Gorga"/>
     <property name="monsterID" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="238" name="Slime" type="MONSTER" x="2352" y="2064" width="48" height="48">
    <properties>
+    <property name="icon" value="Defiler"/>
     <property name="monsterID" value="Creeping Crud"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="239" name="Barn Owl" type="FRIENDLY" x="1968" y="2064" width="48" height="48">
    <properties>
+    <property name="icon" value="Boreal_Owl"/>
     <property name="monsterID" value="Kobold"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="240" name="Tiger" type="MONSTER" x="2304" y="1152" width="48" height="48">
+  <object id="240" name="Tiger" type="MONSTER" x="2256" y="1152" width="48" height="48">
    <properties>
+    <property name="icon" value="Tiger"/>
     <property name="monsterID" value="Capybara"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -611,60 +624,70 @@
   </object>
   <object id="248" name="Enchanted Statue" type="MONSTER" x="1344" y="672" width="48" height="48">
    <properties>
+    <property name="icon" value="Marid"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="249" name="Minotaur" type="MONSTER" x="1440" y="3696" width="48" height="48">
    <properties>
+    <property name="icon" value="Bullwark"/>
     <property name="monsterID" value="Ogre Lord"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="250" name="Minotaur statue" type="MONSTER" x="1200" y="3600" width="48" height="48">
    <properties>
+    <property name="icon" value="Stonecracker"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="251" name="Stone Statue" type="MONSTER" x="720" y="3744" width="48" height="48">
    <properties>
+    <property name="icon" value="Gelidrazah_the_Frozen"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="252" name="Stone Statue" type="MONSTER" x="384" y="4176" width="48" height="48">
    <properties>
+    <property name="icon" value="The_Pale_Worm"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="253" name="Oozing Stenchbeast" type="MONSTER" x="576" y="4080" width="48" height="48">
    <properties>
+    <property name="icon" value="Defiler"/>
     <property name="monsterID" value="LifeStealer"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="254" name="Stone Statue" type="MONSTER" x="672" y="4608" width="48" height="48">
    <properties>
+    <property name="icon" value="The_Old_Whopper"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="255" name="Son of Minotaur" type="MONSTER" x="912" y="4560" width="48" height="48">
    <properties>
+    <property name="icon" value="Rhindeer"/>
     <property name="monsterID" value="Ogre"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="256" name="Green Dragon" type="MONSTER" x="2208" y="3744" width="48" height="48">
    <properties>
+    <property name="icon" value="Dragon"/>
     <property name="monsterID" value="Wyvern"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="257" name="Mechanized Sword" type="FRIENDLY" x="2592" y="3696" width="48" height="48">
    <properties>
+    <property name="icon" value="The_Rage"/>
     <property name="monsterID" value="Murphy's Ghost"/>
     <property name="movement" value="FIXED"/>
    </properties>
@@ -677,12 +700,14 @@
   </object>
   <object id="259" name="Werewolf" type="MONSTER" x="2640" y="3312" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Wolf"/>
+    <property name="icon" value="Hemming"/>
+    <property name="monsterID" value="WereWolf"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="260" name="Giant Scorpion" type="MONSTER" x="2160" y="3264" width="48" height="48">
    <properties>
+    <property name="icon" value="Giant_Spider"/>
     <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -695,12 +720,13 @@
   </object>
   <object id="262" name="Wererat" type="MONSTER" x="2208" y="3168" width="48" height="48">
    <properties>
-    <property name="monsterID" value="Were Rat"/>
+    <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="263" name="Jungle Rat" type="MONSTER" x="2640" y="3120" width="48" height="48">
    <properties>
+    <property name="icon" value="Katex_Blood_Tongue"/>
     <property name="monsterID" value="WereRat"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -725,37 +751,43 @@
   </object>
   <object id="267" name="Aries the Ram" type="FRIENDLY" x="6096" y="3120" width="48" height="48">
    <properties>
+    <property name="icon" value="Doombringer"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="268" name="Pisces" type="FRIENDLY" x="6432" y="3408" width="48" height="48">
    <properties>
+    <property name="icon" value="Brass_Speckled_Koi"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="269" name="Aquarius" type="FRIENDLY" x="6576" y="3408" width="48" height="48">
    <properties>
+    <property name="icon" value="Void_Watcher"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="270" name="Taurus" type="FRIENDLY" x="6000" y="3552" width="48" height="48">
    <properties>
+    <property name="icon" value="Obstinate_Ox"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="272" name="Cancer the Crab" type="MONSTER" x="5520" y="4128" width="48" height="48">
    <properties>
+    <property name="icon" value="Blood_Crab"/>
     <property name="monsterID" value="Huge Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="273" name="Leo" type="MONSTER" x="5856" y="4560" width="48" height="48">
    <properties>
-    <property name="monsterID" value="WereWolf"/>
+    <property name="icon" value="Dragonking_Zyrtarch"/>
+    <property name="monsterID" value="Weretiger"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
@@ -767,30 +799,35 @@
   </object>
   <object id="275" name="Libra" type="FRIENDLY" x="6288" y="4656" width="48" height="48">
    <properties>
+    <property name="icon" value="The_Diamond_Blossom"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="276" name="Scorpio" type="MONSTER" x="6528" y="4704" width="48" height="48">
    <properties>
+    <property name="icon" value="Utua_Stone_Sting"/>
     <property name="monsterID" value="Giant Spider"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
   <object id="277" name="Sagittarius" type="FRIENDLY" x="6816" y="4128" width="48" height="48">
    <properties>
+    <property name="icon" value="Gralvalon"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="278" name="Capricornus" type="FRIENDLY" x="6768" y="3936" width="48" height="48">
    <properties>
+    <property name="icon" value="Cinnamon_Ibex"/>
     <property name="monsterID" value="Gargoyle"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="279" name="Coggia Houssain" type="MONSTER" x="7152" y="4128" width="48" height="48">
    <properties>
+    <property name="icon" value="Nomad_Basic"/>
     <property name="monsterID" value="Lvl 4 Thief"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
@@ -833,25 +870,28 @@
   </object>
   <object id="287" name="Sky Wanderer" type="FRIENDLY" x="3648" y="2064" width="48" height="48">
    <properties>
+    <property name="icon" value="Energy_Elemental"/>
     <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="288" name="Sun Wanderer" type="FRIENDLY" x="3504" y="2064" width="48" height="48">
    <properties>
+    <property name="icon" value="Hellfire_Fighter"/>
     <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="289" name="Earth Wanderer" type="FRIENDLY" x="3504" y="2160" width="48" height="48">
    <properties>
+    <property name="icon" value="Massive_Earth_Elemental"/>
     <property name="monsterID" value="Dragon Puppy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="404" name="Captain of the Thieves" type="FRIENDLY" x="2016" y="720" width="48" height="48">
    <properties>
-    <property name="icon" value="Cobra Assassin"/>
+    <property name="icon" value="Cobra_Assassin"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
@@ -861,7 +901,7 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="73" name="Buring" type="MERCHANT_WER" x="2304" y="1056" width="48" height="48">
+  <object id="73" name="Buring" type="MERCHANT_LEG" x="2304" y="1056" width="48" height="48">
    <properties>
     <property name="icon" value="Memory_of_a_Hero"/>
     <property name="movement" value="WANDER"/>
@@ -899,13 +939,13 @@
   </object>
   <object id="80" name="Hikar" type="TEMPLE" x="3360" y="3120" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="Cult_Believer"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="96" name="Almgar" type="TEMPLE" x="7152" y="3936" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="Cult_Believer"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
@@ -923,7 +963,7 @@
   </object>
   <object id="139" name="Hlorgar" type="TEMPLE" x="2640" y="3552" width="48" height="48">
    <properties>
-    <property name="icon" value="Memory_of_a_Hero"/>
+    <property name="icon" value="Cult_Believer"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
@@ -933,15 +973,15 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="407" name="Ghost of Cassim" type="FRIENDLY" x="3072" y="768" width="48" height="48">
+  <object id="407" name="Ghost of Qasim" type="FRIENDLY" x="3072" y="768" width="48" height="48">
    <properties>
     <property name="icon" value="Irgix_the_Flimsy"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="422" name="Baba Mustafa" type="FRIENDLY" x="5472" y="288" width="48" height="48">
+  <object id="422" name="Baba Mustapha" type="FRIENDLY" x="2112" y="576" width="48" height="48">
    <properties>
-    <property name="icon" value="Dark_Druid"/>
+    <property name="icon" value="Mad_Scientist"/>
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
@@ -964,8 +1004,12 @@
   <object id="215" name="rune" type="Take the high road!" x="4656" y="864" width="48" height="48"/>
   <object id="217" name="rune" type="An oracular rune! A cross marks the spot of a thousand." x="3456" y="336" width="48" height="48"/>
   <object id="218" name="rune" type="One must 'b' lucky to get the treasure in this room. -a friendly mage" x="2640" y="3792" width="48" height="48"/>
-  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" x="3456" y="2640" width="48" height="48"/>
-  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your string arms hold back the wall from collapse!" x="5568" y="3456" width="48" height="48"/>
+  <object id="219" name="rune" type="Taking a drink of clear water from the glowing pool gives a feeling of increased strength and grace!" x="3456" y="2640" width="48" height="48">
+   <properties>
+    <property name="heal" value="true"/>
+   </properties>
+  </object>
+  <object id="318" name="rune" type="The rotted timbers of the unused mine shaft give way, only your strong arms hold back the wall from collapse!" x="5568" y="3456" width="48" height="48"/>
   <object id="408" name="rune" type="An oracular rune reveals, to rescue the princess unaided, attack only the unseen." x="2304" y="768" width="48" height="48"/>
   <object id="409" name="rune" type="Treasury report - the realm has 100,000 ducates but 90,000 has been stolen by thieves and is hidden in the mountain." x="2064" y="576" width="48" height="48"/>
   <object id="410" name="rune" type="while the talkative tailor Mustapha repairs your worn suit of clothes, he speaks of tales he has heard. On the gilded pathway, walk the straight and narrow.  The astrologer went to the mountain often. his last words were, look for the pair of ... no one could quite make out his last word." x="2160" y="576" width="48" height="48"/>

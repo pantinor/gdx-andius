@@ -260,12 +260,6 @@ public class WizardryData {
     public static List<Item> PMO_ITEMS, KOD_ITEMS, LEG_ITEMS, BS_ITEMS, WER_ITEMS, DQ_ITEMS;
 
     public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS, WER_MONSTERS, DQ_MONSTERS;
-    public static final java.util.Map<String, Monster> PMO_MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<String, Monster> KOD_MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<String, Monster> LEG_MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<String, Monster> BS_MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<String, Monster> WER_MONSTER_MAP = new HashMap<>();
-    public static final java.util.Map<String, Monster> DQ_MONSTER_MAP = new HashMap<>();
 
     public static List<DoGooder> WER4_CHARS;
     public static final java.util.Map<String, DoGooder> WER4_CHAR_MAP = new HashMap<>();
@@ -365,25 +359,6 @@ public class WizardryData {
                 WER4_CHAR_MAP.put(i.name, i);
             }
 
-            for (Monster m : PMO_MONSTERS) {
-                PMO_MONSTER_MAP.put(m.name, m);
-            }
-            for (Monster m : KOD_MONSTERS) {
-                KOD_MONSTER_MAP.put(m.name, m);
-            }
-            for (Monster m : LEG_MONSTERS) {
-                LEG_MONSTER_MAP.put(m.name, m);
-            }
-            for (Monster m : BS_MONSTERS) {
-                BS_MONSTER_MAP.put(m.name, m);
-            }
-            for (Monster m : DQ_MONSTERS) {
-                DQ_MONSTER_MAP.put(m.name, m);
-            }
-            for (Monster m : WER_MONSTERS) {
-                WER_MONSTER_MAP.put(m.name, m);
-            }
-
             for (int i = 0; i < PMO_LEVEL_DATA.length; i++) {
                 PMO_LEVELS[i] = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, 20, PMO_MONSTERS, PMO_MESSAGES);
             }
@@ -430,26 +405,25 @@ public class WizardryData {
     }
 
     public static enum Scenario {
-        PMO(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, PMO_LEVELS, PMO_MONSTER_MAP, null),
-        KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, KOD_MONSTER_MAP, null),
-        LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, LEG_MONSTER_MAP, null),
-        BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, BS_MONSTER_MAP, null),
-        WER(WER_ITEMS, WER_MONSTERS, null, WER_MESSAGES, WER_LEVELS, WER_MONSTER_MAP, 11, 9, 9, WER_LEVEL_DESC),
-        DQ(DQ_ITEMS, DQ_MONSTERS, DQ_REWARDS, DQ_MESSAGES, DQ_LEVELS, DQ_MONSTER_MAP, DQ_LEVEL_DESC),
-        EXODUS_PERIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX1_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, PERINIAN_LEVEL_DESC),
-        EXODUS_DARDIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX2_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, DARDIN_LEVEL_DESC),
-        EXODUS_MINE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX3_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, MINE_LEVEL_DESC),
-        EXODUS_FIRE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX4_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, FIRE_LEVEL_DESC),
-        EXODUS_DOOM(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX5_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, DOOM_LEVEL_DESC),
-        EXODUS_SNAKE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX6_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, SNAKE_LEVEL_DESC),
-        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, PMO_MONSTER_MAP, 1, 14, 1, TIME_LEVEL_DESC);
+        PMO(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, PMO_LEVELS, null),
+        KOD(KOD_ITEMS, KOD_MONSTERS, KOD_REWARDS, KOD_MESSAGES, KOD_LEVELS, null),
+        LEG(LEG_ITEMS, LEG_MONSTERS, LEG_REWARDS, LEG_MESSAGES, LEG_LEVELS, null),
+        BS(BS_ITEMS, BS_MONSTERS, BS_REWARDS, BS_MESSAGES, BS_LEVELS, null),
+        WER(WER_ITEMS, WER_MONSTERS, null, WER_MESSAGES, WER_LEVELS, 11, 9, 9, WER_LEVEL_DESC),
+        DQ(DQ_ITEMS, DQ_MONSTERS, DQ_REWARDS, DQ_MESSAGES, DQ_LEVELS, DQ_LEVEL_DESC),
+        EXODUS_PERIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX1_LEVELS, 1, 14, 1, PERINIAN_LEVEL_DESC),
+        EXODUS_DARDIN(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX2_LEVELS, 1, 14, 1, DARDIN_LEVEL_DESC),
+        EXODUS_MINE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX3_LEVELS, 1, 14, 1, MINE_LEVEL_DESC),
+        EXODUS_FIRE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX4_LEVELS, 1, 14, 1, FIRE_LEVEL_DESC),
+        EXODUS_DOOM(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX5_LEVELS, 1, 14, 1, DOOM_LEVEL_DESC),
+        EXODUS_SNAKE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX6_LEVELS, 1, 14, 1, SNAKE_LEVEL_DESC),
+        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, 1, 14, 1, TIME_LEVEL_DESC);
 
         private final List<Item> items;
         private final List<Monster> monsters;
         private final List<Reward> rewards;
         private final List<Message> messages;
         private final MazeLevel[] levels;
-        private final java.util.Map<String, Monster> monsterMap;
         private final int startLevel, startX, startY;
         private final String[] levelDescriptions;
 
@@ -457,13 +431,12 @@ public class WizardryData {
         private final List<DoGooder> characters;
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
-                MazeLevel[] levels, Map<String, Monster> monsterMap, String[] levelDescriptions) {
+                MazeLevel[] levels, String[] levelDescriptions) {
             this.items = items;
             this.monsters = monsters;
             this.rewards = rewards;
             this.messages = messages;
             this.levels = levels;
-            this.monsterMap = monsterMap;
             this.startLevel = 1;
             this.startX = 0;
             this.startY = 0;
@@ -476,13 +449,12 @@ public class WizardryData {
         }
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
-                MazeLevel[] levels, Map<String, Monster> monsterMap, int startLevel, int startX, int startY, String[] levelDescriptions) {
+                MazeLevel[] levels, int startLevel, int startX, int startY, String[] levelDescriptions) {
             this.items = items;
             this.monsters = monsters;
             this.rewards = rewards;
             this.messages = messages;
             this.levels = levels;
-            this.monsterMap = monsterMap;
             this.startLevel = startLevel;
             this.startX = startX;
             this.startY = startY;
@@ -528,10 +500,6 @@ public class WizardryData {
 
         public MazeLevel[] levels() {
             return levels;
-        }
-
-        public Map<String, Monster> monsterMap() {
-            return monsterMap;
         }
 
         public Map<String, DoGooder> characterMap() {

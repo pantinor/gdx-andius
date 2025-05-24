@@ -4991,28 +4991,28 @@
 
     <conversation map="ALIBABA" name="Qasim's Wife" description="The grieving widow whose husband's greed led to tragedy.">
         <topic query="job" phrase="I was the mistress of Qasim’s household, managing his affairs and ensuring our family’s well-being."/>
-        <topic query="griev or loss or mourn" phrase="My husband sought great riches, but instead he found his death. My child and I grieve for him still."/>
-        <topic query="rich or gold or wealth" phrase="I wished only to weigh the coins—but had I known what it would lead to, I would never have borrowed those scales."/>
-        <topic query="ali or protection" phrase="Ali Baba took me in after my husband’s passing, ensuring that my son would have a future."/>
-        <topic query="husband or secrets or fear" phrase="I learned the truth of my husband’s death, but I dared not speak a word of it to anyone."/>
-        <topic query="morgi or girl or cunning or wisdom" phrase="Morgiana saw what I did not—she knew the dangers we faced before they struck."/>
+        <topic query="mistress or family" phrase="My husband sought great riches, but instead he found his death. My child and I grieve for him still."/>
+        <topic query="rich or gold or wealth or death" phrase="I wished only to weigh the coins—but had I known what it would lead to, I would never have borrowed those scales."/>
+        <topic query="truth or ali or protection" phrase="Ali Baba took me in after my husband’s passing, ensuring that my son would have a future."/>
+        <topic query="scales or husband or secrets or fear" phrase="I learned the truth of my husband’s death, but I dared not speak a word of it to anyone, even the girl."/>
+        <topic query="morgi or girl or cunning or wisdom" phrase="Morgiana saw what I did not—she knew the dangers of the fortune before they struck."/>
         <topic query="child or future or son" phrase="My child has inherited his father’s shop, and with Ali Baba’s guidance, I pray he does not repeat his mistakes."/>
-        <topic query="fortune or greed or regret" phrase="Had Qasim been satisfied with his fortune, he would still be alive."/>
-        <topic query="truth or suspicion" phrase="I knew something was wrong when Qasim did not return, and my fears proved to be true."/>
-        <topic query="thie or revenge or justice" phrase="The thieves were ruthless, but thanks to Morgiana, they did not escape punishment."/>
+        <topic query="fortune or greed or regret" phrase="Had Qasim been satisfied with his fortune, he would still be alive.  Now he wanders in the cave."/>
+        <topic query="qasim or truth or suspicion" phrase="I knew something was wrong when Qasim did not return, and my fears proved to be true. You should talk to Baba Mustafa in the bear cave."/>
+        <topic query="they or thie or revenge or justice" phrase="The thieves were ruthless, but thanks to Morgiana, they did not escape punishment."/>
         <topic query="bye" phrase="Take heed—some riches are more trouble than they’re worth."/>
     </conversation>
 
-    <conversation map="ALIBABA" name="Baba Mustafa" description="An aged tailor who unknowingly helped the thieves.">
+    <conversation map="ALIBABA" name="Baba Mustapha" description="An aged tailor who unknowingly helped the thieves.">
         <topic query="job" phrase="I am a humble tailor, skilled in stitching fine garments and shrouds alike."/>
-        <topic query="tailor or sew" phrase="I have stitched cloth for many years, but I never thought I would sew a man back together!"/>
+        <topic query="tailor or stitch or garments" phrase="I have stitched cloth for many years, but I never thought I would sew a man back together! They used a blindfold on me."/>
         <topic query="blindfold or mystery" phrase="They covered my eyes before leading me to the house—I never saw where I went."/>
-        <topic query="gold or payment" phrase="They paid me well for my work, though I wondered at the secrecy of it all."/>
-        <topic query="death or thieves" phrase="I never knew the truth of that corpse until much later... how strange it all was!" />
-        <topic query="robbers or deception" phrase="I simply did my work as requested, but I had no idea of their wicked plans."/>
-        <topic query="fear or regret" phrase="Had I known what I was truly involved in, I might have refused their gold!" />
-        <topic query="cunning or trick" phrase="The woman was wise—she fooled the thieves before they could harm her master!" />
-        <topic query="truth or secret" phrase="I only stitched what was given to me. The story behind it remained unknown to me for some time." />
+        <topic query="gold or payment" phrase="They paid me well for my work, though I wondered at the secrecy of it all. But the woman knew."/>
+        <topic query="man or death or thieves" phrase="I never knew the truth of that corpse until much later... how strange it all was!" />
+        <topic query="fool or robbers or deception" phrase="I simply did my work as requested, but I had no idea of their wicked plans and gold."/>
+        <topic query="plans or fear or regret" phrase="Had I known what I was truly involved in, I might have refused their gold!" />
+        <topic query="woman or cunning or trick" phrase="The woman was wise—she fooled the thieves before they could harm her master!" />
+        <topic query="corpse or truth or secret" phrase="I only stitched what was given to me. The story behind it remained unknown to me for some time." />
         <topic query="bye" phrase="May your clothes be ever finely stitched, and your secrets never tangled."/>
     </conversation>
     

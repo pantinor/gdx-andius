@@ -430,6 +430,17 @@ public class GameScreen extends BaseScreen {
 
                     animateText(msg, Color.WHITE);
 
+                    String heal = obj.getProperties().get("heal", String.class);
+                    if (heal != null) {
+                        Sounds.play(Sound.HEALING);
+                        for (int i = 0; i < CTX.players().length; i++) {
+                            CTX.players()[i].adjustHP(15);
+                            CTX.players()[i].status.reset();
+                            SaveGame.setSpellPoints(CTX.players()[i]);
+                        }
+                        return false;
+                    }
+
                     String itemRequired = obj.getProperties().get("itemRequired", String.class);
                     if (itemRequired != null) {
                         Item found = this.map.scenario().item(itemRequired);

@@ -22,6 +22,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -224,7 +225,7 @@ public interface Constants {
 
                 MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
-                    loadPeopleLayer(peopleLayer, this.wizScenario.monsterMap());
+                    loadPeopleLayer(peopleLayer, this.wizScenario.monsters());
                 }
 
                 MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
@@ -265,7 +266,12 @@ public interface Constants {
 
         }
 
-        private void loadPeopleLayer(MapLayer peopleLayer, java.util.Map<String, Monster> monsters) {
+        private void loadPeopleLayer(MapLayer peopleLayer, List<Monster> monsters) {
+            
+            java.util.Map<String, Monster> monsterMap = new HashMap<>();
+             for (Monster m : monsters) {
+                monsterMap.put(m.name, m);
+            }
 
             TextureAtlas iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wizIcons.atlas"));
 
@@ -288,11 +294,11 @@ public interface Constants {
                 Actor actor = new Actor(name);
                 if (role == Role.MONSTER) {
                     try {
-                        Monster monster = monsters.get(name);
+                        Monster monster = monsterMap.get(name);
 
                         if (monster == null) {
                             String mid = obj.getProperties().get("monsterID", String.class);
-                            monster = monsters.get(mid.toUpperCase());
+                            monster = monsterMap.get(mid.toUpperCase());
                         }
 
                         if (monster != null) {
@@ -306,7 +312,12 @@ public interface Constants {
                                 tr = iconAtlas.findRegion("" + monster.getIconId());
                                 if (tr == null) {
                                     tr = iconAtlas.findRegion("0");
+                                    System.err.printf("icon not found using icon 0 for %s %s %s\n", name, icon, monster.getIconId());
                                 }
+                            }
+
+                            if (tr == null) {
+                                System.err.printf("icon not found %s %s %s\n", name, icon, monster.getIconId());
                             }
 
                             actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, tr);
@@ -323,9 +334,15 @@ public interface Constants {
                     if (icon == null) {
                         icon = "Knight_Arena_Champion_Male";
                     }
+                    
+                    TextureRegion tr = TibianSprite.icon(icon);
+                    
+                    if (tr == null) {
+                        System.err.printf("icon not found %s %s\n", name, icon);
+                    }
 
                     MutableMonster mm = null;
-                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, TibianSprite.icon(icon));
+                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, tr);
                 }
 
                 this.baseMap.actors.add(actor);

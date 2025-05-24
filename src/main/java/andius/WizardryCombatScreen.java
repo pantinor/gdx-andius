@@ -80,7 +80,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private MazeCell destCell, fromCell;
     private final boolean hasTreasure;
 
-    public WizardryCombatScreen(Context context, Map contextMap, Monster opponent, int level, boolean hasTreasure, MazeCell destCell, MazeCell fromCell) {
+    public WizardryCombatScreen(Context context, Map contextMap, String mname, Monster opponent, int level, boolean hasTreasure, MazeCell destCell, MazeCell fromCell) {
         super(context, contextMap, opponent, level);
 
         this.destCell = destCell;
@@ -291,7 +291,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         this.stage.addActor(this.actionsScroll);
         this.stage.addActor(this.spellsScroll);
 
-        Label l = new Label(opponent.name, Andius.skin, "default-16");
+        Label l = new Label(mname, Andius.skin, "default-16");
         l.setPosition(715, 730);
         this.stage.addActor(l);
         this.background = fm.build();

@@ -92,7 +92,7 @@ public class BaseMap {
                     if (dist <= 1) {
                         this.combatActor = p;
                         Monster m = (Monster) p.getEnemy().baseType();
-                        WizardryCombatScreen cs = new WizardryCombatScreen(CTX, map, m, m.getLevel(), true, null, null);
+                        WizardryCombatScreen cs = new WizardryCombatScreen(CTX, map, p.getName(), m, m.getLevel(), true, null, null);
                         mainGame.setScreen(cs);
                         return;
                     } else if (dist >= 4) {
