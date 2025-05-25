@@ -95,11 +95,6 @@
    H4sIAAAAAAAACmNgGAWjYBSMglFALuhjYlhAD3tK8GB6gH4m7OK9OMRpBfrobN8oGDygnwZ57QYRmJaAHPOPQHAClB4I+xdA7T5AbftJcU8PE0MChdaj2EevOMdlPzY+OQBXWU2M/fQG9LIfmFYO4LKf1vmfWub04/ADvewfBcMLAAAoVC7hABAAAA==
   </data>
  </layer>
- <layer id="4" name="creature" width="32" height="32">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
-  </data>
- </layer>
  <layer id="3" name="props" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACmNgGP6gjGn425k0AH4kFVDiRuTwHAp+pQcYiHQ9nEEhEyRtFQ7icF3IhMJOgNILKDFzKPh7oEEhEyrGJTYKIMBwAOwswhEHBVSMmyoaxTOxdVrtAKezSjz2Vw+w22roZP8mHPbQKm1gA7jSOrFgsJVXlLbpRtuE9AHo4UzvdIRu30CnY0L2D/Z0CQCyBt0dABAAAA==
@@ -115,11 +110,6 @@
    H4sIAAAAAAAACmNgGAXDHbQzDrQLRsFIA4cZMdneFKRDbOZhE6MFEBzh+Wek+59SQMu0OVBgOPqJGmA0r4wCdEBJvYcMqJG2KDUDPd8PxnJgpOdBZP8XD3BYjPY9BjcAACGk19MAEAAA
   </data>
  </layer>
- <layer id="9" name="torches" width="32" height="32">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3TwQkAMAhDUenuHaLb9iq9WEpCQf4bICLGCADwmMObV+Uv8fwzT52PXnI/1b9wI/dT1dWOOwEO/Ep/P+6acVe82kCAtsUAEAAA
-  </data>
- </layer>
  <layer id="6" name="shadows" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu2WWQoAIAhEu4v3v2P/wYC5NGU+iD6iMZeyMeojH9hk+KhFltmj4dWpRMcBI2BY96A1rXYEWbbZfjUYa/xfzKWmT2hrdcfXyLvNegsqwfQn4q+CNL0arJq+ifXcqD9bdDNjlRnzKrltzjMBQ1Wg3QAQAAA=
@@ -130,79 +120,89 @@
    H4sIAAAAAAAACu3U0QkAMAgDUXH5UqfuCP1RCtd7C0jAJIKpkn3vpZ+ySlIHwm4uQAZp2q0nE1uw7abg/PFeB84T+GUAEAAA
   </data>
  </layer>
+ <layer id="4" name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
  <layer id="7" name="walls" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACs1W7XGDMAy1+cklK3QIhsgcGS2jdBacrBCaf0FXv+uLamwZQ1Pd6fwB6OnJkoxz+8rdO9d336PoX0gKc098xsNaY+6NvzTynH2stc/x1Has+DzW4i/ZE5nehJ/KMe3Plvhi95Hh+OXdJedvK/6SPb0HHyU+h+5nnsNHPOX9nhRrEZ6n9iwcc/jjrNc46rlF1uCD95E4H7vfezX4UyW+8LxFnjfiPDbwD9FuiHshzlvyrwafVe+twdc5IYJ4YY/if9a5i3XLHQD/dX95JLjmbLB8dHZFrmpOnKfwZ0nQoyDD/M3JoPJezi6kVC+a/2CsrcF4dsjzd+GXcrwFX59dSuYzutTU/9b8J19X/1b8k7EPI//Rvw+qVnpVK1Z8qT/uO0H1IfSgqXD++A79ak38UyPz3bv+UqP1vpLerO1ael8On+/qNfytOtffZwr/6l81+Nc+xOvW+4dH/b9Zer9V8K9i/afFWW+Fn/JnzMS09Pw/yBPVxBXWABAAAA==
   </data>
  </layer>
+ <layer id="9" name="torches" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3TwQkAMAhDUenuHaLb9iq9WEpCQf4bICLGCADwmMObV+Uv8fwzT52PXnI/1b9wI/dT1dWOOwEO/Ep/P+6acVe82kCAtsUAEAAA
+  </data>
+ </layer>
  <objectgroup id="11" name="people">
-  <object id="1" name="bleeb" type="MONSTER" x="1152" y="480" width="48" height="48">
+  <object id="1" name="Bleeb" type="MONSTER" x="1152" y="480" width="48" height="48">
    <properties>
     <property name="monsterID" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="21" name="priestess" type="MONSTER" x="768" y="864" width="48" height="48">
+  <object id="21" name="Priestess" type="MONSTER" x="768" y="864" width="48" height="48">
    <properties>
     <property name="monsterID" value="Priestess"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="22" name="evil wizard" type="MONSTER" x="864" y="1056" width="48" height="48">
+  <object id="22" name="Lvl 5 Mage" type="MONSTER" x="864" y="1056" width="48" height="48">
    <properties>
     <property name="monsterID" value="Lvl 5 Mage"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="24" name="toad" type="MONSTER" x="624" y="864" width="48" height="48">
+  <object id="24" name="Giant Toad" type="MONSTER" x="624" y="864" width="48" height="48">
    <properties>
     <property name="monsterID" value="Giant Toad"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="32" name="elemental" type="MONSTER" x="1056" y="1200" width="48" height="48">
+  <object id="32" name="Will O' Wisp" type="MONSTER" x="1056" y="1200" width="48" height="48">
    <properties>
     <property name="monsterID" value="Will O' Wisp"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="33" name="golem" type="MONSTER" x="1200" y="1248" width="48" height="48">
+  <object id="33" name="Ogre Lord" type="MONSTER" x="1200" y="1248" width="48" height="48">
    <properties>
     <property name="monsterID" value="Ogre Lord"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="36" name="wraith" type="MONSTER" x="1152" y="1392" width="48" height="48">
+  <object id="36" name="NightStalker" type="MONSTER" x="1152" y="1392" width="48" height="48">
    <properties>
     <property name="monsterID" value="NightStalker"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="39" name="bleeb" type="MONSTER" x="1248" y="480" width="48" height="48">
+  <object id="39" name="Bleeb" type="MONSTER" x="1248" y="480" width="48" height="48">
    <properties>
     <property name="monsterID" value="Bleeb"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="65" name="elemental" type="MONSTER" x="192" y="960" width="48" height="48">
+  <object id="65" name="Fire Giant" type="MONSTER" x="192" y="960" width="48" height="48">
    <properties>
     <property name="monsterID" value="Fire Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="66" name="elemental" type="MONSTER" x="192" y="1152" width="48" height="48">
+  <object id="66" name="Earth Giant" type="MONSTER" x="192" y="1152" width="48" height="48">
    <properties>
     <property name="monsterID" value="Earth Giant"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="70" name="samurai" type="MONSTER" x="480" y="528" width="48" height="48">
+  <object id="70" name="Champ Samurai" type="MONSTER" x="480" y="528" width="48" height="48">
    <properties>
     <property name="monsterID" value="Champ Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
    </properties>
   </object>
-  <object id="72" name="samurai" type="MONSTER" x="864" y="528" width="48" height="48">
+  <object id="72" name="Champ Samurai" type="MONSTER" x="864" y="528" width="48" height="48">
    <properties>
     <property name="monsterID" value="Champ Samurai"/>
     <property name="movement" value="ATTACK_AVATAR"/>
