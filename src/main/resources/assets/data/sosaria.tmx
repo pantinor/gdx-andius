@@ -162,7 +162,7 @@
   <object id="1" name="LLECHY" type="portal" x="1080" y="432" width="24" height="24"/>
   <object id="2" name="WIZARDRY4" type="portal" x="240" y="1272" width="24" height="24"/>
   <object id="3" name="BOLTAC" type="portal" x="1104" y="456" width="24" height="24"/>
-  <object id="4" name="ALIBABA" type="portal" x="144" y="312" width="24" height="24"/>
+  <object id="4" name="WIZARDRY4" type="portal" x="144" y="312" width="24" height="24"/>
   <object id="6" name="CANT" type="portal" x="1152" y="552" width="24" height="24"/>
   <object id="7" name="DOOM" type="portal" x="432" y="744" width="24" height="24"/>
   <object id="8" name="BARAD_ENELETH" type="portal" x="1176" y="1392" width="24" height="24"/>

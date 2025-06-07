@@ -50,7 +50,6 @@ public interface Constants {
         CAVE("Cave", "cave.tmx", TILE_DIM),
         BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
-        ALIBABA("Ali Baba Shahriar", "ali-baba.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
