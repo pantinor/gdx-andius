@@ -3,7 +3,7 @@ package andius.dialogs;
 import andius.BaseScreen;
 import andius.Context;
 import andius.GameScreen;
-import andius.WorldScreen;
+import andius.OverworldScreen;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import java.util.regex.Matcher;
@@ -17,7 +17,7 @@ public class TeleportDialog extends Dialog {
         Vector3 v = new Vector3();
         screen.getCurrentMapCoords(v);
 
-        if (screen instanceof WorldScreen || screen instanceof GameScreen) {
+        if (screen instanceof OverworldScreen || screen instanceof GameScreen) {
             scrollPane.add("Enter the destination coordinates one wishes to travel as (North, East).");
             scrollPane.add("Current coordinates are");
             scrollPane.add(String.format("North [%d]", (int) v.y));
@@ -42,7 +42,7 @@ public class TeleportDialog extends Dialog {
 
                     String coordinates = tf.getText().trim();
 
-                    if (screen instanceof WorldScreen || screen instanceof GameScreen) {
+                    if (screen instanceof OverworldScreen || screen instanceof GameScreen) {
                         String regex = "^\\d+,\\d+$";
                         Pattern pattern = Pattern.compile(regex);
                         Matcher matcher = pattern.matcher(coordinates);

@@ -9,15 +9,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -26,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Array;
-import java.util.HashMap;
 import utils.Hud;
 
 public class Andius extends Game {
@@ -59,14 +55,13 @@ public class Andius extends Game {
     public static float musicVolume = 0.1f;
     public static Music music;
 
-    public static java.util.Map<Color, Animation> EXPLMAP = new HashMap<>();
-
     public static Animation<TextureRegion> world_scr_avatar;
     public static Animation<TextureRegion> game_scr_avatar;
 
     public static Hud HUD;
     public static Conversations CONVERSATIONS;
 
+    public static TextureRegion[] u1Tiles = new TextureRegion[9 * 6];
     public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
 
     public static void main(String[] args) {
@@ -128,7 +123,7 @@ public class Andius extends Game {
         skin.get("default-12-green", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12-yellow", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12", CheckBox.CheckBoxStyle.class).font = font12;
-        
+
         skin.get("default-14", Label.LabelStyle.class).font = font14;
 
         skin.get("default-16", Label.LabelStyle.class).font = font16;
@@ -155,7 +150,14 @@ public class Andius extends Game {
 
             backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
 
-            TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
+            TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/ultima1-tiles.png")), 16, 16);
+            for (int row = 0; row < 6; row++) {
+                for (int col = 0; col < 9; col++) {
+                    u1Tiles[row * 9 + col] = trs[row][col];
+                }
+            }
+
+            trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
             for (int row = 0; row < 6; row++) {
                 for (int col = 0; col < 6; col++) {
                     faceTiles[row * 6 + col] = trs[row][col];
@@ -168,18 +170,9 @@ public class Andius extends Game {
             mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
             moongateTextures = mapAtlas.findRegions("moongate");
 
-            world_scr_avatar = new Animation(.4f, mapAtlas.findRegions("avatar_warrior_red"));
+            world_scr_avatar = new Animation(.4f, u1Tiles[10], u1Tiles[11]);
             game_scr_avatar = TibianSprite.animation("Knight_Knight_Male");
 
-            TextureRegion[][] expl = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_FX.png")), 24, 24);
-            EXPLMAP.put(Color.GRAY, new Animation(.1f, getTextureArray(expl, 0, 0)));
-            EXPLMAP.put(Color.BLUE, new Animation(.1f, getTextureArray(expl, 0, 5)));
-            EXPLMAP.put(Color.RED, new Animation(.1f, getTextureArray(expl, 1, 0)));
-            EXPLMAP.put(Color.GREEN, new Animation(.1f, getTextureArray(expl, 1, 5)));
-            EXPLMAP.put(Color.PURPLE, new Animation(.1f, getTextureArray(expl, 4, 5)));
-            EXPLMAP.put(Color.YELLOW, new Animation(.1f, getTextureArray(expl, 5, 5)));
-
-            //static initializer
             WizardryData.class.getClass();
 
             Constants.Moongate.init();
@@ -193,32 +186,6 @@ public class Andius extends Game {
         startScreen = new StartScreen();
         setScreen(startScreen);
 
-    }
-
-    private Array<TextureRegion> getTextureArray(TextureRegion[][] expl, int x, int y) {
-        Array<TextureRegion> arr = new Array<>();
-        arr.add(expl[x][y]);
-        arr.add(expl[x][y + 1]);
-        arr.add(expl[x][y + 2]);
-        arr.add(expl[x][y + 3]);
-        arr.add(expl[x][y + 4]);
-        return arr;
-    }
-
-    public static class ExplosionDrawable extends Actor {
-
-        private float stateTime;
-        private final Animation<TextureRegion> anim;
-
-        public ExplosionDrawable(Animation anim) {
-            this.anim = anim;
-        }
-
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            stateTime += Gdx.graphics.getDeltaTime();
-            batch.draw(anim.getKeyFrame(stateTime, false), getX(), getY(), 24, 24);
-        }
     }
 
 }

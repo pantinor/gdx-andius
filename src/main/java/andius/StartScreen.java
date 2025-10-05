@@ -33,6 +33,7 @@ public class StartScreen implements Screen, Constants {
     private final BitmapFont titleFont;
     private final Stage stage;
     private final Texture background;
+    private final List saveGameSelection;
 
     public StartScreen() {
 
@@ -40,9 +41,8 @@ public class StartScreen implements Screen, Constants {
 
         batch = new SpriteBatch();
 
-        List saveGameSelection = new List<>(Andius.skin, "default-16");
-        Object[] jsonFiles = new File(".").list((File dir, String name) -> name.startsWith("party") && name.endsWith(".json"));
-        saveGameSelection.setItems(jsonFiles);
+        saveGameSelection = new List<>(Andius.skin, "default-16");
+
         AutoFocusScrollPane savedGamePane = new AutoFocusScrollPane(saveGameSelection, Andius.skin);
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -78,7 +78,7 @@ public class StartScreen implements Screen, Constants {
                 try {
 
                     CTX = new Context();
-                    
+
                     String fname = (String) saveGameSelection.getSelected();
                     SaveGame saveGame = SaveGame.read(fname);
                     CTX.setSaveGame(saveGame);
@@ -91,9 +91,10 @@ public class StartScreen implements Screen, Constants {
                     Sounds.play(Sound.TRIGGER);
 
                     if (CTX.saveGame.map == null) {
-                        CTX.saveGame.map = Map.WORLD;
-                        CTX.saveGame.wx = Map.WORLD.getStartX();
-                        CTX.saveGame.wy = Map.WORLD.getStartY();
+                        Map.OVERWORLD.init();
+                        CTX.saveGame.map = Map.OVERWORLD;
+                        CTX.saveGame.wx = Map.OVERWORLD.getStartX();
+                        CTX.saveGame.wy = Map.OVERWORLD.getStartY();
                     }
 
                     BaseScreen scr = (BaseScreen) CTX.saveGame.map.getScreen();
@@ -122,6 +123,17 @@ public class StartScreen implements Screen, Constants {
 
     @Override
     public void show() {
+
+        Object[] jsonFiles = new File(".").list((File dir, String name) -> name.startsWith("party") && name.endsWith(".json"));
+        saveGameSelection.setItems(jsonFiles);
+
+        Object selected = saveGameSelection.getSelected();
+        if (selected == null) {
+            if (jsonFiles.length > 0) {
+                saveGameSelection.setSelected(jsonFiles[0]);
+            }
+        }
+
         Gdx.input.setInputProcessor(stage);
     }
 

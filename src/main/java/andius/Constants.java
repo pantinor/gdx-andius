@@ -46,7 +46,8 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        WORLD("Andius", "sosaria.tmx", WORLD_TILE_DIM),
+        OVERWORLD("Ultima", "ultima1.tmx", 16),
+        SOSARIA("Andius", "sosaria.tmx", WORLD_TILE_DIM),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
@@ -256,19 +257,20 @@ public interface Constants {
 
             if (this.dim == 0) {
                 this.screen = new WizardryDungeonScreen(this);
-            } else if (this.dim == TILE_DIM) {
+            } else if (this.dim == 48) {
                 this.screen = new GameScreen(this);
-            } else {
-                this.screen = new WorldScreen(this);
-                //this.screen = new VoronoiAzgaarMapScreen();
+            } else if (this.dim == 24) {
+                this.screen = new SosariaScreen(this);
+            } else if (this.dim == 16) {
+                this.screen = new OverworldScreen(this);
             }
 
         }
 
         private void loadPeopleLayer(MapLayer peopleLayer, List<Monster> monsters) {
-            
+
             java.util.Map<String, Monster> monsterMap = new HashMap<>();
-             for (Monster m : monsters) {
+            for (Monster m : monsters) {
                 monsterMap.put(m.name, m);
             }
 
@@ -333,9 +335,9 @@ public interface Constants {
                     if (icon == null) {
                         icon = "Knight_Arena_Champion_Male";
                     }
-                    
+
                     TextureRegion tr = TibianSprite.icon(icon);
-                    
+
                     if (tr == null) {
                         System.err.printf("icon not found %s %s\n", name, icon);
                     }
@@ -510,9 +512,9 @@ public interface Constants {
         }
 
         public static void init() {
-            int mapWidth = Map.WORLD.getTiledMap().getProperties().get("width", Integer.class);
-            int tileWidth = Map.WORLD.getTiledMap().getProperties().get("tilewidth", Integer.class);
-            MapLayer moongatesLayer = Map.WORLD.getTiledMap().getLayers().get("moongates");
+            int mapWidth = Map.SOSARIA.getTiledMap().getProperties().get("width", Integer.class);
+            int tileWidth = Map.SOSARIA.getTiledMap().getProperties().get("tilewidth", Integer.class);
+            MapLayer moongatesLayer = Map.SOSARIA.getTiledMap().getLayers().get("moongates");
             Iterator<MapObject> iter = moongatesLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();

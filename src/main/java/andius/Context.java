@@ -123,7 +123,7 @@ public class Context {
     }
 
     public void endTurn(Constants.Map map) throws PartyDeathException {
-        int decr_interval = (map == Constants.Map.WORLD ? 50 : 20);
+        int decr_interval = (map == Constants.Map.SOSARIA || map == Constants.Map.OVERWORLD? 50 : 20);
         for (CharacterRecord player : this.saveGame.players) {
             if (!player.isDead()) {
                 player.submorsels -= decr_interval;

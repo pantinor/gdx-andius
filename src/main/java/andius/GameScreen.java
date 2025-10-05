@@ -407,7 +407,7 @@ public class GameScreen extends BaseScreen {
         }
 
         if (nx > this.map.getBaseMap().getWidth() - 1 || nx < 0 || ny > this.map.getBaseMap().getHeight() - 1 || ny < 0) {
-            Andius.mainGame.setScreen(Map.WORLD.getScreen());
+            Andius.mainGame.setScreen(Map.OVERWORLD.getScreen());
             return false;
         }
 

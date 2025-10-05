@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.SpreadFOV;
 import utils.WrappingTileMapRenderer;
 
-public class WorldScreen extends BaseScreen {
+public class SosariaScreen extends BaseScreen {
 
     private static final int MAP_VIEWPORT_DIM = 504;
 
@@ -44,7 +44,7 @@ public class WorldScreen extends BaseScreen {
     private final Texture frame;
     private final int width, height;
 
-    public WorldScreen(Map map) {
+    public SosariaScreen(Map map) {
 
         this.map = map;
 
@@ -89,7 +89,7 @@ public class WorldScreen extends BaseScreen {
     public void save(SaveGame saveGame) {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        CTX.saveGame.map = Map.WORLD;
+        CTX.saveGame.map = Map.SOSARIA;
         CTX.saveGame.level = 0;
         CTX.saveGame.direction = Direction.NORTH;
     }
