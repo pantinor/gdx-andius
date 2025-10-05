@@ -2,6 +2,8 @@ package andius;
 
 import andius.objects.Direction;
 import static andius.Andius.CTX;
+import static andius.Andius.SCREEN_HEIGHT;
+import static andius.Andius.SCREEN_WIDTH;
 import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
 import andius.objects.Item;
@@ -20,30 +22,36 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import utils.FrameMaker;
 import utils.SpreadFOV;
 import utils.WrappingTileMapRenderer;
 
 public class OverworldScreen extends BaseScreen {
 
-    private static final int DIM = 16;
-    private static final int VIEWPORT_DIM = DIM * 31;
+    private static final int SCALED_DIM = 32;
+    private static final int VIEWPORT_DIM = SCALED_DIM * 17;
 
     private final Map map;
     private final WrappingTileMapRenderer renderer;
     private final Batch batch;
     private final Viewport mapViewPort;
-    private final Texture frame;
+    private final Texture background;
     private final int width, height;
 
     public OverworldScreen(Map map) {
 
         this.map = map;
 
-        this.frame = new Texture(Gdx.files.classpath("assets/data/world_frame.png"));
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+        Texture frame = new Texture(Gdx.files.classpath("assets/data/world_frame.png"));
+        frame.getTextureData().prepare();
+        fm.drawPixmap(frame.getTextureData().consumePixmap(), 0, 0);
+        fm.emptyFrame(SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
+        this.background = fm.build();
 
         this.width = this.map.getBaseMap().getWidth();
         this.height = this.map.getBaseMap().getHeight();
-        this.mapPixelHeight = height * DIM;
+        this.mapPixelHeight = height * SCALED_DIM;
 
         this.batch = new SpriteBatch();
 
@@ -60,12 +68,12 @@ public class OverworldScreen extends BaseScreen {
             for (int x = 0; x < width; x++) {
                 TiledMapTileLayer.Cell cell = mapLayer.getCell(x, height - 1 - y);
                 int val = cell.getTile().getId();
-                shadowMap[x][y] = (val == 4 ? 1 : 0);
+                shadowMap[x][y] = (val == 3 || val == 4 ? 1 : 0);//forest or mountains block visibility
             }
         }
 
         SpreadFOV fov = new SpreadFOV(shadowMap);
-        this.renderer = new WrappingTileMapRenderer(this.map, this.map.getTiledMap(), fov, 1f);
+        this.renderer = new WrappingTileMapRenderer(this.map, this.map.getTiledMap(), fov, 2f);
     }
 
     @Override
@@ -102,21 +110,21 @@ public class OverworldScreen extends BaseScreen {
 
         this.time += delta;
 
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(0x18 / 255f, 0x18 / 255f, 0x18 / 255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (this.renderer == null) {
             return;
         }
 
-        this.camera.position.x = newMapPixelCoords.x + DIM * 11;
-        this.camera.position.y = newMapPixelCoords.y + DIM * 0;
+        this.camera.position.x = newMapPixelCoords.x + SCALED_DIM * 5;
+        this.camera.position.y = newMapPixelCoords.y + SCALED_DIM * 1;
 
         this.camera.update();
 
         this.renderer.setView(camera.combined,
-                camera.position.x - DIM * 26,
-                camera.position.y - DIM * 15,
+                camera.position.x - SCALED_DIM * 13,
+                camera.position.y - SCALED_DIM * 9,
                 VIEWPORT_DIM,
                 VIEWPORT_DIM);
 
@@ -124,8 +132,8 @@ public class OverworldScreen extends BaseScreen {
 
         batch.begin();
 
-        batch.draw(this.frame, 0, 0);
-        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), DIM * 21, DIM * 24);
+        batch.draw(this.background, 0, 0);
+        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), SCALED_DIM * 11, SCALED_DIM * 11, SCALED_DIM, SCALED_DIM);
 
         Andius.HUD.render(batch, Andius.CTX);
 
@@ -143,7 +151,7 @@ public class OverworldScreen extends BaseScreen {
         //shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         //shapeRenderer.setColor(255, 255, 0, .50f);//yellow
         //shapeRenderer.box(vb.x, vb.y, 0, vb.width, vb.height, 0);
-        //shapeRenderer.box(camera.position.x, camera.position.y, 0, 16, 16, 0);
+        //shapeRenderer.box(camera.position.x, camera.position.y, 0, SCALED_DIM, SCALED_DIM, 0);
         //shapeRenderer.end();
     }
 
@@ -160,14 +168,14 @@ public class OverworldScreen extends BaseScreen {
 
     @Override
     public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
-        v.set(x * DIM, mapPixelHeight - DIM - y * DIM, 0);
+        v.set(x * SCALED_DIM, mapPixelHeight - SCALED_DIM - y * SCALED_DIM, 0);
     }
 
     @Override
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(336, 368, 0), 96, 624, VIEWPORT_DIM, VIEWPORT_DIM);
-        float y = Math.round((mapPixelHeight - tmp.y) / DIM) - 47;
-        float x = Math.round(tmp.x / DIM) - 10;
+        Vector3 tmp = camera.unproject(new Vector3(SCALED_DIM * 11, SCALED_DIM * 11, 0), SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
+        float y = Math.round((mapPixelHeight - tmp.y) / SCALED_DIM) + 2;
+        float x = Math.round(tmp.x / SCALED_DIM) - 4;
         v.set(x, y, 0);
     }
 
@@ -259,32 +267,32 @@ public class OverworldScreen extends BaseScreen {
         }
 
         if (dir == Direction.NORTH) {
-            if (newMapPixelCoords.y + DIM >= this.map.getBaseMap().getHeight() * DIM) {
+            if (newMapPixelCoords.y + SCALED_DIM >= this.map.getBaseMap().getHeight() * SCALED_DIM) {
                 newMapPixelCoords.y = 0;
             } else {
-                newMapPixelCoords.y += DIM;
+                newMapPixelCoords.y += SCALED_DIM;
             }
         } else if (dir == Direction.SOUTH) {
-            if (newMapPixelCoords.y - DIM < 0) {
-                newMapPixelCoords.y = (this.map.getBaseMap().getHeight() - 1) * DIM;
+            if (newMapPixelCoords.y - SCALED_DIM < 0) {
+                newMapPixelCoords.y = (this.map.getBaseMap().getHeight() - 1) * SCALED_DIM;
             } else {
-                newMapPixelCoords.y -= DIM;
+                newMapPixelCoords.y -= SCALED_DIM;
             }
         } else if (dir == Direction.EAST) {
-            if (newMapPixelCoords.x + DIM >= this.map.getBaseMap().getWidth() * DIM) {
+            if (newMapPixelCoords.x + SCALED_DIM >= this.map.getBaseMap().getWidth() * SCALED_DIM) {
                 newMapPixelCoords.x = 0;
             } else {
-                newMapPixelCoords.x += DIM;
+                newMapPixelCoords.x += SCALED_DIM;
             }
         } else if (dir == Direction.WEST) {
-            if (newMapPixelCoords.x - DIM < 0) {
-                newMapPixelCoords.x = (this.map.getBaseMap().getWidth() - 1) * DIM;
+            if (newMapPixelCoords.x - SCALED_DIM < 0) {
+                newMapPixelCoords.x = (this.map.getBaseMap().getWidth() - 1) * SCALED_DIM;
             } else {
-                newMapPixelCoords.x -= DIM;
+                newMapPixelCoords.x -= SCALED_DIM;
             }
         }
 
-        renderer.getFOV().calculateFOV(nx, ny, 20f);
+        renderer.getFOV().calculateFOV(nx, ny, 72);
 
         return new Vector3(nx, ny, 0);
     }

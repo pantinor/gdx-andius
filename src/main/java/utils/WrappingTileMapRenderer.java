@@ -170,7 +170,7 @@ public class WrappingTileMapRenderer extends BatchTiledMapRenderer {
         float val = lightMap[cx][cy];
 
         if (val <= 0) {
-            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 0); //make it all black
+            return Color.BLACK.toFloatBits();
         } else {
             return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
         }

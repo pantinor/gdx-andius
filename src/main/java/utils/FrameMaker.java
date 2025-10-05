@@ -57,6 +57,26 @@ public class FrameMaker {
         return this;
     }
 
+    public FrameMaker emptyFrame(float x, float y, float w, float h) {
+
+        int ix = (int) x;
+        int iy = (int) (this.height - y - h);
+        int iw = (int) w;
+        int ih = (int) h;
+
+        this.pix.setColor(DARK);
+        this.pix.fillRectangle(ix - 32, iy - 32, iw + 64, ih + 64);
+
+        this.pix.setColor(LIGHT);
+        this.pix.fillRectangle(ix - 16, iy - 16, iw + 32, ih + 32);
+
+        pix.setBlending(Pixmap.Blending.None);
+        pix.setColor(Color.CLEAR);                     
+        pix.fillRectangle(ix, iy, iw, ih);
+
+        return this;
+    }
+
     public FrameMaker drawPixmap(Pixmap pixmap, int x, int y) {
         this.pix.drawPixmap(pixmap, x, y);
         return this;
