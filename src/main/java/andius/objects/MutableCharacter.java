@@ -45,10 +45,7 @@ public class MutableCharacter implements Mutable {
 
     @Override
     public CharacterType getMonsterType() {
-        if (null != getType()) {
-            CharacterType.valueOf(getType().toString());
-        }
-        return null;
+        return CharacterType.valueOf(getType().toString());
     }
 
     @Override

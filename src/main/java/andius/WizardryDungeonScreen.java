@@ -1219,7 +1219,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             currentLevel--;
             if (currentLevel < 0) {
                 currentLevel = 0;
-                Andius.mainGame.setScreen(Map.OVERWORLD.getScreen());
+                Andius.mainGame.setScreen(Map.WORLD.getScreen());
             } else {
                 createMiniMap();
             }
@@ -1240,7 +1240,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         } else if (keycode == Keys.NUM_1 || keycode == Keys.PAGE_DOWN) {
             if (cell.elevator) {//up
                 if (currentLevel == 0) {
-                    Andius.mainGame.setScreen(Map.OVERWORLD.getScreen());
+                    Andius.mainGame.setScreen(Map.WORLD.getScreen());
                 } else if (currentLevel + 1 - 1 >= cell.elevatorFrom && currentLevel + 1 - 1 <= cell.elevatorTo) {
                     currentLevel--;
                     createMiniMap();
@@ -1710,7 +1710,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         if (addr.level <= 0) {
             setMapPixelCoords(null, this.map.scenario().getStartX(), this.map.scenario().getStartY(), this.map.scenario().getStartLevel());
-            Andius.mainGame.setScreen(Map.OVERWORLD.getScreen());
+            Andius.mainGame.setScreen(Map.WORLD.getScreen());
             return;
         } else {
             if (this.map == Map.WIZARDRY4 && addr.level == 12) {//root of the world level 12

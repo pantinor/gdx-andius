@@ -46,8 +46,7 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        OVERWORLD("Ultima", "ultima1.tmx", 16),
-        SOSARIA("Andius", "sosaria.tmx", WORLD_TILE_DIM),
+        WORLD("Ultima", "ultima1.tmx", 16),
         CAVE("Cave", "cave.tmx", TILE_DIM),
         BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
@@ -259,9 +258,7 @@ public interface Constants {
                 this.screen = new WizardryDungeonScreen(this);
             } else if (this.dim == 48) {
                 this.screen = new GameScreen(this);
-            } else if (this.dim == 24) {
-                this.screen = new SosariaScreen(this);
-            } else if (this.dim == 16) {
+            } else {
                 this.screen = new OverworldScreen(this);
             }
 
@@ -512,9 +509,9 @@ public interface Constants {
         }
 
         public static void init() {
-            int mapWidth = Map.SOSARIA.getTiledMap().getProperties().get("width", Integer.class);
-            int tileWidth = Map.SOSARIA.getTiledMap().getProperties().get("tilewidth", Integer.class);
-            MapLayer moongatesLayer = Map.SOSARIA.getTiledMap().getLayers().get("moongates");
+            int mapWidth = Map.WORLD.getTiledMap().getProperties().get("width", Integer.class);
+            int tileWidth = Map.WORLD.getTiledMap().getProperties().get("tilewidth", Integer.class);
+            MapLayer moongatesLayer = Map.WORLD.getTiledMap().getLayers().get("moongates");
             Iterator<MapObject> iter = moongatesLayer.getObjects().iterator();
             while (iter.hasNext()) {
                 MapObject obj = iter.next();

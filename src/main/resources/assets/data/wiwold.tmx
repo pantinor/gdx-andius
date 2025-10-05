@@ -136,7 +136,7 @@
   </data>
  </layer>
  <objectgroup id="11" name="portals">
-  <object id="1" name="WORLD" type="portal" x="1632" y="1920" width="48" height="48"/>
+  <object id="1" name="BOLTAC" type="portal" x="1632" y="1920" width="48" height="48"/>
   <object id="2" name="WIWOLD_LVL_2" type="portal" x="240" y="624" width="48" height="48">
    <properties>
     <property name="dx" value="22"/>

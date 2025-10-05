@@ -80,7 +80,7 @@ public class OverworldScreen extends BaseScreen {
     public void save(SaveGame saveGame) {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        CTX.saveGame.map = Map.OVERWORLD;
+        CTX.saveGame.map = Map.WORLD;
         CTX.saveGame.level = 0;
         CTX.saveGame.direction = Direction.NORTH;
     }

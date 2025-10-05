@@ -319,50 +319,42 @@ public abstract class Combat implements Constants {
 
     public CharacterRecord pickPlayer() {
 
-        List<CharacterRecord> shuffled = new ArrayList();
-
+        List<CharacterRecord> alive = new ArrayList<>(players.size());
         for (CharacterRecord p : players) {
             if (!p.isDead()) {
-                shuffled.add(p);
+                alive.add(p);
             }
         }
 
-        Collections.shuffle(shuffled);
-
-        if (shuffled.isEmpty()) {
+        int n = alive.size();
+        if (n == 0) {
             return null;
         }
-
-        if (shuffled.size() == 1) {
-            return shuffled.get(0);
+        if (n == 1) {
+            return alive.get(0);
+        }
+        if (n <= 3) {
+            return alive.get(RANDOM.nextInt(n));
         }
 
-        CharacterRecord[] players = ctx.players();
+        int idx = (n <= 5) ? pickIndex2nPlus3(n) : pickIndexNPlus9(n);
+        return alive.get(idx);
+    }
 
-        while (true) {
-            int roll = RANDOM.nextInt(15);
-            int playerIndex = switch (roll) {
-                case 0, 1, 2, 3 ->
-                    0;
-                case 4, 5, 6, 7 ->
-                    1;
-                case 8, 9, 10, 11 ->
-                    2;
-                case 12 ->
-                    3;
-                case 13 ->
-                    4;
-                case 14 ->
-                    5;
-                default ->
-                    -1;
-            };
-
-            if (playerIndex >= 0 && players[playerIndex] != null && !players[playerIndex].isDead()) {
-                return players[playerIndex];
-            }
+    private int pickIndex2nPlus3(int n) {
+        int r = RANDOM.nextInt(2 * n + 3);
+        if (r < 9) {
+            return r / 3;
         }
+        return 3 + (r - 9) / 2;
+    }
 
+    private int pickIndexNPlus9(int n) {
+        int r = RANDOM.nextInt(n + 9);
+        if (r < 12) {
+            return r / 4;
+        }
+        return 3 + (r - 12);
     }
 
     private void damage(Object attacker, Object defender, int damage, String type) {

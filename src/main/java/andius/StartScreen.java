@@ -91,10 +91,10 @@ public class StartScreen implements Screen, Constants {
                     Sounds.play(Sound.TRIGGER);
 
                     if (CTX.saveGame.map == null) {
-                        Map.OVERWORLD.init();
-                        CTX.saveGame.map = Map.OVERWORLD;
-                        CTX.saveGame.wx = Map.OVERWORLD.getStartX();
-                        CTX.saveGame.wy = Map.OVERWORLD.getStartY();
+                        Map.WORLD.init();
+                        CTX.saveGame.map = Map.WORLD;
+                        CTX.saveGame.wx = Map.WORLD.getStartX();
+                        CTX.saveGame.wy = Map.WORLD.getStartY();
                     }
 
                     BaseScreen scr = (BaseScreen) CTX.saveGame.map.getScreen();

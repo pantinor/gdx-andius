@@ -118,7 +118,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.playersTable.row();
         }
 
-        this.actionsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16");
+        this.actionsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16-padded");
         this.actionsList.getSelection().setDisabled(true);
         this.actionsScroll = new ScrollPane(this.actionsList, Andius.skin);
         for (Action action : this.actions) {
@@ -130,7 +130,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.monstersTable.row();
         }
 
-        this.spellsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16");
+        this.spellsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16-padded");
         this.spellsScroll = new AutoFocusScrollPane(this.spellsList, Andius.skin);
         this.spellsScroll.setScrollingDisabled(true, false);
 
@@ -276,8 +276,8 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         this.exit.setBounds(x, 480, 80, 40);
 
         fm.setBounds(this.playersScroll, 10, 412, LISTING_WIDTH, 345);
-        fm.setBounds(this.actionsScroll, 10, 14, LISTING_WIDTH, 370);
-        fm.setBounds(this.spellsScroll, 340, 530, 300, 220);
+        fm.setBounds(this.spellsScroll, 10, 14, LISTING_WIDTH, 355);
+        fm.setBounds(this.actionsScroll, 326, 584, LOG_WIDTH, 136);
         fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
         fm.setBounds(this.monstersScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT - 35);
 
@@ -291,9 +291,18 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         this.stage.addActor(this.actionsScroll);
         this.stage.addActor(this.spellsScroll);
 
-        Label l = new Label(mname, Andius.skin, "default-16");
-        l.setPosition(715, 730);
-        this.stage.addActor(l);
+        Label actionLabel = new Label("Action", Andius.skin, "default-16");
+        actionLabel.setPosition(326, 730);
+        this.stage.addActor(actionLabel);
+
+        Label monLabel = new Label(mname, Andius.skin, "default-16");
+        monLabel.setPosition(715, 730);
+        this.stage.addActor(monLabel);
+
+        Label spellLabel = new Label("Spells", Andius.skin, "default-16");
+        spellLabel.setPosition(10, 380);
+        this.stage.addActor(spellLabel);
+
         this.background = fm.build();
     }
 

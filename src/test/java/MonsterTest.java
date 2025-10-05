@@ -327,7 +327,7 @@ public class MonsterTest {
 
         assertEquals(ctx.saveGame.players[0].level, level);
 
-        ctx.saveGame.map = Constants.Map.OVERWORLD;
+        ctx.saveGame.map = Constants.Map.WORLD;
         ctx.saveGame.wx = 10;
         ctx.saveGame.wy = 54;
         ctx.saveGame.write("party-mage.json");

@@ -22,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.Array;
 import utils.Hud;
 
 public class Andius extends Game {
@@ -36,8 +35,6 @@ public class Andius extends Game {
 
     public static Texture backGround;
     public static TextureAtlas mapAtlas;
-
-    public static Array<TextureAtlas.AtlasRegion> moongateTextures = new Array<>();
 
     public static BitmapFont font12;
     public static BitmapFont font14;
@@ -142,6 +139,7 @@ public class Andius extends Game {
         skin.get("default-16", SelectBox.SelectBoxStyle.class).font = font16;
         skin.get("default-16", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
         skin.get("default-16", List.ListStyle.class).font = font16;
+        skin.get("default-16-padded", List.ListStyle.class).font = font16;
         skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
 
         HUD = new Hud();
@@ -167,15 +165,11 @@ public class Andius extends Game {
             Icons.init();
             TibianSprite.init();
 
-            mapAtlas = new TextureAtlas(Gdx.files.classpath("assets/data/map-atlas.txt"));
-            moongateTextures = mapAtlas.findRegions("moongate");
-
             world_scr_avatar = new Animation(.4f, u1Tiles[10], u1Tiles[11]);
             game_scr_avatar = TibianSprite.animation("Knight_Knight_Male");
 
             WizardryData.class.getClass();
 
-            Constants.Moongate.init();
             CONVERSATIONS = Conversations.init();
 
         } catch (Exception e) {

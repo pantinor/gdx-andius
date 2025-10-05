@@ -139,7 +139,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.enemiesTable.row();
         }
 
-        this.spells = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16");
+        this.spells = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16-padded");
         this.spellsScroll = new AutoFocusScrollPane(this.spells, Andius.skin);
         this.spellsScroll.setScrollingDisabled(true, false);
 
@@ -214,7 +214,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.exit.setBounds(x, 426, 80, 40);
 
         fm.setBounds(this.monstersScroll, 10, 14, LISTING_WIDTH, TABLE_HEIGHT);
-        fm.setBounds(this.spellsScroll, 340, 530, 300, 220);
+        fm.setBounds(this.spellsScroll, 326, 479, LOG_WIDTH, 240);
         fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
         fm.setBounds(this.enemiesScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT - 35);
 
@@ -236,6 +236,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
             l.setPosition(715, 730);
             this.stage.addActor(l);
         }
+
+        Label spellLabel = new Label("Spells", Andius.skin, "default-16");
+        spellLabel.setPosition(326, 732);
+        this.stage.addActor(spellLabel);
 
         this.background = fm.build();
 
