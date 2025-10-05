@@ -412,7 +412,7 @@ public class SaveGame implements Constants {
         }
 
         public int extraSwings() {
-            int v = this.weapon.extraSwings == 0 ? 1 : this.weapon.extraSwings;
+            int v = this.weapon == null || this.weapon.extraSwings == 0 ? 1 : this.weapon.extraSwings;
             if (this.classType == ClassType.FIGHTER || this.classType == ClassType.SAMURAI || this.classType == ClassType.LORD) {
                 int vc = this.level / 5 + 1;
                 if (vc > v) {
