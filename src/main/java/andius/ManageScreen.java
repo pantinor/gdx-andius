@@ -313,7 +313,7 @@ public class ManageScreen implements Screen, Constants {
                         }
                     }
                     saveGame.players = sgchars.toArray(CharacterRecord.class);
-                    saveGame.write(SAVE_FILENAME);
+                    saveGame.write();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

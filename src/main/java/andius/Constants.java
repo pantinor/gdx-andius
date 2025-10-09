@@ -31,7 +31,7 @@ public interface Constants {
     public static int WORLD_TILE_DIM = 24;
     public static int TILE_DIM = 48;
 
-    public static final String SAVE_FILENAME = "party.json";
+    public static final String DEFAULT_SAVE_FILENAME = "party.json";
     public static final String ROSTER_FILENAME = "roster.json";
     public static final int STATS_NONE = 0;
     public static final int STATS_PLAYER1 = 1;

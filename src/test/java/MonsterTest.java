@@ -313,7 +313,8 @@ public class MonsterTest {
         ctx.saveGame.players[4] = SaveGame.generatePlayer(lvl, ClassType.MAGE, "JANE");
         ctx.saveGame.players[5] = SaveGame.generatePlayer(lvl, ClassType.THIEF, "FRANK");
 
-        ctx.saveGame.write("party-team.json");
+        ctx.saveGame.saveGameFileName = "party-team.json";
+        ctx.saveGame.write();
     }
 
     //@Test
@@ -330,7 +331,9 @@ public class MonsterTest {
         ctx.saveGame.map = Constants.Map.WORLD;
         ctx.saveGame.wx = 10;
         ctx.saveGame.wy = 54;
-        ctx.saveGame.write("party-mage.json");
+                
+        ctx.saveGame.saveGameFileName = "party-mage.json";
+        ctx.saveGame.write();
     }
 
 }

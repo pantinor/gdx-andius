@@ -9,7 +9,7 @@ You may also discover 7 of the Ultima III Exodus dungeon maps, which were ported
 
 There are boots of flying from Wizardry 4 and Marks of Kings from Ultima 3 to be fouind in the mazes that have special uses, one of which was flying over water.
 
-The Overworld is the Ultima 1 map.  I did not add the ships yet and there are no moongates for teleporting either.
+The Overworld is the Ultima 1 map.  Malor can be used to teleport.
 
 This is a Maven Java projec developed with the NetBeans development environment.
 

@@ -87,7 +87,8 @@ public class OverworldScreen extends BaseScreen {
 
     @Override
     public void load(SaveGame saveGame) {
-
+        setMapPixelCoords(newMapPixelCoords, saveGame.wx, saveGame.wy, 0);
+        renderer.getFOV().calculateFOV(saveGame.wx, saveGame.wy, 72);
     }
 
     @Override
@@ -104,7 +105,6 @@ public class OverworldScreen extends BaseScreen {
     }
 
     //private final ShapeRenderer shapeRenderer = new ShapeRenderer();
-
     @Override
     public void render(float delta) {
 
@@ -311,7 +311,9 @@ public class OverworldScreen extends BaseScreen {
     @Override
     public void teleport(int level, int north, int east) {
         setMapPixelCoords(newMapPixelCoords, east, north, 0);
-        this.renderer.getFOV().calculateFOV(east, north, 20f);
+        this.renderer.getFOV().calculateFOV(east, north, 72);
+        CTX.saveGame.wx = east;
+        CTX.saveGame.wy = north;
     }
 
     @Override

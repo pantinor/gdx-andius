@@ -2,8 +2,6 @@
 /.settings
 /.classpath
 /.project
-/test.sav
-/party.json
-/roster.json
+/*.json
 /test-output
 /nbactions.xml

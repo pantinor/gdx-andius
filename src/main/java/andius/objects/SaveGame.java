@@ -32,6 +32,7 @@ public class SaveGame implements Constants {
 
     public static final Random RANDOM = new Random();
 
+    public String saveGameFileName = Constants.DEFAULT_SAVE_FILENAME;
     public CharacterRecord[] players;
     public Map map;
     public int wx;//world x
@@ -61,7 +62,7 @@ public class SaveGame implements Constants {
         return sg;
     }
 
-    public void write(String file) throws Exception {
+    public void write() throws Exception {
 
         for (CharacterRecord player : players) {
             player.acmodifier1 = 0;
@@ -104,7 +105,7 @@ public class SaveGame implements Constants {
         Gson gson = builder.setPrettyPrinting().create();
         String json = gson.toJson(this);
         //String b64 = Base64Coder.encodeString(json);
-        FileOutputStream fos = new FileOutputStream(file);
+        FileOutputStream fos = new FileOutputStream(saveGameFileName);
         //GZIPOutputStream gzos = new GZIPOutputStream(fos);
         //gzos.write(b64.getBytes("UTF-8"));
         //gzos.close();

@@ -6,7 +6,6 @@ import static andius.Andius.CTX;
 import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
-import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -56,7 +55,11 @@ public class StartScreen implements Screen, Constants {
                 if (CTX == null) {
                     CTX = new Context();
                     try {
-                        SaveGame saveGame = SaveGame.read(SAVE_FILENAME);
+                        
+                        String fname = (String) saveGameSelection.getSelected();
+                        SaveGame saveGame = SaveGame.read(fname);
+                        saveGame.saveGameFileName = fname;
+                    
                         CTX.setSaveGame(saveGame);
                         mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, saveGame));
                     } catch (Exception e) {
@@ -81,6 +84,7 @@ public class StartScreen implements Screen, Constants {
 
                     String fname = (String) saveGameSelection.getSelected();
                     SaveGame saveGame = SaveGame.read(fname);
+                    saveGame.saveGameFileName = fname;
                     CTX.setSaveGame(saveGame);
 
                     if (CTX.pickRandomEnabledPlayer() == null) {

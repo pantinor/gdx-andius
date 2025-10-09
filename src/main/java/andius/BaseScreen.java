@@ -5,7 +5,6 @@ import andius.objects.Sounds;
 import andius.dialogs.ReorderPartyDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
-import static andius.Constants.SAVE_FILENAME;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import java.util.Random;
@@ -130,7 +129,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
                     map.getScreen().save(CTX.saveGame);
 
-                    CTX.saveGame.write(SAVE_FILENAME);
+                    CTX.saveGame.write();
 
                     Sounds.play(Sound.TRIGGER);
 
