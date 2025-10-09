@@ -7,9 +7,11 @@ The Wizardy maps include Wizardry 1 through Wizardry 4, the Black Stone maze, an
 
 You may also discover some Ultima III Exodus dungeon maps during your adventures, which were ported to the original Wizardry binary encoding format.
 
+Then Overworld is from Ultima 1.
+
 This is a Maven Java projec developed with the NetBeans development environment.
 
-To journey onward, download the zip file, extract, and run the "java -jar command" and have fun!
+ I got tired of rebuilding the zip download with every commit to keep it updated, so to journey onward, you would run it from the development environment.
 
 ![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview1.png)
 
