@@ -1769,7 +1769,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
             if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterID >= 0) {
                 this.map.scenario().levels()[currentLevel].cells[x][y].encounterOccurences -= 1;
-                if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterOccurences == 0) {
+                if (this.map.scenario().levels()[currentLevel].cells[x][y].encounterOccurences <= 0) {
                     this.map.scenario().levels()[currentLevel].cells[x][y].encounterID = -1;
                 }
                 if (this.map == Map.WIZARDRY4) {
