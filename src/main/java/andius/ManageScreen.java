@@ -1,5 +1,7 @@
 package andius;
 
+import static andius.Andius.SCREEN_HEIGHT;
+import static andius.Andius.SCREEN_WIDTH;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.objects.Race;
@@ -18,6 +20,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -28,12 +32,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
+import utils.FrameMaker;
 import utils.Utils;
 
 public class ManageScreen implements Screen, Constants {
@@ -44,14 +50,14 @@ public class ManageScreen implements Screen, Constants {
     BitmapFont font;
     Texture bkgnd;
 
-    Label rosText;
+    Label rosText, activePartyText, roleCharacterText;
     List<RosterIndex> registry;
     List<PartyIndex> partyFormation;
 
-    ImageButton apply;
-    ImageButton clear;
-    ImageButton add;
-    ImageButton remove;
+    TextButton apply;
+    TextButton clear;
+    TextButton add;
+    TextButton remove;
 
     ImageButton iconLeft, partyIconLeft;
     ImageButton iconRight, partyIconRight;
@@ -60,7 +66,7 @@ public class ManageScreen implements Screen, Constants {
     TextButton cancel;
     TextButton reset;
 
-    TextField nameField;
+    UppercaseTextField nameField;
 
     ImageButton strMinus, strPlus;
     ImageButton intMinus, intPlus;
@@ -69,16 +75,17 @@ public class ManageScreen implements Screen, Constants {
     ImageButton agMinus, agPlus;
     ImageButton luMinus, luPlus;
 
-    List<ClassType> profSelect;
-    SelectBox<Race> raceSelect;
+    List<ClassType> classTypeSelection;
+    ButtonGroup<CheckBox> raceGroup = new ButtonGroup<>();
+    CheckBox[] cbRace = new CheckBox[Race.values().length];
 
     int stVal, inVal, piVal, viVal, agVal, luVal;
     int stExt, inExt, piExt, viExt, agExt, luExt;
 
-    ExtraPoints extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
+    ExtraPoints extraPoints = new ExtraPoints();
     int pidx = 0;
 
-    private static final String EMPTY = "<empty>";
+    private static final String EMPTY = "(empty)";
 
     public ManageScreen(Screen rs, Skin skin, SaveGame saveGame) {
 
@@ -88,7 +95,7 @@ public class ManageScreen implements Screen, Constants {
 
         font = Andius.font16;
 
-        bkgnd = new Texture(Gdx.files.classpath("assets/data/roster.png"));
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         PartyIndex[] mbrs = new PartyIndex[6];
         for (int i = 0; i < mbrs.length; i++) {
@@ -104,7 +111,7 @@ public class ManageScreen implements Screen, Constants {
             mbrs[i] = new PartyIndex(r, i + 1);
         }
 
-        partyFormation = new List<>(skin, "default-16");
+        partyFormation = new List<>(skin, "default-16-padded-clear");
         partyFormation.setItems(mbrs);
 
         RosterIndex[] recs = new RosterIndex[20];
@@ -136,62 +143,58 @@ public class ManageScreen implements Screen, Constants {
             }
         }
 
-        registry = new List<>(skin, "default-16");
+        registry = new List<>(skin, "default-16-padded-clear");
         registry.setItems(recs);
 
         Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
 
-        apply = new ImageButton(imgBtnSkin, "left");
-        clear = new ImageButton(imgBtnSkin, "clear");
-        add = new ImageButton(imgBtnSkin, "right");
-        remove = new ImageButton(imgBtnSkin, "left");
+        apply = new TextButton("APPLY NEW TO ROSTER", skin, "default-16-green");
+        clear = new TextButton("CLEAR FROM ROSTER", skin, "default-16-red");
+        add = new TextButton("ROSTER TO PARTY", skin, "default-16-green");
+        remove = new TextButton("REMOVE FROM PARTY", skin, "default-16-red");
+
         cancel = new TextButton("CANCEL", skin, "default-16");
         reset = new TextButton("RESET", skin, "default-16");
         save = new TextButton("SAVE", skin, "default-16");
+
         iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
         partyIconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
         partyIconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
 
-        apply.setX(335);
-        apply.setY(Andius.SCREEN_HEIGHT - 200);
+        apply.setBounds(245, Andius.SCREEN_HEIGHT - 170 - 40, 215, 40);
+        clear.setBounds(245, Andius.SCREEN_HEIGHT - 220 - 40, 215, 40);
+        add.setBounds(245, Andius.SCREEN_HEIGHT - 420 - 40, 215, 40);
+        remove.setBounds(245, Andius.SCREEN_HEIGHT - 470 - 40, 215, 40);
 
-        clear.setX(335);
-        clear.setY(Andius.SCREEN_HEIGHT - 250);
+        save.setBounds(260, Andius.SCREEN_HEIGHT - 120, 80, 40);
+        cancel.setBounds(370, Andius.SCREEN_HEIGHT - 120, 80, 40);
 
-        add.setX(335);
-        add.setY(Andius.SCREEN_HEIGHT - 450);
+        reset.setBounds(774, Andius.SCREEN_HEIGHT - 302 - 40, 80, 40);
 
-        remove.setX(335);
-        remove.setY(Andius.SCREEN_HEIGHT - 500);
-
-        save.setBounds(300, Andius.SCREEN_HEIGHT - 50, 80, 40);
-        cancel.setBounds(390, Andius.SCREEN_HEIGHT - 50, 80, 40);
-        reset.setBounds(735, Andius.SCREEN_HEIGHT - 347, 80, 40);
-
-        iconLeft.setX(769);
+        iconLeft.setX(764);
         iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
-        iconRight.setX(840);
+        iconRight.setX(764 + 80);
         iconRight.setY(Andius.SCREEN_HEIGHT - 125);
 
-        partyIconLeft.setX(776);
+        partyIconLeft.setX(771);
         partyIconLeft.setY(Andius.SCREEN_HEIGHT - 710);
-        partyIconRight.setX(770 + 77);
+        partyIconRight.setX(771 + 80);
         partyIconRight.setY(Andius.SCREEN_HEIGHT - 710);
 
         apply.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
 
-                if (profSelect.getSelected() == null || nameField.getText().length() < 1) {
+                if (classTypeSelection.getSelected() == null || nameField.getText().length() < 1) {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
 
                 CharacterRecord sel = registry.getSelected().character;
                 sel.name = nameField.getText();
-                sel.race = raceSelect.getSelected();
-                sel.classType = profSelect.getSelected();
+                sel.race = (Race) raceGroup.getChecked().getUserObject();
+                sel.classType = classTypeSelection.getSelected();
                 sel.str = stVal + stExt;
                 sel.intell = inVal + inExt;
                 sel.piety = piVal + piExt;
@@ -338,7 +341,7 @@ public class ManageScreen implements Screen, Constants {
                 viExt = 0;
                 agExt = 0;
                 luExt = 0;
-                extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
+                extraPoints = new ExtraPoints();
                 checkClasses();
             }
         });
@@ -383,23 +386,27 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        rosText = new Label("Roster", skin, "default-16");
-        rosText.setX(80);
-        rosText.setY(Andius.SCREEN_HEIGHT - 55);
-
-        ScrollPane sp1 = new ScrollPane(partyFormation, skin);
-        sp1.setX(490);
-        sp1.setY(232);
-        sp1.setWidth(224);
-        sp1.setHeight(143);
+        rosText = new Label("ROSTER", skin, "default-16");
+        rosText.setX(64);
+        rosText.setY(Andius.SCREEN_HEIGHT - 54);
 
         ScrollPane sp2 = new ScrollPane(registry, skin);
-        sp2.setX(80);
-        sp2.setY(Andius.SCREEN_HEIGHT - 528 - 16);
-        sp2.setWidth(160);
-        sp2.setHeight(464);
+        fm.setBoundsFancy(sp2, 64, Andius.SCREEN_HEIGHT - 64 - 464, 160, 464, new Color(0x326c8eff));
+        fm.setBoundsFancy(null, 64, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x326c8eff));
+        fm.setBoundsFancy(null, 383, Andius.SCREEN_HEIGHT - 673 - 48, 48, 48, new Color(0x2e2e2eff));
 
-        nameField = new TextField("", skin, "default-16");
+        activePartyText = new Label("ACTIVE PARTY - SAVED GAME FILE", skin, "default-16");
+        activePartyText.setX(480);
+        activePartyText.setY(Andius.SCREEN_HEIGHT - 395);
+
+        ScrollPane sp1 = new ScrollPane(partyFormation, skin);
+        fm.setBoundsFancy(sp1, 480, 215, 384, 143, new Color(0x0f6905ff));
+        fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x0f6905ff));
+        fm.setBoundsFancy(null, 792, Andius.SCREEN_HEIGHT - 673 - 48, 48, 48, new Color(0x2e2e2eff));
+
+        nameField = new UppercaseTextField("", skin, "default-16");
+        nameField.setMaxLength(16);
+
         strMinus = new ImageButton(imgBtnSkin, "minus");
         strPlus = new ImageButton(imgBtnSkin, "plus");
         intMinus = new ImageButton(imgBtnSkin, "minus");
@@ -413,14 +420,15 @@ public class ManageScreen implements Screen, Constants {
         luMinus = new ImageButton(imgBtnSkin, "minus");
         luPlus = new ImageButton(imgBtnSkin, "plus");
 
-        profSelect = new List<>(skin, "default-16");
-        ScrollPane classPane = new ScrollPane(profSelect, skin);
+        roleCharacterText = new Label("ROLE NEW CHARACTER", skin, "default-16");
+        roleCharacterText.setX(480);
+        roleCharacterText.setY(Andius.SCREEN_HEIGHT - 54);
 
-        raceSelect = new SelectBox<>(skin, "default-16");
-        Array<Race> arr = new Array<>();
-        arr.addAll(Race.HUMAN, Race.DWARF, Race.ELF, Race.GNOME, Race.HOBBIT);
-        raceSelect.setItems(arr);
-        raceSelect.setSelected(Race.HUMAN);
+        classTypeSelection = new List<>(skin, "default-16-padded-clear");
+        ScrollPane classTypeScrollPane = new ScrollPane(classTypeSelection, skin);
+
+        fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 64 - 288, 384, 288, new Color(0x7a5d98ff));
+        fm.setBoundsFancy(null, 785, Andius.SCREEN_HEIGHT - 83 - 48, 48, 48, new Color(0x2e2e2eff));
 
         stVal = Race.HUMAN.getInitialStrength();
         inVal = Race.HUMAN.getInitialIntell();
@@ -429,26 +437,39 @@ public class ManageScreen implements Screen, Constants {
         agVal = Race.HUMAN.getInitialAgility();
         luVal = Race.HUMAN.getInitialLuck();
 
-        raceSelect.addListener(new ChangeListener() {
+        raceGroup = new ButtonGroup<>();
+        raceGroup.setMinCheckCount(1);
+        raceGroup.setMaxCheckCount(1);
+
+        ChangeListener onRaceChanged = new ChangeListener() {
             @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Race race = raceSelect.getSelected();
+            public void changed(ChangeEvent event, Actor actor) {
+                CheckBox cb = (CheckBox) actor;
+                if (!cb.isChecked()) {
+                    return;
+                }
+                Race race = (Race) cb.getUserObject();
                 stVal = race.getInitialStrength();
                 inVal = race.getInitialIntell();
                 piVal = race.getInitialPiety();
                 viVal = race.getInitialVitality();
                 agVal = race.getInitialAgility();
                 luVal = race.getInitialLuck();
-                stExt = 0;
-                inExt = 0;
-                piExt = 0;
-                viExt = 0;
-                agExt = 0;
-                luExt = 0;
-                extraPoints = new ExtraPoints(Utils.getRandomBetween(5, 20));
+                stExt = inExt = piExt = viExt = agExt = luExt = 0;
+                extraPoints = new ExtraPoints();
                 checkClasses();
             }
-        });
+        };
+
+        for (Race r : Race.values()) {
+            cbRace[r.ordinal()] = new CheckBox(r.name(), Andius.skin, "default-16");
+            cbRace[r.ordinal()].addListener(onRaceChanged);
+            cbRace[r.ordinal()].setUserObject(r);
+            raceGroup.add(cbRace[r.ordinal()]);
+            stage.addActor(cbRace[r.ordinal()]);
+        }
+
+        raceGroup.getButtons().first().setChecked(true);
 
         strMinus.addListener(new ChangeListener() {
             @Override
@@ -571,48 +592,31 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        int x = 580;
-        nameField.setX(x);
-        strMinus.setX(x);
-        intMinus.setX(x);
-        piMinus.setX(x);
-        vitMinus.setX(x);
-        agMinus.setX(x);
-        luMinus.setX(x);
+        int x = 490;
+        int y = SCREEN_HEIGHT - 90;
+        nameField.setPosition(x + 55, y);
+        cbRace[0].setPosition(x, y -= 28);
+        cbRace[1].setPosition(x, y -= 28);
+        cbRace[2].setPosition(x, y -= 28);
+        cbRace[3].setPosition(x, y -= 28);
+        cbRace[4].setPosition(x, y -= 28);
 
-        strPlus.setX(x + 46);
-        intPlus.setX(x + 46);
-        piPlus.setX(x + 46);
-        vitPlus.setX(x + 46);
-        agPlus.setX(x + 46);
-        luPlus.setX(x + 46);
+        x = 637;
+        y = SCREEN_HEIGHT - 115;
+        strMinus.setPosition(x, y);
+        intMinus.setPosition(x, y -= 28);
+        piMinus.setPosition(x, y -= 28);
+        vitMinus.setPosition(x, y -= 28);
+        agMinus.setPosition(x, y -= 28);
+        luMinus.setPosition(x, y -= 28);
 
-        classPane.setX(715);
-        classPane.setY(Andius.SCREEN_HEIGHT - 300);
-
-        raceSelect.setX(x);
-
-        int y = Andius.SCREEN_HEIGHT - 112;
-        nameField.setY(y);
-        raceSelect.setY(y -= 28);
-        strMinus.setY(y -= 28);
-        intMinus.setY(y -= 28);
-        piMinus.setY(y -= 28);
-        vitMinus.setY(y -= 28);
-        agMinus.setY(y -= 28);
-        luMinus.setY(y -= 28);
-
-        y = Andius.SCREEN_HEIGHT - 112;
-        strPlus.setY(y -= 28 * 2);
-        intPlus.setY(y -= 28);
-        piPlus.setY(y -= 28);
-        vitPlus.setY(y -= 28);
-        agPlus.setY(y -= 28);
-        luPlus.setY(y -= 28);
-
-        nameField.setMaxLength(16);
-        classPane.setWidth(100);
-        raceSelect.setWidth(100);
+        y = SCREEN_HEIGHT - 115;
+        strPlus.setPosition(x + 46, y);
+        intPlus.setPosition(x + 46, y -= 28);
+        piPlus.setPosition(x + 46, y -= 28);
+        vitPlus.setPosition(x + 46, y -= 28);
+        agPlus.setPosition(x + 46, y -= 28);
+        luPlus.setPosition(x + 46, y -= 28);
 
         stage.addActor(nameField);
         stage.addActor(strMinus);
@@ -621,7 +625,6 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(vitMinus);
         stage.addActor(agMinus);
         stage.addActor(luMinus);
-
         stage.addActor(strPlus);
         stage.addActor(intPlus);
         stage.addActor(piPlus);
@@ -629,25 +632,31 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(agPlus);
         stage.addActor(luPlus);
 
-        stage.addActor(classPane);
-        stage.addActor(raceSelect);
+        classTypeScrollPane.setPosition(715, SCREEN_HEIGHT - 300);
+        stage.addActor(classTypeScrollPane);
 
         stage.addActor(apply);
         stage.addActor(remove);
         stage.addActor(clear);
+        stage.addActor(add);
+
         stage.addActor(save);
         stage.addActor(cancel);
         stage.addActor(reset);
-        stage.addActor(add);
+
         stage.addActor(iconLeft);
         stage.addActor(iconRight);
         stage.addActor(partyIconLeft);
         stage.addActor(partyIconRight);
+
         stage.addActor(sp1);
         stage.addActor(sp2);
         stage.addActor(rosText);
+        stage.addActor(activePartyText);
+        stage.addActor(roleCharacterText);
 
-        //this.stage.setDebugAll(true);
+        //stage.setDebugAll(true);
+        bkgnd = fm.build();
 
     }
 
@@ -663,7 +672,7 @@ public class ManageScreen implements Screen, Constants {
             if (s && i && p && v && a && l) {
                 items.add(ct);
             }
-            profSelect.setItems(items);
+            classTypeSelection.setItems(items);
         }
     }
 
@@ -674,38 +683,42 @@ public class ManageScreen implements Screen, Constants {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+
+        Gdx.gl.glClearColor(0x18 / 255f, 0x18 / 255f, 0x18 / 255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
         batch.draw(bkgnd, 0, 0);
 
-        int viewY = Andius.SCREEN_HEIGHT - 96;
-        int x = 495;
+        int x = 490;
+        int viewY = Andius.SCREEN_HEIGHT - 75;
 
-        font.draw(batch, "Name: ", x, viewY);
-        font.draw(batch, "Race: ", x, viewY -= 28);
-        font.draw(batch, "Strength: ", x, viewY -= 28);
-        font.draw(batch, "Intelligence: ", x, viewY -= 28);
-        font.draw(batch, "Piety: ", x, viewY -= 28);
-        font.draw(batch, "Vitality: ", x, viewY -= 28);
-        font.draw(batch, "Agility: ", x, viewY -= 28);
-        font.draw(batch, "Luck: ", x, viewY -= 28);
-        font.draw(batch, "Extra Points: ", x, viewY -= 28);
+        font.draw(batch, "NAME", x, viewY);
 
-        viewY = Andius.SCREEN_HEIGHT - 96;
+        x = 600;
+        viewY = Andius.SCREEN_HEIGHT - 75;
 
-        font.draw(batch, stVal + stExt + "", 600, viewY -= 28 * 2);
-        font.draw(batch, inVal + inExt + "", 600, viewY -= 28);
-        font.draw(batch, piVal + piExt + "", 600, viewY -= 28);
-        font.draw(batch, viVal + viExt + "", 600, viewY -= 28);
-        font.draw(batch, agVal + agExt + "", 600, viewY -= 28);
-        font.draw(batch, luVal + luExt + "", 600, viewY -= 28);
-        font.draw(batch, extraPoints.val + "", 600, viewY -= 28);
+        font.draw(batch, "STR", x, viewY -= 28);
+        font.draw(batch, "INT", x, viewY -= 28);
+        font.draw(batch, "PIE", x, viewY -= 28);
+        font.draw(batch, "VIT", x, viewY -= 28);
+        font.draw(batch, "AGI", x, viewY -= 28);
+        font.draw(batch, "LCK", x, viewY -= 28);
+
+        x = 658;
+        viewY = Andius.SCREEN_HEIGHT - 75;
+
+        font.draw(batch, stVal + stExt + "", x, viewY -= 28);
+        font.draw(batch, inVal + inExt + "", x, viewY -= 28);
+        font.draw(batch, piVal + piExt + "", x, viewY -= 28);
+        font.draw(batch, viVal + viExt + "", x, viewY -= 28);
+        font.draw(batch, agVal + agExt + "", x, viewY -= 28);
+        font.draw(batch, luVal + luExt + "", x, viewY -= 28);
+        font.draw(batch, extraPoints.val + "", x, viewY -= 28);
 
         font.setColor(Color.WHITE);
 
-        batch.draw(Andius.faceTiles[pidx], 785, Andius.SCREEN_HEIGHT - 131);
+        batch.draw(Andius.faceTiles[pidx], 785, Andius.SCREEN_HEIGHT - 83 - 48);
 
         CharacterRecord sel = this.registry.getSelected().character;
 
@@ -726,7 +739,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
         font.draw(batch, "INV: " + sel.inventory.size(), x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 383, Andius.SCREEN_HEIGHT - 721);
+        batch.draw(Andius.faceTiles[sel.portaitIndex], 383, Andius.SCREEN_HEIGHT - 673 - 48);
 
         sel = this.partyFormation.getSelected().character;
 
@@ -756,7 +769,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 719);
+        batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 673 - 48);
 
         int[] ms = sel.magePoints;
         int[] cs = sel.clericPoints;
@@ -775,8 +788,8 @@ public class ManageScreen implements Screen, Constants {
         int val;
         final int max;
 
-        ExtraPoints(int max) {
-            this.val = this.max = max;
+        ExtraPoints() {
+            this.val = this.max = 10;
         }
 
         void incr() {
@@ -822,7 +835,40 @@ public class ManageScreen implements Screen, Constants {
 
         @Override
         public String toString() {
-            return " Active Player " + index + " : " + character.name.toUpperCase();
+            return " " + index + " - " + character.name.toUpperCase();
+        }
+    }
+
+    public class UppercaseTextField extends TextField {
+
+        public UppercaseTextField(String text, Skin skin) {
+            super(text, skin);
+            setTextFieldListener((field, c) -> enforceUpper());
+        }
+
+        public UppercaseTextField(String text, Skin skin, String styleName) {
+            super(text, skin, styleName);
+            setTextFieldListener((field, c) -> enforceUpper());
+        }
+
+        private void enforceUpper() {
+            String t = getText();
+            String up = t.toUpperCase(java.util.Locale.ROOT);
+            if (!t.equals(up)) {
+                int cursor = getCursorPosition();
+                setText(up);
+                setCursorPosition(Math.min(cursor, up.length()));
+            }
+        }
+
+        @Override
+        public void setText(String text) {
+            super.setText(text == null ? null : text.toUpperCase(java.util.Locale.ROOT));
+        }
+
+        @Override
+        public void appendText(String text) {
+            super.appendText(text == null ? "" : text.toUpperCase(java.util.Locale.ROOT));
         }
     }
 

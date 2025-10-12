@@ -57,6 +57,35 @@ public class FrameMaker {
         return this;
     }
 
+    public FrameMaker setBoundsFancy(Actor a, float x, float y, float w, float h, Color fill) {
+
+        if (a != null) {
+            a.setBounds(x, y, w, h);
+        }
+
+        int ix = (int) x;
+        int iy = (int) (this.height - y - h);
+        int iw = (int) w;
+        int ih = (int) h;
+
+        this.pix.setColor(Color.BLACK);
+        this.pix.fillRectangle(ix - 8, iy - 8, iw + 16, ih + 16);
+
+        this.pix.setColor(DARKEST);
+        this.pix.fillRectangle(ix - 6, iy - 6, iw + 12, ih + 12);
+
+        this.pix.setColor(DARK);
+        this.pix.fillRectangle(ix - 4, iy - 4, iw + 8, ih + 8);
+
+        this.pix.setColor(LIGHT);
+        this.pix.fillRectangle(ix - 2, iy - 2, iw + 4, ih + 4);
+
+        this.pix.setColor(fill);
+        this.pix.fillRectangle(ix, iy, iw, ih);
+
+        return this;
+    }
+
     public FrameMaker emptyFrame(float x, float y, float w, float h) {
 
         int ix = (int) x;
@@ -71,7 +100,7 @@ public class FrameMaker {
         this.pix.fillRectangle(ix - 16, iy - 16, iw + 32, ih + 32);
 
         pix.setBlending(Pixmap.Blending.None);
-        pix.setColor(Color.CLEAR);                     
+        pix.setColor(Color.CLEAR);
         pix.fillRectangle(ix, iy, iw, ih);
 
         return this;

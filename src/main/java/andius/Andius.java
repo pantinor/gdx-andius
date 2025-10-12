@@ -140,6 +140,7 @@ public class Andius extends Game {
         skin.get("default-16", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
         skin.get("default-16", List.ListStyle.class).font = font16;
         skin.get("default-16-padded", List.ListStyle.class).font = font16;
+        skin.get("default-16-padded-clear", List.ListStyle.class).font = font16;
         skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
 
         HUD = new Hud();

@@ -397,6 +397,13 @@
             "fontColorSelected": "white",
             "font": "default-font",
             "background": "dimmer"
+        },
+        "default-16-padded-clear": {
+            "fontColorUnselected": "white",
+            "selection": "list-selection-padded",
+            "fontColorSelected": "white",
+            "font": "default-font",
+            "background": "clear"
         }
     },
 
