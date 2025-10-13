@@ -545,6 +545,8 @@ public class WizardryData {
 
         public abstract int getRandomMonster();
 
+        public abstract List<Integer> getEncounterIds();
+
         public boolean rotate(MazeCell cell) {
 
             if (!cell.spinner || cell.rotateDirection == -1) {
@@ -913,12 +915,26 @@ public class WizardryData {
 
         @Override
         public int getRandomMonster() {
+            //monsterOdds[0] ~ 75% of the time
+            //monsterOdds[1] ~ 18.75%
+            //monsterOdds[2] ~ 6.25%
             int encounterType = 0;
             while (RANDOM.nextInt(4) == 2 && encounterType < 2) {
                 ++encounterType;
             }
-
             return monsterOdds[encounterType].getRandomMonster();
+        }
+
+        @Override
+        public List<Integer> getEncounterIds() {
+            List<Integer> ids0 = monsterOdds[0].getIds();
+            List<Integer> ids1 = monsterOdds[1].getIds();
+            List<Integer> ids2 = monsterOdds[2].getIds();
+            List<Integer> all = new ArrayList<>();
+            all.addAll(ids0);
+            all.addAll(ids1);
+            all.addAll(ids2);
+            return all;
         }
 
         private void getConnectedRoomCells(int x, int y, List<MazeCell> roomCells) {
@@ -1194,12 +1210,26 @@ public class WizardryData {
 
         @Override
         public int getRandomMonster() {
+            //monsterOdds[0] ~ 75% of the time
+            //monsterOdds[1] ~ 18.75%
+            //monsterOdds[2] ~ 6.25%
             int encounterType = 0;
             while (RANDOM.nextInt(4) == 2 && encounterType < 2) {
                 ++encounterType;
             }
-
             return monsterOdds[encounterType].getRandomMonster();
+        }
+
+        @Override
+        public List<Integer> getEncounterIds() {
+            List<Integer> ids0 = monsterOdds[0].getIds();
+            List<Integer> ids1 = monsterOdds[1].getIds();
+            List<Integer> ids2 = monsterOdds[2].getIds();
+            List<Integer> all = new ArrayList<>();
+            all.addAll(ids0);
+            all.addAll(ids1);
+            all.addAll(ids2);
+            return all;
         }
 
     }
@@ -1422,6 +1452,22 @@ public class WizardryData {
                 ++rangeNo;
             }
             return minEnemy + RANDOM.nextInt(rangeSize) + extraRangeOffset * rangeNo;
+        }
+
+        public List<Integer> getIds() {
+            if (rangeSize <= 0) {
+                return new ArrayList<>();
+            }
+
+            ArrayList<Integer> ids = new ArrayList<>(Math.max(0, (totExtraRanges + 1) * rangeSize));
+            for (int rangeNo = 0; rangeNo <= totExtraRanges; rangeNo++) {
+                int base = minEnemy + extraRangeOffset * rangeNo;
+                for (int k = 0; k < rangeSize; k++) {
+                    ids.add(base + k);
+                }
+            }
+            Collections.sort(ids);
+            return ids;
         }
 
         @Override

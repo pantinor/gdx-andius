@@ -264,22 +264,6 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-//        List<String> removedMonsters = saveGame.removedActors.get(this.map);
-//        if (removedMonsters == null) {
-//            removedMonsters = new ArrayList<>();
-//            saveGame.removedActors.put(this.map, removedMonsters);
-//        }
-//
-//        for (int level = 0; level < this.map.scenario().levels().length; level++) {
-//            for (int x = 0; x < this.dim; x++) {
-//                for (int y = 0; y < this.dim; y++) {
-//                    MazeCell cell = this.map.scenario().levels()[level].cells[x][y];
-//                    if (removedMonsters.contains(level + ":M:" + x + ":" + y)) {
-//                        cell.wanderingEncounterID = -1;
-//                    }
-//                }
-//            }
-//        }
         this.loadedMazeData = true;
     }
 
@@ -1624,16 +1608,18 @@ public class WizardryDungeonScreen extends BaseScreen {
                     mainGame.setScreen(cs);
                 }
             } else {
-                int wanderingEncounterID = -1;
-                if (Utils.percentChance(33)) {
-                    wanderingEncounterID = this.map.scenario().levels()[currentLevel].getRandomMonster();
-                    if (defeated.contains(wanderingEncounterID)) {
-                        wanderingEncounterID = -1;
-                    }
-                    if (wanderingEncounterID > 0) {
-                        DoGooder dogooder = this.map.scenario().characters().get(wanderingEncounterID);
-                        Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                        mainGame.setScreen(cs);
+                if (Utils.percentChance(25)) {
+                    int maxTries = 10;
+                    for (int tries = 0; tries < maxTries; tries++) {
+                        int id = this.map.scenario().levels()[currentLevel].getRandomMonster();
+                        if (id <= 0) {
+                            break;
+                        }
+                        if (!defeated.contains(id)) {
+                            DoGooder d = this.map.scenario().characters().get(id);
+                            mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
+                            break;
+                        }
                     }
                 }
             }
@@ -1734,7 +1720,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (to.level == currentLevel + 1) {//same level
             currentPos.x = dx + .5f;
             currentPos.z = dy + .5f;
-            //this.camera.position.set(currentPos.x, .5f, currentPos.z);
             stage.addAction(new MoveCameraAction(camera, .5f, dx + .5f, dy + .5f));
         } else {//different level
             currentLevel = to.level - 1;
@@ -1785,22 +1770,13 @@ public class WizardryDungeonScreen extends BaseScreen {
                     DoGooder dg = (DoGooder) opponent;
                     for (int id : dg.partyMembers) {
                         if (!this.map.scenario().levels()[currentLevel].defeated.contains(id)) {
-                            //this is not persisted to save file
+                            //this is not persisted to save file to be consistent with the real game
                             this.map.scenario().levels()[currentLevel].defeated.add(id);
                         }
                     }
                 }
             }
 
-            if (this.map != Map.WIZARDRY4) {
-                //List<String> removedMonsters = CTX.saveGame.removedActors.get(this.map);
-                //if (removedMonsters == null) {
-                //    removedMonsters = new ArrayList<>();
-                //    CTX.saveGame.removedActors.put(this.map, removedMonsters);
-                //}
-                //pesisted to save file
-                //removedMonsters.add(currentLevel + ":M:" + x + ":" + y);
-            }
         }
     }
 

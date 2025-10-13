@@ -139,6 +139,14 @@
     },
 
     "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+        "default": {
+            "down": "textfield",
+            "up": "bluefield",
+            "over": "textfield",
+            "font": "default-font",
+            "fontColor": "white",
+            "downFontColor": "blue"
+        },
         "default-12": {
             "down": "textfield",
             "up": "bluefield",
@@ -312,6 +320,11 @@
     },
 
     "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+        "default": {
+            "font": "default-font",
+            "fontColor": "white",
+            "background": "clear"
+        },
         "default-12": {
             "font": "default-font",
             "fontColor": "white",

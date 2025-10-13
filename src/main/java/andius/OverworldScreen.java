@@ -10,6 +10,7 @@ import andius.objects.Item;
 import andius.objects.Portal;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.FrameMaker;
@@ -199,7 +201,7 @@ public class OverworldScreen extends BaseScreen {
             if (p != null) {
                 if (p.getMap() == Map.WIZARDRY4) {
                     if (Andius.CTX.players().length == 1 && Andius.CTX.players()[0].classType == ClassType.MAGE) {
-                        Andius.mainGame.setScreen(p.getMap().getScreen());
+                        showEnterDungeonPrompt(stage, () -> Andius.mainGame.setScreen(p.getMap().getScreen()));
                     } else {
                         log("An impenetrable force of energy bars your party's passage in the entrance! A solitary mage might have more luck...");
                     }
@@ -215,6 +217,27 @@ public class OverworldScreen extends BaseScreen {
         }
 
         return false;
+    }
+
+    private void showEnterDungeonPrompt(Stage stage, Runnable onConfirm) {
+        Dialog dialog = new Dialog("Enter Dungeon?", Andius.skin) {
+            @Override
+            protected void result(Object obj) {
+                boolean yes = Boolean.TRUE.equals(obj);
+                if (yes && onConfirm != null) {
+                    onConfirm.run();
+                }
+            }
+        };
+        dialog.text("Are you sure you want to proceed into Werdna's realm at this time?  It is easy to enter and long to exit.");
+        dialog.button("Enter", true);
+        dialog.button("Stay", false);
+        dialog.key(Input.Keys.ENTER, true);
+        dialog.key(Input.Keys.Y, true);
+        dialog.key(Input.Keys.ESCAPE, false);
+        dialog.key(Input.Keys.N, false);
+        dialog.show(stage);
+        dialog.setMovable(false);
     }
 
     private Vector3 checkAndMove(Vector3 current, Direction dir) {

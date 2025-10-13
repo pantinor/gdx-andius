@@ -120,10 +120,12 @@ public class Andius extends Game {
         skin.get("default-12-green", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12-yellow", TextButton.TextButtonStyle.class).font = font12;
         skin.get("default-12", CheckBox.CheckBoxStyle.class).font = font12;
-
+        
         skin.get("default-14", Label.LabelStyle.class).font = font14;
-
+        
+        skin.get("default", Label.LabelStyle.class).font = font16;
         skin.get("default-16", Label.LabelStyle.class).font = font16;
+        skin.get("default", TextButton.TextButtonStyle.class).font = font16;
         skin.get("default-16", TextButton.TextButtonStyle.class).font = font16;
         skin.get("default-16-red", TextButton.TextButtonStyle.class).font = font16;
         skin.get("default-16-green", TextButton.TextButtonStyle.class).font = font16;

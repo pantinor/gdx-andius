@@ -52,6 +52,7 @@ public interface Constants {
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
+        YEW("Yew", "yew.tmx", TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),

@@ -26,6 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="mapConversationsPane" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="addTopicBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -34,26 +35,11 @@
                       <Component id="saveBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="topicPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="topicPanel" min="-2" pref="611" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelPane" min="-2" pref="383" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="labelTopicsPane" pref="381" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="mapConversationsPane" alignment="0" min="-2" pref="611" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="addPersonBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="removePersonBtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldDesc" max="32767" attributes="0"/>
-                          <Component id="jTextFieldName" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="labelTopicsPane" pref="362" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -64,26 +50,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="mapConversationsPane" min="-2" pref="318" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="mapConversationsPane" min="-2" pref="448" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jTextFieldName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldDesc" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addPersonBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="removePersonBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="labelPane" pref="614" max="32767" attributes="0"/>
+                  <Component id="topicPanel" max="32767" attributes="0"/>
                   <Component id="labelTopicsPane" max="32767" attributes="0"/>
-                  <Component id="topicPanel" pref="455" max="32767" attributes="0"/>
-                  <Component id="labelPane" pref="455" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="removeTopicBtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -139,22 +113,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTopicBtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="addPersonBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ADD PERSON"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPersonBtnActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="removePersonBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="REMOVE PERSON"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removePersonBtnActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="mapConversationsPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -174,10 +132,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="jTextFieldName">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldDesc">
-    </Component>
     <Container class="javax.swing.JScrollPane" name="labelPane">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>

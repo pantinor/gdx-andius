@@ -7,7 +7,6 @@ import andius.objects.ClassType;
 import andius.objects.Race;
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
-import andius.objects.Conversations.Label;
 import andius.objects.Conversations.Topic;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -25,19 +24,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.StringTokenizer;
 import javax.imageio.ImageIO;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
 import java.util.ArrayList;
-import java.util.TreeMap;
 import org.apache.commons.io.IOUtils;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -177,6 +170,11 @@ public class ObjectsTestNG {
 
         for (MazeLevel l : sc.levels()) {
             System.out.printf("%d - %s\n", l.level - 1, WER_LEVEL_DESC[l.level - 1]);
+
+            for (int id : l.getEncounterIds()) {
+                System.out.println(sc.characters().get(id).name);
+            }
+
             for (int x = 0; x < sc.dim(); x++) {
                 for (int y = 0; y < sc.dim(); y++) {
                     WizardryData.MazeCell c = l.cells[x][y];
@@ -184,19 +182,32 @@ public class ObjectsTestNG {
                         String hx = String.format("%04x", (short) c.addressTo.column);
                     }
                     if (c.summoningCircle != null) {
-                        System.out.printf("\t%d - %d %s\n", x, y, c.summoningCircle);
+                        //System.out.printf("\t%d - %d %s\n", x, y, c.summoningCircle);
                     }
                 }
             }
         }
     }
 
-    //@Test
+    @Test
     public void testScript() throws Exception {
-        Conversations convs = Conversations.init();
-        for (Conversation c : convs.getConversations()) {
-            System.out.println(c);
-        }
+
+        Conversations convs = new Conversations();
+
+        Conversation conv = new Conversation("paul", "desc");
+        conv.topics.add(new Topic("name", "sss"));
+        conv.topics.add(new Topic("job", "sss"));
+
+        convs.maps.put("LLECHY", new ArrayList<>());
+
+        convs.maps.get("LLECHY").add(conv);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.setPrettyPrinting().create();
+        String json = gson.toJson(convs);
+
+        System.out.println(json);
+
     }
 
     //@Test
@@ -404,189 +415,6 @@ public class ObjectsTestNG {
         System.out.println("<data encoding=\"csv\">\n");
         System.out.println(water.toString().trim());
         System.out.println("</data>\n");
-    }
-
-    //@Test
-    public void parseU5TLK() throws Exception {
-
-        Conversations convs = new Conversations();
-
-        FileInputStream fstream = new FileInputStream("u5tr.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        //String temp = "";
-        //BufferedReader br = new BufferedReader(new StringReader(temp));
-
-        boolean end = false;
-        while (!end) {
-            Conversation c = new Conversation();
-            convs.getConversations().add(c);
-
-            boolean texts = false;
-            boolean labels = false;
-            Label label = null;
-            String s;
-            while ((s = br.readLine()) != null) {
-                if (s.length() < 1) {
-                    continue;
-                }
-
-                s = s.replace("<New Line>", "");
-                s = s.replace("<PAUSE>", "");
-                s = s.replace("<Key wait>", "");
-                s = s.replace("<Nothing>", "");
-                s = s.replace("\"", "");
-                s = s.replace("    ", " ");
-                s = s.replace("<AVATAR NAME>", "%NAME%");
-                s = s.replace("<", "%");
-                s = s.replace(">", "%");
-                s = s.replace("Goto Label ", "");
-                s = s.replace("%END CONVERSATION%", "");
-                s = s.replace("%If/Else Knows Name%", "");
-                s = s.replace("%Ask Name%", "");
-                s = s.replace("%Rune%", "");
-
-                if (s.contains(":")) {
-                    String[] toks = s.split(":");
-                    if (toks[0].startsWith("Name")) {
-                        c.setName(toks[1].trim());
-                        continue;
-                    }
-                    if (toks[0].startsWith("Description")) {
-                        c.setDescription(toks[1].trim());
-                        continue;
-                    }
-                    if (toks[0].startsWith("Greeting")) {
-                        if (toks.length == 2) {
-                            c.getTopics().add(new Topic("greeting", toks[1].trim()));
-                        }
-                        continue;
-                    }
-                    if (toks[0].startsWith("Job")) {
-                        if (toks.length == 2) {
-                            c.getTopics().add(new Topic("job", toks[1].trim()));
-                        }
-                        continue;
-                    }
-                    if (toks[0].startsWith("Goodbye")) {
-                        if (toks.length == 2) {
-                            c.getTopics().add(new Topic("bye", toks[1].trim()));
-                        }
-                        continue;
-                    }
-                    if (toks[0].startsWith("Text information")) {
-                        texts = true;
-                        labels = false;
-                        continue;
-                    }
-                    if (toks[0].startsWith("Label information")) {
-                        labels = true;
-                        texts = false;
-                        continue;
-                    }
-                    if (texts && toks.length == 2) {
-                        c.getTopics().add(new Topic(toks[0].trim().toLowerCase(), toks[1].trim()));
-                    }
-                    if (labels && toks.length == 2) {
-                        String t = toks[0].trim().toLowerCase();
-                        label.getTopics().add(new Topic(t, toks[1].trim()));
-                    }
-                } else {
-
-                    if (labels) {
-                        if (s.contains("Label")) {
-                            label = new Label();
-                            label.setId(s.substring(s.indexOf("Label") + 6, s.indexOf("Label") + 7));
-                            label.setQuery(s.substring(s.indexOf("Label") + 8).trim());
-                            c.getLabels().add(label);
-                            continue;
-                        }
-                    }
-                    if (!s.contains(":") && c.getName() != null) {
-                        break;
-                    }
-                }
-            }
-
-            if (br.readLine() == null) {
-                end = true;
-            }
-        }
-        br.close();
-
-        String tmp = "Castle Britannia 	9 	#Alistair, #Chuckles, #Desiree, #Drudgeworth, #Margaret, #Stephen, #Saduj, #Stillwelt, #Treanna\n"
-                + "Empath Abbey 	7 	#Barbra, #Cory, #Hardluck, #Julia, #Lord Michael, #Tim, #Toshi\n"
-                + "The Lycaeum 	7 	#Lady Hayden, #Lady Janell, #Lord R'hien, #Lord Shalineth, #Mariah, #Rollo, #Sir Sean\n"
-                + "Serpent's Hold 	6 	#Gardner, #Kristi, #Lord Malone, #Loubet, #Maxwell, #Toede\n"
-                + "Palace of Blackthorn 	7 	#Foulwell, #Gallrot, #Gorn, #Hassad, #Kraw, #Blackthorn, #Weblock, #Unnamed prisoner\n"
-                + "Britain 	7 	#Annon, #Eb, #Greyson, #Gwenno, #Justin, #Telila, #Terrance\n"
-                + "Yew 	10 	#Aleyn, #Chamfort, #Felespar, #Greymarch, #Jaana, #Jeremy, #Jerone, #Judge Dryden, #Landon, #Mario\n"
-                + "Trinsic 	4 	#Gruman, #Jimmy, #Sindar, #Woolfe\n"
-                + "Minoc 	6 	#Delwyn, #Fenelon, #Fiona, #Lady Sahra, #Rew, #Tactus\n"
-                + "Moonglow 	5 	#Donn Piatt, #Lord Stuart the Hungry, #Malifora, #Malik, #Zachariah\n"
-                + "Skara Brae 	4 	#Flain, #Froed, #Kindor, #Saul\n"
-                + "New Magincia 	8 	#Fumiko, #Kaiko, #Katrina, #Shirita, #Tetsuo, #Tomoka, #Wartow, #Yasuda\n"
-                + "Jhelom 	4 	#Bullwier, #Goeth, #Thorne, #Trian\n"
-                + "Greyhaven (Trinsic) 	5 	#Anthony, #Charlotte, #David, #Sir Arbuthnot, #Kenneth\n"
-                + "Stormcrow (Minoc) 	2 	#Emilly, #Windmire\n"
-                + "Fogsbane (Britain) 	2 	#Jennifer, #Jotham\n"
-                + "Waveguide (Moonglow) 	2 	#Gregory, #Jacqueline\n"
-                + "West Britanny 	3 	#Camile, #Christopher, #Phillip\n"
-                + "North Britanny 	5 	#Joshua, #Kurt, #Leof, #Thentis, #Vigil\n"
-                + "East Britanny 	3 	#Sir Adam, #Flint, #Squire Jimmy\n"
-                + "Paws 	2 	#Bandaii, #Glinkie\n"
-                + "Cove 	3 	#Ambrose, #Ava, #Leona\n"
-                + "Buccaneer's Den 	7 	#Bidney, #Geoffrey, #Lord Dalgrin, #Scally, #Sven, #Thorkin, #Tierra\n"
-                + "Bordermarch 	4 	#Dupre, #Lady Tessa, #Sentri, #Sir Simon\n"
-                + "Farthing 	4 	#Dufus, #Quintin, #Seggallion, #Temme\n"
-                + "Windemere 	2 	#Elistaria, #Thrud\n"
-                + "Stonegate 	1 	#Balinor\n"
-                + "Iolo's hut 	1 	#Smith the Horse\n"
-                + "Sin'Vraal's hut 	1 	#Sin'Vraal\n"
-                + "Grendel's hut 	1 	#Grendel\n"
-                + "Sutek's hut 	1 	#Sutek\n"
-                + "Ararat shipwreck 	1 	#Captain Johne";
-
-        BufferedReader br2 = new BufferedReader(new StringReader(tmp));
-        String s;
-        java.util.Map<String, String[]> mapChars = new HashMap<>();
-
-        while ((s = br2.readLine()) != null) {
-            StringTokenizer st = new StringTokenizer(s, "\t");
-            String map = st.nextToken().trim();
-            st.nextToken();
-            String c = st.nextToken().trim();
-            c = c.replace("#", "");
-            String[] names = c.split(",");
-            mapChars.put(map, names);
-        }
-
-        Iterator<Conversation> it = convs.getConversations().iterator();
-        while (it.hasNext()) {
-            Conversation c = it.next();
-            for (String map : mapChars.keySet()) {
-                String[] names = mapChars.get(map);
-                for (String n : names) {
-                    if (n.contains(c.getName()) || c.getName().contains(n)) {
-                        c.setMap(map);
-                    }
-                }
-
-            }
-        }
-
-        Iterator<Conversation> it2 = convs.getConversations().iterator();
-        while (it2.hasNext()) {
-            Conversation c = it2.next();
-            if (c.getMap() == null) {
-                c.setMap("LLECHY");
-            }
-        }
-
-        JAXBContext context = JAXBContext.newInstance(Conversations.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(convs, System.out);
-
     }
 
     //@Test

@@ -83,7 +83,7 @@ public class ConversationDialog extends Window implements Constants {
 
                         Topic lt = previousLabel.matchTopic(query);
                         if (lt != null) {
-                            Wrapper w = new Wrapper(lt.getPhrase());
+                            Wrapper w = new Wrapper(lt.phrase);
                             recurseLabels(w);
                             previousLabel = w.active;
                             scrollPane.add(w.phrase);
@@ -91,7 +91,7 @@ public class ConversationDialog extends Window implements Constants {
 
                             lt = previousLabel.matchTopic("default");
                             if (lt != null) {
-                                Wrapper w = new Wrapper(lt.getPhrase());
+                                Wrapper w = new Wrapper(lt.phrase);
                                 recurseLabels(w);
                                 previousLabel = w.active;
                                 scrollPane.add(w.phrase);
@@ -104,13 +104,13 @@ public class ConversationDialog extends Window implements Constants {
 
                     } else if (query.contains("name")) {
 
-                        scrollPane.add(conv.getName());
+                        scrollPane.add(conv.name);
 
                     } else {
 
                         Topic t = conv.matchTopic(query);
                         if (t != null) {
-                            Wrapper w = new Wrapper(t.getPhrase());
+                            Wrapper w = new Wrapper(t.phrase);
                             recurseLabels(w);
                             previousLabel = w.active;
                             scrollPane.add(w.phrase);
@@ -158,14 +158,14 @@ public class ConversationDialog extends Window implements Constants {
 
         Topic greeting = conv.matchTopic("greeting");
         if (greeting != null) {
-            Wrapper w = new Wrapper(greeting.getPhrase());
+            Wrapper w = new Wrapper(greeting.phrase);
             recurseLabels(w);
             previousLabel = w.active;
             scrollPane.add(w.phrase);
         }
         
-        if (conv.getDescription() != null) {
-            Wrapper w = new Wrapper(conv.getDescription());
+        if (conv.description != null) {
+            Wrapper w = new Wrapper(conv.description);
             recurseLabels(w);
             previousLabel = w.active;
             scrollPane.add("You meet " + w.phrase);
@@ -185,12 +185,12 @@ public class ConversationDialog extends Window implements Constants {
 
     private void recurseLabels(Wrapper w) {
 
-        if (w.phrase.contains("%") && this.conv.getLabels() != null) {
+        if (w.phrase.contains("%") && this.conv.labels != null) {
 
             java.util.Map<Integer, Label> order = new TreeMap<>();
 
-            for (Label label : this.conv.getLabels()) {
-                int x = w.phrase.indexOf("%" + label.getId() + "%");
+            for (Label label : this.conv.labels) {
+                int x = w.phrase.indexOf("%" + label.id + "%");
                 if (x >= 0) {
                     order.put(x, label);
                 }
@@ -199,7 +199,7 @@ public class ConversationDialog extends Window implements Constants {
             if (!order.isEmpty()) {
 
                 for (Label l : order.values()) {
-                    w.phrase = w.phrase.replace("%" + l.getId() + "%", l.getQuery());
+                    w.phrase = w.phrase.replace("%" + l.id + "%", l.query);
                     w.active = l;
                 }
 
