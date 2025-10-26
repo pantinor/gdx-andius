@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="15" nextobjectid="32">
+ <properties>
+  <property name="startX" value="1"/>
+  <property name="startY" value="16"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACqWXa47CMAyEfd4VewFoi3uFBa7F40ZbpIz6dXC6P9aS1ZK4GU/s2CEjYlo0Fz3j+da5/c5mM7WxCTb/Fa5HjIRNwo62LvLnXsy9Fn0Uc+SkfUiMu2hub/xlc4829mzvT/tuju2ezxjXHP2tZMbcHSp/yP+B7xjziq/WzQ5uhS95xMr9BZ+ese6BsKfi+4AN96LyZcK885AfwmZ8tF4PO2KNx2TvLlqL/j0NV0/5kLHyr3hpXXLPHfvKN+Wc5wW5yQc/0+SchR/ug8dRcRc+c5H28pu5oHfHp73ja00KY+A1QDjKL62pd+4P54VfCcd13rTvzIEALvObvsi/sekxtrXCxesFfRB/5j/5J/TUsIamJ/NhbGNfix4W/W52Y9RnmeeforW0nnAdn0p7YR8wNhT4Edu6R3xhyZcBT/o0xjZWaWslfNYZke0ArDPmyVE+sB9wfIjtOXA5g7/ixfjpmbGNe++MTcB1/i7sWSeo545iw3Mkvjx7mvNcyA5v7rdwj7GNq3iyhrG28qxzTlyq3kMe5HCMbe4wprL3faCIi9+PfO+9HooDc9p92+v59IO5UfUG2bCH6jdzjnH1+43Ea7+PV/cL8mFffj+Zb9xzr7Vc56cp/WDOuDB36MNbVOOru6jfE84N97ropb3fwK0n7Nl6Ep8+qPfwO9nODe/asC/xmWu93Od/AXJi31f/Vf31e9wU695f4/M88Gzv8WdMvdey73n8tfYN3B1jL/+9b/8lvf842vuEHfnRnv752X4L+Uu1/1msx7GEf14fe3wqTj3xXCU+40ifeufAazfj4XWJvHxN9iCPecXJcfx/JGusx7B313ZhDfJx8arursLgk/tK/34BYXbj0AAQAAA=
+  </data>
+ </layer>
+ <layer id="2" name="floor 2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACuVWWw6AIAwj3v8a/ntEv0zI0s4he2Bo4g/gWrqxrLU5XOKbwXnUcY+iktubv/fdGhedG82fJS7TEOE/4tbu5qFBxrXe31ODFhNB01yBiDy8rTPu3frQ7mDee/RChif2X+tOeoO80vyrrnmNOzLvjD+a88t8wP7X1ixYJe+Z753NJZm1hrRkcqOe18ReFDdan/XAMlf051bo+YjfW8NI3894gyv67okbyis0/wAQAAA=
+  </data>
+ </layer>
+ <layer id="5" name="water_edges" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2WgQ2EIAxFYQfuWOHiDLoLozmKo9wo9xslaYwSiNASvZ8YGk362oKlxlyTs+s6Yn1Zs1x0VyTwiLtossl2wuyNye1qfMoL/mZ6YM/SfO4X9Q1nMeB9GLdvtfgePqcdL+U7xpCKs1Q8r5xz3SoGt/pLsqPinmn8B5xfswa54n1Aow9p9t+/dM9+D/ff09ikXvrd084cqYfcpfkDuG/cbR9rvrVnnhw232fJ+lO9hx1Hin/E5vzWs4Y/ya/V3J0rzsesHLzgvMV7T8l8Wpt9p773A9e9DzcAEAAA
+  </data>
+ </layer>
+ <layer id="12" name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+ <layer id="3" name="props" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGH6glgm7eCkOcXqBTQNs/0CAGySKDzcw6n/SxIcbGOn+HwWjYBSMglEw8KAQ2v4MHaB2aNEIbP+OgoEFoLQ+UOl9KAAAnWU50QAQAAA=
+  </data>
+ </layer>
+ <layer id="6" name="shadows" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2VSwoAIAhEu4v3v2OrNqKCH/rYvOWI5kDqGP0gRSMl5qkTgdfx9hDpI5pn1avMy3iycqt9Z6n0/yLw79O70N3fwtpJJMQlDYBbOPUn+YzsflvSuswn9g34CX5jcXN1JplR9m4AEAAA
+  </data>
+ </layer>
+ <layer id="7" name="walls" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu1XUW6DMAwl1y3Q3aCwcgNS1BuMbr0BFI4wqHah2dKLQFESQYX52Z701IqEvNhxbBNFftQqij5UYIIDJ5p/IRbEnJip6VlJ1HhuxkL4ofGGeMc+7gv2kmNONtO5WO9dsad8wXpPmvNN7EBGyCdmTdYwOi4UgTEXRprbE2/ER+A9XjcmHjHHtt2gWmj/HOyLAf7w4Qp/s/9TYuKZe0SMSMGcv97Q/jXIcb6xRyPZQZ99UHk09Mr4W4sC55t6NFJh+zPoh+JfMv7M+fviPxHWL7F+NssFBgc17U8SJzWdg/FDDN1C2H6GxvlXszgokZd14G7842+C+51P1Ng9wf1Ejfo+4LfeaQ81+gnutUZojuh11vZ+r6D19BMDfPEK7Jz7hjqcOnJhJ2CjnVdNHnLV3EZAP5RXbf1WQD9U1+29Sdi/Rr/Fnd8S7OMz8d3i2XP+vYB+Oot5vg8H5e652f6tY4Dj3HzrlWDlqbkPFf6ekUYH/Rty7hfy3l41oIH/e5D/N0rmXrjwC7gs5TgAEAAA
+  </data>
+ </layer>
+ <layer id="8" name="door" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+ <layer id="9" name="torches" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgoD5oZcIulsiEXY7WAN3OgXDDKCAeLATGz2IoHkj7Fw5gOhlIu0fBKBgFo2AUjIJRQDkYbW+OglEwCgYjAABJb4VPABAAAA==
+  </data>
+ </layer>
+ <layer id="10" name="webs" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3PIQ4AIAwDwIXPk+zVeDIcA3MnW9NG3DfHOcui67bvebXhx1cAAACoLPLmlPYAEAAA
+  </data>
+ </layer>
+ <objectgroup id="14" name="rooms" visible="0">
+  <object id="15" x="960" y="0">
+   <polygon points="0,0 0,192 96,192 96,240 192,240 192,96 144,96 144,0"/>
+  </object>
+  <object id="16" x="1008" y="1056">
+   <polygon points="0,0 0,288 384,288 384,0"/>
+  </object>
+  <object id="19" x="0" y="624">
+   <polygon points="0,0 0,-624 336,-624 336,-576 384,-576 384,-528 528,-528 528,-480 576,-480 576,-432 720,-432 720,-384 768,-384 768,-336 816,-336 816,-288 864,-288 864,96 816,96 816,144 768,144 768,192 720,192 720,240 672,240 672,480 576,480 576,528 480,528 480,576 432,576 432,624 384,624 384,384 336,384 336,336 288,336 288,288 144,288 144,336 48,336 48,384 0,384"/>
+  </object>
+  <object id="27" x="1536" y="0">
+   <polygon points="0,0 -384,0 -384,240 -432,240 -432,528 -384,528 -384,624 0,624"/>
+  </object>
+  <object id="28" x="0" y="1008">
+   <polygon points="0,0 48,0 48,-48 144,-48 144,-96 288,-96 288,-48 336,-48 336,0 384,0 432,0 432,96 624,96 624,432 576,432 576,528 0,528"/>
+  </object>
+  <object id="30" x="336" y="0">
+   <polygon points="0,0 0,48 48,48 48,96 192,96 192,144 192,192 336,192 336,144 432,144 432,96 480,96 480,0"/>
+  </object>
+  <object id="31" x="1008" y="0">
+   <polygon points="0,0 -192,0 -192,96 -240,96 -240,288 -192,288 -192,336 -144,336 -144,720 -192,720 -192,768 -240,768 -240,816 -288,816 -288,864 -336,864 -336,1104 -384,1104 -384,1440 -432,1440 -432,1536 144,1536 144,1344 48,1344 48,1056 336,1056 336,1344 144,1344 144,1536 528,1536 528,624 144,624 144,528 96,528 96,192 0,192"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="people">
+  <object id="10" name="Fothak" type="MERCHANT_WER" x="1104" y="1296" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="12" name="Sloven" type="FRIENDLY" x="192" y="1152" width="48" height="48">
+   <properties>
+    <property name="icon" value="Sorcerer_Elementalist_Male"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="13" name="Mentorion" type="FRIENDLY" x="1296" y="48" width="48" height="48">
+   <properties>
+    <property name="icon" value="Druid_Percht_Raider_Male"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

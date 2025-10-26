@@ -136,15 +136,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="6" name="Vara" type="FRIENDLY" x="912" y="1056" width="48" height="48">
+  <object id="7" name="Nadia" type="FRIENDLY" x="912" y="1104" width="48" height="48">
    <properties>
-    <property name="icon" value="Paladin_Hunter_Female"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="7" name="Nadia" type="FRIENDLY" x="336" y="528" width="48" height="48">
-   <properties>
-    <property name="icon" value="Druid__Shaman_Female"/>
+    <property name="icon" value="Druid_Shaman_Female"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -154,7 +148,7 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="9" name="Lyrra" type="FRIENDLY" x="576" y="432" width="48" height="48">
+  <object id="9" name="Lyrra" type="FRIENDLY" x="624" y="1296" width="48" height="48">
    <properties>
     <property name="icon" value="Sorcerer_Mage_Female"/>
     <property name="movement" value="FIXED"/>

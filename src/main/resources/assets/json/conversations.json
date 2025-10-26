@@ -7,27 +7,31 @@
                 "topics": [
                     {
                         "query": "job",
-                        "phrase": "I study taunting plaques and blinking runes out of my home."
+                        "phrase": "I study taunting plaques and statues out of my home."
                     },
                     {
-                        "query": "mage plaque home",
-                        "phrase": "I live down on Contra-Dextra Avenue and curate mage lore. I have seen several altars in my travels."
+                        "query": "home",
+                        "phrase": "I live down on Contra-Dextra Avenue and curate mage lore. I have seen several statues in my travels."
                     },
                     {
-                        "query": "hooded humanoid statue altar",
-                        "phrase": "A “hole in the hood” with light shining out reads like an oculus - a place where the deity/guardian “sees” or where a supplicant presents an offering. Altars paired with an oculus often mean the faithful align themselves with the opening during prayer."
+                        "query": "statue plaque",
+                        "phrase": "The KEY of SILVER lies in the northeast: a silver boar with horns and long fangs. The nearby scrawl—likely elven—warns of ghosts and demons; search the room to take the key."
                     },
                     {
-                        "query": "eye",
-                        "phrase": "A hood hides a searing “inner eye.” The faithful might offer incense to “clear the way” and receive guidance - or the statue “watches” for trespassers."
+                        "query": "key",
+                        "phrase": "Seek the KEY of BRONZE in the southeast: a bronze statue—body of a chicken, head of a cat—rests upon an onyx pedestal. Read the plaque, then look around to claim it."
                     },
                     {
-                        "query": "bronze chicken cat onyx",
-                        "phrase": "A plaque under a whimsical hybrid statue is a perfect place to hide a navigational hint keyed to left/right misdirection."
+                        "query": "cat chicken onyx pedestal bronze",
+                        "phrase": "The KEY of BRONZE is required for a checkpoint on the lower level. Do not leave the first floor without it if you intend to press on below. Beware of areas that may teleport...and ghosts as well."
                     },
                     {
-                        "query": "bear wall",
-                        "phrase": "It could mean it is too hot to bear, or else perhaps it refers to forcing you to bear out.."
+                        "query": "teleport",
+                        "phrase": "Two squares send travelers into the southeast zone, arriving near E15-N4. One is just west of the arrival door; the other sits off the east run of the central corridor."
+                    },
+                    {
+                        "query": "ghost murphy",
+                        "phrase": "The ghosts of MURPHY can appear without end. You cannot run. Use DILTO to dim their sight and grind experience—but bring a party fit to stand."
                     }
                 ],
                 "labels": []
@@ -45,20 +49,16 @@
                         "phrase": "The Testing Grounds Control Center is strictly off-limits; those DO NOT ENTER signs at the Testing Grounds Control Center aren’t for show."
                     },
                     {
-                        "query": "bell alarm guardian monsters big trouble",
+                        "query": "bell alarm",
                         "phrase": "When the bell alarm echoes, guardian monsters mobilize - once that bell alarm hits, you’re in big trouble."
                     },
                     {
-                        "query": "private elevator authorized users only access",
+                        "query": "private elevator restrict corridor",
                         "phrase": "The Private Elevator is for authorized users only; I audit Private Elevator access logs every watch."
                     },
                     {
-                        "query": "treasure repository security protocols",
+                        "query": "access log",
                         "phrase": "I review Treasure Repository security protocols weekly - access to the Treasure Repository is tightly controlled."
-                    },
-                    {
-                        "query": "sliding panel pale blue door bright orange",
-                        "phrase": "That sliding panel glows pale blue and the opposite door turns bright orange - never trust a bright orange door in a lockdown."
                     }
                 ],
                 "labels": []
@@ -72,15 +72,15 @@
                         "phrase": "Wayfinding archivist decoding mosaics and placards, cataloging strange statues, and mapping rotating floors and fear rooms."
                     },
                     {
-                        "query": "mosaic turn",
+                        "query": "mosaic room",
                         "phrase": "The floor mosaic says turn left, turn right, or turn around - those mosaic turn cues form a hidden route."
                     },
                     {
-                        "query": "placard dungeon dark",
+                        "query": "placard",
                         "phrase": "That placard sequence - 'A dungeon's dark… when it's not lit… watch out…' - is classic; the placard warning is easy to miss."
                     },
                     {
-                        "query": "chicken cat",
+                        "query": "bronze pedestal chicken cat",
                         "phrase": "I logged the bronze chicken-cat statuette on an onyx pedestal; those pedestal runes around the statuette are unusual."
                     },
                     {
@@ -100,22 +100,22 @@
                 "topics": [
                     {
                         "query": "job",
-                        "phrase": "Expedition quartermaster tracking lair access, statues, gates, and other clues."
+                        "phrase": "Expedition quartermaster tracking lair access, statues, tokens, and other clues."
                     },
                     {
-                        "query": "access blue ribbon level transporter",
+                        "query": "access statue",
                         "phrase": "Secure the Blue Ribbon for Level Transporter access - the Blue Ribbon is your ticket to the transporter room."
                     },
                     {
-                        "query": "clue contra dextra avenue arch mage",
+                        "query": "clue",
                         "phrase": "Follow the Contra-Dextra Avenue clue from the Arch-Mage Werdna; Contra-Dextra Avenue hints at the route to his lair."
                     },
                     {
-                        "query": "lair werdna",
-                        "phrase": "The sign says 'Lair of the Evil Wizard Werdna - the wizard is in'; treat Werdna’s lair as active."
+                        "query": "route sign lair werdna",
+                        "phrase": "If the sign says 'Lair of the Evil Wizard Werdna - the wizard is in'; treat Werdna’s lair as active."
                     },
                     {
-                        "query": "statue bear sliding wall",
+                        "query": "bear token",
                         "phrase": "If the sliding Bear wall blocks the path and forces you outside, you’re missing the proper token for the bear gate."
                     }
                 ],
@@ -236,19 +236,19 @@
                         "phrase": "I'm a dungeon mage. My job is controlling crowds with KATINO and MONTINO and nuking packs with MAHALITO while keeping an eye on poison cures like LATUMOFIS."
                     },
                     {
-                        "query": "BLUE RIBBON elevator access Monster Allocation Center",
+                        "query": "southwest zone mage dungeon",
                         "phrase": "We earned the BLUE RIBBON at the Monster Allocation Center on floor 4 - now the second elevator is open."
                     },
                     {
-                        "query": "DISPEL undead kobolds paralyze poison",
+                        "query": "nuk pack poison cure",
                         "phrase": "On floor 1 I always DISPELL undead kobolds and prep for paralyze or poison just in case."
                     },
                     {
-                        "query": "MAKANITO power spike threshold",
+                        "query": "control crowd",
                         "phrase": "Once I hit level 9, MAKANITO becomes my go-to answer for crowds that ignore lesser spells."
                     },
                     {
-                        "query": "LATUMOFIS potions breath weapons casters",
+                        "query": "lesser spell",
                         "phrase": "Bring extra LATUMOFIS.  Breath weapons and enemy casters turn a bad pull into a wipe fast."
                     }
                 ],
@@ -263,15 +263,15 @@
                         "phrase": "I have collected relics in the testing grounds, seen the guardian of the STATUE of BEAR and keeper of the keys and treasure."
                     },
                     {
-                        "query": "MURPHY GHOST guard",
+                        "query": "guard",
                         "phrase": "If you need experience, challenge MURPHY'S GHOST in the southeast zone - steady gains for disciplined parties."
                     },
                     {
-                        "query": "Testing Grounds Control Center monster alarm",
+                        "query": "testing ground",
                         "phrase": "If you ignore the Testing Grounds Control Center warnings then the guardian monster alarms will bring trouble."
                     },
                     {
-                        "query": "Treasure key guard silver bronze",
+                        "query": "treasure key",
                         "phrase": "The Treasure Repository is warded - many try the door but nobody in the party can break that door down.  So it is with elevator access too..."
                     },
                     {
@@ -282,28 +282,24 @@
                 "labels": []
             },
             {
-                "name": "Dexa Contra",
+                "name": "Dexa",
                 "description": "Maze-cartographer and puzzle savant",
                 "topics": [
                     {
                         "query": "job",
-                        "phrase": "I'm a dungeon cartographer - my job is mapping rotating floors and chutes, reading mosaic cues, and charting MALOR-safe routes.  I live in the avenue too."
+                        "phrase": "I'm a dungeon cartographer - my job is mapping rotating floors, stairs, and chutes, reading mosaic cues, and charting MALOR-safe routes.  I live in the avenue too."
                     },
                     {
-                        "query": "turn left turn right turn around mosaics",
+                        "query": "map floor chute",
                         "phrase": "When the floor mosaics say TURN LEFT, TURN RIGHT, or TURN AROUND, trust them - but mark your map."
                     },
                     {
-                        "query": "Dance Hall rotating floors, stairs-only arrival, warp tiles, one-way doors",
+                        "query": "rotating stair",
                         "phrase": "The Dance Hall’s rotating floors demand patience - wait for warp tiles or scout for one-way doors along the north wall."
                     },
                     {
                         "query": "contra dextra avenue werdna trebor sux plaque",
                         "phrase": "That ornate plaque hints at Contra-Dextra Avenue - and a classic Werdna taunt to Trebor."
-                    },
-                    {
-                        "query": "DUMAPIC navigation MALOR restrictions chute floor",
-                        "phrase": "Use DUMAPIC to reorient after spins; remember MALOR restrictions and take the chute from floor 9 to reach floor 10."
                     },
                     {
                         "query": "Elira",
@@ -571,24 +567,20 @@
                 "description": "A vigilant moat warden and beach sentry",
                 "topics": [
                     {
-                        "query": "barracks beware moat monsters fortress",
+                        "query": "job",
+                        "phrase": "I am the moat warden and beach sentry, guarding the fortress and barracks while keeping watch on the lake and its island."
+                    },
+                    {
+                        "query": "barracks fortress",
                         "phrase": "At the barracks by the fortress, I always remind recruits to BEWARE OF MOAT MONSTERS before they cross the parapets."
                     },
                     {
-                        "query": "beach dark lake small island",
-                        "phrase": "From the beach beside the dark lake I watch that small island for ripples and shadows."
+                        "query": "moat monster",
+                        "phrase": "From the beach beside the dark lake I watch that small island for ripples and shadows from the waters edge."
                     },
                     {
-                        "query": "water edge drown",
+                        "query": "water edge",
                         "phrase": "Don't step past the water's edge or you'll drown - I've hauled too many back."
-                    },
-                    {
-                        "query": " words good evil triumph",
-                        "phrase": "HEAR YE THE WORDS OF L'KBRETH: neither good nor evil alone can triumph here, so even my patrols mix alignments."
-                    },
-                    {
-                        "query": "job",
-                        "phrase": "I am the moat warden and beach sentry, guarding the fortress and barracks while keeping watch on the lake and its island."
                     }
                 ],
                 "labels": []
@@ -598,24 +590,24 @@
                 "description": "A meticulous clerk",
                 "topics": [
                     {
+                        "query": "job",
+                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                    },
+                    {
                         "query": "grand wizard",
                         "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
                     },
                     {
-                        "query": "grand dining room kitchen opulent boudoir",
+                        "query": "grand dining room kitchen boudoir",
                         "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
                     },
                     {
-                        "query": "large dusty desk ornate letter",
+                        "query": "desk ornate letter",
                         "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
                     },
                     {
-                        "query": "wine cellar",
+                        "query": "cellar",
                         "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
-                    },
-                    {
-                        "query": "job",
-                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, and that desk with the ornate letter P."
                     }
                 ],
                 "labels": []
@@ -625,51 +617,20 @@
                 "description": "A silver-tongued dispatcher and quartermaster",
                 "topics": [
                     {
-                        "query": "Abdul's Ethereal Taxi Service",
+                        "query": "job",
+                        "phrase": "Welcome, traveler - may the winds of the desert be at your back and the sun leave you always in shade. I run Abdul’s routes, dispatching the Ethereal Taxi and selling rarities like the Rod of Fire to those with the right password and the right price."
+                    },
+                    {
+                        "query": "dispatch abdul ethereal taxi price",
                         "phrase": "For Abdul's Ethereal Taxi Service fares, it’s 2500 when you’re close and 5000 when you’ve really wandered."
                     },
                     {
-                        "query": "Abdul password",
+                        "query": "password",
                         "phrase": "If someone challenges you, just tell them Abdul sent you - say 'ABDUL SENT YOU' as the password."
                     },
                     {
-                        "query": "Rod Fire jewel encrusted coffer",
+                        "query": "rod fire",
                         "phrase": "Open the jewel encrusted coffer and behold the Rod of Fire - 25000, and not a coin less."
-                    },
-                    {
-                        "query": "winds desert back sun shade",
-                        "phrase": "Welcome, traveler - may the winds of the desert be at your back and the sun leave you always in shade."
-                    },
-                    {
-                        "query": "job",
-                        "phrase": "I run Abdul’s routes, dispatching the Ethereal Taxi and selling rarities like the Rod of Fire to those with the right password and the right price."
-                    }
-                ],
-                "labels": []
-            },
-            {
-                "name": "Vara",
-                "description": "An elegantly dressed sentinel with a wicked whip and a sharper tongue, loyal to the Temple of the Irascible Fung.",
-                "topics": [
-                    {
-                        "query": "Temple Irascible Fung",
-                        "phrase": "Temple of the Irascible Fung - Private No Trespassing - read it, breathe it, obey it."
-                    },
-                    {
-                        "query": "elegantly dressed woman whip password boys",
-                        "phrase": "An elegantly dressed woman with a whip asks, 'what's the password boys?' - I do enjoy the pause."
-                    },
-                    {
-                        "query": "LOOK OUT",
-                        "phrase": "When I hiss LOOK OUT!, take one more step only if you crave trouble."
-                    },
-                    {
-                        "query": "oily black liquid drips ceiling pool",
-                        "phrase": "Mind the hall where an oily black liquid drips from the ceiling, forming a treacherous pool."
-                    },
-                    {
-                        "query": "job",
-                        "phrase": "I serve as the temple’s doorkeeper and ritual attendant, enforcing that 'Private!! No Trespassing!!' policy - politely, until I need the whip."
                     }
                 ],
                 "labels": []
@@ -679,24 +640,76 @@
                 "description": "Custodian of the radiant statue and keeper of riddles who trades in crystals, orbs, and answers.",
                 "topics": [
                     {
-                        "query": "radiant statue hands outstretched shining crystal sphere",
+                        "query": "job",
+                        "phrase": "I am the statue-warden and riddlemaster, overseeing trades of crystals and orbs while testing seekers with AIR, DEATH, and the WHEEL."
+                    },
+                    {
+                        "query": "statue crystal orb",
                         "phrase": "At the radiant statue with hands outstretched, I mind the shining crystal sphere and the empty palm that aches to trade."
                     },
                     {
-                        "query": "never leave AIR",
+                        "query": "riddle seeker air answer",
                         "phrase": "Hear the riddle: I am around you always, never seen, and you would never leave me - AIR."
                     },
                     {
-                        "query": "black figure horse white rose rising sun change DEATH",
+                        "query": "death",
                         "phrase": "Tarot whispers: black figure on a black horse with the white rose; the rising sun - change will come - DEATH."
                     },
                     {
-                        "query": "roll move forward turn WHEEL",
+                        "query": "wheel",
                         "phrase": "On my roll you move forward; my turn is your turn - turn the WHEEL and watch fate pivot."
-                    },
+                    }
+                ],
+                "labels": []
+            }
+        ],
+        "MONTOR": [
+            {
+                "name": "Mentorian",
+                "description": "A vigilant moat warden and beach sentry",
+                "topics": [
                     {
                         "query": "job",
-                        "phrase": "I am the statue-warden and riddlemaster, overseeing trades of crystals and orbs while testing seekers with AIR, DEATH, and the WHEEL."
+                        "phrase": "I am the moat warden and beach sentry, guarding the fortress and barracks while keeping watch on the lake and its island."
+                    },
+                    {
+                        "query": "barracks fortress",
+                        "phrase": "At the barracks by the fortress, I always remind recruits to BEWARE OF MOAT MONSTERS before they cross the parapets."
+                    },
+                    {
+                        "query": "moat monster",
+                        "phrase": "From the beach beside the dark lake I watch that small island for ripples and shadows from the waters edge."
+                    },
+                    {
+                        "query": "water edge",
+                        "phrase": "Don't step past the water's edge or you'll drown - I've hauled too many back."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Sloven",
+                "description": "A meticulous clerk",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                    },
+                    {
+                        "query": "grand wizard",
+                        "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
+                    },
+                    {
+                        "query": "grand dining room kitchen boudoir",
+                        "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
+                    },
+                    {
+                        "query": "desk ornate letter",
+                        "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
+                    },
+                    {
+                        "query": "cellar",
+                        "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
                     }
                 ],
                 "labels": []

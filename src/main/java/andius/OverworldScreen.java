@@ -9,6 +9,7 @@ import andius.objects.ClassType;
 import andius.objects.Item;
 import andius.objects.Portal;
 import andius.objects.SaveGame;
+import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
@@ -201,7 +202,7 @@ public class OverworldScreen extends BaseScreen {
             if (p != null) {
                 if (p.getMap() == Map.WIZARDRY4) {
                     if (Andius.CTX.players().length == 1 && Andius.CTX.players()[0].classType == ClassType.MAGE) {
-                        showEnterDungeonPrompt(stage, () -> Andius.mainGame.setScreen(p.getMap().getScreen()));
+                        showEnterWiz4Prompt(stage, () -> Andius.mainGame.setScreen(p.getMap().getScreen()));
                     } else {
                         log("An impenetrable force of energy bars your party's passage in the entrance! A solitary mage might have more luck...");
                     }
@@ -219,17 +220,38 @@ public class OverworldScreen extends BaseScreen {
         return false;
     }
 
-    private void showEnterDungeonPrompt(Stage stage, Runnable onConfirm) {
+    private void showEnterWiz4Prompt(Stage stage, Runnable onConfirm) {
         Dialog dialog = new Dialog("Enter Dungeon?", Andius.skin) {
             @Override
             protected void result(Object obj) {
                 boolean yes = Boolean.TRUE.equals(obj);
                 if (yes && onConfirm != null) {
+                    SaveGame.CharacterRecord c = Andius.CTX.players()[0];
+                    c.level = 1;
+                    c.exp = 0;
+
+                    c.hp = c.getMoreHP();
+                    c.maxhp = c.hp;
+
+                    c.knownSpells.clear();
+                    for (int i = 0; i < c.magePoints.length; i++) {
+                        c.magePoints[i] = 0;
+                    }
+                    for (int i = 0; i < c.clericPoints.length; i++) {
+                        c.clericPoints[i] = 0;
+                    }
+
+                    c.knownSpells.add(Spells.values()[1]);
+                    c.knownSpells.add(Spells.values()[3]);
+                    c.magePoints[0] = 2;
+
+                    SaveGame.setSpellPoints(c);
+
                     onConfirm.run();
                 }
             }
         };
-        dialog.text("Are you sure you want to proceed into Werdna's realm at this time?  It is easy to enter and long to exit.");
+        dialog.text("Are you sure you want to proceed into Werdna's realm at this time?  Your experience level will start at 1.");
         dialog.button("Enter", true);
         dialog.button("Stay", false);
         dialog.key(Input.Keys.ENTER, true);
