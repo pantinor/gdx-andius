@@ -732,6 +732,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         batch.draw(Andius.backGround, 0, 0);
 
         Andius.HUD.render(batch, Andius.CTX);
+        if (this.map == Map.WIZARDRY4) {
+            Andius.HUD.renderSummonedMonsters(batch, Andius.CTX);
+        }
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);

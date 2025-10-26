@@ -2,8 +2,11 @@ package utils;
 
 import andius.Andius;
 import andius.Context;
+import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -80,5 +83,75 @@ public class Hud {
 
         }
 
+    }
+
+    public void renderSummonedMonsters(Batch batch, Context ctxt) {
+
+        if (smb == null) {
+            smb = summondMonstersBackground();
+        }
+
+        batch.draw(smb, 722, Andius.SCREEN_HEIGHT - 110 - 298);
+
+        Andius.font12.setColor(Color.WHITE);
+
+        float y = Andius.SCREEN_HEIGHT - 102;
+        int count = 0;
+        for (MutableMonster mm : ctxt.saveGame.players[0].summonedMonsters) {
+            Andius.font12.setColor(mm.isDead() ? Color.RED : mm.status().color());
+
+            String str = String.format("%s %d %d/%d %s (%d, %d)",
+                    mm.name().toUpperCase(), mm.getLevel(),
+                    mm.getCurrentHitPoints(), mm.getMaxHitPoints(),
+                    mm.getCurrentHitPoints() <= 0 ? "DEAD" : mm.status(),
+                    mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel());
+            Andius.font12.draw(batch, str, 730, y -= 16);
+
+            count++;
+            if (count > 17) {
+                break;
+            }
+        }
+
+        Andius.font12.setColor(Color.WHITE);
+    }
+
+    private Texture smb = null;
+
+    private Texture summondMonstersBackground() {
+
+        Color DARKEST = new Color(0x2e2e2eff);
+        Color DARK = new Color(0x575757ff);
+        Color LIGHT = new Color(0x7a7a7aff);
+        Color LIGHTEST = new Color(0xabababff);
+
+        Pixmap pix = new Pixmap(280, 298, Pixmap.Format.RGBA8888);
+
+        int ix = 5;
+        int iy = 5;
+        int iw = 270;
+        int ih = 288;
+
+        pix.setColor(Color.BLACK);
+        pix.fillRectangle(ix - 5, iy - 5, iw + 10, ih + 10);
+
+        pix.setColor(DARK);
+        pix.fillRectangle(ix - 4, iy - 4, iw + 8, ih + 8);
+
+        pix.setColor(LIGHT);
+        pix.fillRectangle(ix - 3, iy - 3, iw + 6, ih + 6);
+
+        pix.setColor(LIGHTEST);
+        pix.fillRectangle(ix - 2, iy - 2, iw + 4, ih + 4);
+
+        pix.setColor(Color.BLACK);
+        pix.fillRectangle(ix - 1, iy - 1, iw + 2, ih + 2);
+
+        pix.setColor(DARKEST);
+        pix.fillRectangle(ix, iy, iw, ih);
+
+        Texture t = new Texture(pix);
+        pix.dispose();
+        return t;
     }
 }
