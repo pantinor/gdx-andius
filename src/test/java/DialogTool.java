@@ -7,13 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -23,7 +18,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 public class DialogTool extends javax.swing.JFrame {
 

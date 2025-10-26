@@ -32,7 +32,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
@@ -78,6 +77,9 @@ public class ManageScreen implements Screen, Constants {
     List<ClassType> classTypeSelection;
     ButtonGroup<CheckBox> raceGroup = new ButtonGroup<>();
     CheckBox[] cbRace = new CheckBox[Race.values().length];
+
+    SelectBox<ClassType> changeClassBox;
+    TextButton changeClassBtn;
 
     int stVal, inVal, piVal, viVal, agVal, luVal;
     int stExt, inExt, piExt, viExt, agExt, luExt;
@@ -250,6 +252,7 @@ public class ManageScreen implements Screen, Constants {
                     }
                 }
                 partyFormation.getSelected().character = rsel;
+                updateChangeClassOptions();
                 Sounds.play(Sound.TRIGGER);
             }
         });
@@ -618,6 +621,39 @@ public class ManageScreen implements Screen, Constants {
         agPlus.setPosition(x + 46, y -= 28);
         luPlus.setPosition(x + 46, y -= 28);
 
+        changeClassBox = new SelectBox<>(skin, "default-16-dark-background");
+        changeClassBtn = new TextButton("CHANGE CLASS", skin, "default-16-green");
+
+        changeClassBox.setBounds(728, Andius.SCREEN_HEIGHT - 35 - 460, 130, 35);
+        changeClassBtn.setBounds(728, Andius.SCREEN_HEIGHT - 35 - 510, 130, 35);
+
+        partyFormation.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                updateChangeClassOptions();
+            }
+        });
+        changeClassBtn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                CharacterRecord sel = partyFormation.getSelected().character;
+                if (sel == null || sel.name.equals(EMPTY)) {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
+                ClassType target = changeClassBox.getSelected();
+                if (target == null || target == sel.classType) {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
+                applyClassChange(sel, target);
+                updateChangeClassOptions();
+                Sounds.play(Sound.TRIGGER);
+            }
+        });
+
+        updateChangeClassOptions();
+
         stage.addActor(nameField);
         stage.addActor(strMinus);
         stage.addActor(intMinus);
@@ -655,6 +691,9 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(activePartyText);
         stage.addActor(roleCharacterText);
 
+        stage.addActor(changeClassBox);
+        stage.addActor(changeClassBtn);
+
         //stage.setDebugAll(true);
         bkgnd = fm.build();
 
@@ -674,6 +713,58 @@ public class ManageScreen implements Screen, Constants {
             }
             classTypeSelection.setItems(items);
         }
+    }
+
+    private void updateChangeClassOptions() {
+        Array<ClassType> items = new Array<>();
+        CharacterRecord sel = partyFormation.getSelected() != null ? partyFormation.getSelected().character : null;
+        if (sel != null && !sel.name.equals(EMPTY)) {
+            for (ClassType ct : ClassType.values()) {
+                boolean s = sel.str >= ct.getMinStr();
+                boolean i = sel.intell >= ct.getMinIntell();
+                boolean p = sel.piety >= ct.getMinPiety();
+                boolean v = sel.vitality >= ct.getMinVitality();
+                boolean a = sel.agility >= ct.getMinAgility();
+                boolean l = sel.luck >= ct.getMinLuck();
+                if (s && i && p && v && a && l) {
+                    items.add(ct);
+                }
+            }
+        }
+        changeClassBox.setItems(items);
+        if (sel != null && items.contains(sel.classType, true)) {
+            changeClassBox.setSelected(sel.classType);
+        }
+    }
+
+    private void applyClassChange(SaveGame.CharacterRecord c, ClassType newClass) {
+        c.classType = newClass;
+        c.level = 1;
+        c.exp = 0;
+
+        c.hp = c.getMoreHP();
+        c.maxhp = c.hp;
+
+        c.knownSpells.clear();
+        for (int i = 0; i < c.magePoints.length; i++) {
+            c.magePoints[i] = 0;
+        }
+        for (int i = 0; i < c.clericPoints.length; i++) {
+            c.clericPoints[i] = 0;
+        }
+
+        if (newClass == ClassType.MAGE || newClass == ClassType.BISHOP) {
+            c.knownSpells.add(Spells.values()[1]);
+            c.knownSpells.add(Spells.values()[3]);
+            c.magePoints[0] = 2;
+        }
+        if (newClass == ClassType.PRIEST) {
+            c.knownSpells.add(Spells.values()[23]);
+            c.knownSpells.add(Spells.values()[24]);
+            c.clericPoints[0] = 2;
+        }
+
+        SaveGame.setSpellPoints(c);
     }
 
     @Override
@@ -728,7 +819,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
         font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
         font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "TYPE: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "CLASS: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
         font.draw(batch, "STAT: " + sel.status.toString(), x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
@@ -749,7 +840,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
         font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
         font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "TYPE: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
+        font.draw(batch, "CLASS: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
         font.draw(batch, "STAT: " + sel.status.toString().toUpperCase(), x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
@@ -763,7 +854,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "LCK: " + sel.luck, x, viewY -= 18);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 504 + 250;
+        x = 504 + 220;
 
         font.draw(batch, "GLD: " + sel.gold, x, viewY);
         font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);

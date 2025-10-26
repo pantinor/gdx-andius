@@ -63,6 +63,15 @@
                 "a": 0.5
             }
         },
+        "very-dim": {
+            "name": "white",
+            "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.80
+            }
+        },
         "dim": {
             "name": "white",
             "color": {
@@ -280,6 +289,19 @@
                 "fontColorSelected": "white",
                 "font": "default-font",
                 "background": "dimmer"
+            }
+        },
+        "default-16-dark-background": {
+            "font": "default-font",
+            "fontColor": "white",
+            "background": "dimmest",
+            "scrollStyle": "default",
+            "listStyle": {
+                "fontColorUnselected": "white",
+                "selection": "light",
+                "fontColorSelected": "white",
+                "font": "default-font",
+                "background": "very-dim"
             }
         }
     },
