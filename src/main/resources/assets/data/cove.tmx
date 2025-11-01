@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="13" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="14" nextobjectid="20">
  <properties>
   <property name="startX" value="1"/>
   <property name="startY" value="16"/>
@@ -185,4 +185,25 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="13" name="rooms">
+  <object id="14" x="192" y="1056">
+   <polygon points="0,0 0,240 336,240 336,0"/>
+  </object>
+  <object id="15" x="912" y="1056">
+   <polygon points="0,0 0,240 336,240 336,0"/>
+  </object>
+  <object id="16" x="480" y="1200">
+   <polygon points="0,0 144,0 144,-48 480,-48 480,192 0,192"/>
+  </object>
+  <object id="17" x="624" y="912">
+   <polygon points="0,0 240,0 240,240 0,240"/>
+  </object>
+  <object id="18" x="480" y="480">
+   <polygon points="0,0 0,720 0,768 192,768 192,672 192,432 336,432 336,672 480,672 480,0"/>
+  </object>
+  <object id="19" x="0" y="0">
+   <polygon points="0,0 0,1536 720,1536 720,1392 528,1392 528,1296 240,1296 240,1056 528,1056 528,480 912,480 912,1056 1200,1056 1200,1296 960,1296 912,1296 912,1392 720,1392 720,1536 1536,1536 1536,0"/>
+  </object>
+ </objectgroup>
 </map>
+

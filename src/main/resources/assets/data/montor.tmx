@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="15" nextobjectid="32">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="16" nextobjectid="53">
  <properties>
   <property name="startX" value="1"/>
   <property name="startY" value="16"/>
@@ -54,6 +54,76 @@
     <frame tileid="218" duration="500"/>
    </animation>
   </tile>
+  <tile id="435">
+   <animation>
+    <frame tileid="435" duration="300"/>
+    <frame tileid="436" duration="300"/>
+    <frame tileid="437" duration="300"/>
+    <frame tileid="438" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="455">
+   <animation>
+    <frame tileid="455" duration="300"/>
+    <frame tileid="456" duration="300"/>
+    <frame tileid="457" duration="300"/>
+    <frame tileid="458" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="475">
+   <animation>
+    <frame tileid="475" duration="300"/>
+    <frame tileid="476" duration="300"/>
+    <frame tileid="477" duration="300"/>
+    <frame tileid="478" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="495">
+   <animation>
+    <frame tileid="495" duration="300"/>
+    <frame tileid="496" duration="300"/>
+    <frame tileid="497" duration="300"/>
+    <frame tileid="498" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="515">
+   <animation>
+    <frame tileid="515" duration="300"/>
+    <frame tileid="516" duration="300"/>
+    <frame tileid="517" duration="300"/>
+    <frame tileid="518" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="535">
+   <animation>
+    <frame tileid="535" duration="300"/>
+    <frame tileid="536" duration="300"/>
+    <frame tileid="537" duration="300"/>
+    <frame tileid="538" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="555">
+   <animation>
+    <frame tileid="555" duration="300"/>
+    <frame tileid="556" duration="300"/>
+    <frame tileid="557" duration="300"/>
+    <frame tileid="558" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="575">
+   <animation>
+    <frame tileid="575" duration="300"/>
+    <frame tileid="576" duration="300"/>
+    <frame tileid="577" duration="300"/>
+    <frame tileid="578" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
   <tile id="644">
    <animation>
     <frame tileid="644" duration="200"/>
@@ -81,12 +151,12 @@
  </tileset>
  <layer id="1" name="floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACqWXa47CMAyEfd4VewFoi3uFBa7F40ZbpIz6dXC6P9aS1ZK4GU/s2CEjYlo0Fz3j+da5/c5mM7WxCTb/Fa5HjIRNwo62LvLnXsy9Fn0Uc+SkfUiMu2hub/xlc4829mzvT/tuju2ezxjXHP2tZMbcHSp/yP+B7xjziq/WzQ5uhS95xMr9BZ+ese6BsKfi+4AN96LyZcK885AfwmZ8tF4PO2KNx2TvLlqL/j0NV0/5kLHyr3hpXXLPHfvKN+Wc5wW5yQc/0+SchR/ug8dRcRc+c5H28pu5oHfHp73ja00KY+A1QDjKL62pd+4P54VfCcd13rTvzIEALvObvsi/sekxtrXCxesFfRB/5j/5J/TUsIamJ/NhbGNfix4W/W52Y9RnmeeforW0nnAdn0p7YR8wNhT4Edu6R3xhyZcBT/o0xjZWaWslfNYZke0ArDPmyVE+sB9wfIjtOXA5g7/ixfjpmbGNe++MTcB1/i7sWSeo545iw3Mkvjx7mvNcyA5v7rdwj7GNq3iyhrG28qxzTlyq3kMe5HCMbe4wprL3faCIi9+PfO+9HooDc9p92+v59IO5UfUG2bCH6jdzjnH1+43Ea7+PV/cL8mFffj+Zb9xzr7Vc56cp/WDOuDB36MNbVOOru6jfE84N97ropb3fwK0n7Nl6Ep8+qPfwO9nODe/asC/xmWu93Od/AXJi31f/Vf31e9wU695f4/M88Gzv8WdMvdey73n8tfYN3B1jL/+9b/8lvf842vuEHfnRnv752X4L+Uu1/1msx7GEf14fe3wqTj3xXCU+40ifeufAazfj4XWJvHxN9iCPecXJcfx/JGusx7B313ZhDfJx8arursLgk/tK/34BYXbj0AAQAAA=
+   H4sIAAAAAAAACqVWCW7DMAzTe4fuA2sS/6HHt5rkR0sBE+VYSkkxA4JT1xEpiZbTImLq1sgmWZ/M2tP+OyoM3aN7dYDPw/y3bjab/1phDkO5sR+sr/Lf3NeW/ryIP5fvFj7PDlt5PcjAh+OfhXcVL3Orhtszxyv2lTgt8cqBxu9GpQ3Fd7oED2BzfarYK/yjuVoEF/Nq3jkaf5WvrA7gwbrAftWb+nN6zDjrGuoOfNYiYlP/WU/IzqnLAQ+ugfYAF4/rha43Zv2P8XHekHfWAPa6vOrz2O1H9upwOQEHxM/6Zyz2e+5YQ7ezcBj72tdmp82++74xvC74/POAL/gDruKz8X5gn2htSHIzmzXGApeBZuY0xnudeEzEWTU6EBavc4zgMJn3nF8djeJHvbh+mLOz5jQOXI6/6n3gAFPtDPGut+qcqRayuBWf8wbu1VnLeOAscN54uHsBdWXt7GFoXFVfzPB5D2s666XOX5PniqPbA2PNVX2d46jWq9y73LLesp46iZ9LtyxXVezKET3efYvq3dk67m2za3++R55zxne1Bb5ycN8c+H3v+JfOQetwJP/8Dt/7+NZzdz78IPc3g1WdEb2/8J67a/nO1fojB9fIsZ0GnP6Axd+dQbPzBw1c429eND4drp9o/C7/6i/T0l78yrPSq3J2+FU/3vOVnfMjvdTF+kndHXbl80iu9Ew77CM42R31nH8B0EGt9wAQAAA=
   </data>
  </layer>
  <layer id="2" name="floor 2" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACuVWWw6AIAwj3v8a/ntEv0zI0s4he2Bo4g/gWrqxrLU5XOKbwXnUcY+iktubv/fdGhedG82fJS7TEOE/4tbu5qFBxrXe31ODFhNB01yBiDy8rTPu3frQ7mDee/RChif2X+tOeoO80vyrrnmNOzLvjD+a88t8wP7X1ixYJe+Z753NJZm1hrRkcqOe18ReFDdan/XAMlf051bo+YjfW8NI3894gyv67okbyis0/wAQAAA=
+   H4sIAAAAAAAACuVWQQ6EIAzEfY/f9r6P2IMnjT/xCXsyMU2ndCiIxkm8VOiUKQykFMNXfBFMn37cLHpy1+Y/6+7Nq43T+rcP+nwUl3lRDS3017ittXlqGMGePuIyr3f9TA0scvmsmiV+IAeKl6CGBsh7cp6U69cM9jmKs+jtQ28H0p69yxgcuZ96/0ltNK0s/XrveYu7Zd8Rf2vOkvcBmm/FPLhL36887+hdwnAuQW6tFgZbkFvzvCT+WVgD3Fqc1UDye94V53FRz2fXb9XV0n8Z37/iDN7hrpX8NfEHsGA6BgAQAAA=
   </data>
  </layer>
  <layer id="5" name="water_edges" width="32" height="32">
@@ -94,24 +164,19 @@
    H4sIAAAAAAAACu2WgQ2EIAxFYQfuWOHiDLoLozmKo9wo9xslaYwSiNASvZ8YGk362oKlxlyTs+s6Yn1Zs1x0VyTwiLtossl2wuyNye1qfMoL/mZ6YM/SfO4X9Q1nMeB9GLdvtfgePqcdL+U7xpCKs1Q8r5xz3SoGt/pLsqPinmn8B5xfswa54n1Aow9p9t+/dM9+D/ff09ikXvrd084cqYfcpfkDuG/cbR9rvrVnnhw232fJ+lO9hx1Hin/E5vzWs4Y/ya/V3J0rzsesHLzgvMV7T8l8Wpt9p773A9e9DzcAEAAA
   </data>
  </layer>
+ <layer id="3" name="props" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGH6glmmgXTAKkMEmJvz84Q42MuHnD3ewgQk/f7iDzUz4+aNgFIyCUTAKRgGtgCcjA0MhtN4JHYD6B2R/0QDWeyD7BxKMdPsHCoDS+kCk96ECAIjAeygAEAAA
+  </data>
+ </layer>
  <layer id="12" name="creature" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
   </data>
  </layer>
- <layer id="3" name="props" width="32" height="32">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgGH6glgm7eCkOcXqBTQNs/0CAGySKDzcw6n/SxIcbGOn+HwWjYBSMglEw8KAQ2v4MHaB2aNEIbP+OgoEFoLQ+UOl9KAAAnWU50QAQAAA=
-  </data>
- </layer>
- <layer id="6" name="shadows" width="32" height="32">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2VSwoAIAhEu4v3v2OrNqKCH/rYvOWI5kDqGP0gRSMl5qkTgdfx9hDpI5pn1avMy3iycqt9Z6n0/yLw79O70N3fwtpJJMQlDYBbOPUn+YzsflvSuswn9g34CX5jcXN1JplR9m4AEAAA
-  </data>
- </layer>
  <layer id="7" name="walls" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu1XUW6DMAwl1y3Q3aCwcgNS1BuMbr0BFI4wqHah2dKLQFESQYX52Z701IqEvNhxbBNFftQqij5UYIIDJ5p/IRbEnJip6VlJ1HhuxkL4ofGGeMc+7gv2kmNONtO5WO9dsad8wXpPmvNN7EBGyCdmTdYwOi4UgTEXRprbE2/ER+A9XjcmHjHHtt2gWmj/HOyLAf7w4Qp/s/9TYuKZe0SMSMGcv97Q/jXIcb6xRyPZQZ99UHk09Mr4W4sC55t6NFJh+zPoh+JfMv7M+fviPxHWL7F+NssFBgc17U8SJzWdg/FDDN1C2H6GxvlXszgokZd14G7842+C+51P1Ng9wf1Ejfo+4LfeaQ81+gnutUZojuh11vZ+r6D19BMDfPEK7Jz7hjqcOnJhJ2CjnVdNHnLV3EZAP5RXbf1WQD9U1+29Sdi/Rr/Fnd8S7OMz8d3i2XP+vYB+Oot5vg8H5e652f6tY4Dj3HzrlWDlqbkPFf6ekUYH/Rty7hfy3l41oIH/e5D/N0rmXrjwC7gs5TgAEAAA
+   H4sIAAAAAAAACu1XbW6DMAwl1y3Q3aAgcQMo6g1Gt94ACkcYTLvQbOlFoCixoML82Z5ktSImL/6IbaIojMZE0bsRFDy4kP6VpCDJSTIzPytJKjy3axJ+aL0leeAcjxVnyaGTLXiuzns3nClfsd836XyR9BCG5BO7J3NYHh8KYc2HiXQHkjvJU3iP941JztBxbbeoV9q/BPtihD9CuMHf7P+UJAnonpEjWrDxr3a0fwtyxDcOcCQH8LMP6gBHtTH/tqJAfNMAR6psfwZ+Kf8188/GP5T/iTJ/if2zRS2wOJn5fJq4mDkO1g8xeAtl+xkV4l8v8qBEXa6Eu/GPvwmedz7QY48EzxMN+vuI3+agMzSYJ3jWmsA5YdbZOvu9gi4wT4zwxStwa+4b+nDqqYW9go1uXbV1yNdzWwV+qa66/J0Cv9TX3bNp2L+Fv8Od3xNSX/XFf1DgTxc5z/fhZPwzN9u/dw5wnttvvRJSB3ru08jfM9rowX9Hzf1E3TuqB7Tw/wDh/63RuRc+/ALSyK0OABAAAA==
   </data>
  </layer>
  <layer id="8" name="door" width="32" height="32">
@@ -121,7 +186,7 @@
  </layer>
  <layer id="9" name="torches" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgoD5oZcIulsiEXY7WAN3OgXDDKCAeLATGz2IoHkj7Fw5gOhlIu0fBKBgFo2AUjIJRQDkYbW+OglEwCgYjAABJb4VPABAAAA==
+   H4sIAAAAAAAACmNgoD5oZcIthk2O1gDdzoFwwyggHiwExs9iKB5I+xcOYDoZSLtHwSgYBaNgFIyCUUA5GG1vjoJRMAoGIwAAHbPXBQAQAAA=
   </data>
  </layer>
  <layer id="10" name="webs" width="32" height="32">
@@ -129,18 +194,64 @@
    H4sIAAAAAAAACu3PIQ4AIAwDwIXPk+zVeDIcA3MnW9NG3DfHOcui67bvebXhx1cAAACoLPLmlPYAEAAA
   </data>
  </layer>
- <objectgroup id="14" name="rooms" visible="0">
-  <object id="15" x="960" y="0">
-   <polygon points="0,0 0,192 96,192 96,240 192,240 192,96 144,96 144,0"/>
+ <layer id="6" name="shadows" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGH5AGYeYMg45UswhB6CbQ6obyHEHufrwmUdNfZT4CZ9eavubUkBN/w9FMFz8D3TvARgmUR9J4tjsQ7eTXLcQYw8VzR2WQBkPJqQWlxg+fbQGxPhjJANlHGx6u4Fedg8GP9LbDfjy7nAAo3l7FIwkgK+OHs0DqAAADQ1ZEgAQAAA=
+  </data>
+ </layer>
+ <objectgroup id="15" name="messages">
+  <object id="32" name="reward" type="WINGED BOOTS" x="1008" y="48" width="48" height="48">
+   <properties>
+    <property name="scenario" value="WER"/>
+   </properties>
   </object>
+  <object id="39" name="itemRequired" type="MARK OF FIRE" x="1152" y="192" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="40" name="itemRequired" type="MARK OF FIRE" x="1152" y="288" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="41" name="itemRequired" type="MARK OF FIRE" x="1152" y="384" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="42" name="itemRequired" type="MARK OF FIRE" x="1440" y="192" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="43" name="itemRequired" type="MARK OF FIRE" x="1440" y="288" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="44" name="itemRequired" type="MARK OF FIRE" x="1440" y="384" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="45" name="itemRequired" type="MARK OF FIRE" x="1440" y="480" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+  <object id="46" name="itemRequired" type="MARK OF FIRE" x="1152" y="480" width="48" height="48">
+   <properties>
+    <property name="scenario" value="PMO"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="14" name="rooms" visible="0">
   <object id="16" x="1008" y="1056">
    <polygon points="0,0 0,288 384,288 384,0"/>
   </object>
   <object id="19" x="0" y="624">
    <polygon points="0,0 0,-624 336,-624 336,-576 384,-576 384,-528 528,-528 528,-480 576,-480 576,-432 720,-432 720,-384 768,-384 768,-336 816,-336 816,-288 864,-288 864,96 816,96 816,144 768,144 768,192 720,192 720,240 672,240 672,480 576,480 576,528 480,528 480,576 432,576 432,624 384,624 384,384 336,384 336,336 288,336 288,288 144,288 144,336 48,336 48,384 0,384"/>
-  </object>
-  <object id="27" x="1536" y="0">
-   <polygon points="0,0 -384,0 -384,240 -432,240 -432,528 -384,528 -384,624 0,624"/>
   </object>
   <object id="28" x="0" y="1008">
    <polygon points="0,0 48,0 48,-48 144,-48 144,-96 288,-96 288,-48 336,-48 336,0 384,0 432,0 432,96 624,96 624,432 576,432 576,528 0,528"/>
@@ -151,9 +262,15 @@
   <object id="31" x="1008" y="0">
    <polygon points="0,0 -192,0 -192,96 -240,96 -240,288 -192,288 -192,336 -144,336 -144,720 -192,720 -192,768 -240,768 -240,816 -288,816 -288,864 -336,864 -336,1104 -384,1104 -384,1440 -432,1440 -432,1536 144,1536 144,1344 48,1344 48,1056 336,1056 336,1344 144,1344 144,1536 528,1536 528,624 144,624 144,528 96,528 96,192 0,192"/>
   </object>
+  <object id="50" x="960" y="0">
+   <polygon points="0,0 0,240 192,240 192,0"/>
+  </object>
+  <object id="51" x="1152" y="0">
+   <polygon points="0,0 336,0 336,672 0,672"/>
+  </object>
  </objectgroup>
  <objectgroup id="11" name="people">
-  <object id="10" name="Fothak" type="MERCHANT_WER" x="1104" y="1296" width="48" height="48">
+  <object id="10" name="Fothak" type="MERCHANT_WER" x="1296" y="1200" width="48" height="48">
    <properties>
     <property name="icon" value="Hero"/>
     <property name="movement" value="WANDER"/>
@@ -168,6 +285,12 @@
   <object id="13" name="Mentorion" type="FRIENDLY" x="1296" y="48" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Percht_Raider_Male"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="52" name="Fitz" type="FRIENDLY" x="672" y="48" width="48" height="48">
+   <properties>
+    <property name="icon" value="Sorcerer_Elementalist_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

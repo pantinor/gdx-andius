@@ -150,6 +150,10 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public void animateText(String text, Color color) {
+        
+        if (text == null) {
+            return;
+        }
 
         float sx = 100;
         float sy = -100;
@@ -167,7 +171,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         label.setAlignment(Align.center);
         label.setColor(color);
         stage.addActor(label);
-        Sounds.play(Sound.POSITIVE_EFFECT);
+
         label.addAction(sequence(Actions.moveTo(dx, dy, delay), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 

@@ -12,6 +12,7 @@ import static andius.WizardryData.DQ_ITEMS;
 import static andius.WizardryData.KOD_ITEMS;
 import static andius.WizardryData.LEG_ITEMS;
 import static andius.WizardryData.PMO_ITEMS;
+import andius.WizardryData.Scenario;
 import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Actor;
 import andius.objects.Conversations.Conversation;
@@ -276,23 +277,22 @@ public class GameScreen extends BaseScreen {
                     float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
                     float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
                     if (v.x == mx && this.map.getBaseMap().getHeight() - v.y - 1 == my) {
-                        if ("REWARD".equals(obj.getName())) {
-                            StringBuilder sb = new StringBuilder();
-                            Iterator<String> iter2 = obj.getProperties().getKeys();
-                            while (iter2.hasNext()) {
-                                String key = iter2.next();
-                                if (key.startsWith("item")) {
-                                    Item found = this.map.scenario().item((obj.getProperties().get(key, String.class)));
-                                    sb.append("Party found ").append(found.genericName).append(". ");
-                                    Andius.CTX.players()[0].inventory.add(found);
+                        if ("reward".equals(obj.getName())) {
+                            String itemName = obj.getProperties().get("type", String.class);
+                            if (itemName != null) {
+                                String scenName = obj.getProperties().get("scenario") != null ? obj.getProperties().get("scenario", String.class) : "PMO";
+                                Scenario sc = Scenario.valueOf(scenName);
+                                Item item = sc.item(itemName);
+                                StringBuilder sb = new StringBuilder();
+                                sb.append("Party found ").append(item.genericName).append(". ");
+                                Andius.CTX.players()[0].inventory.add(item);
+                                animateText(sb.toString(), Color.GREEN);
+                                messagesLayer.getObjects().remove(obj);
+                                TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+                                TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
+                                if (cell != null) {
+                                    cell.setTile(null);
                                 }
-                            }
-                            animateText(sb.toString(), Color.GREEN);
-                            messagesLayer.getObjects().remove(obj);
-                            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-                            TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
-                            if (cell != null) {
-                                cell.setTile(null);
                             }
                             return false;
                         }
@@ -426,12 +426,14 @@ public class GameScreen extends BaseScreen {
                 float mx = obj.getProperties().get("x", Float.class) / TILE_DIM;
                 float my = obj.getProperties().get("y", Float.class) / TILE_DIM;
                 if (nx == mx && this.map.getBaseMap().getHeight() - 1 - ny == my) {
-                    String msg = obj.getProperties().get("type", String.class);
 
-                    animateText(msg, Color.WHITE);
+                    if (obj.getName().equals("message")) {
+                        String msg = obj.getProperties().get("type", String.class);
+                        Sounds.play(Sound.POSITIVE_EFFECT);
+                        animateText(msg, Color.WHITE);
+                    }
 
-                    String heal = obj.getProperties().get("heal", String.class);
-                    if (heal != null) {
+                    if (obj.getName().equals("heal")) {
                         Sounds.play(Sound.HEALING);
                         for (int i = 0; i < CTX.players().length; i++) {
                             CTX.players()[i].adjustHP(15);
@@ -441,12 +443,14 @@ public class GameScreen extends BaseScreen {
                         return false;
                     }
 
-                    String itemRequired = obj.getProperties().get("itemRequired", String.class);
-                    if (itemRequired != null) {
-                        Item found = this.map.scenario().item(itemRequired);
+                    if (obj.getName().equals("itemRequired")) {
+                        String itemName = obj.getProperties().get("type", String.class);
+                        String scenName = obj.getProperties().get("scenario") != null ? obj.getProperties().get("scenario", String.class) : "PMO";
+                        Scenario sc = Scenario.valueOf(scenName);
+                        Item item = sc.item(itemName);
                         boolean owned = false;
-                        for (int i = 0; i < Andius.CTX.players().length && found != null; i++) {
-                            if (Andius.CTX.players()[i].inventory.contains(found)) {
+                        for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
+                            if (Andius.CTX.players()[i].inventory.contains(item)) {
                                 owned = true;
                             }
                         }
@@ -454,26 +458,11 @@ public class GameScreen extends BaseScreen {
                             Sounds.play(Sound.NEGATIVE_EFFECT);
                             animateText("Cannot pass!", Color.RED);
                             return false;
-                        }
-                    }
-
-                    String itemObtained = obj.getProperties().get("itemObtained", String.class);
-                    if (itemObtained != null) {
-                        Item found = this.map.scenario().item(itemObtained);
-                        boolean owned = false;
-                        for (int i = 0; i < Andius.CTX.players().length; i++) {
-                            if (Andius.CTX.players()[i].inventory.contains(found)) {
-                                owned = true;
-                            }
-                        }
-                        if (found != null && !owned) {
+                        } else {
                             Sounds.play(Sound.POSITIVE_EFFECT);
-                            Andius.CTX.players()[0].inventory.add(found);
-                            animateText(Andius.CTX.players()[0].name + " obtained a " + found.name + "!", Color.GREEN);
                         }
                     }
                 }
-
             }
         }
 

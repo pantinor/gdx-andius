@@ -47,7 +47,7 @@
   <object id="14" name="CAVE" x="848" y="352" width="16" height="16"/>
   <object id="15" name="BOLTAC" x="1024" y="352" width="16" height="16"/>
   <object id="16" name="DOOM" x="944" y="464" width="16" height="16"/>
-  <object id="17" name="YEW" x="1056" y="656" width="16" height="16"/>
+  <object id="17" name="COVE" x="1056" y="656" width="16" height="16"/>
   <object id="18" name="WIZARDRY2" x="992" y="784" width="16" height="16"/>
   <object id="19" name="CANT" x="1120" y="1008" width="16" height="16"/>
   <object id="20" name="town" x="400" y="1504" width="16" height="16"/>

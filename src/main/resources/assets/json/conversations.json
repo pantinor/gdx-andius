@@ -713,6 +713,33 @@
                     }
                 ],
                 "labels": []
+            },
+            {
+                "name": "Fitz",
+                "description": "A meticulous clerk",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                    },
+                    {
+                        "query": "grand wizard",
+                        "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
+                    },
+                    {
+                        "query": "grand dining room kitchen boudoir",
+                        "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
+                    },
+                    {
+                        "query": "desk ornate letter",
+                        "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
+                    },
+                    {
+                        "query": "cellar",
+                        "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
+                    }
+                ],
+                "labels": []
             }
         ]
     }

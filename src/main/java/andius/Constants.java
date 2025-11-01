@@ -52,8 +52,8 @@ public interface Constants {
         LLECHY("Llechy", "llechy.tmx", TILE_DIM),
         CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
         BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        YEW("Yew", "yew.tmx", TILE_DIM),
-        MONTOR("Montor", "montor.tmx", TILE_DIM),        
+        COVE("Cove", "cove.tmx", TILE_DIM),
+        MONTOR("Montor", "montor.tmx", WizardryData.Scenario.WER, TILE_DIM),
         WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
         WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
         WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
@@ -87,6 +87,13 @@ public interface Constants {
             this.tmxFile = tmx;
             this.dim = dim;
             this.wizScenario = WizardryData.Scenario.PMO;
+        }
+
+        private Map(String label, String tmx, WizardryData.Scenario scenario, int dim) {
+            this.label = label;
+            this.tmxFile = tmx;
+            this.dim = dim;
+            this.wizScenario = scenario;
         }
 
         private Map(String label, WizardryData.Scenario scenario) {
