@@ -70,7 +70,7 @@ public class GameScreen extends BaseScreen {
         renderer.registerCreatureLayer(new CreatureLayer() {
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Andius.game_scr_avatar.getKeyFrames()[currentDirection], newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
+                renderer.getBatch().draw(Andius.game_scr_avatar, newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
                     if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
                         renderer.getBatch().draw(a.getIcon(), a.getX() - 0, a.getY() + 0);

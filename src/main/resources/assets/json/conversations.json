@@ -309,7 +309,7 @@
                 "labels": []
             }
         ],
-        "YEW": [
+        "COVE": [
             {
                 "name": "Nalara",
                 "description": "A temple herald devoted to the Earth-god Gnilda",
@@ -665,78 +665,80 @@
         ],
         "MONTOR": [
             {
-                "name": "Mentorian",
-                "description": "A vigilant moat warden and beach sentry",
+                "name": "Chade",
+                "description": "vigilant warden of the temple",
                 "topics": [
                     {
                         "query": "job",
-                        "phrase": "I am the moat warden and beach sentry, guarding the fortress and barracks while keeping watch on the lake and its island."
+                        "phrase": "I am the warden of this temple and guard what it contains, and have deeper knowledge about the 4 Marks."
                     },
                     {
-                        "query": "barracks fortress",
-                        "phrase": "At the barracks by the fortress, I always remind recruits to BEWARE OF MOAT MONSTERS before they cross the parapets."
+                        "query": "mark",
+                        "phrase": "Seek the four marks in the dungeons.  The Mark of Kings, the Mark of Force, the Mark of Fire and the Mark of the Snake."
                     },
                     {
-                        "query": "moat monster",
-                        "phrase": "From the beach beside the dark lake I watch that small island for ripples and shadows from the waters edge."
+                        "query": "fire",
+                        "phrase": "The Mark of Fire can be found at the bottom of the dungeons of Perinean, Fire and Morinia. Only with the Mark of Fire can you be granted entry."
                     },
                     {
-                        "query": "water edge",
-                        "phrase": "Don't step past the water's edge or you'll drown - I've hauled too many back."
+                        "query": "force",
+                        "phrase": "The Mark of Force can be found at the bottom of the dungeons of Fire and Doom."
+                    },
+                    {
+                        "query": "snake",
+                        "phrase": "The Mark of Snake can be found at the bottom of the dungeon of the Snake."
+                    },
+                    {
+                        "query": "king",
+                        "phrase": "The Mark of Kings is more common and can be found in the dungeons of Perinean, Morinia, Dardens Pit, Snake and Time."
                     }
                 ],
                 "labels": []
             },
             {
-                "name": "Sloven",
+                "name": "FitzChivalry",
                 "description": "A meticulous clerk",
                 "topics": [
                     {
                         "query": "job",
                         "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
-                    },
-                    {
-                        "query": "grand wizard",
-                        "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
-                    },
-                    {
-                        "query": "grand dining room kitchen boudoir",
-                        "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
-                    },
-                    {
-                        "query": "desk ornate letter",
-                        "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
-                    },
-                    {
-                        "query": "cellar",
-                        "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
                     }
                 ],
                 "labels": []
             },
             {
-                "name": "Fitz",
-                "description": "A meticulous clerk",
+                "name": "Nighteyes",
+                "description": "dry and sardonic wolf",
                 "topics": [
                     {
                         "query": "job",
-                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                        "phrase": "I protect the Fitz, we are pack."
                     },
                     {
-                        "query": "grand wizard",
-                        "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
-                    },
+                        "query": "pack",
+                        "phrase": "Loyalty is absolute once you’re pack. It is the straightforward path that keeps the pack alive."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Jinna",
+                "description": "hedge witch",
+                "topics": [
                     {
-                        "query": "grand dining room kitchen boudoir",
-                        "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
-                    },
+                        "query": "job",
+                        "phrase": "I craft small, practical magics—protection and luck charms, hearth blessings, remedies—aimed at helping ordinary people."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Starling",
+                "description": "court minstrel",
+                "topics": [
                     {
-                        "query": "desk ornate letter",
-                        "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
-                    },
-                    {
-                        "query": "cellar",
-                        "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
+                        "query": "job",
+                        "phrase": "I observe with a memory for lineage, politics, and gossip. I play and sing, but my real gift is turning living people into legend—editing messy truth into a song that will be remembered.."
                     }
                 ],
                 "labels": []

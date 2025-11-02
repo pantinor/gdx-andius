@@ -53,7 +53,7 @@ public class Andius extends Game {
     public static Music music;
 
     public static Animation<TextureRegion> world_scr_avatar;
-    public static Animation<TextureRegion> game_scr_avatar;
+    public static TextureRegion game_scr_avatar;
 
     public static Hud HUD;
     public static Conversations CONVERSATIONS;
@@ -171,7 +171,7 @@ public class Andius extends Game {
             TibianSprite.init();
 
             world_scr_avatar = new Animation(.4f, u1Tiles[10], u1Tiles[11]);
-            game_scr_avatar = TibianSprite.animation("Knight_Knight_Male");
+            game_scr_avatar = TibianSprite.icon("Bandit");
 
             WizardryData.class.getClass();
 

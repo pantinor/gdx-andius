@@ -8,7 +8,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -82,11 +81,7 @@ public class AtlasViewer extends Game implements InputProcessor {
                 continue;
             }
 
-            Animation anim = TibianSprite.animation(this.names.get(index));
-
-            if (anim.getKeyFrames().length <= 0) {
-                continue;
-            }
+            TextureRegion tr = TibianSprite.icon(this.names.get(index));
 
             count++;
 
@@ -97,8 +92,7 @@ public class AtlasViewer extends Game implements InputProcessor {
             int centerRectX = rX + (DIM / 2);
             int centerRectY = rY + (DIM / 2);
 
-            //centerize the image on the rectangle
-            TextureRegion frame = (TextureRegion) anim.getKeyFrame(frameCounter);
+            TextureRegion frame = tr;
             int width = frame.getRegionWidth();
             int height = frame.getRegionHeight();
             batch.draw(frame, centerRectX - width / 2, centerRectY - height / 2, width, height);
