@@ -339,7 +339,7 @@ public interface Constants {
 
                     String icon = obj.getProperties().get("icon", String.class);
                     if (icon == null) {
-                        icon = "Hero";
+                        icon = "Bandit";
                     }
 
                     TextureRegion tr = TibianSprite.icon(icon);

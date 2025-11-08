@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -46,17 +47,20 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
         private Label label;
         private Animation<TextureRegion> animation;
         private float stateTime;
+        float w, h;
 
         public AnimatedLabelGroup(Label label, Animation<TextureRegion> animation) {
             this.label = label;
             this.animation = animation;
             this.stateTime = 0f;
+            this.w = animation.getKeyFrames()[0].getRegionWidth();
+            this.h = animation.getKeyFrames()[0].getRegionHeight();
 
             addActor(label);
 
-            setBounds(0, 0, 0, 32);
+            setBounds(0, 0, w, h);
 
-            this.label.setBounds(0, 0, 32, 32);
+            this.label.setBounds(0, 0, w, h);
         }
 
         @Override
@@ -64,7 +68,7 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
             super.draw(batch, parentAlpha);
             stateTime += parentAlpha;
             TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-            batch.draw(currentFrame, getX() + 200, getY(), 32, 32);
+            batch.draw(currentFrame, getX() + 200, getY(), w, h);
         }
 
     }
@@ -77,14 +81,14 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
         stage = new Stage();
 
-        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/tibian/tileset16.atlas"));
+        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/tibian/tibian.atlas"));
 
         Table animTable = new Table(skin);
         animTable.left().setFillParent(true);
 
         java.util.Map<String, Animation> animations = new HashMap<>();
         Array<String> processedNames = new Array<>();
-        for (TextureAtlas.AtlasRegion region : atlas.getRegions()) {
+        for (AtlasRegion region : atlas.getRegions()) {
             String regionName = region.name;
             if (!processedNames.contains(regionName, false)) {
                 Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions(regionName);

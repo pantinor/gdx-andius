@@ -44,11 +44,15 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.SpotLightsAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
+import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -79,6 +83,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private final Environment environment = new Environment();
     private final Environment outside = new Environment();
+
+    private final List<SpotLightInfo> spotLights = new ArrayList<>();
 
     private final Color darkness = Color.DARK_GRAY;
     private final Color flame = new Color(0xf59414ff);
@@ -132,7 +138,15 @@ public class WizardryDungeonScreen extends BaseScreen {
         arrows[3][2].getTexture().getTextureData().prepare();
         this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
 
-        this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
+        DefaultShader.Config config = new DefaultShader.Config();
+        config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
+        config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
+        config.numSpotLights = 16;
+
+        modelBatch = new ModelBatch(new DefaultShaderProvider(config));
+        this.batch = new SpriteBatch();
+
+        this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.01f, 0.01f, 0.01f, 1f));
         this.torch = new PointLight();
         this.environment.add(this.torch);
 
@@ -141,9 +155,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 1f, 0.8f, 0.5f);
         this.outside.add(this.directionalLightDown);
         this.outside.add(this.directionalLightUp);
-
-        this.modelBatch = new ModelBatch();
-        this.batch = new SpriteBatch();
 
         this.camera = new PerspectiveCamera(67f, MAP_WIDTH, MAP_HEIGHT);
         this.camera.near = 0.1f;
@@ -439,6 +450,15 @@ public class WizardryDungeonScreen extends BaseScreen {
                         addBlock(level, cell, n - this.dim, e - this.dim);
                         addBlock(level, cell, n + this.dim, e - this.dim);
                         addBlock(level, cell, n - this.dim, e + this.dim);
+                    }
+                    if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0) {
+                        SpotLight orbLight = new SpotLight().set(
+                                flame.r, flame.g, flame.b,
+                                n + .5f, 2f, e + .5f,
+                                0f, -1f, 0f, // direction: down
+                                2.5f, 25f, 1f
+                        );
+                        spotLights.add(new SpotLightInfo(level, n, e, orbLight));
                     }
                 }
             }
@@ -952,6 +972,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         miniMap = new Texture(pixmap);
         pixmap.dispose();
+
+        setLightsForLevel();
     }
 
     private void drawLadderTriangle(MazeCell cell, Pixmap pixmap, int e, int n) {
@@ -1835,4 +1857,33 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
     }
+
+    private static class SpotLightInfo {
+
+        final int level;
+        final float cx, cy;
+        final SpotLight light;
+
+        SpotLightInfo(int level, float cx, float cy, SpotLight light) {
+            this.level = level;
+            this.cx = cx;
+            this.cy = cy;
+            this.light = light;
+        }
+    }
+
+    private void setLightsForLevel() {
+
+        SpotLightsAttribute sLights = ((SpotLightsAttribute) environment.get(SpotLightsAttribute.Type));
+        if (sLights != null) {
+            sLights.lights.clear();
+        }
+
+        for (SpotLightInfo info : this.spotLights) {
+            if (info.level == currentLevel) {
+                environment.add(info.light);
+            }
+        }
+    }
+
 }

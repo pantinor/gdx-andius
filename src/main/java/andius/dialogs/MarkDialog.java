@@ -40,7 +40,10 @@ public class MarkDialog extends Dialog {
                     if (response.equals("yes") || response.equals("ok")) {
 
                         for (CharacterRecord p : ctx.players()) {
-                            p.adjustHP(-Utils.RANDOM.nextInt(30, 50));
+                            int currentHp = p.hp;
+                            int damage = Math.max(10, (currentHp * 30) / 100);
+                            damage = Math.min(damage, currentHp - 1);//avoid killing them outright
+                            p.adjustHP(-damage);
                         }
 
                         Sounds.play(Sound.PC_STRUCK);
@@ -61,7 +64,7 @@ public class MarkDialog extends Dialog {
                             }
 
                             Item m = Scenario.PMO.items().get(itemId);
-                            CharacterRecord p = ctx.pickRandomEnabledPlayer();
+                            CharacterRecord p = ctx.players()[0];
                             p.inventory.add(m);
                             screen.log(p.name.toUpperCase() + " obtained " + m.genericName);
                         }
