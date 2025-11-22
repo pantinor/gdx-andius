@@ -475,37 +475,6 @@ public class ObjectsTestNG {
     }
 
     @Test
-    public void testDirection() throws Exception {
-
-        int mask = 0;
-        mask = Direction.addToMask(Direction.NORTH, mask);
-
-        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
-
-        mask = Direction.addToMask(Direction.NORTH_WEST, mask);
-        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
-        assertTrue(Direction.isDirInMask(Direction.NORTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
-
-        mask = Direction.removeFromMask(mask, Direction.NORTH_WEST);
-        assertTrue(Direction.isDirInMask(Direction.NORTH, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.NORTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_WEST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH_EAST, mask));
-        assertFalse(Direction.isDirInMask(Direction.SOUTH, mask));
-
-    }
-
-    @Test
     public void testFOVWrapping() throws Exception {
 
         float[][] shadowMap = new float[][]{

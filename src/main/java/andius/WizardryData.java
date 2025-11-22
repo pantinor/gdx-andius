@@ -360,7 +360,7 @@ public class WizardryData {
             }
 
             for (int i = 0; i < PMO_LEVEL_DATA.length; i++) {
-                PMO_LEVELS[i] = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, 20, PMO_MONSTERS, PMO_MESSAGES);
+                PMO_LEVELS[i] = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, 20, WER_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < KOD_LEVEL_DATA.length; i++) {
                 KOD_LEVELS[i] = new MazeLevelV1(2, DatatypeConverter.parseHexBinary(KOD_LEVEL_DATA[i]), i + 1, 20, KOD_MONSTERS, KOD_MESSAGES);
@@ -607,6 +607,158 @@ public class WizardryData {
             }
 
             return true;
+        }
+
+        public boolean hasLineOfSight(MazeCell source, int cx, int cy) {
+
+            MazeCell destination = this.cells[cx][cy];
+
+            if (source == null || destination == null) {
+                return false;
+            }
+            if (source.address == null || destination.address == null) {
+                return false;
+            }
+
+            MazeAddress from = source.address;
+            MazeAddress to = destination.address;
+
+            if (from.level != to.level) {
+                return false;
+            }
+
+            int fromRow = from.row;
+            int fromCol = from.column;
+            int toRow = to.row;
+            int toCol = to.column;
+
+            if (!inBounds(fromRow, fromCol) || !inBounds(toRow, toCol)) {
+                return false;
+            }
+
+            if (fromRow == toRow && fromCol == toCol) {
+                return true;
+            }
+
+            int x0 = fromCol;
+            int y0 = fromRow;
+            int x1 = toCol;
+            int y1 = toRow;
+
+            int dx = x1 - x0;
+            int dy = y1 - y0;
+
+            int nx = Math.abs(dx);
+            int ny = Math.abs(dy);
+
+            int stepX = Integer.compare(dx, 0);
+            int stepY = Integer.compare(dy, 0);
+
+            int col = x0;
+            int row = y0;
+
+            int ix = 0;
+            int iy = 0;
+
+            while (ix < nx || iy < ny) {
+
+                int decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx;
+
+                int nextCol = col;
+                int nextRow = row;
+
+                if (decision == 0) {
+                    nextCol += stepX;
+                    nextRow += stepY;
+                    ix++;
+                    iy++;
+
+                    boolean routeABlocked
+                            = isBlockedHorizontally(row, col, nextCol)
+                            || isBlockedVertically(row, nextRow, nextCol);
+
+                    boolean routeBBlocked
+                            = isBlockedVertically(row, nextRow, col)
+                            || isBlockedHorizontally(nextRow, col, nextCol);
+
+                    if (routeABlocked && routeBBlocked) {
+                        return false;
+                    }
+
+                } else if (decision < 0) {
+                    nextCol += stepX;
+                    ix++;
+
+                    if (isBlockedHorizontally(row, col, nextCol)) {
+                        return false;
+                    }
+
+                } else {
+                    nextRow += stepY;
+                    iy++;
+
+                    if (isBlockedVertically(row, nextRow, col)) {
+                        return false;
+                    }
+                }
+
+                col = nextCol;
+                row = nextRow;
+
+                if (row == toRow && col == toCol) {
+                    return true;
+                }
+
+                if (!inBounds(row, col)) {
+                    return false;
+                }
+            }
+
+            return (row == toRow && col == toCol);
+        }
+
+        private boolean inBounds(int row, int column) {
+            return row >= 0 && row < dimension && column >= 0 && column < dimension;
+        }
+
+        private boolean isBlockedHorizontally(int row, int fromColumn, int toColumn) {
+            if (fromColumn == toColumn) {
+                return false;
+            }
+            if (!inBounds(row, fromColumn) || !inBounds(row, toColumn)) {
+                return true;
+            }
+
+            MazeCell from = cells[row][fromColumn];
+            MazeCell to = cells[row][toColumn];
+
+            if (toColumn > fromColumn) { // moving east
+                return (from.eastWall || from.eastDoor || from.hiddenEastDoor
+                        || to.westWall || to.westDoor || to.hiddenWestDoor);
+            } else { // moving west
+                return (from.westWall || from.westDoor || from.hiddenWestDoor
+                        || to.eastWall || to.eastDoor || to.hiddenEastDoor);
+            }
+        }
+
+        private boolean isBlockedVertically(int fromRow, int toRow, int column) {
+            if (fromRow == toRow) {
+                return false;
+            }
+            if (!inBounds(fromRow, column) || !inBounds(toRow, column)) {
+                return true;
+            }
+
+            MazeCell from = cells[fromRow][column];
+            MazeCell to = cells[toRow][column];
+
+            if (toRow > fromRow) { // moving "north"
+                return (from.northWall || from.northDoor || from.hiddenNorthDoor
+                        || to.southWall || to.southDoor || to.hiddenSouthDoor);
+            } else { // moving "south"
+                return (from.southWall || from.southDoor || from.hiddenSouthDoor
+                        || to.northWall || to.northDoor || to.hiddenNorthDoor);
+            }
         }
 
     }

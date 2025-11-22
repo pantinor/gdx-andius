@@ -10,6 +10,7 @@ import static andius.Andius.startScreen;
 import static andius.Constants.CLASSPTH_RSLVR;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
+import andius.WizardryData.MazeLevel;
 import static andius.WizardryData.WER_MESSAGES;
 import static andius.WizardryData.getMessage;
 import static andius.objects.Direction.*;
@@ -47,11 +48,9 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.SpotLightsAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -63,6 +62,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.Iterator;
+import utils.RotateOnlyInputController;
 import utils.Utils;
 
 public class WizardryDungeonScreen extends BaseScreen {
@@ -74,7 +74,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final ModelBatch modelBatch;
     private final SpriteBatch batch;
 
-    private CameraInputController inputController;
+    private RotateOnlyInputController cameraPan;
     private final AssetManager assets;
 
     private Model ladderModel, elevatorModel;
@@ -89,7 +89,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final Color darkness = Color.DARK_GRAY;
     private final Color flame = new Color(0xf59414ff);
 
-    private PointLight torch;
+    private SpotLight torch;
     boolean isTorchOn = true;
     private DirectionalLight directionalLightDown;
     private DirectionalLight directionalLightUp;
@@ -143,11 +143,11 @@ public class WizardryDungeonScreen extends BaseScreen {
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
         config.numSpotLights = 16;
 
-        modelBatch = new ModelBatch(new DefaultShaderProvider(config));
+        this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
         this.batch = new SpriteBatch();
 
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.01f, 0.01f, 0.01f, 1f));
-        this.torch = new PointLight();
+        this.torch = new SpotLight();
         this.environment.add(this.torch);
 
         this.outside.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1.f));
@@ -177,11 +177,8 @@ public class WizardryDungeonScreen extends BaseScreen {
         //camera.lookAt(3, 0, 3);
         //this.isTorchOn = true;
         //this.showMiniMap = false;
-        //inputController = new CameraInputController(camera);
-        //inputController.rotateLeftKey = inputController.rotateRightKey = inputController.forwardKey = inputController.backwardKey = 0;
-        //inputController.translateUnits = 10f;
-        //Gdx.input.setInputProcessor(inputController);
-        //createAxes();
+
+        cameraPan = new RotateOnlyInputController(camera);
     }
 
     @Override
@@ -286,7 +283,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     @Override
     public void show() {
         Andius.HUD.addActor(this.stage);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage, cameraPan));
         loadMazeData(CTX.saveGame);
         createMiniMap();
         moveMiniMapIcon();
@@ -451,7 +448,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                         addBlock(level, cell, n + this.dim, e - this.dim);
                         addBlock(level, cell, n - this.dim, e + this.dim);
                     }
-                    if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0) {
+                    if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0
+                            || cell.message != null || cell.function != null) {
                         SpotLight orbLight = new SpotLight().set(
                                 flame.r, flame.g, flame.b,
                                 n + .5f, 2f, e + .5f,
@@ -700,9 +698,9 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         if (this.map != Map.WIZARDRY4 || (this.currentLevel >= 1 && this.currentLevel <= 11)) {
             if (isTorchOn) {
-                torch.set(flame.r, flame.g, flame.b, currentPos.x, currentPos.y + .35f, currentPos.z, 6);
+                this.torch.set(flame, camera.position, camera.direction, 2.5f, 65, 5);
             } else {
-                torch.set(darkness.r, darkness.g, darkness.b, currentPos.x, currentPos.y + .35f, currentPos.z, 0.003f);
+                this.torch.set(darkness, camera.position, camera.direction, 0.5f, 65, 5);
             }
             camera.far = 10f;
         } else {
@@ -973,7 +971,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         miniMap = new Texture(pixmap);
         pixmap.dispose();
 
-        setLightsForLevel();
+        int x = (Math.round(currentPos.x) - 1);
+        int y = (Math.round(currentPos.z) - 1);
+        MazeCell cell = this.map.scenario().levels()[this.currentLevel].cells[x][y];
+        setLineOfSightLights(this.map.scenario().levels()[this.currentLevel], cell);
     }
 
     private void drawLadderTriangle(MazeCell cell, Pixmap pixmap, int e, int n) {
@@ -1067,45 +1068,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        //for peeking
-        boolean d = (currentDir == EAST || currentDir == WEST);
-        switch (keycode) {
-            case Keys.NUMPAD_3:
-                camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), 30f);
-                break;
-            case Keys.NUMPAD_7:
-                camera.rotate(new Vector3(0, 1, 0), 30f);
-                break;
-            case Keys.NUMPAD_1:
-                camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), -30f);
-                break;
-            case Keys.NUMPAD_9:
-                camera.rotate(new Vector3(0, 1, 0), -30f);
-                break;
-        }
-        return false;
-    }
-
-    @Override
     public boolean keyUp(int keycode) {
-
-        //for peeking
-        boolean d = (currentDir == EAST || currentDir == WEST);
-        switch (keycode) {
-            case Keys.NUMPAD_3:
-                camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), -30f);
-                break;
-            case Keys.NUMPAD_7:
-                camera.rotate(new Vector3(0, 1, 0), -30f);
-                break;
-            case Keys.NUMPAD_1:
-                camera.rotate(new Vector3(d ? 1 : 0, 0, d ? 0 : 1), 30f);
-                break;
-            case Keys.NUMPAD_9:
-                camera.rotate(new Vector3(0, 1, 0), 30f);
-                break;
-        }
+        camera.up.set(Vector3.Y); // remove tilt/roll
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
@@ -1113,7 +1077,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         float tdur = .7f;
 
-        if (keycode == Keys.LEFT || keycode == Keys.NUMPAD_4) {
+        if (keycode == Keys.LEFT) {
 
             if (currentDir == EAST) {
                 stage.addAction(new PanCameraAction(camera, tdur, EAST.degree(), NORTH.degree()));
@@ -1130,7 +1094,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.RIGHT || keycode == Keys.NUMPAD_6) {
+        } else if (keycode == Keys.RIGHT) {
 
             if (currentDir == EAST) {
                 stage.addAction(new PanCameraAction(camera, tdur, EAST.degree(), SOUTH.degree()));
@@ -1147,7 +1111,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.UP || keycode == Keys.NUMPAD_8) {
+        } else if (keycode == Keys.UP) {
 
             boolean skipProgression = false;
 
@@ -1186,7 +1150,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
             return false;
 
-        } else if (keycode == Keys.DOWN || keycode == Keys.NUMPAD_2) {
+        } else if (keycode == Keys.DOWN) {
             boolean skipProgression = false;
 
             //backwards
@@ -1318,6 +1282,8 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         WizardryData.MazeLevel[] levels = this.map.scenario().levels();
         MazeCell destinationCell = levels[currentLevel].cells[dx][dy];
+
+        setLineOfSightLights(levels[currentLevel], destinationCell);
 
         if (destinationCell.teleport) {
             MazeAddress to = destinationCell.addressTo;
@@ -1861,10 +1827,10 @@ public class WizardryDungeonScreen extends BaseScreen {
     private static class SpotLightInfo {
 
         final int level;
-        final float cx, cy;
+        final int cx, cy;
         final SpotLight light;
 
-        SpotLightInfo(int level, float cx, float cy, SpotLight light) {
+        SpotLightInfo(int level, int cx, int cy, SpotLight light) {
             this.level = level;
             this.cx = cx;
             this.cy = cy;
@@ -1872,16 +1838,22 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
     }
 
-    private void setLightsForLevel() {
+    private void setLineOfSightLights(MazeLevel lvl, MazeCell src) {
 
         SpotLightsAttribute sLights = ((SpotLightsAttribute) environment.get(SpotLightsAttribute.Type));
         if (sLights != null) {
             sLights.lights.clear();
         }
 
+        environment.add(this.torch);
+
         for (SpotLightInfo info : this.spotLights) {
             if (info.level == currentLevel) {
-                environment.add(info.light);
+                if (lvl.hasLineOfSight(src, info.cx, info.cy)) {
+                    environment.add(info.light);
+                } else {
+                    environment.remove(info.light);
+                }
             }
         }
     }
