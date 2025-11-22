@@ -30,6 +30,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -45,6 +46,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.SpotLightsAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
@@ -88,6 +90,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private final Color darkness = Color.DARK_GRAY;
     private final Color flame = new Color(0xf59414ff);
+    private final Color wallColor = new Color(0x646778ff);
 
     private SpotLight torch;
     boolean isTorchOn = true;
@@ -150,7 +153,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.torch = new SpotLight();
         this.environment.add(this.torch);
 
-        this.outside.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1.f));
+        this.outside.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1.f));
         this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.5f);
         this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 1f, 0.8f, 0.5f);
         this.outside.add(this.directionalLightDown);
@@ -302,18 +305,18 @@ public class WizardryDungeonScreen extends BaseScreen {
         assets.load("assets/graphics/wood-door-texture.png", Texture.class);
         assets.update(2000);
 
-        Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)));
-        TextureRegion flipped = new TextureRegion(assets.get("assets/graphics/mortar.png", Texture.class));
-        flipped.flip(true, true);
-        Material mortarRotated = new Material(TextureAttribute.createDiffuse(flipped));
-        Material wood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood-door-texture.png", Texture.class)));
-        Material dirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)));
-        Material rock = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)));
-        Material grazz = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/grass.png", Texture.class)));
-        Material gr = new Material(ColorAttribute.createDiffuse(Color.GREEN));
-        Material bl = new Material(ColorAttribute.createDiffuse(Color.BLUE));
-        Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW));
-        Material red = new Material(ColorAttribute.createDiffuse(Color.RED));
+        Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material wood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood-door-texture.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material dirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material rock = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material gr = new Material(ColorAttribute.createDiffuse(Color.FOREST), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material bl = new Material(ColorAttribute.createDiffuse(Color.BLUE), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material red = new Material(ColorAttribute.createDiffuse(Color.RED), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material edgeMaterial = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
+        Texture grz = assets.get("assets/graphics/grass.png", Texture.class);
+        grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        Material grazz = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
 
         //export from blender to fbx format, then convert fbx to the g3db like below
         //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
@@ -344,16 +347,15 @@ public class WizardryDungeonScreen extends BaseScreen {
         chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
         chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
         manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
-        wall = builder.createBox(1.090f, 1, 0.05f, mortar, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-        Model doorWall = builder.createBox(1.090f, 1, 0.05f, mortarRotated, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+        wall = Utils.createWall(builder, mortar, edgeMaterial);
         builder.begin();
-        builder.node("door-wall", doorWall);
+        builder.node("door-wall", wall);
         builder.node("door-main", doorModel);
         doorModel = builder.end();
 
-        Model floorModel = builder.createBox(1.1f, 0.1f, 1.1f, rock, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
-        Model grassModel = builder.createBox(1.1f, 0.1f, 1.1f, grazz, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
-        Model ceilingModel = builder.createBox(1.1f, 0.1f, 1.1f, dirt, Usage.Position | Usage.TextureCoordinates | Usage.Normal);
+        Model floorModel = Utils.createThinBox(builder, rock, edgeMaterial);
+        Model grassModel = Utils.createThinBox(builder, grazz, gr);
+        Model ceilingModel = Utils.createThinBox(builder, dirt, edgeMaterial);
 
         Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
         sky.nodes.get(0).scale.set(.14f, .14f, .14f);
@@ -422,13 +424,10 @@ public class WizardryDungeonScreen extends BaseScreen {
             this.wiz4CastleLevel12ModelInstances.add(sk);
             this.wiz4CastleLevel13ModelInstances.add(sk);
 
-            for (int x = -this.dim * 2; x < this.dim * 2; x++) {
-                for (int y = -this.dim * 2; y < this.dim * 2; y++) {
-                    wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -.06f, y));
-                    wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -1.16f, y));
-                    wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassModel, 0, 0, 0, x, -2.26f, y));
-                }
-            }
+            Model grassPlaneModel = Utils.createGrassPlaneModel(builder, this.dim, grazz);
+            this.wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -0.06f, 0f));
+            this.wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -1.16f, 0f));
+            this.wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -2.26f, 0f));
 
         }
 

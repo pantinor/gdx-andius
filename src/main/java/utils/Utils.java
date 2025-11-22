@@ -15,9 +15,16 @@ import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttributes;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -434,6 +441,200 @@ public class Utils {
         label.setColor(color);
         stage.addActor(label);
         label.addAction(sequence(Actions.moveTo(dx, dy, 3f), Actions.fadeOut(1f), Actions.removeActor(label)));
+    }
+
+    public static Model createWall(ModelBuilder builder, Material wallMaterial, Material edgeMaterial) {
+
+        final float width = 1.090f;
+        final float height = 1.0f;
+        final float depth = 0.05f;
+
+        final float hw = width * 0.5f; // half-width
+        final float hh = height * 0.5f; // half-height
+        final float hd = depth * 0.5f; // half-depth
+
+        long attrs = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
+
+        builder.begin();
+
+        // Big wall faces (front/back)
+        MeshPartBuilder wallPart = builder.part("wallFaces", GL20.GL_TRIANGLES, attrs, wallMaterial);
+
+        // Use full 0..1 range for each face; UVs consistent front/back
+        wallPart.setUVRange(0f, 0f, 1f, 1f);
+
+        // Front face (z = +hd), normal (0,0,1)
+        // u: left->right maps -hw -> +hw
+        // v: bottom->top maps -hh -> +hh
+        wallPart.rect(
+                -hw, -hh, +hd, // bottom-left
+                +hw, -hh, +hd, // bottom-right
+                +hw, +hh, +hd, // top-right
+                -hw, +hh, +hd, // top-left
+                0f, 0f, 1f
+        );
+
+        // Back face (z = -hd), normal (0,0,-1)
+        // Same vertex order in local X/Y so UVs line up the same way
+        wallPart.setUVRange(0f, 0f, 1f, 1f);
+        wallPart.rect(
+                -hw, -hh, -hd, // bottom-left
+                +hw, -hh, -hd, // bottom-right
+                +hw, +hh, -hd, // top-right
+                -hw, +hh, -hd, // top-left
+                0f, 0f, -1f
+        );
+
+        // Edge faces (top, bottom, left, right)
+        MeshPartBuilder edgePart = builder.part("wallEdges", GL20.GL_TRIANGLES, attrs, edgeMaterial);
+
+        // Top face (y = +hh), normal (0,1,0)
+        edgePart.setUVRange(0f, 0f, 1f, 1f);
+        edgePart.rect(
+                -hw, +hh, +hd, // front-left
+                +hw, +hh, +hd, // front-right
+                +hw, +hh, -hd, // back-right
+                -hw, +hh, -hd, // back-left
+                0f, 1f, 0f
+        );
+
+        // Bottom face (y = -hh), normal (0,-1,0)
+        edgePart.setUVRange(0f, 0f, 1f, 1f);
+        edgePart.rect(
+                -hw, -hh, -hd, // back-left
+                +hw, -hh, -hd, // back-right
+                +hw, -hh, +hd, // front-right
+                -hw, -hh, +hd, // front-left
+                0f, -1f, 0f
+        );
+
+        // Left face (x = -hw), normal (-1,0,0)
+        edgePart.setUVRange(0f, 0f, 1f, 1f);
+        edgePart.rect(
+                -hw, -hh, -hd, // bottom-back
+                -hw, -hh, +hd, // bottom-front
+                -hw, +hh, +hd, // top-front
+                -hw, +hh, -hd, // top-back
+                -1f, 0f, 0f
+        );
+
+        // Right face (x = +hw), normal (1,0,0)
+        edgePart.setUVRange(0f, 0f, 1f, 1f);
+        edgePart.rect(
+                +hw, -hh, +hd, // bottom-front
+                +hw, -hh, -hd, // bottom-back
+                +hw, +hh, -hd, // top-back
+                +hw, +hh, +hd, // top-front
+                1f, 0f, 0f
+        );
+
+        return builder.end();
+    }
+
+    public static Model createThinBox(ModelBuilder builder, Material material, Material edgeMaterial) {
+        float size = 1.1f;
+        float thickness = 0.1f;
+
+        float hw = size * 0.5f;
+        float hh = thickness * 0.5f;
+        float hd = size * 0.5f;
+
+        long attrs = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
+
+        builder.begin();
+
+        MeshPartBuilder top = builder.part("top", GL20.GL_TRIANGLES, attrs, material);
+        top.rect(
+                -hw, +hh, -hd,
+                hw, +hh, -hd,
+                hw, +hh, hd,
+                -hw, +hh, hd,
+                0f, 1f, 0f
+        );
+
+        MeshPartBuilder bottom = builder.part("bottom", GL20.GL_TRIANGLES, attrs, material);
+        bottom.rect(
+                -hw, -hh, hd,
+                hw, -hh, hd,
+                hw, -hh, -hd,
+                -hw, -hh, -hd,
+                0f, -1f, 0f
+        );
+
+        MeshPartBuilder sides = builder.part("sides", GL20.GL_TRIANGLES, attrs, edgeMaterial);
+
+        // front (z = -hd)
+        sides.rect(
+                -hw, -hh, -hd,
+                hw, -hh, -hd,
+                hw, +hh, -hd,
+                -hw, +hh, -hd,
+                0f, 0f, -1f
+        );
+
+        // back (z = +hd)
+        sides.rect(
+                -hw, -hh, hd,
+                hw, -hh, hd,
+                hw, +hh, hd,
+                -hw, +hh, hd,
+                0f, 0f, 1f
+        );
+
+        // left (x = -hw)
+        sides.rect(
+                -hw, -hh, hd,
+                -hw, -hh, -hd,
+                -hw, +hh, -hd,
+                -hw, +hh, hd,
+                -1f, 0f, 0f
+        );
+
+        // right (x = +hw)
+        sides.rect(
+                hw, -hh, -hd,
+                hw, -hh, hd,
+                hw, +hh, hd,
+                hw, +hh, -hd,
+                1f, 0f, 0f
+        );
+
+        return builder.end();
+    }
+
+    public static Model createGrassPlaneModel(ModelBuilder builder, int dim, Material grassMaterial) {
+        builder.begin();
+
+        long attrs = VertexAttributes.Usage.Position
+                | VertexAttributes.Usage.Normal
+                | VertexAttributes.Usage.TextureCoordinates;
+
+        MeshPartBuilder mpb = builder.part(
+                "grassPlane",
+                GL20.GL_TRIANGLES,
+                attrs,
+                grassMaterial
+        );
+
+        int tiles = dim * 4;
+        float halfSize = tiles * 0.5f;
+        float y = 0f;
+
+        float x1 = -halfSize;
+        float x2 = halfSize;
+        float z1 = -halfSize;
+        float z2 = halfSize;
+
+        mpb.setUVRange(0f, 0f, tiles, tiles);
+        mpb.rect(
+                x1, y, z1, // bottom-left
+                x2, y, z1, // bottom-right
+                x2, y, z2, // top-right
+                x1, y, z2, // top-left
+                0f, 1f, 0f // normal up
+        );
+
+        return builder.end();
     }
 
 }
