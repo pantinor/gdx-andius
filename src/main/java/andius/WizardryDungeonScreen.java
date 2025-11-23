@@ -1610,8 +1610,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                     }
                 } else {
                     DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
-                    //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                    //mainGame.setScreen(cs);
+                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                    mainGame.setScreen(cs);
                 }
             } else {
                 if (Utils.percentChance(25)) {
@@ -1623,7 +1623,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                         }
                         if (!defeated.contains(id)) {
                             DoGooder d = this.map.scenario().characters().get(id);
-                            //mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
+                            mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
                             break;
                         }
                     }
@@ -1636,7 +1636,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
-                //mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster.name, monster, currentLevel + 1, treasure, destCell, fromCell));
+                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster.name, monster, currentLevel + 1, treasure, destCell, fromCell));
             }
         }
     }
