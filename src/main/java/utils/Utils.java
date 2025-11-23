@@ -14,6 +14,8 @@ import andius.objects.Mutable;
 import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -445,27 +447,22 @@ public class Utils {
 
     public static Model createWall(ModelBuilder builder, Material wallMaterial, Material edgeMaterial) {
 
-        final float width = 1.090f;
-        final float height = 1.0f;
+        final float width = 1f;
+        final float height = 1f;
         final float depth = 0.05f;
 
-        final float hw = width * 0.5f; // half-width
-        final float hh = height * 0.5f; // half-height
-        final float hd = depth * 0.5f; // half-depth
+        final float hw = width * 0.5f;  // half-width  (X)
+        final float hh = height * 0.5f;  // half-height (Y)
+        final float hd = depth * 0.5f;  // half-depth  (Z)
 
         long attrs = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
 
         builder.begin();
 
-        // Big wall faces (front/back)
         MeshPartBuilder wallPart = builder.part("wallFaces", GL20.GL_TRIANGLES, attrs, wallMaterial);
 
-        // Use full 0..1 range for each face; UVs consistent front/back
         wallPart.setUVRange(0f, 0f, 1f, 1f);
-
-        // Front face (z = +hd), normal (0,0,1)
-        // u: left->right maps -hw -> +hw
-        // v: bottom->top maps -hh -> +hh
+        // Front face (z = +hd)
         wallPart.rect(
                 -hw, -hh, +hd, // bottom-left
                 +hw, -hh, +hd, // bottom-right
@@ -474,9 +471,8 @@ public class Utils {
                 0f, 0f, 1f
         );
 
-        // Back face (z = -hd), normal (0,0,-1)
-        // Same vertex order in local X/Y so UVs line up the same way
         wallPart.setUVRange(0f, 0f, 1f, 1f);
+        // Back face (z = -hd)
         wallPart.rect(
                 -hw, -hh, -hd, // bottom-left
                 +hw, -hh, -hd, // bottom-right
@@ -485,54 +481,70 @@ public class Utils {
                 0f, 0f, -1f
         );
 
-        // Edge faces (top, bottom, left, right)
+        final float cornerSize = 0.040f;
+        float postWidth = cornerSize;
+        float postHeight = height;
+        float postDepth = cornerSize;
+
+        float cxLeft = -hw - postWidth * 0.5f;
+        float cxRight = +hw + postWidth * 0.5f;
+
+        float cy = 0f;
+        float cz = 0f;
+
+        builder.part("cornerLeft", GL20.GL_TRIANGLES, attrs, edgeMaterial)
+                .box(cxLeft, cy, cz, postWidth, postHeight, postDepth);
+
+        builder.part("cornerRight", GL20.GL_TRIANGLES, attrs, edgeMaterial)
+                .box(cxRight, cy, cz, postWidth, postHeight, postDepth);
+
         MeshPartBuilder edgePart = builder.part("wallEdges", GL20.GL_TRIANGLES, attrs, edgeMaterial);
 
-        // Top face (y = +hh), normal (0,1,0)
+        // Top
         edgePart.setUVRange(0f, 0f, 1f, 1f);
         edgePart.rect(
-                -hw, +hh, +hd, // front-left
-                +hw, +hh, +hd, // front-right
-                +hw, +hh, -hd, // back-right
-                -hw, +hh, -hd, // back-left
+                -hw, +hh, +hd,
+                +hw, +hh, +hd,
+                +hw, +hh, -hd,
+                -hw, +hh, -hd,
                 0f, 1f, 0f
         );
 
-        // Bottom face (y = -hh), normal (0,-1,0)
+        // Bottom
         edgePart.setUVRange(0f, 0f, 1f, 1f);
         edgePart.rect(
-                -hw, -hh, -hd, // back-left
-                +hw, -hh, -hd, // back-right
-                +hw, -hh, +hd, // front-right
-                -hw, -hh, +hd, // front-left
+                -hw, -hh, -hd,
+                +hw, -hh, -hd,
+                +hw, -hh, +hd,
+                -hw, -hh, +hd,
                 0f, -1f, 0f
         );
 
-        // Left face (x = -hw), normal (-1,0,0)
+        // Left
         edgePart.setUVRange(0f, 0f, 1f, 1f);
         edgePart.rect(
-                -hw, -hh, -hd, // bottom-back
-                -hw, -hh, +hd, // bottom-front
-                -hw, +hh, +hd, // top-front
-                -hw, +hh, -hd, // top-back
+                -hw, -hh, -hd,
+                -hw, -hh, +hd,
+                -hw, +hh, +hd,
+                -hw, +hh, -hd,
                 -1f, 0f, 0f
         );
 
-        // Right face (x = +hw), normal (1,0,0)
+        // Right
         edgePart.setUVRange(0f, 0f, 1f, 1f);
         edgePart.rect(
-                +hw, -hh, +hd, // bottom-front
-                +hw, -hh, -hd, // bottom-back
-                +hw, +hh, -hd, // top-back
-                +hw, +hh, +hd, // top-front
+                +hw, -hh, +hd,
+                +hw, -hh, -hd,
+                +hw, +hh, -hd,
+                +hw, +hh, +hd,
                 1f, 0f, 0f
         );
 
         return builder.end();
     }
 
-    public static Model createThinBox(ModelBuilder builder, Material material, Material edgeMaterial) {
-        float size = 1.1f;
+    public static Model createThinBox(ModelBuilder builder, Material... material) {
+        float size = 1f;
         float thickness = 0.1f;
 
         float hw = size * 0.5f;
@@ -543,7 +555,7 @@ public class Utils {
 
         builder.begin();
 
-        MeshPartBuilder top = builder.part("top", GL20.GL_TRIANGLES, attrs, material);
+        MeshPartBuilder top = builder.part("top", GL20.GL_TRIANGLES, attrs, material[0]);
         top.rect(
                 -hw, +hh, -hd,
                 hw, +hh, -hd,
@@ -552,7 +564,7 @@ public class Utils {
                 0f, 1f, 0f
         );
 
-        MeshPartBuilder bottom = builder.part("bottom", GL20.GL_TRIANGLES, attrs, material);
+        MeshPartBuilder bottom = builder.part("bottom", GL20.GL_TRIANGLES, attrs, material[material.length - 2]);
         bottom.rect(
                 -hw, -hh, hd,
                 hw, -hh, hd,
@@ -561,7 +573,7 @@ public class Utils {
                 0f, -1f, 0f
         );
 
-        MeshPartBuilder sides = builder.part("sides", GL20.GL_TRIANGLES, attrs, edgeMaterial);
+        MeshPartBuilder sides = builder.part("sides", GL20.GL_TRIANGLES, attrs, material[material.length - 1]);
 
         // front (z = -hd)
         sides.rect(
@@ -634,6 +646,20 @@ public class Utils {
                 0f, 1f, 0f // normal up
         );
 
+        return builder.end();
+    }
+
+    public static Model getDoor(ModelLoader gloader, ModelBuilder builder, Model wall, Material mwood) {
+        Model door = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
+        door.nodes.get(0).scale.set(.2f, .2f, .2f);
+        door.nodes.get(0).translation.set(.06f, -.5f, .015f);
+        door.nodes.get(0).parts.first().material = mwood;
+        
+        door.calculateTransforms();
+
+        builder.begin();
+        builder.node("door-wall", wall);
+        builder.node("door-main", door);
         return builder.end();
     }
 

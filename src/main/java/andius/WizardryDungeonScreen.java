@@ -79,9 +79,9 @@ public class WizardryDungeonScreen extends BaseScreen {
     private RotateOnlyInputController cameraPan;
     private final AssetManager assets;
 
-    private Model ladderModel, elevatorModel;
-    private Model doorModel, pentagram;
-    private Model wall, manhole, letterM, fountainModel, orbModel, chestModel;
+    private Model ladderModel, elevatorModel, pentagram, manhole, letterM, fountainModel, orbModel, chestModel;
+    private Model[] walls = new Model[4];
+    private Model[] doors = new Model[4];
 
     private final Environment environment = new Environment();
     private final Environment outside = new Environment();
@@ -97,7 +97,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private DirectionalLight directionalLightDown;
     private DirectionalLight directionalLightUp;
 
-    private final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
+    public final List<DungeonTileModelInstance> modelInstances = new ArrayList<>();
     private final List<DungeonTileModelInstance> floor = new ArrayList<>();
     private final List<DungeonTileModelInstance> ceiling = new ArrayList<>();
 
@@ -182,6 +182,198 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.showMiniMap = false;
 
         cameraPan = new RotateOnlyInputController(camera);
+    }
+
+    private void init() {
+        assets.load("assets/graphics/floor.png", Texture.class);
+        assets.load("assets/graphics/dirt.png", Texture.class);
+        assets.load("assets/graphics/wall1.png", Texture.class);
+        assets.load("assets/graphics/wall2.png", Texture.class);
+        assets.load("assets/graphics/wall3.png", Texture.class);
+        assets.load("assets/graphics/wall4.png", Texture.class);
+        assets.load("assets/graphics/rock.png", Texture.class);
+        assets.load("assets/graphics/grass.png", Texture.class);
+        assets.load("assets/graphics/roof.png", Texture.class);
+        assets.load("assets/graphics/wood.png", Texture.class);
+        assets.update(2000);
+
+        Material mwall1 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall2 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall3 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall4 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mdirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mroof = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/roof.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mfloor = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mgreen = new Material(ColorAttribute.createDiffuse(Color.FOREST), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mblue = new Material(ColorAttribute.createDiffuse(Color.BLUE), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material myellow = new Material(ColorAttribute.createDiffuse(Color.YELLOW), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mred = new Material(ColorAttribute.createDiffuse(Color.RED), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material medges = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
+        Texture grz = assets.get("assets/graphics/grass.png", Texture.class);
+        grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        Material mgrass = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
+
+        //export from blender to fbx format, then convert fbx to the g3db like below
+        //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
+        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
+        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
+        ladderModel.nodes.get(0).scale.set(.260f, .260f, .260f);
+        ladderModel.nodes.get(0).translation.set(.10f, .93f, .06f);
+        elevatorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
+        elevatorModel.nodes.get(0).scale.set(.3f, .3f, .3f);
+        elevatorModel.nodes.get(0).translation.set(0, 0, 0);
+        pentagram = gloader.loadModel(Gdx.files.classpath("assets/graphics/pentagram.g3db"));
+        pentagram.nodes.get(0).scale.set(.2f, .2f, .2f);
+        pentagram.nodes.get(0).rotation.set(0, 0, 0, 1);
+        pentagram.nodes.get(0).translation.set(0, -.17f, 0);
+        pentagram.nodes.get(0).parts.first().material = mred;
+        letterM = gloader.loadModel(Gdx.files.classpath("assets/graphics/letter-m.g3db"));
+        letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
+        letterM.nodes.get(0).translation.set(0, 0, 0);
+        letterM.nodes.get(0).parts.first().material = mgreen;
+        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
+        fountainModel.nodes.get(0).scale.set(.010f, .010f, .010f);
+        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.YELLOW, 1));
+        orbModel.nodes.get(0).scale.set(.0025f, .0025f, .0025f);
+        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
+        chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
+        manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
+        
+        walls[0] = Utils.createWall(builder, mwall1, medges);
+        walls[1] = Utils.createWall(builder, mwall2, medges);
+        walls[2] = Utils.createWall(builder, mwall3, medges);
+        walls[3] = Utils.createWall(builder, mwall4, medges);
+
+        doors[0] = Utils.getDoor(gloader, builder, walls[0], mwood);
+        doors[1] = Utils.getDoor(gloader, builder, walls[1], mwood);
+        doors[2] = Utils.getDoor(gloader, builder, walls[2], mwood);
+        doors[3] = Utils.getDoor(gloader, builder, walls[3], mwood);
+
+        Model floorModel = Utils.createThinBox(builder, mfloor, medges);
+        Model grassModel = Utils.createThinBox(builder, mgrass, mgreen);
+        Model ceilingModel = Utils.createThinBox(builder, mroof, mdirt, medges);
+
+        Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
+        sky.nodes.get(0).scale.set(.14f, .14f, .14f);
+        sky.nodes.get(0).translation.set(10, -3, 10);
+
+        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
+            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
+                floor.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, x - 1.5f, -.05f, y - 1.5f));
+            }
+        }
+        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
+            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
+                ceiling.add(new DungeonTileModelInstance(ceilingModel, 0, 0f, 0f, x - 1.5f, 1.05f, y - 1.5f));
+            }
+        }
+
+        if (this.map == Map.WIZARDRY4) {
+            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+            TiledMap wiz4CastleFloorCeilingMap = loader.load("assets/data/wiz4-castle-floor-ceiling-map.tmx");
+            TiledMapTileLayer floor1 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor1");
+            TiledMapTileLayer floor2 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor2");
+            TiledMapTileLayer floor3 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor3");
+            TiledMapTileLayer ceiling1 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling1");
+            TiledMapTileLayer ceiling2 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling2");
+            TiledMapTileLayer ceiling3 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling3");
+
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor1, floorModel, grassModel, -.05f);
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling1, ceilingModel, null, 1.05f);
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor2, floorModel, grassModel, 1.15f);
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling2, ceilingModel, null, 2.25f);
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor3, floorModel, grassModel, 2.35f);
+            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling3, ceilingModel, null, 3.35f);
+
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor1, floorModel, grassModel, -1.15f);
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling1, ceilingModel, null, -.15f);
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor2, floorModel, grassModel, -.05f);
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling2, ceilingModel, null, 1.05f);
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor3, floorModel, grassModel, 1.15f);
+            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling3, ceilingModel, null, 2.25f);
+
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor1, floorModel, grassModel, -2.25f);
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling1, ceilingModel, null, -1.25f);
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor2, floorModel, grassModel, -1.15f);
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling2, ceilingModel, null, -.15f);
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor3, floorModel, grassModel, -.05f);
+            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling3, ceilingModel, null, 1.05f);
+
+            for (int x = 0; x < this.dim; x++) {
+                for (int y = 0; y < this.dim; y++) {
+                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, .5f);
+                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, 1.7f);
+                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, 2.85f);
+
+                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, -.65f);
+                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, .5f);
+                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, 1.7f);
+
+                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, -1.75f);
+                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, -.65f);
+                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, .5f);
+                }
+            }
+
+            DungeonTileModelInstance sk = new DungeonTileModelInstance(sky, 0, 0, 0);
+            this.wiz4CastleLevel0ModelInstances.add(sk);
+            this.wiz4CastleLevel12ModelInstances.add(sk);
+            this.wiz4CastleLevel13ModelInstances.add(sk);
+
+            Model grassPlaneModel = Utils.createGrassPlaneModel(builder, this.dim, mgrass);
+            this.wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -0.06f, 0f));
+            this.wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -1.16f, 0f));
+            this.wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -2.26f, 0f));
+
+        }
+
+        for (int level = 0; level < this.map.scenario().levels().length; level++) {
+            for (int e = 0; e < this.dim; e++) {
+                for (int n = 0; n < this.dim; n++) {
+                    MazeCell cell = this.map.scenario().levels()[level].cells[n][e];
+                    addBlock(level, cell, n, e);
+                    if (this.map != Map.WIZARDRY4 || (level == 4 || level == 6 || level == 8)) {
+                        //duplicated for wrapping
+                        addBlock(level, cell, n + this.dim, e);
+                        addBlock(level, cell, n - this.dim, e);
+                        addBlock(level, cell, n, e + this.dim);
+                        addBlock(level, cell, n, e - this.dim);
+                        addBlock(level, cell, n + this.dim, e + this.dim);
+                        addBlock(level, cell, n - this.dim, e - this.dim);
+                        addBlock(level, cell, n + this.dim, e - this.dim);
+                        addBlock(level, cell, n - this.dim, e + this.dim);
+                    }
+                    if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0
+                            || cell.message != null || cell.function != null) {
+                        SpotLight orbLight = new SpotLight().set(
+                                flame.r, flame.g, flame.b,
+                                n + .5f, 2f, e + .5f,
+                                0f, -1f, 0f, // direction: down
+                                2.5f, 25f, 1f
+                        );
+                        spotLights.add(new SpotLightInfo(level, n, e, orbLight));
+                    }
+                }
+            }
+        }
+
+        //prune uneeded
+        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
+        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
+        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
     }
 
     @Override
@@ -296,189 +488,6 @@ public class WizardryDungeonScreen extends BaseScreen {
     public void hide() {
     }
 
-    private void init() {
-
-        assets.load("assets/graphics/dirt.png", Texture.class);
-        assets.load("assets/graphics/mortar.png", Texture.class);
-        assets.load("assets/graphics/rock.png", Texture.class);
-        assets.load("assets/graphics/grass.png", Texture.class);
-        assets.load("assets/graphics/wood-door-texture.png", Texture.class);
-        assets.update(2000);
-
-        Material mortar = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/mortar.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material wood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood-door-texture.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material dirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material rock = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material gr = new Material(ColorAttribute.createDiffuse(Color.FOREST), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material bl = new Material(ColorAttribute.createDiffuse(Color.BLUE), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material red = new Material(ColorAttribute.createDiffuse(Color.RED), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material edgeMaterial = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
-        Texture grz = assets.get("assets/graphics/grass.png", Texture.class);
-        grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        Material grazz = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
-
-        //export from blender to fbx format, then convert fbx to the g3db like below
-        //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
-        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
-        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
-        ladderModel.nodes.get(0).scale.set(.260f, .260f, .260f);
-        ladderModel.nodes.get(0).translation.set(.10f, .93f, .06f);
-        doorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
-        doorModel.nodes.get(0).scale.set(.2f, .2f, .2f);
-        doorModel.nodes.get(0).translation.set(.06f, -.5f, .015f);
-        doorModel.nodes.get(0).parts.first().material = wood;
-        elevatorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
-        elevatorModel.nodes.get(0).scale.set(.3f, .3f, .3f);
-        elevatorModel.nodes.get(0).translation.set(0, 0, 0);
-        pentagram = gloader.loadModel(Gdx.files.classpath("assets/graphics/pentagram.g3db"));
-        pentagram.nodes.get(0).scale.set(.2f, .2f, .2f);
-        pentagram.nodes.get(0).rotation.set(0, 0, 0, 1);
-        pentagram.nodes.get(0).translation.set(0, -.17f, 0);
-        pentagram.nodes.get(0).parts.first().material = red;
-        letterM = gloader.loadModel(Gdx.files.classpath("assets/graphics/letter-m.g3db"));
-        letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
-        letterM.nodes.get(0).translation.set(0, 0, 0);
-        letterM.nodes.get(0).parts.first().material = gr;
-        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
-        fountainModel.nodes.get(0).scale.set(.010f, .010f, .010f);
-        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.YELLOW, 1));
-        orbModel.nodes.get(0).scale.set(.0025f, .0025f, .0025f);
-        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
-        chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
-        manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
-        wall = Utils.createWall(builder, mortar, edgeMaterial);
-        builder.begin();
-        builder.node("door-wall", wall);
-        builder.node("door-main", doorModel);
-        doorModel = builder.end();
-
-        Model floorModel = Utils.createThinBox(builder, rock, edgeMaterial);
-        Model grassModel = Utils.createThinBox(builder, grazz, gr);
-        Model ceilingModel = Utils.createThinBox(builder, dirt, edgeMaterial);
-
-        Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
-        sky.nodes.get(0).scale.set(.14f, .14f, .14f);
-        sky.nodes.get(0).translation.set(10, -3, 10);
-
-        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
-            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
-                floor.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, x - 1.5f, -.05f, y - 1.5f));
-            }
-        }
-        for (int x = -this.dim * 2; x < this.dim * 2; x++) {
-            for (int y = -this.dim * 2; y < this.dim * 2; y++) {
-                ceiling.add(new DungeonTileModelInstance(ceilingModel, 0, 0f, 0f, x - 1.5f, 1.05f, y - 1.5f));
-            }
-        }
-
-        if (this.map == Map.WIZARDRY4) {
-            TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-            TiledMap wiz4CastleFloorCeilingMap = loader.load("assets/data/wiz4-castle-floor-ceiling-map.tmx");
-            TiledMapTileLayer floor1 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor1");
-            TiledMapTileLayer floor2 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor2");
-            TiledMapTileLayer floor3 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("floor3");
-            TiledMapTileLayer ceiling1 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling1");
-            TiledMapTileLayer ceiling2 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling2");
-            TiledMapTileLayer ceiling3 = (TiledMapTileLayer) wiz4CastleFloorCeilingMap.getLayers().get("ceiling3");
-
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor1, floorModel, grassModel, -.05f);
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling1, ceilingModel, null, 1.05f);
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor2, floorModel, grassModel, 1.15f);
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling2, ceilingModel, null, 2.25f);
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, floor3, floorModel, grassModel, 2.35f);
-            castleFloorAndCeiling(wiz4CastleLevel0ModelInstances, ceiling3, ceilingModel, null, 3.35f);
-
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor1, floorModel, grassModel, -1.15f);
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling1, ceilingModel, null, -.15f);
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor2, floorModel, grassModel, -.05f);
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling2, ceilingModel, null, 1.05f);
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, floor3, floorModel, grassModel, 1.15f);
-            castleFloorAndCeiling(wiz4CastleLevel12ModelInstances, ceiling3, ceilingModel, null, 2.25f);
-
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor1, floorModel, grassModel, -2.25f);
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling1, ceilingModel, null, -1.25f);
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor2, floorModel, grassModel, -1.15f);
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling2, ceilingModel, null, -.15f);
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, floor3, floorModel, grassModel, -.05f);
-            castleFloorAndCeiling(wiz4CastleLevel13ModelInstances, ceiling3, ceilingModel, null, 1.05f);
-
-            for (int x = 0; x < this.dim; x++) {
-                for (int y = 0; y < this.dim; y++) {
-                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, .5f);
-                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, 1.7f);
-                    addCastleCell(this.wiz4CastleLevel0ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, 2.85f);
-
-                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, -.65f);
-                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, .5f);
-                    addCastleCell(this.wiz4CastleLevel12ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, 1.7f);
-
-                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 0, this.map.scenario().levels()[0].cells[x][y], x, y, -1.75f);
-                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 12, this.map.scenario().levels()[12].cells[x][y], x, y, -.65f);
-                    addCastleCell(this.wiz4CastleLevel13ModelInstances, 13, this.map.scenario().levels()[13].cells[x][y], x, y, .5f);
-                }
-            }
-
-            DungeonTileModelInstance sk = new DungeonTileModelInstance(sky, 0, 0, 0);
-            this.wiz4CastleLevel0ModelInstances.add(sk);
-            this.wiz4CastleLevel12ModelInstances.add(sk);
-            this.wiz4CastleLevel13ModelInstances.add(sk);
-
-            Model grassPlaneModel = Utils.createGrassPlaneModel(builder, this.dim, grazz);
-            this.wiz4CastleLevel0ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -0.06f, 0f));
-            this.wiz4CastleLevel12ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -1.16f, 0f));
-            this.wiz4CastleLevel13ModelInstances.add(new DungeonTileModelInstance(grassPlaneModel, 0, 0, 0, 0f, -2.26f, 0f));
-
-        }
-
-        for (int level = 0; level < this.map.scenario().levels().length; level++) {
-            for (int e = 0; e < this.dim; e++) {
-                for (int n = 0; n < this.dim; n++) {
-                    MazeCell cell = this.map.scenario().levels()[level].cells[n][e];
-                    addBlock(level, cell, n, e);
-                    if (this.map != Map.WIZARDRY4 || (level == 4 || level == 6 || level == 8)) {
-                        //duplicated for wrapping
-                        addBlock(level, cell, n + this.dim, e);
-                        addBlock(level, cell, n - this.dim, e);
-                        addBlock(level, cell, n, e + this.dim);
-                        addBlock(level, cell, n, e - this.dim);
-                        addBlock(level, cell, n + this.dim, e + this.dim);
-                        addBlock(level, cell, n - this.dim, e - this.dim);
-                        addBlock(level, cell, n + this.dim, e - this.dim);
-                        addBlock(level, cell, n - this.dim, e + this.dim);
-                    }
-                    if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0
-                            || cell.message != null || cell.function != null) {
-                        SpotLight orbLight = new SpotLight().set(
-                                flame.r, flame.g, flame.b,
-                                n + .5f, 2f, e + .5f,
-                                0f, -1f, 0f, // direction: down
-                                2.5f, 25f, 1f
-                        );
-                        spotLights.add(new SpotLightInfo(level, n, e, orbLight));
-                    }
-                }
-            }
-        }
-
-        //prune uneeded
-        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
-                || mi.transform.val[Matrix4.M23] < -10
-                || mi.transform.val[Matrix4.M03] < -10
-                || mi.transform.val[Matrix4.M23] > 30);
-
-        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
-                || mi.transform.val[Matrix4.M23] < -10
-                || mi.transform.val[Matrix4.M03] < -10
-                || mi.transform.val[Matrix4.M23] > 30);
-
-        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 30
-                || mi.transform.val[Matrix4.M23] < -10
-                || mi.transform.val[Matrix4.M03] < -10
-                || mi.transform.val[Matrix4.M23] > 30);
-
-    }
-
     private void addBlock(int level, MazeCell cell, float x, float y) {
         addBlock(level, cell, x, y, false);
     }
@@ -495,30 +504,34 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
+        int index = level % walls.length;
+        Model wallModel = walls[index];
+        Model doorModel = doors[index];
+
         float z = 0.5f;
         if (cell.northWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
             modelInstances.add(instance);
         }
         if (cell.southWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
             modelInstances.add(instance);
         }
         if (cell.eastWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
             modelInstances.add(instance);
         }
         if (cell.westWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y, x + .5f, z, y + .025f);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y, x + .5f, z, y + .025f);
             modelInstances.add(instance);
         }
 
         if (cell.northDoor) {
             if (cell.northWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
                 modelInstances.add(instance);
             } else {
@@ -529,7 +542,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.southDoor) {
             if (cell.southWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
                 modelInstances.add(instance);
             } else {
@@ -540,7 +553,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.eastDoor) {
             if (cell.eastWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
                 modelInstances.add(instance);
             } else {
@@ -550,7 +563,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.westDoor) {
             if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setToTranslation(x + .5f, z, y + .025f);
                 modelInstances.add(instance);
             } else {
@@ -610,29 +623,32 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private void addCastleCell(List<DungeonTileModelInstance> list, int level, MazeCell cell, float x, float y, float z) {
 
+        Model wallModel = walls[2];
+        Model doorModel = doors[2];
+
         if (cell.northWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
             list.add(instance);
         }
         if (cell.southWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
             list.add(instance);
         }
         if (cell.eastWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
             instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
             list.add(instance);
         }
         if (cell.westWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y, x + .5f, z, y + .025f);
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y, x + .5f, z, y + .025f);
             list.add(instance);
         }
 
         if (cell.northDoor) {
             if (cell.northWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
                 list.add(instance);
             } else {
@@ -643,7 +659,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.southDoor) {
             if (cell.southWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
                 list.add(instance);
             } else {
@@ -654,7 +670,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.eastDoor) {
             if (cell.eastWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
                 instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
                 list.add(instance);
             } else {
@@ -664,7 +680,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
         if (cell.westDoor) {
             if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y, x + .5f, z, y + .025f);
+                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y, x + .5f, z, y + .025f);
                 list.add(instance);
             } else {
                 DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
@@ -1594,8 +1610,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                     }
                 } else {
                     DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
-                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
-                    mainGame.setScreen(cs);
+                    //Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                    //mainGame.setScreen(cs);
                 }
             } else {
                 if (Utils.percentChance(25)) {
@@ -1607,7 +1623,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                         }
                         if (!defeated.contains(id)) {
                             DoGooder d = this.map.scenario().characters().get(id);
-                            mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
+                            //mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
                             break;
                         }
                     }
@@ -1620,7 +1636,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (destCell.encounterID != -1 || wandering) {
                 int encounterID = destCell.encounterID != -1 ? destCell.encounterID : destCell.wanderingEncounterID;
                 Monster monster = this.map.scenario().monsters().get(encounterID);
-                mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster.name, monster, currentLevel + 1, treasure, destCell, fromCell));
+                //mainGame.setScreen(new WizardryCombatScreen(CTX, this.map, monster.name, monster, currentLevel + 1, treasure, destCell, fromCell));
             }
         }
     }
@@ -1775,7 +1791,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         CTX.endTurn(this.map);
     }
 
-    private class DungeonTileModelInstance extends ModelInstance {
+    public static class DungeonTileModelInstance extends ModelInstance {
 
         private final int level;
         private final float cx;

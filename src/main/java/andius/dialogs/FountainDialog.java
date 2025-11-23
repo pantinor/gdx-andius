@@ -30,7 +30,7 @@ public class FountainDialog extends Dialog {
                     scrollPane.add(response, Color.WHITE);
                     scrollPane.add(" ");
 
-                    if (response.equals("yes") || response.equals("ok")) {
+                    if (response.startsWith("y") || response.equals("ok")) {
                         if (fountainType == 1) {//cure
                             for (CharacterRecord p : ctx.players()) {
                                 p.status.set(Status.POISONED, 0);

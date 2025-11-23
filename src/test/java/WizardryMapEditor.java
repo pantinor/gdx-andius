@@ -1,4 +1,5 @@
 
+import andius.Andius;
 import andius.WizardryData;
 import andius.WizardryData.CellType;
 import static andius.WizardryData.CellType.ROCK;
@@ -102,6 +103,9 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
     @Override
     public void create() {
+
+        Andius a = new Andius();
+        a.create();
 
         font = new BitmapFont();
         batch = new SpriteBatch();

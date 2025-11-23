@@ -37,7 +37,7 @@ public class MarkDialog extends Dialog {
                     scrollPane.add(response, Color.WHITE);
                     scrollPane.add(" ");
 
-                    if (response.equals("yes") || response.equals("ok")) {
+                    if (response.startsWith("y") || response.equals("ok")) {
 
                         for (CharacterRecord p : ctx.players()) {
                             int currentHp = p.hp;

@@ -1,51 +1,42 @@
 
-import andius.WizardryData;
+import andius.Andius;
+import andius.Constants;
+import andius.WizardryDungeonScreen;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
-import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.UBJsonReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
-    private ModelBuilder builder = new ModelBuilder();
     private ModelBatch modelBatch;
     private CameraInputController inputController;
     private PerspectiveCamera cam;
     private Environment environment;
-    private final List<ModelInstance> modelInstances = new ArrayList<>();
-
-    private Model doorModel;
-    private Model wall, hiddenDoor;
 
     public BitmapFont font;
     private SpriteBatch batch;
+
+    private WizardryDungeonScreen screen;
 
     private Color flame = new Color(0xf59414ff);
 
@@ -60,6 +51,9 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
     @Override
     public void create() {
+
+        Andius a = new Andius();
+        a.create();
 
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.near = 0.1f;
@@ -78,140 +72,32 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         environment = new Environment();
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.05f, 0.05f, 0.05f, 1f));
 
-//        PointLight light1 = new PointLight().set(flame, 2.5f, .5f, 2.5f, 1f);
-//        environment.add(light1);
-//
-//        PointLight light2 = new PointLight().set(flame, 16.5f, .5f, 16.5f, .5f);
-//        environment.add(light2);
-//
-//        PointLight light3 = new PointLight().set(flame, 8.5f, .5f, 8.5f, .5f);
-//        environment.add(light3);
-        
-        PointLight light3 = new PointLight().set(flame, 8.5f, 5f, 8.5f, 100f);
+        PointLight light1 = new PointLight().set(flame, 2, 2, 2, 5);
+        environment.add(light1);
+
+        PointLight light2 = new PointLight().set(flame, 2, 2, 18, 5);
+        environment.add(light2);
+
+        PointLight light3 = new PointLight().set(flame, 10, 2, 2, 5);
         environment.add(light3);
+
+        PointLight light4 = new PointLight().set(flame, 10, 2, 18, 5);
+        environment.add(light4);
+
+        PointLight light5 = new PointLight().set(flame, 18, 2, 2, 5);
+        environment.add(light5);
+
+        PointLight light6 = new PointLight().set(flame, 18, 2, 18, 5);
+        environment.add(light6);
 
         modelBatch = new ModelBatch();
 
+        this.screen = new WizardryDungeonScreen(Constants.Map.WIZARDRY4);
+
         createAxes();
 
-        cam.position.set(-1f, 3f, 9f);
-        cam.lookAt(1, 0, 9);
-
-        Material mortar = new Material(TextureAttribute.createDiffuse(new Texture(Gdx.files.classpath("assets/graphics/mortar.png"))));
-
-        TextureRegion flipped = new TextureRegion(new Texture(Gdx.files.classpath("assets/graphics/mortar.png")));
-        flipped.flip(true, true);
-        Material mortarRotated = new Material(TextureAttribute.createDiffuse(flipped));
-
-        Material wood = new Material(TextureAttribute.createDiffuse(new Texture(Gdx.files.classpath("assets/graphics/wood-door-texture.png"))));
-        Material dirt = new Material(TextureAttribute.createDiffuse(new Texture(Gdx.files.classpath("assets/graphics/dirt.png"))));
-        Material gr = new Material(ColorAttribute.createDiffuse(Color.GREEN));
-        Material bl = new Material(ColorAttribute.createDiffuse(Color.BLUE));
-        Material yl = new Material(ColorAttribute.createDiffuse(Color.YELLOW));
-        Material red = new Material(ColorAttribute.createDiffuse(Color.RED));
-
-        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
-
-        Model floorModel = builder.createBox(1f, 1f, 1f, dirt, VertexAttributes.Usage.Position | VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.Normal);
-
-        doorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
-        doorModel.nodes.get(0).scale.set(.2f, .2f, .2f);
-        doorModel.nodes.get(0).translation.set(.06f, -.5f, .015f);
-        doorModel.nodes.get(0).parts.first().material = wood;
-
-        hiddenDoor = builder.createBox(1.090f, 1, 0.05f, red, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-        wall = builder.createBox(1.090f, 1, 0.05f, mortar, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-
-        Model doorWall = builder.createBox(1.090f, 1, 0.05f, mortarRotated, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-
-        builder.begin();
-        builder.node("door-wall", doorWall);
-        builder.node("door-main", doorModel);
-        doorModel = builder.end();
-
-        WizardryData.Scenario sc = WizardryData.Scenario.EXODUS_DARDIN;
-
-        for (int e = -1; e < sc.dim() + 1; e++) {
-            for (int n = -1; n < sc.dim() + 1; n++) {
-                modelInstances.add(new DungeonTileModelInstance(floorModel, 0, 0f, 0f, e + .5f, -.5f, n + .5f));
-            }
-        }
-
-        for (int e = 0; e < sc.dim(); e++) {
-            for (int n = 0; n < sc.dim(); n++) {
-                WizardryData.MazeCell cell = sc.levels()[3].cells[n][e];
-                addBlock(0, cell, n, e);
-            }
-        }
-
-    }
-
-    void addBlock(int level, WizardryData.MazeCell cell, float x, float y) {
-
-        float z = 0.5f;
-        if (cell.northWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-            instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
-            modelInstances.add(instance);
-        }
-        if (cell.southWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-            instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-            modelInstances.add(instance);
-        }
-        if (cell.eastWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y);
-            instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
-            modelInstances.add(instance);
-        }
-        if (cell.westWall) {
-            DungeonTileModelInstance instance = new DungeonTileModelInstance(wall, level, x, y, x + .5f, z, y + .025f);
-            modelInstances.add(instance);
-        }
-
-        if (cell.northDoor) {
-            if (cell.northWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(hiddenDoor, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                modelInstances.add(instance);
-            }
-        }
-        if (cell.southDoor) {
-            if (cell.southWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(hiddenDoor, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(instance);
-            }
-        }
-        if (cell.eastDoor) {
-            if (cell.eastWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(hiddenDoor, level, x, y);
-                instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
-                modelInstances.add(instance);
-            }
-        }
-        if (cell.westDoor) {
-            if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(hiddenDoor, level, x, y);
-                instance.transform.setToTranslation(x + .5f, z, y + .025f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
-                modelInstances.add(instance);
-            }
-        }
+        cam.position.set(-1f, 3f, -1f);
+        cam.lookAt(5, 0.5f, 5);
 
     }
 
@@ -226,8 +112,10 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
         modelBatch.render(axesInstance);
 
-        for (ModelInstance i : modelInstances) {
-            modelBatch.render(i, environment);
+        for (WizardryDungeonScreen.DungeonTileModelInstance i : this.screen.modelInstances) {
+            if (i.getLevel() == 4) {
+                modelBatch.render(i, environment);
+            }
         }
 
         modelBatch.end();
