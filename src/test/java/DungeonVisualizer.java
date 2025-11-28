@@ -92,7 +92,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
         modelBatch = new ModelBatch();
 
-        this.screen = new WizardryDungeonScreen(Constants.Map.WIZARDRY4);
+        this.screen = new WizardryDungeonScreen(Constants.Map.WIZARDRY1);
 
         createAxes();
 
@@ -113,7 +113,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         modelBatch.render(axesInstance);
 
         for (WizardryDungeonScreen.DungeonTileModelInstance i : this.screen.modelInstances) {
-            if (i.getLevel() == 4) {
+            if (i.getLevel() == 1) {
                 modelBatch.render(i, environment);
             }
         }

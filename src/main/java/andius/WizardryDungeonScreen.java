@@ -36,7 +36,6 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -64,6 +63,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.Iterator;
+import utils.Models;
 import utils.RotateOnlyInputController;
 import utils.Utils;
 
@@ -79,7 +79,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private RotateOnlyInputController cameraPan;
     private final AssetManager assets;
 
-    private Model ladderModel, elevatorModel, pentagram, manhole, letterM, fountainModel, orbModel, chestModel;
+    private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, orbModel, chestModel;
     private Model[] walls = new Model[4];
     private Model[] doors = new Model[4];
 
@@ -214,12 +214,15 @@ public class WizardryDungeonScreen extends BaseScreen {
         grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         Material mgrass = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
 
+        ladderUp = Models.loadModel("assets/graphics/ladder.obj", "Ladder", Color.DARK_GRAY, 0.1f);
+        ladderDown = Models.loadModel("assets/graphics/ladder.obj", "LadderDown", Color.DARK_GRAY, 0.1f);
+        topHole = Models.loadModel("assets/graphics/ladder.obj", "TopHole", Color.DARK_GRAY, 0.1f);
+        bottomHole = Models.loadModel("assets/graphics/ladder.obj", "BottomHole", Color.DARK_GRAY, 0.1f);
+
         //export from blender to fbx format, then convert fbx to the g3db like below
         //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
         ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
-        ladderModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/ladder.g3db"));
-        ladderModel.nodes.get(0).scale.set(.260f, .260f, .260f);
-        ladderModel.nodes.get(0).translation.set(.10f, .93f, .06f);
+
         elevatorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
         elevatorModel.nodes.get(0).scale.set(.3f, .3f, .3f);
         elevatorModel.nodes.get(0).translation.set(0, 0, 0);
@@ -238,8 +241,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         orbModel.nodes.get(0).scale.set(.0025f, .0025f, .0025f);
         chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
         chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
-        manhole = builder.createCylinder(.5f, .02f, .5f, 32, new Material(ColorAttribute.createDiffuse(Color.DARK_GRAY)), Usage.Position | Usage.Normal);
-        
+
         walls[0] = Utils.createWall(builder, mwall1, medges);
         walls[1] = Utils.createWall(builder, mwall2, medges);
         walls[2] = Utils.createWall(builder, mwall3, medges);
@@ -574,11 +576,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         if (cell.stairs) {
-            modelInstances.add(new DungeonTileModelInstance(ladderModel, level, x, y, x + .5f, 0, y + .5f));
             if (cell.address.level < cell.addressTo.level) {//down
-                modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, 0, y + .5f));
+                modelInstances.add(new DungeonTileModelInstance(ladderDown, level, x, y, x + .5f, 0, y + .5f));
+                modelInstances.add(new DungeonTileModelInstance(bottomHole, level, x, y, x + .5f, 0, y + .5f));
             } else {//up
-                modelInstances.add(new DungeonTileModelInstance(manhole, level, x, y, x + .6f, 1, y + .5f));
+                modelInstances.add(new DungeonTileModelInstance(ladderUp, level, x, y, x + .5f, 0, y + .5f));
+                modelInstances.add(new DungeonTileModelInstance(topHole, level, x, y, x + .5f, .95f, y + .5f));
             }
         }
         if (cell.elevator) {
@@ -690,11 +693,12 @@ public class WizardryDungeonScreen extends BaseScreen {
         }
 
         if (cell.stairs) {
-            list.add(new DungeonTileModelInstance(ladderModel, level, x, y, x + .5f, z - .5f, y + .5f));
             if (level == 13 || cell.address.level > cell.addressTo.level) {//down
-                list.add(new DungeonTileModelInstance(manhole, level, x, y, x + .5f, z - .5f, y + .5f));
+                list.add(new DungeonTileModelInstance(ladderDown, level, x, y, x + .5f, z - .5f, y + .5f));
+                list.add(new DungeonTileModelInstance(bottomHole, level, x, y, x + .5f, z - .5f, y + .5f));
             } else {//up
-                list.add(new DungeonTileModelInstance(manhole, level, x, y, x + .6f, z + .5f, y + .5f));
+                list.add(new DungeonTileModelInstance(ladderUp, level, x, y, x + .5f, z - .5f, y + .5f));
+                list.add(new DungeonTileModelInstance(topHole, level, x, y, x + .5f, z + .45f, y + .5f));
             }
         }
         if (cell.elevator) {

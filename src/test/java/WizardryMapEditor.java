@@ -135,8 +135,11 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        int dim = 16;
+        WizardryData.Scenario sc = WizardryData.Scenario.EXODUS_PERIN;
+        MazeLevelV1 ml = (MazeLevelV1) sc.levels()[0];
+        int dim = ml.dimension;
 
+        specials = getSpecials(ml.buffer, 0x2F8);
         cells = new MazeCellActor[dim][dim];
 
         for (int e = 0; e < dim; e++) {
@@ -146,16 +149,8 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             }
         }
 
-        WizardryData.Scenario sc = WizardryData.Scenario.WER;
-
-        String SDATA = "0000000000005505001500000008150000000019000000001500000800000000081900000000590000000845000000005900500100000050010000000000000000005001000000000000000000000400000000002000000000006400000400000000000000000000000000000000000000000000000000000000000000000100000100000004010100000001010100000101010400000101040100000100C10300000441001000000100101000000110101000000110101000001110101000001110101000002910101000001140401000000140400400000000000000000000000000000000000000000000000000000000000000005509000000000008000000000000001900000000190800000015080000001900540500000844010000000000000000005401000000000000000000000000000000000000000000006411110100002000000000005540401400000000000000000000000000000000000000000000000000000000000000000004001000000004101000000010101000001010100400001010041000001000F01000000404011000000001001100000001011100000100011100000101011100000101011100000A01011100001140401000004040401000000000000000000000000000000000000000000000000000000000000008500000204400000050000001200000000000000003000000010000020000004811000001000000C00800000001000044000000010000000008000000000000000000000000000000000000111111111111111111110E00001111112010111111110111221202121111111100102212201011110010A010221201111111D0100010011100101111001011110000001011110111002110111110111100001011112212101111000010001522121011111011110810221210111110001B0016221210111110001009102212101111000010001022121011111010110111011110111100C0117111410113111111111111111111111111111111111111111111111111111111111111111111111111111111111111901FE11EEE1DD101000000000000070007000000000007000000000067000700070066000700000000000000C8000E000B0002000100070004000300CB0004000300CA00000000000000000002000F000F000C000C000F000C000C0003000B000F0002000100000046000A0001000A0023004A000A0001000A00230056000000000009000000";
-        byte[] data = DatatypeConverter.parseHexBinary(SDATA);
-        MazeLevelV1 ml = new MazeLevelV1(1, data, 1, dim, PMO_MONSTERS, PMO_MESSAGES);
-        specials = getSpecials(data, 0x2F8);
-
         for (int e = 0; e < dim; e++) {
             for (int n = 0; n < dim; n++) {
-                //WizardryData.MazeCell c = sc.levels()[8].cells[n][e];
                 WizardryData.MazeCell c = ml.cells[n][e];
                 cells[n][e].set(c);
 
@@ -326,7 +321,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 sb.append("CHU");
             }
             if (cell.lair) {
-                sb.append("LR");
+                sb.append("LAIR");
             }
             if (cell.encounterID >= 0) {
                 sb.append("MON");
@@ -344,7 +339,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 sb.append("FNT");
             }
             if (cell.markType > 0) {
-                sb.append("MRK");
+                sb.append("MARK");
             }
             if (cell.chestType > 0) {
                 sb.append("CHST");
@@ -359,10 +354,10 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 sb.append("CAG");
             }
             if (cell.spinner) {
-                sb.append("SPN");
+                sb.append("SPIN");
             }
             if (cell.teleport) {
-                sb.append("TEP");
+                sb.append("TLP");
             }
             if (cell.stairs) {
                 if (cell.address.level > cell.addressTo.level) {//up

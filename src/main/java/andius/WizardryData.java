@@ -765,7 +765,7 @@ public class WizardryData {
 
     public static class MazeLevelV1 extends MazeLevel {
 
-        private byte[] buffer;
+        public byte[] buffer;
         public CellInfo[] cellInfo;
         public byte[][] cellInfoLocations;
         public EncounterOdds[] monsterOdds = new EncounterOdds[3];
