@@ -62,6 +62,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.UBJsonReader;
+import java.util.HashMap;
 import java.util.Iterator;
 import utils.Models;
 import utils.RotateOnlyInputController;
@@ -214,10 +215,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         Material mgrass = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
 
-        ladderUp = Models.loadModel("assets/graphics/ladder.obj", "Ladder", Color.DARK_GRAY, 0.1f);
-        ladderDown = Models.loadModel("assets/graphics/ladder.obj", "LadderDown", Color.DARK_GRAY, 0.1f);
-        topHole = Models.loadModel("assets/graphics/ladder.obj", "TopHole", Color.DARK_GRAY, 0.1f);
-        bottomHole = Models.loadModel("assets/graphics/ladder.obj", "BottomHole", Color.DARK_GRAY, 0.1f);
+        ladderUp = Models.loadModel("assets/graphics/ladder.obj", "Ladder", 0.1f);
+        ladderDown = Models.loadModel("assets/graphics/ladder.obj", "LadderDown", 0.1f);
+        topHole = Models.loadModel("assets/graphics/ladder.obj", "TopHole", 0.1f);
+        bottomHole = Models.loadModel("assets/graphics/ladder.obj", "BottomHole", 0.1f);
 
         //export from blender to fbx format, then convert fbx to the g3db like below
         //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
@@ -360,21 +361,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         }
 
-        //prune uneeded
-        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
-
-        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
-
-        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
+        pruneWrappedInstances();
 
     }
 
@@ -1875,6 +1862,122 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
         }
+    }
+
+    private void pruneWrappedInstances() {
+
+        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
+        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
+        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
+                || mi.transform.val[Matrix4.M23] < -5
+                || mi.transform.val[Matrix4.M03] < -5
+                || mi.transform.val[Matrix4.M23] > 25);
+
+        final int dim = this.dim;
+        MazeLevel[] levels = this.map.scenario().levels();
+
+        java.util.Map<DungeonTileModelInstance, Boolean> visible = new HashMap<>();
+
+        List<DungeonTileModelInstance>[] northByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
+        List<DungeonTileModelInstance>[] southByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
+        List<DungeonTileModelInstance>[] westByRow = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
+        List<DungeonTileModelInstance>[] eastByRow = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
+
+        for (int i = 0; i < dim; i++) {
+            northByColumn[i] = new ArrayList<>();
+            southByColumn[i] = new ArrayList<>();
+            westByRow[i] = new ArrayList<>();
+            eastByRow[i] = new ArrayList<>();
+        }
+
+        for (DungeonTileModelInstance mi : modelInstances) {
+            int cx = Math.round(mi.getCx());
+            int cy = Math.round(mi.getCy());
+
+            if (cx < 0 || cx >= dim || cy < 0 || cy >= dim) {
+                visible.put(mi, Boolean.TRUE);
+
+                int row = Math.floorMod(cx, dim);
+                int col = Math.floorMod(cy, dim);
+
+                if (cx < 0) {
+                    southByColumn[col].add(mi);
+                } else if (cx >= dim) {
+                    northByColumn[col].add(mi);
+                }
+
+                if (cy < 0) {
+                    westByRow[row].add(mi);
+                } else if (cy >= dim) {
+                    eastByRow[row].add(mi);
+                }
+            }
+        }
+
+        for (int levelIndex = 0; levelIndex < levels.length; levelIndex++) {
+            MazeLevel lvl = levels[levelIndex];
+
+            int northRow = dim - 1;
+            for (int col = 0; col < dim; col++) {
+                MazeCell cell = lvl.cells[northRow][col];
+                if (cell != null && (cell.northWall || cell.northDoor || cell.hiddenNorthDoor)) {
+                    for (DungeonTileModelInstance mi : northByColumn[col]) {
+                        if (mi.getLevel() == levelIndex) {
+                            visible.put(mi, Boolean.FALSE);
+                        }
+                    }
+                }
+            }
+
+            int southRow = 0;
+            for (int col = 0; col < dim; col++) {
+                MazeCell cell = lvl.cells[southRow][col];
+                if (cell != null && (cell.southWall || cell.southDoor || cell.hiddenSouthDoor)) {
+                    for (DungeonTileModelInstance mi : southByColumn[col]) {
+                        if (mi.getLevel() == levelIndex) {
+                            visible.put(mi, Boolean.FALSE);
+                        }
+                    }
+                }
+            }
+
+            int westCol = 0;
+            for (int row = 0; row < dim; row++) {
+                MazeCell cell = lvl.cells[row][westCol];
+                if (cell != null && (cell.westWall || cell.westDoor || cell.hiddenWestDoor)) {
+                    for (DungeonTileModelInstance mi : westByRow[row]) {
+                        if (mi.getLevel() == levelIndex) {
+                            visible.put(mi, Boolean.FALSE);
+                        }
+                    }
+                }
+            }
+
+            int eastCol = dim - 1;
+            for (int row = 0; row < dim; row++) {
+                MazeCell cell = lvl.cells[row][eastCol];
+                if (cell != null && (cell.eastWall || cell.eastDoor || cell.hiddenEastDoor)) {
+                    for (DungeonTileModelInstance mi : eastByRow[row]) {
+                        if (mi.getLevel() == levelIndex) {
+                            visible.put(mi, Boolean.FALSE);
+                        }
+                    }
+                }
+            }
+        }
+
+        modelInstances.removeIf(mi -> {
+            Boolean v = visible.get(mi);
+            return v != null && !v;
+        });
     }
 
 }

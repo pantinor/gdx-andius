@@ -534,9 +534,9 @@ public class VendorScreen implements Screen, Constants {
             }
 
             @Override
-            public com.badlogic.gdx.utils.StringBuilder getText() {
+            public com.badlogic.gdx.utils.CharArray getText() {
 
-                com.badlogic.gdx.utils.StringBuilder sb = new com.badlogic.gdx.utils.StringBuilder();
+                com.badlogic.gdx.utils.CharArray sb = new com.badlogic.gdx.utils.CharArray();
 
                 sb.append(String.format("%s  LVL %d  %s  %s\n", p.name.toUpperCase(), p.level, p.race.toString(), p.classType.toString()));
                 sb.append(String.format("HP: %d /%d AC: %d ST: %s\n", p.hp, p.maxhp, p.calculateAC(), p.status.toString()));

@@ -360,43 +360,43 @@ public class WizardryData {
             }
 
             for (int i = 0; i < PMO_LEVEL_DATA.length; i++) {
-                PMO_LEVELS[i] = new MazeLevelV1(1, DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, 20, WER_MONSTERS, PMO_MESSAGES);
+                PMO_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(PMO_LEVEL_DATA[i]), i + 1, 20, WER_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < KOD_LEVEL_DATA.length; i++) {
-                KOD_LEVELS[i] = new MazeLevelV1(2, DatatypeConverter.parseHexBinary(KOD_LEVEL_DATA[i]), i + 1, 20, KOD_MONSTERS, KOD_MESSAGES);
+                KOD_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(KOD_LEVEL_DATA[i]), i + 1, 20, KOD_MONSTERS, KOD_MESSAGES);
             }
             for (int i = 0; i < LEG_LEVEL_DATA.length; i++) {
-                LEG_LEVELS[i] = new MazeLevelV1(3, DatatypeConverter.parseHexBinary(LEG_LEVEL_DATA[i]), i + 1, 20, LEG_MONSTERS, LEG_MESSAGES);
+                LEG_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(LEG_LEVEL_DATA[i]), i + 1, 20, LEG_MONSTERS, LEG_MESSAGES);
             }
             for (int i = 0; i < BS_LEVEL_DATA.length; i++) {
-                BS_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(BS_LEVEL_DATA[i]), i + 1, 20, BS_MONSTERS, BS_MESSAGES);
+                BS_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(BS_LEVEL_DATA[i]), i + 1, 20, BS_MONSTERS, BS_MESSAGES);
             }
             for (int i = 0; i < WER_LEVEL_DATA.length; i++) {
-                WER_LEVELS[i] = new MazeLevelV4(5, DatatypeConverter.parseHexBinary(WER_LEVEL_DATA[i]), i + 1, WER4_CHARS, WER_MESSAGES);
+                WER_LEVELS[i] = new MazeLevelV4(DatatypeConverter.parseHexBinary(WER_LEVEL_DATA[i]), i + 1, WER4_CHARS, WER_MESSAGES);
             }
             for (int i = 0; i < DQ_LEVEL_DATA.length; i++) {
-                DQ_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(DQ_LEVEL_DATA[i]), i + 1, 20, DQ_MONSTERS, DQ_MESSAGES);
+                DQ_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(DQ_LEVEL_DATA[i]), i + 1, 20, DQ_MONSTERS, DQ_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_1.length; i++) {
-                EX1_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_1[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX1_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_1[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_2.length; i++) {
-                EX2_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_2[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX2_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_2[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_3.length; i++) {
-                EX3_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_3[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX3_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_3[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_4.length; i++) {
-                EX4_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_4[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX4_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_4[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_5.length; i++) {
-                EX5_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_5[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX5_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_5[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_6.length; i++) {
-                EX6_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_6[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX6_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_6[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
             for (int i = 0; i < EX_DNG_7.length; i++) {
-                EX7_LEVELS[i] = new MazeLevelV1(4, DatatypeConverter.parseHexBinary(EX_DNG_7[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
+                EX7_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_7[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
         } catch (Throwable t) {
             t.printStackTrace();
@@ -442,6 +442,9 @@ public class WizardryData {
             this.startY = 0;
             this.characterMap = null;
             this.characters = null;
+            for (MazeLevel lvl : levels) {
+                lvl.scenario = this;
+            }
             for (Item i : items) {
                 i.scenarioID = this.ordinal();
             }
@@ -460,6 +463,9 @@ public class WizardryData {
             this.startY = startY;
             this.characterMap = WER4_CHAR_MAP;
             this.characters = WER4_CHARS;
+            for (MazeLevel lvl : levels) {
+                lvl.scenario = this;
+            }
             for (Item i : items) {
                 i.scenarioID = this.ordinal();
             }
@@ -538,7 +544,7 @@ public class WizardryData {
 
         public int dimension;
         public int level;
-        public int scenario;
+        public Scenario scenario;
         public MazeCell[][] cells;
 
         public final List<Integer> defeated = new ArrayList<>();
@@ -770,10 +776,9 @@ public class WizardryData {
         public byte[][] cellInfoLocations;
         public EncounterOdds[] monsterOdds = new EncounterOdds[3];
 
-        public MazeLevelV1(int scenario, byte[] buffer, int level, int dimension, List<Monster> monsters, List<Message> messages) {
+        public MazeLevelV1(byte[] buffer, int level, int dimension, List<Monster> monsters, List<Message> messages) {
             this.level = level;
             this.buffer = buffer;
-            this.scenario = scenario;
             this.dimension = dimension;
             this.cells = new MazeCell[dimension][dimension];
 
@@ -1117,10 +1122,9 @@ public class WizardryData {
         private byte[][] cellInfoLocations;
         private EncounterOdds[] monsterOdds = new EncounterOdds[3];
 
-        public MazeLevelV4(int scenario, byte[] buffer, int level, List<DoGooder> characters, List<Message> messages) {
+        public MazeLevelV4(byte[] buffer, int level, List<DoGooder> characters, List<Message> messages) {
             this.level = level;
             this.buffer = buffer;
-            this.scenario = scenario;
             this.dimension = 20;
             this.cells = new MazeCell[dimension][dimension];
 

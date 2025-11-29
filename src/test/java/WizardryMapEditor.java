@@ -5,8 +5,6 @@ import andius.WizardryData.CellType;
 import static andius.WizardryData.CellType.ROCK;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevelV1;
-import static andius.WizardryData.PMO_MESSAGES;
-import static andius.WizardryData.PMO_MONSTERS;
 import andius.WizardryData.Scenario;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -35,8 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.StringBuilder;
-import jakarta.xml.bind.DatatypeConverter;
+import com.badlogic.gdx.utils.CharArray;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.EndianUtils;
@@ -135,8 +132,8 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        WizardryData.Scenario sc = WizardryData.Scenario.EXODUS_PERIN;
-        MazeLevelV1 ml = (MazeLevelV1) sc.levels()[0];
+        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
+        MazeLevelV1 ml = (MazeLevelV1) sc.levels()[6];
         int dim = ml.dimension;
 
         specials = getSpecials(ml.buffer, 0x2F8);
@@ -301,7 +298,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         private final MazeCell cell;
         private Color col = Color.BLUE;
-        private final StringBuilder sb = new StringBuilder();
+        private final CharArray sb = new CharArray();
 
         public MazeLabel(MazeCell cell) {
             super("", skin, "default-12");
@@ -309,7 +306,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         }
 
         @Override
-        public StringBuilder getText() {
+        public CharArray getText() {
             sb.clear();
             if (cell.darkness) {
                 sb.append("DRK");

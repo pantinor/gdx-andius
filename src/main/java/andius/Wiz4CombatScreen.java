@@ -1102,8 +1102,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
-            return new com.badlogic.gdx.utils.StringBuilder(
+        public com.badlogic.gdx.utils.CharArray getText() {
+            return new com.badlogic.gdx.utils.CharArray(
                     String.format("HP: %d /%d  AC: %d  ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.isDead() ? "DEAD" : rec.status));
         }
 
@@ -1131,10 +1131,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
+        public com.badlogic.gdx.utils.CharArray getText() {
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            return new com.badlogic.gdx.utils.StringBuilder(
+            return new com.badlogic.gdx.utils.CharArray(
                     String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                             ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
         }
@@ -1195,8 +1195,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
-            return new com.badlogic.gdx.utils.StringBuilder(
+        public com.badlogic.gdx.utils.CharArray getText() {
+            return new com.badlogic.gdx.utils.CharArray(
                     String.format("HP: %d / %d AC: %d  ST: %s", mm.getCurrentHitPoints(), mm.getMaxHitPoints(), mm.getArmourClass(), mm.getCurrentHitPoints() <= 0 ? "DEAD" : mm.status()));
         }
 
@@ -1224,8 +1224,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
-            return new com.badlogic.gdx.utils.StringBuilder(String.format("MG: %d  PR: %d ", mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel()));
+        public com.badlogic.gdx.utils.CharArray getText() {
+            return new com.badlogic.gdx.utils.CharArray(String.format("MG: %d  PR: %d ", mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel()));
         }
 
         @Override
@@ -1288,8 +1288,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
-            return new com.badlogic.gdx.utils.StringBuilder(
+        public com.badlogic.gdx.utils.CharArray getText() {
+            return new com.badlogic.gdx.utils.CharArray(
                     String.format("HP: %d / %d AC: %d  ST: %s", mm.getCurrentHitPoints(), mm.getMaxHitPoints(), mm.getArmourClass(), mm.getCurrentHitPoints() <= 0 ? "DEAD" : mm.status()));
         }
 
@@ -1317,10 +1317,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
 
         @Override
-        public com.badlogic.gdx.utils.StringBuilder getText() {
+        public com.badlogic.gdx.utils.CharArray getText() {
             int[] ms = mm.getMageSpellLevels();
             int[] cs = mm.getPriestSpellLevels();
-            return new com.badlogic.gdx.utils.StringBuilder(
+            return new com.badlogic.gdx.utils.CharArray(
                     String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
                             ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
         }

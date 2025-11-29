@@ -43,6 +43,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.CharArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import utils.AutoFocusScrollPane;
@@ -489,9 +490,9 @@ public class CampScreen implements Screen, Constants {
             }
 
             @Override
-            public com.badlogic.gdx.utils.StringBuilder getText() {
+            public CharArray getText() {
 
-                com.badlogic.gdx.utils.StringBuilder sb = new com.badlogic.gdx.utils.StringBuilder();
+                CharArray sb = new com.badlogic.gdx.utils.CharArray();
 
                 sb.append(String.format("%s  LVL %d  %s  %s\n", p.name.toUpperCase(), p.level, p.race.toString(), p.classType.toString()));
                 sb.append(String.format("HP: %d /%d AC: %d ST: %s\n", p.hp, p.maxhp, p.calculateAC(), p.status.toString()));

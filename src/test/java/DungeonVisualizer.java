@@ -1,6 +1,7 @@
 
 import andius.Andius;
 import andius.Constants;
+import andius.WizardryData;
 import andius.WizardryDungeonScreen;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -91,13 +92,15 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         environment.add(light6);
 
         modelBatch = new ModelBatch();
+        
+        WizardryData.class.getClass();
 
         this.screen = new WizardryDungeonScreen(Constants.Map.WIZARDRY1);
 
         createAxes();
 
-        cam.position.set(-1f, 3f, -1f);
-        cam.lookAt(5, 0.5f, 5);
+        cam.position.set(-1, 30, 10);
+        cam.lookAt(10, 0.5f, 10);
 
     }
 
@@ -113,7 +116,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         modelBatch.render(axesInstance);
 
         for (WizardryDungeonScreen.DungeonTileModelInstance i : this.screen.modelInstances) {
-            if (i.getLevel() == 1) {
+            if (i.getLevel() == 3) {
                 modelBatch.render(i, environment);
             }
         }
