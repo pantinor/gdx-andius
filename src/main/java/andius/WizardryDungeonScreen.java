@@ -28,7 +28,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -50,7 +49,6 @@ import com.badlogic.gdx.graphics.g3d.attributes.SpotLightsAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
-import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
@@ -61,10 +59,9 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.HashMap;
 import java.util.Iterator;
-import utils.Models;
+import utils.ObjLoader;
 import utils.RotateOnlyInputController;
 import utils.Utils;
 
@@ -80,7 +77,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     private RotateOnlyInputController cameraPan;
     private final AssetManager assets;
 
-    private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, orbModel, chestModel;
+    private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, markModel, chestModel;
     private Model[] walls = new Model[4];
     private Model[] doors = new Model[4];
 
@@ -154,9 +151,9 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.torch = new SpotLight();
         this.environment.add(this.torch);
 
-        this.outside.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1.f));
-        this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.5f);
-        this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 1f, 0.8f, 0.5f);
+        this.outside.set(ColorAttribute.createAmbient(0.8f, 0.8f, 0.8f, 1f));
+        this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 0.2274f, -0.8961f, 0.3811f);
+        this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.1865f, 0.9098f, -0.3709f);
         this.outside.add(this.directionalLightDown);
         this.outside.add(this.directionalLightUp);
 
@@ -202,64 +199,42 @@ public class WizardryDungeonScreen extends BaseScreen {
         Material mwall2 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mwall3 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mwall4 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwood = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wood.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mdirt = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/dirt.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mroof = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/roof.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mfloor = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/rock.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mgreen = new Material(ColorAttribute.createDiffuse(Color.FOREST), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mblue = new Material(ColorAttribute.createDiffuse(Color.BLUE), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material myellow = new Material(ColorAttribute.createDiffuse(Color.YELLOW), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mred = new Material(ColorAttribute.createDiffuse(Color.RED), IntAttribute.createCullFace(GL20.GL_NONE));
         Material medges = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
         Texture grz = assets.get("assets/graphics/grass.png", Texture.class);
         grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         Material mgrass = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
 
-        ladderUp = Models.loadModel("assets/graphics/ladder.obj", "Ladder", 0.1f);
-        ladderDown = Models.loadModel("assets/graphics/ladder.obj", "LadderDown", 0.1f);
-        topHole = Models.loadModel("assets/graphics/ladder.obj", "TopHole", 0.1f);
-        bottomHole = Models.loadModel("assets/graphics/ladder.obj", "BottomHole", 0.1f);
-
-        //export from blender to fbx format, then convert fbx to the g3db like below
-        //fbx-conv.exe -o G3DB ./Chess/pawn.fbx ./pawn.g3db
-        ModelLoader gloader = new G3dModelLoader(new UBJsonReader());
-
-        elevatorModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/metal-door.g3db"));
-        elevatorModel.nodes.get(0).scale.set(.3f, .3f, .3f);
-        elevatorModel.nodes.get(0).translation.set(0, 0, 0);
-        pentagram = gloader.loadModel(Gdx.files.classpath("assets/graphics/pentagram.g3db"));
-        pentagram.nodes.get(0).scale.set(.2f, .2f, .2f);
-        pentagram.nodes.get(0).rotation.set(0, 0, 0, 1);
-        pentagram.nodes.get(0).translation.set(0, -.17f, 0);
-        pentagram.nodes.get(0).parts.first().material = mred;
-        letterM = gloader.loadModel(Gdx.files.classpath("assets/graphics/letter-m.g3db"));
-        letterM.nodes.get(0).scale.set(.3f, .3f, .3f);
-        letterM.nodes.get(0).translation.set(0, 0, 0);
-        letterM.nodes.get(0).parts.first().material = mgreen;
-        fountainModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/fountain.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
-        fountainModel.nodes.get(0).scale.set(.010f, .010f, .010f);
-        orbModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/orb.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.YELLOW, 1));
-        orbModel.nodes.get(0).scale.set(.0025f, .0025f, .0025f);
-        chestModel = gloader.loadModel(Gdx.files.classpath("assets/graphics/chest.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.BROWN, 1));
-        chestModel.nodes.get(0).scale.set(.010f, .010f, .010f);
+        ladderUp = ObjLoader.loadModel("assets/graphics/ladder.obj", "Ladder", 0.1f);
+        ladderDown = ObjLoader.loadModel("assets/graphics/ladder.obj", "LadderDown", 0.1f);
+        topHole = ObjLoader.loadModel("assets/graphics/ladder.obj", "TopHole", 0.1f);
+        bottomHole = ObjLoader.loadModel("assets/graphics/ladder.obj", "BottomHole", 0.1f);
+        pentagram = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", 0.1f);
+        letterM = ObjLoader.loadModel("assets/graphics/letter-m.obj", "letter-m", 0.1f);
+        fountainModel = ObjLoader.loadModel("assets/graphics/fountain.obj", "fountain", 0.1f);
+        chestModel = ObjLoader.loadModel("assets/graphics/chest.obj", "chest", 0.1f);
+        elevatorModel = ObjLoader.loadModel("assets/graphics/elevator.obj", "elevator-booth", 0.1f);
+        markModel = ObjLoader.loadModel("assets/graphics/marks.obj", "mark", 0.1f);
 
         walls[0] = Utils.createWall(builder, mwall1, medges);
         walls[1] = Utils.createWall(builder, mwall2, medges);
         walls[2] = Utils.createWall(builder, mwall3, medges);
         walls[3] = Utils.createWall(builder, mwall4, medges);
 
-        doors[0] = Utils.getDoor(gloader, builder, walls[0], mwood);
-        doors[1] = Utils.getDoor(gloader, builder, walls[1], mwood);
-        doors[2] = Utils.getDoor(gloader, builder, walls[2], mwood);
-        doors[3] = Utils.getDoor(gloader, builder, walls[3], mwood);
+        doors[0] = Utils.getDoor(builder, walls[0]);
+        doors[1] = Utils.getDoor(builder, walls[1]);
+        doors[2] = Utils.getDoor(builder, walls[2]);
+        doors[3] = Utils.getDoor(builder, walls[3]);
 
         Model floorModel = Utils.createThinBox(builder, mfloor, medges);
         Model grassModel = Utils.createThinBox(builder, mgrass, mgreen);
         Model ceilingModel = Utils.createThinBox(builder, mroof, mdirt, medges);
 
-        Model sky = gloader.loadModel(Gdx.files.classpath("assets/graphics/skydome.g3db"), (String fileName) -> Utils.fillRectangle(5, 5, Color.SKY, 1));
-        sky.nodes.get(0).scale.set(.14f, .14f, .14f);
-        sky.nodes.get(0).translation.set(10, -3, 10);
+        Model sky = Utils.createSky(builder);
+        sky.nodes.get(0).translation.set(10, 0, 10);
 
         for (int x = -this.dim * 2; x < this.dim * 2; x++) {
             for (int y = -this.dim * 2; y < this.dim * 2; y++) {
@@ -336,7 +311,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                 for (int n = 0; n < this.dim; n++) {
                     MazeCell cell = this.map.scenario().levels()[level].cells[n][e];
                     addBlock(level, cell, n, e);
-                    if (this.map != Map.WIZARDRY4 || (level == 4 || level == 6 || level == 8)) {
+                    if (this.map != Map.WIZARDRY4 || (level == 4 || level == 6)) {
                         //duplicated for wrapping
                         addBlock(level, cell, n + this.dim, e);
                         addBlock(level, cell, n - this.dim, e);
@@ -346,6 +321,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                         addBlock(level, cell, n - this.dim, e - this.dim);
                         addBlock(level, cell, n + this.dim, e - this.dim);
                         addBlock(level, cell, n - this.dim, e + this.dim);
+
+                        pruneWrappedInstances();
                     }
                     if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0
                             || cell.message != null || cell.function != null) {
@@ -360,8 +337,6 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
         }
-
-        pruneWrappedInstances();
 
     }
 
@@ -467,10 +442,14 @@ public class WizardryDungeonScreen extends BaseScreen {
     @Override
     public void show() {
         Andius.HUD.addActor(this.stage);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage, cameraPan));
+        setInputProcessor();
         loadMazeData(CTX.saveGame);
         createMiniMap();
         moveMiniMapIcon();
+    }
+
+    public void setInputProcessor() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage, cameraPan));
     }
 
     @Override
@@ -581,7 +560,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             modelInstances.add(new DungeonTileModelInstance(chestModel, level, x, y, x + .5f, 0, y + .5f));
         }
         if (cell.markType >= 0) {
-            modelInstances.add(new DungeonTileModelInstance(orbModel, level, x, y, x + .5f, .5f, y + .5f));
+            modelInstances.add(new DungeonTileModelInstance(markModel, level, x, y, x + .5f, 0, y + .5f));
         } else if (cell.fountainType >= 0) {
             modelInstances.add(new DungeonTileModelInstance(fountainModel, level, x, y, x + .5f, 0, y + .5f));
         } else if (cell.message != null || cell.function != null) {

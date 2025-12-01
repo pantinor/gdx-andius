@@ -13,6 +13,7 @@ import andius.Andius;
 import andius.BaseScreen;
 import andius.Constants;
 import andius.Context;
+import andius.WizardryDungeonScreen;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -109,10 +110,10 @@ public class ReorderPartyDialog extends Window implements Constants {
                     float high = totalHeight - playerSelection.getItemHeight() * idx;
                     float low = high - playerSelection.getItemHeight();
                     if (y <= high && y >= low) {
-                        CharacterRecord c1 = ctx.players()[(int)payload.getObject()];
+                        CharacterRecord c1 = ctx.players()[(int) payload.getObject()];
                         CharacterRecord c2 = ctx.players()[idx];
                         ctx.players()[idx] = c1;
-                        ctx.players()[(int)payload.getObject()] = c2;
+                        ctx.players()[(int) payload.getObject()] = c2;
                         playerSelection.setItems(ctx.players());
                     }
                 }
@@ -195,7 +196,12 @@ public class ReorderPartyDialog extends Window implements Constants {
             remove();
         }
 
-        Gdx.input.setInputProcessor(new InputMultiplexer(screen, stage));
+        if (screen instanceof WizardryDungeonScreen) {
+            WizardryDungeonScreen wds = (WizardryDungeonScreen) screen;
+            wds.setInputProcessor();
+        } else {
+            Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+        }
     }
 
 }

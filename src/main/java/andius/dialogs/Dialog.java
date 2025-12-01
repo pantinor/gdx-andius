@@ -4,6 +4,7 @@ import andius.Andius;
 import andius.BaseScreen;
 import andius.Constants;
 import andius.Context;
+import andius.WizardryDungeonScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -29,7 +30,7 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
         setSkin(Andius.skin);
         setWidth(WIDTH);
         setHeight(HEIGHT);
-        
+
         pad(10);
 
         scrollPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
@@ -53,11 +54,12 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
     @Override
     public void hide() {
         super.hide();
-        Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+        if (screen instanceof WizardryDungeonScreen) {
+            WizardryDungeonScreen wds = (WizardryDungeonScreen) screen;
+            wds.setInputProcessor();
+        } else {
+            Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+        }
     }
-    
-    
-    
-    
 
 }

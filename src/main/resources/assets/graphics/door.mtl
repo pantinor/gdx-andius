@@ -1,0 +1,22 @@
+# Blender 4.3.2 MTL File: 'knight.blend'
+# www.blender.org
+
+newmtl mortar
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.4 0.35 0.35
+Ks 0.500000 0.500000 0.500000
+Ke 0.3 0.15 0.07   # emissive (glow)
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl wood
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.7 0.3 0.1
+Ks 0.500000 0.500000 0.500000
+Ke 0.3 0.15 0.07   # emissive (glow)
+Ni 1.500000
+d 1.000000
+illum 2

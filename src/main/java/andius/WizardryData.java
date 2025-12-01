@@ -1115,12 +1115,12 @@ public class WizardryData {
         }
     }
 
-    private static class MazeLevelV4 extends MazeLevel {
+    public static class MazeLevelV4 extends MazeLevel {
 
-        private byte[] buffer;
-        private CellInfo[] cellInfo;
-        private byte[][] cellInfoLocations;
-        private EncounterOdds[] monsterOdds = new EncounterOdds[3];
+        public byte[] buffer;
+        public CellInfo[] cellInfo;
+        public byte[][] cellInfoLocations;
+        public EncounterOdds[] monsterOdds = new EncounterOdds[3];
 
         public MazeLevelV4(byte[] buffer, int level, List<DoGooder> characters, List<Message> messages) {
             this.level = level;

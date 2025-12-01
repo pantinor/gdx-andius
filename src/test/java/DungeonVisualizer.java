@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
 
 public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
@@ -99,8 +98,8 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
 
         createAxes();
 
-        cam.position.set(-1, 30, 10);
-        cam.lookAt(10, 0.5f, 10);
+        cam.position.set(2.5f, .5f, 3.5f);
+        cam.lookAt(3.5f, 0.5f, 3.5f);
 
     }
 
@@ -116,7 +115,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         modelBatch.render(axesInstance);
 
         for (WizardryDungeonScreen.DungeonTileModelInstance i : this.screen.modelInstances) {
-            if (i.getLevel() == 3) {
+            if (i.getLevel() == 0) {
                 modelBatch.render(i, environment);
             }
         }
@@ -220,54 +219,6 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
     @Override
     public boolean scrolled(float f, float f1) {
         return false;
-    }
-
-    private class DungeonTileModelInstance extends ModelInstance {
-
-        private final int level;
-        private final float cx;
-        private final float cy;
-        private boolean rotates;
-
-        public DungeonTileModelInstance(Model model, int level, float cx, float cy) {
-            super(model);
-            this.level = level;
-            this.cx = cx;
-            this.cy = cy;
-        }
-
-        public DungeonTileModelInstance(Model model, int level, float cx, float cy, float x, float y, float z, boolean rotates) {
-            this(model, level, cx, cy, x, y, z);
-            this.rotates = rotates;
-        }
-
-        public DungeonTileModelInstance(Model model, int level, float cx, float cy, float x, float y, float z) {
-            super(model);
-            this.level = level;
-            this.cx = cx;
-            this.cy = cy;
-            this.transform.setToTranslation(x, y, z);
-        }
-
-        public int getLevel() {
-            return level;
-        }
-
-        public float getCx() {
-            return cx;
-        }
-
-        public float getCy() {
-            return cy;
-        }
-
-        public void render(ModelBatch batch, Environment env) {
-            if (this.rotates) {
-                this.transform.rotate(Vector3.Y, 45f * Gdx.graphics.getDeltaTime());
-            }
-            batch.render(this, env);
-        }
-
     }
 
 }

@@ -4,7 +4,7 @@ import andius.WizardryData;
 import andius.WizardryData.CellType;
 import static andius.WizardryData.CellType.ROCK;
 import andius.WizardryData.MazeCell;
-import andius.WizardryData.MazeLevelV1;
+import andius.WizardryData.MazeLevelV4;
 import andius.WizardryData.Scenario;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -132,8 +132,8 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
-        MazeLevelV1 ml = (MazeLevelV1) sc.levels()[6];
+        WizardryData.Scenario sc = WizardryData.Scenario.WER;
+        MazeLevelV4 ml = (MazeLevelV4) sc.levels()[8];
         int dim = ml.dimension;
 
         specials = getSpecials(ml.buffer, 0x2F8);

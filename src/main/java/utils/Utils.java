@@ -14,8 +14,6 @@ import andius.objects.Mutable;
 import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -25,6 +23,8 @@ import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector2;
@@ -445,6 +445,12 @@ public class Utils {
         label.addAction(sequence(Actions.moveTo(dx, dy, 3f), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
+    public static Model createSky(ModelBuilder builder) {
+        Material skyMaterial = new Material(ColorAttribute.createDiffuse(Color.SKY), IntAttribute.createCullFace(GL20.GL_NONE));
+        long attrs = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal;
+        return builder.createSphere(50f, 50f, 50f, 32, 32, skyMaterial, attrs);
+    }
+
     public static Model createWall(ModelBuilder builder, Material wallMaterial, Material edgeMaterial) {
 
         final float width = 1f;
@@ -649,12 +655,9 @@ public class Utils {
         return builder.end();
     }
 
-    public static Model getDoor(ModelLoader gloader, ModelBuilder builder, Model wall, Material mwood) {
-        Model door = gloader.loadModel(Gdx.files.classpath("assets/graphics/door.g3db"));
-        door.nodes.get(0).scale.set(.2f, .2f, .2f);
-        door.nodes.get(0).translation.set(.06f, -.5f, .015f);
-        door.nodes.get(0).parts.first().material = mwood;
-        
+    public static Model getDoor(ModelBuilder builder, Model wall) {
+        Model door = ObjLoader.loadModel("assets/graphics/door.obj", "door", 0.1f);
+        door.nodes.get(0).translation.set(0f, -.5f, 0f);
         door.calculateTransforms();
 
         builder.begin();

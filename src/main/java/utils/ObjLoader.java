@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
 
-public class Models {
+public class ObjLoader {
 
     public static Model loadModel(String fname, String name, float scale) {
         ObjData data;
@@ -44,17 +44,13 @@ public class Models {
             e.printStackTrace();
         }
 
-        final VertexAttributes edgeVA = new VertexAttributes(
-                new VertexAttribute(VertexAttributes.Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE)
-        );
-
         final VertexAttributes solidVA = new VertexAttributes(
                 new VertexAttribute(VertexAttributes.Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE),
                 new VertexAttribute(VertexAttributes.Usage.Normal, 3, ShaderProgram.NORMAL_ATTRIBUTE)
         );
 
         // Fallback material when a face has no or unknown material
-        final Material defaultSolidMaterial = new Material(ColorAttribute.createDiffuse(Color.RED));
+        final Material defaultSolidMaterial = new Material(ColorAttribute.createDiffuse(Color.CHARTREUSE));
 
         for (ObjObject obj : data.objects) {
             if (!obj.name.equals(name)) {
@@ -83,60 +79,8 @@ public class Models {
 
             final float yOffset = (minY == Float.POSITIVE_INFINITY) ? 0f : -minY;
 
-            // --- build model ---
             ModelBuilder mb = new ModelBuilder();
             mb.begin();
-
-            final HashSet<Long> edgeSet = new HashSet<>();
-
-            // collect edges from polylines
-            for (int[] chain : obj.lines) {
-                for (int i = 0; i < chain.length - 1; i++) {
-                    addEdge(edgeSet, chain[i], chain[i + 1]);
-                }
-            }
-
-            // collect edges from faces
-            for (int[] poly : obj.faces) {
-                int n = poly.length;
-                if (n < 2) {
-                    continue;
-                }
-                for (int i = 0; i < n; i++) {
-                    int a = poly[i];
-                    int b = poly[(i + 1) % n];
-                    addEdge(edgeSet, a, b);
-                }
-            }
-
-            // Map each edge to the material of one adjacent face (if any)
-            final HashMap<Long, String> edgeToMtl = new HashMap<>();
-            for (int faceIndex = 0; faceIndex < obj.faces.size(); faceIndex++) {
-                int[] poly = obj.faces.get(faceIndex);
-                int n = poly.length;
-                if (n < 2) {
-                    continue;
-                }
-
-                String mtlName = (faceIndex < obj.faceMaterials.size())
-                        ? obj.faceMaterials.get(faceIndex)
-                        : null;
-
-                for (int i = 0; i < n; i++) {
-                    int a = poly[i];
-                    int b = poly[(i + 1) % n];
-
-                    int i0 = Math.min(a, b);
-                    int i1 = Math.max(a, b);
-                    long edgeKey = ((long) i0 << 32) | (i1 & 0xFFFFFFFFL);
-
-                    // Only set the material once; if two faces share the edge with different
-                    // materials, the first one wins.
-                    if (edgeSet.contains(edgeKey) && !edgeToMtl.containsKey(edgeKey)) {
-                        edgeToMtl.put(edgeKey, mtlName);
-                    }
-                }
-            }
 
             Vector3 tmp0 = new Vector3();
             Vector3 tmp1 = new Vector3();
@@ -145,55 +89,18 @@ public class Models {
             Vector3 edge1 = new Vector3();
             Vector3 normal = new Vector3();
 
-            // One MeshPartBuilder per material name for edges
-            HashMap<String, MeshPartBuilder> edgeBuilders = new HashMap<>();
-
-            // build edge geometry, grouped by adjacent face material
-            for (long key : edgeSet) {
-                int i0 = (int) (key >>> 32);
-                int i1 = (int) key;
-
-                String mtlName = edgeToMtl.get(key);
-                String builderKey = (mtlName != null) ? mtlName : "__default__";
-
-                MeshPartBuilder edgePart = edgeBuilders.get(builderKey);
-                if (edgePart == null) {
-                    Material mat = (mtlName != null) ? mtlMaterials.get(mtlName) : null;
-                    if (mat == null) {
-                        mat = defaultSolidMaterial;
-                    }
-                    edgePart = mb.part(
-                            obj.name + "_edges_" + builderKey,
-                            GL20.GL_LINES,
-                            edgeVA,
-                            mat
-                    );
-                    edgeBuilders.put(builderKey, edgePart);
-                }
-
-                Vector3 p0 = tmp0.set(data.vertices.get(i0)).add(0f, yOffset, 0f);
-                Vector3 p1 = tmp1.set(data.vertices.get(i1)).add(0f, yOffset, 0f);
-                short s0 = edgePart.vertex(new VertexInfo().setPos(p0));
-                short s1 = edgePart.vertex(new VertexInfo().setPos(p1));
-                edgePart.line(s0, s1);
-            }
-
-            // One MeshPartBuilder per material name for solid faces
             HashMap<String, MeshPartBuilder> solidBuilders = new HashMap<>();
 
-            // build solid faces, grouped by material
             for (int faceIndex = 0; faceIndex < obj.faces.size(); faceIndex++) {
                 int[] poly = obj.faces.get(faceIndex);
                 if (poly.length < 3) {
                     continue;
                 }
 
-                // Which material applies to this face?
                 String mtlName = (faceIndex < obj.faceMaterials.size())
                         ? obj.faceMaterials.get(faceIndex)
                         : null;
 
-                // key for the per-material builder
                 String key = (mtlName != null) ? mtlName : "__default__";
 
                 MeshPartBuilder solid = solidBuilders.get(key);
@@ -214,7 +121,6 @@ public class Models {
                 int v0Index = poly[0];
                 Vector3 v0 = tmp0.set(data.vertices.get(v0Index)).add(0f, yOffset, 0f);
 
-                // fan triangulation
                 for (int i = 1; i < poly.length - 1; i++) {
                     int v1Index = poly[i];
                     int v2Index = poly[i + 1];
@@ -241,7 +147,6 @@ public class Models {
             }
 
             Model model = mb.end();
-            // apply scale
             model.nodes.get(0).scale.set(scale, scale, scale);
             return model;
         }
@@ -399,29 +304,6 @@ public class Models {
         int i1 = Math.max(a, b);
         long key = ((long) i0 << 32) | (i1 & 0xFFFFFFFFL);
         set.add(key);
-    }
-
-    private static String[] splitWS(String s, int expected) {
-        String[] out = new String[expected];
-        int idx = 0;
-        int i = 0, len = s.length();
-        while (i < len && idx < expected) {
-            while (i < len && Character.isWhitespace(s.charAt(i))) {
-                i++;
-            }
-            int start = i;
-            while (i < len && !Character.isWhitespace(s.charAt(i))) {
-                i++;
-            }
-            if (start < i) {
-                out[idx++] = s.substring(start, i);
-            }
-        }
-        if (idx != expected) {
-            return s.trim().split("\\s+"); // fallback
-        }
-        return out;
-
     }
 
     private static class ObjData {
