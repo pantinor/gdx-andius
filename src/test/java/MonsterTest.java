@@ -37,10 +37,10 @@ import utils.Loggable;
 
 public class MonsterTest {
 
-    //@Test
+    @Test
     public void monsters() throws Exception {
 
-        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/leglyl-monsters.json");
+        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/slaver-monsters.json");
         String json = IOUtils.toString(is2);
 
         GsonBuilder builder = new GsonBuilder();
@@ -49,11 +49,34 @@ public class MonsterTest {
         }.getType());
 
         Collections.sort(monsters);
-        System.out.println("ID\tNAME          \tTYPE      \tLVL\tEXP\tHPMX\tAC\tDAMG                      \tMAGE\tPRST\tSPED\tGOLD\tREWD\tLVLDR\tHEAL\tBRTH\tPARTID\tGRPSZ");
+
+        // Header aligned to Monster.toString()’s column widths
+        String header = String.format(
+                "%s\t%-55s\t%-15s\t%-4s\t%-4s\t%-5s\t%-3s\t%-25s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+                "ID",
+                "NAME",
+                "TYPE",
+                "LVL",
+                "EXP",
+                "HPMX",
+                "AC",
+                "DAMG",
+                "MAGE",
+                "PRST",
+                "SPED",
+                "GOLD",
+                "REWD",
+                "LVLDR",
+                "HEAL",
+                "BRTH",
+                "PARTID",
+                "GRPSZ"
+        );
+        System.out.println(header);
+
         for (Monster m : monsters) {
             System.out.println(m);
         }
-
     }
 
     //@Test

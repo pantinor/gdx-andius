@@ -277,6 +277,19 @@ public class TmxWizardryLevel extends MazeLevel {
             this.cells[py][px].addressTo = new MazeAddress(lvl, dimension - 1 - dy, dx);
         }
 
+        MapLayer encounters = tiledMap.getLayers().get("encounters");
+        Iterator<MapObject> iter2 = encounters.getObjects().iterator();
+        while (iter2.hasNext()) {
+            MapObject obj = iter2.next();
+            RectangleMapObject rmo = (RectangleMapObject) obj;
+            Rectangle rect = rmo.getRectangle();
+            int px = (int) (rect.x / 16f);
+            int py = (int) (rect.y / 16f);
+            MapProperties props = obj.getProperties();
+            int eid = Integer.parseInt((String) props.get("id"));
+            this.cells[py][px].encounterID = eid;
+        }
+
     }
 
     @Override
