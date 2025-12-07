@@ -257,9 +257,12 @@ public class WizardryData {
         WER_PYRAMID_ENTRAP_10, WER_LVL_11, WER_CASTLE_2, WER_CASTLE_3, WER_LVL_15};
     public static final MazeLevel[] WER_LEVELS = new MazeLevel[WER_LEVEL_DATA.length];
 
+    public static final MazeLevel[] SLAVER_LEVELS = new MazeLevel[2];
+    public static final String[] SLAVER_LEVELS_DESC = new String[]{"Slave Pits Temple Level", "Slave Pits Sewer Level"};
+
     public static List<Item> PMO_ITEMS, KOD_ITEMS, LEG_ITEMS, BS_ITEMS, WER_ITEMS, DQ_ITEMS;
 
-    public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS, WER_MONSTERS, DQ_MONSTERS;
+    public static List<Monster> PMO_MONSTERS, KOD_MONSTERS, LEG_MONSTERS, BS_MONSTERS, WER_MONSTERS, DQ_MONSTERS, SLAVER_MONSTERS;
 
     public static List<DoGooder> WER4_CHARS;
     public static final java.util.Map<String, DoGooder> WER4_CHAR_MAP = new HashMap<>();
@@ -298,6 +301,8 @@ public class WizardryData {
             String j22 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/dq-monsters.json"));
             String j23 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/dq-rewards.json"));
             String j24 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/dq-messages.json"));
+
+            String j25 = IOUtils.toString(WizardryData.class.getResourceAsStream("/assets/json/slaver-monsters.json"));
 
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
@@ -398,6 +403,13 @@ public class WizardryData {
             for (int i = 0; i < EX_DNG_7.length; i++) {
                 EX7_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_7[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
+
+            SLAVER_LEVELS[0] = new TmxWizardryLevel("slaver-pit-1.tmx", 1, 30);
+            SLAVER_LEVELS[1] = new TmxWizardryLevel("slaver-pit-2.tmx", 2, 30);
+            
+            SLAVER_MONSTERS = gson.fromJson(j25, new TypeToken<List<Monster>>() {
+            }.getType());
+
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -417,7 +429,8 @@ public class WizardryData {
         EXODUS_FIRE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX4_LEVELS, 1, 14, 1, FIRE_LEVEL_DESC),
         EXODUS_DOOM(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX5_LEVELS, 1, 14, 1, DOOM_LEVEL_DESC),
         EXODUS_SNAKE(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX6_LEVELS, 1, 14, 1, SNAKE_LEVEL_DESC),
-        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, 1, 14, 1, TIME_LEVEL_DESC);
+        EXODUS_TIME(PMO_ITEMS, PMO_MONSTERS, PMO_REWARDS, PMO_MESSAGES, EX7_LEVELS, 1, 14, 1, TIME_LEVEL_DESC),
+        SLAVERS_PIT(PMO_ITEMS, SLAVER_MONSTERS, PMO_REWARDS, PMO_MESSAGES, SLAVER_LEVELS, 1, 0, 4, SLAVER_LEVELS_DESC);
 
         private final List<Item> items;
         private final List<Monster> monsters;

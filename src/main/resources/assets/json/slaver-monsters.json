@@ -1,0 +1,1039 @@
+[
+    {
+        "genericName": "Ghoul",
+        "name": "Ghoul",
+        "monsterId": 1,
+        "iconId": 1,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 14,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "LVLDRAIN", "MAGIC"],
+        "ability": ["PARALYZE"],
+        "exp": 300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 12,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 12,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Ghast",
+        "name": "Ghast",
+        "monsterId": 2,
+        "iconId": 2,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 14,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "LVLDRAIN", "MAGIC"],
+        "ability": ["PARALYZE", "POISON"],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 12,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Gelatinous Cube",
+        "name": "Gelatinous Cube",
+        "monsterId": 3,
+        "iconId": 3,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "MAGIC"],
+        "ability": ["PARALYZE"],
+        "exp": 300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 10,
+            "bonus": 36
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 4
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Dire Rat",
+        "name": "Dire Rat",
+        "monsterId": 4,
+        "iconId": 4,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 15,
+        "speed": 40,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": ["POISON"],
+        "exp": 33,
+        "groupSize": {
+            "qty": 1,
+            "sides": 20,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Ogre",
+        "name": "Ogre",
+        "monsterId": 5,
+        "iconId": 5,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 16,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 8
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 7
+            },
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 7
+            }
+        ]
+    },
+    {
+        "genericName": "Wight",
+        "name": "Wight",
+        "monsterId": 6,
+        "iconId": 6,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 15,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 1,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "LVLDRAIN", "MAGIC"],
+        "ability": [],
+        "exp": 300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 11,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 12,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Troll",
+        "name": "Troll",
+        "monsterId": 7,
+        "iconId": 7,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 18,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 5,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 500,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 36
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 6
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 6
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 3
+            },
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 9
+            }
+        ]
+    },
+    {
+        "genericName": "Zombie",
+        "name": "Zombie",
+        "monsterId": 8,
+        "iconId": 8,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 11,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "LVLDRAIN", "MAGIC"],
+        "ability": [],
+        "exp": 50,
+        "groupSize": {
+            "qty": 1,
+            "sides": 5,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 12,
+            "bonus": 3
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Dire Weasel",
+        "name": "Dire Weasel",
+        "monsterId": 9,
+        "iconId": 9,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 16,
+        "speed": 40,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": ["POISON"],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 2,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 3
+            }
+        ]
+    },
+    {
+        "genericName": "Skeleton",
+        "name": "Skeleton",
+        "monsterId": 10,
+        "iconId": 10,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 13,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["POISON", "LVLDRAIN", "COLD", "MAGIC"],
+        "ability": [],
+        "exp": 100,
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 12,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Stirges",
+        "name": "Stirges",
+        "monsterId": 11,
+        "iconId": 11,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 16,
+        "speed": 10,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": ["POISON"],
+        "exp": 50,
+        "groupSize": {
+            "qty": 1,
+            "sides": 13,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": -4
+            }
+        ]
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc",
+        "monsterId": 12,
+        "iconId": 12,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 14,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 50,
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 3
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 2
+            }
+        ]
+    },
+    {
+        "genericName": "Harpy",
+        "name": "Harpy",
+        "monsterId": 13,
+        "iconId": 13,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 13,
+        "speed": 20,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": ["SLEEP"],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 12,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 7,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Green Slime",
+        "name": "Green Slime",
+        "monsterId": 14,
+        "iconId": 14,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 1,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": ["POISON"],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Giant Sundew",
+        "name": "Giant Sundew",
+        "monsterId": 15,
+        "iconId": 15,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 13,
+        "speed": 5,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["FIRE"],
+        "ability": ["POISON"],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 8,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Doppleganger",
+        "name": "Doppleganger",
+        "monsterId": 16,
+        "iconId": 16,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 15,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["MAGIC"],
+        "ability": [],
+        "exp": 300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 4
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Crocodile",
+        "name": "Crocodile",
+        "monsterId": 17,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 15,
+        "speed": 20,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 11,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 9
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 6
+            },
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 6
+            }
+        ]
+    },
+    {
+        "genericName": "Basilisk",
+        "name": "Basilisk",
+        "monsterId": 18,
+        "iconId": 12,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 16,
+        "speed": 20,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["STONING"],
+        "ability": ["STONE"],
+        "exp": 500,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 10,
+            "bonus": 12
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 3
+            }
+        ]
+    },
+    {
+        "genericName": "Giant Ant Worker",
+        "name": "Giant Ant Worker",
+        "monsterId": 19,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 17,
+        "speed": 50,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["MAGIC"],
+        "ability": [],
+        "exp": 100,
+        "groupSize": {
+            "qty": 1,
+            "sides": 11,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Giant Ant Soldier",
+        "name": "Giant Ant Soldier",
+        "monsterId": 20,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 17,
+        "speed": 50,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["MAGIC"],
+        "ability": ["POISON"],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 2
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 3
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Giant Ant Queen",
+        "name": "Giant Ant Queen",
+        "monsterId": 21,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 17,
+        "speed": 40,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["MAGIC"],
+        "ability": [],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 4
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 4
+            }
+        ]
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 22,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 19,
+        "speed": 40,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["FIRE", "COLD"],
+        "ability": [],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 6
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Aspis Larvae",
+        "name": "Aspis Larvae",
+        "monsterId": 23,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 14,
+        "speed": 30,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["FIRE", "COLD"],
+        "ability": [],
+        "exp": 200,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 2
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Aspis Cow",
+        "name": "Aspis Cow",
+        "monsterId": 24,
+        "iconId": 17,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 0,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 12,
+        "speed": 10,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": ["FIRE", "COLD"],
+        "ability": ["POISON"],
+        "exp": 1000,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 10,
+            "sides": 8,
+            "bonus": 10
+        },
+        "damage": [
+            {
+                "qty": 3,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 4,
+                "sides": 10,
+                "bonus": 0
+            }
+        ]
+    }
+]
+

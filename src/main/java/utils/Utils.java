@@ -666,4 +666,13 @@ public class Utils {
         return builder.end();
     }
 
+    public static Model getMark(ModelBuilder builder, Model mark) {
+        Model pedestal = ObjLoader.loadModel("assets/graphics/pedestal.obj", "pedestal", 0.1f);
+
+        builder.begin();
+        builder.node("mark", mark);
+        builder.node("pedestal", pedestal);
+        return builder.end();
+    }
+
 }

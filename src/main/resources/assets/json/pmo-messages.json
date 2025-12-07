@@ -361,25 +361,25 @@
     {
         "id": 201,
         "text": [
-            "You found a Yellow Mark which brings great favor with kings and will raise your Experiential Prowess."
+            "Before you is pedestal with a Mark of Kings."
         ]
     },
     {
         "id": 202,
         "text": [
-            "You found a Red Mark warm to the touch.  It will grant the ability to pass unharmed through Lava."
+            "Before you is pedestal with a Mark of Fire."
         ]
     },
     {
         "id": 203,
         "text": [
-            "You found a Blue Mark cold to the touch.  It will grant the ability to pass unharmed through Force Fields."
+            "Before you is pedestal with a Mark of Force."
         ]
     },
     {
         "id": 204,
         "text": [
-            "You found a Green Mark cold to the touch.  It will be necessary to have this mark to pass the Great Earth Serpent."
+            "Before you is pedestal with a Mark of the Snake."
         ]
     }
 ]

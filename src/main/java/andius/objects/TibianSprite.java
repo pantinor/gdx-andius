@@ -30,9 +30,11 @@ public class TibianSprite {
     }
 
     public static TextureRegion icon(String n) {
-        TextureRegion cr = atlas.findRegion(n);
-        if (cr != null) {
-            return cr;
+        if (atlas != null) {
+            TextureRegion cr = atlas.findRegion(n);
+            if (cr != null) {
+                return cr;
+            }
         }
         return null;
     }

@@ -77,7 +77,8 @@ public class WizardryDungeonScreen extends BaseScreen {
     private RotateOnlyInputController cameraPan;
     private final AssetManager assets;
 
-    private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, markModel, chestModel;
+    private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, chestModel;
+    private Model[] markModels = new Model[4];
     private Model[] walls = new Model[4];
     private Model[] doors = new Model[4];
 
@@ -115,11 +116,11 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final MiniMapIcon miniMapIcon;
     private final Pixmap miniMapIconsPixmap;
     private final int miniMapBackgroundDimension;
+    private Texture miniMapBackground;
     private final int dim;//dimension of the map
     private final int xalignMM;
     private final int yalignMM;
 
-    private static Texture MINI_MAP_BACKGROUND;
     private static final int MINI_DIM = 24;
 
     public final Constants.Map map;
@@ -134,7 +135,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.miniMapBackgroundDimension = MINI_DIM * this.dim + 8;
         this.xalignMM = Andius.SCREEN_WIDTH - this.miniMapBackgroundDimension - 10;
         this.yalignMM = Andius.SCREEN_HEIGHT - this.miniMapBackgroundDimension - 10;
-        MINI_MAP_BACKGROUND = Utils.fillRectangle(miniMapBackgroundDimension + 7, miniMapBackgroundDimension + 7, new Color(0x009900ff), 1);
+        this.miniMapBackground = Utils.fillRectangle(miniMapBackgroundDimension + 7, miniMapBackgroundDimension + 7, new Color(0x009900ff), 1);
 
         arrows[3][2].getTexture().getTextureData().prepare();
         this.miniMapIconsPixmap = arrows[3][2].getTexture().getTextureData().consumePixmap();
@@ -192,7 +193,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         assets.load("assets/graphics/rock.png", Texture.class);
         assets.load("assets/graphics/grass.png", Texture.class);
         assets.load("assets/graphics/roof.png", Texture.class);
-        assets.load("assets/graphics/wood.png", Texture.class);
         assets.update(2000);
 
         Material mwall1 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
@@ -217,7 +217,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         fountainModel = ObjLoader.loadModel("assets/graphics/fountain.obj", "fountain", 0.1f);
         chestModel = ObjLoader.loadModel("assets/graphics/chest.obj", "chest", 0.1f);
         elevatorModel = ObjLoader.loadModel("assets/graphics/elevator.obj", "elevator-booth", 0.1f);
-        markModel = ObjLoader.loadModel("assets/graphics/marks.obj", "mark", 0.1f);
+        markModels[0] = Utils.getMark(builder, ObjLoader.loadModel("assets/graphics/mark-king.obj", "mark-king", 0.1f));
+        markModels[1] = Utils.getMark(builder, ObjLoader.loadModel("assets/graphics/mark-fire.obj", "mark-fire", 0.1f));
+        markModels[2] = Utils.getMark(builder, ObjLoader.loadModel("assets/graphics/mark-force.obj", "mark-force", 0.1f));
+        markModels[3] = Utils.getMark(builder, ObjLoader.loadModel("assets/graphics/mark-snake.obj", "mark-snake", 0.1f));
 
         walls[0] = Utils.createWall(builder, mwall1, medges);
         walls[1] = Utils.createWall(builder, mwall2, medges);
@@ -321,8 +324,6 @@ public class WizardryDungeonScreen extends BaseScreen {
                         addBlock(level, cell, n - this.dim, e - this.dim);
                         addBlock(level, cell, n + this.dim, e - this.dim);
                         addBlock(level, cell, n - this.dim, e + this.dim);
-
-                        pruneWrappedInstances();
                     }
                     if (cell.markType >= 0 || cell.summoningCircle != null || cell.fountainType >= 0
                             || cell.message != null || cell.function != null) {
@@ -337,6 +338,8 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
         }
+
+        pruneWrappedInstances();
 
     }
 
@@ -497,48 +500,43 @@ public class WizardryDungeonScreen extends BaseScreen {
             modelInstances.add(instance);
         }
 
-        if (cell.northDoor) {
-            if (cell.northWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                modelInstances.add(instance);
-            }
+        if (cell.hiddenNorthDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(270, 0, 0).trn(x + 1 - .025f, z, y + .5f);
+            modelInstances.add(instance);
+        } else if (cell.northDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
+            modelInstances.add(instance);
         }
-        if (cell.southDoor) {
-            if (cell.southWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
-                modelInstances.add(instance);
-            }
+
+        if (cell.hiddenSouthDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
+            modelInstances.add(instance);
+        } else if (cell.southDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
+            modelInstances.add(instance);
         }
-        if (cell.eastDoor) {
-            if (cell.eastWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
-                modelInstances.add(instance);
-            }
+
+        if (cell.hiddenEastDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(180, 0, 0).trn(x + .5f, z, y - .025f + 1);
+            modelInstances.add(instance);
+        } else if (cell.eastDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
+            modelInstances.add(instance);
         }
-        if (cell.westDoor) {
-            if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setToTranslation(x + .5f, z, y + .025f);
-                modelInstances.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
-                modelInstances.add(instance);
-            }
+
+        if (cell.hiddenWestDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setToTranslation(x + .5f, z, y + .025f);
+            modelInstances.add(instance);
+        } else if (cell.westDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
+            modelInstances.add(instance);
         }
 
         if (cell.stairs) {
@@ -560,7 +558,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             modelInstances.add(new DungeonTileModelInstance(chestModel, level, x, y, x + .5f, 0, y + .5f));
         }
         if (cell.markType >= 0) {
-            modelInstances.add(new DungeonTileModelInstance(markModel, level, x, y, x + .5f, 0, y + .5f));
+            modelInstances.add(new DungeonTileModelInstance(markModels[cell.markType - 1], level, x, y, x + .5f, 0, y + .5f));
         } else if (cell.fountainType >= 0) {
             modelInstances.add(new DungeonTileModelInstance(fountainModel, level, x, y, x + .5f, 0, y + .5f));
         } else if (cell.message != null || cell.function != null) {
@@ -615,47 +613,42 @@ public class WizardryDungeonScreen extends BaseScreen {
             list.add(instance);
         }
 
-        if (cell.northDoor) {
-            if (cell.northWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                list.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
-                list.add(instance);
-            }
+        if (cell.hiddenNorthDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(270, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
+            list.add(instance);
+        } else if (cell.northDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(90, 0, 0).trn(1 + x - .025f, z, 1 + y - .5f);
+            list.add(instance);
         }
-        if (cell.southDoor) {
-            if (cell.southWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
-                list.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
-                list.add(instance);
-            }
+
+        if (cell.hiddenSouthDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(90, 0, 0).trn(x + .025f, z, y + .5f);
+            list.add(instance);
+        } else if (cell.southDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(270, 0, 0).trn(x + .025f, z, y + .5f);
+            list.add(instance);
         }
-        if (cell.eastDoor) {
-            if (cell.eastWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
-                list.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
-                list.add(instance);
-            }
+
+        if (cell.hiddenEastDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y);
+            instance.transform.setFromEulerAngles(0, 0, 180).trn(x + .5f, z, 1 + y - .025f);
+            list.add(instance);
+        } else if (cell.eastDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y, x - .5f + 1, z, y - .025f + 1);
+            list.add(instance);
         }
-        if (cell.westDoor) {
-            if (cell.westWall) {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y, x + .5f, z, y + .025f);
-                list.add(instance);
-            } else {
-                DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
-                instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
-                list.add(instance);
-            }
+
+        if (cell.hiddenWestDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(wallModel, level, x, y, x + .5f, z, y + .025f);
+            list.add(instance);
+        } else if (cell.westDoor) {
+            DungeonTileModelInstance instance = new DungeonTileModelInstance(doorModel, level, x, y);
+            instance.transform.setFromEulerAngles(0, 180, 180).trn(x + .5f, z, y + .025f);
+            list.add(instance);
         }
 
         if (cell.stairs) {
@@ -1036,7 +1029,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (!showMiniMap) {
                 return;
             }
-            batch.draw(MINI_MAP_BACKGROUND, xalignMM - 3, yalignMM - 3);
+            batch.draw(miniMapBackground, xalignMM - 3, yalignMM - 3);
             batch.draw(miniMap, xalignMM, yalignMM);
         }
 
@@ -1427,16 +1420,16 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     }
 
-    private boolean canMove(MazeCell currentCell, Direction dir) {
+    private boolean canMove(MazeCell c, Direction dir) {
         switch (dir) {
             case NORTH:
-                return currentCell.hiddenNorthDoor || !currentCell.northWall;
+                return c.hiddenNorthDoor || c.northDoor || !c.northWall;
             case SOUTH:
-                return currentCell.hiddenSouthDoor || !currentCell.southWall;
+                return c.hiddenSouthDoor || c.southDoor || !c.southWall;
             case WEST:
-                return currentCell.hiddenWestDoor || !currentCell.westWall;
+                return c.hiddenWestDoor || c.westDoor || !c.westWall;
             case EAST:
-                return currentCell.hiddenEastDoor || !currentCell.eastWall;
+                return c.hiddenEastDoor || c.eastDoor || !c.eastWall;
             default:
                 return false;
         }
@@ -1845,32 +1838,34 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     private void pruneWrappedInstances() {
 
-        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
+        int max = this.dim + 5;
+        int min = -5;
 
-        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
+        floor.removeIf(mi -> mi.transform.val[Matrix4.M03] > max
+                || mi.transform.val[Matrix4.M23] < min
+                || mi.transform.val[Matrix4.M03] < min
+                || mi.transform.val[Matrix4.M23] > max);
 
-        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > 25
-                || mi.transform.val[Matrix4.M23] < -5
-                || mi.transform.val[Matrix4.M03] < -5
-                || mi.transform.val[Matrix4.M23] > 25);
+        ceiling.removeIf(mi -> mi.transform.val[Matrix4.M03] > max
+                || mi.transform.val[Matrix4.M23] < min
+                || mi.transform.val[Matrix4.M03] < min
+                || mi.transform.val[Matrix4.M23] > max);
 
-        final int dim = this.dim;
+        modelInstances.removeIf(mi -> mi.transform.val[Matrix4.M03] > max
+                || mi.transform.val[Matrix4.M23] < min
+                || mi.transform.val[Matrix4.M03] < min
+                || mi.transform.val[Matrix4.M23] > max);
+
         MazeLevel[] levels = this.map.scenario().levels();
 
         java.util.Map<DungeonTileModelInstance, Boolean> visible = new HashMap<>();
 
-        List<DungeonTileModelInstance>[] northByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
-        List<DungeonTileModelInstance>[] southByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
-        List<DungeonTileModelInstance>[] westByRow = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
-        List<DungeonTileModelInstance>[] eastByRow = (List<DungeonTileModelInstance>[]) new ArrayList[dim];
+        List<DungeonTileModelInstance>[] northByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[this.dim];
+        List<DungeonTileModelInstance>[] southByColumn = (List<DungeonTileModelInstance>[]) new ArrayList[this.dim];
+        List<DungeonTileModelInstance>[] westByRow = (List<DungeonTileModelInstance>[]) new ArrayList[this.dim];
+        List<DungeonTileModelInstance>[] eastByRow = (List<DungeonTileModelInstance>[]) new ArrayList[this.dim];
 
-        for (int i = 0; i < dim; i++) {
+        for (int i = 0; i < this.dim; i++) {
             northByColumn[i] = new ArrayList<>();
             southByColumn[i] = new ArrayList<>();
             westByRow[i] = new ArrayList<>();
@@ -1881,21 +1876,21 @@ public class WizardryDungeonScreen extends BaseScreen {
             int cx = Math.round(mi.getCx());
             int cy = Math.round(mi.getCy());
 
-            if (cx < 0 || cx >= dim || cy < 0 || cy >= dim) {
+            if (cx < 0 || cx >= this.dim || cy < 0 || cy >= this.dim) {
                 visible.put(mi, Boolean.TRUE);
 
-                int row = Math.floorMod(cx, dim);
-                int col = Math.floorMod(cy, dim);
+                int row = Math.floorMod(cx, this.dim);
+                int col = Math.floorMod(cy, this.dim);
 
                 if (cx < 0) {
                     southByColumn[col].add(mi);
-                } else if (cx >= dim) {
+                } else if (cx >= this.dim) {
                     northByColumn[col].add(mi);
                 }
 
                 if (cy < 0) {
                     westByRow[row].add(mi);
-                } else if (cy >= dim) {
+                } else if (cy >= this.dim) {
                     eastByRow[row].add(mi);
                 }
             }
@@ -1904,10 +1899,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         for (int levelIndex = 0; levelIndex < levels.length; levelIndex++) {
             MazeLevel lvl = levels[levelIndex];
 
-            int northRow = dim - 1;
-            for (int col = 0; col < dim; col++) {
+            int northRow = this.dim - 1;
+            for (int col = 0; col < this.dim; col++) {
                 MazeCell cell = lvl.cells[northRow][col];
-                if (cell != null && (cell.northWall || cell.northDoor || cell.hiddenNorthDoor)) {
+                if (cell != null && (cell.northWall || cell.northDoor || cell.hiddenNorthDoor || cell.rock)) {
                     for (DungeonTileModelInstance mi : northByColumn[col]) {
                         if (mi.getLevel() == levelIndex) {
                             visible.put(mi, Boolean.FALSE);
@@ -1917,9 +1912,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
             int southRow = 0;
-            for (int col = 0; col < dim; col++) {
+            for (int col = 0; col < this.dim; col++) {
                 MazeCell cell = lvl.cells[southRow][col];
-                if (cell != null && (cell.southWall || cell.southDoor || cell.hiddenSouthDoor)) {
+                if (cell != null && (cell.southWall || cell.southDoor || cell.hiddenSouthDoor || cell.rock)) {
                     for (DungeonTileModelInstance mi : southByColumn[col]) {
                         if (mi.getLevel() == levelIndex) {
                             visible.put(mi, Boolean.FALSE);
@@ -1929,9 +1924,9 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
 
             int westCol = 0;
-            for (int row = 0; row < dim; row++) {
+            for (int row = 0; row < this.dim; row++) {
                 MazeCell cell = lvl.cells[row][westCol];
-                if (cell != null && (cell.westWall || cell.westDoor || cell.hiddenWestDoor)) {
+                if (cell != null && (cell.westWall || cell.westDoor || cell.hiddenWestDoor || cell.rock)) {
                     for (DungeonTileModelInstance mi : westByRow[row]) {
                         if (mi.getLevel() == levelIndex) {
                             visible.put(mi, Boolean.FALSE);
@@ -1940,10 +1935,10 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
             }
 
-            int eastCol = dim - 1;
-            for (int row = 0; row < dim; row++) {
+            int eastCol = this.dim - 1;
+            for (int row = 0; row < this.dim; row++) {
                 MazeCell cell = lvl.cells[row][eastCol];
-                if (cell != null && (cell.eastWall || cell.eastDoor || cell.hiddenEastDoor)) {
+                if (cell != null && (cell.eastWall || cell.eastDoor || cell.hiddenEastDoor || cell.rock)) {
                     for (DungeonTileModelInstance mi : eastByRow[row]) {
                         if (mi.getLevel() == levelIndex) {
                             visible.put(mi, Boolean.FALSE);

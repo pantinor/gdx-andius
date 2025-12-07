@@ -10,7 +10,6 @@ import andius.objects.Sound;
 import andius.objects.Sounds;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import utils.Utils;
 
 public class MarkDialog extends Dialog {
 

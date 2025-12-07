@@ -1,9 +1,12 @@
 
 import andius.Andius;
+import andius.TmxWizardryLevel;
 import andius.WizardryData;
 import andius.WizardryData.CellType;
 import static andius.WizardryData.CellType.ROCK;
 import andius.WizardryData.MazeCell;
+import andius.WizardryData.MazeLevel;
+import andius.WizardryData.MazeLevelV1;
 import andius.WizardryData.MazeLevelV4;
 import andius.WizardryData.Scenario;
 import com.badlogic.gdx.ApplicationListener;
@@ -132,27 +135,46 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        WizardryData.Scenario sc = WizardryData.Scenario.WER;
-        MazeLevelV4 ml = (MazeLevelV4) sc.levels()[8];
-        int dim = ml.dimension;
-
-        specials = getSpecials(ml.buffer, 0x2F8);
-        cells = new MazeCellActor[dim][dim];
-
-        for (int e = 0; e < dim; e++) {
-            for (int n = 0; n < dim; n++) {
-                cells[n][e] = new MazeCellActor(n, e);
-                stage.addActor(cells[n][e]);
+        WizardryData.Scenario sc = WizardryData.Scenario.SLAVERS_PIT;
+        MazeLevel lvl = sc.levels()[1];
+        if (lvl instanceof TmxWizardryLevel) {
+            TmxWizardryLevel ml = (TmxWizardryLevel) lvl;
+            int dim = ml.dimension;
+            cells = new MazeCellActor[dim][dim];
+            for (int e = 0; e < dim; e++) {
+                for (int n = 0; n < dim; n++) {
+                    cells[n][e] = new MazeCellActor(n, e);
+                    stage.addActor(cells[n][e]);
+                }
             }
-        }
+            for (int e = 0; e < dim; e++) {
+                for (int n = 0; n < dim; n++) {
+                    WizardryData.MazeCell c = ml.cells[n][e];
+                    cells[n][e].set(c);
+                }
+            }
+        } else {
+            MazeLevelV1 ml = (MazeLevelV1) sc.levels()[0];
+            int dim = ml.dimension;
 
-        for (int e = 0; e < dim; e++) {
-            for (int n = 0; n < dim; n++) {
-                WizardryData.MazeCell c = ml.cells[n][e];
-                cells[n][e].set(c);
+            specials = getSpecials(ml.buffer, 0x2F8);
+            cells = new MazeCellActor[dim][dim];
 
-                int index = ml.cellInfoLocations[n][e];
-                specials[index].addLocation(new Location(8, n, e));
+            for (int e = 0; e < dim; e++) {
+                for (int n = 0; n < dim; n++) {
+                    cells[n][e] = new MazeCellActor(n, e);
+                    stage.addActor(cells[n][e]);
+                }
+            }
+
+            for (int e = 0; e < dim; e++) {
+                for (int n = 0; n < dim; n++) {
+                    WizardryData.MazeCell c = ml.cells[n][e];
+                    cells[n][e].set(c);
+
+                    int index = ml.cellInfoLocations[n][e];
+                    specials[index].addLocation(new Location(8, n, e));
+                }
             }
         }
 
@@ -274,19 +296,19 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 south.setDrawable(new TextureRegionDrawable(new TextureRegion(southDoor)));
             }
 
-            if (cell.eastWall && cell.eastDoor) {
+            if (cell.hiddenEastDoor) {
                 this.east.idx = 3;
                 east.setDrawable(new TextureRegionDrawable(new TextureRegion(eastHiddenDoor)));
             }
-            if (cell.westWall && cell.westDoor) {
+            if (cell.hiddenWestDoor) {
                 this.west.idx = 3;
                 west.setDrawable(new TextureRegionDrawable(new TextureRegion(westHiddenDoor)));
             }
-            if (cell.northWall && cell.northDoor) {
+            if (cell.hiddenNorthDoor) {
                 this.north.idx = 3;
                 north.setDrawable(new TextureRegionDrawable(new TextureRegion(northHiddenDoor)));
             }
-            if (cell.southWall && cell.southDoor) {
+            if (cell.hiddenSouthDoor) {
                 this.south.idx = 3;
                 south.setDrawable(new TextureRegionDrawable(new TextureRegion(southHiddenDoor)));
             }
@@ -666,8 +688,10 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         font.draw(batch, String.format("(%d,%d)  %s", currentNorth, currentEast, selectedCell.cell.addressTo), 400, 907);
 
         int y = 300;
-        for (Special s : specials) {
-            font.draw(batch, s.toString(), 975, y -= 15);
+        if (specials != null) {
+            for (Special s : specials) {
+                font.draw(batch, s.toString(), 975, y -= 15);
+            }
         }
 
         batch.end();

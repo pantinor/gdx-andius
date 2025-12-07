@@ -46,8 +46,8 @@ public class ModelVisualizer implements ApplicationListener, InputProcessor {
 
     private Color flame = new Color(0xf59414ff);
 
-    private Model[] models = new Model[31];
-    private ModelInstance[] modelInstances = new ModelInstance[31];
+    private Model[] models = new Model[30];
+    private ModelInstance[] modelInstances = new ModelInstance[30];
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -120,8 +120,7 @@ public class ModelVisualizer implements ApplicationListener, InputProcessor {
         this.models[25] = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
         this.models[26] = ObjLoader.loadModel("assets/graphics/letter-m.obj", "letter-m", .1f);
         this.models[27] = ObjLoader.loadModel("assets/graphics/fountain.obj", "fountain", .1f);
-        this.models[28] = ObjLoader.loadModel("assets/graphics/marks.obj", "mark", .1f);
-        this.models[29] = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
+        this.models[28] = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
         this.models[29] = ObjLoader.loadModel("assets/graphics/elevator.obj", "elevator-booth", .1f);
 
         final int MODELS_PER_ROW = 5;

@@ -94,12 +94,12 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         
         WizardryData.class.getClass();
 
-        this.screen = new WizardryDungeonScreen(Constants.Map.WIZARDRY1);
+        this.screen = new WizardryDungeonScreen(Constants.Map.SLAVERS_PIT);
 
         createAxes();
 
-        cam.position.set(2.5f, .5f, 3.5f);
-        cam.lookAt(3.5f, 0.5f, 3.5f);
+        cam.position.set(2.5f, 8.5f, 11.5f);
+        cam.lookAt(9.5f, 0.5f, 9.5f);
 
     }
 
@@ -115,7 +115,7 @@ public class DungeonVisualizer implements ApplicationListener, InputProcessor {
         modelBatch.render(axesInstance);
 
         for (WizardryDungeonScreen.DungeonTileModelInstance i : this.screen.modelInstances) {
-            if (i.getLevel() == 0) {
+            if (i.getLevel() == 1) {
                 modelBatch.render(i, environment);
             }
         }

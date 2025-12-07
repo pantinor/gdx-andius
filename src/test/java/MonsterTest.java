@@ -93,23 +93,23 @@ public class MonsterTest {
             throw new SkipException("Skipped");
         }
 
-        int maxLevel = 20;
+        int maxLevel = 5;
         int[][][] results = new int[map.scenario().monsters().size()][maxLevel][2];
 
         Spells[] spellsArray = Spells.values();
 
         for (int m = 0; m < map.scenario().monsters().size(); m++) {
-            for (int lvl = 0; lvl < 20; lvl++) {
+            for (int lvl = 0; lvl < maxLevel; lvl++) {
                 Monster monster = map.scenario().monsters().get(m);
                 Context ctx = new Context();
                 ctx.setSaveGame(new SaveGame());
-                ctx.saveGame.players = new CharacterRecord[2];
+                ctx.saveGame.players = new CharacterRecord[6];
                 ctx.saveGame.players[0] = SaveGame.generatePlayer(lvl + 1, ClassType.FIGHTER, "fred");
                 ctx.saveGame.players[1] = SaveGame.generatePlayer(lvl + 1, ClassType.FIGHTER, "same");
-                //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
-                //ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
-                //ctx.saveGame.players[2] = generatePlayer(lvl + 1, ClassType.MAGE, "jane");
-                //ctx.saveGame.players[3] = generatePlayer(lvl + 1, ClassType.THIEF, "frank");
+                ctx.saveGame.players[2] = SaveGame.generatePlayer(lvl + 1, ClassType.FIGHTER, "jack");
+                ctx.saveGame.players[3] = SaveGame.generatePlayer(lvl + 1, ClassType.PRIEST, "joe");
+                ctx.saveGame.players[4] = SaveGame.generatePlayer(lvl + 1, ClassType.MAGE, "jane");
+                ctx.saveGame.players[5] = SaveGame.generatePlayer(lvl + 1, ClassType.THIEF, "frank");
 
                 Loggable logs = new Loggable() {
                     @Override
@@ -121,7 +121,7 @@ public class MonsterTest {
                     }
                 };
 
-                Combat combat = new Combat(ctx, map, monster, 1) {
+                Combat combat = new Combat(ctx, map, monster, lvl) {
                     @Override
                     public void log(String s) {
                     }
@@ -270,6 +270,7 @@ public class MonsterTest {
             for (int level = 0; level < results[monsterID].length; level++) {
                 totalWins += results[monsterID][level][0];   // Wins
                 totalRounds += results[monsterID][level][1]; // Rounds
+                aggregateData[monsterID][3]++;
             }
 
             aggregateData[monsterID][0] = monsterID;       // MonsterID
@@ -278,16 +279,17 @@ public class MonsterTest {
         }
 
         Arrays.sort(aggregateData, (a, b) -> {
-            // Sort by total wins (descending)
-            int winComparison = Integer.compare(b[1], a[1]);
-            if (winComparison != 0) {
-                return winComparison;
-            }
 
-            // Sort by total rounds (descending)
-            int roundComparison = Integer.compare(b[2], a[2]);
+            // Sort by total rounds (ascending)
+            int roundComparison = Integer.compare(a[2], b[2]);
             if (roundComparison != 0) {
                 return roundComparison;
+            }
+
+            // Sort by total wins (ascending)
+            int winComparison = Integer.compare(a[1], b[1]);
+            if (winComparison != 0) {
+                return winComparison;
             }
 
             // Sort by monsterID (ascending, as a fallback)
@@ -296,7 +298,7 @@ public class MonsterTest {
 
         for (int i = 0; i < aggregateData.length; i++) {
             String name = map.scenario().monsters().get(aggregateData[i][0]).getName();
-            System.out.println(name + ", Wins: " + aggregateData[i][1] + ", Rounds: " + aggregateData[i][2]);
+            System.out.println(name + ", Total Wins: " + aggregateData[i][1] + ", Total Rounds: " + aggregateData[i][2] + ", Total Fights: " + aggregateData[i][3]);
         }
     }
 
@@ -331,7 +333,7 @@ public class MonsterTest {
         ctx.saveGame.map = Constants.Map.WORLD;
         ctx.saveGame.wx = 10;
         ctx.saveGame.wy = 54;
-                
+
         ctx.saveGame.saveGameFileName = "party-mage.json";
         ctx.saveGame.write();
     }

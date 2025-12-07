@@ -16,8 +16,8 @@ import utils.LogScrollPane;
 
 public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog implements Constants {
 
-    protected static final int WIDTH = 400;
-    protected static final int HEIGHT = 400;
+    protected static final int WIDTH = 300;
+    protected static final int HEIGHT = 200;
 
     protected final BaseScreen screen;
     protected final TextField input;

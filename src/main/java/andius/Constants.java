@@ -68,7 +68,8 @@ public interface Constants {
         FIRE("Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_FIRE),
         DOOM("Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_DOOM),
         SNAKE("Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
-        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME);
+        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME),
+        SLAVERS_PIT("Slave Pits of the Undercity", WizardryData.Scenario.SLAVERS_PIT);
 
         private final String label;
         private final String tmxFile;
