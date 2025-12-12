@@ -148,7 +148,8 @@ public class Monster implements Comparable<Monster> {
 
     @Override
     public int compareTo(Monster o) {
-        return Integer.compare(this.monsterId, o.monsterId);
+        //return Integer.compare(this.monsterId, o.monsterId);
+        return this.name.compareTo(o.name);
     }
 
     @Override

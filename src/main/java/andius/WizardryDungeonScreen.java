@@ -7,7 +7,6 @@ import andius.dialogs.RiddleDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
-import static andius.Constants.CLASSPTH_RSLVR;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
@@ -64,6 +63,7 @@ import java.util.Iterator;
 import utils.ObjLoader;
 import utils.RotateOnlyInputController;
 import utils.Utils;
+import static utils.Utils.CLASSPTH_RSLVR;
 
 public class WizardryDungeonScreen extends BaseScreen {
 

@@ -1,12 +1,12 @@
 [
     {
         "genericName": "Ghoul",
-        "name": "Ghouls (Temple 3 ambush)",
+        "name": "Ghoul",
         "monsterId": 1,
         "iconId": 0,
         "type": 10,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -23,7 +23,7 @@
         "ability": [
             "PARALYZE"
         ],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 8,
             "sides": 1,
@@ -55,12 +55,12 @@
     },
     {
         "genericName": "Ghast",
-        "name": "Ghasts (Temple 3 ambush)",
+        "name": "Ghast",
         "monsterId": 2,
         "iconId": 0,
         "type": 10,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 8,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -78,7 +78,7 @@
             "PARALYZE",
             "POISON"
         ],
-        "exp": 0,
+        "exp": 500,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -109,13 +109,13 @@
         "roomId": "T3"
     },
     {
-        "genericName": "Giant Sundew",
-        "name": "Giant Sundew (Temple 5b)",
+        "genericName": "Plant",
+        "name": "Giant Sundew",
         "monsterId": 3,
         "iconId": 0,
         "type": 13,
-        "goldReward": 0,
-        "chestReward": 0,
+        "goldReward": 500,
+        "chestReward": 17,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -130,7 +130,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 1300,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -177,12 +177,12 @@
     },
     {
         "genericName": "Half-Orc",
-        "name": "Half-Orc Stablehands (Temple 6)",
+        "name": "Half-Orc Stablehand",
         "monsterId": 4,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 2,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -195,7 +195,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 4,
             "sides": 1,
@@ -217,12 +217,12 @@
     },
     {
         "genericName": "Doppelganger",
-        "name": "Doppelganger (Temple 6 loft)",
+        "name": "Doppelganger",
         "monsterId": 5,
         "iconId": 0,
         "type": 13,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 5,
@@ -237,7 +237,7 @@
             "MAGIC"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -259,12 +259,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Guards (Temple 7 stonecutter's shed)",
+        "name": "Orc Guard",
         "monsterId": 6,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -277,7 +277,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 6,
             "sides": 1,
@@ -298,13 +298,13 @@
         "roomId": "T7"
     },
     {
-        "genericName": "Giant Ant, Worker",
-        "name": "Giant Worker Ants (Temple 8 cemetery encounter)",
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
         "monsterId": 7,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 2,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -317,7 +317,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 7,
@@ -339,12 +339,12 @@
     },
     {
         "genericName": "Ghoul",
-        "name": "Ghouls (Temple 8 cemetery encounter)",
+        "name": "Ghoul",
         "monsterId": 8,
         "iconId": 0,
         "type": 10,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -361,7 +361,7 @@
         "ability": [
             "PARALYZE"
         ],
-        "exp": 0,
+        "exp": 500,
         "groupSize": {
             "qty": 1,
             "sides": 4,
@@ -392,16 +392,16 @@
         "roomId": "T8"
     },
     {
-        "genericName": "Animated Tree",
-        "name": "Guardian Trees (Temple 8 cemetery)",
+        "genericName": "Tree",
+        "name": "Guardian Tree",
         "monsterId": 9,
         "iconId": 0,
         "type": 13,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 2,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 10,
+        "armourClass": 8,
         "speed": 3,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -411,7 +411,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 500,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -448,12 +448,12 @@
     },
     {
         "genericName": "Wight",
-        "name": "Wight (Temple 9 inner courtyard)",
+        "name": "Wight",
         "monsterId": 10,
         "iconId": 0,
         "type": 10,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 17,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 5,
@@ -470,7 +470,7 @@
         "ability": [
             "AUTOKILL"
         ],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -492,12 +492,12 @@
     },
     {
         "genericName": "Basilisk",
-        "name": "Basilisks (Temple 10 pen)",
+        "name": "Basilisk",
         "monsterId": 11,
         "iconId": 0,
         "type": 6,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -514,7 +514,7 @@
         "ability": [
             "STONE"
         ],
-        "exp": 0,
+        "exp": 1100,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -536,15 +536,15 @@
     },
     {
         "genericName": "Half-Orc",
-        "name": "Half-Orc False Slaves (Temple 12a)",
+        "name": "Half-Orc False Slave",
         "monsterId": 12,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 2,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 10,
+        "armourClass": 6,
         "speed": 9,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -554,7 +554,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 17,
             "sides": 1,
@@ -576,12 +576,12 @@
     },
     {
         "genericName": "Half-Orc Assassin",
-        "name": "Half-Orc Assassins (Temple 12a)",
+        "name": "Half-Orc Assassin",
         "monsterId": 13,
         "iconId": 0,
         "type": 3,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 5,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 8,
@@ -594,7 +594,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 800,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -605,17 +605,23 @@
             "sides": 6,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
         "roomId": "T12a"
     },
     {
         "genericName": "Half-Orc Fighter/Cleric",
-        "name": "Half-Orc Leader (Temple 12a)",
+        "name": "Half-Orc Leader",
         "monsterId": 14,
         "iconId": 0,
         "type": 2,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -628,7 +634,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 900,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -639,17 +645,23 @@
             "sides": 10,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
         "roomId": "T12a"
     },
     {
         "genericName": "Orc",
-        "name": "Orc Slaver Illusionists (Temple 12b)",
+        "name": "Orc Slaver Illusionist",
         "monsterId": 15,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -662,7 +674,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -694,12 +706,12 @@
     },
     {
         "genericName": "Harpy",
-        "name": "Harpies (Temple 14 cloister garden)",
+        "name": "Harpy",
         "monsterId": 16,
         "iconId": 0,
         "type": 6,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -712,7 +724,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 4,
             "sides": 1,
@@ -744,12 +756,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Table Defenders (Temple 16a main courtyard)",
+        "name": "Orc Table Defender",
         "monsterId": 17,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -762,7 +774,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 6,
             "sides": 1,
@@ -784,12 +796,12 @@
     },
     {
         "genericName": "Half-Orc",
-        "name": "Half-Orc Flamethrower Crew (Temple 16a main courtyard)",
+        "name": "Half-Orc Flamethrower Crew",
         "monsterId": 18,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -802,7 +814,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 4,
             "sides": 1,
@@ -813,17 +825,23 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
         "roomId": "T16a"
     },
     {
         "genericName": "Half-Orc Fighter",
-        "name": "Half-Orc Portcullis Guard (Temple 16b outer winch)",
+        "name": "Half-Orc Portcullis Guard",
         "monsterId": 19,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 15,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -836,7 +854,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -863,12 +881,12 @@
     },
     {
         "genericName": "Half-Orc",
-        "name": "Half-Orc Inner Portcullis Guard (Temple 16c)",
+        "name": "Half-Orc Inner Portcullis Guard",
         "monsterId": 20,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 15,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -881,7 +899,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -892,17 +910,23 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
         "roomId": "T16c"
     },
     {
         "genericName": "Doppelganger",
-        "name": "Doppelganger (Temple 16c portcullis room)",
+        "name": "Doppelganger",
         "monsterId": 21,
         "iconId": 0,
         "type": 13,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 5,
@@ -917,7 +941,7 @@
             "MAGIC"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -939,12 +963,12 @@
     },
     {
         "genericName": "Half-Orc Fighter",
-        "name": "Half-Orc Temple Guards (Temple 18)",
+        "name": "Half-Orc Temple Guard",
         "monsterId": 22,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -957,7 +981,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -979,12 +1003,12 @@
     },
     {
         "genericName": "Evil Cleric",
-        "name": "Temple Priestess (Temple 18)",
+        "name": "Temple Priestess",
         "monsterId": 23,
         "iconId": 0,
         "type": 2,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 1,
@@ -997,7 +1021,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 640,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1019,12 +1043,12 @@
     },
     {
         "genericName": "Troll",
-        "name": "Troll in Poorbox (Temple 18)",
+        "name": "Troll",
         "monsterId": 24,
         "iconId": 0,
-        "type": 5,
-        "goldReward": 0,
-        "chestReward": 0,
+        "type": 0,
+        "goldReward": 5,
+        "chestReward": 15,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -1032,12 +1056,12 @@
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 3,
         "breath": 0,
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 1720,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1069,15 +1093,15 @@
     },
     {
         "genericName": "Assassin",
-        "name": "Assassin Behind Font (Temple 18)",
+        "name": "Assassin",
         "monsterId": 25,
         "iconId": 0,
         "type": 3,
-        "goldReward": 0,
-        "chestReward": 0,
+        "goldReward": 2,
+        "chestReward": 12,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 7,
+        "armourClass": 3,
         "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -1086,8 +1110,11 @@
         "breath": 0,
         "unaffected": 0,
         "resistance": [],
-        "ability": [],
-        "exp": 0,
+        "ability": [
+            "POISON",
+            "AUTOKILL"
+        ],
+        "exp": 1360,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1098,17 +1125,43 @@
             "sides": 6,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "T18"
     },
     {
         "genericName": "Stirge",
-        "name": "Stirges (Temple 19 ruined chapel)",
+        "name": "Stirge",
         "monsterId": 26,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 10,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 8,
@@ -1121,7 +1174,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 240,
         "groupSize": {
             "qty": 10,
             "sides": 1,
@@ -1143,12 +1196,12 @@
     },
     {
         "genericName": "Aspis Larva",
-        "name": "Aspis Larvae (Sewer 2 grub hatchery)",
+        "name": "Aspis Larvae",
         "monsterId": 27,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -1161,7 +1214,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 300,
         "groupSize": {
             "qty": 5,
             "sides": 1,
@@ -1183,15 +1236,15 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drones (Sewer 3 egg chamber)",
+        "name": "Aspis Drone",
         "monsterId": 28,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 3,
+        "armourClass": 2,
         "speed": 15,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -1201,7 +1254,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -1212,20 +1265,31 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "S3"
     },
     {
         "genericName": "Gray Ooze",
-        "name": "Gray Ooze (Sewer 4 food storage trench)",
+        "name": "Gray Ooze",
         "monsterId": 29,
         "iconId": 0,
         "type": 13,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 8,
+        "armourClass": 6,
         "speed": 1,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -1235,7 +1299,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1257,12 +1321,12 @@
     },
     {
         "genericName": "Rot Grub",
-        "name": "Rot Grubs (Sewer 4 food storage)",
+        "name": "Rot Grub",
         "monsterId": 30,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 9,
@@ -1277,7 +1341,7 @@
         "ability": [
             "AUTOKILL"
         ],
-        "exp": 0,
+        "exp": 800,
         "groupSize": {
             "qty": 15,
             "sides": 1,
@@ -1288,17 +1352,22 @@
             "sides": 4,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4
+            }
+        ],
         "roomId": "S4"
     },
     {
-        "genericName": "Giant Ant, Worker",
-        "name": "Giant Worker Ants (Sewer 5 aspis chamber)",
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
         "monsterId": 31,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 6,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1311,7 +1380,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 5,
             "sides": 1,
@@ -1333,12 +1402,12 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drones (Sewer 5 aspis chamber)",
+        "name": "Aspis Drone",
         "monsterId": 32,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,
@@ -1354,7 +1423,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 4,
             "sides": 1,
@@ -1365,17 +1434,28 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "S5"
     },
     {
         "genericName": "Aspis Cow",
-        "name": "Aspis Cow (Sewer 6 breeding chamber)",
+        "name": "Aspis Cow",
         "monsterId": 33,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 14,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -1391,7 +1471,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 800,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1413,12 +1493,12 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drones (Sewer 6 breeding chamber)",
+        "name": "Aspis Drone",
         "monsterId": 34,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,
@@ -1434,7 +1514,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 6,
             "sides": 1,
@@ -1445,17 +1525,28 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "S6"
     },
     {
-        "genericName": "Giant Ant, Soldier",
-        "name": "Giant Soldier Ants (Sewer 6 reinforcements)",
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
         "monsterId": 35,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 8,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1470,7 +1561,7 @@
         "ability": [
             "POISON"
         ],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 1,
             "sides": 3,
@@ -1496,13 +1587,13 @@
         "roomId": "S6"
     },
     {
-        "genericName": "Giant Ant, Worker",
-        "name": "Giant Worker Ants (Sewer 6 reinforcements)",
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
         "monsterId": 36,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1515,7 +1606,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 10,
@@ -1536,13 +1627,13 @@
         "roomId": "S6"
     },
     {
-        "genericName": "Giant Ant, Worker",
-        "name": "Giant Worker Ants (Sewer 8a nests)",
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
         "monsterId": 37,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1555,7 +1646,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 2,
             "sides": 6,
@@ -1576,13 +1667,13 @@
         "roomId": "S8a"
     },
     {
-        "genericName": "Giant Ant, Soldier",
-        "name": "Giant Soldier Ants (Sewer 8a nests)",
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
         "monsterId": 38,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 8,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1597,7 +1688,7 @@
         "ability": [
             "POISON"
         ],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 1,
             "sides": 3,
@@ -1623,13 +1714,13 @@
         "roomId": "S8a"
     },
     {
-        "genericName": "Giant Ant, Worker",
-        "name": "Giant Worker Ants (Sewer 8b queen's chamber)",
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
         "monsterId": 39,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1642,7 +1733,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 10,
             "sides": 1,
@@ -1663,13 +1754,13 @@
         "roomId": "S8b"
     },
     {
-        "genericName": "Giant Ant, Soldier",
-        "name": "Giant Soldier Ants (Sewer 8b queen's chamber)",
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
         "monsterId": 40,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 8,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1684,7 +1775,7 @@
         "ability": [
             "POISON"
         ],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 10,
             "sides": 1,
@@ -1710,13 +1801,13 @@
         "roomId": "S8b"
     },
     {
-        "genericName": "Giant Ant Queen",
-        "name": "Giant Ant Queen (Sewer 8b)",
+        "genericName": "Giant Ant",
+        "name": "Giant Ant Queen",
         "monsterId": 41,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 19,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 3,
@@ -1729,7 +1820,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 1400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1740,20 +1831,26 @@
             "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
         "roomId": "S8b"
     },
     {
         "genericName": "Ogre",
-        "name": "Ogre Captains (Sewer 12 outpost)",
+        "name": "Ogre Captain",
         "monsterId": 42,
         "iconId": 0,
         "type": 5,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 9,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 5,
+        "armourClass": 4,
         "speed": 9,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -1763,7 +1860,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 1500,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -1785,12 +1882,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Guards (Sewer 12 outpost)",
+        "name": "Orc Guard",
         "monsterId": 43,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -1803,7 +1900,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 18,
             "sides": 1,
@@ -1825,12 +1922,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Guard Post (Sewer 14)",
+        "name": "Orc Guard",
         "monsterId": 44,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -1843,7 +1940,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 6,
             "sides": 1,
@@ -1865,15 +1962,15 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Tribe (Sewer 15a main chamber)",
+        "name": "Orc Tribesman",
         "monsterId": 45,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 6,
+        "armourClass": 5,
         "speed": 9,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -1883,7 +1980,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 24,
             "sides": 1,
@@ -1905,12 +2002,12 @@
     },
     {
         "genericName": "Orc Chief",
-        "name": "Orc Chief (Sewer 15b)",
+        "name": "Orc Chief",
         "monsterId": 46,
         "iconId": 0,
         "type": 16,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -1923,7 +2020,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -1950,12 +2047,12 @@
     },
     {
         "genericName": "Orc Bodyguard",
-        "name": "Orc Bodyguards (Sewer 15b)",
+        "name": "Orc Bodyguard",
         "monsterId": 47,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -1968,7 +2065,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 500,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -1995,12 +2092,12 @@
     },
     {
         "genericName": "Ogre",
-        "name": "Ogre Advisors (Sewer 15b)",
+        "name": "Ogre Advisor",
         "monsterId": 48,
         "iconId": 0,
         "type": 5,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 17,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 5,
@@ -2013,7 +2110,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -2035,12 +2132,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Wall Guards (Sewer 16a)",
+        "name": "Orc Guard",
         "monsterId": 49,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -2053,7 +2150,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 8,
             "sides": 1,
@@ -2075,12 +2172,12 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Witch-Doctor's Orcs (Sewer 16b)",
+        "name": "Witch Doctor Orc",
         "monsterId": 50,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -2093,7 +2190,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 6,
             "sides": 1,
@@ -2114,13 +2211,13 @@
         "roomId": "S16b"
     },
     {
-        "genericName": "Orc Witch-Doctor",
-        "name": "Orc Witch-Doctor (Sewer 16b)",
+        "genericName": "Orc Witch Doctor",
+        "name": "Orc Witch Doctor",
         "monsterId": 51,
         "iconId": 0,
         "type": 2,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -2133,7 +2230,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 800,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2160,12 +2257,12 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drones (Sewer 18a slave pits)",
+        "name": "Aspis Drone",
         "monsterId": 52,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 5,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,
@@ -2181,7 +2278,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 2,
             "sides": 1,
@@ -2208,12 +2305,12 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drone (Sewer 18b control booth)",
+        "name": "Aspis Drone",
         "monsterId": 53,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 6,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,
@@ -2229,7 +2326,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2256,12 +2353,12 @@
     },
     {
         "genericName": "Human Merchant",
-        "name": "Slave Merchant (Sewer 19a)",
+        "name": "Slave Merchant",
         "monsterId": 54,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 21,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 10,
@@ -2274,7 +2371,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2296,15 +2393,15 @@
     },
     {
         "genericName": "Human Fighter",
-        "name": "Female Fighter (Sewer 19a caravan leader)",
+        "name": "Female Fighter",
         "monsterId": 55,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 5,
+        "armourClass": 4,
         "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -2314,7 +2411,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2335,26 +2432,28 @@
         "roomId": "S19a"
     },
     {
-        "genericName": "Human Magic-User",
-        "name": "Magic-User (Sewer 19a caravan organizer)",
+        "genericName": "Human Magic User",
+        "name": "Magic User",
         "monsterId": 56,
         "iconId": 0,
         "type": 1,
-        "goldReward": 0,
-        "chestReward": 0,
+        "goldReward": 8,
+        "chestReward": 18,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
         "speed": 12,
-        "mageSpellLevel": 3,
+        "mageSpellLevel": 5,
         "priestSpellLevel": 0,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
         "unaffected": 0,
-        "resistance": [],
+        "resists": [
+            "FIRE"
+        ],
         "ability": [],
-        "exp": 0,
+        "exp": 2000,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2365,17 +2464,23 @@
             "sides": 4,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "S19a"
     },
     {
         "genericName": "Orc",
-        "name": "Orc Guides (Sewer 19a slave chamber)",
+        "name": "Orc Guide",
         "monsterId": 57,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 6,
@@ -2388,7 +2493,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 5,
             "sides": 1,
@@ -2415,12 +2520,12 @@
     },
     {
         "genericName": "Slave",
-        "name": "Common Slave Prisoners (Sewer 19a)",
+        "name": "Common Slave Prisoner",
         "monsterId": 58,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 1,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 4,
@@ -2433,7 +2538,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 300,
         "groupSize": {
             "qty": 1,
             "sides": 2,
@@ -2444,20 +2549,26 @@
             "sides": 6,
             "bonus": 1
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
         "roomId": "S19a"
     },
     {
         "genericName": "Human Fighter",
-        "name": "Fighter Slave (Sewer 19a)",
+        "name": "Fighter Slave",
         "monsterId": 59,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 17,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 10,
+        "armourClass": 3,
         "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -2467,7 +2578,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 800,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2478,17 +2589,28 @@
             "sides": 10,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
         "roomId": "S19a"
     },
     {
         "genericName": "Doppelganger",
-        "name": "Doppelganger Prisoner (Sewer 19a)",
+        "name": "Doppelganger Prisoner",
         "monsterId": 60,
         "iconId": 0,
         "type": 13,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 2,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 5,
@@ -2503,7 +2625,7 @@
             "MAGIC"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2525,12 +2647,12 @@
     },
     {
         "genericName": "Aspis Drone",
-        "name": "Aspis Drone (Sewer 19c machine room)",
+        "name": "Aspis Drone",
         "monsterId": 61,
         "iconId": 0,
         "type": 12,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 4,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,
@@ -2546,7 +2668,7 @@
             "FIRE"
         ],
         "ability": [],
-        "exp": 0,
+        "exp": 700,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2573,12 +2695,12 @@
     },
     {
         "genericName": "Slave",
-        "name": "Maintenance Slaves (Sewer 19c machine room)",
+        "name": "Maintenance Slave",
         "monsterId": 62,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 1,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 10,
@@ -2591,7 +2713,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 500,
         "groupSize": {
             "qty": 5,
             "sides": 1,
@@ -2602,30 +2724,36 @@
             "sides": 4,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 1
+            }
+        ],
         "roomId": "S19c"
     },
     {
         "genericName": "Slave Lord",
-        "name": "Slave Lord (Sewer 21)",
+        "name": "Slave Lord",
         "monsterId": 63,
         "iconId": 0,
         "type": 3,
-        "goldReward": 0,
-        "chestReward": 0,
+        "goldReward": 9,
+        "chestReward": 19,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 5,
+        "armourClass": 2,
         "speed": 12,
-        "mageSpellLevel": 0,
-        "priestSpellLevel": 0,
+        "mageSpellLevel": 5,
+        "priestSpellLevel": 5,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 2300,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2633,23 +2761,34 @@
         },
         "hitPoints": {
             "qty": 7,
-            "sides": 6,
+            "sides": 8,
             "bonus": 0
         },
-        "damage": [],
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
         "roomId": "S21"
     },
     {
         "genericName": "Giant Weasel",
-        "name": "Giant Weasels (Sewer 21)",
+        "name": "Giant Weasel",
         "monsterId": 64,
         "iconId": 0,
         "type": 8,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 1,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 6,
+        "armourClass": 5,
         "speed": 15,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -2659,7 +2798,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 600,
         "groupSize": {
             "qty": 5,
             "sides": 1,
@@ -2681,15 +2820,15 @@
     },
     {
         "genericName": "Orc",
-        "name": "Orc Ledge Guards (Sewer 21)",
+        "name": "Orc Ledge Guard",
         "monsterId": 65,
         "iconId": 0,
         "type": 0,
         "goldReward": 0,
-        "chestReward": 0,
+        "chestReward": 3,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 6,
+        "armourClass": 5,
         "speed": 9,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
@@ -2699,7 +2838,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [],
-        "exp": 0,
+        "exp": 400,
         "groupSize": {
             "qty": 10,
             "sides": 1,

@@ -1,10 +1,10 @@
 
-import static andius.Constants.CLASSPTH_RSLVR;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import static utils.Utils.CLASSPTH_RSLVR;
 
 public class WorldTileConvertScript implements ApplicationListener {
 

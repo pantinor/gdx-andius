@@ -14,6 +14,8 @@ import andius.objects.Mutable;
 import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -36,6 +38,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import java.util.Random;
 
 public class Utils {
+
+    public static FileHandleResolver CLASSPTH_RSLVR = (String fileName) -> Gdx.files.classpath(fileName);
 
     public static final Random RANDOM = new Random();
 

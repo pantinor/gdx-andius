@@ -8,8 +8,6 @@ import andius.objects.Monster;
 import andius.objects.MutableMonster;
 import andius.objects.TibianSprite;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -25,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import static utils.Utils.CLASSPTH_RSLVR;
 
 public interface Constants {
 
@@ -585,13 +584,6 @@ public interface Constants {
         MERCHANT_DQ,
         MERCHANT_BS;
     }
-
-    public static final FileHandleResolver CLASSPTH_RSLVR = new FileHandleResolver() {
-        @Override
-        public FileHandle resolve(String fileName) {
-            return Gdx.files.classpath(fileName);
-        }
-    };
 
     public enum SpellTarget {
         PERSON, PARTY, MONSTER, GROUP, VARIABLE, NONE, CASTER

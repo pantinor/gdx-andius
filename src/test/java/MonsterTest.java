@@ -29,13 +29,43 @@ import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import andius.Combat;
 import andius.Combat.Action;
+import andius.WizardryData;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.headless.mock.graphics.MockGraphics;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 import utils.Loggable;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.GdxNativesLoader;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import utils.Utils;
 
 public class MonsterTest {
+
+    static {
+
+        GdxNativesLoader.load();
+        Gdx.gl = mock(GL20.class);
+        Gdx.graphics = new MockGraphics();
+        Gdx.files = mock(Files.class);
+
+        doAnswer(inv -> {
+            String filename = inv.getArgument(0, String.class);
+            return new FileHandle(filename);
+        }).when(Gdx.files).classpath(anyString());
+
+        Utils.class.getClass();
+        Utils.CLASSPTH_RSLVR = (String fileName) -> Gdx.files.classpath("./src/main/resources/" + fileName);
+
+        Constants.class.getClass();
+        WizardryData.class.getClass();
+    }
 
     @Test
     public void monsters() throws Exception {
@@ -116,7 +146,7 @@ public class MonsterTest {
             throw new SkipException("Skipped");
         }
 
-        int maxLevel = 5;
+        int maxLevel = 1;
         int[][][] results = new int[map.scenario().monsters().size()][maxLevel][2];
 
         Spells[] spellsArray = Spells.values();
@@ -293,7 +323,7 @@ public class MonsterTest {
             for (int level = 0; level < results[monsterID].length; level++) {
                 totalWins += results[monsterID][level][0];   // Wins
                 totalRounds += results[monsterID][level][1]; // Rounds
-                aggregateData[monsterID][3]++;
+                aggregateData[monsterID][3]++; //level
             }
 
             aggregateData[monsterID][0] = monsterID;       // MonsterID
@@ -321,7 +351,7 @@ public class MonsterTest {
 
         for (int i = 0; i < aggregateData.length; i++) {
             String name = map.scenario().monsters().get(aggregateData[i][0]).getName();
-            System.out.println(name + ", Total Wins: " + aggregateData[i][1] + ", Total Rounds: " + aggregateData[i][2] + ", Total Fights: " + aggregateData[i][3]);
+            System.out.println(name + ", Total Wins: " + aggregateData[i][1] + ", Total Rounds: " + aggregateData[i][2] + ", Characters fought up to level: " + aggregateData[i][3]);
         }
     }
 

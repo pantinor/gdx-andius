@@ -1,6 +1,5 @@
 package andius;
 
-import static andius.Constants.CLASSPTH_RSLVR;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import static utils.Utils.CLASSPTH_RSLVR;
 
 public class TmxWizardryLevel extends MazeLevel {
 
@@ -288,6 +288,7 @@ public class TmxWizardryLevel extends MazeLevel {
             MapProperties props = obj.getProperties();
             int eid = Integer.parseInt((String) props.get("id"));
             this.cells[py][px].encounterID = eid;
+            this.cells[py][px].hasTreasureChest = true;
         }
 
     }
