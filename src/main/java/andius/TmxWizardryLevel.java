@@ -18,9 +18,13 @@ import static utils.Utils.CLASSPTH_RSLVR;
 
 public class TmxWizardryLevel extends MazeLevel {
 
-    public TmxWizardryLevel(String tmxFile, int level, int dimension) {
+    public TmxWizardryLevel(String tmxFile, int level) {
+
+        TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
+        TiledMap tiledMap = loader.load("assets/data/" + tmxFile);
+
         this.level = level;
-        this.dimension = dimension;
+        this.dimension = tiledMap.getProperties().get("width", Integer.class);
         this.cells = new MazeCell[dimension][dimension];
 
         for (int column = 0; column < dimension; column++) {
@@ -28,9 +32,6 @@ public class TmxWizardryLevel extends MazeLevel {
                 this.cells[row][column] = new MazeCell(new MazeAddress(level, row, column));
             }
         }
-
-        TmxMapLoader loader = new TmxMapLoader(CLASSPTH_RSLVR);
-        TiledMap tiledMap = loader.load("assets/data/" + tmxFile);
 
         TiledMapTileLayer walls = (TiledMapTileLayer) tiledMap.getLayers().get("walls");
         for (int column = 0; column < dimension; column++) {
@@ -289,6 +290,22 @@ public class TmxWizardryLevel extends MazeLevel {
             int eid = Integer.parseInt((String) props.get("id"));
             this.cells[py][px].encounterID = eid;
             this.cells[py][px].hasTreasureChest = true;
+        }
+
+        TiledMapTileLayer lights = (TiledMapTileLayer) tiledMap.getLayers().get("lights");
+        for (int column = 0; column < dimension; column++) {
+            for (int row = 0; row < dimension; row++) {
+                MazeCell mc = this.cells[column][row];
+                TiledMapTileLayer.Cell cell = lights.getCell(row, column);
+                if (cell != null && cell.getTile() != null) {
+                    int tid = cell.getTile().getId() - 1;
+                    switch (tid) {
+                        case 87:
+                            mc.spotLight = true;
+                            break;
+                    }
+                }
+            }
         }
 
     }

@@ -30,6 +30,10 @@ public interface Constants {
     public static int WORLD_TILE_DIM = 24;
     public static int TILE_DIM = 48;
 
+    enum MapType {
+        OVERWORLD, TMX_TOWN, WIZARDRY_ENCODED, TMX_DUNGEON;
+    }
+
     public static final String DEFAULT_SAVE_FILENAME = "party.json";
     public static final String ROSTER_FILENAME = "roster.json";
     public static final int STATS_NONE = 0;
@@ -45,35 +49,40 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        WORLD("Ultima", "ultima1.tmx", 16),
-        CAVE("Cave", "cave.tmx", TILE_DIM),
-        BOLTAC("Boltac's Trading Post", "boltac.tmx", TILE_DIM),
-        LLECHY("Llechy", "llechy.tmx", TILE_DIM),
-        CANT("Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
-        BARAD_ENELETH("Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        COVE("Cove", "cove.tmx", TILE_DIM),
-        MONTOR("Montor", "montor.tmx", WizardryData.Scenario.WER, TILE_DIM),
-        WIWOLD("Wiwold", "wiwold.tmx", TILE_DIM),
-        WIWOLD_LVL_2("Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
-        WIZARDRY1("Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
-        WIZARDRY2("Knight of Diamonds", WizardryData.Scenario.KOD),
-        WIZARDRY3("Legacy of Llylgamyn", WizardryData.Scenario.LEG),
-        BLACK_STONE("Black Stone", WizardryData.Scenario.BS),
-        DRAGON_QUEST("Dragon Quest", WizardryData.Scenario.DQ),
-        WIZARDRY4("Return of Werdna", WizardryData.Scenario.WER),
-        PERINEAN("Ultima III Exodus Perinean Depths", WizardryData.Scenario.EXODUS_PERIN),
-        DARDIN("Ultima III Exodus Dardin's Pit", WizardryData.Scenario.EXODUS_DARDIN),
-        MINE("Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_MINE),
-        FIRE("Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_FIRE),
-        DOOM("Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_DOOM),
-        SNAKE("Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
-        TIME("Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME),
-        SLAVERS_PIT("Slave Pits of the Undercity", WizardryData.Scenario.SLAVERS_PIT);
+        //
+        WORLD(MapType.OVERWORLD, "Ultima", "ultima1.tmx", 16),
+        //
+        CAVE(MapType.TMX_TOWN, "Cave", "cave.tmx", TILE_DIM),
+        BOLTAC(MapType.TMX_TOWN, "Boltac's Trading Post", "boltac.tmx", TILE_DIM),
+        LLECHY(MapType.TMX_TOWN, "Llechy", "llechy.tmx", TILE_DIM),
+        CANT(MapType.TMX_TOWN, "Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
+        BARAD_ENELETH(MapType.TMX_TOWN, "Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
+        COVE(MapType.TMX_TOWN, "Cove", "cove.tmx", TILE_DIM),
+        MONTOR(MapType.TMX_TOWN, "Montor", "montor.tmx", WizardryData.Scenario.WER, TILE_DIM),
+        WIWOLD(MapType.TMX_TOWN, "Wiwold", "wiwold.tmx", TILE_DIM),
+        WIWOLD_LVL_2(MapType.TMX_TOWN, "Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
+        //
+        WIZARDRY1(MapType.WIZARDRY_ENCODED, "Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
+        WIZARDRY2(MapType.WIZARDRY_ENCODED, "Knight of Diamonds", WizardryData.Scenario.KOD),
+        WIZARDRY3(MapType.WIZARDRY_ENCODED, "Legacy of Llylgamyn", WizardryData.Scenario.LEG),
+        BLACK_STONE(MapType.WIZARDRY_ENCODED, "Black Stone", WizardryData.Scenario.BS),
+        DRAGON_QUEST(MapType.WIZARDRY_ENCODED, "Dragon Quest", WizardryData.Scenario.DQ),
+        WIZARDRY4(MapType.WIZARDRY_ENCODED, "Return of Werdna", WizardryData.Scenario.WER),
+        PERINEAN(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Perinean Depths", WizardryData.Scenario.EXODUS_PERIN),
+        DARDIN(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Dardin's Pit", WizardryData.Scenario.EXODUS_DARDIN),
+        MINE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_MINE),
+        FIRE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_FIRE),
+        DOOM(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_DOOM),
+        SNAKE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
+        TIME(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME),
+        //
+        SLAVERS_PIT(MapType.TMX_DUNGEON, "Slave Pits of the Undercity", WizardryData.Scenario.SLAVERS_PIT);
 
         private final String label;
         private final String tmxFile;
-        private final int dim;
-        private final WizardryData.Scenario wizScenario;
+        private final int tileDimension;
+        private final WizardryData.Scenario scenario;
+        private final MapType mapType;
 
         private BaseMap baseMap;
         private TiledMap tiledMap;
@@ -82,25 +91,28 @@ public interface Constants {
         private int startY;
         private int[][][] roomIds;
 
-        private Map(String label, String tmx, int dim) {
+        private Map(MapType mapType, String label, String tmx, int tileDimension) {
             this.label = label;
             this.tmxFile = tmx;
-            this.dim = dim;
-            this.wizScenario = WizardryData.Scenario.PMO;
+            this.tileDimension = tileDimension;
+            this.scenario = WizardryData.Scenario.PMO;
+            this.mapType = mapType;
         }
 
-        private Map(String label, String tmx, WizardryData.Scenario scenario, int dim) {
+        private Map(MapType mapType, String label, String tmx, WizardryData.Scenario scenario, int tileDimension) {
             this.label = label;
             this.tmxFile = tmx;
-            this.dim = dim;
-            this.wizScenario = scenario;
+            this.tileDimension = tileDimension;
+            this.scenario = scenario;
+            this.mapType = mapType;
         }
 
-        private Map(String label, WizardryData.Scenario scenario) {
+        private Map(MapType mapType, String label, WizardryData.Scenario scenario) {
             this.label = label;
             this.tmxFile = null;
-            this.dim = 0;
-            this.wizScenario = scenario;
+            this.tileDimension = 0;
+            this.scenario = scenario;
+            this.mapType = mapType;
         }
 
         public String getLabel() {
@@ -122,12 +134,12 @@ public interface Constants {
             return baseMap;
         }
 
-        public int getDim() {
-            return dim;
+        public int getTileDimension() {
+            return tileDimension;
         }
 
         public WizardryData.Scenario scenario() {
-            return wizScenario;
+            return scenario;
         }
 
         public boolean isLoaded() {
@@ -180,8 +192,8 @@ public interface Constants {
                         }
                         float x = obj.getProperties().get("x", Float.class);
                         float y = obj.getProperties().get("y", Float.class);
-                        int sx = (int) (x / this.dim);
-                        int sy = this.baseMap.getHeight() - 1 - (int) (y / this.dim);
+                        int sx = (int) (x / this.tileDimension);
+                        int sy = this.baseMap.getHeight() - 1 - (int) (y / this.tileDimension);
 
                         if ("ELEVATOR".equals(obj.getName())) {
                             Object down = obj.getProperties().get("DOWN");
@@ -233,7 +245,7 @@ public interface Constants {
 
                 MapLayer peopleLayer = this.tiledMap.getLayers().get("people");
                 if (peopleLayer != null) {
-                    loadPeopleLayer(peopleLayer, this.wizScenario.monsters());
+                    loadPeopleLayer(peopleLayer, this.scenario.monsters());
                 }
 
                 MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
@@ -263,12 +275,19 @@ public interface Constants {
                 }
             }
 
-            if (this.dim == 0) {
-                this.screen = new WizardryDungeonScreen(this);
-            } else if (this.dim == 48) {
-                this.screen = new GameScreen(this);
-            } else {
-                this.screen = new OverworldScreen(this);
+            switch (this.mapType) {
+                case TMX_DUNGEON:
+                    this.screen = new TmxDungeonScreen(this);
+                    break;
+                case WIZARDRY_ENCODED:
+                    this.screen = new WizardryDungeonScreen(this);
+                    break;
+                case TMX_TOWN:
+                    this.screen = new GameScreen(this);
+                    break;
+                case OVERWORLD:
+                    this.screen = new OverworldScreen(this);
+                    break;
             }
 
         }

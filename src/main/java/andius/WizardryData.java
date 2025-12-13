@@ -404,9 +404,9 @@ public class WizardryData {
                 EX7_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_7[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
 
-            SLAVER_LEVELS[0] = new TmxWizardryLevel("slaver-pit-1.tmx", 1, 30);
-            SLAVER_LEVELS[1] = new TmxWizardryLevel("slaver-pit-2.tmx", 2, 30);
-            
+            SLAVER_LEVELS[0] = new TmxWizardryLevel("slaver-pit-1.tmx", 1);
+            SLAVER_LEVELS[1] = new TmxWizardryLevel("slaver-pit-2.tmx", 2);
+
             SLAVER_MONSTERS = gson.fromJson(j25, new TypeToken<List<Monster>>() {
             }.getType());
 
@@ -503,6 +503,15 @@ public class WizardryData {
 
         public List<Monster> monsters() {
             return monsters;
+        }
+
+        public Monster monster(int id) {
+            for (Monster m : this.monsters) {
+                if (m.getMonsterId() == id) {
+                    return m;
+                }
+            }
+            return null;
         }
 
         public List<DoGooder> characters() {
@@ -1469,6 +1478,7 @@ public class WizardryData {
         public boolean hiddenWestDoor;
 
         public boolean darkness;
+        public boolean spotLight;
         public boolean stairs;
         public boolean pit;
         public boolean cage;
