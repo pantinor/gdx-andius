@@ -1,0 +1,6390 @@
+
+tibian.png
+size: 1024,4256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Abyssador
+  rotate: false
+  xy: 2,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Aftershock
+  rotate: false
+  xy: 68,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ahau
+  rotate: false
+  xy: 134,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Alptramun
+  rotate: false
+  xy: 200,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Amenef_the_Burning
+  rotate: false
+  xy: 266,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ancient_Spawn_of_Morgathla
+  rotate: false
+  xy: 332,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Angry_King_Chuck
+  rotate: false
+  xy: 398,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Anmothra
+  rotate: false
+  xy: 464,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Annihilon
+  rotate: false
+  xy: 530,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Anomaly
+  rotate: false
+  xy: 596,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+An_Astral_Glyph
+  rotate: false
+  xy: 662,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+An_Observer_Eye
+  rotate: false
+  xy: 728,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Apprentice_Sheng
+  rotate: false
+  xy: 794,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Arachir_the_Ancient_One
+  rotate: false
+  xy: 860,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Arbaziloth
+  rotate: false
+  xy: 926,2
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Armenius
+  rotate: false
+  xy: 2,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Arthom_the_Hunter
+  rotate: false
+  xy: 68,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ascending_Ferumbras
+  rotate: false
+  xy: 134,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ashmunrah
+  rotate: false
+  xy: 200,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Atab
+  rotate: false
+  xy: 266,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ayana_the_Crimson_Curse
+  rotate: false
+  xy: 332,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Azerus
+  rotate: false
+  xy: 398,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+A_Shielded_Astral_Glyph
+  rotate: false
+  xy: 464,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bakragore
+  rotate: false
+  xy: 530,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Barbaria
+  rotate: false
+  xy: 596,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Battlemaster_Zunzu
+  rotate: false
+  xy: 662,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Black_Knight
+  rotate: false
+  xy: 728,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Black_Vixen
+  rotate: false
+  xy: 794,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bloodback
+  rotate: false
+  xy: 860,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bloom_of_Doom
+  rotate: false
+  xy: 926,68
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bolfrim
+  rotate: false
+  xy: 2,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bragrumol
+  rotate: false
+  xy: 68,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Brain_Head
+  rotate: false
+  xy: 134,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bretzecutioner
+  rotate: false
+  xy: 200,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Brokul
+  rotate: false
+  xy: 266,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bruise_Payne
+  rotate: false
+  xy: 332,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bruton
+  rotate: false
+  xy: 398,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Brutus_Bloodbeard
+  rotate: false
+  xy: 464,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bullwark
+  rotate: false
+  xy: 530,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Burster
+  rotate: false
+  xy: 596,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Captain_Jones
+  rotate: false
+  xy: 662,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chagorz
+  rotate: false
+  xy: 728,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Channeling_Earl_Osam
+  rotate: false
+  xy: 794,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Charged_Anomaly
+  rotate: false
+  xy: 860,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Charged_Disruption
+  rotate: false
+  xy: 926,134
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Charging_Outburst
+  rotate: false
+  xy: 2,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chayenne
+  rotate: false
+  xy: 68,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chest
+  rotate: false
+  xy: 134,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chikhaton
+  rotate: false
+  xy: 200,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chizzoron_the_Distorter
+  rotate: false
+  xy: 266,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chopper
+  rotate: false
+  xy: 332,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cocoon
+  rotate: false
+  xy: 398,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Countess_Sorrow
+  rotate: false
+  xy: 464,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Count_Tofifti
+  rotate: false
+  xy: 530,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Count_Vlarkorth
+  rotate: false
+  xy: 596,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Craban
+  rotate: false
+  xy: 662,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crultor
+  rotate: false
+  xy: 728,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crystal_Spider
+  rotate: false
+  xy: 794,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cublarc_the_Plunderer
+  rotate: false
+  xy: 860,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Custodian
+  rotate: false
+  xy: 926,200
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Damage_Resonance
+  rotate: false
+  xy: 2,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Darkfang
+  rotate: false
+  xy: 68,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Torturer
+  rotate: false
+  xy: 134,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deadeye_Devious
+  rotate: false
+  xy: 200,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deathbine
+  rotate: false
+  xy: 266,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deathstrike
+  rotate: false
+  xy: 332,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Death_Priest_Shargon
+  rotate: false
+  xy: 398,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deep_Terror
+  rotate: false
+  xy: 464,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Defiler
+  rotate: false
+  xy: 530,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Delany
+  rotate: false
+  xy: 596,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Denson_Larika
+  rotate: false
+  xy: 662,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Despor
+  rotate: false
+  xy: 728,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Destabilized_Ferumbras
+  rotate: false
+  xy: 794,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Devovorga
+  rotate: false
+  xy: 860,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dharalion
+  rotate: false
+  xy: 926,266
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Diabolic_Imp
+  rotate: false
+  xy: 2,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dirtbeard
+  rotate: false
+  xy: 68,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Diseased_Bill
+  rotate: false
+  xy: 134,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Diseased_Dan
+  rotate: false
+  xy: 200,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Diseased_Fred
+  rotate: false
+  xy: 266,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Doctor_Marrow
+  rotate: false
+  xy: 332,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Doctor_Perhaps
+  rotate: false
+  xy: 398,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dragon
+  rotate: false
+  xy: 464,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dragonking_Zyrtarch
+  rotate: false
+  xy: 530,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dragon_Hoard
+  rotate: false
+  xy: 596,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dragon_Lord
+  rotate: false
+  xy: 662,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dreadful_Disruptor
+  rotate: false
+  xy: 728,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dreadmaw
+  rotate: false
+  xy: 794,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Drume
+  rotate: false
+  xy: 860,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Duke_Krule
+  rotate: false
+  xy: 926,332
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Earl_Osam
+  rotate: false
+  xy: 2,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Earth_Overlord
+  rotate: false
+  xy: 68,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ekatrix
+  rotate: false
+  xy: 134,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Elvira_Hammerthrust
+  rotate: false
+  xy: 200,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Energized_Raging_Mage
+  rotate: false
+  xy: 266,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Energy_Elemental
+  rotate: false
+  xy: 332,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Enraged_Morshabaal
+  rotate: false
+  xy: 398,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Enusat_the_Onyx_Wing
+  rotate: false
+  xy: 464,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Eradicator
+  rotate: false
+  xy: 530,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Esmeralda
+  rotate: false
+  xy: 596,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Evil_Mastermind
+  rotate: false
+  xy: 662,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Faceless_Bane
+  rotate: false
+  xy: 728,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fahim_the_Wise
+  rotate: false
+  xy: 794,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fat_Porker
+  rotate: false
+  xy: 860,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fazzrah
+  rotate: false
+  xy: 926,398
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fernfang
+  rotate: false
+  xy: 2,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Feroxa
+  rotate: false
+  xy: 68,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Feroxa_Werewolf
+  rotate: false
+  xy: 134,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Feroxa_Wolf
+  rotate: false
+  xy: 200,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ferumbras
+  rotate: false
+  xy: 266,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ferumbras_Mortal_Shell
+  rotate: false
+  xy: 332,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ferumbras_Soul_Splinter
+  rotate: false
+  xy: 398,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flameborn
+  rotate: false
+  xy: 464,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flamecaller_Zazrak
+  rotate: false
+  xy: 530,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flamesteed
+  rotate: false
+  xy: 596,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fleabringer
+  rotate: false
+  xy: 662,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fleshcrawler
+  rotate: false
+  xy: 728,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fleshslicer
+  rotate: false
+  xy: 794,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Foreman_Kneebiter
+  rotate: false
+  xy: 860,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Foreshock
+  rotate: false
+  xy: 926,464
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fugue
+  rotate: false
+  xy: 2,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Furious_Morshabaal
+  rotate: false
+  xy: 68,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Furyosa
+  rotate: false
+  xy: 134,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gaffir
+  rotate: false
+  xy: 200,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gaz_haragoth
+  rotate: false
+  xy: 266,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gelidrazah_the_Frozen
+  rotate: false
+  xy: 332,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+General_Murius
+  rotate: false
+  xy: 398,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ghastly_Dragon
+  rotate: false
+  xy: 464,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ghazbaran
+  rotate: false
+  xy: 530,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ghulosh
+  rotate: false
+  xy: 596,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ghulosh_Deathgaze
+  rotate: false
+  xy: 662,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Giant_Spider
+  rotate: false
+  xy: 728,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glooth_Bomb
+  rotate: false
+  xy: 794,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glooth_Golem
+  rotate: false
+  xy: 860,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gnomevil
+  rotate: false
+  xy: 926,530
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Golgordan
+  rotate: false
+  xy: 2,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gorga
+  rotate: false
+  xy: 68,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gorgo
+  rotate: false
+  xy: 134,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gorzindel
+  rotate: false
+  xy: 200,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Cruelty
+  rotate: false
+  xy: 266,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Greed
+  rotate: false
+  xy: 332,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Hatred
+  rotate: false
+  xy: 398,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Malice
+  rotate: false
+  xy: 464,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Megalomania
+  rotate: false
+  xy: 530,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goshnars_Spite
+  rotate: false
+  xy: 596,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gralvalon
+  rotate: false
+  xy: 662,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grandfather_Tridian
+  rotate: false
+  xy: 728,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grand_Canon_Dominus
+  rotate: false
+  xy: 794,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grand_Chaplain_Gaunder
+  rotate: false
+  xy: 860,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grand_Commander_Soeren
+  rotate: false
+  xy: 926,596
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grand_Master_Oberon
+  rotate: false
+  xy: 2,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Great_Timedisplaced_Anomaly
+  rotate: false
+  xy: 68,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Greedok
+  rotate: false
+  xy: 134,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grimrat
+  rotate: false
+  xy: 200,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grim_Reaper
+  rotate: false
+  xy: 266,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Groam
+  rotate: false
+  xy: 332,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Guard_Captain_Quaid
+  rotate: false
+  xy: 398,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hairman_the_Huge
+  rotate: false
+  xy: 464,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Haunted_Treeling
+  rotate: false
+  xy: 530,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hellfire_Fighter
+  rotate: false
+  xy: 596,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hellgorak
+  rotate: false
+  xy: 662,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hemming
+  rotate: false
+  xy: 728,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Heoni
+  rotate: false
+  xy: 794,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+High_Templar_Cobrass
+  rotate: false
+  xy: 860,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Horadron
+  rotate: false
+  xy: 926,662
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ice_Golem
+  rotate: false
+  xy: 2,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ichgahal
+  rotate: false
+  xy: 68,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Irahsae
+  rotate: false
+  xy: 134,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Irgix_the_Flimsy
+  rotate: false
+  xy: 200,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Izcandar_Champion_of_Summer
+  rotate: false
+  xy: 266,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Izcandar_Champion_of_Winter
+  rotate: false
+  xy: 332,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Izcandar_the_Banished
+  rotate: false
+  xy: 398,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jaul
+  rotate: false
+  xy: 464,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jesse_the_Wicked
+  rotate: false
+  xy: 530,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kalyassa
+  rotate: false
+  xy: 596,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Katex_Blood_Tongue
+  rotate: false
+  xy: 662,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kerberos
+  rotate: false
+  xy: 728,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kesar
+  rotate: false
+  xy: 794,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+King_Chuck
+  rotate: false
+  xy: 860,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+King_Zelos
+  rotate: false
+  xy: 926,728
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kraknaknork
+  rotate: false
+  xy: 2,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kroazur
+  rotate: false
+  xy: 68,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kusuma
+  rotate: false
+  xy: 134,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lady_Tenebris
+  rotate: false
+  xy: 200,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lagatos
+  rotate: false
+  xy: 266,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Last_Planegazer
+  rotate: false
+  xy: 332,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Latrivan
+  rotate: false
+  xy: 398,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Leiden
+  rotate: false
+  xy: 464,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lethal_Lissy
+  rotate: false
+  xy: 530,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Leviathan
+  rotate: false
+  xy: 596,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lich
+  rotate: false
+  xy: 662,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lionet
+  rotate: false
+  xy: 728,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lisa
+  rotate: false
+  xy: 794,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lizard_Abomination
+  rotate: false
+  xy: 860,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lizard_Gate_Guardian
+  rotate: false
+  xy: 926,794
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lloyd
+  rotate: false
+  xy: 2,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lokathmor
+  rotate: false
+  xy: 68,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lord_Azaram
+  rotate: false
+  xy: 134,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lord_Retro
+  rotate: false
+  xy: 200,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lyxoph_Creature
+  rotate: false
+  xy: 266,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Madareth
+  rotate: false
+  xy: 332,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mad_Mage
+  rotate: false
+  xy: 398,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mad_Technomancer
+  rotate: false
+  xy: 464,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Magma_Bubble
+  rotate: false
+  xy: 530,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Magnor_Mournbringer
+  rotate: false
+  xy: 596,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mahrdis
+  rotate: false
+  xy: 662,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Major_Timedisplaced_Anomaly_Fiehonja
+  rotate: false
+  xy: 728,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Major_Timedisplaced_Anomaly_Issavi
+  rotate: false
+  xy: 794,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Major_Timedisplaced_Anomaly_Rascacoon
+  rotate: false
+  xy: 860,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Maliz
+  rotate: false
+  xy: 926,860
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Malofur_Mangrinder
+  rotate: false
+  xy: 2,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Malvaroth
+  rotate: false
+  xy: 68,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Man_in_the_Cave
+  rotate: false
+  xy: 134,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Massacre
+  rotate: false
+  xy: 200,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Massive_Energy_Elemental
+  rotate: false
+  xy: 266,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Massive_Water_Elemental
+  rotate: false
+  xy: 332,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Maw
+  rotate: false
+  xy: 398,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mawhawk
+  rotate: false
+  xy: 464,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Maxxenius
+  rotate: false
+  xy: 530,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mazoran
+  rotate: false
+  xy: 596,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mazzinor
+  rotate: false
+  xy: 662,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Megasylvan_Yselda
+  rotate: false
+  xy: 728,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Merikh_the_Slaughterer
+  rotate: false
+  xy: 794,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mindmasher
+  rotate: false
+  xy: 860,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Minor_Timedisplaced_Anomaly_Greenshore
+  rotate: false
+  xy: 926,926
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Minor_Timedisplaced_Anomaly_Rookgaard
+  rotate: false
+  xy: 2,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mirade_Creature
+  rotate: false
+  xy: 68,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mitmah_Vanguard
+  rotate: false
+  xy: 134,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Monstor
+  rotate: false
+  xy: 200,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+MoohTah_Master
+  rotate: false
+  xy: 266,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Moohtant_Wallbreaker
+  rotate: false
+  xy: 332,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Morgaroth
+  rotate: false
+  xy: 398,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Morik_the_Gladiator
+  rotate: false
+  xy: 464,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mornenion
+  rotate: false
+  xy: 530,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Morshabaal
+  rotate: false
+  xy: 596,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mounted_Thorn_Knight
+  rotate: false
+  xy: 662,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mozradek
+  rotate: false
+  xy: 728,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mummy
+  rotate: false
+  xy: 794,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Munster
+  rotate: false
+  xy: 860,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Murcion
+  rotate: false
+  xy: 926,992
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mutated_Zalamon
+  rotate: false
+  xy: 2,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nargol_the_Impaler
+  rotate: false
+  xy: 68,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Necropharus
+  rotate: false
+  xy: 134,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Neferi_the_Spy
+  rotate: false
+  xy: 200,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Obujos
+  rotate: false
+  xy: 266,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ocyakao
+  rotate: false
+  xy: 332,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Omrafir
+  rotate: false
+  xy: 398,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Oodok_Witchmaster
+  rotate: false
+  xy: 464,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Orc_Warlord
+  rotate: false
+  xy: 530,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Orshabaal
+  rotate: false
+  xy: 596,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Outburst
+  rotate: false
+  xy: 662,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Overcharged_Disruption
+  rotate: false
+  xy: 728,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Owin_Creature
+  rotate: false
+  xy: 794,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paiz_the_Pauperizer
+  rotate: false
+  xy: 860,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Penciljack_Creature
+  rotate: false
+  xy: 926,1058
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Phrodomo
+  rotate: false
+  xy: 2,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Pirate_Ship
+  rotate: false
+  xy: 68,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Plagirath
+  rotate: false
+  xy: 134,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Plagueroot
+  rotate: false
+  xy: 200,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Preceptor_Lazare
+  rotate: false
+  xy: 266,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Prince_Drazzak
+  rotate: false
+  xy: 332,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Professor_Maxxen
+  rotate: false
+  xy: 398,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Quara_Constrictor
+  rotate: false
+  xy: 464,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ragiaz
+  rotate: false
+  xy: 530,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Raging_Mage
+  rotate: false
+  xy: 596,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ratmiral_Blackwhiskers
+  rotate: false
+  xy: 662,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ravenous_Hunger
+  rotate: false
+  xy: 728,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Raxias
+  rotate: false
+  xy: 794,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Razzagorn
+  rotate: false
+  xy: 860,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Realityquake
+  rotate: false
+  xy: 926,1124
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Reflection_of_Obujos
+  rotate: false
+  xy: 2,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rejana_Creature
+  rotate: false
+  xy: 68,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Renegade_Orc
+  rotate: false
+  xy: 134,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Retros_Treasure
+  rotate: false
+  xy: 200,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rewar_the_Bloody
+  rotate: false
+  xy: 266,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ribstride
+  rotate: false
+  xy: 332,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Robby_the_Reckless
+  rotate: false
+  xy: 398,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ron_the_Ripper
+  rotate: false
+  xy: 464,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rotspit
+  rotate: false
+  xy: 530,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rotworm
+  rotate: false
+  xy: 596,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rukor_Zad
+  rotate: false
+  xy: 662,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rupture
+  rotate: false
+  xy: 728,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Samael
+  rotate: false
+  xy: 794,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Scarlett_Etzel
+  rotate: false
+  xy: 860,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Serpent_Spawn
+  rotate: false
+  xy: 926,1190
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadowpelt
+  rotate: false
+  xy: 2,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadowstalker
+  rotate: false
+  xy: 68,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sharpclaw
+  rotate: false
+  xy: 134,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sharptooth
+  rotate: false
+  xy: 200,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shlorg
+  rotate: false
+  xy: 266,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shulgrax
+  rotate: false
+  xy: 332,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Siramal_Creature
+  rotate: false
+  xy: 398,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sir_Baeloc
+  rotate: false
+  xy: 464,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sir_Nictros
+  rotate: false
+  xy: 530,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sister_Hetai
+  rotate: false
+  xy: 596,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Skeleton_Warrior
+  rotate: false
+  xy: 662,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Skyrr_Creature
+  rotate: false
+  xy: 728,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Smuggler_Baron_Silvertoe
+  rotate: false
+  xy: 794,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Snake_God_Essence
+  rotate: false
+  xy: 860,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Soul_of_Dragonking_Zyrtarch
+  rotate: false
+  xy: 926,1256
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sphere_of_Wrath
+  rotate: false
+  xy: 2,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Spirit_of_Light
+  rotate: false
+  xy: 68,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Splasher
+  rotate: false
+  xy: 134,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stonecracker
+  rotate: false
+  xy: 200,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stone_Golem
+  rotate: false
+  xy: 266,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sugar_Daddy
+  rotate: false
+  xy: 332,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sugar_Mommy
+  rotate: false
+  xy: 398,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sulphur_Scuttler
+  rotate: false
+  xy: 464,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tamru_the_Black
+  rotate: false
+  xy: 530,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tanjis
+  rotate: false
+  xy: 596,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tarantula
+  rotate: false
+  xy: 662,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tarbaz
+  rotate: false
+  xy: 728,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tazhadur
+  rotate: false
+  xy: 794,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Teneshpar
+  rotate: false
+  xy: 860,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tentuglys_Head
+  rotate: false
+  xy: 926,1322
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Terofar
+  rotate: false
+  xy: 2,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Thaian
+  rotate: false
+  xy: 68,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Abomination
+  rotate: false
+  xy: 134,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Armored_Voidborn
+  rotate: false
+  xy: 200,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Astral_Source
+  rotate: false
+  xy: 266,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Baron_from_Below
+  rotate: false
+  xy: 332,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Big_Bad_One
+  rotate: false
+  xy: 398,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Blazing_Rose
+  rotate: false
+  xy: 464,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Blazing_Time_Guardian
+  rotate: false
+  xy: 530,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Blightfather
+  rotate: false
+  xy: 596,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Bloodtusk
+  rotate: false
+  xy: 662,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Brainstealer
+  rotate: false
+  xy: 728,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Corruptor_of_Souls
+  rotate: false
+  xy: 794,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Count_of_the_Core
+  rotate: false
+  xy: 860,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Destruction
+  rotate: false
+  xy: 926,1388
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Diamond_Blossom
+  rotate: false
+  xy: 2,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Distorted_Astral_Source
+  rotate: false
+  xy: 68,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Dread_Maiden
+  rotate: false
+  xy: 134,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Duke_of_the_Depths
+  rotate: false
+  xy: 200,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Enraged_Thorn_Knight
+  rotate: false
+  xy: 266,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Evil_Eye
+  rotate: false
+  xy: 332,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_False_God
+  rotate: false
+  xy: 398,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Fear_Feaster
+  rotate: false
+  xy: 464,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Fettered_Shatterer
+  rotate: false
+  xy: 530,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Fire_Empowered_Duke
+  rotate: false
+  xy: 596,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_First_Dragon
+  rotate: false
+  xy: 662,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Flaming_Orchid
+  rotate: false
+  xy: 728,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Freezing_Time_Guardian
+  rotate: false
+  xy: 794,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Frog_Prince
+  rotate: false
+  xy: 860,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Great_Schnitzel
+  rotate: false
+  xy: 926,1454
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Handmaiden
+  rotate: false
+  xy: 2,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Horned_Fox
+  rotate: false
+  xy: 68,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Hunger
+  rotate: false
+  xy: 134,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Hungerer
+  rotate: false
+  xy: 200,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Hungry_Baron_from_Below
+  rotate: false
+  xy: 266,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Last_Lore_Keeper
+  rotate: false
+  xy: 332,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Lily_of_Night
+  rotate: false
+  xy: 398,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Lord_of_the_Lice
+  rotate: false
+  xy: 464,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Manhunter
+  rotate: false
+  xy: 530,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Many
+  rotate: false
+  xy: 596,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Mean_Masher
+  rotate: false
+  xy: 662,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Mega_Magmaoid
+  rotate: false
+  xy: 728,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Monster
+  rotate: false
+  xy: 794,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Moonlight_Aster
+  rotate: false
+  xy: 860,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Mutated_Pumpkin
+  rotate: false
+  xy: 926,1520
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Nightmare_Beast
+  rotate: false
+  xy: 2,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Old_Whopper
+  rotate: false
+  xy: 68,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Pale_Count
+  rotate: false
+  xy: 134,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Pale_Worm
+  rotate: false
+  xy: 200,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Percht_Queen
+  rotate: false
+  xy: 266,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Primal_Menace
+  rotate: false
+  xy: 332,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Rage
+  rotate: false
+  xy: 398,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Red_Knight
+  rotate: false
+  xy: 464,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Remorseless_Corruptor
+  rotate: false
+  xy: 530,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Rootkraken
+  rotate: false
+  xy: 596,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Sandking
+  rotate: false
+  xy: 662,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Scion_of_Havoc
+  rotate: false
+  xy: 728,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Scourge_of_Oblivion
+  rotate: false
+  xy: 794,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Scourge_of_Oblivion_Charging
+  rotate: false
+  xy: 860,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Scourge_of_Oblivion_Reflective
+  rotate: false
+  xy: 926,1586
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Shatterer
+  rotate: false
+  xy: 2,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Shielded_Thorn_Knight
+  rotate: false
+  xy: 68,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Sinister_Hermit_Blue
+  rotate: false
+  xy: 134,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Sinister_Hermit_Yellow
+  rotate: false
+  xy: 200,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Snapper
+  rotate: false
+  xy: 266,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Souldespoiler
+  rotate: false
+  xy: 332,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Spellstealer
+  rotate: false
+  xy: 398,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Spellstealer_Creator
+  rotate: false
+  xy: 464,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Spellstealer_Destructor
+  rotate: false
+  xy: 530,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Time_Guardian
+  rotate: false
+  xy: 596,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Unarmored_Voidborn
+  rotate: false
+  xy: 662,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Unwelcome
+  rotate: false
+  xy: 728,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Voice_of_Ruin
+  rotate: false
+  xy: 794,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Weakened_Count
+  rotate: false
+  xy: 860,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Welter
+  rotate: false
+  xy: 926,1652
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Winter_Bloom
+  rotate: false
+  xy: 2,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Timedisplaced_Anomaly_Banuta
+  rotate: false
+  xy: 68,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Timedisplaced_Anomaly_Chazorai
+  rotate: false
+  xy: 134,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Timedisplaced_Anomaly_Warzone
+  rotate: false
+  xy: 200,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Timira_the_ManyHeaded
+  rotate: false
+  xy: 266,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tiquandas_Revenge
+  rotate: false
+  xy: 332,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Titano_Dragon
+  rotate: false
+  xy: 398,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tjured_Creature
+  rotate: false
+  xy: 464,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tormentor
+  rotate: false
+  xy: 530,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Trollwut
+  rotate: false
+  xy: 596,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Troll_Champion
+  rotate: false
+  xy: 662,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tromphonyte
+  rotate: false
+  xy: 728,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Twisterror
+  rotate: false
+  xy: 794,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tyrn
+  rotate: false
+  xy: 860,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tzumrah_the_Dazzler
+  rotate: false
+  xy: 926,1718
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Unaz_the_Mean
+  rotate: false
+  xy: 2,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Undead_Dragon
+  rotate: false
+  xy: 68,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ungreez
+  rotate: false
+  xy: 134,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Urmahlullu_the_Immaculate
+  rotate: false
+  xy: 200,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Urmahlullu_the_Tamed
+  rotate: false
+  xy: 266,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Urmahlullu_the_Weakened
+  rotate: false
+  xy: 332,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ushuriel
+  rotate: false
+  xy: 398,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Utua_Stone_Sting
+  rotate: false
+  xy: 464,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vemiath
+  rotate: false
+  xy: 530,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vengar
+  rotate: false
+  xy: 596,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Versperoth
+  rotate: false
+  xy: 662,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vilear
+  rotate: false
+  xy: 728,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vok_the_Freakish
+  rotate: false
+  xy: 794,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vulnerable_Cocoon
+  rotate: false
+  xy: 860,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Weakened_Shlorg
+  rotate: false
+  xy: 926,1784
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+White_Pale
+  rotate: false
+  xy: 2,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wildness_of_Urmahlullu
+  rotate: false
+  xy: 68,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Willi_Wasp
+  rotate: false
+  xy: 134,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wisdom_of_Urmahlullu
+  rotate: false
+  xy: 200,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+World_Devourer
+  rotate: false
+  xy: 266,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Xenia
+  rotate: false
+  xy: 332,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Xogixath
+  rotate: false
+  xy: 398,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Yaga_the_Crone
+  rotate: false
+  xy: 464,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Yakchal
+  rotate: false
+  xy: 530,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Yirkas_Blue_Scales
+  rotate: false
+  xy: 596,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zamulosh
+  rotate: false
+  xy: 662,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zarabustor
+  rotate: false
+  xy: 728,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zavarash
+  rotate: false
+  xy: 794,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zomba
+  rotate: false
+  xy: 860,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zorvorax
+  rotate: false
+  xy: 926,1850
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zugurosh
+  rotate: false
+  xy: 2,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zulazza_the_Corruptor
+  rotate: false
+  xy: 68,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zushuka
+  rotate: false
+  xy: 134,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Arachnophobica
+  rotate: false
+  xy: 200,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Exotic_Cave_Spider
+  rotate: false
+  xy: 266,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Furious_Scorpion
+  rotate: false
+  xy: 332,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Giant_Spider_Nostalgia
+  rotate: false
+  xy: 398,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Girtablilu_Warrior
+  rotate: false
+  xy: 464,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Poison_Spider
+  rotate: false
+  xy: 530,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Scorpion
+  rotate: false
+  xy: 596,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sparkion
+  rotate: false
+  xy: 662,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Spider
+  rotate: false
+  xy: 728,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Spider_Nostalgia
+  rotate: false
+  xy: 794,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Spidris
+  rotate: false
+  xy: 860,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sulphider
+  rotate: false
+  xy: 926,1916
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Unwanted
+  rotate: false
+  xy: 2,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Venerable_Girtablilu
+  rotate: false
+  xy: 68,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wailing_Widow
+  rotate: false
+  xy: 134,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bear
+  rotate: false
+  xy: 200,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Panda
+  rotate: false
+  xy: 266,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Polar_Bear
+  rotate: false
+  xy: 332,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Undead_Cavebear
+  rotate: false
+  xy: 398,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Werebear
+  rotate: false
+  xy: 464,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Adult_Goanna
+  rotate: false
+  xy: 530,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Amenef_The_Burning
+  rotate: false
+  xy: 596,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ancient_Scarab
+  rotate: false
+  xy: 662,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Assassin
+  rotate: false
+  xy: 728,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Badger
+  rotate: false
+  xy: 794,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Banshee
+  rotate: false
+  xy: 860,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Barbarian_Brutetamer
+  rotate: false
+  xy: 926,1982
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bat
+  rotate: false
+  xy: 2,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Behemoth
+  rotate: false
+  xy: 68,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Biting_Book
+  rotate: false
+  xy: 134,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Blood_Crab
+  rotate: false
+  xy: 200,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bonelord
+  rotate: false
+  xy: 266,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Brain_Squid
+  rotate: false
+  xy: 332,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Calamary
+  rotate: false
+  xy: 398,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cave_Chimera
+  rotate: false
+  xy: 464,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Chakoya_Toolshaper
+  rotate: false
+  xy: 530,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Corym_Skirmisher
+  rotate: false
+  xy: 596,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crawler
+  rotate: false
+  xy: 662,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dawnfire_Asura
+  rotate: false
+  xy: 728,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deathslicer
+  rotate: false
+  xy: 794,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Death_Blob
+  rotate: false
+  xy: 860,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Deepling_Scout
+  rotate: false
+  xy: 926,2048
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Demon
+  rotate: false
+  xy: 2,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Diamond_Servant
+  rotate: false
+  xy: 68,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Doctor_Rudebert_Evul
+  rotate: false
+  xy: 134,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Draken_Elite
+  rotate: false
+  xy: 200,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dwarf_Miner
+  rotate: false
+  xy: 266,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dworc_Voodoomaster
+  rotate: false
+  xy: 332,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Elder_Wyrm
+  rotate: false
+  xy: 398,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Elf_Arcanist
+  rotate: false
+  xy: 464,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Enlightened_of_the_Cult
+  rotate: false
+  xy: 530,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Faun
+  rotate: false
+  xy: 596,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fire_Devil
+  rotate: false
+  xy: 662,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flying_Book
+  rotate: false
+  xy: 728,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Foxmouse
+  rotate: false
+  xy: 794,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gnarlhound
+  rotate: false
+  xy: 860,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gnorre_Chyllson
+  rotate: false
+  xy: 926,2114
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goblin_Scavenger
+  rotate: false
+  xy: 2,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gravedigger
+  rotate: false
+  xy: 68,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grimeleech
+  rotate: false
+  xy: 134,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Humongous_Fungus
+  rotate: false
+  xy: 200,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Husky
+  rotate: false
+  xy: 266,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hydra
+  rotate: false
+  xy: 332,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Island_Troll
+  rotate: false
+  xy: 398,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jellyfish
+  rotate: false
+  xy: 464,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Juggernaut
+  rotate: false
+  xy: 530,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Juvenile_Bashmu
+  rotate: false
+  xy: 596,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Killer_Caiman
+  rotate: false
+  xy: 662,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kollos
+  rotate: false
+  xy: 728,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kongra
+  rotate: false
+  xy: 794,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lava_Golem
+  rotate: false
+  xy: 860,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lizard_Templar
+  rotate: false
+  xy: 926,2180
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Manticore
+  rotate: false
+  xy: 2,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Marid
+  rotate: false
+  xy: 68,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Massive_Earth_Elemental
+  rotate: false
+  xy: 134,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Midnight_Panther
+  rotate: false
+  xy: 200,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Minotaur_Guard
+  rotate: false
+  xy: 266,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mirade
+  rotate: false
+  xy: 332,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Monk
+  rotate: false
+  xy: 398,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mutated_Human
+  rotate: false
+  xy: 464,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mutated_Rat
+  rotate: false
+  xy: 530,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Necromancer
+  rotate: false
+  xy: 596,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nightfiend
+  rotate: false
+  xy: 662,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Orclops_Ravager
+  rotate: false
+  xy: 728,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Phantasm
+  rotate: false
+  xy: 794,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Pirate_Corsair
+  rotate: false
+  xy: 860,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Pirat_Mate
+  rotate: false
+  xy: 926,2246
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Pit_Reaver
+  rotate: false
+  xy: 2,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Priestess_of_the_Wild_Sun
+  rotate: false
+  xy: 68,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Quara_Predator
+  rotate: false
+  xy: 134,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rhindeer
+  rotate: false
+  xy: 200,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Salamander
+  rotate: false
+  xy: 266,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sea_Serpent
+  rotate: false
+  xy: 332,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shaburak_Demon
+  rotate: false
+  xy: 398,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shaburak_Lord
+  rotate: false
+  xy: 464,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shaburak_Prince
+  rotate: false
+  xy: 530,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shark
+  rotate: false
+  xy: 596,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Silver_Rabbit
+  rotate: false
+  xy: 662,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sphinx
+  rotate: false
+  xy: 728,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Squirrel
+  rotate: false
+  xy: 794,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stampor
+  rotate: false
+  xy: 860,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Storm
+  rotate: false
+  xy: 926,2312
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Terrorsleep
+  rotate: false
+  xy: 2,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Terror_Bird
+  rotate: false
+  xy: 68,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Draccoon
+  rotate: false
+  xy: 134,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Thornback_Tortoise
+  rotate: false
+  xy: 200,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tiger
+  rotate: false
+  xy: 266,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Toad
+  rotate: false
+  xy: 332,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Twisted_Shaper
+  rotate: false
+  xy: 398,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Valkyrie
+  rotate: false
+  xy: 464,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vampire_Viscount
+  rotate: false
+  xy: 530,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Warlock
+  rotate: false
+  xy: 596,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Werewolf
+  rotate: false
+  xy: 662,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wyvern
+  rotate: false
+  xy: 728,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ancient_Lion_Knight
+  rotate: false
+  xy: 794,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Barbarian_Bloodwalker
+  rotate: false
+  xy: 860,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Barbarian_Headsplitter
+  rotate: false
+  xy: 926,2378
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Barbarian_Skullhunter
+  rotate: false
+  xy: 2,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Burning_Gladiator
+  rotate: false
+  xy: 68,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cobra_Assassin
+  rotate: false
+  xy: 134,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cobra_Scout
+  rotate: false
+  xy: 200,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Colerian_the_Barbarian
+  rotate: false
+  xy: 266,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Darakan_the_Executioner
+  rotate: false
+  xy: 332,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Apprentice
+  rotate: false
+  xy: 398,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Domestikion
+  rotate: false
+  xy: 464,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ice_Witch
+  rotate: false
+  xy: 530,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Infernalist
+  rotate: false
+  xy: 596,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lion_Archer
+  rotate: false
+  xy: 662,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ron_The_Ripper
+  rotate: false
+  xy: 728,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Svoren_the_Mad
+  rotate: false
+  xy: 794,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Hag
+  rotate: false
+  xy: 860,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Achad
+  rotate: false
+  xy: 926,2444
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Adventurer
+  rotate: false
+  xy: 2,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Angry_Adventurer
+  rotate: false
+  xy: 68,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bandit
+  rotate: false
+  xy: 134,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crazed_Beggar
+  rotate: false
+  xy: 200,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crypt_Defiler
+  rotate: false
+  xy: 266,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cult_Believer
+  rotate: false
+  xy: 332,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cult_Enforcer
+  rotate: false
+  xy: 398,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cult_Scholar
+  rotate: false
+  xy: 464,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Druid
+  rotate: false
+  xy: 530,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Knight
+  rotate: false
+  xy: 596,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Paladin
+  rotate: false
+  xy: 662,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Sorcerer
+  rotate: false
+  xy: 728,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Feverish_Citizen
+  rotate: false
+  xy: 794,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gang_Member
+  rotate: false
+  xy: 860,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gladiator
+  rotate: false
+  xy: 926,2510
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glooth_Bandit
+  rotate: false
+  xy: 2,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glooth_Brigand
+  rotate: false
+  xy: 68,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goldhanded_Cultist
+  rotate: false
+  xy: 134,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Goldhanded_Cultist_Bride
+  rotate: false
+  xy: 200,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Grave_Robber
+  rotate: false
+  xy: 266,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hero
+  rotate: false
+  xy: 332,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hunter
+  rotate: false
+  xy: 398,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Memory_of_a_Hero
+  rotate: false
+  xy: 464,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Misguided_Bully
+  rotate: false
+  xy: 530,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Misguided_Thief
+  rotate: false
+  xy: 596,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nomad_Basic
+  rotate: false
+  xy: 662,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nomad_Blue
+  rotate: false
+  xy: 728,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nomad_Female
+  rotate: false
+  xy: 794,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Poacher
+  rotate: false
+  xy: 860,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Renegade_Knight
+  rotate: false
+  xy: 926,2576
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Smuggler
+  rotate: false
+  xy: 2,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stalker
+  rotate: false
+  xy: 68,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Thief_Creature
+  rotate: false
+  xy: 134,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Travelling_Merchant
+  rotate: false
+  xy: 200,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vicious_Squire
+  rotate: false
+  xy: 266,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vile_Grandmaster
+  rotate: false
+  xy: 332,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wild_Warrior
+  rotate: false
+  xy: 398,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Magician
+  rotate: false
+  xy: 464,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Incredibly_Old_Witch
+  rotate: false
+  xy: 530,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mad_Scientist
+  rotate: false
+  xy: 596,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Memory_of_a_Yalahari
+  rotate: false
+  xy: 662,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Witch
+  rotate: false
+  xy: 728,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Beastmaster_Female
+  rotate: false
+  xy: 794,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Beastmaster_Male
+  rotate: false
+  xy: 860,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Dream_Warrior_Female
+  rotate: false
+  xy: 926,2642
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Dream_Warrior_Male
+  rotate: false
+  xy: 2,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Druid_Female
+  rotate: false
+  xy: 68,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Druid_Male
+  rotate: false
+  xy: 134,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Grove_Keeper_Female
+  rotate: false
+  xy: 200,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Grove_Keeper_Male
+  rotate: false
+  xy: 266,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Herbalist_Female
+  rotate: false
+  xy: 332,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Herbalist_Male
+  rotate: false
+  xy: 398,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Percht_Raider_Female
+  rotate: false
+  xy: 464,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Percht_Raider_Male
+  rotate: false
+  xy: 530,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Shaman_Female
+  rotate: false
+  xy: 596,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Shaman_Male
+  rotate: false
+  xy: 662,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Spirit_Caller_Female
+  rotate: false
+  xy: 728,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Spirit_Caller_Male
+  rotate: false
+  xy: 794,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Winter_Warden_Female
+  rotate: false
+  xy: 860,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Druid_Winter_Warden_Male
+  rotate: false
+  xy: 926,2708
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Arena_Champion_Female
+  rotate: false
+  xy: 2,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Arena_Champion_Male
+  rotate: false
+  xy: 68,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Barbarian_Female
+  rotate: false
+  xy: 134,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Barbarian_Male
+  rotate: false
+  xy: 200,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Champion_Female
+  rotate: false
+  xy: 266,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Champion_Male
+  rotate: false
+  xy: 332,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Crystal_Warlord_Female
+  rotate: false
+  xy: 398,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Crystal_Warlord_Male
+  rotate: false
+  xy: 464,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Demon_Female
+  rotate: false
+  xy: 530,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Demon_Male
+  rotate: false
+  xy: 596,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Knight_Female
+  rotate: false
+  xy: 662,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Knight_Male
+  rotate: false
+  xy: 728,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Lion_of_War_Female
+  rotate: false
+  xy: 794,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Lion_of_War_Male
+  rotate: false
+  xy: 860,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Mercenary_Female
+  rotate: false
+  xy: 926,2774
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Mercenary_Male
+  rotate: false
+  xy: 2,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Nightmare_Knights_Female
+  rotate: false
+  xy: 68,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Nightmare_Knights_Male
+  rotate: false
+  xy: 134,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Warmaster_Female
+  rotate: false
+  xy: 200,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Warmaster_Male
+  rotate: false
+  xy: 266,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Warrior_Female
+  rotate: false
+  xy: 332,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Knight_Warrior_Male
+  rotate: false
+  xy: 398,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Assassin_Female
+  rotate: false
+  xy: 464,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Assassin_Male
+  rotate: false
+  xy: 530,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Demon_Hunter_Female
+  rotate: false
+  xy: 596,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Demon_Hunter_Male
+  rotate: false
+  xy: 662,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Hunter_Female
+  rotate: false
+  xy: 728,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Hunter_Male
+  rotate: false
+  xy: 794,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Ranger_Female
+  rotate: false
+  xy: 860,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Ranger_Male
+  rotate: false
+  xy: 926,2840
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Sinister_Archer_Female
+  rotate: false
+  xy: 2,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Sinister_Archer_Male
+  rotate: false
+  xy: 68,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Veteran_Paladin_Female
+  rotate: false
+  xy: 134,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Paladin_Veteran_Paladin_Male
+  rotate: false
+  xy: 200,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Battle_Mage_Female
+  rotate: false
+  xy: 266,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Battle_Mage_Male
+  rotate: false
+  xy: 332,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Chaos_Acolyte_Female
+  rotate: false
+  xy: 398,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Chaos_Acolyte_Male
+  rotate: false
+  xy: 464,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Conjurer_Female
+  rotate: false
+  xy: 530,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Conjurer_Male
+  rotate: false
+  xy: 596,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Elementalist_Female
+  rotate: false
+  xy: 662,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Elementalist_Male
+  rotate: false
+  xy: 728,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Evoker_Female
+  rotate: false
+  xy: 794,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Evoker_Male
+  rotate: false
+  xy: 860,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Mage_Female
+  rotate: false
+  xy: 926,2906
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Mage_Male
+  rotate: false
+  xy: 2,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Owl_Keeper_Female
+  rotate: false
+  xy: 68,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Owl_Keeper_Male
+  rotate: false
+  xy: 134,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Summoner_Female
+  rotate: false
+  xy: 200,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Summoner_Male
+  rotate: false
+  xy: 266,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Void_Master_Female
+  rotate: false
+  xy: 332,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Void_Master_Male
+  rotate: false
+  xy: 398,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Wizard_Female
+  rotate: false
+  xy: 464,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sorcerer_Wizard_Male
+  rotate: false
+  xy: 530,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Antelope
+  rotate: false
+  xy: 596,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Arctic_Unicorn
+  rotate: false
+  xy: 662,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Armoured_War_Horse
+  rotate: false
+  xy: 728,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Azudocus
+  rotate: false
+  xy: 794,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Batcat
+  rotate: false
+  xy: 860,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Battle_Badger
+  rotate: false
+  xy: 926,2972
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Benevolent_Coral_Rhea
+  rotate: false
+  xy: 2,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Benevolent_Eventide_Nandu
+  rotate: false
+  xy: 68,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Benevolent_Savanna_Ostrich
+  rotate: false
+  xy: 134,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Blackpelt
+  rotate: false
+  xy: 200,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Black_Sheep_Mount
+  rotate: false
+  xy: 266,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Black_Stag
+  rotate: false
+  xy: 332,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Blazebringer
+  rotate: false
+  xy: 398,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Blazing_Unicorn
+  rotate: false
+  xy: 464,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bloodcurl
+  rotate: false
+  xy: 530,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Blue_Rolling_Barrel
+  rotate: false
+  xy: 596,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bogwurm
+  rotate: false
+  xy: 662,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bog_Tyrant
+  rotate: false
+  xy: 728,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Boisterous_Bull
+  rotate: false
+  xy: 794,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Boreal_Owl
+  rotate: false
+  xy: 860,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Brass_Speckled_Koi
+  rotate: false
+  xy: 926,3038
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bright_Percht_Sleigh
+  rotate: false
+  xy: 2,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bright_Percht_Sleigh_Variant
+  rotate: false
+  xy: 68,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bumblebee
+  rotate: false
+  xy: 134,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Bunny_Dray
+  rotate: false
+  xy: 200,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Caped_Snowman
+  rotate: false
+  xy: 266,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Carpacosaurus
+  rotate: false
+  xy: 332,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cave_Tarantula
+  rotate: false
+  xy: 398,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cerberus_Champion
+  rotate: false
+  xy: 464,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cinderhoof
+  rotate: false
+  xy: 530,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cinnamon_Ibex
+  rotate: false
+  xy: 596,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cold_Percht_Sleigh
+  rotate: false
+  xy: 662,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cold_Percht_Sleigh_Variant
+  rotate: false
+  xy: 728,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cony_Cart
+  rotate: false
+  xy: 794,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Copper_Fly
+  rotate: false
+  xy: 860,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Coralripper
+  rotate: false
+  xy: 926,3104
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Coral_Rhea
+  rotate: false
+  xy: 2,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Corpsefire_Skull
+  rotate: false
+  xy: 68,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cranium_Spider
+  rotate: false
+  xy: 134,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crimson_Fang
+  rotate: false
+  xy: 200,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crimson_Ray
+  rotate: false
+  xy: 266,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Crystal_Wolf_Mount
+  rotate: false
+  xy: 332,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Cunning_Hyaena
+  rotate: false
+  xy: 398,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dandelion
+  rotate: false
+  xy: 464,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Darkfire_Devourer
+  rotate: false
+  xy: 530,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Percht_Sleigh
+  rotate: false
+  xy: 596,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dark_Percht_Sleigh_Variant
+  rotate: false
+  xy: 662,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dawnbringer_Pegasus
+  rotate: false
+  xy: 728,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dawn_Strayer
+  rotate: false
+  xy: 794,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Death_Crawler
+  rotate: false
+  xy: 860,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Desert_King
+  rotate: false
+  xy: 926,3170
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Donkey
+  rotate: false
+  xy: 2,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Doombringer
+  rotate: false
+  xy: 2,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Doom_Skull
+  rotate: false
+  xy: 2,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dragonling_Mount
+  rotate: false
+  xy: 2,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Draptor_Mount
+  rotate: false
+  xy: 2,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dreadhare
+  rotate: false
+  xy: 2,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dromedary_Mount
+  rotate: false
+  xy: 2,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Dusk_Pryer
+  rotate: false
+  xy: 2,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ebony_Tiger
+  rotate: false
+  xy: 2,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ember_Saurian
+  rotate: false
+  xy: 2,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Emerald_Raven
+  rotate: false
+  xy: 2,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Emerald_Sphinx
+  rotate: false
+  xy: 2,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Emerald_Waccoon
+  rotate: false
+  xy: 2,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Emperor_Deer
+  rotate: false
+  xy: 2,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ether_Badger
+  rotate: false
+  xy: 2,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Eventide_Nandu
+  rotate: false
+  xy: 68,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Feral_Tiger
+  rotate: false
+  xy: 134,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Festive_Mammoth
+  rotate: false
+  xy: 200,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Festive_Snowman
+  rotate: false
+  xy: 266,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Finished_Bright_Percht_Sleigh
+  rotate: false
+  xy: 332,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Finished_Cold_Percht_Sleigh
+  rotate: false
+  xy: 398,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Finished_Dark_Percht_Sleigh
+  rotate: false
+  xy: 464,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Fleeting_Knowledge
+  rotate: false
+  xy: 530,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flitterkatzen
+  rotate: false
+  xy: 596,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Floating_Augur
+  rotate: false
+  xy: 662,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Floating_Kashmir
+  rotate: false
+  xy: 728,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Floating_Sage
+  rotate: false
+  xy: 794,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Floating_Scholar
+  rotate: false
+  xy: 860,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Flying_Divan
+  rotate: false
+  xy: 926,3236
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Frostbringer
+  rotate: false
+  xy: 68,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Frostflare
+  rotate: false
+  xy: 68,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Giant_Beaver_Mount
+  rotate: false
+  xy: 68,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glacier_Vagabond
+  rotate: false
+  xy: 68,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glacier_Wyrm
+  rotate: false
+  xy: 68,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gloomwurm
+  rotate: false
+  xy: 68,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gloom_Widow
+  rotate: false
+  xy: 68,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gloothomotive
+  rotate: false
+  xy: 68,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Glooth_Glider
+  rotate: false
+  xy: 68,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gnarlhound_Mount
+  rotate: false
+  xy: 68,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Golden_Dragonfly
+  rotate: false
+  xy: 68,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gold_Sphinx
+  rotate: false
+  xy: 68,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gorgon_Hydra
+  rotate: false
+  xy: 68,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gorongra
+  rotate: false
+  xy: 68,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Green_Rolling_Barrel
+  rotate: false
+  xy: 134,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Gryphon_Mount
+  rotate: false
+  xy: 200,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hailstorm_Fury
+  rotate: false
+  xy: 266,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Haze
+  rotate: false
+  xy: 332,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hibernal_Moth_Mount
+  rotate: false
+  xy: 398,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Highland_Yak
+  rotate: false
+  xy: 464,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Holiday_Mammoth
+  rotate: false
+  xy: 530,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Hyacinth_Mount
+  rotate: false
+  xy: 596,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Icebreacher
+  rotate: false
+  xy: 662,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ink_Spotted_Koi
+  rotate: false
+  xy: 728,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ironblight_Mount
+  rotate: false
+  xy: 794,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ivory_Fang
+  rotate: false
+  xy: 860,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jackalope
+  rotate: false
+  xy: 926,3302
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jade_Lion
+  rotate: false
+  xy: 134,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jade_Pincer
+  rotate: false
+  xy: 134,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jade_Shrine
+  rotate: false
+  xy: 134,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jousting_Eagle
+  rotate: false
+  xy: 134,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jousting_Horse
+  rotate: false
+  xy: 134,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jungle_Saurian
+  rotate: false
+  xy: 134,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Jungle_Tiger
+  rotate: false
+  xy: 134,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Kingly_Deer
+  rotate: false
+  xy: 134,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Krakoloss
+  rotate: false
+  xy: 134,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lacewing_Moth_Mount
+  rotate: false
+  xy: 134,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lady_Bug
+  rotate: false
+  xy: 134,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Lagoon_Saurian
+  rotate: false
+  xy: 134,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Leafscuttler
+  rotate: false
+  xy: 134,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Magic_Carpet_Mount
+  rotate: false
+  xy: 200,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Magma_Crawler_Mount
+  rotate: false
+  xy: 266,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Magma_Skull
+  rotate: false
+  xy: 332,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Manta_Ray_Mount
+  rotate: false
+  xy: 398,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Marsh_Toad
+  rotate: false
+  xy: 464,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Merry_Mammoth
+  rotate: false
+  xy: 530,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Midnight_Panther_Mount
+  rotate: false
+  xy: 596,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mint_Ibex
+  rotate: false
+  xy: 662,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mole_Mount
+  rotate: false
+  xy: 728,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mouldpincer
+  rotate: false
+  xy: 794,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mould_Shell
+  rotate: false
+  xy: 860,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Muffled_Snowman
+  rotate: false
+  xy: 926,3368
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mutated_Abomination
+  rotate: false
+  xy: 200,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mystic_Jaguar_Mount
+  rotate: false
+  xy: 200,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Mystic_Raven
+  rotate: false
+  xy: 200,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Neon_Sparkid
+  rotate: false
+  xy: 200,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nethersteed
+  rotate: false
+  xy: 200,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nightdweller
+  rotate: false
+  xy: 200,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nightmarish_Crocovile
+  rotate: false
+  xy: 200,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Nightstinger
+  rotate: false
+  xy: 200,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Night_Waccoon
+  rotate: false
+  xy: 200,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Noble_Lion_Mount
+  rotate: false
+  xy: 200,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Noctungra
+  rotate: false
+  xy: 200,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Obsidian_Shrine
+  rotate: false
+  xy: 200,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Obstinate_Ox
+  rotate: false
+  xy: 266,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Parade_Horse
+  rotate: false
+  xy: 332,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Pegasus
+  rotate: false
+  xy: 398,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Peony
+  rotate: false
+  xy: 464,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Phant
+  rotate: false
+  xy: 530,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Phantasmal_Jade
+  rotate: false
+  xy: 596,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Platesaurian
+  rotate: false
+  xy: 662,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Plumfish
+  rotate: false
+  xy: 728,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Poisonbane
+  rotate: false
+  xy: 794,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Poppy_Ibex
+  rotate: false
+  xy: 860,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Prismatic_Unicorn
+  rotate: false
+  xy: 926,3434
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rabbit_Rickshaw
+  rotate: false
+  xy: 266,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Racing_Bird
+  rotate: false
+  xy: 266,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Radiant_Raven
+  rotate: false
+  xy: 266,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rapid_Boar
+  rotate: false
+  xy: 266,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Red_Rolling_Barrel
+  rotate: false
+  xy: 266,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Reed_Lurker
+  rotate: false
+  xy: 266,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rented_Horse
+  rotate: false
+  xy: 266,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rift_Runner
+  rotate: false
+  xy: 266,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rift_Watcher
+  rotate: false
+  xy: 266,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ringtail_Waccoon
+  rotate: false
+  xy: 266,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ripptor
+  rotate: false
+  xy: 266,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+River_Crocovile
+  rotate: false
+  xy: 332,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rune_Watcher
+  rotate: false
+  xy: 398,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Rustwurm
+  rotate: false
+  xy: 464,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sanguine_Frog
+  rotate: false
+  xy: 530,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Savanna_Ostrich
+  rotate: false
+  xy: 596,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Scorpion_King
+  rotate: false
+  xy: 662,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Scruffy_Hyaena
+  rotate: false
+  xy: 728,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sea_Devil
+  rotate: false
+  xy: 794,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadow_Claw
+  rotate: false
+  xy: 860,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadow_Draptor
+  rotate: false
+  xy: 926,3500
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadow_Hart
+  rotate: false
+  xy: 332,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shadow_Sphinx
+  rotate: false
+  xy: 332,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shellodon
+  rotate: false
+  xy: 332,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Shock_Head_Mount
+  rotate: false
+  xy: 332,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Siegebreaker
+  rotate: false
+  xy: 332,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Silverneck
+  rotate: false
+  xy: 332,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Singeing_Steed
+  rotate: false
+  xy: 332,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Skybreaker_Pegasus
+  rotate: false
+  xy: 332,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Slagsnare
+  rotate: false
+  xy: 332,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Snowy_Owl
+  rotate: false
+  xy: 332,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Snow_Pelt
+  rotate: false
+  xy: 398,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Snow_Strider
+  rotate: false
+  xy: 464,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Sparkion_Mount
+  rotate: false
+  xy: 530,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Spirit_of_Purity
+  rotate: false
+  xy: 596,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stampor_Mount
+  rotate: false
+  xy: 662,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Steelbeak
+  rotate: false
+  xy: 728,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Stone_Rhino_Mount
+  rotate: false
+  xy: 794,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Surly_Steer
+  rotate: false
+  xy: 860,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Swamp_Crocovile
+  rotate: false
+  xy: 926,3566
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Swamp_Snapper
+  rotate: false
+  xy: 398,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tamed_Panda
+  rotate: false
+  xy: 398,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tangerine_Flecked_Koi
+  rotate: false
+  xy: 398,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tawny_Owl
+  rotate: false
+  xy: 398,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tempest
+  rotate: false
+  xy: 398,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+The_Hellgrip
+  rotate: false
+  xy: 398,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tiger_Slug
+  rotate: false
+  xy: 398,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tin_Lizzard
+  rotate: false
+  xy: 398,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Titanica
+  rotate: false
+  xy: 398,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tombstinger
+  rotate: false
+  xy: 464,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Topaz_Shrine
+  rotate: false
+  xy: 530,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tourney_Horse
+  rotate: false
+  xy: 596,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Toxic_Toad
+  rotate: false
+  xy: 662,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Tundra_Rambler
+  rotate: false
+  xy: 728,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Undead_Cavebear_Mount
+  rotate: false
+  xy: 794,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Uniwheel
+  rotate: false
+  xy: 860,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Ursagrodon
+  rotate: false
+  xy: 926,3632
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Venompaw
+  rotate: false
+  xy: 464,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Void_Watcher
+  rotate: false
+  xy: 464,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Voracious_Hyaena
+  rotate: false
+  xy: 464,3830
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Vortexion
+  rotate: false
+  xy: 464,3896
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Walker_Mount
+  rotate: false
+  xy: 464,3962
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+War_Bear
+  rotate: false
+  xy: 464,4028
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+War_Horse
+  rotate: false
+  xy: 464,4094
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Water_Buffalo_Mount
+  rotate: false
+  xy: 464,4160
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+White_Lion_Mount
+  rotate: false
+  xy: 530,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Widow_Queen
+  rotate: false
+  xy: 596,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Winterstride
+  rotate: false
+  xy: 662,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Winter_King
+  rotate: false
+  xy: 728,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wolpertinger
+  rotate: false
+  xy: 794,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Woodland_Prince
+  rotate: false
+  xy: 860,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Wrathfire_Pegasus
+  rotate: false
+  xy: 926,3698
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+Zaoan_Badger
+  rotate: false
+  xy: 530,3764
+  size: 64,64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

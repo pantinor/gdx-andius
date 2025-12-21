@@ -1,0 +1,7 @@
+/target
+/.settings
+/.classpath
+/.project
+/*.json
+/test-output
+/nbactions.xml

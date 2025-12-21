@@ -1,0 +1,380 @@
+[
+    {
+        "id": 45,
+        "text": [
+            "THE DOOR IS LOCKED!!"
+        ]
+    },
+    {
+        "id": 0,
+        "text": [
+            "WIPE YOUR FEET!!"
+        ]
+    },
+    {
+        "id": 1,
+        "text": [
+            "BEFORE YOU SITS A SMALL WIZENED OLD",
+            "MAN DRESSED IN WHITE ROBES.",
+            "   \"THE KEY TO SUCCESS LIES BEYOND",
+            "THE DARKNESS.  FOR MORE CRYPTIC CLUES",
+            "SEE MY BROTHER.\"",
+            "   AFTER DELIVERING HIS MESSAGE THE",
+            "OLD MAN DISAPPEARS."
+        ]
+    },
+    {
+        "id": 8,
+        "text": [
+            "AN ELDERLY SAGE WEARING A LOINCLOTH",
+            "IS SEATED IN A CORNER OF THE ROOM",
+            "CONTEMPLATING HIS NAVEL.  ON NOTICING",
+            "YOUR ARRIVAL HE LOOKS UP AND SPEAKS.",
+            "   \"WHEN YOU FEEL LIKE GIVING UP, TRY",
+            "2 STEPS FORWARD, 4 TO YOUR LEFT, 2",
+            "RIGHT AND FINALLY 1 STEP TO YOUR LEFT.",
+            "I WISH YOU LUCK.  CLOSE THE DOOR ON",
+            "YOUR WAY OUT.\"",
+            "   THE SAGE RESUMES THE STUDY OF HIS",
+            "NAVEL."
+        ]
+    },
+    {
+        "id": 19,
+        "text": [
+            "YOU ARE IN A LARGE HALL.  THE WALLS",
+            "ARE LINED WITH CARVINGS OF FEARSOME",
+            "MONSTERS.",
+            "   ON THE EAST WALL HANGS A TAPESTRY",
+            "DEPICTING SEVEN POWERFUL DEMONS."
+        ]
+    },
+    {
+        "id": 24,
+        "text": [
+            "A DISEMBODIED VOICE ECHOES THROUGH",
+            "THE ROOM.",
+            "   \"TAKE HEED OF THE MESSAGE OF THE",
+            "GREAT TAPESTRIES.  THE FATE OF YOUR",
+            "QUEST IS WOVEN INTO THESE WORKS!!!\""
+        ]
+    },
+    {
+        "id": 47,
+        "text": [
+            "DON'T GIVE UP!"
+        ]
+    },
+    {
+        "id": 40,
+        "text": [
+            "IF YOU STAND ANY CLOSER YOU'LL FALL",
+            "DOWN THE CHASM!!"
+        ]
+    },
+    {
+        "id": 42,
+        "text": [
+            "THE SURROUNDING PASSAGE WALLS ARE",
+            "ROUGH AND UNHEWN."
+        ]
+    },
+    {
+        "id": 29,
+        "text": [
+            "YOU ARE IN A CAVERN.  IN THE NORTHWEST",
+            "CORNER DAYLIGHT IS COMING DOWN THROUGH",
+            "A HOLE IN THE CEILING, REVEALING A",
+            "CHASM IN THE CAVERN FLOOR.",
+            "   DOTTED ABOUT THE CAVERN ARE A",
+            "NUMBER OF SMALL GNARLED TREES LEANING",
+            "TOWARDS THE WEAK SOURCE OF LIGHT."
+        ]
+    },
+    {
+        "id": 36,
+        "text": [
+            "A FINELY DETAILED TAPESTRY OF THE",
+            "FIVE CEREMONIAL GALLEONS OF THE",
+            "IMPERIAL NAVY HANGS FROM THE WALL IN",
+            "FRONT OF YOU."
+        ]
+    },
+    {
+        "id": 44,
+        "text": [
+            "THERE IS AN OPEN CHEST IN THE CORNER"
+        ]
+    },
+    {
+        "id": 48,
+        "text": [
+            "IF YOU'RE LOOKING FOR DEATH YOU'VE",
+            "COME TO THE RIGHT PLACE. PLEASE ENTER."
+        ]
+    },
+    {
+        "id": 56,
+        "text": [
+            "IN FRONT OF YOU IS A TAPESTRY ",
+            "REVEALING THE THREE CITY TOWERS IN ALL",
+            "THEIR SPLENDOUR!"
+        ]
+    },
+    {
+        "id": 50,
+        "text": [
+            "THE PASSAGE WALLS ARE LINED WITH",
+            "GROTESQUE STATUES. ON THE FACE OF EACH",
+            "STATUE IS AN EXPRESSION OF ABJECT",
+            "TERROR.",
+            "  THE EYES OF THESE STONE IMAGES SEEM",
+            "TO BE FOLLOWING YOUR PROGRESS."
+        ]
+    },
+    {
+        "id": 59,
+        "text": [
+            "IT IS VERY COLD HERE!!"
+        ]
+    },
+    {
+        "id": 62,
+        "text": [
+            "BEFORE YOU IS A WALL-HANGING DEPICTING",
+            "THE SNOW-CAPPED TWIN PEAKS OF MELGAR,",
+            "THE HIGHEST MOUNTAIN IN THE KINGDOM."
+        ]
+    },
+    {
+        "id": 46,
+        "text": [
+            "THERE IS AN OBJECT EMBEDDED IN THE ICE"
+        ]
+    },
+    {
+        "id": 65,
+        "text": [
+            "A WALL OF ICE BLOCKS YOUR PATH."
+        ]
+    },
+    {
+        "id": 66,
+        "text": [
+            "YOU ARE IN AN IMMENSE CAVERN. ITS SIZE",
+            "CAUSES THE PARTY TO FEEL DISORIENTED."
+        ]
+    },
+    {
+        "id": 68,
+        "text": [
+            "IT'S HOT HERE!!"
+        ]
+    },
+    {
+        "id": 69,
+        "text": [
+            "THE ROOM IS FULL OF STEAM.  A FAMILIAR",
+            "OLD MAN IS RECLINING IN ONE CORNER",
+            "WITH A TOWEL WRAPPED AROUND HIM.  ",
+            "HE WIPES HIS BROW AND SPEAKS.",
+            "   \"HELLO AGAIN FRIENDS.  IF YOU WISH",
+            "TO SUCCEED IN YOUR QUEST YOU MUST",
+            "FIRST SLAY THE GUARDIAN OF THE REGIONS",
+            "OF FIRE.  THE WAY WILL BE HARD AND",
+            "FRAUGHT WITH PITFALLS.",
+            "   IF YOU FEEL UP TO THE TASK TAKE THE",
+            "RIGHT DOOR.  IF NOT,TAKE THE LEFT AND",
+            "RETURN TO SAFER REGIONS.",
+            "   WHEN THE CREATURE HAS BEEN",
+            "VANQUISHED SEEK MY BROTHER.  HE WILL",
+            "GIVE YOU THE REMAINING CLUES NEEDED TO",
+            "ACHIEVE YOUR GOAL.\"",
+            "THE OLD MAN VANISHES."
+        ]
+    },
+    {
+        "id": 89,
+        "text": [
+            "AN ELDERLY SAGE WEARING A LOINCLOTH IS",
+            "STANDING ON HIS HANDS IN THE CENTRE OF",
+            "THE ROOM.  ON NOTICING YOUR ARRIVAL HE",
+            "SCREAMS \"AARGHH,MUD!!\" AND RUNS OUT ",
+            "THE DOOR."
+        ]
+    },
+    {
+        "id": 94,
+        "text": [
+            "THE PARTY IS FACING A FINELY WOVEN",
+            "TAPESTRY OF THE EIGHT MOONS OF THE",
+            "LAND.  'XARPOG' THE PALE BLUE ONE IS",
+            "PARTICULARLY FETCHING."
+        ]
+    },
+    {
+        "id": 87,
+        "text": [
+            "THE FLOOR OF THIS PASSAGE IS COVERED",
+            "IN MUD."
+        ]
+    },
+    {
+        "id": 108,
+        "text": [
+            "THE AIR HERE IS STALE AND DANK.",
+            "THE PASSAGE YOU ARE IN IS NARROW.",
+            "A BATTERED AND NEGLECTED SIGN ON ONE",
+            "OF THE WALLS READS:",
+            "           ***CATACOMBS***",
+            " ",
+            " ",
+            "    *PLEASE DO NOT FEED THE VAMPIRES*"
+        ]
+    },
+    {
+        "id": 98,
+        "text": [
+            "THE FLOOR LOOKS UNSAFE!!"
+        ]
+    },
+    {
+        "id": 118,
+        "text": [
+            "THE PARTY IS IN A CHAMBER.  ENORMOUS",
+            "FADED AND ROTTING TAPESTRIES DEPICTING",
+            "BATTLE SCENES HANG FROM THE WALLS.",
+            "ONE PARTICULARLY IMPRESSIVE TAPESTRY",
+            "ON THE SOUTH WALL STANDS OUT FROM THE",
+            "OTHERS. THIS WORK SHOWS THE TWO ARMIES",
+            "OF THE EVIL LORD 'THUMORAK' AND KING",
+            "'MORKANDYL XII' LOCKED IN BATTLE."
+        ]
+    },
+    {
+        "id": 99,
+        "text": [
+            "YOUR WAY IS BLOCKED BY A WALL OF",
+            "SHIMMERING YELLOW LIGHT."
+        ]
+    },
+    {
+        "id": 101,
+        "text": [
+            "YOUR WAY IS BLOCKED BY A WALL OF",
+            "SHIMMERING BLUE LIGHT."
+        ]
+    },
+    {
+        "id": 103,
+        "text": [
+            "YOUR WAY IS BLOCKED BY A WALL OF",
+            "SHIMMERING RED LIGHT."
+        ]
+    },
+    {
+        "id": 105,
+        "text": [
+            "BEWARE OF FALSE PROPHETS!!"
+        ]
+    },
+    {
+        "id": 130,
+        "text": [
+            "YOU ARE CONFRONTED BY AN APPARITION OF",
+            "A PORTLY SQUIRE.  HIS VOICE SOUNDS",
+            "FAMILIAR.",
+            " ",
+            "\"WITHOUT THE ASSISTANCE OF MY LATE",
+            "MASTER 'KING MORKANDYL XII', YOUR",
+            "MISSION IS DOOMED TO FAILURE.  THE",
+            "BODY OF MY MASTER IS WELL HIDDEN.",
+            "AS YOU HAVE PROVED YOURSELVES WORTHY",
+            "OF KING MORKANDYL'S HELP I WILL GIVE",
+            "YOU THIS CLUE.",
+            " ",
+            "WHEN DARKNESS FALLS ON YOUR QUEST YOUR",
+            "GUIDANCE MUST COME FROM THE MESSAGE OF",
+            "THE GREAT TAPESTRIES.",
+            " ",
+            "WHEN YOU FIND MY MASTER YOU MUST BE",
+            "VERY CAREFUL.  HIS TEMPER IS SHORT, ",
+            "AND WAKING HIM FROM MANY YEARS OF",
+            "UNDISTURBED REST IS SOMETHING WHICH",
+            "SHOULD NOT BE UNDERTAKEN LIGHTLY.\"",
+            " ",
+            "   THE SQUIRE BOWS RESPECTFULLY AND",
+            "DISAPPEARS."
+        ]
+    },
+    {
+        "id": 116,
+        "text": [
+            "THE PARTY IS IN A LARGE RICHLY",
+            "DECORATED MAUSELEUM."
+        ]
+    },
+    {
+        "id": 154,
+        "text": [
+            "THE PARTY IS IN A CRYPT CONTAINING A",
+            "SINGLE STONE SARCOPHAGUS.  THE LID IS",
+            "CARVED IN THE SHAPE OF A MIGHTY",
+            "WARRIOR.  WITH A CREAK THE LID OPENS.",
+            "THE CRYPT IS SUDDENLY FILLED WITH A",
+            "POWERFUL PRESENCE.  A WARRIOR OF ",
+            "MASSIVE PROPORTIONS STANDS BEFORE YOU.",
+            " ",
+            "THERE IS A LOOK OF DEATH AND MAYHEM IN",
+            "HIS EYES.  IN ONE SWIFT MOTION HE ",
+            "BRANDISHES A LARGE GLOWING SWORD AND",
+            "BEGINS SWINGING IT ABOUT HIS HEAD.",
+            "AS THE PARTY PREPARES TO MEET AN",
+            "IGNOMINIOUS END THEY NOTICE A CHANGE",
+            "COME OVER THE WARRIOR.  HIS EXPRESSION",
+            "ALTERS TO ONE OF RECOGNITION AND IN",
+            "A KINDLY VOICE HE SPEAKS:",
+            "   \"THE PROPHETS FORETOLD THE DAY OF",
+            "YOUR ARRIVAL.  YOUR NEED FOR THE BLADE",
+            "OF MY FATHERS IS MUCH GREATER THAN",
+            "MINE. I TRUST IT WILL SERVE YOU WELL.\""
+        ]
+    },
+    {
+        "id": 128,
+        "text": [
+            "WHAT IS YOUR FAVOURITE COLOUR?"
+        ]
+    },
+    {
+        "id": 126,
+        "text": [
+            "TO THE WEST A LONG STAIRCASE DESCENDS",
+            "INTO THE GLOOM."
+        ]
+    },
+    {
+        "id": 60,
+        "text": [
+            "YOU ARE AWARE OF AN ALMOST PALPABLE",
+            "WALL OF HATE EMINATING FROM NEARBY!!"
+        ]
+    },
+    {
+        "id": 106,
+        "text": [
+            "YOUR WAY IS BLOCKED BY A WALL OF",
+            "SHIMMERING WHITE LIGHT"
+        ]
+    },
+    {
+        "id": 175,
+        "text": [
+            "YOU STAND AT THE ENTRANCE TO A LONG",
+            "CAVERN. THERE ARE FRAGILE LOOKING",
+            "STALACTITES PROTRUDING FROM THE CEIL-",
+            "ING.  BE CAREFUL,IT WOULD BE A PITY TO",
+            "BE IMPALED AT THIS STAGE OF THE QUEST."
+        ]
+    }
+]

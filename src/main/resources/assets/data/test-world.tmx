@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="24" tileheight="24" infinite="0" nextlayerid="9" nextobjectid="60">
+ <properties>
+  <property name="startX" value="5"/>
+  <property name="startY" value="5"/>
+ </properties>
+ <tileset firstgid="1" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
+  <image source="uf_map.png" width="600" height="504"/>
+  <tile id="17">
+   <animation>
+    <frame tileid="17" duration="500"/>
+    <frame tileid="18" duration="500"/>
+    <frame tileid="19" duration="500"/>
+    <frame tileid="20" duration="500"/>
+    <frame tileid="19" duration="500"/>
+    <frame tileid="18" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="67">
+   <animation>
+    <frame tileid="67" duration="500"/>
+    <frame tileid="68" duration="500"/>
+    <frame tileid="69" duration="500"/>
+    <frame tileid="70" duration="500"/>
+    <frame tileid="69" duration="500"/>
+    <frame tileid="68" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="92">
+   <animation>
+    <frame tileid="92" duration="500"/>
+    <frame tileid="93" duration="500"/>
+    <frame tileid="94" duration="500"/>
+    <frame tileid="95" duration="500"/>
+    <frame tileid="94" duration="500"/>
+    <frame tileid="93" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="117">
+   <animation>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+    <frame tileid="119" duration="500"/>
+    <frame tileid="120" duration="500"/>
+    <frame tileid="119" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="260">
+   <animation>
+    <frame tileid="260" duration="200"/>
+    <frame tileid="261" duration="200"/>
+    <frame tileid="262" duration="200"/>
+    <frame tileid="263" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="265">
+   <animation>
+    <frame tileid="265" duration="200"/>
+    <frame tileid="266" duration="200"/>
+    <frame tileid="267" duration="200"/>
+    <frame tileid="268" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="285">
+   <animation>
+    <frame tileid="285" duration="200"/>
+    <frame tileid="286" duration="200"/>
+    <frame tileid="287" duration="200"/>
+    <frame tileid="288" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="290">
+   <animation>
+    <frame tileid="290" duration="200"/>
+    <frame tileid="291" duration="200"/>
+    <frame tileid="292" duration="200"/>
+    <frame tileid="293" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="388">
+   <animation>
+    <frame tileid="388" duration="300"/>
+    <frame tileid="389" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="390">
+   <animation>
+    <frame tileid="390" duration="500"/>
+    <frame tileid="391" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="410">
+   <animation>
+    <frame tileid="410" duration="400"/>
+    <frame tileid="411" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="412">
+   <animation>
+    <frame tileid="412" duration="400"/>
+    <frame tileid="413" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="414">
+   <animation>
+    <frame tileid="414" duration="400"/>
+    <frame tileid="415" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="416">
+   <animation>
+    <frame tileid="416" duration="400"/>
+    <frame tileid="417" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="443">
+   <animation>
+    <frame tileid="443" duration="200"/>
+    <frame tileid="444" duration="200"/>
+    <frame tileid="445" duration="200"/>
+    <frame tileid="446" duration="200"/>
+   </animation>
+  </tile>
+  <wangsets>
+   <wangset name="Terrains" type="corner" tile="-1">
+    <wangcolor name="forest" color="#ff0000" tile="178" probability="1"/>
+    <wangcolor name="meadow" color="#00ff00" tile="147" probability="1"/>
+    <wangtile tileid="127" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="128" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="129" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="144" wangid="0,2,0,2,0,0,0,2"/>
+    <wangtile tileid="147" wangid="0,2,0,2,0,2,0,2"/>
+    <wangtile tileid="151" wangid="0,0,0,1,0,0,0,0"/>
+    <wangtile tileid="152" wangid="0,1,0,1,0,1,0,0"/>
+    <wangtile tileid="153" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="154" wangid="0,0,0,1,0,1,0,1"/>
+    <wangtile tileid="155" wangid="0,0,0,0,0,1,0,0"/>
+    <wangtile tileid="166" wangid="0,0,0,2,0,0,0,0"/>
+    <wangtile tileid="167" wangid="0,0,0,2,0,2,0,0"/>
+    <wangtile tileid="168" wangid="0,0,0,0,0,2,0,0"/>
+    <wangtile tileid="169" wangid="0,2,0,2,0,2,0,0"/>
+    <wangtile tileid="175" wangid="0,1,0,1,0,0,0,0"/>
+    <wangtile tileid="176" wangid="0,1,0,1,0,0,0,0"/>
+    <wangtile tileid="177" wangid="0,1,0,1,0,0,0,0"/>
+    <wangtile tileid="178" wangid="0,1,0,1,0,1,0,1"/>
+    <wangtile tileid="179" wangid="0,0,0,0,0,1,0,1"/>
+    <wangtile tileid="180" wangid="0,0,0,0,0,1,0,1"/>
+    <wangtile tileid="181" wangid="0,0,0,0,0,1,0,1"/>
+    <wangtile tileid="191" wangid="0,2,0,2,0,0,0,0"/>
+    <wangtile tileid="193" wangid="0,0,0,0,0,2,0,2"/>
+    <wangtile tileid="194" wangid="0,2,0,0,0,2,0,2"/>
+    <wangtile tileid="201" wangid="0,1,0,0,0,0,0,0"/>
+    <wangtile tileid="202" wangid="0,1,0,1,0,0,0,1"/>
+    <wangtile tileid="203" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="204" wangid="0,1,0,0,0,1,0,1"/>
+    <wangtile tileid="205" wangid="0,0,0,0,0,0,0,1"/>
+    <wangtile tileid="216" wangid="0,2,0,0,0,0,0,0"/>
+    <wangtile tileid="217" wangid="0,2,0,0,0,0,0,2"/>
+    <wangtile tileid="218" wangid="0,0,0,0,0,0,0,2"/>
+    <wangtile tileid="219" wangid="0,0,0,2,0,2,0,2"/>
+    <wangtile tileid="227" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="228" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="229" wangid="0,1,0,0,0,0,0,1"/>
+   </wangset>
+  </wangsets>
+ </tileset>
+ <tileset firstgid="526" name="heroes" tilewidth="24" tileheight="24" tilecount="5600" columns="80">
+  <image source="uf_heroes.png" width="1920" height="1680"/>
+ </tileset>
+ <tileset firstgid="6126" name="terrain" tilewidth="24" tileheight="24" tilecount="3040" columns="40">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="water" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACotlYGCIHcWjmEwMAOSgY9pAAgAA
+  </data>
+ </layer>
+ <layer id="2" name="grass" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgoA+YTACPqqeteloBAKZXGeFAAgAA
+  </data>
+ </layer>
+ <layer id="3" name="meadow" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjgHwAAPMY7ENAAgAA
+  </data>
+ </layer>
+ <layer id="4" name="forest" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjgHwAAPMY7ENAAgAA
+  </data>
+ </layer>
+ <layer id="5" name="mountains" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWkgAVAvBCIFxGpficQ7wLi3USqvwTEl4H4KskuGxgAAARtVgJAAgAA
+  </data>
+ </layer>
+ <layer id="6" name="props" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGH6gmXGgXTByAABGR6CVQAIAAA==
+  </data>
+ </layer>
+ <objectgroup id="7" name="portals">
+  <object id="59" name="ALIBABA" type="portal" x="120" y="96" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup id="8" name="moongates"/>
+</map>

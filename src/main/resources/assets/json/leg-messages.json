@@ -1,0 +1,322 @@
+[
+    {
+        "id": 2,
+        "text": [
+            "YOU ARE AT THE WATER'S EDGE. IF YOU GO",
+            "ANY FURTHER, YOU'LL DROWN!"
+        ]
+    },
+    {
+        "id": 0,
+        "text": [
+            "YOU STAND ON A BEACH. BEYOND IT LIES A",
+            "DARK LAKE, IN WHICH IS A SMALL ISLAND."
+        ]
+    },
+    {
+        "id": 4,
+        "text": [
+            "A SIGN ON THE DOOR READS: \"BARRACKS\""
+        ]
+    },
+    {
+        "id": 5,
+        "text": [
+            "BEFORE YOU STANDS A GREAT FORTRESS.",
+            "BETWEEN ITS PARAPETS LIES A DEEP MOAT,",
+            "AND A SIGN BY THE MOAT READS:",
+            "  \"BEWARE OF MOAT MONSTERS!!!\""
+        ]
+    },
+    {
+        "id": 9,
+        "text": [
+            "HEAR YE THE WORDS OF L'KBRETH:",
+            "TO ALL WHO TRESPASS HERE, GOOD OR EVIL",
+            "I GIVE MY WARNING: NEITHER GOOD NOR ",
+            "EVIL ALONE CAN TRIUMPH HERE."
+        ]
+    },
+    {
+        "id": 107,
+        "text": [
+            "THIS IS THE GRAND DINING ROOM OF THE",
+            "GRAND WIZARD. TO THE NORTH IS A LARGE",
+            "KITCHEN AREA. TO THE SOUTH IS THE",
+            "WIZARD'S OPULENT BOUDOIR."
+        ]
+    },
+    {
+        "id": 22,
+        "text": [
+            "A LARGE, DUSTY DESK STANDS AGAINST THE",
+            "FAR WALL. ITS DRAWERS ARE OVERFLOWING",
+            "WITH BOOKS AND PAPERS. INLAID IN THE",
+            "DESKTOP IS AN ORNATE LETTER 'P'."
+        ]
+    },
+    {
+        "id": 71,
+        "text": [
+            "I AM AROUND YOU ALWAYS,",
+            "BUT YOU HAVE NEVER SEEN ME.",
+            " ",
+            " ",
+            "YOU WOULD NEVER LEAVE ME,",
+            "BUT WERE I GONE,",
+            "YOU WOULD NOT CRY OUT FOR ME.",
+            "  ",
+            "WHAT AM I?"
+        ]
+    },
+    {
+        "id": 26,
+        "text": [
+            "AN ELEGANTLY DRESSED WOMAN WITH A WHIP",
+            "DEMANDS, \"WHAT'S THE PASSWORD, BOYS?\""
+        ]
+    },
+    {
+        "id": 16,
+        "text": [
+            "A SIGN ON THE DOOR READS \"WINE CELLAR\""
+        ]
+    },
+    {
+        "id": 17,
+        "text": [
+            "A GLOWING MESSAGE APPEARS IN MID-AIR:",
+            " ",
+            "      S.E.G. PO'LE, GRAND WIZARD",
+            "THE WIZARD IS *OUT*    DO NOT ENTER!"
+        ]
+    },
+    {
+        "id": 14,
+        "text": [
+            "I'D TURN BACK IF I WERE YOU."
+        ]
+    },
+    {
+        "id": 15,
+        "text": [
+            "HAVE YOU CONSIDERED ANOTHER DIRECTION?"
+        ]
+    },
+    {
+        "id": 35,
+        "text": [
+            "AN AGED MONK APPEARS BEFORE YOU:",
+            "\"IN EXCHANGE FOR YOUR SOUL, YOU MAY",
+            "HAVE WHAT YOU FIND IN THIS CHEST.\""
+        ]
+    },
+    {
+        "id": 41,
+        "text": [
+            "ABDUL'S ETHEREAL TAXI SERVICE",
+            "            2500 GP ONE WAY"
+        ]
+    },
+    {
+        "id": 38,
+        "text": [
+            "AN APPARITION BECKONS TO YOU FROM",
+            "ABOVE A MURKY POOL. OMINOUS SHADOWS",
+            "CAN BE SEEN MOVING IN THE DEPTHS."
+        ]
+    },
+    {
+        "id": 67,
+        "text": [
+            "\"A GRAVEYARD'S DARK...\""
+        ]
+    },
+    {
+        "id": 68,
+        "text": [
+            "\"AND THIS TRAP'S A CROCK...\""
+        ]
+    },
+    {
+        "id": 69,
+        "text": [
+            "\"DON'T GO ANY FURTHER, OR...\""
+        ]
+    },
+    {
+        "id": 81,
+        "text": [
+            "OURS IS AN UNEASY FRIENDSHIP.",
+            "YOUR FATHERS TOILED LONG TO TAME ME,",
+            "BUT EVEN NOW I WILL GO MY OWN WAY",
+            "IF YOU DO NOT TEND ME WELL.",
+            "I AM A POWERFUL DESTROYER,",
+            "YET MY FRAILTY IS GREAT.",
+            "  ",
+            "WHAT AM I?"
+        ]
+    },
+    {
+        "id": 32,
+        "text": [
+            "AN OILY BLACK LIQUID DRIPS FROM THE",
+            "CEILING, FORMING A POOL ON THE FLOOR."
+        ]
+    },
+    {
+        "id": 29,
+        "text": [
+            "A SHORT, SWARTHY MAN IN A TURBAN",
+            "SIDLES UP TO YOU AND WHISPERS:",
+            "\"TELL THEM ABDUL SENT YOU\""
+        ]
+    },
+    {
+        "id": 34,
+        "text": [
+            "LOOK OUT!"
+        ]
+    },
+    {
+        "id": 101,
+        "text": [
+            "I AM ONE OF THE DECK OF SEVENTY-EIGHT,",
+            "AND VICTORY I FORETELL.",
+            "TWO BOLD STEEDS DRAW ME FORTH,",
+            "AND STARS SHINE FROM MY CROWN.",
+            "WHAT CARD AM I?"
+        ]
+    },
+    {
+        "id": 44,
+        "text": [
+            "AN INSCRIPTION ON THE DOOR READS:",
+            "     TEMPLE OF THE IRASCIBLE FUNG",
+            "      PRIVATE!! NO TRESPASSING!!"
+        ]
+    },
+    {
+        "id": 47,
+        "text": [
+            "ABDUL'S ETHEREAL TAXI SERVICE...GIVE",
+            "UP YET? STILL ONLY 5000 GP!"
+        ]
+    },
+    {
+        "id": 50,
+        "text": [
+            "A SHORT, SWARTHY MAN IN A TURBAN ",
+            "GREETS YOU, \"MAY THE WINDS OF THE",
+            "DESERT BE AT YOUR BACK AND THE SUN",
+            "LEAVE YOU ALWAYS IN SHADE!\"",
+            "\"MY FRIENDS, I HAVE JUST THE THING FOR",
+            "YOU. A POWERFUL MAGIC CRYSTAL; A GEM",
+            "CONTAINING THE FIRE OF THE GODS! AND ",
+            "FOR YOU, MY GOOD FRIENDS, A BARGAIN...",
+            "...ONLY 25000 PIECES OF GOLD!\""
+        ]
+    },
+    {
+        "id": 60,
+        "text": [
+            "ABDUL OPENS A JEWEL ENCRUSTED COFFER,",
+            "AND MOTIONS FOR YOU TO LOOK INSIDE.",
+            "WITH A LOW CHUCKLE, HE DISAPPEARS."
+        ]
+    },
+    {
+        "id": 63,
+        "text": [
+            "A RADIANT STATUE STANDS BEFORE YOU,",
+            "ITS HANDS OUTSTRETCHED. IN ONE HAND IT",
+            "HOLDS A SHINING CRYSTAL SPHERE.  THE",
+            "OTHER HAND IS EMPTY."
+        ]
+    },
+    {
+        "id": 13,
+        "text": [
+            "FAREWELL. MAY YOUR WAY BE EASY."
+        ]
+    },
+    {
+        "id": 90,
+        "text": [
+            "BLACK FIGURE ON A BLACK HORSE,",
+            "HE CARRIES THE WHITE ROSE.",
+            "THE RISING SUN -- CHANGE WILL COME",
+            "IT FOLLOWS WHEREVER HE GOES.",
+            "WHAT CARD AM I?"
+        ]
+    },
+    {
+        "id": 96,
+        "text": [
+            "ON MY ROLL, YOU MOVE FORWARD;",
+            "MY TURN IS YOUR TURN.",
+            " ",
+            "WHAT AM I?"
+        ]
+    },
+    {
+        "id": 70,
+        "text": [
+            "YOU HAVE REACHED THE STATUE."
+        ]
+    },
+    {
+        "id": 28,
+        "text": [
+            "ABDUL SENT YOU"
+        ]
+    },
+    {
+        "id": 43,
+        "text": [
+            "2500"
+        ]
+    },
+    {
+        "id": 49,
+        "text": [
+            "5000"
+        ]
+    },
+    {
+        "id": 59,
+        "text": [
+            "25000"
+        ]
+    },
+    {
+        "id": 80,
+        "text": [
+            "AIR"
+        ]
+    },
+    {
+        "id": 89,
+        "text": [
+            "FIRE"
+        ]
+    },
+    {
+        "id": 95,
+        "text": [
+            "DEATH"
+        ]
+    },
+    {
+        "id": 100,
+        "text": [
+            "WHEEL"
+        ]
+    },
+    {
+        "id": 106,
+        "text": [
+            "THE CHARIOT"
+        ]
+    }
+]

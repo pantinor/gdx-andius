@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="24" tileheight="24" infinite="0" backgroundcolor="#000000" nextlayerid="21" nextobjectid="33">
+ <properties>
+  <property name="startX" value="44"/>
+  <property name="startY" value="20"/>
+ </properties>
+ <tileset firstgid="1" name="uf_map" tilewidth="24" tileheight="24" tilecount="525" columns="25">
+  <image source="uf_map.png" width="600" height="504"/>
+  <tile id="17">
+   <animation>
+    <frame tileid="17" duration="500"/>
+    <frame tileid="18" duration="500"/>
+    <frame tileid="19" duration="500"/>
+    <frame tileid="20" duration="500"/>
+    <frame tileid="19" duration="500"/>
+    <frame tileid="18" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="67">
+   <animation>
+    <frame tileid="67" duration="500"/>
+    <frame tileid="68" duration="500"/>
+    <frame tileid="69" duration="500"/>
+    <frame tileid="70" duration="500"/>
+    <frame tileid="69" duration="500"/>
+    <frame tileid="68" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="92">
+   <animation>
+    <frame tileid="92" duration="500"/>
+    <frame tileid="93" duration="500"/>
+    <frame tileid="94" duration="500"/>
+    <frame tileid="95" duration="500"/>
+    <frame tileid="94" duration="500"/>
+    <frame tileid="93" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="117">
+   <animation>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+    <frame tileid="119" duration="500"/>
+    <frame tileid="120" duration="500"/>
+    <frame tileid="119" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="260">
+   <animation>
+    <frame tileid="260" duration="200"/>
+    <frame tileid="261" duration="200"/>
+    <frame tileid="262" duration="200"/>
+    <frame tileid="263" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="265">
+   <animation>
+    <frame tileid="265" duration="200"/>
+    <frame tileid="266" duration="200"/>
+    <frame tileid="267" duration="200"/>
+    <frame tileid="268" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="285">
+   <animation>
+    <frame tileid="285" duration="200"/>
+    <frame tileid="286" duration="200"/>
+    <frame tileid="287" duration="200"/>
+    <frame tileid="288" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="290">
+   <animation>
+    <frame tileid="290" duration="200"/>
+    <frame tileid="291" duration="200"/>
+    <frame tileid="292" duration="200"/>
+    <frame tileid="293" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="388">
+   <animation>
+    <frame tileid="388" duration="300"/>
+    <frame tileid="389" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="390">
+   <animation>
+    <frame tileid="390" duration="500"/>
+    <frame tileid="391" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="410">
+   <animation>
+    <frame tileid="410" duration="400"/>
+    <frame tileid="411" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="412">
+   <animation>
+    <frame tileid="412" duration="400"/>
+    <frame tileid="413" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="414">
+   <animation>
+    <frame tileid="414" duration="400"/>
+    <frame tileid="415" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="416">
+   <animation>
+    <frame tileid="416" duration="400"/>
+    <frame tileid="417" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="443">
+   <animation>
+    <frame tileid="443" duration="200"/>
+    <frame tileid="444" duration="200"/>
+    <frame tileid="445" duration="200"/>
+    <frame tileid="446" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="14" name="lava" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3YMQoAIAwDwD6u/3+TqzoLRXIHIWu7pgoAAAAAAAAAYF5PHzCotyTqq9Ok/w8AAAC8YWM6GwAAfrUAXUWLhgBAAAA=
+  </data>
+ </layer>
+ <layer id="15" name="grass" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACuVW267bMAzz/7+mHzzswYDAkRTlpO3ZRiBomvgiShSda631Wv8PXnBd5WJ5uMq4lxjzt6HyvcTFxt/NQZ2Pe3wDm0eNq+aEjXfvT/DkWidwvYA1P+2Dut5aM76uN59A5aR+Ua9Pa6CuW3PL6vA0GDfkXvdVvXKiCbzqviyekzx0Y1ncWHdWD6aPqgm2Bs7txqiem2gvGYc5dbpXfsHqkvBla7DrVP+pLhOdsLqspfPkaqw4qjHYIxOcjO+8X62pzhFXa/ct4nojwdSXVrA/87yLzO9q6Lyhm/cJ/hhTXVP19Vo6/q4XnF5Y3yU44e/07npbabfzONzb5e/k/Jv2/57nvI7psqs7y1ndbyM5M1zcjMfTUL2ZeDjW8EWeOX1NMPULhi73zu/duabG45rs/STu6bw9l81R/eh8XfUCrsl6gOWLoWpD7Z2C6RnjdDrvfI9pEu+VBye1nPiFms9q1fm68kXlFSw2l6uunsqHTvl3+zt9d++Ss8FpyV3KU6b8Vb1VHlQMHV+Vu46j81O21mkO3B6uxzuNON5qL9dTnUanmNTUcVPaVj2WcOp6547+KxIeiWY7n0h7IOlFtv8duP3UeNWfSU+7+04zO6Yn6l/5IRfFmT1TNex6WdVd+R7GdpFnE2CNMZ8Xec7ycOJlzlecxqvX39U+6hzzWfOgOFUk2k388Sl/d2C1vOBZ/XU9ijXoNJ3onnkE1ukOlPaZppjXKZ92eylOqk9YL6z1Z3w7xglwPRZfXVtpvfO2JcapMwDHIkfV/xP+jB/zm85bnI9VuNp2WkdccH/if86L8OqAtcZ9WI7cfo4723s6B2PuvLnLQXoWdv6PzyqcFqbc2Vzmv0ybyXrdeZecB7hf4qtTsLyrPlR9vZbm0Xmc6gXcS+274P00B93enY6Tmipv63yPnSEYO/rg9Pyr85QW0ngTT3e+V7kknsa4n/Kfxpncd3lV95t/EvPGif/jeixupQPHdcfu8qa8AqF0wOp9Wv9Ep4mPMw+q/zt91DmVj+uR03pXOI6drpwP1LUdH+cn7JmK4yQXyndP18Jzq+qR1b/rO/YOcer7O76kzmyOeuf6WGkMfYBd7pzAvE9wJ38OLE9Ka84TXQ+c1O8TSPpY+YE6c5QHsLHfRlJDlQ+VH8fzRZ59E87Tp+9Ur7yrb+/C8VGepi6ln8kZ/WmkPt59B7j6/1Q9dPErH+z6YJF36ffBp9B5t9O40nPllPjH3Rycfj8kZ1t6trN5e58VrHGSA/SOdL6qV5oH540Y2/5lta/xsG+ElAfed+NVb7tas9ywWqoYVJ5qXO88CxSH+r7rYdf/Kg/MI1iO3u2DaY9hbbu13Lm2xyod1T1/ynfAb6h4VM92/FW/KM7fPA8VmN+zMYxX8k2x8dO08DSUDph2/mWoPPxE7b8T6vz438By8AviVqrUAEAAAA==
+  </data>
+ </layer>
+ <layer id="16" name="water" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2Va27EIAyEuSj3v0YV7Z/IAj/wYJvQkVC7m2DmGzDb2k/9kiFJ8342w+4MKCMqA0QNdA5cHhH+s7PwaGWN7phrXXc3/04vGm9WNs358wqVu/U9bZaa/vMKUcOy1oyf9trsfVoL5SdCGv7WeP5RTpb1qZcoSf3FnQXEnbjjPrVohQHJ/675rh0lxP2/kp3kKUIrHAj+KtrJP+M8gb81mQExMoXoYQ9rdhYR/LP3K0jya517Wu8/Wu3Nr/A/sp7NE+62nfrnvzuDm/m9v/mny8p/cgYj77fxU/838Hfm/1v4UeNUjfadPr+Bn+PYxV8pP84Dmr3aGcre++wMZmtH9H5V/sj7vwJ7Jn+mOI6v81Pvs88nZiB5or6/2AOUjfOM4N+RAer3dfac+y6bfebJMkfTA/Tz6tDKOtfKj/CBZPfW4u4ojzQMHn7tHMsztKS6K/vm7SNNXZSQ/AjO3ftNhTr/1fdZ0mi9SPZsfrpuhZGpbPZs/kcoz5XYLbWz+HfKWh/lu8o57+Svdo6FX/oumvu9nsQ/8ray/1KNaGny51gq8Xvmc3M159nSA9x8jU9pn1akvadGPiwZdGE+t7bmblmVNXvKhOJHDI332TONEGfhhKFVts/MHLK9Vcgh21eFHP4AXgfYHQBAAAA=
+  </data>
+ </layer>
+ <layer id="17" name="meadow" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu1WS67DMAj0/a+TC75FN5YFGIbBdpw3UtU2wXwGDDyttad9B8/k45F/O2YcjDGyODiNw6f7RmqB5cNOPjy14OXHY6M17GwVvDFqv6v8GX1bYU/6j+rJQPKnioOqu8y6M2wfZ7ayeiS9DP0rOGCdr9oZVs1P1oyv8jWiF/Ehek/HM6v69i5Ytd4alp/TdsMRntiicUhyJ3JQsZN4eLwVnvhOip99P98Qv+bjql0GmVmsfVHryVW7cuQdQ3/0rDTjGaju/6gua49no3r+o/vf7v7DxM0cRHYtpm6pbnftspW2rB6FfN4Ibf/N1Ealr70PTL1R/1fXhDS3K+aplffZuSoOpLxX1oBm33qGcFDZ31FIcVmyER40uZk/FXmP1rkmG/Ff6rPec/3ZLDy2GXp6mUhfyNTLDBGfPTJI/KjtFbmP2PL0tkje2D1ds8GSRXufpS8qu2I2VNzxmQ6v/ElgxV5RL5Y9JhCdmdmA+p+tV68+tA4smVEegeVvtnYz9eyxJdlGkPVbkmVxMbM3Psvoivo8k/HwgYLVszJ1O5P31gMrBvQcwyctfo+tXXUg5SYDTQd6vyI2s72PjUi/yPLAvEsMsPoJanc3sjnNnDsBzL52Sk69qJzLX0LVrvAGWLvUDRxYsWg5v6kOpP2wf2ftkjfwoPkvPZ/Fv4ODCrurdqQsquxH8vr2+pcQ5fU2DrJ7svb+Zlh35qbakKDth7v742p8OfYe/xz8IHHwBzUqHDQAQAAA
+  </data>
+ </layer>
+ <layer id="18" name="forest" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3XQRKEIAwFUe5/pJxuKgs21IyDSpTk99u4TaOgtgYAe7O3B3iZNdbAmvY62HAFgCPK56WjP0d/1IwZ+iO/a3b+ZhpnWz2ntb37u6gZs/Q75f0fTb0fABBH+T2r3O6U2zGHPZLrf2w15Xan2AxEU95Xqmdpp9wOAEA1iv/K35qrr8Nsc7U1uNqdvf9ud+Z+2s/3ZW+/e38z9694vrO2u1X7PWN7N85/1Fex/5eZvsr9bqatcv8/yu0AnvEBY6zmegBAAAA=
+  </data>
+ </layer>
+ <layer id="19" name="mountains" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2Z6w7DIAiFu/d/gT3usixLjCmKcukB+ZL9Wa1wQG0L11UURYHP+/X7nWq/9YHjRztW6jeC9paZP/11qf8o2ntNnHGc8TObSPo5a1qiv7eBor1l5pNm/iOivf8jwj0rshJFv9U5E0F/q1s7Buj7/84nLT+puSOgpd9iXk0s80/ZQ8Ny/1N20PB4z0TV7sXp+os1Tl8vyOelF5wYRKgVSKA0UZozxmH0Lk3pzBaHVf3tuOhx2Mk/NccTcZDY5uz/XV884iH9vljpMeygcT+3Fr7qL/f5t4NG/rm5tVxrK/Nqrnvv2gHHF8/4I+mn7FufcYj1Pe+zvbd7IqX9aS+KoigwyfANrkHpz20PjdP33On6i/hk7+/MQKwxeLFbY8qyTkb1POr/LNq/rOjPpPtPn89Rfq37JE+x0mO4u2+3P4BEq380RvKclPbpLOHoL4qiiMYH9L6QtABAAAA=
+  </data>
+ </layer>
+ <layer id="20" name="props" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3awQ2DMAwAwPTLEMzUmQofqm6BmKZL9cUTCR5xiHs3QRLFlm25FIj3frQ+AZBd1jyT9V4Arb3kVwiziTdOGvyVMnkD+HuLPABUdDRr/Mo9dKL2vHy9aSzoE8jurrEHANCbZ6K66pPoLgBAjDGwfpjVKtAdPUasfWfU7ijAdT82NE37AEAAAA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="portals">
+  <object id="1" name="LLECHY" type="portal" x="1080" y="432" width="24" height="24"/>
+  <object id="2" name="WIZARDRY4" type="portal" x="240" y="1272" width="24" height="24"/>
+  <object id="3" name="BOLTAC" type="portal" x="1104" y="456" width="24" height="24"/>
+  <object id="4" name="WIZARDRY4" type="portal" x="144" y="312" width="24" height="24"/>
+  <object id="6" name="CANT" type="portal" x="1152" y="552" width="24" height="24"/>
+  <object id="7" name="DOOM" type="portal" x="432" y="744" width="24" height="24"/>
+  <object id="8" name="BARAD_ENELETH" type="portal" x="1176" y="1392" width="24" height="24"/>
+  <object id="9" name="BARAD_ENELETH" type="portal" x="1128" y="1392" width="24" height="24"/>
+  <object id="10" name="WIWOLD" type="portal" x="888" y="1272" width="24" height="24"/>
+  <object id="11" name="DRAGON_QUEST" type="portal" x="1344" y="744" width="24" height="24"/>
+  <object id="12" name="DARDIN" type="portal" x="720" y="48" width="24" height="24"/>
+  <object id="13" name="PERINEAN" type="portal" x="1344" y="144" width="24" height="24"/>
+  <object id="14" name="BLACK_STONE" type="portal" x="216" y="672" width="24" height="24"/>
+  <object id="15" name="WIZARDRY1" type="portal" x="1104" y="168" width="24" height="24"/>
+  <object id="16" name="FIRE" type="portal" x="1176" y="816" width="24" height="24"/>
+  <object id="17" name="WIZARDRY3" type="portal" x="456" y="1368" width="24" height="24"/>
+  <object id="18" name="SNAKE" type="portal" x="1392" y="1056" width="24" height="24"/>
+  <object id="19" name="TIME" type="portal" x="1392" y="720" width="24" height="24"/>
+  <object id="29" name="CAVE" type="portal" x="168" y="1056" width="24" height="24"/>
+  <object id="30" name="WIZARDRY2" type="portal" x="816" y="384" width="24" height="24"/>
+  <object id="31" name="MINE" type="portal" x="360" y="672" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup id="5" name="moongates" visible="0">
+  <object id="20" name="GATE_0" type="portal" x="168" y="192" width="24" height="24"/>
+  <object id="21" name="GATE_1" type="portal" x="1368" y="1104" width="24" height="24"/>
+  <object id="22" name="GATE_2" type="portal" x="360" y="648" width="24" height="24"/>
+  <object id="23" name="GATE_3" type="portal" x="864" y="1392" width="24" height="24"/>
+  <object id="24" name="GATE_4" type="portal" x="360" y="696" width="24" height="24"/>
+  <object id="25" name="GATE_5" type="portal" x="288" y="1320" width="24" height="24"/>
+  <object id="26" name="GATE_6" type="portal" x="744" y="744" width="24" height="24"/>
+  <object id="27" name="GATE_7" type="portal" x="1392" y="744" width="24" height="24"/>
+ </objectgroup>
+</map>

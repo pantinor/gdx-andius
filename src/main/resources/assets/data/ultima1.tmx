@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="168" height="168" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="78">
+ <properties>
+  <property name="startX" value="49"/>
+  <property name="startY" value="40"/>
+ </properties>
+ <tileset firstgid="1" name="ultima1-tiles" tilewidth="16" tileheight="16" tilecount="54" columns="9">
+  <image source="ultima1-tiles.png" width="144" height="96"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="1000"/>
+    <frame tileid="52" duration="1000"/>
+    <frame tileid="53" duration="1000"/>
+   </animation>
+  </tile>
+  <tile id="4">
+   <animation>
+    <frame tileid="4" duration="1000"/>
+    <frame tileid="5" duration="1000"/>
+   </animation>
+  </tile>
+  <tile id="7">
+   <animation>
+    <frame tileid="7" duration="1000"/>
+    <frame tileid="8" duration="1000"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="map" width="168" height="168">
+  <data encoding="base64" compression="gzip">
+   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
+  </data>
+ </layer>
+ <objectgroup id="2" name="portals">
+  <object id="1" name="MONTOR" x="512" y="432" width="16" height="16"/>
+  <object id="2" name="WIZARDRY4" x="288" y="544" width="16" height="16"/>
+  <object id="4" name="BOLTAC" x="624" y="624" width="16" height="16"/>
+  <object id="5" name="LLECHY" x="640" y="608" width="16" height="16"/>
+  <object id="6" name="BOLTAC" x="736" y="448" width="16" height="16"/>
+  <object id="7" name="PERINEAN" x="288" y="208" width="16" height="16"/>
+  <object id="8" name="BARAD_ENELETH" x="832" y="1008" width="16" height="16"/>
+  <object id="9" name="WIZARDRY3" x="624" y="960" width="16" height="16"/>
+  <object id="10" name="CANT" x="400" y="976" width="16" height="16"/>
+  <object id="11" name="FIRE" x="208" y="688" width="16" height="16"/>
+  <object id="12" name="BLACK_STONE" x="464" y="592" width="16" height="16"/>
+  <object id="13" name="WIZARDRY1" x="768" y="176" width="16" height="16"/>
+  <object id="14" name="CAVE" x="848" y="352" width="16" height="16"/>
+  <object id="15" name="BOLTAC" x="1024" y="352" width="16" height="16"/>
+  <object id="16" name="DOOM" x="944" y="464" width="16" height="16"/>
+  <object id="17" name="COVE" x="1056" y="656" width="16" height="16"/>
+  <object id="18" name="WIZARDRY2" x="992" y="784" width="16" height="16"/>
+  <object id="19" name="CANT" x="1120" y="1008" width="16" height="16"/>
+  <object id="20" name="town" x="400" y="1504" width="16" height="16"/>
+  <object id="21" name="MINE" x="400" y="1680" width="16" height="16"/>
+  <object id="22" name="FIRE" x="224" y="1760" width="16" height="16"/>
+  <object id="23" name="town" x="496" y="1792" width="16" height="16"/>
+  <object id="24" name="DOOM" x="512" y="1584" width="16" height="16"/>
+  <object id="25" name="town" x="704" y="1472" width="16" height="16"/>
+  <object id="26" name="SNAKE" x="832" y="1536" width="16" height="16"/>
+  <object id="27" name="town" x="1056" y="1408" width="16" height="16"/>
+  <object id="28" name="castle" x="656" y="1888" width="16" height="16"/>
+  <object id="29" name="town" x="672" y="1904" width="16" height="16"/>
+  <object id="30" name="town" x="1056" y="1696" width="16" height="16"/>
+  <object id="31" name="town" x="1024" y="2128" width="16" height="16"/>
+  <object id="32" name="TIME" x="736" y="2320" width="16" height="16"/>
+  <object id="33" name="town" x="592" y="2240" width="16" height="16"/>
+  <object id="34" name="WIZARDRY1" x="640" y="2064" width="16" height="16"/>
+  <object id="35" name="WIZARDRY2" x="256" y="2240" width="16" height="16"/>
+  <object id="36" name="castle" x="480" y="2016" width="16" height="16"/>
+  <object id="37" name="WIZARDRY3" x="1008" y="1904" width="16" height="16"/>
+  <object id="38" name="BLACK_STONE" x="1136" y="1920" width="16" height="16"/>
+  <object id="39" name="town" x="1552" y="2256" width="16" height="16"/>
+  <object id="40" name="town" x="1840" y="2256" width="16" height="16"/>
+  <object id="41" name="DRAGON_QUEST" x="1680" y="2032" width="16" height="16"/>
+  <object id="42" name="town" x="1616" y="1904" width="16" height="16"/>
+  <object id="43" name="WIZARDRY4" x="1728" y="1712" width="16" height="16"/>
+  <object id="44" name="town" x="1648" y="1600" width="16" height="16"/>
+  <object id="45" name="town" x="1936" y="1696" width="16" height="16"/>
+  <object id="46" name="PERINEAN" x="1824" y="1600" width="16" height="16"/>
+  <object id="47" name="DARDIN" x="1904" y="1424" width="16" height="16"/>
+  <object id="48" name="castle" x="2160" y="1680" width="16" height="16"/>
+  <object id="49" name="town" x="2384" y="1792" width="16" height="16"/>
+  <object id="50" name="MINE" x="2384" y="1456" width="16" height="16"/>
+  <object id="51" name="FIRE" x="2464" y="1936" width="16" height="16"/>
+  <object id="52" name="town" x="2272" y="2224" width="16" height="16"/>
+  <object id="53" name="DOOM" x="2064" y="2336" width="16" height="16"/>
+  <object id="54" name="SNAKE" x="2048" y="2208" width="16" height="16"/>
+  <object id="55" name="town" x="2048" y="1872" width="16" height="16"/>
+  <object id="56" name="castle" x="2032" y="1856" width="16" height="16"/>
+  <object id="57" name="TIME" x="2208" y="1840" width="16" height="16"/>
+  <object id="58" name="town" x="2400" y="1072" width="16" height="16"/>
+  <object id="59" name="town" x="2400" y="784" width="16" height="16"/>
+  <object id="60" name="WIZARDRY1" x="2176" y="944" width="16" height="16"/>
+  <object id="61" name="WIZARDRY2" x="2480" y="560" width="16" height="16"/>
+  <object id="62" name="WIZARDRY3" x="2352" y="576" width="16" height="16"/>
+  <object id="63" name="town" x="2368" y="352" width="16" height="16"/>
+  <object id="64" name="BLACK_STONE" x="2080" y="160" width="16" height="16"/>
+  <object id="65" name="town" x="1936" y="240" width="16" height="16"/>
+  <object id="66" name="DRAGON_QUEST" x="1984" y="416" width="16" height="16"/>
+  <object id="67" name="town" x="2016" y="576" width="16" height="16"/>
+  <object id="68" name="castle" x="2000" y="592" width="16" height="16"/>
+  <object id="69" name="town" x="1840" y="688" width="16" height="16"/>
+  <object id="70" name="castle" x="1824" y="464" width="16" height="16"/>
+  <object id="71" name="WIZARDRY4" x="1600" y="240" width="16" height="16"/>
+  <object id="72" name="PERINEAN" x="1568" y="720" width="16" height="16"/>
+  <object id="73" name="DARDIN" x="1744" y="800" width="16" height="16"/>
+  <object id="74" name="town" x="1744" y="976" width="16" height="16"/>
+  <object id="75" name="MINE" x="1856" y="896" width="16" height="16"/>
+  <object id="76" name="town" x="2048" y="1008" width="16" height="16"/>
+  <object id="77" name="SLAVERS_PIT" x="608" y="1088" width="16" height="16"/>
+ </objectgroup>
+</map>

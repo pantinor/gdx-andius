@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="48" tileheight="48" infinite="0" backgroundcolor="#00aaaa7f" nextlayerid="13" nextobjectid="124">
+ <properties>
+  <property name="startX" value="35"/>
+  <property name="startY" value="40"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="floor" width="13" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACnNmYGBwJgPrk4BH9YzqQdZDKgYAij+xp6QCAAA=
+  </data>
+ </layer>
+ <layer id="2" name="floor 2" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="3" name="props" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="4" name="creature" width="13" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="5" name="water_edges" width="13" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="6" name="shadows" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="7" name="walls" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="8" name="door" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="9" name="torches" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <layer id="10" name="webs" width="13" height="13" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYHADAI+3czykAgAA
+  </data>
+ </layer>
+ <objectgroup id="11" name="Monster Positions">
+  <object id="1" name="1" x="240" y="384" width="48" height="48"/>
+  <object id="94" name="2" x="144" y="384" width="48" height="48"/>
+  <object id="95" name="3" x="336" y="384" width="48" height="48"/>
+  <object id="96" name="4" x="192" y="336" width="48" height="48"/>
+  <object id="97" name="5" x="288" y="336" width="48" height="48"/>
+  <object id="98" name="6" x="96" y="336" width="48" height="48"/>
+  <object id="99" name="7" x="384" y="336" width="48" height="48"/>
+  <object id="100" name="8" x="432" y="288" width="48" height="48"/>
+  <object id="103" name="9" x="192" y="240" width="48" height="48"/>
+  <object id="104" name="10" x="240" y="336" width="48" height="48"/>
+  <object id="105" name="11" x="432" y="384" width="48" height="48"/>
+  <object id="106" name="12" x="96" y="384" width="48" height="48"/>
+  <object id="107" name="13" x="144" y="288" width="48" height="48"/>
+  <object id="108" name="14" x="336" y="288" width="48" height="48"/>
+  <object id="109" name="15" x="240" y="288" width="48" height="48"/>
+  <object id="110" name="16" x="384" y="240" width="48" height="48"/>
+  <object id="112" name="17" x="96" y="240" width="48" height="48"/>
+  <object id="113" name="18" x="240" y="240" width="48" height="48"/>
+  <object id="114" name="19" x="192" y="192" width="48" height="48"/>
+  <object id="115" name="20" x="288" y="192" width="48" height="48"/>
+  <object id="116" name="21" x="432" y="192" width="48" height="48"/>
+  <object id="117" name="22" x="240" y="144" width="48" height="48"/>
+  <object id="118" name="23" x="336" y="192" width="48" height="48"/>
+  <object id="119" name="24" x="288" y="144" width="48" height="48"/>
+  <object id="120" name="25" x="384" y="96" width="48" height="48"/>
+  <object id="121" name="26" x="144" y="144" width="48" height="48"/>
+  <object id="122" name="27" x="432" y="96" width="48" height="48"/>
+  <object id="123" name="28" x="96" y="144" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="12" name="Player Positions">
+  <object id="1" name="1" x="288" y="432" width="48" height="48"/>
+  <object id="91" name="2" x="240" y="432" width="48" height="48"/>
+  <object id="92" name="3" x="192" y="432" width="48" height="48"/>
+  <object id="93" name="4" x="336" y="432" width="48" height="48"/>
+  <object id="101" name="5" x="144" y="432" width="48" height="48"/>
+  <object id="102" name="6" x="384" y="432" width="48" height="48"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,500 @@
+[
+    {
+        "id": 0,
+        "text": [
+            "YOU ARE ON THE OUTSKIRTS OF THE TOWN  ",
+            "OF SEAGATE AT THE BOTTOM OF THE STAIRS",
+            "LEADING BACK TO THE CASTLE.           "
+        ]
+    },
+    {
+        "id": 91,
+        "text": [
+            "TOWN HALL                             "
+        ]
+    },
+    {
+        "id": 3,
+        "text": [
+            "THE MAYOR IMPLORES YOU:               ",
+            "\"THE FRONTIERS OF ALUSIA IS A LAND IN ",
+            "PERIL. LOKTAR, AN EVIL RED DRAGON,    ",
+            "AND ITS MINIONS ARE RAPIDLY TAKING    ",
+            "CONTROL OF THE TRADE ROUTES AND RAI-  ",
+            "DING THE CASTLES. YOU MUST STOP THEM!\""
+        ]
+    },
+    {
+        "id": 9,
+        "text": [
+            "GARGAMEL\u0027S HOUSE                      "
+        ]
+    },
+    {
+        "id": 10,
+        "text": [
+            "YOU MEET A WIZARD AND HIS CAT:        ",
+            "\"FOR ARCANE TOMES GO TO:              ",
+            "HTTPS://ZIMLAB.COM/WIZARDRY           ",
+            "(IN LOWERCASE LETTERS)\"               "
+        ]
+    },
+    {
+        "id": 14,
+        "text": [
+            "YE FIDDLE IN HAND INN                 "
+        ]
+    },
+    {
+        "id": 15,
+        "text": [
+            "A DRUNKEN DERELICT BABBLES: \"MAGIC    ",
+            "USERS CAN USE A TRUESILVER (TS) ITEM  ",
+            "AS IT DOES NOT IMPEDE MAGICAL MANA.\"  "
+        ]
+    },
+    {
+        "id": 18,
+        "text": [
+            "A FARMHOUSE                           "
+        ]
+    },
+    {
+        "id": 19,
+        "text": [
+            "THE FARMER BEGS YOU:                  ",
+            "\"PLEASE, BRAVE HEROES, SAVE OUR WIVES,",
+            "CHILDREN, AND BABIES FROM EVIL!\"      "
+        ]
+    },
+    {
+        "id": 22,
+        "text": [
+            "CEMETARY OF SEAGATE                   "
+        ]
+    },
+    {
+        "id": 23,
+        "text": [
+            "THE SWEET RIDING PLAINS               "
+        ]
+    },
+    {
+        "id": 24,
+        "text": [
+            "THE FILGISO FOREST                    "
+        ]
+    },
+    {
+        "id": 25,
+        "text": [
+            "CAVE ENTRANCE                         "
+        ]
+    },
+    {
+        "id": 26,
+        "text": [
+            "A WARD PREVENTS YOUR PASSAGE.         "
+        ]
+    },
+    {
+        "id": 27,
+        "text": [
+            "ON THE REMAINS OF A POOR SOUL YOU FIND",
+            "A JOURNAL: \"... COULD NOT GET THE     ",
+            "QUILL... PASSAGE DENIED... DYING FROM ",
+            "WOUNDS... SHAME ON ME ALUSIA IS LOST!\""
+        ]
+    },
+    {
+        "id": 40,
+        "text": [
+            "SEAGATE\u0027S CATACOMBS                   ",
+            "YOU HEAR THE CLATTER OF BONES...      "
+        ]
+    },
+    {
+        "id": 42,
+        "text": [
+            "SEAGATE\u0027S UNDERGROUND PRISON          "
+        ]
+    },
+    {
+        "id": 43,
+        "text": [
+            "WATER\u0027S EDGE. HOW WELL DO YOU SWIM?   "
+        ]
+    },
+    {
+        "id": 44,
+        "text": [
+            "YOU MEET THE LADY OF THE LAKE: \"SEEK  ",
+            "THE STRONGEST WEAPON OF ALL, FOR IT   ",
+            "WILL HELP YOU DEFEAT THE GODS. SEEK   ",
+            "MERLIN FOR HE KNOWS ABOUT THEM.\"      "
+        ]
+    },
+    {
+        "id": 48,
+        "text": [
+            "YOU MEET MERLIN: \"THE GODS YOU SAY?   ",
+            "MY FOOT! THESE PRETENDERS HAVE THEIR  ",
+            "HEADS SWOLLEN BY HAVING TOO MUCH      ",
+            "POWER!! A QUILL! A PLUME! A FEATHER!! ",
+            "... CAN BE FOUND ON A CERTAIN ANIMAL.\""
+        ]
+    },
+    {
+        "id": 53,
+        "text": [
+            "HUGE BOULDERS BLOCK THE PASSAGE...    ",
+            "THERE MUST BE ANOTHER WAY THROUGH.    "
+        ]
+    },
+    {
+        "id": 31,
+        "text": [
+            "YOU FINALLY EMERGE FROM A LONG TUNNEL ",
+            "ONTO THE SIDE OF A MOUNTAIN PLATEAU.  ",
+            "A HUGE NEST IS IN THE MIDDLE.         ",
+            "MOMMY BETTER NOT SHOW UP!             "
+        ]
+    },
+    {
+        "id": 37,
+        "text": [
+            "WIND IS PULLING YOU IN! YOU RESIST!!  "
+        ]
+    },
+    {
+        "id": 38,
+        "text": [
+            "ONE MORE STEP AND YOU\u0027LL BE SUCKED IN!"
+        ]
+    },
+    {
+        "id": 39,
+        "text": [
+            "YOU WOKE IT UP! IT IS PRODIGIOUS!!!   "
+        ]
+    },
+    {
+        "id": 55,
+        "text": [
+            "A MESSAGE ON A DEAD PIGEON READS:     ",
+            "\"LOKTAR HAS KIDNAPPED MY DAUGHTER,    ",
+            "PRINCESS PERSIA. I BEG YOU, SAVE HER! ",
+            "          - KING GULTHALION OF ALUSIA\""
+        ]
+    },
+    {
+        "id": 35,
+        "text": [
+            "IT IS SLEEPING. DARE YOU WAKE IT UP?  ",
+            "YOU SHIVER, YOU MAY ACTUALLY DIE HERE!"
+        ]
+    },
+    {
+        "id": 167,
+        "text": [
+            "A TORNADO !!!                         "
+        ]
+    },
+    {
+        "id": 59,
+        "text": [
+            "YOU MIRACULOUSLY FALL UNHURT IN THE   ",
+            "CENTER OF A VALLEY. STRONG WINDS SEND ",
+            "DEBRIS FLYING ALL OVER THE PLACE!     ",
+            "CAREFUL,YOU\u0027LL BE CAUGHT IN A TORNADO!"
+        ]
+    },
+    {
+        "id": 61,
+        "text": [
+            "DEBRIS FLYING ALL OVER THE PLACE!     ",
+            "CAREFUL,YOU\u0027LL BE CAUGHT IN A TORNADO!"
+        ]
+    },
+    {
+        "id": 63,
+        "text": [
+            "YOU MEET SINBAD: \"A SPECIAL SHIELD    ",
+            "PROTECTS AGAINST DEMONIC FORCES. FIND ",
+            "IT, FOR IT WILL SERVE YOU WELL.       ",
+            "HAVE YOU SEEN MY SCIMITAR? I LOST IT.\""
+        ]
+    },
+    {
+        "id": 67,
+        "text": [
+            "YOU MEET BILBO BAGGINS: \"TO GET TO    ",
+            "LOKTAR YOU MUST FIRST DEFEAT THE GODS ",
+            "THAT ARE PROTECTING IT. ONLY THE ONE  ",
+            "TRUE RING LET ME ESCAPE THEM!\"        "
+        ]
+    },
+    {
+        "id": 71,
+        "text": [
+            "YOU MEET CONAN THE BARBARIAN: \"MIGHTY ",
+            "WEAPONS AND ARMOR ARE HIDDEN EVERY-   ",
+            "WHERE,FIND THEM FOR YOU WILL NEED THEM",
+            "TO FIGHT THE FIENDS OF THE UNDERWORLD\"",
+            "HE THEN DISMISSES YOU: \"BY CROM, LEAVE",
+            "ME NOW FOR I HAVE A KINGDOM TO CONQUER",
+            "FOR MYSELF AND MY FUTURE QUEEN.\"      "
+        ]
+    },
+    {
+        "id": 168,
+        "text": [
+            "YOU FIND A SECRET PASSAGE!            "
+        ]
+    },
+    {
+        "id": 78,
+        "text": [
+            "YOU MEET LANCELOT: \"I HAD THE KING\u0027S  ",
+            "KEY, BUT DEADALUS STOLE IT FROM ME!\"  "
+        ]
+    },
+    {
+        "id": 80,
+        "text": [
+            "YOU MEET HERCULES: \"DEADALUS STOLE MY ",
+            "RING, I AM NOW POWERLESS TO HELP YOU.\""
+        ]
+    },
+    {
+        "id": 82,
+        "text": [
+            "AN ENGRAVED STONE: \"FORTUNATE IS THE  ",
+            "ONE WHO FOUND KING ARTHUR\u0027S TREASURE. ",
+            "BE POLITE, TAKE ONLY WHAT YOU NEED.\"  "
+        ]
+    },
+    {
+        "id": 85,
+        "text": [
+            "YOU STAND IN FRONT OF A DOOR. A GLOW  ",
+            "EMANATES FROM THE KEYHOLE.            "
+        ]
+    },
+    {
+        "id": 87,
+        "text": [
+            "A SINISTER LAUGHTER REVERBERATES: \"YOU",
+            "WILL PAY WITH YOUR LIFE FOR DISTURBING",
+            "MY PRIVACY HA HA HAGH HAGH HAGHHHH...\""
+        ]
+    },
+    {
+        "id": 90,
+        "text": [
+            "YOU FEEL A GHOSTLY PRESENCE...        "
+        ]
+    },
+    {
+        "id": 92,
+        "text": [
+            "YOU ENTER A PROTECTIVE PENTAGRAM.     "
+        ]
+    },
+    {
+        "id": 96,
+        "text": [
+            "A VOICE BOOMS OUT OF A 20 FEET        ",
+            "HUMANOID STATUE STANDING IN FRONT     ",
+            "OF YOU : \"KNEEL BEFORE YOUR GOD!\"     "
+        ]
+    },
+    {
+        "id": 101,
+        "text": [
+            "A PARCHMENT READS: THE TRUE NATURE OF ",
+            "THE MYTHOLOGICAL GODS CAN BE UNCOVERED",
+            "IN THESE NUMBERS: 4 1 1 0 2 9 0 2     "
+        ]
+    },
+    {
+        "id": 93,
+        "text": [
+            "RUNES ON THE WALL READ: \"YOU HAVE     ",
+            "DISCOVERED THE CHAMBER OF A           ",
+            "WELL-KNOWN REVENANT.\"                 "
+        ]
+    },
+    {
+        "id": 99,
+        "text": [
+            "A GODLY BEING STANDS BEHIND GLASS     ",
+            "DOORS. DARE YOU DISTURB IT?           "
+        ]
+    },
+    {
+        "id": 175,
+        "text": [
+            "AN ADVENTURER PALE WITH FEAR RUNS BY  ",
+            "YOU: \"REVENANTS... RUN !\""
+        ]
+    },
+    {
+        "id": 152,
+        "text": [
+            "YOU MUST PAY TO ENTER THE TEMPLE.     "
+        ]
+    },
+    {
+        "id": 104,
+        "text": [
+            "A PARCHMENT READS: \"THE TRUE NATURE   ",
+            "OF THE FALSE GODS CAN BE UNCOVERED    ",
+            "USING A MAGIC MIRROR.\""
+        ]
+    },
+    {
+        "id": 107,
+        "text": [
+            "YOU HAVE FOUND A SECRET PASSAGE!      "
+        ]
+    },
+    {
+        "id": 154,
+        "text": [
+            "I AM VERY PRECIOUS TO MIGHTY HERCULES ",
+            "AND BILBO BAGGINS, WHAT AM I?         "
+        ]
+    },
+    {
+        "id": 169,
+        "text": [
+            "A SURPRISED, BUT NO LESS EVIL VOICE   ",
+            "INTONES: \"WHAT? YOU MADE IT THIS FAR! ",
+            "I WILL HAVE TO TAKE CARE OF YOU       ",
+            "MYSELF THEN... AND I WILL HAVE A FEW  ",
+            "OF MY FRIENDS JOIN THE PARTY, AND     ",
+            "I KNOW YOU LOVE THESE GUYS !!!\"       "
+        ]
+    },
+    {
+        "id": 108,
+        "text": [
+            "A MALOR WARD ! ! !                    "
+        ]
+    },
+    {
+        "id": 109,
+        "text": [
+            "AHEAD IS A DOOR WITH A DRAGON EMBLEM. "
+        ]
+    },
+    {
+        "id": 110,
+        "text": [
+            "AN OMINOUS VOICE INTONES: \"BY SETTING ",
+            "FOOT ON MY DOMAIN YOU HAVE SHOWN TRUE ",
+            "COURAGE. BUT YOUR BRAVADO DOES NOT    ",
+            "INTIMIDATE ME FOR I AM LOKTAR AND YOUR",
+            "AUDACITY WILL BE PUNISHED. I WILL SEND",
+            "MY HORDES UPON YOU. BE PREPARED       ",
+            "TO DIE! MOOHOOHAHAHAHAHA...\"          "
+        ]
+    },
+    {
+        "id": 117,
+        "text": [
+            "YOU EMERGE INTO A DRAGON\u0027S LAIR AND   ",
+            "SEE ONE OF THE BIGGEST, NASTIEST RED  ",
+            "DRAGON EVER. IT IS HOLDING A BEAUTIFUL",
+            "HUMANOID FEMALE FIGURE DRESSED IN     ",
+            "ROYAL GOWNS. LOKTAR CHALLENGES YOU:   ",
+            "\"IF YOU COME ANY CLOSER, I WILL CRUSH ",
+            "HER SPINE! MOOHOOHAHAHAHAHA...\"       "
+        ]
+    },
+    {
+        "id": 124,
+        "text": [
+            "CRAACKK! LOKTAR BREAKS HER NECK IN A  ",
+            "SICKENING NOISE! YOU FIND HER DEAD.   ",
+            "LOKTAR MOCKS YOU: \"YOU FAILED YOUR    ",
+            "QUEST MISERABLE VERMINS. NOW GO TELL  ",
+            "GULTHALION HOW LAMENTABLE YOU ARE!\"   "
+        ]
+    },
+    {
+        "id": 129,
+        "text": [
+            "THE STENCH HERE IS AWFUL! IT IS THE   ",
+            "SMELL OF THE BIGGEST, NASTIEST,       ",
+            "THE OLDEST, AND MOST POWERFUL DRAGONS.",
+            "UNLIKE SOME OTHER WORLDS, THE DRAGONS ",
+            "IN DRAGONQUEST ARE REALLY POWERFUL.   ",
+            "DO NET EVEN EXPECT TO WALK AROUND AND ",
+            "LIVE TO TELL. WELCOME TO THE          ",
+            "DRAGON\u0027S LAIR!                        "
+        ]
+    },
+    {
+        "id": 141,
+        "text": [
+            "YOU FIND A BOOK OF TRUE NAMES:        ",
+            "LOKTAR RED DRAGON. CALORUS TITAN.     ",
+            "FRIGOROUS TITAN. KADORTO GOD.         "
+        ]
+    },
+    {
+        "id": 160,
+        "text": [
+            "A FRIENDLY GOLD DRAGON OFFERS SOME    ",
+            "KNOWLEDGE: \"YOU PUNY LITTLE HUMANOIDS ",
+            "MUST KNOW THAT THERE IS ONE TRUE GOD. ",
+            "I WILL NOT REVEAL ITS NAME,THAT IS FOR",
+            "YOU TO DISCOVER, BUT I CAN TELL YOU   ",
+            "THAT ITS POWER IS GREAT AND THAT ITS  ",
+            "FAVORITE COLOR IS BLUE!\"              "
+        ]
+    },
+    {
+        "id": 157,
+        "text": [
+            "A FRIGHT WARD ! ! !                   ",
+            "YOU START TO PANIC ! ! !              ",
+            "YOU RUN IN TERROR ! ! !               "
+        ]
+    },
+    {
+        "id": 177,
+        "text": [
+            "YOU BEGIN YOUR DESCENT...             "
+        ]
+    },
+    {
+        "id": 137,
+        "text": [
+            "YOU HAVE REACHED THE BOTTOM OF A      ",
+            "GALLERY. YOU LOOK AROUND AND SEE      ",
+            "FUMES AND MOLTEN MAGMA SPLURGE OUT OF ",
+            "THE GROUND. WELCOME TO HELL!!!        "
+        ]
+    },
+    {
+        "id": 144,
+        "text": [
+            "THIS IS A LIBRARY OF THE COLLEGE OF   ",
+            "NAMING INCANTATIONS. A NAMER IS ONE   ",
+            "WHO SPECIALIZES IN THE KNOWLEDGE OF   ",
+            "TRUE NAMES AND COUNTERSPELLS. A NAMER ",
+            "CAN CONTROL AN ENTITY FOR WHICH THEY  ",
+            "KNOW THE TRUE NAME. COUNTERSPELLS     ",
+            "HELP ONE RESIST SPELLS AND MAGIC.     "
+        ]
+    },
+    {
+        "id": 151,
+        "text": [
+            "YOU FOUND A POOL OF 30% BLUE WATER.   "
+        ]
+    }
+]

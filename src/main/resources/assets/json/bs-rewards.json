@@ -1,0 +1,683 @@
+[
+    {
+        "id": 0,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": []
+    },
+    {
+        "id": 1,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 2,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "isChest": true,
+        "trapTypeFlags": 139,
+        "rewardDetails": [
+            {
+                "odds": 20,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 4,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 5,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 15,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 8,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "isChest": true,
+        "trapTypeFlags": 15,
+        "rewardDetails": [
+            {
+                "odds": 35,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 32,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 8,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 32,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 12,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "isChest": true,
+        "trapTypeFlags": 207,
+        "rewardDetails": [
+            {
+                "odds": 45,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 40,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 12,
+                        "sides": 5,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 15,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 40,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "isChest": true,
+        "trapTypeFlags": 228,
+        "rewardDetails": [
+            {
+                "odds": 50,
+                "type": 1,
+                "itemReward": {
+                    "min": 1,
+                    "size": 0,
+                    "max": 0,
+                    "range": 50,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 1,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 15,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 34,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 2,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "isChest": true,
+        "trapTypeFlags": 236,
+        "rewardDetails": [
+            {
+                "odds": 55,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 50,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 2,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 45,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 4,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "isChest": true,
+        "trapTypeFlags": 238,
+        "rewardDetails": [
+            {
+                "odds": 60,
+                "type": 1,
+                "itemReward": {
+                    "min": 17,
+                    "size": 0,
+                    "max": 0,
+                    "range": 60,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 35,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 4,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 10,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 44,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 8,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "isChest": true,
+        "trapTypeFlags": 236,
+        "rewardDetails": [
+            {
+                "odds": 70,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 52,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 8,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 15,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 50,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 16,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "isChest": true,
+        "trapTypeFlags": 236,
+        "rewardDetails": [
+            {
+                "odds": 90,
+                "type": 1,
+                "itemReward": {
+                    "min": 33,
+                    "size": 0,
+                    "max": 0,
+                    "range": 58,
+                    "odds": 0
+                }
+            },
+            {
+                "odds": 100,
+                "type": 0,
+                "goldReward": {
+                    "dice1": {
+                        "qty": 10,
+                        "sides": 10,
+                        "bonus": 0
+                    },
+                    "base": 10,
+                    "dice2": {
+                        "qty": 1,
+                        "sides": 16,
+                        "bonus": 0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "isChest": true,
+        "trapTypeFlags": 15,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 100,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "isChest": true,
+        "trapTypeFlags": 236,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 93,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "isChest": true,
+        "trapTypeFlags": 236,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 98,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 97,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 96,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 95,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "isChest": false,
+        "trapTypeFlags": 0,
+        "rewardDetails": [
+            {
+                "odds": 100,
+                "type": 1,
+                "itemReward": {
+                    "min": 94,
+                    "size": 0,
+                    "max": 0,
+                    "range": 0,
+                    "odds": 0
+                }
+            }
+        ]
+    }
+]

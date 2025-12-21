@@ -1,0 +1,2866 @@
+[
+    {
+        "genericName": "Ghoul",
+        "name": "Ghoul",
+        "monsterId": 1,
+        "iconId": 25,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [
+            "PARALYZE"
+        ],
+        "exp": 400,
+        "groupSize": {
+            "qty": 8,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T3"
+    },
+    {
+        "genericName": "Ghast",
+        "name": "Ghast",
+        "monsterId": 2,
+        "iconId": 25,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 8,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [
+            "PARALYZE",
+            "POISON"
+        ],
+        "exp": 500,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T3"
+    },
+    {
+        "genericName": "Plant",
+        "name": "Giant Sundew",
+        "monsterId": 3,
+        "iconId": 21,
+        "type": 13,
+        "goldReward": 500,
+        "chestReward": 17,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 7,
+        "speed": 1,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 1300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 8,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T5b"
+    },
+    {
+        "genericName": "Half-Orc",
+        "name": "Half-Orc Stablehand",
+        "monsterId": 4,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 2,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 7,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 4,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T6"
+    },
+    {
+        "genericName": "Doppelganger",
+        "name": "Doppelganger",
+        "monsterId": 5,
+        "iconId": 23,
+        "type": 13,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T6"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Guard",
+        "monsterId": 6,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 6,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T7"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
+        "monsterId": 7,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 2,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 7,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T8"
+    },
+    {
+        "genericName": "Ghoul",
+        "name": "Ghoul",
+        "monsterId": 8,
+        "iconId": 25,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [
+            "PARALYZE"
+        ],
+        "exp": 500,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T8"
+    },
+    {
+        "genericName": "Tree",
+        "name": "Guardian Tree",
+        "monsterId": 9,
+        "iconId": 21,
+        "type": 13,
+        "goldReward": 0,
+        "chestReward": 2,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 8,
+        "speed": 3,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 500,
+        "groupSize": {
+            "qty": 3,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 10,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T8"
+    },
+    {
+        "genericName": "Wight",
+        "name": "Wight",
+        "monsterId": 10,
+        "iconId": 22,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 17,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 1,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [
+            "AUTOKILL"
+        ],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 3
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T9"
+    },
+    {
+        "genericName": "Basilisk",
+        "name": "Basilisk",
+        "monsterId": 11,
+        "iconId": 15,
+        "type": 6,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "STONING"
+        ],
+        "ability": [
+            "STONE"
+        ],
+        "exp": 1100,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T10"
+    },
+    {
+        "genericName": "Half-Orc",
+        "name": "Half-Orc False Slave",
+        "monsterId": 12,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 2,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 600,
+        "groupSize": {
+            "qty": 17,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T12a"
+    },
+    {
+        "genericName": "Half-Orc Assassin",
+        "name": "Half-Orc Assassin",
+        "monsterId": 13,
+        "iconId": 20,
+        "type": 3,
+        "goldReward": 0,
+        "chestReward": 5,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 8,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 800,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 6,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T12a"
+    },
+    {
+        "genericName": "Half-Orc Fighter/Cleric",
+        "name": "Half-Orc Leader",
+        "monsterId": 14,
+        "iconId": 8,
+        "type": 2,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 7,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 2,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 900,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T12a"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Slaver Illusionist",
+        "monsterId": 15,
+        "iconId": 21,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 3,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T12b"
+    },
+    {
+        "genericName": "Harpy",
+        "name": "Harpy",
+        "monsterId": 16,
+        "iconId": 26,
+        "type": 6,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 7,
+        "speed": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 4,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T14"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Table Defender",
+        "monsterId": 17,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 6,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T16a"
+    },
+    {
+        "genericName": "Half-Orc",
+        "name": "Half-Orc Flamethrower Crew",
+        "monsterId": 18,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 4,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T16a"
+    },
+    {
+        "genericName": "Half-Orc Fighter",
+        "name": "Half-Orc Portcullis Guard",
+        "monsterId": 19,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 15,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T16b"
+    },
+    {
+        "genericName": "Half-Orc",
+        "name": "Half-Orc Inner Portcullis Guard",
+        "monsterId": 20,
+        "iconId": 0,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 15,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T16c"
+    },
+    {
+        "genericName": "Doppelganger",
+        "name": "Doppelganger",
+        "monsterId": 21,
+        "iconId": 23,
+        "type": 13,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T16c"
+    },
+    {
+        "genericName": "Half-Orc Fighter",
+        "name": "Half-Orc Temple Guard",
+        "monsterId": 22,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 3,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T18"
+    },
+    {
+        "genericName": "Evil Cleric",
+        "name": "Temple Priestess",
+        "monsterId": 23,
+        "iconId": 8,
+        "type": 2,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 1,
+        "speed": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 3,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 640,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ],
+        "roomId": "T18"
+    },
+    {
+        "genericName": "Troll",
+        "name": "Troll",
+        "monsterId": 24,
+        "iconId": 16,
+        "type": 0,
+        "goldReward": 5,
+        "chestReward": 15,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 3,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1720,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 6
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 4
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 4
+            },
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T18"
+    },
+    {
+        "genericName": "Assassin",
+        "name": "Assassin",
+        "monsterId": 25,
+        "iconId": 9,
+        "type": 3,
+        "goldReward": 2,
+        "chestReward": 12,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON",
+            "AUTOKILL"
+        ],
+        "exp": 1360,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 6,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T18"
+    },
+    {
+        "genericName": "Stirge",
+        "name": "Stirge",
+        "monsterId": 26,
+        "iconId": 11,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 8,
+        "speed": 3,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 240,
+        "groupSize": {
+            "qty": 10,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ],
+        "roomId": "T19"
+    },
+    {
+        "genericName": "Aspis Larva",
+        "name": "Aspis Larvae",
+        "monsterId": 27,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 3,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 300,
+        "groupSize": {
+            "qty": 5,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ],
+        "roomId": "S2"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 28,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 3,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S3"
+    },
+    {
+        "genericName": "Gray Ooze",
+        "name": "Gray Ooze",
+        "monsterId": 29,
+        "iconId": 0,
+        "type": 13,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 1,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 3
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S4"
+    },
+    {
+        "genericName": "Rot Grub",
+        "name": "Rot Grub",
+        "monsterId": 30,
+        "iconId": 0,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 9,
+        "speed": 1,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "AUTOKILL"
+        ],
+        "exp": 800,
+        "groupSize": {
+            "qty": 15,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4
+            }
+        ],
+        "roomId": "S4"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
+        "monsterId": 31,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 6,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 5,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S5"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 32,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 4,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S5"
+    },
+    {
+        "genericName": "Aspis Cow",
+        "name": "Aspis Cow",
+        "monsterId": 33,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 7,
+        "speed": 3,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 800,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 3,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S6"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 34,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 6,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S6"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
+        "monsterId": 35,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 8,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON"
+        ],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 3,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 3,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S6"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
+        "monsterId": 36,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 10,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S6"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
+        "monsterId": 37,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 2,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S8a"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
+        "monsterId": 38,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 8,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON"
+        ],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 3,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 3,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S8a"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Worker Ant",
+        "monsterId": 39,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 10,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S8b"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Soldier Ant",
+        "monsterId": 40,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 8,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 18,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON"
+        ],
+        "exp": 600,
+        "groupSize": {
+            "qty": 10,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 3,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S8b"
+    },
+    {
+        "genericName": "Giant Ant",
+        "name": "Giant Ant Queen",
+        "monsterId": 41,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 19,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 10,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S8b"
+    },
+    {
+        "genericName": "Ogre",
+        "name": "Ogre Captain",
+        "monsterId": 42,
+        "iconId": 16,
+        "type": 5,
+        "goldReward": 0,
+        "chestReward": 9,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1500,
+        "groupSize": {
+            "qty": 3,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S12"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Guard",
+        "monsterId": 43,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 18,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S12"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Guard",
+        "monsterId": 44,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 6,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S14"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Tribesman",
+        "monsterId": 45,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 24,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S15a"
+    },
+    {
+        "genericName": "Orc Chief",
+        "name": "Orc Chief",
+        "monsterId": 46,
+        "iconId": 20,
+        "type": 16,
+        "goldReward": 0,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ],
+        "roomId": "S15b"
+    },
+    {
+        "genericName": "Orc Bodyguard",
+        "name": "Orc Bodyguard",
+        "monsterId": 47,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 500,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 1
+            }
+        ],
+        "roomId": "S15b"
+    },
+    {
+        "genericName": "Ogre",
+        "name": "Ogre Advisor",
+        "monsterId": 48,
+        "iconId": 20,
+        "type": 5,
+        "goldReward": 0,
+        "chestReward": 17,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 10,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S15b"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Guard",
+        "monsterId": 49,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 8,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S16a"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Witch Doctor Orc",
+        "monsterId": 50,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 7,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 600,
+        "groupSize": {
+            "qty": 6,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S16b"
+    },
+    {
+        "genericName": "Orc Witch Doctor",
+        "name": "Orc Witch Doctor",
+        "monsterId": 51,
+        "iconId": 20,
+        "type": 2,
+        "goldReward": 0,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 9,
+        "mageSpellLevel": 2,
+        "priestSpellLevel": 2,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 800,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 5,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 7,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S16b"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 52,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 5,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 2,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S18a"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 53,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 6,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S18b"
+    },
+    {
+        "genericName": "Human Merchant",
+        "name": "Slave Merchant",
+        "monsterId": 54,
+        "iconId": 7,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 21,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": -1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Human Fighter",
+        "name": "Female Fighter",
+        "monsterId": 55,
+        "iconId": 4,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 7,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Human Magic User",
+        "name": "Magic User",
+        "monsterId": 56,
+        "iconId": 7,
+        "type": 1,
+        "goldReward": 8,
+        "chestReward": 18,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 12,
+        "mageSpellLevel": 5,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resists": [
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 2000,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 4,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Guide",
+        "monsterId": 57,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 5,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Slave",
+        "name": "Common Slave Prisoner",
+        "monsterId": 58,
+        "iconId": 3,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 1,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 2,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Human Fighter",
+        "name": "Fighter Slave",
+        "monsterId": 59,
+        "iconId": 4,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 17,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 800,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 10,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Doppelganger",
+        "name": "Doppelganger Prisoner",
+        "monsterId": 60,
+        "iconId": 23,
+        "type": 13,
+        "goldReward": 0,
+        "chestReward": 2,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 16,
+            "sides": 1,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19a"
+    },
+    {
+        "genericName": "Aspis Drone",
+        "name": "Aspis Drone",
+        "monsterId": 61,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 0,
+        "chestReward": 4,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
+        "ability": [],
+        "exp": 700,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S19c"
+    },
+    {
+        "genericName": "Slave",
+        "name": "Maintenance Slave",
+        "monsterId": 62,
+        "iconId": 4,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 1,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 12,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 500,
+        "groupSize": {
+            "qty": 5,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 1
+            }
+        ],
+        "roomId": "S19c"
+    },
+    {
+        "genericName": "Slave Lord",
+        "name": "Slave Lord",
+        "monsterId": 63,
+        "iconId": 22,
+        "type": 3,
+        "goldReward": 9,
+        "chestReward": 19,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 2,
+        "speed": 12,
+        "mageSpellLevel": 5,
+        "priestSpellLevel": 5,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 2300,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 7,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S21"
+    },
+    {
+        "genericName": "Giant Weasel",
+        "name": "Giant Weasel",
+        "monsterId": 64,
+        "iconId": 11,
+        "type": 8,
+        "goldReward": 0,
+        "chestReward": 1,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 600,
+        "groupSize": {
+            "qty": 5,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 8,
+            "bonus": 3
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S21"
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc Ledge Guard",
+        "monsterId": 65,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 3,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 9,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 400,
+        "groupSize": {
+            "qty": 10,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ],
+        "roomId": "S21"
+    }
+]

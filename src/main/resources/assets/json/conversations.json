@@ -1,0 +1,748 @@
+{
+    "maps": {
+        "LLECHY": [
+            {
+                "name": "Elira",
+                "description": "an urbane scholar",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I study taunting plaques and statues out of my home."
+                    },
+                    {
+                        "query": "home",
+                        "phrase": "I live down on Contra-Dextra Avenue and curate mage lore. I have seen several statues in my travels."
+                    },
+                    {
+                        "query": "statue plaque",
+                        "phrase": "The KEY of SILVER lies in the northeast: a silver boar with horns and long fangs. The nearby scrawl—likely elven—warns of ghosts and demons; search the room to take the key."
+                    },
+                    {
+                        "query": "key",
+                        "phrase": "Seek the KEY of BRONZE in the southeast: a bronze statue—body of a chicken, head of a cat—rests upon an onyx pedestal. Read the plaque, then look around to claim it."
+                    },
+                    {
+                        "query": "cat chicken onyx pedestal bronze",
+                        "phrase": "The KEY of BRONZE is required for a checkpoint on the lower level. Do not leave the first floor without it if you intend to press on below. Beware of areas that may teleport...and ghosts as well."
+                    },
+                    {
+                        "query": "teleport",
+                        "phrase": "Two squares send travelers into the southeast zone, arriving near E15-N4. One is just west of the arrival door; the other sits off the east run of the central corridor."
+                    },
+                    {
+                        "query": "ghost murphy",
+                        "phrase": "The ghosts of MURPHY can appear without end. You cannot run. Use DILTO to dim their sight and grind experience—but bring a party fit to stand."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Garrick",
+                "description": "a seasoned Guardian Liaison",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "Guardian Liaison patrolling the Testing Grounds Control Center, responding to bell alarms, and managing Private Elevator access in restricted corridors."
+                    },
+                    {
+                        "query": "test ground control center sign",
+                        "phrase": "The Testing Grounds Control Center is strictly off-limits; those DO NOT ENTER signs at the Testing Grounds Control Center aren’t for show."
+                    },
+                    {
+                        "query": "bell alarm",
+                        "phrase": "When the bell alarm echoes, guardian monsters mobilize - once that bell alarm hits, you’re in big trouble."
+                    },
+                    {
+                        "query": "private elevator restrict corridor",
+                        "phrase": "The Private Elevator is for authorized users only; I audit Private Elevator access logs every watch."
+                    },
+                    {
+                        "query": "access log",
+                        "phrase": "I review Treasure Repository security protocols weekly - access to the Treasure Repository is tightly controlled."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Sable",
+                "description": "a dungeon wayfinding archivist",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "Wayfinding archivist decoding mosaics and placards, cataloging strange statues, and mapping rotating floors and fear rooms."
+                    },
+                    {
+                        "query": "mosaic room",
+                        "phrase": "The floor mosaic says turn left, turn right, or turn around - those mosaic turn cues form a hidden route."
+                    },
+                    {
+                        "query": "placard",
+                        "phrase": "That placard sequence - 'A dungeon's dark… when it's not lit… watch out…' - is classic; the placard warning is easy to miss."
+                    },
+                    {
+                        "query": "bronze pedestal chicken cat",
+                        "phrase": "I logged the bronze chicken-cat statuette on an onyx pedestal; those pedestal runes around the statuette are unusual."
+                    },
+                    {
+                        "query": "bear statue",
+                        "phrase": "The bear statuette room labeled 'I’ve got a million of ’em' is a hint - bear statuette lore repeats across levels."
+                    },
+                    {
+                        "query": "frog",
+                        "phrase": "That metal frog statue with a red and blue cape actually twitches - its 'Yeah!!!!' high-pitched call startled me."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Neris",
+                "description": "an expedition quartermaster",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "Expedition quartermaster tracking lair access, statues, tokens, and other clues."
+                    },
+                    {
+                        "query": "access statue",
+                        "phrase": "Secure the Blue Ribbon for Level Transporter access - the Blue Ribbon is your ticket to the transporter room."
+                    },
+                    {
+                        "query": "clue",
+                        "phrase": "Follow the Contra-Dextra Avenue clue from the Arch-Mage Werdna; Contra-Dextra Avenue hints at the route to his lair."
+                    },
+                    {
+                        "query": "route sign lair werdna",
+                        "phrase": "If the sign says 'Lair of the Evil Wizard Werdna - the wizard is in'; treat Werdna’s lair as active."
+                    },
+                    {
+                        "query": "bear token",
+                        "phrase": "If the sliding Bear wall blocks the path and forces you outside, you’re missing the proper token for the bear gate."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Captain Johne",
+                "description": "an unkempt man in tattered robes",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I fear the Shadowlords!"
+                    },
+                    {
+                        "query": "bye",
+                        "phrase": "Beware!"
+                    },
+                    {
+                        "query": "fear or shad",
+                        "phrase": "Years ago, my ship was swallowed by a massive whirlpool. The remains of my ship washed up on this isle with myself and three others. When I recovered, I explored my surroundings, and found a great gem broken into three shards. The Shards, full of evil, drove me to kill my three companions, and from their blood sprang the three Shadowlords.  Taking the Shards deep into this underworld, they entrapped Lord British, and hold Blackthorn in their power. They spare me only to taunt me with such news until my dying day. %0%"
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Drudgeworth",
+                "description": "a unkempt and pitiful soul with a distant stare.   %0%",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I didn't do it!   %1%"
+                    },
+                    {
+                        "query": "bye",
+                        "phrase": "%3%"
+                    },
+                    {
+                        "query": "sent",
+                        "phrase": "For a crime I did not commit."
+                    },
+                    {
+                        "query": "faul or comm or crim",
+                        "phrase": "I didn't mean to kill 'er! Honest!"
+                    },
+                    {
+                        "query": "who or kill or her",
+                        "phrase": "Why doesn't they believes me? %1%"
+                    },
+                    {
+                        "query": "chuc",
+                        "phrase": "'Twer his fault really!"
+                    },
+                    {
+                        "query": "help",
+                        "phrase": "Why, I can show ye where it's hidden!"
+                    },
+                    {
+                        "query": "it or wher or hidd",
+                        "phrase": "Lets me out, I'll show ye. %2%"
+                    }
+                ],
+                "labels": [
+                    {
+                        "id": "0",
+                        "query": "Hey, come 'ere! Yer the first soul I've seen in months! Won't ye stay and speak with me a while?",
+                        "topics": [
+                            {
+                                "query": "default",
+                                "phrase": "%3%"
+                            },
+                            {
+                                "query": "y",
+                                "phrase": "Chuckles 'ates me! Left me locked up 'ere well beyond me sentence!"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "1",
+                        "query": "Ye believes me, don't ye?",
+                        "topics": [
+                            {
+                                "query": "default",
+                                "phrase": "%3%"
+                            },
+                            {
+                                "query": "y",
+                                "phrase": "Then let me out. I can helps ye!"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2",
+                        "query": "Ye will let me out, won't ye?",
+                        "topics": [
+                            {
+                                "query": "default",
+                                "phrase": "%3%"
+                            },
+                            {
+                                "query": "y",
+                                "phrase": "Aye, let's go then."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3",
+                        "query": "Then go! On yer wretched way,  PIGDOG  ! Just ye wait 'til I get outta this hole! I'll teach ye to mess with ol' Drudgeworth!",
+                        "topics": []
+                    }
+                ]
+            },
+            {
+                "name": "Kara Montino",
+                "description": "a level 9 battle mage who cut her teeth in the southwest zone",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I'm a dungeon mage. My job is controlling crowds with KATINO and MONTINO and nuking packs with MAHALITO while keeping an eye on poison cures like LATUMOFIS."
+                    },
+                    {
+                        "query": "southwest zone mage dungeon",
+                        "phrase": "We earned the BLUE RIBBON at the Monster Allocation Center on floor 4 - now the second elevator is open."
+                    },
+                    {
+                        "query": "nuk pack poison cure",
+                        "phrase": "On floor 1 I always DISPELL undead kobolds and prep for paralyze or poison just in case."
+                    },
+                    {
+                        "query": "control crowd",
+                        "phrase": "Once I hit level 9, MAKANITO becomes my go-to answer for crowds that ignore lesser spells."
+                    },
+                    {
+                        "query": "lesser spell",
+                        "phrase": "Bring extra LATUMOFIS.  Breath weapons and enemy casters turn a bad pull into a wipe fast."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Rook Bearward",
+                "description": "stoic vault-warden",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I have collected relics in the testing grounds, seen the guardian of the STATUE of BEAR and keeper of the keys and treasure."
+                    },
+                    {
+                        "query": "guard",
+                        "phrase": "If you need experience, challenge MURPHY'S GHOST in the southeast zone - steady gains for disciplined parties."
+                    },
+                    {
+                        "query": "testing ground",
+                        "phrase": "If you ignore the Testing Grounds Control Center warnings then the guardian monster alarms will bring trouble."
+                    },
+                    {
+                        "query": "treasure key",
+                        "phrase": "The Treasure Repository is warded - many try the door but nobody in the party can break that door down.  So it is with elevator access too..."
+                    },
+                    {
+                        "query": "elevator access",
+                        "phrase": "Yes, private elevators - authorized users only. Bring proof or be turned away."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Dexa",
+                "description": "Maze-cartographer and puzzle savant",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I'm a dungeon cartographer - my job is mapping rotating floors, stairs, and chutes, reading mosaic cues, and charting MALOR-safe routes.  I live in the avenue too."
+                    },
+                    {
+                        "query": "map floor chute",
+                        "phrase": "When the floor mosaics say TURN LEFT, TURN RIGHT, or TURN AROUND, trust them - but mark your map."
+                    },
+                    {
+                        "query": "rotating stair",
+                        "phrase": "The Dance Hall’s rotating floors demand patience - wait for warp tiles or scout for one-way doors along the north wall."
+                    },
+                    {
+                        "query": "contra dextra avenue werdna trebor sux plaque",
+                        "phrase": "That ornate plaque hints at Contra-Dextra Avenue - and a classic Werdna taunt to Trebor."
+                    },
+                    {
+                        "query": "Elira",
+                        "phrase": "We are room mates.."
+                    }
+                ],
+                "labels": []
+            }
+        ],
+        "COVE": [
+            {
+                "name": "Nalara",
+                "description": "A temple herald devoted to the Earth-god Gnilda",
+                "topics": [
+                    {
+                        "query": "job temple herald gnilda shrine staff guide",
+                        "phrase": "My job is temple herald for Gnilda’s shrine, guiding parties through the shrine, the Staff of Gnilda rites, and reciting lore to worthy seekers."
+                    },
+                    {
+                        "query": "sphynx riddle knight of diamonds answer",
+                        "phrase": "For the sphynx riddle, the correct answer is the Knight of Diamonds; remember the sphynx riddle and answer with Knight of Diamonds."
+                    },
+                    {
+                        "query": "apparition gnilda temple words staff five tests",
+                        "phrase": "When the apparition speaks - “Hear these, the words of Gnilda” - it commands that one must acquire the five as proof before receiving the staff."
+                    },
+                    {
+                        "query": "one alone staff of gnilda shrine rule",
+                        "phrase": "The shrine’s rule is “one alone”; only one alone may present the five and bear the Staff of Gnilda."
+                    },
+                    {
+                        "query": "armor clue four steps ahead three steps away",
+                        "phrase": "Follow the armor clue - four steps ahead but three steps away - to locate the armor the quest demands."
+                    }
+                ],
+                "labels": [
+                    {
+                        "id": "0",
+                        "query": "gnilda shrine apparition staff rules",
+                        "topics": [
+                            {
+                                "query": "apparition speaks hear these words",
+                                "phrase": "The apparition’s charge - hear these words of Gnilda - defines who is worthy in the shrine."
+                            },
+                            {
+                                "query": "worthy alone present five",
+                                "phrase": "Only the worthy, one alone, may present the five to earn the staff."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Sevrin",
+                "description": "An astrologer-sage who sits among dusty tomes, sells insights for a steep fee",
+                "topics": [
+                    {
+                        "query": "job astrologer sage dusty tomes stars configuration",
+                        "phrase": "My job is astrologer-sage: I read the stars in dusty tomes and interpret the new configuration that changes spells."
+                    },
+                    {
+                        "query": "sage fee gold pay",
+                        "phrase": "The sage’s fee is 100000 gold - pay 100000 gold and many things will be told."
+                    },
+                    {
+                        "query": "spells sleep silence latumapic mahaman",
+                        "phrase": "Under the new stars, sleep lasts longer, silence is stronger, Latumapic has changed, and even Mahaman finds a favorable choice."
+                    },
+                    {
+                        "query": "three roads choose wisely quest path",
+                        "phrase": "Three roads to follow - choose wisely among them lest the quest be forfeit."
+                    },
+                    {
+                        "query": "incantation mapiro mahama diromat",
+                        "phrase": "In the study you may hear an incantation - Mapiro Mahama Diromat - shouted as familiar magic surges."
+                    }
+                ],
+                "labels": [
+                    {
+                        "id": "0",
+                        "query": "gold fee wishes well",
+                        "topics": [
+                            {
+                                "query": "well wishes 5000 gp wizicorp",
+                                "phrase": "At the brick-walled well, wishes cost 5000 GP - Wizicorp will take your 5000 if you’re tempted."
+                            },
+                            {
+                                "query": "panel slams shut trap",
+                                "phrase": "Beware the corridor trap when a panel slams shut behind you."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Aeshma",
+                "description": "A leonine riddler who prowls the deepest halls, posing trials about greedy kings and hidden clues",
+                "topics": [
+                    {
+                        "query": "job guardian riddler sphynx tomb",
+                        "phrase": "My job is guardian riddler of the tombs: I ask the sphynx riddle and judge those who seek passage."
+                    },
+                    {
+                        "query": "king worships gold power doom treasure room",
+                        "phrase": "Seek the king who worships gold or power - the king who worships gold will no more see his treasure room, and the king who worships these meets doom."
+                    },
+                    {
+                        "query": "cavern dark inside mountain clear blue fountain burma shave",
+                        "phrase": "In the cavern’s dark, as the inside of a mountain, down the hall a clear blue fountain waits - Burma Shave."
+                    },
+                    {
+                        "query": "earth god gnilda statue staff of light",
+                        "phrase": "Before the statue of the Earth-god Gnilda, search to find a Staff of Light."
+                    },
+                    {
+                        "query": "ominous beasts cave in bones rusted armor",
+                        "phrase": "From all directions come ominous beasts, and beyond a cave-in lie broken bones and rusted armor."
+                    }
+                ],
+                "labels": [
+                    {
+                        "id": "0",
+                        "query": "hidden choices traps clues",
+                        "topics": [
+                            {
+                                "query": "search passage room three clues",
+                                "phrase": "Search each passage and room; three clues lie hidden where the riddle points."
+                            },
+                            {
+                                "query": "choose road wisely forsake quest",
+                                "phrase": "Choose the single right road or your quest you will forsake."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Ariadne",
+                "description": "A meticulous dungeon cartographer of Llylgamyn",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I'm a dungeon cartographer who maps teleporter light illusions, finds hidden doors with milwa and lomilwa, and charts anti-magic zones in Llylgamyn."
+                    },
+                    {
+                        "query": "teleporter light lomilwa milwa mapping corridors",
+                        "phrase": "Teleporter light can trick mapping - how do teleporter light and lomilwa or milwa change corridor mapping in your experience?"
+                    },
+                    {
+                        "query": "hidden doors milwa lomilwa detection mapping",
+                        "phrase": "For hidden doors, I keep milwa or lomilwa active - what hidden doors detection tricks improve mapping accuracy?"
+                    },
+                    {
+                        "query": "anti-magic bug expedition spells monsters affected",
+                        "phrase": "Have you exploited the anti-magic bug where the anti-magic area follows you, leaving expedition spells intact and monsters affected?"
+                    },
+                    {
+                        "query": "armor riddle malor three squares east",
+                        "phrase": "The armor riddle implies you must malor three squares east - how do you plot that malor jump on your map?"
+                    },
+                    {
+                        "query": "WIZICORP wishes 5000 gp well teleport town",
+                        "phrase": "Ever used the WIZICORP well - wishes 5000 gp - to teleport back to town mid-expedition?"
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Brother Latumapic",
+                "description": "A soft-spoken Bishop who identifies unknown items, safely handles cursed gear",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I'm a Bishop appraiser who identifies unknown items, manages cursed items, and keeps latumapic at the ready for safe adventuring."
+                    },
+                    {
+                        "query": "latumapic mahaman katino montino stars favorable",
+                        "phrase": "The stars are favorable - latumapic, mahaman, katino, and montino behave differently; how do you use these stars-favorable shifts?"
+                    },
+                    {
+                        "query": "identify unknown items cursed items bishop delete recreate",
+                        "phrase": "As a Bishop, I identify unknown items. how do you manage cursed items?"
+                    },
+                    {
+                        "query": "knight shield dialma unlimited healing",
+                        "phrase": "Once you have the Knight of Diamonds shield, dialma becomes your unlimited healing - how do you ration the shield dialma in long delves?"
+                    },
+                    {
+                        "query": "one alone sphinx riddle Knight of Diamonds",
+                        "phrase": "Facing the sphinx with one alone for the Knight of Diamonds - what’s your ritual for that riddle encounter?"
+                    },
+                    {
+                        "query": "Mapiro Mahama Diromat incantation",
+                        "phrase": "Ever had a foe shout “Mapiro Mahama Diromat” - how do you counter that incantation when it echoes through the hall?"
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Sir Hrathnir",
+                "description": "A class-changed Samurai named for the Magic Sword Hrathnir",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I'm a Samurai swordmaster, mentoring class changes and party composition for efficient endgame progression."
+                    },
+                    {
+                        "query": "three roads choose wisely forsake the quest",
+                        "phrase": "When the dungeon offers three forking roads - choose wisely lest you forsake the quest - how do you evaluate those forks?"
+                    },
+                    {
+                        "query": "Magic Sword Hrathnir fixed encounter Level III",
+                        "phrase": "Tell me about the Magic Sword Hrathnir encounter on the third level - what prep do you bring for Hrathnir?"
+                    },
+                    {
+                        "query": "KOD Helm Gauntlets Shield Armor fixed encounter",
+                        "phrase": "For Knight of Diamond pieces - Helm, Gauntlets, Shield, Armor - fixed encounters can be brutal; which fixed encounters do you tackle first?"
+                    },
+                    {
+                        "query": "thief to ninja chests traps early Wizardry",
+                        "phrase": "Did you flip a thief to ninja early, and how do you handle chests and traps when ninjas can’t disarm reliably?"
+                    },
+                    {
+                        "query": "cavern's dark inside of a mountain clear blue fountain",
+                        "phrase": "In that cavern’s dark, as the inside of a mountain, did you scout the clear blue fountain or avoid it altogether?"
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Caliphar",
+                "description": "A wisened sage who barters secret lore",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the wisened sage who sells lore for 100,000 gold and explains why the stars now favor silence, sleep, latumapic, and mahaman."
+                    },
+                    {
+                        "query": "100000 gold wisened sage study dusty books",
+                        "phrase": "For 100,000 gold, the wisened sage in a study of dusty books reveals much - what questions would you pay 100000 gold to answer?"
+                    },
+                    {
+                        "query": "riddle answer shield magic shield KOD",
+                        "phrase": "On riddles, the answer shield leads to the Magic Shield Knight of Diamonds - how did you deduce the shield answer under pressure?"
+                    },
+                    {
+                        "query": "sphinx clues king worships gold power doom treasure room",
+                        "phrase": "The sphinx clues - the king worships gold and power, treasure room and doom - how do you stitch those king clues into one solution?"
+                    },
+                    {
+                        "query": "ominous sounds hungry wild beasts stalactites cavern",
+                        "phrase": "When ominous sounds of hungry wild beasts echo from stalactites in the cavern, what party formation do you hold?"
+                    },
+                    {
+                        "query": "panel slams shut behind you trap",
+                        "phrase": "Have you been caught where a panel slams shut behind you - what trap discipline keeps the party safe?"
+                    }
+                ],
+                "labels": []
+            }
+        ],
+        "BARAD_ENELETH": [
+            {
+                "name": "Lyrra",
+                "description": "A vigilant moat warden and beach sentry",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the moat warden and beach sentry, guarding the fortress and barracks while keeping watch on the lake and its island."
+                    },
+                    {
+                        "query": "barracks fortress",
+                        "phrase": "At the barracks by the fortress, I always remind recruits to BEWARE OF MOAT MONSTERS before they cross the parapets."
+                    },
+                    {
+                        "query": "moat monster",
+                        "phrase": "From the beach beside the dark lake I watch that small island for ripples and shadows from the waters edge."
+                    },
+                    {
+                        "query": "water edge",
+                        "phrase": "Don't step past the water's edge or you'll drown - I've hauled too many back."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Penneth",
+                "description": "A meticulous clerk",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                    },
+                    {
+                        "query": "grand wizard",
+                        "phrase": "At S.E.G. Po'le's door the placard shouts THE WIZARD IS *OUT* DO NOT ENTER, and I make sure no one enters."
+                    },
+                    {
+                        "query": "grand dining room kitchen boudoir",
+                        "phrase": "The grand dining room connects north to the kitchen and south to the wizard's opulent boudoir, all under my care."
+                    },
+                    {
+                        "query": "desk ornate letter",
+                        "phrase": "I file petitions in the large dusty desk inlaid with an ornate letter 'P'."
+                    },
+                    {
+                        "query": "cellar",
+                        "phrase": "Mind the wine cellar; vintage tomes and vintages both are stored with equal reverence."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Nadia",
+                "description": "A silver-tongued dispatcher and quartermaster",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "Welcome, traveler - may the winds of the desert be at your back and the sun leave you always in shade. I run Abdul’s routes, dispatching the Ethereal Taxi and selling rarities like the Rod of Fire to those with the right password and the right price."
+                    },
+                    {
+                        "query": "dispatch abdul ethereal taxi price",
+                        "phrase": "For Abdul's Ethereal Taxi Service fares, it’s 2500 when you’re close and 5000 when you’ve really wandered."
+                    },
+                    {
+                        "query": "password",
+                        "phrase": "If someone challenges you, just tell them Abdul sent you - say 'ABDUL SENT YOU' as the password."
+                    },
+                    {
+                        "query": "rod fire",
+                        "phrase": "Open the jewel encrusted coffer and behold the Rod of Fire - 25000, and not a coin less."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Orin",
+                "description": "Custodian of the radiant statue and keeper of riddles who trades in crystals, orbs, and answers.",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the statue-warden and riddlemaster, overseeing trades of crystals and orbs while testing seekers with AIR, DEATH, and the WHEEL."
+                    },
+                    {
+                        "query": "statue crystal orb",
+                        "phrase": "At the radiant statue with hands outstretched, I mind the shining crystal sphere and the empty palm that aches to trade."
+                    },
+                    {
+                        "query": "riddle seeker air answer",
+                        "phrase": "Hear the riddle: I am around you always, never seen, and you would never leave me - AIR."
+                    },
+                    {
+                        "query": "death",
+                        "phrase": "Tarot whispers: black figure on a black horse with the white rose; the rising sun - change will come - DEATH."
+                    },
+                    {
+                        "query": "wheel",
+                        "phrase": "On my roll you move forward; my turn is your turn - turn the WHEEL and watch fate pivot."
+                    }
+                ],
+                "labels": []
+            }
+        ],
+        "MONTOR": [
+            {
+                "name": "Chade",
+                "description": "vigilant warden of the temple",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the warden of this temple and guard what it contains, and have deeper knowledge about the 4 Marks."
+                    },
+                    {
+                        "query": "mark",
+                        "phrase": "Seek the four marks in the dungeons.  The Mark of Kings, the Mark of Force, the Mark of Fire and the Mark of the Snake."
+                    },
+                    {
+                        "query": "fire",
+                        "phrase": "The Mark of Fire can be found at the bottom of the dungeons of Perinean, Fire and Morinia. Only with the Mark of Fire can you be granted entry."
+                    },
+                    {
+                        "query": "force",
+                        "phrase": "The Mark of Force can be found at the bottom of the dungeons of Fire and Doom."
+                    },
+                    {
+                        "query": "snake",
+                        "phrase": "The Mark of Snake can be found at the bottom of the dungeon of the Snake."
+                    },
+                    {
+                        "query": "king",
+                        "phrase": "The Mark of Kings is more common and can be found in the dungeons of Perinean, Morinia, Dardens Pit, Snake and Time."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "FitzChivalry",
+                "description": "A meticulous clerk",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I am the grand wizard’s scribe and archivist, tending the office, dining room, kitchen, boudoir, cellar and that desk with the ornate letter P."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Nighteyes",
+                "description": "dry and sardonic wolf",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I protect the Fitz, we are pack."
+                    },
+                    {
+                        "query": "pack",
+                        "phrase": "Loyalty is absolute once you’re pack. It is the straightforward path that keeps the pack alive."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Jinna",
+                "description": "hedge witch",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I craft small, practical magics—protection and luck charms, hearth blessings, remedies—aimed at helping ordinary people."
+                    }
+                ],
+                "labels": []
+            },
+            {
+                "name": "Starling",
+                "description": "court minstrel",
+                "topics": [
+                    {
+                        "query": "job",
+                        "phrase": "I observe with a memory for lineage, politics, and gossip. I play and sing, but my real gift is turning living people into legend—editing messy truth into a song that will be remembered.."
+                    }
+                ],
+                "labels": []
+            }
+        ]
+    }
+}

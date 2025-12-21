@@ -1,0 +1,60 @@
+moonPhases.png
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+PHASE_4
+  rotate: false
+  xy: 0, 0
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_5
+  rotate: false
+  xy: 72, 0
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_6
+  rotate: false
+  xy: 144, 0
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_7
+  rotate: false
+  xy: 216, 0
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_0
+  rotate: false
+  xy: 0, 72
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_1
+  rotate: false
+  xy: 72, 72
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_2
+  rotate: false
+  xy: 144, 72
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0
+PHASE_3
+  rotate: false
+  xy: 216, 72
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: 0

@@ -1,0 +1,577 @@
+
+import andius.objects.Direction;
+import andius.WizardryData;
+import andius.WizardryData.MazeLevel;
+import static andius.WizardryData.WER_LEVEL_DESC;
+import andius.objects.ClassType;
+import andius.objects.Race;
+import andius.objects.Conversations;
+import andius.objects.Conversations.Conversation;
+import andius.objects.Conversations.Topic;
+import andius.objects.Item;
+import andius.objects.Monster;
+import andius.objects.MutableMonster;
+import andius.objects.Reward;
+import andius.objects.SaveGame;
+import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import org.apache.commons.io.IOUtils;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
+import utils.SpreadFOV;
+import utils.Utils;
+
+public class ObjectsTestNG {
+
+    @Test
+    public void wiz4code() throws Exception {
+
+        int[][] col1 = new int[][]{
+            {1080, 8771},
+            {1211, 1280},
+            {1386, 6528},
+            {1556, 8090},
+            {1607, 9125},
+            {1735, 8696},
+            {2138, 4261},
+            {2293, 1026},
+            {2338, 6375},
+            {2395, 6353},
+            {2470, 3160},
+            {2788, 2544},
+            {2892, 5107},
+            {2919, 3105},
+            {2990, 1102},
+            {3137, 3205},
+            {3303, 6727},
+            {3463, 4306},
+            {3587, 7452},
+            {3852, 4943}};
+
+        int[][] col2 = new int[][]{
+            {1086, 0},
+            {1219, 1488},
+            {1516, 7814},
+            {1588, 9399},
+            {1669, 1330},
+            {1753, 6704},
+            {2194, 9354},
+            {2301, 7565},
+            {2362, 3161},
+            {2437, 6150},
+            {2480, 2293},
+            {2800, 1764},
+            {2897, 4925},
+            {2922, 3479},
+            {3014, 5023},
+            {3243, 8265},
+            {3369, 7684},
+            {3538, 7509},
+            {3779, 6269},
+            {3868, 3350}};
+        int[][] col3 = new int[][]{
+            {1193, 0},
+            {1282, 8510},
+            {1529, 9475},
+            {1602, 1451},
+            {1712, 9012},
+            {1757, 8556},
+            {2219, 8449},
+            {2313, 9190},
+            {2377, 8896},
+            {2451, 8981},
+            {2770, 8866},
+            {2812, 9871},
+            {2910, 1315},
+            {2941, 1190},
+            {3032, 8839},
+            {3278, 9832},
+            {3414, 9682},
+            {3547, 1065},
+            {3816, 1374},
+            {3996, 9299}};
+
+        int sum = 0;
+
+        int c1 = 1211;
+        int c2 = 3014;
+        int c3 = 3547;
+
+        for (int i = 0; i < col1.length; i++) {
+            if (col1[i][0] == c1) {
+                sum += col1[i][1];
+                break;
+            }
+        }
+
+        for (int i = 0; i < col2.length; i++) {
+            if (col2[i][0] == c2) {
+                sum += col2[i][1];
+                break;
+            }
+        }
+
+        for (int i = 0; i < col3.length; i++) {
+            if (col3[i][0] == c3) {
+                sum += col3[i][1];
+                break;
+            }
+        }
+
+        while (sum > 9999) {
+            sum -= 9000;
+        }
+
+        System.out.println("Code is " + sum);
+
+    }
+
+    //@Test
+    public void testCompareArrays() throws Exception {
+
+        byte[] array1 = IOUtils.readFully(new FileInputStream("D:\\applewin\\wiz4_d1.dsk"), 143360);
+        byte[] array2 = IOUtils.readFully(new FileInputStream("D:\\applewin\\wiz4_d1 - Copy.dsk"), 143360);
+
+        boolean areEqual = Arrays.equals(array1, array2);
+        System.out.println("Arrays are equal: " + areEqual);
+
+        int length = Math.min(array1.length, array2.length);
+        for (int i = 0; i < length; i++) {
+            if (array1[i] != array2[i]) {
+                System.out.printf("Difference at index %s: %s  %s\n", Integer.toHexString(i), String.format("%02X", array1[i]), String.format("%02X", array2[i]));
+            }
+        }
+
+        if (array1.length != array2.length) {
+            System.out.println("Arrays have different lengths.");
+        }
+    }
+
+    @Test
+    public void testMazeData() throws Exception {
+        WizardryData.Scenario sc = WizardryData.Scenario.WER;
+
+        for (MazeLevel l : sc.levels()) {
+            System.out.printf("%d - %s\n", l.level - 1, WER_LEVEL_DESC[l.level - 1]);
+
+            for (int id : l.getEncounterIds()) {
+                System.out.println(sc.characters().get(id).name);
+            }
+
+            for (int x = 0; x < sc.dim(); x++) {
+                for (int y = 0; y < sc.dim(); y++) {
+                    WizardryData.MazeCell c = l.cells[x][y];
+                    if (c.stairs || c.chute || c.teleport) {
+                        String hx = String.format("%04x", (short) c.addressTo.column);
+                    }
+                    if (c.summoningCircle != null) {
+                        //System.out.printf("\t%d - %d %s\n", x, y, c.summoningCircle);
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testScript() throws Exception {
+
+        Conversations convs = new Conversations();
+
+        Conversation conv = new Conversation("paul", "desc");
+        conv.topics.add(new Topic("name", "sss"));
+        conv.topics.add(new Topic("job", "sss"));
+
+        convs.maps.put("LLECHY", new ArrayList<>());
+
+        convs.maps.get("LLECHY").add(conv);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.setPrettyPrinting().create();
+        String json = gson.toJson(convs);
+
+        System.out.println(json);
+
+    }
+
+    //@Test
+    public void testReadSaveGame() throws Exception {
+
+        CharacterRecord avatar = new CharacterRecord();
+        avatar.name = "Steve";
+        avatar.race = Race.HUMAN;
+        avatar.classType = ClassType.PRIEST;
+        avatar.hp = avatar.getMoreHP();
+        avatar.maxhp = avatar.hp;
+        avatar.gold = Utils.getRandomBetween(100, 200);
+        avatar.weapon = new Item();
+        avatar.armor = new Item();
+        avatar.inventory.add(new Item());
+        avatar.inventory.add(new Item());
+        avatar.intell = 12;
+        avatar.piety = 12;
+        avatar.level = 1;
+
+        if (avatar.classType == ClassType.MAGE || avatar.classType == ClassType.BISHOP) {
+            avatar.knownSpells.add(Spells.values()[1]);
+            avatar.knownSpells.add(Spells.values()[3]);
+            avatar.magePoints[0] = 2;
+        }
+        if (avatar.classType == ClassType.PRIEST) {
+            avatar.knownSpells.add(Spells.values()[23]);
+            avatar.knownSpells.add(Spells.values()[24]);
+            avatar.clericPoints[0] = 2;
+        }
+
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        //avatar.magePoints[0]--;
+        avatar.clericPoints[0]--;
+        avatar.clericPoints[0]--;
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        SaveGame.setSpellPoints(avatar);
+        System.out.println(Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+        avatar.exp = 1300;
+        int ret = 0;
+        while (ret >= 0) {
+            ret = avatar.checkAndSetLevel();
+        }
+        System.out.printf("%d\t%d\t%d\n", avatar.level, avatar.exp, ret);
+        for (int i = 1; i < 30; i++) {
+            avatar.level = i;
+            SaveGame.setSpellPoints(avatar);
+            SaveGame.tryLearn(avatar);
+            System.out.println("" + i + "\t" + Arrays.toString(avatar.magePoints) + "\t" + Arrays.toString(avatar.clericPoints));
+            System.out.println("" + i + "\t" + avatar.knownSpells);
+        }
+    }
+
+    //@Test
+    public void formatEnum() throws Exception {
+        String s = "";
+
+        String[] lines = s.split("\\r?\\n");
+        for (String line : lines) {
+            String[] items = line.split("\\t");
+            //String camel = toCamelCase(items[1].trim());
+            System.out.println(String.format("%s(\"%s\",%s,\"%s\",\"%s\",\"%s\",\"%s\"),", items[0].trim().toUpperCase().replace(" ", "_"), items[1].trim(), items[2], items[3], items[4], items[5], items[6]));
+        }
+
+    }
+
+    public static String toCamelCase(final String init) {
+        if (init == null) {
+            return null;
+        }
+
+        final StringBuilder ret = new StringBuilder(init.length());
+
+        for (final String word : init.split(" ")) {
+            if (!word.isEmpty()) {
+                ret.append(word.substring(0, 1).toUpperCase());
+                ret.append(word.substring(1).toLowerCase());
+            }
+            if (!(ret.length() == init.length())) {
+                ret.append(" ");
+            }
+        }
+
+        return ret.toString();
+    }
+
+    //@Test
+    public void readJson() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
+        String json = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/rewards.json");
+        String json2 = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
+        String json3 = IOUtils.toString(is);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {
+        }.getType());
+        List<Reward> rewards = gson.fromJson(json2, new TypeToken<List<Reward>>() {
+        }.getType());
+        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
+        }.getType());
+        int x = 0;
+
+        Collections.sort(items);
+
+        java.util.Map<String, Item> itemMap = new HashMap<>();
+
+        for (Item it : items) {
+            System.out.println(it);
+            itemMap.put(it.name, it);
+        }
+
+        for (Reward r : rewards) {
+
+            int goldAmt = r.goldAmount();
+            System.out.println(String.format("player found %d gold with %s", goldAmt, r.getId()));
+
+            for (Reward.RewardDetails d : r.getRewardDetails()) {
+                if (d.itemReward != null) {
+                    Item min = items.get(d.itemReward.getMin());
+                    Item mx = items.get(d.itemReward.getMax());
+                    System.out.println(String.format("player finds a %s or a %s", min.name, mx.name));
+                }
+
+            }
+
+        }
+
+        Collections.sort(monsters);
+
+        java.util.Map<String, Monster> MONSTER_MAP = new HashMap<>();
+        java.util.Map<Integer, java.util.List<Monster>> MONSTER_LEVELS = new HashMap<>();
+
+        for (int i = 0; i < 30; i++) {
+            MONSTER_LEVELS.put(i, new ArrayList<>());
+        }
+
+        for (Monster m : monsters) {
+            if (!MONSTER_MAP.containsKey(m.name)) {
+                MONSTER_MAP.put(m.name, m);
+            } else {
+                // System.err.printf("DUPLICATE %s mid %d level %d\n", m.name, m.iconId, m.getLevel());
+            }
+            MONSTER_LEVELS.get(m.getLevel()).add(m);
+        }
+
+        for (Monster m : monsters) {
+            System.out.printf("%s mid %d level %d mlvl %d  prlvl %s\n", m.name, m.monsterId, m.getLevel(), m.getMageSpellLevel(), m.getPriestSpellLevel());
+        }
+    }
+
+    //@Test
+    public void parseImage() throws Exception {
+        BufferedImage input = ImageIO.read(new File("C:\\Users\\Paul\\Documents\\water\\Wizardry7-Mapd.png"));
+        StringBuilder grass = new StringBuilder();
+        StringBuilder water = new StringBuilder();
+        Random ra = new Random();
+        for (int y = 0; y < 173; y++) {
+            for (int x = 0; x < 197; x++) {
+                try {
+                    int rgb = input.getRGB(x * 14, y * 14);
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
+                    if (x == 8 && y == 91) {
+                        int u = 0;
+                    }
+                    if (r == 0 && g == 0 && b == 0) { //nothing
+                        grass.append("0,");
+                        water.append("0,");
+                    } else if (r == 144 && g == 92 && b == 60) { //darker tile floor
+                        int id = ra.nextInt(4) + 206;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    } else if (r == 160 && g == 120 && b == 56) { //path
+                        int id = ra.nextInt(3) + 203;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    } else if (r == 0 && g == 0 && b >= 72) { //water
+                        grass.append("0,");
+                        water.append("176,");
+                    } else { //ground
+                        int id = ra.nextInt(4) + 122;
+                        grass.append("" + id).append(",");
+                        water.append("0,");
+                    }
+
+                } catch (Exception e) {
+                    System.err.printf("wrong coord %d %d\n", x, y);
+                }
+            }
+            grass.append("\n");
+            water.append("\n");
+
+        }
+        System.out.println("<data encoding=\"csv\">\n");
+        System.out.println(grass.toString().trim());
+        System.out.println("</data>\n\n\n");
+
+        System.out.println("<data encoding=\"csv\">\n");
+        System.out.println(water.toString().trim());
+        System.out.println("</data>\n");
+    }
+
+    //@Test
+    public void testAttack() throws Exception {
+
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
+        String json = IOUtils.toString(is);
+
+        is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
+        String json3 = IOUtils.toString(is);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+
+        List<Item> items = gson.fromJson(json, new TypeToken<List<Item>>() {
+        }.getType());
+
+        List<Monster> monsters = gson.fromJson(json3, new TypeToken<List<Monster>>() {
+        }.getType());
+
+        java.util.Map<String, Item> itemsMap = new HashMap<>();
+        for (Item i : items) {
+            itemsMap.put(i.name, i);
+        }
+
+        CharacterRecord avatar = new CharacterRecord();
+        avatar.name = "Steve";
+        avatar.race = Race.HUMAN;
+        avatar.classType = ClassType.FIGHTER;
+        avatar.hp = 100;
+        avatar.maxhp = avatar.hp;
+
+        avatar.armor = itemsMap.get("CHAIN MAIL").clone();
+        avatar.weapon = itemsMap.get("MACE +1").clone();
+        avatar.helm = itemsMap.get("HELM").clone();
+        avatar.shield = itemsMap.get("LARGE SHIELD").clone();
+        //avatar.glove = itemsMap.get("SILVER GLOVES").clone();
+        //avatar.item1 = itemsMap.get("ROD OF FLAME").clone();
+        //avatar.item2 = itemsMap.get("WERDNAS AMULET").clone();
+
+        avatar.str = 16;
+        avatar.agility = 16;
+        avatar.luck = 12;
+
+        avatar.level = 1;
+
+        for (int x = 0; x < 20; x++) {
+            MutableMonster mm = new MutableMonster(monsters.get(85));
+            Utils.attackHit(mm, avatar);
+            Utils.attackHit(avatar, mm);
+        }
+
+        for (Monster m : monsters) {
+            MutableMonster mm = new MutableMonster(m);
+            //Utils.attackHit(mm, avatar);
+            //Utils.attackHit(avatar, mm);
+        }
+    }
+
+    @Test
+    public void testFOVWrapping() throws Exception {
+
+        float[][] shadowMap = new float[][]{
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 0, 0, 0, 1, 1},
+            {0, 0, 1, 0, 0, 0, 0, 1, 0},
+            {1, 0, 1, 0, 0, 0, 0, 1, 1},
+            {1, 1, 1, 0, 0, 0, 0, 0, 1},
+            {1, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 0, 1, 1, 1, 1},};
+
+        SpreadFOV fov = new SpreadFOV(shadowMap);
+
+        fov.calculateFOV(4, 1, 5);
+
+        //visible
+        assertTrue(fov.light(1, 1) > 0);
+        assertTrue(fov.light(2, 1) > 0);
+        assertTrue(fov.light(3, 1) > 0);
+        assertTrue(fov.light(4, 1) > 0);
+        assertTrue(fov.light(5, 1) > 0);
+        assertTrue(fov.light(4, 0) > 0);
+
+        //not visible
+        assertTrue(fov.light(7, 1) <= 0);
+        assertTrue(fov.light(4, 3) <= 0);
+        assertTrue(fov.light(8, 1) <= 0);
+
+        float[][] m = fov.lightMap();
+        assertTrue(m[4 + 9][8] > 0);//wrapped
+
+    }
+
+    //@Test
+    public void parseDisassembledPascal() throws Exception {
+
+        FileInputStream fstream = new FileInputStream("D:\\Wizardry_i_SourceCode\\WizardryCode\\Wiz1WizardryPascal.txt");
+
+        java.util.Map<Integer, List<String>> groupedLines = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(fstream))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.trim().split("\\s+", 3);
+                if (parts.length < 3) {
+                    continue;
+                }
+                int key = Integer.parseInt(parts[1]);
+                String content = parts[2];
+
+                groupedLines.computeIfAbsent(key, k -> new ArrayList<>()).add(content);
+            }
+
+        }
+
+        java.util.Map<Integer, java.util.Map<Integer, List<String>>> groups = new HashMap<>();
+
+        for (int j : groupedLines.keySet()) {
+
+            java.util.Map<Integer, List<String>> subLines = new HashMap<>();
+
+            for (String line : groupedLines.get(j)) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.trim().split("\\s+", 3);
+                if (parts.length < 3) {
+                    continue;
+                }
+
+                int key = Integer.parseInt(parts[0].split(":")[0]);
+                String content = parts[2];
+
+                subLines.computeIfAbsent(key, k -> new ArrayList<>()).add(content);
+            }
+
+            groups.put(j, subLines);
+
+        }
+
+        for (int k : groups.keySet()) {
+            for (int j : groups.get(k).keySet()) {
+                System.out.printf("%d - %d - ", k, j, groups.get(k).get(j));
+                for (String line : groups.get(k).get(j)) {
+                    System.out.print(line + ";");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+
+    }
+
+}
