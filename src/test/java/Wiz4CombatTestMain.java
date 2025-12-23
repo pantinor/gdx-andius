@@ -96,7 +96,7 @@ public class Wiz4CombatTestMain extends Game {
             //setScreen(new VendorScreen(ctx, Constants.Map.CAVE, DQ_ITEMS, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
             //setScreen(new ManageScreen(null, Andius.skin, new SaveGame()));
-            setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(11).getName(), PMO_MONSTERS.get(11), 1, true, null, null));
+            setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(16).getName(), PMO_MONSTERS.get(16), 1, true, null, null));
 
         } catch (Exception e) {
             e.printStackTrace();

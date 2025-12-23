@@ -1,5 +1,6 @@
 
 import andius.Andius;
+import andius.objects.MonsterModels;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -24,29 +25,28 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import utils.ObjLoader;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import java.util.ArrayList;
 
 public class ModelVisualizer implements ApplicationListener, InputProcessor {
 
     private ModelBatch modelBatch;
     private CameraInputController inputController;
     private PerspectiveCamera cam;
-    private ShapeRenderer debugRenderer;
 
     private final Environment outside = new Environment();
 
-    private DirectionalLight directionalLightDown = new DirectionalLight();
-    private DirectionalLight directionalLightUp = new DirectionalLight();
+    private Vector3 lightTarget = new Vector3();
+    private java.util.List<DirectionalLight> directionalLightsDown = new ArrayList<>();
+    private java.util.List<DirectionalLight> directionalLightsUp = new ArrayList<>();
 
     public BitmapFont font;
     private SpriteBatch batch;
 
     private Color flame = new Color(0xf59414ff);
 
-    private Model[] models = new Model[30];
-    private ModelInstance[] modelInstances = new ModelInstance[30];
+    private java.util.List<ModelInstance> modelInstances = new ArrayList<>();
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -68,7 +68,12 @@ public class ModelVisualizer implements ApplicationListener, InputProcessor {
         cam.far = 1000;
         cam.update();
 
-        inputController = new CameraInputController(cam);
+        inputController = new CameraInputController(cam) {
+            @Override
+            public boolean scrolled(float amountX, float amountY) {
+                return super.scrolled(amountX, amountY * 0.10f);
+            }
+        };
         inputController.rotateLeftKey = inputController.rotateRightKey = inputController.forwardKey = inputController.backwardKey = 0;
         inputController.translateUnits = 30f;
 
@@ -78,72 +83,96 @@ public class ModelVisualizer implements ApplicationListener, InputProcessor {
         Gdx.input.setInputProcessor(new InputMultiplexer(inputController));
 
         this.outside.set(ColorAttribute.createAmbient(0.8f, 0.8f, 0.8f, 1f));
-        this.directionalLightDown = new DirectionalLight().set(0.8f, 0.8f, 0.8f, 0.2274f, -0.8961f, 0.3811f);
-        this.directionalLightUp = new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.1865f, 0.9098f, -0.3709f);
-        this.outside.add(this.directionalLightDown);
-        this.outside.add(this.directionalLightUp);
 
         DefaultShader.Config config = new DefaultShader.Config();
         config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
-        config.numSpotLights = 16;
+        config.numDirectionalLights = 12;
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
-        this.debugRenderer = new ShapeRenderer();
 
-        this.models[0] = ObjLoader.loadModel("assets/graphics/monsters/demon.obj", "demon", .1f);
-        this.models[1] = ObjLoader.loadModel("assets/graphics/monsters/bear.obj", "bear", .1f);
-        this.models[2] = ObjLoader.loadModel("assets/graphics/monsters/blob.obj", "blob", .1f);
-        this.models[3] = ObjLoader.loadModel("assets/graphics/monsters/celtic-warrior.obj", "CelticWarrior", .1f);
-        this.models[4] = ObjLoader.loadModel("assets/graphics/chest.obj", "chest", .1f);
-        this.models[5] = ObjLoader.loadModel("assets/graphics/monsters/dragon.obj", "dragon", .1f);
-        this.models[6] = ObjLoader.loadModel("assets/graphics/monsters/elemental.obj", "elemental", .1f);
-        this.models[7] = ObjLoader.loadModel("assets/graphics/monsters/humanoid.obj", "humanoid", .1f);
-        this.models[8] = ObjLoader.loadModel("assets/graphics/monsters/kobold.obj", "kobold", .1f);
-        this.models[9] = ObjLoader.loadModel("assets/graphics/monsters/ninja.obj", "ninja", .1f);
-        this.models[10] = ObjLoader.loadModel("assets/graphics/monsters/ogre.obj", "ogre", .1f);
-        this.models[11] = ObjLoader.loadModel("assets/graphics/monsters/orc.obj", "orc", .1f);
-        this.models[12] = ObjLoader.loadModel("assets/graphics/monsters/plant.obj", "plant", .1f);
-        this.models[13] = ObjLoader.loadModel("assets/graphics/monsters/priest.obj", "priest", .1f);
-        this.models[14] = ObjLoader.loadModel("assets/graphics/monsters/rat.obj", "rat", .1f);
-        this.models[15] = ObjLoader.loadModel("assets/graphics/monsters/skeleton.obj", "skeleton", .1f);
-        this.models[16] = ObjLoader.loadModel("assets/graphics/monsters/toad.obj", "toad", .1f);
-        this.models[17] = ObjLoader.loadModel("assets/graphics/monsters/spider.obj", "spider", .1f);
-        this.models[18] = ObjLoader.loadModel("assets/graphics/monsters/viking.obj", "viking", .1f);
-        this.models[19] = ObjLoader.loadModel("assets/graphics/monsters/viking2.obj", "viking2", .1f);
-        this.models[20] = ObjLoader.loadModel("assets/graphics/monsters/warlock1.obj", "warlock1", .1f);
-        this.models[21] = ObjLoader.loadModel("assets/graphics/monsters/warrior.obj", "warrior", .1f);
-        this.models[22] = ObjLoader.loadModel("assets/graphics/monsters/wasp.obj", "wasp", .1f);
-        this.models[23] = ObjLoader.loadModel("assets/graphics/monsters/wizard.obj", "wizard", .1f);
-        this.models[24] = ObjLoader.loadModel("assets/graphics/monsters/dark-wizard.obj", "dark-wizard", .1f);
-        this.models[25] = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
-        this.models[26] = ObjLoader.loadModel("assets/graphics/letter-m.obj", "letter-m", .1f);
-        this.models[27] = ObjLoader.loadModel("assets/graphics/fountain.obj", "fountain", .1f);
-        this.models[28] = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
-        this.models[29] = ObjLoader.loadModel("assets/graphics/elevator.obj", "elevator-booth", .1f);
-
+        //this.models[25] = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
+        //this.models[26] = ObjLoader.loadModel("assets/graphics/letter-m.obj", "letter-m", .1f);
+        //this.models[27] = ObjLoader.loadModel("assets/graphics/fountain.obj", "fountain", .1f);
+        //this.models[28] = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
+        //this.models[29] = ObjLoader.loadModel("assets/graphics/elevator.obj", "elevator-booth", .1f);
         final int MODELS_PER_ROW = 5;
-        final float SPACING = 1.0f;  // distance between models, tweak if you want them farther apart
+        final float SPACING = 1.0f;
 
-        for (int i = 0; i < this.models.length; i++) {
-            if (this.models[i] != null) {
-                this.modelInstances[i] = new ModelInstance(this.models[i]);
+        for (int i = 0; i < MonsterModels.values().length; i++) {
+            MonsterModels mm = MonsterModels.values()[i];
+            System.out.println(mm);
+            ModelInstance mi = new ModelInstance(mm.model());
+            this.modelInstances.add(mi);
 
-                int row = i / MODELS_PER_ROW;  // integer division
-                int col = i % MODELS_PER_ROW;  // remainder
+            int row = i / MODELS_PER_ROW;
+            int col = i % MODELS_PER_ROW;
 
-                float x = 0.5f + col * SPACING;
-                float z = 0.5f + row * SPACING;
+            float x = 0.5f + col * SPACING;
+            float z = 0.5f + row * SPACING;
 
-                this.modelInstances[i].transform.setToTranslation(x, 0f, z);
-            }
+            mi.transform.setToTranslation(x, 0f, z);
         }
+
+        computeModelsCenter(this.lightTarget);
+
+        float LIGHT_RING_RADIUS = 6.0f;
+        float LIGHT_HEIGHT = 8.0f;
+        float LIGHT_INTENSITY = 0.34f;
+
+        addHexRingDirectionalLights(this.outside, this.lightTarget, LIGHT_RING_RADIUS, LIGHT_HEIGHT,
+                true, LIGHT_INTENSITY, this.directionalLightsDown); // from above, aiming down
+
+        addHexRingDirectionalLights(this.outside, this.lightTarget, LIGHT_RING_RADIUS, LIGHT_HEIGHT,
+                false, LIGHT_INTENSITY, this.directionalLightsUp);   // from below, aiming up
 
         createAxes();
 
         cam.position.set(1, 0.5f, 6);
         cam.lookAt(1, 0.5f, 0);
 
+    }
+
+    private void computeModelsCenter(Vector3 out) {
+        out.set(0, 0, 0);
+        if (this.modelInstances.isEmpty()) {
+            return;
+        }
+
+        Vector3 tmp = new Vector3();
+        for (ModelInstance mi : this.modelInstances) {
+            mi.transform.getTranslation(tmp);
+            out.add(tmp);
+        }
+        out.scl(1f / this.modelInstances.size());
+
+        out.y = 0.5f;
+    }
+
+    private void addHexRingDirectionalLights(Environment env,
+            Vector3 target,
+            float ringRadius,
+            float height,
+            boolean fromAbove,
+            float intensity,
+            java.util.List<DirectionalLight> outList) {
+
+        outList.clear();
+
+        Vector3 dir = new Vector3();
+        for (int i = 0; i < 6; i++) {
+            float angleDeg = i * 60f;
+            float lx = target.x + MathUtils.cosDeg(angleDeg) * ringRadius;
+            float lz = target.z + MathUtils.sinDeg(angleDeg) * ringRadius;
+            float ly = target.y + (fromAbove ? height : -height);
+
+            dir.set(target.x - lx, target.y - ly, target.z - lz).nor();
+
+            DirectionalLight light = new DirectionalLight().set(intensity, intensity, intensity, dir.x, dir.y, dir.z);
+
+            env.add(light);
+            outList.add(light);
+        }
     }
 
     @Override
@@ -164,32 +193,6 @@ public class ModelVisualizer implements ApplicationListener, InputProcessor {
         }
 
         modelBatch.end();
-
-        debugRenderer.setProjectionMatrix(cam.combined);
-        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
-
-        float len = 50f;                 // length of the line
-        Vector3 origin = Vector3.Zero;   // start at world origin (0,0,0)
-
-        // UP light (red)
-        debugRenderer.setColor(Color.RED);
-        debugRenderer.line(
-                origin.x, origin.y, origin.z,
-                origin.x - directionalLightUp.direction.x * len,
-                origin.y - directionalLightUp.direction.y * len,
-                origin.z - directionalLightUp.direction.z * len
-        );
-
-        // DOWN light (blue)
-        debugRenderer.setColor(Color.BLUE);
-        debugRenderer.line(
-                origin.x, origin.y, origin.z,
-                origin.x - directionalLightDown.direction.x * len,
-                origin.y - directionalLightDown.direction.y * len,
-                origin.z - directionalLightDown.direction.z * len
-        );
-
-        debugRenderer.end();
 
         batch.begin();
         font.draw(batch, "" + cam.position, 280, 700);

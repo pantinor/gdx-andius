@@ -22,26 +22,21 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
-import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -68,19 +63,17 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
-    private final PointLight pointLight1 = new PointLight();
-    private final PointLight pointLight2 = new PointLight();
-
+    private java.util.List<DirectionalLight> directionalLightsDown = new ArrayList<>();
+    private java.util.List<DirectionalLight> directionalLightsUp = new ArrayList<>();
     private final PerspectiveCamera camera;
 
     private final java.util.List<MonsterListing> monsterOrderedList = new ArrayList<>();
-    private static final int MONSTERS_PER_ROW = 5;
+    private static final int MONSTER_LISTING_PER_ROW = 5;
 
     private final BoundingBox sceneBounds = new BoundingBox();
     private final Vector3 sceneCenter = new Vector3();
     private final Vector3 sceneDims = new Vector3();
     private ModelInstance floorPlane;
-    private final Color flame = new Color(0xeac4a1ff);
 
     private final Stage stage;
     private final com.badlogic.gdx.scenes.scene2d.ui.List<SpellLabel> spellsList;
@@ -101,12 +94,12 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
     private static final int MONSTER_LISTING_WIDTH = 185;
     private static final int LINE_HEIGHT = 15;
     private static final int LOG_WIDTH = 335;
-    private static final int LOG_HEIGHT = 150;
+    private static final int LOG_HEIGHT = 200;
 
     private final Image selectedMonster = new Image(Utils.fillRectangle(MONSTER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.RED, .25f));
     private final Image selectedPlayer = new Image(Utils.fillRectangle(PLAYER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.YELLOW, .25f));
-    private static final Texture PLAYER_GREEN = Utils.fillRectangle(PLAYER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.GREEN, .2f);
-    private static final Texture MONSTER_GREEN = Utils.fillRectangle(MONSTER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.GREEN, .2f);
+    private static final Texture PLAYER_GREEN = Utils.fillRectangle(PLAYER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.FOREST, .75f);
+    private static final Texture MONSTER_GREEN = Utils.fillRectangle(MONSTER_LISTING_WIDTH, LINE_HEIGHT * 3, Color.FOREST, .75f);
 
     private MazeCell destCell, fromCell;
     private final boolean hasTreasure;
@@ -119,17 +112,12 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         this.fromCell = fromCell;
         this.hasTreasure = hasTreasure;
 
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        environment.set(ColorAttribute.createAmbient(flame.r, flame.g, flame.b, 1f));
-        environment.add(pointLight1);
-        environment.add(pointLight2);
-
         this.camera = new PerspectiveCamera(67, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         DefaultShader.Config config = new DefaultShader.Config();
         config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
+        config.numDirectionalLights = 12;
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
 
@@ -137,7 +125,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         Texture floorTex = new Texture(Gdx.files.classpath("assets/graphics/rock.png"));
         floorTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         Material mfloor = new Material(TextureAttribute.createDiffuse(floorTex), IntAttribute.createCullFace(GL20.GL_NONE));
-        this.floorPlane = new ModelInstance(Utils.createPlaneModel(builder, 5, mfloor, false));
+        this.floorPlane = new ModelInstance(Utils.createPlaneModel(builder, 2, mfloor, false));
 
         Table logTable = new Table(Andius.skin);
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
@@ -145,14 +133,13 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
-        createAxes();
 
         this.monstersTable = new Table(Andius.skin);
         this.monstersTable.top().defaults().pad(2).expandX().center();
         this.monstersScroll = new AutoFocusScrollPane(this.monstersTable, Andius.skin);
         this.monstersScroll.setScrollingDisabled(true, true);
         for (MutableMonster mm : monsters) {
-            add(mm);
+            addListing(mm);
         }
 
         this.playersTable = new Table(Andius.skin);
@@ -167,14 +154,14 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             }
         }
 
-        this.actionsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-12-padded");
+        this.actionsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-12-padded-clear");
         this.actionsList.getSelection().setDisabled(true);
         this.actionsScroll = new ScrollPane(this.actionsList, Andius.skin);
         for (Action action : this.actions) {
             this.actionsList.getItems().add(new ActionLabel(action));
         }
 
-        this.spellsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-12-padded");
+        this.spellsList = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-12-padded-clear");
         this.spellsScroll = new AutoFocusScrollPane(this.spellsList, Andius.skin);
 
         CharacterRecord player = this.ctx.players()[0];
@@ -222,7 +209,22 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             }
         });
 
-        int x = 345;
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        int monsterCount = this.monstersTable.getCells().size;
+        int monsterRows = (monsterCount + MONSTER_LISTING_PER_ROW - 1) / MONSTER_LISTING_PER_ROW;
+        float monstersPanelHeight = monsterRows * (LINE_HEIGHT * 3 + 6) + 12;
+        fm.setBounds(this.monstersScroll, 0, SCREEN_HEIGHT - monstersPanelHeight, SCREEN_WIDTH, monstersPanelHeight);
+
+        int playerRows = context.players().length > 3 ? 2 : 1;
+        float playersPanelHeight = playerRows * (LINE_HEIGHT * 3 + 6) + 3;
+        fm.setBounds(this.playersScroll, 0, 0, SCREEN_WIDTH - 350, playersPanelHeight);
+
+        fm.setBounds(this.spellsScroll, 5, playersPanelHeight + 3, PLAYER_LISTING_WIDTH, 100);
+        fm.setBounds(this.actionsScroll, 5, playersPanelHeight + 4 + 100, LOG_WIDTH, 110);
+        fm.setBounds(this.logs, SCREEN_WIDTH - LOG_WIDTH - 5, 3, LOG_WIDTH, LOG_HEIGHT);
+
+        int x = 320;
         this.fight = new TextButton("FIGHT", Andius.skin, "default-16");
         this.fight.addListener(new ChangeListener() {
             @Override
@@ -230,7 +232,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                 fight();
             }
         });
-        this.fight.setBounds(SCREEN_WIDTH - 85, 335, 80, 40);
+        this.fight.setBounds(x, playersPanelHeight + 4, 80, 40);
 
         this.reset = new TextButton("RESET", Andius.skin, "default-16");
         this.reset.addListener(new ChangeListener() {
@@ -243,7 +245,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                 }
             }
         });
-        this.reset.setBounds(SCREEN_WIDTH - 85, 290, 80, 40);
+        this.reset.setBounds(x += 90, playersPanelHeight + 4, 80, 40);
 
         this.flee = new TextButton("FLEE", Andius.skin, "default-16");
         this.flee.addListener(new ChangeListener() {
@@ -252,7 +254,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                 end(true);
             }
         });
-        this.flee.setBounds(SCREEN_WIDTH - 85, 245, 80, 40);
+        this.flee.setBounds(x += 90, playersPanelHeight + 4, 80, 40);
 
         this.exit = new TextButton("EXIT", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -316,20 +318,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                 }
             }
         });
-        this.exit.setBounds(SCREEN_WIDTH - 85, 200, 80, 40);
-
-        int monsterCount = this.monstersTable.getCells().size;
-        int monsterRows = (monsterCount + MONSTERS_PER_ROW - 1) / MONSTERS_PER_ROW;
-        float monstersPanelHeight = monsterRows * (LINE_HEIGHT * 3 + 6) + 12;
-        fm.setBounds(this.monstersScroll, 0, SCREEN_HEIGHT - monstersPanelHeight, SCREEN_WIDTH, monstersPanelHeight);
-
-        int playerRows = context.players().length > 3 ? 2 : 1;
-        float playersPanelHeight = playerRows * (LINE_HEIGHT * 3 + 6) + 3;
-        fm.setBounds(this.playersScroll, 0, 0, SCREEN_WIDTH - 350, playersPanelHeight);
-
-        fm.setBounds(this.spellsScroll, 5, playersPanelHeight + 3, PLAYER_LISTING_WIDTH, 100);
-        fm.setBounds(this.actionsScroll, 5, playersPanelHeight + 6 + 100, LOG_WIDTH, 115);
-        fm.setBounds(this.logs, SCREEN_WIDTH - LOG_WIDTH - 5, 3, LOG_WIDTH, LOG_HEIGHT);
+        this.exit.setBounds(x, playersPanelHeight + 4, 80, 40);
 
         this.stage.addActor(this.fight);
         this.stage.addActor(this.flee);
@@ -355,11 +344,11 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
     }
 
-    private void refitCameraToModels() {
+    private void sceneOrientation() {
 
         sceneBounds.inf();
 
-        int MODELS_PER_ROW = 5;
+        int MODELS_PER_ROW = 4;
         float SPACING = 0.4f;
 
         int index = 0;
@@ -380,16 +369,21 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         sceneBounds.getCenter(sceneCenter);
         sceneBounds.getDimensions(sceneDims);
 
-        camera.position.set(sceneCenter.x, 0.5f, sceneDims.z + 2);
+        camera.position.set(sceneCenter.x, 0.5f, sceneDims.z + 1.5f);
         camera.lookAt(sceneCenter.x, 0.3f, sceneCenter.z);
 
         floorPlane.transform.setToTranslation(sceneCenter.x, 0f, sceneCenter.z);
-        pointLight1.set(flame.r, flame.g, flame.b, sceneCenter.x, 2, sceneDims.z + 1, 20f);
-        pointLight2.set(flame.r, flame.g, flame.b, sceneCenter.x, -2, sceneDims.z + 1, 20f);
 
         camera.near = 0.1f;
-        camera.far = 100;
+        camera.far = 200;
         camera.update();
+
+        float LIGHT_RING_RADIUS = 5;
+        float LIGHT_HEIGHT = 5;
+        float LIGHT_INTENSITY = 0.24f;
+
+        addHexRingDirectionalLights(this.environment, this.sceneCenter, LIGHT_RING_RADIUS, LIGHT_HEIGHT, true, LIGHT_INTENSITY, this.directionalLightsDown);
+        addHexRingDirectionalLights(this.environment, this.sceneCenter, LIGHT_RING_RADIUS, LIGHT_HEIGHT, false, LIGHT_INTENSITY, this.directionalLightsUp);
     }
 
     @Override
@@ -398,7 +392,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
-        refitCameraToModels();
+        sceneOrientation();
     }
 
     @Override
@@ -413,7 +407,6 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         camera.update();
 
         modelBatch.begin(camera);
-        //modelBatch.render(axesInstance);
         modelBatch.render(floorPlane, environment);
         for (MonsterListing l : monsterOrderedList) {
             if (l.health.modelInstance != null) {
@@ -449,19 +442,19 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         this.stage.addActor(this.exit);
     }
 
-    private void add(MutableMonster mm) {
-        MonsterListing ml = new MonsterListing(mm);
-        this.monsterOrderedList.add(ml);
-        this.monstersTable.add(ml).width(MONSTER_LISTING_WIDTH).center();
-        if (this.monstersTable.getCells().size % MONSTERS_PER_ROW == 0) {
-            this.monstersTable.row();
-        }
-    }
-
     @Override
     public void addMonster(MutableMonster mm) {
         super.addMonster(mm);
-        add(mm);
+        addListing(mm);
+    }
+
+    private void addListing(MutableMonster mm) {
+        MonsterListing ml = new MonsterListing(mm);
+        this.monsterOrderedList.add(ml);
+        this.monstersTable.add(ml).width(MONSTER_LISTING_WIDTH).center();
+        if (this.monstersTable.getCells().size % MONSTER_LISTING_PER_ROW == 0) {
+            this.monstersTable.row();
+        }
     }
 
     @Override
@@ -505,7 +498,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             for (Actor a : cells) {
                 monstersTable.add(a).pad(2);
                 i++;
-                if (i % MONSTERS_PER_ROW == 0) {
+                if (i % MONSTER_LISTING_PER_ROW == 0) {
                     monstersTable.row();
                 }
             }
@@ -649,6 +642,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                             || (player.classType == ClassType.LORD && player.level >= 3)
                             || (player.classType == ClassType.BISHOP && player.level >= 8)) {
                         spellsList.getItems().add(new SpellLabel());
+                        spellsList.invalidateHierarchy();
                     }
                     if (player.weapon != null && player.weapon.spell != null) {
                         addSpell(player.weapon);
@@ -866,6 +860,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         if (s.getArea() == SpellArea.COMBAT || s.getArea() == SpellArea.ANY_TIME) {
             SpellLabel label = new SpellLabel(s);
             spellsList.getItems().add(label);
+            spellsList.invalidateHierarchy();
         }
     }
 
@@ -873,6 +868,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         if (i.spell.getArea() == SpellArea.COMBAT || i.spell.getArea() == SpellArea.ANY_TIME) {
             SpellLabel label = new SpellLabel(i);
             spellsList.getItems().add(label);
+            spellsList.invalidateHierarchy();
         }
     }
 
@@ -900,35 +896,30 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
     public void resume() {
     }
 
-    final float GRID_MIN = 0f;
-    final float GRID_MAX = 20f;
-    final float GRID_STEP = .5f;
-    public Model axesModel;
-    public ModelInstance axesInstance;
+    private void addHexRingDirectionalLights(Environment env,
+            Vector3 target,
+            float ringRadius,
+            float height,
+            boolean fromAbove,
+            float intensity,
+            java.util.List<DirectionalLight> outList) {
 
-    private void createAxes() {
-        ModelBuilder modelBuilder = new ModelBuilder();
-        modelBuilder.begin();
+        outList.clear();
 
-        // grid
-        MeshPartBuilder builder = modelBuilder.part("grid", GL30.GL_LINES, VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorUnpacked, new Material());
-        builder.setColor(Color.LIGHT_GRAY);
-        for (float t = GRID_MIN; t <= GRID_MAX; t += GRID_STEP) {
-            builder.line(t, 0, GRID_MIN, t, 0, GRID_MAX);
-            builder.line(GRID_MIN, 0, t, GRID_MAX, 0, t);
+        Vector3 dir = new Vector3();
+        for (int i = 0; i < 6; i++) {
+            float angleDeg = i * 60f;
+            float lx = target.x + MathUtils.cosDeg(angleDeg) * ringRadius;
+            float lz = target.z + MathUtils.sinDeg(angleDeg) * ringRadius;
+            float ly = target.y + (fromAbove ? height : -height);
+
+            dir.set(target.x - lx, target.y - ly, target.z - lz).nor();
+
+            DirectionalLight light = new DirectionalLight().set(intensity, intensity, intensity, dir.x, dir.y, dir.z);
+
+            env.add(light);
+            outList.add(light);
         }
-
-        // axes
-        builder = modelBuilder.part("axes", GL30.GL_LINES, VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorUnpacked, new Material());
-        builder.setColor(Color.RED);
-        builder.line(0, 0, 0, 500, 0, 0);
-        builder.setColor(Color.GREEN);
-        builder.line(0, 0, 0, 0, 500, 0);
-        builder.setColor(Color.BLUE);
-        builder.line(0, 0, 0, 0, 0, 500);
-
-        axesModel = modelBuilder.end();
-        axesInstance = new ModelInstance(axesModel);
     }
 
 }
