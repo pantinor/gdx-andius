@@ -56,7 +56,7 @@ public class Wiz4CombatTestMain extends Game {
 
             //SaveGame sg = SaveGame.read(SAVE_FILENAME);
             //ctx.setSaveGame(sg);
-            int lvl = 5;
+            int lvl = 3;
             ctx.setSaveGame(new SaveGame());
             ctx.saveGame.players = new CharacterRecord[6];
             ctx.saveGame.players[0] = SaveGame.generatePlayer(lvl, ClassType.FIGHTER, "fred");
@@ -96,7 +96,7 @@ public class Wiz4CombatTestMain extends Game {
             //setScreen(new VendorScreen(ctx, Constants.Map.CAVE, DQ_ITEMS, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
             //setScreen(new ManageScreen(null, Andius.skin, new SaveGame()));
-            setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(16).getName(), PMO_MONSTERS.get(16), 1, true, null, null));
+            setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(32).getName(), PMO_MONSTERS.get(32), 1, true, null, null));
 
         } catch (Exception e) {
             e.printStackTrace();

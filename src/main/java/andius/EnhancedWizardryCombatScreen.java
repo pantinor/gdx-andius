@@ -28,14 +28,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -57,15 +55,20 @@ import java.util.List;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
 import utils.LogScrollPane;
+import utils.ObjLoader;
 import utils.Utils;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
 public class EnhancedWizardryCombatScreen extends Combat implements Screen, Constants {
 
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
-    private java.util.List<DirectionalLight> directionalLightsDown = new ArrayList<>();
-    private java.util.List<DirectionalLight> directionalLightsUp = new ArrayList<>();
+    private final PointLight pointLight1 = new PointLight();
     private final PerspectiveCamera camera;
+    private final Color flame = new Color(0xeac4a1ff);
 
     private final java.util.List<MonsterListing> monsterOrderedList = new ArrayList<>();
     private static final int MONSTER_LISTING_PER_ROW = 5;
@@ -73,7 +76,11 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
     private final BoundingBox sceneBounds = new BoundingBox();
     private final Vector3 sceneCenter = new Vector3();
     private final Vector3 sceneDims = new Vector3();
-    private ModelInstance floorPlane;
+
+    private final java.util.List<ModelInstance> wallAndFloor = new ArrayList<>();
+    private ModelInstance wmi00, wmi01, wmi02, wmi03, door;
+    private ModelInstance wmi10, wmi11, wmi12, wmi13;
+    private ModelInstance wmi20, wmi21, wmi22, wmi23;
 
     private final Stage stage;
     private final com.badlogic.gdx.scenes.scene2d.ui.List<SpellLabel> spellsList;
@@ -117,15 +124,45 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         DefaultShader.Config config = new DefaultShader.Config();
         config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
-        config.numDirectionalLights = 12;
+        config.numDirectionalLights = 4;
+
+        pointLight1.set(flame.r, flame.g, flame.b, 1, 2, 2, 10f);
+        environment.add(pointLight1);
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
 
-        ModelBuilder builder = new ModelBuilder();
-        Texture floorTex = new Texture(Gdx.files.classpath("assets/graphics/rock.png"));
-        floorTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        Material mfloor = new Material(TextureAttribute.createDiffuse(floorTex), IntAttribute.createCullFace(GL20.GL_NONE));
-        this.floorPlane = new ModelInstance(Utils.createPlaneModel(builder, 2, mfloor, false));
+        Model modelDoor = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
+        Model modelWallCorner = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-corner", .1f);
+        Model modelWallStraight = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-straight", .1f);
+        Model modelWallFloor = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-floor", .1f);
+
+        this.door = new ModelInstance(modelDoor);
+        this.wmi00 = new ModelInstance(modelWallCorner);
+        this.wmi01 = new ModelInstance(modelWallStraight);
+        this.wmi02 = new ModelInstance(modelWallStraight);
+        this.wmi03 = new ModelInstance(modelWallCorner);
+        this.wmi10 = new ModelInstance(modelWallStraight);
+        this.wmi11 = new ModelInstance(modelWallFloor);
+        this.wmi12 = new ModelInstance(modelWallFloor);
+        this.wmi13 = new ModelInstance(modelWallStraight);
+        this.wmi20 = new ModelInstance(modelWallStraight);
+        this.wmi21 = new ModelInstance(modelWallFloor);
+        this.wmi22 = new ModelInstance(modelWallFloor);
+        this.wmi23 = new ModelInstance(modelWallStraight);
+
+        this.wallAndFloor.add(door);
+        this.wallAndFloor.add(wmi00);
+        this.wallAndFloor.add(wmi01);
+        this.wallAndFloor.add(wmi02);
+        this.wallAndFloor.add(wmi03);
+        this.wallAndFloor.add(wmi10);
+        this.wallAndFloor.add(wmi11);
+        this.wallAndFloor.add(wmi12);
+        this.wallAndFloor.add(wmi13);
+        this.wallAndFloor.add(wmi20);
+        this.wallAndFloor.add(wmi21);
+        this.wallAndFloor.add(wmi22);
+        this.wallAndFloor.add(wmi23);
 
         Table logTable = new Table(Andius.skin);
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
@@ -371,19 +408,38 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
         camera.position.set(sceneCenter.x, 0.5f, sceneDims.z + 1.5f);
         camera.lookAt(sceneCenter.x, 0.3f, sceneCenter.z);
+        //camera.position.set(1.2f, 2.5f, 3.5f);
+        //camera.lookAt(1.2f, 0.5f, 1.5f);
 
-        floorPlane.transform.setToTranslation(sceneCenter.x, 0f, sceneCenter.z);
+        float FH = -0.15f;
+        wmi00.transform.setToTranslation(0, FH, 0);
+        wmi00.transform.rotate(Vector3.Y, 180);
+        wmi01.transform.setToTranslation(0.007f, FH, 0.023f);
+        wmi01.transform.rotate(Vector3.Y, 90);
+        wmi02.transform.setToTranslation(1.2098f, FH, 0.0209f);
+        wmi02.transform.rotate(Vector3.Y, 90);
+        wmi03.transform.setToTranslation(2.425f, FH, 0.00548f);
+        wmi03.transform.rotate(Vector3.Y, 90);
+
+        wmi10.transform.setToTranslation(0.017f, FH, 1.216f);
+        wmi10.transform.rotate(Vector3.Y, 180);
+        wmi11.transform.setToTranslation(0.0118f, FH, 0.0288f);
+        wmi12.transform.setToTranslation(1.2114f, FH, 0.0255f);
+        wmi13.transform.setToTranslation(2.4028f, FH, 0.00115f);
+
+        wmi20.transform.setToTranslation(0.017f, FH, 2.4275f);
+        wmi20.transform.rotate(Vector3.Y, 180);
+        wmi21.transform.setToTranslation(0.0118f, FH, 1.2226f);
+        wmi22.transform.setToTranslation(1.2114f, FH, 1.2245f);
+        wmi23.transform.setToTranslation(2.4028f, FH, 1.2149f);
+
+        door.transform.setToTranslation(0.0478f, 0, -0.9024f);
+        door.transform.rotate(Vector3.Y, 180);
 
         camera.near = 0.1f;
         camera.far = 200;
         camera.update();
 
-        float LIGHT_RING_RADIUS = 5;
-        float LIGHT_HEIGHT = 5;
-        float LIGHT_INTENSITY = 0.24f;
-
-        addHexRingDirectionalLights(this.environment, this.sceneCenter, LIGHT_RING_RADIUS, LIGHT_HEIGHT, true, LIGHT_INTENSITY, this.directionalLightsDown);
-        addHexRingDirectionalLights(this.environment, this.sceneCenter, LIGHT_RING_RADIUS, LIGHT_HEIGHT, false, LIGHT_INTENSITY, this.directionalLightsUp);
     }
 
     @Override
@@ -407,7 +463,9 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         camera.update();
 
         modelBatch.begin(camera);
-        modelBatch.render(floorPlane, environment);
+        for (ModelInstance w : this.wallAndFloor) {
+            modelBatch.render(w, environment);
+        }
         for (MonsterListing l : monsterOrderedList) {
             if (l.health.modelInstance != null) {
                 modelBatch.render(l.health.modelInstance, environment);
@@ -793,6 +851,13 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         }
 
         @Override
+        public void draw(Batch batch, float parentAlpha) {
+            Color color = getColor();
+            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+            batch.draw(healthGreen, getX(), getY());
+        }
+
+        @Override
         public void adjust(int hp, int maxhp) {
             double percent = (double) hp / maxhp;
             double bar = percent * (double) this.width;
@@ -804,19 +869,103 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             }
 
             if (bar <= 0) {
-                this.modelInstance = null;
+                if (this.modelInstance != null) {
+                    final ModelInstance dyingInstance = this.modelInstance;
+                    this.addAction(Actions.sequence(
+                            new ModelFadeAndRiseAction(dyingInstance),
+                            Actions.run(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ListingBackground.this.modelInstance = null;
+                                }
+                            })
+                    ));
+                }
             }
 
             healthGreen.setRegion(0, 0, (int) bar, LINE_HEIGHT * 3);
         }
 
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            Color color = getColor();
-            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-            batch.draw(healthGreen, getX(), getY());
-        }
+        private static class ModelFadeAndRiseAction extends TemporalAction {
 
+            private final ModelInstance instance;
+            private final Vector3 tmp = new Vector3();
+            private float start;
+            private float startAlpha;
+
+            ModelFadeAndRiseAction(ModelInstance instance) {
+                this.instance = instance;
+                setDuration(1);
+            }
+
+            @Override
+            protected void begin() {
+                if (instance == null) {
+                    return;
+                }
+
+                instance.transform.getTranslation(tmp);
+                start = tmp.z;
+
+                startAlpha = extractAlpha(instance);
+                ensureBlending(instance, startAlpha);
+            }
+
+            @Override
+            protected void update(float percent) {
+                if (instance == null) {
+                    return;
+                }
+
+                instance.transform.getTranslation(tmp);
+                tmp.z = MathUtils.lerp(start, 0, percent);
+                instance.transform.setTranslation(tmp);
+
+                float alpha = MathUtils.lerp(startAlpha, 0.05f, percent);
+                applyAlpha(instance, alpha);
+            }
+
+            private static float extractAlpha(ModelInstance instance) {
+                for (Material mat : instance.materials) {
+                    BlendingAttribute ba = (BlendingAttribute) mat.get(BlendingAttribute.Type);
+                    if (ba != null) {
+                        return ba.opacity;
+                    }
+
+                    ColorAttribute ca = (ColorAttribute) mat.get(ColorAttribute.Diffuse);
+                    if (ca != null) {
+                        return ca.color.a;
+                    }
+                }
+                return 1f;
+            }
+
+            private static void ensureBlending(ModelInstance instance, float alpha) {
+                for (Material mat : instance.materials) {
+                    BlendingAttribute ba = (BlendingAttribute) mat.get(BlendingAttribute.Type);
+                    if (ba == null) {
+                        mat.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, alpha));
+                    }
+                }
+            }
+
+            private static void applyAlpha(ModelInstance instance, float alpha) {
+                for (Material mat : instance.materials) {
+                    BlendingAttribute ba = (BlendingAttribute) mat.get(BlendingAttribute.Type);
+                    if (ba == null) {
+                        ba = new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, alpha);
+                        mat.set(ba);
+                    } else {
+                        ba.opacity = alpha;
+                    }
+
+                    ColorAttribute ca = (ColorAttribute) mat.get(ColorAttribute.Diffuse);
+                    if (ca != null) {
+                        ca.color.a = alpha;
+                    }
+                }
+            }
+        }
     }
 
     private class SpellLabel extends Label {
@@ -894,32 +1043,6 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
     @Override
     public void resume() {
-    }
-
-    private void addHexRingDirectionalLights(Environment env,
-            Vector3 target,
-            float ringRadius,
-            float height,
-            boolean fromAbove,
-            float intensity,
-            java.util.List<DirectionalLight> outList) {
-
-        outList.clear();
-
-        Vector3 dir = new Vector3();
-        for (int i = 0; i < 6; i++) {
-            float angleDeg = i * 60f;
-            float lx = target.x + MathUtils.cosDeg(angleDeg) * ringRadius;
-            float lz = target.z + MathUtils.sinDeg(angleDeg) * ringRadius;
-            float ly = target.y + (fromAbove ? height : -height);
-
-            dir.set(target.x - lx, target.y - ly, target.z - lz).nor();
-
-            DirectionalLight light = new DirectionalLight().set(intensity, intensity, intensity, dir.x, dir.y, dir.z);
-
-            env.add(light);
-            outList.add(light);
-        }
     }
 
 }
