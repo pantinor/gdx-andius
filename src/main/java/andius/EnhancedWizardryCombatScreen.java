@@ -288,7 +288,27 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         this.flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                end(true);
+                int temp = 38 - (3 * level);
+
+                int enabledCount = ctx.enabledCount();
+                if (ctx.enabledCount() < 4) {
+                    temp += (20 - (5 * enabledCount));
+                }
+
+                if (level == 10) {
+                    temp = -1;
+                }
+
+                int roll = Utils.getRandomBetween(0, 99);
+
+                if (roll > temp) {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    fight();
+                } else {
+                    Sounds.play(Sound.EVADE);
+                    end(true);
+                }
+
             }
         });
         this.flee.setBounds(x += 90, playersPanelHeight + 4, 80, 40);

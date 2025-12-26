@@ -150,31 +150,19 @@
   </data>
  </layer>
  <objectgroup id="11" name="people">
-  <object id="5" name="Brother Latumapic" type="FRIENDLY" x="144" y="912" width="48" height="48">
+  <object id="5" name="Brother Latumapic" type="FRIENDLY" x="672" y="144" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Grove_Keeper_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="6" name="Ariadne" type="FRIENDLY" x="864" y="576" width="48" height="48">
-   <properties>
-    <property name="icon" value="Paladin_Hunter_Female"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="7" name="Aeshma" type="FRIENDLY" x="240" y="1200" width="48" height="48">
-   <properties>
-    <property name="icon" value="Druid_Shaman_Female"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="8" name="Sevrin" type="FRIENDLY" x="1104" y="1200" width="48" height="48">
+  <object id="8" name="Alavik" type="FRIENDLY" x="336" y="1152" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Beastmaster_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="9" name="Nalara" type="FRIENDLY" x="528" y="624" width="48" height="48">
+  <object id="9" name="Margda" type="FRIENDLY" x="1104" y="1200" width="48" height="48">
    <properties>
     <property name="icon" value="Sorcerer_Mage_Female"/>
     <property name="movement" value="FIXED"/>
@@ -192,20 +180,8 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="12" name="Caliphar" type="FRIENDLY" x="1104" y="864" width="48" height="48">
-   <properties>
-    <property name="icon" value="Sorcerer_Elementalist_Male"/>
-    <property name="movement" value="WANDER"/>
-   </properties>
-  </object>
-  <object id="13" name="Sir Hrathnir" type="FRIENDLY" x="624" y="144" width="48" height="48">
-   <properties>
-    <property name="icon" value="Druid_Percht_Raider_Male"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
  </objectgroup>
- <objectgroup id="13" name="rooms">
+ <objectgroup id="13" name="rooms" visible="0">
   <object id="14" x="192" y="1056">
    <polygon points="0,0 0,240 336,240 336,0"/>
   </object>

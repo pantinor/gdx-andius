@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="13" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="13" nextobjectid="13">
  <properties>
   <property name="startX" value="15"/>
   <property name="startY" value="30"/>
@@ -142,13 +142,19 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
+  <object id="12" name="FitzChivalry" type="FRIENDLY" x="864" y="528" width="48" height="48">
+   <properties>
+    <property name="icon" value="Druid_Beastmaster_Male"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
   <object id="8" name="Penneth" type="FRIENDLY" x="480" y="384" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Beastmaster_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="9" name="Lyrra" type="FRIENDLY" x="624" y="1296" width="48" height="48">
+  <object id="9" name="Lyrra" type="FRIENDLY" x="672" y="912" width="48" height="48">
    <properties>
     <property name="icon" value="Sorcerer_Mage_Female"/>
     <property name="movement" value="FIXED"/>

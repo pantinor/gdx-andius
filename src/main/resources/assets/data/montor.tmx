@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="16" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="16" nextobjectid="58">
  <properties>
   <property name="startX" value="1"/>
   <property name="startY" value="16"/>
@@ -246,7 +246,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="14" name="rooms">
+ <objectgroup id="14" name="rooms" visible="0">
   <object id="16" x="1008" y="1056">
    <polygon points="0,0 0,288 384,288 384,0"/>
   </object>
@@ -279,21 +279,27 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="12" name="Jinna" type="FRIENDLY" x="192" y="1152" width="48" height="48">
-   <properties>
-    <property name="icon" value="Domestikion"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
   <object id="13" name="Chade" type="FRIENDLY" x="1296" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Cult_Scholar"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="52" name="FitzChivalry" type="FRIENDLY" x="672" y="48" width="48" height="48">
+  <object id="57" name="Molly" type="FRIENDLY" x="1152" y="1056" width="48" height="48">
    <properties>
-    <property name="icon" value="Bandit"/>
+    <property name="icon" value="Domestikion"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="56" name="Burrich" type="FRIENDLY" x="1056" y="1056" width="48" height="48">
+   <properties>
+    <property name="icon" value="Domestikion"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="12" name="Jinna" type="FRIENDLY" x="192" y="1152" width="48" height="48">
+   <properties>
+    <property name="icon" value="Domestikion"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -306,6 +312,12 @@
   <object id="55" name="Nighteyes" type="FRIENDLY" x="576" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Feroxa_Wolf"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="52" name="FitzChivalry" type="FRIENDLY" x="672" y="48" width="48" height="48">
+   <properties>
+    <property name="icon" value="Bandit"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

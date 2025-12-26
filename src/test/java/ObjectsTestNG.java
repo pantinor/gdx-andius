@@ -1,5 +1,4 @@
 
-import andius.objects.Direction;
 import andius.WizardryData;
 import andius.WizardryData.MazeLevel;
 import static andius.WizardryData.WER_LEVEL_DESC;
@@ -7,7 +6,6 @@ import andius.objects.ClassType;
 import andius.objects.Race;
 import andius.objects.Conversations;
 import andius.objects.Conversations.Conversation;
-import andius.objects.Conversations.Topic;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
@@ -187,27 +185,6 @@ public class ObjectsTestNG {
                 }
             }
         }
-    }
-
-    @Test
-    public void testScript() throws Exception {
-
-        Conversations convs = new Conversations();
-
-        Conversation conv = new Conversation("paul", "desc");
-        conv.topics.add(new Topic("name", "sss"));
-        conv.topics.add(new Topic("job", "sss"));
-
-        convs.maps.put("LLECHY", new ArrayList<>());
-
-        convs.maps.get("LLECHY").add(conv);
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.setPrettyPrinting().create();
-        String json = gson.toJson(convs);
-
-        System.out.println(json);
-
     }
 
     //@Test

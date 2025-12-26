@@ -46,7 +46,7 @@
   <object id="13" name="WIZARDRY1" x="768" y="176" width="16" height="16"/>
   <object id="14" name="CAVE" x="848" y="352" width="16" height="16"/>
   <object id="15" name="BOLTAC" x="1024" y="352" width="16" height="16"/>
-  <object id="16" name="DOOM" x="944" y="464" width="16" height="16"/>
+  <object id="16" name="SLAVERS_PIT" x="944" y="464" width="16" height="16"/>
   <object id="17" name="COVE" x="1056" y="656" width="16" height="16"/>
   <object id="18" name="WIZARDRY2" x="992" y="784" width="16" height="16"/>
   <object id="19" name="CANT" x="1120" y="1008" width="16" height="16"/>
@@ -107,6 +107,6 @@
   <object id="74" name="town" x="1744" y="976" width="16" height="16"/>
   <object id="75" name="MINE" x="1856" y="896" width="16" height="16"/>
   <object id="76" name="town" x="2048" y="1008" width="16" height="16"/>
-  <object id="77" name="SLAVERS_PIT" x="608" y="1088" width="16" height="16"/>
+  <object id="77" name="DOOM" x="608" y="1088" width="16" height="16"/>
  </objectgroup>
 </map>

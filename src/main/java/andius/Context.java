@@ -45,6 +45,16 @@ public class Context {
         return true;
     }
 
+    public int enabledCount() {
+        int count = 0;
+        for (CharacterRecord cr : this.saveGame.players) {
+            if (!cr.isDisabled()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public CharacterRecord pickRandomEnabledPlayer() {
         List<CharacterRecord> enabled = new ArrayList<>();
         for (CharacterRecord cr : this.saveGame.players) {
@@ -123,7 +133,7 @@ public class Context {
     }
 
     public void endTurn(Constants.Map map) throws PartyDeathException {
-        int decr_interval = (map == Constants.Map.WORLD? 50 : 20);
+        int decr_interval = (map == Constants.Map.WORLD ? 50 : 20);
         for (CharacterRecord player : this.saveGame.players) {
             if (!player.isDead()) {
                 player.submorsels -= decr_interval;

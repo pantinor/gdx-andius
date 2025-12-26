@@ -152,8 +152,8 @@ public class Monster implements Comparable<Monster> {
         //return this.name.compareTo(o.name);
     }
 
-    @Override
-    public String toString() {
+    //@Override
+    public String xxtoString() {
         return String.format("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s",
                 monsterId,
                 String.format("%-55s", name),
@@ -173,7 +173,16 @@ public class Monster implements Comparable<Monster> {
                 breath,
                 partnerID,
                 groupSize,
-                iconId
+                MonsterModels.values()[iconId]
+        );
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d\t%s\t%s",
+                monsterId,
+                String.format("%-55s", name),
+                MonsterModels.values()[iconId]
         );
     }
 

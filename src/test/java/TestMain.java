@@ -2,7 +2,6 @@
 import andius.Andius;
 import andius.Constants;
 import andius.Context;
-import andius.WizardryCombatScreen;
 import andius.dialogs.ConversationDialog;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;

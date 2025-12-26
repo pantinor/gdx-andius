@@ -1,8 +1,6 @@
 package andius.objects;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -46,82 +44,8 @@ public class Conversations {
 
         public String name;
         public String description;
-        public List<Topic> topics = new ArrayList<>();
-        public List<Label> labels = new ArrayList<>();
-
-        public Conversation() {
-
-        }
-
-        public Conversation(String name, String description) {
-            this.name = name;
-            this.description = description;
-        }
-
-        public Topic matchTopic(String query) {
-            for (Topic t : topics) {
-                StringTokenizer st = new StringTokenizer(t.query, " ");
-                while (st.hasMoreTokens()) {
-                    String tok = st.nextToken().trim().toLowerCase();
-                    if (tok.equals("or")) {
-                        continue;
-                    }
-                    if (query.toLowerCase().contains(tok)) {
-                        return t;
-                    }
-                }
-            }
-            return null;
-        }
+        public List<String> story;
 
     }
 
-    public static class Topic {
-
-        public String query;
-        public String phrase;
-
-        public Topic() {
-        }
-
-        public Topic(String query, String phrase) {
-            this.query = query;
-            this.phrase = phrase;
-        }
-
-        @Override
-        public String toString() {
-            return "Topic{" + "query=" + query + ", phrase=" + phrase + '}';
-        }
-
-    }
-
-    public static class Label {
-
-        public String id;
-        public String query;
-        public List<Topic> topics = new ArrayList<>();
-
-        public Topic matchTopic(String query) {
-            for (Topic t : topics) {
-                StringTokenizer st = new StringTokenizer(t.query, " ");
-                while (st.hasMoreTokens()) {
-                    String tok = st.nextToken().trim().toLowerCase();
-                    if (tok.equals("or")) {
-                        continue;
-                    }
-                    if (query.toLowerCase().contains(tok)) {
-                        return t;
-                    }
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return "Label{" + "id=" + id + ", query=" + query + ", topics=" + topics + '}';
-        }
-
-    }
 }
