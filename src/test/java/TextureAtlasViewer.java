@@ -7,6 +7,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Align;
 import java.util.HashMap;
 
 public class TextureAtlasViewer extends InputAdapter implements ApplicationListener {
@@ -33,6 +35,11 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
     Stage stage;
     Skin skin;
 
+    // Increase this to make tiny regions (e.g. 16x16) easier to see in the ScrollPane.
+    private static final float PREVIEW_SCALE = 4f;
+    private static final float PREVIEW_PAD = 10f;
+    private static final float LABEL_WIDTH = 220f;
+
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Texture Atlas Viewer";
@@ -44,32 +51,52 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
 
     private class AnimatedLabelGroup extends Group {
 
-        private Label label;
-        private Animation<TextureRegion> animation;
-        private float stateTime;
-        float w, h;
+        
+        private final Label label;
+        private final Animation<TextureRegion> animation;
+        private float stateTime = 0f;
+
+        private final float regionW;
+        private final float regionH;
+        private final float previewW;
+        private final float previewH;
 
         public AnimatedLabelGroup(Label label, Animation<TextureRegion> animation) {
             this.label = label;
             this.animation = animation;
-            this.stateTime = 0f;
-            this.w = animation.getKeyFrames()[0].getRegionWidth();
-            this.h = animation.getKeyFrames()[0].getRegionHeight();
 
-            addActor(label);
+            TextureRegion first = animation.getKeyFrames()[0];
+            this.regionW = first.getRegionWidth();
+            this.regionH = first.getRegionHeight();
+            this.previewW = regionW * PREVIEW_SCALE;
+            this.previewH = regionH * PREVIEW_SCALE;
 
-            setBounds(0, 0, w, h);
+            // Lay out the label + preview so the Table/ScrollPane can size rows correctly.
+            this.label.setAlignment(Align.left);
+            this.label.setBounds(0, 0, LABEL_WIDTH, previewH);
+            addActor(this.label);
 
-            this.label.setBounds(0, 0, w, h);
+            setBounds(0, 0, LABEL_WIDTH + PREVIEW_PAD + previewW, previewH);
+        }
+
+        @Override
+        public void act(float delta) {
+            super.act(delta);
+            stateTime += delta;
         }
 
         @Override
         public void draw(Batch batch, float parentAlpha) {
             super.draw(batch, parentAlpha);
-            stateTime += parentAlpha;
+
             TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-            batch.draw(currentFrame, getX() + 200, getY(), w, h);
+
+            float previewX = getX() + LABEL_WIDTH + PREVIEW_PAD;
+            float previewY = getY() + (getHeight() - previewH) * 0.5f;
+
+            batch.draw(currentFrame, previewX, previewY, previewW, previewH);
         }
+
 
     }
 
@@ -81,10 +108,17 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
         skin = new Skin(Gdx.files.internal("assets/skin/uiskin.json"));
         stage = new Stage();
 
-        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/tibian/tibian.atlas"));
+        TextureAtlas atlas = new TextureAtlas(new FileHandle("src/main/resources/assets/tibian/tileset16.atlas"));
+
+        // Keep scaled-up 16x16 (pixel art) regions crisp instead of blurry.
+        for (Texture t : atlas.getTextures()) {
+            t.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
+
 
         Table animTable = new Table(skin);
-        animTable.left().setFillParent(true);
+        animTable.top().left();
+        animTable.defaults().left().pad(4);
 
         java.util.Map<String, Animation> animations = new HashMap<>();
         Array<String> processedNames = new Array<>();
@@ -93,7 +127,7 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
             if (!processedNames.contains(regionName, false)) {
                 Array<TextureAtlas.AtlasRegion> frames = atlas.findRegions(regionName);
                 if (frames.size > 0) {
-                    Animation<TextureRegion> animation = new Animation(8.0f, frames, Animation.PlayMode.LOOP);
+                    Animation<TextureRegion> animation = new Animation(0.3f, frames, Animation.PlayMode.LOOP);
                     animations.put(regionName, animation);
                     processedNames.add(regionName);
                 }
@@ -102,12 +136,13 @@ public class TextureAtlasViewer extends InputAdapter implements ApplicationListe
 
         for (String r : animations.keySet()) {
             AnimatedLabelGroup a = new AnimatedLabelGroup(new Label(r, skin, "default-16"), animations.get(r));
-            animTable.add(a);
+            animTable.add(a).expandX().fillX().left();
             animTable.row();
         }
 
         ScrollPane sp1 = new ScrollPane(animTable, skin, "default");
-        sp1.setBounds(50, 50, 300, 700);
+        sp1.setScrollingDisabled(false, false);
+        sp1.setBounds(50, 50, 700, 700);
 
         stage.addActor(sp1);
 
