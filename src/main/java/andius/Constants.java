@@ -49,25 +49,24 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        //
         WORLD(MapType.OVERWORLD, "Ultima", "ultima1.tmx", 16),
         //
-        CAVE(MapType.TMX_TOWN, "Cave", "cave.tmx", TILE_DIM),
-        BOLTAC(MapType.TMX_TOWN, "Boltac's Trading Post", "boltac.tmx", TILE_DIM),
-        LLECHY(MapType.TMX_TOWN, "Llechy", "llechy.tmx", TILE_DIM),
-        CANT(MapType.TMX_TOWN, "Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
-        BARAD_ENELETH(MapType.TMX_TOWN, "Barad Eneleth", "barad_eneleth.tmx", TILE_DIM),
-        COVE(MapType.TMX_TOWN, "Cove", "cove.tmx", TILE_DIM),
-        MONTOR(MapType.TMX_TOWN, "Montor", "montor.tmx", WizardryData.Scenario.WER, TILE_DIM),
-        WIWOLD(MapType.TMX_TOWN, "Wiwold", "wiwold.tmx", TILE_DIM),
-        WIWOLD_LVL_2(MapType.TMX_TOWN, "Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM),
+        WIZ1TOWN(MapType.TMX_TOWN, "Wizardry 1 Town", "WIZ1TOWN.tmx", TILE_DIM),
+        WIZ2TOWN(MapType.TMX_TOWN, "Wizardry 2 Town", "WIZ2TOWN.tmx", TILE_DIM),
+        WIZ3TOWN(MapType.TMX_TOWN, "Wizardry 3 Town", "WIZ3TOWN.tmx", TILE_DIM),
+        WIZ4TOWN(MapType.TMX_TOWN, "Wizardry 4 Town", "WIZ4TOWN.tmx", WizardryData.Scenario.WER, TILE_DIM),
+        SPTOWN(MapType.TMX_TOWN, "Slaver Pits Town", "SPTOWN.tmx", TILE_DIM),
+        BSTOWN(MapType.TMX_TOWN, "Black Stone Town", "BSTOWN.tmx", TILE_DIM),
+        DQTOWN(MapType.TMX_TOWN, "Dragon Quest Town", "DQTOWN.tmx", TILE_DIM),
+        ULT3TOWN(MapType.TMX_TOWN, "Ultima 3 Town", "ULT3TOWN.tmx", WizardryData.Scenario.WER, TILE_DIM),
         //
         WIZARDRY1(MapType.WIZARDRY_ENCODED, "Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
         WIZARDRY2(MapType.WIZARDRY_ENCODED, "Knight of Diamonds", WizardryData.Scenario.KOD),
         WIZARDRY3(MapType.WIZARDRY_ENCODED, "Legacy of Llylgamyn", WizardryData.Scenario.LEG),
+        WIZARDRY4(MapType.WIZARDRY_ENCODED, "Return of Werdna", WizardryData.Scenario.WER),
         BLACK_STONE(MapType.WIZARDRY_ENCODED, "Black Stone", WizardryData.Scenario.BS),
         DRAGON_QUEST(MapType.WIZARDRY_ENCODED, "Dragon Quest", WizardryData.Scenario.DQ),
-        WIZARDRY4(MapType.WIZARDRY_ENCODED, "Return of Werdna", WizardryData.Scenario.WER),
+        SLAVERS_PIT(MapType.TMX_DUNGEON, "Slave Pits of the Undercity", WizardryData.Scenario.SLAVERS_PIT),
         PERINEAN(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Perinean Depths", WizardryData.Scenario.EXODUS_PERIN),
         DARDIN(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Dardin's Pit", WizardryData.Scenario.EXODUS_DARDIN),
         MINE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Mines of Morinia", WizardryData.Scenario.EXODUS_MINE),
@@ -76,7 +75,10 @@ public interface Constants {
         SNAKE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
         TIME(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME),
         //
-        SLAVERS_PIT(MapType.TMX_DUNGEON, "Slave Pits of the Undercity", WizardryData.Scenario.SLAVERS_PIT);
+        BOLTAC(MapType.TMX_TOWN, "Boltac's Trading Post", "boltac.tmx", TILE_DIM),
+        CANT(MapType.TMX_TOWN, "Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
+        WIWOLD(MapType.TMX_TOWN, "Wiwold", "wiwold.tmx", TILE_DIM),
+        WIWOLD_LVL_2(MapType.TMX_TOWN, "Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM);
 
         private final String label;
         private final String tmxFile;

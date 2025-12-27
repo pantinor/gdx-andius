@@ -136,25 +136,13 @@
   </data>
  </layer>
  <objectgroup id="11" name="people">
-  <object id="1" name="Jason" type="INNKEEPER" x="864" y="96" width="48" height="48">
+  <object id="14" name="Nifadas" type="MERCHANT_PMO" x="1296" y="624" width="48" height="48">
    <properties>
     <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="6" name="Kara Montino" type="FRIENDLY" x="1008" y="1296" width="48" height="48">
-   <properties>
-    <property name="icon" value="Dwarf_Miner"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="11" name="Drudgeworth" type="FRIENDLY" x="720" y="720" width="48" height="48">
-   <properties>
-    <property name="icon" value="Misguided_Bully"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="12" name="Kalab" type="MERCHANT_KOD" x="288" y="1200" width="48" height="48">
+  <object id="12" name="Kalab" type="MERCHANT_DQ" x="288" y="1200" width="48" height="48">
    <properties>
     <property name="icon" value="Hero"/>
     <property name="movement" value="FOLLOW_AVATAR"/>
@@ -166,27 +154,39 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="14" name="Nifadas" type="MERCHANT_PMO" x="1296" y="624" width="48" height="48">
+  <object id="1" name="Jason" type="INNKEEPER" x="864" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="16" name="Sable" type="FRIENDLY" x="960" y="288" width="48" height="48">
+  <object id="6" name="Shun" type="FRIENDLY" x="1008" y="1296" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dwarf_Miner"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="16" name="Careful" type="FRIENDLY" x="960" y="288" width="48" height="48">
    <properties>
     <property name="icon" value="Sorcerer_Mage_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="17" name="Garrick" type="FRIENDLY" x="864" y="288" width="48" height="48">
+  <object id="17" name="Perseverance" type="FRIENDLY" x="864" y="288" width="48" height="48">
    <properties>
     <property name="icon" value="Paladin_Ranger_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="20" name="Elira" type="FRIENDLY" x="864" y="432" width="48" height="48">
+  <object id="20" name="Riddle" type="FRIENDLY" x="864" y="432" width="48" height="48">
    <properties>
     <property name="icon" value="Sorcerer_Mage_Female"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="11" name="Dutiful" type="FRIENDLY" x="720" y="720" width="48" height="48">
+   <properties>
+    <property name="icon" value="Misguided_Bully"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

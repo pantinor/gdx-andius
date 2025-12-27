@@ -16,7 +16,7 @@ public class ConversationDialog extends Dialog {
         this.conv = conv;
 
         if (conv.description != null) {
-            scrollPane.add("You meet " + conv.description);
+            scrollPane.add("You meet " + conv.name + ". " + conv.description);
         }
 
         input.setTextFieldListener((TextField tf, char key) -> {

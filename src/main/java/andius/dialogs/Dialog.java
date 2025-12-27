@@ -16,7 +16,7 @@ import utils.LogScrollPane;
 
 public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog implements Constants {
 
-    protected static final int WIDTH = 300;
+    protected static final int WIDTH = 350;
     protected static final int HEIGHT = 200;
 
     protected final BaseScreen screen;
@@ -28,19 +28,22 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
         this.screen = screen;
 
         setSkin(Andius.skin);
-        setWidth(WIDTH);
-        setHeight(HEIGHT);
+        setSize(WIDTH, HEIGHT);
 
-        pad(10);
+        float titlePadTop = getPadTop();
+        padLeft(10);
+        padRight(10);
+        padBottom(10);
+        padTop(titlePadTop + 10);
 
         scrollPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
-        scrollPane.setHeight(HEIGHT);
 
         input = new TextField("", Andius.skin, "default-16");
 
-        getContentTable().add(scrollPane).maxWidth(WIDTH).width(WIDTH);
+        getContentTable().defaults().maxWidth(WIDTH).width(WIDTH).growX();
+        getContentTable().add(scrollPane).expandY().fillY().minHeight(0);
         getContentTable().row();
-        getContentTable().add(input).maxWidth(WIDTH).width(WIDTH);
+        getContentTable().add(input);
     }
 
     @Override

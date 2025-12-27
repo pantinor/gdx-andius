@@ -279,19 +279,13 @@
     <property name="movement" value="WANDER"/>
    </properties>
   </object>
-  <object id="13" name="Chade" type="FRIENDLY" x="1296" y="96" width="48" height="48">
-   <properties>
-    <property name="icon" value="Cult_Scholar"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="57" name="Molly" type="FRIENDLY" x="1152" y="1056" width="48" height="48">
+  <object id="57" name="Molly" type="FRIENDLY" x="1344" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Domestikion"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="56" name="Burrich" type="FRIENDLY" x="1056" y="1056" width="48" height="48">
+  <object id="56" name="Burrich" type="FRIENDLY" x="1248" y="96" width="48" height="48">
    <properties>
     <property name="icon" value="Domestikion"/>
     <property name="movement" value="FIXED"/>

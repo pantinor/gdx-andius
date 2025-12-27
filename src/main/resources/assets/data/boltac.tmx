@@ -146,12 +146,4 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="13" name="rooms" visible="0">
-  <object id="118" x="240" y="240">
-   <polygon points="0,0 0,528 672,528 672,0"/>
-  </object>
-  <object id="119" x="144" y="336">
-   <polygon points="0,0 0,96 96,96 96,0"/>
-  </object>
- </objectgroup>
 </map>

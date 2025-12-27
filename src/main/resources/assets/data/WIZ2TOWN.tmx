@@ -150,9 +150,15 @@
   </data>
  </layer>
  <objectgroup id="11" name="people">
-  <object id="5" name="Brother Latumapic" type="FRIENDLY" x="672" y="144" width="48" height="48">
+  <object id="11" name="Rent" type="MERCHANT_KOD" x="768" y="1008" width="48" height="48">
    <properties>
-    <property name="icon" value="Druid_Grove_Keeper_Male"/>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="10" name="Slade" type="MERCHANT_LEG" x="768" y="1296" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
@@ -168,15 +174,9 @@
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="10" name="Slade" type="MERCHANT_LEG" x="768" y="1296" width="48" height="48">
+  <object id="5" name="Brother Latumapic" type="FRIENDLY" x="672" y="144" width="48" height="48">
    <properties>
-    <property name="icon" value="Hero"/>
-    <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="11" name="Rent" type="MERCHANT_KOD" x="768" y="1008" width="48" height="48">
-   <properties>
-    <property name="icon" value="Hero"/>
+    <property name="icon" value="Druid_Grove_Keeper_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>

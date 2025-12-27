@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="48" tileheight="48" infinite="0" nextlayerid="12" nextobjectid="21">
+ <properties>
+  <property name="startX" value="1"/>
+  <property name="startY" value="15"/>
+ </properties>
+ <tileset firstgid="1" name="terrain" tilewidth="48" tileheight="48" tilecount="760" columns="20">
+  <image source="uf_terrain.png" width="960" height="1824"/>
+  <tile id="115">
+   <animation>
+    <frame tileid="115" duration="500"/>
+    <frame tileid="116" duration="500"/>
+    <frame tileid="117" duration="500"/>
+    <frame tileid="118" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <animation>
+    <frame tileid="135" duration="500"/>
+    <frame tileid="136" duration="500"/>
+    <frame tileid="137" duration="500"/>
+    <frame tileid="138" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="155">
+   <animation>
+    <frame tileid="155" duration="500"/>
+    <frame tileid="156" duration="500"/>
+    <frame tileid="157" duration="500"/>
+    <frame tileid="158" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="175">
+   <animation>
+    <frame tileid="175" duration="500"/>
+    <frame tileid="176" duration="500"/>
+    <frame tileid="177" duration="500"/>
+    <frame tileid="178" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="195" duration="300"/>
+    <frame tileid="196" duration="300"/>
+    <frame tileid="197" duration="300"/>
+    <frame tileid="198" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="215">
+   <animation>
+    <frame tileid="215" duration="500"/>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="217" duration="500"/>
+    <frame tileid="218" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="621">
+   <animation>
+    <frame tileid="621" duration="300"/>
+    <frame tileid="622" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="644">
+   <animation>
+    <frame tileid="644" duration="200"/>
+    <frame tileid="645" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="664">
+   <animation>
+    <frame tileid="664" duration="200"/>
+    <frame tileid="665" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="672">
+   <animation>
+    <frame tileid="672" duration="750"/>
+    <frame tileid="673" duration="750"/>
+   </animation>
+  </tile>
+  <tile id="674">
+   <animation>
+    <frame tileid="674" duration="750"/>
+    <frame tileid="675" duration="750"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACq2WQU7EMAxFcx5W3IHjADvW7WIuMitmgbgDJ5iBG9GIRvr6/G871XzJStWmebFju22trnW3ZeKdihZhfF/xnwLregPrum72AyPz1xbzcV6FfwG77va9jzfgo0+4/kLP1qb5KMff/f+6/Y3nbTw7/mBwPGbjz3wnxVf5sIJl/Ev7zx/X77sNIaOyzyPnzzb4C62LMVfPqv53cf4r/3F9VQeKr87/qNz6HAO1pxPY2rQvLq7Z2ion+B3Hd+vzGWaxVsK5is85EomZqua6HgSf469ytivKzyP+4xzmq7PL+KfAnrce+bIZjm6u+4ao2pjhvwJb8R+D97P+wDGM/B/X0fwj/KhulVz+O34LRtd3+R+H81/1H5f/kRSX80f57/gcx6yPV747ip35r/pf1puzfak5Uf/NVOGqs8F7GT/L/epecc+Krc5/SLHZ/66PxJB/j9rnOq/wq+yI32Ctap0O3bv34Vl9FozzzdVb5dvD+TfDd3U88+3n/Kvy3b+a4kea+U8ainql+/dT+1Q9J1pH9e9ZlovZL9WB7p0AEAAA
+  </data>
+ </layer>
+ <layer id="2" name="floor 2" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGN6ggGmgXUB7YIeER8EoGAXUAxuQ8EDaPRBugNnZNsD2D2QcUAPYMYyW0eQAasS/Mw6aFPtHcvof6nlvJANsaZ2U9D8cAS7/o5fRw6W8Hk5+GQXUBwBoj+mOABAAAA==
+  </data>
+ </layer>
+ <layer id="3" name="props" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3WzQqAIAwA4Ny9Vw2sLj1OdO4dK4agpvkzxYp9MHYZDnWIXfdeE5jZNgKGTgKGMoBZL+FeE+o/P/R3Ca2d2t+3f4qY/n/VC4zSloQzTaktvWat/bPytvNOV8DcwtV7F5hzqDfajlit98/aot6/ehPtHIs6/1Q8/yyXa9Z986//i13RUsn+Nf5djH3VAXaS4fsAEAAA
+  </data>
+ </layer>
+ <layer id="4" name="creature" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+ <layer id="5" name="water_edges" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3S0QmAMAwE0HSHRFdwiA6T0TpKRzMhIOKv2AO599P8XRNO5L/2Jr41GfEO9F+IVmP/37MmonE/A9wws3vlewf84ajsmbPe5lW09ve8f7xzdT5h6aP/iP4h+2+199V/A/TfKt8R2URE9J0TJx1yZgAQAAA=
+  </data>
+ </layer>
+ <layer id="6" name="shadows" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2WUQoAIQhEu4v3v+N+7H6JVDMMa4YPhIgKZhRzjBf7IgMLwu/v3pvdj840MYg/VTxF8/+HHnPrVU2jb1fIC4PXtPKO9TTTw0hjNRS1XFH3CVT/9xQ98AZY3er/pMHI9J3pserZo9lHMaucyA0aGJBcqmZVhgcQRIP6ABAAAA==
+  </data>
+ </layer>
+ <layer id="7" name="walls" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu1WCw6CMAyFS3oIDoGegZh4A416AwSPIOqJ3KKLzUvXbeUTFV/SQEuzx9ruQZ1n2YWxmvEpSuNXguFzLr9k1nXAeMPwS8DnFZNvc84kfiT3yI/+KpG/8PDXHs4O8lth/4v8bT5+6xdgNtYIe6Y4JdYf6+3rfwv8h/zZh62x/eu6Y+ZkGeDHevv6fyNxN+s21pHZvxu79pw/X/+14NbH3kq+i2mB9XQ93RhbB7SB2i8D6402NiSN7tP7WEgaOQW/xDEFv5tvqs9Oo6fglzAHfk7zhtC+WPy17zu0L/SumndO0Z7Qv7RGr6X54vhDGPK8fCI/ajQ1zXmV5kWz/1S4NWO+PWPxx2qvlKs9fynaO+d/1QeRUmmKABAAAA==
+  </data>
+ </layer>
+ <layer id="8" name="door" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3RMQoAIAwDwPoEX+2rBQd3N7XQO8jckEbUMD/f7+1zgcey7X3qM9rOTdX+DwAA5LMA8YDvFQAQAAA=
+  </data>
+ </layer>
+ <layer id="9" name="torches" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3WsQ0AIAhEUcLuDuG2tsQQGhXF/NdRH1wQWdM0nk/rGs94S/Z+zNiPPbj7GrxcMrPyciErABls1934PWzX0Xt18bfiRwMagxxbABAAAA==
+  </data>
+ </layer>
+ <layer id="10" name="webs" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3SoREAIBADwQzNM981DYCBd+zKE1FJkjmydeq3uvf4Q/kNAADAswXFeyztABAAAA==
+  </data>
+ </layer>
+ <objectgroup id="11" name="people">
+  <object id="14" name="Nifadas" type="MERCHANT_PMO" x="1296" y="624" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="12" name="Kalab" type="MERCHANT_BS" x="288" y="1200" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="FOLLOW_AVATAR"/>
+   </properties>
+  </object>
+  <object id="13" name="Osric" type="TEMPLE" x="1344" y="1296" width="48" height="48">
+   <properties>
+    <property name="icon" value="Bandit"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="1" name="Jason" type="INNKEEPER" x="864" y="96" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+  <object id="6" name="Revel" type="FRIENDLY" x="768" y="720" width="48" height="48">
+   <properties>
+    <property name="icon" value="Dwarf_Miner"/>
+    <property name="movement" value="FIXED"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

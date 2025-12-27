@@ -130,13 +130,25 @@
   </data>
  </layer>
  <objectgroup id="11" name="people">
+  <object id="11" name="Jason" type="MERCHANT_DQ" x="48" y="528" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
+  <object id="10" name="Momoa" type="MERCHANT_WER" x="912" y="768" width="48" height="48">
+   <properties>
+    <property name="icon" value="Hero"/>
+    <property name="movement" value="WANDER"/>
+   </properties>
+  </object>
   <object id="5" name="Orin" type="FRIENDLY" x="480" y="1104" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Percht_Raider_Male"/>
     <property name="movement" value="FIXED"/>
    </properties>
   </object>
-  <object id="7" name="Nadia" type="FRIENDLY" x="912" y="1104" width="48" height="48">
+  <object id="7" name="Nettle" type="FRIENDLY" x="912" y="1104" width="48" height="48">
    <properties>
     <property name="icon" value="Druid_Shaman_Female"/>
     <property name="movement" value="FIXED"/>
@@ -158,18 +170,6 @@
    <properties>
     <property name="icon" value="Sorcerer_Mage_Female"/>
     <property name="movement" value="FIXED"/>
-   </properties>
-  </object>
-  <object id="10" name="Momoa" type="MERCHANT_WER" x="912" y="768" width="48" height="48">
-   <properties>
-    <property name="icon" value="Hero"/>
-    <property name="movement" value="WANDER"/>
-   </properties>
-  </object>
-  <object id="11" name="Jason" type="MERCHANT_DQ" x="48" y="528" width="48" height="48">
-   <properties>
-    <property name="icon" value="Hero"/>
-    <property name="movement" value="WANDER"/>
    </properties>
   </object>
  </objectgroup>

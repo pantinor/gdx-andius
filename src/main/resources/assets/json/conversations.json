@@ -1,6 +1,6 @@
 {
     "maps": {
-        "LLECHY": [
+        "WIZ1TOWN": [
             {
                 "name": "Drudgeworth",
                 "description": "A bard.",
@@ -71,7 +71,7 @@
                 ]
             }
         ],
-        "COVE": [
+        "WIZ2TOWN": [
             {
                 "name": "Brother Latumapic",
                 "description": "A soft-spoken Bishop and story teller.",
@@ -126,7 +126,7 @@
                 ]
             }
         ],
-        "BARAD_ENELETH": [
+        "WIZ3TOWN": [
             {
                 "name": "Lyrra",
                 "description": "An attractive lady.",
@@ -211,7 +211,7 @@
                 ]
             }
         ],
-        "MONTOR": [
+        "WIZ4TOWN": [
             {
                 "name": "FitzChivalry",
                 "description": "A stout man.",
@@ -297,7 +297,110 @@
                     "Until Werdna can finally put his hands on the one name he hates even more than Hawkwind’s:",
                     "Trebor."
                 ]
+            }
+        ],
+        "DQTOWN": [
+            {
+                "name": "Dutiful",
+                "description": "A stout man.",
+                "story": [
+                    "The frontier has a way of making liars out of maps.",
+                    "North of you are the Confederated Baronies - hard country, hard people, and laws that hold mostly because steel backs them.",
+                    "South lie the old realms: the ancient and decadent kingdoms that once ruled by inheritance and memory, and now mostly rule by habit.",
+                    "Between those powers stretches a semi-settled borderland - the Frontiers of Alusia, a place with just enough roads to get you killed on schedule.",
+                    "To the east is the Sea of Grass, a steppe that seems endless until it isn’t - wide enough to hide whole nations of raiders and the old scars of fallen cities.",
+                    "To the west is the Alusian Ocean, a gray, storm-prone void that sailors whisper is bottomless and world-ending, because the alternative is to admit it’s simply indifferent.",
+                    "In the middle are the thin lifelines: rivers, ferries, and the stubborn commerce of people who refuse to move back home.",
+                    "Two names come up again and again in tavern talk and caravan ledgers: the Barony of Carzala and the Brastor Holding - the region’s closest things to stability.",
+                    "They trade with each other along the waterways and overland routes that cut through the wild, forming a single economic spine for the scattered settlements that cling to coast and riverbank.",
+                    "The greatest artery is the Sweetwater River - broad, old, and treacherous in its calm.",
+                    "It’s said to run from the Sea of Grass to Confederation Bay; it is over a mile wide through most of its course, and it does not forgive the careless.",
+                    "Outside of ferries and a few hard-won fords (or a strong horse and a reckless rider), it is a barrier as much as it is a route.",
+                    "This is the kind of place where civilization means a castle with a working gate, and where the only honest prayer is: let the road be quiet today.",
+                    "The world’s rules are not your rules - out here, magic doesn’t feel like a parlor trick.",
+                    "It feels like a leak."
+                ]
             },
+            {
+                "name": "Riddle",
+                "description": "A stout man.",
+                "story": [
+                    "DragonQuest lore speaks of magic as something that happens where planes press too close - energy bleeding between dimensions, shaped by those with the talent and training to seize it.",
+                    "Such practitioners are called Adepts, and their arts are organized into separate Colleges of Magic, each with its own disciplines, spells, and taboos.",
+                    "Among those Colleges is one feared by soldiers and priests alike: Illusions.",
+                    "Illusion-work is not merely pretty lights.",
+                    "Properly crafted, it can fool senses, twist judgment, and - under particular conditions - harm.",
+                    "In the DragonQuest tradition, an illusion that truly injures must include a tactile component paired with an effect aimed at the victim’s primary sense; lesser illusions can still mislead, terrify, or cripple decisions at exactly the wrong moment.",
+                    "People in the Baronies call that sort of magic cowardice.",
+                    "People in the Frontiers call it Tuesday."
+                ]
+            }, {
+                "name": "Perseverance",
+                "description": "A stout man.",
+                "story": [
+                    "The newest terror in Alusia has a name spoken softly around fires.",
+                    "Loktar - a dragon whose cruelty is as deliberate as it is immense.",
+                    "The beasts and demonic forces that prowl the wilderness were always there in one form or another, but Loktar made them feel coordinated - like a hand closing into a fist.",
+                    "And then came the insult that turned fear into mobilization:",
+                    "Princess Persia - symbol, hostage, leverage - taken into Loktar’s grasp.",
+                    "No one agrees on the exact night.",
+                    "Some insist the sky flashed green.",
+                    "Some swear the castle guards saw the Princess walk into the fog as if summoned.",
+                    "Some claim the dragon never crossed the walls at all - that only a shadow did, and that the shadow was enough.",
+                    "But the result is the same: a royal captive, a realm trembling, and a frontier that cannot afford to look weak."
+                ]
+            }, {
+                "name": "Careful",
+                "description": "A stout man.",
+                "story": [
+                    "The King’s Treasure Room",
+                    "The order goes out: Find the Princess.",
+                    "Break Loktar’s hold.",
+                    "Save Alusia.",
+                    "The path to that salvation does not lead to a battlefield.",
+                    "It leads downward - into a place spoken of with the uneasy tone normally reserved for graves: the King’s Treasure Room.",
+                    "Despite the name, no one imagines a glittering chamber and an obliging chest.",
+                    "They mean a vault-complex, a layered understructure of defenses and dead ends - booby-trapped not just with blades and poison, but with architectural malice: spaces designed to confuse, to separate, to exhaust.",
+                    "Even before Loktar, it was a nightmare made for thieves.",
+                    "With Loktar’s influence, it becomes something worse: a maze where your senses can betray you and where the dark itself may be weaponized."
+                ]
+            }, {
+                "name": "Shun",
+                "description": "A stout man.",
+                "story": [
+                    "The Frontier’s veterans tell the same story in different words.",
+                    "Each level has its own theme.",
+                    "Which is how survivors explain why the horrors change, and why tactics that worked yesterday stop working today.",
+                    "The deeper you go, the richer the rewards - and the less forgiving the mistakes.",
+                    "And when your company is assembled, you do what adventurers have always done on the edge of maps:",
+                    "You count torches.",
+                    "You check straps.",
+                    "You memorize the feel of your last clean breath.",
+                    "Because beyond the doors is a three-dimensional ruin of stairs, pits, chutes, teleports, elevators, and regions where light and magic may fail you - an underworld built to punish certainty.",
+                    "And somewhere, at the bottom of the designs and the lies, Loktar’s grip on the Princess - whether it is chain, spell, or the subtler kind of prison where the captive can no longer trust their own eyes.",
+                    "So here is the oath, spoken plainly because the frontier doesn’t respect poetry:",
+                    "You will go down.",
+                    "You will bring back the Princess.",
+                    "You will break the dragon’s claim.",
+                    "You will survive the King’s Treasure Room - booby traps and all.",
+                    "And if you find treasure along the way?",
+                    "Try not to die counting it."
+                ]
+            }
+        ],
+        "BSTOWN": [
+            {
+                "name": "Revel",
+                "description": "A stout man.",
+                "story": [
+                    "Your quest is to descend into the dungeons beneath the cit - the Black Stone - and only by regaining this gem and returning it to its rightful owner, your master, Lord Valacar, can the city be saved from evil.",
+                    "Along the way you will face the minions of Llorgarth and other denizens of the maze, together with the tricks and traps the lich has set to defend his stronghold.",
+                    "But you may also find help from unexpected quarters.",
+                    "Good Luck!!!"
+                ]
+            }
+        ],
+        "ULT3TOWN": [
             {
                 "name": "Chade",
                 "description": "A wise councillor.",

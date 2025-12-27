@@ -1,7 +1,10 @@
 package andius.objects;
 
+import static andius.Andius.CTX;
+import static andius.Andius.mainGame;
 import andius.Constants.Map;
 import andius.GameScreen;
+import andius.EnhancedWizardryCombatScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
@@ -84,6 +87,24 @@ public class BaseMap {
             Direction dir = null;
 
             switch (p.getMovement()) {
+                case ATTACK_AVATAR: {
+                    int dist = Utils.movementDistance(p.getWx(), p.getWy(), avatarX, avatarY);
+                    if (dist <= 1) {
+                        this.combatActor = p;
+                        Monster m = (Monster) p.getEnemy().baseType();
+                        EnhancedWizardryCombatScreen cs = new EnhancedWizardryCombatScreen(CTX, map, p.getName(), m, m.getLevel(), true, null, null);
+                        mainGame.setScreen(cs);
+                        return;
+                    } else if (dist >= 4) {
+                        //dont move until close enough
+                        continue;
+                    }
+                    if (Utils.randomBoolean()) {
+                        int mask = getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY);
+                        dir = Utils.getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
+                    }
+                }
+                break;
                 case FOLLOW_AVATAR: {
                     int mask = getValidMovesMask(map, p.getWx(), p.getWy(), p, avatarX, avatarY);
                     dir = Utils.getPath(avatarX, avatarY, mask, true, p.getWx(), p.getWy());
