@@ -179,10 +179,24 @@ public class Monster implements Comparable<Monster> {
 
     @Override
     public String toString() {
-        return String.format("%d\t%s\t%s",
+        return String.format("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d",
                 monsterId,
                 String.format("%-55s", name),
-                MonsterModels.values()[iconId]
+                String.format("%-15s", CharacterType.values()[this.type]),
+                String.format("%-4s", "" + getLevel()),
+                String.format("%-4s", "" + exp),
+                String.format("%-5s", "" + hitPoints.max()),
+                String.format("%-3s", "" + armourClass),
+                String.format("%-25s", damage),
+                String.format("%-12s", "" + MonsterModels.values()[iconId]),
+                partnerID,
+                groupSize,
+                mageSpellLevel,
+                priestSpellLevel,
+                goldReward,
+                chestReward,
+                healpts,
+                breath
         );
     }
 

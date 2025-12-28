@@ -400,6 +400,45 @@
                 ]
             }
         ],
+        "SPTOWN": [
+            {
+                "name": "Seraphine",
+                "description": "A sharp-eyed half-elf hexbinder.",
+                "story": [
+                    "For several years, organized bands of pirates and slavers have made a living by raiding the coastal towns on the Sea of Gearnat.",
+                    "Ranging from Onnwal to the Wild Coast, they have descended quickly and ruthlessly on the small towns and villages, and carried off innocent citizens into the night.",
+                    "Although these marauders were not approved of by the lords and rulers of the lands they raided, they were allowed to continue their depredations.",
+                    "Feuding amongst the lords and lack of funds prevented all but an occasional naval battle with the villains and the slow fortification of towns.",
+                    "Bribery was often a more effective method of protecting one’s lands from the incursions of these avaricious sea-wolves.",
+                    "Recently, however, the slavers’ attacks have become more frequent and vicious.",
+                    "Believing their prey to be weak and helpless, the raiders have burnt entire villages and pulled down the walk of towns."
+                ]
+            },
+            {
+                "name": "Brom",
+                "description": "A broad-shouldered human bruiser in patched chainmail.",
+                "story": [
+                    "Women, children, and whole families have disappeared; and though bribes are accepted, the agreements are ignored.",
+                    "Vast tracts of coastline have been reduced to ashes, left barren except for packs of wild dogs.",
+                    "The lords have finally become determined to take action, forgetting their petty squabbles to unite against the marauders of the yellow sails.",
+                    "Through information gained from escaped slaves, and those fortunate enough to have been found and bought by families or friends, the lords have traced the slavers to a port from which they launch their swift attacks on the coast - the despoiled city of Highport in wasted Pomarj.",
+                    "Some who have lost kin and fortune to the reavers have advised taking a fleet and crushing the outpost, but cooler heads have prevailed.",
+                    "They have pointed out that such a base is undoubtedly well-defended and that the slavers, if alarmed, might arrange that loved ones and kin are never seen again."
+                ]
+            },
+            {
+                "name": "Kaelith",
+                "description": "A quiet, moon-touched tiefling ranger.",
+                "story": [
+                    "The lords have chosen a plan of stealth.",
+                    "Several bands of adventurers have been gathered together and will be sent to infiltrate the base and destroy the leaders of this evil band.",
+                    "Caution is recommended, for the true strength and extent of this slave ring is not known, but they seem to be stronger and better organized than encounters with their small raiding parties would indicate.",
+                    "Highport was once a human city, but the land and town have been overrun by humanoids - orcs, goblins, kobolds, ogres, and gnolls.",
+                    "Looted, burned, and ill-kept, the city has become a base for human outcasts wishing to deal with these unsavory creatures.",
+                    "Your party, provided with transport, has managed to arrive in Highport and pose as one of these groups come to deal."
+                ]
+            }
+        ],
         "ULT3TOWN": [
             {
                 "name": "Chade",

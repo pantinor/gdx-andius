@@ -70,7 +70,7 @@ public class MonsterTest {
     @Test
     public void monsters() throws Exception {
 
-        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/slaver-monsters.json");
+        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/ultima-monsters.json");
         String json = IOUtils.toString(is2);
 
         GsonBuilder builder = new GsonBuilder();
@@ -103,7 +103,7 @@ public class MonsterTest {
                 "GRPSZ",
                 "ICON"
         );
-        System.out.println(header);
+        //System.out.println(header);
 
         for (Monster m : monsters) {
             System.out.println(m);

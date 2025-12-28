@@ -1,0 +1,1056 @@
+[
+    {
+        "genericName": "Skeleton",
+        "name": "Skeleton",
+        "monsterId": 0,
+        "iconId": 2,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "FIRE",
+            "COLD"
+        ],
+        "ability": [],
+        "exp": 230,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 3,
+            "bonus": 2
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Orc",
+        "name": "Orc",
+        "monsterId": 1,
+        "iconId": 20,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "FIRE"
+        ],
+        "ability": [
+            "SLEEP",
+            "RUN"
+        ],
+        "exp": 235,
+        "groupSize": {
+            "qty": 3,
+            "sides": 2,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Pirate",
+        "name": "Pirate",
+        "monsterId": 2,
+        "iconId": 3,
+        "type": 3,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 10,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "SLEEP",
+            "RUN"
+        ],
+        "exp": 380,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 5,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 2,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "monsterId": 3,
+        "name": "Goblin",
+        "genericName": "SMALL HUMANOID",
+        "iconId": 1,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 8,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resists": [
+            "NONE",
+            "COLD"
+        ],
+        "ability": [
+            "SLEEP",
+            "RUN"
+        ],
+        "exp": 415,
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            }
+        ],
+        "groupSize": {
+            "qty": 2,
+            "sides": 2,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 3,
+            "bonus": 1
+        }
+    },
+    {
+        "genericName": "Ghoul",
+        "name": "Ghoul",
+        "monsterId": 4,
+        "iconId": 5,
+        "type": 10,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "PARALYZE"
+        ],
+        "exp": 520,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 1,
+            "sides": 10,
+            "bonus": 1
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Man-o-War",
+        "name": "Man-o-War",
+        "monsterId": 5,
+        "iconId": 0,
+        "type": 8,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [
+            "COLD",
+            "MAGIC"
+        ],
+        "ability": [
+            "POISON"
+        ],
+        "exp": 550,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 1
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 4,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "genericName": "Snatch",
+        "name": "Snatch",
+        "monsterId": 6,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 3,
+        "chestReward": 13,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON",
+            "SLEEP"
+        ],
+        "exp": 600,
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 2,
+            "sides": 8,
+            "bonus": 2
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Brigand",
+        "name": "Brigand",
+        "monsterId": 7,
+        "iconId": 4,
+        "type": 0,
+        "goldReward": 0,
+        "chestReward": 10,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "AUTOKILL",
+            "SLEEP",
+            "RUN"
+        ],
+        "exp": 840,
+        "groupSize": {
+            "qty": 2,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 3,
+            "sides": 4,
+            "bonus": 2
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            },
+            {
+                "qty": 1,
+                "sides": 2,
+                "bonus": 1
+            }
+        ]
+    },
+    {
+        "monsterId": 8,
+        "name": "Giant",
+        "genericName": "Giant",
+        "iconId": 16,
+        "type": 0,
+        "goldReward": 2,
+        "chestReward": 12,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resists": [],
+        "ability": [
+            "SLEEP",
+            "RUN"
+        ],
+        "exp": 960,
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            }
+        ],
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 1
+        }
+    },
+    {
+        "genericName": "Serpent",
+        "name": "Serpent",
+        "monsterId": 9,
+        "iconId": 5,
+        "type": 6,
+        "goldReward": 4,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "STONE"
+        ],
+        "exp": 1040,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Bradle",
+        "name": "Bradle",
+        "monsterId": 10,
+        "iconId": 14,
+        "type": 12,
+        "goldReward": 2,
+        "chestReward": 12,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1120,
+        "groupSize": {
+            "qty": 1,
+            "sides": 8,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 5,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "monsterId": 11,
+        "name": "Golem",
+        "genericName": "Golem",
+        "iconId": 5,
+        "type": 8,
+        "goldReward": 2,
+        "chestReward": 12,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 6,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 1,
+        "breath": 0,
+        "unaffected": 0,
+        "resists": [
+            "COLD",
+            "POISON"
+        ],
+        "ability": [
+            "RUN"
+        ],
+        "exp": 1320,
+        "damage": [
+            {
+                "qty": 3,
+                "sides": 6,
+                "bonus": 1
+            }
+        ],
+        "groupSize": {
+            "qty": 2,
+            "sides": 3,
+            "bonus": 2
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 8,
+            "bonus": 0
+        }
+    },
+    {
+        "genericName": "Mane",
+        "name": "Mane",
+        "monsterId": 12,
+        "iconId": 27,
+        "type": 8,
+        "goldReward": 4,
+        "chestReward": 14,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 0,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1460,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 6,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Wyvern",
+        "name": "Wyvern",
+        "monsterId": 13,
+        "iconId": 34,
+        "type": 8,
+        "goldReward": 6,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "POISON"
+        ],
+        "exp": 1540,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 7,
+            "sides": 8,
+            "bonus": 7
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Thief",
+        "name": "Thief",
+        "monsterId": 14,
+        "iconId": 3,
+        "type": 3,
+        "goldReward": 7,
+        "chestReward": 17,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [
+            "RUN"
+        ],
+        "exp": 1640,
+        "groupSize": {
+            "qty": 1,
+            "sides": 5,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 9,
+            "sides": 6,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 3,
+                "sides": 8,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 10,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Titan",
+        "name": "Titan",
+        "monsterId": 15,
+        "iconId": 16,
+        "type": 1,
+        "goldReward": 5,
+        "chestReward": 15,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 0,
+        "mageSpellLevel": 3,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 1,
+        "breath": 0,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 1790,
+        "groupSize": {
+            "qty": 1,
+            "sides": 5,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 8,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 12,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Griffin",
+        "name": "Griffin",
+        "monsterId": 16,
+        "iconId": 15,
+        "type": 7,
+        "goldReward": 2,
+        "chestReward": 12,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 3,
+        "speed": 0,
+        "mageSpellLevel": 1,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 3,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 2075,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 5,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 3,
+                "sides": 6,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Gargoyle",
+        "name": "Gargoyle",
+        "monsterId": 17,
+        "iconId": 17,
+        "type": 13,
+        "goldReward": 3,
+        "chestReward": 13,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 5,
+        "speed": 0,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 50,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [],
+        "exp": 2435,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 4,
+            "sides": 8,
+            "bonus": 4
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Dragon",
+        "name": "Dragon",
+        "monsterId": 18,
+        "iconId": 15,
+        "type": 7,
+        "goldReward": 8,
+        "chestReward": 18,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": -1,
+        "speed": 0,
+        "mageSpellLevel": 5,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 1,
+        "unaffected": 0,
+        "resistance": [],
+        "ability": [],
+        "exp": 5000,
+        "groupSize": {
+            "qty": 1,
+            "sides": 4,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 12,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 4,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    },
+    {
+        "genericName": "Demon",
+        "name": "Demon",
+        "monsterId": 19,
+        "iconId": 17,
+        "type": 11,
+        "goldReward": 6,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "speed": 0,
+        "mageSpellLevel": 3,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 60,
+        "resistance": [],
+        "ability": [
+            "CALLFORHELP"
+        ],
+        "exp": 5100,
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 10,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 4
+            }
+        ]
+    },
+    {
+        "monsterId": 20,
+        "name": "Devil",
+        "genericName": "DEMON",
+        "iconId": 17,
+        "type": 11,
+        "goldReward": 6,
+        "chestReward": 16,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": 4,
+        "mageSpellLevel": 3,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 0,
+        "breath": 0,
+        "unaffected": 60,
+        "resists": [],
+        "ability": [
+            "CALLFORHELP"
+        ],
+        "exp": 5100,
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 2,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 3,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 4
+            }
+        ],
+        "groupSize": {
+            "qty": 1,
+            "sides": 1,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 10,
+            "sides": 8,
+            "bonus": 0
+        }
+    },
+    {
+        "genericName": "Balron",
+        "name": "Balron",
+        "monsterId": 21,
+        "iconId": 17,
+        "type": 11,
+        "goldReward": 8,
+        "chestReward": 18,
+        "partnerID": 0,
+        "partnerOdds": 0,
+        "armourClass": -3,
+        "speed": 0,
+        "mageSpellLevel": 5,
+        "priestSpellLevel": 0,
+        "levelDrain": 0,
+        "healpts": 1,
+        "breath": 0,
+        "unaffected": 95,
+        "resistance": [],
+        "ability": [
+            "POISON",
+            "PARALYZE",
+            "CALLFORHELP"
+        ],
+        "exp": 44090,
+        "groupSize": {
+            "qty": 1,
+            "sides": 6,
+            "bonus": 0
+        },
+        "hitPoints": {
+            "qty": 11,
+            "sides": 8,
+            "bonus": 0
+        },
+        "damage": [
+            {
+                "qty": 2,
+                "sides": 12,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 6,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            },
+            {
+                "qty": 1,
+                "sides": 4,
+                "bonus": 0
+            }
+        ]
+    }
+]
