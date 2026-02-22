@@ -271,16 +271,16 @@ public class ObjectsTestNG {
         return ret.toString();
     }
 
-    //@Test
+    @Test
     public void readJson() throws Exception {
 
-        InputStream is = this.getClass().getResourceAsStream("/assets/json/items.json");
+        InputStream is = this.getClass().getResourceAsStream("/assets/json/kod-items.json");
         String json = IOUtils.toString(is);
 
-        is = this.getClass().getResourceAsStream("/assets/json/rewards.json");
+        is = this.getClass().getResourceAsStream("/assets/json/kod-rewards.json");
         String json2 = IOUtils.toString(is);
 
-        is = this.getClass().getResourceAsStream("/assets/json/monsters.json");
+        is = this.getClass().getResourceAsStream("/assets/json/kod-monsters.json");
         String json3 = IOUtils.toString(is);
 
         GsonBuilder builder = new GsonBuilder();
@@ -295,27 +295,16 @@ public class ObjectsTestNG {
 
         Collections.sort(items);
 
-        java.util.Map<String, Item> itemMap = new HashMap<>();
-
-        for (Item it : items) {
-            System.out.println(it);
-            itemMap.put(it.name, it);
-        }
-
         for (Reward r : rewards) {
-
             int goldAmt = r.goldAmount();
             System.out.println(String.format("player found %d gold with %s", goldAmt, r.getId()));
-
             for (Reward.RewardDetails d : r.getRewardDetails()) {
                 if (d.itemReward != null) {
-                    Item min = items.get(d.itemReward.getMin());
-                    Item mx = items.get(d.itemReward.getMax());
-                    System.out.println(String.format("player finds a %s or a %s", min.name, mx.name));
+                    int itemId = Utils.getRandomBetween(d.itemReward.min, d.itemReward.min + d.itemReward.range);
+                    Item found = items.get(itemId);
+                    System.out.println(String.format("player finds a %s", found.name));
                 }
-
             }
-
         }
 
         Collections.sort(monsters);

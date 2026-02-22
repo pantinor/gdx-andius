@@ -110,10 +110,10 @@ public class MonsterTest {
         }
     }
 
-    //@Test
+    @Test
     public void items() throws Exception {
 
-        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/items.json");
+        InputStream is2 = this.getClass().getResourceAsStream("/assets/json/kod-items.json");
         String json = IOUtils.toString(is2);
 
         GsonBuilder builder = new GsonBuilder();

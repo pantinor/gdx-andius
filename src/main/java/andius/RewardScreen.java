@@ -186,7 +186,7 @@ public class RewardScreen implements Screen, Constants {
                     int roll = rand.nextInt(101);
                     if (roll <= odds) {
                         CharacterRecord picked = lastMenStanding.get(rand.nextInt(lastMenStanding.size()));
-                        int itemId = Math.min(Utils.getRandomBetween(d.itemReward.getMin(), d.itemReward.getMax()), this.map.scenario().items().size() - 1);
+                        int itemId = Utils.getRandomBetween(d.itemReward.min, d.itemReward.min + d.itemReward.range);
                         Item found = this.map.scenario().items().get(itemId).clone();
                         picked.inventory.add(found);
                         log(String.format("%s finds a %s.", picked.name.toUpperCase(), found.genericName));

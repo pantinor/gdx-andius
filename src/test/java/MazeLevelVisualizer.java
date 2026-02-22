@@ -7,8 +7,6 @@ import static andius.WizardryData.CellType.ROCK;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
 import andius.WizardryData.MazeLevelV1;
-import andius.WizardryData.MazeLevelV4;
-import andius.WizardryData.Scenario;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -22,27 +20,23 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.CharArray;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.EndianUtils;
-import utils.FrameMaker;
 
-public class WizardryMapEditor extends InputAdapter implements ApplicationListener {
+public class MazeLevelVisualizer extends InputAdapter implements ApplicationListener {
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
@@ -56,7 +50,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         cfg.x = 0;
         cfg.y = 0;
 
-        new LwjglApplication(new WizardryMapEditor(), cfg);
+        new LwjglApplication(new MazeLevelVisualizer(), cfg);
     }
 
     private static final int UNIT = 4;
@@ -70,7 +64,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
     private BitmapFont font;
     private Stage stage;
     private Skin skin;
-    private Texture background;
+    private final GlyphLayout glyphLayout = new GlyphLayout();
 
     private Texture northWall;
     private Texture southWall;
@@ -100,6 +94,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
     private MazeCellActor[][] cells;
     private MazeCellActor selectedCell;
     private Special[] specials;
+    private byte[][] cellInfoLocations;
 
     @Override
     public void create() {
@@ -135,8 +130,10 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         center = fillRectangle(UNIT * FACTOR, UNIT * FACTOR, Color.WHITE, 1);
 
-        WizardryData.Scenario sc = WizardryData.Scenario.SLAVERS_PIT;
-        MazeLevel lvl = sc.levels()[1];
+        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
+        int level = 0;
+        MazeLevel lvl = sc.levels()[level];
+
         if (lvl instanceof TmxWizardryLevel) {
             TmxWizardryLevel ml = (TmxWizardryLevel) lvl;
             int dim = ml.dimension;
@@ -154,10 +151,11 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                 }
             }
         } else {
-            MazeLevelV1 ml = (MazeLevelV1) sc.levels()[0];
+            MazeLevelV1 ml = (MazeLevelV1) sc.levels()[level];
             int dim = ml.dimension;
 
-            specials = getSpecials(ml.buffer, 0x2F8);
+            cellInfoLocations = ml.cellInfoLocations;
+            specials = getSpecials(ml.buffer, 0x2F8, sc);
             cells = new MazeCellActor[dim][dim];
 
             for (int e = 0; e < dim; e++) {
@@ -172,19 +170,13 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                     WizardryData.MazeCell c = ml.cells[n][e];
                     cells[n][e].set(c);
 
-                    int index = ml.cellInfoLocations[n][e];
-                    specials[index].addLocation(new Location(8, n, e));
+                    int index = ml.cellInfoLocations[e][n];
+                    specials[index].addLocation(new Location(level, n, e));
                 }
             }
         }
 
         Gdx.input.setInputProcessor(new InputMultiplexer(stage, this));
-
-        FrameMaker fm = new FrameMaker(1224, 916);
-        MazeSettings ms = new MazeSettings();
-        fm.setBounds(ms, 950, 400, 200, 400);
-        this.stage.addActor(ms);
-        this.background = fm.build();
 
         this.selectedCell = cells[0][0];
 
@@ -332,53 +324,72 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             sb.clear();
             if (cell.darkness) {
                 sb.append("DRK");
+                this.col = Color.PURPLE;
             }
             if (cell.rock) {
                 sb.append("RCK");
+                this.col = Color.BROWN;
             }
             if (cell.chute) {
                 sb.append("CHU");
+                this.col = Color.BROWN;
+
             }
             if (cell.lair) {
                 sb.append("LAIR");
             }
             if (cell.encounterID >= 0) {
                 sb.append("MON");
+                this.col = Color.RED;
             }
             if (cell.message != null) {
                 sb.append("MSG");
+                this.col = Color.GREEN;
             }
             if (cell.itemRequired > 0) {
                 sb.append("ITREQ");
+                this.col = Color.GOLD;
             }
             if (cell.itemObtained > 0) {
                 sb.append("ITOBT");
+                this.col = Color.GOLD;
             }
             if (cell.fountainType > 0) {
                 sb.append("FNT");
+                this.col = Color.BLUE;
             }
             if (cell.markType > 0) {
                 sb.append("MARK");
+                this.col = Color.CYAN;
+
             }
             if (cell.chestType > 0) {
                 sb.append("CHST");
+                this.col = Color.GOLDENROD;
+
             }
             if (cell.pit) {
                 sb.append("PIT");
+                this.col = Color.FOREST;
             }
             if (cell.damage != null) {
                 sb.append("DMG");
+                this.col = Color.CORAL;
             }
             if (cell.cage) {
                 sb.append("CAG");
+                this.col = Color.BROWN;
             }
             if (cell.spinner) {
                 sb.append("SPIN");
+                this.col = Color.PINK;
             }
             if (cell.teleport) {
                 sb.append("TLP");
+                this.col = Color.NAVY;
             }
             if (cell.stairs) {
+                this.col = Color.VIOLET;
                 if (cell.address.level > cell.addressTo.level) {//up
                     sb.append("UP");
                 } else {//down           
@@ -387,9 +398,11 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             }
             if (cell.elevator) {
                 sb.append("ELV");
+                this.col = Color.SKY;
             }
             if (cell.summoningCircle != null) {
                 sb.append("SUM");
+                this.col = Color.SALMON;
             }
             return sb;
         }
@@ -403,173 +416,6 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         @Override
         public Color getColor() {
             return col;
-        }
-
-    }
-
-    private class MazeSettings extends WidgetGroup {
-
-        public MazeSettings() {
-            List<Actor> temp = new ArrayList<>();
-            {
-                CheckBox cb = new CheckBox("darkness", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.darkness = !selectedCell.cell.darkness;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                CheckBox cb = new CheckBox("rock", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.rock = !selectedCell.cell.rock;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                CheckBox cb = new CheckBox("chute", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.chute = !selectedCell.cell.chute;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-
-            {
-                CheckBox cb = new CheckBox("spinner", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.spinner = !selectedCell.cell.spinner;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                CheckBox cb = new CheckBox("teleport", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.teleport = !selectedCell.cell.teleport;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                CheckBox cb = new CheckBox("stairs", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.stairs = !selectedCell.cell.stairs;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                CheckBox cb = new CheckBox("elevator", skin, "default-16");
-                cb.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                        selectedCell.cell.elevator = !selectedCell.cell.elevator;
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-            }
-            {
-                TextField cb = new TextField("", skin, "default-16");
-                cb.setTextFieldListener(new TextField.TextFieldListener() {
-                    @Override
-                    public void keyTyped(TextField tf, char key) {
-                        if (key == '\r') {
-                            try {
-                                selectedCell.cell.encounterID = Integer.parseInt(tf.getText().trim());
-                            } catch (Throwable t) {
-                            }
-                        }
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-                Label l = new Label("encounterID", skin, "default-16");
-                this.addActor(l);
-                temp.add(l);
-            }
-            {
-                TextField cb = new TextField("", skin, "default-16");
-                cb.setTextFieldListener(new TextField.TextFieldListener() {
-                    @Override
-                    public void keyTyped(TextField tf, char key) {
-                        if (key == '\r') {
-                            try {
-                                selectedCell.cell.message = WizardryData.getMessage(Scenario.PMO.messages(), Integer.parseInt(tf.getText().trim()));
-                            } catch (Throwable t) {
-                            }
-                        }
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-                Label l = new Label("message", skin, "default-16");
-                this.addActor(l);
-                temp.add(l);
-            }
-            {
-                TextField cb = new TextField("", skin, "default-16");
-                cb.setTextFieldListener(new TextField.TextFieldListener() {
-                    @Override
-                    public void keyTyped(TextField tf, char key) {
-                        if (key == '\r') {
-                            try {
-                                selectedCell.cell.itemRequired = Integer.parseInt(tf.getText().trim());
-                            } catch (Throwable t) {
-                            }
-                        }
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-                Label l = new Label("itemRequired", skin, "default-16");
-                this.addActor(l);
-                temp.add(l);
-            }
-            {
-                TextField cb = new TextField("", skin, "default-16");
-                cb.setTextFieldListener(new TextField.TextFieldListener() {
-                    @Override
-                    public void keyTyped(TextField tf, char key) {
-                        if (key == '\r') {
-                            try {
-                                selectedCell.cell.itemObtained = Integer.parseInt(tf.getText().trim());
-                            } catch (Throwable t) {
-                            }
-                        }
-                    }
-                });
-                this.addActor(cb);
-                temp.add(cb);
-                Label l = new Label("itemObtained", skin, "default-16");
-                this.addActor(l);
-                temp.add(l);
-            }
-            for (int i = 0; i < temp.size(); i++) {
-                Actor a = temp.get(i);
-                a.setPosition(0, i * 25);
-            }
-
         }
 
     }
@@ -677,24 +523,55 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(this.background, 0, 0);
-        batch.end();
-
         stage.act();
         stage.draw();
 
-        batch.begin();
-        font.draw(batch, String.format("(%d,%d)  %s", currentNorth, currentEast, selectedCell.cell.addressTo), 400, 907);
+        float pad = 10f;
+        float rightX = Gdx.graphics.getWidth() - pad;
+        float y = Gdx.graphics.getHeight() - pad;
 
-        int y = 300;
+        batch.begin();
+
+        String status = String.format("(%d,%d)  %s", currentNorth, currentEast, selectedSpecialString());
+        y = drawRightAligned(status, rightX, y);
+
         if (specials != null) {
             for (Special s : specials) {
-                font.draw(batch, s.toString(), 975, y -= 15);
+                if (y < pad) {
+                    break;
+                }
+                y = drawRightAligned(s.toString(), rightX, y);
             }
         }
-
         batch.end();
+    }
+
+    private String selectedSpecialString() {
+        if (selectedCell == null || selectedCell.cell == null) {
+            return "Special: (none)";
+        }
+
+        if (specials == null || cellInfoLocations == null) {
+            return "Special: (none)";
+        }
+
+        int idx = cellInfoLocations[selectedCell.e][selectedCell.n];
+
+        if (idx < 0 || idx >= specials.length || specials[idx] == null) {
+            return String.format("Special[%d]: (missing)", idx);
+        }
+
+        if (specials[idx].square == CellType.NORMAL) {
+            return "Special: (none)";
+        }
+
+        return String.format("Special[%d]: %s", idx, specials[idx].toString());
+    }
+
+    private float drawRightAligned(String text, float rightX, float yTop) {
+        glyphLayout.setText(font, text);
+        font.draw(batch, glyphLayout, rightX - glyphLayout.width, yTop);
+        return yTop - font.getLineHeight();
     }
 
     @Override
@@ -726,25 +603,26 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
         return t;
     }
 
-    private Special[] getSpecials(byte[] buffer, int ptr) {
-        Special[] specials = new Special[16];
+    private Special[] getSpecials(byte[] buffer, int ptr, WizardryData.Scenario sc) {
+        Special[] sp = new Special[16];
 
         int pos = 0;
         for (int i = 0; i < 8; i++) {
-            specials[pos] = new Special(pos++, buffer, ptr);
-            specials[pos] = new Special(pos++, buffer, ptr);
+            sp[pos] = new Special(pos++, buffer, ptr, sc);
+            sp[pos] = new Special(pos++, buffer, ptr, sc);
         }
 
-        return specials;
+        return sp;
     }
 
     private class Special {
 
+        private final WizardryData.Scenario sc;
         private final CellType square;
         private final int[] aux = new int[3];
         private final List<Location> locations = new ArrayList<>();
 
-        public Special(int index, byte[] buffer, int offset) {
+        public Special(int index, byte[] buffer, int offset, WizardryData.Scenario sc) {
 
             byte b = buffer[offset + (index) / 2];
             int val = index % 2 == 0 ? b & 0x0F : (b & 0xF0) >>> 4;
@@ -754,6 +632,8 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             aux[0] = EndianUtils.readSwappedShort(buffer, offset + 8 + index * 2);
             aux[1] = EndianUtils.readSwappedShort(buffer, offset + 40 + index * 2);
             aux[2] = EndianUtils.readSwappedShort(buffer, offset + 72 + index * 2);
+
+            this.sc = sc;
         }
 
         private void addLocation(Location location) {
@@ -764,12 +644,15 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
             java.lang.StringBuilder description = new java.lang.StringBuilder();
 
             switch (square) {
+                case ENCOUNTER:
+                    description.append("Encounter : " + this.sc.monster(aux[2]).name);
+                    break;
                 case MESSAGE:
                     switch (aux[2]) {
                         case 1:
                             break;
                         case 2:
-                            description.append("Obtain : " + aux[0]);
+                            description.append("Obtain : " + this.sc.item(aux[0]).name);
                             break;
                         case 3:
                             if (aux[0] > 0) {
@@ -778,15 +661,15 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                             break;
                         case 4:
                             if (aux[0] >= 0) {
-                                description.append("Encounter : " + aux[0]);
+                                description.append("Encounter : " + this.sc.monster(aux[0]).name);
                             } else if (aux[0] > -1200) {
-                                description.append("Obtain : " + (aux[0] * -1 - 1000));
+                                description.append("Obtain : " + this.sc.item(aux[0] * -1 - 1000).name);
                             } else {
-                                description.append("Trade : " + aux[0] + " for " + aux[1]);
+                                description.append("Trade : " + this.sc.item(aux[0]).name + " for " + this.sc.item(aux[1]).name);
                             }
                             break;
                         case 5:
-                            description.append("Access requires : " + aux[0]);
+                            description.append("Access requires : " + this.sc.item(aux[0]).name);
                             break;
                         case 6:
                             description.append("Check alignment");
@@ -858,8 +741,6 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
                     break;
                 case NOSPELL:
                     break;
-                case ENCOUNTER:
-                    break;
                 case NORMAL:
                     break;
             }
@@ -868,7 +749,7 @@ public class WizardryMapEditor extends InputAdapter implements ApplicationListen
 
         @Override
         public String toString() {
-            String extra = locations.size() == 1 ? "" : "(" + locations.size() + ")";
+            String extra = "(" + locations.size() + ")";
             return String.format("%-8s  %5d  %4d  %4d  %s %s", square, aux[0], aux[1], aux[2], extra, description());
         }
     }
