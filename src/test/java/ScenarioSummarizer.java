@@ -51,6 +51,11 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
     private BitmapFont font;
     private GlyphLayout hudLayout;
 
+    private String[] hudEventByStep = new String[0];
+    private int[] hudNextObjectiveItemByStep = new int[0];
+    private String[] hudRequiredByStep = new String[0];
+    private String[] hudOwnedByStep = new String[0];
+
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "ScenarioSummarizer";
@@ -72,7 +77,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         Andius a = new Andius();
         a.create();
 
-        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
+        WizardryData.Scenario sc = WizardryData.Scenario.LEG;
         this.scenario = sc;
         this.scenarioMaxLevel = sc.levels().length - 1;
 
@@ -104,6 +109,8 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
 
         List<Node> nodes = findWalkthrough(sc, 0, sc.getStartX(), sc.getStartY(), sc.levels().length - 1);
         this.walkthrough = nodes;
+
+        buildHudAnnotations(sc, nodes);
 
         this.camera = new OrthographicCamera();
         this.shapes = new ShapeRenderer();
@@ -344,11 +351,22 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
                     if (!passableDir(cell2, dir)) {
                         continue;
                     }
+
                     int nx2 = x2 + dx[dir];
                     int ny2 = y2 + dy[dir];
-                    if (nx2 < 0 || nx2 >= dim || ny2 < 0 || ny2 >= dim) {
-                        continue;
+
+                    boolean out = (nx2 < 0 || nx2 >= dim || ny2 < 0 || ny2 >= dim);
+                    if (out) {
+                        // Only allow wrapping if we are actually going through a door/hidden door.
+                        // (Prevents accidental wrap on maps that just forgot boundary walls.)
+                        if (!passableDir(cell2, dir)) {
+                            continue;
+                        }
+
+                        nx2 = wrap(nx2, dim);
+                        ny2 = wrap(ny2, dim);
                     }
+
                     WizardryData.MazeCell neighbor = sc.levels()[lvl2].cells[nx2][ny2];
                     if (neighbor == null || neighbor.rock) {
                         continue;
@@ -357,9 +375,11 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
                         continue;
                     }
 
-                    long newMask2 = applyPickupMask(sc, lvl2, nx2, ny2, mask2, bitByItem, java.util.Collections.emptyMap(), xyBits, lvlBits);
+                    long newMask2 = applyPickupMask(sc, lvl2, nx2, ny2, mask2, bitByItem,
+                            java.util.Collections.emptyMap(), xyBits, lvlBits);
                     long newCost2 = cost2 + STEP_WEIGHT + hazardPenalty(sc, lvl2, nx2, ny2) * STEP_WEIGHT;
                     long newState2 = packState(lvl2, nx2, ny2, newMask2, xyBits, lvlBits);
+
                     Long prevCost2 = costMap.get(newState2);
                     if (prevCost2 == null || newCost2 < prevCost2) {
                         costMap.put(newState2, newCost2);
@@ -694,6 +714,166 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         return walk;
     }
 
+    private void buildHudAnnotations(WizardryData.Scenario sc, java.util.List<Node> nodes) {
+        if (nodes == null || nodes.isEmpty()) {
+            hudEventByStep = new String[0];
+            hudNextObjectiveItemByStep = new int[0];
+            hudRequiredByStep = new String[0];
+            hudOwnedByStep = new String[0];
+            return;
+        }
+
+        final int n = nodes.size();
+        String[] events = new String[n];
+        int[] firstItemGainedAt = new int[n];
+
+        final int[] requiredInWalk = collectRequiredItemsInWalk(sc, nodes);
+        String[] reqStatus = new String[n];
+        String[] ownedStatus = new String[n];
+
+        java.util.HashSet<Integer> owned = new java.util.HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            Node cur = nodes.get(i);
+            WizardryData.MazeLevel lvl = sc.levels()[cur.lvl];
+            WizardryData.MazeCell c = lvl.cells[cur.x][cur.y];
+
+            java.util.ArrayList<String> msgs = new java.util.ArrayList<>(2);
+
+            if (c != null) {
+                if (c.encounterID >= 0) {
+                    msgs.add("Encounter #" + c.encounterID);
+
+                    Integer rid = encounterRewardItemByEncounterId.get(c.encounterID);
+                    if (rid != null && rid > 0 && !owned.contains(rid)) {
+                        owned.add(rid);
+                        msgs.add("Obtained (reward) " + itemLabel(sc, rid));
+                        if (firstItemGainedAt[i] == 0) {
+                            firstItemGainedAt[i] = rid;
+                        }
+                    }
+                }
+
+                if (c.wanderingEncounterID >= 0) {
+                    msgs.add("Wandering encounter #" + c.wanderingEncounterID);
+                }
+                if (c.pit) {
+                    msgs.add("Pit");
+                }
+                if (c.damage != null) {
+                    msgs.add("Damage");
+                }
+
+                if (c.itemRequired > 0) {
+                    if (owned.contains(c.itemRequired)) {
+                        msgs.add("Used obtained " + itemLabel(sc, c.itemRequired) + " to pass gate");
+                    } else {
+                        msgs.add("Gate requires " + itemLabel(sc, c.itemRequired));
+                    }
+                }
+
+                if (c.itemObtained > 0 && !owned.contains(c.itemObtained)) {
+                    owned.add(c.itemObtained);
+                    msgs.add("Obtained " + itemLabel(sc, c.itemObtained));
+                    if (firstItemGainedAt[i] == 0) {
+                        firstItemGainedAt[i] = c.itemObtained;
+                    }
+                }
+
+                if (c.itemObtainedFromRiddle > 0 && !owned.contains(c.itemObtainedFromRiddle)) {
+                    owned.add(c.itemObtainedFromRiddle);
+                    msgs.add("Obtained (riddle) " + itemLabel(sc, c.itemObtainedFromRiddle));
+                    if (firstItemGainedAt[i] == 0) {
+                        firstItemGainedAt[i] = c.itemObtainedFromRiddle;
+                    }
+                }
+
+                if (c.encounterGiveItem > 0 && !owned.contains(c.encounterGiveItem)) {
+                    boolean ok = true;
+                    if (c.encounterTakeItem > 0 && !owned.contains(c.encounterTakeItem)) {
+                        ok = false;
+                    }
+                    if (ok) {
+                        if (c.encounterTakeItem > 0 && owned.contains(c.encounterTakeItem)) {
+                            owned.remove(c.encounterTakeItem);
+                            msgs.add("Used " + itemLabel(sc, c.encounterTakeItem) + " (consumed)");
+                        }
+                        owned.add(c.encounterGiveItem);
+                        msgs.add("Obtained (encounter) " + itemLabel(sc, c.encounterGiveItem));
+                        if (firstItemGainedAt[i] == 0) {
+                            firstItemGainedAt[i] = c.encounterGiveItem;
+                        }
+                    }
+                } else if (c.encounterTakeItem > 0 && owned.contains(c.encounterTakeItem) && c.encounterGiveItem <= 0) {
+                    owned.remove(c.encounterTakeItem);
+                    msgs.add("Used " + itemLabel(sc, c.encounterTakeItem) + " (consumed)");
+                }
+
+                if (c.tradeItem2 > 0 && !owned.contains(c.tradeItem2)) {
+                    boolean ok = true;
+                    if (c.tradeItem1 > 0 && !owned.contains(c.tradeItem1)) {
+                        ok = false;
+                    }
+                    if (ok) {
+                        if (c.tradeItem1 > 0 && owned.contains(c.tradeItem1)) {
+                            owned.remove(c.tradeItem1);
+                            msgs.add("Traded " + itemLabel(sc, c.tradeItem1));
+                        }
+                        owned.add(c.tradeItem2);
+                        msgs.add("Obtained (trade) " + itemLabel(sc, c.tradeItem2));
+                        if (firstItemGainedAt[i] == 0) {
+                            firstItemGainedAt[i] = c.tradeItem2;
+                        }
+                    }
+                }
+            }
+
+            events[i] = msgs.isEmpty() ? "" : String.join("   |   ", msgs);
+
+            // Persistent item status lines for the HUD (required gates + current inventory)
+            if (requiredInWalk.length == 0) {
+                reqStatus[i] = "Required items: none";
+            } else {
+                java.util.ArrayList<String> status = new java.util.ArrayList<>(requiredInWalk.length);
+                int have = 0;
+                for (int rid : requiredInWalk) {
+                    boolean haveIt = owned.contains(rid);
+                    if (haveIt) {
+                        have++;
+                    }
+                    status.add((haveIt ? "[x] " : "[ ] ") + itemShortLabel(sc, rid));
+                }
+                reqStatus[i] = String.format("Required items (%d/%d): %s", have, requiredInWalk.length, joinLimited(status, 8));
+            }
+
+            if (owned.isEmpty()) {
+                ownedStatus[i] = "Owned items: (none)";
+            } else {
+                java.util.ArrayList<Integer> ownedIds = new java.util.ArrayList<>(owned);
+                java.util.Collections.sort(ownedIds);
+                java.util.ArrayList<String> names = new java.util.ArrayList<>(ownedIds.size());
+                for (Integer oid : ownedIds) {
+                    names.add(itemShortLabel(sc, oid.intValue()));
+                }
+                ownedStatus[i] = "Owned items (" + owned.size() + "): " + joinLimited(names, 10);
+            }
+        }
+
+        int[] nextObjective = new int[n];
+        int nextId = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            nextObjective[i] = nextId;
+            if (firstItemGainedAt[i] != 0) {
+                nextId = firstItemGainedAt[i];
+            }
+        }
+
+        hudEventByStep = events;
+        hudNextObjectiveItemByStep = nextObjective;
+        hudRequiredByStep = reqStatus;
+        hudOwnedByStep = ownedStatus;
+    }
+
     private static boolean isSpecialCell(WizardryData.MazeCell c) {
         if (c == null) {
             return false;
@@ -1024,6 +1204,37 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
                 cur.x, cur.y, cur.mask
         );
 
+        int nextItemId = (hudNextObjectiveItemByStep != null && walkIdx < hudNextObjectiveItemByStep.length)
+                ? hudNextObjectiveItemByStep[walkIdx] : 0;
+        String hud2 = "Next objective item: " + itemLabel(scenario, nextItemId);
+
+        String hudReq = (hudRequiredByStep != null && walkIdx < hudRequiredByStep.length)
+                ? hudRequiredByStep[walkIdx] : "";
+
+        String hudOwned = (hudOwnedByStep != null && walkIdx < hudOwnedByStep.length)
+                ? hudOwnedByStep[walkIdx] : "";
+
+        String hud3 = (hudEventByStep != null && walkIdx < hudEventByStep.length)
+                ? hudEventByStep[walkIdx] : "";
+
+        float topY = Gdx.graphics.getHeight() - pad;
+        float lh = font.getLineHeight();
+        float maxW = Gdx.graphics.getWidth() - 2f * pad;
+
+        font.draw(batch, fitHudLine(hud1, maxW), pad, topY);
+        font.draw(batch, fitHudLine(hud2, maxW), pad, topY - lh);
+
+        if (hudReq != null && !hudReq.isEmpty()) {
+            font.draw(batch, fitHudLine(hudReq, maxW), pad, topY - 2f * lh);
+        }
+        if (hudOwned != null && !hudOwned.isEmpty()) {
+            font.draw(batch, fitHudLine(hudOwned, maxW), pad, topY - 3f * lh);
+        }
+
+        if (hud3 != null && !hud3.isEmpty()) {
+            font.draw(batch, fitHudLine(hud3, maxW), pad, topY - 4f * lh);
+        }
+
         batch.end();
     }
 
@@ -1080,16 +1291,21 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
 
     }
 
+    private static int wrap(int v, int dim) {
+        int r = v % dim;
+        return r < 0 ? r + dim : r;
+    }
+
     private static boolean passableDir(WizardryData.MazeCell c, int dir) {
         switch (dir) {
-            case 0:
-                return !(c.northWall && !c.northDoor); // N
-            case 1:
-                return !(c.southWall && !c.southDoor); // S
-            case 2:
-                return !(c.westWall && !c.westDoor);  // W
-            case 3:
-                return !(c.eastWall && !c.eastDoor);  // E
+            case 0: // N
+                return !(c.northWall && !(c.northDoor || c.hiddenNorthDoor));
+            case 1: // S
+                return !(c.southWall && !(c.southDoor || c.hiddenSouthDoor));
+            case 2: // W
+                return !(c.westWall && !(c.westDoor || c.hiddenWestDoor));
+            case 3: // E
+                return !(c.eastWall && !(c.eastDoor || c.hiddenEastDoor));
             default:
                 return false;
         }
@@ -1338,24 +1554,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         return parts.isEmpty() ? "plain" : String.join(", ", parts);
     }
 
-    private String itemLabel(WizardryData.Scenario sc, int itemId) {
-        if (itemId <= 0) {
-            return "none";
-        }
-        if (sc == null) {
-            return "#" + itemId;
-        }
-        try {
-            Item it = sc.item(itemId);
-            if (it != null && it.name != null && !it.name.isEmpty()) {
-                return String.format("%s (#%d)", it.name, itemId);
-            }
-        } catch (Throwable t) {
-            // Best-effort only; keep the walkthrough running even if lookup fails.
-        }
-        return "#" + itemId;
-    }
-
     private java.util.Map<Integer, Integer> buildEncounterRewardItemByEncounterId(WizardryData.Scenario sc) {
 
         java.util.HashMap<Integer, Integer> out = new java.util.HashMap<>();
@@ -1481,6 +1679,105 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         }
 
         return bestItem;
+    }
+
+    private String itemLabel(WizardryData.Scenario sc, int itemId) {
+        if (itemId <= 0) {
+            return "none";
+        }
+        if (sc == null) {
+            return "#" + itemId;
+        }
+        try {
+            Item it = sc.item(itemId);
+            if (it != null && it.name != null && !it.name.isEmpty()) {
+                return String.format("%s (#%d)", it.name, itemId);
+            }
+        } catch (Throwable t) {
+        }
+        return "#" + itemId;
+    }
+
+    private String itemShortLabel(WizardryData.Scenario sc, int itemId) {
+        if (itemId <= 0) {
+            return "none";
+        }
+        if (sc == null) {
+            return "#" + itemId;
+        }
+        try {
+            Item it = sc.item(itemId);
+            if (it != null && it.name != null && !it.name.isEmpty()) {
+                return it.name;
+            }
+        } catch (Throwable t) {
+        }
+        return "#" + itemId;
+    }
+
+    private static String joinLimited(java.util.List<String> parts, int maxItems) {
+        if (parts == null || parts.isEmpty()) {
+            return "";
+        }
+        if (maxItems <= 0 || parts.size() <= maxItems) {
+            return String.join(", ", parts);
+        }
+        java.util.List<String> head = parts.subList(0, maxItems);
+        return String.join(", ", head) + String.format(" ...(+%d)", (parts.size() - maxItems));
+    }
+
+    private int[] collectRequiredItemsInWalk(WizardryData.Scenario sc, java.util.List<Node> nodes) {
+        java.util.HashSet<Integer> req = new java.util.HashSet<>();
+        if (sc == null || nodes == null) {
+            return new int[0];
+        }
+        for (Node n : nodes) {
+            WizardryData.MazeCell c = sc.levels()[n.lvl].cells[n.x][n.y];
+            if (c != null && c.itemRequired > 0) {
+                req.add(c.itemRequired);
+            }
+        }
+
+        req.addAll(this.encounterRewardItemByEncounterId.values());
+
+        int[] out = new int[req.size()];
+        int i = 0;
+        for (Integer id : req) {
+            out[i++] = id;
+        }
+        java.util.Arrays.sort(out);
+        return out;
+    }
+
+    private String fitHudLine(String s, float maxWidth) {
+        if (s == null) {
+            return "";
+        }
+        if (hudLayout == null || font == null) {
+            return s;
+        }
+        hudLayout.setText(font, s);
+        if (hudLayout.width <= maxWidth) {
+            return s;
+        }
+
+        final String suffix = "...";
+        int lo = 0;
+        int hi = s.length();
+        while (lo + 1 < hi) {
+            int mid = (lo + hi) >>> 1;
+            String cand = s.substring(0, mid) + suffix;
+            hudLayout.setText(font, cand);
+            if (hudLayout.width <= maxWidth) {
+                lo = mid;
+            } else {
+                hi = mid;
+            }
+        }
+        if (lo <= 0) {
+            return suffix;
+        }
+        return s.substring(0, lo) + suffix;
     }
 
 }
