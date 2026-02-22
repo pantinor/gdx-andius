@@ -1,6 +1,7 @@
 
 import andius.Andius;
 import andius.WizardryData;
+import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
 import andius.objects.Item;
 import andius.objects.Monster;
@@ -23,7 +24,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import utils.Utils;
 
 public class ScenarioSummarizer extends InputAdapter implements ApplicationListener {
 
@@ -35,18 +35,15 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
     private WizardryData.Scenario scenario;
     private List<Node> walkthrough;
 
-    private String[] hudEventByStep = new String[0];
-    private int[] hudNextObjectiveItemByStep = new int[0];
-    private String[] hudRequiredByStep = new String[0];
-    private String[] hudOwnedByStep = new String[0];
     private int walkIdx = 0;
     private float walkAccum = 0f;
 
     private static final float STEP_SECONDS = 0.5f;
     private static final float HUD_HEIGHT = 180f;
-    private static final int LEVEL_HOP_PENALTY = 50;
     private static final int PIT_PENALTY = 500;
     private static final int DAMAGE_PENALTY = 120;
+    private static final int STEP_WEIGHT = 5000;
+    private static final int HOP_TIEBREAKER = 1;
 
     private OrthographicCamera camera;
     private ShapeRenderer shapes;
@@ -99,23 +96,14 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         }
 
         for (int lvl : specials.keySet()) {
-            System.out.println("Level " + (lvl + 1));
+            System.out.println("Specials for Level " + (lvl + 1));
             for (SpecialCell s : specials.get(lvl)) {
                 System.out.println("\t" + s);
             }
         }
 
-        List<Node> nodes = findWalkthroughAllSpecials(sc, 0, sc.getStartX(), sc.getStartY(), sc.levels().length - 1);
+        List<Node> nodes = findWalkthrough(sc, 0, sc.getStartX(), sc.getStartY(), sc.levels().length - 1);
         this.walkthrough = nodes;
-        buildHudAnnotations(sc, nodes);
-
-        if (nodes != null) {
-            for (Node n : nodes) {
-                System.out.println(n);
-            }
-        } else {
-            System.out.println("No nodes found - exiting.");
-        }
 
         this.camera = new OrthographicCamera();
         this.shapes = new ShapeRenderer();
@@ -131,167 +119,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
     }
 
-    private void buildHudAnnotations(WizardryData.Scenario sc, java.util.List<Node> nodes) {
-        if (nodes == null || nodes.isEmpty()) {
-            hudEventByStep = new String[0];
-            hudNextObjectiveItemByStep = new int[0];
-            hudRequiredByStep = new String[0];
-            hudOwnedByStep = new String[0];
-            return;
-        }
-
-        final int n = nodes.size();
-        String[] events = new String[n];
-        int[] firstItemGainedAt = new int[n];
-
-        final int[] requiredInWalk = collectRequiredItemsInWalk(sc, nodes);
-        String[] reqStatus = new String[n];
-        String[] ownedStatus = new String[n];
-
-        java.util.HashSet<Integer> owned = new java.util.HashSet<>();
-
-        for (int i = 0; i < n; i++) {
-            Node cur = nodes.get(i);
-            WizardryData.MazeLevel lvl = sc.levels()[cur.lvl];
-            WizardryData.MazeCell c = lvl.cells[cur.x][cur.y];
-
-            java.util.ArrayList<String> msgs = new java.util.ArrayList<>(2);
-
-            if (c != null) {
-                if (c.encounterID >= 0) {
-                    msgs.add("Encounter #" + c.encounterID);
-
-                    Integer rid = encounterRewardItemByEncounterId.get(c.encounterID);
-                    if (rid != null && rid > 0 && !owned.contains(rid)) {
-                        owned.add(rid);
-                        msgs.add("Obtained (reward) " + itemLabel(sc, rid));
-                        if (firstItemGainedAt[i] == 0) {
-                            firstItemGainedAt[i] = rid;
-                        }
-                    }
-                }
-
-                if (c.wanderingEncounterID >= 0) {
-                    msgs.add("Wandering encounter #" + c.wanderingEncounterID);
-                }
-                if (c.pit) {
-                    msgs.add("Pit");
-                }
-                if (c.damage != null) {
-                    msgs.add("Damage");
-                }
-
-                if (c.itemRequired > 0) {
-                    if (owned.contains(c.itemRequired)) {
-                        msgs.add("Used obtained " + itemLabel(sc, c.itemRequired) + " to pass gate");
-                    } else {
-                        msgs.add("Gate requires " + itemLabel(sc, c.itemRequired));
-                    }
-                }
-
-                if (c.itemObtained > 0 && !owned.contains(c.itemObtained)) {
-                    owned.add(c.itemObtained);
-                    msgs.add("Obtained " + itemLabel(sc, c.itemObtained));
-                    if (firstItemGainedAt[i] == 0) {
-                        firstItemGainedAt[i] = c.itemObtained;
-                    }
-                }
-
-                if (c.itemObtainedFromRiddle > 0 && !owned.contains(c.itemObtainedFromRiddle)) {
-                    owned.add(c.itemObtainedFromRiddle);
-                    msgs.add("Obtained (riddle) " + itemLabel(sc, c.itemObtainedFromRiddle));
-                    if (firstItemGainedAt[i] == 0) {
-                        firstItemGainedAt[i] = c.itemObtainedFromRiddle;
-                    }
-                }
-
-                if (c.encounterGiveItem > 0 && !owned.contains(c.encounterGiveItem)) {
-                    boolean ok = true;
-                    if (c.encounterTakeItem > 0 && !owned.contains(c.encounterTakeItem)) {
-                        ok = false;
-                    }
-                    if (ok) {
-                        if (c.encounterTakeItem > 0 && owned.contains(c.encounterTakeItem)) {
-                            owned.remove(c.encounterTakeItem);
-                            msgs.add("Used " + itemLabel(sc, c.encounterTakeItem) + " (consumed)");
-                        }
-                        owned.add(c.encounterGiveItem);
-                        msgs.add("Obtained (encounter) " + itemLabel(sc, c.encounterGiveItem));
-                        if (firstItemGainedAt[i] == 0) {
-                            firstItemGainedAt[i] = c.encounterGiveItem;
-                        }
-                    }
-                } else if (c.encounterTakeItem > 0 && owned.contains(c.encounterTakeItem) && c.encounterGiveItem <= 0) {
-                    owned.remove(c.encounterTakeItem);
-                    msgs.add("Used " + itemLabel(sc, c.encounterTakeItem) + " (consumed)");
-                }
-
-                if (c.tradeItem2 > 0 && !owned.contains(c.tradeItem2)) {
-                    boolean ok = true;
-                    if (c.tradeItem1 > 0 && !owned.contains(c.tradeItem1)) {
-                        ok = false;
-                    }
-                    if (ok) {
-                        if (c.tradeItem1 > 0 && owned.contains(c.tradeItem1)) {
-                            owned.remove(c.tradeItem1);
-                            msgs.add("Traded " + itemLabel(sc, c.tradeItem1));
-                        }
-                        owned.add(c.tradeItem2);
-                        msgs.add("Obtained (trade) " + itemLabel(sc, c.tradeItem2));
-                        if (firstItemGainedAt[i] == 0) {
-                            firstItemGainedAt[i] = c.tradeItem2;
-                        }
-                    }
-                }
-            }
-
-            events[i] = msgs.isEmpty() ? "" : String.join("   |   ", msgs);
-
-            // Persistent item status lines for the HUD (required gates + current inventory)
-            if (requiredInWalk.length == 0) {
-                reqStatus[i] = "Required items: none";
-            } else {
-                java.util.ArrayList<String> status = new java.util.ArrayList<>(requiredInWalk.length);
-                int have = 0;
-                for (int rid : requiredInWalk) {
-                    boolean haveIt = owned.contains(rid);
-                    if (haveIt) {
-                        have++;
-                    }
-                    status.add((haveIt ? "[x] " : "[ ] ") + itemShortLabel(sc, rid));
-                }
-                reqStatus[i] = String.format("Required items (%d/%d): %s", have, requiredInWalk.length, joinLimited(status, 8));
-            }
-
-            if (owned.isEmpty()) {
-                ownedStatus[i] = "Owned items: (none)";
-            } else {
-                java.util.ArrayList<Integer> ownedIds = new java.util.ArrayList<>(owned);
-                java.util.Collections.sort(ownedIds);
-                java.util.ArrayList<String> names = new java.util.ArrayList<>(ownedIds.size());
-                for (Integer oid : ownedIds) {
-                    names.add(itemShortLabel(sc, oid.intValue()));
-                }
-                ownedStatus[i] = "Owned items (" + owned.size() + "): " + joinLimited(names, 10);
-            }
-        }
-
-        int[] nextObjective = new int[n];
-        int nextId = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            nextObjective[i] = nextId;
-            if (firstItemGainedAt[i] != 0) {
-                nextId = firstItemGainedAt[i];
-            }
-        }
-
-        hudEventByStep = events;
-        hudNextObjectiveItemByStep = nextObjective;
-        hudRequiredByStep = reqStatus;
-        hudOwnedByStep = ownedStatus;
-    }
-
-    private java.util.List<Node> findWalkthroughAllSpecials(WizardryData.Scenario sc, int startLevelIdx, int startX, int startY, int targetLevelIdx) {
+    private java.util.List<Node> findWalkthrough(WizardryData.Scenario sc, int startLevelIdx, int startX, int startY, int targetLevelIdx) {
 
         final int L = sc.levels().length;
         final int dim = sc.levels()[0].dimension;
@@ -392,405 +220,478 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         walk.add(new Node(curLvl, curX, curY, curMask, totalCost));
         remaining.remove(specialKey(curLvl, curX, curY, dim));
 
-        int stuckCount = 0;
-        final int MAX_STUCK = 50; // avoid infinite loops on truly unreachable objectives
+        // Direction deltas: N=0, S=1, W=2, E=3
+        final int[] dx = {1, -1, 0, 0};
+        final int[] dy = {0, 0, -1, 1};
 
-        while (!remaining.isEmpty() && stuckCount < MAX_STUCK) {
-            DijkstraResult toNext = dijkstraToAnySpecial(sc, curLvl, curX, curY, curMask, remaining, bitByItem, xyBits, lvlBits);
+        // Track which specials have been visited (item obtained)
+        java.util.HashSet<Integer> visited = new java.util.HashSet<>();
+        // Track specials we skipped due to pathfinding blockage (gated/unreachable)
+        java.util.HashSet<Integer> deferred = new java.util.HashSet<>();
 
-            if (toNext != null && toNext.path != null && toNext.path.size() > 1) {
-                // Append with cost offset and consume any visited specials along the subpath.
-                for (int i = 1; i < toNext.path.size(); i++) {
-                    Node n = toNext.path.get(i);
-                    int absCost = totalCost + n.cost;
-                    walk.add(new Node(n.lvl, n.x, n.y, n.mask, absCost));
-                    remaining.remove(specialKey(n.lvl, n.x, n.y, dim));
+        // ---- Inner Dijkstra: find shortest path from (curLvl,curX,curY) to (tLvl,tX,tY)
+        // Returns list of Nodes from start (exclusive) to target (inclusive), or null if unreachable.
+        // Uses wall/door passability, level transitions via stairs/chute/teleport/elevator.
+        // Hidden doors are visible (passable) to the walker.
+        java.util.function.Function<long[], java.util.List<Node>> dijkstraTo = (args) -> {
+            int fromLvl = (int) args[0];
+            int fromX = (int) args[1];
+            int fromY = (int) args[2];
+            int toLvl = (int) args[3];
+            int toX = (int) args[4];
+            int toY = (int) args[5];
+            long startMask = args[6];
+
+            // State: (lvl, x, y, mask) -> packed long
+            // Cost map
+            java.util.HashMap<Long, Long> costMap = new java.util.HashMap<>();
+            // Parent map for path reconstruction
+            java.util.HashMap<Long, Long> parent = new java.util.HashMap<>();
+
+            // Priority queue: [cost, lvl, x, y, mask]
+            java.util.PriorityQueue<long[]> pq = new java.util.PriorityQueue<>((a, b) -> Long.compare(a[0], b[0]));
+
+            long startState = packState(fromLvl, fromX, fromY, startMask, xyBits, lvlBits);
+            costMap.put(startState, 0L);
+            pq.offer(new long[]{0, fromLvl, fromX, fromY, startMask});
+
+            long goalState = -1L;
+
+            while (!pq.isEmpty()) {
+                long[] cur2 = pq.poll();
+                long cost2 = cur2[0];
+                int lvl2 = (int) cur2[1];
+                int x2 = (int) cur2[2];
+                int y2 = (int) cur2[3];
+                long mask2 = cur2[4];
+
+                long state2 = packState(lvl2, x2, y2, mask2, xyBits, lvlBits);
+                Long best = costMap.get(state2);
+                if (best != null && cost2 > best) {
+                    continue;
                 }
 
-                Node last = walk.get(walk.size() - 1);
-                totalCost = last.cost;
+                if (lvl2 == toLvl && x2 == toX && y2 == toY) {
+                    goalState = state2;
+                    break;
+                }
+
+                WizardryData.MazeCell cell2 = sc.levels()[lvl2].cells[x2][y2];
+                if (cell2 == null) {
+                    continue;
+                }
+
+                // --- Handle level transitions from current cell ---
+                // Stairs / chute / teleport: move to addressTo
+                if ((cell2.stairs || cell2.chute || cell2.teleport) && cell2.addressTo != null && cell2.addressTo.level > 0) {
+                    int nextLvl2 = cell2.addressTo.level - 1;
+                    int nextX2 = cell2.addressTo.row;
+                    int nextY2 = cell2.addressTo.column;
+                    if (nextLvl2 >= 0 && nextLvl2 < L
+                            && nextX2 >= 0 && nextX2 < dim
+                            && nextY2 >= 0 && nextY2 < dim) {
+                        WizardryData.MazeCell dest2 = sc.levels()[nextLvl2].cells[nextX2][nextY2];
+                        if (dest2 != null && !dest2.rock) {
+                            long newMask2 = applyPickupMask(sc, nextLvl2, nextX2, nextY2, mask2, bitByItem, java.util.Collections.emptyMap(), xyBits, lvlBits);
+                            boolean forced = (cell2.teleport || cell2.chute);
+                            long hopCost = forced ? 0L : (STEP_WEIGHT + HOP_TIEBREAKER);
+                            long newCost2 = cost2 + hopCost + (long) hazardPenalty(sc, nextLvl2, nextX2, nextY2) * STEP_WEIGHT;
+                            long newState2 = packState(nextLvl2, nextX2, nextY2, newMask2, xyBits, lvlBits);
+                            Long prevCost2 = costMap.get(newState2);
+                            if (prevCost2 == null || newCost2 < prevCost2) {
+                                costMap.put(newState2, newCost2);
+                                parent.put(newState2, state2);
+                                pq.offer(new long[]{newCost2, nextLvl2, nextX2, nextY2, newMask2});
+                            }
+                        }
+                    }
+                }
+
+                // Elevator: can move to any floor between elevatorFrom and elevatorTo
+                if (cell2.elevator) {
+                    int eFrom = Math.min(cell2.elevatorFrom, cell2.elevatorTo);
+                    int eTo = Math.max(cell2.elevatorFrom, cell2.elevatorTo);
+                    for (int eLvl = eFrom; eLvl <= eTo && eLvl < L; eLvl++) {
+                        if (eLvl == lvl2) {
+                            continue;
+                        }
+                        // Elevator lands on same x,y position on destination floor
+                        int ex2 = x2, ey2 = y2;
+                        if (ex2 < 0 || ex2 >= dim || ey2 < 0 || ey2 >= dim) {
+                            continue;
+                        }
+                        WizardryData.MazeCell eDest = sc.levels()[eLvl].cells[ex2][ey2];
+                        if (eDest == null || eDest.rock) {
+                            continue;
+                        }
+                        long newMask2 = applyPickupMask(sc, eLvl, ex2, ey2, mask2, bitByItem, java.util.Collections.emptyMap(), xyBits, lvlBits);
+                        long newCost2 = cost2 + STEP_WEIGHT + HOP_TIEBREAKER + hazardPenalty(sc, eLvl, ex2, ey2) * STEP_WEIGHT;
+                        long newState2 = packState(eLvl, ex2, ey2, newMask2, xyBits, lvlBits);
+                        Long prevCost2 = costMap.get(newState2);
+                        if (prevCost2 == null || newCost2 < prevCost2) {
+                            costMap.put(newState2, newCost2);
+                            parent.put(newState2, state2);
+                            pq.offer(new long[]{newCost2, eLvl, ex2, ey2, newMask2});
+                        }
+                    }
+                }
+
+                // --- Regular cardinal moves ---
+                // Wizardry only checks the EXITING cell's wall, not the neighbour's entry wall.
+                // Walls are stored on one side only, so a bidirectional check incorrectly
+                // blocks valid moves (e.g. a cell with only a West wall blocks entry from East).
+                for (int dir = 0; dir < 4; dir++) {
+                    if (!passableDir(cell2, dir)) {
+                        continue;
+                    }
+                    int nx2 = x2 + dx[dir];
+                    int ny2 = y2 + dy[dir];
+                    if (nx2 < 0 || nx2 >= dim || ny2 < 0 || ny2 >= dim) {
+                        continue;
+                    }
+                    WizardryData.MazeCell neighbor = sc.levels()[lvl2].cells[nx2][ny2];
+                    if (neighbor == null || neighbor.rock) {
+                        continue;
+                    }
+                    if (!canEnter(sc, lvl2, nx2, ny2, mask2, bitByItem)) {
+                        continue;
+                    }
+
+                    long newMask2 = applyPickupMask(sc, lvl2, nx2, ny2, mask2, bitByItem, java.util.Collections.emptyMap(), xyBits, lvlBits);
+                    long newCost2 = cost2 + STEP_WEIGHT + hazardPenalty(sc, lvl2, nx2, ny2) * STEP_WEIGHT;
+                    long newState2 = packState(lvl2, nx2, ny2, newMask2, xyBits, lvlBits);
+                    Long prevCost2 = costMap.get(newState2);
+                    if (prevCost2 == null || newCost2 < prevCost2) {
+                        costMap.put(newState2, newCost2);
+                        parent.put(newState2, state2);
+                        pq.offer(new long[]{newCost2, lvl2, nx2, ny2, newMask2});
+                    }
+                }
+            }
+
+            if (goalState < 0) {
+                // ── Dijkstra failure diagnostics ──────────────────────────────
+                String fPos = "L" + (fromLvl + 1) + "(" + fromX + "," + fromY + ")";
+                String tPos = "L" + (toLvl + 1) + "(" + toX + "," + toY + ")";
+                System.out.println("     [DIJKSTRA FAIL] No path from " + fPos + " to " + tPos);
+                System.out.println("       States visited: " + costMap.size());
+                boolean goalCellVisited = false;
+                for (Long stateKey : costMap.keySet()) {
+                    int[] up = unpackState(stateKey, xyBits, lvlBits);
+                    if (up[0] == toLvl && up[1] == toX && up[2] == toY) {
+                        goalCellVisited = true;
+                        System.out.println("       Goal cell WAS visited mask=0x"
+                                + Long.toHexString(unpackMask(stateKey, xyBits, lvlBits)));
+                    }
+                }
+                if (!goalCellVisited) {
+                    System.out.println("       Goal cell NEVER reached. Neighbours of " + tPos + ":");
+                    WizardryData.MazeCell tgt = sc.levels()[toLvl].cells[toX][toY];
+                    if (tgt == null) {
+                        System.out.println("         target cell is NULL!");
+                    } else {
+                        System.out.println("         N-wall=" + tgt.northWall + "(door=" + tgt.northDoor + ")"
+                                + " S=" + tgt.southWall + "(door=" + tgt.southDoor + ")"
+                                + " W=" + tgt.westWall + "(door=" + tgt.westDoor + ")"
+                                + " E=" + tgt.eastWall + "(door=" + tgt.eastDoor + ")"
+                                + " itemReq=" + tgt.itemRequired);
+                        String[] dname = {"N", "S", "W", "E"};
+                        int[] ddx2 = {1, -1, 0, 0};
+                        int[] ddy2 = {0, 0, -1, 1};
+                        for (int d2 = 0; d2 < 4; d2++) {
+                            int ax = toX + ddx2[d2], ay = toY + ddy2[d2];
+                            if (ax < 0 || ax >= dim || ay < 0 || ay >= dim) {
+                                continue;
+                            }
+                            String aPos = "L" + (toLvl + 1) + "(" + ax + "," + ay + ")";
+                            WizardryData.MazeCell adj = sc.levels()[toLvl].cells[ax][ay];
+                            if (adj == null || adj.rock) {
+                                System.out.println("         " + dname[d2] + " " + aPos + " -> rock/null");
+                                continue;
+                            }
+                            boolean adjVisited = false;
+                            for (Long sk2 : costMap.keySet()) {
+                                int[] up2 = unpackState(sk2, xyBits, lvlBits);
+                                if (up2[0] == toLvl && up2[1] == ax && up2[2] == ay) {
+                                    adjVisited = true;
+                                    break;
+                                }
+                            }
+                            System.out.println("         " + dname[d2] + " " + aPos
+                                    + " visited=" + adjVisited
+                                    + " adjCanExit=" + passableDir(adj, d2)
+                                    + " itemReq=" + adj.itemRequired
+                                    + " teleport=" + adj.teleport + " rock=" + adj.rock);
+                        }
+                    }
+                }
+                return null; // unreachable
+            }
+
+            // Reconstruct path by walking parent links back to the seed node.
+            // The seed was never inserted into parent map, so par==null marks it.
+            java.util.LinkedList<long[]> pathStates = new java.util.LinkedList<>();
+            long cur3 = goalState;
+            while (true) {
+                int[] unpacked = unpackState(cur3, xyBits, lvlBits);
+                long m3 = unpackMask(cur3, xyBits, lvlBits);
+                long cost3 = costMap.getOrDefault(cur3, 0L);
+                pathStates.addFirst(new long[]{unpacked[0], unpacked[1], unpacked[2], m3, cost3});
+                Long par = parent.get(cur3);
+                if (par == null) {
+                    break; // reached seed
+                }
+                cur3 = par;
+            }
+            // Strip start cell if it ended up as first entry
+            if (!pathStates.isEmpty()) {
+                long[] first = pathStates.getFirst();
+                if ((int) first[0] == fromLvl && (int) first[1] == fromX && (int) first[2] == fromY) {
+                    pathStates.removeFirst();
+                }
+            }
+
+            java.util.List<Node> result = new java.util.ArrayList<>(pathStates.size());
+            for (long[] ps : pathStates) {
+                result.add(new Node((int) ps[0], (int) ps[1], (int) ps[2], ps[3], (int) ps[4]));
+            }
+            return result;
+        };
+
+        // ---- Helper: collect item specials on a given level that give items ----
+        // Returns list of [lvl, x, y] for specials that could be item sources
+        java.util.function.Function<Integer, java.util.List<int[]>> itemSpecialsOnLevel = (lvlIdx) -> {
+            java.util.List<int[]> result = new java.util.ArrayList<>();
+            java.util.List<SpecialCell> spList = specials.get(lvlIdx);
+            if (spList == null) {
+                return result;
+            }
+            for (SpecialCell s : spList) {
+                WizardryData.MazeCell mc = sc.levels()[s.lvl].cells[s.x][s.y];
+                if (mc == null) {
+                    continue;
+                }
+                boolean hasItem = mc.itemObtained > 0 || mc.itemObtainedFromRiddle > 0
+                        || mc.encounterGiveItem > 0 || mc.tradeItem2 > 0
+                        || (mc.encounterID >= 0 && encounterRewardItemByEncounterId.containsKey(mc.encounterID));
+                if (hasItem) {
+                    result.add(new int[]{s.lvl, s.x, s.y});
+                }
+            }
+            return result;
+        };
+
+        // ---- Attempt to collect all item specials on all levels, with backtracking ----
+        // We do multiple passes: first collect all reachable items on all levels in order,
+        // then check if any deferred items became reachable with newly acquired items.
+        // Collect all item-bearing special locations across all levels
+        java.util.LinkedHashSet<Integer> pendingSpecials = new java.util.LinkedHashSet<>();
+        for (int lvlIdx = startLevelIdx; lvlIdx <= targetLevelIdx && lvlIdx < L; lvlIdx++) {
+            java.util.List<int[]> lvlItems = itemSpecialsOnLevel.apply(lvlIdx);
+            for (int[] loc : lvlItems) {
+                pendingSpecials.add(specialKey(loc[0], loc[1], loc[2], dim));
+            }
+        }
+
+        // Mark start cell visited
+        visited.add(specialKey(curLvl, curX, curY, dim));
+
+        System.out.println("START: " + pos(curLvl, curX, curY)
+                + "  [" + debugCellDescription(sc, curLvl, curX, curY) + "]");
+        System.out.println("       Inventory: " + debugInventory(sc, curMask, bitByItem));
+        System.out.println();
+
+        boolean madeProgress = true;
+        int passCount = 0;
+        final int MAX_PASSES = 20;
+
+        while (madeProgress && passCount < MAX_PASSES) {
+            madeProgress = false;
+            passCount++;
+
+            java.util.List<Integer> candidates = new java.util.ArrayList<>(pendingSpecials);
+            candidates.removeAll(visited);
+            if (candidates.isEmpty()) {
+                break;
+            }
+
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("PASS " + passCount + " | from " + pos(curLvl, curX, curY)
+                    + " | candidates=" + candidates.size() + " | deferred=" + deferred.size());
+            System.out.println("  Inventory: " + debugInventory(sc, curMask, bitByItem));
+            System.out.println();
+
+            for (int specKey : candidates) {
+                int sk = specKey;
+                int sLvl = sk / (dim * dim);
+                int sX = (sk % (dim * dim)) / dim;
+                int sY = sk % dim;
+
+                System.out.println("  >> TARGET: " + pos(sLvl, sX, sY)
+                        + "  [" + debugCellDescription(sc, sLvl, sX, sY) + "]");
+                System.out.println("     from: " + pos(curLvl, curX, curY)
+                        + "  inventory: " + debugInventory(sc, curMask, bitByItem));
+
+                java.util.List<Node> path = dijkstraTo.apply(new long[]{curLvl, curX, curY, sLvl, sX, sY, curMask});
+
+                if (path == null || path.isEmpty()) {
+                    WizardryData.MazeCell mc = sc.levels()[sLvl].cells[sX][sY];
+                    String why = (mc != null && mc.itemRequired > 0)
+                            ? " -- GATE requires " + itemLabel(sc, mc.itemRequired) : "";
+                    System.out.println("     [DEFERRED]" + why);
+                    System.out.println();
+                    deferred.add(specKey);
+                    continue;
+                }
+
+                System.out.println("     Path: " + path.size() + " steps");
+                long prevMask = curMask;
+                int prevLvl2 = curLvl;
+                int stepNum = 0;
+                for (Node pathNode : path) {
+                    stepNum++;
+                    walk.add(pathNode);
+                    remaining.remove(specialKey(pathNode.lvl, pathNode.x, pathNode.y, dim));
+                    boolean lvlChange = pathNode.lvl != prevLvl2;
+                    String cellDesc = debugCellDescription(sc, pathNode.lvl, pathNode.x, pathNode.y);
+                    System.out.println("     step " + stepNum + ": " + pos(pathNode.lvl, pathNode.x, pathNode.y)
+                            + (lvlChange ? "  [LEVEL CHANGE from L" + (prevLvl2 + 1) + "]" : "")
+                            + "  [" + cellDesc + "]");
+                    if (pathNode.mask != prevMask) {
+                        System.out.println("              ** Inventory -> "
+                                + debugInventory(sc, pathNode.mask, bitByItem));
+                    }
+                    prevMask = pathNode.mask;
+                    prevLvl2 = pathNode.lvl;
+                }
+
+                Node last = path.get(path.size() - 1);
+                long maskBefore = last.mask;
                 curLvl = last.lvl;
                 curX = last.x;
                 curY = last.y;
                 curMask = last.mask;
-                stuckCount = 0;
-                continue;
+                curMask = applyPickupMask(sc, curLvl, curX, curY, curMask, bitByItem,
+                        java.util.Collections.emptyMap(), xyBits, lvlBits);
+
+                System.out.println("     ARRIVED " + pos(curLvl, curX, curY));
+                if (curMask != maskBefore) {
+                    System.out.println("     ** Items gained! Before: " + debugInventory(sc, maskBefore, bitByItem));
+                    System.out.println("                      After:  " + debugInventory(sc, curMask, bitByItem));
+                } else {
+                    System.out.println("     Inventory: " + debugInventory(sc, curMask, bitByItem));
+                }
+                System.out.println();
+
+                visited.add(specKey);
+                deferred.remove(specKey);
+                madeProgress = true;
             }
 
-            // No reachable special from here with the current inventory.
-            // Keep the "malor"-style fallback descent so we can push deeper and (hopefully) pick up gating items.
-            stuckCount++;
-
-            if (curLvl < targetLevelIdx) {
-                int[] sd = findBestStairsDown(sc, curLvl, dim, targetLevelIdx);
-                if (sd == null) {
-                    break;
+            // Check if any deferred items are now reachable with updated mask
+            java.util.List<Integer> newlyReachable = new java.util.ArrayList<>();
+            for (int specKey : deferred) {
+                if (visited.contains(specKey)) {
+                    continue;
                 }
-
-                int stairsX = sd[0], stairsY = sd[1];
-                int toLvl = sd[2], toX = sd[3], toY = sd[4];
-
-                // Teleport to stairs square (bypass walls/doors). This is the “malor” fallback.
-                totalCost += LEVEL_HOP_PENALTY;
-                curMask = applyPickupMask(sc, curLvl, stairsX, stairsY, curMask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                walk.add(new Node(curLvl, stairsX, stairsY, curMask, totalCost));
-                remaining.remove(specialKey(curLvl, stairsX, stairsY, dim));
-
-                // Take stairs down.
-                totalCost += 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvl, toX, toY);
-                curLvl = toLvl;
-                curX = toX;
-                curY = toY;
-                curMask = applyPickupMask(sc, curLvl, curX, curY, curMask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                walk.add(new Node(curLvl, curX, curY, curMask, totalCost));
-                remaining.remove(specialKey(curLvl, curX, curY, dim));
-            } else {
-                break;
+                int sk = specKey;
+                int sLvl = sk / (dim * dim);
+                int sX = (sk % (dim * dim)) / dim;
+                int sY = sk % dim;
+                java.util.List<Node> path = dijkstraTo.apply(new long[]{curLvl, curX, curY, sLvl, sX, sY, curMask});
+                if (path != null && !path.isEmpty()) {
+                    newlyReachable.add(specKey);
+                }
             }
-        }
 
-        // Ensure the final walkthrough ends on the last level
-        if (curLvl != targetLevelIdx) {
-            DijkstraResult toLast = dijkstraToLevel(sc, curLvl, curX, curY, curMask, targetLevelIdx, bitByItem, xyBits, lvlBits);
-            if (toLast != null && toLast.path != null && toLast.path.size() > 1) {
-                for (int i = 1; i < toLast.path.size(); i++) {
-                    Node n = toLast.path.get(i);
-                    int absCost = totalCost + n.cost;
-                    walk.add(new Node(n.lvl, n.x, n.y, n.mask, absCost));
-                }
-            } else {
-                // Last-ditch: just force descend with the same fallback as above.
-                while (curLvl < targetLevelIdx) {
-                    int[] sd = findBestStairsDown(sc, curLvl, dim, targetLevelIdx);
-                    if (sd == null) {
-                        break;
+            if (!newlyReachable.isEmpty()) {
+                System.out.println("  [RETRY] " + newlyReachable.size()
+                        + " previously-deferred specials now reachable. Inventory: "
+                        + debugInventory(sc, curMask, bitByItem));
+                System.out.println();
+                for (int specKey : newlyReachable) {
+                    int sk = specKey;
+                    int sLvl = sk / (dim * dim);
+                    int sX = (sk % (dim * dim)) / dim;
+                    int sY = sk % dim;
+
+                    System.out.println("  >> RETRY: " + pos(sLvl, sX, sY)
+                            + "  [" + debugCellDescription(sc, sLvl, sX, sY) + "]");
+
+                    java.util.List<Node> path = dijkstraTo.apply(new long[]{curLvl, curX, curY, sLvl, sX, sY, curMask});
+                    if (path == null || path.isEmpty()) {
+                        System.out.println("     [STILL BLOCKED]");
+                        System.out.println();
+                        continue;
                     }
 
-                    int stairsX = sd[0], stairsY = sd[1];
-                    int toLvl = sd[2], toX = sd[3], toY = sd[4];
+                    System.out.println("     Path: " + path.size() + " steps");
+                    long prevMask = curMask;
+                    int prevLvl2 = curLvl;
+                    int stepNum = 0;
+                    for (Node pathNode : path) {
+                        stepNum++;
+                        walk.add(pathNode);
+                        remaining.remove(specialKey(pathNode.lvl, pathNode.x, pathNode.y, dim));
+                        boolean lvlChange = pathNode.lvl != prevLvl2;
+                        System.out.println("     step " + stepNum + ": " + pos(pathNode.lvl, pathNode.x, pathNode.y)
+                                + (lvlChange ? "  [LEVEL CHANGE from L" + (prevLvl2 + 1) + "]" : "")
+                                + "  [" + debugCellDescription(sc, pathNode.lvl, pathNode.x, pathNode.y) + "]");
+                        if (pathNode.mask != prevMask) {
+                            System.out.println("              ** Inventory -> "
+                                    + debugInventory(sc, pathNode.mask, bitByItem));
+                        }
+                        prevMask = pathNode.mask;
+                        prevLvl2 = pathNode.lvl;
+                    }
 
-                    totalCost += LEVEL_HOP_PENALTY;
-                    curMask = applyPickupMask(sc, curLvl, stairsX, stairsY, curMask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                    walk.add(new Node(curLvl, stairsX, stairsY, curMask, totalCost));
+                    Node last = path.get(path.size() - 1);
+                    long maskBefore = last.mask;
+                    curLvl = last.lvl;
+                    curX = last.x;
+                    curY = last.y;
+                    curMask = last.mask;
+                    curMask = applyPickupMask(sc, curLvl, curX, curY, curMask, bitByItem,
+                            java.util.Collections.emptyMap(), xyBits, lvlBits);
 
-                    totalCost += 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvl, toX, toY);
-                    curLvl = toLvl;
-                    curX = toX;
-                    curY = toY;
-                    curMask = applyPickupMask(sc, curLvl, curX, curY, curMask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                    walk.add(new Node(curLvl, curX, curY, curMask, totalCost));
+                    System.out.println("     ARRIVED " + pos(curLvl, curX, curY));
+                    if (curMask != maskBefore) {
+                        System.out.println("     ** Items gained! Before: " + debugInventory(sc, maskBefore, bitByItem));
+                        System.out.println("                      After:  " + debugInventory(sc, curMask, bitByItem));
+                    } else {
+                        System.out.println("     Inventory: " + debugInventory(sc, curMask, bitByItem));
+                    }
+                    System.out.println();
+
+                    visited.add(specKey);
+                    deferred.remove(specKey);
+                    madeProgress = true;
                 }
             }
+
+            pendingSpecials.removeAll(visited);
         }
+
+        // Final summary
+        System.out.println("================================================================");
+        System.out.println("WALKTHROUGH COMPLETE  nodes=" + walk.size() + "  passes=" + passCount);
+        System.out.println("  Final position:  " + pos(curLvl, curX, curY));
+        System.out.println("  Final inventory: " + debugInventory(sc, curMask, bitByItem));
+        System.out.println("  Visited: " + visited.size() + "  Still deferred: " + deferred.size());
+        if (!deferred.isEmpty()) {
+            System.out.println("[HUD ERRORS] Could not obtain:");
+            for (int specKey : deferred) {
+                int sk = specKey;
+                int sLvl = sk / (dim * dim);
+                int sX = (sk % (dim * dim)) / dim;
+                int sY = sk % dim;
+                System.out.println("  [MISSED] " + pos(sLvl, sX, sY)
+                        + "  [" + debugCellDescription(sc, sLvl, sX, sY) + "]");
+            }
+        }
+        System.out.println("================================================================");
 
         return walk;
-    }
-
-    private static final class DijkstraResult {
-
-        final java.util.List<Node> path;
-
-        DijkstraResult(java.util.List<Node> path) {
-            this.path = path;
-        }
-    }
-
-    private DijkstraResult dijkstraToAnySpecial(
-            WizardryData.Scenario sc,
-            int startLvl, int startX, int startY,
-            long startMask,
-            java.util.Set<Integer> remainingSpecialKeys,
-            java.util.Map<Integer, Integer> bitByItem,
-            int xyBits, int lvlBits) {
-
-        final int L = sc.levels().length;
-        final int dim = sc.levels()[0].dimension;
-        final java.util.Map<Integer, Integer> emptyGateBits = java.util.Collections.emptyMap();
-
-        java.util.HashMap<Long, Integer> dist = new java.util.HashMap<>();
-        java.util.HashMap<Long, Long> prev = new java.util.HashMap<>();
-
-        java.util.PriorityQueue<Node> pq = new java.util.PriorityQueue<>(
-                java.util.Comparator.comparingInt(n -> n.cost));
-
-        long startState = packState(startLvl, startX, startY, startMask, xyBits, lvlBits);
-        dist.put(startState, 0);
-        pq.add(new Node(startLvl, startX, startY, startMask, 0));
-
-        // dir: 0=N, 1=S, 2=W, 3=E
-        final int[] dx = {+1, -1, 0, 0};  // row
-        final int[] dy = {0, 0, -1, +1};  // col
-
-        long goalState = -1L;
-
-        while (!pq.isEmpty()) {
-            Node cur = pq.poll();
-
-            long curState = packState(cur.lvl, cur.x, cur.y, cur.mask, xyBits, lvlBits);
-            Integer known = dist.get(curState);
-            if (known == null || cur.cost != known) {
-                continue;
-            }
-
-            if (remainingSpecialKeys.contains(specialKey(cur.lvl, cur.x, cur.y, dim))) {
-                goalState = curState;
-                break;
-            }
-
-            WizardryData.MazeCell c = sc.levels()[cur.lvl].cells[cur.x][cur.y];
-            if (c == null) {
-                continue;
-            }
-
-            // 1) normal moves
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cur.x + dx[dir];
-                int ny = cur.y + dy[dir];
-                if (nx < 0 || ny < 0 || nx >= dim || ny >= dim) {
-                    continue;
-                }
-                if (!passableDir(c, dir)) {
-                    continue;
-                }
-                if (!canEnter(sc, cur.lvl, nx, ny, cur.mask, bitByItem)) {
-                    continue;
-                }
-
-                long nmask = applyPickupMask(sc, cur.lvl, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                int ncost = cur.cost + 1 + hazardPenalty(sc, cur.lvl, nx, ny);
-
-                long nstate = packState(cur.lvl, nx, ny, nmask, xyBits, lvlBits);
-                Integer old = dist.get(nstate);
-                if (old == null || ncost < old) {
-                    dist.put(nstate, ncost);
-                    prev.put(nstate, curState);
-                    pq.add(new Node(cur.lvl, nx, ny, nmask, ncost));
-                }
-            }
-
-            // 2) special transitions out of this cell
-            if (c.teleport || c.stairs || c.chute) {
-                WizardryData.MazeAddress to = c.addressTo;
-                if (to != null && to.level > 0) {
-                    int toLvlIdx = to.level - 1;
-                    if (toLvlIdx >= 0 && toLvlIdx < L) {
-                        int nx = to.row, ny = to.column;
-                        if (nx >= 0 && ny >= 0 && nx < dim && ny < dim
-                                && canEnter(sc, toLvlIdx, nx, ny, cur.mask, bitByItem)) {
-
-                            long nmask = applyPickupMask(sc, toLvlIdx, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                            int ncost = cur.cost + 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvlIdx, nx, ny);
-
-                            long nstate = packState(toLvlIdx, nx, ny, nmask, xyBits, lvlBits);
-                            Integer old = dist.get(nstate);
-                            if (old == null || ncost < old) {
-                                dist.put(nstate, ncost);
-                                prev.put(nstate, curState);
-                                pq.add(new Node(toLvlIdx, nx, ny, nmask, ncost));
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (c.elevator) {
-                int lo = Math.min(c.elevatorFrom, c.elevatorTo);
-                int hi = Math.max(c.elevatorFrom, c.elevatorTo);
-
-                for (int raw = lo; raw <= hi; raw++) {
-                    if (raw <= 0) {
-                        continue;
-                    }
-                    int toLvlIdx = raw - 1;
-                    if (toLvlIdx < 0 || toLvlIdx >= L) {
-                        continue;
-                    }
-                    int nx = cur.x, ny = cur.y;
-                    if (!canEnter(sc, toLvlIdx, nx, ny, cur.mask, bitByItem)) {
-                        continue;
-                    }
-
-                    long nmask = applyPickupMask(sc, toLvlIdx, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                    int ncost = cur.cost + 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvlIdx, nx, ny);
-
-                    long nstate = packState(toLvlIdx, nx, ny, nmask, xyBits, lvlBits);
-                    Integer old = dist.get(nstate);
-                    if (old == null || ncost < old) {
-                        dist.put(nstate, ncost);
-                        prev.put(nstate, curState);
-                        pq.add(new Node(toLvlIdx, nx, ny, nmask, ncost));
-                    }
-                }
-            }
-        }
-
-        if (goalState < 0) {
-            return null;
-        }
-
-        java.util.ArrayList<Node> path = new java.util.ArrayList<>();
-        long curState = goalState;
-        while (true) {
-            int[] u = unpackState(curState, xyBits, lvlBits);
-            long mask = unpackMask(curState, xyBits, lvlBits);
-            int cost = dist.get(curState);
-            path.add(new Node(u[0], u[1], u[2], mask, cost));
-
-            Long p = prev.get(curState);
-            if (p == null) {
-                break;
-            }
-            curState = p.longValue();
-        }
-
-        java.util.Collections.reverse(path);
-        return new DijkstraResult(path);
-    }
-
-    private DijkstraResult dijkstraToLevel(
-            WizardryData.Scenario sc,
-            int startLvl, int startX, int startY,
-            long startMask,
-            int targetLevelIdx,
-            java.util.Map<Integer, Integer> bitByItem,
-            int xyBits, int lvlBits) {
-
-        final int L = sc.levels().length;
-        final int dim = sc.levels()[0].dimension;
-        final java.util.Map<Integer, Integer> emptyGateBits = java.util.Collections.emptyMap();
-
-        java.util.HashMap<Long, Integer> dist = new java.util.HashMap<>();
-        java.util.HashMap<Long, Long> prev = new java.util.HashMap<>();
-
-        java.util.PriorityQueue<Node> pq = new java.util.PriorityQueue<>(
-                java.util.Comparator.comparingInt(n -> n.cost));
-
-        long startState = packState(startLvl, startX, startY, startMask, xyBits, lvlBits);
-        dist.put(startState, 0);
-        pq.add(new Node(startLvl, startX, startY, startMask, 0));
-
-        // dir: 0=N, 1=S, 2=W, 3=E
-        final int[] dx = {+1, -1, 0, 0};
-        final int[] dy = {0, 0, -1, +1};
-
-        long goalState = -1L;
-
-        while (!pq.isEmpty()) {
-            Node cur = pq.poll();
-
-            long curState = packState(cur.lvl, cur.x, cur.y, cur.mask, xyBits, lvlBits);
-            Integer known = dist.get(curState);
-            if (known == null || cur.cost != known) {
-                continue;
-            }
-
-            if (cur.lvl == targetLevelIdx) {
-                goalState = curState;
-                break;
-            }
-
-            WizardryData.MazeCell c = sc.levels()[cur.lvl].cells[cur.x][cur.y];
-            if (c == null) {
-                continue;
-            }
-
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cur.x + dx[dir];
-                int ny = cur.y + dy[dir];
-                if (nx < 0 || ny < 0 || nx >= dim || ny >= dim) {
-                    continue;
-                }
-                if (!passableDir(c, dir)) {
-                    continue;
-                }
-                if (!canEnter(sc, cur.lvl, nx, ny, cur.mask, bitByItem)) {
-                    continue;
-                }
-
-                long nmask = applyPickupMask(sc, cur.lvl, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                int ncost = cur.cost + 1 + hazardPenalty(sc, cur.lvl, nx, ny);
-
-                long nstate = packState(cur.lvl, nx, ny, nmask, xyBits, lvlBits);
-                Integer old = dist.get(nstate);
-                if (old == null || ncost < old) {
-                    dist.put(nstate, ncost);
-                    prev.put(nstate, curState);
-                    pq.add(new Node(cur.lvl, nx, ny, nmask, ncost));
-                }
-            }
-
-            if (c.teleport || c.stairs || c.chute) {
-                WizardryData.MazeAddress to = c.addressTo;
-                if (to != null && to.level > 0) {
-                    int toLvlIdx = to.level - 1;
-                    if (toLvlIdx >= 0 && toLvlIdx < L) {
-                        int nx = to.row, ny = to.column;
-                        if (nx >= 0 && ny >= 0 && nx < dim && ny < dim
-                                && canEnter(sc, toLvlIdx, nx, ny, cur.mask, bitByItem)) {
-
-                            long nmask = applyPickupMask(sc, toLvlIdx, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                            int ncost = cur.cost + 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvlIdx, nx, ny);
-
-                            long nstate = packState(toLvlIdx, nx, ny, nmask, xyBits, lvlBits);
-                            Integer old = dist.get(nstate);
-                            if (old == null || ncost < old) {
-                                dist.put(nstate, ncost);
-                                prev.put(nstate, curState);
-                                pq.add(new Node(toLvlIdx, nx, ny, nmask, ncost));
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (c.elevator) {
-                int lo = Math.min(c.elevatorFrom, c.elevatorTo);
-                int hi = Math.max(c.elevatorFrom, c.elevatorTo);
-                for (int raw = lo; raw <= hi; raw++) {
-                    if (raw <= 0) {
-                        continue;
-                    }
-                    int toLvlIdx = raw - 1;
-                    if (toLvlIdx < 0 || toLvlIdx >= L) {
-                        continue;
-                    }
-                    int nx = cur.x, ny = cur.y;
-                    if (!canEnter(sc, toLvlIdx, nx, ny, cur.mask, bitByItem)) {
-                        continue;
-                    }
-                    long nmask = applyPickupMask(sc, toLvlIdx, nx, ny, cur.mask, bitByItem, emptyGateBits, xyBits, lvlBits);
-                    int ncost = cur.cost + 1 + LEVEL_HOP_PENALTY + hazardPenalty(sc, toLvlIdx, nx, ny);
-                    long nstate = packState(toLvlIdx, nx, ny, nmask, xyBits, lvlBits);
-                    Integer old = dist.get(nstate);
-                    if (old == null || ncost < old) {
-                        dist.put(nstate, ncost);
-                        prev.put(nstate, curState);
-                        pq.add(new Node(toLvlIdx, nx, ny, nmask, ncost));
-                    }
-                }
-            }
-        }
-
-        if (goalState < 0) {
-            return null;
-        }
-
-        java.util.ArrayList<Node> path = new java.util.ArrayList<>();
-        long curState = goalState;
-        while (true) {
-            int[] u = unpackState(curState, xyBits, lvlBits);
-            long mask = unpackMask(curState, xyBits, lvlBits);
-            int cost = dist.get(curState);
-            path.add(new Node(u[0], u[1], u[2], mask, cost));
-
-            Long p = prev.get(curState);
-            if (p == null) {
-                break;
-            }
-            curState = p.longValue();
-        }
-        java.util.Collections.reverse(path);
-        return new DijkstraResult(path);
     }
 
     private static boolean isSpecialCell(WizardryData.MazeCell c) {
@@ -1089,7 +990,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
 
         shapes.end();
 
-        // ---------- Animated current position ----------
         float fx = cur.x;
         float fy = cur.y;
 
@@ -1123,37 +1023,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
                 walkIdx, (walkthrough.size() - 1),
                 cur.x, cur.y, cur.mask
         );
-
-        int nextItemId = (hudNextObjectiveItemByStep != null && walkIdx < hudNextObjectiveItemByStep.length)
-                ? hudNextObjectiveItemByStep[walkIdx] : 0;
-        String hud2 = "Next objective item: " + itemLabel(scenario, nextItemId);
-
-        String hudReq = (hudRequiredByStep != null && walkIdx < hudRequiredByStep.length)
-                ? hudRequiredByStep[walkIdx] : "";
-
-        String hudOwned = (hudOwnedByStep != null && walkIdx < hudOwnedByStep.length)
-                ? hudOwnedByStep[walkIdx] : "";
-
-        String hud3 = (hudEventByStep != null && walkIdx < hudEventByStep.length)
-                ? hudEventByStep[walkIdx] : "";
-
-        float topY = Gdx.graphics.getHeight() - pad;
-        float lh = font.getLineHeight();
-        float maxW = Gdx.graphics.getWidth() - 2f * pad;
-
-        font.draw(batch, fitHudLine(hud1, maxW), pad, topY);
-        font.draw(batch, fitHudLine(hud2, maxW), pad, topY - lh);
-
-        if (hudReq != null && !hudReq.isEmpty()) {
-            font.draw(batch, fitHudLine(hudReq, maxW), pad, topY - 2f * lh);
-        }
-        if (hudOwned != null && !hudOwned.isEmpty()) {
-            font.draw(batch, fitHudLine(hudOwned, maxW), pad, topY - 3f * lh);
-        }
-
-        if (hud3 != null && !hud3.isEmpty()) {
-            font.draw(batch, fitHudLine(hud3, maxW), pad, topY - 4f * lh);
-        }
 
         batch.end();
     }
@@ -1390,41 +1259,83 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         return true;
     }
 
-    private static int[] findBestStairsDown(WizardryData.Scenario sc, int lvlIdx, int dim, int targetLevelIdx) {
-        int bestToLvl = -1;
-        int bestX = -1, bestY = -1;
-        int bestToX = -1, bestToY = -1;
+    private static String pos(int lvl, int x, int y) {
+        return "L" + (lvl + 1) + "(" + x + "," + y + ")";
+    }
 
-        WizardryData.MazeLevel lvl = sc.levels()[lvlIdx];
-        for (int x = 0; x < dim; x++) {
-            for (int y = 0; y < dim; y++) {
-                WizardryData.MazeCell c = lvl.cells[x][y];
-                if (c == null || !c.stairs || c.addressTo == null || c.addressTo.level <= 0) {
-                    continue;
-                }
-
-                int toLvlIdx = c.addressTo.level - 1; // 1-based -> 0-based
-                if (toLvlIdx <= lvlIdx) {
-                    continue;     // not "down"
-                }
-                if (toLvlIdx > targetLevelIdx) {
-                    continue;
-                }
-
-                if (toLvlIdx > bestToLvl) {
-                    bestToLvl = toLvlIdx;
-                    bestX = x;
-                    bestY = y;
-                    bestToX = c.addressTo.row;
-                    bestToY = c.addressTo.column;
-                }
+    private String debugInventory(WizardryData.Scenario sc, long mask,
+            java.util.Map<Integer, Integer> bitByItem) {
+        if (mask == 0L) {
+            return "(empty)";
+        }
+        java.util.TreeMap<Integer, Integer> sorted = new java.util.TreeMap<>();
+        for (java.util.Map.Entry<Integer, Integer> e : bitByItem.entrySet()) {
+            if ((mask & (1L << e.getValue())) != 0L) {
+                sorted.put(e.getKey(), e.getValue());
             }
         }
-
-        if (bestToLvl < 0) {
-            return null;
+        if (sorted.isEmpty()) {
+            return "(empty)";
         }
-        return new int[]{bestX, bestY, bestToLvl, bestToX, bestToY};
+        StringBuilder sb = new StringBuilder();
+        for (Integer id : sorted.keySet()) {
+            if (sb.length() > 0) {
+                sb.append(", ");
+            }
+            sb.append(itemLabel(sc, id));
+        }
+        return sb.toString();
+    }
+
+    private String debugCellDescription(WizardryData.Scenario sc, int lvlIdx, int x, int y) {
+        WizardryData.MazeCell c = sc.levels()[lvlIdx].cells[x][y];
+        if (c == null) {
+            return "null-cell";
+        }
+        java.util.ArrayList<String> parts = new java.util.ArrayList<>();
+        if (c.itemObtained > 0) {
+            parts.add("gives=" + itemLabel(sc, c.itemObtained));
+        }
+        if (c.itemObtainedFromRiddle > 0) {
+            parts.add("riddle=" + itemLabel(sc, c.itemObtainedFromRiddle));
+        }
+        if (c.encounterGiveItem > 0) {
+            parts.add("enc-gives=" + itemLabel(sc, c.encounterGiveItem));
+        }
+        if (c.encounterTakeItem > 0) {
+            parts.add("enc-takes=" + itemLabel(sc, c.encounterTakeItem));
+        }
+        if (c.tradeItem2 > 0) {
+            parts.add("trade " + itemLabel(sc, c.tradeItem1) + "->" + itemLabel(sc, c.tradeItem2));
+        }
+        if (c.itemRequired > 0) {
+            parts.add("GATE=" + itemLabel(sc, c.itemRequired));
+        }
+        if (c.encounterID >= 0) {
+            parts.add("encounter#" + c.encounterID);
+        }
+        if (c.stairs) {
+            parts.add("stairs->L" + (c.addressTo != null ? c.addressTo.level : "?"));
+        }
+        if (c.chute) {
+            parts.add("chute->L" + (c.addressTo != null ? c.addressTo.level : "?"));
+        }
+        if (c.teleport) {
+            parts.add("teleport->L" + (c.addressTo != null ? c.addressTo.level : "?"));
+        }
+        if (c.elevator) {
+            parts.add("elevator[" + c.elevatorFrom + "-" + c.elevatorTo + "]");
+        }
+        if (c.pit) {
+            parts.add("PIT");
+        }
+        if (c.damage != null) {
+            parts.add("DAMAGE");
+        }
+        if (c.darkness) {
+            parts.add("dark");
+        }
+        return parts.isEmpty() ? "plain" : String.join(", ", parts);
     }
 
     private String itemLabel(WizardryData.Scenario sc, int itemId) {
@@ -1443,89 +1354,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
             // Best-effort only; keep the walkthrough running even if lookup fails.
         }
         return "#" + itemId;
-    }
-
-    private String itemShortLabel(WizardryData.Scenario sc, int itemId) {
-        if (itemId <= 0) {
-            return "none";
-        }
-        if (sc == null) {
-            return "#" + itemId;
-        }
-        try {
-            Item it = sc.item(itemId);
-            if (it != null && it.name != null && !it.name.isEmpty()) {
-                return it.name;
-            }
-        } catch (Throwable t) {
-            // Best-effort only.
-        }
-        return "#" + itemId;
-    }
-
-    private static String joinLimited(java.util.List<String> parts, int maxItems) {
-        if (parts == null || parts.isEmpty()) {
-            return "";
-        }
-        if (maxItems <= 0 || parts.size() <= maxItems) {
-            return String.join(", ", parts);
-        }
-        java.util.List<String> head = parts.subList(0, maxItems);
-        return String.join(", ", head) + String.format(" ...(+%d)", (parts.size() - maxItems));
-    }
-
-    private int[] collectRequiredItemsInWalk(WizardryData.Scenario sc, java.util.List<Node> nodes) {
-        java.util.HashSet<Integer> req = new java.util.HashSet<>();
-        if (sc == null || nodes == null) {
-            return new int[0];
-        }
-        for (Node n : nodes) {
-            WizardryData.MazeCell c = sc.levels()[n.lvl].cells[n.x][n.y];
-            if (c != null && c.itemRequired > 0) {
-                req.add(c.itemRequired);
-            }
-        }
-
-        req.addAll(this.encounterRewardItemByEncounterId.values());
-
-        int[] out = new int[req.size()];
-        int i = 0;
-        for (Integer id : req) {
-            out[i++] = id;
-        }
-        java.util.Arrays.sort(out);
-        return out;
-    }
-
-    private String fitHudLine(String s, float maxWidth) {
-        if (s == null) {
-            return "";
-        }
-        if (hudLayout == null || font == null) {
-            return s;
-        }
-        hudLayout.setText(font, s);
-        if (hudLayout.width <= maxWidth) {
-            return s;
-        }
-
-        final String suffix = "...";
-        int lo = 0;
-        int hi = s.length();
-        while (lo + 1 < hi) {
-            int mid = (lo + hi) >>> 1;
-            String cand = s.substring(0, mid) + suffix;
-            hudLayout.setText(font, cand);
-            if (hudLayout.width <= maxWidth) {
-                lo = mid;
-            } else {
-                hi = mid;
-            }
-        }
-        if (lo <= 0) {
-            return suffix;
-        }
-        return s.substring(0, lo) + suffix;
     }
 
     private java.util.Map<Integer, Integer> buildEncounterRewardItemByEncounterId(WizardryData.Scenario sc) {
