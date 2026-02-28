@@ -180,7 +180,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
 
                 shapes.setColor(rock ? Color.DARK_GRAY : Color.valueOf("1A1A1A"));
 
-                // Y-up: screenY = x, screenX = y
                 float px = ox + y * cell;
                 float py = oy + x * cell;
                 shapes.rect(px, py, cell, cell);
@@ -582,8 +581,8 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
 
                 // Elevator: can move to any floor between elevatorFrom and elevatorTo
                 if (cell2.elevator) {
-                    int eFrom = Math.min(cell2.elevatorFrom, cell2.elevatorTo);
-                    int eTo = Math.max(cell2.elevatorFrom, cell2.elevatorTo);
+                    int eFrom = Math.min(cell2.elevatorFrom, cell2.elevatorTo) - 1;
+                    int eTo = Math.max(cell2.elevatorFrom, cell2.elevatorTo) - 1;
                     for (int eLvl = eFrom; eLvl <= eTo && eLvl < L; eLvl++) {
                         if (eLvl == lvl2) {
                             continue;
@@ -1385,7 +1384,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         return out;
     }
 
-    private static long seedUnobtainableRequiredInputs(WizardryData.Scenario sc, int startLevelIdx, int targetLevelIdx, 
+    private static long seedUnobtainableRequiredInputs(WizardryData.Scenario sc, int startLevelIdx, int targetLevelIdx,
             Map<Integer, Integer> bitByItem, Map<Integer, Integer> encounterRewardItemByEncounterId) {
 
         if (sc == null || sc.levels() == null) {
@@ -1727,7 +1726,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
     }
 
     private static int pickRewardItemId(Reward reward) {
-        if (reward == null || reward.getRewardDetails() == null || reward.isIsChest()) {
+        if (reward == null || reward.getRewardDetails() == null) {
             return 0;
         }
         int bestItem = 0;
