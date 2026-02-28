@@ -38,9 +38,8 @@ import java.util.function.Function;
  * automatically.
  *
  */
-public class ScenarioSummarizer extends InputAdapter implements ApplicationListener {
+public class ScenarioWalkThruVisualizer extends InputAdapter implements ApplicationListener {
 
-    // Best-effort mapping from encounterID -> a notable reward item id (typically a quest/key item).
     private Map<Integer, Integer> encounterRewardItemByEncounterId = Collections.emptyMap();
     private final Map<Integer, List<SpecialCell>> specials = new HashMap<>();
     private int scenarioMaxLevel = -1;
@@ -81,7 +80,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         cfg.x = 0;
         cfg.y = 0;
 
-        new LwjglApplication(new ScenarioSummarizer(), cfg);
+        new LwjglApplication(new ScenarioWalkThruVisualizer(), cfg);
     }
 
     @Override
@@ -90,7 +89,7 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         Andius a = new Andius();
         a.create();
 
-        WizardryData.Scenario sc = WizardryData.Scenario.LEG;
+        WizardryData.Scenario sc = WizardryData.Scenario.PMO;
         this.scenario = sc;
         this.scenarioMaxLevel = sc.levels().length - 1;
 
@@ -190,6 +189,55 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         float doorLen = cell * 0.45f;
         float doorOff = (cell - doorLen) * 0.5f;
 
+        float wallT = Math.min(2f, Math.max(1f, cell * 0.25f));
+
+        shapes.begin(ShapeType.Filled);
+        for (int x = 0; x < dim; x++) {
+            for (int y = 0; y < dim; y++) {
+                WizardryData.MazeCell c = lvl.cells[x][y];
+                if (c == null) {
+                    continue;
+                }
+
+                float left = ox + y * cell;
+                float bottom = oy + x * cell;
+                float right = left + cell;
+                float top = bottom + cell;
+
+                shapes.setColor(Color.LIGHT_GRAY);
+                if (c.northWall) {
+                    shapes.rect(left, top - wallT, cell, wallT);
+                }
+                if (c.southWall) {
+                    shapes.rect(left, bottom, cell, wallT);
+                }
+                if (c.westWall) {
+                    shapes.rect(left, bottom, wallT, cell);
+                }
+                if (c.eastWall) {
+                    shapes.rect(right - wallT, bottom, wallT, cell);
+                }
+
+                if (c.northDoor) {
+                    shapes.setColor(c.hiddenNorthDoor ? Color.ORANGE : Color.GREEN);
+                    shapes.rect(left + doorOff, top - wallT, doorLen, wallT);
+                }
+                if (c.southDoor) {
+                    shapes.setColor(c.hiddenSouthDoor ? Color.ORANGE : Color.GREEN);
+                    shapes.rect(left + doorOff, bottom, doorLen, wallT);
+                }
+                if (c.westDoor) {
+                    shapes.setColor(c.hiddenWestDoor ? Color.ORANGE : Color.GREEN);
+                    shapes.rect(left, bottom + doorOff, wallT, doorLen);
+                }
+                if (c.eastDoor) {
+                    shapes.setColor(c.hiddenEastDoor ? Color.ORANGE : Color.GREEN);
+                    shapes.rect(right - wallT, bottom + doorOff, wallT, doorLen);
+                }
+            }
+        }
+        shapes.end();
+
         shapes.begin(ShapeType.Line);
 
         for (int x = 0; x < dim; x++) {
@@ -208,38 +256,6 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
                 float cy = bottom + cell * 0.5f;
                 float r = cell * 0.15f;
                 float m = cell * 0.22f;
-
-                shapes.setColor(Color.LIGHT_GRAY);
-
-                if (c.northWall) {
-                    shapes.line(left, top, right, top);
-                }
-                if (c.southWall) {
-                    shapes.line(left, bottom, right, bottom);
-                }
-                if (c.westWall) {
-                    shapes.line(left, bottom, left, top);
-                }
-                if (c.eastWall) {
-                    shapes.line(right, bottom, right, top);
-                }
-
-                if (c.northDoor) {
-                    shapes.setColor(c.hiddenNorthDoor ? Color.ORANGE : Color.GREEN);
-                    shapes.line(left + doorOff, top, left + doorOff + doorLen, top);
-                }
-                if (c.southDoor) {
-                    shapes.setColor(c.hiddenSouthDoor ? Color.ORANGE : Color.GREEN);
-                    shapes.line(left + doorOff, bottom, left + doorOff + doorLen, bottom);
-                }
-                if (c.westDoor) {
-                    shapes.setColor(c.hiddenWestDoor ? Color.ORANGE : Color.GREEN);
-                    shapes.line(left, bottom + doorOff, left, bottom + doorOff + doorLen);
-                }
-                if (c.eastDoor) {
-                    shapes.setColor(c.hiddenEastDoor ? Color.ORANGE : Color.GREEN);
-                    shapes.line(right, bottom + doorOff, right, bottom + doorOff + doorLen);
-                }
 
                 if (c.stairs) {
                     shapes.setColor(Color.PURPLE);
@@ -353,6 +369,153 @@ public class ScenarioSummarizer extends InputAdapter implements ApplicationListe
         }
 
         batch.end();
+
+        float legendPad = pad;
+        float rowH = lh * 1.15f;
+        float icon = lh * 0.75f;
+
+        float lx = legendPad;
+        float ly = legendPad;
+
+        float labelX = lx + icon + (legendPad * 0.6f);
+        float textBaselineOffset = icon * 0.78f;
+
+        float wallTLegend = 2f;
+        float doorLenLegend = icon * 0.65f;
+        float doorOffLegend = (icon - doorLenLegend) * 0.5f;
+
+        shapes.begin(ShapeType.Filled);
+
+        int li = 0;
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.LIGHT_GRAY);
+            shapes.rect(lx, y + icon - wallTLegend, icon, wallTLegend);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.GREEN);
+            shapes.rect(lx + doorOffLegend, y + icon - wallTLegend, doorLenLegend, wallTLegend);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.ORANGE);
+            shapes.rect(lx + doorOffLegend, y + icon - wallTLegend, doorLenLegend, wallTLegend);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.YELLOW);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, Math.max(3f, icon * 0.28f), 20);
+        }
+
+        shapes.end();
+
+        shapes.begin(ShapeType.Line);
+
+        li = 0;
+        
+        li++;
+        li++;
+        li++;
+        li++;
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.PURPLE);
+            float cx0 = lx + icon * 0.30f;
+            float cx1 = lx + icon * 0.70f;
+            float cy0 = y + icon * 0.5f;
+            float m = icon * 0.20f;
+            // up triangle (left)
+            shapes.triangle(cx0, y + icon - m, lx + m, y + m, lx + icon * 0.55f, y + m);
+            // down triangle (right)
+            shapes.triangle(cx1, y + m, lx + icon * 0.45f, y + icon - m, lx + icon - m, y + icon - m);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.VIOLET);
+            float cxE = lx + icon * 0.5f;
+            float cyE = y + icon * 0.5f;
+            float m = icon * 0.20f;
+            shapes.triangle(cxE, y + icon - m, lx + m, cyE, lx + icon - m, cyE);
+            shapes.triangle(cxE, y + m, lx + m, cyE, lx + icon - m, cyE);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.YELLOW);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, icon * 0.22f, 20);
+        }
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.FOREST);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, icon * 0.22f, 20);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.BLUE);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, icon * 0.22f, 20);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.SKY);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, icon * 0.22f, 20);
+        }
+
+        {
+            float y = ly + rowH * li++;
+            shapes.setColor(Color.RED);
+            shapes.circle(lx + icon * 0.5f, y + icon * 0.5f, icon * 0.22f, 20);
+        }
+
+        shapes.end();
+        
+        batch.begin();
+
+        li = 0;
+
+        font.setColor(Color.LIGHT_GRAY);
+        font.draw(batch, "Wall", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.GREEN);
+        font.draw(batch, "Door", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.ORANGE);
+        font.draw(batch, "Hidden door", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.YELLOW);
+        font.draw(batch, "Current position", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.PURPLE);
+        font.draw(batch, "Stairs (up/down)", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.VIOLET);
+        font.draw(batch, "Elevator", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.YELLOW);
+        font.draw(batch, "Message", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.FOREST);
+        font.draw(batch, "Teleport", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.BLUE);
+        font.draw(batch, "Item required", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.SKY);
+        font.draw(batch, "Item obtained", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        font.setColor(Color.RED);
+        font.draw(batch, "Encounter", labelX, (ly + rowH * li++) + textBaselineOffset);
+
+        batch.end();
+
     }
 
     @Override
