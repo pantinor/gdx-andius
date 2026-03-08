@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public enum ClassType {
 
-    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, TibianSprite.icon("Knight_Knight_Male")),
-    MAGE("M", 4, 0, 11, 0, 0, 0, 0, TibianSprite.icon("Sorcerer_Conjurer_Male")),
-    PRIEST("C", 8, 0, 0, 11, 0, 0, 0, TibianSprite.icon("Druid_Grove_Keeper_Male")),
-    THIEF("T", 6, 0, 0, 0, 0, 11, 0, TibianSprite.icon("Paladin_Demon_Hunter_Male")),
-    BISHOP("W", 6, 0, 12, 12, 0, 0, 0, TibianSprite.icon("Sorcerer_Wizard_Male")),
-    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, TibianSprite.icon("Knight_Warmaster_Male")),
-    LORD("L", 10, 15, 12, 12, 15, 14, 15, TibianSprite.icon("Knight_Arena_Champion_Male")),
-    NINJA("N", 6, 17, 17, 17, 17, 17, 17, TibianSprite.icon("Paladin_Assassin_Male"));
+    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, UltimaSprite.icon(42)),
+    MAGE("M", 4, 0, 11, 0, 0, 0, 0, UltimaSprite.icon(32)),
+    PRIEST("C", 8, 0, 0, 11, 0, 0, 0, UltimaSprite.icon(38)),
+    THIEF("T", 6, 0, 0, 0, 0, 11, 0, UltimaSprite.icon(44)),
+    BISHOP("W", 6, 0, 12, 12, 0, 0, 0, UltimaSprite.icon(46)),
+    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, UltimaSprite.icon(40)),
+    LORD("L", 10, 15, 12, 12, 15, 14, 15, UltimaSprite.icon(42)),
+    NINJA("N", 6, 17, 17, 17, 17, 17, 17, UltimaSprite.icon(44));
 
     private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
     private final String abbr;

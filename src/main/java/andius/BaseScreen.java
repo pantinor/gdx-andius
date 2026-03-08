@@ -42,9 +42,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     protected final Vector2 currentMousePos = new Vector2();
 
-    protected int currentRoomId = 0;
-    protected String roomName = null;
-
     /**
      * translate map tile coords to world pixel coords
      *
@@ -67,10 +64,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     public abstract void load(SaveGame saveGame);
 
     public abstract void log(String t);
-
-    public int currentRoomId() {
-        return this.currentRoomId;
-    }
 
     @Override
     public void dispose() {

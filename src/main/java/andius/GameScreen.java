@@ -5,6 +5,8 @@ import andius.objects.Sounds;
 import andius.objects.Direction;
 import andius.dialogs.ConversationDialog;
 import static andius.Andius.CTX;
+import static andius.Andius.SCREEN_HEIGHT;
+import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import static andius.WizardryData.BS_ITEMS;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
@@ -35,25 +38,41 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import utils.FrameMaker;
 import utils.PartyDeathException;
+import utils.SpreadFOV;
 import utils.TmxMapRenderer;
 import utils.TmxMapRenderer.CreatureLayer;
 import utils.Utils;
 
 public class GameScreen extends BaseScreen {
 
+    private static final int SCALED_DIM = TILE_DIM * 2;
+    private static final int VIEWPORT_DIM = SCALED_DIM * 17;
+
+    private final Texture background;
     private final Map map;
     private final TmxMapRenderer renderer;
     private final Batch batch;
     private final Viewport mapViewPort;
+
     private int currentDirection;
     private boolean removedActors;
 
     public GameScreen(Map map) {
 
         this.map = map;
+
+        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+        Texture frame = new Texture(Gdx.files.classpath("assets/data/world_frame.png"));
+        frame.getTextureData().prepare();
+        fm.drawPixmap(frame.getTextureData().consumePixmap(), 0, 0);
+        fm.emptyFrame(SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
+        this.background = fm.build();
 
         batch = new SpriteBatch();
 
@@ -65,83 +84,39 @@ public class GameScreen extends BaseScreen {
 
         addButtons(this.map);
 
-        renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 1f);
+        TiledMapTileLayer mapLayer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("map");
+        float[][] shadowMap = new float[mapLayer.getWidth()][mapLayer.getHeight()];
+        for (int y = 0; y < mapLayer.getHeight(); y++) {
+            for (int x = 0; x < mapLayer.getWidth(); x++) {
+                TiledMapTileLayer.Cell cell = mapLayer.getCell(x, mapLayer.getHeight() - 1 - y);
+                int val = cell.getTile().getId() - 1;
+                shadowMap[x][y] = (val == 6 || val == 8 || val == 73 || val == 127 || val == 58 || val == 59 ? 1 : 0);
+            }
+        }
+
+        SpreadFOV fov = new SpreadFOV(shadowMap);
+
+        renderer = new TmxMapRenderer(this.map, this.map.getTiledMap(), 2f, fov);
 
         renderer.registerCreatureLayer(new CreatureLayer() {
+            Vector3 pos = new Vector3();
+
             @Override
             public void render(float time) {
-                renderer.getBatch().draw(Andius.game_scr_avatar, newMapPixelCoords.x - 20, newMapPixelCoords.y - TILE_DIM + 12);
                 for (Actor a : GameScreen.this.map.getBaseMap().actors) {
-                    if (renderer.shouldRenderCell(currentRoomId, a.getWx(), a.getWy())) {
-                        renderer.getBatch().draw(a.getIcon(), a.getX() - 0, a.getY() + 0);
+                    setMapPixelCoords(pos, a.getWx(), a.getWy(), 0);
+                    float packed = renderer.getColor(mapLayer, a.getWx(), a.getWy());
+                    if (packed != Color.BLACK.toFloatBits()) {
+                        renderer.getBatch().draw(a.getAnim().getKeyFrame(time, true), pos.x, pos.y, SCALED_DIM, SCALED_DIM);
                     }
                 }
             }
         });
 
-        mapPixelHeight = this.map.getBaseMap().getHeight() * TILE_DIM;
+        mapPixelHeight = this.map.getBaseMap().getHeight() * SCALED_DIM;
 
         setMapPixelCoords(newMapPixelCoords, this.map.getStartX(), this.map.getStartY(), 0);
 
-        if (this.map.getRoomIds() != null) {
-            currentRoomId = this.map.getRoomIds()[this.map.getStartX()][this.map.getStartY()][0];
-        }
-
-    }
-
-    @Override
-    public void save(SaveGame saveGame) {
-        Vector3 v = new Vector3();
-        getCurrentMapCoords(v);
-        CTX.saveGame.map = this.map;
-        CTX.saveGame.x = (int) v.x;
-        CTX.saveGame.y = (int) v.y;
-        CTX.saveGame.level = 0;
-        CTX.saveGame.direction = Direction.NORTH;
-    }
-
-    @Override
-    public void load(SaveGame saveGame) {
-        setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
-        if (this.map.getRoomIds() != null) {
-            currentRoomId = this.map.getRoomIds()[saveGame.x][saveGame.y][0];
-        }
-        removeActors(saveGame);
-    }
-
-    private void removeActors(SaveGame saveGame) {
-        if (this.removedActors) {
-            return;
-        }
-        List<String> l = saveGame.removedActors.get(this.map);
-        if (l != null && this.map.getBaseMap() != null) {
-            Iterator<Actor> iter = this.map.getBaseMap().actors.iterator();
-            while (iter.hasNext()) {
-                Actor a = iter.next();
-                if (l.contains(a.hash())) {
-                    iter.remove();
-                }
-            }
-        }
-        this.removedActors = true;
-    }
-
-    @Override
-    public void show() {
-        setRoomName();
-        removeActors(CTX.saveGame);
-        Andius.HUD.addActor(this.stage);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void log(String s) {
-        Andius.HUD.log(s);
     }
 
     @Override
@@ -156,29 +131,29 @@ public class GameScreen extends BaseScreen {
             return;
         }
 
-        camera.position.set(newMapPixelCoords.x + 3 * TILE_DIM + 24 + 8, newMapPixelCoords.y - 1 * TILE_DIM, 0);
+        this.camera.position.x = newMapPixelCoords.x + SCALED_DIM * 5;
+        this.camera.position.y = newMapPixelCoords.y + SCALED_DIM * 1;
 
         camera.update();
 
-        renderer.setView(camera.combined,
-                camera.position.x - TILE_DIM * 10,
-                camera.position.y - TILE_DIM * 6,
-                Andius.MAP_VIEWPORT_DIM,
-                Andius.MAP_VIEWPORT_DIM);
+        this.renderer.setView(camera.combined,
+                camera.position.x - SCALED_DIM * 13,
+                camera.position.y - SCALED_DIM * 9,
+                VIEWPORT_DIM,
+                VIEWPORT_DIM);
 
         renderer.render();
 
         batch.begin();
 
-        batch.draw(Andius.backGround, 0, 0);
+        batch.draw(this.background, 0, 0);
+        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), SCALED_DIM * 11, SCALED_DIM * 11, SCALED_DIM, SCALED_DIM);
+
         Andius.HUD.render(batch, Andius.CTX);
 
-        //Vector3 v = new Vector3();
-        //setCurrentMapCoords(v);
-        //Andius.smallFont.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
-        if (this.roomName != null) {
-            Andius.font16.draw(batch, String.format("%s", this.roomName), 300, Andius.SCREEN_HEIGHT - 12);
-        }
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        Andius.font14.draw(batch, String.format("%s, %s\n", v.x, v.y), 200, Andius.SCREEN_HEIGHT - 32);
 
         batch.end();
 
@@ -195,13 +170,57 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void setMapPixelCoords(Vector3 v, int x, int y, int z) {
-        v.set(x * TILE_DIM, mapPixelHeight - y * TILE_DIM, 0);
+        v.set(x * SCALED_DIM, mapPixelHeight - SCALED_DIM - y * SCALED_DIM, 0);
     }
 
     @Override
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(TILE_DIM * 7, TILE_DIM * 8, 0), 48, 96, Andius.MAP_VIEWPORT_DIM, Andius.MAP_VIEWPORT_DIM);
-        v.set(Math.round(tmp.x / TILE_DIM) - 3, ((mapPixelHeight - Math.round(tmp.y) - TILE_DIM) / TILE_DIM) - 0, 0);
+        Vector3 tmp = camera.unproject(new Vector3(SCALED_DIM * 11, SCALED_DIM * 11, 0), SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
+        float y = Math.round((mapPixelHeight - tmp.y) / SCALED_DIM) + 2;
+        float x = Math.round(tmp.x / SCALED_DIM) - 4;
+        v.set(x, y, 0);
+    }
+
+    @Override
+    public void save(SaveGame saveGame) {
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+        CTX.saveGame.map = this.map;
+        CTX.saveGame.x = (int) v.x;
+        CTX.saveGame.y = (int) v.y;
+        CTX.saveGame.level = 0;
+        CTX.saveGame.direction = Direction.NORTH;
+    }
+
+    @Override
+    public void load(SaveGame saveGame) {
+        removeActors(saveGame);
+
+        setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
+        renderer.getFOV().calculateFOV(saveGame.x, saveGame.y, 72);
+    }
+
+    @Override
+    public void show() {
+        removeActors(CTX.saveGame);
+
+        Andius.HUD.addActor(this.stage);
+        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+
+        Vector3 v = new Vector3();
+        getCurrentMapCoords(v);
+
+        renderer.getFOV().calculateFOV((int) v.x, (int) v.y, 72);
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void log(String s) {
+        Andius.HUD.log(s);
     }
 
     @Override
@@ -214,28 +233,28 @@ public class GameScreen extends BaseScreen {
                 return false;
             }
             this.currentDirection = 2;
-            newMapPixelCoords.y = newMapPixelCoords.y + TILE_DIM;
+            newMapPixelCoords.y = newMapPixelCoords.y + SCALED_DIM;
             v.y -= 1;
         } else if (keycode == Keys.DOWN) {
             if (!preMove(v, Direction.SOUTH)) {
                 return false;
             }
             this.currentDirection = 0;
-            newMapPixelCoords.y = newMapPixelCoords.y - TILE_DIM;
+            newMapPixelCoords.y = newMapPixelCoords.y - SCALED_DIM;
             v.y += 1;
         } else if (keycode == Keys.RIGHT) {
             if (!preMove(v, Direction.EAST)) {
                 return false;
             }
             this.currentDirection = 1;
-            newMapPixelCoords.x = newMapPixelCoords.x + TILE_DIM;
+            newMapPixelCoords.x = newMapPixelCoords.x + SCALED_DIM;
             v.x += 1;
         } else if (keycode == Keys.LEFT) {
             if (!preMove(v, Direction.WEST)) {
                 return false;
             }
             this.currentDirection = 3;
-            newMapPixelCoords.x = newMapPixelCoords.x - TILE_DIM;
+            newMapPixelCoords.x = newMapPixelCoords.x - SCALED_DIM;
             v.x -= 1;
         } else if (keycode == Keys.NUM_1 || keycode == Keys.PAGE_DOWN || keycode == Keys.NUM_2 || keycode == Keys.PAGE_UP) {//elevators
             Portal p = this.map.getBaseMap().getPortal((int) v.x, (int) v.y, (keycode == Keys.NUM_2 || keycode == Keys.PAGE_UP));
@@ -244,9 +263,6 @@ public class GameScreen extends BaseScreen {
                 int dx = (int) dv.x;
                 int dy = (int) dv.y;
                 if (dx >= 0 && dy >= 0) {
-                    if (p.getMap().getRoomIds() != null) {
-                        p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
-                    }
                     p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy, 0);
                 }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
@@ -259,9 +275,6 @@ public class GameScreen extends BaseScreen {
                 int dx = (int) dv.x;
                 int dy = (int) dv.y;
                 if (dx >= 0 && dy >= 0) {
-                    if (p.getMap().getRoomIds() != null) {
-                        p.getMap().getScreen().currentRoomId = p.getMap().getRoomIds()[dx][dy][0];
-                    }
                     p.getMap().getScreen().setMapPixelCoords(p.getMap().getScreen().newMapPixelCoords, dx, dy, 0);
                 }
                 Andius.mainGame.setScreen(p.getMap().getScreen());
@@ -301,9 +314,9 @@ public class GameScreen extends BaseScreen {
             }
 
             //random treasure chest
-            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
+            TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("map");
             TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
-            if (cell != null && cell.getTile() != null && cell.getTile().getId() == (609 + 1)) { //gold pile tile id
+            if (cell.getTile().getId() - 1 == 60) {
                 RewardScreen rs = new RewardScreen(CTX, this.map, rand.nextInt(20));
                 mainGame.setScreen(rs);
                 cell.setTile(null);
@@ -379,13 +392,37 @@ public class GameScreen extends BaseScreen {
         pos[11] = new Vector2(x, y + 2);
         pos[12] = new Vector2(x, y - 2);
 
+        List<Actor> nearby = new ArrayList<>();
         for (int i = 0; i < pos.length; i++) {
             Actor a = this.map.getBaseMap().getCreatureAt((int) pos[i].x, (int) pos[i].y);
             if (a != null) {
-                return a;
+                nearby.add(a);
             }
         }
-        return null;
+
+        if (nearby.isEmpty()) {
+            return null;
+        }
+
+        if (nearby.size() > 1) {
+            EnumSet<Role> priorityRoles = EnumSet.of(
+                    Role.TEMPLE,
+                    Role.INNKEEPER,
+                    Role.MERCHANT_PMO,
+                    Role.MERCHANT_KOD,
+                    Role.MERCHANT_LEG,
+                    Role.MERCHANT_WER,
+                    Role.MERCHANT_DQ,
+                    Role.MERCHANT_BS
+            );
+            for (Actor a : nearby) {
+                if (priorityRoles.contains(a.getRole())) {
+                    return a;
+                }
+            }
+        }
+
+        return nearby.get(0);
     }
 
     private boolean preMove(Vector3 current, Direction dir) {
@@ -411,10 +448,12 @@ public class GameScreen extends BaseScreen {
             return false;
         }
 
-        TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("floor");
+        TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("map");
         TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
-        if (cell == null) {
-            //Sounds.play(Sound.BLOCKED);
+        int val = cell.getTile().getId() - 1;
+
+        if (val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127)) {
+            Sounds.play(Sound.BLOCKED);
             return false;
         }
 
@@ -469,27 +508,20 @@ public class GameScreen extends BaseScreen {
         Portal p = this.map.getBaseMap().getPortal((int) nx, (int) ny);
         if (p != null && p.getMap() == this.map) { //go to a portal on the same map ie ali-baba map has this
             Vector3 dv = p.getDest();
-            if (this.map.getRoomIds() != null) {
-                currentRoomId = this.map.getRoomIds()[(int) dv.x][(int) dv.y][0];
-                setRoomName();
-            }
             setMapPixelCoords(newMapPixelCoords, (int) dv.x, (int) dv.y, 0);
-
             for (Actor act : this.map.getBaseMap().actors) {//so follower can follow thru portal
                 if (act.getMovement() == MovementBehavior.FOLLOW_AVATAR) {
                     int dist = Utils.movementDistance(act.getWx(), act.getWy(), (int) nx, (int) ny);
                     if (dist < 5) {
                         act.setWx((int) dv.x);
                         act.setWy((int) dv.y);
-                        Vector3 pixelPos = new Vector3();
-                        setMapPixelCoords(pixelPos, act.getWx(), act.getWy(), 0);
-                        act.setX(pixelPos.x);
-                        act.setY(pixelPos.y);
                     }
                 }
             }
             return false;
         }
+
+        renderer.getFOV().calculateFOV(nx, ny, 72);
 
         return true;
     }
@@ -508,16 +540,9 @@ public class GameScreen extends BaseScreen {
             return;
         }
 
-        if (this.map.getRoomIds() != null && this.map.getRoomIds()[x][y][1] == 0) {
-            this.currentRoomId = this.map.getRoomIds()[x][y][0];
-            setRoomName();
-        }
-
         try {
-            this.map.getBaseMap().moveObjects(this.map, this, x, y);
-
+            this.map.getBaseMap().moveObjects(this.map, x, y);
             CTX.endTurn(this.map);
-
         } catch (PartyDeathException t) {
             partyDeath();
         }
@@ -527,26 +552,26 @@ public class GameScreen extends BaseScreen {
     public void partyDeath() {
     }
 
-    private void setRoomName() {
-        MapLayer roomsLayer = this.map.getTiledMap().getLayers().get("rooms");
-        if (roomsLayer != null) {
-            Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
-            while (iter.hasNext()) {
-                MapObject obj = iter.next();
-                int id = obj.getProperties().get("id", Integer.class);
-                String name = obj.getName();
-                if (id == this.currentRoomId) {
-                    this.roomName = name;
-                    return;
-                }
-            }
-        }
-        this.roomName = null;
-    }
-
     @Override
     public void teleport(int level, int stepsX, int stepsY) {
 
+    }
+
+    private void removeActors(SaveGame saveGame) {
+        if (this.removedActors) {
+            return;
+        }
+        List<String> l = saveGame.removedActors.get(this.map);
+        if (l != null && this.map.getBaseMap() != null) {
+            Iterator<Actor> iter = this.map.getBaseMap().actors.iterator();
+            while (iter.hasNext()) {
+                Actor a = iter.next();
+                if (l.contains(a.hash())) {
+                    iter.remove();
+                }
+            }
+        }
+        this.removedActors = true;
     }
 
 }

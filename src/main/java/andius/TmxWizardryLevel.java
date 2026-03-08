@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import static utils.Utils.CLASSPTH_RSLVR;

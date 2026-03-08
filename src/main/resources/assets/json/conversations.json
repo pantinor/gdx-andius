@@ -1,8 +1,8 @@
 {
     "maps": {
-        "WIZ1TOWN": [
+        "BRITAIN": [
             {
-                "name": "Drudgeworth",
+                "name": "Iolo",
                 "description": "A bard.",
                 "story": [
                     "The Castle had always been a hard place, but it wasn’t always mad.",
@@ -14,7 +14,7 @@
                 ]
             },
             {
-                "name": "Elira",
+                "name": "Gweno",
                 "description": "A lady.",
                 "story": [
                     "There was only one wizard Trebor believed capable of that kind of theft.",
@@ -31,7 +31,7 @@
                 ]
             },
             {
-                "name": "Garrick",
+                "name": "Shapero",
                 "description": "An older warrior.",
                 "story": [
                     "The Castle Above the Maze",
@@ -46,7 +46,7 @@
                 ]
             },
             {
-                "name": "Sable",
+                "name": "Sebastian",
                 "description": "An older warrior.",
                 "story": [
                     "The Maze Below",
@@ -56,7 +56,7 @@
                 ]
             }, 
             {
-                "name": "Kara Montino",
+                "name": "Mentor",
                 "description": "An older warrior.",
                 "story": [
                     "The Chronicles of Hawkwind - as if someone tried to write courage into existence. It describes a six-person band on what they believe is the ninth level of the accursed maze, time and distance twisting, reality fleeting.",
@@ -71,9 +71,9 @@
                 ]
             }
         ],
-        "WIZ2TOWN": [
+        "JHELOM": [
             {
-                "name": "Brother Latumapic",
+                "name": "Lord Robert",
                 "description": "A soft-spoken Bishop and story teller.",
                 "story": [
                     "Llylgamyn was built to endure. For ages beyond easy counting, the City of Llylgamyn stood behind a miracle of craft and divinity: the Staff of Gnilda.",
@@ -92,7 +92,7 @@
                 ]
             },
             {
-                "name": "Alavik",
+                "name": "Geoffrey",
                 "description": "A old warrior prince.",
                 "story": [
                     "The quest is cruelly circular: To reclaim the Staff of Gnilda, you must first reclaim what once made Alavik worthy to wield it.",
@@ -106,7 +106,7 @@
                 ]
             },
             {
-                "name": "Margda",
+                "name": "Lady Donna",
                 "description": "An elegant older lady.",
                 "story": [
                     "The Sixth Level and the Sphinx",
@@ -126,9 +126,9 @@
                 ]
             }
         ],
-        "WIZ3TOWN": [
+        "MINOC": [
             {
-                "name": "Lyrra",
+                "name": "Julia",
                 "description": "An attractive lady.",
                 "story": [
                     "A generation has passed since the day the old legends became real again.",
@@ -144,8 +144,8 @@
                 ]
             },
             {
-                "name": "Penneth",
-                "description": "An regal lord.",
+                "name": "Zircon",
+                "description": "An toughened black smith.",
                 "story": [
                     "Soon Llylgamyn was struck by an earthquake so mighty that even the Temple of Gnilda was damaged - its stones bruised, its sanctity visibly wounded. Nearby volcanoes, long dormant, stirred awake from ancient slumbers.",
                     "As fear spread, everyone had an explanation - and none of them agreed.",
@@ -160,7 +160,7 @@
                 ]
             },
             {
-                "name": "Orin",
+                "name": "Merida",
                 "description": "An wise councillor.",
                 "story": [
                     "Long ago, the orb was taken by the great dragon L’kbreth - one of the five children of the World Serpent, and a being devoted not to conquest, but to the balance of the world.",
@@ -173,7 +173,7 @@
                 ]
             },
             {
-                "name": "FitzChivalry",
+                "name": "Damon",
                 "description": "An stout man.",
                 "story": [
                     "The Rite of Passage",
@@ -192,8 +192,8 @@
                 ]
             },
             {
-                "name": "Nettle",
-                "description": "An young woman.",
+                "name": "Alex",
+                "description": "An young man.",
                 "story": [
                     "Graduation Day: The Quest Revealed",
                     "Upon completion of the Rite, the new adventurers are gathered before the Elders of Llylgamyn.",
@@ -211,9 +211,9 @@
                 ]
             }
         ],
-        "WIZ4TOWN": [
+        "COVE": [
             {
-                "name": "FitzChivalry",
+                "name": "Allen",
                 "description": "A stout man.",
                 "story": [
                     "Five years.",
@@ -227,8 +227,8 @@
                 ]
             },
             {
-                "name": "Nighteyes",
-                "description": "A wolf.",
+                "name": "Sloven",
+                "description": "A thin man.",
                 "story": [
                     "Then fate offered Werdna a hook: an antique dealer with a sealed scroll. It cost him dearly - though not as dearly as it should have - because when he touched the seal, it came free too easily.",
                     "The scroll had been opened and resealed, and its text was in a tongue unknown even to me.",
@@ -239,8 +239,8 @@
                 ]
             },
             {
-                "name": "Jinna",
-                "description": "An hedge witch.",
+                "name": "Merlin",
+                "description": "An hedge mage.",
                 "story": [
                     "When Werdna reached the Temple, the amulet was already gone.",
                     "Footprints in dust became hard ground outside; hard ground became nothing.",
@@ -253,7 +253,7 @@
                 ]
             },
             {
-                "name": "Starling",
+                "name": "Circe",
                 "description": "An attractive minstrel.",
                 "story": [
                     "Ten levels. A fortress beneath Trebor’s castle - close enough to steal from, close enough to mock.",
@@ -266,8 +266,8 @@
                 ]
             },
             {
-                "name": "Burrich",
-                "description": "A solemn stable master.",
+                "name": "Draconian",
+                "description": "A solemn man.",
                 "story": [
                     "Then came the interruption that history likes to call heroic.",
                     "One evening, while Werdna entertained a Vampire Lord and his liegemen, the door to his study crashed open and a wild-eyed party surged in - adventurers bent on my destruction.",
@@ -281,7 +281,7 @@
                 ]
             },
             {
-                "name": "Molly",
+                "name": "Mentorian",
                 "description": "An beekeeper and candle maker.",
                 "story": [
                     "When the authorities realized his body was not rotting but locked in a deep trance - indestructible, unkillable by ordinary means - they did not bury me with honors or burn me with fear.",
@@ -299,9 +299,9 @@
                 ]
             }
         ],
-        "DQTOWN": [
+        "TRINSIC": [
             {
-                "name": "Dutiful",
+                "name": "Dupre",
                 "description": "A stout man.",
                 "story": [
                     "The frontier has a way of making liars out of maps.",
@@ -322,7 +322,7 @@
                 ]
             },
             {
-                "name": "Riddle",
+                "name": "Kline",
                 "description": "A stout man.",
                 "story": [
                     "DragonQuest lore speaks of magic as something that happens where planes press too close - energy bleeding between dimensions, shaped by those with the talent and training to seize it.",
@@ -335,7 +335,7 @@
                     "People in the Frontiers call it Tuesday."
                 ]
             }, {
-                "name": "Perseverance",
+                "name": "Quix",
                 "description": "A stout man.",
                 "story": [
                     "The newest terror in Alusia has a name spoken softly around fires.",
@@ -350,7 +350,7 @@
                     "But the result is the same: a royal captive, a realm trembling, and a frontier that cannot afford to look weak."
                 ]
             }, {
-                "name": "Careful",
+                "name": "Lexington",
                 "description": "A stout man.",
                 "story": [
                     "The King’s Treasure Room",
@@ -365,7 +365,7 @@
                     "With Loktar’s influence, it becomes something worse: a maze where your senses can betray you and where the dark itself may be weaponized."
                 ]
             }, {
-                "name": "Shun",
+                "name": "Virgil",
                 "description": "A stout man.",
                 "story": [
                     "The Frontier’s veterans tell the same story in different words.",
@@ -388,10 +388,10 @@
                 ]
             }
         ],
-        "BSTOWN": [
+        "YEW": [
             {
-                "name": "Revel",
-                "description": "A stout man.",
+                "name": "Jaana",
+                "description": "An attractive young woman.",
                 "story": [
                     "Your quest is to descend into the dungeons beneath the city - find the Black Stone - and only by regaining this gem and returning it to its rightful owner, your master, Lord Valacar, can the city be saved from evil.",
                     "Along the way you will face the minions of Llorgarth and other denizens of the maze, together with the tricks and traps the lich has set to defend his stronghold.",
@@ -400,9 +400,9 @@
                 ]
             }
         ],
-        "SPTOWN": [
+        "SKARABRAE": [
             {
-                "name": "Seraphine",
+                "name": "Michaelangelo",
                 "description": "A sharp-eyed half-elf hexbinder.",
                 "story": [
                     "For several years, organized bands of pirates and slavers have made a living by raiding the coastal towns on the Sea of Gearnat.",
@@ -415,7 +415,7 @@
                 ]
             },
             {
-                "name": "Brom",
+                "name": "Santayana",
                 "description": "A broad-shouldered human bruiser in patched chainmail.",
                 "story": [
                     "Women, children, and whole families have disappeared; and though bribes are accepted, the agreements are ignored.",
@@ -427,7 +427,7 @@
                 ]
             },
             {
-                "name": "Kaelith",
+                "name": "Shamino",
                 "description": "A quiet, moon-touched tiefling ranger.",
                 "story": [
                     "The lords have chosen a plan of stealth.",
@@ -439,9 +439,9 @@
                 ]
             }
         ],
-        "ULT3TOWN": [
+        "MOONGLOW": [
             {
-                "name": "Chade",
+                "name": "Tyrone",
                 "description": "A wise councillor.",
                 "story": [
                     "I am the warden of this temple and guard what it contains, and have deeper knowledge about the 4 Marks.",

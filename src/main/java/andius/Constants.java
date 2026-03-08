@@ -6,15 +6,15 @@ import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
-import andius.objects.TibianSprite;
+import andius.objects.UltimaSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
@@ -28,7 +28,7 @@ import static utils.Utils.CLASSPTH_RSLVR;
 public interface Constants {
 
     public static int WORLD_TILE_DIM = 24;
-    public static int TILE_DIM = 48;
+    public static int TILE_DIM = 16;
 
     enum MapType {
         OVERWORLD, TMX_TOWN, WIZARDRY_ENCODED, TMX_DUNGEON;
@@ -49,16 +49,16 @@ public interface Constants {
     public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
-        WORLD(MapType.OVERWORLD, "Ultima", "ultima1.tmx", 16),
+        WORLD(MapType.OVERWORLD, "Overworld", "ultima1.tmx", null, TILE_DIM),
         //
-        WIZ1TOWN(MapType.TMX_TOWN, "Wizardry 1 Town", "WIZ1TOWN.tmx", TILE_DIM),
-        WIZ2TOWN(MapType.TMX_TOWN, "Wizardry 2 Town", "WIZ2TOWN.tmx", TILE_DIM),
-        WIZ3TOWN(MapType.TMX_TOWN, "Wizardry 3 Town", "WIZ3TOWN.tmx", TILE_DIM),
-        WIZ4TOWN(MapType.TMX_TOWN, "Wizardry 4 Town", "WIZ4TOWN.tmx", WizardryData.Scenario.WER, TILE_DIM),
-        SPTOWN(MapType.TMX_TOWN, "Slaver Pits Town", "SPTOWN.tmx", TILE_DIM),
-        BSTOWN(MapType.TMX_TOWN, "Black Stone Town", "BSTOWN.tmx", TILE_DIM),
-        DQTOWN(MapType.TMX_TOWN, "Dragon Quest Town", "DQTOWN.tmx", TILE_DIM),
-        ULT3TOWN(MapType.TMX_TOWN, "Ultima 3 Town", "ULT3TOWN.tmx", WizardryData.Scenario.WER, TILE_DIM),
+        BRITAIN(MapType.TMX_TOWN, "Wizardry 1 Town", "BRITAIN.tmx", WizardryData.Scenario.PMO, TILE_DIM),
+        JHELOM(MapType.TMX_TOWN, "Wizardry 2 Town", "JHELOM.tmx", WizardryData.Scenario.KOD, TILE_DIM),
+        MINOC(MapType.TMX_TOWN, "Wizardry 3 Town", "MINOC.tmx", WizardryData.Scenario.LEG, TILE_DIM),
+        COVE(MapType.TMX_TOWN, "Wizardry 4 Town", "COVE.tmx", WizardryData.Scenario.WER, TILE_DIM),
+        SKARABRAE(MapType.TMX_TOWN, "Slaver Pits Town", "SKARABRAE.tmx", WizardryData.Scenario.PMO, TILE_DIM),
+        YEW(MapType.TMX_TOWN, "Black Stone Town", "YEW.tmx", WizardryData.Scenario.BS, TILE_DIM),
+        TRINSIC(MapType.TMX_TOWN, "Dragon Quest Town", "TRINSIC.tmx", WizardryData.Scenario.DQ, TILE_DIM),
+        MOONGLOW(MapType.TMX_TOWN, "Ultima 3 Town", "MOONGLOW.tmx", WizardryData.Scenario.WER, TILE_DIM),
         //
         WIZARDRY1(MapType.WIZARDRY_ENCODED, "Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
         WIZARDRY2(MapType.WIZARDRY_ENCODED, "Knight of Diamonds", WizardryData.Scenario.KOD),
@@ -73,12 +73,7 @@ public interface Constants {
         FIRE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Fire", WizardryData.Scenario.EXODUS_FIRE),
         DOOM(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Doom", WizardryData.Scenario.EXODUS_DOOM),
         SNAKE(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Snake", WizardryData.Scenario.EXODUS_SNAKE),
-        TIME(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME),
-        //
-        BOLTAC(MapType.TMX_TOWN, "Boltac's Trading Post", "boltac.tmx", TILE_DIM),
-        CANT(MapType.TMX_TOWN, "Radiant Temple of Cant", "templeCant.tmx", TILE_DIM),
-        WIWOLD(MapType.TMX_TOWN, "Wiwold", "wiwold.tmx", TILE_DIM),
-        WIWOLD_LVL_2(MapType.TMX_TOWN, "Wiwold Level 2", "wiwold_lvl_2.tmx", TILE_DIM);
+        TIME(MapType.WIZARDRY_ENCODED, "Ultima III Exodus Time", WizardryData.Scenario.EXODUS_TIME);
 
         private final String label;
         private final String tmxFile;
@@ -91,15 +86,6 @@ public interface Constants {
         private BaseScreen screen;
         private int startX;
         private int startY;
-        private int[][][] roomIds;
-
-        private Map(MapType mapType, String label, String tmx, int tileDimension) {
-            this.label = label;
-            this.tmxFile = tmx;
-            this.tileDimension = tileDimension;
-            this.scenario = WizardryData.Scenario.PMO;
-            this.mapType = mapType;
-        }
 
         private Map(MapType mapType, String label, String tmx, WizardryData.Scenario scenario, int tileDimension) {
             this.label = label;
@@ -161,10 +147,6 @@ public interface Constants {
 
         public int getStartY() {
             return startY;
-        }
-
-        public int[][][] getRoomIds() {
-            return roomIds;
         }
 
         public void init() {
@@ -250,31 +232,6 @@ public interface Constants {
                     loadPeopleLayer(peopleLayer, this.scenario.monsters());
                 }
 
-                MapLayer roomsLayer = this.tiledMap.getLayers().get("rooms");
-                if (roomsLayer != null) {
-                    this.roomIds = new int[this.baseMap.getWidth()][this.baseMap.getHeight()][3];
-                    Iterator<MapObject> iter = roomsLayer.getObjects().iterator();
-                    while (iter.hasNext()) {
-                        MapObject obj = iter.next();
-                        int id = obj.getProperties().get("id", Integer.class);
-                        PolygonMapObject rmo = (PolygonMapObject) obj;
-                        for (int y = 0; y < this.baseMap.getHeight(); y++) {
-                            for (int x = 0; x < this.baseMap.getWidth(); x++) {
-                                if (rmo.getPolygon().contains(x * TILE_DIM + TILE_DIM / 2, this.baseMap.getHeight() * TILE_DIM - y * TILE_DIM - TILE_DIM / 2)) {
-                                    if (this.roomIds[x][y][0] == 0) {
-                                        this.roomIds[x][y][0] = id;
-                                    } else if (this.roomIds[x][y][1] == 0) {
-                                        this.roomIds[x][y][1] = id;
-                                    } else if (this.roomIds[x][y][2] == 0) {
-                                        this.roomIds[x][y][2] = id;
-                                    } else {
-                                        throw new RuntimeException("Too many overlaps on roomids");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
 
             switch (this.mapType) {
@@ -307,11 +264,10 @@ public interface Constants {
             while (iter.hasNext()) {
                 MapObject obj = iter.next();
                 String name = obj.getName().toUpperCase();
-                int id = obj.getProperties().get("id", Integer.class);
                 float x = obj.getProperties().get("x", Float.class);
                 float y = obj.getProperties().get("y", Float.class);
-                int sx = (int) (x / TILE_DIM);
-                int sy = (int) (y / TILE_DIM);
+                int wx = (int) (x / TILE_DIM);
+                int wy = (int) (y / TILE_DIM);
 
                 String rl = obj.getProperties().get("type", String.class);
                 Role role = Role.valueOf(rl != null ? rl : "FRIENDLY");
@@ -323,32 +279,15 @@ public interface Constants {
                 if (role == Role.MONSTER) {
                     try {
                         Monster monster = monsterMap.get(name);
-
                         if (monster == null) {
                             String mid = obj.getProperties().get("monsterID", String.class);
                             monster = monsterMap.get(mid.toUpperCase());
                         }
-
                         if (monster != null) {
                             MutableMonster mm = new MutableMonster(monster);
-
-                            TextureRegion tr = null;
-                            String icon = obj.getProperties().get("icon", String.class);
-                            if (icon != null) {
-                                tr = TibianSprite.icon(icon);
-                            } else {
-                                tr = iconAtlas.findRegion("" + monster.getIconId());
-                                if (tr == null) {
-                                    tr = iconAtlas.findRegion("0");
-                                    System.err.printf("icon not found using icon 0 for %s %s %s\n", name, icon, monster.getIconId());
-                                }
-                            }
-
-                            if (tr == null) {
-                                System.err.printf("icon not found %s %s %s\n", name, icon, monster.getIconId());
-                            }
-
-                            actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, tr);
+                            int icon = Integer.parseInt(obj.getProperties().get("icon", String.class));
+                            Animation<TextureRegion> anim = UltimaSprite.anim(icon);
+                            actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, anim);
                         } else {
                             System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s]\n", name, role, movement, this, name);
                         }
@@ -357,20 +296,15 @@ public interface Constants {
                         System.err.printf("Cannot find monster: %s on map %s.\n", name, this);
                     }
                 } else {
-
-                    String icon = obj.getProperties().get("icon", String.class);
-                    if (icon == null) {
-                        icon = "Bandit";
+                    try {
+                        int icon = Integer.parseInt(obj.getProperties().get("icon", String.class));
+                        Animation<TextureRegion> anim = UltimaSprite.anim(icon);
+                        MutableMonster mm = null;
+                        actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, anim);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.err.printf("Cannot find person: %s on map %s.\n", name, this);
                     }
-
-                    TextureRegion tr = TibianSprite.icon(icon);
-
-                    if (tr == null) {
-                        System.err.printf("icon not found %s %s\n", name, icon);
-                    }
-
-                    MutableMonster mm = null;
-                    actor.set(mm, role, sx, this.baseMap.getHeight() - 1 - sy, x, y, movement, tr);
                 }
 
                 this.baseMap.actors.add(actor);
@@ -476,86 +410,6 @@ public interface Constants {
         BARELYWOUNDED;
     }
 
-    public enum Moongate {
-        GATE_0(0, 1, 2),
-        GATE_1(3, 4, 5),
-        GATE_2(6, 7, 0),
-        GATE_3(1, 2, 3),
-        GATE_4(4, 5, 6),
-        GATE_5(7, 0, 1),
-        GATE_6(2, 3, 4),
-        GATE_7(5, 6, 7),;
-
-        private float x;
-        private float y;
-        private float mapX;
-        private float mapY;
-        private final int d1;
-        private final int d2;
-        private final int d3;
-
-        private TextureAtlas.AtlasRegion currentTexture;
-
-        private Moongate(int d1, int d2, int d3) {
-            this.d1 = d1;
-            this.d2 = d2;
-            this.d3 = d3;
-        }
-
-        public float getX() {
-            return x;
-        }
-
-        public float getY() {
-            return y;
-        }
-
-        public float getMapX() {
-            return mapX;
-        }
-
-        public float getMapY() {
-            return mapY;
-        }
-
-        public int getD1() {
-            return d1;
-        }
-
-        public int getD2() {
-            return d2;
-        }
-
-        public int getD3() {
-            return d3;
-        }
-
-        public TextureAtlas.AtlasRegion getCurrentTexture() {
-            return currentTexture;
-        }
-
-        public void setCurrentTexture(TextureAtlas.AtlasRegion currentTexture) {
-            this.currentTexture = currentTexture;
-        }
-
-        public static void init() {
-            int mapWidth = Map.WORLD.getTiledMap().getProperties().get("width", Integer.class);
-            int tileWidth = Map.WORLD.getTiledMap().getProperties().get("tilewidth", Integer.class);
-            MapLayer moongatesLayer = Map.WORLD.getTiledMap().getLayers().get("moongates");
-            Iterator<MapObject> iter = moongatesLayer.getObjects().iterator();
-            while (iter.hasNext()) {
-                MapObject obj = iter.next();
-                Moongate mg = Moongate.valueOf(obj.getName());
-                mg.x = obj.getProperties().get("x", Float.class);
-                mg.y = obj.getProperties().get("y", Float.class);
-                mg.mapX = mg.x / tileWidth;
-                mg.mapY = mapWidth - (mg.y / tileWidth) - 1;
-                int c = 0;
-            }
-        }
-
-    }
-
     public enum HealType {
 
         NONE,
@@ -595,8 +449,8 @@ public interface Constants {
     public enum Role {
         NONE,
         FRIENDLY,
-        TEMPLE,
         MONSTER,
+        TEMPLE,
         INNKEEPER,
         MERCHANT_PMO,
         MERCHANT_KOD,

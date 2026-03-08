@@ -3,49 +3,47 @@ package andius.objects;
 import andius.Constants.MovementBehavior;
 import andius.Constants.Role;
 import andius.objects.SaveGame.CharacterRecord;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.Objects;
 
 public class Actor {
 
     private final String name;
-    private TextureRegion tr;
+    private Animation<TextureRegion> anim;
     private Role role;
     private int wx;
     private int wy;
-    private float x;
-    private float y;
     private int dir;
     private MovementBehavior movement = MovementBehavior.FIXED;
     private Mutable enemy;
     private CharacterRecord player;
-    private PlayerCursor playerCursor;
-
     private String hash;
 
     public Actor(String name) {
         this.name = name;
     }
 
-    public void set(Mutable enemy, Role role, int wx, int wy, float x, float y, MovementBehavior movement, TextureRegion tr) {
+    public void set(Mutable enemy, Role role, int wx, int wy, MovementBehavior movement, Animation<TextureRegion> anim) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
-        this.x = x;
-        this.y = y;
         this.movement = movement;
         this.enemy = enemy;
-        this.tr = tr;
-        this.hash = "M:" + x + ":" + y;
+
+        if (anim == null) {
+            throw new RuntimeException("anim cannot be null");
+        }
+
+        this.anim = anim;
+        this.hash = "M:" + wx + ":" + wy;
     }
 
-    public void set(CharacterRecord player, int wx, int wy, float x, float y) {
+    public void set(CharacterRecord player, int wx, int wy) {
         this.wx = wx;
         this.wy = wy;
-        this.x = x;
-        this.y = y;
         this.player = player;
-        this.hash = "P:" + x + ":" + y;
+        this.hash = "P:" + wx + ":" + wy;
     }
 
     public String hash() {
@@ -82,8 +80,8 @@ public class Actor {
         return role;
     }
 
-    public TextureRegion getIcon() {
-        return this.tr;
+    public Animation<TextureRegion> getAnim() {
+        return this.anim;
     }
 
     public int getWx() {
@@ -102,22 +100,6 @@ public class Actor {
         this.wy = wy;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
     public MovementBehavior getMovement() {
         return movement;
     }
@@ -132,14 +114,6 @@ public class Actor {
 
     public void adjustHP(int amt) {
         this.player.adjustHP(amt);
-    }
-
-    public PlayerCursor getPlayerCursor() {
-        return playerCursor;
-    }
-
-    public void setPlayerCursor(PlayerCursor playerCursor) {
-        this.playerCursor = playerCursor;
     }
 
     public int getDirection() {

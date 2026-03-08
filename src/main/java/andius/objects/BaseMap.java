@@ -3,7 +3,6 @@ package andius.objects;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import andius.Constants.Map;
-import andius.GameScreen;
 import andius.EnhancedWizardryCombatScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
@@ -78,7 +77,7 @@ public class BaseMap {
         }
     }
 
-    public void moveObjects(Map map, GameScreen screen, int avatarX, int avatarY) throws PartyDeathException {
+    public void moveObjects(Map map, int avatarX, int avatarY) throws PartyDeathException {
 
         wanderFlag++;
 
@@ -141,19 +140,13 @@ public class BaseMap {
                     p.setWx(p.getWx() - 1);
                     break;
             }
-
-            Vector3 pixelPos = new Vector3();
-            screen.setMapPixelCoords(pixelPos, p.getWx(), p.getWy() + 1, 0);
-            p.setX(pixelPos.x);
-            p.setY(pixelPos.y);
-
         }
     }
 
     public int getValidMovesMask(Map map, int x, int y, Actor cr, int avatarX, int avatarY) {
         int mask = 0;
 
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("floor");
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getTiledMap().getLayers().get("map");
         TiledMapTileLayer.Cell north = layer.getCell(x, height - 1 - y + 1);
         TiledMapTileLayer.Cell south = layer.getCell(x, height - 1 - y - 1);
         TiledMapTileLayer.Cell west = layer.getCell(x - 1, height - 1 - y + 0);
@@ -168,7 +161,14 @@ public class BaseMap {
     }
 
     private int addToMask(Direction dir, int mask, TiledMapTileLayer.Cell cell, int x, int y, Actor cr, int avatarX, int avatarY) {
+
         if (cell != null) {
+
+            int val = cell.getTile().getId() - 1;
+
+            if (val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127)) {
+                return mask;
+            }
 
             for (Actor c : this.actors) {
                 if (c.getWx() == x && c.getWy() == y) {

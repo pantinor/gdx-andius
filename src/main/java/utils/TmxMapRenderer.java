@@ -35,8 +35,19 @@ import java.util.List;
 public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
 
     private final Map map;
-    float stateTime = 0;
-    List<CreatureLayer> creatureLayers = new ArrayList<>();
+    private float stateTime = 0;
+    private CreatureLayer creatureLayer;
+    private final SpreadFOV fov;
+
+    public TmxMapRenderer(Map map, TiledMap tiledMap, float unitScale, SpreadFOV fov) {
+        super(tiledMap, unitScale);
+        this.map = map;
+        this.fov = fov;
+    }
+
+    public SpreadFOV getFOV() {
+        return this.fov;
+    }
 
     public interface CreatureLayer {
 
@@ -44,53 +55,25 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
     }
 
     public void registerCreatureLayer(CreatureLayer layer) {
-        creatureLayers.add(layer);
-    }
-
-    public void unregisterCreatureLayer(CreatureLayer layer) {
-        creatureLayers.remove(layer);
-    }
-
-    public TmxMapRenderer(Map map, TiledMap tiledMap, float unitScale) {
-        super(tiledMap, unitScale);
-        this.map = map;
-    }
-
-    public boolean shouldRenderCell(int roomId, int x, int y) {
-        if (this.map.getRoomIds() == null || roomId <= 0) {
-            return true;
-        }
-        if (this.map.getRoomIds()[x][y][0] == roomId || this.map.getRoomIds()[x][y][1] == roomId || this.map.getRoomIds()[x][y][2] == roomId) {
-            return true;
-        }
-        return false;
+        creatureLayer = layer;
     }
 
     @Override
     public void render() {
+        stateTime += Gdx.graphics.getDeltaTime();
+
         beginRender();
         for (MapLayer layer : map.getTiledMap().getLayers()) {
             if (layer instanceof TiledMapTileLayer && layer.isVisible()) {
                 renderTileLayer((TiledMapTileLayer) layer);
             }
         }
+        creatureLayer.render(stateTime);
         endRender();
     }
 
     @Override
     public void renderTileLayer(TiledMapTileLayer layer) {
-
-        stateTime += Gdx.graphics.getDeltaTime() / 4;
-
-        if (layer.getName().equals("creature")) {
-            for (CreatureLayer cl : creatureLayers) {
-                cl.render(stateTime);
-            }
-            return;
-        }
-
-        final Color batchColor = batch.getColor();
-        final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * layer.getOpacity());
 
         int layerWidth = layer.getWidth();
         int layerHeight = layer.getHeight();
@@ -112,8 +95,9 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
             for (int col = col1; col < col2; col++) {
 
                 TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                float color = getColor(layer, col, layerHeight - 1 - row);
 
-                if (cell == null || !shouldRenderCell(this.map.getScreen().currentRoomId(), col, layerHeight - row - 1)) {
+                if (cell == null) {
                     x += layerTileWidth;
                     continue;
                 }
@@ -230,5 +214,34 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
             }
             y -= layerTileHeight;
         }
+    }
+
+    public float getColor(TiledMapTileLayer layer, int col, int row) {
+        Color batchColor = this.batch.getColor();
+
+        //if (true) {
+        //    return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
+        //}
+
+        int layerWidth = layer.getWidth();
+        int layerHeight = layer.getHeight();
+
+        int cx = layerWidth + col;
+        int cy = layerHeight + row;
+
+        float[][] lightMap = fov.lightMap();
+
+        if (!(cx >= 0 && cx < lightMap.length && cy >= 0 && cy < lightMap[0].length)) {
+            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
+        }
+
+        float val = lightMap[cx][cy];
+
+        if (val <= 0) {
+            return Color.BLACK.toFloatBits();
+        } else {
+            return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
+        }
+
     }
 }
