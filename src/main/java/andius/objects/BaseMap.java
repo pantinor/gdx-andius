@@ -166,7 +166,11 @@ public class BaseMap {
 
             int val = cell.getTile().getId() - 1;
 
-            if (val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127)) {
+            if (cr.icon() == 133 || cr.icon() == 134 || cr.icon() == 136 || cr.icon() == 138) {//water creatures
+                if (val != 0 && val != 1 && val != 2) {
+                    return mask;
+                }
+            } else if (val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127)) {
                 return mask;
             }
 

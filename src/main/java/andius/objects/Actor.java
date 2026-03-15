@@ -11,6 +11,7 @@ public class Actor {
 
     private final String name;
     private Animation<TextureRegion> anim;
+    private int icon;
     private Role role;
     private int wx;
     private int wy;
@@ -24,19 +25,19 @@ public class Actor {
         this.name = name;
     }
 
-    public void set(Mutable enemy, Role role, int wx, int wy, MovementBehavior movement, Animation<TextureRegion> anim) {
+    public void set(Mutable enemy, Role role, int wx, int wy, MovementBehavior movement, int icon) {
         this.role = role;
         this.wx = wx;
         this.wy = wy;
         this.movement = movement;
         this.enemy = enemy;
+        this.icon = icon;
+        this.anim = UltimaSprite.anim(icon);
+        this.hash = "M:" + wx + ":" + wy;
 
         if (anim == null) {
             throw new RuntimeException("anim cannot be null");
         }
-
-        this.anim = anim;
-        this.hash = "M:" + wx + ":" + wy;
     }
 
     public void set(CharacterRecord player, int wx, int wy) {
@@ -122,6 +123,10 @@ public class Actor {
 
     public void setDirection(int dir) {
         this.dir = dir;
+    }
+
+    public int icon() {
+        return icon;
     }
 
 }

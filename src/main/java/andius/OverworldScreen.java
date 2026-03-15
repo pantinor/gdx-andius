@@ -300,14 +300,9 @@ public class OverworldScreen extends BaseScreen {
         TiledMapTileLayer.Cell cell = mapLayer.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
         int tileid = cell.getTile().getId();
 
-        Item wingedboots = CTX.partyHasItem(5, Scenario.WER.ordinal());
-        Item markSnake = CTX.partyHasItem(104, Scenario.PMO.ordinal());
-        Item markFire = CTX.partyHasItem(105, Scenario.PMO.ordinal());
-        Item markForce = CTX.partyHasItem(103, Scenario.PMO.ordinal());
+        Item wingedboots = Scenario.WER.item("WINGED BOOTS");
 
-        boolean canFly = (wingedboots != null || markSnake != null || markFire != null || markForce != null);
-
-        if ((tileid == 1 || tileid == 4) && !canFly) {
+        if ((tileid == 1 || tileid == 4) && !CTX.partyHasItem(wingedboots)) {
             return null;
         }
 

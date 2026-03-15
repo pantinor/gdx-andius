@@ -301,11 +301,6 @@ public class GameScreen extends BaseScreen {
                                 Andius.CTX.players()[0].inventory.add(item);
                                 animateText(sb.toString(), Color.GREEN);
                                 messagesLayer.getObjects().remove(obj);
-                                TiledMapTileLayer layer = (TiledMapTileLayer) this.map.getTiledMap().getLayers().get("props");
-                                TiledMapTileLayer.Cell cell = layer.getCell((int) v.x, this.map.getBaseMap().getHeight() - 1 - (int) v.y);
-                                if (cell != null) {
-                                    cell.setTile(null);
-                                }
                             }
                             return false;
                         }
@@ -452,7 +447,19 @@ public class GameScreen extends BaseScreen {
         TiledMapTileLayer.Cell cell = layer.getCell(nx, this.map.getBaseMap().getHeight() - 1 - ny);
         int val = cell.getTile().getId() - 1;
 
-        if (val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127)) {
+        Item wingedboots = Scenario.WER.item("WINGED BOOTS");
+        Item markFire = Scenario.PMO.item("MARK OF FIRE");
+        Item markForce = Scenario.PMO.item("MARK OF FORCE");
+
+        boolean blocked = val == 0 || val == 1 || val == 2 || val == 8 || val == 57 || (val >= 96 && val <= 127);
+
+        if (!CTX.partyHasItem(markFire) && val == 70) {
+            Sounds.play(Sound.BLOCKED);
+            return false;
+        } else if (!CTX.partyHasItem(markForce) && val == 69) {
+            Sounds.play(Sound.BLOCKED);
+            return false;
+        } else if (blocked && !CTX.partyHasItem(wingedboots)) {
             Sounds.play(Sound.BLOCKED);
             return false;
         }
@@ -487,15 +494,8 @@ public class GameScreen extends BaseScreen {
                         String scenName = obj.getProperties().get("scenario") != null ? obj.getProperties().get("scenario", String.class) : "PMO";
                         Scenario sc = Scenario.valueOf(scenName);
                         Item item = sc.item(itemName);
-                        boolean owned = false;
-                        for (int i = 0; i < Andius.CTX.players().length && item != null; i++) {
-                            if (Andius.CTX.players()[i].inventory.contains(item)) {
-                                owned = true;
-                            }
-                        }
-                        if (!owned) {
+                        if (!CTX.partyHasItem(item)) {
                             Sounds.play(Sound.NEGATIVE_EFFECT);
-                            animateText("Cannot pass!", Color.RED);
                             return false;
                         } else {
                             Sounds.play(Sound.POSITIVE_EFFECT);

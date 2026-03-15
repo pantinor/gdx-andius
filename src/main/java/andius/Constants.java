@@ -286,8 +286,7 @@ public interface Constants {
                         if (monster != null) {
                             MutableMonster mm = new MutableMonster(monster);
                             int icon = Integer.parseInt(obj.getProperties().get("icon", String.class));
-                            Animation<TextureRegion> anim = UltimaSprite.anim(icon);
-                            actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, anim);
+                            actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, icon);
                         } else {
                             System.err.printf("Cannot load actor: %s %s %s on map %s with creature [%s]\n", name, role, movement, this, name);
                         }
@@ -298,9 +297,8 @@ public interface Constants {
                 } else {
                     try {
                         int icon = Integer.parseInt(obj.getProperties().get("icon", String.class));
-                        Animation<TextureRegion> anim = UltimaSprite.anim(icon);
                         MutableMonster mm = null;
-                        actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, anim);
+                        actor.set(mm, role, wx, this.baseMap.getHeight() - 1 - wy, movement, icon);
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.err.printf("Cannot find person: %s on map %s.\n", name, this);
