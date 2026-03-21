@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.FrameMaker;
+import utils.PartyDeathException;
 import utils.SpreadFOV;
 import utils.WrappingTileMapRenderer;
 
@@ -340,7 +341,11 @@ public class OverworldScreen extends BaseScreen {
     private void postMove(Vector3 position) {
         CTX.saveGame.wx = (int) position.x;
         CTX.saveGame.wy = (int) position.y;
-        CTX.endTurn(this.map);
+        try {
+            CTX.endTurn(this.map);
+        } catch (PartyDeathException t) {
+            partyDeath(t);
+        }
     }
 
     @Override
@@ -354,10 +359,6 @@ public class OverworldScreen extends BaseScreen {
         this.renderer.getFOV().calculateFOV(east, north, 72);
         CTX.saveGame.wx = east;
         CTX.saveGame.wy = north;
-    }
-
-    @Override
-    public void partyDeath() {
     }
 
 }

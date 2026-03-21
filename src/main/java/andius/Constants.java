@@ -6,12 +6,9 @@ import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
-import andius.objects.UltimaSprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -307,6 +304,12 @@ public interface Constants {
 
                 this.baseMap.actors.add(actor);
 
+            }
+        }
+        
+        public static void releaseAllMaps() {
+            for (Map m : Map.values()) {
+                m.screen = null;
             }
         }
 

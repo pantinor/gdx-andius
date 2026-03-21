@@ -318,6 +318,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (ctx.pickRandomEnabledPlayer() == null) {
+                    Map.releaseAllMaps();
                     mainGame.setScreen(startScreen);
                 } else {
                     if (pickMonster() == null) {

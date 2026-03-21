@@ -5,6 +5,7 @@ import andius.objects.Sounds;
 import andius.dialogs.ReorderPartyDialog;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
+import static andius.Andius.startScreen;
 import andius.objects.SaveGame;
 import com.badlogic.gdx.Gdx;
 import java.util.Random;
@@ -79,7 +80,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     public abstract void teleport(int level, int north, int east);
 
     public void endCombat(boolean isWon, Object opponent) {
-        
+
     }
 
     public final void addButtons(Map map) {
@@ -143,7 +144,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public void animateText(String text, Color color) {
-        
+
         if (text == null) {
             return;
         }
@@ -168,7 +169,11 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         label.addAction(sequence(Actions.moveTo(dx, dy, delay), Actions.fadeOut(1f), Actions.removeActor(label)));
     }
 
-    public abstract void partyDeath();
+    public void partyDeath(Throwable t) {
+        t.printStackTrace();
+        Map.releaseAllMaps();
+        mainGame.setScreen(startScreen);
+    }
 
     @Override
     public void hide() {

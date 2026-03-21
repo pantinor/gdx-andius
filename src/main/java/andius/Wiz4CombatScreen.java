@@ -200,6 +200,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (player.isDead()) {
+                    Map.releaseAllMaps();
                     mainGame.setScreen(startScreen);
                 } else {
                     if (pickEnemy() == null) {

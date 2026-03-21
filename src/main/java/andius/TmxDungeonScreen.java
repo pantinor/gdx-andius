@@ -2,7 +2,6 @@ package andius;
 
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
-import static andius.Andius.startScreen;
 import static andius.Constants.PIT_DAMAGE_MSGS;
 import andius.objects.Sound;
 import andius.objects.Sounds;
@@ -55,6 +54,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.Iterator;
 import utils.ObjLoader;
+import utils.PartyDeathException;
 import utils.RotateOnlyInputController;
 import utils.Utils;
 import static utils.Utils.CLASSPTH_RSLVR;
@@ -821,11 +821,6 @@ public class TmxDungeonScreen extends BaseScreen {
     }
 
     @Override
-    public void partyDeath() {
-        mainGame.setScreen(startScreen);
-    }
-
-    @Override
     public boolean keyUp(int keycode) {
         camera.up.set(Vector3.Y); // remove tilt/roll
 
@@ -903,8 +898,7 @@ public class TmxDungeonScreen extends BaseScreen {
             try {
                 move(cell, currentDir, x, y, skipProgression);
             } catch (Throwable e) {
-                e.printStackTrace();
-                partyDeath();
+                partyDeath(e);
             }
             return false;
 
@@ -941,8 +935,7 @@ public class TmxDungeonScreen extends BaseScreen {
             try {
                 move(cell, Direction.reverse(currentDir), x, y, skipProgression);
             } catch (Throwable e) {
-                e.printStackTrace();
-                partyDeath();
+                partyDeath(e);
             }
             return false;
 
@@ -1014,8 +1007,7 @@ public class TmxDungeonScreen extends BaseScreen {
             try {
                 pass(x, y);
             } catch (Throwable e) {
-                e.printStackTrace();
-                partyDeath();
+                partyDeath(e);
             }
 
         }
@@ -1023,8 +1015,7 @@ public class TmxDungeonScreen extends BaseScreen {
         try {
             finishTurn(x, y);
         } catch (Throwable e) {
-            e.printStackTrace();
-            partyDeath();
+            partyDeath(e);
         }
 
         return false;
@@ -1415,7 +1406,11 @@ public class TmxDungeonScreen extends BaseScreen {
 
     @Override
     public void finishTurn(int currentX, int currentY) {
-        CTX.endTurn(this.map);
+        try {
+            CTX.endTurn(this.map);
+        } catch (PartyDeathException t) {
+            partyDeath(t);
+        }
     }
 
     public static class DungeonTileModelInstance extends ModelInstance {

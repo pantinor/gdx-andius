@@ -197,6 +197,7 @@ public class GameScreen extends BaseScreen {
         removeActors(saveGame);
 
         setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
+
         renderer.getFOV().calculateFOV(saveGame.x, saveGame.y, 72);
     }
 
@@ -206,6 +207,11 @@ public class GameScreen extends BaseScreen {
 
         Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+
+        this.camera.position.x = newMapPixelCoords.x + SCALED_DIM * 5;
+        this.camera.position.y = newMapPixelCoords.y + SCALED_DIM * 1;
+
+        camera.update();
 
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
@@ -544,12 +550,8 @@ public class GameScreen extends BaseScreen {
             this.map.getBaseMap().moveObjects(this.map, x, y);
             CTX.endTurn(this.map);
         } catch (PartyDeathException t) {
-            partyDeath();
+            partyDeath(t);
         }
-    }
-
-    @Override
-    public void partyDeath() {
     }
 
     @Override
