@@ -40,7 +40,7 @@ public enum Spells {
     MANIFO("Statue", ClassType.PRIEST, 2, Sound.POWER_CHAINS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 3, 91),
     MONTINO("Still air", ClassType.PRIEST, 2, Sound.SLEEP, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, 3, 7),
     LOMILWA("More light", ClassType.PRIEST, 3, Sound.MAGIC, Color.BLUE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 0, 31),
-    DIALKO("Dispel effects", ClassType.PRIEST, 3, Sound.DIVINE_INTERVENTION, Color.BLUE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 30),
+    DIALKO("Dispel effects", ClassType.PRIEST, 3, Sound.DIVINE_INTERVENTION, Color.BLUE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 0, 30),
     LATUMAPIC("Dispel group effects", ClassType.PRIEST, 3, Sound.DIVINE_INTERVENTION, Color.BLUE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 0, 32),
     BAMATU("Prayer", ClassType.PRIEST, 3, Sound.HEALING, Color.BLUE, SpellTarget.PARTY, SpellArea.COMBAT, 0, 0, 4, 38),
     DIAL("More Heal", ClassType.PRIEST, 4, Sound.HEALING, Color.BLUE, SpellTarget.PERSON, SpellArea.ANY_TIME, 2, 16, 0, 41),
@@ -49,7 +49,7 @@ public enum Spells {
     MAPORFIC("Big Shield", ClassType.PRIEST, 4, Sound.POWER_CHAINS, Color.BLUE, SpellTarget.PARTY, SpellArea.ANY_TIME, 0, 0, 2, 352),
     DIALMA("Greatly Heal", ClassType.PRIEST, 5, Sound.HEALING, Color.YELLOW, SpellTarget.PERSON, SpellArea.ANY_TIME, 3, 24, 0, 27),
     BADIALMA("Greatly Hurt", ClassType.PRIEST, 5, Sound.SPIRITS, Color.RED, SpellTarget.MONSTER, SpellArea.COMBAT, 3, 8, 0, 50),
-    LITOKAN("Flame tower", ClassType.PRIEST, 5, Sound.FIREBALL, Color.RED, SpellTarget.PARTY, SpellArea.COMBAT, 3, 8, 1, 65),
+    LITOKAN("Flame tower", ClassType.PRIEST, 5, Sound.FIREBALL, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 3, 8, 1, 65),
     KANDI("Location", ClassType.PRIEST, 5, Sound.MEDITATION, Color.BLUE, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 0, 365),
     DI("Life", ClassType.PRIEST, 5, Sound.DIVINE_INTERVENTION, Color.GREEN, SpellTarget.PERSON, SpellArea.CAMP, 0, 0, 0, 637),
     BADI("Death", ClassType.PRIEST, 5, Sound.SPIRITS, Color.PURPLE, SpellTarget.MONSTER, SpellArea.COMBAT, 0, 0, 0, 35),
@@ -61,6 +61,7 @@ public enum Spells {
     KADORTO("Resurrection", ClassType.PRIEST, 7, Sound.DIVINE_INTERVENTION, Color.BLUE, SpellTarget.PERSON, SpellArea.ANY_TIME, 0, 0, 0, 24);
 
     private final static HashMap<Spells, String> desc = new HashMap<>();
+    private final static HashMap<Spells, String> hint = new HashMap<>();
 
     static {
         desc.put(Spells.BADIOS, "Causes 1-8 points of damage to a monster");
@@ -113,6 +114,57 @@ public enum Spells {
         desc.put(Spells.MAHAMAN, "Does more random damage than Haman.");
         desc.put(Spells.MALOR, "Teleports the party to given coordinates or randomly if cast in combat.  Best used in conjunction with DUMAPIC.");
         desc.put(Spells.TILTOWAIT, "Does 10-100 hit points of damage to all monsters.");
+
+        hint.put(Spells.BADIOS, "Single-target harm");
+        hint.put(Spells.DIOS, "Single-target heal");
+        hint.put(Spells.KALKI, "Party defense up");
+        hint.put(Spells.MILWA, "Light and reveal");
+        hint.put(Spells.PORFIC, "Self defense up");
+        hint.put(Spells.CALFO, "Identify chest trap");
+        hint.put(Spells.MANIFO, "Group paralyze");
+        hint.put(Spells.MATU, "Party defense up");
+        hint.put(Spells.MONTINO, "Group silence");
+        hint.put(Spells.BAMATU, "Party defense up");
+        hint.put(Spells.DIALKO, "Cure sleep/paralysis");
+        hint.put(Spells.LATUMAPIC, "Clear group ailments");
+        hint.put(Spells.LOMILWA, "Long-lasting light");
+        hint.put(Spells.BADIAL, "Stronger harm");
+        hint.put(Spells.DIAL, "Stronger heal");
+        hint.put(Spells.LATUMOFIS, "Cure poison");
+        hint.put(Spells.MAPORFIC, "Party shield");
+        hint.put(Spells.BADI, "Instant death chance");
+        hint.put(Spells.BADIALMA, "Major harm");
+        hint.put(Spells.DI, "Resurrect ally");
+        hint.put(Spells.DIALMA, "Major heal");
+        hint.put(Spells.KANDI, "Locate target");
+        hint.put(Spells.LITOKAN, "Group fire");
+        hint.put(Spells.LOKTOFEIT, "Return to castle");
+        hint.put(Spells.LORTO, "Group blade attack");
+        hint.put(Spells.MABADI, "Leave target barely alive");
+        hint.put(Spells.MADI, "Full heal and cure");
+        hint.put(Spells.KADORTO, "Great resurrection");
+        hint.put(Spells.MALIKTO, "Heavy group damage");
+        hint.put(Spells.DUMAPIC, "Show exact position");
+        hint.put(Spells.HALITO, "Single-target fire");
+        hint.put(Spells.KATINO, "Group sleep");
+        hint.put(Spells.MOGREF, "Self defense up");
+        hint.put(Spells.DILTO, "Lower enemy defense");
+        hint.put(Spells.SOPIC, "Self defense up");
+        hint.put(Spells.MAHALITO, "Group fire");
+        hint.put(Spells.MOLITO, "Group lightning");
+        hint.put(Spells.DALTO, "Group ice");
+        hint.put(Spells.LAHALITO, "Strong group fire");
+        hint.put(Spells.MORLIS, "Group fear");
+        hint.put(Spells.MADALTO, "Heavy group ice");
+        hint.put(Spells.MAKANITO, "Kill weak enemies");
+        hint.put(Spells.MAMORLIS, "All enemies fear");
+        hint.put(Spells.HAMAN, "Random magic effect");
+        hint.put(Spells.LAKANITO, "Deadly group kill");
+        hint.put(Spells.MASOPIC, "Party defense up");
+        hint.put(Spells.ZILWAN, "Destroy undead");
+        hint.put(Spells.MAHAMAN, "Great random effect");
+        hint.put(Spells.MALOR, "Teleport");
+        hint.put(Spells.TILTOWAIT, "Massive group damage");
     }
 
     private final String name;
@@ -188,6 +240,10 @@ public enum Spells {
 
     public String getDescription() {
         return desc.get(this);
+    }
+
+    public String getHint() {
+        return hint.get(this);
     }
 
     public Color getColor() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius;
 
 import andius.objects.Sound;
@@ -34,10 +29,6 @@ import utils.AutoFocusScrollPane;
 import utils.LogScrollPane;
 import utils.Utils;
 
-/**
- *
- * @author Paul
- */
 public class InnScreen implements Screen, Constants {
 
     private final Context context;
@@ -79,9 +70,9 @@ public class InnScreen implements Screen, Constants {
 
         this.playerSelectionLabel = new Label("WE HAVE :", Andius.skin, "default-16");
 
-        focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
-        focusIndicator.setWidth(PAT_SCR_WIDTH);
-        focusIndicator.setHeight(PAT_ITEM_HGT);
+        this.focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
+        this.focusIndicator.setWidth(PAT_SCR_WIDTH);
+        this.focusIndicator.setHeight(PAT_ITEM_HGT);
 
         this.roomSelection = new List<>(Andius.skin, "default-16");
         Array<String> names = new Array<>();
@@ -90,26 +81,37 @@ public class InnScreen implements Screen, Constants {
         names.add("ECONOMY ROOMS. 50 GP/WEEK.");
         names.add("MERCHANT SUITES. 200 GP/WEEK.");
         names.add("ROYAL SUITES. 500 GP/WEEK.");
-
         this.roomSelection.setItems(names);
 
         this.go = new TextButton("BUY", Andius.skin, "default-16-red");
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (selectedPlayer.c.isDisabled()) {
-                    log(selectedPlayer.c.name.toUpperCase() + " IS DISABLED.");
+                if (selectedPlayer == null) {
+                    log("NO PLAYER SELECTED.");
                     return;
                 }
-                if (roomSelection.getSelected().startsWith("THE STAB")) {
+
+                if (selectedPlayer.c.isDead()) {
+                    log(selectedPlayer.c.name.toUpperCase() + " IS DEAD.");
+                    return;
+                }
+
+                String room = roomSelection.getSelected();
+                if (room == null) {
+                    log("NO ROOM SELECTED.");
+                    return;
+                }
+
+                if (room.startsWith("THE STAB")) {
                     takeNap(0, 0, selectedPlayer);
-                } else if (roomSelection.getSelected().startsWith("COTS")) {
+                } else if (room.startsWith("COTS")) {
                     takeNap(1, 10, selectedPlayer);
-                } else if (roomSelection.getSelected().startsWith("ECON")) {
+                } else if (room.startsWith("ECON")) {
                     takeNap(3, 50, selectedPlayer);
-                } else if (roomSelection.getSelected().startsWith("MERCH")) {
+                } else if (room.startsWith("MERCH")) {
                     takeNap(7, 200, selectedPlayer);
-                } else if (roomSelection.getSelected().startsWith("ROYAL")) {
+                } else if (room.startsWith("ROYAL")) {
                     takeNap(10, 500, selectedPlayer);
                 }
             }
@@ -119,19 +121,26 @@ public class InnScreen implements Screen, Constants {
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                for (Cell cell : playerTable.getCells()) {
-                    if (cell.getActor() instanceof PlayerListing) {
-                        PlayerListing pi = (PlayerListing) cell.getActor();
+                if (selectedPlayer == null) {
+                    log("NO PLAYER SELECTED.");
+                    return;
+                }
+
+                for (Cell<?> cell : playerTable.getCells()) {
+                    if (cell.getActor() instanceof PlayerListing pi) {
                         if (pi != selectedPlayer) {
                             int gold = pi.c.gold;
-                            pi.c.adjustGold(-gold);
-                            pi.gold.setText("0");
-                            selectedPlayer.c.adjustGold(gold);
-                            pi.gold.setText("" + pi.c.gold);
+                            if (gold > 0) {
+                                pi.c.adjustGold(-gold);
+                                selectedPlayer.c.adjustGold(gold);
+                                pi.gold.setText(String.valueOf(pi.c.gold));
+                            }
                         }
                     }
                 }
-                selectedPlayer.gold.setText("" + selectedPlayer.c.gold);
+
+                selectedPlayer.gold.setText(String.valueOf(selectedPlayer.c.gold));
+                log("ALL GOLD POOLED TO " + selectedPlayer.c.name.toUpperCase() + ".");
             }
         });
 
@@ -146,35 +155,35 @@ public class InnScreen implements Screen, Constants {
         AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.roomSelection, Andius.skin);
         sp1.setBounds(X_ALIGN, 340, 300, 145);
 
-        playerTable = new Table(Andius.skin);
-        playerTable.top().left();
-        playerTable.addListener(new EventListener() {
+        this.playerTable = new Table(Andius.skin);
+        this.playerTable.top().left();
+        this.playerTable.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                if (event.toString().equals("touchDown")) {
+                if ("touchDown".equals(String.valueOf(event))) {
                     if (focusIndicator.getParent() != null) {
                         focusIndicator.getParent().removeActor(focusIndicator);
                     }
-                    if (event.getTarget() instanceof PlayerListing) {
-                        selectedPlayer = (PlayerListing) event.getTarget();
-                        selectedPlayer.addActor(focusIndicator);
-                    } else if (event.getTarget().getParent() instanceof PlayerListing) {
-                        selectedPlayer = (PlayerListing) event.getTarget().getParent();
-                        selectedPlayer.addActor(focusIndicator);
+
+                    Actor target = event.getTarget();
+                    if (target instanceof PlayerListing listing) {
+                        setSelectedPlayer(listing);
+                    } else if (target != null && target.getParent() instanceof PlayerListing listing) {
+                        setSelectedPlayer(listing);
                     }
                 }
                 return false;
             }
-        }
-        );
+        });
+
         this.playerScroll = new AutoFocusScrollPane(playerTable, Andius.skin);
         this.playerScroll.setScrollingDisabled(true, false);
+
         for (int i = 0; i < context.players().length; i++) {
             CharacterRecord p = context.players()[i];
             PlayerListing pl = new PlayerListing(p);
             if (i == 0) {
-                pl.addActor(focusIndicator);
-                selectedPlayer = pl;
+                setSelectedPlayer(pl);
             }
             playerTable.add(pl);
             playerTable.row();
@@ -199,20 +208,21 @@ public class InnScreen implements Screen, Constants {
         stage.addActor(logScroll);
         stage.addActor(playerScroll);
 
-        //this.stage.setDebugAll(true);
-
         log("WELCOME TO THE " + contextMap.getLabel().toUpperCase());
+    }
 
+    private void setSelectedPlayer(PlayerListing listing) {
+        this.selectedPlayer = listing;
+        listing.addActor(focusIndicator);
     }
 
     private void takeNap(int hpAdd, int goldAmt, PlayerListing pi) {
-
         int expnextlvl = pi.c.checkAndSetLevel();
         while (expnextlvl >= 0) {
             pi.c.maxhp += pi.c.getMoreHP();
 
             log(pi.c.name.toUpperCase() + " IS LEVEL " + pi.c.level);
-            pi.lvlracetype.setText("LVL " + pi.c.level + " " + pi.c.race.toString() + " " + pi.c.classType.toString());
+            pi.lvlracetype.setText("LVL " + pi.c.level + " " + pi.c.race + " " + pi.c.classType);
 
             pi.c.str = gainOrLose("STRENGTH", pi.c.str, pi.c);
             pi.c.intell = gainOrLose("INTELLIGENCE", pi.c.intell, pi.c);
@@ -236,22 +246,31 @@ public class InnScreen implements Screen, Constants {
         if (goldAmt > 0) {
             int healed = 0;
             while (pi.c.gold >= goldAmt && pi.c.hp < pi.c.maxhp) {
-                pi.c.hp += hpAdd;
-                if (pi.c.hp > pi.c.maxhp) {
-                    pi.c.hp = pi.c.maxhp;
-                }
+                pi.c.adjustHP(hpAdd);
                 pi.c.adjustGold(-goldAmt);
-                pi.gold.setText("" + pi.c.gold);
+                pi.gold.setText(String.valueOf(pi.c.gold));
                 pi.hp.setText(pi.c.hp + " / " + pi.c.maxhp);
                 healed++;
             }
+
             if (healed > 0) {
                 log(pi.c.name.toUpperCase() + " HAS HEALED (" + healed + " WEEKS).");
                 Sounds.play(Sound.HEALING);
+            } else {
+                if (pi.c.gold < goldAmt) {
+                    log(pi.c.name.toUpperCase() + " DOES NOT HAVE ENOUGH GOLD.");
+                } else if (pi.c.hp >= pi.c.maxhp) {
+                    log(pi.c.name.toUpperCase() + " IS ALREADY FULLY HEALED.");
+                }
             }
         } else {
             log(pi.c.name.toUpperCase() + " IS NAPPING.");
         }
+
+        pi.status.setText(pi.c.isDead() ? "DEAD" : pi.c.status.toString());
+        pi.hp.setText(pi.c.hp + " / " + pi.c.maxhp);
+        pi.gold.setText(String.valueOf(pi.c.gold));
+        pi.exp.setText(String.valueOf(pi.c.exp));
 
         log("");
     }
@@ -262,14 +281,12 @@ public class InnScreen implements Screen, Constants {
             log(c.name.toUpperCase() + " GAINED " + desc + ".");
         } else if (newattrib < attr) {
             log(c.name.toUpperCase() + " LOST " + desc + ".");
-        } else {
-            //nothing
         }
         return newattrib;
     }
 
     private void log(String s) {
-      this.logScroll.add(s);
+        this.logScroll.add(s);
     }
 
     private class PlayerListing extends Group {
@@ -289,11 +306,11 @@ public class InnScreen implements Screen, Constants {
             this.style = new LabelStyle(Andius.font16, rec.isDead() ? Color.RED : rec.status.color());
 
             this.name = new Label(rec.name.toUpperCase(), this.style);
-            this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race.toString() + " " + rec.classType.toString(), this.style);
+            this.lvlracetype = new Label("LVL " + rec.level + " " + rec.race + " " + rec.classType, this.style);
             this.status = new Label(rec.isDead() ? "DEAD" : rec.status.toString(), this.style);
             this.hp = new Label(rec.hp + " / " + rec.maxhp, this.style);
-            this.gold = new Label("" + rec.gold, this.style);
-            this.exp = new Label("" + rec.exp, this.style);
+            this.gold = new Label(String.valueOf(rec.gold), this.style);
+            this.exp = new Label(String.valueOf(rec.exp), this.style);
 
             addActor(this.name);
             addActor(this.lvlracetype);
@@ -312,7 +329,6 @@ public class InnScreen implements Screen, Constants {
 
             this.setBounds(getX(), getY(), PAT_SCR_WIDTH, PAT_ITEM_HGT);
         }
-
     }
 
     @Override
@@ -350,5 +366,4 @@ public class InnScreen implements Screen, Constants {
     @Override
     public void dispose() {
     }
-
 }

@@ -7,9 +7,11 @@ import static andius.Constants.Ability.POISON;
 import static andius.Constants.Ability.SLEEP;
 import static andius.Constants.Ability.STONE;
 import andius.Constants.Status;
+import static andius.WizardryData.WER_ITEMS;
 import andius.objects.Direction;
 import andius.objects.DoGooder;
 import andius.objects.Item;
+import andius.objects.Monster;
 import andius.objects.Mutable;
 import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
@@ -226,6 +228,31 @@ public class Utils {
         defender.adjustHealthCursor();
 
         return damage;
+    }
+
+    public static String getAttackName(Object attacker) {
+        if (attacker instanceof CharacterRecord pc) {
+            return pc.weapon != null ? pc.weapon.name : Item.HANDS.name;
+        }
+
+        if (attacker instanceof MutableCharacter mc) {
+            DoGooder dg = (DoGooder) mc.baseType();
+            for (int id : dg.items) {
+                for (Item it : WER_ITEMS) {
+                    if (it.id == id && it.type == Item.ItemType.WEAPON) {
+                        return it.name;
+                    }
+                }
+            }
+            return Item.HANDS.name;
+        }
+
+        if (attacker instanceof MutableMonster mm) {
+            Monster mon = mm.monster();
+            return "attack";
+        }
+
+        return "attack";
     }
 
     public static boolean inflict(MutableMonster attacker, MutableCharacter defender, Loggable logs) {

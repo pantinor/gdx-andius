@@ -257,8 +257,10 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         float playersPanelHeight = playerRows * (LINE_HEIGHT * 3 + 6) + 3;
         fm.setBounds(this.playersScroll, 0, 0, SCREEN_WIDTH - 350, playersPanelHeight);
 
-        fm.setBounds(this.spellsScroll, 5, playersPanelHeight + 3, PLAYER_LISTING_WIDTH, 100);
-        fm.setBounds(this.actionsScroll, 5, playersPanelHeight + 4 + 100, LOG_WIDTH, 110);
+        int leftTopY = SCREEN_HEIGHT - 300;
+        fm.setBounds(this.actionsScroll, 5, leftTopY, LOG_WIDTH, 120);
+        fm.setBounds(this.spellsScroll, 5, leftTopY - 110, PLAYER_LISTING_WIDTH, 110);
+
         fm.setBounds(this.logs, SCREEN_WIDTH - LOG_WIDTH - 5, 3, LOG_WIDTH, LOG_HEIGHT);
 
         int x = 320;
@@ -275,11 +277,48 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         this.reset.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                selectedPlayer.remove();
+                selectedMonster.remove();
+
+                spellsList.getSelection().clear();
+                spellsList.getItems().clear();
+
                 actionsList.getItems().clear();
                 actions.clear();
                 for (CharacterRecord p : ctx.players()) {
                     actionsList.getItems().add(new ActionLabel(addAction(p)));
                 }
+
+                if (ctx.players().length > 0) {
+                    CharacterRecord player = ctx.players()[0];
+
+                    for (Spells s : player.knownSpells) {
+                        addSpell(s);
+                    }
+                    if (player.weapon != null && player.weapon.spell != null) {
+                        addSpell(player.weapon);
+                    }
+                    if (player.helm != null && player.helm.spell != null) {
+                        addSpell(player.helm);
+                    }
+                    if (player.armor != null && player.armor.spell != null) {
+                        addSpell(player.armor);
+                    }
+                    if (player.item1 != null && player.item1.spell != null) {
+                        addSpell(player.item1);
+                    }
+                    if (player.item2 != null && player.item2.spell != null) {
+                        addSpell(player.item2);
+                    }
+                    for (Item i : player.inventory) {
+                        if (i.spell != null) {
+                            addSpell(i);
+                        }
+                    }
+                }
+
+                actionsList.invalidateHierarchy();
+                spellsList.invalidateHierarchy();
             }
         });
         this.reset.setBounds(x += 90, playersPanelHeight + 4, 80, 40);
@@ -601,12 +640,12 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
 
     @Override
     public void log(String s) {
-        this.logs.add(s);
+        this.logs.add(s.toUpperCase());
     }
 
     @Override
     public void log(String s, Color c) {
-        this.logs.add(s, c);
+        this.logs.add(s.toUpperCase(), c);
     }
 
     @Override
@@ -709,6 +748,18 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    SpellLabel sl = spellsList.getSelected();
+                    PlayerListing acting = (PlayerListing) selectedPlayer.getParent();
+
+                    if (acting != null && acting != PlayerListing.this && sl != null && !sl.dispel) {
+                        Spells selectedSpell = sl.spell != null ? sl.spell : sl.item != null ? sl.item.spell : null;
+                        if (selectedSpell != null && selectedSpell.getTarget() == SpellTarget.PERSON) {
+                            setAction(acting.index, PlayerListing.this.player);
+                            spellsList.getSelection().clear();
+                            return;
+                        }
+                    }
+
                     selectedPlayer.remove();
                     PlayerListing.this.addActor(selectedPlayer);
 
@@ -743,7 +794,6 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                             addSpell(i);
                         }
                     }
-
                 }
             });
         }
@@ -1021,7 +1071,10 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
             if (this.dispel) {
                 return "Dispel Undead";
             }
-            return this.spell != null ? this.spell.label() : this.item.name + " - " + this.item.spell;
+            if (this.spell != null) {
+                return this.spell.label() + "    " + this.spell.getHint();
+            }
+            return this.item.name + " - " + this.item.spell + "  " + this.item.spell.getHint();
         }
 
     }

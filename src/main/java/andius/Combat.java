@@ -96,7 +96,7 @@ public abstract class Combat implements Constants {
 
     public void fight() {
 
-        List<Object> shuffled = new ArrayList();
+        List<Object> shuffled = new ArrayList<>();
 
         if (this.suprised == 1) {
             shuffled.addAll(this.players);
@@ -116,39 +116,65 @@ public abstract class Combat implements Constants {
             if (m instanceof CharacterRecord player) {
                 Action action = getAction(player);
 
-                MutableMonster defender = pickMonster();
-                if (action.target != null) {
-                    defender = action.target;
-                }
+                if (!player.isDisabled()) {
 
-                if (defender != null) {
-                    if (!player.isDisabled()) {
+                    if (action.spell != null || action.item != null) {
+                        Spells spell = action.spell != null ? action.spell : action.item.spell;
+                        Object spellTarget = null;
 
-                        if (action.spell != null || action.item != null) {
-                            Spells spell = action.spell != null ? action.spell : action.item.spell;
-                            spellCast(spell, player, defender, action.item != null);
-                            if (action.item != null && action.item.changeChance > 0) {
-                                boolean decayed = Utils.percentChance(action.item.changeChance);
-                                if (decayed) {
-                                    Item changeTo = this.contextMap.scenario().items().get(action.item.changeTo);
-                                    player.removeItem(action.item.id, action.item.scenarioID);
-                                    if (changeTo.id != 0) {
-                                        player.inventory.add(changeTo);
-                                    }
+                        switch (spell.getTarget()) {
+                            case PERSON:
+                                spellTarget = action.playerTarget != null ? action.playerTarget : player;
+                                break;
+                            case CASTER:
+                                spellTarget = player;
+                                break;
+                            case MONSTER:
+                                spellTarget = action.monsterTarget != null ? action.monsterTarget : pickMonster();
+                                break;
+                            case PARTY:
+                            case GROUP:
+                            case VARIABLE:
+                            case NONE:
+                            default:
+                                spellTarget = null;
+                                break;
+                        }
+
+                        spellCast(spell, player, spellTarget, action.item != null);
+
+                        if (action.item != null && action.item.changeChance > 0) {
+                            boolean decayed = Utils.percentChance(action.item.changeChance);
+                            if (decayed) {
+                                Item changeTo = this.contextMap.scenario().items().get(action.item.changeTo);
+                                player.removeItem(action.item.id, action.item.scenarioID);
+                                if (changeTo.id != 0) {
+                                    player.inventory.add(changeTo);
                                 }
                             }
-                        } else if (action.dispel) {
-                            for (MutableMonster mon : monsters) {
-                                if (mon.getCurrentHitPoints() > 0 && mon.getMonsterType() == CharacterType.UNDEAD) {
-                                    int roll = RANDOM.nextInt(100) + 1;
-                                    if (roll < 50 + (player.level * 5) - (mon.getLevel() * 10)) {
-                                        log(String.format("%s dispels %s and sends it back to the abyss!", player.name.toUpperCase(), defender.name()), Color.SKY);
-                                    } else {
-                                        log(String.format("%s failed to dispel %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
-                                    }
+                        }
+
+                    } else if (action.dispel) {
+                        List<MutableMonster> dispelled = new ArrayList<>();
+                        for (MutableMonster mon : monsters) {
+                            if (mon.getCurrentHitPoints() > 0 && mon.getMonsterType() == CharacterType.UNDEAD) {
+                                int roll = RANDOM.nextInt(100) + 1;
+                                if (roll < 50 + (player.level * 5) - (mon.getLevel() * 10)) {
+                                    log(String.format("%s dispels %s", player.name.toUpperCase(), mon.name()), Color.SKY);
+                                    dispelled.add(mon);
+                                } else {
+                                    log(String.format("%s failed to dispel %s", player.name.toUpperCase(), mon.name()), Color.WHITE);
                                 }
                             }
-                        } else {
+                        }
+                        for (MutableMonster mon : dispelled) {
+                            removeMonster(mon);
+                        }
+
+                    } else {
+                        MutableMonster defender = action.monsterTarget != null ? action.monsterTarget : pickMonster();
+
+                        if (defender != null) {
                             int hpDamage = 0;
                             int hitsCount = 0;
                             Item weapon = player.weapon == null ? Item.HANDS : player.weapon;
@@ -162,16 +188,15 @@ public abstract class Combat implements Constants {
                             }
 
                             if (hpDamage > 0) {
-                                log(String.format("%s %s %s %d times for %d damage with %s.",
+                                log(String.format("%s %s %s [%d] times [%d] %s.",
                                         player.name.toUpperCase(),
-                                        HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
+                                        "hit",
                                         defender.name().toUpperCase(),
                                         hitsCount,
                                         hpDamage, weapon.name), Color.SCARLET);
                             } else {
                                 log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                             }
-
                         }
                     }
                 }
@@ -186,18 +211,20 @@ public abstract class Combat implements Constants {
         for (MutableMonster m : this.monsters) {
             if (!m.isDead()) {
                 alive = true;
+                break;
             }
         }
 
         if (!alive) {
             end(false);
+            return;
         } else if (this.ctx.allDead()) {
             end(false);
+            return;
         }
 
         log("------------ end of round " + round, Color.YELLOW);
         round++;
-
     }
 
     public void end(boolean fled) {
@@ -260,7 +287,7 @@ public abstract class Combat implements Constants {
                 for (CharacterRecord defender : players) {
                     int dmg = attacker.getCurrentHitPoints() / 2;
                     if (defender.savingThrowBreath()) {
-                        log(String.format("%s made a saving throwing throw against %s", defender.name, attacker.breath()));
+                        log(String.format("%s saves versus %s", defender.name, attacker.breath()));
                         dmg = dmg / 2;
                     }
                     damage(attacker, defender, dmg, attacker.breath().toString());
@@ -273,7 +300,7 @@ public abstract class Combat implements Constants {
                     if (hit) {
                         for (Dice dice : attacker.getDamage()) {
                             int dmg = dice.roll();
-                            damage(attacker, defender, dmg, "arms");
+                            damage(attacker, defender, dmg, Utils.getAttackName(attacker));
                         }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name));
@@ -281,11 +308,27 @@ public abstract class Combat implements Constants {
                 }
                 break;
             case CAST: {
-                CharacterRecord target = pickPlayer();
-                if (target != null) {
-                    log(String.format("%s casts %s", attacker.name(), spell), Color.SKY);
-                    spellCast(spell, attacker, target, false);
+                Object target = null;
+                switch (spell.getTarget()) {
+                    case PERSON:
+                        target = pickMonster();
+                        break;
+                    case CASTER:
+                        target = attacker;
+                        break;
+                    case MONSTER:
+                        target = pickPlayer();
+                        break;
+                    case PARTY:
+                    case GROUP:
+                    case VARIABLE:
+                    case NONE:
+                    default:
+                        target = null;
+                        break;
                 }
+
+                spellCast(spell, attacker, target, false);
                 break;
             }
             case FLEE: {
@@ -376,16 +419,16 @@ public abstract class Combat implements Constants {
                 if (m.getHealthCursor() != null) {
                     m.getHealthCursor().adjust(m.getCurrentHitPoints(), m.getMaxHitPoints());
                 }
-                log(String.format("%s %s %s for %d damage with %s.",
-                        attName.toUpperCase(),
-                        HITMSGS[Utils.RANDOM.nextInt(HITMSGS.length)],
-                        m.name().toUpperCase(),
+                log(String.format("%s %s %s [%d] %s.",
+                        attName,
+                        "hit",
+                        m.name(),
                         damage, type), Color.SCARLET);
             }
         } else if (defender instanceof CharacterRecord p) {
             if (!p.isDead()) {
                 p.adjustHP(-damage);
-                log(String.format("%s strikes %s who was hit for %d damage!", attName, p.name.toUpperCase(), damage), Color.RED);
+                log(String.format("%s hit %s [%d]", attName, p.name.toUpperCase(), damage), Color.RED);
             }
         }
     }
@@ -438,10 +481,8 @@ public abstract class Combat implements Constants {
             case ZILWAN:
             case BADIOS:
             case BADI:
-                spellDamage(caster, spell, target);
-                break;
             case MABADI:
-                spellGroupMabadi(caster, spell);
+                spellDamage(caster, spell, target);
                 break;
             case KATINO:
                 spellGroupAffect(caster, spell, Status.ASLEEP);
@@ -462,16 +503,12 @@ public abstract class Combat implements Constants {
                     p.status.set(Status.PARALYZED, 0);
                     p.status.set(Status.ASLEEP, 0);
                 }
-                for (MutableMonster m : monsters) {
-                    m.status().set(Status.PARALYZED, 0);
-                    m.status().set(Status.ASLEEP, 0);
-                }
                 break;
             case DIOS:
             case DIAL:
             case DIALMA:
             case MADI:
-                spellGroupHeal(caster, spell);
+                spellHeal(caster, spell, target);
                 break;
             case HAMAN:
             case MAHAMAN:
@@ -500,16 +537,31 @@ public abstract class Combat implements Constants {
                 spellGroupACModify(caster, spell.getHitBonus());
                 break;
         }
-
     }
 
     private void spellDamage(Object caster, Spells spell, Object target) {
         if (target == null) {
             return;
         }
+
         if (caster instanceof CharacterRecord p) {
-            MutableMonster mm = (MutableMonster) target;
+            if (!(target instanceof MutableMonster mm)) {
+                return;
+            }
+
             boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
+
+            if (spell == Spells.MABADI) {
+                if (unaffected) {
+                    log(mm.name() + " saves versus " + spell + " unaffected!");
+                    return;
+                }
+                int pointsLeft = Utils.getRandomBetween(1, 8);
+                mm.adjustHitPoints(-(mm.getCurrentHitPoints() - pointsLeft));
+                mm.adjustHealthCursor();
+                return;
+            }
+
             int dmg = spell.damage();
             if (unaffected) {
                 dmg = dmg / 2;
@@ -519,33 +571,53 @@ public abstract class Combat implements Constants {
             }
             damage(caster, mm, dmg, spell.getName());
         }
+
         if (caster instanceof MutableMonster) {
-            CharacterRecord p = (CharacterRecord) target;
-            if (p.savingThrowSpell()) {
-                log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
-            } else {
-                int dmg = spell.damage();
-                damage(caster, p, dmg, spell.getName());
+            if (!(target instanceof CharacterRecord p)) {
+                return;
             }
+
+            if (p.savingThrowSpell()) {
+                log(p.name.toUpperCase() + " saves versus " + spell + " unaffected!");
+                return;
+            }
+
+            if (spell == Spells.MABADI) {
+                int pointsLeft = Utils.getRandomBetween(1, 8);
+                p.hp = pointsLeft;
+                if (p.healthCursor != null) {
+                    p.healthCursor.adjust(p.hp, p.maxhp);
+                }
+                return;
+            }
+
+            int dmg = spell.damage();
+            damage(caster, p, dmg, spell.getName());
         }
     }
 
     private void spellGroupDamage(Object caster, Spells spell) {
         int groupDamage = spell.damage();
+
         if (caster instanceof CharacterRecord p) {
-            java.util.Map<MutableMonster, Integer> grpDamageMap = monsters.stream().collect(Collectors.toMap(key -> key, key -> 0));
+            java.util.Map<MutableMonster, Integer> grpDamageMap
+                    = monsters.stream().collect(Collectors.toMap(key -> key, key -> 0));
+
             while (groupDamage > 0) {
                 for (MutableMonster mm : this.monsters) {
-                    boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
-                    if (!mm.status().isDisabled() && unaffected) {
+                    if (groupDamage <= 0) {
+                        break;
+                    }
 
-                    } else {
+                    boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
+                    if (!mm.isDead() && !unaffected) {
                         int dmg = grpDamageMap.get(mm);
                         grpDamageMap.put(mm, dmg + 1);
                     }
                     groupDamage--;
                 }
             }
+
             for (MutableMonster mm : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(mm);
                 if (dmg > 0) {
@@ -553,21 +625,30 @@ public abstract class Combat implements Constants {
                 }
             }
         }
+
         if (caster instanceof MutableMonster) {
-            java.util.Map<CharacterRecord, Integer> grpDamageMap = this.players.stream().collect(Collectors.toMap(key -> key, key -> 0));
+            java.util.Map<CharacterRecord, Integer> grpDamageMap
+                    = this.players.stream().collect(Collectors.toMap(key -> key, key -> 0));
+
             while (groupDamage > 0) {
                 for (CharacterRecord p : this.players) {
-                    if (p.armor != null && p.armor.id == 89 && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
-                        log(p.name.toUpperCase() + " was saved by oxygen mask versus " + spell + " and is unaffected!");
-                    } else if (p.savingThrowSpell()) {
-                        log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
-                    } else {
-                        int dmg = grpDamageMap.get(p);
-                        grpDamageMap.put(p, dmg + 1);
+                    if (groupDamage <= 0) {
+                        break;
                     }
+
+                    if (!p.isDead()) {
+                        if (p.savingThrowSpell()) {
+                            log(p.name.toUpperCase() + " saves versus " + spell + " unaffected!");
+                        } else {
+                            int dmg = grpDamageMap.get(p);
+                            grpDamageMap.put(p, dmg + 1);
+                        }
+                    }
+
                     groupDamage--;
                 }
             }
+
             for (CharacterRecord p : grpDamageMap.keySet()) {
                 int dmg = grpDamageMap.get(p);
                 if (dmg > 0) {
@@ -577,53 +658,49 @@ public abstract class Combat implements Constants {
         }
     }
 
-    private void spellGroupHeal(Object caster, Spells spell) {
-        if (caster instanceof MutableMonster) {
-            for (MutableMonster mm : this.monsters) {
-                if (!mm.isDead()) {
-                    int dmg = spell.damage();
-                    mm.adjustHitPoints(dmg);
-                    if (mm.getHealthCursor() != null) {
-                        mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
-                    }
-                }
-            }
+    private void spellHeal(Object caster, Spells spell, Object target) {
+        if (target == null) {
+            return;
         }
-        if (caster instanceof CharacterRecord) {
-            for (CharacterRecord p : this.players) {
-                if (!p.isDead()) {
-                    p.adjustHP(spell.damage());
-                }
-            }
-        }
-    }
 
-    private void spellGroupMabadi(Object caster, Spells spell) {
-        if (caster instanceof MutableMonster) {
-            for (CharacterRecord p : this.players) {
-                if (p.savingThrowSpell()) {
-                    log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
+        int heal = spell == Spells.MADI ? Integer.MAX_VALUE : spell.damage();
+
+        if (caster instanceof CharacterRecord) {
+            if (!(target instanceof CharacterRecord p)) {
+                return;
+            }
+
+            if (!p.isDead()) {
+                if (spell == Spells.MADI) {
+                    p.adjustHP(p.maxhp);
+                    p.status.set(Status.ASLEEP, 0);
+                    p.status.set(Status.PARALYZED, 0);
+                    p.status.set(Status.SILENCED, 0);
+                    p.status.set(Status.AFRAID, 0);
+                    p.status.set(Status.POISONED, 0);
                 } else {
-                    int pointsLeft = Utils.getRandomBetween(1, 8);
-                    p.hp = pointsLeft;
-                    if (p.healthCursor != null) {
-                        p.healthCursor.adjust(p.hp, p.maxhp);
-                    }
+                    p.adjustHP(heal);
                 }
             }
         }
-        if (caster instanceof CharacterRecord p) {
-            for (MutableMonster mm : this.monsters) {
-                boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
-                if (unaffected) {
-                    log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
+
+        if (caster instanceof MutableMonster) {
+            if (!(target instanceof MutableMonster mm)) {
+                return;
+            }
+
+            if (!mm.isDead()) {
+                if (spell == Spells.MADI) {
+                    mm.adjustHitPoints(mm.getMaxHitPoints());
+                    mm.status().set(Status.ASLEEP, 0);
+                    mm.status().set(Status.PARALYZED, 0);
+                    mm.status().set(Status.SILENCED, 0);
+                    mm.status().set(Status.AFRAID, 0);
+                    mm.status().set(Status.POISONED, 0);
                 } else {
-                    int pointsLeft = Utils.getRandomBetween(1, 8);
-                    mm.adjustHitPoints(mm.getCurrentHitPoints() - pointsLeft);
-                    if (mm.getHealthCursor() != null) {
-                        mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
-                    }
+                    mm.adjustHitPoints(heal);
                 }
+                mm.adjustHealthCursor();
             }
         }
     }
@@ -632,7 +709,7 @@ public abstract class Combat implements Constants {
         if (caster instanceof MutableMonster) {
             for (CharacterRecord p : this.players) {
                 if (p.savingThrowSpell()) {
-                    log(p.name.toUpperCase() + " made a saving throw versus " + spell + " and is unaffected!");
+                    log(p.name.toUpperCase() + " saves versus " + spell + " unaffected!");
                 } else {
                     p.status.set(effect, Math.abs(spell.getHitBonus()));
                 }
@@ -642,7 +719,7 @@ public abstract class Combat implements Constants {
             for (MutableMonster mm : this.monsters) {
                 boolean unaffected = mm.isUnaffected(spell, CharacterType.valueOf(p.classType.toString()));
                 if (unaffected) {
-                    log(mm.name() + " made a saving throw versus " + spell + " and is unaffected!");
+                    log(mm.name() + " saves versus " + spell + " unaffected!");
                 } else {
                     mm.status().set(effect, Math.abs(spell.getHitBonus()));
                 }
@@ -688,7 +765,8 @@ public abstract class Combat implements Constants {
         public Spells spell;
         public Item item;
         public boolean dispel;
-        public MutableMonster target;
+        public MutableMonster monsterTarget;
+        public CharacterRecord playerTarget;
 
         public Action(CharacterRecord player) {
             this.player = player;
@@ -707,8 +785,10 @@ public abstract class Combat implements Constants {
             if (this.dispel) {
                 sb.append("Dispel Undead").append(" - ");
             }
-            if (this.target != null) {
-                Monster m = (Monster) this.target.baseType();
+            if (this.playerTarget != null) {
+                sb.append(this.playerTarget.name.toUpperCase());
+            } else if (this.monsterTarget != null) {
+                Monster m = (Monster) this.monsterTarget.baseType();
                 sb.append(m.name.toUpperCase());
             } else {
                 sb.append("ANY");
@@ -729,6 +809,7 @@ public abstract class Combat implements Constants {
         if (al != null && (s.getArea() == SpellArea.COMBAT || s.getArea() == SpellArea.ANY_TIME)) {
             al.spell = s;
             al.item = null;
+            al.dispel = false;
         }
     }
 
@@ -737,6 +818,7 @@ public abstract class Combat implements Constants {
         if (al != null && (i.spell.getArea() == SpellArea.COMBAT || i.spell.getArea() == SpellArea.ANY_TIME)) {
             al.item = i;
             al.spell = null;
+            al.dispel = false;
         }
     }
 
@@ -744,12 +826,23 @@ public abstract class Combat implements Constants {
         Action al = this.actions.get(index);
         if (al != null) {
             al.dispel = dispel;
+            if (dispel) {
+                al.spell = null;
+                al.item = null;
+            }
         }
     }
 
     public final void setAction(int index, MutableMonster target) {
         Action al = this.actions.get(index);
-        al.target = target;
+        al.monsterTarget = target;
+        al.playerTarget = null;
+    }
+
+    public final void setAction(int index, CharacterRecord target) {
+        Action al = this.actions.get(index);
+        al.playerTarget = target;
+        al.monsterTarget = null;
     }
 
     public final Action getAction(CharacterRecord player) {
@@ -764,7 +857,6 @@ public abstract class Combat implements Constants {
 
     public void addMonster(MutableMonster added) {
         this.monsters.add(added);
-
     }
 
     public void removeMonster(MutableMonster removed) {

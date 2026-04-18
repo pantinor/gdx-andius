@@ -220,8 +220,8 @@ public class RewardScreen implements Screen, Constants {
             case GAS_BOMB -> {
                 log("A gas bomb explodes in your face!");
                 for (CharacterRecord c : this.context.players()) {
-                    if (rand.nextInt(21) < c.luck) {
-                        player.status.set(Status.POISONED, 1);
+                    if (rand.nextInt(21) > c.luck) {
+                        c.status.set(Status.POISONED, 1);
                     }
                 }
                 Sounds.play(Sound.POISON_EFFECT);
@@ -229,7 +229,7 @@ public class RewardScreen implements Screen, Constants {
             case ANTI_MAGE -> {
                 for (CharacterRecord c : this.context.players()) {
                     if (c.classType == ClassType.MAGE || c.classType == ClassType.BISHOP || c.classType == ClassType.SAMURAI) {
-                        if (rand.nextInt(21) < c.luck) {
+                        if (rand.nextInt(21) > c.luck) {
                             log("A spell has a horrible affect on the mage " + c.name);
                             if (rand.nextInt(2) == 0) {
                                 c.status.set(Status.STONED, 4);
@@ -245,7 +245,7 @@ public class RewardScreen implements Screen, Constants {
             case ANTI_PRIEST -> {
                 for (CharacterRecord c : this.context.players()) {
                     if (c.classType == ClassType.PRIEST || c.classType == ClassType.LORD) {
-                        if (rand.nextInt(21) < c.luck) {
+                        if (rand.nextInt(21) > c.luck) {
                             log("A spell has a horrible affect on the cleric " + c.name);
                             if (rand.nextInt(2) == 0) {
                                 c.status.set(Status.STONED, 4);
@@ -308,16 +308,17 @@ public class RewardScreen implements Screen, Constants {
             log("Cannot cast calfo!");
             return;
         }
-        if (player.clericPoints[Spells.CALFO.getLevel() - 1] < 1) {
+        if (!player.canCast(Spells.CALFO)) {
             Sounds.play(Sound.NEGATIVE_EFFECT);
-            log("Not enough spell points!");
+            log("Cannot cast calfo!");
             return;
         }
+
         log("Calfo disarmed " + this.trap);
         this.trap = TrapType.NONE;
         this.chestDisarmed = true;
         Sounds.play(Sound.TRIGGER);
-        player.clericPoints[Spells.CALFO.getLevel() - 1] -= 1;
+        player.decrMagicPts(Spells.CALFO);
     }
 
     private void disarm(CharacterRecord player, TrapType attemptingTrap) {
