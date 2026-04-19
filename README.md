@@ -36,7 +36,7 @@ You will also find the Ultima III Exodus dungeon maps, which were ported to the 
 
 ---
 
-##️ To Journey Onward
+## To Journey Onward
 
 This is a Maven-based Java project developed in NetBeans.
 It can run directly in Netbeans project or from command line with Apache Maven and Java installed.
