@@ -107,7 +107,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
 
         Table logTable = new Table(Andius.skin);
-        logTable.setBackground("log-background");
+        logTable.setBackground("dimmer");
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
         
         this.stage = new Stage();

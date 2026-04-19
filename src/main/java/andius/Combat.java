@@ -188,12 +188,10 @@ public abstract class Combat implements Constants {
                             }
 
                             if (hpDamage > 0) {
-                                log(String.format("%s %s %s [%d] times [%d] %s.",
+                                log(String.format("%s %s %s %dx%d %s.",
                                         player.name.toUpperCase(),
-                                        "hit",
-                                        defender.name().toUpperCase(),
-                                        hitsCount,
-                                        hpDamage, weapon.name), Color.SCARLET);
+                                        "-", defender.name().toUpperCase(),
+                                        hpDamage, hitsCount, weapon.name), Color.SCARLET);
                             } else {
                                 log(String.format("%s misses %s", player.name.toUpperCase(), defender.name()), Color.WHITE);
                             }
@@ -598,6 +596,7 @@ public abstract class Combat implements Constants {
 
     private void spellGroupDamage(Object caster, Spells spell) {
         int groupDamage = spell.damage();
+        log("for group damage of " + groupDamage, Color.SKY);
 
         if (caster instanceof CharacterRecord p) {
             java.util.Map<MutableMonster, Integer> grpDamageMap

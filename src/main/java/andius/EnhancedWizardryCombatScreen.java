@@ -165,6 +165,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
         this.wallAndFloor.add(wmi23);
 
         Table logTable = new Table(Andius.skin);
+        logTable.setBackground("dimmer");
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
         setLogs(this.logs);
 

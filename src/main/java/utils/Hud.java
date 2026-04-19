@@ -18,11 +18,15 @@ public class Hud {
 
     private final LogScrollPane logs;
     static final int LOG_AREA_WIDTH = 270;
+    static final int LOG_AREA_HEIGHT = 327;
     private final List<Integer> magicPoints = new ArrayList<>();
 
     public Hud() {
-        logs = new LogScrollPane(Andius.skin, new Table(), LOG_AREA_WIDTH);
-        logs.setBounds(728, 30, LOG_AREA_WIDTH, 320);
+        Table table = new Table(Andius.skin);
+        table.setBackground("dimmer");
+        logs = new LogScrollPane(Andius.skin, table, LOG_AREA_WIDTH, "default-12");
+        float y = Andius.SCREEN_HEIGHT - 415 - LOG_AREA_HEIGHT;
+        logs.setBounds(727, y, LOG_AREA_WIDTH, LOG_AREA_HEIGHT);
     }
 
     public void addActor(Stage stage) {

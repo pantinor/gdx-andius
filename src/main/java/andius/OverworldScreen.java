@@ -143,7 +143,7 @@ public class OverworldScreen extends BaseScreen {
 
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        Andius.font14.draw(batch, String.format("East [%s], North [%s]\n", (int) v.x, (int) v.y), 300, Andius.SCREEN_HEIGHT - 45);
+        Andius.font14.draw(batch, String.format("East [%s], North [%s]\n", (int) v.x, (int) v.y), 300, Andius.SCREEN_HEIGHT - 72);
         batch.end();
 
         stage.act();
