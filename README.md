@@ -1,19 +1,50 @@
-gdx-andius
-=========
+# gdx-andius
 
-A fun RPG mash-up of the early Sir-Tech Wizardry mazes with some Ultima flavor.
+A fun RPG mash-up inspired by the classic Sir-Tech *Wizardry* mazes with a touch of *Ultima* flavor.
 
-The Wizardy maps include Wizardry 1 through Wizardry 4, the Black Stone maze, and Snafaru's Dragon Quest maze.
+---
 
+## Overview
+
+This project brings together multiple classic dungeon experiences into a single game.
 You will also find the Ultima III Exodus dungeon maps, which were ported to the original Wizardry binary encoding format.
 
-There are Boots of Flying from Wizardry 4 and Marks of Kings from Ultima 3 to be found in the mazes that have special uses, one of which was flying over water.
+- **Wizardry Maps**
+  - Wizardry I through IV
+  - Black Stone maze
+  - Snafaru's Dragon Quest maze
 
-The Overworld is the Ultima 1 map.  Malor spell can be used to teleport.
+- **Ultima Content**
+  - Ultima III: Exodus dungeon maps (ported into Wizardry’s binary format)
+  - Ultima I overworld map
 
-This is a Maven Java project developed in the NetBeans development environment.
+- **Additional Adventures**
+  - *Advanced Dungeons & Dragons* Module  
+    **A1: Slave Pits of the Undercity**
 
-To journey onward, try running it from the development environment or command line, or building and executing from the jar file.
+---
+
+## Features
+
+- Classic grid-based dungeon exploration
+- Cross-universe items and mechanics:
+  - **Boots of Flying** (Wizardry IV)
+  - **Marks of Kings** (Ultima III)
+- Special abilities such as:
+  - Flying over water
+  - Teleportation via the **Malor** spell
+
+---
+
+##️ Build & Run
+
+This is a Maven-based Java project developed in NetBeans.
+It can run directly in Netbeans project or from command line.
+
+```
+mvn clean package
+java -jar target/gdx-andius-1.0.1-SNAPSHOT-jar-with-dependencies.jar
+```
 
 ![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview1.png)
 
