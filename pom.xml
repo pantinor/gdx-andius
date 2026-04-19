@@ -36,7 +36,6 @@
     
     
     <build>
-	
         <plugins>
 
             <plugin>
@@ -51,26 +50,23 @@
                             <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>andius.Andius</mainClass>
                         </manifest>
-
                     </archive>
                 </configuration>
             </plugin>
 
-
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.7.1</version>
                 <configuration>
-
-                    <descriptors>
-                        <descriptor>src/main/resources/assemble.xml</descriptor>
-                    </descriptors>
-
                     <archive>
                         <manifest>
                             <mainClass>andius.Andius</mainClass>
                         </manifest>
                     </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>true</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
@@ -82,8 +78,8 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
 
+        </plugins>
     </build>
 
     <dependencies>

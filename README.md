@@ -36,15 +36,19 @@ You will also find the Ultima III Exodus dungeon maps, which were ported to the 
 
 ---
 
-##️ Build & Run
+##️ To Journey Onward
 
 This is a Maven-based Java project developed in NetBeans.
-It can run directly in Netbeans project or from command line.
+It can run directly in Netbeans project or from command line with Apache Maven and Java installed.
 
 ```
-mvn clean package
-java -jar target/gdx-andius-1.0.1-SNAPSHOT-jar-with-dependencies.jar
+mvn clean install
+java -jar ./target/gdx-andius-1.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
+
+---
+
+## Previews
 
 ![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview1.png)
 
