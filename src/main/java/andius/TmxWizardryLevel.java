@@ -3,6 +3,7 @@ package andius;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
+import andius.WizardryData.Message;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -313,6 +314,21 @@ public class TmxWizardryLevel extends MazeLevel {
             }
         }
 
+        MapLayer messages = tiledMap.getLayers().get("messages");
+        Iterator<MapObject> iter3 = messages.getObjects().iterator();
+        while (iter3.hasNext()) {
+            MapObject obj = iter3.next();
+            RectangleMapObject rmo = (RectangleMapObject) obj;
+            Rectangle rect = rmo.getRectangle();
+
+            int px = (int) (rect.x / 16f);
+            int py = (int) (rect.y / 16f);
+
+            String text = obj.getName();
+            if (text != null && !text.isBlank()) {
+                this.cells[py][px].message = new Message(text);
+            }
+        }
     }
 
     @Override

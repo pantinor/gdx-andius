@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="11">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="54">
  <tileset firstgid="1" name="u4-tiles" tilewidth="16" tileheight="16" tilecount="256" columns="16">
   <image source="u4-tiles.png" width="256" height="256"/>
  </tileset>
@@ -229,7 +229,7 @@
     <property name="id" value="11"/>
    </properties>
   </object>
-  <object id="12" name="Half-Orc False Slaves (Temple 12a) T12a" x="384" y="80" width="16" height="16">
+  <object id="12" name="Half-Orc False Slaves (Temple 12a) T12a" x="368" y="64" width="16" height="16">
    <properties>
     <property name="id" value="12"/>
    </properties>
@@ -244,7 +244,7 @@
     <property name="id" value="14"/>
    </properties>
   </object>
-  <object id="15" name="Orc Slaver Illusionists (Temple 12b) T12b" x="400" y="80" width="16" height="16">
+  <object id="15" name="Orc Slaver Illusionists (Temple 12b) T12b" x="352" y="64" width="16" height="16">
    <properties>
     <property name="id" value="15"/>
    </properties>
@@ -264,12 +264,12 @@
     <property name="id" value="18"/>
    </properties>
   </object>
-  <object id="19" name="Half-Orc Portcullis Guard (Temple 16b outer winch) T16b" x="288" y="80" width="16" height="16">
+  <object id="19" name="Half-Orc Portcullis Guard (Temple 16b outer winch) T16b" x="256" y="64" width="16" height="16">
    <properties>
     <property name="id" value="19"/>
    </properties>
   </object>
-  <object id="20" name="Half-Orc Inner Portcullis Guard (Temple 16c) T16c" x="304" y="80" width="16" height="16">
+  <object id="20" name="Half-Orc Inner Portcullis Guard (Temple 16c) T16c" x="304" y="64" width="16" height="16">
    <properties>
     <property name="id" value="20"/>
    </properties>
@@ -336,7 +336,26 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="messages">
-  <object id="30" name="basilisk den" x="176" y="304" width="16" height="16"/>
-  <object id="31" name="inner courtyard" x="176" y="144" width="16" height="16"/>
+  <object id="32" name="overhanging vines cover the wall here" x="64" y="432" width="16" height="16"/>
+  <object id="33" name="a ruined chamber with a strangely reinforced wall" x="64" y="416" width="16" height="16"/>
+  <object id="34" name="burnt ruins with a collapsed ceiling and rotting debris" x="64" y="352" width="16" height="16"/>
+  <object id="35" name="a shattered chamber with only narrow paths across the void" x="128" y="368" width="16" height="16"/>
+  <object id="36" name="dusty barrels filled with sour, spoiled wine" x="96" y="192" width="16" height="16"/>
+  <object id="37" name="a foul sticky mass lies amid buzzing flies" x="96" y="160" width="16" height="16"/>
+  <object id="38" name="a crude stable with horses hay and watchful guards" x="64" y="160" width="16" height="16"/>
+  <object id="39" name="a cluttered shed filled with tools and strange holy symbols" x="64" y="16" width="16" height="16"/>
+  <object id="40" name="an overgrown graveyard filled with twisted trees and dread" x="64" y="48" width="16" height="16"/>
+  <object id="41" name="a dusty courtyard strewn with rubble and hiding places" x="176" y="144" width="16" height="16"/>
+  <object id="42" name="a walled ruin filled with shattered statues" x="176" y="304" width="16" height="16"/>
+  <object id="44" name="a narrow room of chained slaves and harsh commands" x="384" y="80" width="16" height="16"/>
+  <object id="45" name="a quiet hall with narrow windows and flickering candles" x="352" y="160" width="16" height="16"/>
+  <object id="46" name="an overgrown garden with bright flowers and dying trees" x="384" y="144" width="16" height="16"/>
+  <object id="47" name="a broken corridor above rushing foul water" x="288" y="160" width="16" height="16"/>
+  <object id="48" name="a large yard guarded by orcs and strange war devices" x="272" y="80" width="16" height="16"/>
+  <object id="49" name="a cramped room with a portcullis winch and chained slaves" x="256" y="80" width="16" height="16"/>
+  <object id="50" name="a small chamber with a winch and uneasy occupants" x="304" y="80" width="16" height="16"/>
+  <object id="51" name="massive doors flanked by lifelike statues of orcs and gargoyles" x="288" y="224" width="16" height="16"/>
+  <object id="52" name="a grand hall with an altar and a looming one eyed statue" x="288" y="288" width="16" height="16"/>
+  <object id="53" name="a ruined chapel choked with rubble and open to the sky" x="288" y="368" width="16" height="16"/>
  </objectgroup>
 </map>

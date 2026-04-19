@@ -171,7 +171,7 @@
     <property name="id" value="39"/>
    </properties>
   </object>
-  <object id="40" name="Giant Soldier Ants (Sewer 8b queen's chamber) S8b" x="448" y="320" width="16" height="16">
+  <object id="40" name="Giant Soldier Ants (Sewer 8b queen's chamber) S8b" x="448" y="336" width="16" height="16">
    <properties>
     <property name="id" value="40"/>
    </properties>
@@ -191,12 +191,12 @@
     <property name="id" value="43"/>
    </properties>
   </object>
-  <object id="44" name="Orc Guard Post (Sewer 14) S14" x="16" y="352" width="16" height="16">
+  <object id="44" name="Orc Guard Post (Sewer 14) S14" x="0" y="352" width="16" height="16">
    <properties>
     <property name="id" value="44"/>
    </properties>
   </object>
-  <object id="45" name="Orc Tribe (Sewer 15a main chamber) S15a" x="16" y="240" width="16" height="16">
+  <object id="45" name="Orc Tribe (Sewer 15a main chamber) S15a" x="16" y="256" width="16" height="16">
    <properties>
     <property name="id" value="45"/>
    </properties>
@@ -216,7 +216,7 @@
     <property name="id" value="48"/>
    </properties>
   </object>
-  <object id="49" name="Orc Wall Guards (Sewer 16a) S16a" x="32" y="144" width="16" height="16">
+  <object id="49" name="Orc Wall Guards (Sewer 16a) S16a" x="16" y="144" width="16" height="16">
    <properties>
     <property name="id" value="49"/>
    </properties>
@@ -414,6 +414,33 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="messages">
-  <object id="4" name="inner courtyard" x="176" y="288" width="16" height="16"/>
+  <object id="66" name="a ladder descends from a stone shaft into foul earth tunnels" x="464" y="464" width="16" height="16"/>
+  <object id="67" name="a hot reeking pit of sewage and blind larvae" x="400" y="416" width="16" height="16"/>
+  <object id="68" name="aspis guards ring a chamber of glistening white eggs" x="320" y="448" width="16" height="16"/>
+  <object id="69" name="trenches of grain, carrion, and rot fill this foul storeroom" x="352" y="384" width="16" height="16"/>
+  <object id="70" name="an aspis meeting chamber buzzes with ants and hidden nets" x="336" y="272" width="16" height="16"/>
+  <object id="71" name="a vast breeding cavern houses a giant pale larva" x="416" y="240" width="16" height="16"/>
+  <object id="72" name="an empty reserve food chamber holds four deep pits and a ladder" x="304" y="64" width="16" height="16"/>
+  <object id="73" name="giant ants crowd these hard-packed nest tunnels" x="368" y="272" width="16" height="16"/>
+  <object id="74" name="the ant queen is hidden beyond a swarm of workers and soldiers" x="448" y="320" width="16" height="16"/>
+  <object id="75" name="trash swirls above a dangerous sewer trap" x="240" y="240" width="16" height="16"/>
+  <object id="76" name="an old tun drums steadily in the stagnant runoff" x="192" y="320" width="16" height="16"/>
+  <object id="77" name="a hidden pivoting stone door lies in the ruined sewer wall" x="208" y="208" width="16" height="16"/>
+  <object id="78" name="the main sewer splits into three smaller sewage channels" x="160" y="400" width="16" height="16"/>
+  <object id="79" name="an orc and ogre outpost guards the western passages" x="64" y="448" width="16" height="16"/>
+  <object id="80" name="a collapsed sewer leaves only a narrow path through rubble" x="80" y="384" width="16" height="16"/>
+  <object id="81" name="a smoky guard post with gongs and crude trophies" x="16" y="352" width="16" height="16"/>
+  <object id="82" name="a crowded orc chamber reeks of smoke, hides, and cooking fires" x="16" y="240" width="16" height="16"/>
+  <object id="83" name="the chief's den is hung with furs and grisly tapestries" x="32" y="304" width="16" height="16"/>
+  <object id="84" name="orcs defend this sewer bridge behind a low stone wall" x="32" y="144" width="16" height="16"/>
+  <object id="85" name="the witch-doctor's camp watches the ledges across the sewage" x="80" y="256" width="16" height="16"/>
+  <object id="86" name="a bitter-smelling room is filled with invisible explosive gas" x="160" y="96" width="16" height="16"/>
+  <object id="87" name="beams span open slave pits beneath a towering chamber" x="176" y="160" width="16" height="16"/>
+  <object id="88" name="levers and a narrow slit mark the trapdoor control booth" x="224" y="16" width="16" height="16"/>
+  <object id="89" name="rows of barred cages hold ragged prisoners for sale" x="176" y="144" width="16" height="16"/>
+  <object id="90" name="shelves hold rations, manacles, whips, rope, and wine" x="208" y="112" width="16" height="16"/>
+  <object id="91" name="slaves labor beneath pistons and springs in the machine room" x="240" y="0" width="16" height="16"/>
+  <object id="92" name="loose flagstones hide a trick stair and sliding trap" x="304" y="16" width="16" height="16"/>
+  <object id="93" name="a circular lair with a sewage moat, arched bridges, and stacked crates" x="336" y="16" width="16" height="16"/>
  </objectgroup>
 </map>

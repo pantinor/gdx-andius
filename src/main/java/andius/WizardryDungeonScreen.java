@@ -453,7 +453,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     @Override
     public void log(String s) {
-        Andius.HUD.log(s);
+        Andius.HUD.log(s.toUpperCase());
     }
 
     @Override

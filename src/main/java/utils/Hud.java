@@ -36,11 +36,11 @@ public class Hud {
     }
 
     public void log(String s) {
-        logs.add(s, Color.WHITE);
+        logs.add(s.toUpperCase(), Color.WHITE);
     }
 
     public void log(String s, Color c) {
-        logs.add(s, c);
+        logs.add(s.toUpperCase(), c);
     }
 
     public void render(Batch batch, Context ctxt) {
