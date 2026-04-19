@@ -52,25 +52,24 @@ public class StartScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Sounds.play(Sound.TRIGGER);
-                if (CTX == null) {
-                    CTX = new Context();
-                    try {
-                        
-                        String fname = (String) saveGameSelection.getSelected();
-                        SaveGame saveGame = SaveGame.read(fname);
+
+                String fname = (String) saveGameSelection.getSelected();
+                SaveGame saveGame;
+                try {
+                    saveGame = (fname != null) ? SaveGame.read(fname) : new SaveGame();
+                    if (fname != null) {
                         saveGame.saveGameFileName = fname;
-                    
-                        CTX.setSaveGame(saveGame);
-                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, saveGame));
-                    } catch (Exception e) {
-                        CTX.setSaveGame(new SaveGame());
-                        mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
                     }
-                } else {
-                    mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, CTX.saveGame));
+                } catch (Exception e) {
+                    saveGame = new SaveGame();
                 }
+
+                CTX = new Context();
+                CTX.setSaveGame(saveGame);
+                mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, saveGame));
             }
         });
+        
         manage.setBounds(360, Andius.SCREEN_HEIGHT - 400, 220, 40);
 
         journey = new TextButton("Journey Onward", Andius.skin, "default-24");
@@ -128,7 +127,10 @@ public class StartScreen implements Screen, Constants {
     @Override
     public void show() {
 
-        Object[] jsonFiles = new File(".").list((File dir, String name) -> name.startsWith("party") && name.endsWith(".json"));
+        String[] jsonFiles = new File(".").list((dir, name) -> name.startsWith("party") && name.endsWith(".json"));
+        if (jsonFiles == null) {
+            jsonFiles = new String[0];
+        }
         saveGameSelection.setItems(jsonFiles);
 
         Object selected = saveGameSelection.getSelected();

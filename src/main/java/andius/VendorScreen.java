@@ -38,8 +38,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
@@ -60,18 +58,17 @@ public class VendorScreen implements Screen, Constants {
     private final TextButton buy;
     private final TextButton pool;
 
-    private Image selectedImage;
     private ItemListing selectedItem;
     private VendorItem selectedVendorItem;
     private PlayerIndex selectedPlayer;
+    private ItemType currentFilter = ItemType.ANY;
 
-    private AutoFocusScrollPane playerPane;
+    private final AutoFocusScrollPane playerPane;
     private AutoFocusScrollPane invPane;
-    private AutoFocusScrollPane vendorPane;
+    private final AutoFocusScrollPane vendorPane;
 
-    private Table playerTable;
+    private final Table playerTable;
     private Table vendorTable;
-    private Label invDesc;
 
     private Image playerFocusIndicator, itemFocusIndicator, vendorFocusIndicator;
 
@@ -107,8 +104,6 @@ public class VendorScreen implements Screen, Constants {
         vendorFocusIndicator.setWidth(300);
         vendorFocusIndicator.setHeight(HT);
 
-        invDesc = new Label("", Andius.skin, "default-16");
-
         playerTable = new Table(Andius.skin);
         playerTable.left().setFillParent(true);
         for (int i = 0; i < this.context.players().length; i++) {
@@ -130,8 +125,8 @@ public class VendorScreen implements Screen, Constants {
                     playerFocusIndicator.remove();
                     selectedPlayer.addActor(playerFocusIndicator);
 
-                    invPane.clearChildren();
                     invPane.setActor(selectedPlayer.invTable);
+
                     selectedItem = null;
                     itemFocusIndicator.remove();
 
@@ -144,16 +139,14 @@ public class VendorScreen implements Screen, Constants {
                 }
 
                 InventoryImage ii = selectedPlayer.itemClicked(x, y);
-                if (ii != null) {
-                    if (selectedItem != null) {
-                        if (ii.type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
-                            ii.equip(selectedPlayer.p, selectedItem.item);
-                            itemFocusIndicator.remove();
-                            selectedItem = null;
-                            selectedPlayer.setInventoryTable();
-                        } else {
-                            Sounds.play(Sound.NEGATIVE_EFFECT);
-                        }
+                if (ii != null && selectedItem != null) {
+                    if (ii.type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
+                        ii.equip(selectedPlayer.p, selectedItem.item);
+                        itemFocusIndicator.remove();
+                        selectedItem = null;
+                        selectedPlayer.setInventoryTable();
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
                     }
                 }
             }
@@ -168,8 +161,8 @@ public class VendorScreen implements Screen, Constants {
                     playerFocusIndicator.remove();
                     selectedPlayer.addActor(playerFocusIndicator);
 
-                    invPane.clearChildren();
                     invPane.setActor(selectedPlayer.invTable);
+
                     selectedItem = null;
                     itemFocusIndicator.remove();
 
@@ -211,10 +204,24 @@ public class VendorScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedVendorItem != null && selectedPlayer.p.gold >= selectedVendorItem.item.cost) {
 
-                    selectedPlayer.p.adjustGold(-selectedVendorItem.item.cost);
-                    selectedPlayer.p.inventory.add(selectedVendorItem.item);
+                    Item vendorIt = selectedVendorItem.item;
+                    Item playerIt = vendorIt.clone();
+
+                    selectedPlayer.p.adjustGold(-vendorIt.cost);
+                    selectedPlayer.p.inventory.add(playerIt);
+
+                    if (vendorIt.stock > 0) {
+                        vendorIt.stock--;
+                        if (vendorIt.stock == 0) {
+                            selectedVendorItem.remove();
+                            selectedVendorItem = null;
+                            vendorFocusIndicator.remove();
+                        }
+                    }
 
                     selectedPlayer.setInventoryTable();
+
+                    filterVendorItems(currentFilter);
 
                     Sounds.play(Sound.TRIGGER);
                 } else {
@@ -229,25 +236,20 @@ public class VendorScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 if (selectedItem != null) {
-                    Item it = item(selectedItem.item.id);
-                    if (it != null) {
-                        selectedItem.removeActor(vendorFocusIndicator);
-                        selectedPlayer.invTable.removeActor(selectedItem);
-                        selectedPlayer.p.adjustGold(selectedItem.item.cost / 2);
-                        if (it.stock == 0) {
-                            it.stock = 1;
-                            vendorTable.add(new VendorItem(it));
-                            vendorTable.row();
-                        } else if (it.stock == -1) {
-                            //nothing - always in stock
-                        } else {
-                            it.stock++;
-                        }
-                        selectedItem = null;
-                        Sounds.play(Sound.TRIGGER);
-                    } else {
-                        Sounds.play(Sound.NEGATIVE_EFFECT);
-                    }
+
+                    Item sold = selectedItem.item;
+
+                    selectedPlayer.p.inventory.remove(sold);
+                    selectedPlayer.p.adjustGold(sold.cost / 2);
+
+                    itemFocusIndicator.remove();
+                    selectedItem = null;
+
+                    selectedPlayer.setInventoryTable();
+
+                    filterVendorItems(currentFilter);
+
+                    Sounds.play(Sound.TRIGGER);
                 } else {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 }
@@ -316,12 +318,16 @@ public class VendorScreen implements Screen, Constants {
     }
 
     private void filterVendorItems(ItemType type) {
+        currentFilter = type;
 
         vendorTable.clear();
+        vendorTable.clearListeners();
 
         if (vendorFocusIndicator.getParent() != null) {
             vendorFocusIndicator.getParent().removeActor(vendorFocusIndicator);
         }
+
+        selectedVendorItem = null;
 
         vendorTable.addListener(new EventListener() {
             @Override
@@ -353,12 +359,7 @@ public class VendorScreen implements Screen, Constants {
             }
         }
 
-        Collections.sort(sellables, new Comparator<Item>() {
-            @Override
-            public int compare(Item it1, Item it2) {
-                return Long.compare(it1.cost, it2.cost);
-            }
-        });
+        sellables.sort((it1, it2) -> Long.compare(it1.cost, it2.cost));
 
         for (Item it : sellables) {
             vendorTable.add(new VendorItem(it));
@@ -426,7 +427,7 @@ public class VendorScreen implements Screen, Constants {
             this.buy.toggle();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             this.exit.toggle();
         }
 
@@ -495,7 +496,8 @@ public class VendorScreen implements Screen, Constants {
             }
 
             invTable.align(Align.top);
-            invTable.clear();
+            invTable.clearChildren();
+            invTable.clearListeners();
 
             for (Item it : p.inventory) {
                 invTable.add(new ItemListing(it, p));
@@ -524,8 +526,6 @@ public class VendorScreen implements Screen, Constants {
         }
 
         private class PlayerLabel extends Label {
-
-            private final java.util.List<Integer> magicPoints = new ArrayList<>();
 
             public PlayerLabel() {
                 super("", Andius.skin, "default-12");
@@ -697,7 +697,7 @@ public class VendorScreen implements Screen, Constants {
                 p.glove = equip;
             }
             if (slot == 6) {
-                p.item2 = equip;
+                p.item1 = equip;
             }
             if (slot == 7) {
                 p.item2 = equip;
@@ -713,7 +713,7 @@ public class VendorScreen implements Screen, Constants {
         }
 
         public void unequip(CharacterRecord p) {
-            this.setDrawable(new TextureRegionDrawable(Icons.get(Icons.QUESTION_MARK)));
+            this.setDrawable(new TextureRegionDrawable(Icons.get(Icons.EMPTY_MARK)));
 
             Item current = this.item;
 
@@ -735,7 +735,7 @@ public class VendorScreen implements Screen, Constants {
                 p.glove = null;
             }
             if (slot == 6) {
-                p.item2 = null;
+                p.item1 = null;
             }
             if (slot == 7) {
                 p.item2 = null;
@@ -768,24 +768,6 @@ public class VendorScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
-    }
-
-    public Item item(int id) {
-        for (Item it : vendorItems) {
-            if (it.id == id) {
-                return it;
-            }
-        }
-        return null;
-    }
-
-    public Item item(String name) {
-        for (Item it : vendorItems) {
-            if (it.name.equalsIgnoreCase(name)) {
-                return it;
-            }
-        }
-        return null;
     }
 
 }

@@ -105,11 +105,14 @@ public class ManageScreen implements Screen, Constants {
             try {
                 r = saveGame.players[i];
             } catch (Exception e) {
+                // ignore and substitute empty slot below
             }
-            if (r == null || r.name.length() < 1) {
+            sanitizeCharacter(r);
+            if (r == null || r.name == null || r.name.length() < 1) {
                 r = new CharacterRecord();
                 r.name = EMPTY;
             }
+            r.portaitIndex = clampPortraitIndex(r.portaitIndex);
             mbrs[i] = new PartyIndex(r, i + 1);
         }
 
@@ -122,27 +125,35 @@ public class ManageScreen implements Screen, Constants {
             recs[i].character.name = EMPTY;
         }
 
-        try {
+        try (FileInputStream fis = new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file())) {
             //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file()));
             //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
             //gzis.close();
             //String json = Base64Coder.decodeString(b64);
-            FileInputStream fis = new FileInputStream(Gdx.files.internal(ROSTER_FILENAME).file());
             String json = IOUtils.toString(fis, StandardCharsets.UTF_8);
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            RosterIndex[] r = gson.fromJson(json, RosterIndex[].class);
-            for (int i = 0; i < 20; i++) {
-                recs[i] = r[i];
+            Gson gson = new GsonBuilder().create();
+            RosterIndex[] loaded = gson.fromJson(json, RosterIndex[].class);
+
+            if (loaded != null) {
+                for (int i = 0; i < Math.min(recs.length, loaded.length); i++) {
+                    if (loaded[i] != null) {
+                        recs[i] = loaded[i];
+                    }
+                }
             }
         } catch (Exception e) {
-            //nothing
+            e.printStackTrace();
         }
 
         for (RosterIndex ri : recs) {
+            if (ri.character == null) {
+                ri.character = new CharacterRecord();
+            }
+            sanitizeCharacter(ri.character);
             if (ri.character.name == null) {
                 ri.character.name = EMPTY;
             }
+            ri.character.portaitIndex = clampPortraitIndex(ri.character.portaitIndex);
         }
 
         registry = new List<>(skin, "default-16-padded-clear");
@@ -194,6 +205,8 @@ public class ManageScreen implements Screen, Constants {
                 }
 
                 CharacterRecord sel = registry.getSelected().character;
+                sanitizeCharacter(sel);
+
                 sel.name = nameField.getText();
                 sel.race = (Race) raceGroup.getChecked().getUserObject();
                 sel.classType = classTypeSelection.getSelected();
@@ -207,8 +220,17 @@ public class ManageScreen implements Screen, Constants {
                 sel.hp = sel.getMoreHP();
                 sel.maxhp = sel.hp;
                 sel.level = 1;
+                sel.exp = 0;
                 sel.gold = Utils.getRandomBetween(100, 200);
-                sel.portaitIndex = pidx;
+                sel.portaitIndex = clampPortraitIndex(pidx);
+
+                sel.knownSpells.clear();
+                for (int i = 0; i < sel.magePoints.length; i++) {
+                    sel.magePoints[i] = 0;
+                }
+                for (int i = 0; i < sel.clericPoints.length; i++) {
+                    sel.clericPoints[i] = 0;
+                }
 
                 if (sel.classType == ClassType.MAGE || sel.classType == ClassType.BISHOP) {
                     sel.knownSpells.add(Spells.values()[1]);
@@ -241,16 +263,24 @@ public class ManageScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 CharacterRecord rsel = registry.getSelected().character;
                 CharacterRecord psel = partyFormation.getSelected().character;
+
+                if (rsel == null || EMPTY.equals(rsel.name)) {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
+
                 if (!psel.name.equals(EMPTY)) {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                     return;
                 }
+
                 for (PartyIndex pi : partyFormation.getItems()) {
                     if (pi.character.name.equals(rsel.name)) {
                         Sounds.play(Sound.NEGATIVE_EFFECT);
                         return;
                     }
                 }
+
                 partyFormation.getSelected().character = rsel;
                 updateChangeClassOptions();
                 Sounds.play(Sound.TRIGGER);
@@ -296,21 +326,14 @@ public class ManageScreen implements Screen, Constants {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
 
                 try {
-                    for (RosterIndex ri : registry.getItems()) {
-                        if (ri.character.name.equals(EMPTY)) {
-                            ri.character.name = null;
-                        }
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+                    RosterIndex[] out = buildRosterForSave();
+                    String json = gson.toJson(out);
+
+                    try (FileOutputStream fos = new FileOutputStream(ROSTER_FILENAME)) {
+                        fos.write(json.getBytes(StandardCharsets.UTF_8));
                     }
-                    GsonBuilder builder = new GsonBuilder();
-                    Gson gson = builder.setPrettyPrinting().create();
-                    String json = gson.toJson(registry.getItems().toArray());
-                    //String b64 = Base64Coder.encodeString(json);
-                    FileOutputStream fos = new FileOutputStream(ROSTER_FILENAME);
-                    //GZIPOutputStream gzos = new GZIPOutputStream(fos);
-                    //gzos.write(b64.getBytes("UTF-8"));
-                    //gzos.close();
-                    fos.write(json.getBytes("UTF-8"));
-                    fos.close();
 
                     Array<CharacterRecord> sgchars = new Array<>();
                     for (PartyIndex pi : partyFormation.getItems()) {
@@ -318,11 +341,14 @@ public class ManageScreen implements Screen, Constants {
                             sgchars.add(pi.character);
                         }
                     }
+
                     saveGame.players = sgchars.toArray(CharacterRecord.class);
                     saveGame.write();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 Sounds.play(Sound.TRIGGER);
                 Andius.mainGame.setScreen(returnScreen);
             }
@@ -338,6 +364,9 @@ public class ManageScreen implements Screen, Constants {
         reset.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                nameField.setText("");
+                pidx = 0;
+                raceGroup.getButtons().first().setChecked(true);
                 stExt = 0;
                 inExt = 0;
                 piExt = 0;
@@ -363,8 +392,8 @@ public class ManageScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 pidx++;
-                if (pidx > 6 * 6 - 1) {
-                    pidx = 6 * 6 - 1;
+                if (pidx > Andius.faceTiles.length - 1) {
+                    pidx = Andius.faceTiles.length - 1;
                 }
             }
         });
@@ -383,8 +412,8 @@ public class ManageScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 partyFormation.getSelected().character.portaitIndex++;
-                if (partyFormation.getSelected().character.portaitIndex > 6 * 6 - 1) {
-                    partyFormation.getSelected().character.portaitIndex = 6 * 6 - 1;
+                if (partyFormation.getSelected().character.portaitIndex > Andius.faceTiles.length - 1) {
+                    partyFormation.getSelected().character.portaitIndex = Andius.faceTiles.length - 1;
                 }
             }
         });
@@ -633,6 +662,7 @@ public class ManageScreen implements Screen, Constants {
                 updateChangeClassOptions();
             }
         });
+
         changeClassBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -694,9 +724,7 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(changeClassBox);
         stage.addActor(changeClassBtn);
 
-        //stage.setDebugAll(true);
         bkgnd = fm.build();
-
     }
 
     private void checkClasses() {
@@ -707,12 +735,12 @@ public class ManageScreen implements Screen, Constants {
             boolean p = piVal + piExt >= ct.getMinPiety();
             boolean v = viVal + viExt >= ct.getMinVitality();
             boolean a = agVal + agExt >= ct.getMinAgility();
-            boolean l = stVal + stExt >= ct.getMinLuck();
+            boolean l = luVal + luExt >= ct.getMinLuck();
             if (s && i && p && v && a && l) {
                 items.add(ct);
             }
-            classTypeSelection.setItems(items);
         }
+        classTypeSelection.setItems(items);
     }
 
     private void updateChangeClassOptions() {
@@ -767,6 +795,112 @@ public class ManageScreen implements Screen, Constants {
         SaveGame.setSpellPoints(c);
     }
 
+    private int clampPortraitIndex(int idx) {
+        if (Andius.faceTiles == null || Andius.faceTiles.length == 0) {
+            return 0;
+        }
+        if (idx < 0) {
+            return 0;
+        }
+        if (idx >= Andius.faceTiles.length) {
+            return Andius.faceTiles.length - 1;
+        }
+        return idx;
+    }
+
+    private void sanitizeCharacter(CharacterRecord c) {
+        if (c == null) {
+            return;
+        }
+        if (c.name == null) {
+            c.name = EMPTY;
+        }
+        c.portaitIndex = clampPortraitIndex(c.portaitIndex);
+        if (c.knownSpells == null) {
+            c.knownSpells = new java.util.ArrayList<>();
+        }
+        if (c.inventory == null) {
+            c.inventory = new java.util.ArrayList<>();
+        }
+        if (c.magePoints == null || c.magePoints.length != 7) {
+            c.magePoints = new int[7];
+        }
+        if (c.clericPoints == null || c.clericPoints.length != 7) {
+            c.clericPoints = new int[7];
+        }
+    }
+
+    private CharacterRecord copyCharacterForSave(CharacterRecord src) {
+        CharacterRecord dst = new CharacterRecord();
+
+        dst.name = EMPTY.equals(src.name) ? null : src.name;
+        dst.portaitIndex = clampPortraitIndex(src.portaitIndex);
+        dst.str = src.str;
+        dst.intell = src.intell;
+        dst.piety = src.piety;
+        dst.vitality = src.vitality;
+        dst.agility = src.agility;
+        dst.luck = src.luck;
+        dst.race = src.race;
+        dst.classType = src.classType;
+        dst.hp = src.hp;
+        dst.maxhp = src.maxhp;
+        dst.exp = src.exp;
+        dst.gold = src.gold;
+        dst.level = src.level;
+
+        dst.armor = src.armor;
+        dst.weapon = src.weapon;
+        dst.helm = src.helm;
+        dst.shield = src.shield;
+        dst.glove = src.glove;
+        dst.item1 = src.item1;
+        dst.item2 = src.item2;
+
+        dst.knownSpells.clear();
+        if (src.knownSpells != null) {
+            dst.knownSpells.addAll(src.knownSpells);
+        }
+
+        if (src.magePoints != null) {
+            System.arraycopy(src.magePoints, 0, dst.magePoints, 0, Math.min(src.magePoints.length, dst.magePoints.length));
+        }
+        if (src.clericPoints != null) {
+            System.arraycopy(src.clericPoints, 0, dst.clericPoints, 0, Math.min(src.clericPoints.length, dst.clericPoints.length));
+        }
+
+        dst.inventory.clear();
+        if (src.inventory != null) {
+            dst.inventory.addAll(src.inventory);
+        }
+
+        dst.summoningCircles.clear();
+        if (src.summoningCircles != null) {
+            dst.summoningCircles.addAll(src.summoningCircles);
+        }
+
+        dst.summonedMonsters.clear();
+        if (src.summonedMonsters != null) {
+            dst.summonedMonsters.addAll(src.summonedMonsters);
+        }
+
+        dst.submorsels = src.submorsels;
+        dst.acmodifier1 = src.acmodifier1;
+        dst.acmodifier2 = src.acmodifier2;
+
+        return dst;
+    }
+
+    private RosterIndex[] buildRosterForSave() {
+        RosterIndex[] out = new RosterIndex[registry.getItems().size];
+        for (int i = 0; i < registry.getItems().size; i++) {
+            RosterIndex src = registry.getItems().get(i);
+            RosterIndex dst = new RosterIndex(copyCharacterForSave(src.character), src.index);
+            out[i] = dst;
+        }
+        return out;
+    }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -809,9 +943,10 @@ public class ManageScreen implements Screen, Constants {
 
         font.setColor(Color.WHITE);
 
-        batch.draw(Andius.faceTiles[pidx], 785, Andius.SCREEN_HEIGHT - 83 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(pidx)], 785, Andius.SCREEN_HEIGHT - 83 - 48);
 
         CharacterRecord sel = this.registry.getSelected().character;
+        sanitizeCharacter(sel);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 90;
@@ -830,9 +965,10 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
         font.draw(batch, "INV: " + sel.inventory.size(), x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 383, Andius.SCREEN_HEIGHT - 673 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 383, Andius.SCREEN_HEIGHT - 673 - 48);
 
         sel = this.partyFormation.getSelected().character;
+        sanitizeCharacter(sel);
 
         viewY = Andius.SCREEN_HEIGHT - 590;
         x = 504;
@@ -860,12 +996,15 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[sel.portaitIndex], 792, Andius.SCREEN_HEIGHT - 673 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 792, Andius.SCREEN_HEIGHT - 673 - 48);
 
         int[] ms = sel.magePoints;
         int[] cs = sel.clericPoints;
-        String d = String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
+        String d = String.format(
+                "M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
+                ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6],
+                cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]
+        );
         font.draw(batch, d, 504, 60);
 
         batch.end();
@@ -982,5 +1121,4 @@ public class ManageScreen implements Screen, Constants {
     @Override
     public void dispose() {
     }
-
 }

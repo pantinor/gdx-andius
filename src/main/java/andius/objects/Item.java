@@ -62,7 +62,7 @@ public class Item implements Comparable<Item> {
         i.armourClass = this.armourClass;
         i.extraSwings = this.extraSwings;
         i.name = this.name;
-        i.stock = this.stock;
+        i.stock = 0;
         i.cursed = this.cursed;
         i.usable = this.usable;
         i.spell = this.spell;
@@ -77,6 +77,7 @@ public class Item implements Comparable<Item> {
         i.wepvsty2Flags = this.wepvsty2Flags;
         i.wepvsty3Flags = this.wepvsty3Flags;
         i.wepvstyFlags = this.wepvstyFlags;
+        i.scenarioID = this.scenarioID;
         return i;
     }
 

@@ -532,7 +532,7 @@ public class WizardryData {
             for (int i = 0; i < EX_DNG_7.length; i++) {
                 EX7_LEVELS[i] = new MazeLevelV1(DatatypeConverter.parseHexBinary(EX_DNG_7[i]), i + 1, 16, PMO_MONSTERS, PMO_MESSAGES);
             }
-            
+
             ULTIMA_MONSTERS = gson.fromJson(j26, new TypeToken<List<Monster>>() {
             }.getType());
 
@@ -590,9 +590,6 @@ public class WizardryData {
             for (MazeLevel lvl : levels) {
                 lvl.scenario = this;
             }
-            for (Item i : items) {
-                i.scenarioID = this.ordinal();
-            }
             this.levelDescriptions = levelDescriptions;
         }
 
@@ -610,9 +607,6 @@ public class WizardryData {
             this.characters = WER4_CHARS;
             for (MazeLevel lvl : levels) {
                 lvl.scenario = this;
-            }
-            for (Item i : items) {
-                i.scenarioID = this.ordinal();
             }
             this.levelDescriptions = levelDescriptions;
         }
@@ -2330,6 +2324,28 @@ public class WizardryData {
             }
         }
 
+    }
+
+    public static void initItemScenarioIds() {
+
+        for (Item i : PMO_ITEMS) {
+            i.scenarioID = Scenario.PMO.ordinal();
+        }
+        for (Item i : KOD_ITEMS) {
+            i.scenarioID = Scenario.KOD.ordinal();
+        }
+        for (Item i : LEG_ITEMS) {
+            i.scenarioID = Scenario.LEG.ordinal();
+        }
+        for (Item i : BS_ITEMS) {
+            i.scenarioID = Scenario.BS.ordinal();
+        }
+        for (Item i : WER_ITEMS) {
+            i.scenarioID = Scenario.WER.ordinal();
+        }
+        for (Item i : DQ_ITEMS) {
+            i.scenarioID = Scenario.DQ.ordinal();
+        }
     }
 
 }

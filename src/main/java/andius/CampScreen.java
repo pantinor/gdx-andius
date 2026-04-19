@@ -4,6 +4,7 @@ import static andius.Andius.SCREEN_HEIGHT;
 import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import andius.WizardryData.MazeCell;
+import andius.WizardryData.Scenario;
 import andius.dialogs.TeleportDialog;
 import andius.objects.Icons;
 import andius.objects.Item;
@@ -217,6 +218,7 @@ public class CampScreen implements Screen, Constants {
             }
         });
         this.drop.setBounds(x, 200, 80, 40);
+
         x += 84;
         this.use = new TextButton("USE", Andius.skin, "default-16-green");
         this.use.addListener(new ChangeListener() {
@@ -235,11 +237,12 @@ public class CampScreen implements Screen, Constants {
                         used = true;
                     }
 
-                    if (selectedItem.item.id == 4 && selectedItem.item.scenarioID == 4) {//HHG
+                    //holy hand grenade
+                    if (selectedItem.item.id == 4 && selectedItem.item.scenarioID == Scenario.WER.ordinal()) {
                         Vector3 v = new Vector3();
                         map.getScreen().getCurrentMapCoords(v);
                         if (v.x == 15 && v.y == 15 && v.z == 1) {
-                            if (context.partyHasItem(11, 4) != null) {//cleansing oil
+                            if (context.partyHasItem(11, Scenario.WER.ordinal()) != null) {//cleansing oil
                                 WizardryDungeonScreen sc = (WizardryDungeonScreen) map.getScreen();
                                 MazeCell cell1 = sc.cell(15, 15, 1);
                                 MazeCell cell2 = sc.cell(16, 15, 1);
@@ -283,6 +286,7 @@ public class CampScreen implements Screen, Constants {
             }
         });
         this.use.setBounds(x, 200, 80, 40);
+
         x = 350;
         this.exit = new TextButton("EXIT", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -292,6 +296,7 @@ public class CampScreen implements Screen, Constants {
             }
         });
         this.exit.setBounds(x, 150, 80, 40);
+
         x += 84;
         this.trade = new TextButton("TRADE", Andius.skin, "default-16-green");
         this.trade.addListener(new ChangeListener() {
@@ -324,14 +329,11 @@ public class CampScreen implements Screen, Constants {
         stage.addActor(castTargetSlider);
 
         this.background = fm.build();
-
     }
 
     @Override
-
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
@@ -368,7 +370,6 @@ public class CampScreen implements Screen, Constants {
 
         stage.act();
         stage.draw();
-
     }
 
     private class PlayerIndex extends Group {
@@ -426,6 +427,22 @@ public class CampScreen implements Screen, Constants {
 
             setInventoryTable();
 
+            invTable.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    itemFocusIndicator.remove();
+                    if (event.getTarget() instanceof ItemListing) {
+                        selectedItem = (ItemListing) event.getTarget();
+                        selectedItem.addActor(itemFocusIndicator);
+                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
+                    } else if (event.getTarget().getParent() instanceof ItemListing) {
+                        selectedItem = (ItemListing) event.getTarget().getParent();
+                        selectedItem.addActor(itemFocusIndicator);
+                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
+                    }
+                }
+            });
+
             spellTable.align(Align.top);
 
             for (Spells spell : p.knownSpells) {
@@ -449,34 +466,16 @@ public class CampScreen implements Screen, Constants {
                     }
                 }
             });
-
         }
 
         private void setInventoryTable() {
-
             invTable.align(Align.top);
-            invTable.clear();
+            invTable.clearChildren(); 
 
             for (Item it : p.inventory) {
                 invTable.add(new ItemListing(it, p));
                 invTable.row();
             }
-
-            invTable.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    itemFocusIndicator.remove();
-                    if (event.getTarget() instanceof ItemListing) {
-                        selectedItem = (ItemListing) event.getTarget();
-                        selectedItem.addActor(itemFocusIndicator);
-                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
-                    } else if (event.getTarget().getParent() instanceof ItemListing) {
-                        selectedItem = (ItemListing) event.getTarget().getParent();
-                        selectedItem.addActor(itemFocusIndicator);
-                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
-                    }
-                }
-            });
         }
 
         private class PlayerLabel extends Label {
@@ -582,7 +581,6 @@ public class CampScreen implements Screen, Constants {
 
             this.setSize(WD, HT);
         }
-
     }
 
     private class SpellListing extends Group {
@@ -624,7 +622,6 @@ public class CampScreen implements Screen, Constants {
 
             this.setSize(WD, HT);
         }
-
     }
 
     private class InventoryImage extends Image {
@@ -662,7 +659,7 @@ public class CampScreen implements Screen, Constants {
                 p.glove = equip;
             }
             if (slot == 6) {
-                p.item2 = equip;
+                p.item1 = equip;
             }
             if (slot == 7) {
                 p.item2 = equip;
@@ -678,10 +675,9 @@ public class CampScreen implements Screen, Constants {
         }
 
         public void unequip(CharacterRecord p) {
-            this.setDrawable(new TextureRegionDrawable(Icons.get(Icons.QUESTION_MARK)));
+            this.setDrawable(new TextureRegionDrawable(Icons.get(Icons.EMPTY_MARK)));
 
             Item current = this.item;
-
             this.item = null;
 
             if (slot == 1) {
@@ -700,7 +696,7 @@ public class CampScreen implements Screen, Constants {
                 p.glove = null;
             }
             if (slot == 6) {
-                p.item2 = null;
+                p.item1 = null;
             }
             if (slot == 7) {
                 p.item2 = null;
@@ -710,9 +706,7 @@ public class CampScreen implements Screen, Constants {
                 p.inventory.add(current);
                 Sounds.play(Sound.TRIGGER);
             }
-
         }
-
     }
 
     private class TradeSliderBox extends Group {
@@ -803,7 +797,6 @@ public class CampScreen implements Screen, Constants {
                 return character.name.toUpperCase();
             }
         }
-
     }
 
     private class CastTargetSliderBox extends Group {
@@ -875,7 +868,6 @@ public class CampScreen implements Screen, Constants {
                 return character.name.toUpperCase();
             }
         }
-
     }
 
     @Override
@@ -897,5 +889,4 @@ public class CampScreen implements Screen, Constants {
     @Override
     public void dispose() {
     }
-
 }

@@ -64,9 +64,15 @@ public class SaveGame implements Constants {
 
     public void write() throws Exception {
 
+        if (players == null) {
+            players = new CharacterRecord[0];
+        }
+        
         for (CharacterRecord player : players) {
-            player.acmodifier1 = 0;
-            player.acmodifier2 = 0;
+            if (player != null) {
+                player.acmodifier1 = 0;
+                player.acmodifier2 = 0;
+            }
         }
 
         for (Map map : Map.values()) {
@@ -651,7 +657,7 @@ public class SaveGame implements Constants {
                 p.weapon = Scenario.PMO.item("STAFF");
                 break;
         }
-        
+
         p.inventory.add(Scenario.PMO.item("ROBES"));
 
         return p;
