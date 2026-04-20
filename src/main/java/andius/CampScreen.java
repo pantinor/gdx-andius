@@ -86,7 +86,7 @@ public class CampScreen implements Screen, Constants {
     private static final int WD = 246;
     private static final int HT = 50;
     private static final int DIM = 44;
-    private static final int PDIM = 60;
+    private static final int PDIM = 64;
 
     public CampScreen(Context context, Map map) {
         this.context = context;
@@ -96,7 +96,7 @@ public class CampScreen implements Screen, Constants {
         //this.stage.setDebugAll(true);
 
         playerFocusIndicator = new Image(Utils.fillRectangle(10, 10, Color.GREEN, .25f));
-        playerFocusIndicator.setWidth(600);
+        playerFocusIndicator.setWidth(625);
         playerFocusIndicator.setHeight(PDIM);
 
         itemFocusIndicator = new Image(Utils.fillRectangle(10, 10, Color.GREEN, .25f));
@@ -312,9 +312,9 @@ public class CampScreen implements Screen, Constants {
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        fm.setBounds(playerPane, 20, 375, 600, 376);
-        fm.setBounds(invPane, 20, 10, 246, 348);
-        fm.setBounds(spellPane, 640, 151, 246, 600);
+        fm.setBounds(playerPane, 15, 372, 625, PDIM * 6);
+        fm.setBounds(invPane, 15, 10, 246, 348);
+        fm.setBounds(spellPane, 665, 155, 246, 600);
 
         stage.addActor(playerPane);
         stage.addActor(invPane);
@@ -411,19 +411,19 @@ public class CampScreen implements Screen, Constants {
             addActor(this.item1Icon);
             addActor(this.item2Icon);
 
-            setBounds(0, 0, 0, PDIM + 2);
+            setBounds(0, 0, 0, PDIM);
 
             float x = 0;
-            float dim = 48;
-            this.avatar.setPosition(x, 5);
-            this.label.setBounds(x += dim + 3, 0, 210, PDIM);
-            this.weaponIcon.setPosition(x += 210, 5);
-            this.armorIcon.setPosition(x += dim, 5);
-            this.helmIcon.setPosition(x += dim, 5);
-            this.shieldIcon.setPosition(x += dim, 5);
-            this.glovesIcon.setPosition(x += dim, 5);
-            this.item1Icon.setPosition(x += dim, 5);
-            this.item2Icon.setPosition(x += dim, 5);
+            float xdim = 48;
+            this.avatar.setPosition(x, 0);
+            this.label.setBounds(x += PDIM, 0, 210, PDIM);
+            this.weaponIcon.setPosition(x += 210, 8);
+            this.armorIcon.setPosition(x += xdim, 8);
+            this.helmIcon.setPosition(x += xdim, 8);
+            this.shieldIcon.setPosition(x += xdim, 8);
+            this.glovesIcon.setPosition(x += xdim, 8);
+            this.item1Icon.setPosition(x += xdim, 8);
+            this.item2Icon.setPosition(x += xdim, 8);
 
             setInventoryTable();
 

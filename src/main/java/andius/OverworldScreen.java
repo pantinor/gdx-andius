@@ -2,8 +2,6 @@ package andius;
 
 import andius.objects.Direction;
 import static andius.Andius.CTX;
-import static andius.Andius.SCREEN_HEIGHT;
-import static andius.Andius.SCREEN_WIDTH;
 import andius.WizardryData.Scenario;
 import andius.objects.ClassType;
 import andius.objects.Item;
@@ -16,7 +14,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -25,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import utils.FrameMaker;
 import utils.PartyDeathException;
 import utils.SpreadFOV;
 import utils.WrappingTileMapRenderer;
@@ -39,19 +35,11 @@ public class OverworldScreen extends BaseScreen {
     private final WrappingTileMapRenderer renderer;
     private final Batch batch;
     private final Viewport mapViewPort;
-    private final Texture background;
     private final int width, height;
 
     public OverworldScreen(Map map) {
 
         this.map = map;
-
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-        Texture frame = new Texture(Gdx.files.classpath("assets/data/world_frame.png"));
-        frame.getTextureData().prepare();
-        fm.drawPixmap(frame.getTextureData().consumePixmap(), 0, 0);
-        fm.emptyFrame(SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
-        this.background = fm.build();
 
         this.width = this.map.getBaseMap().getWidth();
         this.height = this.map.getBaseMap().getHeight();
@@ -135,10 +123,8 @@ public class OverworldScreen extends BaseScreen {
         this.renderer.render();
 
         batch.begin();
-
-        batch.draw(this.background, 0, 0);
+        batch.draw(Andius.backGround, 0, 0);
         batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), SCALED_DIM * 11, SCALED_DIM * 11, SCALED_DIM, SCALED_DIM);
-
         Andius.HUD.render(batch, Andius.CTX);
 
         Vector3 v = new Vector3();

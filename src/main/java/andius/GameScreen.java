@@ -5,8 +5,6 @@ import andius.objects.Sounds;
 import andius.objects.Direction;
 import andius.dialogs.ConversationDialog;
 import static andius.Andius.CTX;
-import static andius.Andius.SCREEN_HEIGHT;
-import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import static andius.Constants.TILE_DIM;
 import static andius.WizardryData.BS_ITEMS;
@@ -27,7 +25,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
@@ -42,7 +39,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
-import utils.FrameMaker;
 import utils.PartyDeathException;
 import utils.SpreadFOV;
 import utils.TmxMapRenderer;
@@ -54,7 +50,6 @@ public class GameScreen extends BaseScreen {
     private static final int SCALED_DIM = TILE_DIM * 2;
     private static final int VIEWPORT_DIM = SCALED_DIM * 17;
 
-    private final Texture background;
     private final Map map;
     private final TmxMapRenderer renderer;
     private final Batch batch;
@@ -66,13 +61,6 @@ public class GameScreen extends BaseScreen {
     public GameScreen(Map map) {
 
         this.map = map;
-
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-        Texture frame = new Texture(Gdx.files.classpath("assets/data/world_frame.png"));
-        frame.getTextureData().prepare();
-        fm.drawPixmap(frame.getTextureData().consumePixmap(), 0, 0);
-        fm.emptyFrame(SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
-        this.background = fm.build();
 
         batch = new SpriteBatch();
 
@@ -145,8 +133,7 @@ public class GameScreen extends BaseScreen {
         renderer.render();
 
         batch.begin();
-
-        batch.draw(this.background, 0, 0);
+        batch.draw(Andius.backGround, 0, 0);
         batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), SCALED_DIM * 11, SCALED_DIM * 11, SCALED_DIM, SCALED_DIM);
 
         Andius.HUD.render(batch, Andius.CTX);
@@ -155,7 +142,7 @@ public class GameScreen extends BaseScreen {
         getCurrentMapCoords(v);
         Andius.font12.draw(batch, String.format("%s, %s\n", (int) v.x, (int) v.y), 10, Andius.SCREEN_HEIGHT - 10);
         Andius.font14.draw(batch, this.map.getLabel(), 300, Andius.SCREEN_HEIGHT - 72);
-        
+
         batch.end();
 
         stage.act();

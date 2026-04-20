@@ -59,7 +59,7 @@ public class Andius extends Game {
     public static Conversations CONVERSATIONS;
 
     public static TextureRegion[] u1Tiles = new TextureRegion[9 * 6];
-    public static TextureRegion[] faceTiles = new TextureRegion[6 * 6];
+    public static TextureRegion[] faceTiles = new TextureRegion[16 * 13];
 
     public static void main(String[] args) {
 
@@ -162,10 +162,10 @@ public class Andius extends Game {
                 }
             }
 
-            trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/uf_portraits_example.png")), 48, 48);
-            for (int row = 0; row < 6; row++) {
-                for (int col = 0; col < 6; col++) {
-                    faceTiles[row * 6 + col] = trs[row][col];
+            trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/u6-portraits.png")), 56, 64);
+            for (int row = 0; row < 13; row++) {
+                for (int col = 0; col < 16; col++) {
+                    faceTiles[row * 16 + col] = trs[row][col];
                 }
             }
 

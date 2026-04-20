@@ -14,6 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -40,6 +41,12 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import utils.FrameMaker;
 import utils.Utils;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class ManageScreen implements Screen, Constants {
 
@@ -58,8 +65,9 @@ public class ManageScreen implements Screen, Constants {
     TextButton add;
     TextButton remove;
 
-    ImageButton iconLeft, partyIconLeft;
-    ImageButton iconRight, partyIconRight;
+    private Texture transparentTexture;
+    private ImageButton newPortraitButton;
+    private ImageButton partyPortraitButton;
 
     TextButton save;
     TextButton cancel;
@@ -85,9 +93,12 @@ public class ManageScreen implements Screen, Constants {
     int stExt, inExt, piExt, viExt, agExt, luExt;
 
     ExtraPoints extraPoints = new ExtraPoints();
-    int pidx = 0;
+    int pidx = 1;
 
     private static final String EMPTY = "(empty)";
+
+    private static final int PORTRAIT_W = 56;
+    private static final int PORTRAIT_H = 64;
 
     public ManageScreen(Screen rs, Skin skin, SaveGame saveGame) {
 
@@ -170,11 +181,6 @@ public class ManageScreen implements Screen, Constants {
         reset = new TextButton("RESET", skin, "default-16");
         save = new TextButton("SAVE", skin, "default-16");
 
-        iconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
-        iconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
-        partyIconLeft = new ImageButton(imgBtnSkin, "sm-arr-left");
-        partyIconRight = new ImageButton(imgBtnSkin, "sm-arr-right");
-
         apply.setBounds(245, Andius.SCREEN_HEIGHT - 170 - 40, 215, 40);
         clear.setBounds(245, Andius.SCREEN_HEIGHT - 220 - 40, 215, 40);
         add.setBounds(245, Andius.SCREEN_HEIGHT - 420 - 40, 215, 40);
@@ -184,16 +190,6 @@ public class ManageScreen implements Screen, Constants {
         cancel.setBounds(370, Andius.SCREEN_HEIGHT - 120, 80, 40);
 
         reset.setBounds(774, Andius.SCREEN_HEIGHT - 302 - 40, 80, 40);
-
-        iconLeft.setX(764);
-        iconLeft.setY(Andius.SCREEN_HEIGHT - 125);
-        iconRight.setX(764 + 80);
-        iconRight.setY(Andius.SCREEN_HEIGHT - 125);
-
-        partyIconLeft.setX(771);
-        partyIconLeft.setY(Andius.SCREEN_HEIGHT - 710);
-        partyIconRight.setX(771 + 80);
-        partyIconRight.setY(Andius.SCREEN_HEIGHT - 710);
 
         apply.addListener(new ChangeListener() {
             @Override
@@ -378,46 +374,6 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        iconLeft.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                pidx--;
-                if (pidx < 0) {
-                    pidx = 0;
-                }
-            }
-        });
-
-        iconRight.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                pidx++;
-                if (pidx > Andius.faceTiles.length - 1) {
-                    pidx = Andius.faceTiles.length - 1;
-                }
-            }
-        });
-
-        partyIconLeft.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                partyFormation.getSelected().character.portaitIndex--;
-                if (partyFormation.getSelected().character.portaitIndex < 0) {
-                    partyFormation.getSelected().character.portaitIndex = 0;
-                }
-            }
-        });
-
-        partyIconRight.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                partyFormation.getSelected().character.portaitIndex++;
-                if (partyFormation.getSelected().character.portaitIndex > Andius.faceTiles.length - 1) {
-                    partyFormation.getSelected().character.portaitIndex = Andius.faceTiles.length - 1;
-                }
-            }
-        });
-
         rosText = new Label("ROSTER", skin, "default-16");
         rosText.setX(64);
         rosText.setY(Andius.SCREEN_HEIGHT - 54);
@@ -425,7 +381,7 @@ public class ManageScreen implements Screen, Constants {
         ScrollPane sp2 = new ScrollPane(registry, skin);
         fm.setBoundsFancy(sp2, 64, Andius.SCREEN_HEIGHT - 64 - 464, 160, 464, new Color(0x326c8eff));
         fm.setBoundsFancy(null, 64, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x326c8eff));
-        fm.setBoundsFancy(null, 383, Andius.SCREEN_HEIGHT - 673 - 48, 48, 48, new Color(0x2e2e2eff));
+        fm.setBoundsFancy(null, 372, Andius.SCREEN_HEIGHT - 720, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
 
         activePartyText = new Label("ACTIVE PARTY - SAVED GAME FILE", skin, "default-16");
         activePartyText.setX(480);
@@ -434,7 +390,7 @@ public class ManageScreen implements Screen, Constants {
         ScrollPane sp1 = new ScrollPane(partyFormation, skin);
         fm.setBoundsFancy(sp1, 480, 215, 384, 143, new Color(0x0f6905ff));
         fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x0f6905ff));
-        fm.setBoundsFancy(null, 792, Andius.SCREEN_HEIGHT - 673 - 48, 48, 48, new Color(0x2e2e2eff));
+        fm.setBoundsFancy(null, 788, Andius.SCREEN_HEIGHT - 720, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
 
         nameField = new UppercaseTextField("", skin, "default-16");
         nameField.setMaxLength(16);
@@ -460,7 +416,7 @@ public class ManageScreen implements Screen, Constants {
         ScrollPane classTypeScrollPane = new ScrollPane(classTypeSelection, skin);
 
         fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 64 - 288, 384, 288, new Color(0x7a5d98ff));
-        fm.setBoundsFancy(null, 785, Andius.SCREEN_HEIGHT - 83 - 48, 48, 48, new Color(0x2e2e2eff));
+        fm.setBoundsFancy(null, 781, Andius.SCREEN_HEIGHT - 150, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
 
         stVal = Race.HUMAN.getInitialStrength();
         inVal = Race.HUMAN.getInitialIntell();
@@ -682,6 +638,41 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
+        Pixmap pm = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pm.setColor(1, 1, 1, 0f);
+        pm.fill();
+        transparentTexture = new Texture(pm);
+        pm.dispose();
+
+        ImageButton.ImageButtonStyle transparentBtnStyle = new ImageButton.ImageButtonStyle();
+        transparentBtnStyle.imageUp = new TextureRegionDrawable(new TextureRegion(transparentTexture));
+        transparentBtnStyle.imageDown = transparentBtnStyle.imageUp;
+        transparentBtnStyle.imageOver = transparentBtnStyle.imageUp;
+
+        newPortraitButton = new ImageButton(transparentBtnStyle);
+        newPortraitButton.setBounds(783, Andius.SCREEN_HEIGHT - 84 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
+        newPortraitButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                showPortraitPicker(true);
+            }
+        });
+
+        partyPortraitButton = new ImageButton(transparentBtnStyle);
+        partyPortraitButton.setBounds(790, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
+        partyPortraitButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                CharacterRecord sel = partyFormation.getSelected().character;
+                sanitizeCharacter(sel);
+                if (sel == null || EMPTY.equals(sel.name)) {
+                    Sounds.play(Sound.NEGATIVE_EFFECT);
+                    return;
+                }
+                showPortraitPicker(false);
+            }
+        });
+
         updateChangeClassOptions();
 
         stage.addActor(nameField);
@@ -710,11 +701,6 @@ public class ManageScreen implements Screen, Constants {
         stage.addActor(cancel);
         stage.addActor(reset);
 
-        stage.addActor(iconLeft);
-        stage.addActor(iconRight);
-        stage.addActor(partyIconLeft);
-        stage.addActor(partyIconRight);
-
         stage.addActor(sp1);
         stage.addActor(sp2);
         stage.addActor(rosText);
@@ -723,6 +709,9 @@ public class ManageScreen implements Screen, Constants {
 
         stage.addActor(changeClassBox);
         stage.addActor(changeClassBtn);
+
+        stage.addActor(newPortraitButton);
+        stage.addActor(partyPortraitButton);
 
         bkgnd = fm.build();
     }
@@ -943,7 +932,7 @@ public class ManageScreen implements Screen, Constants {
 
         font.setColor(Color.WHITE);
 
-        batch.draw(Andius.faceTiles[clampPortraitIndex(pidx)], 785, Andius.SCREEN_HEIGHT - 83 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(pidx)], 783, Andius.SCREEN_HEIGHT - 84 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
 
         CharacterRecord sel = this.registry.getSelected().character;
         sanitizeCharacter(sel);
@@ -965,7 +954,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
         font.draw(batch, "INV: " + sel.inventory.size(), x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 383, Andius.SCREEN_HEIGHT - 673 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 374, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
 
         sel = this.partyFormation.getSelected().character;
         sanitizeCharacter(sel);
@@ -996,7 +985,7 @@ public class ManageScreen implements Screen, Constants {
         font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
         font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
 
-        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 792, Andius.SCREEN_HEIGHT - 673 - 48);
+        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 790, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
 
         int[] ms = sel.magePoints;
         int[] cs = sel.clericPoints;
@@ -1120,5 +1109,73 @@ public class ManageScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+    }
+
+    private void showPortraitPicker(boolean forNewCharacter) {
+        Dialog dialog = new Dialog("SELECT PORTRAIT", Andius.skin, "default") {
+            @Override
+            protected void result(Object object) {
+                hide();
+            }
+        };
+
+        Table grid = new Table();
+        grid.pad(10);
+
+        int cols = 6;
+        int col = 0;
+
+        for (int i = 0; i < Andius.faceTiles.length; i++) {
+            int portraitIndex = i;
+            TextureRegion region = Andius.faceTiles[i];
+            if (region == null) {
+                continue;
+            }
+
+            ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
+            style.imageUp = new TextureRegionDrawable(region);
+            style.imageDown = style.imageUp;
+            style.imageOver = style.imageUp;
+
+            ImageButton btn = new ImageButton(style);
+            btn.getImageCell().size(PORTRAIT_W, PORTRAIT_H);
+
+            btn.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (forNewCharacter) {
+                        pidx = portraitIndex;
+                    } else {
+                        CharacterRecord sel = partyFormation.getSelected().character;
+                        sanitizeCharacter(sel);
+                        sel.portaitIndex = portraitIndex;
+                    }
+                    Sounds.play(Sound.TRIGGER);
+                    dialog.hide();
+                }
+            });
+
+            grid.add(btn).size(PORTRAIT_W, PORTRAIT_H).pad(6);
+
+            col++;
+            if (col >= cols) {
+                grid.row();
+                col = 0;
+            }
+        }
+
+        ScrollPane scroll = new ScrollPane(grid, Andius.skin);
+        scroll.setFadeScrollBars(false);
+        scroll.setScrollingDisabled(true, false);
+
+        float contentWidth = cols * PORTRAIT_W + (cols - 1) * 12 + 20;
+        float dialogWidth = contentWidth + 40;
+        float dialogHeight = 560;
+
+        dialog.getContentTable().add(scroll).width(contentWidth).height(460);
+        dialog.show(stage);
+
+        dialog.setSize(dialogWidth, dialogHeight);
+        dialog.setPosition((Andius.SCREEN_WIDTH - dialog.getWidth()) / 2f, (Andius.SCREEN_HEIGHT - dialog.getHeight()) / 2f);
     }
 }

@@ -17,16 +17,16 @@ import java.util.List;
 public class Hud {
 
     private final LogScrollPane logs;
-    static final int LOG_AREA_WIDTH = 270;
-    static final int LOG_AREA_HEIGHT = 327;
+    static final int LOG_AREA_WIDTH = 308;
+    static final int LOG_AREA_HEIGHT = 292;
     private final List<Integer> magicPoints = new ArrayList<>();
 
     public Hud() {
         Table table = new Table(Andius.skin);
         table.setBackground("dimmer");
         logs = new LogScrollPane(Andius.skin, table, LOG_AREA_WIDTH, "default-12");
-        float y = Andius.SCREEN_HEIGHT - 415 - LOG_AREA_HEIGHT;
-        logs.setBounds(727, y, LOG_AREA_WIDTH, LOG_AREA_HEIGHT);
+        float y = 10;
+        logs.setBounds(702, y, LOG_AREA_WIDTH, LOG_AREA_HEIGHT);
     }
 
     public void addActor(Stage stage) {
@@ -45,8 +45,8 @@ public class Hud {
 
     public void render(Batch batch, Context ctxt) {
 
-        int y = Andius.SCREEN_HEIGHT - 56;
-        int py = Andius.SCREEN_HEIGHT - 103;
+        int y = Andius.SCREEN_HEIGHT - 16 - 2;
+        int py = Andius.SCREEN_HEIGHT - 16 - 64;
 
         for (CharacterRecord rec : ctxt.saveGame.players) {
 
@@ -56,16 +56,16 @@ public class Hud {
                 Andius.font12.setColor(Color.SALMON);
             }
 
-            batch.draw(Andius.faceTiles[rec.portaitIndex], 727, py);
+            batch.draw(Andius.faceTiles[rec.portaitIndex], 702, py);
 
             String d = String.format("%s  LVL %d  %s  %s", rec.name.toUpperCase(), rec.level, rec.race.toString(), rec.classType.toString());
-            Andius.font12.draw(batch, d, 790, y);
+            Andius.font12.draw(batch, d, 772, y);
 
             d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status.toString());
-            Andius.font12.draw(batch, d, 790, y - 12);
+            Andius.font12.draw(batch, d, 772, y - 16);
 
             d = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);
-            Andius.font12.draw(batch, d, 790, y - 24);
+            Andius.font12.draw(batch, d, 772, y - 32);
 
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
@@ -78,12 +78,12 @@ public class Hud {
                         ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
                 Color tmp = Andius.font12.getColor();
                 Andius.font12.setColor(Color.SKY);
-                Andius.font12.draw(batch, d, 790, y - 36);
+                Andius.font12.draw(batch, d, 772, y - 48);
                 Andius.font12.setColor(tmp);
             }
 
-            y -= 60;
-            py -= 60;
+            y -= 75;
+            py -= 75;
 
         }
 
