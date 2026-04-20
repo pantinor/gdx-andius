@@ -1,7 +1,6 @@
 package utils;
 
 import andius.Constants.Map;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import static com.badlogic.gdx.graphics.g2d.Batch.C1;
 import static com.badlogic.gdx.graphics.g2d.Batch.C2;

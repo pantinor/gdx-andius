@@ -6,9 +6,7 @@ import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
 import andius.objects.MutableMonster;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -254,8 +252,6 @@ public interface Constants {
             for (Monster m : monsters) {
                 monsterMap.put(m.name, m);
             }
-
-            TextureAtlas iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wizIcons.atlas"));
 
             Iterator<MapObject> iter = peopleLayer.getObjects().iterator();
             while (iter.hasNext()) {

@@ -13,7 +13,6 @@ import static andius.Constants.Status.PARALYZED;
 import static andius.Constants.Status.POISONED;
 import static andius.Constants.Status.SILENCED;
 import static andius.Constants.Status.STONED;
-import andius.objects.Aura;
 import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.SaveGame;
@@ -25,7 +24,6 @@ import utils.Utils;
 
 public class Context {
 
-    public final Aura activeSpellEffect = new Aura();
     public SaveGame saveGame;
 
     public void setSaveGame(SaveGame sg) {
