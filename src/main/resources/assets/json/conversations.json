@@ -3,8 +3,10 @@
         "BRITAIN": [
             {
                 "name": "Iolo",
-                "description": "A bard.",
+                "description": "Charming bard",
                 "story": [
+                    "I play my lute and receive the good wishes of the people.",
+                    "If you treat someone else well then they will have reason to do the same.",
                     "The Castle had always been a hard place, but it wasn’t always mad.",
                     "They still call him Trebor, the Overlord - because even before the panic took him, he was power-crazed enough to make the title sound like a warning. And then, several years ago, Trebor acquired what every legend insists you should never try to own: a fabled amulet of awesome powers, an artifact with so much myth wrapped around it that merely holding it felt like holding tomorrow hostage.",
                     "He sat in his throne room and gloated - over the empire this amulet would bring him - when something seized him.",
@@ -15,8 +17,10 @@
             },
             {
                 "name": "Gweno",
-                "description": "A lady.",
+                "description": "a charming jester",
                 "story": [
+                    "Dance is good for the soul.",
+                    "To give to a beggar shows compassion.",
                     "There was only one wizard Trebor believed capable of that kind of theft.",
                     "Werdna. His arch nemesis. An evil wizard whose very name tastes like a curse when spoken under your breath.",
                     "Trebor barely had time to decide what to do next - because the answer arrived the next day in the language of breaking stone.",
@@ -32,8 +36,10 @@
             },
             {
                 "name": "Shapero",
-                "description": "An older warrior.",
+                "description": "A druid.",
                 "story": [
+                    "He knows the true nature of compassion.",
+                    "Seek out Julio and ask him of compassion!",
                     "The Castle Above the Maze",
                     "This is where your story truly begins - not in heroic sunlight, but in the Castle’s routines and institutions that exist because people keep coming back from the Maze in pieces.",
                     "Within Trebor’s domain are the places every expedition depends on:",
@@ -47,8 +53,10 @@
             },
             {
                 "name": "Sebastian",
-                "description": "An older warrior.",
+                "description": "An injured person.",
                 "story": [
+                    "Mondain's influence has not left the world!",
+                    "An artifact remains! I heard at Buccaneer's Den!",
                     "The Maze Below",
                     "The Maze is not framed as a romantic underworld. It is described like a workplace:",
                     "A place adventurers enter in search of monsters to kill, loot to borrow and clues that might lead them, eventually, to Werdna himself. As skill grows, parties push deeper - until the day they might stand face-to-face with their nemesis.",
@@ -57,8 +65,10 @@
             }, 
             {
                 "name": "Mentor",
-                "description": "An older warrior.",
+                "description": "A wise shepherd.",
                 "story": [
+                    "Pride was too great in Magincia!",
+                    "The city was destroyed by daemons for its pride!",
                     "The Chronicles of Hawkwind - as if someone tried to write courage into existence. It describes a six-person band on what they believe is the ninth level of the accursed maze, time and distance twisting, reality fleeting.",
                     "They move under magical light, find a secret door, and crash into a fight against hellhounds, demons, and deadly creeping coins.",
                     "They win - only to discover a hidden chute that masks the way to the tenth level, the final path to Werdna’s lair.",
@@ -69,12 +79,100 @@
                     "If you map the Maze, maul the monsters, steal the right goodies, and somehow reach the depths... you might recover the amulet.",
                     "And you might only get killed a few times doing it."
                 ]
+            },
+            {
+                "name": "a child",
+                "description": "a small child",
+                "story": [
+                    "The song goes  Ho eyo he hum!",
+                    "It means  Love to one and all!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A guard",
+                "story": [
+                    "Across the bridge our people dance and sing!",
+                    "Yep."
+                ]
+            },
+            {
+                "name": "Pepper",
+                "description": "A spicy woman.",
+                "story": [
+                    "Bards know many things.",
+                    "The rune of compassion lies at the end of a hall somewhere in this towne."
+                ]
+            },
+            {
+                "name": "Thevel",
+                "description": "A seasoned fighter.",
+                "story": [
+                    "A one-handed beggar knows their secrets!",
+                    "Magic orbs."
+                ]
+            },
+            {
+                "name": "Joe",
+                "description": "A drunken fighter",
+                "story": [
+                    "The yellow stone is in the dungeon Despise...",
+                    "Rum... hic..."
+                ]
+            },
+            {
+                "name": "Cricket",
+                "description": "A bard in green",
+                "story": [
+                    "Yes, shhh!",
+                    "The mantra for the shrine of compassion is 'MU'!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A cheerful guard.",
+                "story": [
+                    "We guards have a lot of compassion.",
+                    "We always say  Let all others' troubles be as thine own!"
+                ]
+            },
+            {
+                "name": "a child",
+                "description": "A small child",
+                "story": [
+                    "The solution to ones problems often lies in solving others!",
+                    "Never care so much for thyself that thou cannot care for others!"
+                ]
+            },
+            {
+                "name": "Shalimar",
+                "description": "A tired shepherd",
+                "story": [
+                    "It takes a good deal of compassion to deal with children!",
+                    "Compassion strengthens the soul as knowledge tempers the mind!"
+                ]
+            },
+            {
+                "name": "Julio",
+                "description": "A solemn bard.",
+                "story": [
+                    "All things have a true nature!",
+                    "Compassion derives itself from unending love!"
+                ]
+            },
+            {
+                "name": "Sprite",
+                "description": "A poor beggar.",
+                "story": [
+                    "I have not eaten in a week!",
+                    "Please! Help me!"
+                ]
             }
         ],
         "JHELOM": [
             {
                 "name": "Lord Robert",
-                "description": "A soft-spoken Bishop and story teller.",
+                "description": "A mysterious warrior.",
                 "story": [
                     "Llylgamyn was built to endure. For ages beyond easy counting, the City of Llylgamyn stood behind a miracle of craft and divinity: the Staff of Gnilda.",
                     "When the staff was set and properly invoked, it spread a barrier around the city - one that did not merely discourage attack, but refused it entirely, turning aside blade and spell alike as if the world itself had decided violence could not cross that threshold.",
@@ -93,8 +191,10 @@
             },
             {
                 "name": "Geoffrey",
-                "description": "A old warrior prince.",
+                "description": "A 6 foot 5, great warrior.",
                 "story": [
+                    "A great warrior is a valiant warrior!",
+                    "I desire to fight again in battle!",
                     "The quest is cruelly circular: To reclaim the Staff of Gnilda, you must first reclaim what once made Alavik worthy to wield it.",
                     "The Five Relics of the Knight: Deep in the maze, five pieces of the Knight’s equipment must be gathered - trophies not merely found, but won, for each is guarded by a living paradox: the item itself turned hostile, an animated threat waiting near the ends of the lower roads.",
                     "KOD’s Armor - accessible only by a precise leap of wizardry: the way is hinted, and the key moment demands the spell MALOR, three squares east, as if the dungeon itself insists you earn the shortcut.",
@@ -107,8 +207,10 @@
             },
             {
                 "name": "Lady Donna",
-                "description": "An elegant older lady.",
+                "description": "A 5 foot pregnant woman",
                 "story": [
+                    "It's no fun to be pregnant.",
+                    "I can't stand sheep!",
                     "The Sixth Level and the Sphinx",
                     "At the bottom, the dungeon stops pretending it is merely architecture and becomes a rite.",
                     "There is a statue of Gnilda-named not just as a goddess but as an earth power, present in stone and warning. Nearby waits a sphinx with a riddle that is less puzzle than identity-test. The maze speaks a final instruction like a knife-edge: one alone.",
@@ -124,13 +226,116 @@
                     "It is guarding a succession.",
                     "Because when you return, staff in hand, the city will not only be saved - it will need someone new to wear a legend."
                 ]
+            },
+            {
+                "name": "Bengrod",
+                "description": "A wounded fighter!",
+                "story": [
+                    "I fell in the dungeon 'Destard'.",
+                    "Therein use the stones found in the connecting dungeons!"
+                ]
+            },
+            {
+                "name": "Sir William",
+                "description": "A noble fighter.",
+                "story": []
+            },
+            {
+                "name": "Sir Hrothgar",
+                "description": "A mighty warrior!",
+                "story": [
+                    "The valiant soul fears not its own visage!",
+                    "The mantra need be known, ask Aesop!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A stern guard.",
+                "story": [
+                    "The gates of Jhelom.",
+                    "These passages are restricted."
+                ]
+            },
+            {
+                "name": "Aesop",
+                "description": "A small man.",
+                "story": [
+                    "I find that 'tis easy to be brave from a safe distance!",
+                    "The mantra of valor is 'RA' use it in the shrine on the next isle!"
+                ]
+            },
+            {
+                "name": "Gravnor",
+                "description": "A grave fighter.",
+                "story": [
+                    "I seek the red stone.",
+                    "It is found on an altar!"
+                ]
+            },
+            {
+                "name": "Senora",
+                "description": "A beautiful mage",
+                "story": [
+                    "I am being punished for my crimes.",
+                    "Does not matter, I can help thee!"
+                ]
+            },
+            {
+                "name": "Nostro",
+                "description": "A withering soul",
+                "story": [
+                    "This passage runs around the city!",
+                    "The rune is buried in a tower!"
+                ]
+            },
+            {
+                "name": "Luke",
+                "description": "A ranger with a far away look.",
+                "story": [
+                    "I come from Skara Brae and am on my way to Yew.",
+                    "'tis a city based in the virtue of justice!"
+                ]
+            },
+            {
+                "name": "Max",
+                "description": "The housekeeper.",
+                "story": [
+                    "I clean the rooms.",
+                    "That's a strange one at the end. People often disappear."
+                ]
+            },
+            {
+                "name": "X",
+                "description": "A strange person",
+                "story": [
+                    "The red stone.",
+                    "Red is for valor a virtue of the avatar!"
+                ]
+            },
+            {
+                "name": "Slithe",
+                "description": "A valiant warrior.",
+                "story": [
+                    "True valor is seen not in the force of arms, but in the force of will!",
+                    "I display my valor in battle."
+                ]
+            },
+            {
+                "name": "Timrod",
+                "description": "A thin fighter.",
+                "story": [
+                    "There is no holier spot of ground than where defeated valor lies.",
+                    "Be brave for there is much to dare!"
+                ]
             }
         ],
         "MINOC": [
             {
                 "name": "Julia",
-                "description": "An attractive lady.",
+                "description": "An agile tinker.",
                 "story": [
+                    "Self preservation is the first law of nature; self sacrifice the highest rule of grace.",
+                    "Within this house are many poor and destitute souls.",
                     "A generation has passed since the day the old legends became real again.",
                     "Once, Llylgamyn was saved by steel and sorcery - by an intrepid band who recovered the ancient armor of the Knight of Diamonds and restored the Staff of Gnilda to its rightful place.",
                     "With the staff’s protection returned, peace did not merely hold. It prevailed.",
@@ -145,8 +350,10 @@
             },
             {
                 "name": "Zircon",
-                "description": "An toughened black smith.",
+                "description": "A seasoned blacksmith.",
                 "story": [
+                    "I make the very best!",
+                    "Ah, yes, the mystic weapons, and armour, my greatest work! Those I gave unto Sir Simon and Lady Tessa.",
                     "Soon Llylgamyn was struck by an earthquake so mighty that even the Temple of Gnilda was damaged - its stones bruised, its sanctity visibly wounded. Nearby volcanoes, long dormant, stirred awake from ancient slumbers.",
                     "As fear spread, everyone had an explanation - and none of them agreed.",
                     "Self-appointed prophets cried divine wrath and demanded immediate repentance.",
@@ -161,8 +368,10 @@
             },
             {
                 "name": "Merida",
-                "description": "An wise councillor.",
+                "description": "A wandering tinker.",
                 "story": [
+                    "But first I need the mantra!",
+                    "I am told that a hidden shepherd knows the mantra.",
                     "Long ago, the orb was taken by the great dragon L’kbreth - one of the five children of the World Serpent, and a being devoted not to conquest, but to the balance of the world.",
                     "In the lore preserved by Llylgamyn’s scholars, L’kbreth judged that the orb could upset that balance if it remained in mortal hands, and so she carried it to her mountain sanctuary.",
                     "There, she invoked both good and evil powers to protect the orb from thieves and unworthy seekers.",
@@ -174,8 +383,10 @@
             },
             {
                 "name": "Damon",
-                "description": "An stout man.",
+                "description": "A meek shepherd.",
                 "story": [
+                    "Oh, just about things.",
+                    "Listen to the bard's song for in its verse lies the key!",
                     "The Rite of Passage",
                     "This is not the old age, when veteran mercenaries drifted into taverns and formed parties on a whim.",
                     "This time, the chosen come from a single cohort: this year’s graduating apprentices.",
@@ -193,8 +404,10 @@
             },
             {
                 "name": "Alex",
-                "description": "An young man.",
+                "description": "A teenage boy.",
                 "story": [
+                    "The way I figure it, if thou art kind to others they will have reason to be kind in return!",
+                    "Yes, give all that thou can unto the needy!",
                     "Graduation Day: The Quest Revealed",
                     "Upon completion of the Rite, the new adventurers are gathered before the Elders of Llylgamyn.",
                     "There the burden of the quest is placed squarely on their shoulders - and the truth is spoken plainly: the newly awakened volcano that threatens the city is not merely geology.",
@@ -209,13 +422,104 @@
                     "A world suddenly shaken by sea and fire. A dragon sworn to balance, guarding the one tool that can reveal what’s gone wrong.",
                     "And a new generation - descendants wearing old names - sent into a volcano-lair where even morality itself may be part of the lock and key."
                 ]
+            },
+
+            {
+                "name": "Bob the Beggar",
+                "description": "A sickly little man.",
+                "story": [
+                    "I need money to cure my sickness.",
+                    "I have terminal leg rot."
+                ]
+            },
+            {
+                "name": "Linda Sue",
+                "description": "A small muddy girl.",
+                "story": [
+                    "I have not eaten in days.",
+                    "Oh, thou art a kind soul!"
+                ]
+            },
+            {
+                "name": "Gimble",
+                "description": "A fading man.",
+                "story": [
+                    "I suffer from a tsetse byte!",
+                    "I will soon sleep forever."
+                ]
+            },
+            {
+                "name": "Jude",
+                "description": "A ragged soul.",
+                "story": [
+                    "I will not speak of my sin!",
+                    "I used it!"
+                ]
+            },
+            {
+                "name": "Alkerion",
+                "description": "An old ragged man.",
+                "story": [
+                    "What does thou wish to know?",
+                    "The stone of sacrifice is orange in color and used in the altar rooms of love and courage!"
+                ]
+            },
+            {
+                "name": "Mike Ward",
+                "description": "A stocky ranger.",
+                "story": [
+                    "I have travelled clear from Skara Brae.",
+                    "The rune of our city is missing!"
+                ]
+            },
+            {
+                "name": "Shentis",
+                "description": "A rotund tinker.",
+                "story": [
+                    "Self-sacrifice is a needed virtue!",
+                    "Avatars strive to be virtuous."
+                ]
+            },
+            {
+                "name": "Singsong",
+                "description": "A cute bard.",
+                "story": [
+                    "I sing songs!",
+                    "Very well, the raven sings, the raven saw and in the corn he sayeth 'CAH'."
+                ]
+            },
+            {
+                "name": "Mischief",
+                "description": "A happy tinker.",
+                "story": [
+                    "And that...",
+                    "The rune of sacrifice is hard to get. It lies within the fires of the forge!"
+                ]
+            },
+            {
+                "name": "Azure",
+                "description": "A tinker at the table.",
+                "story": [
+                    "I carve runes for passage into the shrines!",
+                    "Ask my sister, Mischief."
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A massive guard.",
+                "story": [
+                    "I often wonder if I will ever have to give my life in the line of duty.",
+                    "One life for many!"
+                ]
             }
         ],
         "COVE": [
             {
                 "name": "Allen",
-                "description": "A stout man.",
+                "description": "A small boy.",
                 "story": [
+                    "The abyss may only be approached by ship!",
+                    "The ship must have a magically strengthened hull!",
                     "Five years.",
                     "That is how long it had been since Werdna seized the mystical amulet that would make lesser men weep and greater men go mad with wanting.",
                     "Trebor’s agents had nearly beaten him to it - hours, not days - snatching the artifact from an ancient crumbling Temple hidden in a mist-choked valley whispered of in forbidden tomes: a place called the Gods’ Hopyard, where legends claim a portal once opened and the Gods themselves came to play.",
@@ -228,8 +532,10 @@
             },
             {
                 "name": "Sloven",
-                "description": "A thin man.",
+                "description": "An old hermit.",
                 "story": [
+                    "I have withdrawn from society.",
+                    "Only the ghost of Isaac who haunts the inn at Skara Brae can tell thee.",
                     "Then fate offered Werdna a hook: an antique dealer with a sealed scroll. It cost him dearly - though not as dearly as it should have - because when he touched the seal, it came free too easily.",
                     "The scroll had been opened and resealed, and its text was in a tongue unknown even to me.",
                     "He restored the faded script by art, but translating the meaning took nearly a year.",
@@ -240,7 +546,7 @@
             },
             {
                 "name": "Merlin",
-                "description": "An hedge mage.",
+                "description": "A mystical wizard.",
                 "story": [
                     "When Werdna reached the Temple, the amulet was already gone.",
                     "Footprints in dust became hard ground outside; hard ground became nothing.",
@@ -254,8 +560,10 @@
             },
             {
                 "name": "Circe",
-                "description": "An attractive minstrel.",
+                "description": "A wise mage.",
                 "story": [
+                    "The whole of the axiom is greater than all its parts!",
+                    "The measure of unending love, the limitless courage needed to face all obstacles,the truth which encompasses all things!",
                     "Ten levels. A fortress beneath Trebor’s castle - close enough to steal from, close enough to mock.",
                     "Werdna opened only a tiny conduit to the amulet to draw power for conjuring, and the backlash nearly vaporized him.",
                     "The ground under the castle melted and twisted like pulled taffy.",
@@ -267,7 +575,7 @@
             },
             {
                 "name": "Draconian",
-                "description": "A solemn man.",
+                "description": "An old druid.",
                 "story": [
                     "Then came the interruption that history likes to call heroic.",
                     "One evening, while Werdna entertained a Vampire Lord and his liegemen, the door to his study crashed open and a wild-eyed party surged in - adventurers bent on my destruction.",
@@ -282,8 +590,10 @@
             },
             {
                 "name": "Mentorian",
-                "description": "An beekeeper and candle maker.",
+                "description": "A tall wizard.",
                 "story": [
+                    "There is truth in magic!",
+                    "Since thou dost bear the ankh I shall tell thee. A gate spell requires ash, pearl, and mandrake root!",
                     "When the authorities realized his body was not rotting but locked in a deep trance - indestructible, unkillable by ordinary means - they did not bury me with honors or burn me with fear.",
                     "They did something colder: they adapted an ancient subterranean ruin into an escape-proof prison around my bier, packed it with patrols, traps, and guardians, and left me at the bottom of the very labyrinth Werdna had created.",
                     "And now Werdna awakens.",
@@ -297,13 +607,86 @@
                     "Until Werdna can finally put his hands on the one name he hates even more than Hawkwind’s:",
                     "Trebor."
                 ]
+            },
+            {
+                "name": "Frontis",
+                "description": "A small druid.",
+                "story": []
+            },
+            {
+                "name": "the ankh",
+                "description": "A shining ankh!",
+                "story": []
+            },
+            {
+                "name": "Irmangresh",
+                "description": "A sad giant.",
+                "story": [
+                    "Thoranguard the village lies East of here accessable by boat only!",
+                    "The rune was taken to create a molten orb"
+                ]
+            },
+            {
+                "name": "Fothak",
+                "description": "A Wounded Warrior.",
+                "story": [
+                    "T'is an evil Place wounded from skeleton hoards!",
+                    "Takes thee thru Serpents River..."
+                ]
+            },
+            {
+                "name": "Blissful",
+                "description": "A majestic seahorse!",
+                "story": [
+                    "The shrine ankh knows how to enter the chamber of the codex!",
+                    "Meditate at the shrines of honesty, compassion and valor for 3 cycles to know how to enter!"
+                ]
+            },
+            {
+                "name": "Rabindranath tagore",
+                "description": "A wise man.",
+                "story": []
+            },
+            {
+                "name": "Brother Zair",
+                "description": "An old druid.",
+                "story": [
+                    "It flows endlessly.",
+                    "The kings of the castles which represent the three principles of virtue each know but one syllable of the word of passage!"
+                ]
+            },
+            {
+                "name": "Spellbind",
+                "description": "A slender mage.",
+                "story": [
+                    "One must know the combination of the three principles of virtue!",
+                    "The combination of the three principles of virtue equals the measure of time and space!"
+                ]
+            },
+            {
+                "name": "Shaman",
+                "description": "A tall mage.",
+                "story": [
+                    "I study of the codex!",
+                    "The one pure axiom is more endless than the changing tides, more eternal than day and night!"
+                ]
+            },
+            {
+                "name": "Charm",
+                "description": "A fair sorceress.",
+                "story": [
+                    "To the axiom.",
+                    "The 1 pure axiom encompasses all things."
+                ]
             }
         ],
         "TRINSIC": [
             {
                 "name": "Dupre",
-                "description": "A stout man.",
+                "description": "Handsome fighter",
                 "story": [
+                    "'tis an honor!",
+                    "It gives life meaning!",
                     "The frontier has a way of making liars out of maps.",
                     "North of you are the Confederated Baronies - hard country, hard people, and laws that hold mostly because steel backs them.",
                     "South lie the old realms: the ancient and decadent kingdoms that once ruled by inheritance and memory, and now mostly rule by habit.",
@@ -323,7 +706,7 @@
             },
             {
                 "name": "Kline",
-                "description": "A stout man.",
+                "description": "A searching paladin!",
                 "story": [
                     "DragonQuest lore speaks of magic as something that happens where planes press too close - energy bleeding between dimensions, shaped by those with the talent and training to seize it.",
                     "Such practitioners are called Adepts, and their arts are organized into separate Colleges of Magic, each with its own disciplines, spells, and taboos.",
@@ -334,10 +717,13 @@
                     "People in the Baronies call that sort of magic cowardice.",
                     "People in the Frontiers call it Tuesday."
                 ]
-            }, {
+            }, 
+            {
                 "name": "Quix",
-                "description": "A stout man.",
+                "description": "A wandering mage",
                 "story": [
+                    "It knows a great secret.",
+                    "About the purple stone of honor!",
                     "The newest terror in Alusia has a name spoken softly around fires.",
                     "Loktar - a dragon whose cruelty is as deliberate as it is immense.",
                     "The beasts and demonic forces that prowl the wilderness were always there in one form or another, but Loktar made them feel coordinated - like a hand closing into a fist.",
@@ -349,10 +735,13 @@
                     "Some claim the dragon never crossed the walls at all - that only a shadow did, and that the shadow was enough.",
                     "But the result is the same: a royal captive, a realm trembling, and a frontier that cannot afford to look weak."
                 ]
-            }, {
+            },
+            {
                 "name": "Lexington",
-                "description": "A stout man.",
+                "description": "A shining paladin.",
                 "story": [
+                    "I have solved many quests!",
+                    "The solving of quests brings ye honor!",
                     "The King’s Treasure Room",
                     "The order goes out: Find the Princess.",
                     "Break Loktar’s hold.",
@@ -364,10 +753,13 @@
                     "Even before Loktar, it was a nightmare made for thieves.",
                     "With Loktar’s influence, it becomes something worse: a maze where your senses can betray you and where the dark itself may be weaponized."
                 ]
-            }, {
+            },
+            {
                 "name": "Virgil",
-                "description": "A stout man.",
+                "description": "A mystic wizard.",
                 "story": [
+                    "Poison is my favorite.",
+                    "Nightshade may be found only near lat-J'F\" long-C'O\" only on the darkest of nights!",
                     "The Frontier’s veterans tell the same story in different words.",
                     "Each level has its own theme.",
                     "Which is how survivors explain why the horrors change, and why tactics that worked yesterday stop working today.",
@@ -386,24 +778,228 @@
                     "And if you find treasure along the way?",
                     "Try not to die counting it."
                 ]
+            },
+            {
+                "name": "Publius",
+                "description": "A sleepy fighter",
+                "story": [
+                    "What is left when honor is lost?",
+                    "Right, take honor from me and my life is done!"
+                ]
+            },
+            {
+                "name": "Skitle",
+                "description": "A bony skeleton",
+                "story": [
+                    "I come from the dungeon 'Shame'!",
+                    "I have seen the purple stone used in the altars of truth and courage!"
+                ]
+            },
+            {
+                "name": "Sailor Sam",
+                "description": "An ugly sailor.",
+                "story": [
+                    "My specialty is navigation!",
+                    "Go to the pub in Jhelom and ask of sextants."
+                ]
+            },
+            {
+                "name": "Aristotle",
+                "description": "A dignified paladin.",
+                "story": [
+                    "Dignity consists not in possessing honors, but in deserving them.",
+                    "Honor no one, but honor itself!"
+                ]
+            },
+            {
+                "name": "Terrin",
+                "description": "A cowering child",
+                "story": [
+                    "A big one, with long, pointy horns!",
+                    "It is buried in the southwest corner of towne."
+                ]
+            },
+            {
+                "name": "Rigmore",
+                "description": "A strong paladin.",
+                "story": [
+                    "Yes, welcome to Trinsic city of honor!",
+                    "Wisdom on the virtue of honor is found throughout this towne."
+                ]
+            },
+            {
+                "name": "Winthrop",
+                "description": "A scruffy merchant.",
+                "story": [
+                    "About what?",
+                    "There is a small child who knew named... Terrin."
+                ]
+            },
+            {
+                "name": "Swindrik",
+                "description": "A tall wizard.",
+                "story": [
+                    "Spells of great power.",
+                    "Ask at the Folley tavern of mandrake."
+                ]
+            },
+            {
+                "name": "Dergin",
+                "description": "A soulful fighter.",
+                "story": [
+                    "I have quested long and hard.",
+                    "I seek enlightenment at the shrine of honor!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A big guard.",
+                "story": [
+                    "Into and out of Trinsic.",
+                    "'tis an honorable job!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A strong guard.",
+                "story": [
+                    "Guarding.",
+                    "Guard"
+                ]
             }
         ],
-        "YEW": [
+        "PAWS": [
             {
-                "name": "Jaana",
-                "description": "An attractive young woman.",
+                "name": "Sal",
+                "description": "A very large woman.",
                 "story": [
+                    "We have the finest brew in Britannia!",
+                    "We serve only Folley on tap!",
                     "Your quest is to descend into the dungeons beneath the city - find the Black Stone - and only by regaining this gem and returning it to its rightful owner, your master, Lord Valacar, can the city be saved from evil.",
                     "Along the way you will face the minions of Llorgarth and other denizens of the maze, together with the tricks and traps the lich has set to defend his stronghold.",
                     "But you may also find help from unexpected quarters.",
                     "Good Luck!!!"
+                ]
+            },
+            {
+                "name": "Wilmoore",
+                "description": "A very big guard.",
+                "story": [
+                    "Paws is a great village and we keep it safe!",
+                    "Pirates come from an isle to the east!"
+                ]
+            },
+            {
+                "name": "Francesca",
+                "description": "A tough girl.",
+                "story": [
+                    "I saw the way ya dealt with ol' Red Eye!",
+                    "The talking horse!"
+                ]
+            },
+            {
+                "name": "Sven",
+                "description": "A tall burly man.",
+                "story": [
+                    "Wit' my axe, I can chop'm down quick, ya.",
+                    "It's a big axe, ya."
+                ]
+            },
+            {
+                "name": "Zair the Wise",
+                "description": "A man of many years.",
+                "story": [
+                    "Its secrets are boundless!",
+                    "A three part key and a word of passage are needed to enter the chamber. Ask my brother beyond Lock Lake of the word!"
+                ]
+            },
+            {
+                "name": "Jingles",
+                "description": "A young mage!",
+                "story": [
+                    "My master knows the gate travel spell!",
+                    "My master is Mentorian."
+                ]
+            },
+            {
+                "name": "Sir Hobie",
+                "description": "A tall muscular knight.",
+                "story": [
+                    "I quest always for Britannia!",
+                    "My quest is to defeat the evils of the world."
+                ]
+            },
+            {
+                "name": "Damsel",
+                "description": "A small druid.",
+                "story": [
+                    "Yes, I hear they have the best rations here.",
+                    "Rations are used in dungeons."
+                ]
+            },
+            {
+                "name": "Wheatpin",
+                "description": "A meek shepherd.",
+                "story": []
+            },
+            {
+                "name": "Barren",
+                "description": "A hooded ranger.",
+                "story": [
+                    "Britannia.",
+                    "Search the hills in the south-east corner of town!"
+                ]
+            },
+            {
+                "name": "Pix",
+                "description": "A small girl.",
+                "story": []
+            },
+            {
+                "name": "Sir Simon",
+                "description": "A wise lord.",
+                "story": [
+                    "Of what I cannot say!",
+                    "Mystics can be found by an eight parts avatar!"
+                ]
+            },
+            {
+                "name": "Lady Tessa",
+                "description": "A wise lady.",
+                "story": [
+                    "I cannot say.",
+                    "Mystics can be found by an eight parts avatar!"
+                ]
+            },
+            {
+                "name": "Asemly",
+                "description": "A short jester.",
+                "story": [
+                    "Well, I can dance and sing!",
+                    "And sing, tra la la..."
+                ]
+            },
+            {
+                "name": "Little Jon",
+                "description": "A singing bard.",
+                "story": [
+                    "Britannia is a land so fair, to other lands I would not dare!",
+                    "I hope someday thou may return!"
+                ]
+            },
+            {
+                "name": "Smith",
+                "description": "A white stallion",
+                "story": [
+                    "A",
+                    "A"
                 ]
             }
         ],
         "SKARABRAE": [
             {
                 "name": "Michaelangelo",
-                "description": "A sharp-eyed half-elf hexbinder.",
+                "description": "A skilled ranger",
                 "story": [
                     "For several years, organized bands of pirates and slavers have made a living by raiding the coastal towns on the Sea of Gearnat.",
                     "Ranging from Onnwal to the Wild Coast, they have descended quickly and ruthlessly on the small towns and villages, and carried off innocent citizens into the night.",
@@ -416,8 +1012,10 @@
             },
             {
                 "name": "Santayana",
-                "description": "A broad-shouldered human bruiser in patched chainmail.",
+                "description": "A tall ranger.",
                 "story": [
+                    "The light of philosophy.",
+                    "In philosophical minds the familiar excites wonder!",
                     "Women, children, and whole families have disappeared; and though bribes are accepted, the agreements are ignored.",
                     "Vast tracts of coastline have been reduced to ashes, left barren except for packs of wild dogs.",
                     "The lords have finally become determined to take action, forgetting their petty squabbles to unite against the marauders of the yellow sails.",
@@ -428,8 +1026,10 @@
             },
             {
                 "name": "Shamino",
-                "description": "A quiet, moon-touched tiefling ranger.",
+                "description": "A solemn ranger.",
                 "story": [
+                    "I seek the \"one great truth\"!",
+                    "That which lies within the codex!",
                     "The lords have chosen a plan of stealth.",
                     "Several bands of adventurers have been gathered together and will be sent to infiltrate the base and destroy the leaders of this evil band.",
                     "Caution is recommended, for the true strength and extent of this slave ring is not known, but they seem to be stronger and better organized than encounters with their small raiding parties would indicate.",
@@ -437,19 +1037,366 @@
                     "Looted, burned, and ill-kept, the city has become a base for human outcasts wishing to deal with these unsavory creatures.",
                     "Your party, provided with transport, has managed to arrive in Highport and pose as one of these groups come to deal."
                 ]
+            },
+            {
+                "name": "Emerson",
+                "description": "An injured man.",
+                "story": [
+                    "Spiritual is stronger than any material force.",
+                    "Nothing can bring thee peace but the triumph of principles!"
+                ]
+            },
+            {
+                "name": "Presto",
+                "description": "A very small wizard.",
+                "story": [
+                    "I can cast: jinx, kill, and view!",
+                    "Yes, ask the barkeep at 'The Axe-n-Ale' in Vesper about nightshade."
+                ]
+            },
+            {
+                "name": "Granted",
+                "description": "A hungry beggar.",
+                "story": [
+                    "To eat!",
+                    "To buy food!"
+                ]
+            },
+            {
+                "name": "Mitre",
+                "description": "A radiant ranger.",
+                "story": [
+                    "It tells of the white stone.",
+                    "It is no longer in the dungeon Hythloth, it is gone!"
+                ]
+            },
+            {
+                "name": "Buddha",
+                "description": "A great philosopher.",
+                "story": [
+                    "When one has pity on all living creatures then is one noble.",
+                    "If one speaks or acts with pure thought, happiness will follow like a shadow that never leaves."
+                ]
+            },
+            {
+                "name": "Romasco",
+                "description": "A short dumpy man with a book.",
+                "story": [
+                    "I teach of the abyss.",
+                    "Seek Zair the Wise in Paws for more on the word."
+                ]
+            },
+            {
+                "name": "Carlyle",
+                "description": "A wise mage.",
+                "story": []
+            },
+            {
+                "name": "Dickens",
+                "description": "A wise bard.",
+                "story": [
+                    "Stories are good for the spirit!",
+                    "Remember, no one is useless in this world who lightens the burdens of others!"
+                ]
+            },
+            {
+                "name": "White",
+                "description": "A gallant fighter.",
+                "story": [
+                    "Many quests are very dangerous!",
+                    "I am not afraid of tomorrow; I have seen yesterday and I love today."
+                ]
+            },
+            {
+                "name": "the Ankh of Spirituality",
+                "description": "A silver ankh.",
+                "story": [
+                    "Mantra?",
+                    "Search for the rune of spirituality in the treasure chamber of Britannia!"
+                ]
+            },
+            {
+                "name": "Ambule",
+                "description": "A grimy beggar.",
+                "story": [
+                    "Oh, please... Oh, please...",
+                    "Ask the child named Barren."
+                ]
+            },
+            {
+                "name": "Barren",
+                "description": "A small child.",
+                "story": [
+                    "I know it well, it is 'OM'.",
+                    "A"
+                ]
+            },
+            {
+                "name": "Isaac",
+                "description": "A ghostly figure",
+                "story": [
+                    "The quest is not complete!",
+                    "The white stone sits atop the Serpent's Spine. It can only be reached by one who floats within the clouds."
+                ]
             }
         ],
         "MOONGLOW": [
             {
                 "name": "Tyrone",
-                "description": "A wise councillor.",
+                "description": "A battered mage.",
                 "story": [
+                    "The stone of honesty is found on an altar in the dungeon of Deceit.",
+                    "It is used within the dungeon altar rooms and in the abyss.",
                     "I am the warden of this temple and guard what it contains, and have deeper knowledge about the 4 Marks.",
                     "Seek the four marks in the dungeons.  The Mark of Kings, the Mark of Force, the Mark of Fire and the Mark of the Snake.",
                     "The Mark of Fire can be found at the bottom of the dungeons of Perinean, Fire and Morinia. Only with the Mark of Fire can you be granted entry.",
                     "The Mark of Force can be found at the bottom of the dungeons of Fire and Doom.",
                     "The Mark of Snake can be found at the bottom of the dungeon of the Snake.",
                     "The Mark of Kings is more common and can be found in the dungeons of Perinean, Morinia, Dardens Pit, Snake and Time."
+                ]
+            },
+            {
+                "name": "Mariah",
+                "description": "A young mage",
+                "story": [
+                    "Yes, I hope to go on a great quest!",
+                    "The quest of the avatar is noble indeed!"
+                ]
+            },
+            {
+                "name": "Tracie",
+                "description": "Starving journalist",
+                "story": [
+                    "It's low paid, but glamorous!",
+                    "Cough...cough..."
+                ]
+            },
+            {
+                "name": "Cromwell",
+                "description": "A regal paladin.",
+                "story": [
+                    "A few honest men are better than numbers!",
+                    "The mantra of the shrine of honesty is 'AHM'."
+                ]
+            },
+            {
+                "name": "Rebelias",
+                "description": "A mystic wizard.",
+                "story": [
+                    "Speak the truth and shame the evil forces!",
+                    "Evil still exists in our hearts and souls!"
+                ]
+            },
+            {
+                "name": "Christen",
+                "description": "A playful child.",
+                "story": [
+                    "Honest friends are few!",
+                    "My friend William knows where the rune of honesty is."
+                ]
+            },
+            {
+                "name": "Patric the Humble Shepherd",
+                "description": "A meek shepherd.",
+                "story": [
+                    "Humility is not derived from the direct combination of truth, love or courage.",
+                    "Humility is to act and be humble."
+                ]
+            },
+            {
+                "name": "Shazom",
+                "description": "A dying young wizard.",
+                "story": [
+                    "I will soon need to use the spell he calls 'recall'.",
+                    "Pass on."
+                ]
+            },
+            {
+                "name": "Shakespeare",
+                "description": "A wise wizard.",
+                "story": [
+                    "Remember, there is no terror in threats for I am strong in honesty!",
+                    "Corruption wins not more than honesty!"
+                ]
+            },
+            {
+                "name": "Browning",
+                "description": "A tall mage.",
+                "story": [
+                    "An honest soul need remember no lies!",
+                    "Truth is the root of honesty!"
+                ]
+            },
+            {
+                "name": "Cosima",
+                "description": "An elderly woman",
+                "story": [
+                    "I know how best to mix reagents!",
+                    "A sleep spell actually requires but one part spider silk!"
+                ]
+            },
+            {
+                "name": "Daranor",
+                "description": "A hunched, insane looking man!",
+                "story": [
+                    "The moons are my enemies!",
+                    "When I die the world will end!"
+                ]
+            },
+            {
+                "name": "Inoo",
+                "description": "An old gypsy.",
+                "story": [
+                    "Palms tell fortunes!",
+                    "Give thy palm."
+                ]
+            },
+            {
+                "name": "Calabrini",
+                "description": "A tall mage.",
+                "story": []
+            },
+            {
+                "name": "Dekker",
+                "description": "A bouncy jester",
+                "story": [
+                    "Honest labor bears a lovely face!",
+                    "I love a good jest."
+                ]
+            },
+            {
+                "name": "William",
+                "description": "A child eating a sandwich.",
+                "story": [
+                    "It's a peanut butter and grape jelly on lightly toasted bread!",
+                    "Search for the rune of honesty by Mariah's gold!"
+                ]
+            }
+        ],
+        "YEW": [
+            {
+                "name": "Jaana",
+                "description": "A quiet druid",
+                "story": [
+                    "True justice satisfies all, false none.",
+                    "Let justice be thy calling not thy excuse!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A tall guard",
+                "story": [
+                    "A good life is inspired by love and guided by knowledge.",
+                    "Within this chamber justice is served."
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A big guard.",
+                "story": []
+            },
+            {
+                "name": "Calumny",
+                "description": "A solemn druid.",
+                "story": [
+                    "I invented quickness!",
+                    "Mandrake root is found only in the Fens of the Dead and in the Bloody Plains where the ground is always damp."
+                ]
+            },
+            {
+                "name": "Talfourd",
+                "description": "A wise judge.",
+                "story": [
+                    "Justice is truth in action!",
+                    "It is hidden well!"
+                ]
+            },
+            {
+                "name": "Flamis",
+                "description": "A burning ankh.",
+                "story": [
+                    "The virtue of justice draws its nature from the principles of truth and love!",
+                    "Of justice."
+                ]
+            },
+            {
+                "name": "Silent",
+                "description": "A chanting druid",
+                "story": [
+                    "Beh... Beh...",
+                    "Beh... Beh..."
+                ]
+            },
+            {
+                "name": "Dwp",
+                "description": "A wise druid.",
+                "story": [
+                    "Love no one more than the truth, for justice seeks no favors. Temper thy justice with understanding.",
+                    "Yes 'tis a fair city!"
+                ]
+            },
+            {
+                "name": "a poor beggar.",
+                "description": "A poor beggar.",
+                "story": [
+                    "I have gotten chests in the townes and killed non-evil creatures.",
+                    "He is a mean nasty ugly villain!"
+                ]
+            },
+            {
+                "name": "Vorpal",
+                "description": "A mean nasty ugly villain!",
+                "story": [
+                    "That's me alright!",
+                    "Like thee!"
+                ]
+            },
+            {
+                "name": "a ranger",
+                "description": "A sleek ranger.",
+                "story": [
+                    "On the range!",
+                    "Where the deer and the antelope play."
+                ]
+            },
+            {
+                "name": "Short Round",
+                "description": "A small child",
+                "story": [
+                    "I think Indi's on a quest!",
+                    "I'm not so sure, but it should be fun!"
+                ]
+            },
+            {
+                "name": "Frida",
+                "description": "A withered form.",
+                "story": [
+                    "Oh, no, my baby is dying!",
+                    "Jaana may join thee!"
+                ]
+            },
+            {
+                "name": "Pinrod",
+                "description": "A thin man.",
+                "story": [
+                    "On justice.",
+                    "Justice is hardest to find at the point of a sword, the steel is an agent of justice, humanity the perpetrator!"
+                ]
+            },
+            {
+                "name": "a guard",
+                "description": "A big guard",
+                "story": [
+                    "A good life is inspired by love and guided by truth!",
+                    "Justice means not only to punish the bad but also to reward the good!"
+                ]
+            },
+            {
+                "name": "Druid",
+                "description": "A wandering druid.",
+                "story": [
+                    "Learn at the shrine!",
+                    "The shrine is to the east then north!"
                 ]
             }
         ]

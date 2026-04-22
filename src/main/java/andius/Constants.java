@@ -51,9 +51,10 @@ public interface Constants {
         MINOC(MapType.TMX_TOWN, "Wizardry 3 Town", "MINOC.tmx", WizardryData.Scenario.LEG, TILE_DIM),
         COVE(MapType.TMX_TOWN, "Wizardry 4 Town", "COVE.tmx", WizardryData.Scenario.WER, TILE_DIM),
         SKARABRAE(MapType.TMX_TOWN, "Slaver Pits Town", "SKARABRAE.tmx", WizardryData.Scenario.PMO, TILE_DIM),
-        YEW(MapType.TMX_TOWN, "Black Stone Town", "YEW.tmx", WizardryData.Scenario.BS, TILE_DIM),
+        YEW(MapType.TMX_TOWN, "Town of Yew", "YEW.tmx", WizardryData.Scenario.PMO, TILE_DIM),
         TRINSIC(MapType.TMX_TOWN, "Dragon Quest Town", "TRINSIC.tmx", WizardryData.Scenario.DQ, TILE_DIM),
         MOONGLOW(MapType.TMX_TOWN, "Ultima 3 Town", "MOONGLOW.tmx", WizardryData.Scenario.WER, TILE_DIM),
+        PAWS(MapType.TMX_TOWN, "Black Stone Town", "PAWS.tmx", WizardryData.Scenario.BS, TILE_DIM),
         //
         WIZARDRY1(MapType.WIZARDRY_ENCODED, "Proving Grounds of the Mad Overlord", WizardryData.Scenario.PMO),
         WIZARDRY2(MapType.WIZARDRY_ENCODED, "Knight of Diamonds", WizardryData.Scenario.KOD),

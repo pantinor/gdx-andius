@@ -52,9 +52,9 @@
   <object id="16" name="SLAVERS_PIT" x="944" y="464" width="16" height="16"/>
   <object id="79" name="JHELOM" x="1104" y="720" width="16" height="16"/>
   <object id="18" name="WIZARDRY2" x="992" y="784" width="16" height="16"/>
-  <object id="82" name="BOLTAC" x="656" y="944" width="16" height="16"/>
-  <object id="83" name="CANT" x="704" y="688" width="16" height="16"/>
-  <object id="84" name="YEW" x="272" y="176" width="16" height="16"/>
+  <object id="82" name="PAWS" x="656" y="944" width="16" height="16"/>
+  <object id="83" name="YEW" x="704" y="688" width="16" height="16"/>
+  <object id="84" name="PAWS" x="272" y="176" width="16" height="16"/>
   <object id="85" name="BLACK_STONE" x="288" y="208" width="16" height="16"/>
  </objectgroup>
 </map>
