@@ -7,7 +7,7 @@ A fun RPG mash-up inspired by the classic Sir-Tech *Wizardry* mazes with a touch
 ## Overview
 
 This project brings together multiple classic dungeon experiences into a single game.
-You will also find the Ultima III Exodus dungeon maps, which were ported to the original Wizardry binary encoding format.
+You will also find the Ultima III Exodus dungeon maps.
 
 - **Wizardry Maps**
   - Wizardry I through IV

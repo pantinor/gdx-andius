@@ -141,7 +141,7 @@ public class GameScreen extends BaseScreen {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
         Andius.font12.draw(batch, String.format("%s, %s\n", (int) v.x, (int) v.y), 10, Andius.SCREEN_HEIGHT - 10);
-        Andius.font14.draw(batch, this.map.getLabel(), 300, Andius.SCREEN_HEIGHT - 72);
+        Andius.font14.draw(batch, this.map.getLabel(), 300, Andius.SCREEN_HEIGHT - 32);
 
         batch.end();
 
