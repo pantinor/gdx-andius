@@ -7,8 +7,10 @@
                 "story": [
                     "I play my lute and receive the good wishes of the people.",
                     "If you treat someone else well then they will have reason to do the same.",
-                    "The Castle had always been a hard place, but it wasn’t always mad.",
-                    "They still call him Trebor, the Overlord - because even before the panic took him, he was power-crazed enough to make the title sound like a warning. And then, several years ago, Trebor acquired what every legend insists you should never try to own: a fabled amulet of awesome powers, an artifact with so much myth wrapped around it that merely holding it felt like holding tomorrow hostage.",
+                    "The Castle has always been a hard place, but it wasn’t always mad.",
+                    "They still call him Trebor, the Overlord - because even before the panic took him, he was power-crazed enough to make the title sound like a warning.",
+                    "And then, several years ago, Trebor acquired what every legend insists you should never try to own: a fabled amulet of awesome powers.",
+                    "An artifact with so much myth wrapped around it that merely holding it felt like holding tomorrow hostage.",
                     "He sat in his throne room and gloated - over the empire this amulet would bring him - when something seized him.",
                     "Not a blade. Not poison. Not a coup.",
                     "Fear. Sudden, absolute, incapacitating fear - like the world had shouted a spell directly into his spine.",
@@ -24,7 +26,8 @@
                     "There was only one wizard Trebor believed capable of that kind of theft.",
                     "Werdna. His arch nemesis. An evil wizard whose very name tastes like a curse when spoken under your breath.",
                     "Trebor barely had time to decide what to do next - because the answer arrived the next day in the language of breaking stone.",
-                    "The earth groaned. The Castle rocked. And beneath Trebor’s own seat of power, Werdna used the stolen amulet to carve out a ten-level fortress maze - a deep, engineered wound under the Castle itself, meant as both hideout and taunt.",
+                    "The earth groaned. The Castle rocked. And beneath Trebor’s own seat of power, Werdna used the stolen amulet to carve out a ten-level fortress maze.",
+                    "Deep, and winding under the Castle itself, meant as both a hideout and taunt.",
                     "Down there, surrounded by monsters most foul, Werdna vanished into the depths and began plumbing the amulet’s secrets to some unknown purpose.",
                     "Whatever was left of Trebor’s sanity snapped cleanly.",
                     "Paranoia became policy. He surrounded himself with an elite guard - the best characters in each class - and obsessed over getting the amulet back.",
@@ -42,7 +45,7 @@
                     "Seek out Julio and ask him of compassion!",
                     "The Castle Above the Maze",
                     "This is where your story truly begins - not in heroic sunlight, but in the Castle’s routines and institutions that exist because people keep coming back from the Maze in pieces.",
-                    "Within Trebor’s domain are the places every expedition depends on:",
+                    "Within Trebor’s domain are the places every expedition depends on.",
                     "The Training Grounds, ringing with the sounds of swords clashing, where novices practice - so green they’re still hitting pells with wooden blades, yelping when the wood bounces back. This is where new adventurers are created and veterans inspected.",
                     "Gilgamesh’s Tavern, dim and smoke-filled, where parties are assembled - where you try to find a team capable of surviving the rough rigors of the Maze.",
                     "Boltac’s Trading Post, run by a friendly dwarf who loves gold and jokes darkly enough to fit the dungeon: Boltac will sell you your own arms ... if he can get away with it. The spoils of countless forays are fenced here, and it’s open around the clock.",
@@ -57,10 +60,10 @@
                 "story": [
                     "Mondain's influence has not left the world!",
                     "An artifact remains! I heard at Buccaneer's Den!",
-                    "The Maze Below",
                     "The Maze is not framed as a romantic underworld. It is described like a workplace:",
-                    "A place adventurers enter in search of monsters to kill, loot to borrow and clues that might lead them, eventually, to Werdna himself. As skill grows, parties push deeper - until the day they might stand face-to-face with their nemesis.",
-                    "And the people who have already gone far enough to understand what eventually really means leave behind the only kind of prophecy that matters down there: survival."
+                    "A place adventurers enter in search of monsters to kill, loot to borrow and clues that might lead them, eventually, to Werdna himself.",
+                    "As skill grows, parties push deeper - until the day they might stand face-to-face with their nemesis.",
+                    "And the people who have already gone far enough to understand what eventually really means leave behind the only kind of prophecy that matters down there - survival."
                 ]
             }, 
             {
@@ -69,7 +72,8 @@
                 "story": [
                     "Pride was too great in Magincia!",
                     "The city was destroyed by daemons for its pride!",
-                    "The Chronicles of Hawkwind - as if someone tried to write courage into existence. It describes a six-person band on what they believe is the ninth level of the accursed maze, time and distance twisting, reality fleeting.",
+                    "The Chronicles of Hawkwind - as if someone tried to write courage into existence.",
+                    "It describes a six-person band on what they believe is the ninth level of the accursed maze, time and distance twisting, reality fleeting.",
                     "They move under magical light, find a secret door, and crash into a fight against hellhounds, demons, and deadly creeping coins.",
                     "They win - only to discover a hidden chute that masks the way to the tenth level, the final path to Werdna’s lair.",
                     "And then - like a signature at the bottom of a death warrant - the air is pierced by a maniacal laugh: Werdna waits.",
@@ -81,7 +85,7 @@
                 ]
             },
             {
-                "name": "a child",
+                "name": "child",
                 "description": "a small child",
                 "story": [
                     "The song goes  Ho eyo he hum!",
@@ -89,7 +93,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A guard",
                 "story": [
                     "Across the bridge our people dance and sing!",
@@ -129,7 +133,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A cheerful guard.",
                 "story": [
                     "We guards have a lot of compassion.",
@@ -137,7 +141,7 @@
                 ]
             },
             {
-                "name": "a child",
+                "name": "child",
                 "description": "A small child",
                 "story": [
                     "The solution to ones problems often lies in solving others!",
@@ -175,18 +179,16 @@
                 "description": "A mysterious warrior.",
                 "story": [
                     "Llylgamyn was built to endure. For ages beyond easy counting, the City of Llylgamyn stood behind a miracle of craft and divinity: the Staff of Gnilda.",
-                    "When the staff was set and properly invoked, it spread a barrier around the city - one that did not merely discourage attack, but refused it entirely, turning aside blade and spell alike as if the world itself had decided violence could not cross that threshold.",
+                    "When the staff was set and properly invoked, it spread a barrier around the city - one that did not merely discourage attack, but refused it entirely.",
+                    "Turning aside blade and spell alike as if the world itself had decided violence could not cross that threshold.",
                     "Those who approached with honest purpose could pass; those who came with malice found the way denied.",
                     "It was a defense so complete that, for a time, the people of Llylgamyn mistook it for permanence.",
                     "But the staff had a flaw, small as a hairline crack and just as fatal.",
-                    "The warding on the staff only judged Outsiders - marauders and invaders - who crept in from beyond the walls. But the staff did not bind the hands of those who were born within Llylgamyn. The city’s sanctum could not condemn its own blood. And in that loophole, darkness found a citizen’s face. His name was Davalpus.",
+                    "The warding on the staff only judged Outsiders - marauders and invaders - who crept in from beyond the walls. But the staff did not bind the hands of those who were born within Llylgamyn.",
+                    "The city’s sanctum could not condemn its own blood. And in that loophole, darkness found a citizen’s face. His name was Davalpus.",
                     "Davalpus, aided by the powers of darkness, started a coup. The throne was seized. The royal family was slaughtered.",
-                    "Only two survived the ruin of the crown: Princess Margda and her brother, Prince Alavik. They fled into the city’s shadows and listened to the oldest whispers — tales of a hero from before recorded reigns, a champion whose armor was not simply steel, but legend made wearable: the Knight of Diamonds. Margda and Alavik wagered everything on that story.",
-                    "They found the fabled equipment - piece by piece, relic by relic - and when at last the set was reclaimed, Alavik did what princes do when history offers only one door: he stepped through it. Wearing the Knight’s mystic gear and bearing the Staff of Gnilda, he challenged Davalpus in the castle itself. The battle shook the stones.",
-                    "Davalpus fell… but tyrants rarely die quietly. In his last breath he spoke a curse - one so vile the chroniclers refuse to dress it in poetry. The castle collapsed as if yanked down by an invisible fist, burying victor and villain alike. When the dust settled, the royal keep was gone, and in its place yawned a smoking crater - a wound in the earth that would not close. Davalpus, Alavik, and the Staff of Gnilda were lost to the depths. And without the staff, the city’s protection was a memory.",
-                    "Now Llylgamyn trembles under the weight of what it once could ignore. Without Gnilda’s ward, threats gather - patient forces that had always waited beyond the barrier, watching, counting, measuring the day the field would fail. If the staff is not returned, the old certainty becomes a new prophecy: the city will fall.",
-                    "So the call goes out - not to bright-eyed novices, not to the eager and unscarred, but to those already tempered by impossible corridors and lethal silence. This is not a pilgrimage for the untested. It is a scenario meant for experienced Wizardry adventurers, and the old notices speak bluntly: champions around the 13th level are needed just to endure what waits below. You are summoned because you are what Llylgamyn has left. Not an army. Not a parade of banners. A small company - one to six souls if fate is kind—armed with hard-earned spells and the kind of caution that only survives by learning.",
-                    "Beneath the ruined castle stretches a six-level maze, a stacked anatomy of deception and stone where the relics of the Knight of Diamonds have become both lure and lock."
+                    "Only two survived the ruin of the crown: Princess Margda and her brother, Prince Alavik.",
+                    "They fled into the city’s shadows and listened to the oldest whispers — tales of a hero from before recorded reigns, a champion whose armor was not simply steel, but legend made wearable."
                 ]
             },
             {
@@ -216,7 +218,44 @@
                     "There is a statue of Gnilda-named not just as a goddess but as an earth power, present in stone and warning. Nearby waits a sphinx with a riddle that is less puzzle than identity-test. The maze speaks a final instruction like a knife-edge: one alone.",
                     "The correct response is not the name of a king, nor a spell, nor a treasure.",
                     "It is a title.",
-                    "It is the point.",
+                    "It is the point."
+                ]
+            },
+            {
+                "name": "Bengrod",
+                "description": "A wounded fighter!",
+                "story": [
+                    "I fell in the dungeon 'Destard'.",
+                    "Therein use the stones found in the connecting dungeons!",
+                    "The Knight of Diamonds. Margda and Alavik wagered everything on that story.",
+                    "They found the fabled equipment - piece by piece, relic by relic - and when at last the set was reclaimed, Alavik did what princes do when history offers only one door: he stepped through it.",
+                    "Wearing the Knight’s mystic gear and bearing the Staff of Gnilda, he challenged Davalpus in the castle itself. The battle shook the stones.",
+                    "Davalpus fell… but tyrants rarely die quietly. In his last breath he spoke a curse - one so vile the chroniclers refuse to dress it in poetry.",
+                    "The castle collapsed as if yanked down by an invisible fist, burying victor and villain alike.",
+                    "When the dust settled, the royal keep was gone, and in its place yawned a smoking crater - a wound in the earth that would not close."
+                ]
+            },
+            {
+                "name": "Sir William",
+                "description": "A noble fighter.",
+                "story": [
+                    "Davalpus, Alavik, and the Staff of Gnilda were lost to the depths. And without the staff, the city’s protection was a memory.",
+                    "Now Llylgamyn trembles under the weight of what it once could ignore.",
+                    "Without Gnilda’s ward, threats gather - patient forces that had always waited beyond the barrier, watching, counting, measuring the day the field would fail.",
+                    "If the staff is not returned, the old certainty becomes a new prophecy: the city will fall.",
+                    "So the call goes out - not to bright-eyed novices, not to the eager and unscarred, but to those already tempered by impossible corridors and lethal silence.",
+                    "This is not a pilgrimage for the untested. It is a scenario meant for experienced Wizardry adventurers, and the old notices speak bluntly.",
+                    "Champions around the 13th level are needed just to endure what waits below. You are summoned because you are what Llylgamyn has left.",
+                    "Not an army. Not a parade of banners. A small company - one to six souls if fate is kind—armed with hard-earned spells and the kind of caution that only survives by learning.",
+                    "Beneath the ruined castle stretches a six-level maze, a stacked anatomy of deception and stone where the relics of the Knight of Diamonds have become both lure and lock."
+                ]
+            },
+            {
+                "name": "Sir Hrothgar",
+                "description": "A mighty warrior!",
+                "story": [
+                    "The valiant soul fears not its own visage!",
+                    "The mantra need be known, ask Aesop!",
                     "The Knight of Diamonds.",
                     "And then, as if to ensure you understand: you must return to Gnilda’s temple and speak that answer again-alone, bearing all five relics. If you fail, the dungeon’s mercy is nonexistent; if you succeed, the price is total: the relics are surrendered, and the Staff of Gnilda is finally returned to mortal hands.",
                     "Only then may you climb back toward daylight with the one thing that can save Llylgamyn.",
@@ -228,28 +267,7 @@
                 ]
             },
             {
-                "name": "Bengrod",
-                "description": "A wounded fighter!",
-                "story": [
-                    "I fell in the dungeon 'Destard'.",
-                    "Therein use the stones found in the connecting dungeons!"
-                ]
-            },
-            {
-                "name": "Sir William",
-                "description": "A noble fighter.",
-                "story": []
-            },
-            {
-                "name": "Sir Hrothgar",
-                "description": "A mighty warrior!",
-                "story": [
-                    "The valiant soul fears not its own visage!",
-                    "The mantra need be known, ask Aesop!"
-                ]
-            },
-            {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A stern guard.",
                 "story": [
                     "The gates of Jhelom.",
@@ -341,7 +359,8 @@
                     "With the staff’s protection returned, peace did not merely hold. It prevailed.",
                     "The kingdom grew prosperous. Under that shelter, Llylgamyn became a place of light and beauty, so secure that war and its tools became almost unthinkable.",
                     "Then the trouble came... and it did not come with banners.",
-                    "It came as unbalanced nature - years of unsettling reports that most citizens waved away: freak earthquakes, sudden shifts in climate, thundering storms and tidal waves, strange portents piling up like clouds on the horizon.",
+                    "It came as unbalanced nature - years of unsettling reports that most citizens waved away.",
+                    "Freak earthquakes, sudden shifts in climate, thundering storms and tidal waves, strange portents piling up like clouds on the horizon.",
                     "Until the sea itself made the argument impossible to ignore.",
                     "Far from the castle, the prosperous island colony of Arbithea - once surrounded by gentle waters - was swallowed in a single, catastrophic rise.",
                     "The tidal wave tore the cities apart and left only barren peaks above the waterline, like the broken teeth of a drowned world.",
@@ -411,7 +430,16 @@
                     "Graduation Day: The Quest Revealed",
                     "Upon completion of the Rite, the new adventurers are gathered before the Elders of Llylgamyn.",
                     "There the burden of the quest is placed squarely on their shoulders - and the truth is spoken plainly: the newly awakened volcano that threatens the city is not merely geology.",
-                    "It is the legendary sanctuary of L’kbreth herself, the mountain-lair where she guards the orb from the unworthy.",
+                    "It is the legendary sanctuary of L’kbreth herself, the mountain-lair where she guards the orb from the unworthy."
+                ]
+            },
+
+            {
+                "name": "Bob the Beggar",
+                "description": "A sickly little man.",
+                "story": [
+                    "I need money to cure my sickness.",
+                    "I have terminal leg rot.",
                     "High within that mountain is the hidden resting place of the Orb of Earithin.",
                     "To reach it, the party must climb twisted passageways through L’kbreth’s domain - an inversion of the usual descent into darkness, as though the world is forcing you upward into the dragon’s breath.",
                     "Along the way, the dragon’s protections take shape: good and evil magics woven together, legions of monsters and hostile troops, diabolical traps, and riddles designed not to entertain, but to test.",
@@ -421,15 +449,6 @@
                     "A city once protected by sacred relics.",
                     "A world suddenly shaken by sea and fire. A dragon sworn to balance, guarding the one tool that can reveal what’s gone wrong.",
                     "And a new generation - descendants wearing old names - sent into a volcano-lair where even morality itself may be part of the lock and key."
-                ]
-            },
-
-            {
-                "name": "Bob the Beggar",
-                "description": "A sickly little man.",
-                "story": [
-                    "I need money to cure my sickness.",
-                    "I have terminal leg rot."
                 ]
             },
             {
@@ -505,7 +524,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A massive guard.",
                 "story": [
                     "I often wonder if I will ever have to give my life in the line of duty.",
@@ -852,7 +871,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A big guard.",
                 "story": [
                     "Into and out of Trinsic.",
@@ -860,7 +879,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A strong guard.",
                 "story": [
                     "Guarding.",
@@ -1283,7 +1302,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A tall guard",
                 "story": [
                     "A good life is inspired by love and guided by knowledge.",
@@ -1291,7 +1310,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A big guard.",
                 "story": []
             },
@@ -1384,7 +1403,7 @@
                 ]
             },
             {
-                "name": "a guard",
+                "name": "guard",
                 "description": "A big guard",
                 "story": [
                     "A good life is inspired by love and guided by truth!",

@@ -523,7 +523,7 @@
   <object id="1" name="villager" type="FRIENDLY" x="272" y="400" width="16" height="16">
    <properties>
     <property name="icon" value="82"/>
-    <property name="movement" value="FIXED"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="2" name="Little Jon" type="FRIENDLY" x="16" y="320" width="16" height="16">
@@ -649,25 +649,25 @@
   <object id="22" name="bull" type="FRIENDLY" x="352" y="336" width="16" height="16">
    <properties>
     <property name="icon" value="92"/>
-    <property name="movement" value="ATTACK_AVATAR"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="23" name="Smith" type="FRIENDLY" x="480" y="320" width="16" height="16">
    <properties>
     <property name="icon" value="20"/>
-    <property name="movement" value="WANDER"/>
+    <property name="movement" value="FIXED"/>
    </properties>
   </object>
   <object id="24" name="Merchant" type="MERCHANT_BS" x="96" y="48" width="16" height="16">
    <properties>
     <property name="icon" value="82"/>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="25" name="Healer" type="TEMPLE" x="240" y="128" width="16" height="16">
    <properties>
     <property name="icon" value="82"/>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="26" name="Innkeeper" type="INNKEEPER" x="400" y="64" width="16" height="16">
@@ -685,7 +685,7 @@
   <object id="28" name="Merchant" type="MERCHANT_BS" x="112" y="432" width="16" height="16">
    <properties>
     <property name="icon" value="82"/>
-    <property name="movement" value="FOLLOW_AVATAR"/>
+    <property name="movement" value="WANDER"/>
    </properties>
   </object>
   <object id="29" name="Wilmoore" type="FRIENDLY" x="64" y="256" width="16" height="16">
