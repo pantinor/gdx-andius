@@ -95,11 +95,11 @@ public class Hud {
             smb = summondMonstersBackground();
         }
 
-        batch.draw(smb, 722, Andius.SCREEN_HEIGHT - 110 - 298);
+        batch.draw(smb, 697, Andius.SCREEN_HEIGHT - 86 - 374);
 
         Andius.font12.setColor(Color.WHITE);
 
-        float y = Andius.SCREEN_HEIGHT - 102;
+        float y = Andius.SCREEN_HEIGHT - 86;
         int count = 0;
         for (MutableMonster mm : ctxt.saveGame.players[0].summonedMonsters) {
             Andius.font12.setColor(mm.isDead() ? Color.RED : mm.status().color());
@@ -109,10 +109,10 @@ public class Hud {
                     mm.getCurrentHitPoints(), mm.getMaxHitPoints(),
                     mm.getCurrentHitPoints() <= 0 ? "DEAD" : mm.status(),
                     mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel());
-            Andius.font12.draw(batch, str, 730, y -= 16);
+            Andius.font12.draw(batch, str, 708, y -= 16);
 
             count++;
-            if (count > 17) {
+            if (count > 22) {
                 break;
             }
         }
@@ -129,12 +129,12 @@ public class Hud {
         Color LIGHT = new Color(0x7a7a7aff);
         Color LIGHTEST = new Color(0xabababff);
 
-        Pixmap pix = new Pixmap(280, 298, Pixmap.Format.RGBA8888);
+        Pixmap pix = new Pixmap(318, 374, Pixmap.Format.RGBA8888);
 
         int ix = 5;
         int iy = 5;
-        int iw = 270;
-        int ih = 288;
+        int iw = 308;
+        int ih = 364;
 
         pix.setColor(Color.BLACK);
         pix.fillRectangle(ix - 5, iy - 5, iw + 10, ih + 10);

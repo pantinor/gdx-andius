@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import utils.AutoFocusScrollPane;
 import utils.FrameMaker;
-import utils.LogScrollPane;
 
 public class Wiz4RewardScreen implements Screen, Constants {
 
@@ -34,40 +33,50 @@ public class Wiz4RewardScreen implements Screen, Constants {
     private final Batch batch;
     private final List<ItemLabel> items;
     private final AutoFocusScrollPane itemsScroll;
-    private final LogScrollPane logs;
     private final TextButton take;
     private final TextButton exit;
     private final Texture background;
 
     private static final int TABLE_HEIGHT = 740;
     private static final int LISTING_WIDTH = 300;
-    private static final int LOG_WIDTH = 370;
-    private static final int LOG_HEIGHT = 400;
 
     public Wiz4RewardScreen(CharacterRecord player, DoGooder opponent) {
         this.opponent = opponent;
         this.player = player;
         this.batch = new SpriteBatch();
         this.stage = new Stage();
-        //this.stage.setDebugAll(true);
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        Table logTable = new Table(Andius.skin);
-        this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH);
+        this.items = new List(Andius.skin, "default-16-padded-clear");
 
-        this.items = new List(Andius.skin, "default-16");
-        this.itemsScroll = new AutoFocusScrollPane(this.items, Andius.skin);
+        Table itemsTable = new Table();
+        itemsTable.setBackground(Andius.skin.getDrawable("clear"));
+        itemsTable.pad(8);
+        itemsTable.add(this.items).grow().top().left();
+
+        this.itemsScroll = new AutoFocusScrollPane(itemsTable, Andius.skin);
         this.itemsScroll.setScrollingDisabled(true, false);
+
+        java.util.List<ItemLabel> labels = new java.util.ArrayList<>();
 
         for (int id : opponent.partyMembers) {
             DoGooder dg = WER4_CHARS.get(id);
             for (int it : dg.items) {
                 Item i = WER_ITEMS.get(it);
-                ItemLabel label = new ItemLabel(i);
-                items.getItems().add(label);
+                labels.add(new ItemLabel(i));
             }
         }
+
+        labels.sort((a, b) -> {
+            int typeCompare = Integer.compare(a.item.type.ordinal(), b.item.type.ordinal());
+            if (typeCompare != 0) {
+                return typeCompare;
+            }
+            return a.item.name.compareToIgnoreCase(b.item.name);
+        });
+
+        items.getItems().addAll(labels.toArray(new ItemLabel[0]));
 
         this.exit = new TextButton("LEAVE", Andius.skin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -87,11 +96,9 @@ public class Wiz4RewardScreen implements Screen, Constants {
         });
         this.take.setBounds(500, 450, 80, 40);
 
-        fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
         fm.setBounds(this.itemsScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT);
 
         this.stage.addActor(this.itemsScroll);
-        this.stage.addActor(this.logs);
         this.stage.addActor(exit);
         this.stage.addActor(take);
 

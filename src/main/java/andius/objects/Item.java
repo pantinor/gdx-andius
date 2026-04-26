@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Item implements Comparable<Item> {
 
     public enum ItemType {
-        ANY, WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET, SPECIAL, MISC;
+        SPECIAL, MISC, ANY, WEAPON, ARMOR, SHIELD, HELMET, GAUNTLET;
     }
 
     public Item() {
