@@ -104,12 +104,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
         FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/wiz4ibm.atlas"));
+        this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/werdna_portraits.atlas"));
 
         Table logTable = new Table(Andius.skin);
         logTable.setBackground("dimmer");
         this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
-        
+
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
 
@@ -1509,9 +1509,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private class DoGooderListing extends Group {
 
         final Image icon;
-        final Label l1;
-        final DoGooderStatusLabel l2;
-        final DoGooderMagicPointsLabel l3;
+        final Label l1, l2;
+        final DoGooderStatusLabel l3;
+        final DoGooderMagicPointsLabel l4;
         final ListingBackground bckgrnd;
 
         final DoGooder m;
@@ -1525,28 +1525,35 @@ public class Wiz4CombatScreen implements Screen, Constants {
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
-            this.icon = new Image(iconAtlas.findRegion(this.m.iconID));
+            this.icon = makeIcon(this.m.iconID);
 
             this.l1 = new Label("", Andius.skin, "default-16");
-            this.l2 = new DoGooderStatusLabel(mm);
-            this.l3 = new DoGooderMagicPointsLabel(mm);
+            this.l2 = new Label("", Andius.skin, "default-16");
+            this.l3 = new DoGooderStatusLabel(mm);
+            this.l4 = new DoGooderMagicPointsLabel(mm);
 
-            String d1 = String.format("%s  %s  LVL %d  %s", m.name.toUpperCase(), m.race, mm.getLevel(), m.characterClass);
+            String d1 = String.format("%s  %s", m.name.toUpperCase(), m.race);
             this.l1.setText(d1);
+
+            String d2 = String.format("LVL %d  %s", mm.getLevel(), m.characterClass);
+            this.l2.setText(d2);
 
             addActor(this.bckgrnd);
             addActor(this.icon);
             addActor(this.l1);
             addActor(this.l2);
             addActor(this.l3);
+            addActor(this.l4);
 
             float x = 3;
-            this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
-            this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
-            this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
-            this.icon.setPosition(247, 2);
+            this.l1.setBounds(x, LINE_HEIGHT * 3, LISTING_WIDTH, LINE_HEIGHT);
+            this.l2.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
+            this.l3.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
+            this.l4.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
 
-            this.setSize(LISTING_WIDTH, LINE_HEIGHT * 3f);
+            this.icon.setPosition(224, 0);
+
+            this.setSize(LISTING_WIDTH, 80);
 
             this.addListener(new ClickListener() {
                 @Override
@@ -1622,6 +1629,25 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
             monstersTable.layout();
         }
+    }
+
+    private Image makeIcon(String iconID) {
+        String regionName = iconID;
+
+        if (iconID.startsWith("Mage")) {
+            regionName = String.format("Mage_%02d", Utils.getRandomBetween(1, 9));
+        } else if (iconID.startsWith("Fighter")) {
+            regionName = String.format("Fighter_%02d", Utils.getRandomBetween(1, 22));
+        } else if (iconID.startsWith("Priest")) {
+            regionName = String.format("Priest_%02d", Utils.getRandomBetween(1, 7));
+        }
+
+        TextureRegion region = iconAtlas.findRegion(regionName);
+        if (region == null) {
+            region = iconAtlas.findRegion(iconID);
+        }
+
+        return new Image(region);
     }
 
     @Override

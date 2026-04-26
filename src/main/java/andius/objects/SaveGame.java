@@ -12,8 +12,6 @@ import static andius.objects.ClassType.NINJA;
 import static andius.objects.ClassType.PRIEST;
 import static andius.objects.ClassType.SAMURAI;
 import static andius.objects.ClassType.THIEF;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
 import java.util.Random;
 import utils.Utils;
 import com.google.gson.GsonBuilder;
@@ -42,7 +40,9 @@ public class SaveGame implements Constants {
     public int level;//map level
     public Direction direction;
 
-    public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
+    //not used
+    //public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
+    
     public final java.util.Map<Map, List<AnsweredRiddle>> riddles = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
@@ -75,6 +75,7 @@ public class SaveGame implements Constants {
             }
         }
 
+        /*
         for (Map map : Map.values()) {
             if (map.getBaseMap() != null) {
                 MapLayer peopleLayer = map.getTiledMap().getLayers().get("people");
@@ -106,6 +107,7 @@ public class SaveGame implements Constants {
                 }
             }
         }
+        */
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();

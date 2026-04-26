@@ -1,0 +1,521 @@
+werdna_portraits.png
+size: 468,2152
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Abduul
+  rotate: false
+  xy: 0, 0
+  size: 72, 80
+Air
+  rotate: false
+  xy: 72, 0
+  size: 72, 80
+Applet
+  rotate: false
+  xy: 144, 0
+  size: 72, 80
+Arcturus
+  rotate: false
+  xy: 216, 0
+  size: 72, 80
+Aurelius
+  rotate: false
+  xy: 288, 0
+  size: 72, 80
+Baron
+  rotate: false
+  xy: 0, 80
+  size: 108, 88
+Bishop_01
+  rotate: false
+  xy: 108, 80
+  size: 72, 80
+Bishop_02
+  rotate: false
+  xy: 180, 80
+  size: 72, 80
+Bishop_03
+  rotate: false
+  xy: 252, 80
+  size: 72, 80
+Bishop_06
+  rotate: false
+  xy: 324, 80
+  size: 72, 80
+Caldor
+  rotate: false
+  xy: 0, 168
+  size: 72, 80
+Captain
+  rotate: false
+  xy: 72, 168
+  size: 72, 80
+Chiquita
+  rotate: false
+  xy: 144, 168
+  size: 72, 80
+Chivalry
+  rotate: false
+  xy: 216, 168
+  size: 72, 80
+Corporal
+  rotate: false
+  xy: 288, 168
+  size: 72, 80
+Darkhorse
+  rotate: false
+  xy: 0, 248
+  size: 72, 80
+Deeg
+  rotate: false
+  xy: 72, 248
+  size: 72, 80
+Dorion
+  rotate: false
+  xy: 144, 248
+  size: 72, 80
+Dreampainter
+  rotate: false
+  xy: 216, 248
+  size: 108, 88
+Duchess
+  rotate: false
+  xy: 324, 248
+  size: 72, 80
+Duke
+  rotate: false
+  xy: 0, 336
+  size: 108, 88
+Earth
+  rotate: false
+  xy: 108, 336
+  size: 72, 80
+Fighter_01
+  rotate: false
+  xy: 180, 336
+  size: 72, 80
+Fighter_02
+  rotate: false
+  xy: 252, 336
+  size: 72, 80
+Fighter_03
+  rotate: false
+  xy: 324, 336
+  size: 72, 80
+Fighter_04
+  rotate: false
+  xy: 0, 424
+  size: 72, 80
+Fighter_05
+  rotate: false
+  xy: 72, 424
+  size: 72, 80
+Fighter_06
+  rotate: false
+  xy: 144, 424
+  size: 72, 80
+Fighter_07
+  rotate: false
+  xy: 216, 424
+  size: 72, 80
+Fighter_08
+  rotate: false
+  xy: 288, 424
+  size: 72, 80
+Fighter_09
+  rotate: false
+  xy: 0, 504
+  size: 72, 80
+Fighter_10
+  rotate: false
+  xy: 72, 504
+  size: 72, 80
+Fighter_11
+  rotate: false
+  xy: 144, 504
+  size: 72, 80
+Fighter_12
+  rotate: false
+  xy: 216, 504
+  size: 72, 80
+Fighter_13
+  rotate: false
+  xy: 288, 504
+  size: 72, 80
+Fighter_14
+  rotate: false
+  xy: 0, 584
+  size: 72, 80
+Fighter_15
+  rotate: false
+  xy: 72, 584
+  size: 72, 80
+Fighter_16
+  rotate: false
+  xy: 144, 584
+  size: 72, 80
+Fighter_17
+  rotate: false
+  xy: 216, 584
+  size: 72, 80
+Fighter_18
+  rotate: false
+  xy: 288, 584
+  size: 72, 80
+Fighter_19
+  rotate: false
+  xy: 0, 664
+  size: 72, 80
+Fighter_20
+  rotate: false
+  xy: 72, 664
+  size: 72, 80
+Fighter_21
+  rotate: false
+  xy: 144, 664
+  size: 72, 80
+Fighter_22
+  rotate: false
+  xy: 216, 664
+  size: 72, 80
+Fire
+  rotate: false
+  xy: 288, 664
+  size: 72, 80
+Flies
+  rotate: false
+  xy: 0, 744
+  size: 108, 88
+Glum
+  rotate: false
+  xy: 108, 744
+  size: 108, 88
+Golem
+  rotate: false
+  xy: 216, 744
+  size: 108, 88
+Gorlan
+  rotate: false
+  xy: 324, 744
+  size: 72, 80
+Greyhawk
+  rotate: false
+  xy: 396, 744
+  size: 72, 80
+Greystone
+  rotate: false
+  xy: 0, 832
+  size: 72, 80
+Grote
+  rotate: false
+  xy: 72, 832
+  size: 72, 80
+Hawkwind
+  rotate: false
+  xy: 144, 832
+  size: 108, 88
+Hellhound
+  rotate: false
+  xy: 252, 832
+  size: 108, 88
+Hellpuppy
+  rotate: false
+  xy: 360, 832
+  size: 108, 88
+Herald
+  rotate: false
+  xy: 0, 920
+  size: 72, 80
+Horin
+  rotate: false
+  xy: 72, 920
+  size: 72, 80
+Inner
+  rotate: false
+  xy: 144, 920
+  size: 108, 88
+Jeese
+  rotate: false
+  xy: 252, 920
+  size: 108, 88
+Jiri
+  rotate: false
+  xy: 360, 920
+  size: 72, 80
+Khan
+  rotate: false
+  xy: 0, 1008
+  size: 72, 80
+Killer
+  rotate: false
+  xy: 72, 1008
+  size: 72, 80
+Kyoko
+  rotate: false
+  xy: 144, 1008
+  size: 72, 80
+Laurel_F
+  rotate: false
+  xy: 216, 1008
+  size: 72, 80
+Laurel_M
+  rotate: false
+  xy: 288, 1008
+  size: 72, 80
+Loco
+  rotate: false
+  xy: 0, 1088
+  size: 72, 80
+Loktar
+  rotate: false
+  xy: 72, 1088
+  size: 72, 80
+Lord
+  rotate: false
+  xy: 144, 1088
+  size: 72, 80
+Mage_01
+  rotate: false
+  xy: 216, 1088
+  size: 72, 80
+Mage_02
+  rotate: false
+  xy: 288, 1088
+  size: 72, 80
+Mage_03
+  rotate: false
+  xy: 0, 1168
+  size: 72, 80
+Mage_04
+  rotate: false
+  xy: 72, 1168
+  size: 72, 80
+Mage_05
+  rotate: false
+  xy: 144, 1168
+  size: 72, 80
+Mage_06
+  rotate: false
+  xy: 216, 1168
+  size: 72, 80
+Mage_07
+  rotate: false
+  xy: 288, 1168
+  size: 72, 80
+Mage_08
+  rotate: false
+  xy: 0, 1248
+  size: 72, 80
+Mage_09
+  rotate: false
+  xy: 72, 1248
+  size: 72, 80
+Mage_Illuvatar
+  rotate: false
+  xy: 144, 1248
+  size: 72, 80
+Marian
+  rotate: false
+  xy: 216, 1248
+  size: 72, 80
+Middle
+  rotate: false
+  xy: 288, 1248
+  size: 108, 88
+Morkoth
+  rotate: false
+  xy: 0, 1336
+  size: 72, 82
+Myriad
+  rotate: false
+  xy: 72, 1336
+  size: 72, 80
+Narkneeia
+  rotate: false
+  xy: 144, 1336
+  size: 72, 80
+Ninja
+  rotate: false
+  xy: 216, 1336
+  size: 72, 80
+Outer
+  rotate: false
+  xy: 288, 1336
+  size: 108, 88
+Ozzy
+  rotate: false
+  xy: 0, 1424
+  size: 72, 80
+Pelican
+  rotate: false
+  xy: 72, 1424
+  size: 72, 80
+Pestilian
+  rotate: false
+  xy: 144, 1424
+  size: 72, 80
+Pikemen
+  rotate: false
+  xy: 216, 1424
+  size: 72, 80
+Priest_01
+  rotate: false
+  xy: 288, 1424
+  size: 72, 80
+Priest_02
+  rotate: false
+  xy: 0, 1504
+  size: 72, 80
+Priest_03
+  rotate: false
+  xy: 72, 1504
+  size: 72, 80
+Priest_04
+  rotate: false
+  xy: 144, 1504
+  size: 72, 80
+Priest_05
+  rotate: false
+  xy: 216, 1504
+  size: 72, 80
+Priest_06
+  rotate: false
+  xy: 288, 1504
+  size: 72, 80
+Priest_07
+  rotate: false
+  xy: 0, 1584
+  size: 72, 80
+Private
+  rotate: false
+  xy: 72, 1584
+  size: 72, 80
+Prospero
+  rotate: false
+  xy: 144, 1584
+  size: 72, 80
+Pyramid
+  rotate: false
+  xy: 216, 1584
+  size: 108, 88
+Raiden
+  rotate: false
+  xy: 324, 1584
+  size: 72, 80
+Raist
+  rotate: false
+  xy: 0, 1672
+  size: 72, 80
+Rendor
+  rotate: false
+  xy: 72, 1672
+  size: 72, 80
+Ricatamak
+  rotate: false
+  xy: 144, 1672
+  size: 72, 80
+Rust
+  rotate: false
+  xy: 216, 1672
+  size: 72, 80
+Sakura
+  rotate: false
+  xy: 288, 1672
+  size: 72, 80
+Samurai_01
+  rotate: false
+  xy: 0, 1752
+  size: 72, 80
+Samurai_02
+  rotate: false
+  xy: 72, 1752
+  size: 72, 80
+Samurai_03
+  rotate: false
+  xy: 144, 1752
+  size: 72, 80
+Sarah
+  rotate: false
+  xy: 216, 1752
+  size: 72, 80
+Sentinel
+  rotate: false
+  xy: 288, 1752
+  size: 72, 80
+Sentry
+  rotate: false
+  xy: 0, 1832
+  size: 72, 80
+Sergeant
+  rotate: false
+  xy: 72, 1832
+  size: 72, 80
+Sorriman
+  rotate: false
+  xy: 144, 1832
+  size: 72, 80
+Talon
+  rotate: false
+  xy: 216, 1832
+  size: 72, 80
+Tharagorn
+  rotate: false
+  xy: 288, 1832
+  size: 72, 80
+Thief_01
+  rotate: false
+  xy: 0, 1912
+  size: 72, 80
+Thief_02
+  rotate: false
+  xy: 72, 1912
+  size: 72, 80
+Thief_03
+  rotate: false
+  xy: 144, 1912
+  size: 72, 80
+Thief_04
+  rotate: false
+  xy: 216, 1912
+  size: 72, 80
+Thief_05
+  rotate: false
+  xy: 288, 1912
+  size: 72, 80
+Thief_06
+  rotate: false
+  xy: 0, 1992
+  size: 72, 80
+Thorin
+  rotate: false
+  xy: 72, 1992
+  size: 72, 80
+Tiger
+  rotate: false
+  xy: 144, 1992
+  size: 72, 80
+Tuck
+  rotate: false
+  xy: 216, 1992
+  size: 72, 80
+Turlach
+  rotate: false
+  xy: 288, 1992
+  size: 72, 80
+Uru
+  rotate: false
+  xy: 0, 2072
+  size: 72, 80
+Water
+  rotate: false
+  xy: 72, 2072
+  size: 72, 80
+Zacheri
+  rotate: false
+  xy: 144, 2072
+  size: 72, 80
+Zoidack
+  rotate: false
+  xy: 216, 2072
+  size: 72, 80

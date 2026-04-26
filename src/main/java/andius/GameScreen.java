@@ -182,7 +182,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void load(SaveGame saveGame) {
-        removeActors(saveGame);
+        //removeActors(saveGame);
 
         setMapPixelCoords(newMapPixelCoords, saveGame.x, saveGame.y, 0);
 
@@ -191,7 +191,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void show() {
-        removeActors(CTX.saveGame);
+        //removeActors(CTX.saveGame);
 
         Andius.HUD.addActor(this.stage);
         Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
@@ -547,6 +547,7 @@ public class GameScreen extends BaseScreen {
 
     }
 
+    /*
     private void removeActors(SaveGame saveGame) {
         if (this.removedActors) {
             return;
@@ -563,5 +564,6 @@ public class GameScreen extends BaseScreen {
         }
         this.removedActors = true;
     }
+    */
 
 }
