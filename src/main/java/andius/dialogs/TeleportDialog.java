@@ -11,23 +11,25 @@ import java.util.regex.Pattern;
 
 public class TeleportDialog extends Dialog {
 
-    public TeleportDialog(Context ctx, BaseScreen screen) {
-        super(ctx, screen);
+    private final Runnable afterTeleport;
 
+    public TeleportDialog(Context ctx, BaseScreen screen, Runnable afterTeleport) {
+        super(ctx, screen);
+        this.afterTeleport = afterTeleport;
         Vector3 v = new Vector3();
         screen.getCurrentMapCoords(v);
 
         if (screen instanceof OverworldScreen || screen instanceof GameScreen) {
-            scrollPane.add("Enter the destination coordinates one wishes to travel as (North, East).");
+            scrollPane.add("Enter the destination coordinates one wishes to travel as (North+South, East+West).");
             scrollPane.add("Current coordinates are");
-            scrollPane.add(String.format("North [%d]", (int) v.y));
-            scrollPane.add(String.format("East [%d]", (int) v.x));
+            scrollPane.add(String.format("North+South [%d]", (int) v.y));
+            scrollPane.add(String.format("East+West [%d]", (int) v.x));
         } else {
-            scrollPane.add("Enter the destination coordinates one wishes to travel as (Level, North, East).");
+            scrollPane.add("Enter the destination coordinates one wishes to travel as (Level, North+South, East+West).");
             scrollPane.add("Current coordinates are");
             scrollPane.add(String.format("Level [%d]", (int) v.z + 1));
-            scrollPane.add(String.format("North [%d]", (int) v.x));
-            scrollPane.add(String.format("East [%d]", (int) v.y));
+            scrollPane.add(String.format("North+South [%d]", (int) v.x));
+            scrollPane.add(String.format("East+West [%d]", (int) v.y));
         }
 
         input.setTextFieldListener(new TextField.TextFieldListener() {
@@ -53,6 +55,9 @@ public class TeleportDialog extends Dialog {
                             int eastwest = Integer.parseInt(coords[1]);
                             hide();
                             screen.teleport(0, northsouth, eastwest);
+                            if (afterTeleport != null) {
+                                afterTeleport.run();
+                            }
                         } else {
                             scrollPane.add("Nothing is happening");
                         }
@@ -68,6 +73,9 @@ public class TeleportDialog extends Dialog {
                             int eastwest = Integer.parseInt(coords[2]);
                             hide();
                             screen.teleport(vertical, northsouth, eastwest);
+                            if (afterTeleport != null) {
+                                afterTeleport.run();
+                            }
                         } else {
                             scrollPane.add("Nothing is happening");
                         }

@@ -10497,7 +10497,7 @@
     },
     {
         "id": 132,
-        "iconID": "Mage_02",
+        "iconID": "Marian",
         "name": "Mage Marian",
         "race": "DWARF",
         "characterClass": "MAGE",
@@ -11277,7 +11277,7 @@
     },
     {
         "id": 141,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Toran",
         "race": "GNOME",
         "characterClass": "THIEF",
@@ -11962,7 +11962,7 @@
     },
     {
         "id": 149,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Stalker",
         "race": "GNOME",
         "characterClass": "THIEF",
@@ -13217,7 +13217,7 @@
     },
     {
         "id": 164,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Sly",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -16326,7 +16326,7 @@
     },
     {
         "id": 200,
-        "iconID": "Thief_03",
+        "iconID": "Thief_04",
         "name": "Philthy",
         "race": "ELF",
         "characterClass": "THIEF",
@@ -16799,7 +16799,7 @@
     },
     {
         "id": 205,
-        "iconID": "Thief_03",
+        "iconID": "Thief_04",
         "name": "Slik",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -17317,7 +17317,7 @@
     },
     {
         "id": 210,
-        "iconID": "Thief_03",
+        "iconID": "Thief_05",
         "name": "Scios",
         "race": "HUMAN",
         "characterClass": "THIEF",
@@ -17388,7 +17388,7 @@
     },
     {
         "id": 211,
-        "iconID": "Thief_03",
+        "iconID": "Thief_04",
         "name": "Shadow",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -18501,7 +18501,7 @@
     },
     {
         "id": 222,
-        "iconID": "Thief_03",
+        "iconID": "Thief_06",
         "name": "Shades",
         "race": "DWARF",
         "characterClass": "THIEF",
@@ -19870,7 +19870,7 @@
     },
     {
         "id": 235,
-        "iconID": "Thief_03",
+        "iconID": "Thief_06",
         "name": "Aneas",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -22301,7 +22301,7 @@
     },
     {
         "id": 265,
-        "iconID": "Bishop_02",
+        "iconID": "Bishop_03",
         "name": "Zodac",
         "race": "DWARF",
         "characterClass": "BISHOP",
@@ -26465,7 +26465,7 @@
     },
     {
         "id": 314,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Bimbo",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -27696,7 +27696,7 @@
     },
     {
         "id": 327,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Strident",
         "race": "DWARF",
         "characterClass": "THIEF",
@@ -27775,7 +27775,7 @@
     },
     {
         "id": 328,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Nubs",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -28766,7 +28766,7 @@
     },
     {
         "id": 339,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Subati",
         "race": "HOBBIT",
         "characterClass": "THIEF",
@@ -28845,7 +28845,7 @@
     },
     {
         "id": 340,
-        "iconID": "Thief_03",
+        "iconID": "Thief_02",
         "name": "Auggie",
         "race": "ELF",
         "characterClass": "THIEF",
@@ -32043,7 +32043,7 @@
     },
     {
         "id": 377,
-        "iconID": "Mage_02",
+        "iconID": "Jesse",
         "name": "Jesse The Smith",
         "race": "GNOME",
         "characterClass": "MAGE",
@@ -32582,7 +32582,7 @@
         "id": 383,
         "iconID": "Lord",
         "name": "Mistress Flavia",
-        "race": "NORACE",
+        "race": "HUMAN",
         "characterClass": "LORD",
         "alignment": "GOOD",
         "items": [
@@ -33519,7 +33519,7 @@
         "id": 394,
         "iconID": "Fighter_04",
         "name": "Guntar",
-        "race": "NORACE",
+        "race": "HUMAN",
         "characterClass": "FIGHTER",
         "alignment": "NEUTRAL",
         "items": [
@@ -35448,7 +35448,7 @@
     },
     {
         "id": 419,
-        "iconID": "Laurel_F",
+        "iconID": "Duchess",
         "name": "Duchess Wanda",
         "race": "HUMAN",
         "characterClass": "LORD",
@@ -35525,7 +35525,7 @@
     },
     {
         "id": 420,
-        "iconID": "Laurel_F",
+        "iconID": "Duchess",
         "name": "Duchess Diana",
         "race": "HUMAN",
         "characterClass": "LORD",
@@ -37159,7 +37159,7 @@
     },
     {
         "id": 442,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Sir Manfred",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37234,7 +37234,7 @@
     },
     {
         "id": 443,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Sir Magnus",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37309,7 +37309,7 @@
     },
     {
         "id": 444,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Sir Hrymgnar",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37384,7 +37384,7 @@
     },
     {
         "id": 445,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Duke Sir Hanno",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37459,7 +37459,7 @@
     },
     {
         "id": 446,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Master Feral",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37534,7 +37534,7 @@
     },
     {
         "id": 447,
-        "iconID": "Fighter_05",
+        "iconID": "Chivalry",
         "name": "Sir Vykor",
         "race": "HUMAN",
         "characterClass": "FIGHTER",
@@ -37834,7 +37834,7 @@
     },
     {
         "id": 451,
-        "iconID": "Thief_03",
+        "iconID": "Thief_06",
         "name": "Moradin",
         "race": "GNOME",
         "characterClass": "THIEF",
@@ -41308,7 +41308,7 @@
     },
     {
         "id": 498,
-        "iconID": "Bishop_03",
+        "iconID": "Bishop_04",
         "name": "Grd. Inquisitor",
         "race": "HUMAN",
         "characterClass": "BISHOP",

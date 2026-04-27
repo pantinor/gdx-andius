@@ -543,8 +543,15 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
-    public void teleport(int level, int stepsX, int stepsY) {
-
+    public void teleport(int level, int north, int east) {
+        int width = this.map.getBaseMap().getWidth();
+        int height = this.map.getBaseMap().getHeight();
+        int x = east;
+        int y = north;
+        x = Math.max(0, Math.min(x, width - 1));
+        y = Math.max(0, Math.min(y, height - 1));
+        setMapPixelCoords(newMapPixelCoords, x, y, 0);
+        renderer.getFOV().calculateFOV(x, y, 72);
     }
 
     /*
@@ -564,6 +571,5 @@ public class GameScreen extends BaseScreen {
         }
         this.removedActors = true;
     }
-    */
-
+     */
 }

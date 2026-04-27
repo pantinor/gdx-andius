@@ -1525,14 +1525,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
-            this.icon = makeIcon(this.m.iconID);
+            this.icon = makeIcon(this.m.iconID, this.m.charlev);
 
             this.l1 = new Label("", Andius.skin, "default-16");
             this.l2 = new Label("", Andius.skin, "default-16");
             this.l3 = new DoGooderStatusLabel(mm);
             this.l4 = new DoGooderMagicPointsLabel(mm);
 
-            String d1 = String.format("%s  %s", m.name.toUpperCase(), m.race);
+            String d1 = String.format("%s  %s", m.name.toUpperCase(), m.race != null? m.race : "NO RACE");
             this.l1.setText(d1);
 
             String d2 = String.format("LVL %d  %s", mm.getLevel(), m.characterClass);
@@ -1631,13 +1631,15 @@ public class Wiz4CombatScreen implements Screen, Constants {
         }
     }
 
-    private Image makeIcon(String iconID) {
+    private Image makeIcon(String iconID, int charlev) {
         String regionName = iconID;
 
         if (iconID.startsWith("Mage")) {
             regionName = String.format("Mage_%02d", Utils.getRandomBetween(1, 9));
         } else if (iconID.startsWith("Fighter")) {
-            regionName = String.format("Fighter_%02d", Utils.getRandomBetween(1, 22));
+            int clampedLevel = Math.max(0, Math.min(charlev, 80));
+            int fighterIconNumber = (int) Math.floor((clampedLevel / 81.0) * 22) + 1;
+            regionName = String.format("Fighter_%02d", fighterIconNumber);
         } else if (iconID.startsWith("Priest")) {
             regionName = String.format("Priest_%02d", Utils.getRandomBetween(1, 7));
         }

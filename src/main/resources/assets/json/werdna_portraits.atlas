@@ -39,7 +39,7 @@ Bishop_03
   rotate: false
   xy: 252, 80
   size: 72, 80
-Bishop_06
+Bishop_04
   rotate: false
   xy: 324, 80
   size: 72, 80
@@ -235,7 +235,7 @@ Inner
   rotate: false
   xy: 144, 920
   size: 108, 88
-Jeese
+Jesse
   rotate: false
   xy: 252, 920
   size: 108, 88

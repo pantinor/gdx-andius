@@ -45,6 +45,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.CharArray;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import utils.AutoFocusScrollPane;
@@ -232,9 +233,27 @@ public class CampScreen implements Screen, Constants {
                         used = true;
                     }
 
-                    if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {
-                        map.getScreen().teleport(0, -1, 0);//get out of jail free card
-                        used = true;
+                    if (selectedItem.item.id == 87 && selectedItem.item.scenarioID == 4) {//get out of jail free card
+                        if (map.getScreen() instanceof WizardryDungeonScreen sc) {
+                            Vector3 pos = new Vector3();
+                            sc.getCurrentMapCoords(pos);
+
+                            int currentX = (int) pos.x;
+                            int currentY = (int) pos.y;
+                            int currentLevelIndex = (int) pos.z;
+                            int currentLevelNumber = currentLevelIndex + 1;
+
+                            Coord safe = findNearestSafeDungeonCell(map, currentLevelIndex, currentX, currentY);
+
+                            if (safe != null) {
+                                sc.setMapPixelCoords(null, safe.x, safe.y, currentLevelNumber);
+                                selectedPlayer.p.removeItem(87, 4);
+                                mainGame.setScreen(sc);
+                                used = true;
+                            } else {
+                                Sounds.play(Sound.NEGATIVE_EFFECT);
+                            }
+                        }
                     }
 
                     //holy hand grenade
@@ -470,7 +489,7 @@ public class CampScreen implements Screen, Constants {
 
         private void setInventoryTable() {
             invTable.align(Align.top);
-            invTable.clearChildren(); 
+            invTable.clearChildren();
 
             for (Item it : p.inventory) {
                 invTable.add(new ItemListing(it, p));
@@ -610,7 +629,10 @@ public class CampScreen implements Screen, Constants {
                     @Override
                     public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                         if (spell == Spells.MALOR) {
-                            new TeleportDialog(context, map.getScreen()).show(stage);
+                            TeleportDialog dialog = new TeleportDialog(context, map.getScreen(), () -> {
+                                Andius.mainGame.setScreen(map.getScreen());
+                            });
+                            dialog.show(stage);
                         } else {
                             castTargetSlider.spell = spell;
                             castTargetSlider.setZIndex(Integer.MAX_VALUE);
@@ -889,4 +911,74 @@ public class CampScreen implements Screen, Constants {
     @Override
     public void dispose() {
     }
+
+    private static class Coord {
+
+        final int x;
+        final int y;
+
+        Coord(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    private Coord findNearestSafeDungeonCell(Map map, int levelIndex, int startX, int startY) {
+        WizardryData.MazeLevel level = map.scenario().levels()[levelIndex];
+        WizardryData.MazeCell[][] cells = level.cells;
+        int dim = cells.length;
+
+        if (startX < 0 || startY < 0 || startX >= dim || startY >= dim) {
+            return null;
+        }
+
+        boolean[][] visited = new boolean[dim][dim];
+        ArrayDeque<Coord> queue = new ArrayDeque<>();
+
+        queue.add(new Coord(startX, startY));
+        visited[startX][startY] = true;
+
+        while (!queue.isEmpty()) {
+            Coord c = queue.removeFirst();
+            WizardryData.MazeCell cell = cells[c.x][c.y];
+
+            if (!(c.x == startX && c.y == startY) && isSafeTeleportCell(cell)) {
+                return c;
+            }
+
+            addNeighbor(queue, visited, cells, dim, c.x, c.y - 1);
+            addNeighbor(queue, visited, cells, dim, c.x, c.y + 1);
+            addNeighbor(queue, visited, cells, dim, c.x - 1, c.y);
+            addNeighbor(queue, visited, cells, dim, c.x + 1, c.y);
+        }
+
+        return null;
+    }
+
+    private boolean isSafeTeleportCell(WizardryData.MazeCell cell) {
+        return !cell.rock
+                && !cell.pit
+                && !cell.chute
+                && !cell.teleport
+                && !cell.cage
+                && cell.encounterID < 0
+                && cell.damage == null
+                && cell.itemRequired <= 0
+                && cell.function == null;
+    }
+
+    private void addNeighbor(ArrayDeque<Coord> queue, boolean[][] visited, WizardryData.MazeCell[][] cells, int dim, int toX, int toY) {
+        if (toX < 0 || toY < 0 || toX >= dim || toY >= dim) {
+            return;
+        }
+        if (visited[toX][toY]) {
+            return;
+        }
+        if (cells[toX][toY].rock) {
+            return;
+        }
+        visited[toX][toY] = true;
+        queue.addLast(new Coord(toX, toY));
+    }
+
 }
