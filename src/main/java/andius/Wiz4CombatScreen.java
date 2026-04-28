@@ -555,15 +555,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
                                 }
                             }
                         }
-
-                        if (weakestAlly != null
-                                && (!player.isDead() && player.hp < weakestAlly.getCurrentHitPoints())) {
-                            target = player;
-                        } else if (weakestAlly != null) {
+                        if (weakestAlly != null && weakestAlly.getCurrentHitPoints() < weakestAlly.getMaxHitPoints() / 2) {
                             target = weakestAlly;
                         } else if (!player.isDead()) {
                             target = player;
                         }
+                        Sounds.play(Sound.HEALING);
                     } else {
                         target = attacker;
                     }
@@ -1084,7 +1081,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     break;
                 }
 
-                if (player.armor != null && player.armor.id == 89
+                if (player.armor != null && player.armor.id == 89 //oxygen mask
                         && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
                     // immune
                 } else if (player.savingThrowSpell()) {
@@ -1532,7 +1529,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.l3 = new DoGooderStatusLabel(mm);
             this.l4 = new DoGooderMagicPointsLabel(mm);
 
-            String d1 = String.format("%s  %s", m.name.toUpperCase(), m.race != null? m.race : "NO RACE");
+            String d1 = String.format("%s  %s", m.name.toUpperCase(), m.race != null ? m.race : "NO RACE");
             this.l1.setText(d1);
 
             String d2 = String.format("LVL %d  %s", mm.getLevel(), m.characterClass);

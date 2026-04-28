@@ -697,6 +697,125 @@
                     "To the axiom.",
                     "The 1 pure axiom encompasses all things."
                 ]
+            }, {
+                "name": "Pyramon",
+                "description": "A soot-marked mapmaker who know about the Pyramid of Entrapment.",
+                "story": [
+                    "The Inner, Middle, and Outer Guardians are but locks on Werdna's first chain.",
+                    "The Black Candle can be useful at the Gates of Hell - but be careful of the order you use it.",
+                    "The Bloodstone is a good offering for a sword at the Dream Painter Altar!"
+                ]
+            },
+            {
+                "name": "Morna the Catacomb Nurse",
+                "description": "A pale priestess carrying grave-dust and bandages.",
+                "story": [
+                    "In the Catacombs, the Cone of Silence and the Twilight Cloak lie lost among the dead—recover them if you can survive the guardians.",
+                    "Seek Lander’s Turquoise here; it is one of the Dreampainter’s offerings and will be needed at the altar with the Bloodstone and Amber Dragon.",
+                    "The path onward leads to the Gates of Hell, but they will not open to force or spell alone.",
+                    "First, slay the Dreampainter and take his Ka—without the soul, the gate will not heed you.",
+                    "Then gather the ritual: Demonic Chimes from the Hellhound, the Arabic Diary from Jesse the Smith, and a Black Candle from the depths.",
+                    "At the gate, invoke the bell, read the book, and light the candle while carrying the Ka and wearing the Winged Boots.",
+                    "Only then will the Gates of Hell open; beyond them waits the Holy Hand Grenade—take it and live."
+                ]
+            },
+            {
+                "name": "Sapper Glumwhistle",
+                "description": "A nervous goblin with scorched boots.",
+                "story": [
+                    "Step not by instinct. The Thousand Cuts are laid with mines, and the southern earth bites deepest.",
+                    "The Witching Rod drinks from Tannic Acid and points toward doom; Witch may use it for a Dab of Puce!",
+                    "Defeat Glum and seize the Black Box. From that moment, thy hoard may become a weapon instead of a burden.",
+                    "The Amber Dragon is a suitable offering for the Dream Painter Altar - Choose Wisely!."
+                ]
+            },
+            {
+                "name": "Sister Amberveil",
+                "description": "A veiled acolyte of the Dreampainter's ruined temple.",
+                "story": [
+                    "Three stones open the altar's memory: Bloodstone, Turquoise, and Amber Dragon.",
+                    "Place them in reverse order when the time comes, and the temple shall answer with a sword.",
+                    "Choose carefully. The blade in Werdna's hand may bend the tale's ending. The Dragons Claw is my favorite!"
+                ]
+            },
+            {
+                "name": "Dervish Dumapic",
+                "description": "A spinning sage whose eyes never face the same direction twice.",
+                "story": [
+                    "Trust not thy face after the whirl. Cast Dumapic or read the doors to know where the spinner threw thee.",
+                    "Watch out for Gomez and his Gorillas!",
+                    "The Sentinel is not to be trifled with...",
+                    "When the riddle asks what power all this began around, answer: AMULET for a powerful Cape!",
+                    "Take the Good Hope Cape, the Arabic Diary, and the Turban; one is strength, one is ceremony, one is mystery.",
+                    "Jesse the Smith was once a friend of mine.  His Diary was used in the Gates of Hell!"
+                ]
+            },
+            {
+                "name": "Luma Noct",
+                "description": "A butterfly-winged oracle split between light and shadow.",
+                "story": [
+                    "The board is creatures of light and darkness, but the path is narrower than it appears. Stray little; slay much.",
+                    "Invoke the Oxygen Mask to laugh at Makanito and Lakanito, but remember: its blessing is jealous and fragile.",
+                    "SilverStripe liked to cast away, but that mask always helped me out...he was harmless after that.",
+                    "Carry away the Cape of Hide - Healing without end is worth more than gold.",
+                    "The Magicians Hat can cast MAHALITO!",
+                    "Make sure to say hello to Mistress Flavia and John Griffon, he still has not returned my special boots!",
+                    "I could go anywhere with those boots!"
+                ]
+            },
+            {
+                "name": "Cagewise Nan",
+                "description": "A witch's errand-runner who taps every wall before moving.",
+                "story": [
+                    "The Maze of Wandering hates cartographers—rotators, cages, and one-way doors will punish haste.",
+                    "The Witch speaks only in riddles: camphor, Spanish unguent, tannic acid, blender, rabbit fur, and FeS2.",
+                    "Camphor is the Aromatic Ball from Level 4; Spanish unguent is the Cleansing Oil bought in the Cosmic Cube.",
+                    "Tannic acid is the Witching Rod, and FeS2 is Golden Pyrite—both found on Level 8.",
+                    "Blender is the Blade Cusinart’, taken from a powerful adventurer party in the Cosmic Cube.",
+                    "Rabbit fur is the Magician’s Hat, also taken from adventurers within the Cube.",
+                    "Bring all six items together and the Witch will craft the Dab of Puce.",
+                    "Carry the Aromatic Ball and keep Malor ready—without escape, even a master of evil is only a prisoner."
+                ]
+            },
+            {
+                "name": "Chimekeeper Ash",
+                "description": "A charred bell-ringer with a diary chained to his wrist.",
+                "story": [
+                    "The return road: Slay the Dreampainter and take his Ka—without the soul, the Gates of Hell will not open.",
+                    "To reach him, climb the ziggurat with the Winged Boots from Level 5; invoke them to fly and claim the Hopalong Carrot.",
+                    "Use the Carrot to cross the barrier and defeat the Dreampainter—take the Ka and keep it with you.",
+                    "At the Gates of Hell, the ritual must be exact: Demonic Chimes from the Hellhound, the Arabic Diary from Jesse the Smith, and a Black Candle from the guardians below.",
+                    "Invoke the bell, book, and candle together while carrying the Ka and wearing the Winged Boots—the gate will yield.",
+                    "Beyond the gate lies the Holy Hand Grenade; guard it well, for it is needed when the Cosmic Cube itself must be broken."
+                ]
+            },
+            {
+                "name": "Cube-Seer Joachim",
+                "description": "A three-eyed guide with chalk marks on every finger.",
+                "story": [
+                    "Levels 3→2→1 form the Cosmic Cube—spinners and teleports will shuffle you; confirm position often (Dumapic) and save on each level change.",
+                    "From Level 2, go north to the shop and buy Cleansing Oil; store it safely.",
+                    "Hunt Cube adventurer parties until you secure Blade Cusinart’, Holy Limp Wrist, and Pennonceaux; take them immediately and box them.",
+                    "Use walls to control movement; if disoriented, follow a wall to find a teleporter and reset your route.",
+                    "When blocked by the final stone, equip the Holy Hand Grenade and have Cleansing Oil ready.",
+                    "Count the charge, cleanse with the oil, drop the grenade, and step back—then flee the blast."
+                ]
+            },
+            {
+                "name": "Castellan Vex",
+                "description": "A fallen herald who speaks Trebor's password through clenched teeth.",
+                "story": [
+                    "Castle 1: Speak TREBOR SUX to enter. Fight through Von Halstern's Squires, but beware Boltac's Anti-Shoplifting Unit if you try to steal the Lych-Gate.",
+                    "Find the Inn Key from the Man Who Bows, then use it to pass the inn door.",
+                    "Use the Maintenance Cap to repair the broken fountain; bathe there while Neutral to become Good.",
+                    "With the Crystal Rose, the Chivalry lets you pass, and the Captain's Council can be bought for 1,000,000 gold to gain the Rallying Horn.",
+                    "Castle 2: Trade the Dab of Puce for the Arrow of Truth, the Pennonceaux for the Orb of Dreams, and claim the Crystal Rose only after freeing Trebor's curse.",
+                    "The Baron's Council requires the Crystal Rose; sign their contract to receive the Signet Ring.",
+                    "Castle 3: Ask the Man Who Bows for the Mythril Glove, then prepare for the Duke's Council.",
+                    "The Duke's Council demands the Signet Ring, Rallying Horn, Crystal Rose, Arrow of Truth, and Orb of Dreams; accept the crown for one ending, or refuse and fight.",
+                    "For Kadorto's statue, bring the Holy Limp Wrist, equip the Mythril Glove, and wield the Kris of Truth or one Dreampainter sword.",
+                    "Hawkwind cannot be beaten normally—only a Dink can defeat the living legend."
+                ]
             }
         ],
         "TRINSIC": [
