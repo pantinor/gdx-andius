@@ -6,6 +6,8 @@ import andius.objects.Icons;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -14,28 +16,21 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import utils.FreeTypeSkinLoader;
 import utils.Hud;
+import static utils.Utils.CLASSPTH_RSLVR;
 
 public class Andius extends Game {
 
     public static final int SCREEN_WIDTH = 1024;
     public static final int SCREEN_HEIGHT = 768;
-
     public static final int MAP_VIEWPORT_DIM = 624;
-
+    
     public static Context CTX;
-
     public static Texture backGround;
     public static TextureAtlas mapAtlas;
-
+    public static AssetManager assetManager = new AssetManager(CLASSPTH_RSLVR);
     public static BitmapFont font12;
     public static BitmapFont font14;
     public static BitmapFont font16;
@@ -45,9 +40,8 @@ public class Andius extends Game {
 
     public static Andius mainGame;
     public static StartScreen startScreen;
-
     public static Skin skin;
-
+    
     public static boolean playMusic = true;
     public static float musicVolume = 0.1f;
     public static Music music;
@@ -74,80 +68,23 @@ public class Andius extends Game {
     @Override
     public void create() {
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/sansblack.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        InternalFileHandleResolver resolver = new InternalFileHandleResolver();
+        assetManager.setLoader(Skin.class, new FreeTypeSkinLoader(resolver));
 
-        parameter.size = 12;
-        font12 = generator.generateFont(parameter);
+        FreeTypeSkinLoader.FreeTypeSkinLoaderParameter skinParam
+                = new FreeTypeSkinLoader.FreeTypeSkinLoaderParameter("assets/skin/uiskin.atlas");
 
-        parameter.size = 14;
-        font14 = generator.generateFont(parameter);
+        assetManager.load("assets/skin/uiskin.json", Skin.class, skinParam);
+        assetManager.finishLoading();
 
-        parameter.size = 16;
-        font16 = generator.generateFont(parameter);
+        skin = assetManager.get("assets/skin/uiskin.json", Skin.class);
 
-        parameter.size = 18;
-        font18 = generator.generateFont(parameter);
-
-        parameter.size = 24;
-        font24 = generator.generateFont(parameter);
-
-        parameter.size = 72;
-        font72 = generator.generateFont(parameter);
-
-        generator.dispose();
-
-        generator = new FreeTypeFontGenerator(Gdx.files.classpath("assets/fonts/ultima.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        parameter.size = 24;
-        BitmapFont smallUltimaFont = generator.generateFont(parameter);
-
-        generator.dispose();
-
-        skin = new Skin(Gdx.files.classpath("assets/skin/uiskin.json"));
-        skin.remove("default-font", BitmapFont.class);
-        skin.add("font12", font12, BitmapFont.class);
-        skin.add("font14", font14, BitmapFont.class);
-        skin.add("font16", font16, BitmapFont.class);
-        skin.add("font24", font24, BitmapFont.class);
-        skin.add("font72", font72, BitmapFont.class);
-        skin.add("small-ultima", smallUltimaFont, BitmapFont.class);
-
-        skin.get("default-12", Label.LabelStyle.class).font = font12;
-        skin.get("default-12", TextButton.TextButtonStyle.class).font = font12;
-        skin.get("default-12-red", TextButton.TextButtonStyle.class).font = font12;
-        skin.get("default-12-green", TextButton.TextButtonStyle.class).font = font12;
-        skin.get("default-12-yellow", TextButton.TextButtonStyle.class).font = font12;
-        skin.get("default-12", CheckBox.CheckBoxStyle.class).font = font12;
-        skin.get("default-12-padded", List.ListStyle.class).font = font12;
-        skin.get("default-12-padded-clear", List.ListStyle.class).font = font12;
-
-        skin.get("default-14", Label.LabelStyle.class).font = font14;
-
-        skin.get("default", Label.LabelStyle.class).font = font16;
-        skin.get("default-16", Label.LabelStyle.class).font = font16;
-        skin.get("default", TextButton.TextButtonStyle.class).font = font16;
-        skin.get("default-16", TextButton.TextButtonStyle.class).font = font16;
-        skin.get("default-16-red", TextButton.TextButtonStyle.class).font = font16;
-        skin.get("default-16-green", TextButton.TextButtonStyle.class).font = font16;
-        skin.get("default-16-yellow", TextButton.TextButtonStyle.class).font = font16;
-        skin.get("default-16", CheckBox.CheckBoxStyle.class).font = font16;
-
-        skin.get("default-24", Label.LabelStyle.class).font = font24;
-        skin.get("default-24", TextButton.TextButtonStyle.class).font = font24;
-        skin.get("default-24-red", TextButton.TextButtonStyle.class).font = font24;
-        skin.get("default-24-green", TextButton.TextButtonStyle.class).font = font24;
-        skin.get("default-24-yellow", TextButton.TextButtonStyle.class).font = font24;
-
-        skin.get("default-16", SelectBox.SelectBoxStyle.class).font = font16;
-        skin.get("default-16", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
-        skin.get("default-16-dark-background", SelectBox.SelectBoxStyle.class).font = font16;
-        skin.get("default-16-dark-background", SelectBox.SelectBoxStyle.class).listStyle.font = font16;
-        skin.get("default-16", List.ListStyle.class).font = font16;
-        skin.get("default-16-padded", List.ListStyle.class).font = font16;
-        skin.get("default-16-padded-clear", List.ListStyle.class).font = font16;
-        skin.get("default-16", TextField.TextFieldStyle.class).font = font16;
+        font12 = skin.get("font12", BitmapFont.class);
+        font14 = skin.get("font14", BitmapFont.class);
+        font16 = skin.get("font16", BitmapFont.class);
+        font18 = skin.get("font18", BitmapFont.class);
+        font24 = skin.get("font24", BitmapFont.class);
+        font72 = skin.get("font72", BitmapFont.class);
 
         HUD = new Hud();
 
@@ -172,7 +109,7 @@ public class Andius extends Game {
             Icons.init();
             UltimaSprite.init();
 
-            world_scr_avatar = new Animation(.4f, u1Tiles[10], u1Tiles[11]);
+            world_scr_avatar = new Animation<>(.4f, u1Tiles[10], u1Tiles[11]);
             game_scr_avatar = u1Tiles[10];
 
             WizardryData.class.getClass();

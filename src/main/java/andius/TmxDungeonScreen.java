@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.assetManager;
 import static andius.Andius.mainGame;
 import static andius.Constants.PIT_DAMAGE_MSGS;
 import andius.objects.Sound;
@@ -24,7 +25,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -57,7 +57,6 @@ import utils.ObjLoader;
 import utils.PartyDeathException;
 import utils.RotateOnlyInputController;
 import utils.Utils;
-import static utils.Utils.CLASSPTH_RSLVR;
 
 public class TmxDungeonScreen extends BaseScreen {
 
@@ -70,7 +69,6 @@ public class TmxDungeonScreen extends BaseScreen {
     private final SpriteBatch batch;
 
     private RotateOnlyInputController cameraPan;
-    private final AssetManager assets;
 
     private Model ladderUp, ladderDown, elevatorModel, topHole, bottomHole, letterM, fountainModel, chestModel;
     private Model[] walls = new Model[4];
@@ -119,7 +117,6 @@ public class TmxDungeonScreen extends BaseScreen {
         this.map = map;
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
-        this.assets = new AssetManager(CLASSPTH_RSLVR);
 
         this.dim = map.scenario().dim();
         this.miniMapBackgroundDimension = MINI_DIM * this.dim + 8;
@@ -169,21 +166,21 @@ public class TmxDungeonScreen extends BaseScreen {
     }
 
     private void init() {
-        assets.load("assets/graphics/floor.png", Texture.class);
-        assets.load("assets/graphics/dirt.png", Texture.class);
-        assets.load("assets/graphics/wall1.png", Texture.class);
-        assets.load("assets/graphics/wall2.png", Texture.class);
-        assets.load("assets/graphics/wall3.png", Texture.class);
-        assets.load("assets/graphics/wall4.png", Texture.class);
-        assets.load("assets/graphics/rock.png", Texture.class);
-        assets.load("assets/graphics/grass.png", Texture.class);
-        assets.load("assets/graphics/roof.png", Texture.class);
-        assets.update(2000);
+        assetManager.load("assets/graphics/floor.png", Texture.class);
+        assetManager.load("assets/graphics/dirt.png", Texture.class);
+        assetManager.load("assets/graphics/wall1.png", Texture.class);
+        assetManager.load("assets/graphics/wall2.png", Texture.class);
+        assetManager.load("assets/graphics/wall3.png", Texture.class);
+        assetManager.load("assets/graphics/wall4.png", Texture.class);
+        assetManager.load("assets/graphics/rock.png", Texture.class);
+        assetManager.load("assets/graphics/grass.png", Texture.class);
+        assetManager.load("assets/graphics/roof.png", Texture.class);
+        assetManager.update(2000);
 
-        Material mwall1 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall2 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall3 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall4 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall1 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall2 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall3 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall4 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material medges = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
 
         ladderUp = ObjLoader.loadModel("assets/graphics/ladder.obj", "Ladder", 0.1f);
@@ -205,10 +202,10 @@ public class TmxDungeonScreen extends BaseScreen {
         doors[2] = Utils.getDoor(builder, walls[2]);
         doors[3] = Utils.getDoor(builder, walls[3]);
 
-        Texture floorTex = assets.get("assets/graphics/rock.png", Texture.class);
+        Texture floorTex = assetManager.get("assets/graphics/rock.png", Texture.class);
         floorTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        Texture ceilingTex = assets.get("assets/graphics/dirt.png", Texture.class);
+        Texture ceilingTex = assetManager.get("assets/graphics/dirt.png", Texture.class);
         ceilingTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         Material mfloor = new Material(TextureAttribute.createDiffuse(floorTex), IntAttribute.createCullFace(GL20.GL_NONE));

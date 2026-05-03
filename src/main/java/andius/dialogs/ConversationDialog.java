@@ -3,6 +3,7 @@ package andius.dialogs;
 import andius.Context;
 import andius.GameScreen;
 import andius.objects.Conversations.Conversation;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class ConversationDialog extends Dialog {
@@ -16,7 +17,7 @@ public class ConversationDialog extends Dialog {
         this.conv = conv;
 
         if (conv.description != null) {
-            scrollPane.add("You meet " + conv.name + ". " + conv.description);
+            scrollPane.add("You meet " + conv.name + ". " + conv.description, Color.GREEN);
         }
 
         input.setTextFieldListener((TextField tf, char key) -> {

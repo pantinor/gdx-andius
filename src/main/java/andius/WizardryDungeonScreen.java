@@ -1,6 +1,7 @@
 package andius;
 
 import static andius.Andius.CTX;
+import static andius.Andius.assetManager;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.objects.Direction;
@@ -25,7 +26,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
@@ -75,7 +75,6 @@ public class WizardryDungeonScreen extends BaseScreen {
     private final SpriteBatch batch;
 
     private RotateOnlyInputController cameraPan;
-    private final AssetManager assets;
 
     private Model ladderUp, ladderDown, elevatorModel, pentagram, topHole, bottomHole, letterM, fountainModel, chestModel;
     private Model[] markModels = new Model[4];
@@ -131,7 +130,6 @@ public class WizardryDungeonScreen extends BaseScreen {
         this.map = map;
         this.stage = new Stage();
         //this.stage.setDebugAll(true);
-        this.assets = new AssetManager(CLASSPTH_RSLVR);
 
         this.dim = map.scenario().dim();
         this.miniMapBackgroundDimension = MINI_DIM * this.dim + 8;
@@ -186,36 +184,36 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     private void init() {
-        assets.load("assets/graphics/floor.png", Texture.class);
-        assets.load("assets/graphics/dirt.png", Texture.class);
-        assets.load("assets/graphics/wall1.png", Texture.class);
-        assets.load("assets/graphics/wall2.png", Texture.class);
-        assets.load("assets/graphics/wall3.png", Texture.class);
-        assets.load("assets/graphics/wall4.png", Texture.class);
-        assets.load("assets/graphics/rock.png", Texture.class);
-        assets.load("assets/graphics/grass.png", Texture.class);
-        assets.load("assets/graphics/roof.png", Texture.class);
-        assets.update(2000);
+        assetManager.load("assets/graphics/floor.png", Texture.class);
+        assetManager.load("assets/graphics/dirt.png", Texture.class);
+        assetManager.load("assets/graphics/wall1.png", Texture.class);
+        assetManager.load("assets/graphics/wall2.png", Texture.class);
+        assetManager.load("assets/graphics/wall3.png", Texture.class);
+        assetManager.load("assets/graphics/wall4.png", Texture.class);
+        assetManager.load("assets/graphics/rock.png", Texture.class);
+        assetManager.load("assets/graphics/grass.png", Texture.class);
+        assetManager.load("assets/graphics/roof.png", Texture.class);
+        assetManager.update(2000);
 
-        Texture floorTex = assets.get("assets/graphics/rock.png", Texture.class);
+        Texture floorTex = assetManager.get("assets/graphics/rock.png", Texture.class);
         floorTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        Texture dirtTex = assets.get("assets/graphics/dirt.png", Texture.class);
+        Texture dirtTex = assetManager.get("assets/graphics/dirt.png", Texture.class);
         dirtTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        Texture roofTex = assets.get("assets/graphics/roof.png", Texture.class);
+        Texture roofTex = assetManager.get("assets/graphics/roof.png", Texture.class);
         roofTex.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        Material mwall1 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall2 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall3 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
-        Material mwall4 = new Material(TextureAttribute.createDiffuse(assets.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall1 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall1.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall2 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall2.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall3 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall3.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
+        Material mwall4 = new Material(TextureAttribute.createDiffuse(assetManager.get("assets/graphics/wall4.png", Texture.class)), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mdirt = new Material(TextureAttribute.createDiffuse(dirtTex), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mroof = new Material(TextureAttribute.createDiffuse(roofTex), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mfloor = new Material(TextureAttribute.createDiffuse(floorTex), IntAttribute.createCullFace(GL20.GL_NONE));
         Material mgreen = new Material(ColorAttribute.createDiffuse(Color.FOREST), IntAttribute.createCullFace(GL20.GL_NONE));
         Material medges = new Material(ColorAttribute.createDiffuse(wallColor), IntAttribute.createCullFace(GL20.GL_NONE));
-        Texture grz = assets.get("assets/graphics/grass.png", Texture.class);
+        Texture grz = assetManager.get("assets/graphics/grass.png", Texture.class);
         grz.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         Material mgrass = new Material(TextureAttribute.createDiffuse(grz), IntAttribute.createCullFace(GL20.GL_NONE));
 
@@ -1369,7 +1367,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             if (owner != null) {
                 Andius.HUD.log(destinationCell.message.getText(), Color.GREEN);
                 log(String.format("%s traded %s for %s", owner.name, item1.genericName, item2.genericName));
-                owner.inventory.remove(item1);
+                owner.removeItem(item1.id, item1.scenarioID);
                 owner.inventory.add(item2);
                 Sounds.play(Sound.POSITIVE_EFFECT);
             } else {

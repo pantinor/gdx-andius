@@ -781,31 +781,42 @@
                 "name": "Chimekeeper Ash",
                 "description": "A charred bell-ringer with a diary chained to his wrist.",
                 "story": [
-                    "The return road: Slay the Dreampainter and take his Ka—without the soul, the Gates of Hell will not open.",
-                    "To reach him, climb the ziggurat with the Winged Boots from Level 5; invoke them to fly and claim the Hopalong Carrot.",
-                    "Use the Carrot to cross the barrier and defeat the Dreampainter—take the Ka and keep it with you.",
+                    "Trying to explore beyond the edges of the Ziggurat can cause you to fall off the edge!",
+                    "Slay the Dreampainter and take his Ka!",
+                    "Without his soul, the Gates of Hell will not open!",
+                    "To reach him climb the Ziggurat with the Winged Boots from The Death of a Thousand Cuts.",
+                    "Fly and claim the Hopalong Carrot!",
+                    "Use the Carrot to cross the barrier and defeat the Dreampainter and take his Ka.",
                     "At the Gates of Hell, the ritual must be exact: Demonic Chimes from the Hellhound, the Arabic Diary from Jesse the Smith, and a Black Candle from the guardians below.",
-                    "Invoke the bell, book, and candle together while carrying the Ka and wearing the Winged Boots—the gate will yield.",
-                    "Beyond the gate lies the Holy Hand Grenade; guard it well, for it is needed when the Cosmic Cube itself must be broken."
+                    "Invoke the bell, book, and candle together while carrying the Ka and wearing the Winged Boots and the gate will yield!",
+                    "Beyond the gate lies the Holy Hand Grenade!",
+                    "Guard it well, for it is needed when the Cosmic Cube itself must be broken..."
                 ]
             },
             {
                 "name": "Cube-Seer Joachim",
                 "description": "A three-eyed guide with chalk marks on every finger.",
                 "story": [
-                    "Levels 3→2→1 form the Cosmic Cube—spinners and teleports will shuffle you; confirm position often (Dumapic) and save on each level change.",
-                    "From Level 2, go north to the shop and buy Cleansing Oil; store it safely.",
-                    "Hunt Cube adventurer parties until you secure Blade Cusinart’, Holy Limp Wrist, and Pennonceaux; take them immediately and box them.",
-                    "Use walls to control movement; if disoriented, follow a wall to find a teleporter and reset your route.",
-                    "When blocked by the final stone, equip the Holy Hand Grenade and have Cleansing Oil ready.",
-                    "Count the charge, cleanse with the oil, drop the grenade, and step back—then flee the blast."
+                    "The Cosmic Cube comprises Levels 3, 2, and 1, with each level divided into segments; the invitation to spend 'a lifetime or two' there is correct!",
+                    "The good news is that whenever you enter a chute or teleporter or climb stairs, defeated guardians do not return to life.",
+                    "Those Do-Gooders are more powerful than ever, and there is no regular exit from this level.",
+                    "The puzzle you must solve to escape the Cube cannot be solved unless you obtained the Holy Hand Grenade in advance.",
+                    "The Company on Level 3 is striving for Mordor or Bust!",
+                    "They drop a White Cap, the Wizard Skullcap, and a 3-Sided Cloth, the Skull's Cap, when defeated.",
+                    "The latter is cursed, while the former lowers your AC by 3, enhances your spell damage, and lets you cast Masopic when used. Do not confuse them!",
+                    "Joachim's Jihad on Level 2 is tough to defeat.",
+                    "They carry a Silk Cloth, the Pennonceaux, which you certainly will be needing later!",
+                    "Loktar's Lucky Laddies on Level 1 are not difficult to defeat.",
+                    "They carry the Holy Limp Wrist, a relic that casts the DIALKO spell, used to awaken the Amulet granting god-like powers, especially useful against Kadorto himself!",
+                    "Applet's Angels on Level 1 is by far the toughest group in the dungeon, even though they only carry the Adept Baldness, not nearly as useful compared to the Wizard Skullcap."
                 ]
             },
             {
                 "name": "Castellan Vex",
-                "description": "A fallen herald who speaks Trebor's password through clenched teeth.",
+                "description": "A fallen herald with clenched teeth.",
                 "story": [
-                    "Castle 1: Speak TREBOR SUX to enter. Fight through Von Halstern's Squires, but beware Boltac's Anti-Shoplifting Unit if you try to steal the Lych-Gate.",
+                    "When arriving at the castle, speak TREBOR SUX to enter.",
+                    "Fight through Von Halstern's Squires, but beware Boltac's Anti-Shoplifting Unit if you try to steal the Lych-Gate.",
                     "Find the Inn Key from the Man Who Bows, then use it to pass the inn door.",
                     "Use the Maintenance Cap to repair the broken fountain; bathe there while Neutral to become Good.",
                     "With the Crystal Rose, the Chivalry lets you pass, and the Captain's Council can be bought for 1,000,000 gold to gain the Rallying Horn.",

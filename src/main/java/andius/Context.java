@@ -69,7 +69,7 @@ public class Context {
 
     public CharacterRecord getOwner(Item item) {
         for (int i = 0; i < this.saveGame.players.length && item != null; i++) {
-            if (this.saveGame.players[i].inventory.contains(item)) {
+            if (this.saveGame.players[i].itemOwned(item)) {
                 return players()[i];
             }
         }

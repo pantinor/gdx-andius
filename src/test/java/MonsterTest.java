@@ -44,7 +44,6 @@ import com.badlogic.gdx.utils.GdxNativesLoader;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import utils.Utils;
 
 public class MonsterTest {
 
@@ -59,9 +58,6 @@ public class MonsterTest {
             String filename = inv.getArgument(0, String.class);
             return new FileHandle(filename);
         }).when(Gdx.files).classpath(anyString());
-
-        Utils.class.getClass();
-        Utils.CLASSPTH_RSLVR = (String fileName) -> Gdx.files.classpath("./src/main/resources/" + fileName);
 
         Constants.class.getClass();
         WizardryData.class.getClass();

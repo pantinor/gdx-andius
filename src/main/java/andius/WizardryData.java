@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import org.apache.commons.io.EndianUtils;
@@ -571,8 +570,6 @@ public class WizardryData {
         private final MazeLevel[] levels;
         private final int startLevel, startX, startY;
         private final String[] levelDescriptions;
-
-        private final java.util.Map<String, DoGooder> characterMap;
         private final List<DoGooder> characters;
 
         private Scenario(List<Item> items, List<Monster> monsters, List<Reward> rewards, List<Message> messages,
@@ -585,7 +582,6 @@ public class WizardryData {
             this.startLevel = 1;
             this.startX = 0;
             this.startY = 0;
-            this.characterMap = null;
             this.characters = null;
             for (MazeLevel lvl : levels) {
                 lvl.scenario = this;
@@ -603,7 +599,6 @@ public class WizardryData {
             this.startLevel = startLevel;
             this.startX = startX;
             this.startY = startY;
-            this.characterMap = WER4_CHAR_MAP;
             this.characters = WER4_CHARS;
             for (MazeLevel lvl : levels) {
                 lvl.scenario = this;
@@ -654,10 +649,6 @@ public class WizardryData {
 
         public MazeLevel[] levels() {
             return levels;
-        }
-
-        public Map<String, DoGooder> characterMap() {
-            return characterMap;
         }
 
         public Item item(int id) {
@@ -2131,7 +2122,7 @@ public class WizardryData {
                     if (x == 3 && y == 6 && l.level == 1) {
                         c.message = getMessage(WER_MESSAGES, 121);
                         c.tradeItem1 = 5;
-                        c.tradeItem2 = 0;//lose the winged boots for traversing the castle so pits are not voided
+                        c.tradeItem2 = 0;//lost the winged boots for traversing the castle so pits are not voided
                     }
                     if (x == 3 && y == 9 && l.level == 1) {
                         c.message = getMessage(WER_MESSAGES, 122);

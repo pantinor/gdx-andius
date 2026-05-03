@@ -41,7 +41,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static FileHandleResolver CLASSPTH_RSLVR = (String fileName) -> Gdx.files.classpath(fileName);
+    public static final FileHandleResolver CLASSPTH_RSLVR = (String fileName) -> Gdx.files.classpath(fileName);
 
     public static final Random RANDOM = new Random();
 
