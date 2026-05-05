@@ -72,6 +72,20 @@ public class State {
         return disabled;
     }
 
+    public boolean isGone() {
+        boolean gone = false;
+
+        if (has(Status.ASHES)) {
+            gone = true;
+        }
+
+        if (has(Status.STONED)) {
+            gone = true;
+        }
+
+        return gone;
+    }
+
     public Color color() {
         for (Status s : Status.values()) {
             if (has(s)) {

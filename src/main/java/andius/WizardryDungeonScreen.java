@@ -754,10 +754,10 @@ public class WizardryDungeonScreen extends BaseScreen {
         int y = (Math.round(currentPos.z) - 1);
         if (this.map.scenario().getLevelDescriptions() != null) {
             String lbl = String.format(this.map.scenario().getLevelDescriptions()[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
+            Andius.font18.draw(batch, lbl, 200, Andius.SCREEN_HEIGHT - 12);
         } else {
             String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
+            Andius.font18.draw(batch, lbl, 200, Andius.SCREEN_HEIGHT - 12);
         }
 
         batch.end();

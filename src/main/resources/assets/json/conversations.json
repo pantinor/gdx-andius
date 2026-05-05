@@ -724,8 +724,10 @@
                 "description": "A nervous goblin with scorched boots.",
                 "story": [
                     "Step not by instinct. The Thousand Cuts are laid with mines, and the southern earth bites deepest.",
-                    "The Witching Rod drinks from Tannic Acid and points toward doom; Witch may use it for a Dab of Puce!",
-                    "Defeat Glum and seize the Black Box. From that moment, thy hoard may become a weapon instead of a burden.",
+                    "The Witching Rod wades from Tannic Acid.",
+                    "The Golden Pyrite can be useful to obtain.",
+                    "The Witch may desire both of them for a Dab of Puce!",
+                    "Defeat Glum and seize the Black Box. From that moment, thy hoard may become safe from Thieves!",
                     "The Amber Dragon is a suitable offering for the Dream Painter Altar - Choose Wisely!."
                 ]
             },
@@ -733,7 +735,7 @@
                 "name": "Sister Amberveil",
                 "description": "A veiled acolyte of the Dreampainter's ruined temple.",
                 "story": [
-                    "Three stones open the altar's memory: Bloodstone, Turquoise, and Amber Dragon.",
+                    "Three stones open the Altar's memory: Bloodstone, Turquoise, and Amber Dragon.",
                     "Place them in reverse order when the time comes, and the temple shall answer with a sword.",
                     "Choose carefully. The blade in Werdna's hand may bend the tale's ending. The Dragons Claw is my favorite!"
                 ]
@@ -782,6 +784,7 @@
                 "description": "A charred bell-ringer with a diary chained to his wrist.",
                 "story": [
                     "Trying to explore beyond the edges of the Ziggurat can cause you to fall off the edge!",
+                    "A Black Candle is required to find the way to the top!",
                     "Slay the Dreampainter and take his Ka!",
                     "Without his soul, the Gates of Hell will not open!",
                     "To reach him climb the Ziggurat with the Winged Boots from The Death of a Thousand Cuts.",

@@ -2046,23 +2046,23 @@ public class WizardryData {
                     }
                     if (x == 0 && y == 1 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 71);
-
                     }
                     if (((x == 2 && (y == 0 || y == 19)) || (x == 4 && (y == 1 || y == 18))) && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 70);
                     }
                     if (x == 8 && y == 6 && l.level == 8) {
                         c.itemRequired = 5;//winged boots
+                        c.message = getMessage(WER_MESSAGES, 875);
                     }
                     if (x == 8 && y == 5 && l.level == 8) {
                         c.hiddenEastDoor = true;//dreampainter room
                     }
                     if (x == 14 && y == 8 && l.level == 8) {
                         c.itemRequired = 103;//black candle
+                        c.message = getMessage(WER_MESSAGES, 876);
                     }
                     if (x == 18 && y == 9 && l.level == 8) {
                         c.message = getMessage(WER_MESSAGES, 72);
-
                         c.lair = false;
                     }
                     if (x == 18 && y == 10 && l.level == 8) {

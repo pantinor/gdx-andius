@@ -360,7 +360,7 @@
             "and paintings leads you to the belief",
             "that this is the fabled lost",
             " ",
-            "\"Temple of the Dreampainter\"",
+            "Temple of the Dream Painter",
             " ",
             "which  was  dedicated to  one of  the",
             "ancient creators of this world,  whom",
@@ -372,8 +372,7 @@
         "text": [
             "A small sign on the left wall",
             "reads as follows:",
-            " ",
-            "** PRIEST\u0027S HOLE **",
+            "** PRIEST'S HOLE **",
             "** For Emergency Use Only! **"
         ]
     },
@@ -384,9 +383,7 @@
             "(Children under the age of 90",
             "must be accompanied by",
             "Parent, Guardian, Priest",
-            "or Demon -- NO EXCEPTIONS!)",
-            " ",
-            "? ? ? ? ?"
+            "or Demon -- NO EXCEPTIONS!)"
         ]
     },
     {
@@ -413,8 +410,22 @@
             "lead upwards  through the  roof",
             "of the level.",
             " ",
-            "Don\u0027t get too near the edge, it",
+            "Don't get too near the edge, it",
             "looks like a long fall!"
+        ]
+    },
+    {
+        "id": 875,
+        "text": [
+            "There seems no way to scale the wall here!",
+            "Special foot gear may help perhaps..."
+        ]
+    },
+    {
+        "id": 876,
+        "text": [
+            "There seems no way to pass through this priestly portal.",
+            "Perhaps a candle of black light may help..."
         ]
     },
     {
@@ -1531,24 +1542,17 @@
     {
         "id": 191,
         "text": [
-            "You see an old Witch stirring a",
-            "large cauldron:",
-            "",
-            "\"So nice of you to wander by (Heh,",
-            "Heh, Heh), my fine fellow. Are you",
-            "enjoying your travels? \u003cSnicker\u003e\"",
-            "\"A man  with  your  aspirations",
-            "should  definitely  have some of",
-            "my famous  \u0027Blue Blood Special\u0027.",
-            "If you  have the  makings,  I\u0027ll",
-            "be glad to brew you a batch!\""
+            "You see an old Witch stirring a large cauldron.",
+            "So nice of you to wander by (Heh, Heh, Heh)",
+            "my fine fellow. Are you enjoying your travels? Snicker",
+            "A man  with  your  aspirations should  definitely  have some of my famous Blue Blood Special.",
+            "If you  have the  makings,  I,ll be glad to brew you a batch!"
         ]
     },
     {
         "id": 192,
         "text": [
-            "\"Let\u0027s see now what parts",
-            "of the recipe you have..\""
+            "Let's see now what parts of the recipe you have.."
         ]
     },
     {
@@ -1557,7 +1561,7 @@
             "You need ^",
             "You have ^",
             "Camphor        ",
-            "Rabbit\u0027s Fur   ",
+            "Rabbit's Fur   ",
             "Fe s-sub-2     ",
             "Tannic Acid    ",
             "Spanish Unguent",
@@ -1567,39 +1571,27 @@
     {
         "id": 194,
         "text": [
-            "\"My my! You will have to go find",
-            "some  more  ingredients before I",
-            "can help you.\"",
-            "\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\""
+            "My my! You will have to go find some  more  ingredients before I can help you.",
+            "Be Seeing You! Cackle Cackle"
         ]
     },
     {
         "id": 195,
         "text": [
-            "\"Well, you have been an industr-",
-            "ious young man!  You have all of",
-            "the ingredients of my recipe!",
-            "",
-            "\"I\u0027ll be  happy to make my brew,",
-            "but naturally,  I will require a",
-            "token of payment.  Not money, of",
-            "course...just a favor at a later",
-            "date. \u003cCackle\u003e\""
+            "Well, you have been an industrious young man!",
+            "You have all of the ingredients of my recipe!",
+            "I,ll be happy to make my brew, but naturally, I will require a token of payment.",
+            "Not money, of course... just a favor at a later date. Cackle"
         ]
     },
     {
         "id": 196,
         "text": [
-            "\"Bubble, bubble, toil and trouble,",
-            "Cauldron boil and cauldron bubble!\"",
-            "",
-            "\"Oh, don\u0027t mind  the theatrics, it",
-            "is all part of the union contract.",
-            "We have to keep up  our image, you",
-            "know.  Just hold on a minute and I",
-            "will get your \u0027Blue Blood Special\u0027",
-            "out of the refrigerator...\"",
-            "\"Be Seeing You! \u003cCackle\u003e \u003cCackle\u003e\""
+            "Bubble, bubble, toil and trouble, Cauldron boil and cauldron bubble!",
+            "Oh, don,t mind  the theatrics, it is all part of the union contract.",
+            "We have to keep up  our image, you know.",
+            "Just hold on a minute and I will get your Blue Blood Special out of the refrigerator...",
+            "Be Seeing You! Cackle Cackle"
         ]
     },
     {

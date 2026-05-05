@@ -42,7 +42,6 @@ public class SaveGame implements Constants {
 
     //not used
     //public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
-    
     public final java.util.Map<Map, List<AnsweredRiddle>> riddles = new HashMap<>();
 
     public static SaveGame read(String file) throws Exception {
@@ -67,7 +66,7 @@ public class SaveGame implements Constants {
         if (players == null) {
             players = new CharacterRecord[0];
         }
-        
+
         for (CharacterRecord player : players) {
             if (player != null) {
                 player.acmodifier1 = 0;
@@ -107,8 +106,7 @@ public class SaveGame implements Constants {
                 }
             }
         }
-        */
-
+         */
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String json = gson.toJson(this);
@@ -326,6 +324,13 @@ public class SaveGame implements Constants {
             }
             return this.status.isDisabled();
         }
+        
+        public boolean isGone() {
+            if (isDead()) {
+                return true;
+            }
+            return this.status.isGone();
+        }
 
         public boolean isAllWell() {
             if (isDead()) {
@@ -347,6 +352,7 @@ public class SaveGame implements Constants {
             this.status.decrement(Status.PARALYZED);
             this.status.decrement(Status.SILENCED);
             this.status.decrement(Status.ASLEEP);
+            this.status.decrement(Status.AFRAID);
         }
 
         public int calculateAC() {
@@ -561,6 +567,10 @@ public class SaveGame implements Constants {
         @Override
         public String toString() {
             return this.name.toUpperCase();
+        }
+
+        public String toDebugString() {
+            return "CharacterRecord{" + "name=" + name + ", status=" + status + ", race=" + race + ", classType=" + classType + ", hp=" + hp + ", maxhp=" + maxhp + ", exp=" + exp + ", gold=" + gold + ", level=" + level + '}';
         }
 
     }

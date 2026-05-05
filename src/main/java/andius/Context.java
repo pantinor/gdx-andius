@@ -17,6 +17,8 @@ import andius.objects.Dice;
 import andius.objects.Item;
 import andius.objects.SaveGame;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Sound;
+import andius.objects.Sounds;
 import java.util.ArrayList;
 import java.util.List;
 import utils.PartyDeathException;
@@ -57,6 +59,20 @@ public class Context {
         List<CharacterRecord> enabled = new ArrayList<>();
         for (CharacterRecord cr : this.saveGame.players) {
             if (!cr.isDisabled()) {
+                enabled.add(cr);
+            }
+        }
+        if (enabled.isEmpty()) {
+            return null;
+        }
+        int pick = Utils.RANDOM.nextInt(enabled.size());
+        return enabled.get(pick);
+    }
+
+    public CharacterRecord pickRandomPlayerWhoCanMove() {
+        List<CharacterRecord> enabled = new ArrayList<>();
+        for (CharacterRecord cr : this.saveGame.players) {
+            if (!cr.isGone()) {
                 enabled.add(cr);
             }
         }
@@ -148,7 +164,8 @@ public class Context {
                 }
             }
         }
-        if (pickRandomEnabledPlayer() == null) {
+        if (pickRandomPlayerWhoCanMove() == null) {
+            Sounds.play(Sound.WEAKNESS);
             throw new PartyDeathException();
         }
     }

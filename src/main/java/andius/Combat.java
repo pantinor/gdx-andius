@@ -8,6 +8,7 @@ import andius.objects.Mutable;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Sound;
+import andius.objects.Sounds;
 import andius.objects.Spells;
 import static andius.objects.Spells.*;
 import com.badlogic.gdx.graphics.Color;

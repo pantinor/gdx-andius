@@ -170,6 +170,9 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public void partyDeath(Throwable t) {
+        for (SaveGame.CharacterRecord player : CTX.saveGame.players) {
+            System.out.println(player.toDebugString());
+        }
         t.printStackTrace();
         Map.releaseAllMaps();
         mainGame.setScreen(startScreen);

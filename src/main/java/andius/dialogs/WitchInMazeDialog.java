@@ -36,28 +36,35 @@ public class WitchInMazeDialog extends Dialog {
         boolean alreadyHaveDabOfPuce = false;
 
         for (CharacterRecord rec : ctx.players()) {
-            for (Item i : rec.inventory) {
-                if (i.scenarioID == 4 && i.id == 13) {
-                    found.add(i.name);//camphor aromatic ball
-                }
-                if (i.scenarioID == 4 && i.id == 11) {
-                    found.add(i.name);//spanish unguent oil of ole
-                }
-                if (i.scenarioID == 4 && i.id == 12) {
-                    found.add(i.name);//tannic acid witching rod
-                }
-                if (i.scenarioID == 4 && i.id == 72) {
-                    found.add(i.name);//blender blade cusinart
-                }
-                if (i.scenarioID == 4 && i.id == 57) {
-                    found.add(i.name);//rabbit fur magicians hat
-                }
-                if (i.scenarioID == 4 && i.id == 88) {
-                    found.add(i.name);//fe2 golden pyrite
-                }
-                if (i.scenarioID == 4 && i.id == 18) {
-                    alreadyHaveDabOfPuce = true;
-                }
+
+            Item aromaticBall = rec.itemOwned(13, 4);
+            Item cleansingOil = rec.itemOwned(11, 4);
+            Item witchingRod = rec.itemOwned(12, 4);
+            Item bladeCusinart = rec.itemOwned(72, 4);
+            Item magiciansHat = rec.itemOwned(57, 4);
+            Item goldenPyrite = rec.itemOwned(88, 4);
+            Item dabOfPuce = rec.itemOwned(18, 4);
+
+            if (aromaticBall != null) {
+                found.add(aromaticBall.name);
+            }
+            if (cleansingOil != null) {
+                found.add(cleansingOil.name);
+            }
+            if (witchingRod != null) {
+                found.add(witchingRod.name);
+            }
+            if (bladeCusinart != null) {
+                found.add(bladeCusinart.name);
+            }
+            if (magiciansHat != null) {
+                found.add(magiciansHat.name);
+            }
+            if (goldenPyrite != null) {
+                found.add(goldenPyrite.name);
+            }
+            if (dabOfPuce != null) {
+                alreadyHaveDabOfPuce = true;
             }
         }
 
