@@ -1084,6 +1084,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 if (player.armor != null && player.armor.id == 89 //oxygen mask
                         && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
                     // immune
+                    log("Saved by Oxygen Mask!", Color.GREEN);
                 } else if (player.savingThrowSpell()) {
                     // saved
                 } else {

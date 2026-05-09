@@ -11,6 +11,8 @@ import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
 import static andius.WizardryData.WER_MESSAGES;
+import static andius.WizardryData.ZIGGURAT_BLOCKED_MOVES;
+import static andius.WizardryData.ZIGGURAT_EDGE_FALLS;
 import static andius.WizardryData.getMessage;
 import static andius.objects.Direction.*;
 import andius.objects.DoGooder;
@@ -1283,8 +1285,16 @@ public class WizardryDungeonScreen extends BaseScreen {
             return;
         }
 
+        if (this.map == Map.WIZARDRY4 && currentCell.address.level == 8 && CTX.partyHasItem(5, 4) == null) {//no winged boots
+            for (int[] move : ZIGGURAT_BLOCKED_MOVES) {
+                if (currentCell.address.row == move[0] && currentCell.address.column == move[1] && dx == move[2] && dy == move[3]) {
+                    return;
+                }
+            }
+        }
+
         if (destinationCell.damage != null) {
-            if (CTX.partyHasItem(5, 4) == null) {//winged boots
+            if (CTX.partyHasItem(5, 4) == null) {//no winged boots
                 CTX.damageGroup(destinationCell.damage);
                 log(PIT_DAMAGE_MSGS[Utils.RANDOM.nextInt(PIT_DAMAGE_MSGS.length)]);
                 Sounds.play(Sound.PC_STRUCK);
@@ -1293,6 +1303,14 @@ public class WizardryDungeonScreen extends BaseScreen {
                         //on ledge
                     } else {
                         teleport(new MazeAddress(0, dx, dy), false);
+                    }
+                }
+                if (this.map == Map.WIZARDRY4 && currentCell.address.level == 8) {
+                    for (int[] move : ZIGGURAT_EDGE_FALLS) {
+                        if (currentCell.address.row == move[0] && currentCell.address.column == move[1] && dx == move[2] && dy == move[3]) {
+                            teleport(new MazeAddress(8, move[4], move[5]), false);
+                            return;
+                        }
                     }
                 }
             }

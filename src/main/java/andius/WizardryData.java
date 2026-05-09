@@ -1987,6 +1987,47 @@ public class WizardryData {
         "Sacrifices You To Kadorto"
     };
 
+    public static final int[][] ZIGGURAT_BLOCKED_MOVES = {
+        {2, 0, 3, 0},
+        {2, 19, 3, 19},
+        {4, 1, 5, 1},
+        {4, 18, 5, 18},
+        {6, 2, 7, 2},
+        {6, 17, 7, 17},
+        {8, 3, 9, 3},
+        {8, 16, 9, 16},
+        {10, 4, 11, 4},
+        {10, 15, 11, 15},
+        {12, 5, 13, 5},
+        {12, 14, 13, 14},
+        {14, 6, 15, 6},
+        {14, 13, 15, 13},
+        {16, 7, 17, 7},
+        {16, 12, 17, 12},
+        {18, 8, 19, 8},
+        {18, 11, 19, 11}
+    };
+
+    public static int[][] ZIGGURAT_EDGE_FALLS = {
+        {18, 11, 18, 12, 16, 12},
+        {16, 12, 16, 13, 14, 13},
+        {14, 13, 14, 14, 12, 14},
+        {12, 14, 12, 15, 10, 15},
+        {10, 15, 10, 16, 8, 16},
+        {8, 16, 8, 17, 6, 17},
+        {6, 17, 6, 18, 4, 18},
+        {4, 18, 4, 19, 2, 19},
+        //
+        {18, 8, 18, 7, 16, 7},
+        {16, 7, 16, 6, 14, 6},
+        {14, 6, 14, 5, 12, 5},
+        {12, 5, 12, 4, 10, 4},
+        {10, 4, 10, 3, 8, 3},
+        {8, 3, 8, 2, 6, 2},
+        {6, 2, 6, 1, 4, 1},
+        {4, 1, 4, 0, 2, 0}
+    };
+
     private static void wiz4Customization(MazeLevel[] levels) {
         for (int i = 0; i < wiz4Addrs.length; i++) {
             MazeLevel fromLevel = levels[wiz4Addrs[i][0]];
@@ -2051,7 +2092,7 @@ public class WizardryData {
                         c.message = getMessage(WER_MESSAGES, 70);
                     }
                     if (x == 8 && y == 6 && l.level == 8) {
-                        c.itemRequired = 5;//winged boots
+                        c.itemRequired = 10;//hopalong carrot
                         c.message = getMessage(WER_MESSAGES, 875);
                     }
                     if (x == 8 && y == 5 && l.level == 8) {
