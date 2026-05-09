@@ -1677,6 +1677,14 @@ public class WizardryDungeonScreen extends BaseScreen {
             } else if ((level == 0 || level >= 11) && !CTX.saveGame.riddles.get(Map.WIZARDRY4).contains(new AnsweredRiddle(0, 1, 9))) {
                 failed = true;//trebur sux riddle must be answered before malor can be used to the castle levels and beyond
             }
+            //no winged boots and malor to ziggurat damage cell then fail
+            if (level == 8 && CTX.partyHasItem(5, 4) == null) {
+                WizardryData.MazeLevel[] levels = this.map.scenario().levels();
+                MazeCell destinationCell = levels[8].cells[x][y];
+                if (destinationCell.damage != null) {
+                    failed = true;
+                }
+            }
             if (failed) {
                 Sounds.play(Sound.FLEE);
                 return;
