@@ -8,6 +8,7 @@ import static andius.Andius.startScreen;
 import andius.WizardryData.MazeCell;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.WER_ITEMS;
+import static andius.WizardryData.nextHawkindQuote;
 import andius.objects.ClassType;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
@@ -92,7 +93,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private int suprised = 0;
     MazeCell destCell, fromCell;
 
-    public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent, MazeCell destCell, MazeCell fromCell) {
+    public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent, MazeCell destCell, MazeCell fromCell, String initialMessage) {
 
         this.opponent = opponent;
         this.player = player;
@@ -275,6 +276,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
         } else {
             this.suprised = 0;
             log("You encounter " + disp, Color.YELLOW);
+        }
+        
+        if (initialMessage != null) {
+            log(initialMessage, Color.RED);
         }
 
     }
@@ -768,10 +773,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
                                 log("As mighty Achilles fell to Paris arrow, so does Lord Hawkwind fall to the stab of a lowly Dink!  Long will Skara Brae be mourning his passing!", Color.WHITE);
                             }
                         } else {
-                            log(String.format("%s attacks %s who noticeth it not!", attName, "Lord Hawkwind"), Color.SKY);
+                            log("Lord Hawkwind - " + nextHawkindQuote(), Color.SKY);
                         }
                     } else {
-                        log(String.format("%s attacks %s who noticeth it not!", attName, "Lord Hawkwind"), Color.SKY);
+                        log("Lord Hawkwind - " + nextHawkindQuote(), Color.SKY);
                     }
                 } else {
                     m.adjustHitPoints(-damage);

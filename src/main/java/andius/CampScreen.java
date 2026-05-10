@@ -271,6 +271,7 @@ public class CampScreen implements Screen, Constants {
                                 sc.addBlock(1, cell2, 16, 15, true);
                                 Sounds.play(Sound.EXPLOSION);
                                 selectedPlayer.p.removeItem(4, 4);
+                                context.saveGame.hhgUsed = true;
                                 mainGame.setScreen(map.getScreen());
                             } else {
                                 Sounds.play(Sound.NEGATIVE_EFFECT);

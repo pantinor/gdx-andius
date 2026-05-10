@@ -53,6 +53,25 @@ public class Wiz4CombatTestMain extends Game {
                 }
             }
 
+            // visualize Wizardry 4 do-gooder encounter odds by level
+            for (int i = 0; i < Constants.Map.WIZARDRY4.scenario().levels().length; i++) {
+                WizardryData.MazeLevelV4 lvl4 = (WizardryData.MazeLevelV4) Constants.Map.WIZARDRY4.scenario().levels()[i];
+                System.out.println("\n==============================");
+                System.out.println("WIZ4 LEVEL " + (i + 1));
+                System.out.println("==============================");
+                for (int oddsIdx = 0; oddsIdx < lvl4.monsterOdds.length; oddsIdx++) {
+                    WizardryData.EncounterOdds odds = lvl4.monsterOdds[oddsIdx];
+                    System.out.println("\nEncounter Bucket " + oddsIdx);
+                    System.out.println(odds);
+                    for (Integer id : odds.getIds()) {
+                        if (id >= 0 && id < WER4_CHARS.size()) {
+                            DoGooder dg = WER4_CHARS.get(id);
+                            System.out.printf("  [%03d] %-24s class=%-10s level=%d%n", dg.id, dg.name, dg.characterClass, dg.charlev);
+                        }
+                    }
+                }
+            }
+
             Andius.CTX = new Context();
             Context ctx = Andius.CTX;
 
@@ -87,7 +106,7 @@ public class Wiz4CombatTestMain extends Game {
             mms.add(new MutableMonster(WER_MONSTERS.get(108)));
             mms.add(new MutableMonster(WER_MONSTERS.get(108)));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[4], mms, WER4_CHARS.get(448), null, null));
+            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[4], mms, WER4_CHARS.get(448), null, null, null));
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(454), null, null));
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(8).getName(), PMO_MONSTERS.get(8), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));

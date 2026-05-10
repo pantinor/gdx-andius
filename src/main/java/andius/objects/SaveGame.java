@@ -40,10 +40,9 @@ public class SaveGame implements Constants {
     public int level;//map level
     public Direction direction;
 
-    //not used
-    //public final java.util.Map<Map, List<String>> removedActors = new HashMap<>();
     public final java.util.Map<Map, List<AnsweredRiddle>> riddles = new HashMap<>();
-
+    public boolean hhgUsed = false;//was the holy hand grenade used
+    
     public static SaveGame read(String file) throws Exception {
         //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
         //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);

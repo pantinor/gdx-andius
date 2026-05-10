@@ -7,9 +7,11 @@ import andius.objects.Sounds;
 import andius.objects.Direction;
 import andius.dialogs.RiddleDialog;
 import static andius.Andius.mainGame;
+import static andius.WizardryData.MALOR_BLOCKED_MOVES;
 import andius.WizardryData.MazeAddress;
 import andius.WizardryData.MazeCell;
 import andius.WizardryData.MazeLevel;
+import andius.WizardryData.Scenario;
 import static andius.WizardryData.WER_MESSAGES;
 import static andius.WizardryData.ZIGGURAT_BLOCKED_MOVES;
 import static andius.WizardryData.ZIGGURAT_EDGE_FALLS;
@@ -446,6 +448,15 @@ public class WizardryDungeonScreen extends BaseScreen {
                 MazeCell cell = this.map.scenario().levels()[ar.level].cells[ar.x][ar.y];
                 cell.riddleAnswers.clear();
             }
+        }
+
+        if (saveGame.hhgUsed) {
+            MazeCell cell1 = cell(15, 15, 1);
+            MazeCell cell2 = cell(16, 15, 1);
+            cell1.northWall = false;
+            cell2.southWall = false;
+            addBlock(1, cell1, 15, 15, true);
+            addBlock(1, cell2, 16, 15, true);
         }
 
         this.loadedMazeData = true;
@@ -1302,7 +1313,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                     if (dx == 9 && dy == 8 && this.currentLevel == 13) {
                         //on ledge
                     } else {
-                        teleport(new MazeAddress(0, dx, dy), false);
+                        teleport(new MazeAddress(1, dx, dy), false);
                     }
                 }
                 if (this.map == Map.WIZARDRY4 && currentCell.address.level == 8) {
@@ -1570,39 +1581,66 @@ public class WizardryDungeonScreen extends BaseScreen {
         if (this.map == Map.WIZARDRY4) {
 
             if ((destCell.encounterID > 0 && !defeated.contains(destCell.encounterID))) {
-
-                if (!destCell.fightIfDoNotOwnAnyOfItems.isEmpty() && CTX.partyHasAnyOfTheseItems(destCell.fightIfDoNotOwnAnyOfItems, 4) != null) {
-                    //no fight
-                    if (destCell.encounterGiveItem > 0) {
-                        Item give = this.map.scenario().items().get(destCell.encounterGiveItem);
+                if (!destCell.fightIfDoNotOwnAnyOfItems.isEmpty()) {
+                    Item bypassItem = CTX.partyHasAnyOfTheseItems(destCell.fightIfDoNotOwnAnyOfItems, 4);
+                    if (bypassItem != null) {
                         Andius.HUD.log(destCell.encounterTradeSuccessMessage.getText(), Color.YELLOW);
-                        Andius.HUD.log(String.format("%s obtained a %s", CTX.saveGame.players[0].name, give.genericName));
-                        CTX.saveGame.players[0].inventory.add(give);
-                        destCell.message = null;
-                        destCell.encounterID = -1;
+                        if (destCell.encounterGiveItem > 0) {
+                            Item give = this.map.scenario().items().get(destCell.encounterGiveItem);
+                            Andius.HUD.log(String.format("%s obtained a %s", CTX.saveGame.players[0].name, give.name));
+                            CTX.saveGame.players[0].inventory.add(give);
+                            destCell.message = null;
+                            destCell.encounterID = -1;
+                        }
                         Sounds.play(Sound.POSITIVE_EFFECT);
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        String msg = String.format("You do not have the %s!", Scenario.WER.itemNames(destCell.fightIfDoNotOwnAnyOfItems));
+                        Andius.HUD.log(msg, Color.RED);
+                        DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
+                        Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell, msg);
+                        mainGame.setScreen(cs);
                     }
-                } else if (destCell.encounterGiveItem > 0 && CTX.partyHasItem(destCell.encounterGiveItem, 4) != null) {
-                    //no fight
-                } else if (destCell.encounterTakeItem > 0 && CTX.partyHasItem(destCell.encounterTakeItem, 4) != null) {
-                    //no fight
-                    if (destCell.encounterGiveItem > 0) {
-                        Item take = this.map.scenario().items().get(destCell.encounterTakeItem);
-                        Item give = this.map.scenario().items().get(destCell.encounterGiveItem);
+                } else if (destCell.encounterTakeItem > 0 && destCell.encounterGiveItem > 0) {
+                    Item taken = CTX.partyHasItem(destCell.encounterTakeItem, 4);
+                    if (taken != null) {
+                        Item received = this.map.scenario().items().get(destCell.encounterGiveItem);
                         Andius.HUD.log(destCell.encounterTradeSuccessMessage.getText(), Color.YELLOW);
-                        Andius.HUD.log(String.format("%s traded %s for %s", CTX.saveGame.players[0].name, take.genericName, give.genericName));
-                        CTX.saveGame.players[0].inventory.remove(take);
-                        CTX.saveGame.players[0].inventory.add(give);
+                        Andius.HUD.log(String.format("%s accepts the %s and offers the %s", CTX.saveGame.players[0].name, received.name, taken.name), Color.GREEN);
+                        CTX.saveGame.players[0].inventory.remove(taken);
+                        CTX.saveGame.players[0].inventory.add(received);
                         destCell.message = null;
                         destCell.encounterID = -1;
                         Sounds.play(Sound.POSITIVE_EFFECT);
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        String msg = String.format("You do not have the %s!", Scenario.WER.itemName(destCell.encounterTakeItem));
+                        Andius.HUD.log(msg, Color.RED);
+                        DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
+                        Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell, msg);
+                        mainGame.setScreen(cs);
                     }
                 } else {
                     DoGooder dogooder = this.map.scenario().characters().get(destCell.encounterID);
-                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell);
+                    Wiz4CombatScreen cs = new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, dogooder, destCell, fromCell, null);
                     mainGame.setScreen(cs);
                 }
             } else {
+                /**
+                 * Each movement step in Wizardry IV has a 25% chance to trigger
+                 * a random do-gooder encounter. When an encounter is triggered,
+                 * the current dungeon level chooses from one of three encounter
+                 * probability tables: the primary table is used about 75% of
+                 * the time, the secondary table about 18.75%, and the rare
+                 * table about 6.25%. After selecting a table, the game rolls
+                 * within that table’s configured monster ID ranges using the
+                 * `EncounterOdds` structure, which can probabilistically
+                 * advance into higher offset ranges based on the
+                 * `extraRangeOdds` setting. The resulting do-gooder ID is then
+                 * checked against the defeated list. If that do-gooder has
+                 * already been defeated, the game retries up to 10 times to
+                 * find a valid undefeated encounter before giving up.
+                 */
                 if (Utils.percentChance(25)) {
                     int maxTries = 10;
                     for (int tries = 0; tries < maxTries; tries++) {
@@ -1612,7 +1650,7 @@ public class WizardryDungeonScreen extends BaseScreen {
                         }
                         if (!defeated.contains(id)) {
                             DoGooder d = this.map.scenario().characters().get(id);
-                            mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell));
+                            mainGame.setScreen(new Wiz4CombatScreen(CTX.saveGame.players[0], CTX.saveGame.players[0].summonedMonsters, d, destCell, fromCell, null));
                             break;
                         }
                     }
@@ -1683,6 +1721,12 @@ public class WizardryDungeonScreen extends BaseScreen {
                 MazeCell destinationCell = levels[8].cells[x][y];
                 if (destinationCell.damage != null) {
                     failed = true;
+                }
+            }
+            for (int[] tport : MALOR_BLOCKED_MOVES) {
+                if (level == tport[0] && x == tport[1] && y == tport[2]) {
+                    failed = true;
+                    break;
                 }
             }
             if (failed) {

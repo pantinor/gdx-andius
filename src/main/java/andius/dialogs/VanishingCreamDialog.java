@@ -169,6 +169,8 @@ public class VanishingCreamDialog extends Dialog {
             return Collections.emptyList();
         }
 
+        Collections.shuffle(allItems);
+
         long totalAvailable = totalCost(allItems);
         if (totalAvailable < requiredCost) {
             return Collections.emptyList();
@@ -278,6 +280,7 @@ public class VanishingCreamDialog extends Dialog {
     }
 
     private static class BarterItem {
+
         private final CharacterRecord player;
         private final Item item;
         private final int playerIndex;

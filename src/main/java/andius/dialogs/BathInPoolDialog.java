@@ -46,10 +46,12 @@ public class BathInPoolDialog extends Dialog {
                             Item r = Scenario.WER.items().get(120);
                             ctx.players()[0].inventory.add(r);
                             screen.log(getMessage(Scenario.WER.messages(), 153).getText());
-                            screen.log(ctx.players()[0].name.toUpperCase() + " obtained " + r.genericName);
+                            screen.log(ctx.players()[0].name.toUpperCase() + " obtained " + r.name);
                             Sounds.play(Sound.HEALING);
                             ctx.players()[0].summonedMonsters.clear();
                         }
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
                     }
 
                     hide();

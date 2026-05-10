@@ -119,21 +119,25 @@ public class Context {
     }
 
     public Item partyHasItem(int id, int scenarioID) {
-        for (CharacterRecord rec : this.saveGame.players) {
-            Item it = rec.itemOwned(id, scenarioID);
-            if (it != null) {
-                return it;
+        if (id > 0) {
+            for (CharacterRecord rec : this.saveGame.players) {
+                Item it = rec.itemOwned(id, scenarioID);
+                if (it != null) {
+                    return it;
+                }
             }
         }
         return null;
     }
 
     public Item partyHasAnyOfTheseItems(List<Integer> items, int scenarioID) {
-        for (int id : items) {
-            for (CharacterRecord rec : this.saveGame.players) {
-                Item it = rec.itemOwned(id, scenarioID);
-                if (it != null) {
-                    return it;
+        if (items != null && !items.isEmpty()) {
+            for (int id : items) {
+                for (CharacterRecord rec : this.saveGame.players) {
+                    Item it = rec.itemOwned(id, scenarioID);
+                    if (it != null) {
+                        return it;
+                    }
                 }
             }
         }

@@ -669,6 +669,25 @@ public class WizardryData {
             return null;
         }
 
+        public String itemName(int id) {
+            for (Item it : items) {
+                if (it.id == id) {
+                    return it.name;
+                }
+            }
+            return null;
+        }
+
+        public String itemNames(List<Integer> ids) {
+            String ret = "";
+            for (Item it : items) {
+                if (ids.contains(it.id)) {
+                    ret += it.name + " ";
+                }
+            }
+            return ret.length() == 0 ? null : ret;
+        }
+
         public String[] getLevelDescriptions() {
             return levelDescriptions;
         }
@@ -1959,7 +1978,17 @@ public class WizardryData {
         wiz4Customization(WER_LEVELS);
     }
 
-    public static String[] HAWKWIND_REPLIES = new String[]{
+    private static int hawkCount = 0;
+
+    public static String nextHawkindQuote() {
+        hawkCount++;
+        if (hawkCount == HAWKWIND_REPLIES.length) {
+            hawkCount = 0;
+        }
+        return HAWKWIND_REPLIES[hawkCount];
+    }
+
+    private static String[] HAWKWIND_REPLIES = new String[]{
         "Laughs",
         "Chuckles",
         "Snickers",
@@ -1985,6 +2014,17 @@ public class WizardryData {
         "Puts You On The Sacrificial Altar",
         "Anoints You With Sacrificial Oils",
         "Sacrifices You To Kadorto"
+    };
+
+    public static final int[][] MALOR_BLOCKED_MOVES = {
+        {8, 18, 6},
+        {8, 8, 6},
+        {8, 8, 7},
+        {8, 9, 6},
+        {8, 9, 7},
+        {2, 16, 15},
+        {2, 16, 16},
+        {2, 17, 15}
     };
 
     public static final int[][] ZIGGURAT_BLOCKED_MOVES = {
@@ -2200,6 +2240,7 @@ public class WizardryData {
                     if (x == 9 && y == 13 && l.level == 1) {//von halstern chivalry
                         c.message = new Message(getMessage(WER_MESSAGES, 110));
                         c.fightIfDoNotOwnAnyOfItems.add(17);//crystal rose
+                        c.encounterTradeSuccessMessage = new Message("I see you bear the crystal Rose, you may pass Sir!");
                         c.encounterID = 442;
                     }
                     if (x == 9 && y == 12 && l.level == 1) {
@@ -2237,7 +2278,7 @@ public class WizardryData {
                     if (x == 13 && y == 14 && l.level == 13) {//tiger cubs
                         c.message = new Message(getMessage(WER_MESSAGES, 107), getMessage(WER_MESSAGES, 108));
                         c.encounterTradeSuccessMessage = getMessage(WER_MESSAGES, 109);
-                        c.encounterTakeItem = 19;//pennencaux
+                        c.encounterTakeItem = 19;//PENNONCEAUX 
                         c.encounterGiveItem = 109;//gold orb
                         c.encounterID = 436;
                     }
