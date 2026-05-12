@@ -277,7 +277,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.suprised = 0;
             log("You encounter " + disp, Color.YELLOW);
         }
-        
+
         if (initialMessage != null) {
             log(initialMessage, Color.RED);
         }
@@ -629,35 +629,46 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
+        DoGooder dg = (DoGooder) attacker.baseType();
+
         switch (action) {
             case ATTACK:
-                Object def = pickMonster();
-                if (def != null) {
-                    if (def instanceof MutableMonster defender) {
-                        boolean hit = Utils.attackHit(attacker, defender);
-                        if (hit) {
-                            for (Dice dice : attacker.getDamage()) {
-                                int dmg = dice.roll();
-                                if (attacker.getType() == ClassType.NINJA && Utils.RANDOM.nextInt(100) < 15) {
-                                    dmg = defender.getMaxHitPoints();
+                boolean criticalHit = dg.crithitm && Utils.percentChance(Math.min(dg.charlev * 2, 50));
+                for (int swing = 0; swing < dg.swingCount; swing++) {
+                    Object def = pickMonster();
+                    if (def != null) {
+                        if (def instanceof MutableMonster defender) {
+                            boolean hit = Utils.attackHit(attacker, defender);
+                            if (hit) {
+                                for (Dice dice : attacker.getDamage()) {
+                                    int dmg = dice.roll();
+                                    if (criticalHit) {
+                                        dmg = defender.getMaxHitPoints();
+                                        criticalHit = false;
+                                        log(String.format("%s decapitated %s!", attacker.name(), defender.name()), Color.RED);
+                                        Sounds.play(Sound.RAGE);
+                                    }
+                                    damage(attacker, defender, dmg, Utils.getAttackName(attacker));
                                 }
-                                damage(attacker, defender, dmg, Utils.getAttackName(attacker));
+                            } else {
+                                log(String.format("%s misses %s", attacker.name(), defender.name()));
                             }
                         } else {
-                            log(String.format("%s misses %s", attacker.name(), defender.name()));
-                        }
-                    } else {
-                        boolean hit = Utils.attackHit(attacker, player);
-                        if (hit) {
-                            for (Dice dice : attacker.getDamage()) {
-                                int dmg = dice.roll();
-                                if (attacker.getType() == ClassType.NINJA && Utils.RANDOM.nextInt(100) < 15) {
-                                    dmg = player.maxhp;
+                            boolean hit = Utils.attackHit(attacker, player);
+                            if (hit) {
+                                for (Dice dice : attacker.getDamage()) {
+                                    int dmg = dice.roll();
+                                    if (criticalHit) {
+                                        dmg = player.maxhp;
+                                        criticalHit = false;
+                                        log(String.format("%s decapitated %s!", attacker.name(), player.name.toUpperCase()), Color.RED);
+                                        Sounds.play(Sound.RAGE);
+                                    }
+                                    damage(attacker, player, dmg, Utils.getAttackName(attacker));
                                 }
-                                damage(attacker, player, dmg, Utils.getAttackName(attacker));
+                            } else {
+                                log(String.format("%s misses %s", attacker.name(), player.name.toUpperCase()));
                             }
-                        } else {
-                            log(String.format("%s misses %s", attacker.name(), player.name.toUpperCase()));
                         }
                     }
                 }
@@ -1210,9 +1221,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
         @Override
         public String toString() {
             if (this.spell != null) {
-                return this.spell.label() + "    " + this.spell.getHint();
+                return this.spell.label() + "    " + this.spell.getName();
             }
-            return this.item.name + " - " + this.item.spell + "  " + this.item.spell.getHint();
+            return this.item.name + " - " + this.item.spell + "  " + this.item.spell.getName();
         }
 
     }

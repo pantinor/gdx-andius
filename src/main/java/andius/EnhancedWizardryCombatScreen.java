@@ -1073,9 +1073,9 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                 return "Dispel Undead";
             }
             if (this.spell != null) {
-                return this.spell.label() + "    " + this.spell.getHint();
+                return this.spell.label() + "    " + this.spell.getName();
             }
-            return this.item.name + " - " + this.item.spell + "  " + this.item.spell.getHint();
+            return this.item.name + " - " + this.item.spell + "  " + this.item.spell.getName();
         }
 
     }

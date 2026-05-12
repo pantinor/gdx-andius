@@ -6,13 +6,14 @@ A fun RPG mash-up inspired by the classic Sir-Tech *Wizardry* mazes with a touch
 
 ## Overview
 
-This project brings together multiple classic dungeon experiences into a single game.
-You will also find the Ultima III Exodus dungeon maps.
+Multiple classic dungeon experiences in a single game! 
+Ported to Java and implementing the LibGDX framework.
+Using information from various websites for technical details and algorithms.
 
 - **Wizardry Maps**
   - Wizardry I through IV
-  - Black Stone maze
-  - Snafaru's Dragon Quest maze
+  - The Black Stone
+  - Snafaru's Dragon Quest
 
 - **Ultima Content**
   - Ultima III: Exodus dungeon maps (ported into Wizardry’s binary format)
@@ -24,23 +25,13 @@ You will also find the Ultima III Exodus dungeon maps.
 
 ---
 
-## Features
-
-- Classic grid-based dungeon exploration
-- Cross-universe items and mechanics:
-  - **Boots of Flying** (Wizardry IV)
-  - **Marks of Kings** (Ultima III)
-- Special abilities such as:
-  - Flying over water
-  - Teleportation via the **Malor** spell
-
----
-
 ## To Journey Onward
 
-This is a Maven-based Java project developed in NetBeans.
-It can run directly in Netbeans project or from command line with Apache Maven and Java installed.
+This is a Maven-based Java project.
+It can run directly in your IDE (I use Netbeans) as opened maven project, 
+or from the command line requiring Apache Maven and latest Java (JDK) installed.
 
+Build and run with these CLI commands:
 ```
 mvn clean install
 java -jar ./target/gdx-andius-1.0.1-SNAPSHOT-jar-with-dependencies.jar
