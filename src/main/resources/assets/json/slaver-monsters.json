@@ -467,9 +467,7 @@
         "resistance": [
             "MAGIC"
         ],
-        "ability": [
-            "AUTOKILL"
-        ],
+        "ability": [],
         "exp": 600,
         "groupSize": {
             "qty": 1,
@@ -621,7 +619,7 @@
         "iconId": 8,
         "type": 2,
         "goldReward": 0,
-        "chestReward": 14,
+        "chestReward": 18,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 7,
@@ -1008,7 +1006,7 @@
         "iconId": 8,
         "type": 2,
         "goldReward": 0,
-        "chestReward": 14,
+        "chestReward": 19,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 1,
@@ -1252,7 +1250,10 @@
         "healpts": 0,
         "breath": 0,
         "unaffected": 0,
-        "resistance": [],
+        "resistance": [
+            "COLD",
+            "FIRE"
+        ],
         "ability": [],
         "exp": 700,
         "groupSize": {
@@ -1297,7 +1298,10 @@
         "healpts": 0,
         "breath": 0,
         "unaffected": 0,
-        "resistance": [],
+        "resistance": [
+            "FIRE",
+            "COLD"
+        ],
         "ability": [],
         "exp": 700,
         "groupSize": {
@@ -1355,7 +1359,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 4
+                "sides": 4,
+                "bonus": 0
             }
         ],
         "roomId": "S4"
@@ -2223,7 +2228,7 @@
         "armourClass": 4,
         "speed": 9,
         "mageSpellLevel": 2,
-        "priestSpellLevel": 2,
+        "priestSpellLevel": 3,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
@@ -2443,15 +2448,12 @@
         "partnerOdds": 0,
         "armourClass": 6,
         "speed": 12,
-        "mageSpellLevel": 5,
+        "mageSpellLevel": 3,
         "priestSpellLevel": 0,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
         "unaffected": 0,
-        "resists": [
-            "FIRE"
-        ],
         "ability": [],
         "exp": 2000,
         "groupSize": {
@@ -2471,7 +2473,10 @@
                 "bonus": 0
             }
         ],
-        "roomId": "S19a"
+        "roomId": "S19a",
+        "resistance": [
+            "FIRE"
+        ]
     },
     {
         "genericName": "Orc",
@@ -2540,8 +2545,8 @@
         "ability": [],
         "exp": 300,
         "groupSize": {
-            "qty": 1,
-            "sides": 2,
+            "qty": 11,
+            "sides": 1,
             "bonus": 0
         },
         "hitPoints": {
@@ -2740,7 +2745,7 @@
         "iconId": 22,
         "type": 3,
         "goldReward": 9,
-        "chestReward": 19,
+        "chestReward": 41,
         "partnerID": 0,
         "partnerOdds": 0,
         "armourClass": 2,

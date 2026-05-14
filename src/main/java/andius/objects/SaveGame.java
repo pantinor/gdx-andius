@@ -42,7 +42,7 @@ public class SaveGame implements Constants {
 
     public final java.util.Map<Map, List<AnsweredRiddle>> riddles = new HashMap<>();
     public boolean hhgUsed = false;//was the holy hand grenade used
-    
+
     public static SaveGame read(String file) throws Exception {
         //GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(file));
         //String b64 = IOUtils.toString(gzis, StandardCharsets.UTF_8);
@@ -323,7 +323,7 @@ public class SaveGame implements Constants {
             }
             return this.status.isDisabled();
         }
-        
+
         public boolean isGone() {
             if (isDead()) {
                 return true;
@@ -637,39 +637,12 @@ public class SaveGame implements Constants {
 
         p.hp = p.maxhp;
 
-        switch (ctype) {
-            case SAMURAI:
-            case LORD:
-            case FIGHTER:
-                p.armor = Scenario.PMO.item("CHAIN MAIL");
-                p.weapon = Scenario.PMO.item("LONG SWORD");
-                p.shield = Scenario.PMO.item("SMALL SHIELD");
-                //p.glove = PMO_ITEMS_MAP.get("SILVER GLOVES");
-                break;
-            case MAGE:
-                p.armor = Scenario.PMO.item("ROBES");
-                p.weapon = Scenario.PMO.item("STAFF");
-                break;
-            case PRIEST:
-                p.armor = Scenario.PMO.item("CHAIN MAIL");
-                p.weapon = Scenario.PMO.item("ANOINTED FLAIL");
-                p.shield = Scenario.PMO.item("SMALL SHIELD");
-                break;
-            case THIEF:
-                p.armor = Scenario.PMO.item("LEATHER ARMOR");
-                p.weapon = Scenario.PMO.item("SHORT SWORD");
-                break;
-            case BISHOP:
-                p.armor = Scenario.PMO.item("ROBES");
-                p.weapon = Scenario.PMO.item("STAFF");
-                break;
-            case NINJA:
-                p.armor = Scenario.PMO.item("ROBES");
-                p.weapon = Scenario.PMO.item("STAFF");
-                break;
-        }
+        equipGeneratedPlayer(p, lvl, ctype);
 
-        p.inventory.add(Scenario.PMO.item("ROBES"));
+        Item robes = Scenario.PMO.item("ROBES");
+        if (canGeneratedPlayerUse(ctype, robes)) {
+            p.inventory.add(robes);
+        }
 
         return p;
     }
@@ -876,6 +849,189 @@ public class SaveGame implements Constants {
             return this.y == other.y;
         }
 
+    }
+
+    private static void equipGeneratedPlayer(CharacterRecord p, int lvl, ClassType ctype) {
+
+        switch (ctype) {
+            case SAMURAI:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "LONG SWORD",
+                        "LONG SWORD+1",
+                        "LONG SWORD + 2",
+                        "MURASAMA BLADE");
+                p.armor = itemForLevel(ctype, lvl,
+                        "CHAIN MAIL",
+                        "BREAST PLATE",
+                        "PLATE MAIL",
+                        "PLATE MAIL + 1",
+                        "PLATE MAIL + 2");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD",
+                        "LARGE SHIELD",
+                        "SHIELD + 1",
+                        "SHIELD + 2",
+                        "SHIELD + 3");
+                break;
+
+            case LORD:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "LONG SWORD",
+                        "LONG SWORD+1",
+                        "LONG SWORD + 2",
+                        "BLADE CUSINART'");
+                p.armor = itemForLevel(ctype, lvl,
+                        "CHAIN MAIL",
+                        "BREAST PLATE",
+                        "PLATE MAIL",
+                        "PLATE MAIL + 1",
+                        "LORDS GARB");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD",
+                        "LARGE SHIELD",
+                        "SHIELD + 1",
+                        "SHIELD + 2",
+                        "SHIELD + 3");
+                break;
+
+            case FIGHTER:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "LONG SWORD",
+                        "LONG SWORD+1",
+                        "LONG SWORD + 2",
+                        "BLADE CUSINART'");
+                p.armor = itemForLevel(ctype, lvl,
+                        "CHAIN MAIL",
+                        "BREAST PLATE",
+                        "PLATE MAIL",
+                        "PLATE MAIL + 1",
+                        "PLATE MAIL + 2");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD",
+                        "LARGE SHIELD",
+                        "SHIELD + 1",
+                        "SHIELD + 2",
+                        "SHIELD + 3");
+                break;
+
+            case PRIEST:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "ANOINTED MACE",
+                        "ANOINTED FLAIL",
+                        "MACE+1",
+                        "MACE + 2",
+                        "MACE PRO POISON");
+                p.armor = itemForLevel(ctype, lvl,
+                        "CHAIN MAIL",
+                        "BREAST PLATE",
+                        "CHAIN MAIL + 1",
+                        "CHAIN + 2",
+                        "CHAIN PRO FIRE");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD",
+                        "LARGE SHIELD",
+                        "SHIELD + 1",
+                        "SHIELD + 2",
+                        "SHIELD + 3");
+                break;
+
+            case THIEF:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "SHORT SWORD",
+                        "SHORT SWORD+1",
+                        "SHORT SWORD +2",
+                        "MAGE MASHER",
+                        "THIEVES DAGGER");
+                p.armor = itemForLevel(ctype, lvl,
+                        "LEATHER ARMOR",
+                        "LEATHER + 1",
+                        "LEATHER + 2");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD",
+                        "SHIELD + 1",
+                        "SHIELD + 2");
+                break;
+
+            case MAGE:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "STAFF",
+                        "DAGGER",
+                        "STAFF OF MOGREF",
+                        "STAFF/MONTINO",
+                        "STAFF +2");
+                p.armor = itemForLevel(ctype, lvl,
+                        "ROBES");
+                break;
+
+            case BISHOP:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "STAFF",
+                        "ANOINTED MACE",
+                        "STAFF OF MOGREF",
+                        "STAFF/MONTINO",
+                        "STAFF +2");
+                p.armor = itemForLevel(ctype, lvl,
+                        "ROBES",
+                        "LEATHER ARMOR",
+                        "LEATHER + 1",
+                        "LEATHER + 2");
+                p.shield = itemForLevel(ctype, lvl,
+                        "SMALL SHIELD");
+                break;
+
+            case NINJA:
+                p.weapon = itemForLevel(ctype, lvl,
+                        "STAFF",
+                        "DAGGER",
+                        "DAGGER + 2",
+                        "DAGGER OF SPEED",
+                        "SHURIKEN");
+                p.armor = itemForLevel(ctype, lvl,
+                        "ROBES",
+                        "LEATHER ARMOR",
+                        "LEATHER + 1",
+                        "LEATHER + 2");
+                break;
+        }
+    }
+
+    private static Item itemForLevel(ClassType ctype, int lvl, String... itemNames) {
+        if (itemNames == null || itemNames.length == 0) {
+            return null;
+        }
+
+        int safeLevel = Math.max(1, lvl);
+
+        // 1-4 starter, 5-8 next, 9-12 next, etc.
+        int preferredTier = (safeLevel - 1) / 4;
+        if (preferredTier >= itemNames.length) {
+            preferredTier = itemNames.length - 1;
+        }
+
+        // Try preferred item, then walk backward to weaker usable gear.
+        for (int i = preferredTier; i >= 0; i--) {
+            Item item = Scenario.PMO.item(itemNames[i]);
+            if (canGeneratedPlayerUse(ctype, item)) {
+                return item;
+            }
+        }
+
+        // Fallback: try stronger entries in case lower entries were invalid.
+        for (int i = preferredTier + 1; i < itemNames.length; i++) {
+            Item item = Scenario.PMO.item(itemNames[i]);
+            if (canGeneratedPlayerUse(ctype, item)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    private static boolean canGeneratedPlayerUse(ClassType ctype, Item item) {
+        return item != null
+                && !item.cursed
+                && item.canUse(ctype)
+                && (item.alignment == null || "UNALIGN".equals(item.alignment));
     }
 
 }

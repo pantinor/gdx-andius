@@ -1,6 +1,7 @@
 package andius.objects;
 
 import static andius.Andius.CTX;
+import static andius.Constants.LEVEL_PROGRESSION_TABLE;
 import andius.Constants.SpellTarget;
 import andius.Constants.Status;
 import utils.Utils;
@@ -166,8 +167,8 @@ public class SpellUtil {
         }
     }
 
-    public static void haman(CharacterRecord p, 
-            Spells spell, 
+    public static void haman(CharacterRecord p,
+            Spells spell,
             List<CharacterRecord> players,
             List<MutableMonster> monsters,
             java.util.function.Consumer<MutableMonster> removeMonster,
@@ -178,7 +179,27 @@ public class SpellUtil {
             return;
         }
 
-        p.level--;
+        int targetLevel = p.level - 1;
+
+        // Reset experience/level, then rebuild back up to targetLevel.
+        p.exp = 0;
+        p.level = 1;
+
+        if (targetLevel > 1) {
+            if (targetLevel <= 12) {
+                p.exp = LEVEL_PROGRESSION_TABLE[targetLevel][p.classType.ordinal()] - 5;
+            } else {
+                for (int i = 13; i <= targetLevel; i++) {
+                    p.exp += LEVEL_PROGRESSION_TABLE[0][p.classType.ordinal()];
+                }
+                p.exp -= 5;
+            }
+
+            int expnextlvl = p.checkAndSetLevel();
+            while (expnextlvl >= 0) {
+                expnextlvl = p.checkAndSetLevel();
+            }
+        }
 
         int hpLoss = Math.max(1, p.getMoreHP());
         p.maxhp = Math.max(1, p.maxhp - hpLoss);
