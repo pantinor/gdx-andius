@@ -1806,7 +1806,10 @@ public class WizardryDungeonScreen extends BaseScreen {
                 }
                 if (this.map == Map.WIZARDRY4) {
                     if (currentLevel == 6 && x == 2 && y == 13) {
+                        //jesse the smith
                         teleport(new MazeAddress(7, 4, 17), true);
+                        this.map.scenario().levels()[currentLevel].cells[2][13].teleport = true;
+                        this.map.scenario().levels()[currentLevel].cells[2][13].addressTo = new MazeAddress(7, 4, 17);
                     }
                     if (currentLevel == 6 && x == 2 && y == 8) {
                         teleport(new MazeAddress(7, 6, 2), true);

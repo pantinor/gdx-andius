@@ -8,8 +8,8 @@ import static andius.Constants.Ability.SLEEP;
 import static andius.Constants.Ability.STONE;
 import andius.Constants.Status;
 import static andius.WizardryData.WER_ITEMS;
+import andius.objects.Dice;
 import andius.objects.Direction;
-import andius.objects.DoGooder;
 import andius.objects.Item;
 import andius.objects.Monster;
 import andius.objects.Mutable;
@@ -37,6 +37,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -58,7 +59,7 @@ public class Utils {
     }
 
     public static boolean percentChance(int percent) {
-        return RANDOM.nextInt(100 + 1) <= percent;
+        return RANDOM.nextInt(100) < percent;
     }
 
     public static int intValue(byte b1) {
@@ -208,7 +209,7 @@ public class Utils {
         if (weapon.autokill) {
             int critChance = Math.min(attacker.level * 2, 50);
             if (RANDOM.nextInt(100) < critChance && RANDOM.nextInt(35) > defender.getLevel() + 10) {
-                defender.adjustHitPoints(defender.getMaxHitPoints());
+                defender.adjustHitPoints(-defender.getMaxHitPoints());
                 defender.adjustHealthCursor();
                 return defender.getMaxHitPoints();
             }
@@ -230,14 +231,30 @@ public class Utils {
         return damage;
     }
 
+    public static int dealDamage(MutableCharacter attacker, Mutable defender, Dice dice) {
+        int damage = dice.roll();
+
+        if (defender.status().has(Status.ASLEEP)) {
+            damage *= 2;
+        }
+
+        if (attacker.hasPurposeAgainst(defender.getMonsterType())) {
+            damage *= 2;
+        }
+
+        defender.adjustHitPoints(-damage);
+        defender.adjustHealthCursor();
+
+        return damage;
+    }
+
     public static String getAttackName(Object attacker) {
         if (attacker instanceof CharacterRecord pc) {
             return pc.weapon != null ? pc.weapon.name : Item.HANDS.name;
         }
 
         if (attacker instanceof MutableCharacter mc) {
-            DoGooder dg = (DoGooder) mc.baseType();
-            for (int id : dg.items) {
+            for (int id : mc.getItems()) {
                 for (Item it : WER_ITEMS) {
                     if (it.id == id && it.type == Item.ItemType.WEAPON) {
                         return it.name;
@@ -255,78 +272,117 @@ public class Utils {
         return "attack";
     }
 
-    public static boolean inflict(MutableMonster attacker, MutableCharacter defender, Loggable logs) {
+    public static boolean shouldCallForHelp(MutableMonster attacker, List<MutableMonster> monsters) {
+        int groupCount = countLivingSameMonster(attacker, monsters);
+        return groupCount < 5 && Utils.RANDOM.nextInt(100) < 75 && Utils.percentChance(attacker.getLevel() * 5);
+    }
 
-        if (defender == null) {
-            return false;
+    public static boolean shouldFlee(MutableMonster attacker) {
+        return demoralized(attacker) && Utils.RANDOM.nextInt(100) < 65;
+    }
+
+    private static int countLivingSameMonster(MutableMonster attacker, List<MutableMonster> monsters) {
+        int count = 0;
+        for (MutableMonster mm : monsters) {
+            if (!mm.isDead() && mm.monster().getMonsterId() == attacker.monster().getMonsterId()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static boolean demoralized(MutableMonster attacker) {
+        return attacker.getCurrentHitPoints() <= attacker.getMaxHitPoints() / 2;
+    }
+
+    private static boolean specialAttackSucceeds(MutableMonster attacker) {
+        return Utils.percentChance(attacker.getLevel() * 5);
+    }
+
+    public static void applyAttackSpecialEffects(MutableMonster attacker, MutableCharacter defender, Loggable logs) {
+
+        if (attacker == null || defender == null || defender.isDead()) {
+            return;
         }
 
         for (Constants.Ability ability : attacker.monster().ability) {
             switch (ability) {
                 case AUTOKILL:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        DoGooder dg = (DoGooder) defender.baseType();
-                        if (dg.savingThrowDeath()) {
-                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name(), "DEATH"), Color.YELLOW);
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowDeath()) {
+                            logs.add(String.format("%s made a saving throw against DEATH", defender.name()), Color.YELLOW);
                         } else {
-                            defender.adjustHitPoints(defender.getCurrentHitPoints());
-                            defender.getHealthCursor().adjust(defender.getCurrentHitPoints(), defender.getMaxHitPoints());
+                            defender.adjustHitPoints(-defender.getCurrentHitPoints());
+                            defender.getHealthCursor().adjust(
+                                    defender.getCurrentHitPoints(),
+                                    defender.getMaxHitPoints());
                             logs.add(String.format("%s was instantly killed by %s!", defender.name(), attacker.name()), Color.SCARLET);
-                            return true;
                         }
                     }
                     break;
+
                 case STONE:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        DoGooder dg = (DoGooder) defender.baseType();
-                        if (dg.savingThrowPetrify()) {
-                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name(), "PETRIFICATION"), Status.STONED.getColor());
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowPetrify()) {
+                            logs.add(String.format("%s made a saving throw against PETRIFICATION", defender.name()), Status.STONED.getColor());
                         } else {
                             defender.status().set(Status.STONED, 100);
                             logs.add(String.format("%s was petrified by %s!", defender.name(), attacker.name()), Status.STONED.getColor());
-                            return true;
                         }
                     }
                     break;
+
                 case POISON:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        defender.status().set(Status.POISONED, 5);
-                        logs.add(String.format("%s was poisoned by %s!", defender.name(), attacker.name()), Status.POISONED.getColor());
-                        return true;
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowPoison()) {
+                            logs.add(String.format("%s made a saving throw against POISON", defender.name()), Status.POISONED.getColor());
+                        } else {
+                            defender.status().set(Status.POISONED, 5);
+                            logs.add(String.format("%s was poisoned by %s!", defender.name(), attacker.name()), Status.POISONED.getColor());
+                        }
                     }
                     break;
+
                 case PARALYZE:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        defender.status().set(Status.PARALYZED, 3);
-                        logs.add(String.format("%s was paralyzed by %s!", defender.name(), attacker.name()), Status.PARALYZED.getColor());
-                        return true;
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowParalyze()) {
+                            logs.add(String.format("%s made a saving throw against PARALYSIS", defender.name()), Status.PARALYZED.getColor());
+                        } else {
+                            defender.status().set(Status.PARALYZED, 3);
+                            logs.add(String.format("%s was paralyzed by %s!", defender.name(), attacker.name()), Status.PARALYZED.getColor());
+                        }
                     }
                     break;
+
                 case SLEEP:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.RANDOM.nextInt(100) < 15) {
+                    if (Utils.RANDOM.nextInt(100) < 15) {
                         defender.status().set(Status.ASLEEP, 3);
                         logs.add(String.format("%s was slept by %s!", defender.name(), attacker.name()), Status.ASLEEP.getColor());
-                        return true;
                     }
+                    break;
+
+                default:
                     break;
             }
 
+            if (defender.isDead() || defender.status().isDisabled()) {
+                return;
+            }
         }
-        return false;
     }
 
-    public static boolean inflict(MutableMonster attacker, CharacterRecord defender, Loggable logs) {
+    public static boolean applyAttackSpecialEffects(MutableMonster attacker, CharacterRecord defender, Loggable logs) {
 
-        if (defender == null) {
+        if (attacker == null || defender == null || defender.isDead()) {
             return false;
         }
 
         for (Constants.Ability ability : attacker.monster().ability) {
             switch (ability) {
                 case AUTOKILL:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                    if (specialAttackSucceeds(attacker)) {
                         if (defender.savingThrowDeath()) {
-                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name, "DEATH"), Color.YELLOW);
+                            logs.add(String.format("%s made a saving throw against DEATH", defender.name), Color.YELLOW);
                         } else {
                             defender.adjustHP(-defender.hp);
                             logs.add(String.format("%s was instantly killed by %s!", defender.name, attacker.name()), Color.SCARLET);
@@ -334,10 +390,11 @@ public class Utils {
                         }
                     }
                     break;
+
                 case STONE:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
+                    if (specialAttackSucceeds(attacker)) {
                         if (defender.savingThrowPetrify()) {
-                            logs.add(String.format("%s made a saving throwing throw against %s", defender.name, "PETRIFICATION"), Status.STONED.getColor());
+                            logs.add(String.format("%s made a saving throw against PETRIFICATION", defender.name), Status.STONED.getColor());
                         } else {
                             defender.status.set(Status.STONED, 100);
                             logs.add(String.format("%s was petrified by %s!", defender.name, attacker.name()), Status.STONED.getColor());
@@ -345,30 +402,48 @@ public class Utils {
                         }
                     }
                     break;
+
                 case POISON:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        defender.status.set(Status.POISONED, 5);
-                        logs.add(String.format("%s was poisoned by %s!", defender.name, attacker.name()), Status.POISONED.getColor());
-                        return true;
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowDeath()) {
+                            logs.add(String.format("%s made a saving throw against POISON", defender.name), Status.POISONED.getColor());
+                        } else {
+                            defender.status.set(Status.POISONED, 5);
+                            logs.add(String.format("%s was poisoned by %s!", defender.name, attacker.name()), Status.POISONED.getColor());
+                            return true;
+                        }
                     }
                     break;
+
                 case PARALYZE:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.percentChance(attacker.getLevel() * 5)) {
-                        defender.status.set(Status.PARALYZED, 3);
-                        logs.add(String.format("%s was paralyzed by %s!", defender.name, attacker.name()), Status.PARALYZED.getColor());
-                        return true;
+                    if (specialAttackSucceeds(attacker)) {
+                        if (defender.savingThrowDeath()) {
+                            logs.add(String.format("%s made a saving throw against PARALYSIS", defender.name), Status.PARALYZED.getColor());
+                        } else {
+                            defender.status.set(Status.PARALYZED, 3);
+                            logs.add(String.format("%s was paralyzed by %s!", defender.name, attacker.name()), Status.PARALYZED.getColor());
+                            return true;
+                        }
                     }
                     break;
+
                 case SLEEP:
-                    if (attacker.getPercentDamaged() < 0.50 && Utils.RANDOM.nextInt(100) < 15) {
+                    if (Utils.RANDOM.nextInt(100) < 15) {
                         defender.status.set(Status.ASLEEP, 3);
                         logs.add(String.format("%s was slept by %s!", defender.name, attacker.name()), Status.ASLEEP.getColor());
                         return true;
                     }
                     break;
+
+                default:
+                    break;
             }
 
+            if (defender.isDead() || defender.isDisabled()) {
+                return true;
+            }
         }
+
         return false;
     }
 

@@ -4,21 +4,33 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public enum ClassType {
 
-    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, UltimaSprite.icon(42)),
-    MAGE("M", 4, 0, 11, 0, 0, 0, 0, UltimaSprite.icon(32)),
-    PRIEST("C", 8, 0, 0, 11, 0, 0, 0, UltimaSprite.icon(38)),
-    THIEF("T", 6, 0, 0, 0, 0, 11, 0, UltimaSprite.icon(44)),
-    BISHOP("W", 6, 0, 12, 12, 0, 0, 0, UltimaSprite.icon(46)),
-    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, UltimaSprite.icon(40)),
-    LORD("L", 10, 15, 12, 12, 15, 14, 15, UltimaSprite.icon(42)),
-    NINJA("N", 6, 17, 17, 17, 17, 17, 17, UltimaSprite.icon(44));
+    FIGHTER("F", 10, 11, 0, 0, 0, 0, 0, 42),
+    MAGE("M", 4, 0, 11, 0, 0, 0, 0, 32),
+    PRIEST("C", 8, 0, 0, 11, 0, 0, 0, 38),
+    THIEF("T", 6, 0, 0, 0, 0, 11, 0, 44),
+    BISHOP("W", 6, 0, 12, 12, 0, 0, 0, 46),
+    SAMURAI("S", 8, 15, 11, 10, 14, 10, 0, 40),
+    LORD("L", 10, 15, 12, 12, 15, 14, 15, 42),
+    NINJA("N", 6, 17, 17, 17, 17, 17, 17, 44);
 
     private final int minStr, minIntell, minPiety, minVitality, minAgility, minLuck;
     private final String abbr;
     private final int hitDie;
-    private final TextureRegion tr;
+    private final int iconIndex;
 
-    private ClassType(String abbr, int hitDie, int minStr, int minIntell, int minPiety, int minVitality, int minAgility, int minLuck, TextureRegion tr) {
+    private TextureRegion tr;
+
+    private ClassType(
+            String abbr,
+            int hitDie,
+            int minStr,
+            int minIntell,
+            int minPiety,
+            int minVitality,
+            int minAgility,
+            int minLuck,
+            int iconIndex) {
+
         this.abbr = abbr;
         this.minStr = minStr;
         this.minIntell = minIntell;
@@ -27,7 +39,7 @@ public enum ClassType {
         this.minAgility = minAgility;
         this.minLuck = minLuck;
         this.hitDie = hitDie;
-        this.tr = tr;
+        this.iconIndex = iconIndex;
     }
 
     public String getAbbr() {
@@ -63,7 +75,9 @@ public enum ClassType {
     }
 
     public TextureRegion getIcon() {
+        if (tr == null) {
+            tr = UltimaSprite.icon(iconIndex);
+        }
         return tr;
     }
-
 }

@@ -27,7 +27,6 @@ public class DoGooder {
     public int armourClass;
     public int maxlevac;
     public int[] attributes;
-    public int[] saveVs;
     public int charlev;
     public Spells[] knownSpells;
     public int[][] spellAllowance;

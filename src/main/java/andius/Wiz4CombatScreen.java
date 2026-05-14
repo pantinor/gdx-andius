@@ -9,7 +9,6 @@ import andius.WizardryData.MazeCell;
 import static andius.WizardryData.WER4_CHARS;
 import static andius.WizardryData.WER_ITEMS;
 import static andius.WizardryData.nextHawkindQuote;
-import andius.objects.ClassType;
 import andius.objects.Dice;
 import andius.objects.DoGooder;
 import andius.objects.HealthCursor;
@@ -460,72 +459,53 @@ public class Wiz4CombatScreen implements Screen, Constants {
         CombatAction action = CombatAction.ATTACK;
         Spells spell = null;
 
-        if (attacker.breath() != Breath.NONE && Utils.RANDOM.nextInt(100) < 60) {
-            action = CombatAction.BREATH;
-        }
-
-        if (!attacker.status().has(Status.SILENCED) && Utils.RANDOM.nextInt(100) < 80) {
-            int plvl = attacker.getCurrentPriestSpellLevel();
+        boolean silenced = attacker.status().has(Status.SILENCED);
+        if (!silenced) {
             int mlvl = attacker.getCurrentMageSpellLevel();
-            if (mlvl > 0 && mlvl > plvl) {
+            if (mlvl > 0 && Utils.RANDOM.nextInt(100) < 75) {
                 action = CombatAction.CAST;
                 spell = attacker.castMageSpell();
-            } else if (plvl > 0 && plvl > mlvl) {
-                action = CombatAction.CAST;
-                spell = attacker.castPriestSpell();
-            } else if (plvl > 0 && mlvl > 0 && plvl == mlvl) {
-                action = CombatAction.CAST;
-                spell = Utils.randomBoolean() ? attacker.castMageSpell() : attacker.castPriestSpell();
             }
         }
 
-        if (Utils.inflict(attacker, pickRandomEnemy(), logs)) {
-            return;
+        if (action == CombatAction.ATTACK && !silenced) {
+            int plvl = attacker.getCurrentPriestSpellLevel();
+            if (plvl > 0 && Utils.RANDOM.nextInt(100) < 75) {
+                action = CombatAction.CAST;
+                spell = attacker.castPriestSpell();
+            }
         }
 
-        if (attacker.monster().ability.contains(Ability.CALLFORHELP)
-                && attacker.getPercentDamaged() < 0.50
-                && Utils.RANDOM.nextInt(100) < 75
-                && Utils.percentChance(attacker.getLevel() * 5)) {
+        if (action == CombatAction.ATTACK && !silenced && attacker.breath() != Breath.NONE && Utils.RANDOM.nextInt(100) < 60) {
+            action = CombatAction.BREATH;
+        }
+
+        if (action == CombatAction.ATTACK && !silenced
+                && attacker.monster().ability.contains(Ability.CALLFORHELP)
+                && Utils.shouldCallForHelp(attacker, this.monsters)) {
             action = CombatAction.CALL_FOR_HELP;
-        } else if (attacker.monster().ability.contains(Ability.RUN)
-                && attacker.getPercentDamaged() < 0.50
-                && Utils.RANDOM.nextInt(100) < 75
-                && Utils.percentChance(attacker.getLevel() * 5)) {
+        } else if (action == CombatAction.ATTACK
+                && attacker.monster().ability.contains(Ability.RUN)
+                && Utils.shouldFlee(attacker)) {
             action = CombatAction.FLEE;
         }
 
         switch (action) {
             case BREATH:
                 log(String.format("%s breathes %s", attacker.name(), attacker.breath()), Color.YELLOW);
-                java.util.Map<MutableCharacter, Integer> grpDamageMap
-                        = this.enemies.stream().collect(Collectors.toMap(key -> key, key -> 0));
-
-                int groupDamage = (attacker.getCurrentHitPoints() * 3) / 4;
-
-                while (groupDamage > 0) {
-                    for (MutableCharacter mc : this.enemies) {
-                        if (groupDamage <= 0) {
-                            break;
-                        }
-
-                        DoGooder dg = (DoGooder) mc.baseType();
-                        boolean unaffected = mc.isUnaffected(spell, attacker.getMonsterType());
-
-                        if (!mc.status().isDisabled() && (dg.savingThrowBreath() || unaffected)) {
-                            // no damage
-                        } else {
-                            grpDamageMap.put(mc, grpDamageMap.get(mc) + 1);
-                        }
-
-                        groupDamage--;
+                int baseBreathDamage = attacker.getCurrentHitPoints();
+                for (MutableCharacter defender : this.enemies) {
+                    if (defender.status().isDisabled()) {
+                        continue;
                     }
-                }
-
-                for (MutableCharacter mc : grpDamageMap.keySet()) {
-                    int dmg = grpDamageMap.get(mc);
+                    int dmg = baseBreathDamage;
+                    boolean saved = defender.savingThrowBreath();
+                    boolean unaffected = defender.isUnaffectedByBreath(attacker.breath(), attacker.getMonsterType());
+                    if (saved || unaffected) {
+                        dmg /= 2;
+                    }
                     if (dmg > 0) {
-                        damage(attacker, mc, dmg, attacker.breath().toString());
+                        damage(attacker, defender, dmg, attacker.breath().toString());
                     }
                 }
                 break;
@@ -539,6 +519,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
                             int dmg = dice.roll();
                             damage(attacker, defender, dmg, Utils.getAttackName(attacker));
                         }
+                        if (!defender.isDead()) {
+                            Utils.applyAttackSpecialEffects(attacker, defender, logs);
+                        }
                     } else {
                         log(String.format("%s misses %s", attacker.name(), defender.name()));
                     }
@@ -548,9 +531,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
             case CAST: {
                 Object target = null;
 
-                if (spell == Spells.DIOS || spell == Spells.DIAL || spell == Spells.DIALMA || spell == Spells.MADI
-                        || spell == Spells.MOGREF || spell == Spells.SOPIC || spell == Spells.PORFIC) {
-
+                if (spell == Spells.DIOS || spell == Spells.DIAL || spell == Spells.DIALMA
+                        || spell == Spells.MADI || spell == Spells.MOGREF || spell == Spells.SOPIC || spell == Spells.PORFIC) {
                     if (spell == Spells.DIOS || spell == Spells.DIAL || spell == Spells.DIALMA || spell == Spells.MADI) {
                         MutableMonster weakestAlly = null;
                         for (MutableMonster mm : this.monsters) {
@@ -641,14 +623,22 @@ public class Wiz4CombatScreen implements Screen, Constants {
                             boolean hit = Utils.attackHit(attacker, defender);
                             if (hit) {
                                 for (Dice dice : attacker.getDamage()) {
-                                    int dmg = dice.roll();
+                                    int dmg;
                                     if (criticalHit) {
                                         dmg = defender.getMaxHitPoints();
                                         criticalHit = false;
                                         log(String.format("%s decapitated %s!", attacker.name(), defender.name()), Color.RED);
-                                        Sounds.play(Sound.RAGE);
+                                        Sounds.play(Sound.PC_STRUCK);
+                                        damage(attacker, defender, dmg, Utils.getAttackName(attacker));
+                                    } else {
+                                        dmg = Utils.dealDamage(attacker, defender, dice);
+                                        log(String.format("%s %s %s [%d] %s",
+                                                attacker.name().toUpperCase(),
+                                                "hit",
+                                                defender.name().toUpperCase(),
+                                                dmg,
+                                                Utils.getAttackName(attacker)), Color.SCARLET);
                                     }
-                                    damage(attacker, defender, dmg, Utils.getAttackName(attacker));
                                 }
                             } else {
                                 log(String.format("%s misses %s", attacker.name(), defender.name()));
@@ -723,24 +713,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
         return weakest;
     }
 
-    private MutableCharacter pickRandomEnemy() {
-
-        List<MutableCharacter> shuffled = new ArrayList();
-        for (MutableCharacter m : enemies) {
-            if (m.getCurrentHitPoints() > 0) {
-                shuffled.add(m);
-            }
-        }
-
-        Collections.shuffle(shuffled);
-
-        if (shuffled.isEmpty()) {
-            return null;
-        }
-
-        return shuffled.get(0);
-    }
-
     private Object pickMonster() {
 
         List<Object> shuffled = new ArrayList();
@@ -759,7 +731,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         return shuffled.get(0);
     }
 
-    private void damage(Object attacker, Object defender, int damage, String type) {
+    private void damage(Object attacker, Object defender, int damage, String kindOfAttack) {
 
         if (damage <= 0) {
             return;
@@ -779,7 +751,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                                     attName.toUpperCase(),
                                     "hit",
                                     m.name().toUpperCase(),
-                                    damage, type), Color.SCARLET);
+                                    damage, kindOfAttack), Color.SCARLET);
                             if (m.isDead()) {
                                 log("As mighty Achilles fell to Paris arrow, so does Lord Hawkwind fall to the stab of a lowly Dink!  Long will Skara Brae be mourning his passing!", Color.WHITE);
                             }
@@ -796,7 +768,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                             attName.toUpperCase(),
                             "hit",
                             m.name().toUpperCase(),
-                            damage, type), attacker instanceof MutableMonster ? Color.CORAL : Color.SCARLET);
+                            damage, kindOfAttack), attacker instanceof MutableMonster ? Color.CORAL : Color.SCARLET);
 
                     if (m.isDead() && selected.getParent() instanceof DoGooderListing dgl && dgl.mm == m) {
                         selected.remove();
@@ -806,7 +778,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         } else {
             if (!player.isDead()) {
                 player.adjustHP(-damage);
-                log(String.format("%s hit %s [%d] %s", attName, player.name.toUpperCase(), damage, type), Color.RED);
+                log(String.format("%s hit %s [%d] %s", attName, player.name.toUpperCase(), damage, kindOfAttack), Color.RED);
             }
         }
     }
@@ -837,7 +809,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
             log(m.name() + " casts " + spell, Color.SKY);
 
-            m.decrementSpellPoints(spell);
+            if (!(m instanceof MutableCharacter mc && mc.isPendingSpellFromItem(spell))) {
+                m.decrementSpellPoints(spell);
+            }
         }
 
         switch (spell) {
@@ -926,6 +900,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 spellGroupACModify(caster, spell.getHitBonus());
                 break;
         }
+
+        if (caster instanceof MutableCharacter mc) {
+            mc.resolvePendingSpellItemDecay();
+        }
     }
 
     private void spellDamage(Object caster, Spells spell, Object target) {
@@ -965,9 +943,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
             // Damage spells from friendly side should hit enemy DoGooders
             if (target instanceof MutableCharacter mc) {
-                DoGooder dg = (DoGooder) mc.baseType();
-                if (!mc.status().isDisabled() && dg.savingThrowSpell()) {
-                    log(dg.name + " saves versus " + spell + " unaffected!");
+                if (!mc.status().isDisabled() && mc.savingThrowSpell()) {
+                    log(mc.name() + " saves versus " + spell + " unaffected!");
                 } else {
                     int dmg = spell.damage();
                     damage(caster, mc, dmg, spell.getName());
@@ -1035,120 +1012,136 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void spellGroupDamage(Object caster, Spells spell) {
-        int groupDamage = spell.damage();
-        log("for group damage of " + groupDamage, Color.SKY);
+        int dmg = spell.damage();
+        log("for group damage of " + dmg, Color.SKY);
 
-        if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
-            java.util.Map<MutableCharacter, Integer> grpDamageMap
-                    = this.enemies.stream().collect(Collectors.toMap(key -> key, key -> 0));
+        if (caster instanceof MutableMonster mmCaster) {
+            CharacterType casterType = mmCaster.getMonsterType();
 
-            while (groupDamage > 0) {
-                for (MutableCharacter mc : this.enemies) {
-                    if (groupDamage <= 0) {
-                        break;
-                    }
-
-                    DoGooder dg = (DoGooder) mc.baseType();
-                    CharacterType ct = caster instanceof MutableMonster
-                            ? ((MutableMonster) caster).getMonsterType()
-                            : CharacterType.valueOf(player.classType.toString());
-
-                    boolean unaffected = mc.isUnaffected(spell, ct);
-
-                    if (!mc.status().isDisabled() && (dg.savingThrowSpell() || unaffected)) {
-                        // no damage
-                    } else {
-                        grpDamageMap.put(mc, grpDamageMap.get(mc) + 1);
-                    }
-
-                    groupDamage--;
+            for (MutableCharacter mc : this.enemies) {
+                if (mc.status().isDisabled()) {
+                    continue;
                 }
-            }
 
-            for (MutableCharacter mc : grpDamageMap.keySet()) {
-                int dmg = grpDamageMap.get(mc);
-                if (dmg > 0) {
+                boolean unaffected = mc.isUnaffected(spell, casterType);
+                boolean saved = mc.savingThrowSpell();
+
+                if (unaffected || saved) {
+                    log(mc.name() + " saves versus " + spell + " for half damage!");
+                    damage(caster, mc, dmg / 2, spell.getName());
+                } else {
                     damage(caster, mc, dmg, spell.getName());
                 }
             }
+
             return;
         }
 
-        if (caster instanceof MutableCharacter) {
-            java.util.Map<MutableMonster, Integer> grpDamageMap
-                    = monsters.stream().collect(Collectors.toMap(key -> key, key -> 0));
-            int playerDmg = 0;
+        if (caster instanceof CharacterRecord crCaster) {
+            CharacterType casterType = CharacterType.valueOf(crCaster.classType.toString());
 
-            while (groupDamage > 0) {
-                for (MutableMonster mm : this.monsters) {
-                    if (groupDamage <= 0) {
-                        break;
-                    }
-
-                    boolean unaffected = mm.isUnaffected(spell, ((MutableCharacter) caster).getMonsterType());
-                    if (!unaffected) {
-                        grpDamageMap.put(mm, grpDamageMap.get(mm) + 1);
-                    }
-
-                    groupDamage--;
+            for (MutableCharacter mc : this.enemies) {
+                if (mc.status().isDisabled()) {
+                    continue;
                 }
 
-                if (groupDamage <= 0) {
-                    break;
-                }
+                boolean unaffected = mc.isUnaffected(spell, casterType);
+                boolean saved = mc.savingThrowSpell();
 
-                if (player.armor != null && player.armor.id == 89 //oxygen mask
-                        && (spell.equals(Spells.KATINO) || spell.equals(Spells.LAKANITO) || spell.equals(Spells.MAKANITO))) {
-                    // immune
-                    log("Saved by Oxygen Mask!", Color.GREEN);
-                } else if (player.savingThrowSpell()) {
-                    // saved
+                if (unaffected || saved) {
+                    log(mc.name() + " saves versus " + spell + " for half damage!");
+                    damage(caster, mc, dmg / 2, spell.getName());
                 } else {
-                    playerDmg++;
+                    damage(caster, mc, dmg, spell.getName());
                 }
-
-                groupDamage--;
             }
 
-            for (MutableMonster mm : grpDamageMap.keySet()) {
-                int dmg = grpDamageMap.get(mm);
-                if (dmg > 0) {
+            return;
+        }
+
+        if (caster instanceof MutableCharacter mcCaster) {
+            CharacterType casterType = mcCaster.getMonsterType();
+
+            for (MutableMonster mm : this.monsters) {
+                if (mm.isDead()) {
+                    continue;
+                }
+
+                boolean unaffected = mm.isUnaffected(spell, casterType);
+
+                if (unaffected) {
+                    log(mm.name() + " saves versus " + spell + " for half damage!");
+                    damage(caster, mm, dmg / 2, spell.getName());
+                } else {
                     damage(caster, mm, dmg, spell.getName());
                 }
             }
 
-            if (playerDmg > 0) {
-                damage(caster, player, playerDmg, spell.getName());
+            if (player.armor != null
+                    && player.armor.id == 89
+                    && (spell.equals(Spells.KATINO)
+                    || spell.equals(Spells.LAKANITO)
+                    || spell.equals(Spells.MAKANITO))) {
+
+                log("Saved by Oxygen Mask!", Color.GREEN);
+
+            } else if (player.savingThrowSpell()) {
+                log(player.name.toUpperCase() + " saves versus " + spell + " for half damage!");
+                damage(caster, player, dmg / 2, spell.getName());
+
+            } else {
+                damage(caster, player, dmg, spell.getName());
             }
         }
     }
 
     private void spellGroupMabadi(Object caster, Spells spell) {
-        if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
+
+        if (caster instanceof MutableMonster mmCaster) {
+            CharacterType casterType = mmCaster.getMonsterType();
+
             for (MutableCharacter mc : this.enemies) {
-                DoGooder dg = (DoGooder) mc.baseType();
-                CharacterType ct = caster instanceof MutableMonster ? ((MutableMonster) caster).getMonsterType() : CharacterType.valueOf(player.classType.toString());
-                boolean unaffected = mc.isUnaffected(spell, ct);
-                if (!mc.status().isDisabled() && (dg.savingThrowSpell() || unaffected)) {
-                    log(dg.name + " saves versus " + spell + " unaffected!");
+                boolean unaffected = mc.isUnaffected(spell, casterType);
+
+                if (!mc.status().isDisabled() && (mc.savingThrowSpell() || unaffected)) {
+                    log(mc.name() + " saves versus " + spell + " unaffected!");
                 } else {
                     int pointsLeft = Utils.getRandomBetween(1, 8);
-                    mc.adjustHitPoints(mc.getCurrentHitPoints() - pointsLeft);
+                    mc.adjustHitPoints(pointsLeft - mc.getCurrentHitPoints());
                     mc.getHealthCursor().adjust(mc.getCurrentHitPoints(), mc.getMaxHitPoints());
                 }
             }
-        }
-        if (caster instanceof MutableCharacter) {
+
+        } else if (caster instanceof CharacterRecord crCaster) {
+            CharacterType casterType = CharacterType.valueOf(crCaster.classType.toString());
+
+            for (MutableCharacter mc : this.enemies) {
+                boolean unaffected = mc.isUnaffected(spell, casterType);
+
+                if (!mc.status().isDisabled() && (mc.savingThrowSpell() || unaffected)) {
+                    log(mc.name() + " saves versus " + spell + " unaffected!");
+                } else {
+                    int pointsLeft = Utils.getRandomBetween(1, 8);
+                    mc.adjustHitPoints(pointsLeft - mc.getCurrentHitPoints());
+                    mc.getHealthCursor().adjust(mc.getCurrentHitPoints(), mc.getMaxHitPoints());
+                }
+            }
+
+        } else if (caster instanceof MutableCharacter mcCaster) {
+            CharacterType casterType = mcCaster.getMonsterType();
+
             for (MutableMonster mm : this.monsters) {
-                boolean unaffected = mm.isUnaffected(spell, ((MutableCharacter) caster).getMonsterType());
+                boolean unaffected = mm.isUnaffected(spell, casterType);
+
                 if (unaffected) {
                     log(mm.name() + " saves versus " + spell + " unaffected!");
                 } else {
                     int pointsLeft = Utils.getRandomBetween(1, 8);
-                    mm.adjustHitPoints(mm.getCurrentHitPoints() - pointsLeft);
+                    mm.adjustHitPoints(pointsLeft - mm.getCurrentHitPoints());
                     mm.getHealthCursor().adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
                 }
             }
+
             if (player.savingThrowSpell()) {
                 log(player.name.toUpperCase() + " saves versus " + spell + " unaffected!");
             } else {
@@ -1162,9 +1155,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private void spellGroupAffect(Object caster, Spells spell, Status effect) {
         if (caster instanceof MutableMonster || caster instanceof CharacterRecord) {
             for (MutableCharacter mc : this.enemies) {
-                DoGooder dg = (DoGooder) mc.baseType();
-                if (!mc.status().isDisabled() && dg.savingThrowSpell()) {
-                    log(dg.name + " saves versus " + spell + " unaffected!");
+                CharacterType ct = caster instanceof MutableMonster
+                        ? ((MutableMonster) caster).getMonsterType()
+                        : CharacterType.valueOf(player.classType.toString());
+                boolean unaffected = mc.isUnaffected(spell, ct);
+                if (!mc.status().isDisabled() && (mc.savingThrowSpell() || unaffected)) {
+                    log(mc.name() + " saves versus " + spell + " unaffected!");
                 } else {
                     mc.status().set(effect, Math.abs(spell.getHitBonus()));
                 }

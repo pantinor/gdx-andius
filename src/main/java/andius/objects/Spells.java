@@ -2,6 +2,7 @@ package andius.objects;
 
 import andius.Constants.SpellArea;
 import andius.Constants.SpellTarget;
+import andius.Constants.Resistance;
 import com.badlogic.gdx.graphics.Color;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,10 +17,10 @@ public enum Spells {
     SOPIC("Glass", ClassType.MAGE, 2, Sound.MAGIC, Color.BLUE, SpellTarget.CASTER, SpellArea.COMBAT, 0, 0, 4, 85),
     MAHALITO("Big Fire", ClassType.MAGE, 3, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 4, 6, 0, 79),
     MOLITO("Spark Storm", ClassType.MAGE, 3, Sound.FLAME_WAVE, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 3, 6, 0, 46),
-    MORLIS("Fear", ClassType.MAGE, 4, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, -2, 89),
+    MORLIS("Fear", ClassType.MAGE, 4, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, -4, 89),
     DALTO("Blizzard Blast", ClassType.MAGE, 4, Sound.WIND, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 6, 6, 2, 1),
     LAHALITO("Flame Storm", ClassType.MAGE, 4, Sound.INFERNO, Color.RED, SpellTarget.GROUP, SpellArea.COMBAT, 6, 6, 0, 81),
-    MAMORLIS("Terror", ClassType.MAGE, 5, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, -3, 90),
+    MAMORLIS("Terror", ClassType.MAGE, 5, Sound.SPIRITS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 0, 0, -4, 90),
     MAKANITO("Deadly Air", ClassType.MAGE, 5, Sound.SLEEP, Color.PURPLE, SpellTarget.GROUP, SpellArea.COMBAT, 30, 2, 0, 43),
     MADALTO("Frost", ClassType.MAGE, 5, Sound.WIND, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 8, 8, 2, 21),
     LAKANITO("Suffocation", ClassType.MAGE, 6, Sound.WEAKNESS, Color.BLUE, SpellTarget.GROUP, SpellArea.COMBAT, 40, 2, 0, 28),
@@ -202,6 +203,19 @@ public enum Spells {
         return Arrays.stream(Spells.values())
                 .filter(s -> s.getType() == type && s.getLevel() == level && s.getArea() == SpellArea.COMBAT)
                 .findAny().orElse(null);
+    }
+
+    public static Resistance resistanceForSpell(Spells spell) {
+        return switch (spell) {
+            case HALITO, MAHALITO, LAHALITO, LITOKAN ->
+                Resistance.FIRE;
+            case DALTO, MADALTO ->
+                Resistance.COLD;
+            case KATINO, MAKANITO, LAKANITO, MONTINO, MANIFO, DILTO, MORLIS, MAMORLIS, BADI, BADIOS, BADIAL, BADIALMA, MABADI, MALIKTO, TILTOWAIT ->
+                Resistance.MAGIC;
+            default ->
+                Resistance.NONE;
+        };
     }
 
 }
