@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import utils.Loggable;
 import utils.Utils;
 import static utils.Utils.RANDOM;
@@ -184,8 +183,7 @@ public abstract class Combat implements Constants {
                         }
                     } else {
 
-                        int playerIndex = players.indexOf(player);
-                        if (playerIndex < 0 || playerIndex >= 3) {
+                        if (!canMeleeAttack(player)) {
                             log(String.format("%s cannot reach the monsters", player.name.toUpperCase()), Color.WHITE);
                             continue;
                         }
@@ -346,15 +344,23 @@ public abstract class Combat implements Constants {
             case ATTACK:
                 CharacterRecord defender = pickFrontPlayer();
                 if (defender != null) {
-                    boolean hit = Utils.attackHit(attacker, defender);
-                    if (hit) {
-                        for (Dice dice : attacker.getDamage()) {
-                            int dmg = dice.roll();
-                            damage(attacker, defender, dmg, Utils.getAttackName(attacker));
-                            if (defender.isDead()) {
-                                break;
-                            }
+                    int hpDamage = 0;
+                    int hitsCount = 0;
+                    for (Dice dice : attacker.getDamage()) {
+                        if (defender.isDead()) {
+                            break;
                         }
+                        if (Utils.attackHit(attacker, defender)) {
+                            int dmg = dice.roll();
+                            if (defender.status.has(Status.ASLEEP)) {
+                                dmg *= 2;
+                            }
+                            hpDamage += dmg;
+                            hitsCount++;
+                        }
+                    }
+                    if (hpDamage > 0) {
+                        damage(attacker, defender, hpDamage, Utils.getAttackName(attacker));
                         if (!defender.isDead()) {
                             Utils.applyAttackSpecialEffects(attacker, defender, logs);
                         }
@@ -426,7 +432,31 @@ public abstract class Combat implements Constants {
         return weakestMonster;
     }
 
-    // classic wizardry melee is front-line limited
+    private boolean canMeleeAttack(CharacterRecord player) {
+        int playerIndex = players.indexOf(player);
+
+        if (playerIndex < 0 || player.isDead()) {
+            return false;
+        }
+
+        // Original Wizardry-style rule: only the first 3 living party members
+        // in marching order can physically reach the monsters.
+        int livingFrontSlots = 0;
+
+        for (CharacterRecord p : players) {
+            if (!p.isDead()) {
+                if (p == player) {
+                    return livingFrontSlots < 3;
+                }
+
+                livingFrontSlots++;
+            }
+        }
+
+        return false;
+    }
+
+    // wizardry melee is front-line limited
     public CharacterRecord pickFrontPlayer() {
         List<CharacterRecord> front = new ArrayList<>();
 
@@ -444,7 +474,7 @@ public abstract class Combat implements Constants {
         return pickPlayer();
     }
 
-    // For spells or effects that may target anyone in the party.
+    // for spells or effects that may target anyone in the party.
     public CharacterRecord pickPlayer() {
         List<CharacterRecord> alive = new ArrayList<>();
 
@@ -517,9 +547,8 @@ public abstract class Combat implements Constants {
                 log(m.name() + " cannot cast spell in current state!");
                 return;
             }
+            
             log(m.name() + " casts " + spell, Color.SKY);
-
-            m.decrementSpellPoints(spell);
         }
 
         switch (spell) {

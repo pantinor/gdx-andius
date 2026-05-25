@@ -4,9 +4,7 @@ import andius.Constants.SpellArea;
 import andius.Constants.SpellTarget;
 import andius.Constants.Resistance;
 import com.badlogic.gdx.graphics.Color;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public enum Spells {
 
@@ -198,23 +196,6 @@ public enum Spells {
 
     public String label() {
         return String.format("%d %s %s %s", this.level, this, this.damage, this.target == SpellTarget.GROUP ? "GRP" : "");
-    }
-
-    public static Spells randomCombatSpell(ClassType type, int level) {
-        List<Spells> choices = Arrays.stream(Spells.values())
-                .filter(s -> s.getType() == type)
-                .filter(s -> s.getLevel() <= level)
-                .filter(s -> s.getArea() == SpellArea.COMBAT)
-                .filter(s -> s.getTarget() != SpellTarget.NONE)
-                .filter(s -> s != MALOR)
-                .filter(s -> s != LOKTOFEIT)
-                .toList();
-
-        if (choices.isEmpty()) {
-            return null;
-        }
-
-        return choices.get((int) (Math.random() * choices.size()));
     }
 
     public static Resistance resistanceForSpell(Spells spell) {

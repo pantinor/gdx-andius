@@ -8,6 +8,7 @@ import static andius.Constants.Ability.SLEEP;
 import static andius.Constants.Ability.STONE;
 import andius.Constants.Status;
 import static andius.WizardryData.WER_ITEMS;
+import andius.objects.ClassType;
 import andius.objects.Dice;
 import andius.objects.Direction;
 import andius.objects.Item;
@@ -16,6 +17,9 @@ import andius.objects.Mutable;
 import andius.objects.MutableCharacter;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
+import andius.objects.Spells;
+import static andius.objects.Spells.LOKTOFEIT;
+import static andius.objects.Spells.MALOR;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
@@ -37,6 +41,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -445,6 +450,77 @@ public class Utils {
         }
 
         return false;
+    }
+
+    public static Spells monsterMageSpell(int spellLevel) {
+        spellLevel = Math.max(1, Math.min(7, spellLevel));
+
+        while (spellLevel > 1 && Utils.RANDOM.nextInt(100) > 70) {
+            spellLevel--;
+        }
+
+        boolean twoThird = Utils.RANDOM.nextInt(100) > 33;
+
+        switch (spellLevel) {
+            case 1:
+                return twoThird ? Spells.KATINO : Spells.HALITO;
+            case 2:
+                return twoThird ? Spells.DILTO : Spells.HALITO;
+            case 3:
+                return twoThird ? Spells.MOLITO : Spells.MAHALITO;
+            case 4:
+                return twoThird ? Spells.DALTO : Spells.LAHALITO;
+            case 5:
+                return twoThird ? Spells.LAHALITO : Spells.MADALTO;
+            case 6:
+                return twoThird ? Spells.MADALTO : Spells.ZILWAN;
+            case 7:
+                return Spells.TILTOWAIT;
+            default:
+                return null;
+        }
+    }
+
+    public static Spells monsterPriestSpell(int spellLevel) {
+        spellLevel = Math.max(1, Math.min(7, spellLevel));
+
+        boolean twoThird = Utils.RANDOM.nextInt(100) > 33;
+
+        switch (spellLevel) {
+            case 1:
+                return Spells.BADIOS;
+            case 2:
+                return Spells.MONTINO;
+            case 3:
+                return twoThird ? Spells.BADIOS : Spells.BADIAL;
+            case 4:
+                return Spells.BADIAL;
+            case 5:
+                return twoThird ? Spells.BADIALMA : Spells.BADI;
+            case 6:
+                return twoThird ? Spells.LORTO : Spells.MABADI;
+            case 7:
+                return Spells.MABADI;
+            default:
+                return null;
+        }
+    }
+
+    public static Spells randomCombatSpell(ClassType type, int level) {
+        List<Spells> choices = Arrays.stream(Spells.values())
+                .filter(s -> s.getType() == type)
+                .filter(s -> s.getLevel() <= level)
+                .filter(s -> s.getArea() == Constants.SpellArea.COMBAT)
+                .filter(s -> s.getTarget() != Constants.SpellTarget.NONE)
+                .filter(s -> s != MALOR)
+                .filter(s -> s != LOKTOFEIT)
+                .toList();
+
+        if (choices.isEmpty()) {
+            return null;
+        }
+
+        return choices.get((int) (Math.random() * choices.size()));
     }
 
     public static Vector2 centerOfMass(TextureRegion tr) {

@@ -82,7 +82,7 @@ public class MutableMonster implements Mutable {
 
     @Override
     public int hitModifier() {
-        return 0;
+        return getLevel();
     }
 
     @Override
@@ -222,94 +222,27 @@ public class MutableMonster implements Mutable {
 
     @Override
     public Spells castMageSpell() {
-        int roll = Utils.RANDOM.nextInt(100);
-        int value = 0;
-        if (roll <= 70) {
-            value = 0;
-        } else if (roll <= 80) {
-            value = 1;
-        } else if (roll <= 90) {
-            value = 2;
-        } else if (roll <= 94) {
-            value = 3;
-        } else if (roll <= 96) {
-            value = 4;
-        } else if (roll <= 98) {
-            value = 5;
-        } else if (roll <= 100) {
-            value = 6;
-        }
-
-        int spellLevel = Math.max(1, this.currentMageSpellLevel - value);
-        int roll2 = Utils.RANDOM.nextInt(100);
-        Spells spell = null;
-
-        if (spellLevel == 1) {
-            spell = roll2 < 66 ? Spells.KATINO : Spells.HALITO;
-        }
-        if (spellLevel == 2) {
-            spell = roll2 < 66 ? Spells.DILTO : Spells.HALITO;
-        }
-        if (spellLevel == 3) {
-            spell = roll2 < 66 ? Spells.MOLITO : Spells.MAHALITO;
-        }
-        if (spellLevel == 4) {
-            spell = roll2 < 66 ? Spells.DALTO : Spells.LAHALITO;
-        }
-        if (spellLevel == 5) {
-            spell = roll2 < 66 ? Spells.LAHALITO : Spells.MADALTO;
-        }
-        if (spellLevel == 6) {
-            spell = roll2 < 66 ? Spells.MADALTO : Spells.ZILWAN;
-        }
-        if (spellLevel == 7) {
-            spell = roll2 < 66 ? Spells.TILTOWAIT : Spells.TILTOWAIT;
-        }
-
-        double tmp = ((double) 1 / (double) (this.monster.groupSize.roll() + 2)) * 100;
-        int roll3 = Utils.RANDOM.nextInt(100);
-        if (roll3 <= tmp) {
+        Spells spell = Utils.monsterMageSpell(this.currentMageSpellLevel);
+        int depletionRange = Math.max(1, this.monster.groupSize.roll() + 2);
+        if (Utils.RANDOM.nextInt(depletionRange) == 0) {
             this.currentMageSpellLevel--;
+            if (this.currentMageSpellLevel < 0) {
+                this.currentMageSpellLevel = 0;
+            }
         }
-
         return spell;
     }
 
     @Override
     public Spells castPriestSpell() {
-
-        int spellLevel = Math.max(1, this.currentPriestSpellLevel);
-        int roll2 = Utils.RANDOM.nextInt(100);
-        Spells spell = null;
-
-        if (spellLevel == 1) {
-            spell = roll2 < 66 ? Spells.BADIOS : Spells.BADIOS;
-        }
-        if (spellLevel == 2) {
-            spell = roll2 < 66 ? Spells.MONTINO : Spells.MONTINO;
-        }
-        if (spellLevel == 3) {
-            spell = roll2 < 66 ? Spells.BADIOS : Spells.BADIAL;
-        }
-        if (spellLevel == 4) {
-            spell = roll2 < 66 ? Spells.BADIAL : Spells.BADIAL;
-        }
-        if (spellLevel == 5) {
-            spell = roll2 < 66 ? Spells.BADIALMA : Spells.BADI;
-        }
-        if (spellLevel == 6) {
-            spell = roll2 < 66 ? Spells.LORTO : Spells.MABADI;
-        }
-        if (spellLevel == 7) {
-            spell = roll2 < 66 ? Spells.MABADI : Spells.MABADI;
-        }
-
-        double tmp = ((double) 1 / (double) (this.monster.groupSize.roll() + 2)) * 100;
-        int roll3 = Utils.RANDOM.nextInt(100);
-        if (roll3 <= tmp) {
+        Spells spell = Utils.monsterPriestSpell(this.currentPriestSpellLevel);
+        int depletionRange = Math.max(1, this.monster.groupSize.roll() + 2);
+        if (Utils.RANDOM.nextInt(depletionRange) == 0) {
             this.currentPriestSpellLevel--;
+            if (this.currentPriestSpellLevel < 0) {
+                this.currentPriestSpellLevel = 0;
+            }
         }
-
         return spell;
     }
 

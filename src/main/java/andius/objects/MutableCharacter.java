@@ -269,7 +269,7 @@ public class MutableCharacter implements Mutable {
                 return itemSpell.item.spell;
             }
 
-            Spells tmp = Spells.randomCombatSpell(spellType, spellLevel);
+            Spells tmp = Utils.randomCombatSpell(spellType, spellLevel);
             if (tmp != null) {
                 return tmp;
             }

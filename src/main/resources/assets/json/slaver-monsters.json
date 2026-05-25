@@ -32,23 +32,23 @@
         "hitPoints": {
             "qty": 2,
             "sides": 8,
-            "bonus": 0
+            "bonus": 4
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "T3"
@@ -70,7 +70,7 @@
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 10,
         "resistance": [
             "MAGIC"
         ],
@@ -87,23 +87,23 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 0
+            "bonus": 8
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 6,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 6,
+                "bonus": 1
             },
             {
                 "qty": 1,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "T3"
@@ -138,39 +138,39 @@
         },
         "hitPoints": {
             "qty": 8,
-            "sides": 8,
-            "bonus": 0
+            "sides": 10,
+            "bonus": 8
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             }
         ],
         "roomId": "T5b"
@@ -197,7 +197,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 4,
+            "qty": 6,
             "sides": 1,
             "bonus": 0
         },
@@ -232,7 +232,7 @@
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [
             "MAGIC"
         ],
@@ -246,13 +246,13 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 0
+            "bonus": 8
         },
         "damage": [
             {
-                "qty": 1,
-                "sides": 12,
-                "bonus": 0
+                "qty": 2,
+                "sides": 6,
+                "bonus": 2
             }
         ],
         "roomId": "T6"
@@ -279,7 +279,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 6,
+            "qty": 8,
             "sides": 1,
             "bonus": 0
         },
@@ -319,9 +319,9 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 1,
-            "sides": 7,
-            "bonus": 1
+            "qty": 2,
+            "sides": 6,
+            "bonus": 2
         },
         "hitPoints": {
             "qty": 2,
@@ -363,30 +363,30 @@
         ],
         "exp": 500,
         "groupSize": {
-            "qty": 1,
+            "qty": 2,
             "sides": 4,
-            "bonus": 1
+            "bonus": 2
         },
         "hitPoints": {
             "qty": 2,
             "sides": 8,
-            "bonus": 0
+            "bonus": 4
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "T8"
@@ -420,28 +420,28 @@
         "hitPoints": {
             "qty": 10,
             "sides": 8,
-            "bonus": 0
+            "bonus": 15
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "T8"
@@ -463,11 +463,13 @@
         "levelDrain": 1,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 20,
         "resistance": [
             "MAGIC"
         ],
-        "ability": [],
+        "ability": [
+            "AUTOKILL"
+        ],
         "exp": 600,
         "groupSize": {
             "qty": 1,
@@ -477,13 +479,13 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 3
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "T9"
@@ -505,7 +507,7 @@
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [
             "STONING"
         ],
@@ -521,13 +523,13 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 1
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 10,
-                "bonus": 0
+                "bonus": 3
             }
         ],
         "roomId": "T10"
@@ -567,7 +569,7 @@
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "T12a"
@@ -601,13 +603,13 @@
         "hitPoints": {
             "qty": 5,
             "sides": 6,
-            "bonus": 0
+            "bonus": 10
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 3
             }
         ],
         "roomId": "T12a"
@@ -625,7 +627,7 @@
         "armourClass": 7,
         "speed": 9,
         "mageSpellLevel": 0,
-        "priestSpellLevel": 2,
+        "priestSpellLevel": 3,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
@@ -641,13 +643,13 @@
         "hitPoints": {
             "qty": 5,
             "sides": 10,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "T12a"
@@ -721,7 +723,9 @@
         "breath": 0,
         "unaffected": 0,
         "resistance": [],
-        "ability": [],
+        "ability": [
+            "PARALYZE"
+        ],
         "exp": 400,
         "groupSize": {
             "qty": 4,
@@ -736,18 +740,18 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 3,
-                "bonus": 0
+                "sides": 4,
+                "bonus": 1
             },
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "T14"
@@ -774,7 +778,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 6,
+            "qty": 8,
             "sides": 1,
             "bonus": 0
         },
@@ -786,7 +790,7 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
+                "sides": 8,
                 "bonus": 0
             }
         ],
@@ -814,7 +818,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 4,
+            "qty": 5,
             "sides": 1,
             "bonus": 0
         },
@@ -826,7 +830,7 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
+                "sides": 8,
                 "bonus": 0
             }
         ],
@@ -861,18 +865,18 @@
         "hitPoints": {
             "qty": 4,
             "sides": 10,
-            "bonus": 0
+            "bonus": 10
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "T16b"
@@ -911,8 +915,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "T16c"
@@ -934,7 +938,7 @@
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [
             "MAGIC"
         ],
@@ -948,13 +952,13 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 0
+            "bonus": 8
         },
         "damage": [
             {
-                "qty": 1,
-                "sides": 12,
-                "bonus": 0
+                "qty": 2,
+                "sides": 6,
+                "bonus": 2
             }
         ],
         "roomId": "T16c"
@@ -988,13 +992,13 @@
         "hitPoints": {
             "qty": 3,
             "sides": 10,
-            "bonus": 0
+            "bonus": 6
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 10,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "T18"
@@ -1012,11 +1016,11 @@
         "armourClass": 1,
         "speed": 6,
         "mageSpellLevel": 0,
-        "priestSpellLevel": 3,
+        "priestSpellLevel": 5,
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 20,
         "resistance": [],
         "ability": [],
         "exp": 640,
@@ -1028,13 +1032,13 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 18
         },
         "damage": [
             {
-                "qty": 1,
-                "sides": 6,
-                "bonus": 1
+                "qty": 2,
+                "sides": 4,
+                "bonus": 2
             }
         ],
         "roomId": "T18"
@@ -1054,9 +1058,9 @@
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 3,
+        "healpts": 5,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 10,
         "resistance": [],
         "ability": [],
         "exp": 1720,
@@ -1068,23 +1072,23 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 6
+            "bonus": 18
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
+                "sides": 6,
                 "bonus": 4
             },
             {
                 "qty": 1,
-                "sides": 4,
+                "sides": 6,
                 "bonus": 4
             },
             {
                 "qty": 2,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 3
             }
         ],
         "roomId": "T18"
@@ -1109,8 +1113,7 @@
         "unaffected": 0,
         "resistance": [],
         "ability": [
-            "POISON",
-            "AUTOKILL"
+            "POISON"
         ],
         "exp": 1360,
         "groupSize": {
@@ -1121,33 +1124,33 @@
         "hitPoints": {
             "qty": 4,
             "sides": 6,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "T18"
@@ -1174,7 +1177,7 @@
         "ability": [],
         "exp": 240,
         "groupSize": {
-            "qty": 10,
+            "qty": 12,
             "sides": 1,
             "bonus": 0
         },
@@ -1186,7 +1189,7 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 3,
+                "sides": 4,
                 "bonus": 0
             }
         ],
@@ -1221,13 +1224,13 @@
         "hitPoints": {
             "qty": 5,
             "sides": 8,
-            "bonus": 0
+            "bonus": 10
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 1
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "S2"
@@ -1264,18 +1267,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 6,
+                "bonus": 2
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 6,
+                "bonus": 2
             }
         ],
         "roomId": "S3"
@@ -1312,13 +1315,13 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 3
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 2,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S4"
@@ -1387,7 +1390,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 5,
+            "qty": 7,
             "sides": 1,
             "bonus": 0
         },
@@ -1399,8 +1402,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S5"
@@ -1437,18 +1440,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "S5"
@@ -1485,13 +1488,13 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 18
         },
         "damage": [
             {
                 "qty": 3,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S6"
@@ -1528,18 +1531,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 10,
+                "bonus": 2
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 10,
+                "bonus": 2
             }
         ],
         "roomId": "S6"
@@ -1569,24 +1572,24 @@
         "exp": 600,
         "groupSize": {
             "qty": 1,
-            "sides": 3,
-            "bonus": 1
+            "sides": 4,
+            "bonus": 2
         },
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 6
         },
         "damage": [
             {
                 "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 3,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "S6"
@@ -1613,8 +1616,8 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 1,
-            "sides": 10,
+            "qty": 2,
+            "sides": 8,
             "bonus": 0
         },
         "hitPoints": {
@@ -1625,8 +1628,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S6"
@@ -1653,7 +1656,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 2,
+            "qty": 3,
             "sides": 6,
             "bonus": 0
         },
@@ -1665,8 +1668,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S8a"
@@ -1696,24 +1699,24 @@
         "exp": 600,
         "groupSize": {
             "qty": 1,
-            "sides": 3,
-            "bonus": 0
+            "sides": 4,
+            "bonus": 1
         },
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 6
         },
         "damage": [
             {
                 "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 3,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "S8a"
@@ -1752,8 +1755,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S8b"
@@ -1789,18 +1792,18 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 6
         },
         "damage": [
             {
                 "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 3,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "S8b"
@@ -1834,13 +1837,13 @@
         "hitPoints": {
             "qty": 10,
             "sides": 8,
-            "bonus": 0
+            "bonus": 20
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 10,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S8b"
@@ -1855,17 +1858,17 @@
         "chestReward": 9,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 4,
-        "speed": 9,
+        "armourClass": 2,
+        "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 2,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 12,
         "resistance": [],
         "ability": [],
-        "exp": 1500,
+        "exp": 3000,
         "groupSize": {
             "qty": 3,
             "sides": 1,
@@ -1874,13 +1877,13 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 1
+            "bonus": 48
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 10,
-                "bonus": 0
+                "bonus": 6
             }
         ],
         "roomId": "S12"
@@ -1907,7 +1910,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 18,
+            "qty": 22,
             "sides": 1,
             "bonus": 0
         },
@@ -1919,8 +1922,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S12"
@@ -1947,7 +1950,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 6,
+            "qty": 8,
             "sides": 1,
             "bonus": 0
         },
@@ -1960,7 +1963,7 @@
             {
                 "qty": 1,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "S14"
@@ -1999,8 +2002,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S15a"
@@ -2015,17 +2018,17 @@
         "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 4,
-        "speed": 9,
+        "armourClass": 2,
+        "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 2,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [],
         "ability": [],
-        "exp": 700,
+        "exp": 1400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2034,18 +2037,18 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 42
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 6
             },
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 6,
-                "bonus": 1
+                "bonus": 6
             }
         ],
         "roomId": "S15b"
@@ -2079,18 +2082,18 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 6
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 1
+                "bonus": 2
             }
         ],
         "roomId": "S15b"
@@ -2124,13 +2127,13 @@
         "hitPoints": {
             "qty": 4,
             "sides": 8,
-            "bonus": 1
+            "bonus": 8
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 10,
-                "bonus": 0
+                "bonus": 3
             }
         ],
         "roomId": "S15b"
@@ -2157,7 +2160,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 8,
+            "qty": 10,
             "sides": 1,
             "bonus": 0
         },
@@ -2169,8 +2172,8 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             }
         ],
         "roomId": "S16a"
@@ -2185,32 +2188,32 @@
         "chestReward": 7,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 6,
-        "speed": 9,
+        "armourClass": 4,
+        "speed": 12,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 1,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 10,
         "resistance": [],
         "ability": [],
-        "exp": 600,
+        "exp": 1200,
         "groupSize": {
-            "qty": 6,
+            "qty": 12,
             "sides": 1,
             "bonus": 0
         },
         "hitPoints": {
             "qty": 1,
             "sides": 8,
-            "bonus": 0
+            "bonus": 8
         },
         "damage": [
             {
-                "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "qty": 2,
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "S16b"
@@ -2225,17 +2228,17 @@
         "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 4,
-        "speed": 9,
-        "mageSpellLevel": 2,
-        "priestSpellLevel": 3,
+        "armourClass": 2,
+        "speed": 12,
+        "mageSpellLevel": 6,
+        "priestSpellLevel": 6,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 2,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 30,
         "resistance": [],
         "ability": [],
-        "exp": 800,
+        "exp": 1600,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2244,18 +2247,18 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 0
+            "bonus": 48
         },
         "damage": [
             {
-                "qty": 2,
+                "qty": 4,
                 "sides": 5,
-                "bonus": 0
+                "bonus": 4
             },
             {
-                "qty": 2,
+                "qty": 4,
                 "sides": 7,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S16b"
@@ -2292,18 +2295,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "S18a"
@@ -2340,18 +2343,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "S18b"
@@ -2366,17 +2369,17 @@
         "chestReward": 21,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 10,
-        "speed": 12,
+        "armourClass": 8,
+        "speed": 15,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 1,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 10,
         "resistance": [],
         "ability": [],
-        "exp": 700,
+        "exp": 1400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2385,11 +2388,11 @@
         "hitPoints": {
             "qty": 1,
             "sides": 8,
-            "bonus": -1
+            "bonus": 6
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 4,
                 "bonus": 0
             }
@@ -2406,17 +2409,17 @@
         "chestReward": 16,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 4,
-        "speed": 12,
+        "armourClass": 2,
+        "speed": 15,
         "mageSpellLevel": 0,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 2,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [],
         "ability": [],
-        "exp": 700,
+        "exp": 1400,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2425,13 +2428,13 @@
         "hitPoints": {
             "qty": 7,
             "sides": 10,
-            "bonus": 0
+            "bonus": 98
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 8,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S19a"
@@ -2446,16 +2449,16 @@
         "chestReward": 18,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 6,
-        "speed": 12,
-        "mageSpellLevel": 3,
+        "armourClass": 4,
+        "speed": 15,
+        "mageSpellLevel": 7,
         "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 1,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 30,
         "ability": [],
-        "exp": 2000,
+        "exp": 4000,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2464,18 +2467,19 @@
         "hitPoints": {
             "qty": 6,
             "sides": 4,
-            "bonus": 0
+            "bonus": 48
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 4
             }
         ],
         "roomId": "S19a",
         "resistance": [
-            "FIRE"
+            "FIRE",
+            "MAGIC"
         ]
     },
     {
@@ -2500,7 +2504,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 5,
+            "qty": 6,
             "sides": 1,
             "bonus": 0
         },
@@ -2513,12 +2517,12 @@
             {
                 "qty": 1,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 1
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "S19a"
@@ -2592,18 +2596,18 @@
         "hitPoints": {
             "qty": 4,
             "sides": 10,
-            "bonus": 0
+            "bonus": 8
         },
         "damage": [
             {
                 "qty": 1,
                 "sides": 12,
-                "bonus": 0
+                "bonus": 2
             },
             {
                 "qty": 1,
                 "sides": 12,
-                "bonus": 0
+                "bonus": 2
             }
         ],
         "roomId": "S19a"
@@ -2625,7 +2629,7 @@
         "levelDrain": 0,
         "healpts": 0,
         "breath": 0,
-        "unaffected": 0,
+        "unaffected": 15,
         "resistance": [
             "MAGIC"
         ],
@@ -2644,7 +2648,7 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 2,
+                "sides": 12,
                 "bonus": 0
             }
         ],
@@ -2682,18 +2686,18 @@
         "hitPoints": {
             "qty": 6,
             "sides": 8,
-            "bonus": 0
+            "bonus": 12
         },
         "damage": [
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             },
             {
                 "qty": 1,
-                "sides": 4,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 2
             }
         ],
         "roomId": "S19c"
@@ -2748,17 +2752,22 @@
         "chestReward": 41,
         "partnerID": 0,
         "partnerOdds": 0,
-        "armourClass": 2,
-        "speed": 12,
-        "mageSpellLevel": 5,
-        "priestSpellLevel": 5,
+        "armourClass": 0,
+        "speed": 15,
+        "mageSpellLevel": 0,
+        "priestSpellLevel": 0,
         "levelDrain": 0,
-        "healpts": 0,
+        "healpts": 4,
         "breath": 0,
-        "unaffected": 0,
-        "resistance": [],
-        "ability": [],
-        "exp": 2300,
+        "unaffected": 40,
+        "resistance": [
+            "MAGIC"
+        ],
+        "ability": [
+            "POISON",
+            "AUTOKILL"
+        ],
+        "exp": 4600,
         "groupSize": {
             "qty": 1,
             "sides": 1,
@@ -2767,18 +2776,18 @@
         "hitPoints": {
             "qty": 7,
             "sides": 8,
-            "bonus": 0
+            "bonus": 98
         },
         "damage": [
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 12,
-                "bonus": 0
+                "bonus": 6
             },
             {
-                "qty": 1,
+                "qty": 2,
                 "sides": 12,
-                "bonus": 0
+                "bonus": 6
             }
         ],
         "roomId": "S21"
@@ -2812,13 +2821,13 @@
         "hitPoints": {
             "qty": 3,
             "sides": 8,
-            "bonus": 3
+            "bonus": 9
         },
         "damage": [
             {
                 "qty": 2,
                 "sides": 6,
-                "bonus": 0
+                "bonus": 3
             }
         ],
         "roomId": "S21"
@@ -2845,7 +2854,7 @@
         "ability": [],
         "exp": 400,
         "groupSize": {
-            "qty": 10,
+            "qty": 12,
             "sides": 1,
             "bonus": 0
         },
@@ -2857,13 +2866,13 @@
         "damage": [
             {
                 "qty": 1,
-                "sides": 6,
-                "bonus": 0
+                "sides": 8,
+                "bonus": 1
             },
             {
                 "qty": 1,
                 "sides": 4,
-                "bonus": 0
+                "bonus": 1
             }
         ],
         "roomId": "S21"
