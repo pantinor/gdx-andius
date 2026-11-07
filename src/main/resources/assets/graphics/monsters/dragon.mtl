@@ -1,12 +1,96 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Red dragon materials
 
-newmtl red.003
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800172 0.008603 0.005813
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl horn_tip
+Kd 0.9098 0.7843 0.5882
+d 1.0
+illum 1
+
+newmtl horn
+Kd 0.6235 0.4392 0.2667
+d 1.0
+illum 1
+
+newmtl scarlet_head
+Kd 0.7020 0.1922 0.1412
+d 1.0
+illum 1
+
+newmtl mouth
+Kd 0.2392 0.0549 0.0824
+d 1.0
+illum 1
+
+newmtl tongue
+Kd 0.5882 0.1686 0.2039
+d 1.0
+illum 1
+
+newmtl teeth
+Kd 0.9216 0.8314 0.6314
+d 1.0
+illum 1
+
+newmtl nostril
+Kd 0.1020 0.0314 0.0392
+d 1.0
+illum 1
+
+newmtl eye_socket
+Kd 0.3490 0.0902 0.0588
+d 1.0
+illum 1
+
+newmtl eye
+Kd 1.0000 0.5922 0.0902
+d 1.0
+illum 1
+
+newmtl crimson_scales
+Kd 0.6078 0.1412 0.1137
+d 1.0
+illum 1
+
+newmtl scale_shadow
+Kd 0.4196 0.1020 0.1020
+d 1.0
+illum 1
+
+newmtl belly_plate
+Kd 0.7608 0.5490 0.3176
+d 1.0
+illum 1
+
+newmtl dorsal_red
+Kd 0.4863 0.1020 0.0941
+d 1.0
+illum 1
+
+newmtl belly_shadow
+Kd 0.5176 0.3255 0.1882
+d 1.0
+illum 1
+
+newmtl wing_rib
+Kd 0.4118 0.0980 0.0941
+d 1.0
+illum 1
+
+newmtl wing_shadow
+Kd 0.5176 0.1176 0.0941
+d 1.0
+illum 1
+
+newmtl wing_membrane
+Kd 0.6941 0.1882 0.1137
+d 1.0
+illum 1
+
+newmtl talon_horn
+Kd 0.2627 0.2039 0.1765
+d 1.0
+illum 1
+
+newmtl talon_tip
+Kd 0.5490 0.4706 0.3843
+d 1.0
+illum 1

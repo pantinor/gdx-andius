@@ -1,12 +1,51 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Moss and bark elemental material colors
 
-newmtl Material.008
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.076722 0.800331 0.015213
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl swirl_shadow
+Kd 0.1490 0.1804 0.1098
+d 1.0
+illum 1
+
+newmtl bark_brown
+Kd 0.4118 0.3294 0.1804
+d 1.0
+illum 1
+
+newmtl bark_light
+Kd 0.5569 0.4706 0.2667
+d 1.0
+illum 1
+
+newmtl moss_light
+Kd 0.5216 0.6000 0.2118
+d 1.0
+illum 1
+
+newmtl bark_shadow
+Kd 0.2510 0.2118 0.1294
+d 1.0
+illum 1
+
+newmtl forest_green
+Kd 0.1843 0.2706 0.1255
+d 1.0
+illum 1
+
+newmtl moss_green
+Kd 0.3569 0.4392 0.1451
+d 1.0
+illum 1
+
+newmtl deep_green
+Kd 0.1137 0.1843 0.1137
+d 1.0
+illum 1
+
+newmtl lichen
+Kd 0.6118 0.6275 0.3569
+d 1.0
+illum 1
+
+newmtl leaf_highlight
+Kd 0.6667 0.7176 0.2980
+d 1.0
+illum 1

@@ -1,12 +1,81 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Golden-throated giant frog material colors
 
-newmtl Material.018
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.300486 0.801173 0.038902
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl forest
+Kd 0.1059 0.2588 0.1686
+d 1.0
+illum 1
+
+newmtl belly_shadow
+Kd 0.6196 0.3882 0.1333
+d 1.0
+illum 1
+
+newmtl belly_gold
+Kd 0.7843 0.5176 0.1529
+d 1.0
+illum 1
+
+newmtl toe_green
+Kd 0.1882 0.3451 0.1686
+d 1.0
+illum 1
+
+newmtl pupil
+Kd 0.0784 0.0667 0.0549
+d 1.0
+illum 1
+
+newmtl back_dark
+Kd 0.0745 0.1922 0.1529
+d 1.0
+illum 1
+
+newmtl jade
+Kd 0.1725 0.4039 0.2118
+d 1.0
+illum 1
+
+newmtl iris_amber
+Kd 0.9647 0.4863 0.1294
+d 1.0
+illum 1
+
+newmtl moss
+Kd 0.2667 0.4510 0.1961
+d 1.0
+illum 1
+
+newmtl iris_red
+Kd 0.7373 0.2157 0.0863
+d 1.0
+illum 1
+
+newmtl nostril
+Kd 0.0667 0.1294 0.1020
+d 1.0
+illum 1
+
+newmtl eye_ring
+Kd 0.7333 0.5882 0.1765
+d 1.0
+illum 1
+
+newmtl eye_glint
+Kd 0.9608 0.8235 0.5647
+d 1.0
+illum 1
+
+newmtl mouth_dark
+Kd 0.1686 0.1451 0.0902
+d 1.0
+illum 1
+
+newmtl lip_gold
+Kd 0.6588 0.5098 0.1804
+d 1.0
+illum 1
+
+newmtl throat_light
+Kd 0.9020 0.6431 0.2118
+d 1.0
+illum 1

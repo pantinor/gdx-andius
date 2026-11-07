@@ -1,12 +1,66 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Aged skeleton warrior material colors
 
-newmtl Material.018
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800440 0.516171 0.044339
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl bone_shadow
+Kd 0.4392 0.3490 0.2392
+d 1.0
+illum 1
+
+newmtl bone_ivory
+Kd 0.7686 0.6941 0.5451
+d 1.0
+illum 1
+
+newmtl bone_warm
+Kd 0.6235 0.5333 0.3922
+d 1.0
+illum 1
+
+newmtl iron_edge
+Kd 0.3529 0.3882 0.3804
+d 1.0
+illum 1
+
+newmtl teeth_ivory
+Kd 0.8235 0.7529 0.5922
+d 1.0
+illum 1
+
+newmtl nasal_dark
+Kd 0.2118 0.1529 0.1137
+d 1.0
+illum 1
+
+newmtl socket_dark
+Kd 0.1647 0.1294 0.1020
+d 1.0
+illum 1
+
+newmtl leather_wrap
+Kd 0.2706 0.1647 0.1294
+d 1.0
+illum 1
+
+newmtl iron_black
+Kd 0.1961 0.2275 0.2353
+d 1.0
+illum 1
+
+newmtl steel_flat
+Kd 0.4549 0.5451 0.5569
+d 1.0
+illum 1
+
+newmtl steel_edge
+Kd 0.6980 0.7569 0.7333
+d 1.0
+illum 1
+
+newmtl steel_dark
+Kd 0.2824 0.3569 0.3804
+d 1.0
+illum 1
+
+newmtl bronze_pommel
+Kd 0.4275 0.3216 0.2000
+d 1.0
+illum 1

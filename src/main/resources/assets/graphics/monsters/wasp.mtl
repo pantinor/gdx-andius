@@ -1,12 +1,91 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Gold-banded wasp material colors
 
-newmtl Material.002
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800275 0.075340 0.014780
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl shell_shadow
+Kd 0.0784 0.0941 0.1176
+d 1.0
+illum 1
+
+newmtl leg_dark
+Kd 0.1176 0.1490 0.1765
+d 1.0
+illum 1
+
+newmtl wing_gold
+Kd 0.9686 0.7137 0.2510
+d 1.0
+illum 1
+
+newmtl wing_light
+Kd 1.0000 0.8353 0.4353
+d 1.0
+illum 1
+
+newmtl wing_vein
+Kd 0.3922 0.2275 0.0941
+d 1.0
+illum 1
+
+newmtl wing_root
+Kd 0.2471 0.1647 0.1059
+d 1.0
+illum 1
+
+newmtl shell_black
+Kd 0.1137 0.1490 0.1882
+d 1.0
+illum 1
+
+newmtl shell_blue
+Kd 0.1922 0.2588 0.3020
+d 1.0
+illum 1
+
+newmtl band_ochre
+Kd 0.6196 0.3451 0.0706
+d 1.0
+illum 1
+
+newmtl band_gold
+Kd 0.8784 0.5882 0.1176
+d 1.0
+illum 1
+
+newmtl leg_bronze
+Kd 0.4627 0.2941 0.1333
+d 1.0
+illum 1
+
+newmtl leg_joint
+Kd 0.6588 0.4353 0.1922
+d 1.0
+illum 1
+
+newmtl face_gold
+Kd 0.9373 0.6588 0.1529
+d 1.0
+illum 1
+
+newmtl eye_dark
+Kd 0.0667 0.1137 0.1569
+d 1.0
+illum 1
+
+newmtl eye_glint
+Kd 0.1843 0.3020 0.3686
+d 1.0
+illum 1
+
+newmtl antenna_dark
+Kd 0.1176 0.1333 0.1569
+d 1.0
+illum 1
+
+newmtl antenna_tip
+Kd 0.5843 0.4235 0.2039
+d 1.0
+illum 1
+
+newmtl sting
+Kd 0.2000 0.1216 0.0863
+d 1.0
+illum 1

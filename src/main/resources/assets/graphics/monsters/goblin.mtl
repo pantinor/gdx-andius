@@ -1,52 +1,106 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Green goblin scout material colors
 
-newmtl BootBrown
-Ns 10.000005
-Ka 1.000000 1.000000 1.000000
-Kd 0.450000 0.280000 0.120000
-Ks 0.050000 0.050000 0.050000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl skin_light
+Kd 0.6745 0.7373 0.2667
+d 1.0
+illum 1
 
-newmtl ClothTan
-Ns 10.000005
-Ka 1.000000 1.000000 1.000000
-Kd 0.760000 0.670000 0.450000
-Ks 0.050000 0.050000 0.050000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl leather_light
+Kd 0.5490 0.3569 0.1922
+d 1.0
+illum 1
 
-newmtl SkinGreen
-Ns 10.000005
-Ka 1.000000 1.000000 1.000000
-Kd 0.200000 0.700000 0.250000
-Ks 0.050000 0.050000 0.050000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl leather
+Kd 0.4196 0.2627 0.1490
+d 1.0
+illum 1
 
-newmtl SpearSilver
-Ns 95.999992
-Ka 1.000000 1.000000 1.000000
-Kd 0.750000 0.750000 0.780000
-Ks 0.250000 0.250000 0.250000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl tooth
+Kd 0.8353 0.7725 0.5686
+d 1.0
+illum 1
 
-newmtl SpearWoodBrown
-Ns 10.000005
-Ka 1.000000 1.000000 1.000000
-Kd 0.500000 0.320000 0.150000
-Ks 0.050000 0.050000 0.050000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl leather_dark
+Kd 0.2863 0.1804 0.1176
+d 1.0
+illum 1
+
+newmtl skin
+Kd 0.5294 0.6157 0.1843
+d 1.0
+illum 1
+
+newmtl skin_shadow
+Kd 0.3608 0.4431 0.1373
+d 1.0
+illum 1
+
+newmtl cloth_shadow
+Kd 0.0941 0.1725 0.1529
+d 1.0
+illum 1
+
+newmtl wood
+Kd 0.4667 0.2980 0.1529
+d 1.0
+illum 1
+
+newmtl forest_cloth
+Kd 0.1412 0.2667 0.2157
+d 1.0
+illum 1
+
+newmtl cloth_light
+Kd 0.2157 0.3451 0.2549
+d 1.0
+illum 1
+
+newmtl buckle
+Kd 0.6118 0.5922 0.4706
+d 1.0
+illum 1
+
+newmtl ear_ochre
+Kd 0.5294 0.4078 0.1490
+d 1.0
+illum 1
+
+newmtl wood_light
+Kd 0.6118 0.4196 0.2157
+d 1.0
+illum 1
+
+newmtl steel
+Kd 0.5725 0.6392 0.6157
+d 1.0
+illum 1
+
+newmtl steel_shadow
+Kd 0.3373 0.4039 0.3961
+d 1.0
+illum 1
+
+newmtl steel_edge
+Kd 0.7765 0.8235 0.7608
+d 1.0
+illum 1
+
+newmtl eye_dark
+Kd 0.1373 0.1137 0.0667
+d 1.0
+illum 1
+
+newmtl eye_amber
+Kd 0.7608 0.4941 0.1451
+d 1.0
+illum 1
+
+newmtl mouth
+Kd 0.2431 0.2118 0.1020
+d 1.0
+illum 1
+
+newmtl eye_glint
+Kd 0.8902 0.7216 0.3373
+d 1.0
+illum 1

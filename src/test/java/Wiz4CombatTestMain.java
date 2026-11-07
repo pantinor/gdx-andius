@@ -106,7 +106,7 @@ public class Wiz4CombatTestMain extends Game {
             mms.add(new MutableMonster(WER_MONSTERS.get(108)));
             mms.add(new MutableMonster(WER_MONSTERS.get(108)));
 
-            setScreen(new Wiz4CombatScreen(ctx.saveGame.players[4], mms, WER4_CHARS.get(448), null, null, null));
+            //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[4], mms, WER4_CHARS.get(448), null, null, null));
             //setScreen(new Wiz4CombatScreen(ctx.saveGame.players[0], mms, WER4_CHARS.get(454), null, null));
             //setScreen(new WizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(8).getName(), PMO_MONSTERS.get(8), 1, true, null, null));
             //setScreen(new Wiz4RewardScreen(ctx.saveGame.players[0], WER4_CHARS.get(0)));
@@ -117,7 +117,7 @@ public class Wiz4CombatTestMain extends Game {
             //setScreen(new VendorScreen(ctx, Constants.Map.CAVE, DQ_ITEMS, "paul"));
             //setScreen(new SummoningCircleScreen(ctx.saveGame.players[0], SummoningCircle.CIRCLE1));
             //setScreen(new ManageScreen(null, Andius.skin, new SaveGame()));
-            //setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(32).getName(), PMO_MONSTERS.get(32), 1, true, null, null));
+            setScreen(new EnhancedWizardryCombatScreen(ctx, Constants.Map.WIZARDRY1, PMO_MONSTERS.get(32).getName(), PMO_MONSTERS.get(32), 1, true, null, null));
 
         } catch (Exception e) {
             e.printStackTrace();

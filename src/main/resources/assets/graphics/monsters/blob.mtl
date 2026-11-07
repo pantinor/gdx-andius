@@ -1,12 +1,66 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Golden orange-spotted slug material colors
 
-newmtl Material.026
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.011093 0.165046 0.003047
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl yellow
+Kd 0.9804 0.7961 0.1882
+d 1.0
+illum 1
+
+newmtl spot_edge
+Kd 0.5922 0.2235 0.1020
+d 1.0
+illum 1
+
+newmtl gold
+Kd 0.8902 0.6863 0.1020
+d 1.0
+illum 1
+
+newmtl gold_shadow
+Kd 0.6706 0.4784 0.0745
+d 1.0
+illum 1
+
+newmtl orange_light
+Kd 0.9490 0.4392 0.1451
+d 1.0
+illum 1
+
+newmtl orange
+Kd 0.8235 0.3059 0.1137
+d 1.0
+illum 1
+
+newmtl cream
+Kd 0.9176 0.8784 0.7333
+d 1.0
+illum 1
+
+newmtl cream_shadow
+Kd 0.7216 0.6510 0.4745
+d 1.0
+illum 1
+
+newmtl mouth
+Kd 0.1725 0.1647 0.0745
+d 1.0
+illum 1
+
+newmtl green_light
+Kd 0.3882 0.7098 0.1412
+d 1.0
+illum 1
+
+newmtl green_shadow
+Kd 0.1333 0.3490 0.0863
+d 1.0
+illum 1
+
+newmtl green
+Kd 0.2353 0.5608 0.1059
+d 1.0
+illum 1
+
+newmtl cream_light
+Kd 1.0000 0.9686 0.8314
+d 1.0
+illum 1

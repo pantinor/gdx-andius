@@ -1,12 +1,101 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Violet and green warlock material colors
 
-newmtl Material.013
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.800308 0.117100 0.026305
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl eye_dark
+Kd 0.0941 0.1098 0.0941
+d 1.0
+illum 1
+
+newmtl hair
+Kd 0.1020 0.1333 0.1255
+d 1.0
+illum 1
+
+newmtl eye
+Kd 0.7804 0.8314 0.6039
+d 1.0
+illum 1
+
+newmtl green_metal
+Kd 0.2784 0.3922 0.1137
+d 1.0
+illum 1
+
+newmtl leather
+Kd 0.1882 0.1608 0.1373
+d 1.0
+illum 1
+
+newmtl cape_light
+Kd 0.1373 0.1686 0.4706
+d 1.0
+illum 1
+
+newmtl cape_shadow
+Kd 0.0588 0.0745 0.1882
+d 1.0
+illum 1
+
+newmtl green_shadow
+Kd 0.1569 0.2392 0.0902
+d 1.0
+illum 1
+
+newmtl gem
+Kd 0.2549 0.5294 0.4314
+d 1.0
+illum 1
+
+newmtl violet_shadow
+Kd 0.1843 0.0980 0.3451
+d 1.0
+illum 1
+
+newmtl cape_blue
+Kd 0.0863 0.1059 0.3333
+d 1.0
+illum 1
+
+newmtl violet
+Kd 0.3137 0.1373 0.5961
+d 1.0
+illum 1
+
+newmtl green_edge
+Kd 0.4392 0.5608 0.1686
+d 1.0
+illum 1
+
+newmtl skin_light
+Kd 0.7490 0.5176 0.2902
+d 1.0
+illum 1
+
+newmtl violet_light
+Kd 0.4510 0.2235 0.7451
+d 1.0
+illum 1
+
+newmtl hem_red
+Kd 0.5294 0.1176 0.1804
+d 1.0
+illum 1
+
+newmtl skin_shadow
+Kd 0.4314 0.2588 0.1647
+d 1.0
+illum 1
+
+newmtl trim
+Kd 0.6510 0.7529 0.5490
+d 1.0
+illum 1
+
+newmtl horn
+Kd 0.7255 0.7882 0.5725
+d 1.0
+illum 1
+
+newmtl skin
+Kd 0.6157 0.3922 0.2118
+d 1.0
+illum 1

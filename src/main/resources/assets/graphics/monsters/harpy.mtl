@@ -1,52 +1,106 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Crimson-winged harpy material colors
 
-newmtl Material.011
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.009277 0.047155 0.004006
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl scales_dark
+Kd 0.1373 0.2000 0.2235
+d 1.0
+illum 1
 
-newmtl Material.012
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.140659 0.140991 0.131248
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl scales_light
+Kd 0.2980 0.3882 0.3765
+d 1.0
+illum 1
 
-newmtl Material.013
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.136443 0.031073 0.002438
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl skin_light
+Kd 0.7529 0.6902 0.6510
+d 1.0
+illum 1
 
-newmtl Material.014
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.014653 0.013457 0.013457
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl scales
+Kd 0.2039 0.2980 0.3020
+d 1.0
+illum 1
 
-newmtl Material.015
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.060198 0.005758 0.005758
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl skin_shadow
+Kd 0.4510 0.4078 0.4275
+d 1.0
+illum 1
+
+newmtl eyes
+Kd 0.1686 0.0784 0.1020
+d 1.0
+illum 1
+
+newmtl skin
+Kd 0.6353 0.5725 0.5608
+d 1.0
+illum 1
+
+newmtl mouth
+Kd 0.2627 0.1059 0.1255
+d 1.0
+illum 1
+
+newmtl feather_wine
+Kd 0.3569 0.1098 0.1529
+d 1.0
+illum 1
+
+newmtl feather_red
+Kd 0.7020 0.1922 0.1686
+d 1.0
+illum 1
+
+newmtl feather_crimson
+Kd 0.5373 0.1373 0.1569
+d 1.0
+illum 1
+
+newmtl iris
+Kd 0.7294 0.2980 0.1569
+d 1.0
+illum 1
+
+newmtl bronze_dark
+Kd 0.3725 0.2745 0.1686
+d 1.0
+illum 1
+
+newmtl tooth
+Kd 0.8235 0.7529 0.6314
+d 1.0
+illum 1
+
+newmtl bronze
+Kd 0.5451 0.4157 0.2314
+d 1.0
+illum 1
+
+newmtl talon
+Kd 0.2196 0.1922 0.1804
+d 1.0
+illum 1
+
+newmtl talon_tip
+Kd 0.5451 0.4902 0.3961
+d 1.0
+illum 1
+
+newmtl feather_dark
+Kd 0.1647 0.1059 0.1451
+d 1.0
+illum 1
+
+newmtl steel
+Kd 0.4157 0.4627 0.4863
+d 1.0
+illum 1
+
+newmtl steel_edge
+Kd 0.6000 0.6471 0.6471
+d 1.0
+illum 1
+
+newmtl haft
+Kd 0.2941 0.1843 0.1569
+d 1.0
+illum 1

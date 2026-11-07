@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ObjLoader {
 
@@ -89,60 +90,52 @@ public class ObjLoader {
             Vector3 edge1 = new Vector3();
             Vector3 normal = new Vector3();
 
-            HashMap<String, MeshPartBuilder> solidBuilders = new HashMap<>();
-
+            // ModelBuilder can reuse a MeshBuilder across parts. Finish writing
+            // each material's faces before starting the next part.
+            LinkedHashMap<String, ArrayList<int[]>> facesByMaterial = new LinkedHashMap<>();
             for (int faceIndex = 0; faceIndex < obj.faces.size(); faceIndex++) {
-                int[] poly = obj.faces.get(faceIndex);
-                if (poly.length < 3) {
-                    continue;
-                }
+                String materialName = obj.faceMaterials.get(faceIndex);
+                facesByMaterial.computeIfAbsent(materialName, ignored -> new ArrayList<>())
+                        .add(obj.faces.get(faceIndex));
+            }
 
-                String mtlName = (faceIndex < obj.faceMaterials.size())
-                        ? obj.faceMaterials.get(faceIndex)
-                        : null;
+            for (var entry : facesByMaterial.entrySet()) {
+                String materialName = entry.getKey();
+                String key = materialName != null ? materialName : "__default__";
+                MeshPartBuilder solid = mb.part(
+                        obj.name + "_solid_" + key,
+                        GL20.GL_TRIANGLES,
+                        solidVA,
+                        mtlMaterials.getOrDefault(materialName, defaultSolidMaterial)
+                );
 
-                String key = (mtlName != null) ? mtlName : "__default__";
+                for (int[] poly : entry.getValue()) {
+                    int v0Index = poly[0];
+                    Vector3 v0 = tmp0.set(data.vertices.get(v0Index)).add(0f, yOffset, 0f);
 
-                MeshPartBuilder solid = solidBuilders.get(key);
-                if (solid == null) {
-                    Material mat = (mtlName != null) ? mtlMaterials.get(mtlName) : null;
-                    if (mat == null) {
-                        mat = defaultSolidMaterial;
+                    for (int i = 1; i < poly.length - 1; i++) {
+                        int v1Index = poly[i];
+                        int v2Index = poly[i + 1];
+
+                        Vector3 v1 = tmp1.set(data.vertices.get(v1Index)).add(0f, yOffset, 0f);
+                        Vector3 v2 = tmp2.set(data.vertices.get(v2Index)).add(0f, yOffset, 0f);
+
+                        edge0.set(v1).sub(v0);
+                        edge1.set(v2).sub(v0);
+                        normal.set(edge0).crs(edge1).nor();
+                        if (normal.isZero(1e-6f)) {
+                            continue;
+                        }
+
+                        VertexInfo i0 = new VertexInfo().setPos(v0).setNor(normal);
+                        VertexInfo i1 = new VertexInfo().setPos(v1).setNor(normal);
+                        VertexInfo i2 = new VertexInfo().setPos(v2).setNor(normal);
+
+                        short s0 = solid.vertex(i0);
+                        short s1 = solid.vertex(i1);
+                        short s2 = solid.vertex(i2);
+                        solid.triangle(s0, s1, s2);
                     }
-                    solid = mb.part(
-                            obj.name + "_solid_" + key,
-                            GL20.GL_TRIANGLES,
-                            solidVA,
-                            mat
-                    );
-                    solidBuilders.put(key, solid);
-                }
-
-                int v0Index = poly[0];
-                Vector3 v0 = tmp0.set(data.vertices.get(v0Index)).add(0f, yOffset, 0f);
-
-                for (int i = 1; i < poly.length - 1; i++) {
-                    int v1Index = poly[i];
-                    int v2Index = poly[i + 1];
-
-                    Vector3 v1 = tmp1.set(data.vertices.get(v1Index)).add(0f, yOffset, 0f);
-                    Vector3 v2 = tmp2.set(data.vertices.get(v2Index)).add(0f, yOffset, 0f);
-
-                    edge0.set(v1).sub(v0);
-                    edge1.set(v2).sub(v0);
-                    normal.set(edge0).crs(edge1).nor();
-                    if (normal.isZero(1e-6f)) {
-                        continue;
-                    }
-
-                    VertexInfo i0 = new VertexInfo().setPos(v0).setNor(normal);
-                    VertexInfo i1 = new VertexInfo().setPos(v1).setNor(normal);
-                    VertexInfo i2 = new VertexInfo().setPos(v2).setNor(normal);
-
-                    short s0 = solid.vertex(i0);
-                    short s1 = solid.vertex(i1);
-                    short s2 = solid.vertex(i2);
-                    solid.triangle(s0, s1, s2);
                 }
             }
 

@@ -1,12 +1,96 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Slate and leather thief material colors
 
-newmtl Material.033
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Kd 0.095646 0.026445 0.001029
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
+newmtl leather
+Kd 0.4471 0.2863 0.2157
+d 1.0
+illum 1
+
+newmtl leather_dark
+Kd 0.2745 0.1882 0.1647
+d 1.0
+illum 1
+
+newmtl tunic
+Kd 0.3529 0.3294 0.3255
+d 1.0
+illum 1
+
+newmtl tunic_shadow
+Kd 0.2196 0.2000 0.2157
+d 1.0
+illum 1
+
+newmtl leather_edge
+Kd 0.5686 0.3843 0.2863
+d 1.0
+illum 1
+
+newmtl hood_slate
+Kd 0.2706 0.3412 0.4275
+d 1.0
+illum 1
+
+newmtl hood_light
+Kd 0.3608 0.4314 0.5176
+d 1.0
+illum 1
+
+newmtl hood_shadow
+Kd 0.1412 0.1882 0.2588
+d 1.0
+illum 1
+
+newmtl face_skin
+Kd 0.6588 0.5176 0.3961
+d 1.0
+illum 1
+
+newmtl mask_navy
+Kd 0.1451 0.2000 0.2745
+d 1.0
+illum 1
+
+newmtl eye_dark
+Kd 0.1137 0.0980 0.1137
+d 1.0
+illum 1
+
+newmtl bracer
+Kd 0.3137 0.3529 0.4000
+d 1.0
+illum 1
+
+newmtl bracer_edge
+Kd 0.4941 0.5294 0.5569
+d 1.0
+illum 1
+
+newmtl eye_glint
+Kd 0.6000 0.5843 0.5255
+d 1.0
+illum 1
+
+newmtl glove
+Kd 0.2196 0.2078 0.2275
+d 1.0
+illum 1
+
+newmtl blade
+Kd 0.6078 0.6745 0.7098
+d 1.0
+illum 1
+
+newmtl blade_edge
+Kd 0.7608 0.8078 0.8235
+d 1.0
+illum 1
+
+newmtl blade_dark
+Kd 0.3373 0.4118 0.4667
+d 1.0
+illum 1
+
+newmtl boot
+Kd 0.2275 0.1765 0.1608
+d 1.0
+illum 1
