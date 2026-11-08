@@ -72,7 +72,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private Label commandHint, encounterStatus, abilityTitle;
     private TextButton attack, abilities;
     private Table abilityDrawer;
-    static final int SCENE_X = 8, SCENE_Y = 184, SCENE_WIDTH = 794, SCENE_HEIGHT = 540;
+    static final int SCENE_X = 8, SCENE_Y = 204, SCENE_WIDTH = 794, SCENE_HEIGHT = 520;
     private boolean encounterEnded;
     private int turn = 1;
     private int nextMonsterNumber = 1;
@@ -81,17 +81,17 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private void buildCommandUI(String encounterName) {
         panel(0, 730, 1024, 38, INK);
         panel(810, 216, 206, 508, INK);
-        panel(8, 8, 794, 128, INK);
+        panel(8, 8, 794, 148, INK);
         panel(810, 8, 206, 200, INK);
-        panel(8, 140, 794, 38, INK);
+        panel(8, 160, 794, 38, INK);
         caption(encounterName.toUpperCase(), 18, 738, 650, 22, GOLD, "default-16");
         encounterStatus = caption("", 718, 738, 298, 22, GOLD, "default-12");
         caption("TARGETS", 820, 698, 190, 20, GOLD, "default-16");
         caption("JOURNAL", 820, 184, 190, 20, GOLD, "default-12");
-        commandHint = caption("", 240, 146, 208, 28, MUTED, "default-12");
+        commandHint = caption("", 240, 166, 208, 28, MUTED, "default-12");
         commandHint.setWrap(true);
         attack = new TextButton("Melee", combatSkin, "default-12");
-        attack.setBounds(16, 145, 78, 28);
+        attack.setBounds(16, 165, 78, 28);
         attack.addListener(new ChangeListener() {
             @Override public void changed(ChangeEvent event, Actor actor) {
                 if (selectedPlayer.getParent() instanceof PlayerListing listing) {
@@ -112,7 +112,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         styleButton(exit, true);
         styleButton(attack, false);
         abilities = new TextButton("Spells / Items", combatSkin, "default-12");
-        abilities.setBounds(102, 145, 124, 28);
+        abilities.setBounds(102, 165, 124, 28);
         styleButton(abilities, false);
         abilities.addListener(new ChangeListener() {
             @Override public void changed(ChangeEvent event, Actor actor) {
@@ -124,11 +124,11 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         abilityDrawer = new Table(combatSkin);
         abilityDrawer.setBackground(new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(
                 new TextureRegion(uiPixel)).tint(INK));
-        abilityDrawer.setBounds(16, 190, 284, 330);
+        abilityDrawer.setBounds(16, 210, 284, 330);
         abilityTitle = new Label("", combatSkin, "default-12");
         abilityTitle.setColor(GOLD);
         abilityTitle.setEllipsis(true);
-        abilityDrawer.add(abilityTitle).width(260).height(30).pad(8).row();
+        abilityDrawer.add(abilityTitle).width(260).height(44).pad(8).row();
         abilityDrawer.add(spellsScroll).expand().fill().pad(8);
         abilityDrawer.setVisible(false);
         stage.addActor(abilityDrawer);
@@ -240,9 +240,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         encounterStatus.setText(encounterEnded ? (ctx.enabledCount() == 0 ? "PARTY FALLEN" : living == 0 ? "VICTORY" : "WITHDRAWN")
                 : "TURN " + turn + "   /   " + living + " HOSTILES");
         if (selectedPlayer.getParent() instanceof PlayerListing listing) {
-            abilityTitle.setText(String.format("%s / M %d / P %d", listing.player.name.toUpperCase(),
-                    java.util.Arrays.stream(listing.player.magePoints).sum(),
-                    java.util.Arrays.stream(listing.player.clericPoints).sum()));
+            abilityTitle.setText(listing.player.name.toUpperCase() + " / LEVELS 1-7\n" + spellUses(listing.player));
             Action action = actions.get(listing.index);
             Spells spell = action.spell != null ? action.spell : action.item != null ? action.item.spell : null;
             commandHint.setText(encounterEnded ? "Encounter complete."
@@ -289,6 +287,14 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         return command + " > " + target;
     }
 
+    private String spellUses(CharacterRecord player) {
+        int[] m = player.magePoints;
+        int[] p = player.clericPoints;
+        return String.format("M: %d/%d/%d/%d/%d/%d/%d  P: %d/%d/%d/%d/%d/%d/%d",
+                m[0], m[1], m[2], m[3], m[4], m[5], m[6],
+                p[0], p[1], p[2], p[3], p[4], p[5], p[6]);
+    }
+
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
     private final PointLight pointLight1 = new PointLight();
@@ -324,9 +330,11 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private static final int MONSTER_LISTING_WIDTH = 186;
     private static final int MONSTER_CARD_HEIGHT = 40;
     private static final int LINE_HEIGHT = 18;
+    private static final int PLAYER_LINE_HEIGHT = 16;
+    private static final int PLAYER_CARD_HEIGHT = PLAYER_LINE_HEIGHT * 4;
     private static final int LOG_WIDTH = 190;
     private final Image selectedMonster = selection(MONSTER_LISTING_WIDTH, MONSTER_CARD_HEIGHT, Color.SALMON);
-    private final Image selectedPlayer = selection(PLAYER_LISTING_WIDTH, LINE_HEIGHT * 3, GOLD);
+    private final Image selectedPlayer = selection(PLAYER_LISTING_WIDTH, PLAYER_CARD_HEIGHT, GOLD);
 
     private MazeCell destCell, fromCell;
     private final boolean hasTreasure;
@@ -447,7 +455,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         });
 
         this.monstersScroll.setBounds(816, 224, 196, 468);
-        this.playersScroll.setBounds(16, 14, 778, 116);
+        this.playersScroll.setBounds(16, 14, 778, 136);
         this.logs.setBounds(816, 16, LOG_WIDTH, 164);
         this.fight = new TextButton("Resolve Turn", combatSkin, "default-16");
         this.fight.addListener(new ChangeListener() {
@@ -456,7 +464,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 fight();
             }
         });
-        this.fight.setBounds(664, 145, 130, 28);
+        this.fight.setBounds(664, 165, 130, 28);
 
         this.reset = new TextButton("Clear", combatSkin, "default-16");
         this.reset.addListener(new ChangeListener() {
@@ -478,7 +486,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 selectPlayer(0);
             }
         });
-        this.reset.setBounds(552, 145, 104, 28);
+        this.reset.setBounds(552, 165, 104, 28);
 
         this.flee = new TextButton("Retreat", combatSkin, "default-16");
         this.flee.addListener(new ChangeListener() {
@@ -507,7 +515,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
             }
         });
-        this.flee.setBounds(456, 145, 88, 28);
+        this.flee.setBounds(456, 165, 88, 28);
 
         this.exit = new TextButton("Continue", combatSkin, "default-16");
         this.exit.addListener(new ChangeListener() {
@@ -572,7 +580,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 }
             }
         });
-        this.exit.setBounds(664, 145, 130, 28);
+        this.exit.setBounds(664, 165, 130, 28);
 
         this.stage.addActor(this.fight);
         this.stage.addActor(this.flee);
@@ -871,12 +879,27 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
     }
 
+    private class PlayerSpellUsesLabel extends Label {
+        private final CharacterRecord player;
+
+        PlayerSpellUsesLabel(CharacterRecord player) {
+            super("", combatSkin, "default-12");
+            this.player = player;
+        }
+
+        @Override public void draw(Batch batch, float parentAlpha) {
+            setText(spellUses(player));
+            super.draw(batch, parentAlpha);
+        }
+    }
+
     private class PlayerListing extends Group {
 
         final int index;
         final Label l1;
         final PlayerStatusLabel l2;
         final PlayerOrderLabel l3;
+        final PlayerSpellUsesLabel spellUses;
         final ListingBackground health;
         final CharacterRecord player;
 
@@ -890,6 +913,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.l1 = new Label("", combatSkin, "default-12");
             this.l2 = new PlayerStatusLabel(rec);
             this.l3 = new PlayerOrderLabel(rec);
+            this.spellUses = new PlayerSpellUsesLabel(rec);
             this.l3.setColor(GOLD);
             this.l1.setEllipsis(true);
             this.l2.setEllipsis(true);
@@ -902,13 +926,15 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             addActor(this.l1);
             addActor(this.l2);
             addActor(this.l3);
+            addActor(this.spellUses);
 
             float x = 3;
-            this.l1.setBounds(x, LINE_HEIGHT * 2, PLAYER_LISTING_WIDTH - 6, LINE_HEIGHT);
-            this.l2.setBounds(x, LINE_HEIGHT * 1, PLAYER_LISTING_WIDTH - 6, LINE_HEIGHT);
-            this.l3.setBounds(x, LINE_HEIGHT * 0, PLAYER_LISTING_WIDTH - 6, LINE_HEIGHT);
+            this.l1.setBounds(x, PLAYER_LINE_HEIGHT * 3, PLAYER_LISTING_WIDTH - 6, PLAYER_LINE_HEIGHT);
+            this.l2.setBounds(x, PLAYER_LINE_HEIGHT * 2, PLAYER_LISTING_WIDTH - 6, PLAYER_LINE_HEIGHT);
+            this.spellUses.setBounds(x, PLAYER_LINE_HEIGHT, PLAYER_LISTING_WIDTH - 6, PLAYER_LINE_HEIGHT);
+            this.l3.setBounds(x, 0, PLAYER_LISTING_WIDTH - 6, PLAYER_LINE_HEIGHT);
 
-            this.setSize(PLAYER_LISTING_WIDTH, LINE_HEIGHT * 3f);
+            this.setSize(PLAYER_LISTING_WIDTH, PLAYER_CARD_HEIGHT);
 
             this.addListener(new ClickListener() {
                 @Override
@@ -1082,7 +1108,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         public ListingBackground(Texture texture, int width, ModelInstance modelInstance) {
             this.modelInstance = modelInstance;
             this.width = width;
-            this.height = modelInstance == null ? LINE_HEIGHT * 3 : MONSTER_CARD_HEIGHT;
+            this.height = modelInstance == null ? PLAYER_CARD_HEIGHT : MONSTER_CARD_HEIGHT;
             this.healthGreen = new TextureRegion(texture, 0, 0, width, LINE_HEIGHT * 3);
         }
 

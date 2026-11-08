@@ -1418,7 +1418,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
             return new com.badlogic.gdx.utils.CharArray(
-                    String.format("Spell uses: Mage %d / Priest %d", java.util.Arrays.stream(ms).sum(), java.util.Arrays.stream(cs).sum()));
+                    String.format("M: %d/%d/%d/%d/%d/%d/%d  P: %d/%d/%d/%d/%d/%d/%d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6],
+                            cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
         }
 
         @Override
@@ -1605,7 +1607,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
             int[] ms = mm.getMageSpellLevels();
             int[] cs = mm.getPriestSpellLevels();
             return new com.badlogic.gdx.utils.CharArray(
-                    String.format("Spell uses: Mage %d / Priest %d", java.util.Arrays.stream(ms).sum(), java.util.Arrays.stream(cs).sum()));
+                    String.format("M: %d/%d/%d/%d/%d/%d/%d  P: %d/%d/%d/%d/%d/%d/%d",
+                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6],
+                            cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
         }
 
         @Override
