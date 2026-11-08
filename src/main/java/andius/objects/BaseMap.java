@@ -3,7 +3,7 @@ package andius.objects;
 import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import andius.Constants.Map;
-import andius.EnhancedWizardryCombatScreen;
+import andius.WizardryCombatScreen;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class BaseMap {
                     if (dist <= 1) {
                         this.combatActor = p;
                         Monster m = (Monster) p.getEnemy().baseType();
-                        EnhancedWizardryCombatScreen cs = new EnhancedWizardryCombatScreen(CTX, map, p.getName(), m, m.getLevel(), true, null, null);
+                        WizardryCombatScreen cs = new WizardryCombatScreen(CTX, map, p.getName(), m, m.getLevel(), true, null, null);
                         mainGame.setScreen(cs);
                         return;
                     } else if (dist >= 4) {

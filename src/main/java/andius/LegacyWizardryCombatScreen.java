@@ -62,7 +62,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 
-public class EnhancedWizardryCombatScreen extends Combat implements Screen, Constants {
+public class LegacyWizardryCombatScreen extends Combat implements Screen, Constants {
 
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
@@ -111,7 +111,7 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
     private MazeCell destCell, fromCell;
     private final boolean hasTreasure;
 
-    public EnhancedWizardryCombatScreen(Context context, Map contextMap, String mname, Monster opponent, int level,
+    public LegacyWizardryCombatScreen(Context context, Map contextMap, String mname, Monster opponent, int level,
             boolean hasTreasure, MazeCell destCell, MazeCell fromCell) {
         super(context, contextMap, opponent, level);
 
@@ -389,29 +389,29 @@ public class EnhancedWizardryCombatScreen extends Combat implements Screen, Cons
                             }
                         }
 
-                        EnhancedWizardryCombatScreen.this.contextMap.getScreen().endCombat(true, EnhancedWizardryCombatScreen.this.opponent);
+                        LegacyWizardryCombatScreen.this.contextMap.getScreen().endCombat(true, LegacyWizardryCombatScreen.this.opponent);
 
                         for (CharacterRecord p : lastMenStanding) {
                             if (!p.isDead()) {
                                 p.awardXP(exp / lastMenStanding.size());
-                                EnhancedWizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s gained %d experience points.", p.name.toUpperCase(), exp / lastMenStanding.size()));
+                                LegacyWizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s gained %d experience points.", p.name.toUpperCase(), exp / lastMenStanding.size()));
                             }
                         }
 
-                        if (EnhancedWizardryCombatScreen.this.hasTreasure) {
-                            mainGame.setScreen(new RewardScreen(EnhancedWizardryCombatScreen.this.ctx, EnhancedWizardryCombatScreen.this.contextMap, chestRewardId));
+                        if (LegacyWizardryCombatScreen.this.hasTreasure) {
+                            mainGame.setScreen(new RewardScreen(LegacyWizardryCombatScreen.this.ctx, LegacyWizardryCombatScreen.this.contextMap, chestRewardId));
                         } else {
                             Reward reward = contextMap.scenario().rewards().get(goldRewardId);
                             int goldAmt = reward.goldAmount();
                             for (SaveGame.CharacterRecord c : lastMenStanding) {
                                 c.adjustGold(goldAmt / lastMenStanding.size());
-                                EnhancedWizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
+                                LegacyWizardryCombatScreen.this.contextMap.getScreen().log(String.format("%s found %d gold.", c.name.toUpperCase(), goldAmt));
                             }
-                            mainGame.setScreen(EnhancedWizardryCombatScreen.this.contextMap.getScreen());
+                            mainGame.setScreen(LegacyWizardryCombatScreen.this.contextMap.getScreen());
                         }
 
                     } else {
-                        mainGame.setScreen(EnhancedWizardryCombatScreen.this.contextMap.getScreen());
+                        mainGame.setScreen(LegacyWizardryCombatScreen.this.contextMap.getScreen());
                     }
                 }
             }
