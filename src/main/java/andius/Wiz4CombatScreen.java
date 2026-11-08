@@ -30,7 +30,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import utils.AutoFocusScrollPane;
-import utils.FrameMaker;
 import utils.LogScrollPane;
 import utils.Utils;
 
@@ -56,7 +54,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     public final DoGooder opponent;
     private final Stage stage;
-    private final Batch batch;
+    private final com.badlogic.gdx.scenes.scene2d.ui.Skin combatSkin = utils.SkinUtils.createCombatSkin(Andius.skin);
+    private final Texture uiPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
+    private Label encounterStatus, targetHint;
+    private boolean ended;
 
     private final com.badlogic.gdx.scenes.scene2d.ui.List<SpellLabel> spells;
     private final Table monstersTable;
@@ -75,21 +76,134 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private final TextButton flee;
     private final TextButton exit;
 
-    private static final int TABLE_HEIGHT = 740;
-    private static final int LISTING_WIDTH = 300;
-    private static final int LINE_HEIGHT = 17;
-    private static final int LOG_WIDTH = 370;
-    private static final int LOG_HEIGHT = 400;
+    private static final Color INK = Color.valueOf("0c141d");
+    private static final Color GOLD = Color.valueOf("dbbb7c");
+    private static final Color MUTED = Color.valueOf("92a7b7");
+    private static final int LISTING_WIDTH = 264;
+    private static final int ENEMY_WIDTH = 342;
+    private static final int ENEMY_HEIGHT = 88;
+    private static final int LINE_HEIGHT = 18;
+    private static final int LOG_WIDTH = 352;
+    private final Image selected = selection();
 
-    private final Image selected = new Image(Utils.fillRectangle(LISTING_WIDTH, LINE_HEIGHT * 3, Color.RED, .25f));
-    private static final Texture GREEN = Utils.fillRectangle(LISTING_WIDTH, LINE_HEIGHT * 3, Color.GREEN, .2f);
-
-    private final Texture background;
     private final TextureAtlas iconAtlas;
 
     private int round = 1;
     private int suprised = 0;
     MazeCell destCell, fromCell;
+
+    private void buildLayout() {
+        int enemyBottom = enemyPanelBottom();
+        panel(0, 730, SCREEN_WIDTH, 38);
+        panel(8, 628, 282, 96);
+        panel(8, 44, 282, 576);
+        panel(298, enemyBottom, 718, 724 - enemyBottom);
+        panel(298, 44, 342, enemyBottom - 52);
+        panel(646, 44, 370, enemyBottom - 52);
+        panel(8, 4, 1008, 36);
+        caption("WIZARDRY IV / " + opponent.name.toUpperCase(), 18, 738, 704, 22, "default-16", GOLD);
+        encounterStatus = caption("", 740, 738, 276, 22, "default-12", GOLD);
+        caption("THE CONJURER", 20, 698, 262, 20, "default-16", GOLD);
+        caption("SUMMONED ALLIES", 20, 594, 262, 20, "default-16", GOLD);
+        String title = opponent.slogan.isEmpty() ? "ENEMY PARTY" : opponent.slogan.split("[|]")[0];
+        caption(title, 310, 698, 694, 20, "default-16", GOLD);
+        caption("SPELLS / ITEMS", 310, enemyBottom - 34, 318, 20, "default-16", GOLD);
+        caption("BATTLE JOURNAL", 658, enemyBottom - 34, 346, 20, "default-16", GOLD);
+        targetHint = caption("", 20, 10, 628, 24, "default-12", MUTED);
+        styleButton(fight, false);
+        styleButton(cast, true);
+        styleButton(flee, false);
+        styleButton(exit, true);
+        spells.getSelection().clear();
+    }
+
+    private int enemyPanelBottom() {
+        int rows = Math.min(4, Math.max(2, (enemies.size() + 1) / 2));
+        return 724 - (rows * (ENEMY_HEIGHT + 4) + 40);
+    }
+
+    private boolean targetsPlayer(Spells spell) {
+        return spell == DIOS || spell == DIAL || spell == DIALMA || spell == MADI
+                || spell == MOGREF || spell == SOPIC || spell == PORFIC;
+    }
+
+    private void panel(float x, float y, float width, float height) {
+        Image image = new Image(uiPixel);
+        image.setColor(INK);
+        image.setBounds(x, y, width, height);
+        image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(image);
+        image.toBack();
+        Image rule = new Image(uiPixel);
+        rule.setColor(GOLD.r, GOLD.g, GOLD.b, .4f);
+        rule.setBounds(x, y + height - 1, width, 1);
+        rule.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(rule);
+    }
+
+    private Label caption(String text, float x, float y, float width, float height, String style, Color color) {
+        Label label = new Label(text, combatSkin, style);
+        label.setBounds(x, y, width, height);
+        label.setEllipsis(true);
+        label.setColor(color);
+        label.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(label);
+        return label;
+    }
+
+    private void styleButton(TextButton button, boolean primary) {
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(button.getStyle());
+        var pixel = new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(new TextureRegion(uiPixel));
+        style.up = pixel.tint(Color.valueOf(primary ? "35635e" : "1c2d3c"));
+        style.over = pixel.tint(Color.valueOf(primary ? "477e72" : "30495b"));
+        style.down = pixel.tint(Color.valueOf("597b79"));
+        style.disabled = pixel.tint(INK);
+        style.fontColor = primary ? Color.WHITE : GOLD;
+        style.overFontColor = style.downFontColor = style.checkedFontColor = style.fontColor;
+        style.disabledFontColor = MUTED;
+        button.setStyle(style);
+    }
+
+    private Image selection() {
+        Image image = new Image(uiPixel) {
+            @Override public void draw(Batch batch, float parentAlpha) {
+                Color previous = new Color(batch.getColor());
+                batch.setColor(GOLD.r, GOLD.g, GOLD.b, parentAlpha);
+                batch.draw(uiPixel, getX(), getY(), ENEMY_WIDTH, 1);
+                batch.draw(uiPixel, getX(), getY() + ENEMY_HEIGHT - 1, ENEMY_WIDTH, 1);
+                batch.draw(uiPixel, getX(), getY(), 2, ENEMY_HEIGHT);
+                batch.draw(uiPixel, getX() + ENEMY_WIDTH - 2, getY(), 2, ENEMY_HEIGHT);
+                batch.setColor(previous);
+            }
+        };
+        image.setSize(ENEMY_WIDTH, ENEMY_HEIGHT);
+        image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        return image;
+    }
+
+    private void updateStatus() {
+        long alive = enemies.stream().filter(e -> !e.isDead()).count();
+        encounterStatus.setText(ended ? player.isDead() ? "DEFEATED" : alive == 0 ? "VICTORY" : "WITHDRAWN"
+                : "TURN " + round + " / " + alive + " ENEMIES");
+        cast.setDisabled(ended || spells.getSelected() == null);
+        String target = selected.getParent() instanceof DoGooderListing listing && !listing.mm.isDead()
+                ? listing.mm.name() : "auto (weakest enemy)";
+        SpellLabel spell = spells.getSelected();
+        String ability = "Choose a spell or fight.";
+        if (spell != null) {
+            Spells selectedSpell = spell.spell != null ? spell.spell : spell.item.spell;
+            if (targetsPlayer(selectedSpell)) target = player.name;
+            if (spell.item != null) ability = spell.item.name + " / " + selectedSpell;
+            else {
+                int remaining = selectedSpell.getType() == andius.objects.ClassType.MAGE
+                        ? player.magePoints[selectedSpell.getLevel() - 1] : player.clericPoints[selectedSpell.getLevel() - 1];
+                ability = selectedSpell + " / " + selectedSpell.getType() + " " + selectedSpell.getLevel()
+                        + " / " + remaining + " uses";
+            }
+        }
+        targetHint.setText(ended ? "Encounter complete. Continue when ready."
+                : "Target: " + target + " / " + ability);
+    }
 
     public Wiz4CombatScreen(CharacterRecord player, List<MutableMonster> monsters, DoGooder opponent, MazeCell destCell, MazeCell fromCell, String initialMessage) {
 
@@ -99,27 +213,23 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.destCell = destCell;
         this.fromCell = fromCell;
 
-        this.batch = new SpriteBatch();
-
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-
         this.iconAtlas = new TextureAtlas(Gdx.files.classpath("assets/json/werdna_portraits.atlas"));
 
-        Table logTable = new Table(Andius.skin);
+        Table logTable = new Table(combatSkin);
         logTable.setBackground("dimmer");
-        this.logs = new LogScrollPane(Andius.skin, logTable, LOG_WIDTH, "default-12");
+        this.logs = new LogScrollPane(combatSkin, logTable, LOG_WIDTH, "default-12");
 
-        this.stage = new Stage();
+        this.stage = new Stage(new com.badlogic.gdx.utils.viewport.FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
         //this.stage.setDebugAll(true);
 
-        this.monstersTable = new Table(Andius.skin);
+        this.monstersTable = new Table(combatSkin);
         this.monstersTable.top().left();
-        this.monstersScroll = new AutoFocusScrollPane(this.monstersTable, Andius.skin);
+        this.monstersScroll = new AutoFocusScrollPane(this.monstersTable, combatSkin);
         this.monstersScroll.setScrollingDisabled(true, false);
 
-        this.enemiesTable = new Table(Andius.skin);
+        this.enemiesTable = new Table(combatSkin);
         this.enemiesTable.top().left();
-        this.enemiesScroll = new AutoFocusScrollPane(enemiesTable, Andius.skin);
+        this.enemiesScroll = new AutoFocusScrollPane(enemiesTable, combatSkin);
         this.enemiesScroll.setScrollingDisabled(true, false);
 
         this.enemiesScroll.addListener(new ClickListener() {
@@ -142,11 +252,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         });
 
-        this.monstersTable.add(new PlayerListing(player)).pad(3);
-        this.monstersTable.row();
+        PlayerListing playerCard = new PlayerListing(player);
+        playerCard.setBounds(16, 638, LISTING_WIDTH, LINE_HEIGHT * 3);
+        this.stage.addActor(playerCard);
 
         for (MutableMonster mm : monsters) {
-            this.monstersTable.add(new MonsterListing(mm)).pad(3);
+            this.monstersTable.add(new MonsterListing(mm)).pad(2);
             this.monstersTable.row();
         }
 
@@ -154,12 +265,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
             DoGooder dg = WER4_CHARS.get(id);
             MutableCharacter mutc = new MutableCharacter(dg);
             this.enemies.add(mutc);
-            this.enemiesTable.add(new DoGooderListing(mutc)).pad(3);
-            this.enemiesTable.row();
+            this.enemiesTable.add(new DoGooderListing(mutc)).width(ENEMY_WIDTH).pad(2);
+            if (this.enemiesTable.getCells().size % 2 == 0) this.enemiesTable.row();
         }
 
-        this.spells = new com.badlogic.gdx.scenes.scene2d.ui.List(Andius.skin, "default-16-padded");
-        this.spellsScroll = new AutoFocusScrollPane(this.spells, Andius.skin);
+        this.spells = new com.badlogic.gdx.scenes.scene2d.ui.List(combatSkin, "default-12-padded-clear");
+        this.spellsScroll = new AutoFocusScrollPane(this.spells, combatSkin);
         this.spellsScroll.setScrollingDisabled(true, false);
 
         for (Spells s : player.knownSpells) {
@@ -186,35 +297,34 @@ public class Wiz4CombatScreen implements Screen, Constants {
             }
         }
 
-        int x = 365;
-        this.fight = new TextButton("FIGHT", Andius.skin, "default-16");
+        this.fight = new TextButton("Fight", combatSkin, "default-16");
         this.fight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 fight();
             }
         });
-        this.fight.setBounds(x, 426, 80, 40);
+        this.fight.setBounds(660, 8, 108, 28);
 
-        this.cast = new TextButton("CAST", Andius.skin, "default-16");
+        this.cast = new TextButton("Cast", combatSkin, "default-16");
         this.cast.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 cast();
             }
         });
-        this.cast.setBounds(x += 100, 426, 80, 40);
+        this.cast.setBounds(776, 8, 108, 28);
 
-        this.flee = new TextButton("FLEE", Andius.skin, "default-16");
+        this.flee = new TextButton("Retreat", combatSkin, "default-16");
         this.flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 end(true);
             }
         });
-        this.flee.setBounds(x += 100, 426, 80, 40);
+        this.flee.setBounds(892, 8, 116, 28);
 
-        this.exit = new TextButton("EXIT", Andius.skin, "default-16");
+        this.exit = new TextButton("Continue", combatSkin, "default-16");
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -231,13 +341,13 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 }
             }
         });
-        this.exit.setBounds(x, 426, 80, 40);
+        this.exit.setBounds(776, 8, 108, 28);
 
-        fm.setBounds(this.monstersScroll, 10, 14, LISTING_WIDTH, TABLE_HEIGHT);
-        fm.setBounds(this.spellsScroll, 326, 479, LOG_WIDTH, 240);
-        fm.setBounds(this.logs, 326, 14, LOG_WIDTH, LOG_HEIGHT);
-        fm.setBounds(this.enemiesScroll, 712, 14, LISTING_WIDTH, TABLE_HEIGHT - 35);
-
+        this.monstersScroll.setBounds(16, 52, 272, 544);
+        int enemyBottom = enemyPanelBottom();
+        this.spellsScroll.setBounds(308, 52, 328, enemyBottom - 88);
+        this.logs.setBounds(652, 52, LOG_WIDTH, enemyBottom - 88);
+        this.enemiesScroll.setBounds(306, enemyBottom + 8, 704, 688 - enemyBottom);
         this.stage.addActor(this.fight);
         this.stage.addActor(this.flee);
         this.stage.addActor(this.cast);
@@ -247,21 +357,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         this.stage.addActor(this.enemiesScroll);
         this.stage.addActor(this.spellsScroll);
 
-        if (!this.opponent.slogan.isEmpty()) {
-            Label l = new Label(this.opponent.slogan.split("[|]")[0], Andius.skin, "default-16");
-            l.setPosition(715, 730);
-            this.stage.addActor(l);
-        } else {
-            Label l = new Label(this.opponent.name, Andius.skin, "default-16");
-            l.setPosition(715, 730);
-            this.stage.addActor(l);
-        }
-
-        Label spellLabel = new Label("Spells", Andius.skin, "default-16");
-        spellLabel.setPosition(326, 732);
-        this.stage.addActor(spellLabel);
-
-        this.background = fm.build();
+        buildLayout();
 
         String disp = !this.opponent.slogan.isEmpty() ? this.opponent.slogan.replace("|", "  ") : this.opponent.name;
 
@@ -283,6 +379,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void cast() {
+        if (ended || spells.getSelected() == null) return;
 
         List<Object> shuffled = new ArrayList();
 
@@ -310,8 +407,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                     Spells spell = sp.spell != null ? sp.spell : sp.item.spell;
 
                     Object target;
-                    if (spell == Spells.DIOS || spell == Spells.DIAL || spell == Spells.DIALMA || spell == Spells.MADI
-                            || spell == Spells.MOGREF || spell == Spells.SOPIC || spell == Spells.PORFIC) {
+                    if (targetsPlayer(spell)) {
                         target = player;
                     } else {
                         target = pickEnemy();
@@ -361,6 +457,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void fight() {
+        if (ended) return;
 
         List<Object> shuffled = new ArrayList();
 
@@ -428,6 +525,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     public void end(boolean fled) {
+        ended = true;
         player.acmodifier1 = 0;
 
         this.fight.remove();
@@ -572,7 +670,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
                 log(String.format("%s called for help!", attacker.name()), Color.RED);
                 MutableMonster clone = new MutableMonster(attacker.monster());
                 this.monsters.add(clone);
-                this.monstersTable.add(new MonsterListing(clone)).pad(3);
+                this.monstersTable.add(new MonsterListing(clone)).pad(2);
                 this.monstersTable.row();
                 Sounds.play(Sound.GIGGLE);
                 break;
@@ -1202,13 +1300,13 @@ public class Wiz4CombatScreen implements Screen, Constants {
         final Item item;
 
         public SpellLabel(Spells spell) {
-            super(spell.toString(), Andius.skin, "default-16");
+            super(spell.toString(), combatSkin, "default-12");
             this.item = null;
             this.spell = spell;
         }
 
         public SpellLabel(Item it) {
-            super(it.name, Andius.skin, "default-16");
+            super(it.name, combatSkin, "default-12");
             this.item = it;
             this.spell = null;
         }
@@ -1248,6 +1346,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        combatSkin.dispose();
+        uiPixel.dispose();
+        iconAtlas.dispose();
     }
 
     private void log(String s) {
@@ -1261,13 +1363,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
     @Override
     public void render(float delta) {
 
+        Gdx.gl.glClearColor(.025f, .035f, .05f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        batch.draw(this.background, 0, 0);
-        batch.end();
-
-        stage.act();
+        stage.getViewport().apply();
+        updateStatus();
+        stage.act(delta);
         stage.draw();
 
     }
@@ -1277,7 +1378,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerStatusLabel(CharacterRecord rec) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.rec = rec;
             setColor(rec.status.color());
             setText(getText());
@@ -1307,7 +1408,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final CharacterRecord rec;
 
         public PlayerMagicPointsLabel(CharacterRecord rec) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.rec = rec;
             setText(getText());
         }
@@ -1317,8 +1418,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
             return new com.badlogic.gdx.utils.CharArray(
-                    String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+                    String.format("Spell uses: Mage %d / Priest %d", java.util.Arrays.stream(ms).sum(), java.util.Arrays.stream(cs).sum()));
         }
 
         @Override
@@ -1343,7 +1443,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             rec.healthCursor = this.bckgrnd;
             rec.healthCursor.adjust(rec.hp, rec.maxhp);
 
-            this.l1 = new Label("", Andius.skin, "default-16");
+            this.l1 = new Label("", combatSkin, "default-12");
             this.l2 = new PlayerStatusLabel(rec);
             this.l3 = new PlayerMagicPointsLabel(rec);
 
@@ -1356,9 +1456,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
             addActor(this.l3);
 
             float x = 3;
-            this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
-            this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
-            this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
+            this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH - 6, LINE_HEIGHT);
+            for (Label label : new Label[] {l1, l2, l3}) label.setEllipsis(true);
+            this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH - 6, LINE_HEIGHT);
+            this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH - 6, LINE_HEIGHT);
 
             this.setSize(LISTING_WIDTH, LINE_HEIGHT * 3f);
         }
@@ -1370,7 +1471,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final MutableMonster mm;
 
         public MonsterStatusLabel(MutableMonster mm) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.mm = mm;
             setColor(mm.status().color());
             setText(getText());
@@ -1400,7 +1501,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final MutableMonster mm;
 
         public MonsterMagicPointsLabel(MutableMonster mm) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.mm = mm;
             setText(getText());
         }
@@ -1435,7 +1536,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
-            this.l1 = new Label("", Andius.skin, "default-16");
+            this.l1 = new Label("", combatSkin, "default-12");
             this.l2 = new MonsterStatusLabel(mm);
             this.l3 = new MonsterMagicPointsLabel(mm);
 
@@ -1448,9 +1549,10 @@ public class Wiz4CombatScreen implements Screen, Constants {
             addActor(this.l3);
 
             float x = 3;
-            this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
-            this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
-            this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
+            this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH - 6, LINE_HEIGHT);
+            for (Label label : new Label[] {l1, l2, l3}) label.setEllipsis(true);
+            this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH - 6, LINE_HEIGHT);
+            this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH - 6, LINE_HEIGHT);
 
             this.setSize(LISTING_WIDTH, LINE_HEIGHT * 3f);
 
@@ -1463,7 +1565,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final MutableCharacter mm;
 
         public DoGooderStatusLabel(MutableCharacter mm) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.mm = mm;
             setColor(mm.status().color());
             setText(getText());
@@ -1493,7 +1595,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         private final MutableCharacter mm;
 
         public DoGooderMagicPointsLabel(MutableCharacter mm) {
-            super("", Andius.skin, "default-16");
+            super("", combatSkin, "default-12");
             this.mm = mm;
             setText(getText());
         }
@@ -1503,8 +1605,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             int[] ms = mm.getMageSpellLevels();
             int[] cs = mm.getPriestSpellLevels();
             return new com.badlogic.gdx.utils.CharArray(
-                    String.format("M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                            ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]));
+                    String.format("Spell uses: Mage %d / Priest %d", java.util.Arrays.stream(ms).sum(), java.util.Arrays.stream(cs).sum()));
         }
 
         @Override
@@ -1530,14 +1631,14 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.mm = mm;
             this.m = (DoGooder) mm.baseType();
 
-            this.bckgrnd = new ListingBackground();
+            this.bckgrnd = new ListingBackground(ENEMY_WIDTH, ENEMY_HEIGHT);
             mm.setHealthCursor(this.bckgrnd);
             this.bckgrnd.adjust(mm.getCurrentHitPoints(), mm.getMaxHitPoints());
 
             this.icon = makeIcon(this.m.iconID, this.m.charlev);
 
-            this.l1 = new Label("", Andius.skin, "default-16");
-            this.l2 = new Label("", Andius.skin, "default-16");
+            this.l1 = new Label("", combatSkin, "default-12");
+            this.l2 = new Label("", combatSkin, "default-12");
             this.l3 = new DoGooderStatusLabel(mm);
             this.l4 = new DoGooderMagicPointsLabel(mm);
 
@@ -1554,19 +1655,21 @@ public class Wiz4CombatScreen implements Screen, Constants {
             addActor(this.l3);
             addActor(this.l4);
 
-            float x = 3;
-            this.l1.setBounds(x, LINE_HEIGHT * 3, LISTING_WIDTH, LINE_HEIGHT);
-            this.l2.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH, LINE_HEIGHT);
-            this.l3.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH, LINE_HEIGHT);
-            this.l4.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH, LINE_HEIGHT);
+            float x = 84;
+            this.l1.setBounds(x, 64, ENEMY_WIDTH - 92, LINE_HEIGHT);
+            this.l2.setBounds(x, 46, ENEMY_WIDTH - 92, LINE_HEIGHT);
+            this.l3.setBounds(x, 28, ENEMY_WIDTH - 92, LINE_HEIGHT);
+            this.l4.setBounds(x, 10, ENEMY_WIDTH - 92, LINE_HEIGHT);
 
-            this.icon.setPosition(224, 0);
+            this.icon.setBounds(6, 4, 72, 80);
+            for (Label label : new Label[] {l1, l2, l3, l4}) label.setEllipsis(true);
 
-            this.setSize(LISTING_WIDTH, 80);
+            this.setSize(ENEMY_WIDTH, ENEMY_HEIGHT);
 
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (ended || mm.isDead()) return;
                     selected.remove();
                     DoGooderListing.this.addActor(selected);
                 }
@@ -1577,35 +1680,29 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private class ListingBackground extends HealthCursor {
+        private final int width, height;
+        private float healthWidth;
 
-        TextureRegion healthGreen;
+        ListingBackground() { this(LISTING_WIDTH, LINE_HEIGHT * 3); }
 
-        public ListingBackground() {
-            this.healthGreen = new TextureRegion(GREEN, 0, 0, LISTING_WIDTH, LINE_HEIGHT * 3);
+        ListingBackground(int width, int height) {
+            this.width = width;
+            this.height = height;
         }
 
-        @Override
-        public void adjust(int hp, int maxhp) {
-            double percent = (double) hp / maxhp;
-            double bar = percent * (double) LISTING_WIDTH;
-            if (hp < 0) {
-                bar = 0;
-            }
-            if (bar > LISTING_WIDTH) {
-                bar = LISTING_WIDTH;
-            }
-            healthGreen.setRegion(0, 0, (int) bar, LINE_HEIGHT * 3);
+        @Override public void adjust(int hp, int maxhp) {
+            healthWidth = maxhp <= 0 ? 0 : width * Math.max(0, Math.min(1f, (float) hp / maxhp));
         }
 
-        @Override
-        public void draw(Batch batch, float parentAlpha) {
-            Color color = getColor();
-            batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-            batch.draw(healthGreen, getX(), getY());
+        @Override public void draw(Batch batch, float parentAlpha) {
+            Color previous = new Color(batch.getColor());
+            batch.setColor(.065f, .095f, .12f, parentAlpha);
+            batch.draw(uiPixel, getX(), getY(), width, height);
+            batch.setColor(.20f, .75f, .63f, parentAlpha);
+            batch.draw(uiPixel, getX(), getY(), healthWidth, 3);
+            batch.setColor(previous);
         }
-
     }
-
     private void removeMonsterFromTable(MutableMonster mm) {
 
         Cell found = null;
@@ -1632,7 +1729,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             monstersTable.reset();
 
             for (Actor a : cells) {
-                monstersTable.add(a).pad(3);
+                monstersTable.add(a).pad(2);
                 monstersTable.row();
             }
 
@@ -1663,6 +1760,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
