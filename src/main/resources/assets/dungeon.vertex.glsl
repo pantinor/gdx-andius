@@ -128,11 +128,8 @@ varying float v_alphaTest;
 #endif // blendedFlag
 
 #ifdef lightingFlag
-varying vec3 v_lightDiffuse;
 
-#if numSpotLights > 0
 varying vec3 v_worldPos;
-#endif // numSpotLights
 
 #ifdef ambientLightFlag
 uniform vec3 u_ambientLight;
@@ -146,9 +143,7 @@ uniform vec3 u_ambientCubemap[6];
 uniform vec3 u_sphericalHarmonics[9];
 #endif //sphericalHarmonicsFlag
 
-#ifdef specularFlag
-varying vec3 v_lightSpecular;
-#endif // specularFlag
+
 
 #ifdef cameraPositionFlag
 uniform vec4 u_cameraPosition;
@@ -157,36 +152,6 @@ uniform vec4 u_cameraPosition;
 #ifdef fogFlag
 varying float v_fog;
 #endif // fogFlag
-
-#if numDirectionalLights > 0
-struct DirectionalLight
-{
-    vec3 color;
-    vec3 direction;
-};
-uniform DirectionalLight u_dirLights[numDirectionalLights];
-#endif // numDirectionalLights
-
-#if numPointLights > 0
-struct PointLight
-{
-    vec3 color;
-    vec3 position;
-};
-uniform PointLight u_pointLights[numPointLights];
-#endif // numPointLights
-
-#if numSpotLights > 0
-struct SpotLight {
-    vec3  color;
-    vec3  position;
-    vec3  direction;    // direction the cone points (world space)
-    float intensity;    // distance attenuation scale
-    float cutoffAngle;  // in degrees; angle from axis to edge of cone
-    float exponent;     // focus: higher = tighter center
-};
-uniform SpotLight u_spotLights[numSpotLights];
-#endif // numSpotLights
 
 #if defined(ambientLightFlag) || defined(ambientCubemapFlag) || defined(sphericalHarmonicsFlag)
 #define ambientFlag
@@ -268,9 +233,7 @@ void main() {
     #endif
 
 #ifdef lightingFlag
-#if numSpotLights > 0
     v_worldPos = pos.xyz;
-#endif // numSpotLights
 #endif // lightingFlag
 
     gl_Position = u_projViewTrans * pos;
@@ -328,52 +291,7 @@ void main() {
         #endif // sphericalHarmonicsFlag
 
         #ifdef ambientFlag
-            #ifdef separateAmbientFlag
-                v_ambientLight = ambientLight;
-                v_lightDiffuse = vec3(0.0);
-            #else
-                v_lightDiffuse = ambientLight;
-            #endif //separateAmbientFlag
-        #else
-            v_lightDiffuse = vec3(0.0);
-        #endif //ambientFlag
-
-        #ifdef specularFlag
-            v_lightSpecular = vec3(0.0);
-            vec3 viewVec = normalize(u_cameraPosition.xyz - pos.xyz);
-        #endif // specularFlag
-
-        #if (numDirectionalLights > 0) && defined(normalFlag)
-            for (int i = 0; i < numDirectionalLights; i++) {
-                vec3 lightDir = -u_dirLights[i].direction;
-                float NdotL = clamp(dot(normal, lightDir), 0.0, 1.0);
-                vec3 value = u_dirLights[i].color * NdotL;
-                v_lightDiffuse += value;
-                #ifdef specularFlag
-                    float halfDotView = max(0.0, dot(normal, normalize(lightDir + viewVec)));
-                    v_lightSpecular += value * pow(halfDotView, u_shininess);
-                #endif // specularFlag
-            }
-        #endif // numDirectionalLights
-
-        #if (numPointLights > 0) && defined(normalFlag)
-            for (int i = 0; i < numPointLights; i++) {
-                vec3 lightDir = u_pointLights[i].position - pos.xyz;
-                float dist2 = dot(lightDir, lightDir);
-                lightDir *= inversesqrt(dist2);
-                float NdotL = clamp(dot(normal, lightDir), 0.0, 1.0);
-                vec3 value = u_pointLights[i].color * (NdotL / (1.0 + dist2));
-                v_lightDiffuse += value;
-                #ifdef specularFlag
-                    float halfDotView = max(0.0, dot(normal, normalize(lightDir + viewVec)));
-                    v_lightSpecular += value * pow(halfDotView, u_shininess);
-                #endif // specularFlag
-            }
-        #endif // numPointLights
-
-        #if numSpotLights > 0
-            // Spot lights are evaluated per-fragment (see dungeon.fragment.glsl).
-        #endif // numSpotLights
-
+            v_ambientLight = ambientLight;
+        #endif
     #endif // lightingFlag
 }

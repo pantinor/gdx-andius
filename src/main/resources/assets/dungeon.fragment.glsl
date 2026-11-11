@@ -81,33 +81,37 @@ uniform sampler2D u_emissiveTexture;
 #endif
 
 #ifdef lightingFlag
-varying vec3 v_lightDiffuse;
 
-#if numSpotLights > 0
+
 varying vec3 v_worldPos;
 
+// DefaultShader uploads point/spot color already multiplied by intensity.
+#if numDirectionalLights > 0
+struct DirectionalLight { vec3 color; vec3 direction; };
+uniform DirectionalLight u_dirLights[numDirectionalLights];
+#endif
+#if numPointLights > 0
+struct PointLight { vec3 color; vec3 position; };
+uniform PointLight u_pointLights[numPointLights];
+#endif
+#if numSpotLights > 0
 struct SpotLight {
-    vec3  color;
-    vec3  position;
-    vec3  direction;    // direction the cone points (world space)
-    float intensity;    // distance attenuation scale
-    float cutoffAngle;  // degrees
-    float exponent;     // focus
+    vec3 color;
+    vec3 position;
+    vec3 direction;
+    float cutoffAngle; // DefaultShader uploads degrees.
+    float exponent;
 };
 uniform SpotLight u_spotLights[numSpotLights];
-
+#endif
 #ifdef specularFlag
 uniform vec4 u_cameraPosition;
-#endif // specularFlag
-#endif // numSpotLights
-
+#endif
 #if defined(ambientLightFlag) || defined(ambientCubemapFlag) || defined(sphericalHarmonicsFlag)
 #define ambientFlag
 #endif //ambientFlag
 
-#ifdef specularFlag
-varying vec3 v_lightSpecular;
-#endif //specularFlag
+
 
 #ifdef shadowMapFlag
 uniform sampler2D u_shadowTexture;
@@ -182,91 +186,117 @@ void main() {
     #endif
 
 #ifdef lightingFlag
+    vec3 surfaceDiffuse = vec3(0.0);
     vec3 spotDiffuse = vec3(0.0);
     #ifdef specularFlag
+        vec3 surfaceSpecular = vec3(0.0);
         vec3 spotSpecular = vec3(0.0);
-    #endif // specularFlag
-
-    #if (numSpotLights > 0) && defined(normalFlag)
-        vec3 N = normalize(normal);
+    #endif
+    #ifdef normalFlag
+        vec3 N = normal * inversesqrt(max(dot(normal, normal), 1e-8));
         #ifdef specularFlag
-            vec3 V = normalize(u_cameraPosition.xyz - v_worldPos);
-        #endif // specularFlag
-
-        for (int i = 0; i < numSpotLights; i++) {
-            vec3 lightToFrag = v_worldPos - u_spotLights[i].position;
-            float dist2 = dot(lightToFrag, lightToFrag);
-            vec3 L = lightToFrag * inversesqrt(max(dist2, 1e-6)); // light -> frag
-
-            float cosTheta  = dot(normalize(u_spotLights[i].direction), L);
-            float cosCutoff = cos(radians(u_spotLights[i].cutoffAngle));
-
-            if (cosTheta > cosCutoff) {
-                float spotFactor = pow(cosTheta, u_spotLights[i].exponent);
-                float att = u_spotLights[i].intensity / (1.0 + dist2);
-
-                vec3 fragToLight = -L;
-                float NdotL = max(dot(N, fragToLight), 0.0);
-
-                if (NdotL > 0.0) {
-                    vec3 value = u_spotLights[i].color * (NdotL * att * spotFactor);
+            vec3 view = u_cameraPosition.xyz - v_worldPos;
+            vec3 V = view * inversesqrt(max(dot(view, view), 1e-8));
+        #endif
+        #if numDirectionalLights > 0
+            for (int i = 0; i < numDirectionalLights; i++) {
+                vec3 direction = -u_dirLights[i].direction;
+                vec3 L = direction * inversesqrt(max(dot(direction, direction), 1e-8));
+                float NdotL = max(dot(N, L), 0.0);
+                vec3 value = u_dirLights[i].color * NdotL;
+                surfaceDiffuse += value;
+                #ifdef specularFlag
+                    vec3 halfVector = L + V;
+                    vec3 H = halfVector * inversesqrt(max(dot(halfVector, halfVector), 1e-8));
+                    surfaceSpecular += value * pow(max(dot(N, H), 0.0), u_shininess);
+                #endif
+            }
+        #endif
+        #if numPointLights > 0
+            for (int i = 0; i < numPointLights; i++) {
+                vec3 direction = u_pointLights[i].position - v_worldPos;
+                float dist2 = dot(direction, direction);
+                vec3 L = direction * inversesqrt(max(dist2, 1e-8));
+                float NdotL = max(dot(N, L), 0.0);
+                vec3 value = u_pointLights[i].color * (NdotL / (1.0 + dist2));
+                surfaceDiffuse += value;
+                #ifdef specularFlag
+                    vec3 halfVector = L + V;
+                    vec3 H = halfVector * inversesqrt(max(dot(halfVector, halfVector), 1e-8));
+                    surfaceSpecular += value * pow(max(dot(N, H), 0.0), u_shininess);
+                #endif
+            }
+        #endif
+        #if numSpotLights > 0
+            for (int i = 0; i < numSpotLights; i++) {
+                vec3 lightToFrag = v_worldPos - u_spotLights[i].position;
+                float dist2 = dot(lightToFrag, lightToFrag);
+                vec3 outward = lightToFrag * inversesqrt(max(dist2, 1e-8));
+                vec3 direction = u_spotLights[i].direction;
+                direction *= inversesqrt(max(dot(direction, direction), 1e-8));
+                float cosTheta = dot(direction, outward);
+                float cosCutoff = cos(radians(u_spotLights[i].cutoffAngle));
+                if (cosTheta > cosCutoff) {
+                    float edge = smoothstep(cosCutoff, min(1.0, cosCutoff + .12), cosTheta);
+                    float cone = edge * pow(max(cosTheta, 0.0), max(u_spotLights[i].exponent, 0.0));
+                    vec3 L = -outward;
+                    float NdotL = max(dot(N, L), 0.0);
+                    vec3 value = u_spotLights[i].color * (NdotL * cone / (1.0 + dist2));
                     spotDiffuse += value;
-
                     #ifdef specularFlag
-                        vec3 H = normalize(fragToLight + V);
-                        float halfDotView = max(0.0, dot(N, H));
-                        spotSpecular += value * pow(halfDotView, u_shininess);
-                    #endif // specularFlag
+                        vec3 halfVector = L + V;
+                        vec3 H = halfVector * inversesqrt(max(dot(halfVector, halfVector), 1e-8));
+                        spotSpecular += value * pow(max(dot(N, H), 0.0), u_shininess);
+                    #endif
                 }
             }
-        }
-    #endif // (numSpotLights > 0) && defined(normalFlag)
+        #endif
+    #endif // normalFlag
 #endif // lightingFlag
-
     #if (!defined(lightingFlag))
         gl_FragColor.rgb = diffuse.rgb + emissive.rgb;
     #elif (!defined(specularFlag))
         #if defined(ambientFlag) && defined(separateAmbientFlag)
             #ifdef shadowMapFlag
-                vec3 direct = diffuse.rgb * (getShadow() * v_lightDiffuse + spotDiffuse);
+                vec3 direct = diffuse.rgb * (getShadow() * surfaceDiffuse + spotDiffuse);
             #else
-                vec3 direct = diffuse.rgb * (v_lightDiffuse + spotDiffuse);
+                vec3 direct = diffuse.rgb * (surfaceDiffuse + spotDiffuse);
             #endif //shadowMapFlag
 
             vec3 ambient = diffuse.rgb * v_ambientLight;
-            gl_FragColor.rgb = max(ambient, direct) + emissive.rgb;
+            gl_FragColor.rgb = (ambient + direct) + emissive.rgb;
         #else
             #ifdef shadowMapFlag
-                gl_FragColor.rgb = getShadow() * (diffuse.rgb * v_lightDiffuse) + (diffuse.rgb * spotDiffuse) + emissive.rgb;
+                gl_FragColor.rgb = getShadow() * (diffuse.rgb * surfaceDiffuse) + (diffuse.rgb * spotDiffuse) + emissive.rgb;
             #else
-                gl_FragColor.rgb = (diffuse.rgb * (v_lightDiffuse + spotDiffuse)) + emissive.rgb;
+                gl_FragColor.rgb = (diffuse.rgb * (surfaceDiffuse + spotDiffuse)) + emissive.rgb;
             #endif //shadowMapFlag
         #endif
     #else
         #if defined(specularTextureFlag) && defined(specularColorFlag)
-            vec3 specular = texture2D(u_specularTexture, v_specularUV).rgb * u_specularColor.rgb * (v_lightSpecular + spotSpecular);
+            vec3 specular = texture2D(u_specularTexture, v_specularUV).rgb * u_specularColor.rgb * (surfaceSpecular + spotSpecular);
         #elif defined(specularTextureFlag)
-            vec3 specular = texture2D(u_specularTexture, v_specularUV).rgb * (v_lightSpecular + spotSpecular);
+            vec3 specular = texture2D(u_specularTexture, v_specularUV).rgb * (surfaceSpecular + spotSpecular);
         #elif defined(specularColorFlag)
-            vec3 specular = u_specularColor.rgb * (v_lightSpecular + spotSpecular);
+            vec3 specular = u_specularColor.rgb * (surfaceSpecular + spotSpecular);
         #else
-            vec3 specular = v_lightSpecular + spotSpecular;
+            vec3 specular = surfaceSpecular + spotSpecular;
         #endif
 
         #if defined(ambientFlag) && defined(separateAmbientFlag)
             #ifdef shadowMapFlag
-                vec3 direct = diffuse.rgb * (getShadow() * v_lightDiffuse + spotDiffuse);
+                vec3 direct = diffuse.rgb * (getShadow() * surfaceDiffuse + spotDiffuse);
             #else
-                vec3 direct = diffuse.rgb * (v_lightDiffuse + spotDiffuse);
+                vec3 direct = diffuse.rgb * (surfaceDiffuse + spotDiffuse);
             #endif //shadowMapFlag
 
             vec3 ambient = diffuse.rgb * v_ambientLight;
-            gl_FragColor.rgb = max(ambient, direct) + specular + emissive.rgb;
+            gl_FragColor.rgb = (ambient + direct) + specular + emissive.rgb;
         #else
             #ifdef shadowMapFlag
-                gl_FragColor.rgb = getShadow() * (diffuse.rgb * v_lightDiffuse + specular) + (diffuse.rgb * spotDiffuse) + emissive.rgb;
+                gl_FragColor.rgb = getShadow() * (diffuse.rgb * surfaceDiffuse + specular) + (diffuse.rgb * spotDiffuse) + emissive.rgb;
             #else
-                gl_FragColor.rgb = (diffuse.rgb * (v_lightDiffuse + spotDiffuse)) + specular + emissive.rgb;
+                gl_FragColor.rgb = (diffuse.rgb * (surfaceDiffuse + spotDiffuse)) + specular + emissive.rgb;
             #endif //shadowMapFlag
         #endif
     #endif //lightingFlag

@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
+import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.math.MathUtils;
@@ -81,235 +82,19 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private int turn = 1;
     private int nextMonsterNumber = 1;
 
-    /** A separate presentation of the existing Wizardry combat rules. */
-    private void buildCommandUI(String encounterName) {
-        panel(0, 730, 1024, 38, INK);
-        panel(810, 216, 206, 508, INK);
-        panel(8, 8, 794, 148, INK);
-        panel(810, 8, 206, 200, INK);
-        panel(8, 160, 794, 38, INK);
-        caption(encounterName.toUpperCase(), 18, 738, 650, 22, GOLD, "default-16");
-        encounterStatus = caption("", 718, 738, 298, 22, GOLD, "default-12");
-        caption("TARGETS", 820, 698, 190, 20, GOLD, "default-16");
-        caption("JOURNAL", 820, 184, 190, 20, GOLD, "default-12");
-        commandHint = caption("", 240, 166, 208, 28, MUTED, "default-12");
-        commandHint.setWrap(true);
-        attack = new TextButton("Melee", combatSkin, "default-12");
-        attack.setBounds(16, 165, 78, 28);
-        attack.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) {
-                if (selectedPlayer.getParent() instanceof PlayerListing listing) {
-                    Action order = actions.get(listing.index);
-                    order.spell = null;
-                    order.item = null;
-                    order.dispel = false;
-                    order.playerTarget = null;
-                    spellsList.getSelection().clear();
-                    abilityDrawer.setVisible(false);
-                }
-            }
-        });
-        stage.addActor(attack);
-        styleButton(fight, true);
-        styleButton(reset, false);
-        styleButton(flee, false);
-        styleButton(exit, true);
-        styleButton(attack, false);
-        abilities = new TextButton("Spells / Items", combatSkin, "default-12");
-        abilities.setBounds(102, 165, 124, 28);
-        styleButton(abilities, false);
-        abilities.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) {
-                abilityDrawer.setVisible(!abilityDrawer.isVisible());
-                if (abilityDrawer.isVisible()) abilityDrawer.toFront();
-            }
-        });
-        stage.addActor(abilities);
-        abilityDrawer = new Table(combatSkin);
-        abilityDrawer.setBackground(new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(
-                new TextureRegion(uiPixel)).tint(INK));
-        abilityDrawer.setBounds(16, 210, 284, 330);
-        abilityTitle = new Label("", combatSkin, "default-12");
-        abilityTitle.setColor(GOLD);
-        abilityTitle.setEllipsis(true);
-        abilityDrawer.add(abilityTitle).width(260).height(44).pad(8).row();
-        abilityDrawer.add(spellsScroll).expand().fill().pad(8);
-        abilityDrawer.setVisible(false);
-        stage.addActor(abilityDrawer);
-        stage.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-            @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (abilityDrawer.isVisible() && abilityDrawer.isAscendantOf(event.getTarget())) return false;
-                if (encounterEnded || x < SCENE_X || x > SCENE_X + SCENE_WIDTH || y < SCENE_Y || y > SCENE_Y + SCENE_HEIGHT) return false;
-                com.badlogic.gdx.math.collision.Ray ray = camera.getPickRay(
-                        x, Gdx.graphics.getHeight() - y, SCENE_X, SCENE_Y, SCENE_WIDTH, SCENE_HEIGHT);
-                MonsterListing closest = null;
-                float distance = Float.MAX_VALUE;
-                BoundingBox bounds = new BoundingBox();
-                Vector3 hit = new Vector3();
-                for (MonsterListing listing : monsterOrderedList) {
-                    ModelInstance instance = listing.health.modelInstance;
-                    if (instance == null || listing.mm.isDead()) continue;
-                    instance.calculateBoundingBox(bounds);
-                    bounds.mul(instance.transform);
-                    if (com.badlogic.gdx.math.Intersector.intersectRayBounds(ray, bounds, hit)
-                            && ray.origin.dst2(hit) < distance) {
-                        closest = listing;
-                        distance = ray.origin.dst2(hit);
-                    }
-                }
-                if (closest != null) selectMonster(closest);
-                return closest != null;
-            }
-            @Override public boolean keyDown(InputEvent event, int key) {
-                if (key == com.badlogic.gdx.Input.Keys.ESCAPE && abilityDrawer.isVisible()) {
-                    abilityDrawer.setVisible(false);
-                    return true;
-                }
-                if (encounterEnded) return false;
-                if (key >= com.badlogic.gdx.Input.Keys.NUM_1 && key <= com.badlogic.gdx.Input.Keys.NUM_6) {
-                    selectPlayer(key - com.badlogic.gdx.Input.Keys.NUM_1);
-                    return true;
-                }
-                return false;
-            }
-        });
-        logs.add("Choose a party member, assign an ability or melee attack, then choose a target. Resolve turn when ready.", MUTED);
-    }
-
-    private void styleButton(TextButton button, boolean primary) {
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(button.getStyle());
-        com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable pixel =
-                new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(new TextureRegion(uiPixel));
-        style.up = pixel.tint(Color.valueOf(primary ? "35635e" : "1c2d3c"));
-        style.over = pixel.tint(Color.valueOf(primary ? "477e72" : "30495b"));
-        style.down = pixel.tint(Color.valueOf("597b79"));
-        style.disabled = pixel.tint(INK);
-        style.fontColor = primary ? Color.WHITE : GOLD;
-        style.overFontColor = style.fontColor;
-        style.downFontColor = style.fontColor;
-        style.checkedFontColor = style.fontColor;
-        style.disabledFontColor = MUTED;
-        button.setStyle(style);
-    }
-
-    private Image selection(int width, int height, Color color) {
-        Image image = new Image(uiPixel) {
-            @Override public void draw(Batch batch, float parentAlpha) {
-                Color previous = new Color(batch.getColor());
-                batch.setColor(color.r, color.g, color.b, parentAlpha);
-                batch.draw(uiPixel, getX(), getY(), width, 1);
-                batch.draw(uiPixel, getX(), getY() + height - 1, width, 1);
-                batch.draw(uiPixel, getX(), getY(), 2, height);
-                batch.draw(uiPixel, getX() + width - 2, getY(), 2, height);
-                batch.setColor(previous);
-            }
-        };
-        image.setSize(width, height);
-        image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
-        return image;
-    }
-
-    private void selectMonster(MonsterListing listing) {
-        if (encounterEnded || listing.mm.isDead()) return;
-        selectedMonster.remove();
-        listing.addActor(selectedMonster);
-        if (selectedPlayer.getParent() instanceof PlayerListing player) setAction(player.index, listing.mm);
-    }
-
-    private void panel(float x, float y, float width, float height, Color color) {
-        Image surface = new Image(uiPixel);
-        surface.setColor(color);
-        surface.setBounds(x, y, width, height);
-        surface.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
-        stage.addActor(surface);
-        surface.toBack();
-        Image rule = new Image(uiPixel);
-        rule.setColor(GOLD.r, GOLD.g, GOLD.b, .45f);
-        rule.setBounds(x, y + height - 1, width, 1);
-        rule.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
-        stage.addActor(rule);
-    }
-
-    private Label caption(String text, float x, float y, float width, float height, Color color, String style) {
-        Label label = new Label(text, combatSkin, style);
-        label.setColor(color);
-        label.setBounds(x, y, width, height);
-        label.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
-        stage.addActor(label);
-        return label;
-    }
-
-    private void updateCommandUI() {
-        long living = monsters.stream().filter(m -> !m.isDead()).count();
-        encounterStatus.setText(encounterEnded ? (ctx.enabledCount() == 0 ? "PARTY FALLEN" : living == 0 ? "VICTORY" : "WITHDRAWN")
-                : "TURN " + turn + "   /   " + living + " HOSTILES");
-        if (selectedPlayer.getParent() instanceof PlayerListing listing) {
-            abilityTitle.setText(listing.player.name.toUpperCase() + " / LEVELS 1-7\n" + spellUses(listing.player));
-            Action action = actions.get(listing.index);
-            Spells spell = action.spell != null ? action.spell : action.item != null ? action.item.spell : null;
-            commandHint.setText(encounterEnded ? "Encounter complete."
-                    : spell != null && spell.getTarget() == SpellTarget.PERSON ? spell + ": choose an ally"
-                    : listing.player.name + ": " + orderSummary(action));
-        }
-        attack.setDisabled(encounterEnded);
-        abilities.setDisabled(encounterEnded);
-        for (MonsterListing listing : monsterOrderedList) {
-            ModelInstance instance = listing.health.modelInstance;
-            listing.marker.setVisible(instance != null && !listing.mm.isDead());
-            if (instance == null || listing.mm.isDead()) continue;
-            Vector3 position = listing.markerPosition;
-            listing.modelBounds.getCenter(position);
-            position.y = listing.modelBounds.max.y + .035f;
-            position.mul(instance.transform);
-            camera.project(position, SCENE_X, SCENE_Y, SCENE_WIDTH, SCENE_HEIGHT);
-            listing.marker.setPosition(position.x - 10, position.y);
-            listing.marker.setColor(selectedMonster.getParent() == listing ? Color.SALMON : GOLD);
-            listing.marker.setVisible(position.x > SCENE_X + 10 && position.x < SCENE_X + SCENE_WIDTH - 10
-                    && position.y > SCENE_Y && position.y < SCENE_Y + SCENE_HEIGHT - 20
-                    && selectedMonster.getParent() == listing);
-        }
-    }
-
-    @Override public void fight() {
-        if (encounterEnded) return;
-        abilityDrawer.setVisible(false);
-        resolvingTurn = true;
-        try {
-            super.fight();
-        } finally {
-            resolvingTurn = false;
-            formationDirty = true;
-        }
-        turn++;
-    }
-
-    private String orderSummary(Action action) {
-        if (action == null) return "Melee > auto";
-        String command = action.spell != null ? action.spell.toString()
-                : action.item != null ? action.item.spell.toString() : action.dispel ? "Dispel" : "Melee";
-        String target = "auto";
-        if (action.playerTarget != null) target = action.playerTarget.name;
-        else if (action.monsterTarget != null && !action.monsterTarget.isDead()) {
-            for (MonsterListing listing : monsterOrderedList) {
-                if (listing.mm == action.monsterTarget) target = String.format("#%02d", listing.number);
-            }
-        }
-        return command + " > " + target;
-    }
-
-    private String spellUses(CharacterRecord player) {
-        int[] m = player.magePoints;
-        int[] p = player.clericPoints;
-        return String.format("M: %d/%d/%d/%d/%d/%d/%d  P: %d/%d/%d/%d/%d/%d/%d",
-                m[0], m[1], m[2], m[3], m[4], m[5], m[6],
-                p[0], p[1], p[2], p[3], p[4], p[5], p[6]);
-    }
-
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
-    private final PointLight pointLight1 = new PointLight();
+    
+    private final PointLight leftTorch = new PointLight();
+    private final PointLight rightTorch = new PointLight();
+    private final PointLight reflectedDaylight = new PointLight();
+    private final SpotLight leftSkyLight = new SpotLight();
+    private final SpotLight rightSkyLight = new SpotLight();
+    private final SpotLight cameraFillLight = new SpotLight();
+    
+    private final Vector3 cameraFillPosition = new Vector3();
+    private final Vector3 cameraFillDirection = new Vector3();
     private final PerspectiveCamera camera;
-    private final Color flame = new Color(0xeac4a1ff);
 
     private final java.util.List<MonsterListing> monsterOrderedList = new ArrayList<>();
     private static final int MONSTER_LISTING_PER_ROW = 1;
@@ -360,10 +145,13 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         DefaultShader.Config config = new DefaultShader.Config();
         config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
-        config.numDirectionalLights = 4;
+        config.numDirectionalLights = 0;
+        config.numPointLights = 3;
+        config.numSpotLights = 3;
 
-        pointLight1.set(flame.r, flame.g, flame.b, 1, 2, 2, 10f);
-        environment.add(pointLight1);
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, .055f, .085f, .08f, 1));
+        environment.add(leftTorch, rightTorch, reflectedDaylight);
+        environment.add(leftSkyLight, rightSkyLight, cameraFillLight);
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
 
@@ -381,7 +169,6 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         setLogs(this.logs);
 
         this.stage = new Stage(new com.badlogic.gdx.utils.viewport.FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
-        //this.stage.setDebugAll(true);
 
         this.monstersTable = new Table(combatSkin);
         this.monstersTable.top().defaults().pad(2).expandX().center();
@@ -409,7 +196,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         this.spellsList.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (encounterEnded) return;
+                if (encounterEnded) {
+                    return;
+                }
                 PlayerListing pl = (PlayerListing) selectedPlayer.getParent();
                 SpellLabel sl = spellsList.getSelected();
                 if (pl != null && sl != null) {
@@ -566,6 +355,246 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         buildCommandUI(mname);
         selectPlayer(0);
     }
+
+    private void buildCommandUI(String encounterName) {
+        panel(0, 730, 1024, 38, INK);
+        panel(810, 216, 206, 508, INK);
+        panel(8, 8, 794, 148, INK);
+        panel(810, 8, 206, 200, INK);
+        panel(8, 160, 794, 38, INK);
+        caption(encounterName.toUpperCase(), 18, 738, 650, 22, GOLD, "default-16");
+        encounterStatus = caption("", 718, 738, 298, 22, GOLD, "default-12");
+        caption("TARGETS", 820, 698, 190, 20, GOLD, "default-16");
+        caption("JOURNAL", 820, 184, 190, 20, GOLD, "default-12");
+        commandHint = caption("", 240, 166, 208, 28, MUTED, "default-12");
+        commandHint.setWrap(true);
+        attack = new TextButton("Melee", combatSkin, "default-12");
+        attack.setBounds(16, 165, 78, 28);
+        attack.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                if (selectedPlayer.getParent() instanceof PlayerListing listing) {
+                    Action order = actions.get(listing.index);
+                    order.spell = null;
+                    order.item = null;
+                    order.dispel = false;
+                    order.playerTarget = null;
+                    spellsList.getSelection().clear();
+                    abilityDrawer.setVisible(false);
+                }
+            }
+        });
+        stage.addActor(attack);
+        styleButton(fight, true);
+        styleButton(reset, false);
+        styleButton(flee, false);
+        styleButton(exit, true);
+        styleButton(attack, false);
+        abilities = new TextButton("Spells / Items", combatSkin, "default-12");
+        abilities.setBounds(102, 165, 124, 28);
+        styleButton(abilities, false);
+        abilities.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                abilityDrawer.setVisible(!abilityDrawer.isVisible());
+                if (abilityDrawer.isVisible()) {
+                    abilityDrawer.toFront();
+                }
+            }
+        });
+        stage.addActor(abilities);
+        abilityDrawer = new Table(combatSkin);
+        abilityDrawer.setBackground(new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(
+                new TextureRegion(uiPixel)).tint(INK));
+        abilityDrawer.setBounds(16, 210, 284, 330);
+        abilityTitle = new Label("", combatSkin, "default-12");
+        abilityTitle.setColor(GOLD);
+        abilityTitle.setEllipsis(true);
+        abilityDrawer.add(abilityTitle).width(260).height(44).pad(8).row();
+        abilityDrawer.add(spellsScroll).expand().fill().pad(8);
+        abilityDrawer.setVisible(false);
+        stage.addActor(abilityDrawer);
+        stage.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (abilityDrawer.isVisible() && abilityDrawer.isAscendantOf(event.getTarget())) {
+                    return false;
+                }
+                if (encounterEnded || x < SCENE_X || x > SCENE_X + SCENE_WIDTH || y < SCENE_Y || y > SCENE_Y + SCENE_HEIGHT) {
+                    return false;
+                }
+                com.badlogic.gdx.math.collision.Ray ray = camera.getPickRay(
+                        x, Gdx.graphics.getHeight() - y, SCENE_X, SCENE_Y, SCENE_WIDTH, SCENE_HEIGHT);
+                MonsterListing closest = null;
+                float distance = Float.MAX_VALUE;
+                BoundingBox bounds = new BoundingBox();
+                Vector3 hit = new Vector3();
+                for (MonsterListing listing : monsterOrderedList) {
+                    ModelInstance instance = listing.health.modelInstance;
+                    if (instance == null || listing.mm.isDead()) {
+                        continue;
+                    }
+                    instance.calculateBoundingBox(bounds);
+                    bounds.mul(instance.transform);
+                    if (com.badlogic.gdx.math.Intersector.intersectRayBounds(ray, bounds, hit)
+                            && ray.origin.dst2(hit) < distance) {
+                        closest = listing;
+                        distance = ray.origin.dst2(hit);
+                    }
+                }
+                if (closest != null) {
+                    selectMonster(closest);
+                }
+                return closest != null;
+            }
+
+            @Override
+            public boolean keyDown(InputEvent event, int key) {
+                if (key == com.badlogic.gdx.Input.Keys.ESCAPE && abilityDrawer.isVisible()) {
+                    abilityDrawer.setVisible(false);
+                    return true;
+                }
+                if (encounterEnded) {
+                    return false;
+                }
+                if (key >= com.badlogic.gdx.Input.Keys.NUM_1 && key <= com.badlogic.gdx.Input.Keys.NUM_6) {
+                    selectPlayer(key - com.badlogic.gdx.Input.Keys.NUM_1);
+                    return true;
+                }
+                return false;
+            }
+        });
+        logs.add("Choose a party member, assign an ability or melee attack, then choose a target. Resolve turn when ready.", MUTED);
+    }
+
+    private void styleButton(TextButton button, boolean primary) {
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(button.getStyle());
+        com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable pixel
+                = new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(new TextureRegion(uiPixel));
+        style.up = pixel.tint(Color.valueOf(primary ? "35635e" : "1c2d3c"));
+        style.over = pixel.tint(Color.valueOf(primary ? "477e72" : "30495b"));
+        style.down = pixel.tint(Color.valueOf("597b79"));
+        style.disabled = pixel.tint(INK);
+        style.fontColor = primary ? Color.WHITE : GOLD;
+        style.overFontColor = style.fontColor;
+        style.downFontColor = style.fontColor;
+        style.checkedFontColor = style.fontColor;
+        style.disabledFontColor = MUTED;
+        button.setStyle(style);
+    }
+
+    private Image selection(int width, int height, Color color) {
+        Image image = new Image(uiPixel) {
+            @Override
+            public void draw(Batch batch, float parentAlpha) {
+                Color previous = new Color(batch.getColor());
+                batch.setColor(color.r, color.g, color.b, parentAlpha);
+                batch.draw(uiPixel, getX(), getY(), width, 1);
+                batch.draw(uiPixel, getX(), getY() + height - 1, width, 1);
+                batch.draw(uiPixel, getX(), getY(), 2, height);
+                batch.draw(uiPixel, getX() + width - 2, getY(), 2, height);
+                batch.setColor(previous);
+            }
+        };
+        image.setSize(width, height);
+        image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        return image;
+    }
+
+    private void selectMonster(MonsterListing listing) {
+        if (encounterEnded || listing.mm.isDead()) {
+            return;
+        }
+        selectedMonster.remove();
+        listing.addActor(selectedMonster);
+        if (selectedPlayer.getParent() instanceof PlayerListing player) {
+            setAction(player.index, listing.mm);
+        }
+    }
+
+    private void panel(float x, float y, float width, float height, Color color) {
+        Image surface = new Image(uiPixel);
+        surface.setColor(color);
+        surface.setBounds(x, y, width, height);
+        surface.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(surface);
+        surface.toBack();
+        Image rule = new Image(uiPixel);
+        rule.setColor(GOLD.r, GOLD.g, GOLD.b, .45f);
+        rule.setBounds(x, y + height - 1, width, 1);
+        rule.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(rule);
+    }
+
+    private Label caption(String text, float x, float y, float width, float height, Color color, String style) {
+        Label label = new Label(text, combatSkin, style);
+        label.setColor(color);
+        label.setBounds(x, y, width, height);
+        label.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        stage.addActor(label);
+        return label;
+    }
+
+    private void updateCommandUI() {
+        long living = monsters.stream().filter(m -> !m.isDead()).count();
+        encounterStatus.setText(encounterEnded ? (ctx.enabledCount() == 0 ? "PARTY FALLEN" : living == 0 ? "VICTORY" : "WITHDRAWN")
+                : "TURN " + turn + "   /   " + living + " HOSTILES");
+        if (selectedPlayer.getParent() instanceof PlayerListing listing) {
+            abilityTitle.setText(listing.player.name.toUpperCase() + " / LEVELS 1-7\n" + spellUses(listing.player));
+            Action action = actions.get(listing.index);
+            Spells spell = action.spell != null ? action.spell : action.item != null ? action.item.spell : null;
+            commandHint.setText(encounterEnded ? "Encounter complete."
+                    : spell != null && spell.getTarget() == SpellTarget.PERSON ? spell + ": choose an ally"
+                    : listing.player.name + ": " + orderSummary(action));
+        }
+        attack.setDisabled(encounterEnded);
+        abilities.setDisabled(encounterEnded);
+        for (MonsterListing listing : monsterOrderedList) {
+            ModelInstance instance = listing.health.modelInstance;
+            listing.marker.setVisible(instance != null && !listing.mm.isDead());
+            if (instance == null || listing.mm.isDead()) {
+                continue;
+            }
+            Vector3 position = listing.markerPosition;
+            listing.modelBounds.getCenter(position);
+            position.y = listing.modelBounds.max.y + .035f;
+            position.mul(instance.transform);
+            camera.project(position, SCENE_X, SCENE_Y, SCENE_WIDTH, SCENE_HEIGHT);
+            listing.marker.setPosition(position.x - 10, position.y);
+            listing.marker.setColor(selectedMonster.getParent() == listing ? Color.SALMON : GOLD);
+            listing.marker.setVisible(position.x > SCENE_X + 10 && position.x < SCENE_X + SCENE_WIDTH - 10
+                    && position.y > SCENE_Y && position.y < SCENE_Y + SCENE_HEIGHT - 20
+                    && selectedMonster.getParent() == listing);
+        }
+    }
+
+    private String orderSummary(Action action) {
+        if (action == null) {
+            return "Melee > auto";
+        }
+        String command = action.spell != null ? action.spell.toString()
+                : action.item != null ? action.item.spell.toString() : action.dispel ? "Dispel" : "Melee";
+        String target = "auto";
+        if (action.playerTarget != null) {
+            target = action.playerTarget.name;
+        } else if (action.monsterTarget != null && !action.monsterTarget.isDead()) {
+            for (MonsterListing listing : monsterOrderedList) {
+                if (listing.mm == action.monsterTarget) {
+                    target = String.format("#%02d", listing.number);
+                }
+            }
+        }
+        return command + " > " + target;
+    }
+
+    private String spellUses(CharacterRecord player) {
+        int[] m = player.magePoints;
+        int[] p = player.clericPoints;
+        return String.format("M: %d/%d/%d/%d/%d/%d/%d  P: %d/%d/%d/%d/%d/%d/%d",
+                m[0], m[1], m[2], m[3], m[4], m[5], m[6],
+                p[0], p[1], p[2], p[3], p[4], p[5], p[6]);
+    }
+
     private void sceneOrientation() {
         formationDirty = false;
 
@@ -574,7 +603,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         Vector3 translation = new Vector3();
         for (MonsterListing l : this.monsterOrderedList) {
             ModelInstance instance = l.health.modelInstance;
-            if (instance == null) continue;
+            if (instance == null) {
+                continue;
+            }
             instance.transform.getTranslation(translation);
             BoundingBox bounds = new BoundingBox(l.modelBounds).mul(l.baseTransform);
             bounds.min.y += translation.y;
@@ -604,15 +635,12 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             buildRoom();
             roomBuilt = true;
         }
-        pointLight1.position.set(sceneCenter.x, Math.max(2, sceneBounds.max.y + 1), sceneCenter.z + .8f);
-        pointLight1.intensity = 10;
         camera.near = 0.1f;
         camera.far = Math.max(200, camera.position.dst(sceneCenter) + sceneDims.len() + 1);
         camera.update();
 
     }
 
-    /** Extend the room with full-size modules; never stretch the stonework. */
     private void buildRoom() {
         wallAndFloor.clear();
         BoundingBox floorBounds = new ModelInstance(roomFloor).calculateBoundingBox(new BoundingBox());
@@ -636,7 +664,6 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         float thickness = Math.min(wallFaces.getWidth(), wallFaces.getDepth());
         BoundingBox cornerFaces = wallFaceBounds(roomCorner);
         float cornerRun = Math.max(cornerFaces.getWidth(), cornerFaces.getDepth()) - thickness;
-        // Both rear corners use the original L-shaped masonry, at native scale.
         for (int side = 0; side < 2; side++) {
             ModelInstance corner = new ModelInstance(roomCorner);
             corner.transform.setToRotation(Vector3.Y, side == 0 ? 180 : 90);
@@ -672,13 +699,36 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             }
         }
         wood.mul(door.transform);
-        // Keep all of the wood in front of the wall, without a gap around its arch.
-        door.transform.setTranslation(doorX - (doorBounds.min.x + doorBounds.max.x) / 2,
-                -.15f - doorBounds.min.y, back + .04f - wood.min.z);
+        door.transform.setTranslation(doorX - (doorBounds.min.x + doorBounds.max.x) / 2, -.15f - doorBounds.min.y, back + .04f - wood.min.z);
         wallAndFloor.add(door);
+        configureLighting(left, right, back, doorX);
     }
 
-    /** The wall asset includes a floor tile; align its vertical stonework, not that floor. */
+    private void configureLighting(float left, float right, float back, float doorX) {
+        float centerX = (left + right) / 2;
+        float centerZ = sceneCenter.z;
+        leftTorch.set(1f, .43f, .16f, doorX - .52f, .72f, back + .4f, 2f);
+        rightTorch.set(1f, .49f, .21f, doorX + .52f, .72f, back + .4f, 1f);
+        reflectedDaylight.set(.42f, .55f, .50f, centerX, 1.1f, sceneBounds.max.z + 1, 2f);
+        
+        float height = Math.max(2.1f, sceneBounds.max.y + 1.2f);
+        Vector3 leftOpening = new Vector3(left + .35f, height, back + .65f);
+        Vector3 rightOpening = new Vector3(right - .35f, height + .3f, back + .65f);
+        Vector3 target = new Vector3(centerX, .1f, centerZ + .35f);
+        leftSkyLight.set(new Color(.35f, .73f, .78f, 1), leftOpening, new Vector3(target).sub(leftOpening).nor(), 6f, 65f, 3f);
+        rightSkyLight.set(new Color(.35f, .73f, .78f, 1), rightOpening, new Vector3(target).sub(rightOpening).nor(), 6f, 65f, 3f);
+    }
+
+    private void updateCameraFillLight() {
+        cameraFillPosition.set(camera.position).mulAdd(camera.direction, -.75f).add(0, 1.1f, 0);
+        cameraFillDirection.set(sceneCenter).sub(cameraFillPosition).nor();
+        float intensity = 10f;
+        cameraFillLight.set(.82f, .86f, .80f,
+                cameraFillPosition.x, cameraFillPosition.y, cameraFillPosition.z,
+                cameraFillDirection.x, cameraFillDirection.y, cameraFillDirection.z,
+                intensity, 65f, 2f);
+    }
+
     private BoundingBox wallFaceBounds(Model model) {
         ModelInstance template = new ModelInstance(model);
         BoundingBox whole = template.calculateBoundingBox(new BoundingBox());
@@ -691,7 +741,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             mesh.getVertices(vertices);
             for (int i = offset; i < vertices.length; i += stride) {
                 point.set(vertices[i], vertices[i + 1], vertices[i + 2]).mul(template.nodes.first().globalTransform);
-                if (point.y > whole.min.y + whole.getHeight() * .5f) faces.ext(point);
+                if (point.y > whole.min.y + whole.getHeight() * .5f) {
+                    faces.ext(point);
+                }
             }
         }
         // Keep the original grounding while measuring the footprint from the upper wall.
@@ -703,6 +755,22 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         ModelInstance wall = new ModelInstance(roomWall);
         wall.transform.setToRotation(Vector3.Y, angle).setTranslation(x, y, z);
         wallAndFloor.add(wall);
+    }
+
+    @Override
+    public void fight() {
+        if (encounterEnded) {
+            return;
+        }
+        abilityDrawer.setVisible(false);
+        resolvingTurn = true;
+        try {
+            super.fight();
+        } finally {
+            resolvingTurn = false;
+            formationDirty = true;
+        }
+        turn++;
     }
 
     @Override
@@ -723,7 +791,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         if (formationDirty && !resolvingTurn) {
             boolean fading = monsterOrderedList.stream()
                     .anyMatch(l -> l.mm.isDead() && l.health.modelInstance != null);
-            if (!fading) sceneOrientation();
+            if (!fading) {
+                sceneOrientation();
+            }
         }
 
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
@@ -735,6 +805,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 Gdx.graphics.getHeight() - Math.round(origin.y),
                 Math.round(corner.x - origin.x), Math.round(origin.y - corner.y));
         camera.update();
+        updateCameraFillLight();
         modelBatch.begin(camera);
         for (ModelInstance w : this.wallAndFloor) {
             modelBatch.render(w, environment);
@@ -800,7 +871,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         while (iter.hasNext()) {
             MonsterListing l = iter.next();
             if (l.mm == mm) {
-                if (selectedMonster.getParent() == l) selectedMonster.remove();
+                if (selectedMonster.getParent() == l) {
+                    selectedMonster.remove();
+                }
                 l.marker.remove();
                 iter.remove();
             }
@@ -858,7 +931,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     public void dispose() {
         stage.dispose();
         modelBatch.dispose();
-        for (Model model : ownedModels) model.dispose();
+        for (Model model : ownedModels) {
+            model.dispose();
+        }
         uiPixel.dispose();
         combatSkin.dispose();
     }
@@ -932,6 +1007,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     }
 
     private class PlayerSpellUsesLabel extends Label {
+
         private final CharacterRecord player;
 
         PlayerSpellUsesLabel(CharacterRecord player) {
@@ -939,7 +1015,8 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.player = player;
         }
 
-        @Override public void draw(Batch batch, float parentAlpha) {
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
             setText(spellUses(player));
             super.draw(batch, parentAlpha);
         }
@@ -991,7 +1068,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (encounterEnded) return;
+                    if (encounterEnded) {
+                        return;
+                    }
                     SpellLabel sl = spellsList.getSelected();
                     PlayerListing acting = (PlayerListing) selectedPlayer.getParent();
 
@@ -1012,7 +1091,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     }
 
     private void selectPlayer(int index) {
-        if (encounterEnded) return;
+        if (encounterEnded) {
+            return;
+        }
         for (Actor actor : playersTable.getChildren()) {
             if (actor instanceof PlayerListing listing && listing.index == index) {
                 selectedPlayer.remove();
@@ -1022,7 +1103,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 spellsList.getSelection().clear();
                 selectedMonster.remove();
                 for (MonsterListing monster : monsterOrderedList) {
-                    if (actions.get(index).monsterTarget == monster.mm) monster.addActor(selectedMonster);
+                    if (actions.get(index).monsterTarget == monster.mm) {
+                        monster.addActor(selectedMonster);
+                    }
                 }
 
                 for (Spells s : listing.player.knownSpells) {
@@ -1058,6 +1141,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             }
         }
     }
+
     private class MonsterStatusLabel extends Label {
 
         private final MutableMonster mm;
@@ -1115,7 +1199,8 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             this.marker.setSize(20, 20);
             this.marker.setAlignment(com.badlogic.gdx.utils.Align.center);
             this.marker.addListener(new ClickListener() {
-                @Override public void clicked(InputEvent event, float x, float y) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     selectMonster(MonsterListing.this);
                 }
             });
@@ -1160,6 +1245,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         final int width;
         final int height;
         private boolean deathAnimating;
+
         public ListingBackground(Texture texture, int width, ModelInstance modelInstance) {
             this.modelInstance = modelInstance;
             this.width = width;
@@ -1176,6 +1262,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             batch.draw(uiPixel, getX(), getY(), healthGreen.getRegionWidth(), 3);
             batch.setColor(previous);
         }
+
         @Override
         public void adjust(int hp, int maxhp) {
             double percent = maxhp <= 0 ? 0 : (double) Math.max(0, hp) / maxhp;
