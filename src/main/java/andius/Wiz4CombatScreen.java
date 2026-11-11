@@ -103,7 +103,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
         panel(8, 4, 1008, 36);
         caption("WIZARDRY IV / " + opponent.name.toUpperCase(), 18, 738, 704, 22, "default-16", GOLD);
         encounterStatus = caption("", 740, 738, 276, 22, "default-12", GOLD);
-        caption("THE CONJURER", 20, 698, 262, 20, "default-16", GOLD);
+        caption("WERDNA", 20, 698, 262, 20, "default-16", GOLD);
         caption("SUMMONED ALLIES", 20, 594, 262, 20, "default-16", GOLD);
         String title = opponent.slogan.isEmpty() ? "ENEMY PARTY" : opponent.slogan.split("[|]")[0];
         caption(title, 310, 698, 694, 20, "default-16", GOLD);

@@ -60,6 +60,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import utils.SkinUtils;
+import utils.CombatFormation;
 
 public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
@@ -74,6 +75,9 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private Table abilityDrawer;
     static final int SCENE_X = 8, SCENE_Y = 204, SCENE_WIDTH = 794, SCENE_HEIGHT = 520;
     private boolean encounterEnded;
+    private boolean resolvingTurn;
+    private boolean formationDirty;
+    private boolean roomBuilt;
     private int turn = 1;
     private int nextMonsterNumber = 1;
 
@@ -262,14 +266,20 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             listing.marker.setColor(selectedMonster.getParent() == listing ? Color.SALMON : GOLD);
             listing.marker.setVisible(position.x > SCENE_X + 10 && position.x < SCENE_X + SCENE_WIDTH - 10
                     && position.y > SCENE_Y && position.y < SCENE_Y + SCENE_HEIGHT - 20
-                    && (living <= 12 || listing.number <= 5 || selectedMonster.getParent() == listing));
+                    && selectedMonster.getParent() == listing);
         }
     }
 
     @Override public void fight() {
         if (encounterEnded) return;
         abilityDrawer.setVisible(false);
-        super.fight();
+        resolvingTurn = true;
+        try {
+            super.fight();
+        } finally {
+            resolvingTurn = false;
+            formationDirty = true;
+        }
         turn++;
     }
 
@@ -309,9 +319,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     private final Vector3 sceneDims = new Vector3();
 
     private final java.util.List<ModelInstance> wallAndFloor = new ArrayList<>();
-    private ModelInstance wmi00, wmi01, wmi02, wmi03, door;
-    private ModelInstance wmi10, wmi11, wmi12, wmi13;
-    private ModelInstance wmi20, wmi21, wmi22, wmi23;
+    private final Model roomWall, roomCorner, roomFloor, roomDoor;
 
     private final Stage stage;
     private final com.badlogic.gdx.scenes.scene2d.ui.List<SpellLabel> spellsList;
@@ -359,49 +367,14 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
 
-        Model modelDoor = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
-        Model modelWallCorner = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-corner", .1f);
-        Model modelWallStraight = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-straight", .1f);
-        Model modelWallFloor = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-floor", .1f);
-
-        ownedModels.add(modelDoor); ownedModels.add(modelWallCorner);
-        ownedModels.add(modelWallStraight); ownedModels.add(modelWallFloor);
-        this.door = new ModelInstance(modelDoor);
-        this.wmi00 = new ModelInstance(modelWallCorner);
-        this.wmi01 = new ModelInstance(modelWallStraight);
-        this.wmi02 = new ModelInstance(modelWallStraight);
-        this.wmi03 = new ModelInstance(modelWallCorner);
-        this.wmi10 = new ModelInstance(modelWallStraight);
-        this.wmi11 = new ModelInstance(modelWallFloor);
-        this.wmi12 = new ModelInstance(modelWallFloor);
-        this.wmi13 = new ModelInstance(modelWallStraight);
-        this.wmi20 = new ModelInstance(modelWallStraight);
-        this.wmi21 = new ModelInstance(modelWallFloor);
-        this.wmi22 = new ModelInstance(modelWallFloor);
-        this.wmi23 = new ModelInstance(modelWallStraight);
-
-        this.wallAndFloor.add(door);
-        this.wallAndFloor.add(wmi00);
-        this.wallAndFloor.add(wmi01);
-        this.wallAndFloor.add(wmi02);
-        this.wallAndFloor.add(wmi03);
-        this.wallAndFloor.add(wmi10);
-        this.wallAndFloor.add(wmi11);
-        this.wallAndFloor.add(wmi12);
-        this.wallAndFloor.add(wmi13);
-        this.wallAndFloor.add(wmi20);
-        this.wallAndFloor.add(wmi21);
-        this.wallAndFloor.add(wmi22);
-        this.wallAndFloor.add(wmi23);
-        // Continue the floor underneath the wider encounter camera.
-        for (int row = 0; row < 4; row++) {
-            for (int col = -1; col < 3; col++) {
-                ModelInstance floor = new ModelInstance(modelWallFloor);
-                floor.transform.setToTranslation(.0118f + col * 1.2f, -.15f, 2.424f + row * 1.2f);
-                wallAndFloor.add(floor);
-            }
-        }
-
+        this.roomDoor = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
+        this.roomWall = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-straight", .1f);
+        this.roomCorner = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-corner", .1f);
+        this.roomFloor = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-floor", .1f);
+        ownedModels.add(roomDoor);
+        ownedModels.add(roomWall);
+        ownedModels.add(roomCorner);
+        ownedModels.add(roomFloor);
         Table logTable = new Table(combatSkin);
         logTable.setBackground("dimmer");
         this.logs = new LogScrollPane(combatSkin, logTable, LOG_WIDTH, "default-12");
@@ -594,68 +567,142 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         selectPlayer(0);
     }
     private void sceneOrientation() {
+        formationDirty = false;
 
-        sceneBounds.inf();
-
-        int MODELS_PER_ROW = 5;
-        float SPACING = 0.4f;
-
-        int index = 0;
-        int count = this.monsterOrderedList.size();
-        int rows = (count + MODELS_PER_ROW - 1) / MODELS_PER_ROW;
-        float zStart = 0.5f + (rows - 1) * SPACING;
-
+        List<MonsterListing> visible = new ArrayList<>();
+        List<BoundingBox> footprints = new ArrayList<>();
+        Vector3 translation = new Vector3();
         for (MonsterListing l : this.monsterOrderedList) {
-            int row = index / MODELS_PER_ROW;
-            int col = index % MODELS_PER_ROW;
-            float x = 0.3f + col * SPACING;
-            float z = zStart - row * SPACING;
-            if (l.health.modelInstance != null) l.health.modelInstance.transform.setToTranslation(x, 0, z);
-            index++;
-            if (l.health.modelInstance != null) {
-                sceneBounds.ext(new BoundingBox(l.modelBounds).mul(l.health.modelInstance.transform));
-            }
+            ModelInstance instance = l.health.modelInstance;
+            if (instance == null) continue;
+            instance.transform.getTranslation(translation);
+            BoundingBox bounds = new BoundingBox(l.modelBounds).mul(l.baseTransform);
+            bounds.min.y += translation.y;
+            bounds.max.y += translation.y;
+            visible.add(l);
+            footprints.add(bounds);
         }
-
-        if (!sceneBounds.isValid()) sceneBounds.ext(1.1f, 0.5f, 0.5f);
+        CombatFormation.Layout formation = CombatFormation.layoutFacingCamera(footprints,
+                (float) SCENE_WIDTH / SCENE_HEIGHT, camera.fieldOfView, .1f);
+        List<Vector3> positions = formation.positions();
+        for (int i = 0; i < visible.size(); i++) {
+            MonsterListing listing = visible.get(i);
+            ModelInstance instance = listing.health.modelInstance;
+            instance.transform.getTranslation(translation);
+            Vector3 position = positions.get(i);
+            Vector3 location = new Vector3(position.x, translation.y, position.z);
+            float yaw = CombatFormation.facingYaw(location, formation.cameraPosition());
+            instance.transform.setToRotation(Vector3.Y, yaw).mul(listing.baseTransform).setTranslation(location);
+        }
+        sceneBounds.set(formation.bounds());
         sceneBounds.getCenter(sceneCenter);
         sceneBounds.getDimensions(sceneDims);
-
-        float tanHalfFov = MathUtils.tan(camera.fieldOfView * MathUtils.degreesToRadians / 2);
-        float distance = Math.max(sceneDims.y / (2 * tanHalfFov),
-                sceneDims.x / (2 * tanHalfFov * SCENE_WIDTH / SCENE_HEIGHT));
-        camera.position.set(sceneCenter.x, sceneCenter.y + .22f, sceneBounds.max.z + Math.max(.85f, distance * 1.15f));
-        camera.lookAt(sceneCenter.x, sceneCenter.y, sceneCenter.z);
-
-        float FH = -0.15f;
-        wmi00.transform.setToTranslation(0, FH, 0);
-        wmi00.transform.rotate(Vector3.Y, 180);
-        wmi01.transform.setToTranslation(0.007f, FH, 0.023f);
-        wmi01.transform.rotate(Vector3.Y, 90);
-        wmi02.transform.setToTranslation(1.2098f, FH, 0.0209f);
-        wmi02.transform.rotate(Vector3.Y, 90);
-        wmi03.transform.setToTranslation(2.425f, FH, 0.00548f);
-        wmi03.transform.rotate(Vector3.Y, 90);
-
-        wmi10.transform.setToTranslation(0.017f, FH, 1.216f);
-        wmi10.transform.rotate(Vector3.Y, 180);
-        wmi11.transform.setToTranslation(0.0118f, FH, 0.0288f);
-        wmi12.transform.setToTranslation(1.2114f, FH, 0.0255f);
-        wmi13.transform.setToTranslation(2.4028f, FH, 0.00115f);
-
-        wmi20.transform.setToTranslation(0.017f, FH, 2.4275f);
-        wmi20.transform.rotate(Vector3.Y, 180);
-        wmi21.transform.setToTranslation(0.0118f, FH, 1.2226f);
-        wmi22.transform.setToTranslation(1.2114f, FH, 1.2245f);
-        wmi23.transform.setToTranslation(2.4028f, FH, 1.2149f);
-
-        door.transform.setToTranslation(0.0478f, 0, -0.9024f);
-        door.transform.rotate(Vector3.Y, 180);
-
+        camera.position.set(formation.cameraPosition());
+        camera.up.set(Vector3.Y);
+        camera.lookAt(formation.cameraTarget());
+        if (!roomBuilt) {
+            buildRoom();
+            roomBuilt = true;
+        }
+        pointLight1.position.set(sceneCenter.x, Math.max(2, sceneBounds.max.y + 1), sceneCenter.z + .8f);
+        pointLight1.intensity = 10;
         camera.near = 0.1f;
-        camera.far = 200;
+        camera.far = Math.max(200, camera.position.dst(sceneCenter) + sceneDims.len() + 1);
         camera.update();
 
+    }
+
+    /** Extend the room with full-size modules; never stretch the stonework. */
+    private void buildRoom() {
+        wallAndFloor.clear();
+        BoundingBox floorBounds = new ModelInstance(roomFloor).calculateBoundingBox(new BoundingBox());
+        float tileWidth = floorBounds.getWidth();
+        float tileDepth = floorBounds.getDepth();
+        float left = (float) Math.floor((sceneBounds.min.x - .4f) / tileWidth) * tileWidth;
+        float right = Math.max(left + tileWidth * 3,
+                (float) Math.ceil((sceneBounds.max.x + .4f) / tileWidth) * tileWidth);
+        float back = (float) Math.floor(Math.min(0, sceneBounds.min.z - .4f) / tileDepth) * tileDepth;
+        float front = (float) Math.ceil(Math.max(sceneBounds.max.z + .5f, camera.position.z + .6f) / tileDepth) * tileDepth;
+        for (float x = left; x < right - .001f; x += tileWidth) {
+            for (float z = back; z < front - .001f; z += tileDepth) {
+                ModelInstance floor = new ModelInstance(roomFloor);
+                floor.transform.setToTranslation(x - floorBounds.min.x, -.15f - floorBounds.max.y, z - floorBounds.min.z);
+                wallAndFloor.add(floor);
+            }
+        }
+        BoundingBox wallFaces = wallFaceBounds(roomWall);
+        BoundingBox backWall = new BoundingBox(wallFaces)
+                .mul(new com.badlogic.gdx.math.Matrix4().setToRotation(Vector3.Y, 90));
+        float thickness = Math.min(wallFaces.getWidth(), wallFaces.getDepth());
+        BoundingBox cornerFaces = wallFaceBounds(roomCorner);
+        float cornerRun = Math.max(cornerFaces.getWidth(), cornerFaces.getDepth()) - thickness;
+        // Both rear corners use the original L-shaped masonry, at native scale.
+        for (int side = 0; side < 2; side++) {
+            ModelInstance corner = new ModelInstance(roomCorner);
+            corner.transform.setToRotation(Vector3.Y, side == 0 ? 180 : 90);
+            BoundingBox cornerBounds = new BoundingBox(cornerFaces).mul(corner.transform);
+            float x = side == 0 ? left - cornerBounds.min.x - thickness : right - cornerBounds.max.x + thickness;
+            corner.transform.setTranslation(x, -.15f - cornerBounds.min.y, back - cornerBounds.min.z - thickness);
+            wallAndFloor.add(corner);
+        }
+        float start = left + cornerRun;
+        int doorTile = Math.max(0, Math.round(((left + right) / 2 - start) / backWall.getWidth() - .5f));
+        float doorX = start + (doorTile + .5f) * backWall.getWidth();
+        for (float x = start; x < right - cornerRun - .001f; x += backWall.getWidth()) {
+            addRoomWall(90, x - backWall.min.x, -.15f - backWall.min.y, back - backWall.max.z);
+        }
+        for (int side = 0; side < 2; side++) {
+            float angle = side == 0 ? 0 : 180;
+            BoundingBox sideWall = new BoundingBox(wallFaces)
+                    .mul(new com.badlogic.gdx.math.Matrix4().setToRotation(Vector3.Y, angle));
+            for (float z = back + cornerRun; z < front - .001f; z += sideWall.getDepth()) {
+                float x = side == 0 ? left - sideWall.max.x : right - sideWall.min.x;
+                addRoomWall(angle, x, -.15f - sideWall.min.y, z - sideWall.min.z);
+            }
+        }
+        ModelInstance door = new ModelInstance(roomDoor);
+        door.transform.setToRotation(Vector3.Y, 180);
+        BoundingBox doorBounds = door.calculateBoundingBox(new BoundingBox()).mul(door.transform);
+        BoundingBox wood = new BoundingBox().inf();
+        for (var node : door.nodes) {
+            for (var part : node.parts) {
+                if (part.meshPart.id.contains("wood")) {
+                    part.meshPart.mesh.extendBoundingBox(wood, part.meshPart.offset, part.meshPart.size, node.globalTransform);
+                }
+            }
+        }
+        wood.mul(door.transform);
+        // Keep all of the wood in front of the wall, without a gap around its arch.
+        door.transform.setTranslation(doorX - (doorBounds.min.x + doorBounds.max.x) / 2,
+                -.15f - doorBounds.min.y, back + .04f - wood.min.z);
+        wallAndFloor.add(door);
+    }
+
+    /** The wall asset includes a floor tile; align its vertical stonework, not that floor. */
+    private BoundingBox wallFaceBounds(Model model) {
+        ModelInstance template = new ModelInstance(model);
+        BoundingBox whole = template.calculateBoundingBox(new BoundingBox());
+        BoundingBox faces = new BoundingBox().inf();
+        Vector3 point = new Vector3();
+        for (com.badlogic.gdx.graphics.Mesh mesh : model.meshes) {
+            int stride = mesh.getVertexSize() / Float.BYTES;
+            int offset = mesh.getVertexAttribute(com.badlogic.gdx.graphics.VertexAttributes.Usage.Position).offset / Float.BYTES;
+            float[] vertices = new float[mesh.getNumVertices() * stride];
+            mesh.getVertices(vertices);
+            for (int i = offset; i < vertices.length; i += stride) {
+                point.set(vertices[i], vertices[i + 1], vertices[i + 2]).mul(template.nodes.first().globalTransform);
+                if (point.y > whole.min.y + whole.getHeight() * .5f) faces.ext(point);
+            }
+        }
+        // Keep the original grounding while measuring the footprint from the upper wall.
+        faces.min.y = whole.min.y;
+        return faces;
+    }
+
+    private void addRoomWall(float angle, float x, float y, float z) {
+        ModelInstance wall = new ModelInstance(roomWall);
+        wall.transform.setToRotation(Vector3.Y, angle).setTranslation(x, y, z);
+        wallAndFloor.add(wall);
     }
 
     @Override
@@ -672,6 +719,12 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         stage.getViewport().apply();
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        stage.act(delta);
+        if (formationDirty && !resolvingTurn) {
+            boolean fading = monsterOrderedList.stream()
+                    .anyMatch(l -> l.mm.isDead() && l.health.modelInstance != null);
+            if (!fading) sceneOrientation();
+        }
 
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glDepthMask(true);
@@ -695,7 +748,6 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
         stage.getViewport().apply();
         updateCommandUI();
-        stage.act(delta);
         stage.draw();
     }
 
@@ -728,7 +780,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     public void addMonster(MutableMonster mm) {
         super.addMonster(mm);
         addListing(mm);
-        if (camera != null) sceneOrientation();
+        formationDirty = true;
     }
 
     private void addListing(MutableMonster mm) {
@@ -790,7 +842,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
             monstersTable.layout();
         }
-        sceneOrientation();
+        formationDirty = true;
     }
 
     @Override
@@ -1041,6 +1093,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         final int number = nextMonsterNumber++;
         final Label marker;
         final BoundingBox modelBounds = new BoundingBox();
+        final com.badlogic.gdx.math.Matrix4 baseTransform;
         final Vector3 markerPosition = new Vector3();
 
         final Label l1;
@@ -1057,6 +1110,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                     MONSTER_LISTING_WIDTH,
                     new ModelInstance(MonsterModels.values()[m.getIconId()].model()));
             this.health.modelInstance.calculateBoundingBox(modelBounds);
+            this.baseTransform = new com.badlogic.gdx.math.Matrix4(this.health.modelInstance.transform);
             this.marker = new Label(String.format("%02d", number), combatSkin, "default-12");
             this.marker.setSize(20, 20);
             this.marker.setAlignment(com.badlogic.gdx.utils.Align.center);
@@ -1105,6 +1159,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         final TextureRegion healthGreen;
         final int width;
         final int height;
+        private boolean deathAnimating;
         public ListingBackground(Texture texture, int width, ModelInstance modelInstance) {
             this.modelInstance = modelInstance;
             this.width = width;
@@ -1133,7 +1188,8 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
             }
 
             if (bar <= 0) {
-                if (this.modelInstance != null) {
+                if (this.modelInstance != null && !deathAnimating) {
+                    deathAnimating = true;
                     final ModelInstance dyingInstance = this.modelInstance;
                     this.addAction(Actions.sequence(
                             new ModelFadeAndRiseAction(dyingInstance),
@@ -1141,6 +1197,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                                 @Override
                                 public void run() {
                                     ListingBackground.this.modelInstance = null;
+                                    formationDirty = true;
                                 }
                             })
                     ));

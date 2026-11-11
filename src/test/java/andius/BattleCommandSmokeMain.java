@@ -143,6 +143,55 @@ public class BattleCommandSmokeMain extends Game {
                         && center.x <= WizardryCombatScreen.SCENE_X + WizardryCombatScreen.SCENE_WIDTH,
                         "Crowded encounter fits the graphical frame");
             }
+            for (MutableMonster monster : new java.util.ArrayList<>(combat.monsters)) combat.removeMonster(monster);
+            var dragon = WizardryData.PMO_MONSTERS.stream()
+                    .filter(m -> m.getIconId() == andius.objects.MonsterModels.DRAGON.ordinal())
+                    .filter(m -> m.name.equals("FIRE DRAGON")).findFirst().orElseThrow();
+            for (int i = 0; i < 3; i++) combat.addMonster(new MutableMonster(dragon));
+            for (int i = 0; i < 2; i++) combat.addMonster(new MutableMonster(combat.opponent));
+            combat.render(0);
+            for (Actor actor : targets.getChildren()) {
+                check(!((Actor) field(actor, "marker")).isVisible(), "Unselected models have no overhead numbers");
+            }
+            click(targets.getChildren().first());
+            combat.render(0);
+            int visibleMarkers = 0;
+            for (Actor actor : targets.getChildren()) {
+                if (((Actor) field(actor, "marker")).isVisible()) visibleMarkers++;
+            }
+            check(visibleMarkers == 1, "Only the selected target shows its overhead number");
+            snapshot("target/battle-command-dragons.png");
+            java.util.List<ModelInstance> room = field(combat, "wallAndFloor");
+            for (ModelInstance section : room) {
+                Vector3 scale = section.transform.getScale(new Vector3());
+                check(Math.abs(scale.x - 1) < .0001f && Math.abs(scale.y - 1) < .0001f
+                        && Math.abs(scale.z - 1) < .0001f, "Room sections retain their original proportions");
+            }
+            java.util.List<BoundingBox> occupied = new java.util.ArrayList<>();
+            for (Actor actor : targets.getChildren()) {
+                ModelInstance instance = field(field(actor, "health"), "modelInstance");
+                BoundingBox bounds = instance.calculateBoundingBox(new BoundingBox()).mul(instance.transform);
+                Vector3 location = instance.transform.getTranslation(new Vector3());
+                Vector3 towardsCamera = new Vector3(camera.position).sub(location);
+                towardsCamera.y = 0;
+                Vector3 facing = new Vector3(Vector3.Z).rot(instance.transform).nor();
+                check(facing.dot(towardsCamera.nor()) > .999f, "Model faces camera while remaining upright");
+                for (BoundingBox previous : occupied) {
+                    boolean overlapX = bounds.min.x < previous.max.x && bounds.max.x > previous.min.x;
+                    boolean overlapZ = bounds.min.z < previous.max.z && bounds.max.z > previous.min.z;
+                    check(!(overlapX && overlapZ), "Actual dragon/samurai model footprints are separated");
+                }
+                occupied.add(bounds);
+                for (int corner = 0; corner < 8; corner++) {
+                    Vector3 point = new Vector3((corner & 1) == 0 ? bounds.min.x : bounds.max.x,
+                            (corner & 2) == 0 ? bounds.min.y : bounds.max.y, (corner & 4) == 0 ? bounds.min.z : bounds.max.z);
+                    camera.project(point, WizardryCombatScreen.SCENE_X, WizardryCombatScreen.SCENE_Y,
+                            WizardryCombatScreen.SCENE_WIDTH, WizardryCombatScreen.SCENE_HEIGHT);
+                    check(point.x >= WizardryCombatScreen.SCENE_X && point.x <= WizardryCombatScreen.SCENE_X + WizardryCombatScreen.SCENE_WIDTH
+                            && point.y >= WizardryCombatScreen.SCENE_Y && point.y <= WizardryCombatScreen.SCENE_Y + WizardryCombatScreen.SCENE_HEIGHT,
+                            "Every dragon/model bounding-box corner fits the viewport");
+                }
+            }
             combat.end(false);
             combat.render(0);
             check(((TextButton) field(combat, "fight")).getStage() == null
