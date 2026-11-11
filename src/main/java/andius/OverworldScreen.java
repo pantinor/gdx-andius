@@ -69,6 +69,16 @@ public class OverworldScreen extends BaseScreen {
     }
 
     @Override
+    protected com.badlogic.gdx.scenes.scene2d.ui.Skin getUiSkin() {
+        return Andius.HUD.getSkin();
+    }
+
+    @Override
+    protected com.badlogic.gdx.graphics.g2d.BitmapFont getMessageFont() {
+        return getUiSkin().getFont("body");
+    }
+
+    @Override
     public void save(SaveGame saveGame) {
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
@@ -129,7 +139,7 @@ public class OverworldScreen extends BaseScreen {
 
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        Andius.font14.draw(batch, String.format("East West [%s], North South [%s]\n", (int) v.x, (int) v.y), 300, Andius.SCREEN_HEIGHT - 32);
+        Andius.HUD.renderLocation(batch, this.map.getLabel(), (int) v.x, (int) v.y);
         batch.end();
 
         stage.act();
@@ -208,7 +218,7 @@ public class OverworldScreen extends BaseScreen {
     }
 
     private void showEnterWiz4Prompt(Stage stage, Runnable onConfirm) {
-        Dialog dialog = new Dialog("Enter Dungeon?", Andius.skin) {
+        Dialog dialog = new Dialog("Enter Dungeon?", getUiSkin()) {
             @Override
             protected void result(Object obj) {
                 boolean yes = Boolean.TRUE.equals(obj);
@@ -238,7 +248,12 @@ public class OverworldScreen extends BaseScreen {
                 }
             }
         };
-        dialog.text("Are you sure you want to proceed into Werdna's realm at this time?  Your experience level will start at 1.");
+        com.badlogic.gdx.scenes.scene2d.ui.Label prompt = new com.badlogic.gdx.scenes.scene2d.ui.Label(
+                "Are you sure you want to proceed into Werdna's realm at this time? Your experience level will start at 1.",
+                getUiSkin());
+        prompt.setWrap(true);
+        dialog.getContentTable().add(prompt).width(440).pad(16);
+        dialog.getButtonTable().defaults().minWidth(96).height(32).pad(6);
         dialog.button("Enter", true);
         dialog.button("Stay", false);
         dialog.key(Input.Keys.ENTER, true);

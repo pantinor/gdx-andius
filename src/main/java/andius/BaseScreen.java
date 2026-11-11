@@ -75,6 +75,14 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         return stage;
     }
 
+    protected Skin getUiSkin() {
+        return Andius.skin;
+    }
+
+    protected BitmapFont getMessageFont() {
+        return Andius.skin.getFont("small-ultima");
+    }
+
     public abstract void finishTurn(int currentX, int currentY);
 
     public abstract void teleport(int level, int north, int east);
@@ -157,8 +165,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
         log(text);
 
-        Label.LabelStyle ls = new Label.LabelStyle(Andius.skin.get("small-ultima", BitmapFont.class), Color.WHITE);
-        Label label = new Label(text, ls);
+        Label label = new Label(text, new Label.LabelStyle(getMessageFont(), Color.WHITE));
         label.setWrap(true);
         label.setWidth(800);
         label.setPosition(sx, sy);

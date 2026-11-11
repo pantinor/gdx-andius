@@ -132,7 +132,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
     public WizardryDungeonScreen(Constants.Map map) {
         this.map = map;
-        this.stage = new Stage();
+        this.stage = new Stage(viewport);
         //this.stage.setDebugAll(true);
 
         this.dim = map.scenario().dim();
@@ -342,6 +342,16 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         pruneWrappedInstances();
 
+    }
+
+    @Override
+    protected com.badlogic.gdx.scenes.scene2d.ui.Skin getUiSkin() {
+        return Andius.HUD.getSkin();
+    }
+
+    @Override
+    protected com.badlogic.gdx.graphics.g2d.BitmapFont getMessageFont() {
+        return getUiSkin().getFont("body");
     }
 
     @Override
@@ -765,13 +775,9 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        if (this.map.scenario().getLevelDescriptions() != null) {
-            String lbl = String.format(this.map.scenario().getLevelDescriptions()[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 200, Andius.SCREEN_HEIGHT - 12);
-        } else {
-            String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 200, Andius.SCREEN_HEIGHT - 12);
-        }
+        String title = this.map.scenario().getLevelDescriptions() != null
+                ? this.map.scenario().getLevelDescriptions()[currentLevel] : this.map.getLabel();
+        Andius.HUD.renderDungeonLocation(batch, title, currentLevel + 1, x, y, currentDir.toString());
 
         batch.end();
 
@@ -1237,7 +1243,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         } else if (keycode == Keys.ESCAPE) {
 
-            Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
+            Utils.animateText(stage, getUiSkin(), "default-12", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
 
         } else if (keycode == Keys.P) {
 

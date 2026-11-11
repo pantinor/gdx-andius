@@ -108,6 +108,16 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
+    protected com.badlogic.gdx.scenes.scene2d.ui.Skin getUiSkin() {
+        return Andius.HUD.getSkin();
+    }
+
+    @Override
+    protected com.badlogic.gdx.graphics.g2d.BitmapFont getMessageFont() {
+        return getUiSkin().getFont("body");
+    }
+
+    @Override
     public void render(float delta) {
 
         time += delta;
@@ -140,8 +150,7 @@ public class GameScreen extends BaseScreen {
 
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
-        Andius.font12.draw(batch, String.format("%s, %s\n", (int) v.x, (int) v.y), 10, Andius.SCREEN_HEIGHT - 10);
-        Andius.font14.draw(batch, this.map.getLabel(), 300, Andius.SCREEN_HEIGHT - 32);
+        Andius.HUD.renderLocation(batch, this.map.getLabel(), (int) v.x, (int) v.y);
 
         batch.end();
 
@@ -356,7 +365,7 @@ public class GameScreen extends BaseScreen {
 
         } else if (keycode == Keys.ESCAPE) {
 
-            Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
+            Utils.animateText(stage, getUiSkin(), "default-12", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
         }
 
         finishTurn((int) v.x, (int) v.y);

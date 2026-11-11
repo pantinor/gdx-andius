@@ -5,34 +5,78 @@ import andius.Context;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import java.util.ArrayList;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Disposable;
 import java.util.Arrays;
-import java.util.List;
 
-public class Hud {
+public class Hud implements Disposable {
 
     private final LogScrollPane logs;
     static final int LOG_AREA_WIDTH = 308;
-    static final int LOG_AREA_HEIGHT = 292;
-    private final List<Integer> magicPoints = new ArrayList<>();
+    static final int LOG_AREA_HEIGHT = 224;
+    private static final int PARTY_X = 702, PARTY_WIDTH = 308, PARTY_ROW_HEIGHT = 84;
+    private final Skin skin = SkinUtils.createAdventureSkin(Andius.skin);
+    private final BitmapFont body = skin.getFont("body");
+    private final BitmapFont emphasis = skin.getFont("emphasis");
+    private final Texture panelPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
+    private static final Color PANEL = Color.valueOf("20252b");
+    private static final Color BORDER = Color.valueOf("48515b");
+    private final Table summonedTable = new Table();
+    private final AutoFocusScrollPane summonedScroll = new AutoFocusScrollPane(summonedTable, skin);
+    private String summonedContent = "";
 
     public Hud() {
-        Table table = new Table(Andius.skin);
+        Table table = new Table(skin);
         table.setBackground("dimmer");
-        logs = new LogScrollPane(Andius.skin, table, LOG_AREA_WIDTH, "default-12");
+        logs = new LogScrollPane(skin, table, LOG_AREA_WIDTH, "default-12");
         float y = 10;
         logs.setBounds(702, y, LOG_AREA_WIDTH, LOG_AREA_HEIGHT);
+        summonedTable.top().left();
+        summonedScroll.setBounds(PARTY_X, 246, PARTY_WIDTH, 392);
+        summonedScroll.setScrollingDisabled(true, false);
+        summonedScroll.setVisible(false);
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public void renderLocation(Batch batch, String title, int east, int north) {
+        renderHeader(batch, title, "East / West " + east + "    North / South " + north);
+    }
+
+    public void renderDungeonLocation(Batch batch, String title, int level, int east, int north, String direction) {
+        renderHeader(batch, title, "Level " + level + "    [" + east + ", " + north + "]    " + direction);
+    }
+
+    private void renderHeader(Batch batch, String title, String detail) {
+        BitmapFont heading = skin.getFont("heading");
+        heading.setColor(Color.valueOf("dbbb7c"));
+        drawLine(batch, heading, title, 104, Andius.SCREEN_HEIGHT - 24, 544, Align.center);
+        body.setColor(Color.WHITE);
+        drawLine(batch, body, detail,
+                104, Andius.SCREEN_HEIGHT - 38, 544, Align.center);
+        heading.setColor(Color.WHITE);
+    }
+
+    private static void drawLine(Batch batch, BitmapFont font, String text, float x, float y, float width, int alignment) {
+        font.draw(batch, text, x, y, 0, text.length(), width, alignment, false, "...");
     }
 
     public void addActor(Stage stage) {
         logs.remove();
         stage.addActor(logs);
         logs.setZIndex(0);
+        summonedScroll.remove();
+        stage.addActor(summonedScroll);
+        summonedScroll.setZIndex(1);
     }
 
     public void log(String s) {
@@ -44,118 +88,101 @@ public class Hud {
     }
 
     public void render(Batch batch, Context ctxt) {
-
-        int y = Andius.SCREEN_HEIGHT - 16 - 2;
-        int py = Andius.SCREEN_HEIGHT - 16 - 64;
-
+        summonedScroll.setVisible(false);
+        Color batchColor = new Color(batch.getColor());
+        batch.setColor(PANEL);
+        batch.draw(panelPixel, 697, 5, 318, 752);
+        float y = Andius.SCREEN_HEIGHT - 16;
         for (CharacterRecord rec : ctxt.saveGame.players) {
-
-            Andius.font12.setColor(rec.isDead() ? Color.RED : rec.status.color());
-
+            batch.setColor(BORDER);
+            batch.draw(panelPixel, PARTY_X - 2, y - 80, PARTY_WIDTH + 4, PARTY_ROW_HEIGHT - 2);
+            batch.setColor(PANEL);
+            batch.draw(panelPixel, PARTY_X - 1, y - 79, PARTY_WIDTH + 2, PARTY_ROW_HEIGHT - 4);
+            batch.setColor(batchColor);
+            Color color = rec.isDead() ? Color.RED : rec.status.color();
             if (rec.hp > 0 && rec.hp < 2) {
-                Andius.font12.setColor(Color.SALMON);
+                color = Color.SALMON;
             }
-
-            batch.draw(Andius.faceTiles[rec.portaitIndex], 702, py);
-
-            String d = String.format("%s  LVL %d  %s  %s", rec.name.toUpperCase(), rec.level, rec.race.toString(), rec.classType.toString());
-            Andius.font12.draw(batch, d, 772, y);
-
-            d = String.format("HP: %d /%d AC: %d ST: %s", rec.hp, rec.maxhp, rec.calculateAC(), rec.status.toString());
-            Andius.font12.draw(batch, d, 772, y - 16);
-
-            d = String.format("GOLD: %d EXP: %d", rec.gold, rec.exp);
-            Andius.font12.draw(batch, d, 772, y - 32);
-
+            body.setColor(color);
+            emphasis.setColor(color);
+            batch.draw(Andius.faceTiles[rec.portaitIndex], PARTY_X, y - 64);
+            float textX = PARTY_X + 70;
+            float textWidth = PARTY_WIDTH - 70;
+            drawLine(batch, emphasis, rec.name.toUpperCase(), textX, y, textWidth, Align.left);
+            drawLine(batch, body, String.format("LVL %d  %s  %s", rec.level, rec.race, rec.classType),
+                    textX, y - 17, textWidth, Align.left);
+            drawLine(batch, body, String.format("HP %d / %d   AC %d", rec.hp, rec.maxhp, rec.calculateAC()),
+                    textX, y - 34, textWidth, Align.left);
+            drawLine(batch, body, String.format("GOLD %d  EXP %d  %s", rec.gold, rec.exp, rec.status),
+                    textX, y - 51, textWidth, Align.left);
             int[] ms = rec.magePoints;
             int[] cs = rec.clericPoints;
-            magicPoints.clear();
-            Arrays.stream(ms).forEach(magicPoints::add);
-            Arrays.stream(cs).forEach(magicPoints::add);
-            int sum = magicPoints.stream().mapToInt(Integer::intValue).sum();
-            if (sum > 0) {
-                d = String.format("M: %d %d %d %d %d %d %d P: %d %d %d %d %d %d %d",
-                        ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6], cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]);
-                Color tmp = Andius.font12.getColor();
-                Andius.font12.setColor(Color.SKY);
-                Andius.font12.draw(batch, d, 772, y - 48);
-                Andius.font12.setColor(tmp);
+            boolean hasMagic = Arrays.stream(ms).sum() + Arrays.stream(cs).sum() > 0;
+            if (hasMagic) {
+                body.setColor(Color.SKY);
+                String points = "M " + spellPoints(ms) + "   P " + spellPoints(cs);
+                drawLine(batch, body, points, PARTY_X, y - 68, PARTY_WIDTH, Align.left);
             }
-
-            y -= 75;
-            py -= 75;
-
+            y -= PARTY_ROW_HEIGHT;
         }
+        body.setColor(Color.WHITE);
+        emphasis.setColor(Color.WHITE);
+        batch.setColor(batchColor);
+    }
 
+    private static String spellPoints(int[] points) {
+        StringBuilder text = new StringBuilder();
+        for (int point : points) {
+            if (text.length() > 0) {
+                text.append('/');
+            }
+            text.append(point);
+        }
+        return text.toString();
+    }
+
+    @Override
+    public void dispose() {
+        logs.remove();
+        summonedScroll.remove();
+        skin.dispose();
+        panelPixel.dispose();
     }
 
     public void renderSummonedMonsters(Batch batch, Context ctxt) {
+        Color previous = new Color(batch.getColor());
+        batch.setColor(BORDER);
+        batch.draw(panelPixel, 697, 240, 318, 430);
+        batch.setColor(PANEL);
+        batch.draw(panelPixel, 698, 241, 316, 428);
+        batch.setColor(previous);
+        BitmapFont heading = skin.getFont("heading");
+        heading.setColor(Color.valueOf("dbbb7c"));
+        drawLine(batch, heading, "SUMMONED ALLIES", PARTY_X + 6, 660, PARTY_WIDTH - 12, Align.left);
+        heading.setColor(Color.WHITE);
 
-        if (smb == null) {
-            smb = summondMonstersBackground();
+        StringBuilder content = new StringBuilder();
+        for (MutableMonster monster : ctxt.saveGame.players[0].summonedMonsters) {
+            content.append(monster.name()).append('|').append(monster.getLevel()).append('|')
+                    .append(monster.getCurrentHitPoints()).append('|').append(monster.getMaxHitPoints()).append('|')
+                    .append(monster.status()).append('|').append(monster.getCurrentMageSpellLevel()).append('|')
+                    .append(monster.getCurrentPriestSpellLevel()).append('\n');
         }
-
-        batch.draw(smb, 697, Andius.SCREEN_HEIGHT - 86 - 374);
-
-        Andius.font12.setColor(Color.WHITE);
-
-        float y = Andius.SCREEN_HEIGHT - 86;
-        int count = 0;
-        for (MutableMonster mm : ctxt.saveGame.players[0].summonedMonsters) {
-            Andius.font12.setColor(mm.isDead() ? Color.RED : mm.status().color());
-
-            String str = String.format("%s %d %d/%d %s (%d, %d)",
-                    mm.name().toUpperCase(), mm.getLevel(),
-                    mm.getCurrentHitPoints(), mm.getMaxHitPoints(),
-                    mm.getCurrentHitPoints() <= 0 ? "DEAD" : mm.status(),
-                    mm.getCurrentMageSpellLevel(), mm.getCurrentPriestSpellLevel());
-            Andius.font12.draw(batch, str, 708, y -= 16);
-
-            count++;
-            if (count > 22) {
-                break;
+        String updated = content.toString();
+        if (!updated.equals(summonedContent)) {
+            summonedContent = updated;
+            summonedTable.clearChildren();
+            for (MutableMonster monster : ctxt.saveGame.players[0].summonedMonsters) {
+                String text = String.format("%s  LVL %d\nHP %d / %d  %s  M %d  P %d",
+                        monster.name(), monster.getLevel(), monster.getCurrentHitPoints(), monster.getMaxHitPoints(),
+                        monster.isDead() ? "DEAD" : monster.status(),
+                        monster.getCurrentMageSpellLevel(), monster.getCurrentPriestSpellLevel());
+                Label label = new Label(text, skin, "default-12");
+                label.setWrap(true);
+                label.setColor(monster.isDead() ? Color.RED : monster.status().color());
+                summonedTable.add(label).width(PARTY_WIDTH - 18).pad(4).left().row();
             }
         }
-
-        Andius.font12.setColor(Color.WHITE);
-    }
-
-    private Texture smb = null;
-
-    private Texture summondMonstersBackground() {
-
-        Color DARKEST = new Color(0x2e2e2eff);
-        Color DARK = new Color(0x575757ff);
-        Color LIGHT = new Color(0x7a7a7aff);
-        Color LIGHTEST = new Color(0xabababff);
-
-        Pixmap pix = new Pixmap(318, 374, Pixmap.Format.RGBA8888);
-
-        int ix = 5;
-        int iy = 5;
-        int iw = 308;
-        int ih = 364;
-
-        pix.setColor(Color.BLACK);
-        pix.fillRectangle(ix - 5, iy - 5, iw + 10, ih + 10);
-
-        pix.setColor(DARK);
-        pix.fillRectangle(ix - 4, iy - 4, iw + 8, ih + 8);
-
-        pix.setColor(LIGHT);
-        pix.fillRectangle(ix - 3, iy - 3, iw + 6, ih + 6);
-
-        pix.setColor(LIGHTEST);
-        pix.fillRectangle(ix - 2, iy - 2, iw + 4, ih + 4);
-
-        pix.setColor(Color.BLACK);
-        pix.fillRectangle(ix - 1, iy - 1, iw + 2, ih + 2);
-
-        pix.setColor(DARKEST);
-        pix.fillRectangle(ix, iy, iw, ih);
-
-        Texture t = new Texture(pix);
-        pix.dispose();
-        return t;
+        summonedScroll.setVisible(true);
     }
 }

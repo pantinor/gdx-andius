@@ -127,4 +127,10 @@ public class Andius extends Game {
 
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        if (HUD != null) HUD.dispose();
+    }
+
 }
