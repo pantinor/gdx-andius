@@ -121,10 +121,15 @@ public class CampScreen implements Screen, Constants {
         }
 
         playerTable.addListener(new ClickListener(Input.Buttons.LEFT) {
-            @Override public void clicked(InputEvent event, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
                 Actor actor = event.getTarget();
-                while (actor != null && !(actor instanceof PlayerIndex)) actor = actor.getParent();
-                if (actor instanceof PlayerIndex player) selectPlayer(player);
+                while (actor != null && !(actor instanceof PlayerIndex)) {
+                    actor = actor.getParent();
+                }
+                if (actor instanceof PlayerIndex player) {
+                    selectPlayer(player);
+                }
             }
         });
 
@@ -280,7 +285,9 @@ public class CampScreen implements Screen, Constants {
     }
 
     private void selectPlayer(PlayerIndex player) {
-        if (player == selectedPlayer) return;
+        if (player == selectedPlayer) {
+            return;
+        }
         selectedPlayer = player;
         playerFocusIndicator.remove();
         player.addActor(playerFocusIndicator);
@@ -334,10 +341,15 @@ public class CampScreen implements Screen, Constants {
         stage.addActor(spellPane);
         spellDescription = ui.description(stage, 684, 108, 304, 134);
         spellCaption = ui.label(stage, "", "default", MUTED, 36, 76, 800, 18);
-        drop.setText("Drop"); drop.setBounds(328, 24, 96, 38);
-        use.setText("Use"); use.setBounds(432, 24, 96, 38);
-        trade.setText("Trade"); trade.setBounds(536, 24, 120, 38);
-        stage.addActor(drop); stage.addActor(use); stage.addActor(trade);
+        drop.setText("Drop");
+        drop.setBounds(328, 24, 96, 38);
+        use.setText("Use");
+        use.setBounds(432, 24, 96, 38);
+        trade.setText("Trade");
+        trade.setBounds(536, 24, 120, 38);
+        stage.addActor(drop);
+        stage.addActor(use);
+        stage.addActor(trade);
         ui.primary(use);
         exit.setText("Return to journey");
         exit.setBounds(850, 24, 150, 38);
@@ -354,7 +366,7 @@ public class CampScreen implements Screen, Constants {
         selectionCaption.setText(selectedPlayer.p.name + "  /  " + selectedPlayer.p.gold + " gold");
         itemDescription.setText(selectedItem == null ? "Select an item to inspect it." : selectedItem.item.name
                 + "\n" + selectedItem.item.vendorDescription() + "\n" + selectedItem.item.briefDescription()
-                );
+        );
         drop.setDisabled(selectedItem == null);
         use.setDisabled(selectedItem == null);
         trade.setDisabled(selectedItem == null || context.players().length < 2);
@@ -362,8 +374,9 @@ public class CampScreen implements Screen, Constants {
                 + "\n" + selectedSpell.spell.getDescription());
         spellCaption.setText("Mage  " + points(selectedPlayer.p.magePoints) + "    /    Priest  " + points(selectedPlayer.p.clericPoints));
         for (Cell<?> cell : selectedPlayer.spellTable.getCells()) {
-            if (cell.getActor() instanceof SpellListing spell && spell.cast != null)
+            if (cell.getActor() instanceof SpellListing spell && spell.cast != null) {
                 spell.cast.setDisabled(selectedPlayer.p.isDisabled() || !selectedPlayer.p.canCast(spell.spell));
+            }
         }
     }
 
@@ -436,7 +449,9 @@ public class CampScreen implements Screen, Constants {
                 spellTable.add(l);
                 spellTable.row();
             }
-            if (p.knownSpells.isEmpty()) spellTable.add(new Label("No known spells.", ui.skin)).width(WD).padTop(14);
+            if (p.knownSpells.isEmpty()) {
+                spellTable.add(new Label("No known spells.", ui.skin)).width(WD).padTop(14);
+            }
 
             spellTable.addListener(new ClickListener() {
                 @Override
@@ -465,7 +480,9 @@ public class CampScreen implements Screen, Constants {
                 invTable.add(new ItemListing(it, p));
                 invTable.row();
             }
-            if (p.inventory.isEmpty()) invTable.add(new Label("Your pack is empty.", ui.skin)).width(WD).padTop(14);
+            if (p.inventory.isEmpty()) {
+                invTable.add(new Label("Your pack is empty.", ui.skin)).width(WD).padTop(14);
+            }
         }
 
         private class PlayerLabel extends Label {
@@ -476,7 +493,8 @@ public class CampScreen implements Screen, Constants {
                 setText(getText());
             }
 
-            @Override public com.badlogic.gdx.utils.CharArray getText() {
+            @Override
+            public com.badlogic.gdx.utils.CharArray getText() {
                 return new com.badlogic.gdx.utils.CharArray(p.name + "\nLv " + p.level + " " + p.race + " " + p.classType
                         + "\nHP " + p.hp + "/" + p.maxhp + "  AC " + p.calculateAC() + "  " + p.status
                         + "\nG " + p.gold + "  XP " + p.exp);
@@ -592,37 +610,54 @@ public class CampScreen implements Screen, Constants {
         public InventoryImage(Item item, ItemType type, int slot) {
             super(Icons.get(item));
             setScaling(Scaling.none);
-            if (item == null) setDrawable(null);
+            if (item == null) {
+                setDrawable(null);
+            }
             this.item = item;
             this.type = type;
             this.slot = slot;
             addListener(new ClickListener(Input.Buttons.LEFT) {
-                @Override public void clicked(InputEvent event, float x, float y) {
-                    if (selectedItem == null) return;
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (selectedItem == null) {
+                        return;
+                    }
                     if (type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
                         equip(selectedPlayer.p, selectedItem.item);
-                        itemFocusIndicator.remove(); selectedItem = null;
+                        itemFocusIndicator.remove();
+                        selectedItem = null;
                         selectedPlayer.setInventoryTable();
                         invPane.setActor(selectedPlayer.invTable);
-                    } else Sounds.play(Sound.NEGATIVE_EFFECT);
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                    }
                 }
             });
             addListener(new ClickListener(Input.Buttons.RIGHT) {
-                @Override public void clicked(InputEvent event, float x, float y) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     unequip(selectedPlayer.p);
-                    itemFocusIndicator.remove(); selectedItem = null;
+                    itemFocusIndicator.remove();
+                    selectedItem = null;
                     selectedPlayer.setInventoryTable();
                     invPane.setActor(selectedPlayer.invTable);
                 }
             });
             addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-                @Override public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
-                    if (pointer != -1) return;
+                @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
+                    if (pointer != -1) {
+                        return;
+                    }
                     hoveredEquipment = InventoryImage.this;
                     refreshEquipmentName();
                 }
-                @Override public void exit(InputEvent event, float x, float y, int pointer, Actor to) {
-                    if (pointer != -1 || hoveredEquipment != InventoryImage.this) return;
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor to) {
+                    if (pointer != -1 || hoveredEquipment != InventoryImage.this) {
+                        return;
+                    }
                     hoveredEquipment = null;
                     refreshEquipmentName();
                 }
@@ -702,6 +737,7 @@ public class CampScreen implements Screen, Constants {
     }
 
     private class CampDialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog {
+
         CampDialog(String title) {
             super(title, ui.skin);
         }
@@ -712,12 +748,14 @@ public class CampScreen implements Screen, Constants {
             setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
         }
 
-        @Override public void hide() {
+        @Override
+        public void hide() {
             super.hide(null);
         }
     }
 
     private class TradeSliderBox extends CampDialog {
+
         private final List<CharacterRecord> tradeSelection;
 
         TradeSliderBox() {
@@ -726,17 +764,26 @@ public class CampScreen implements Screen, Constants {
             tradeSelection = new List<>(ui.skin);
             tradeSelection.setItems(context.players());
             tradeSelection.addListener(new ClickListener() {
-                @Override public void clicked(InputEvent event, float x, float y) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     int index = tradeSelection.getItemIndexAt(y);
-                    if (index < 0 || selectedItem == null) return;
+                    if (index < 0 || selectedItem == null) {
+                        return;
+                    }
                     CharacterRecord recipient = context.players()[index];
-                    if (recipient == selectedPlayer.p) { Sounds.play(Sound.NEGATIVE_EFFECT); return; }
+                    if (recipient == selectedPlayer.p) {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                        return;
+                    }
                     selectedItem.p.inventory.remove(selectedItem.item);
                     recipient.inventory.add(selectedItem.item);
                     for (Cell<?> cell : playerTable.getCells()) {
-                        if (cell.getActor() instanceof PlayerIndex player) player.setInventoryTable();
+                        if (cell.getActor() instanceof PlayerIndex player) {
+                            player.setInventoryTable();
+                        }
                     }
-                    selectedItem = null; itemFocusIndicator.remove();
+                    selectedItem = null;
+                    itemFocusIndicator.remove();
                     invPane.setActor(selectedPlayer.invTable);
                     Sounds.play(Sound.TRIGGER);
                     hide();
@@ -751,6 +798,7 @@ public class CampScreen implements Screen, Constants {
     }
 
     private class CastTargetSliderBox extends CampDialog {
+
         private final List<CharacterRecord> targetSelection;
         private Spells spell;
 
@@ -760,9 +808,12 @@ public class CampScreen implements Screen, Constants {
             targetSelection = new List<>(ui.skin);
             targetSelection.setItems(context.players());
             targetSelection.addListener(new ClickListener() {
-                @Override public void clicked(InputEvent event, float x, float y) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     int index = targetSelection.getItemIndexAt(y);
-                    if (index < 0 || spell == null) return;
+                    if (index < 0 || spell == null) {
+                        return;
+                    }
                     SpellUtil.campCast(selectedPlayer.p, spell, context.players()[index]);
                     hide();
                 }

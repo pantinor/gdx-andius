@@ -56,10 +56,12 @@ public class SaveGame implements Constants {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
-        
+
         if (sg.players != null) {
             for (CharacterRecord player : sg.players) {
-                if (player != null && player.gender == null) player.gender = Gender.MALE;
+                if (player != null && player.gender == null) {
+                    player.gender = Gender.MALE;
+                }
             }
         }
 

@@ -27,7 +27,7 @@ public class SkinUtils {
 
     public static Skin createSkin(Skin shared) {
         Skin skin = new Skin();
-        
+
         BitmapFont body = font("AlegreyaSans-Regular.ttf", 15);
         BitmapFont emphasis = font("AlegreyaSans-Medium.ttf", 16);
         BitmapFont heading = font("Cinzel.ttf", 16);
@@ -41,27 +41,27 @@ public class SkinUtils {
         skin.add("default-16", new Label.LabelStyle(heading, Color.WHITE));
         skin.add("default-24", new Label.LabelStyle(title, Color.WHITE));
         skin.add("default", new Label.LabelStyle(body, Color.WHITE));
-        
+
         TextButton.TextButtonStyle button = new TextButton.TextButtonStyle(shared.get(TextButton.TextButtonStyle.class));
         button.font = emphasis;
         skin.add("default", button);
-        
+
         Window.WindowStyle window = new Window.WindowStyle(shared.get(Window.WindowStyle.class));
         window.titleFont = heading;
         skin.add("default", window);
-        
+
         for (String name : new String[]{"default-12", "default-16"}) {
             TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(shared.get(name, TextButton.TextButtonStyle.class));
             style.font = emphasis;
             skin.add(name, style);
         }
-        
+
         List.ListStyle list = new List.ListStyle(shared.get("default-12-padded-clear", List.ListStyle.class));
         list.font = body;
         skin.add("default-12-padded-clear", list);
         skin.add("default", new ScrollPane.ScrollPaneStyle(shared.get(ScrollPane.ScrollPaneStyle.class)));
         skin.add("dimmer", shared.getDrawable("dimmer"), Drawable.class);
-        
+
         return skin;
     }
 

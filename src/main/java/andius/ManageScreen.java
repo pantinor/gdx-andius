@@ -171,7 +171,6 @@ public class ManageScreen implements Screen, Constants {
         registry = new List<>(uiSkin, "default-12-padded-clear");
         registry.setItems(recs);
 
-
         apply = new TextButton("Create in selected slot", uiSkin);
         clear = new TextButton("Delete character", uiSkin);
         add = new TextButton("Assign to party", uiSkin);
@@ -180,9 +179,6 @@ public class ManageScreen implements Screen, Constants {
         cancel = new TextButton("Cancel", uiSkin);
         reset = new TextButton("Reset", uiSkin);
         save = new TextButton("Save & return", uiSkin);
-
-
-
 
         apply.addListener(new ChangeListener() {
             @Override
@@ -537,7 +533,6 @@ public class ManageScreen implements Screen, Constants {
         changeClassBox = new SelectBox<>(uiSkin);
         changeClassBtn = new TextButton("Change class", uiSkin);
 
-
         partyFormation.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -566,7 +561,7 @@ public class ManageScreen implements Screen, Constants {
 
         newPortrait = new Image();
         partyPortrait = new Image();
-        for (Image image : new Image[] {newPortrait, partyPortrait}) {
+        for (Image image : new Image[]{newPortrait, partyPortrait}) {
             image.setScaling(Scaling.fit);
             image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
         }
@@ -574,13 +569,19 @@ public class ManageScreen implements Screen, Constants {
         rosterGender = genderBox();
         partyGender = genderBox();
         rosterGender.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) {
-                if (!EMPTY.equals(registry.getSelected().character.name)) registry.getSelected().character.gender = rosterGender.getSelected();
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (!EMPTY.equals(registry.getSelected().character.name)) {
+                    registry.getSelected().character.gender = rosterGender.getSelected();
+                }
             }
         });
         partyGender.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) {
-                if (!EMPTY.equals(partyFormation.getSelected().character.name)) partyFormation.getSelected().character.gender = partyGender.getSelected();
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (!EMPTY.equals(partyFormation.getSelected().character.name)) {
+                    partyFormation.getSelected().character.gender = partyGender.getSelected();
+                }
             }
         });
 
@@ -650,8 +651,8 @@ public class ManageScreen implements Screen, Constants {
         scrolling.vScrollKnob = knob;
         uiSkin.add("default", scrolling);
         select.scrollStyle = scrolling;
-        com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle window =
-                new com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle(uiSkin.get(com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle.class));
+        com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle window
+                = new com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle(uiSkin.get(com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle.class));
         window.background = surface("15232f");
         window.titleFontColor = GOLD;
         uiSkin.add("default", window);
@@ -680,8 +681,11 @@ public class ManageScreen implements Screen, Constants {
         scroll.setFadeScrollBars(false);
         scroll.setOverscroll(false, false);
         scroll.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-            @Override public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
-                if (pointer == -1) stage.setScrollFocus(scroll);
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
+                if (pointer == -1) {
+                    stage.setScrollFocus(scroll);
+                }
             }
         });
         return scroll;
@@ -694,7 +698,9 @@ public class ManageScreen implements Screen, Constants {
     }
 
     private void portrait(Image image, TextureRegion region) {
-        if (image.getDrawable() instanceof TextureRegionDrawable current && current.getRegion() == region) return;
+        if (image.getDrawable() instanceof TextureRegionDrawable current && current.getRegion() == region) {
+            return;
+        }
         image.setDrawable(new TextureRegionDrawable(region));
     }
 
@@ -756,7 +762,9 @@ public class ManageScreen implements Screen, Constants {
                     + Race.values()[i].name().substring(1).toLowerCase(java.util.Locale.ROOT));
             cbRace[i].getImageCell().padRight(5);
             ancestry.add(cbRace[i]).width(112).height(26).left();
-            if (i == 2) ancestry.row();
+            if (i == 2) {
+                ancestry.row();
+            }
         }
         recruit.add(ancestry).growX().padBottom(6).row();
         pointsLabel = text("", "default", GOLD);
@@ -830,7 +838,9 @@ public class ManageScreen implements Screen, Constants {
     }
 
     private String summary(CharacterRecord c) {
-        if (EMPTY.equals(c.name)) return "Empty slot\n\nReady for an adventurer.";
+        if (EMPTY.equals(c.name)) {
+            return "Empty slot\n\nReady for an adventurer.";
+        }
         return c.name + "\nLevel " + c.level + " " + c.race + "\n" + c.classType + "  /  " + c.status
                 + "\nHP  " + c.hp + " / " + c.maxhp + "\nGold  " + c.gold + "\nExperience  " + c.exp
                 + "\nItems  " + c.inventory.size()
@@ -882,7 +892,9 @@ public class ManageScreen implements Screen, Constants {
         clear.setDisabled(EMPTY.equals(reserve.name));
         boolean inParty = false;
         for (PartyIndex slot : partyFormation.getItems()) {
-            if (!EMPTY.equals(reserve.name) && slot.character.name.equals(reserve.name)) inParty = true;
+            if (!EMPTY.equals(reserve.name) && slot.character.name.equals(reserve.name)) {
+                inParty = true;
+            }
         }
         add.setDisabled(EMPTY.equals(reserve.name) || !EMPTY.equals(member.name) || inParty);
         remove.setDisabled(EMPTY.equals(member.name) || findEmptyRosterSlot() == null);
@@ -895,7 +907,9 @@ public class ManageScreen implements Screen, Constants {
 
     private RosterIndex findEmptyRosterSlot() {
         for (RosterIndex slot : registry.getItems()) {
-            if (EMPTY.equals(slot.character.name)) return slot;
+            if (EMPTY.equals(slot.character.name)) {
+                return slot;
+            }
         }
         return null;
     }
@@ -919,7 +933,9 @@ public class ManageScreen implements Screen, Constants {
             }
         }
         classTypeSelection.setItems(items);
-        if (selected != null && items.contains(selected, true)) classTypeSelection.setSelected(selected);
+        if (selected != null && items.contains(selected, true)) {
+            classTypeSelection.setSelected(selected);
+        }
     }
 
     private void updateChangeClassOptions() {
@@ -981,7 +997,9 @@ public class ManageScreen implements Screen, Constants {
         if (c.name == null) {
             c.name = EMPTY;
         }
-        if (c.gender == null) c.gender = Gender.MALE;
+        if (c.gender == null) {
+            c.gender = Gender.MALE;
+        }
         if (c.knownSpells == null) {
             c.knownSpells = new java.util.ArrayList<>();
         }

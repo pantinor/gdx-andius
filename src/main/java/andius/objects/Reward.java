@@ -15,7 +15,7 @@ public class Reward {
         ANTI_MAGE,
         ANTI_PRIEST,
         ALARM;
-        
+
         @Override
         public String toString() {
             return this.name().replace("_", " ").toUpperCase();

@@ -80,7 +80,10 @@ public class RewardScreen implements Screen, Constants {
         this.action = new List<>(ui.skin);
         this.action.setItems(new String[]{"OPEN", "INSPECT", "CALFO", "DISARM"});
         this.playerSelection = new List<>(ui.skin) {
-            @Override public String toString(CharacterRecord player) { return player.name + " / " + player.classType; }
+            @Override
+            public String toString(CharacterRecord player) {
+                return player.name + " / " + player.classType;
+            }
         };
         this.playerSelection.setItems(context.players());
 
@@ -89,7 +92,9 @@ public class RewardScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 CharacterRecord player = playerSelection.getSelected();
-                if (player == null) return;
+                if (player == null) {
+                    return;
+                }
                 if (action.getSelected().equals("OPEN")) {
                     open(player);
                 } else if (action.getSelected().equals("INSPECT")) {
@@ -146,7 +151,10 @@ public class RewardScreen implements Screen, Constants {
         leaveButton = new TextButton("Leave treasure", ui.skin);
         leaveButton.setBounds(850, 24, 150, 38);
         leaveButton.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) { leave(); }
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                leave();
+            }
         });
         stage.addActor(leaveButton);
         log("A chest lies before the company. Choose your approach carefully.");
@@ -164,19 +172,29 @@ public class RewardScreen implements Screen, Constants {
                 || "CALFO".equals(choice) && !player.canCast(Spells.CALFO)
                 || "DISARM".equals(choice) && chestDisarmed);
         go.setText(switch (choice) {
-            case "INSPECT" -> "Inspect chest";
-            case "CALFO" -> "Cast Calfo";
-            case "DISARM" -> "Disarm trap";
-            default -> "Open chest";
+            case "INSPECT" ->
+                "Inspect chest";
+            case "CALFO" ->
+                "Cast Calfo";
+            case "DISARM" ->
+                "Disarm trap";
+            default ->
+                "Open chest";
         });
         actionHint.setText(chestOpened ? "The spoils have been distributed among the able members of your company."
                 : switch (choice) {
-                    case "INSPECT" -> "Look for a trap. Each adventurer may inspect the chest once.";
-                    case "CALFO" -> "Spend a Calfo spell use to secure the chest with magic.";
-                    case "DISARM" -> "Select the suspected trap, then attempt to disarm it. A mistake may trigger the trap.";
-                    default -> "Open the chest and collect its contents. An active trap will be triggered.";
-                });
-        if (player == null) return;
+            case "INSPECT" ->
+                "Look for a trap. Each adventurer may inspect the chest once.";
+            case "CALFO" ->
+                "Spend a Calfo spell use to secure the chest with magic.";
+            case "DISARM" ->
+                "Select the suspected trap, then attempt to disarm it. A mistake may trigger the trap.";
+            default ->
+                "Open the chest and collect its contents. An active trap will be triggered.";
+        });
+        if (player == null) {
+            return;
+        }
         portrait.setDrawable(new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(
                 andius.objects.Portraits.get(player)));
         pselLabel.setText(player.name);

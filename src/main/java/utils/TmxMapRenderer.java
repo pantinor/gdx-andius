@@ -222,7 +222,6 @@ public class TmxMapRenderer extends BatchTiledMapRenderer implements Constants {
         //if (true) {
         //    return Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, 1f);
         //}
-
         int layerWidth = layer.getWidth();
         int layerHeight = layer.getHeight();
 

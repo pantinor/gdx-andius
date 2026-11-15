@@ -34,7 +34,9 @@ public class RotateOnlyInputController extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (activeButton != rotateButton) return false;
+        if (activeButton != rotateButton) {
+            return false;
+        }
 
         int deltaX = screenX - lastX;
         int deltaY = screenY - lastY;
@@ -61,7 +63,7 @@ public class RotateOnlyInputController extends InputAdapter {
     }
 
     private void rotateCamera(float deltaX, float deltaY) {
-        float yaw   = -deltaX * rotateSpeed; // left/right
+        float yaw = -deltaX * rotateSpeed; // left/right
         float pitch = -deltaY * rotateSpeed; // up/down
 
         camera.rotate(camera.up, yaw);

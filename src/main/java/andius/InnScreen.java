@@ -105,7 +105,7 @@ public class InnScreen implements Screen, Constants {
                 }
 
                 int choice = roomSelection.getSelectedIndex();
-                takeNap(new int[] {0, 1, 3, 7, 10}[choice], new int[] {0, 10, 50, 200, 500}[choice], selectedPlayer);
+                takeNap(new int[]{0, 1, 3, 7, 10}[choice], new int[]{0, 10, 50, 200, 500}[choice], selectedPlayer);
             }
         });
 
@@ -233,13 +233,19 @@ public class InnScreen implements Screen, Constants {
     }
 
     private void refreshUI() {
-        for (Cell<?> cell : playerTable.getCells()) if (cell.getActor() instanceof PlayerListing listing) listing.refresh();
+        for (Cell<?> cell : playerTable.getCells()) {
+            if (cell.getActor() instanceof PlayerListing listing) {
+                listing.refresh();
+            }
+        }
         int choice = roomSelection.getSelectedIndex();
-        int cost = choice < 0 ? 0 : new int[] {0, 10, 50, 200, 500}[choice];
-        int recovery = choice < 0 ? 0 : new int[] {0, 1, 3, 7, 10}[choice];
+        int cost = choice < 0 ? 0 : new int[]{0, 10, 50, 200, 500}[choice];
+        int recovery = choice < 0 ? 0 : new int[]{0, 1, 3, 7, 10}[choice];
         go.setDisabled(selectedPlayer == null || selectedPlayer.c.isDead() || choice < 0 || selectedPlayer.c.gold < cost);
         pool.setDisabled(selectedPlayer == null || context.players().length < 2);
-        if (selectedPlayer == null) return;
+        if (selectedPlayer == null) {
+            return;
+        }
         bookingCaption.setText(selectedPlayer.c.name + "  /  " + selectedPlayer.c.gold + " gold available");
         roomDescription.setText(cost == 0
                 ? "A place to sleep, free of charge.\nRestores spell uses and checks for advancement. No health recovery."
@@ -359,11 +365,16 @@ public class InnScreen implements Screen, Constants {
             this.status.setBounds(226, 24, 78, 18);
             this.gold.setBounds(88, 6, 106, 18);
             this.exp.setBounds(198, 6, 106, 18);
-            for (Actor actor : getChildren()) if (actor instanceof Label label) label.setEllipsis(true);
+            for (Actor actor : getChildren()) {
+                if (actor instanceof Label label) {
+                    label.setEllipsis(true);
+                }
+            }
             this.name.setStyle(new LabelStyle(ui.skin.getFont("emphasis"), Color.WHITE));
             this.setSize(PAT_SCR_WIDTH, PAT_ITEM_HGT);
             refresh();
         }
+
         void refresh() {
             Color color = c.isDead() ? Color.SALMON : c.status.color();
             name.setText(c.name);

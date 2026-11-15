@@ -77,7 +77,10 @@ public class TempleScreen implements Screen, Constants {
         rebuildTitherList();
 
         this.titherSelection.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) { updateTitherFromSelection(); }
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                updateTitherFromSelection();
+            }
         });
 
         this.offer = new TextButton("TITHE", ui.skin);
@@ -242,7 +245,7 @@ public class TempleScreen implements Screen, Constants {
             if (selectedPatient == null) {
                 selectedPatient = listing;
                 selectedPatient.addActor(focusIndicator);
-                        focusIndicator.toBack();
+                focusIndicator.toBack();
             }
         }
 
@@ -290,7 +293,11 @@ public class TempleScreen implements Screen, Constants {
     }
 
     private void refreshUI() {
-        for (Cell<?> cell : patientTable.getCells()) if (cell.getActor() instanceof PatientListing listing) listing.refresh();
+        for (Cell<?> cell : patientTable.getCells()) {
+            if (cell.getActor() instanceof PatientListing listing) {
+                listing.refresh();
+            }
+        }
         pool.setDisabled(tither == null || context.players().length < 2);
         if (selectedPatient == null) {
             offer.setDisabled(true);
@@ -309,7 +316,7 @@ public class TempleScreen implements Screen, Constants {
         donorCaption.setText(tither == null ? "No eligible donor" : tither.name + "  /  " + tither.gold + " gold");
         careHint.setText(well ? "This adventurer is in good health." : tither == null ? "An able companion must make the offering."
                 : tither.gold < cost ? "The donor needs more gold. Pool the company's funds or choose another donor."
-                : "Your offering will be taken from " + tither.name + ".");
+                        : "Your offering will be taken from " + tither.name + ".");
     }
 
     private int donationAmount(CharacterRecord patient) {
@@ -330,11 +337,17 @@ public class TempleScreen implements Screen, Constants {
 
     private void rebuildTitherList() {
         Array<CharacterRecord> donors = new Array<>();
-        for (CharacterRecord player : context.players()) if (!player.isDisabled()) donors.add(player);
+        for (CharacterRecord player : context.players()) {
+            if (!player.isDisabled()) {
+                donors.add(player);
+            }
+        }
         CharacterRecord previous = tither;
         titherSelection.setItems(donors);
         tither = previous != null && donors.contains(previous, true) ? previous : donors.size > 0 ? donors.first() : null;
-        if (tither != null) titherSelection.setSelected(tither);
+        if (tither != null) {
+            titherSelection.setSelected(tither);
+        }
     }
 
     private void updateTitherFromSelection() {
@@ -389,7 +402,11 @@ public class TempleScreen implements Screen, Constants {
             this.status.setBounds(226, 24, 78, 18);
             this.gold.setBounds(88, 6, 216, 18);
 
-            for (Actor actor : getChildren()) if (actor instanceof Label label) label.setEllipsis(true);
+            for (Actor actor : getChildren()) {
+                if (actor instanceof Label label) {
+                    label.setEllipsis(true);
+                }
+            }
             this.name.setStyle(new LabelStyle(ui.skin.getFont("emphasis"), Color.WHITE));
             this.setSize(PAT_SCR_WIDTH, PAT_ITEM_HGT);
             refresh();

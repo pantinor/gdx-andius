@@ -57,7 +57,7 @@ public class SpreadFOV {
             castLight(1, 1.0f, 0.0f, radius, 0, d.deltaX, d.deltaY, 0, startx, starty);
             castLight(1, 1.0f, 0.0f, radius, d.deltaX, 0, 0, d.deltaY, startx, starty);
         }
-        
+
         //light area around start as well
         lightMap[startx][starty + 1] = 1;
         lightMap[startx][starty - 1] = 1;

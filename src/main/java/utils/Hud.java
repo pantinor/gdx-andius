@@ -34,20 +34,20 @@ import static utils.SkinUtils.createSkin;
 public class Hud implements Disposable {
 
     private final LogScrollPane logs;
-    
+
     public static final int MAP_X = 24, MAP_Y = 80, MAP_SIZE = 624;
     public static final int TILE_MAP_X = 48, TILE_MAP_Y = 88, TILE_MAP_WIDTH = 576, TILE_MAP_HEIGHT = 608;
-    
+
     static final int LOG_AREA_WIDTH = 304;
     static final int LOG_AREA_HEIGHT = 112;
-    
+
     private static final int PARTY_X = 684, PARTY_WIDTH = 304, PARTY_ROW_HEIGHT = 84;
-    
+
     private final Skin skin = createSkin(Andius.skin);
     private final BitmapFont body = skin.getFont("body");
     private final BitmapFont emphasis = skin.getFont("emphasis");
     private final Texture panelPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
-   
+
     private final Table summonedTable = new Table();
     private final AutoFocusScrollPane summonedScroll = new AutoFocusScrollPane(summonedTable, skin);
     private String summonedContent = "";
@@ -239,7 +239,9 @@ public class Hud implements Disposable {
                 body.setColor(MUTED);
                 drawLine(batch, body, (slot + 1) + "  /  Empty formation slot", PARTY_X + 8, top - 32, PARTY_WIDTH - 16, Align.left);
             }
-            if (slot < 5) rect(batch, Color.valueOf("253745"), PARTY_X, bottom - 7, PARTY_WIDTH, 1);
+            if (slot < 5) {
+                rect(batch, Color.valueOf("253745"), PARTY_X, bottom - 7, PARTY_WIDTH, 1);
+            }
             top -= PARTY_ROW_HEIGHT;
         }
         body.setColor(Color.WHITE);

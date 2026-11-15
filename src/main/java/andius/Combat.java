@@ -547,7 +547,7 @@ public abstract class Combat implements Constants {
                 log(m.name() + " cannot cast spell in current state!");
                 return;
             }
-            
+
             log(m.name() + " casts " + spell, Color.SKY);
         }
 

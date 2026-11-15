@@ -22,7 +22,7 @@ public enum Direction {
         this.mask = mask;
         this.degree = degree;
     }
-    
+
     public int value() {
         return val;
     }
@@ -30,7 +30,7 @@ public enum Direction {
     public int mask() {
         return mask;
     }
-    
+
     public int degree() {
         return this.degree;
     }

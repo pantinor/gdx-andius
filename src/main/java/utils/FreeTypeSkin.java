@@ -49,8 +49,8 @@ public class FreeTypeSkin extends Skin {
                         json.readValue("magFilter", String.class, "Nearest", jsonData));
                 jsonData.remove("magFilter");
 
-                FreeTypeFontGenerator.FreeTypeFontParameter parameter =
-                        json.readValue(FreeTypeFontGenerator.FreeTypeFontParameter.class, jsonData);
+                FreeTypeFontGenerator.FreeTypeFontParameter parameter
+                        = json.readValue(FreeTypeFontGenerator.FreeTypeFontParameter.class, jsonData);
                 parameter.hinting = hinting;
                 parameter.minFilter = minFilter;
                 parameter.magFilter = magFilter;

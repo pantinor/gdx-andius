@@ -25,13 +25,13 @@ import static utils.SkinUtils.MUTED;
 import static utils.SkinUtils.createSkin;
 
 public final class ManagementUi implements Disposable {
-   
+
     public final Skin skin = createSkin(Andius.skin);
     private final Texture pixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
 
     public ManagementUi() {
         skin.add("emphasis", new Label.LabelStyle(skin.getFont("emphasis"), Color.WHITE));
-        
+
         TextButton.TextButtonStyle button = new TextButton.TextButtonStyle(skin.get(TextButton.TextButtonStyle.class));
         button.up = surface("223443");
         button.over = surface("344c5d");
@@ -39,18 +39,18 @@ public final class ManagementUi implements Disposable {
         button.disabled = surface("101d28");
         button.disabledFontColor = MUTED;
         skin.add("default", button);
-        
+
         ScrollPane.ScrollPaneStyle scroll = new ScrollPane.ScrollPaneStyle();
         BaseDrawable track = (BaseDrawable) surface("0c1822");
         track.setMinWidth(6);
-        
+
         BaseDrawable knob = (BaseDrawable) surface("7f755f");
         knob.setMinWidth(6);
         knob.setMinHeight(24);
         scroll.vScroll = track;
         scroll.vScrollKnob = knob;
         skin.add("default", scroll);
-        
+
         List.ListStyle list = new List.ListStyle(skin.get("default-12-padded-clear", List.ListStyle.class));
         BaseDrawable selection = (BaseDrawable) surface("344b59");
         selection.setTopHeight(7);
@@ -60,7 +60,7 @@ public final class ManagementUi implements Disposable {
         list.selection = selection;
         list.fontColorSelected = GOLD;
         skin.add("default", list);
-        
+
         SelectBox.SelectBoxStyle select = new SelectBox.SelectBoxStyle(Andius.skin.get("default-16-dark-background", SelectBox.SelectBoxStyle.class));
         select.font = skin.getFont("emphasis");
         select.listStyle = new List.ListStyle(list);
@@ -69,7 +69,7 @@ public final class ManagementUi implements Disposable {
         select.scrollStyle.background = surface("15232f");
         select.background = surface("223443");
         skin.add("default", select);
-        
+
         Window.WindowStyle window = new Window.WindowStyle(skin.get(Window.WindowStyle.class));
         window.background = surface("15232f");
         window.stageBackground = surface("00000099");
@@ -143,7 +143,8 @@ public final class ManagementUi implements Disposable {
         return table;
     }
 
-    @Override public void dispose() {
+    @Override
+    public void dispose() {
         skin.dispose();
         pixel.dispose();
     }

@@ -98,7 +98,7 @@ public class Andius extends Game {
         }
 
         mainGame = this;
-        
+
         startScreen = new StartScreen();
         setScreen(startScreen);
     }

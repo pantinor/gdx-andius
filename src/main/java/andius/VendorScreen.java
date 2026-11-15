@@ -119,10 +119,15 @@ public class VendorScreen implements Screen, Constants {
         }
 
         playerTable.addListener(new ClickListener(Input.Buttons.LEFT) {
-            @Override public void clicked(InputEvent event, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
                 Actor actor = event.getTarget();
-                while (actor != null && !(actor instanceof PlayerIndex)) actor = actor.getParent();
-                if (actor instanceof PlayerIndex player) selectPlayer(player);
+                while (actor != null && !(actor instanceof PlayerIndex)) {
+                    actor = actor.getParent();
+                }
+                if (actor instanceof PlayerIndex player) {
+                    selectPlayer(player);
+                }
             }
         });
 
@@ -219,16 +224,26 @@ public class VendorScreen implements Screen, Constants {
         buildLayout();
         showEquipment();
         stage.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-            @Override public boolean keyDown(InputEvent event, int keycode) {
-                if (event.isHandled()) return false;
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (event.isHandled()) {
+                    return false;
+                }
                 TextButton action = switch (keycode) {
-                    case Input.Keys.B -> buy;
-                    case Input.Keys.S -> sell;
-                    case Input.Keys.P -> pool;
-                    case Input.Keys.E -> exit;
-                    default -> null;
+                    case Input.Keys.B ->
+                        buy;
+                    case Input.Keys.S ->
+                        sell;
+                    case Input.Keys.P ->
+                        pool;
+                    case Input.Keys.E ->
+                        exit;
+                    default ->
+                        null;
                 };
-                if (action == null || action.isDisabled()) return false;
+                if (action == null || action.isDisabled()) {
+                    return false;
+                }
                 action.fire(new ChangeListener.ChangeEvent());
                 return true;
             }
@@ -286,7 +301,9 @@ public class VendorScreen implements Screen, Constants {
             vendorTable.row();
         }
 
-        if (sellables.isEmpty()) vendorTable.add(new Label("No merchandise in this category.", ui.skin)).width(WD).padTop(14);
+        if (sellables.isEmpty()) {
+            vendorTable.add(new Label("No merchandise in this category.", ui.skin)).width(WD).padTop(14);
+        }
 
         if (selectedPlayer != null) {
             for (Cell cell : vendorTable.getCells()) {
@@ -316,7 +333,9 @@ public class VendorScreen implements Screen, Constants {
     }
 
     private void selectPlayer(PlayerIndex player) {
-        if (player == selectedPlayer) return;
+        if (player == selectedPlayer) {
+            return;
+        }
         selectedPlayer = player;
         playerFocusIndicator.remove();
         player.addActor(playerFocusIndicator);
@@ -325,7 +344,9 @@ public class VendorScreen implements Screen, Constants {
         itemFocusIndicator.remove();
         invPane.setActor(player.invTable);
         for (Cell<?> cell : vendorTable.getCells()) {
-            if (cell.getActor() instanceof VendorItem item) item.setUsable(player.p.classType);
+            if (cell.getActor() instanceof VendorItem item) {
+                item.setUsable(player.p.classType);
+            }
         }
         showEquipment();
     }
@@ -370,17 +391,25 @@ public class VendorScreen implements Screen, Constants {
                 ItemType.HELMET, ItemType.GAUNTLET, ItemType.MISC, ItemType.SPECIAL);
         filter.setBounds(684, 590, 304, 34);
         filter.addListener(new ChangeListener() {
-            @Override public void changed(ChangeEvent event, Actor actor) { filterVendorItems(filter.getSelected()); }
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                filterVendorItems(filter.getSelected());
+            }
         });
         stage.addActor(filter);
         vendorPane.setBounds(684, 256, 304, 322);
         vendorPane.setFadeScrollBars(false);
         stage.addActor(vendorPane);
         shopDescription = ui.description(stage, 684, 108, 304, 134);
-        sell.setText("Sell"); sell.setBounds(328, 24, 96, 38);
-        pool.setText("Pool gold"); pool.setBounds(432, 24, 120, 38);
-        buy.setText("Buy"); buy.setBounds(672, 24, 120, 38);
-        stage.addActor(sell); stage.addActor(pool); stage.addActor(buy);
+        sell.setText("Sell");
+        sell.setBounds(328, 24, 96, 38);
+        pool.setText("Pool gold");
+        pool.setBounds(432, 24, 120, 38);
+        buy.setText("Buy");
+        buy.setBounds(672, 24, 120, 38);
+        stage.addActor(sell);
+        stage.addActor(pool);
+        stage.addActor(buy);
         ui.primary(buy);
         exit.setText("Return to journey");
         exit.setBounds(850, 24, 150, 38);
@@ -403,10 +432,9 @@ public class VendorScreen implements Screen, Constants {
         pool.setDisabled(context.players().length < 2);
         shopDescription.setText(selectedVendorItem == null ? "Select merchandise to inspect its price and properties."
                 : selectedVendorItem.item.name + "\n" + selectedVendorItem.item.cost + " gold\n"
-                    + selectedVendorItem.item.vendorDescription() + "\n" + selectedVendorItem.item.briefDescription()
-                    + (selectedVendorItem.item.canUse(selectedPlayer.p.classType) ? "" : "\nNot usable by this class."));
+                + selectedVendorItem.item.vendorDescription() + "\n" + selectedVendorItem.item.briefDescription()
+                + (selectedVendorItem.item.canUse(selectedPlayer.p.classType) ? "" : "\nNot usable by this class."));
     }
-
 
     private class PlayerIndex extends Group {
 
@@ -463,7 +491,9 @@ public class VendorScreen implements Screen, Constants {
                 invTable.add(new ItemListing(it, p));
                 invTable.row();
             }
-            if (p.inventory.isEmpty()) invTable.add(new Label("Your pack is empty.", ui.skin)).width(WD).padTop(14);
+            if (p.inventory.isEmpty()) {
+                invTable.add(new Label("Your pack is empty.", ui.skin)).width(WD).padTop(14);
+            }
 
             invTable.addListener(new ClickListener() {
                 @Override
@@ -496,7 +526,8 @@ public class VendorScreen implements Screen, Constants {
                 setText(getText());
             }
 
-            @Override public com.badlogic.gdx.utils.CharArray getText() {
+            @Override
+            public com.badlogic.gdx.utils.CharArray getText() {
                 return new com.badlogic.gdx.utils.CharArray(p.name + "\nLv " + p.level + " " + p.race + " " + p.classType
                         + "\nHP " + p.hp + "/" + p.maxhp + "  AC " + p.calculateAC() + "  " + p.status
                         + "\nG " + p.gold + "  XP " + p.exp);
@@ -616,37 +647,54 @@ public class VendorScreen implements Screen, Constants {
         public InventoryImage(Item item, ItemType type, int slot) {
             super(Icons.get(item));
             setScaling(Scaling.none);
-            if (item == null) setDrawable(null);
+            if (item == null) {
+                setDrawable(null);
+            }
             this.item = item;
             this.type = type;
             this.slot = slot;
             addListener(new ClickListener(Input.Buttons.LEFT) {
-                @Override public void clicked(InputEvent event, float x, float y) {
-                    if (selectedItem == null) return;
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (selectedItem == null) {
+                        return;
+                    }
                     if (type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
                         equip(selectedPlayer.p, selectedItem.item);
-                        itemFocusIndicator.remove(); selectedItem = null;
+                        itemFocusIndicator.remove();
+                        selectedItem = null;
                         selectedPlayer.setInventoryTable();
                         invPane.setActor(selectedPlayer.invTable);
-                    } else Sounds.play(Sound.NEGATIVE_EFFECT);
+                    } else {
+                        Sounds.play(Sound.NEGATIVE_EFFECT);
+                    }
                 }
             });
             addListener(new ClickListener(Input.Buttons.RIGHT) {
-                @Override public void clicked(InputEvent event, float x, float y) {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     unequip(selectedPlayer.p);
-                    itemFocusIndicator.remove(); selectedItem = null;
+                    itemFocusIndicator.remove();
+                    selectedItem = null;
                     selectedPlayer.setInventoryTable();
                     invPane.setActor(selectedPlayer.invTable);
                 }
             });
             addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-                @Override public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
-                    if (pointer != -1) return;
+                @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
+                    if (pointer != -1) {
+                        return;
+                    }
                     hoveredEquipment = InventoryImage.this;
                     refreshEquipmentName();
                 }
-                @Override public void exit(InputEvent event, float x, float y, int pointer, Actor to) {
-                    if (pointer != -1 || hoveredEquipment != InventoryImage.this) return;
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor to) {
+                    if (pointer != -1 || hoveredEquipment != InventoryImage.this) {
+                        return;
+                    }
                     hoveredEquipment = null;
                     refreshEquipmentName();
                 }

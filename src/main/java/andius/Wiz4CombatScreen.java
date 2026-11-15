@@ -168,7 +168,8 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
     private Image selection() {
         Image image = new Image(uiPixel) {
-            @Override public void draw(Batch batch, float parentAlpha) {
+            @Override
+            public void draw(Batch batch, float parentAlpha) {
                 Color previous = new Color(batch.getColor());
                 batch.setColor(GOLD.r, GOLD.g, GOLD.b, parentAlpha);
                 batch.draw(uiPixel, getX(), getY(), ENEMY_WIDTH, 1);
@@ -194,9 +195,12 @@ public class Wiz4CombatScreen implements Screen, Constants {
         String ability = "Choose a spell or fight.";
         if (spell != null) {
             Spells selectedSpell = spell.spell != null ? spell.spell : spell.item.spell;
-            if (targetsPlayer(selectedSpell)) target = player.name;
-            if (spell.item != null) ability = spell.item.name + " / " + selectedSpell;
-            else {
+            if (targetsPlayer(selectedSpell)) {
+                target = player.name;
+            }
+            if (spell.item != null) {
+                ability = spell.item.name + " / " + selectedSpell;
+            } else {
                 int remaining = selectedSpell.getType() == andius.objects.ClassType.MAGE
                         ? player.magePoints[selectedSpell.getLevel() - 1] : player.clericPoints[selectedSpell.getLevel() - 1];
                 ability = selectedSpell + " / " + selectedSpell.getType() + " " + selectedSpell.getLevel()
@@ -268,7 +272,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
             MutableCharacter mutc = new MutableCharacter(dg);
             this.enemies.add(mutc);
             this.enemiesTable.add(new DoGooderListing(mutc)).width(ENEMY_WIDTH).pad(2);
-            if (this.enemiesTable.getCells().size % 2 == 0) this.enemiesTable.row();
+            if (this.enemiesTable.getCells().size % 2 == 0) {
+                this.enemiesTable.row();
+            }
         }
 
         this.spells = new com.badlogic.gdx.scenes.scene2d.ui.List(combatSkin, "default-12-padded-clear");
@@ -381,7 +387,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void cast() {
-        if (ended || spells.getSelected() == null) return;
+        if (ended || spells.getSelected() == null) {
+            return;
+        }
 
         List<Object> shuffled = new ArrayList();
 
@@ -459,7 +467,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private void fight() {
-        if (ended) return;
+        if (ended) {
+            return;
+        }
 
         List<Object> shuffled = new ArrayList();
 
@@ -1461,7 +1471,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
             float x = 3;
             this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH - 6, LINE_HEIGHT);
-            for (Label label : new Label[] {l1, l2, l3}) label.setEllipsis(true);
+            for (Label label : new Label[]{l1, l2, l3}) {
+                label.setEllipsis(true);
+            }
             this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH - 6, LINE_HEIGHT);
             this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH - 6, LINE_HEIGHT);
 
@@ -1554,7 +1566,9 @@ public class Wiz4CombatScreen implements Screen, Constants {
 
             float x = 3;
             this.l1.setBounds(x, LINE_HEIGHT * 2, LISTING_WIDTH - 6, LINE_HEIGHT);
-            for (Label label : new Label[] {l1, l2, l3}) label.setEllipsis(true);
+            for (Label label : new Label[]{l1, l2, l3}) {
+                label.setEllipsis(true);
+            }
             this.l2.setBounds(x, LINE_HEIGHT * 1, LISTING_WIDTH - 6, LINE_HEIGHT);
             this.l3.setBounds(x, LINE_HEIGHT * 0, LISTING_WIDTH - 6, LINE_HEIGHT);
 
@@ -1668,14 +1682,18 @@ public class Wiz4CombatScreen implements Screen, Constants {
             this.l4.setBounds(x, 10, ENEMY_WIDTH - 92, LINE_HEIGHT);
 
             this.icon.setBounds(6, 4, 72, 80);
-            for (Label label : new Label[] {l1, l2, l3, l4}) label.setEllipsis(true);
+            for (Label label : new Label[]{l1, l2, l3, l4}) {
+                label.setEllipsis(true);
+            }
 
             this.setSize(ENEMY_WIDTH, ENEMY_HEIGHT);
 
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (ended || mm.isDead()) return;
+                    if (ended || mm.isDead()) {
+                        return;
+                    }
                     selected.remove();
                     DoGooderListing.this.addActor(selected);
                 }
@@ -1686,21 +1704,26 @@ public class Wiz4CombatScreen implements Screen, Constants {
     }
 
     private class ListingBackground extends HealthCursor {
+
         private final int width, height;
         private float healthWidth;
 
-        ListingBackground() { this(LISTING_WIDTH, LINE_HEIGHT * 3); }
+        ListingBackground() {
+            this(LISTING_WIDTH, LINE_HEIGHT * 3);
+        }
 
         ListingBackground(int width, int height) {
             this.width = width;
             this.height = height;
         }
 
-        @Override public void adjust(int hp, int maxhp) {
+        @Override
+        public void adjust(int hp, int maxhp) {
             healthWidth = maxhp <= 0 ? 0 : width * Math.max(0, Math.min(1f, (float) hp / maxhp));
         }
 
-        @Override public void draw(Batch batch, float parentAlpha) {
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
             Color previous = new Color(batch.getColor());
             batch.setColor(.065f, .095f, .12f, parentAlpha);
             batch.draw(uiPixel, getX(), getY(), width, height);
@@ -1709,6 +1732,7 @@ public class Wiz4CombatScreen implements Screen, Constants {
             batch.setColor(previous);
         }
     }
+
     private void removeMonsterFromTable(MutableMonster mm) {
 
         Cell found = null;

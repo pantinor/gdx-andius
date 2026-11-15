@@ -17,6 +17,7 @@ public class FreeTypeSkinLoader extends SkinLoader {
     }
 
     public static class FreeTypeSkinLoaderParameter extends SkinParameter {
+
         public FreeTypeSkinLoaderParameter(String textureAtlasPath) {
             super(textureAtlasPath);
         }

@@ -124,9 +124,9 @@ public class KadortoDialog extends Dialog {
 
         input.setTextFieldListener((TextField tf, char key) -> {
             state = state.next(ctx, "");
-            
+
             scrollPane.add(" ");
-            
+
             if (state == null) {
                 hide();
             } else {

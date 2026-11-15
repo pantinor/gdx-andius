@@ -145,11 +145,11 @@ public class StartScreen implements Screen, Constants {
         titlePanel.setBounds(40, 64, 552, 632);
         titlePanel.setTouchable(Touchable.disabled);
         stage.addActor(titlePanel);
-        
+
         ui.label(stage, "AN ADVENTURER'S CHRONICLE", "default", MUTED, 64, 650, 496, 24);
         ui.label(stage, "ANDIUS", "start-title", GOLD, 60, 564, 500, 88);
         ui.label(stage, "Bridgeburners", "default-24", Color.WHITE, 64, 524, 496, 42);
-       
+
         Label introduction = ui.description(stage, 64, 418, 440, 70);
         introduction.setText("Gather your company. Venture beyond the familiar.\nThe next chapter waits in the dark.");
         ui.label(stage, "Assemble your companions. Continue your journey.", "default", MUTED, 64, 100, 496, 34);
@@ -157,19 +157,19 @@ public class StartScreen implements Screen, Constants {
         ui.panel(stage, "Your expeditions", "Select a saved company", 624, 112, 352, 544, "15232f");
         savedGamePane.setBounds(640, 368, 320, 208);
         stage.addActor(savedGamePane);
-        
+
         emptySaves = ui.label(stage, "No saved expeditions yet.", "default", MUTED, 648, 480, 300, 30);
         saveSummary = ui.label(stage, "", "default", MUTED, 640, 280, 320, 78);
         saveSummary.setWrap(true);
         saveSummary.setEllipsis(false);
-        
+
         journey.setBounds(640, 220, 320, 44);
         manage.setBounds(640, 168, 320, 40);
-        
+
         ui.primary(journey);
         stage.addActor(journey);
         stage.addActor(manage);
-        
+
         status = ui.label(stage, "", "default", GOLD, 624, 60, 352, 44);
         status.setWrap(true);
         status.setEllipsis(false);

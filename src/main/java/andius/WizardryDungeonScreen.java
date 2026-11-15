@@ -186,10 +186,13 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.showMiniMap = false;
 
         cameraPan = new RotateOnlyInputController(camera) {
-            @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 com.badlogic.gdx.math.Vector2 point = stage.screenToStageCoordinates(new com.badlogic.gdx.math.Vector2(screenX, screenY));
                 if (showMiniMap || point.x < utils.Hud.MAP_X || point.x > utils.Hud.MAP_X + utils.Hud.MAP_SIZE
-                        || point.y < utils.Hud.MAP_Y || point.y > utils.Hud.MAP_Y + utils.Hud.MAP_SIZE) return false;
+                        || point.y < utils.Hud.MAP_Y || point.y > utils.Hud.MAP_Y + utils.Hud.MAP_SIZE) {
+                    return false;
+                }
                 return super.touchDown(screenX, screenY, pointer, button);
             }
         };

@@ -19,20 +19,20 @@ public class Portal {
         this.map = map;
         this.sx = sx;
         this.sy = sy;
-        this.dest = new Vector3(dx,dy,0);
+        this.dest = new Vector3(dx, dy, 0);
         this.randoms = randoms;
         this.elevator = elevator;
         this.up = up;
     }
-    
+
     public Map getMap() {
         return this.map;
     }
-    
+
     public boolean isElevator() {
         return this.elevator;
     }
-    
+
     public boolean isUp() {
         return this.up;
     }

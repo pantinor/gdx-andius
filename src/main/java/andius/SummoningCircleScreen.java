@@ -14,6 +14,7 @@ import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -21,7 +22,8 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.environment.PointLight;
+import com.badlogic.gdx.graphics.g3d.environment.SpotLight;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.glutils.HdpiUtils;
@@ -40,6 +42,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import java.util.ArrayList;
 import java.util.List;
 import utils.CombatFormation;
+import utils.DungeonRoom;
 import utils.ObjLoader;
 import utils.Utils;
 import utils.ManagementUi;
@@ -61,9 +64,15 @@ public class SummoningCircleScreen implements Screen, Constants {
     private final PerspectiveCamera camera = new PerspectiveCamera(40, SCENE_WIDTH, SCENE_HEIGHT);
     private final Environment environment = new Environment();
     private final ModelBatch modelBatch;
-    private final Model pentagramModel, floorModel;
+    private final Model pentagramModel, floorModel, roomWall, roomCorner, roomDoor;
     private final ModelInstance pentagram;
-    private final List<ModelInstance> floorTiles = new ArrayList<>();
+    private DungeonRoom.Layout room;
+    private final PointLight leftTorch = new PointLight();
+    private final PointLight rightTorch = new PointLight();
+    private final PointLight reflectedDaylight = new PointLight();
+    private final SpotLight leftSkyLight = new SpotLight();
+    private final SpotLight rightSkyLight = new SpotLight();
+    private final SpotLight cameraFillLight = new SpotLight();
     private final List<ModelInstance> summonedModels = new ArrayList<>();
     private boolean disposed;
 
@@ -75,18 +84,21 @@ public class SummoningCircleScreen implements Screen, Constants {
         DefaultShader.Config config = new DefaultShader.Config();
         config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
         config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
-        config.numDirectionalLights = 2;
-        config.numPointLights = 0;
-        config.numSpotLights = 0;
+        config.numDirectionalLights = 0;
+        config.numPointLights = 3;
+        config.numSpotLights = 3;
 
         this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
 
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, .32f, .36f, .40f, 1));
-        environment.add(new DirectionalLight().set(.85f, .88f, .90f, -.4f, -1, -.25f));
-        environment.add(new DirectionalLight().set(.40f, .30f, .22f, .5f, -.5f, .7f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, .055f, .085f, .08f, 1));
+        environment.add(leftTorch, rightTorch, reflectedDaylight);
+        environment.add(leftSkyLight, rightSkyLight, cameraFillLight);
 
         this.pentagramModel = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
         this.floorModel = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-floor", .1f);
+        this.roomWall = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-straight", .1f);
+        this.roomCorner = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-corner", .1f);
+        this.roomDoor = ObjLoader.loadModel("assets/graphics/door.obj", "door", .1f);
         this.pentagram = new ModelInstance(pentagramModel);
 
         if (!player.summoningCircles.contains(summoningId)) {
@@ -279,13 +291,13 @@ public class SummoningCircleScreen implements Screen, Constants {
         BoundingBox scene = new BoundingBox(formation.bounds());
         Vector3 center = scene.getCenter(new Vector3());
         float diameter = Math.max(2, (float) Math.hypot(scene.getWidth(), scene.getDepth()) + .5f);
-        
+
         BoundingBox sigil = pentagram.calculateBoundingBox(new BoundingBox());
         float scale = 1;//diameter / Math.min(sigil.getWidth(), sigil.getDepth());
         pentagram.transform.setToScaling(scale, 1, scale);
         pentagram.transform.setTranslation(
                 center.x - (sigil.min.x + sigil.max.x) / 2 * scale,
-                .008f - sigil.max.y, 
+                .008f - sigil.max.y,
                 center.z - (sigil.min.z + sigil.max.z) / 2 * scale);
         sigil.mul(pentagram.transform);
         scene.ext(sigil);
@@ -294,7 +306,7 @@ public class SummoningCircleScreen implements Screen, Constants {
         Vector3 margin = framing.getDimensions(new Vector3()).scl(.04f);
         framing.min.sub(margin);
         framing.max.add(margin);
-        
+
         CombatFormation.Layout fitted = CombatFormation.fitBounds(framing, (float) SCENE_WIDTH / SCENE_HEIGHT, camera.fieldOfView, .1f, CAMERA_PITCH);
         camera.position.set(fitted.cameraPosition());
         camera.up.set(Vector3.Y);
@@ -302,38 +314,31 @@ public class SummoningCircleScreen implements Screen, Constants {
         camera.near = .1f;
         camera.far = Math.max(100, camera.position.dst(fitted.cameraTarget()) + diameter * 3);
         camera.update();
-        
-        buildFloor(scene);
+
+        buildRoom(scene);
     }
 
-    private void buildFloor(BoundingBox scene) {
-        floorTiles.clear();
-        BoundingBox tile = new ModelInstance(floorModel).calculateBoundingBox(new BoundingBox());
-        float width = tile.getWidth(), depth = tile.getDepth();
-        // Extend past the view's ground intersections so the static scene has no exposed edges.
-        float reach = camera.position.dst(scene.getCenter(new Vector3())) + scene.getWidth() + scene.getDepth();
-        float centerX = (scene.min.x + scene.max.x) / 2;
+    private void buildRoom(BoundingBox scene) {
+        room = DungeonRoom.build(roomWall, roomCorner, floorModel, roomDoor, scene, camera.position, 0);
+        float centerX = (room.left() + room.right()) / 2;
         float centerZ = (scene.min.z + scene.max.z) / 2;
-        for (Vector3 corner : camera.frustum.planePoints) {
-            float dy = corner.y - camera.position.y;
-            if (dy < 0) {
-                float distance = -camera.position.y / dy;
-                float x = camera.position.x + (corner.x - camera.position.x) * distance;
-                float z = camera.position.z + (corner.z - camera.position.z) * distance;
-                reach = Math.max(reach, Math.max(Math.abs(x - centerX), Math.abs(z - centerZ)) + 1);
-            }
-        }
-        float tileScale = Math.max(1, reach / 12);
-        width *= tileScale;
-        depth *= tileScale;
-        for (float x = centerX - reach; x < centerX + reach; x += width) {
-            for (float z = centerZ - reach; z < centerZ + reach; z += depth) {
-                ModelInstance instance = new ModelInstance(floorModel);
-                instance.transform.setToScaling(tileScale, 1, tileScale);
-                instance.transform.setTranslation(x - tile.min.x * tileScale, -tile.max.y, z - tile.min.z * tileScale);
-                floorTiles.add(instance);
-            }
-        }
+        leftTorch.set(1f, .43f, .16f, room.doorX() - .52f, .87f, room.back() + .4f, 2f);
+        rightTorch.set(1f, .49f, .21f, room.doorX() + .52f, .87f, room.back() + .4f, 1f);
+        reflectedDaylight.set(.42f, .55f, .50f, centerX, 1.25f, scene.max.z + 1, 2f);
+
+        float height = Math.max(2.25f, scene.max.y + 1.2f);
+        Vector3 leftOpening = new Vector3(room.left() + .35f, height, room.back() + .65f);
+        Vector3 rightOpening = new Vector3(room.right() - .35f, height + .3f, room.back() + .65f);
+        Vector3 target = new Vector3(centerX, .25f, centerZ + .35f);
+        Color daylight = new Color(.35f, .73f, .78f, 1);
+        leftSkyLight.set(daylight, leftOpening, new Vector3(target).sub(leftOpening).nor(), 6f, 65f, 3f);
+        rightSkyLight.set(daylight, rightOpening, new Vector3(target).sub(rightOpening).nor(), 6f, 65f, 3f);
+        Vector3 fillPosition = new Vector3(camera.position).mulAdd(camera.direction, -.75f).add(0, 1.1f, 0);
+        Vector3 center = scene.getCenter(new Vector3());
+        Vector3 fillDirection = new Vector3(center).sub(fillPosition).nor();
+        float fillIntensity = 10f * Math.max(1, camera.position.dst2(center) / 4);
+        cameraFillLight.set(.82f, .86f, .80f, fillPosition.x, fillPosition.y, fillPosition.z,
+                fillDirection.x, fillDirection.y, fillDirection.z, fillIntensity, 65f, 2f);
     }
 
     @Override
@@ -356,7 +361,7 @@ public class SummoningCircleScreen implements Screen, Constants {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glDepthMask(true);
         modelBatch.begin(camera);
-        modelBatch.render(floorTiles, environment);
+        modelBatch.render(room.instances(), environment);
         modelBatch.render(pentagram, environment);
         modelBatch.render(summonedModels, environment);
         modelBatch.end();
@@ -401,6 +406,9 @@ public class SummoningCircleScreen implements Screen, Constants {
         modelBatch.dispose();
         pentagramModel.dispose();
         floorModel.dispose();
+        roomWall.dispose();
+        roomCorner.dispose();
+        roomDoor.dispose();
         ui.dispose();
     }
 

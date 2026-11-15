@@ -138,7 +138,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
         String controls = dungeon
                 ? "Up / Down    Move forward / back\nLeft / Right    Turn\nDrag the scene    Look around\nP    Show dungeon map\nI    Toggle torch\nK    Use stairs\nPage Up / Down    Change floor\nSpace    Wait a turn"
                 : "Arrow keys    Move\nE    Enter a location or use stairs"
-                    + (this instanceof GameScreen ? "\nT    Talk to someone nearby\nG    Search for treasure" : "");
+                + (this instanceof GameScreen ? "\nT    Talk to someone nearby\nG    Search for treasure" : "");
         Label label = new Label(controls, getUiSkin());
         help.getContentTable().add(label).width(360).padBottom(16);
         help.getButtonTable().defaults().width(110).height(36);

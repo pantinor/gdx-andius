@@ -62,6 +62,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import utils.CombatFormation;
+import utils.DungeonRoom;
 import static utils.SkinUtils.GOLD;
 import static utils.SkinUtils.INK;
 import static utils.SkinUtils.MUTED;
@@ -70,7 +71,7 @@ import static utils.SkinUtils.createSkin;
 public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
     private final Skin combatSkin = createSkin(Andius.skin);
-    
+
     private final Texture uiPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
     private final List<Model> ownedModels = new ArrayList<>();
     private Label commandHint, encounterStatus, abilityTitle;
@@ -86,14 +87,14 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
     private final ModelBatch modelBatch;
     private final Environment environment = new Environment();
-    
+
     private final PointLight leftTorch = new PointLight();
     private final PointLight rightTorch = new PointLight();
     private final PointLight reflectedDaylight = new PointLight();
     private final SpotLight leftSkyLight = new SpotLight();
     private final SpotLight rightSkyLight = new SpotLight();
     private final SpotLight cameraFillLight = new SpotLight();
-    
+
     private final Vector3 cameraFillPosition = new Vector3();
     private final Vector3 cameraFillDirection = new Vector3();
     private final PerspectiveCamera camera;
@@ -644,66 +645,11 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
     }
 
     private void buildRoom() {
+        DungeonRoom.Layout room = DungeonRoom.build(roomWall, roomCorner, roomFloor, roomDoor,
+                sceneBounds, camera.position, -.15f);
         wallAndFloor.clear();
-        BoundingBox floorBounds = new ModelInstance(roomFloor).calculateBoundingBox(new BoundingBox());
-        float tileWidth = floorBounds.getWidth();
-        float tileDepth = floorBounds.getDepth();
-        float left = (float) Math.floor((sceneBounds.min.x - .4f) / tileWidth) * tileWidth;
-        float right = Math.max(left + tileWidth * 3,
-                (float) Math.ceil((sceneBounds.max.x + .4f) / tileWidth) * tileWidth);
-        float back = (float) Math.floor(Math.min(0, sceneBounds.min.z - .4f) / tileDepth) * tileDepth;
-        float front = (float) Math.ceil(Math.max(sceneBounds.max.z + .5f, camera.position.z + .6f) / tileDepth) * tileDepth;
-        for (float x = left; x < right - .001f; x += tileWidth) {
-            for (float z = back; z < front - .001f; z += tileDepth) {
-                ModelInstance floor = new ModelInstance(roomFloor);
-                floor.transform.setToTranslation(x - floorBounds.min.x, -.15f - floorBounds.max.y, z - floorBounds.min.z);
-                wallAndFloor.add(floor);
-            }
-        }
-        BoundingBox wallFaces = wallFaceBounds(roomWall);
-        BoundingBox backWall = new BoundingBox(wallFaces)
-                .mul(new com.badlogic.gdx.math.Matrix4().setToRotation(Vector3.Y, 90));
-        float thickness = Math.min(wallFaces.getWidth(), wallFaces.getDepth());
-        BoundingBox cornerFaces = wallFaceBounds(roomCorner);
-        float cornerRun = Math.max(cornerFaces.getWidth(), cornerFaces.getDepth()) - thickness;
-        for (int side = 0; side < 2; side++) {
-            ModelInstance corner = new ModelInstance(roomCorner);
-            corner.transform.setToRotation(Vector3.Y, side == 0 ? 180 : 90);
-            BoundingBox cornerBounds = new BoundingBox(cornerFaces).mul(corner.transform);
-            float x = side == 0 ? left - cornerBounds.min.x - thickness : right - cornerBounds.max.x + thickness;
-            corner.transform.setTranslation(x, -.15f - cornerBounds.min.y, back - cornerBounds.min.z - thickness);
-            wallAndFloor.add(corner);
-        }
-        float start = left + cornerRun;
-        int doorTile = Math.max(0, Math.round(((left + right) / 2 - start) / backWall.getWidth() - .5f));
-        float doorX = start + (doorTile + .5f) * backWall.getWidth();
-        for (float x = start; x < right - cornerRun - .001f; x += backWall.getWidth()) {
-            addRoomWall(90, x - backWall.min.x, -.15f - backWall.min.y, back - backWall.max.z);
-        }
-        for (int side = 0; side < 2; side++) {
-            float angle = side == 0 ? 0 : 180;
-            BoundingBox sideWall = new BoundingBox(wallFaces)
-                    .mul(new com.badlogic.gdx.math.Matrix4().setToRotation(Vector3.Y, angle));
-            for (float z = back + cornerRun; z < front - .001f; z += sideWall.getDepth()) {
-                float x = side == 0 ? left - sideWall.max.x : right - sideWall.min.x;
-                addRoomWall(angle, x, -.15f - sideWall.min.y, z - sideWall.min.z);
-            }
-        }
-        ModelInstance door = new ModelInstance(roomDoor);
-        door.transform.setToRotation(Vector3.Y, 180);
-        BoundingBox doorBounds = door.calculateBoundingBox(new BoundingBox()).mul(door.transform);
-        BoundingBox wood = new BoundingBox().inf();
-        for (var node : door.nodes) {
-            for (var part : node.parts) {
-                if (part.meshPart.id.contains("wood")) {
-                    part.meshPart.mesh.extendBoundingBox(wood, part.meshPart.offset, part.meshPart.size, node.globalTransform);
-                }
-            }
-        }
-        wood.mul(door.transform);
-        door.transform.setTranslation(doorX - (doorBounds.min.x + doorBounds.max.x) / 2, -.15f - doorBounds.min.y, back + .04f - wood.min.z);
-        wallAndFloor.add(door);
-        configureLighting(left, right, back, doorX);
+        wallAndFloor.addAll(room.instances());
+        configureLighting(room.left(), room.right(), room.back(), room.doorX());
     }
 
     private void configureLighting(float left, float right, float back, float doorX) {
@@ -712,7 +658,7 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
         leftTorch.set(1f, .43f, .16f, doorX - .52f, .72f, back + .4f, 2f);
         rightTorch.set(1f, .49f, .21f, doorX + .52f, .72f, back + .4f, 1f);
         reflectedDaylight.set(.42f, .55f, .50f, centerX, 1.1f, sceneBounds.max.z + 1, 2f);
-        
+
         float height = Math.max(2.1f, sceneBounds.max.y + 1.2f);
         Vector3 leftOpening = new Vector3(left + .35f, height, back + .65f);
         Vector3 rightOpening = new Vector3(right - .35f, height + .3f, back + .65f);
@@ -729,34 +675,6 @@ public class WizardryCombatScreen extends Combat implements Screen, Constants {
                 cameraFillPosition.x, cameraFillPosition.y, cameraFillPosition.z,
                 cameraFillDirection.x, cameraFillDirection.y, cameraFillDirection.z,
                 intensity, 65f, 2f);
-    }
-
-    private BoundingBox wallFaceBounds(Model model) {
-        ModelInstance template = new ModelInstance(model);
-        BoundingBox whole = template.calculateBoundingBox(new BoundingBox());
-        BoundingBox faces = new BoundingBox().inf();
-        Vector3 point = new Vector3();
-        for (com.badlogic.gdx.graphics.Mesh mesh : model.meshes) {
-            int stride = mesh.getVertexSize() / Float.BYTES;
-            int offset = mesh.getVertexAttribute(com.badlogic.gdx.graphics.VertexAttributes.Usage.Position).offset / Float.BYTES;
-            float[] vertices = new float[mesh.getNumVertices() * stride];
-            mesh.getVertices(vertices);
-            for (int i = offset; i < vertices.length; i += stride) {
-                point.set(vertices[i], vertices[i + 1], vertices[i + 2]).mul(template.nodes.first().globalTransform);
-                if (point.y > whole.min.y + whole.getHeight() * .5f) {
-                    faces.ext(point);
-                }
-            }
-        }
-        // Keep the original grounding while measuring the footprint from the upper wall.
-        faces.min.y = whole.min.y;
-        return faces;
-    }
-
-    private void addRoomWall(float angle, float x, float y, float z) {
-        ModelInstance wall = new ModelInstance(roomWall);
-        wall.transform.setToRotation(Vector3.Y, angle).setTranslation(x, y, z);
-        wallAndFloor.add(wall);
     }
 
     @Override

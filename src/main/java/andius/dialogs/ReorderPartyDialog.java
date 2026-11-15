@@ -84,7 +84,9 @@ public class ReorderPartyDialog extends Window implements Constants {
             @Override
             public Payload dragStart(InputEvent event, float x, float y, int pointer) {
                 int index = rowAt(x, y);
-                if (index < 0) return null;
+                if (index < 0) {
+                    return null;
+                }
                 Payload payload = new Payload();
                 payload.setObject(index);
                 com.badlogic.gdx.scenes.scene2d.ui.Label preview = new com.badlogic.gdx.scenes.scene2d.ui.Label(
@@ -96,7 +98,9 @@ public class ReorderPartyDialog extends Window implements Constants {
 
             @Override
             public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
-                if (target == null && payload != null) playerSelection.setSelectedIndex((int) payload.getObject());
+                if (target == null && payload != null) {
+                    playerSelection.setSelectedIndex((int) payload.getObject());
+                }
             }
         });
 
@@ -104,7 +108,9 @@ public class ReorderPartyDialog extends Window implements Constants {
             @Override
             public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
                 int index = rowAt(x, y);
-                if (index < 0) return false;
+                if (index < 0) {
+                    return false;
+                }
                 playerSelection.setSelectedIndex(index);
                 return true;
             }
@@ -116,12 +122,17 @@ public class ReorderPartyDialog extends Window implements Constants {
             @Override
             public void drop(Source source, Payload payload, float x, float y, int pointer) {
                 int destination = rowAt(x, y);
-                if (destination < 0) return;
+                if (destination < 0) {
+                    return;
+                }
                 int from = (int) payload.getObject();
                 CharacterRecord[] players = ctx.players();
                 CharacterRecord moving = players[from];
-                if (from < destination) System.arraycopy(players, from + 1, players, from, destination - from);
-                else if (from > destination) System.arraycopy(players, destination, players, destination + 1, from - destination);
+                if (from < destination) {
+                    System.arraycopy(players, from + 1, players, from, destination - from);
+                } else if (from > destination) {
+                    System.arraycopy(players, destination, players, destination + 1, from - destination);
+                }
                 players[destination] = moving;
                 playerSelection.setItems(players);
                 playerSelection.setSelectedIndex(destination);
@@ -157,7 +168,9 @@ public class ReorderPartyDialog extends Window implements Constants {
     }
 
     private int rowAt(float x, float y) {
-        if (x < 0 || x >= playerSelection.getWidth() || y < 0 || y >= playerSelection.getHeight()) return -1;
+        if (x < 0 || x >= playerSelection.getWidth() || y < 0 || y >= playerSelection.getHeight()) {
+            return -1;
+        }
         return playerSelection.getItemIndexAt(y);
     }
 

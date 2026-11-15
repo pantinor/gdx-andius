@@ -26,17 +26,17 @@ public class Sounds {
         public void run() {
             while (true) {
                 for (Sound sound : backgroundList) {
-                    
+
                     Music m = play(sound);
                     backgroundPlaying = true;
-                    
+
                     m.setOnCompletionListener(new Music.OnCompletionListener() {
                         @Override
                         public void onCompletion(Music music) {
                             backgroundPlaying = false;
                         }
                     });
-                    
+
                     while (backgroundPlaying) {
                         try {
                             Thread.sleep(2000);
@@ -51,7 +51,7 @@ public class Sounds {
     public static Music play(Sound sound) {
         return play(sound, sound.getVolume());
     }
-    
+
     public static Music play(Sound sound, float volume) {
         Music m = sounds.get(sound);
         if (m == null) {

@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.Locale;
 
 public final class Portraits {
+
     private static TextureRegion[][][] regions;
 
-    private Portraits() { }
+    private Portraits() {
+    }
 
     public static String key(Gender gender, Race race, ClassType characterClass) {
         return ((gender == null ? Gender.MALE : gender).name() + "-"
@@ -23,7 +25,9 @@ public final class Portraits {
                 for (ClassType characterClass : ClassType.values()) {
                     String name = key(gender, race, characterClass);
                     TextureRegion region = atlas.findRegion(name);
-                    if (region == null) throw new IllegalArgumentException("Missing character portrait: " + name);
+                    if (region == null) {
+                        throw new IllegalArgumentException("Missing character portrait: " + name);
+                    }
                     loaded[gender.ordinal()][race.ordinal()][characterClass.ordinal()] = region;
                 }
             }
@@ -36,9 +40,9 @@ public final class Portraits {
     }
 
     public static TextureRegion get(Gender gender, Race race, ClassType characterClass) {
-        if (regions == null) throw new IllegalStateException("Portrait atlas has not been loaded");
-        return regions[(gender == null ? Gender.MALE : gender).ordinal()]
-                [(race == null ? Race.HUMAN : race).ordinal()]
-                [(characterClass == null ? ClassType.FIGHTER : characterClass).ordinal()];
+        if (regions == null) {
+            throw new IllegalStateException("Portrait atlas has not been loaded");
+        }
+        return regions[(gender == null ? Gender.MALE : gender).ordinal()][(race == null ? Race.HUMAN : race).ordinal()][(characterClass == null ? ClassType.FIGHTER : characterClass).ordinal()];
     }
 }
