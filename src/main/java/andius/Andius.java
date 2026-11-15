@@ -3,6 +3,7 @@ package andius;
 import andius.objects.UltimaSprite;
 import andius.objects.Conversations;
 import andius.objects.Icons;
+import andius.objects.Portraits;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,22 +26,15 @@ public class Andius extends Game {
     public static final int SCREEN_WIDTH = 1024;
     public static final int SCREEN_HEIGHT = 768;
     public static final int MAP_VIEWPORT_DIM = 624;
-    
+
     public static Context CTX;
-    public static Texture backGround;
     public static TextureAtlas mapAtlas;
     public static AssetManager assetManager = new AssetManager(CLASSPTH_RSLVR);
-    public static BitmapFont font12;
-    public static BitmapFont font14;
-    public static BitmapFont font16;
-    public static BitmapFont font18;
-    public static BitmapFont font24;
-    public static BitmapFont font72;
 
     public static Andius mainGame;
     public static StartScreen startScreen;
     public static Skin skin;
-    
+
     public static boolean playMusic = true;
     public static float musicVolume = 0.1f;
     public static Music music;
@@ -53,10 +46,8 @@ public class Andius extends Game {
     public static Conversations CONVERSATIONS;
 
     public static TextureRegion[] u1Tiles = new TextureRegion[9 * 6];
-    public static TextureRegion[] faceTiles = new TextureRegion[16 * 13];
 
     public static void main(String[] args) {
-
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Andius";
         cfg.width = SCREEN_WIDTH;
@@ -71,26 +62,14 @@ public class Andius extends Game {
         InternalFileHandleResolver resolver = new InternalFileHandleResolver();
         assetManager.setLoader(Skin.class, new FreeTypeSkinLoader(resolver));
 
-        FreeTypeSkinLoader.FreeTypeSkinLoaderParameter skinParam
-                = new FreeTypeSkinLoader.FreeTypeSkinLoaderParameter("assets/skin/uiskin.atlas");
-
+        FreeTypeSkinLoader.FreeTypeSkinLoaderParameter skinParam = new FreeTypeSkinLoader.FreeTypeSkinLoaderParameter("assets/skin/uiskin.atlas");
         assetManager.load("assets/skin/uiskin.json", Skin.class, skinParam);
         assetManager.finishLoading();
-
         skin = assetManager.get("assets/skin/uiskin.json", Skin.class);
-
-        font12 = skin.get("font12", BitmapFont.class);
-        font14 = skin.get("font14", BitmapFont.class);
-        font16 = skin.get("font16", BitmapFont.class);
-        font18 = skin.get("font18", BitmapFont.class);
-        font24 = skin.get("font24", BitmapFont.class);
-        font72 = skin.get("font72", BitmapFont.class);
 
         HUD = new Hud();
 
         try {
-
-            backGround = new Texture(Gdx.files.classpath("assets/data/frame.png"));
 
             TextureRegion[][] trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/ultima1-tiles.png")), 16, 16);
             for (int row = 0; row < 6; row++) {
@@ -99,13 +78,10 @@ public class Andius extends Game {
                 }
             }
 
-            trs = TextureRegion.split(new Texture(Gdx.files.classpath("assets/data/u6-portraits.png")), 56, 64);
-            for (int row = 0; row < 13; row++) {
-                for (int col = 0; col < 16; col++) {
-                    faceTiles[row * 16 + col] = trs[row][col];
-                }
-            }
+            assetManager.load("assets/data/portraits.atlas", TextureAtlas.class);
+            assetManager.finishLoading();
 
+            Portraits.init(assetManager.get("assets/data/portraits.atlas", TextureAtlas.class));
             Icons.init();
             UltimaSprite.init();
 
@@ -122,15 +98,17 @@ public class Andius extends Game {
         }
 
         mainGame = this;
+        
         startScreen = new StartScreen();
         setScreen(startScreen);
-
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        if (HUD != null) HUD.dispose();
+        if (HUD != null) {
+            HUD.dispose();
+        }
     }
 
 }

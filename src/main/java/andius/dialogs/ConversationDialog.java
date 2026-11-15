@@ -21,6 +21,7 @@ public class ConversationDialog extends Dialog {
         }
 
         input.setTextFieldListener((TextField tf, char key) -> {
+            if (key != '\r' && key != '\n') return;
             tf.setText("");
             
             if (index >= conv.story.size()) {

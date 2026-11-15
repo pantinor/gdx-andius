@@ -56,6 +56,12 @@ public class SaveGame implements Constants {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         SaveGame sg = gson.fromJson(json, SaveGame.class);
+        
+        if (sg.players != null) {
+            for (CharacterRecord player : sg.players) {
+                if (player != null && player.gender == null) player.gender = Gender.MALE;
+            }
+        }
 
         return sg;
     }
@@ -122,7 +128,7 @@ public class SaveGame implements Constants {
     public static class CharacterRecord {
 
         public String name = null;
-        public int portaitIndex = 0;
+        public Gender gender = Gender.MALE;
         public final State status = new State();
         public int str;
         public int intell;
@@ -583,7 +589,6 @@ public class SaveGame implements Constants {
         p.level = 1;
         p.hp = p.maxhp = 12;
         p.gold = Utils.getRandomBetween(100, 200);
-        p.portaitIndex = Utils.RANDOM.nextInt(36);
 
         if (lvl == 1) {
             p.exp = 0;

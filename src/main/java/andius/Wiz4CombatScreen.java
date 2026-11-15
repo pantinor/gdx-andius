@@ -39,6 +39,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -48,13 +49,17 @@ import java.util.Collections;
 import java.util.List;
 import utils.AutoFocusScrollPane;
 import utils.LogScrollPane;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
+import static utils.SkinUtils.createSkin;
 import utils.Utils;
 
 public class Wiz4CombatScreen implements Screen, Constants {
 
     public final DoGooder opponent;
     private final Stage stage;
-    private final com.badlogic.gdx.scenes.scene2d.ui.Skin combatSkin = utils.SkinUtils.createCombatSkin(Andius.skin);
+    private final Skin combatSkin = createSkin(Andius.skin);
     private final Texture uiPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
     private Label encounterStatus, targetHint;
     private boolean ended;
@@ -76,9 +81,6 @@ public class Wiz4CombatScreen implements Screen, Constants {
     private final TextButton flee;
     private final TextButton exit;
 
-    private static final Color INK = Color.valueOf("0c141d");
-    private static final Color GOLD = Color.valueOf("dbbb7c");
-    private static final Color MUTED = Color.valueOf("92a7b7");
     private static final int LISTING_WIDTH = 264;
     private static final int ENEMY_WIDTH = 342;
     private static final int ENEMY_HEIGHT = 88;

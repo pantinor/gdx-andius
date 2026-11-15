@@ -60,15 +60,17 @@ import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
-import utils.SkinUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import utils.CombatFormation;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
+import static utils.SkinUtils.createSkin;
 
 public class WizardryCombatScreen extends Combat implements Screen, Constants {
 
-    private static final Color INK = Color.valueOf("0c141d");
-    private static final Color GOLD = Color.valueOf("dbbb7c");
-    private static final Color MUTED = Color.valueOf("92a7b7");
-    private final com.badlogic.gdx.scenes.scene2d.ui.Skin combatSkin = SkinUtils.createCombatSkin(Andius.skin);
+    private final Skin combatSkin = createSkin(Andius.skin);
+    
     private final Texture uiPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
     private final List<Model> ownedModels = new ArrayList<>();
     private Label commandHint, encounterStatus, abilityTitle;

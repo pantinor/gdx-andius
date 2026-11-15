@@ -20,9 +20,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import utils.PartyDeathException;
+import static utils.SkinUtils.INK;
 import utils.SpreadFOV;
 import utils.WrappingTileMapRenderer;
 
@@ -34,7 +33,6 @@ public class OverworldScreen extends BaseScreen {
     private final Map map;
     private final WrappingTileMapRenderer renderer;
     private final Batch batch;
-    private final Viewport mapViewPort;
     private final int width, height;
 
     public OverworldScreen(Map map) {
@@ -49,8 +47,7 @@ public class OverworldScreen extends BaseScreen {
 
         this.stage = new Stage(viewport);
 
-        this.camera = new OrthographicCamera();
-        this.mapViewPort = new ScreenViewport(camera);
+        this.camera = new OrthographicCamera(utils.Hud.TILE_MAP_WIDTH, utils.Hud.TILE_MAP_HEIGHT);
 
         addButtons(this.map);
 
@@ -96,7 +93,7 @@ public class OverworldScreen extends BaseScreen {
     @Override
     public void show() {
         Andius.HUD.addActor(this.stage);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(stage, this));
 
         setMapPixelCoords(newMapPixelCoords, CTX.saveGame.wx, CTX.saveGame.wy, 0);
         renderer.getFOV().calculateFOV(CTX.saveGame.wx, CTX.saveGame.wy, 72);
@@ -112,30 +109,37 @@ public class OverworldScreen extends BaseScreen {
 
         this.time += delta;
 
-        Gdx.gl.glClearColor(0x18 / 255f, 0x18 / 255f, 0x18 / 255f, 1f);
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (this.renderer == null) {
             return;
         }
 
-        this.camera.position.x = newMapPixelCoords.x + SCALED_DIM * 5;
-        this.camera.position.y = newMapPixelCoords.y + SCALED_DIM * 1;
+        this.camera.position.x = newMapPixelCoords.x + SCALED_DIM;
+        this.camera.position.y = newMapPixelCoords.y + SCALED_DIM * 1.5f;
 
         this.camera.update();
 
-        this.renderer.setView(camera.combined,
-                camera.position.x - SCALED_DIM * 13,
-                camera.position.y - SCALED_DIM * 9,
-                VIEWPORT_DIM,
-                VIEWPORT_DIM);
+        viewport.apply();
+        batch.setProjectionMatrix(viewport.getCamera().combined);
+        batch.begin();
+        Andius.HUD.renderTileMapBackground(batch);
+        batch.end();
+
+        Andius.HUD.applyMapViewport(viewport, true);
+        // Keep the legacy 17 x 17 tile render bounds and the avatar's position within them.
+        renderer.setView(camera.combined, newMapPixelCoords.x - SCALED_DIM * 8,
+                newMapPixelCoords.y - SCALED_DIM * 8, VIEWPORT_DIM, VIEWPORT_DIM);
 
         this.renderer.render();
 
+        viewport.apply();
+        batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
-        batch.draw(Andius.backGround, 0, 0);
-        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), SCALED_DIM * 11, SCALED_DIM * 11, SCALED_DIM, SCALED_DIM);
-        Andius.HUD.render(batch, Andius.CTX);
+        batch.draw(Andius.world_scr_avatar.getKeyFrame(time, true), utils.Hud.TILE_MAP_X + SCALED_DIM * 8, utils.Hud.TILE_MAP_Y + SCALED_DIM * 8, SCALED_DIM, SCALED_DIM);
+        Andius.HUD.renderTileMapSurround(batch);
+        Andius.HUD.render(batch, Andius.CTX, false);
 
         Vector3 v = new Vector3();
         getCurrentMapCoords(v);
@@ -162,8 +166,7 @@ public class OverworldScreen extends BaseScreen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, false);
-        mapViewPort.update(width, height, false);
+        viewport.update(width, height, true);
     }
 
     @Override
@@ -173,10 +176,8 @@ public class OverworldScreen extends BaseScreen {
 
     @Override
     public void getCurrentMapCoords(Vector3 v) {
-        Vector3 tmp = camera.unproject(new Vector3(SCALED_DIM * 11, SCALED_DIM * 11, 0), SCALED_DIM * 3, SCALED_DIM * 3, VIEWPORT_DIM, VIEWPORT_DIM);
-        float y = Math.round((mapPixelHeight - tmp.y) / SCALED_DIM) + 2;
-        float x = Math.round(tmp.x / SCALED_DIM) - 4;
-        v.set(x, y, 0);
+        v.set(Math.round(newMapPixelCoords.x / SCALED_DIM),
+                Math.round((mapPixelHeight - SCALED_DIM - newMapPixelCoords.y) / SCALED_DIM), 0);
     }
 
     @Override
@@ -194,6 +195,9 @@ public class OverworldScreen extends BaseScreen {
             newPosition = checkAndMove(currentPosition, Direction.EAST);
         } else if (keycode == Keys.LEFT) {
             newPosition = checkAndMove(currentPosition, Direction.WEST);
+        } else if (keycode == Keys.ESCAPE) {
+            showExplorationHelp(map);
+            return true;
         } else if (keycode == Keys.E) {
             Portal p = this.map.getBaseMap().getPortal((int) currentPosition.x, (int) currentPosition.y);
             if (p != null) {
@@ -248,6 +252,7 @@ public class OverworldScreen extends BaseScreen {
                 }
             }
         };
+        dialog.pad(36, 24, 20, 24);
         com.badlogic.gdx.scenes.scene2d.ui.Label prompt = new com.badlogic.gdx.scenes.scene2d.ui.Label(
                 "Are you sure you want to proceed into Werdna's realm at this time? Your experience level will start at 1.",
                 getUiSkin());

@@ -5,6 +5,8 @@ import static andius.Andius.SCREEN_WIDTH;
 import andius.objects.Sound;
 import andius.objects.Sounds;
 import andius.objects.Race;
+import andius.objects.Gender;
+import andius.objects.Portraits;
 import andius.objects.ClassType;
 import static andius.Constants.ROSTER_FILENAME;
 import andius.objects.SaveGame;
@@ -14,11 +16,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -33,30 +31,36 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
-import utils.FrameMaker;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import utils.Utils;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
+import static utils.SkinUtils.createSkin;
 
 public class ManageScreen implements Screen, Constants {
 
     Screen returnScreen;
     Stage stage;
-    Batch batch;
-    BitmapFont font;
-    Texture bkgnd;
-
-    Label rosText, activePartyText, roleCharacterText;
+    private final Skin uiSkin;
+    private final Texture uiPixel;
+    private Label rosterSummary, partySummary, partySpells, pointsLabel, footerHint, classHint;
+    private Image rosterPortrait;
+    private final Label[] statValues = new Label[6];
     List<RosterIndex> registry;
     List<PartyIndex> partyFormation;
 
@@ -65,9 +69,8 @@ public class ManageScreen implements Screen, Constants {
     TextButton add;
     TextButton remove;
 
-    private Texture transparentTexture;
-    private ImageButton newPortraitButton;
-    private ImageButton partyPortraitButton;
+    private Image newPortrait, partyPortrait;
+    private SelectBox<Gender> genderSelection, rosterGender, partyGender;
 
     TextButton save;
     TextButton cancel;
@@ -93,22 +96,20 @@ public class ManageScreen implements Screen, Constants {
     int stExt, inExt, piExt, viExt, agExt, luExt;
 
     ExtraPoints extraPoints = new ExtraPoints();
-    int pidx = 1;
 
     private static final String EMPTY = "(empty)";
 
-    private static final int PORTRAIT_W = 56;
-    private static final int PORTRAIT_H = 64;
+    private static final float PORTRAIT_W = 76;
+    private static final float PORTRAIT_H = 76;
 
     public ManageScreen(Screen rs, Skin skin, SaveGame saveGame) {
 
-        this.stage = new Stage();
-        this.batch = new SpriteBatch();
+        this.stage = new Stage(new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.uiSkin = createSkin(skin);
+        this.uiPixel = Utils.fillRectangle(1, 1, Color.WHITE, 1);
         this.returnScreen = rs;
 
-        font = Andius.font16;
-
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
+        configureStyles(skin);
 
         PartyIndex[] mbrs = new PartyIndex[6];
         for (int i = 0; i < mbrs.length; i++) {
@@ -123,11 +124,11 @@ public class ManageScreen implements Screen, Constants {
                 r = new CharacterRecord();
                 r.name = EMPTY;
             }
-            r.portaitIndex = clampPortraitIndex(r.portaitIndex);
+
             mbrs[i] = new PartyIndex(r, i + 1);
         }
 
-        partyFormation = new List<>(skin, "default-16-padded-clear");
+        partyFormation = new List<>(uiSkin, "default-12-padded-clear");
         partyFormation.setItems(mbrs);
 
         RosterIndex[] recs = new RosterIndex[20];
@@ -164,32 +165,24 @@ public class ManageScreen implements Screen, Constants {
             if (ri.character.name == null) {
                 ri.character.name = EMPTY;
             }
-            ri.character.portaitIndex = clampPortraitIndex(ri.character.portaitIndex);
+
         }
 
-        registry = new List<>(skin, "default-16-padded-clear");
+        registry = new List<>(uiSkin, "default-12-padded-clear");
         registry.setItems(recs);
 
-        Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
 
-        apply = new TextButton("APPLY NEW TO ROSTER", skin, "default-16-green");
-        clear = new TextButton("CLEAR FROM ROSTER", skin, "default-16-red");
-        add = new TextButton("ROSTER TO PARTY", skin, "default-16-green");
-        remove = new TextButton("REMOVE FROM PARTY", skin, "default-16-red");
+        apply = new TextButton("Create in selected slot", uiSkin);
+        clear = new TextButton("Delete character", uiSkin);
+        add = new TextButton("Assign to party", uiSkin);
+        remove = new TextButton("Return to roster", uiSkin);
 
-        cancel = new TextButton("CANCEL", skin, "default-16");
-        reset = new TextButton("RESET", skin, "default-16");
-        save = new TextButton("SAVE", skin, "default-16");
+        cancel = new TextButton("Cancel", uiSkin);
+        reset = new TextButton("Reset", uiSkin);
+        save = new TextButton("Save & return", uiSkin);
 
-        apply.setBounds(245, Andius.SCREEN_HEIGHT - 170 - 40, 215, 40);
-        clear.setBounds(245, Andius.SCREEN_HEIGHT - 220 - 40, 215, 40);
-        add.setBounds(245, Andius.SCREEN_HEIGHT - 420 - 40, 215, 40);
-        remove.setBounds(245, Andius.SCREEN_HEIGHT - 470 - 40, 215, 40);
 
-        save.setBounds(260, Andius.SCREEN_HEIGHT - 120, 80, 40);
-        cancel.setBounds(370, Andius.SCREEN_HEIGHT - 120, 80, 40);
 
-        reset.setBounds(774, Andius.SCREEN_HEIGHT - 302 - 40, 80, 40);
 
         apply.addListener(new ChangeListener() {
             @Override
@@ -218,7 +211,7 @@ public class ManageScreen implements Screen, Constants {
                 sel.level = 1;
                 sel.exp = 0;
                 sel.gold = Utils.getRandomBetween(100, 200);
-                sel.portaitIndex = clampPortraitIndex(pidx);
+                sel.gender = genderSelection.getSelected();
 
                 sel.knownSpells.clear();
                 for (int i = 0; i < sel.magePoints.length; i++) {
@@ -290,28 +283,14 @@ public class ManageScreen implements Screen, Constants {
                 if (psel.name.equals(EMPTY)) {
                     return;
                 }
-                RosterIndex found = null;
-                for (RosterIndex ri : registry.getItems()) {
-                    if (ri.character.name.equals(psel.name)) {
-                        found = ri;
-                        found.character = psel;
-                        break;
-                    }
-                }
-                if (found == null) {
-                    for (RosterIndex ri : registry.getItems()) {
-                        if (ri.character.name.equals(EMPTY)) {
-                            found = ri;
-                            found.character = psel;
-                            break;
-                        }
-                    }
-                }
+                RosterIndex found = findEmptyRosterSlot();
                 if (found == null) {
                     Sounds.play(Sound.NEGATIVE_EFFECT);
                 } else {
+                    found.character = psel;
                     partyFormation.getSelected().character = new CharacterRecord();
                     partyFormation.getSelected().character.name = EMPTY;
+                    updateChangeClassOptions();
                     Sounds.play(Sound.TRIGGER);
                 }
             }
@@ -343,6 +322,8 @@ public class ManageScreen implements Screen, Constants {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    footerHint.setText("Save failed. Your changes are still here; try again.");
+                    return;
                 }
 
                 Sounds.play(Sound.TRIGGER);
@@ -361,7 +342,7 @@ public class ManageScreen implements Screen, Constants {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 nameField.setText("");
-                pidx = 0;
+                genderSelection.setSelected(Gender.MALE);
                 raceGroup.getButtons().first().setChecked(true);
                 stExt = 0;
                 inExt = 0;
@@ -374,49 +355,23 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        rosText = new Label("ROSTER", skin, "default-16");
-        rosText.setX(64);
-        rosText.setY(Andius.SCREEN_HEIGHT - 54);
-
-        ScrollPane sp2 = new ScrollPane(registry, skin);
-        fm.setBoundsFancy(sp2, 64, Andius.SCREEN_HEIGHT - 64 - 464, 160, 464, new Color(0x326c8eff));
-        fm.setBoundsFancy(null, 64, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x326c8eff));
-        fm.setBoundsFancy(null, 372, Andius.SCREEN_HEIGHT - 720, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
-
-        activePartyText = new Label("ACTIVE PARTY - SAVED GAME FILE", skin, "default-16");
-        activePartyText.setX(480);
-        activePartyText.setY(Andius.SCREEN_HEIGHT - 395);
-
-        ScrollPane sp1 = new ScrollPane(partyFormation, skin);
-        fm.setBoundsFancy(sp1, 480, 215, 384, 143, new Color(0x0f6905ff));
-        fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 576 - 160, 384, 160, new Color(0x0f6905ff));
-        fm.setBoundsFancy(null, 788, Andius.SCREEN_HEIGHT - 720, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
-
-        nameField = new UppercaseTextField("", skin, "default-16");
+        nameField = new UppercaseTextField("", uiSkin, "default");
         nameField.setMaxLength(16);
 
-        strMinus = new ImageButton(imgBtnSkin, "minus");
-        strPlus = new ImageButton(imgBtnSkin, "plus");
-        intMinus = new ImageButton(imgBtnSkin, "minus");
-        intPlus = new ImageButton(imgBtnSkin, "plus");
-        piMinus = new ImageButton(imgBtnSkin, "minus");
-        piPlus = new ImageButton(imgBtnSkin, "plus");
-        vitMinus = new ImageButton(imgBtnSkin, "minus");
-        vitPlus = new ImageButton(imgBtnSkin, "plus");
-        agMinus = new ImageButton(imgBtnSkin, "minus");
-        agPlus = new ImageButton(imgBtnSkin, "plus");
-        luMinus = new ImageButton(imgBtnSkin, "minus");
-        luPlus = new ImageButton(imgBtnSkin, "plus");
+        strMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        strPlus = new ImageButton(new ImageButton.ImageButtonStyle());
+        intMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        intPlus = new ImageButton(new ImageButton.ImageButtonStyle());
+        piMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        piPlus = new ImageButton(new ImageButton.ImageButtonStyle());
+        vitMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        vitPlus = new ImageButton(new ImageButton.ImageButtonStyle());
+        agMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        agPlus = new ImageButton(new ImageButton.ImageButtonStyle());
+        luMinus = new ImageButton(new ImageButton.ImageButtonStyle());
+        luPlus = new ImageButton(new ImageButton.ImageButtonStyle());
 
-        roleCharacterText = new Label("ROLE NEW CHARACTER", skin, "default-16");
-        roleCharacterText.setX(480);
-        roleCharacterText.setY(Andius.SCREEN_HEIGHT - 54);
-
-        classTypeSelection = new List<>(skin, "default-16-padded-clear");
-        ScrollPane classTypeScrollPane = new ScrollPane(classTypeSelection, skin);
-
-        fm.setBoundsFancy(null, 480, Andius.SCREEN_HEIGHT - 64 - 288, 384, 288, new Color(0x7a5d98ff));
-        fm.setBoundsFancy(null, 781, Andius.SCREEN_HEIGHT - 150, PORTRAIT_W + 4, PORTRAIT_H + 4, new Color(0x2e2e2eff));
+        classTypeSelection = new List<>(uiSkin, "default-12-padded-clear");
 
         stVal = Race.HUMAN.getInitialStrength();
         inVal = Race.HUMAN.getInitialIntell();
@@ -450,11 +405,10 @@ public class ManageScreen implements Screen, Constants {
         };
 
         for (Race r : Race.values()) {
-            cbRace[r.ordinal()] = new CheckBox(r.name(), Andius.skin, "default-16");
+            cbRace[r.ordinal()] = new CheckBox(r.name(), uiSkin);
             cbRace[r.ordinal()].addListener(onRaceChanged);
             cbRace[r.ordinal()].setUserObject(r);
             raceGroup.add(cbRace[r.ordinal()]);
-            stage.addActor(cbRace[r.ordinal()]);
         }
 
         raceGroup.getButtons().first().setChecked(true);
@@ -580,37 +534,9 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        int x = 490;
-        int y = SCREEN_HEIGHT - 90;
-        nameField.setPosition(x + 55, y);
-        cbRace[0].setPosition(x, y -= 28);
-        cbRace[1].setPosition(x, y -= 28);
-        cbRace[2].setPosition(x, y -= 28);
-        cbRace[3].setPosition(x, y -= 28);
-        cbRace[4].setPosition(x, y -= 28);
+        changeClassBox = new SelectBox<>(uiSkin);
+        changeClassBtn = new TextButton("Change class", uiSkin);
 
-        x = 637;
-        y = SCREEN_HEIGHT - 115;
-        strMinus.setPosition(x, y);
-        intMinus.setPosition(x, y -= 28);
-        piMinus.setPosition(x, y -= 28);
-        vitMinus.setPosition(x, y -= 28);
-        agMinus.setPosition(x, y -= 28);
-        luMinus.setPosition(x, y -= 28);
-
-        y = SCREEN_HEIGHT - 115;
-        strPlus.setPosition(x + 46, y);
-        intPlus.setPosition(x + 46, y -= 28);
-        piPlus.setPosition(x + 46, y -= 28);
-        vitPlus.setPosition(x + 46, y -= 28);
-        agPlus.setPosition(x + 46, y -= 28);
-        luPlus.setPosition(x + 46, y -= 28);
-
-        changeClassBox = new SelectBox<>(skin, "default-16-dark-background");
-        changeClassBtn = new TextButton("CHANGE CLASS", skin, "default-16-green");
-
-        changeClassBox.setBounds(728, Andius.SCREEN_HEIGHT - 35 - 460, 130, 35);
-        changeClassBtn.setBounds(728, Andius.SCREEN_HEIGHT - 35 - 510, 130, 35);
 
         partyFormation.addListener(new ChangeListener() {
             @Override
@@ -638,85 +564,348 @@ public class ManageScreen implements Screen, Constants {
             }
         });
 
-        Pixmap pm = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pm.setColor(1, 1, 1, 0f);
-        pm.fill();
-        transparentTexture = new Texture(pm);
-        pm.dispose();
-
-        ImageButton.ImageButtonStyle transparentBtnStyle = new ImageButton.ImageButtonStyle();
-        transparentBtnStyle.imageUp = new TextureRegionDrawable(new TextureRegion(transparentTexture));
-        transparentBtnStyle.imageDown = transparentBtnStyle.imageUp;
-        transparentBtnStyle.imageOver = transparentBtnStyle.imageUp;
-
-        newPortraitButton = new ImageButton(transparentBtnStyle);
-        newPortraitButton.setBounds(783, Andius.SCREEN_HEIGHT - 84 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
-        newPortraitButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                showPortraitPicker(true);
+        newPortrait = new Image();
+        partyPortrait = new Image();
+        for (Image image : new Image[] {newPortrait, partyPortrait}) {
+            image.setScaling(Scaling.fit);
+            image.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        }
+        genderSelection = genderBox();
+        rosterGender = genderBox();
+        partyGender = genderBox();
+        rosterGender.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) {
+                if (!EMPTY.equals(registry.getSelected().character.name)) registry.getSelected().character.gender = rosterGender.getSelected();
             }
         });
-
-        partyPortraitButton = new ImageButton(transparentBtnStyle);
-        partyPortraitButton.setBounds(790, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
-        partyPortraitButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                CharacterRecord sel = partyFormation.getSelected().character;
-                sanitizeCharacter(sel);
-                if (sel == null || EMPTY.equals(sel.name)) {
-                    Sounds.play(Sound.NEGATIVE_EFFECT);
-                    return;
-                }
-                showPortraitPicker(false);
+        partyGender.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) {
+                if (!EMPTY.equals(partyFormation.getSelected().character.name)) partyFormation.getSelected().character.gender = partyGender.getSelected();
             }
         });
 
         updateChangeClassOptions();
 
-        stage.addActor(nameField);
-        stage.addActor(strMinus);
-        stage.addActor(intMinus);
-        stage.addActor(piMinus);
-        stage.addActor(vitMinus);
-        stage.addActor(agMinus);
-        stage.addActor(luMinus);
-        stage.addActor(strPlus);
-        stage.addActor(intPlus);
-        stage.addActor(piPlus);
-        stage.addActor(vitPlus);
-        stage.addActor(agPlus);
-        stage.addActor(luPlus);
+        buildLayout();
+        checkClasses();
+        refreshUI();
+    }
 
-        classTypeScrollPane.setPosition(715, SCREEN_HEIGHT - 300);
-        stage.addActor(classTypeScrollPane);
+    private Drawable surface(String color) {
+        return new TextureRegionDrawable(new TextureRegion(uiPixel)).tint(Color.valueOf(color));
+    }
 
-        stage.addActor(apply);
-        stage.addActor(remove);
-        stage.addActor(clear);
-        stage.addActor(add);
+    private void configureStyles(Skin shared) {
+        TextButton.TextButtonStyle button = new TextButton.TextButtonStyle(uiSkin.get(TextButton.TextButtonStyle.class));
+        button.up = surface("223443");
+        button.over = surface("344c5d");
+        button.down = surface("475d68");
+        button.disabled = surface("15222d");
+        button.fontColor = Color.valueOf("e7e6df");
+        button.disabledFontColor = MUTED;
+        uiSkin.add("default", button);
 
-        stage.addActor(save);
-        stage.addActor(cancel);
-        stage.addActor(reset);
+        List.ListStyle list = new List.ListStyle(uiSkin.get("default-12-padded-clear", List.ListStyle.class));
+        com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable selection = (com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable) surface("344b59");
+        selection.setTopHeight(5);
+        selection.setBottomHeight(5);
+        selection.setLeftWidth(8);
+        selection.setRightWidth(8);
+        list.selection = selection;
+        list.fontColorSelected = GOLD;
+        list.fontColorUnselected = Color.valueOf("dce3e6");
+        list.background = surface("101d28");
+        uiSkin.add("default-12-padded-clear", list);
 
-        stage.addActor(sp1);
-        stage.addActor(sp2);
-        stage.addActor(rosText);
-        stage.addActor(activePartyText);
-        stage.addActor(roleCharacterText);
+        TextField.TextFieldStyle field = new TextField.TextFieldStyle(shared.get("default-16", TextField.TextFieldStyle.class));
+        field.font = uiSkin.getFont("emphasis");
+        field.background = surface("0c1822");
+        field.focusedBackground = surface("263e4c");
+        field.fontColor = Color.WHITE;
+        uiSkin.add("default", field);
+        CheckBox.CheckBoxStyle check = new CheckBox.CheckBoxStyle(shared.get("default-16", CheckBox.CheckBoxStyle.class));
+        check.font = uiSkin.getFont("body");
+        check.fontColor = Color.valueOf("dce3e6");
+        com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable off = (com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable) surface("344b59");
+        off.setMinWidth(12);
+        off.setMinHeight(12);
+        com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable on = (com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable) surface("dbbb7c");
+        on.setMinWidth(12);
+        on.setMinHeight(12);
+        check.checkboxOff = off;
+        check.checkboxOn = on;
+        uiSkin.add("default", check);
+        SelectBox.SelectBoxStyle select = new SelectBox.SelectBoxStyle(shared.get("default-16-dark-background", SelectBox.SelectBoxStyle.class));
+        select.font = uiSkin.getFont("emphasis");
+        select.listStyle = new List.ListStyle(list);
+        select.background = surface("223443");
+        uiSkin.add("default", select);
+        ScrollPane.ScrollPaneStyle scrolling = new ScrollPane.ScrollPaneStyle();
+        com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable track = (com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable) surface("0c1822");
+        track.setMinWidth(6);
+        com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable knob = (com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable) surface("7f755f");
+        knob.setMinWidth(6);
+        knob.setMinHeight(24);
+        scrolling.vScroll = track;
+        scrolling.vScrollKnob = knob;
+        uiSkin.add("default", scrolling);
+        select.scrollStyle = scrolling;
+        com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle window =
+                new com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle(uiSkin.get(com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle.class));
+        window.background = surface("15232f");
+        window.titleFontColor = GOLD;
+        uiSkin.add("default", window);
+    }
 
-        stage.addActor(changeClassBox);
-        stage.addActor(changeClassBtn);
+    private Label text(String value, String style, Color color) {
+        Label label = new Label(value, uiSkin, style);
+        label.setColor(color);
+        return label;
+    }
 
-        stage.addActor(newPortraitButton);
-        stage.addActor(partyPortraitButton);
+    private Table panel(String title, String subtitle) {
+        Table panel = new Table();
+        panel.background(surface("15232f"));
+        panel.pad(12).top();
+        panel.add(text(title, "default-16", GOLD)).growX().left().row();
+        panel.add(text(subtitle, "default", MUTED)).growX().padTop(3).padBottom(10).row();
+        Image rule = new Image(surface("66583f"));
+        panel.add(rule).growX().height(1).padBottom(12).row();
+        return panel;
+    }
 
-        bkgnd = fm.build();
+    private ScrollPane scroll(Actor actor) {
+        ScrollPane scroll = new ScrollPane(actor, uiSkin);
+        scroll.setScrollingDisabled(true, false);
+        scroll.setFadeScrollBars(false);
+        scroll.setOverscroll(false, false);
+        scroll.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+            @Override public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
+                if (pointer == -1) stage.setScrollFocus(scroll);
+            }
+        });
+        return scroll;
+    }
+
+    private SelectBox<Gender> genderBox() {
+        SelectBox<Gender> box = new SelectBox<>(uiSkin);
+        box.setItems(Gender.values());
+        return box;
+    }
+
+    private void portrait(Image image, TextureRegion region) {
+        if (image.getDrawable() instanceof TextureRegionDrawable current && current.getRegion() == region) return;
+        image.setDrawable(new TextureRegionDrawable(region));
+    }
+
+    private void primary(TextButton button) {
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(button.getStyle());
+        style.up = surface("b59b67");
+        style.over = surface("dbc28c");
+        style.down = surface("947c50");
+        style.fontColor = INK;
+        button.setStyle(style);
+    }
+
+    private void buildLayout() {
+        Table root = new Table();
+        root.setFillParent(true);
+        root.pad(24);
+        stage.addActor(root);
+        Table header = new Table();
+        header.add(text("Adventurers' Guild", "default-24", GOLD)).left().expandX();
+        header.add(text("PARTY MANAGEMENT", "default-16", MUTED)).right();
+        root.add(header).growX().height(38).row();
+        root.add(text("Recruit adventurers, shape their abilities, and assemble your expedition.", "default", MUTED))
+                .growX().padBottom(18).row();
+
+        Table roster = panel("01  /  Roster", "20 reserve slots");
+        roster.add(scroll(registry)).growX().height(218).row();
+        roster.add(text("SELECTED ADVENTURER", "default", GOLD)).left().padTop(12).padBottom(8).row();
+        Table reserveCard = new Table();
+        rosterPortrait = new Image();
+        rosterPortrait.setScaling(Scaling.fit);
+        Table reserveIdentity = new Table();
+        reserveIdentity.add(rosterPortrait).size(PORTRAIT_W, PORTRAIT_H).row();
+        reserveIdentity.add(rosterGender).width(PORTRAIT_W).height(26).padTop(6);
+        reserveCard.add(reserveIdentity).top().padRight(10);
+        rosterSummary = text("", "default", Color.WHITE);
+        rosterSummary.setWrap(true);
+        reserveCard.add(rosterSummary).width(178).top();
+        roster.add(reserveCard).growX().height(166).top().row();
+        roster.add(add).growX().height(36).padTop(8).row();
+        roster.add(clear).growX().height(32).padTop(6).row();
+        roster.add().expandY();
+
+        Table recruit = panel("02  /  Create character", "Create in the selected roster slot");
+        Table identity = new Table();
+        identity.add(newPortrait).size(PORTRAIT_W, PORTRAIT_H).padRight(12);
+        Table name = new Table();
+        name.add(text("NAME", "default", GOLD)).left().growX().row();
+        name.add(nameField).growX().height(32).padTop(2).row();
+        Table gender = new Table();
+        gender.add(text("GENDER", "default", GOLD)).left().padRight(8);
+        gender.add(genderSelection).growX().height(26);
+        name.add(gender).growX().padTop(4);
+        identity.add(name).growX();
+        recruit.add(identity).growX().row();
+        recruit.add(text("ANCESTRY", "default", GOLD)).left().padTop(12).row();
+        Table ancestry = new Table();
+        for (int i = 0; i < cbRace.length; i++) {
+            cbRace[i].getLabel().setText(Race.values()[i].name().substring(0, 1)
+                    + Race.values()[i].name().substring(1).toLowerCase(java.util.Locale.ROOT));
+            cbRace[i].getImageCell().padRight(5);
+            ancestry.add(cbRace[i]).width(112).height(26).left();
+            if (i == 2) ancestry.row();
+        }
+        recruit.add(ancestry).growX().padBottom(6).row();
+        pointsLabel = text("", "default", GOLD);
+        recruit.add(pointsLabel).growX().padBottom(4).row();
+        Table attributes = new Table();
+        String[] names = {"Strength", "Intellect", "Piety", "Vitality", "Agility", "Luck"};
+        ImageButton[] minus = {strMinus, intMinus, piMinus, vitMinus, agMinus, luMinus};
+        ImageButton[] plus = {strPlus, intPlus, piPlus, vitPlus, agPlus, luPlus};
+        for (int i = 0; i < names.length; i++) {
+            styleAttributeButton(minus[i], "-");
+            styleAttributeButton(plus[i], "+");
+            attributes.add(text(names[i], "default", Color.WHITE)).growX().left();
+            attributes.add(minus[i]).size(28, 26).padRight(8);
+            statValues[i] = text("", "default", GOLD);
+            statValues[i].setAlignment(Align.center);
+            attributes.add(statValues[i]).width(24);
+            attributes.add(plus[i]).size(28, 26).padLeft(8);
+            attributes.row();
+        }
+        recruit.add(attributes).growX().row();
+        recruit.add(text("ELIGIBLE CLASS", "default", GOLD)).left().padTop(10).padBottom(4).row();
+        com.badlogic.gdx.scenes.scene2d.ui.Stack classes = new com.badlogic.gdx.scenes.scene2d.ui.Stack();
+        classes.add(scroll(classTypeSelection));
+        classHint = text("Spend attribute points to unlock classes.", "default", MUTED);
+        classHint.setAlignment(Align.center);
+        classHint.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.disabled);
+        classes.add(classHint);
+        recruit.add(classes).growX().height(66).row();
+        Table createActions = new Table();
+        createActions.add(reset).width(68).height(36).padRight(8);
+        createActions.add(apply).growX().height(36);
+        recruit.add(createActions).growX().padTop(10).row();
+        recruit.add().expandY();
+
+        Table party = panel("03  /  Active party", "6 formation slots  /  select a destination");
+        party.add(partyFormation).growX().height((float) Math.ceil(partyFormation.getPrefHeight())).row();
+        party.add(text("SELECTED PARTY MEMBER", "default", GOLD)).left().padTop(12).padBottom(8).row();
+        Table memberCard = new Table();
+        Table memberIdentity = new Table();
+        memberIdentity.add(partyPortrait).size(PORTRAIT_W, PORTRAIT_H).row();
+        memberIdentity.add(partyGender).width(PORTRAIT_W).height(26).padTop(6);
+        memberCard.add(memberIdentity).top().padRight(10);
+        partySummary = text("", "default", Color.WHITE);
+        partySummary.setWrap(true);
+        memberCard.add(partySummary).width(170).top();
+        party.add(memberCard).height(164).growX().top().row();
+        partySpells = text("", "default", MUTED);
+        party.add(partySpells).growX().height(40).row();
+        party.add(text("CLASS TRAINING  /  resets level to 1", "default", GOLD)).left().padTop(8).padBottom(6).row();
+        Table training = new Table();
+        training.add(changeClassBox).width(126).height(32).padRight(8);
+        training.add(changeClassBtn).growX().height(32);
+        party.add(training).growX().row();
+        party.add(remove).growX().height(32).padTop(8).row();
+        party.add().expandY();
+
+        Table columns = new Table();
+        columns.add(roster).width(288).growY().padRight(16);
+        columns.add(recruit).width(368).growY().padRight(16);
+        columns.add(party).width(288).growY();
+        root.add(columns).grow().row();
+        Table footer = new Table();
+        footerHint = text("Select a roster slot to create or assign an adventurer.", "default", MUTED);
+        footer.add(footerHint).expandX().left();
+        footer.add(cancel).width(92).height(38).padRight(10);
+        footer.add(save).width(150).height(38);
+        root.add(footer).growX().height(62).bottom();
+        primary(apply);
+        primary(save);
+        clear.getLabel().setColor(Color.valueOf("d89b91"));
+    }
+
+    private String summary(CharacterRecord c) {
+        if (EMPTY.equals(c.name)) return "Empty slot\n\nReady for an adventurer.";
+        return c.name + "\nLevel " + c.level + " " + c.race + "\n" + c.classType + "  /  " + c.status
+                + "\nHP  " + c.hp + " / " + c.maxhp + "\nGold  " + c.gold + "\nExperience  " + c.exp
+                + "\nItems  " + c.inventory.size()
+                + "\nSTR " + c.str + "   INT " + c.intell + "   PIE " + c.piety
+                + "\nVIT " + c.vitality + "   AGI " + c.agility + "   LCK " + c.luck;
+    }
+
+    private void styleAttributeButton(ImageButton button, String glyph) {
+        ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
+        style.up = surface("223443");
+        style.over = surface("344c5d");
+        style.down = surface("66583f");
+        style.disabled = surface("101d28");
+        button.setStyle(style);
+        button.clearChildren();
+        button.add(text(glyph, "default", GOLD)).center();
+    }
+
+    private void refreshUI() {
+        CharacterRecord reserve = registry.getSelected().character;
+        CharacterRecord member = partyFormation.getSelected().character;
+        sanitizeCharacter(reserve);
+        sanitizeCharacter(member);
+        rosterSummary.setText(summary(reserve));
+        partySummary.setText(summary(member));
+        portrait(rosterPortrait, Portraits.get(reserve));
+        rosterPortrait.setVisible(!EMPTY.equals(reserve.name));
+        portrait(newPortrait, Portraits.get(genderSelection.getSelected(), (Race) raceGroup.getChecked().getUserObject(), classTypeSelection.getSelected()));
+        portrait(partyPortrait, Portraits.get(member));
+        partyPortrait.setVisible(!EMPTY.equals(member.name));
+        rosterGender.setSelected(reserve.gender);
+        rosterGender.setDisabled(EMPTY.equals(reserve.name));
+        partyGender.setSelected(member.gender);
+        partyGender.setDisabled(EMPTY.equals(member.name));
+        int[] base = {stVal, inVal, piVal, viVal, agVal, luVal};
+        int[] extra = {stExt, inExt, piExt, viExt, agExt, luExt};
+        ImageButton[] minus = {strMinus, intMinus, piMinus, vitMinus, agMinus, luMinus};
+        ImageButton[] plus = {strPlus, intPlus, piPlus, vitPlus, agPlus, luPlus};
+        for (int i = 0; i < 6; i++) {
+            statValues[i].setText(Integer.toString(base[i] + extra[i]));
+            minus[i].setDisabled(extra[i] == 0);
+            plus[i].setDisabled(extraPoints.val == 0 || base[i] + extra[i] >= 18);
+            minus[i].setColor(extra[i] == 0 ? MUTED : Color.WHITE);
+            plus[i].setColor(plus[i].isDisabled() ? MUTED : Color.WHITE);
+        }
+        pointsLabel.setText("ATTRIBUTES   /   " + extraPoints.val + " points remaining");
+        classHint.setVisible(classTypeSelection.getItems().isEmpty());
+        apply.setDisabled(nameField.getText().trim().isEmpty() || classTypeSelection.getSelected() == null);
+        clear.setDisabled(EMPTY.equals(reserve.name));
+        boolean inParty = false;
+        for (PartyIndex slot : partyFormation.getItems()) {
+            if (!EMPTY.equals(reserve.name) && slot.character.name.equals(reserve.name)) inParty = true;
+        }
+        add.setDisabled(EMPTY.equals(reserve.name) || !EMPTY.equals(member.name) || inParty);
+        remove.setDisabled(EMPTY.equals(member.name) || findEmptyRosterSlot() == null);
+        changeClassBtn.setDisabled(EMPTY.equals(member.name) || changeClassBox.getSelected() == null
+                || changeClassBox.getSelected() == member.classType);
+        changeClassBox.setDisabled(EMPTY.equals(member.name));
+        partySpells.setText(EMPTY.equals(member.name) ? "Choose an empty slot, then Assign to party."
+                : "Mage  " + spellPoints(member.magePoints) + "\nPriest  " + spellPoints(member.clericPoints));
+    }
+
+    private RosterIndex findEmptyRosterSlot() {
+        for (RosterIndex slot : registry.getItems()) {
+            if (EMPTY.equals(slot.character.name)) return slot;
+        }
+        return null;
+    }
+
+    private String spellPoints(int[] points) {
+        return java.util.Arrays.toString(points).replace("[", "").replace("]", "").replace(", ", " / ");
     }
 
     private void checkClasses() {
+        ClassType selected = classTypeSelection.getSelected();
         Array<ClassType> items = new Array<>();
         for (ClassType ct : ClassType.values()) {
             boolean s = stVal + stExt >= ct.getMinStr();
@@ -730,6 +919,7 @@ public class ManageScreen implements Screen, Constants {
             }
         }
         classTypeSelection.setItems(items);
+        if (selected != null && items.contains(selected, true)) classTypeSelection.setSelected(selected);
     }
 
     private void updateChangeClassOptions() {
@@ -784,19 +974,6 @@ public class ManageScreen implements Screen, Constants {
         SaveGame.setSpellPoints(c);
     }
 
-    private int clampPortraitIndex(int idx) {
-        if (Andius.faceTiles == null || Andius.faceTiles.length == 0) {
-            return 0;
-        }
-        if (idx < 0) {
-            return 0;
-        }
-        if (idx >= Andius.faceTiles.length) {
-            return Andius.faceTiles.length - 1;
-        }
-        return idx;
-    }
-
     private void sanitizeCharacter(CharacterRecord c) {
         if (c == null) {
             return;
@@ -804,7 +981,7 @@ public class ManageScreen implements Screen, Constants {
         if (c.name == null) {
             c.name = EMPTY;
         }
-        c.portaitIndex = clampPortraitIndex(c.portaitIndex);
+        if (c.gender == null) c.gender = Gender.MALE;
         if (c.knownSpells == null) {
             c.knownSpells = new java.util.ArrayList<>();
         }
@@ -823,7 +1000,7 @@ public class ManageScreen implements Screen, Constants {
         CharacterRecord dst = new CharacterRecord();
 
         dst.name = EMPTY.equals(src.name) ? null : src.name;
-        dst.portaitIndex = clampPortraitIndex(src.portaitIndex);
+        dst.gender = src.gender;
         dst.str = src.str;
         dst.intell = src.intell;
         dst.piety = src.piety;
@@ -898,107 +1075,11 @@ public class ManageScreen implements Screen, Constants {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0x18 / 255f, 0x18 / 255f, 0x18 / 255f, 1f);
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        batch.draw(bkgnd, 0, 0);
-
-        int x = 490;
-        int viewY = Andius.SCREEN_HEIGHT - 75;
-
-        font.draw(batch, "NAME", x, viewY);
-
-        x = 600;
-        viewY = Andius.SCREEN_HEIGHT - 75;
-
-        font.draw(batch, "STR", x, viewY -= 28);
-        font.draw(batch, "INT", x, viewY -= 28);
-        font.draw(batch, "PIE", x, viewY -= 28);
-        font.draw(batch, "VIT", x, viewY -= 28);
-        font.draw(batch, "AGI", x, viewY -= 28);
-        font.draw(batch, "LCK", x, viewY -= 28);
-
-        x = 658;
-        viewY = Andius.SCREEN_HEIGHT - 75;
-
-        font.draw(batch, stVal + stExt + "", x, viewY -= 28);
-        font.draw(batch, inVal + inExt + "", x, viewY -= 28);
-        font.draw(batch, piVal + piExt + "", x, viewY -= 28);
-        font.draw(batch, viVal + viExt + "", x, viewY -= 28);
-        font.draw(batch, agVal + agExt + "", x, viewY -= 28);
-        font.draw(batch, luVal + luExt + "", x, viewY -= 28);
-        font.draw(batch, extraPoints.val + "", x, viewY -= 28);
-
-        font.setColor(Color.WHITE);
-
-        batch.draw(Andius.faceTiles[clampPortraitIndex(pidx)], 783, Andius.SCREEN_HEIGHT - 84 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
-
-        CharacterRecord sel = this.registry.getSelected().character;
-        sanitizeCharacter(sel);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 90;
-
-        font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
-        font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
-        font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "CLASS: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "STAT: " + sel.status.toString(), x, viewY -= 18);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 90 + 145;
-
-        font.draw(batch, "GLD: " + sel.gold, x, viewY);
-        font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
-        font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
-        font.draw(batch, "INV: " + sel.inventory.size(), x, viewY -= 18);
-
-        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 374, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
-
-        sel = this.partyFormation.getSelected().character;
-        sanitizeCharacter(sel);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 504;
-
-        font.draw(batch, "NAME: " + sel.name.toUpperCase(), x, viewY);
-        font.draw(batch, "LVL: " + sel.level, x, viewY -= 18);
-        font.draw(batch, "RACE: " + sel.race.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "CLASS: " + sel.classType.toString().toUpperCase(), x, viewY -= 18);
-        font.draw(batch, "STAT: " + sel.status.toString().toUpperCase(), x, viewY -= 18);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 504 + 145;
-
-        font.draw(batch, "STR: " + sel.str, x, viewY);
-        font.draw(batch, "INT: " + sel.intell, x, viewY -= 18);
-        font.draw(batch, "PTY: " + sel.piety, x, viewY -= 18);
-        font.draw(batch, "VIT: " + sel.vitality, x, viewY -= 18);
-        font.draw(batch, "AGI: " + sel.agility, x, viewY -= 18);
-        font.draw(batch, "LCK: " + sel.luck, x, viewY -= 18);
-
-        viewY = Andius.SCREEN_HEIGHT - 590;
-        x = 504 + 220;
-
-        font.draw(batch, "GLD: " + sel.gold, x, viewY);
-        font.draw(batch, "HP: " + sel.hp, x, viewY -= 18);
-        font.draw(batch, "EXP: " + sel.exp, x, viewY -= 18);
-
-        batch.draw(Andius.faceTiles[clampPortraitIndex(sel.portaitIndex)], 790, Andius.SCREEN_HEIGHT - 654 - PORTRAIT_H, PORTRAIT_W, PORTRAIT_H);
-
-        int[] ms = sel.magePoints;
-        int[] cs = sel.clericPoints;
-        String d = String.format(
-                "M: %d %d %d %d %d %d %d  P: %d %d %d %d %d %d %d",
-                ms[0], ms[1], ms[2], ms[3], ms[4], ms[5], ms[6],
-                cs[0], cs[1], cs[2], cs[3], cs[4], cs[5], cs[6]
-        );
-        font.draw(batch, d, 504, 60);
-
-        batch.end();
-
-        stage.act();
+        refreshUI();
+        stage.getViewport().apply();
+        stage.act(Math.min(delta, .1f));
         stage.draw();
     }
 
@@ -1093,6 +1174,7 @@ public class ManageScreen implements Screen, Constants {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -1109,73 +1191,9 @@ public class ManageScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        uiSkin.dispose();
+        uiPixel.dispose();
     }
 
-    private void showPortraitPicker(boolean forNewCharacter) {
-        Dialog dialog = new Dialog("SELECT PORTRAIT", Andius.skin, "default") {
-            @Override
-            protected void result(Object object) {
-                hide();
-            }
-        };
-
-        Table grid = new Table();
-        grid.pad(10);
-
-        int cols = 6;
-        int col = 0;
-
-        for (int i = 0; i < Andius.faceTiles.length; i++) {
-            int portraitIndex = i;
-            TextureRegion region = Andius.faceTiles[i];
-            if (region == null) {
-                continue;
-            }
-
-            ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
-            style.imageUp = new TextureRegionDrawable(region);
-            style.imageDown = style.imageUp;
-            style.imageOver = style.imageUp;
-
-            ImageButton btn = new ImageButton(style);
-            btn.getImageCell().size(PORTRAIT_W, PORTRAIT_H);
-
-            btn.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if (forNewCharacter) {
-                        pidx = portraitIndex;
-                    } else {
-                        CharacterRecord sel = partyFormation.getSelected().character;
-                        sanitizeCharacter(sel);
-                        sel.portaitIndex = portraitIndex;
-                    }
-                    Sounds.play(Sound.TRIGGER);
-                    dialog.hide();
-                }
-            });
-
-            grid.add(btn).size(PORTRAIT_W, PORTRAIT_H).pad(6);
-
-            col++;
-            if (col >= cols) {
-                grid.row();
-                col = 0;
-            }
-        }
-
-        ScrollPane scroll = new ScrollPane(grid, Andius.skin);
-        scroll.setFadeScrollBars(false);
-        scroll.setScrollingDisabled(true, false);
-
-        float contentWidth = cols * PORTRAIT_W + (cols - 1) * 12 + 20;
-        float dialogWidth = contentWidth + 40;
-        float dialogHeight = 560;
-
-        dialog.getContentTable().add(scroll).width(contentWidth).height(460);
-        dialog.show(stage);
-
-        dialog.setSize(dialogWidth, dialogHeight);
-        dialog.setPosition((Andius.SCREEN_WIDTH - dialog.getWidth()) / 2f, (Andius.SCREEN_HEIGHT - dialog.getHeight()) / 2f);
-    }
 }

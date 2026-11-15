@@ -17,8 +17,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -26,9 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -40,7 +36,13 @@ import com.badlogic.gdx.utils.Align;
 import java.util.ArrayList;
 import java.util.List;
 import utils.AutoFocusScrollPane;
-import utils.FrameMaker;
+import utils.ManagementUi;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
 import utils.Utils;
 
 public class VendorScreen implements Screen, Constants {
@@ -49,8 +51,12 @@ public class VendorScreen implements Screen, Constants {
     private final List<Item> vendorItems;
     private final String vendorName;
 
-    private final Texture background;
-    private final SpriteBatch batch;
+    private final ManagementUi ui = new ManagementUi();
+    private Table equipmentTable;
+    private InventoryImage hoveredEquipment;
+    private Label equipmentName, itemDescription, selectionCaption;
+    private Label shopDescription;
+    private com.badlogic.gdx.scenes.scene2d.ui.SelectBox<ItemType> filter;
     private final Stage stage;
 
     private final TextButton exit;
@@ -72,40 +78,35 @@ public class VendorScreen implements Screen, Constants {
 
     private Image playerFocusIndicator, itemFocusIndicator, vendorFocusIndicator;
 
-    private final Texture redBackgrnd = Utils.fillRectangle(10, 10, Color.RED, .25f);
+    private final Texture redBackgrnd = Utils.fillRectangle(10, 10, Color.valueOf("6b3340"), .42f);
     private final Texture clearBackgrnd = Utils.fillRectangle(10, 10, Color.CLEAR, 0f);
 
-    private final GlyphLayout ITEMDESCLAYOUT = new GlyphLayout(Andius.font12, "", Color.WHITE, 226, Align.left, true);
-
-    private static final int WD = 246;
-    private static final int HT = 50;
+    private static final int WD = 304;
+    private static final int HT = 60;
     private static final int DIM = 44;
-    private static final int PDIM = 64;
+    private static final int PDIM = 84;
 
     public VendorScreen(Context context, Constants.Map contextMap, List<Item> vendorItems, String vendorName) {
         this.context = context;
         this.vendorItems = vendorItems;
         this.vendorName = vendorName;
-        this.batch = new SpriteBatch();
-        this.stage = new Stage();
+        this.stage = new Stage(new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
         //this.stage.setDebugAll(true);
 
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        playerFocusIndicator = new Image(Utils.fillRectangle(10, 10, Color.GREEN, .25f));
-        playerFocusIndicator.setWidth(625);
+        playerFocusIndicator = ui.selection(WD, HT);
+        playerFocusIndicator.setWidth(264);
         playerFocusIndicator.setHeight(PDIM);
 
-        itemFocusIndicator = new Image(Utils.fillRectangle(10, 10, Color.GREEN, .25f));
+        itemFocusIndicator = ui.selection(WD, HT);
         itemFocusIndicator.setWidth(WD);
         itemFocusIndicator.setHeight(HT);
 
-        vendorFocusIndicator = new Image(Utils.fillRectangle(10, 10, Color.GREEN, .25f));
-        vendorFocusIndicator.setWidth(300);
+        vendorFocusIndicator = ui.selection(WD, HT);
+        vendorFocusIndicator.setWidth(WD);
         vendorFocusIndicator.setHeight(HT);
 
-        playerTable = new Table(Andius.skin);
-        playerTable.left().setFillParent(true);
+        playerTable = new Table(ui.skin);
+        playerTable.top().left();
         for (int i = 0; i < this.context.players().length; i++) {
             PlayerIndex pi = new PlayerIndex(this.context.players()[i]);
             playerTable.add(pi);
@@ -113,92 +114,33 @@ public class VendorScreen implements Screen, Constants {
             if (selectedPlayer == null) {
                 selectedPlayer = pi;
                 selectedPlayer.addActor(playerFocusIndicator);
+                playerFocusIndicator.toBack();
             }
         }
 
         playerTable.addListener(new ClickListener(Input.Buttons.LEFT) {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                if (selectedPlayer != event.getTarget().getParent()) {
-                    selectedPlayer = (PlayerIndex) event.getTarget().getParent();
-                    playerFocusIndicator.remove();
-                    selectedPlayer.addActor(playerFocusIndicator);
-
-                    invPane.setActor(selectedPlayer.invTable);
-
-                    selectedItem = null;
-                    itemFocusIndicator.remove();
-
-                    for (Cell cell : vendorTable.getCells()) {
-                        if (cell.getActor() instanceof VendorItem) {
-                            VendorItem vi = (VendorItem) cell.getActor();
-                            vi.setUsable(selectedPlayer.p.classType);
-                        }
-                    }
-                }
-
-                InventoryImage ii = selectedPlayer.itemClicked(x, y);
-                if (ii != null && selectedItem != null) {
-                    if (ii.type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
-                        ii.equip(selectedPlayer.p, selectedItem.item);
-                        itemFocusIndicator.remove();
-                        selectedItem = null;
-                        selectedPlayer.setInventoryTable();
-                    } else {
-                        Sounds.play(Sound.NEGATIVE_EFFECT);
-                    }
-                }
+            @Override public void clicked(InputEvent event, float x, float y) {
+                Actor actor = event.getTarget();
+                while (actor != null && !(actor instanceof PlayerIndex)) actor = actor.getParent();
+                if (actor instanceof PlayerIndex player) selectPlayer(player);
             }
         });
 
-        playerTable.addListener(new ClickListener(Input.Buttons.RIGHT) {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-                if (selectedPlayer != event.getTarget().getParent()) {
-                    selectedPlayer = (PlayerIndex) event.getTarget().getParent();
-                    playerFocusIndicator.remove();
-                    selectedPlayer.addActor(playerFocusIndicator);
-
-                    invPane.setActor(selectedPlayer.invTable);
-
-                    selectedItem = null;
-                    itemFocusIndicator.remove();
-
-                    for (Cell cell : vendorTable.getCells()) {
-                        if (cell.getActor() instanceof VendorItem) {
-                            VendorItem vi = (VendorItem) cell.getActor();
-                            vi.setUsable(selectedPlayer.p.classType);
-                        }
-                    }
-                }
-
-                InventoryImage ii = selectedPlayer.itemClicked(x, y);
-                if (ii != null) {
-                    ii.unequip(selectedPlayer.p);
-                    invPane.clearChildren();
-                    selectedPlayer.setInventoryTable();
-                }
-            }
-        });
-
-        playerPane = new AutoFocusScrollPane(playerTable, Andius.skin);
+        playerPane = new AutoFocusScrollPane(playerTable, ui.skin);
         playerPane.setScrollingDisabled(true, false);
 
-        invPane = new AutoFocusScrollPane(selectedPlayer.invTable, Andius.skin);
+        invPane = new AutoFocusScrollPane(selectedPlayer.invTable, ui.skin);
         invPane.setScrollingDisabled(true, false);
 
-        vendorTable = new Table(Andius.skin);
+        vendorTable = new Table(ui.skin);
         vendorTable.align(Align.top);
 
         filterVendorItems(ItemType.ANY);
 
-        vendorPane = new AutoFocusScrollPane(vendorTable, Andius.skin);
+        vendorPane = new AutoFocusScrollPane(vendorTable, ui.skin);
         vendorPane.setScrollingDisabled(true, false);
 
-        int x = 280;
-        this.buy = new TextButton("BUY", Andius.skin, "default-16-green");
+        this.buy = new TextButton("BUY", ui.skin);
         this.buy.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -229,9 +171,7 @@ public class VendorScreen implements Screen, Constants {
                 }
             }
         });
-        this.buy.setBounds(x, 200, 80, 40);
-        x += 84;
-        this.sell = new TextButton("SELL", Andius.skin, "default-16-green");
+        this.sell = new TextButton("SELL", ui.skin);
         this.sell.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -255,18 +195,14 @@ public class VendorScreen implements Screen, Constants {
                 }
             }
         });
-        this.sell.setBounds(x, 200, 80, 40);
-        x = 280;
-        this.exit = new TextButton("EXIT", Andius.skin, "default-16");
+        this.exit = new TextButton("EXIT", ui.skin);
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 mainGame.setScreen(contextMap.getScreen());
             }
         });
-        this.exit.setBounds(x, 150, 80, 40);
-        x += 84;
-        this.pool = new TextButton("POOL", Andius.skin, "default-16-green");
+        this.pool = new TextButton("POOL", ui.skin);
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -279,42 +215,24 @@ public class VendorScreen implements Screen, Constants {
                 }
             }
         });
-        this.pool.setBounds(x, 150, 80, 40);
 
-        fm.setBounds(playerPane, 15, 372, 625, PDIM * 6);
-        fm.setBounds(invPane, 15, 10, 246, 348);
-        fm.setBounds(vendorPane, 665, 15, 300, 740);
-
-        stage.addActor(playerPane);
-        stage.addActor(invPane);
-        stage.addActor(vendorPane);
-
-        stage.addActor(sell);
-        stage.addActor(pool);
-        stage.addActor(buy);
-        stage.addActor(exit);
-
-        ButtonGroup<CheckBox> filterGroup = new ButtonGroup<>();
-        filterGroup.setMaxCheckCount(1);
-        filterGroup.setMinCheckCount(1);
-        filterGroup.setUncheckLast(true);
-
-        int y = 360;
-        for (ItemType type : ItemType.values()) {
-            CheckBox cb = new CheckBox(type.toString(), Andius.skin, "default-16");
-            cb.setUserObject(type);
-            cb.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                    filterVendorItems((ItemType) actor.getUserObject());
-                }
-            });
-            cb.setPosition(500, y -= 30);
-            filterGroup.add(cb);
-            stage.addActor(cb);
-        }
-
-        this.background = fm.build();
+        buildLayout();
+        showEquipment();
+        stage.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+            @Override public boolean keyDown(InputEvent event, int keycode) {
+                if (event.isHandled()) return false;
+                TextButton action = switch (keycode) {
+                    case Input.Keys.B -> buy;
+                    case Input.Keys.S -> sell;
+                    case Input.Keys.P -> pool;
+                    case Input.Keys.E -> exit;
+                    default -> null;
+                };
+                if (action == null || action.isDisabled()) return false;
+                action.fire(new ChangeListener.ChangeEvent());
+                return true;
+            }
+        });
     }
 
     private void filterVendorItems(ItemType type) {
@@ -340,9 +258,11 @@ public class VendorScreen implements Screen, Constants {
                     if (event.getTarget() instanceof VendorItem) {
                         selectedVendorItem = (VendorItem) event.getTarget();
                         selectedVendorItem.addActor(vendorFocusIndicator);
+                        vendorFocusIndicator.toBack();
                     } else if (event.getTarget().getParent() instanceof VendorItem) {
                         selectedVendorItem = (VendorItem) event.getTarget().getParent();
                         selectedVendorItem.addActor(vendorFocusIndicator);
+                        vendorFocusIndicator.toBack();
                     }
                 }
 
@@ -366,6 +286,8 @@ public class VendorScreen implements Screen, Constants {
             vendorTable.row();
         }
 
+        if (sellables.isEmpty()) vendorTable.add(new Label("No merchandise in this category.", ui.skin)).width(WD).padTop(14);
+
         if (selectedPlayer != null) {
             for (Cell cell : vendorTable.getCells()) {
                 if (cell.getActor() instanceof VendorItem) {
@@ -385,53 +307,106 @@ public class VendorScreen implements Screen, Constants {
     @Override
     public void render(float delta) {
 
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        batch.draw(this.background, 0, 0);
-        batch.end();
-
-        stage.act();
+        refreshUI();
+        stage.getViewport().apply();
+        stage.act(Math.min(delta, .1f));
         stage.draw();
-
-        batch.begin();
-
-        Andius.font16.draw(batch, this.vendorName.toUpperCase(), 400, 30);
-
-        if (selectedPlayer != null) {
-            int y = 360;
-            Andius.font14.draw(batch, selectedPlayer.p.weapon != null ? selectedPlayer.p.weapon.name : "-", 285, y);
-            Andius.font14.draw(batch, selectedPlayer.p.armor != null ? selectedPlayer.p.armor.name : "-", 285, y -= 15);
-            Andius.font14.draw(batch, selectedPlayer.p.helm != null ? selectedPlayer.p.helm.name : "-", 285, y -= 15);
-            Andius.font14.draw(batch, selectedPlayer.p.shield != null ? selectedPlayer.p.shield.name : "-", 285, y -= 15);
-            Andius.font14.draw(batch, selectedPlayer.p.glove != null ? selectedPlayer.p.glove.name : "-", 285, y -= 15);
-            Andius.font14.draw(batch, selectedPlayer.p.item1 != null ? selectedPlayer.p.item1.name : "-", 285, y -= 15);
-            Andius.font14.draw(batch, selectedPlayer.p.item2 != null ? selectedPlayer.p.item2.name : "-", 285, y -= 15);
-        }
-
-        if (selectedItem != null) {
-            Andius.font12.draw(batch, ITEMDESCLAYOUT, 285, 130);
-        }
-
-        batch.end();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            this.pool.toggle();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            this.sell.toggle();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-            this.buy.toggle();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            this.exit.toggle();
-        }
-
     }
+
+    private void selectPlayer(PlayerIndex player) {
+        if (player == selectedPlayer) return;
+        selectedPlayer = player;
+        playerFocusIndicator.remove();
+        player.addActor(playerFocusIndicator);
+        playerFocusIndicator.toBack();
+        selectedItem = null;
+        itemFocusIndicator.remove();
+        invPane.setActor(player.invTable);
+        for (Cell<?> cell : vendorTable.getCells()) {
+            if (cell.getActor() instanceof VendorItem item) item.setUsable(player.p.classType);
+        }
+        showEquipment();
+    }
+
+    private void showEquipment() {
+        hoveredEquipment = null;
+        refreshEquipmentName();
+        equipmentTable.clearChildren();
+        InventoryImage[] slots = {selectedPlayer.weaponIcon, selectedPlayer.armorIcon, selectedPlayer.helmIcon,
+            selectedPlayer.shieldIcon, selectedPlayer.glovesIcon, selectedPlayer.item1Icon, selectedPlayer.item2Icon};
+        String[] names = {"Hand", "Body", "Head", "Shield", "Gloves", "Item I", "Item II"};
+        for (int i = 0; i < slots.length; i++) {
+            Table slot = new Table();
+            slot.background(ui.surface("0c1822"));
+            slot.add(slots[i]).size(DIM, DIM).row();
+            Label caption = new Label(names[i], ui.skin);
+            caption.setColor(MUTED);
+            slot.add(caption).height(20);
+            equipmentTable.add(slot).width(DIM).padRight(i == 6 ? 0 : 1);
+        }
+    }
+
+    private void buildLayout() {
+        ui.label(stage, "Merchants' hall", "default-24", GOLD, 24, 714, 700, 34);
+        ui.label(stage, vendorName, "default", MUTED, 24, 696, 700, 20);
+        ui.panel(stage, "01  /  The company", "Select an adventurer", 24, 288);
+        ui.panel(stage, "02  /  Equipment & pack", "", 328, 328);
+        ui.panel(stage, "03  /  Merchant stock", "Prices in gold", 672, 328);
+        playerPane.setBounds(36, 108, 264, 516);
+        playerPane.setFadeScrollBars(false);
+        stage.addActor(playerPane);
+        selectionCaption = ui.label(stage, "", "default", MUTED, 340, 638, 304, 20);
+        equipmentTable = ui.equipment();
+        stage.addActor(equipmentTable);
+        equipmentName = ui.label(stage, "Equipment", "default", GOLD, 340, 534, 304, 20);
+        invPane.setBounds(340, 256, 304, 270);
+        invPane.setFadeScrollBars(false);
+        stage.addActor(invPane);
+        itemDescription = ui.description(stage, 340, 108, 304, 134);
+        filter = new com.badlogic.gdx.scenes.scene2d.ui.SelectBox<>(ui.skin);
+        filter.setItems(ItemType.ANY, ItemType.WEAPON, ItemType.ARMOR, ItemType.SHIELD,
+                ItemType.HELMET, ItemType.GAUNTLET, ItemType.MISC, ItemType.SPECIAL);
+        filter.setBounds(684, 590, 304, 34);
+        filter.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) { filterVendorItems(filter.getSelected()); }
+        });
+        stage.addActor(filter);
+        vendorPane.setBounds(684, 256, 304, 322);
+        vendorPane.setFadeScrollBars(false);
+        stage.addActor(vendorPane);
+        shopDescription = ui.description(stage, 684, 108, 304, 134);
+        sell.setText("Sell"); sell.setBounds(328, 24, 96, 38);
+        pool.setText("Pool gold"); pool.setBounds(432, 24, 120, 38);
+        buy.setText("Buy"); buy.setBounds(672, 24, 120, 38);
+        stage.addActor(sell); stage.addActor(pool); stage.addActor(buy);
+        ui.primary(buy);
+        exit.setText("Return to journey");
+        exit.setBounds(850, 24, 150, 38);
+        stage.addActor(exit);
+    }
+
+    private void refreshEquipmentName() {
+        equipmentName.setText(hoveredEquipment == null ? "Equipment"
+                : hoveredEquipment.item == null ? hoveredEquipment.type + " / Empty" : hoveredEquipment.item.name);
+    }
+
+    private void refreshUI() {
+        refreshEquipmentName();
+        selectionCaption.setText(selectedPlayer.p.name + "  /  " + selectedPlayer.p.gold + " gold");
+        itemDescription.setText(selectedItem == null ? "Select an item to inspect it." : selectedItem.item.name
+                + "\n" + selectedItem.item.vendorDescription() + "\n" + selectedItem.item.briefDescription()
+                + "\nSell value  " + selectedItem.item.cost / 2 + " gold");
+        sell.setDisabled(selectedItem == null);
+        buy.setDisabled(selectedVendorItem == null || selectedVendorItem.item.stock == 0 || selectedPlayer.p.gold < selectedVendorItem.item.cost);
+        pool.setDisabled(context.players().length < 2);
+        shopDescription.setText(selectedVendorItem == null ? "Select merchandise to inspect its price and properties."
+                : selectedVendorItem.item.name + "\n" + selectedVendorItem.item.cost + " gold\n"
+                    + selectedVendorItem.item.vendorDescription() + "\n" + selectedVendorItem.item.briefDescription()
+                    + (selectedVendorItem.item.canUse(selectedPlayer.p.classType) ? "" : "\nNot usable by this class."));
+    }
+
 
     private class PlayerIndex extends Group {
 
@@ -446,12 +421,12 @@ public class VendorScreen implements Screen, Constants {
         private final InventoryImage item1Icon;
         private final InventoryImage item2Icon;
 
-        private final Table invTable = new Table(Andius.skin);
+        private final Table invTable = new Table(ui.skin);
 
         public PlayerIndex(CharacterRecord p) {
             this.p = p;
             this.label = new PlayerLabel();
-            this.avatar = new Image(Andius.faceTiles[p.portaitIndex]);
+            this.avatar = new Image(andius.objects.Portraits.get(p));
 
             this.weaponIcon = new InventoryImage(p.weapon, ItemType.WEAPON, 1);
             this.armorIcon = new InventoryImage(p.armor, ItemType.ARMOR, 2);
@@ -463,27 +438,12 @@ public class VendorScreen implements Screen, Constants {
 
             addActor(this.avatar);
             addActor(this.label);
-            addActor(this.weaponIcon);
-            addActor(this.armorIcon);
-            addActor(this.helmIcon);
-            addActor(this.shieldIcon);
-            addActor(this.glovesIcon);
-            addActor(this.item1Icon);
-            addActor(this.item2Icon);
 
-            setBounds(0, 0, 0, PDIM);
-
-            float x = 0;
-            float xdim = 48;
-            this.avatar.setPosition(x, 0);
-            this.label.setBounds(x += PDIM, 0, 210, PDIM);
-            this.weaponIcon.setPosition(x += 210, 8);
-            this.armorIcon.setPosition(x += xdim, 8);
-            this.helmIcon.setPosition(x += xdim, 8);
-            this.shieldIcon.setPosition(x += xdim, 8);
-            this.glovesIcon.setPosition(x += xdim, 8);
-            this.item1Icon.setPosition(x += xdim, 8);
-            this.item2Icon.setPosition(x += xdim, 8);
+            setSize(264, PDIM);
+            this.avatar.setScaling(Scaling.fit);
+            this.avatar.setBounds(4, 4, 76, 76);
+            this.label.setBounds(88, 0, 176, PDIM);
+            this.label.setEllipsis(true);
 
             setInventoryTable();
 
@@ -503,6 +463,7 @@ public class VendorScreen implements Screen, Constants {
                 invTable.add(new ItemListing(it, p));
                 invTable.row();
             }
+            if (p.inventory.isEmpty()) invTable.add(new Label("Your pack is empty.", ui.skin)).width(WD).padTop(14);
 
             invTable.addListener(new ClickListener() {
                 @Override
@@ -511,11 +472,13 @@ public class VendorScreen implements Screen, Constants {
                     if (event.getTarget() instanceof ItemListing) {
                         selectedItem = (ItemListing) event.getTarget();
                         selectedItem.addActor(itemFocusIndicator);
-                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
+                        itemFocusIndicator.toBack();
+
                     } else if (event.getTarget().getParent() instanceof ItemListing) {
                         selectedItem = (ItemListing) event.getTarget().getParent();
                         selectedItem.addActor(itemFocusIndicator);
-                        ITEMDESCLAYOUT.setText(Andius.font12, selectedItem.item.briefDescription(), Color.WHITE, 226, Align.left, true);
+                        itemFocusIndicator.toBack();
+
                     }
                 }
             });
@@ -528,21 +491,15 @@ public class VendorScreen implements Screen, Constants {
         private class PlayerLabel extends Label {
 
             public PlayerLabel() {
-                super("", Andius.skin, "default-12");
+                super("", ui.skin, "default");
                 setColor(p.status.color());
                 setText(getText());
             }
 
-            @Override
-            public com.badlogic.gdx.utils.CharArray getText() {
-
-                com.badlogic.gdx.utils.CharArray sb = new com.badlogic.gdx.utils.CharArray();
-
-                sb.append(String.format("%s  LVL %d  %s  %s\n", p.name.toUpperCase(), p.level, p.race.toString(), p.classType.toString()));
-                sb.append(String.format("HP: %d /%d AC: %d ST: %s\n", p.hp, p.maxhp, p.calculateAC(), p.status.toString()));
-                sb.append(String.format("GOLD: %d EXP: %d\n", p.gold, p.exp));
-
-                return sb;
+            @Override public com.badlogic.gdx.utils.CharArray getText() {
+                return new com.badlogic.gdx.utils.CharArray(p.name + "\nLv " + p.level + " " + p.race + " " + p.classType
+                        + "\nHP " + p.hp + "/" + p.maxhp + "  AC " + p.calculateAC() + "  " + p.status
+                        + "\nG " + p.gold + "  XP " + p.exp);
             }
 
             @Override
@@ -557,30 +514,6 @@ public class VendorScreen implements Screen, Constants {
             }
         }
 
-        private InventoryImage itemClicked(float x, float y) {
-            if (weaponIcon.hit(x - weaponIcon.getX(), y - getY() - weaponIcon.getY(), false) != null) {
-                return weaponIcon;
-            }
-            if (armorIcon.hit(x - armorIcon.getX(), y - getY() - armorIcon.getY(), false) != null) {
-                return armorIcon;
-            }
-            if (helmIcon.hit(x - helmIcon.getX(), y - getY() - helmIcon.getY(), false) != null) {
-                return helmIcon;
-            }
-            if (shieldIcon.hit(x - shieldIcon.getX(), y - getY() - shieldIcon.getY(), false) != null) {
-                return shieldIcon;
-            }
-            if (glovesIcon.hit(x - glovesIcon.getX(), y - getY() - glovesIcon.getY(), false) != null) {
-                return glovesIcon;
-            }
-            if (item1Icon.hit(x - item1Icon.getX(), y - getY() - item1Icon.getY(), false) != null) {
-                return item1Icon;
-            }
-            if (item2Icon.hit(x - item2Icon.getX(), y - getY() - item2Icon.getY(), false) != null) {
-                return item2Icon;
-            }
-            return null;
-        }
     }
 
     private class ItemListing extends Group {
@@ -596,8 +529,8 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.name = new Label(item.name, Andius.skin, "default-16");
-            this.detail = new Label(item.vendorDescription(), Andius.skin, "default-12");
+            this.name = new Label(item.name, ui.skin, "emphasis");
+            this.detail = new Label(item.vendorDescription(), ui.skin, "default");
 
             if (!item.canUse(p.classType)) {
                 Image unusable = new Image(new TextureRegionDrawable(new TextureRegion(redBackgrnd)));
@@ -609,9 +542,12 @@ public class VendorScreen implements Screen, Constants {
             addActor(this.name);
             addActor(this.detail);
 
-            this.icon.setBounds(3, 3, DIM, DIM);
-            this.name.setPosition(DIM + 10, 20);
-            this.detail.setPosition(DIM + 10, 3);
+            this.icon.setScaling(Scaling.none);
+            this.icon.setBounds(6, 8, DIM, DIM);
+            this.name.setBounds(DIM + 14, 30, WD - DIM - 22, 22);
+            this.name.setEllipsis(true);
+            this.detail.setBounds(DIM + 14, 8, WD - DIM - 22, 20);
+            this.detail.setEllipsis(true);
 
             this.setSize(WD, HT);
         }
@@ -631,9 +567,9 @@ public class VendorScreen implements Screen, Constants {
             this.item = item;
 
             this.icon = new Image(Icons.get(item));
-            this.name = new Label(item.name, Andius.skin, "default-16");
-            this.detail = new Label(item.vendorDescription(), Andius.skin, "default-12");
-            this.price = new Label("" + item.cost, Andius.skin, "default-16");
+            this.name = new Label(item.name, ui.skin, "emphasis");
+            this.detail = new Label(item.vendorDescription(), ui.skin, "default");
+            this.price = new Label("" + item.cost, ui.skin, "emphasis");
             this.canusebkgnd.setDrawable(new TextureRegionDrawable(new TextureRegion(clearBackgrnd)));
 
             addActor(this.icon);
@@ -642,13 +578,22 @@ public class VendorScreen implements Screen, Constants {
             addActor(this.price);
             addActor(this.canusebkgnd);
 
-            this.icon.setBounds(3, 3, DIM, DIM);
-            this.name.setPosition(DIM + 10, 20);
-            this.detail.setPosition(DIM + 10, 3);
-            this.price.setPosition(215, 20);
-            this.canusebkgnd.setBounds(0, 0, 300, HT);
+            this.icon.setScaling(Scaling.none);
+            this.icon.setBounds(6, 8, DIM, DIM);
+            this.name.setBounds(DIM + 14, 30, WD - DIM - 22, 22);
+            this.name.setEllipsis(true);
+            this.detail.setBounds(DIM + 14, 8, WD - DIM - 22, 20);
+            this.detail.setEllipsis(true);
+            this.name.setWidth(176);
+            this.price.setBounds(238, 30, 60, 22);
+            this.price.setAlignment(Align.right);
+            this.price.setColor(GOLD);
+            this.price.setEllipsis(true);
+            this.canusebkgnd.setBounds(0, 0, WD, HT);
+            this.canusebkgnd.setTouchable(Touchable.disabled);
+            this.canusebkgnd.toBack();
 
-            this.setSize(280, HT);
+            this.setSize(WD, HT);
         }
 
         public void setUsable(ClassType ct) {
@@ -670,9 +615,42 @@ public class VendorScreen implements Screen, Constants {
 
         public InventoryImage(Item item, ItemType type, int slot) {
             super(Icons.get(item));
+            setScaling(Scaling.none);
+            if (item == null) setDrawable(null);
             this.item = item;
             this.type = type;
             this.slot = slot;
+            addListener(new ClickListener(Input.Buttons.LEFT) {
+                @Override public void clicked(InputEvent event, float x, float y) {
+                    if (selectedItem == null) return;
+                    if (type == selectedItem.item.type && selectedItem.item.canUse(selectedPlayer.p.classType)) {
+                        equip(selectedPlayer.p, selectedItem.item);
+                        itemFocusIndicator.remove(); selectedItem = null;
+                        selectedPlayer.setInventoryTable();
+                        invPane.setActor(selectedPlayer.invTable);
+                    } else Sounds.play(Sound.NEGATIVE_EFFECT);
+                }
+            });
+            addListener(new ClickListener(Input.Buttons.RIGHT) {
+                @Override public void clicked(InputEvent event, float x, float y) {
+                    unequip(selectedPlayer.p);
+                    itemFocusIndicator.remove(); selectedItem = null;
+                    selectedPlayer.setInventoryTable();
+                    invPane.setActor(selectedPlayer.invTable);
+                }
+            });
+            addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+                @Override public void enter(InputEvent event, float x, float y, int pointer, Actor from) {
+                    if (pointer != -1) return;
+                    hoveredEquipment = InventoryImage.this;
+                    refreshEquipmentName();
+                }
+                @Override public void exit(InputEvent event, float x, float y, int pointer, Actor to) {
+                    if (pointer != -1 || hoveredEquipment != InventoryImage.this) return;
+                    hoveredEquipment = null;
+                    refreshEquipmentName();
+                }
+            });
         }
 
         public void equip(CharacterRecord p, Item equip) {
@@ -713,7 +691,7 @@ public class VendorScreen implements Screen, Constants {
         }
 
         public void unequip(CharacterRecord p) {
-            this.setDrawable(new TextureRegionDrawable(Icons.get(Icons.EMPTY_MARK)));
+            this.setDrawable(null);
 
             Item current = this.item;
 
@@ -752,6 +730,7 @@ public class VendorScreen implements Screen, Constants {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -768,6 +747,10 @@ public class VendorScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        redBackgrnd.dispose();
+        clearBackgrnd.dispose();
+        ui.dispose();
     }
 
 }

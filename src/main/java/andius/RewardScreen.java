@@ -13,10 +13,8 @@ import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -26,9 +24,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import java.util.ArrayList;
 import java.util.Random;
-import utils.AutoFocusScrollPane;
 import utils.LogScrollPane;
 import utils.Utils;
+import utils.ManagementUi;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
 
 public class RewardScreen implements Screen, Constants {
 
@@ -36,14 +43,17 @@ public class RewardScreen implements Screen, Constants {
     private final Map map;
     private final Reward reward;
 
-    private final Texture hud;
-    private final SpriteBatch batch;
+    private final ManagementUi ui = new ManagementUi();
+    private final Texture chestTexture;
+    private Label chestStatus, actionHint, memberDetails;
+    private Image portrait;
+    private TextButton leaveButton;
     private final Stage stage;
 
     private final List<String> action;
     private final Label pselLabel;
-    private final List<String> playerSelection;
-    private final List<TrapType> trapSelection;
+    private final List<CharacterRecord> playerSelection;
+    private final SelectBox<TrapType> trapSelection;
 
     private final LogScrollPane logs;
     private final TextButton go;
@@ -54,55 +64,32 @@ public class RewardScreen implements Screen, Constants {
     private boolean chestOpened = false;
     private boolean chestDisarmed = false;
 
-    private static final int LOG_AREA_WIDTH = 650;
-    private static final int X_ALIGN = 280;
-    private static final int ITEM_HGT = 25;
-
     public RewardScreen(Context context, Map map, int rewardId) {
         this.context = context;
         this.map = map;
         this.reward = map.scenario().rewards().get(rewardId);
         this.trap = this.reward.getTrap();
 
-        this.hud = new Texture(Gdx.files.classpath("assets/data/treasure.png"));
-        this.batch = new SpriteBatch();
-        this.stage = new Stage();
+        this.chestTexture = new Texture(Gdx.files.classpath("assets/data/rewards.png"));
+        this.stage = new Stage(new FitViewport(Andius.SCREEN_WIDTH, Andius.SCREEN_HEIGHT));
         //this.stage.setDebugAll(true);
 
-        this.trapSelection = new List<>(Andius.skin, "default-16");
+        this.trapSelection = new SelectBox<>(ui.skin);
         this.trapSelection.setItems(TrapType.values());
 
-        this.action = new List<>(Andius.skin, "default-16");
-        this.action.setItems(new String[]{"OPEN", "INSPECT", "CALFO", "DISARM", "LEAVE"});
-        this.action.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                if (action.getSelected().equals("LEAVE")) {
-                    pselLabel.setText("");
-                } else {
-                    pselLabel.setText("WHO WILL " + action.getSelected() + " ?");
-                }
-            }
-        });
+        this.action = new List<>(ui.skin);
+        this.action.setItems(new String[]{"OPEN", "INSPECT", "CALFO", "DISARM"});
+        this.playerSelection = new List<>(ui.skin) {
+            @Override public String toString(CharacterRecord player) { return player.name + " / " + player.classType; }
+        };
+        this.playerSelection.setItems(context.players());
 
-        this.playerSelection = new List<>(Andius.skin, "default-16");
-        String[] names = new String[this.context.players().length];
-        for (int i = 0; i < this.context.players().length; i++) {
-            names[i] = this.context.players()[i].name.toUpperCase();
-        }
-        this.playerSelection.setItems(names);
-
-        this.go = new TextButton("GO", Andius.skin, "default-16-red");
+        this.go = new TextButton("Open chest", ui.skin);
         this.go.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                CharacterRecord player = null;
-                for (CharacterRecord p : RewardScreen.this.context.players()) {
-                    if (p.name.toUpperCase().equals(playerSelection.getSelected())) {
-                        player = p;
-                        break;
-                    }
-                }
+                CharacterRecord player = playerSelection.getSelected();
+                if (player == null) return;
                 if (action.getSelected().equals("OPEN")) {
                     open(player);
                 } else if (action.getSelected().equals("INSPECT")) {
@@ -111,43 +98,92 @@ public class RewardScreen implements Screen, Constants {
                     calfo(player);
                 } else if (action.getSelected().equals("DISARM")) {
                     disarm(player, trapSelection.getSelected());
-                } else if (action.getSelected().equals("LEAVE")) {
-                    leave();
+
                 }
             }
         });
 
-        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.action, Andius.skin);
-        AutoFocusScrollPane sp2 = new AutoFocusScrollPane(this.playerSelection, Andius.skin);
-        AutoFocusScrollPane sp3 = new AutoFocusScrollPane(this.trapSelection, Andius.skin);
+        this.pselLabel = new Label("", ui.skin, "emphasis");
+        this.logs = new LogScrollPane(ui.skin, new Table(), 304, "default");
+        buildLayout();
+    }
 
-        sp1.setScrollingDisabled(true, false);
-        sp2.setScrollingDisabled(true, false);
-        sp3.setScrollingDisabled(true, false);
-
-        Label tmp1 = new Label("A CHEST !", Andius.skin, "default-16");
-        Label tmp2 = new Label("YOU MAY :", Andius.skin, "default-16");
-        this.pselLabel = new Label("WHO WILL OPEN ?", Andius.skin, "default-16");
-
-        this.logs = new LogScrollPane(Andius.skin, new Table(), 275);
-        this.logs.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
-
-        tmp1.setBounds(X_ALIGN, 500, 175, ITEM_HGT);
-        tmp2.setBounds(X_ALIGN, 475, 175, ITEM_HGT);
-        sp1.setBounds(X_ALIGN, 295, 100, 175);
-        sp2.setBounds(X_ALIGN + 110, 295, 175, 175);
-        pselLabel.setBounds(X_ALIGN + 110, 475, 175, ITEM_HGT);
-        go.setBounds(X_ALIGN + 110 + 185, 310, 65, 40);
-        sp3.setBounds(X_ALIGN + 110 + 185 + 80, 298, 155, 198);
-
-        stage.addActor(tmp1);
-        stage.addActor(tmp2);
+    private void buildLayout() {
+        ui.label(stage, "Treasure discovered", "default-24", GOLD, 24, 714, 700, 34);
+        ui.label(stage, "Secure the chest and claim the spoils of your expedition.", "default", MUTED, 24, 696, 700, 20);
+        ui.panel(stage, "01  /  The chest", "Choose your approach", 24, 288);
+        Image chest = new Image(new TextureRegion(chestTexture, 270, 0, 115, 108));
+        chest.setScaling(Scaling.none);
+        chest.setBounds(104, 488, 115, 108);
+        chest.setTouchable(Touchable.disabled);
+        stage.addActor(chest);
+        chestStatus = ui.label(stage, "Unopened chest", "emphasis", GOLD, 36, 450, 264, 24);
+        action.setBounds(36, 280, 264, (float) Math.ceil(action.getPrefHeight()));
+        stage.addActor(action);
+        ui.label(stage, "SUSPECTED TRAP", "default", GOLD, 36, 244, 264, 20);
+        trapSelection.setBounds(36, 204, 264, 34);
+        stage.addActor(trapSelection);
+        actionHint = ui.description(stage, 36, 108, 264, 82);
+        ui.panel(stage, "02  /  Loot journal", "Findings, traps, and recovered treasure", 328, 328);
+        logs.setBounds(340, 108, 304, 516);
+        logs.setFadeScrollBars(false);
+        stage.addActor(logs);
+        ui.panel(stage, "03  /  The company", "Choose who will act", 672, 328);
+        playerSelection.setBounds(684, 428, 304, 196);
+        stage.addActor(playerSelection);
+        portrait = new Image();
+        portrait.setScaling(Scaling.fit);
+        portrait.setBounds(684, 328, 76, 76);
+        portrait.setTouchable(Touchable.disabled);
+        stage.addActor(portrait);
+        pselLabel.setBounds(772, 372, 216, 24);
+        pselLabel.setEllipsis(true);
         stage.addActor(pselLabel);
-        stage.addActor(sp1);
-        stage.addActor(sp2);
-        stage.addActor(sp3);
+        memberDetails = ui.description(stage, 684, 108, 304, 204);
+        go.setBounds(24, 24, 172, 38);
+        ui.primary(go);
         stage.addActor(go);
-        stage.addActor(this.logs);
+        leaveButton = new TextButton("Leave treasure", ui.skin);
+        leaveButton.setBounds(850, 24, 150, 38);
+        leaveButton.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) { leave(); }
+        });
+        stage.addActor(leaveButton);
+        log("A chest lies before the company. Choose your approach carefully.");
+    }
+
+    private void refreshUI() {
+        CharacterRecord player = playerSelection.getSelected();
+        String choice = action.getSelected();
+        chestStatus.setText(chestOpened ? "Treasure recovered" : chestDisarmed ? "Chest secured" : "Unopened chest");
+        leaveButton.setText(chestOpened ? "Continue journey" : "Leave treasure");
+        action.getSelection().setDisabled(chestOpened);
+        trapSelection.setDisabled(chestOpened || !"DISARM".equals(choice));
+        go.setDisabled(chestOpened || player == null || player.isDisabled()
+                || "INSPECT".equals(choice) && whoTried.contains(player)
+                || "CALFO".equals(choice) && !player.canCast(Spells.CALFO)
+                || "DISARM".equals(choice) && chestDisarmed);
+        go.setText(switch (choice) {
+            case "INSPECT" -> "Inspect chest";
+            case "CALFO" -> "Cast Calfo";
+            case "DISARM" -> "Disarm trap";
+            default -> "Open chest";
+        });
+        actionHint.setText(chestOpened ? "The spoils have been distributed among the able members of your company."
+                : switch (choice) {
+                    case "INSPECT" -> "Look for a trap. Each adventurer may inspect the chest once.";
+                    case "CALFO" -> "Spend a Calfo spell use to secure the chest with magic.";
+                    case "DISARM" -> "Select the suspected trap, then attempt to disarm it. A mistake may trigger the trap.";
+                    default -> "Open the chest and collect its contents. An active trap will be triggered.";
+                });
+        if (player == null) return;
+        portrait.setDrawable(new com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(
+                andius.objects.Portraits.get(player)));
+        pselLabel.setText(player.name);
+        memberDetails.setText("Level " + player.level + " " + player.race + " " + player.classType
+                + "\nHealth  " + player.hp + " / " + player.maxhp + "\nCondition  " + (player.isDead() ? "DEAD" : player.status)
+                + "\nDisarm chance  " + (player.classType == ClassType.THIEF || player.classType == ClassType.NINJA ? 75 : 10) + "%"
+                + "\nGold carried  " + player.gold + "\n\nCalfo  /  " + (player.canCast(Spells.CALFO) ? "Available" : "Unavailable"));
     }
 
     private void open(CharacterRecord player) {
@@ -360,41 +396,17 @@ public class RewardScreen implements Screen, Constants {
 
     @Override
     public void render(float f) {
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(this.hud, 0, 0);
-
-        int x1 = X_ALIGN;
-        int y = 245;
-        Andius.font16.draw(batch, "Name", x1, y);
-        Andius.font16.draw(batch, "Class", x1 += 80, y);
-        Andius.font16.draw(batch, "Disarm Chance", x1 += 120, y);
-        Andius.font16.draw(batch, "Status", x1 += 200, y);
-        Andius.font16.draw(batch, "Hit Points", x1 += 120, y);
-        y -= 25;
-        for (CharacterRecord c : this.context.players()) {
-            x1 = X_ALIGN;
-            Andius.font16.setColor(c.isDead() ? Color.RED : c.status.color());
-            if (c.hp > 0 && c.hp < 2) {
-                Andius.font16.setColor(Color.SALMON);
-            }
-            Andius.font16.draw(batch, c.name.toUpperCase(), x1, y);
-            Andius.font16.draw(batch, String.format("%s", c.classType.toString()), x1 += 80, y);
-            Andius.font16.draw(batch, String.format("%d%%", (c.classType == ClassType.THIEF || c.classType == ClassType.NINJA ? 75 : 10)), x1 += 120, y);
-            Andius.font16.draw(batch, "" + (c.isDead() ? "DEAD" : c.status), x1 += 200, y);
-            Andius.font16.draw(batch, String.format("%d / %d", c.hp, c.maxhp), x1 += 120, y);
-            y -= 25;
-        }
-
-        Andius.font16.setColor(Color.WHITE);
-
-        batch.end();
-        stage.act();
+        refreshUI();
+        stage.getViewport().apply();
+        stage.act(Math.min(f, .1f));
         stage.draw();
     }
 
     @Override
-    public void resize(int i, int i1) {
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -411,6 +423,9 @@ public class RewardScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        chestTexture.dispose();
+        ui.dispose();
     }
 
 }

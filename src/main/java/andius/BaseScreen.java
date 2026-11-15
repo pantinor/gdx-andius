@@ -7,7 +7,6 @@ import static andius.Andius.CTX;
 import static andius.Andius.mainGame;
 import static andius.Andius.startScreen;
 import andius.objects.SaveGame;
-import com.badlogic.gdx.Gdx;
 import java.util.Random;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -19,12 +18,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class BaseScreen implements Screen, InputProcessor, Constants {
@@ -37,27 +36,14 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     protected int mapPixelHeight;
     public final Vector3 newMapPixelCoords = new Vector3();
 
-    protected final Viewport viewport = new ScreenViewport();
+    protected final Viewport viewport = new com.badlogic.gdx.utils.viewport.FitViewport(Andius.SCREEN_WIDTH, Andius.SCREEN_HEIGHT);
 
     protected Camera camera;
 
     protected final Vector2 currentMousePos = new Vector2();
 
-    /**
-     * translate map tile coords to world pixel coords
-     *
-     * @param v the vector to set the values into
-     * @param x
-     * @param y
-     * @param z
-     */
     public abstract void setMapPixelCoords(Vector3 v, int x, int y, int z);
 
-    /**
-     * get the map coords at the camera center
-     *
-     * @param v
-     */
     public abstract void getCurrentMapCoords(Vector3 v);
 
     public abstract void save(SaveGame saveGame);
@@ -76,11 +62,11 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     protected Skin getUiSkin() {
-        return Andius.skin;
+        return Andius.HUD.getSkin();
     }
 
     protected BitmapFont getMessageFont() {
-        return Andius.skin.getFont("small-ultima");
+        return getUiSkin().getFont("body");
     }
 
     public abstract void finishTurn(int currentX, int currentY);
@@ -92,9 +78,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
     }
 
     public final void addButtons(Map map) {
-        Skin imgBtnSkin = new Skin(Gdx.files.classpath("assets/skin/imgBtn.json"));
-
-        ImageButton reorder = new ImageButton(imgBtnSkin, "reorder");
+        TextButton reorder = new TextButton("Formation", getUiSkin());
         reorder.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
@@ -102,10 +86,9 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
                 new ReorderPartyDialog(CTX, BaseScreen.this).show(stage);
             }
         });
-        reorder.setX(104);
-        reorder.setY(5);
+        reorder.setBounds(224, 24, 112, 36);
 
-        ImageButton inventory = new ImageButton(imgBtnSkin, "inventory");
+        TextButton inventory = new TextButton("Camp", getUiSkin());
         inventory.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
@@ -114,10 +97,9 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
                 mainGame.setScreen(es);
             }
         });
-        inventory.setX(52);
-        inventory.setY(5);
+        inventory.setBounds(124, 24, 92, 36);
 
-        ImageButton save = new ImageButton(imgBtnSkin, "save");
+        TextButton save = new TextButton("Save", getUiSkin());
         save.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
@@ -142,13 +124,27 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
                 }
             }
         });
-        save.setX(5);
-        save.setY(5);
+        save.setBounds(24, 24, 92, 36);
 
         stage.addActor(inventory);
         stage.addActor(reorder);
         stage.addActor(save);
+    }
 
+    protected void showExplorationHelp(Map map) {
+        boolean dungeon = this instanceof WizardryDungeonScreen || this instanceof TmxDungeonScreen;
+        Dialog help = new Dialog("Exploration controls", getUiSkin());
+        help.pad(36, 24, 20, 24);
+        String controls = dungeon
+                ? "Up / Down    Move forward / back\nLeft / Right    Turn\nDrag the scene    Look around\nP    Show dungeon map\nI    Toggle torch\nK    Use stairs\nPage Up / Down    Change floor\nSpace    Wait a turn"
+                : "Arrow keys    Move\nE    Enter a location or use stairs"
+                    + (this instanceof GameScreen ? "\nT    Talk to someone nearby\nG    Search for treasure" : "");
+        Label label = new Label(controls, getUiSkin());
+        help.getContentTable().add(label).width(360).padBottom(16);
+        help.getButtonTable().defaults().width(110).height(36);
+        help.button("Close");
+        help.key(com.badlogic.gdx.Input.Keys.ESCAPE, true);
+        help.show(stage);
     }
 
     public void animateText(String text, Color color) {
@@ -197,7 +193,7 @@ public abstract class BaseScreen implements Screen, InputProcessor, Constants {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, false);
+        viewport.update(width, height, true);
     }
 
     @Override

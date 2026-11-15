@@ -9,7 +9,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -25,23 +24,28 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import utils.AutoFocusScrollPane;
 import utils.LogScrollPane;
 import utils.Utils;
+import utils.ManagementUi;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
 
 public class TempleScreen implements Screen, Constants {
 
     private final Context context;
     private final Constants.Map contextMap;
 
-    private final Texture hud;
-    private final SpriteBatch batch;
+    private final ManagementUi ui = new ManagementUi();
+    private Label patientName, careDescription, donationLabel, donorCaption, careHint;
     private final Stage stage;
 
-    private final Label playerSelectionLabel;
-    private final List<String> titherSelection;
+    private final List<CharacterRecord> titherSelection;
     private final Table patientTable;
     private final AutoFocusScrollPane patientScroll;
     private final Table logTable;
@@ -53,38 +57,30 @@ public class TempleScreen implements Screen, Constants {
     private PatientListing selectedPatient;
     private CharacterRecord tither;
 
-    private static final int LOG_AREA_WIDTH = 600;
-    private static final int X_ALIGN = 280;
-    private static final int PAT_SCR_WIDTH = 650;
-    private static final int PAT_ITEM_HGT = 25;
+    private static final int LOG_AREA_WIDTH = 280;
+    private static final int PAT_SCR_WIDTH = 304;
+    private static final int PAT_ITEM_HGT = 84;
 
     public TempleScreen(Context context, final Map contextMap) {
         this.context = context;
         this.contextMap = contextMap;
 
-        this.hud = new Texture(Gdx.files.classpath("assets/data/treasure.png"));
         this.icon = new TextureRegion(new Texture(Gdx.files.classpath("assets/data/rewards.png")), 135, 132, 128, 128);
 
-        this.batch = new SpriteBatch();
-        this.stage = new Stage();
+        this.stage = new Stage(new FitViewport(Andius.SCREEN_WIDTH, Andius.SCREEN_HEIGHT));
 
-        this.playerSelectionLabel = new Label("WHO WILL TITHE ?", Andius.skin, "default-16");
-
-        this.focusIndicator = new Image(Utils.fillRectangle(PAT_SCR_WIDTH, PAT_ITEM_HGT, Color.YELLOW, .45f));
+        this.focusIndicator = ui.selection(PAT_SCR_WIDTH, PAT_ITEM_HGT);
         this.focusIndicator.setWidth(PAT_SCR_WIDTH);
         this.focusIndicator.setHeight(PAT_ITEM_HGT);
 
-        this.titherSelection = new List<>(Andius.skin, "default-16");
+        this.titherSelection = new List<>(ui.skin);
         rebuildTitherList();
 
-        this.titherSelection.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                updateTitherFromSelection();
-            }
+        this.titherSelection.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) { updateTitherFromSelection(); }
         });
 
-        this.offer = new TextButton("TITHE", Andius.skin, "default-16-red");
+        this.offer = new TextButton("TITHE", ui.skin);
         this.offer.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -178,7 +174,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        this.pool = new TextButton("POOL", Andius.skin, "default-16-red");
+        this.pool = new TextButton("POOL", ui.skin);
         this.pool.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -201,7 +197,7 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("EXIT", Andius.skin, "default-16-red");
+        this.exit = new TextButton("EXIT", ui.skin);
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -209,15 +205,11 @@ public class TempleScreen implements Screen, Constants {
             }
         });
 
-        AutoFocusScrollPane sp1 = new AutoFocusScrollPane(this.titherSelection, Andius.skin);
-        sp1.setScrollingDisabled(true, false);
-
-        this.logTable = new Table(Andius.skin);
+        this.logTable = new Table(ui.skin);
         this.logTable.bottom().left();
-        this.logs = new LogScrollPane(Andius.skin, logTable, LOG_AREA_WIDTH);
-        this.logs.setBounds(X_ALIGN, Andius.SCREEN_HEIGHT - 200, LOG_AREA_WIDTH, 150);
+        this.logs = new LogScrollPane(ui.skin, logTable, LOG_AREA_WIDTH, "default");
 
-        this.patientTable = new Table(Andius.skin);
+        this.patientTable = new Table(ui.skin);
         this.patientTable.top().left();
         this.patientTable.addListener(new EventListener() {
             @Override
@@ -228,16 +220,18 @@ public class TempleScreen implements Screen, Constants {
                     if (target instanceof PatientListing pl) {
                         selectedPatient = pl;
                         selectedPatient.addActor(focusIndicator);
+                        focusIndicator.toBack();
                     } else if (target != null && target.getParent() instanceof PatientListing pl) {
                         selectedPatient = pl;
                         selectedPatient.addActor(focusIndicator);
+                        focusIndicator.toBack();
                     }
                 }
                 return false;
             }
         });
 
-        this.patientScroll = new AutoFocusScrollPane(patientTable, Andius.skin);
+        this.patientScroll = new AutoFocusScrollPane(patientTable, ui.skin);
         this.patientScroll.setScrollingDisabled(true, false);
 
         for (CharacterRecord p : this.context.players()) {
@@ -248,25 +242,74 @@ public class TempleScreen implements Screen, Constants {
             if (selectedPatient == null) {
                 selectedPatient = listing;
                 selectedPatient.addActor(focusIndicator);
+                        focusIndicator.toBack();
             }
         }
 
-        this.patientScroll.setBounds(X_ALIGN, 55, PAT_SCR_WIDTH, 150);
-        this.playerSelectionLabel.setBounds(X_ALIGN, 480, 400, 50);
-        this.offer.setBounds(525, 310, 65, 40);
-        this.pool.setBounds(600, 310, 65, 40);
-        this.exit.setBounds(675, 310, 65, 40);
-        sp1.setBounds(X_ALIGN, 310, 175, 175);
+        buildLayout();
 
-        stage.addActor(sp1);
-        stage.addActor(playerSelectionLabel);
-        stage.addActor(exit);
+        log("Welcome to the Temple of Light. Choose a patient and a donor.");
+    }
+
+    private void buildLayout() {
+        ui.label(stage, "Temple of Light", "default-24", GOLD, 24, 714, 700, 34);
+        ui.label(stage, contextMap.getLabel() + "  /  Healing & restoration", "default", MUTED, 24, 696, 700, 20);
+        ui.panel(stage, "01  /  Sanctuary", "A place of healing and hope", 24, 304);
+        Image hands = new Image(icon);
+        hands.setScaling(Scaling.none);
+        hands.setBounds(112, 456, 128, 128);
+        hands.setTouchable(Touchable.disabled);
+        stage.addActor(hands);
+        ui.label(stage, "The hands of light", "default-16", GOLD, 36, 404, 280, 30);
+        patientName = ui.label(stage, "", "emphasis", Color.WHITE, 36, 372, 280, 24);
+        careDescription = ui.description(stage, 36, 242, 280, 114);
+        donationLabel = ui.label(stage, "", "default-16", GOLD, 36, 198, 280, 28);
+        careHint = ui.description(stage, 36, 112, 280, 74);
+        ui.panel(stage, "02  /  Your offering", "Choose who will make the donation", 344, 360, 304, 336, "15232f");
+        titherSelection.setBounds(356, 424, 280, 196);
+        stage.addActor(titherSelection);
+        donorCaption = ui.label(stage, "", "default", GOLD, 356, 378, 280, 24);
+        ui.panel(stage, "Temple journal", "Blessings and the outcome of your care", 344, 96, 304, 248, "15232f");
+        logs.setBounds(356, 108, 280, 170);
+        logs.setFadeScrollBars(false);
+        stage.addActor(logs);
+        ui.panel(stage, "03  /  The company", "Select the adventurer in need", 672, 328);
+        patientScroll.setBounds(684, 108, 304, 516);
+        patientScroll.setFadeScrollBars(false);
+        stage.addActor(patientScroll);
+        offer.setText("Make offering");
+        offer.setBounds(24, 24, 172, 38);
+        pool.setText("Pool gold");
+        pool.setBounds(204, 24, 124, 38);
+        exit.setText("Return to journey");
+        exit.setBounds(850, 24, 150, 38);
         stage.addActor(offer);
         stage.addActor(pool);
-        stage.addActor(logs);
-        stage.addActor(patientScroll);
+        stage.addActor(exit);
+        ui.primary(offer);
+    }
 
-        log("WELCOME TO THE " + contextMap.getLabel().toUpperCase());
+    private void refreshUI() {
+        for (Cell<?> cell : patientTable.getCells()) if (cell.getActor() instanceof PatientListing listing) listing.refresh();
+        pool.setDisabled(tither == null || context.players().length < 2);
+        if (selectedPatient == null) {
+            offer.setDisabled(true);
+            careHint.setText("Select an adventurer in need of care.");
+            return;
+        }
+        CharacterRecord patient = selectedPatient.c;
+        int cost = donationAmount(patient);
+        boolean well = patient.isAllWell() && patient.hp == patient.maxhp;
+        offer.setDisabled(well || tither == null || tither.gold < cost);
+        patientName.setText(patient.name);
+        careDescription.setText("Level " + patient.level + " " + patient.race + " " + patient.classType
+                + "\nHealth  " + patient.hp + " / " + patient.maxhp + "\nCondition  " + (patient.isDead() ? "DEAD" : patient.status)
+                + (patient.isDead() || patient.status.has(Status.ASHES) ? "\nRestoration is not guaranteed." : "\nAn offering restores up to 25 HP and treats afflictions."));
+        donationLabel.setText(well ? "No offering needed" : "Donation  /  " + cost + " gold");
+        donorCaption.setText(tither == null ? "No eligible donor" : tither.name + "  /  " + tither.gold + " gold");
+        careHint.setText(well ? "This adventurer is in good health." : tither == null ? "An able companion must make the offering."
+                : tither.gold < cost ? "The donor needs more gold. Pool the company's funds or choose another donor."
+                : "Your offering will be taken from " + tither.name + ".");
     }
 
     private int donationAmount(CharacterRecord patient) {
@@ -286,42 +329,16 @@ public class TempleScreen implements Screen, Constants {
     }
 
     private void rebuildTitherList() {
-        Array<String> names = new Array<>();
-        CharacterRecord firstValid = null;
-
-        for (CharacterRecord p : this.context.players()) {
-            if (!p.isDisabled()) {
-                names.add(p.name.toUpperCase());
-                if (firstValid == null) {
-                    firstValid = p;
-                }
-            }
-        }
-
-        this.titherSelection.setItems(names);
-
-        if (tither == null || tither.isDisabled()) {
-            tither = firstValid;
-        }
-
-        if (tither != null) {
-            this.titherSelection.setSelected(tither.name.toUpperCase());
-        }
+        Array<CharacterRecord> donors = new Array<>();
+        for (CharacterRecord player : context.players()) if (!player.isDisabled()) donors.add(player);
+        CharacterRecord previous = tither;
+        titherSelection.setItems(donors);
+        tither = previous != null && donors.contains(previous, true) ? previous : donors.size > 0 ? donors.first() : null;
+        if (tither != null) titherSelection.setSelected(tither);
     }
 
     private void updateTitherFromSelection() {
-        String selected = titherSelection.getSelected();
-        if (selected == null) {
-            tither = null;
-            return;
-        }
-
-        for (CharacterRecord p : this.context.players()) {
-            if (!p.isDisabled() && selected.equals(p.name.toUpperCase())) {
-                tither = p;
-                return;
-            }
-        }
+        tither = titherSelection.getSelected();
     }
 
     private void refreshAllListings() {
@@ -349,7 +366,7 @@ public class TempleScreen implements Screen, Constants {
 
         PatientListing(CharacterRecord rec) {
             this.c = rec;
-            this.style = new LabelStyle(Andius.font16, rec.isDead() ? Color.RED : rec.status.color());
+            this.style = new LabelStyle(ui.skin.getFont("body"), rec.isDead() ? Color.RED : rec.status.color());
             this.name = new Label("", this.style);
             this.lvlracetype = new Label("", this.style);
             this.status = new Label("", this.style);
@@ -362,32 +379,36 @@ public class TempleScreen implements Screen, Constants {
             addActor(this.hp);
             addActor(this.gold);
 
-            float x = getX();
-            this.name.setBounds(x, getY(), 150, PAT_ITEM_HGT);
-            this.lvlracetype.setBounds(x += 150, getY(), 200, PAT_ITEM_HGT);
-            this.status.setBounds(x += 200, getY(), 120, PAT_ITEM_HGT);
-            this.hp.setBounds(x += 120, getY(), 110, PAT_ITEM_HGT);
-            this.gold.setBounds(x += 110, getY(), 100, PAT_ITEM_HGT);
+            Image portrait = new Image(andius.objects.Portraits.get(rec));
+            portrait.setScaling(Scaling.fit);
+            portrait.setBounds(0, 4, 76, 76);
+            addActor(portrait);
+            this.name.setBounds(88, 60, 216, 20);
+            this.lvlracetype.setBounds(88, 42, 216, 18);
+            this.hp.setBounds(88, 24, 134, 18);
+            this.status.setBounds(226, 24, 78, 18);
+            this.gold.setBounds(88, 6, 216, 18);
 
-            this.setBounds(getX(), getY(), PAT_SCR_WIDTH, PAT_ITEM_HGT);
+            for (Actor actor : getChildren()) if (actor instanceof Label label) label.setEllipsis(true);
+            this.name.setStyle(new LabelStyle(ui.skin.getFont("emphasis"), Color.WHITE));
+            this.setSize(PAT_SCR_WIDTH, PAT_ITEM_HGT);
             refresh();
         }
 
         void refresh() {
-            Color color = c.isDead() ? Color.RED : c.status.color();
-            this.style.fontColor = color;
+            Color color = c.isDead() ? Color.SALMON : c.status.color();
+            name.setText(c.name);
+            lvlracetype.setText("Lv " + c.level + " " + c.race + " " + c.classType);
+            hp.setText("HP " + c.hp + "/" + c.maxhp);
+            status.setText(c.isDead() ? "DEAD" : c.status.toString());
+            gold.setText("Gold " + c.gold);
 
-            this.name.setText(c.name.toUpperCase());
-            this.lvlracetype.setText("LVL " + c.level + " " + c.race + " " + c.classType);
-            this.status.setText(c.isDead() ? "DEAD" : c.status.toString());
-            this.hp.setText(c.hp + " / " + c.maxhp);
-            this.gold.setText(String.valueOf(c.gold));
+            name.setColor(Color.WHITE);
+            lvlracetype.setColor(MUTED);
+            hp.setColor(color);
+            status.setColor(color);
+            gold.setColor(MUTED);
 
-            this.name.setColor(color);
-            this.lvlracetype.setColor(color);
-            this.status.setColor(color);
-            this.hp.setColor(color);
-            this.gold.setColor(color);
         }
     }
 
@@ -398,18 +419,17 @@ public class TempleScreen implements Screen, Constants {
 
     @Override
     public void render(float f) {
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(this.hud, 0, 0);
-        batch.draw(this.icon, 80, Andius.SCREEN_HEIGHT - 425);
-        Andius.font16.draw(batch, "WHO ARE YOU HELPING ?", X_ALIGN, 245);
-        batch.end();
-        stage.act();
+        refreshUI();
+        stage.getViewport().apply();
+        stage.act(Math.min(f, .1f));
         stage.draw();
     }
 
     @Override
-    public void resize(int i, int i1) {
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -426,5 +446,8 @@ public class TempleScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        icon.getTexture().dispose();
+        ui.dispose();
     }
 }

@@ -1,0 +1,565 @@
+portraits.png
+size: 1216,1520
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+male-human-fighter
+  rotate: false
+  xy: 0, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-mage
+  rotate: false
+  xy: 152, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-priest
+  rotate: false
+  xy: 304, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-thief
+  rotate: false
+  xy: 456, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-bishop
+  rotate: false
+  xy: 608, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-samurai
+  rotate: false
+  xy: 760, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-lord
+  rotate: false
+  xy: 912, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-human-ninja
+  rotate: false
+  xy: 1064, 0
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-fighter
+  rotate: false
+  xy: 0, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-mage
+  rotate: false
+  xy: 152, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-priest
+  rotate: false
+  xy: 304, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-thief
+  rotate: false
+  xy: 456, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-bishop
+  rotate: false
+  xy: 608, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-samurai
+  rotate: false
+  xy: 760, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-lord
+  rotate: false
+  xy: 912, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-human-ninja
+  rotate: false
+  xy: 1064, 152
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-fighter
+  rotate: false
+  xy: 0, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-mage
+  rotate: false
+  xy: 152, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-priest
+  rotate: false
+  xy: 304, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-thief
+  rotate: false
+  xy: 456, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-bishop
+  rotate: false
+  xy: 608, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-samurai
+  rotate: false
+  xy: 760, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-lord
+  rotate: false
+  xy: 912, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-elf-ninja
+  rotate: false
+  xy: 1064, 304
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-fighter
+  rotate: false
+  xy: 0, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-mage
+  rotate: false
+  xy: 152, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-priest
+  rotate: false
+  xy: 304, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-thief
+  rotate: false
+  xy: 456, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-bishop
+  rotate: false
+  xy: 608, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-samurai
+  rotate: false
+  xy: 760, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-lord
+  rotate: false
+  xy: 912, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-elf-ninja
+  rotate: false
+  xy: 1064, 456
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-fighter
+  rotate: false
+  xy: 0, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-mage
+  rotate: false
+  xy: 152, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-priest
+  rotate: false
+  xy: 304, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-thief
+  rotate: false
+  xy: 456, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-bishop
+  rotate: false
+  xy: 608, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-samurai
+  rotate: false
+  xy: 760, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-lord
+  rotate: false
+  xy: 912, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-dwarf-ninja
+  rotate: false
+  xy: 1064, 608
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-fighter
+  rotate: false
+  xy: 0, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-mage
+  rotate: false
+  xy: 152, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-priest
+  rotate: false
+  xy: 304, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-thief
+  rotate: false
+  xy: 456, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-bishop
+  rotate: false
+  xy: 608, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-samurai
+  rotate: false
+  xy: 760, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-lord
+  rotate: false
+  xy: 912, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-dwarf-ninja
+  rotate: false
+  xy: 1064, 760
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-fighter
+  rotate: false
+  xy: 0, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-mage
+  rotate: false
+  xy: 152, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-priest
+  rotate: false
+  xy: 304, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-thief
+  rotate: false
+  xy: 456, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-bishop
+  rotate: false
+  xy: 608, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-samurai
+  rotate: false
+  xy: 760, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-lord
+  rotate: false
+  xy: 912, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-gnome-ninja
+  rotate: false
+  xy: 1064, 912
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-fighter
+  rotate: false
+  xy: 0, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-mage
+  rotate: false
+  xy: 152, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-priest
+  rotate: false
+  xy: 304, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-thief
+  rotate: false
+  xy: 456, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-bishop
+  rotate: false
+  xy: 608, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-samurai
+  rotate: false
+  xy: 760, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-lord
+  rotate: false
+  xy: 912, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-gnome-ninja
+  rotate: false
+  xy: 1064, 1064
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-fighter
+  rotate: false
+  xy: 0, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-mage
+  rotate: false
+  xy: 152, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-priest
+  rotate: false
+  xy: 304, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-thief
+  rotate: false
+  xy: 456, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-bishop
+  rotate: false
+  xy: 608, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-samurai
+  rotate: false
+  xy: 760, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-lord
+  rotate: false
+  xy: 912, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+male-hobbit-ninja
+  rotate: false
+  xy: 1064, 1216
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-fighter
+  rotate: false
+  xy: 0, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-mage
+  rotate: false
+  xy: 152, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-priest
+  rotate: false
+  xy: 304, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-thief
+  rotate: false
+  xy: 456, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-bishop
+  rotate: false
+  xy: 608, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-samurai
+  rotate: false
+  xy: 760, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-lord
+  rotate: false
+  xy: 912, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1
+female-hobbit-ninja
+  rotate: false
+  xy: 1064, 1368
+  size: 152, 152
+  orig: 152, 152
+  offset: 0, 0
+  index: -1

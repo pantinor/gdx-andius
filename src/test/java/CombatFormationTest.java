@@ -62,13 +62,77 @@ public class CombatFormationTest {
         verify(List.of(), 794f / 520);
     }
 
+    @Test public void elevatedFormationFitsMixedSizesWithoutOverlapping() {
+        GdxNativesLoader.load();
+        for (int count : new int[] {1, 3, 12, 48}) {
+            List<BoundingBox> models = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                models.add(switch (i % 3) {
+                    case 0 -> new BoundingBox(new Vector3(-1.4f, 0, -.25f), new Vector3(1.4f, 1.2f, .25f));
+                    case 1 -> new BoundingBox(new Vector3(-.08f, 0, -.1f), new Vector3(.12f, .3f, .1f));
+                    default -> new BoundingBox(new Vector3(-.4f, 0, -.3f), new Vector3(.1f, 3.5f, .7f));
+                });
+            }
+            for (float aspect : new float[] {.75f, 2f}) {
+                verify(models, aspect, false, 48);
+                verify(models, aspect, true, 48);
+            }
+        }
+        verify(List.of(), 2f, true, 48);
+    }
+
+    @Test public void elevatedBoundsFitIncludesFloorAndTallCreatures() {
+        GdxNativesLoader.load();
+        BoundingBox scene = new BoundingBox(new Vector3(-4, -.04f, -3), new Vector3(4, 3.5f, 3));
+        var fitted = CombatFormation.fitBounds(scene, 2f, 50, .1f, 48);
+        Vector3 offset = new Vector3(fitted.cameraPosition()).sub(fitted.cameraTarget());
+        assertEquals((float) Math.toDegrees(Math.atan2(offset.y, offset.z)), 48f, .01f);
+        PerspectiveCamera camera = new PerspectiveCamera(50, 2000, 1000);
+        camera.near = .1f;
+        camera.far = 10000;
+        camera.position.set(fitted.cameraPosition());
+        camera.lookAt(fitted.cameraTarget());
+        camera.update();
+        verifyInView(scene, camera, 2f);
+    }
+
+    @Test public void existingCombatCallsKeepTheEightDegreePitch() {
+        GdxNativesLoader.load();
+        List<BoundingBox> models = List.of(
+                new BoundingBox(new Vector3(-1.4f, 0, -.25f), new Vector3(1.4f, 1.2f, .25f)),
+                new BoundingBox(new Vector3(-.4f, 0, -.3f), new Vector3(.1f, 3.5f, .7f)));
+        var combat = CombatFormation.layoutFacingCamera(models, 1.5f, 50, .1f);
+        CombatFormation.layoutFacingCamera(models, 2f, 50, .1f, 48);
+        assertSameLayout(CombatFormation.layoutFacingCamera(models, 1.5f, 50, .1f, 8), combat);
+        assertSameLayout(CombatFormation.layoutFacingCamera(models, 1.5f, 50, .1f), combat);
+        assertSameLayout(CombatFormation.layout(models, 1.5f, 50, .1f),
+                CombatFormation.layout(models, 1.5f, 50, .1f, 8));
+        assertSameLayout(CombatFormation.fitBounds(combat.bounds(), 1.5f, 50, .1f),
+                CombatFormation.fitBounds(combat.bounds(), 1.5f, 50, .1f, 8));
+    }
+
+    private void assertSameLayout(CombatFormation.Layout actual, CombatFormation.Layout expected) {
+        assertEquals(actual.positions(), expected.positions());
+        assertEquals(actual.cameraPosition(), expected.cameraPosition());
+        assertEquals(actual.cameraTarget(), expected.cameraTarget());
+        assertEquals(actual.bounds().min, expected.bounds().min);
+        assertEquals(actual.bounds().max, expected.bounds().max);
+    }
+
     private void verify(List<BoundingBox> models, float aspect) {
         verify(models, aspect, false);
     }
 
     private void verify(List<BoundingBox> models, float aspect, boolean faceCamera) {
-        CombatFormation.Layout layout = faceCamera ? CombatFormation.layoutFacingCamera(models, aspect, 50, .1f)
-                : CombatFormation.layout(models, aspect, 50, .1f);
+        verify(models, aspect, faceCamera, 8);
+    }
+
+    private void verify(List<BoundingBox> models, float aspect, boolean faceCamera, float pitchDegrees) {
+        CombatFormation.Layout layout = faceCamera ? CombatFormation.layoutFacingCamera(models, aspect, 50, .1f, pitchDegrees)
+                : CombatFormation.layout(models, aspect, 50, .1f, pitchDegrees);
+        assertNotNull(layout, "A separated layout must be found");
+        Vector3 view = new Vector3(layout.cameraPosition()).sub(layout.cameraTarget());
+        assertEquals((float) Math.toDegrees(Math.atan2(view.y, view.z)), pitchDegrees, .01f);
         assertEquals(layout.positions().size(), models.size());
         PerspectiveCamera camera = new PerspectiveCamera(50, aspect * 1000, 1000);
         camera.near = .1f;
@@ -89,14 +153,18 @@ public class CombatFormationTest {
                 assertFalse(overlapX && overlapZ, "Model footprints must be separated");
             }
             placed.add(box);
-            for (int corner = 0; corner < 8; corner++) {
-                Vector3 point = new Vector3((corner & 1) == 0 ? box.min.x : box.max.x,
-                        (corner & 2) == 0 ? box.min.y : box.max.y, (corner & 4) == 0 ? box.min.z : box.max.z);
-                camera.project(point, 0, 0, aspect * 1000, 1000);
-                assertTrue(point.x >= 0 && point.x <= aspect * 1000, "Horizontal camera fit");
-                assertTrue(point.y >= 0 && point.y <= 1000, "Vertical camera fit");
-                assertTrue(point.z >= 0 && point.z <= 1, "Near/far camera fit");
-            }
+            verifyInView(box, camera, aspect);
+        }
+    }
+
+    private void verifyInView(BoundingBox box, PerspectiveCamera camera, float aspect) {
+        for (int corner = 0; corner < 8; corner++) {
+            Vector3 point = new Vector3((corner & 1) == 0 ? box.min.x : box.max.x,
+                    (corner & 2) == 0 ? box.min.y : box.max.y, (corner & 4) == 0 ? box.min.z : box.max.z);
+            camera.project(point, 0, 0, aspect * 1000, 1000);
+            assertTrue(point.x >= 0 && point.x <= aspect * 1000, "Horizontal camera fit");
+            assertTrue(point.y >= 0 && point.y <= 1000, "Vertical camera fit");
+            assertTrue(point.z >= 0 && point.z <= 1, "Near/far camera fit");
         }
     }
 }

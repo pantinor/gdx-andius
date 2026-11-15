@@ -15,17 +15,24 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class SkinUtils {
 
-    public static Skin createCombatSkin(Skin shared) {
-        return createAdventureSkin(shared);
+    public static final Color PANEL = Color.valueOf("15232f");
+    public static final Color INK = Color.valueOf("0c141d");
+    public static final Color GOLD = Color.valueOf("dbbb7c");
+    public static final Color MUTED = Color.valueOf("92a7b7");
+    public static final Color BORDER = Color.valueOf("66583f");
+
+    public static BitmapFont createTitleFont(int size) {
+        return font("Cinzel.ttf", size);
     }
 
-    /** An independently owned font palette; drawables are borrowed from the application skin. */
-    public static Skin createAdventureSkin(Skin shared) {
+    public static Skin createSkin(Skin shared) {
         Skin skin = new Skin();
+        
         BitmapFont body = font("AlegreyaSans-Regular.ttf", 15);
         BitmapFont emphasis = font("AlegreyaSans-Medium.ttf", 16);
         BitmapFont heading = font("Cinzel.ttf", 16);
         BitmapFont title = font("Cinzel.ttf", 25);
+
         skin.add("body", body);
         skin.add("emphasis", emphasis);
         skin.add("heading", heading);
@@ -34,28 +41,32 @@ public class SkinUtils {
         skin.add("default-16", new Label.LabelStyle(heading, Color.WHITE));
         skin.add("default-24", new Label.LabelStyle(title, Color.WHITE));
         skin.add("default", new Label.LabelStyle(body, Color.WHITE));
+        
         TextButton.TextButtonStyle button = new TextButton.TextButtonStyle(shared.get(TextButton.TextButtonStyle.class));
         button.font = emphasis;
         skin.add("default", button);
+        
         Window.WindowStyle window = new Window.WindowStyle(shared.get(Window.WindowStyle.class));
         window.titleFont = heading;
         skin.add("default", window);
-        for (String name : new String[] {"default-12", "default-16"}) {
+        
+        for (String name : new String[]{"default-12", "default-16"}) {
             TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(shared.get(name, TextButton.TextButtonStyle.class));
             style.font = emphasis;
             skin.add(name, style);
         }
+        
         List.ListStyle list = new List.ListStyle(shared.get("default-12-padded-clear", List.ListStyle.class));
         list.font = body;
         skin.add("default-12-padded-clear", list);
         skin.add("default", new ScrollPane.ScrollPaneStyle(shared.get(ScrollPane.ScrollPaneStyle.class)));
         skin.add("dimmer", shared.getDrawable("dimmer"), Drawable.class);
+        
         return skin;
     }
 
     private static BitmapFont font(String filename, int size) {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
-                Gdx.files.internal("assets/fonts/combat/" + filename));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/fonts/" + filename));
         try {
             FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameters.size = size;

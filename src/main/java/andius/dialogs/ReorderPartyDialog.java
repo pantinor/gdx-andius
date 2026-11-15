@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package andius.dialogs;
 
-/**
- *
- * @author Paul
- */
 import andius.Andius;
 import andius.BaseScreen;
 import andius.Constants;
@@ -57,15 +48,16 @@ public class ReorderPartyDialog extends Window implements Constants {
     };
 
     public ReorderPartyDialog(Context ctx, BaseScreen screen) {
-        super("Drag and Drop to Reorder", Andius.skin.get("dialog", Window.WindowStyle.class));
+        super("Marching order", Andius.HUD.getSkin().get(Window.WindowStyle.class));
         this.screen = screen;
 
-        setSkin(Andius.skin);
+        setSkin(Andius.HUD.getSkin());
+        pad(36, 18, 18, 18);
         setModal(true);
         defaults().pad(10);
 
-        TextButton close = new TextButton("X", Andius.skin, "default-16");
-        getTitleTable().add(close).height(getPadTop());
+        TextButton close = new TextButton("Close", Andius.HUD.getSkin());
+        getTitleTable().add(close).width(64).height(26).padRight(8);
         close.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -76,26 +68,44 @@ public class ReorderPartyDialog extends Window implements Constants {
             }
         });
 
-        this.playerSelection = new List<>(Andius.skin, "default-12");
+        this.playerSelection = new List<>(Andius.HUD.getSkin(), "default-12-padded-clear");
         this.playerSelection.setItems(ctx.players());
 
-        ScrollPane sp = new ScrollPane(this.playerSelection, Andius.skin);
-        add(sp).expand().fill().minWidth(200);
+        ScrollPane sp = new ScrollPane(this.playerSelection, Andius.HUD.getSkin());
+        sp.setFlickScroll(false);
+        add(sp).expand().fill().width(310).height(220);
+        row();
+        add(new com.badlogic.gdx.scenes.scene2d.ui.Label("Drag a name to change the marching order.", Andius.HUD.getSkin()));
         row();
 
         DragAndDrop dragAndDrop = new DragAndDrop();
+        dragAndDrop.setDragTime(0);
         dragAndDrop.addSource(new Source(playerSelection) {
             @Override
             public Payload dragStart(InputEvent event, float x, float y, int pointer) {
+                int index = rowAt(x, y);
+                if (index < 0) return null;
                 Payload payload = new Payload();
-                payload.setObject(playerSelection.getSelectedIndex());
+                payload.setObject(index);
+                com.badlogic.gdx.scenes.scene2d.ui.Label preview = new com.badlogic.gdx.scenes.scene2d.ui.Label(
+                        playerSelection.getItems().get(index).name, Andius.HUD.getSkin(), "default-16");
+                preview.pack();
+                payload.setDragActor(preview);
                 return payload;
+            }
+
+            @Override
+            public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
+                if (target == null && payload != null) playerSelection.setSelectedIndex((int) payload.getObject());
             }
         });
 
         dragAndDrop.addTarget(new Target(playerSelection) {
             @Override
             public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
+                int index = rowAt(x, y);
+                if (index < 0) return false;
+                playerSelection.setSelectedIndex(index);
                 return true;
             }
 
@@ -105,18 +115,16 @@ public class ReorderPartyDialog extends Window implements Constants {
 
             @Override
             public void drop(Source source, Payload payload, float x, float y, int pointer) {
-                float totalHeight = playerSelection.getItemHeight() * playerSelection.getItems().size;
-                for (int idx = 0; idx < playerSelection.getItems().size; idx++) {
-                    float high = totalHeight - playerSelection.getItemHeight() * idx;
-                    float low = high - playerSelection.getItemHeight();
-                    if (y <= high && y >= low) {
-                        CharacterRecord c1 = ctx.players()[(int) payload.getObject()];
-                        CharacterRecord c2 = ctx.players()[idx];
-                        ctx.players()[idx] = c1;
-                        ctx.players()[(int) payload.getObject()] = c2;
-                        playerSelection.setItems(ctx.players());
-                    }
-                }
+                int destination = rowAt(x, y);
+                if (destination < 0) return;
+                int from = (int) payload.getObject();
+                CharacterRecord[] players = ctx.players();
+                CharacterRecord moving = players[from];
+                if (from < destination) System.arraycopy(players, from + 1, players, from, destination - from);
+                else if (from > destination) System.arraycopy(players, destination, players, destination + 1, from - destination);
+                players[destination] = moving;
+                playerSelection.setItems(players);
+                playerSelection.setSelectedIndex(destination);
             }
         });
 
@@ -146,6 +154,11 @@ public class ReorderPartyDialog extends Window implements Constants {
             }
         };
 
+    }
+
+    private int rowAt(float x, float y) {
+        if (x < 0 || x >= playerSelection.getWidth() || y < 0 || y >= playerSelection.getHeight()) return -1;
+        return playerSelection.getItemIndexAt(y);
     }
 
     public void show(Stage stage) {
@@ -199,8 +212,10 @@ public class ReorderPartyDialog extends Window implements Constants {
         if (screen instanceof WizardryDungeonScreen) {
             WizardryDungeonScreen wds = (WizardryDungeonScreen) screen;
             wds.setInputProcessor();
+        } else if (screen instanceof andius.TmxDungeonScreen dungeon) {
+            dungeon.setInputProcessor();
         } else {
-            Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+            Gdx.input.setInputProcessor(new InputMultiplexer(getStage(), screen));
         }
     }
 

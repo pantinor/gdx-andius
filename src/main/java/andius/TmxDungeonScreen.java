@@ -56,12 +56,13 @@ import java.util.Iterator;
 import utils.ObjLoader;
 import utils.PartyDeathException;
 import utils.RotateOnlyInputController;
+import static utils.SkinUtils.INK;
 import utils.Utils;
 
 public class TmxDungeonScreen extends BaseScreen {
 
-    private static final int MAP_WIDTH = 672;
-    private static final int MAP_HEIGHT = 672;
+    private static final int MAP_WIDTH = utils.Hud.MAP_SIZE;
+    private static final int MAP_HEIGHT = utils.Hud.MAP_SIZE;
     private static final int MAX_SPOT_LIGHTS = 36;
 
     private final ModelBuilder builder = new ModelBuilder();
@@ -115,7 +116,7 @@ public class TmxDungeonScreen extends BaseScreen {
 
     public TmxDungeonScreen(Constants.Map map) {
         this.map = map;
-        this.stage = new Stage();
+        this.stage = new Stage(viewport);
         //this.stage.setDebugAll(true);
 
         this.dim = map.scenario().dim();
@@ -162,7 +163,14 @@ public class TmxDungeonScreen extends BaseScreen {
         camera.position.set(currentPos);
         camera.lookAt(currentPos.x + 1, currentPos.y, currentPos.z);
 
-        cameraPan = new RotateOnlyInputController(camera);
+        cameraPan = new RotateOnlyInputController(camera) {
+            @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                com.badlogic.gdx.math.Vector2 point = stage.screenToStageCoordinates(new com.badlogic.gdx.math.Vector2(screenX, screenY));
+                if (showMiniMap || point.x < utils.Hud.MAP_X || point.x > utils.Hud.MAP_X + utils.Hud.MAP_SIZE
+                        || point.y < utils.Hud.MAP_Y || point.y > utils.Hud.MAP_Y + utils.Hud.MAP_SIZE) return false;
+                return super.touchDown(screenX, screenY, pointer, button);
+            }
+        };
     }
 
     private void init() {
@@ -362,7 +370,7 @@ public class TmxDungeonScreen extends BaseScreen {
     }
 
     public void setInputProcessor() {
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage, cameraPan));
+        Gdx.input.setInputProcessor(new InputMultiplexer(stage, this, cameraPan));
     }
 
     @Override
@@ -478,7 +486,7 @@ public class TmxDungeonScreen extends BaseScreen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
         if (isTorchOn) {
@@ -487,7 +495,7 @@ public class TmxDungeonScreen extends BaseScreen {
             this.torch.set(darkness, camera.position, camera.direction, 0.5f, 65, 5);
         }
 
-        Gdx.gl.glViewport(32, 64, MAP_WIDTH, MAP_HEIGHT);
+        Andius.HUD.applyMapViewport(viewport);
 
         stage.act();
 
@@ -516,23 +524,18 @@ public class TmxDungeonScreen extends BaseScreen {
 
         modelBatch.end();
 
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport.apply();
+        batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
-
-        batch.draw(Andius.backGround, 0, 0);
 
         Andius.HUD.render(batch, Andius.CTX);
 
         int x = (Math.round(currentPos.x) - 1);
         int y = (Math.round(currentPos.z) - 1);
-        if (this.map.scenario().getLevelDescriptions() != null) {
-            String lbl = String.format(this.map.scenario().getLevelDescriptions()[currentLevel] + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
-        } else {
-            String lbl = String.format(this.map.getLabel() + " - Level %d [%d, %d]", currentLevel + 1, x, y).toUpperCase();
-            Andius.font18.draw(batch, lbl, 280, Andius.SCREEN_HEIGHT - 12);
-        }
+        String title = this.map.scenario().getLevelDescriptions() != null
+                ? this.map.scenario().getLevelDescriptions()[currentLevel] : this.map.getLabel();
+        Andius.HUD.renderDungeonLocation(batch, title, currentLevel + 1, x, y);
 
         batch.end();
 
@@ -984,7 +987,8 @@ public class TmxDungeonScreen extends BaseScreen {
             }
         } else if (keycode == Keys.ESCAPE) {
 
-            Utils.animateText(stage, Andius.skin, "default-16", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
+            showExplorationHelp(map);
+            return true;
 
         } else if (keycode == Keys.P) {
 

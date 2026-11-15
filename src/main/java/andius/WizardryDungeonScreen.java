@@ -66,13 +66,14 @@ import java.util.Iterator;
 import utils.ObjLoader;
 import utils.PartyDeathException;
 import utils.RotateOnlyInputController;
+import static utils.SkinUtils.INK;
 import utils.Utils;
 import static utils.Utils.CLASSPTH_RSLVR;
 
 public class WizardryDungeonScreen extends BaseScreen {
 
-    private static final int MAP_WIDTH = 672;
-    private static final int MAP_HEIGHT = 672;
+    private static final int MAP_WIDTH = utils.Hud.MAP_SIZE;
+    private static final int MAP_HEIGHT = utils.Hud.MAP_SIZE;
 
     private final ModelBuilder builder = new ModelBuilder();
     private final ModelBatch modelBatch;
@@ -164,7 +165,7 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         this.camera = new PerspectiveCamera(67f, MAP_WIDTH, MAP_HEIGHT);
         this.camera.near = 0.1f;
-        this.camera.far = 10f;
+        this.camera.far = 30f;
 
         init();
 
@@ -184,7 +185,14 @@ public class WizardryDungeonScreen extends BaseScreen {
         //this.isTorchOn = true;
         //this.showMiniMap = false;
 
-        cameraPan = new RotateOnlyInputController(camera);
+        cameraPan = new RotateOnlyInputController(camera) {
+            @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                com.badlogic.gdx.math.Vector2 point = stage.screenToStageCoordinates(new com.badlogic.gdx.math.Vector2(screenX, screenY));
+                if (showMiniMap || point.x < utils.Hud.MAP_X || point.x > utils.Hud.MAP_X + utils.Hud.MAP_SIZE
+                        || point.y < utils.Hud.MAP_Y || point.y > utils.Hud.MAP_Y + utils.Hud.MAP_SIZE) return false;
+                return super.touchDown(screenX, screenY, pointer, button);
+            }
+        };
     }
 
     private void init() {
@@ -487,7 +495,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     }
 
     public void setInputProcessor() {
-        Gdx.input.setInputProcessor(new InputMultiplexer(this, stage, cameraPan));
+        Gdx.input.setInputProcessor(new InputMultiplexer(stage, this, cameraPan));
     }
 
     @Override
@@ -702,7 +710,7 @@ public class WizardryDungeonScreen extends BaseScreen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT | GL30.GL_DEPTH_BUFFER_BIT);
 
         if (this.map != Map.WIZARDRY4 || (this.currentLevel >= 1 && this.currentLevel <= 11)) {
@@ -716,7 +724,7 @@ public class WizardryDungeonScreen extends BaseScreen {
             camera.far = 100f;
         }
 
-        Gdx.gl.glViewport(32, 64, MAP_WIDTH, MAP_HEIGHT);
+        Andius.HUD.applyMapViewport(viewport);
 
         stage.act();
 
@@ -762,11 +770,10 @@ public class WizardryDungeonScreen extends BaseScreen {
 
         modelBatch.end();
 
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport.apply();
+        batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
-
-        batch.draw(Andius.backGround, 0, 0);
 
         Andius.HUD.render(batch, Andius.CTX);
         if (this.map == Map.WIZARDRY4) {
@@ -777,7 +784,7 @@ public class WizardryDungeonScreen extends BaseScreen {
         int y = (Math.round(currentPos.z) - 1);
         String title = this.map.scenario().getLevelDescriptions() != null
                 ? this.map.scenario().getLevelDescriptions()[currentLevel] : this.map.getLabel();
-        Andius.HUD.renderDungeonLocation(batch, title, currentLevel + 1, x, y, currentDir.toString());
+        Andius.HUD.renderDungeonLocation(batch, title, currentLevel + 1, x, y);
 
         batch.end();
 
@@ -1243,7 +1250,8 @@ public class WizardryDungeonScreen extends BaseScreen {
             }
         } else if (keycode == Keys.ESCAPE) {
 
-            Utils.animateText(stage, getUiSkin(), "default-12", Constants.HELP_KEYS, Color.YELLOW, 20, 100, 20, 200);
+            showExplorationHelp(map);
+            return true;
 
         } else if (keycode == Keys.P) {
 

@@ -12,9 +12,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -22,38 +19,45 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import java.io.File;
 import utils.AutoFocusScrollPane;
-import utils.FrameMaker;
+import utils.ManagementUi;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
+import static utils.SkinUtils.MUTED;
 
 public class StartScreen implements Screen, Constants {
 
-    private final Batch batch;
+    private final ManagementUi ui = new ManagementUi();
+    private final Texture splashBackground = new Texture(Gdx.files.classpath("assets/data/splash-background.png"));
+    private Label saveSummary, status;
+    private Label emptySaves;
     private final TextButton manage;
     private final TextButton journey;
-    private final BitmapFont titleFont;
     private final Stage stage;
-    private final Texture background;
-    private final List saveGameSelection;
+    private final List<String> saveGameSelection;
 
     public StartScreen() {
+        ui.skin.add("start-title", new BitmapFont(Gdx.files.classpath("assets/fonts/exodus.fnt")));
+        ui.skin.add("start-title", new Label.LabelStyle(ui.skin.getFont("start-title"), GOLD));
+        stage = new Stage(new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
+        saveGameSelection = new List<>(ui.skin);
 
-        titleFont = new BitmapFont(Gdx.files.classpath("assets/fonts/exodus.fnt"));
+        AutoFocusScrollPane savedGamePane = new AutoFocusScrollPane(saveGameSelection, ui.skin);
+        savedGamePane.setScrollingDisabled(true, false);
+        savedGamePane.setFadeScrollBars(false);
 
-        batch = new SpriteBatch();
-
-        saveGameSelection = new List<>(Andius.skin, "default-16");
-
-        AutoFocusScrollPane savedGamePane = new AutoFocusScrollPane(saveGameSelection, Andius.skin);
-
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT);
-        fm.setBounds(savedGamePane, 360, 185, 220, 100);
-
-        manage = new TextButton("Manage", Andius.skin, "default-24");
+        manage = new TextButton("Manage company", ui.skin);
         manage.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 Sounds.play(Sound.TRIGGER);
 
-                String fname = (String) saveGameSelection.getSelected();
+                String fname = saveGameSelection.getSelected();
                 SaveGame saveGame;
                 try {
                     saveGame = (fname != null) ? SaveGame.read(fname) : new SaveGame();
@@ -69,10 +73,8 @@ public class StartScreen implements Screen, Constants {
                 mainGame.setScreen(new ManageScreen(StartScreen.this, Andius.skin, saveGame));
             }
         });
-        
-        manage.setBounds(360, Andius.SCREEN_HEIGHT - 400, 220, 40);
 
-        journey = new TextButton("Journey Onward", Andius.skin, "default-24");
+        journey = new TextButton("Journey onward", ui.skin);
         journey.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -88,6 +90,7 @@ public class StartScreen implements Screen, Constants {
 
                     if (CTX.pickRandomEnabledPlayer() == null) {
                         Sounds.play(Sound.NEGATIVE_EFFECT);
+                        status.setText("No able adventurers. Manage your company first.");
                         return;
                     }
 
@@ -113,15 +116,90 @@ public class StartScreen implements Screen, Constants {
 
             }
         });
-        journey.setBounds(360, Andius.SCREEN_HEIGHT - 450, 220, 40);
 
-        stage = new Stage();
-        stage.addActor(manage);
-        stage.addActor(journey);
+        buildLayout(savedGamePane);
+        saveGameSelection.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                refreshSaveSummary();
+            }
+        });
+        stage.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+            @Override
+            public boolean keyDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, int keycode) {
+                if (event.isHandled()) {
+                    return false;
+                }
+                TextButton selected = keycode == Input.Keys.M ? manage : keycode == Input.Keys.J ? journey : null;
+                if (selected == null || selected.isDisabled()) {
+                    return false;
+                }
+                selected.fire(new ChangeListener.ChangeEvent());
+                return true;
+            }
+        });
+    }
+
+    private void buildLayout(AutoFocusScrollPane savedGamePane) {
+        Image titlePanel = new Image(splashBackground);
+        titlePanel.setBounds(40, 64, 552, 632);
+        titlePanel.setTouchable(Touchable.disabled);
+        stage.addActor(titlePanel);
+        
+        ui.label(stage, "AN ADVENTURER'S CHRONICLE", "default", MUTED, 64, 650, 496, 24);
+        ui.label(stage, "ANDIUS", "start-title", GOLD, 60, 564, 500, 88);
+        ui.label(stage, "Bridgeburners", "default-24", Color.WHITE, 64, 524, 496, 42);
+       
+        Label introduction = ui.description(stage, 64, 418, 440, 70);
+        introduction.setText("Gather your company. Venture beyond the familiar.\nThe next chapter waits in the dark.");
+        ui.label(stage, "Assemble your companions. Continue your journey.", "default", MUTED, 64, 100, 496, 34);
+
+        ui.panel(stage, "Your expeditions", "Select a saved company", 624, 112, 352, 544, "15232f");
+        savedGamePane.setBounds(640, 368, 320, 208);
         stage.addActor(savedGamePane);
+        
+        emptySaves = ui.label(stage, "No saved expeditions yet.", "default", MUTED, 648, 480, 300, 30);
+        saveSummary = ui.label(stage, "", "default", MUTED, 640, 280, 320, 78);
+        saveSummary.setWrap(true);
+        saveSummary.setEllipsis(false);
+        
+        journey.setBounds(640, 220, 320, 44);
+        manage.setBounds(640, 168, 320, 40);
+        
+        ui.primary(journey);
+        stage.addActor(journey);
+        stage.addActor(manage);
+        
+        status = ui.label(stage, "", "default", GOLD, 624, 60, 352, 44);
+        status.setWrap(true);
+        status.setEllipsis(false);
+    }
 
-        this.background = fm.build();
-
+    private void refreshSaveSummary() {
+        status.setText("");
+        String filename = saveGameSelection.getSelected();
+        journey.setDisabled(filename == null);
+        emptySaves.setVisible(saveGameSelection.getItems().isEmpty());
+        if (filename == null) {
+            saveSummary.setText("Begin with Manage company to recruit your first adventurers.");
+            return;
+        }
+        try {
+            SaveGame save = SaveGame.read(filename);
+            int count = 0;
+            if (save.players != null) {
+                for (SaveGame.CharacterRecord player : save.players) {
+                    if (player == null || player.name == null || player.name.isBlank()) {
+                        continue;
+                    }
+                    count++;
+                }
+            }
+            saveSummary.setText(filename + "\n" + count + (count == 1 ? " adventurer  /  " : " adventurers  /  ")
+                    + (save.map == null ? "A new journey" : save.map.getLabel()));
+        } catch (Exception failure) {
+            saveSummary.setText(filename + "\nThis save could not be read. Manage company can help you begin again.");
+        }
     }
 
     @Override
@@ -131,14 +209,13 @@ public class StartScreen implements Screen, Constants {
         if (jsonFiles == null) {
             jsonFiles = new String[0];
         }
+        java.util.Arrays.sort(jsonFiles, String.CASE_INSENSITIVE_ORDER);
+        String previous = saveGameSelection.getSelected();
         saveGameSelection.setItems(jsonFiles);
-
-        Object selected = saveGameSelection.getSelected();
-        if (selected == null) {
-            if (jsonFiles.length > 0) {
-                saveGameSelection.setSelected(jsonFiles[0]);
-            }
+        if (previous != null && java.util.Arrays.asList(jsonFiles).contains(previous)) {
+            saveGameSelection.setSelected(previous);
         }
+        refreshSaveSummary();
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -150,30 +227,16 @@ public class StartScreen implements Screen, Constants {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        batch.draw(this.background, 0, 0);
-        titleFont.draw(batch, "ANDIUS", 320, Andius.SCREEN_HEIGHT - 140);
-        Andius.font72.draw(batch, "Bridgeburners", 250, Andius.SCREEN_HEIGHT - 240);
-        batch.end();
-
-        stage.act();
+        stage.getViewport().apply();
+        stage.act(Math.min(delta, .1f));
         stage.draw();
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
-            this.manage.toggle();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
-            this.journey.toggle();
-        }
-
     }
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -186,6 +249,9 @@ public class StartScreen implements Screen, Constants {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        splashBackground.dispose();
+        ui.dispose();
     }
 
 }

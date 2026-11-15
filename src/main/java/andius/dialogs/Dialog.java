@@ -24,10 +24,10 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
     protected final LogScrollPane scrollPane;
 
     public Dialog(Context ctx, BaseScreen screen) {
-        super("", Andius.skin.get("dialog", Window.WindowStyle.class));
+        super("Encounter", Andius.HUD.getSkin().get(Window.WindowStyle.class));
         this.screen = screen;
 
-        setSkin(Andius.skin);
+        setSkin(Andius.HUD.getSkin());
         setSize(WIDTH, HEIGHT);
 
         float titlePadTop = getPadTop();
@@ -36,9 +36,9 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
         padBottom(10);
         padTop(titlePadTop + 10);
 
-        scrollPane = new LogScrollPane(Andius.skin, new Table(), WIDTH);
+        scrollPane = new LogScrollPane(Andius.HUD.getSkin(), new Table(), WIDTH, "default-12");
 
-        input = new TextField("", Andius.skin, "default-16");
+        input = new TextField("", Andius.HUD.getSkin());
 
         getContentTable().defaults().maxWidth(WIDTH).width(WIDTH).growX();
         getContentTable().add(scrollPane).expandY().fillY().minHeight(0);
@@ -60,8 +60,10 @@ public abstract class Dialog extends com.badlogic.gdx.scenes.scene2d.ui.Dialog i
         if (screen instanceof WizardryDungeonScreen) {
             WizardryDungeonScreen wds = (WizardryDungeonScreen) screen;
             wds.setInputProcessor();
+        } else if (screen instanceof andius.TmxDungeonScreen dungeon) {
+            dungeon.setInputProcessor();
         } else {
-            Gdx.input.setInputProcessor(new InputMultiplexer(screen, getStage()));
+            Gdx.input.setInputProcessor(new InputMultiplexer(getStage(), screen));
         }
     }
 

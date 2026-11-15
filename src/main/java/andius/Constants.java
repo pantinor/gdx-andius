@@ -1,7 +1,5 @@
 package andius;
 
-import andius.objects.Sound;
-import andius.objects.Sounds;
 import andius.objects.Actor;
 import andius.objects.BaseMap;
 import andius.objects.Monster;
@@ -13,7 +11,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -303,7 +300,7 @@ public interface Constants {
 
             }
         }
-        
+
         public static void releaseAllMaps() {
             for (Map m : Map.values()) {
                 m.screen = null;
@@ -335,20 +332,6 @@ public interface Constants {
         {232044, 255127, 243596, 208760, 331307, 345000, 358908, 400275},
         {400075, 439874, 419993, 359931, 581240, 605263, 629663, 702236}
     };
-
-    public static final String[] HITMSGS = new String[]{
-        "whacks",
-        "smites",
-        "jabs",
-        "pokes",
-        "wallops",
-        "bashes",
-        "pounds",
-        "smashes",
-        "lambasts",
-        "whomps",
-        "smacks",
-        "clouts",};
 
     public static final String[] DEATHMSGS = new String[]{
         "shuffles off this mortal coil",
@@ -466,16 +449,6 @@ public interface Constants {
         COMBAT, ANY_TIME, LOOTING, CAMP, COMBAT_OR_CAMP
     };
 
-    public enum AuraType {
-
-        NONE,
-        HORN,
-        JINX,
-        NEGATE,
-        PROTECTION,
-        QUICKNESS;
-    }
-
     public enum Resistance {
         NONE, FIRE, COLD, POISON, LVLDRAIN, STONING, MAGIC;
     }
@@ -497,67 +470,6 @@ public interface Constants {
         BREATH,
         CALL_FOR_HELP,
         FLEE;
-    }
-
-    public static class AttackVector {
-
-        public final int x;
-        public final int y;
-        public int distance;
-        public AttackResult result;
-        public Actor victim;
-
-        public AttackVector(int x, int y, int distance) {
-            this.x = x;
-            this.y = y;
-            this.distance = distance;
-        }
-    }
-
-    public static class AddActorAction implements Runnable {
-
-        private final com.badlogic.gdx.scenes.scene2d.Actor actor;
-        private final Stage stage;
-
-        public AddActorAction(Stage stage, com.badlogic.gdx.scenes.scene2d.Actor actor) {
-            this.actor = actor;
-            this.stage = stage;
-        }
-
-        @Override
-        public void run() {
-            stage.addActor(actor);
-        }
-    }
-
-    public static class PlaySoundAction implements Runnable {
-
-        private Sound s;
-
-        public PlaySoundAction(Sound s) {
-            this.s = s;
-        }
-
-        @Override
-        public void run() {
-            Sounds.play(s);
-        }
-    }
-
-    public static class LogAction implements Runnable {
-
-        private BaseScreen screen;
-        private String text;
-
-        public LogAction(BaseScreen screen, String text) {
-            this.screen = screen;
-            this.text = text;
-        }
-
-        @Override
-        public void run() {
-            this.screen.log(this.text);
-        }
     }
 
 }

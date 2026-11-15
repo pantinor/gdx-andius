@@ -7,46 +7,87 @@ import static andius.Andius.SCREEN_WIDTH;
 import static andius.Andius.mainGame;
 import andius.WizardryData.SummoningCircle;
 import andius.objects.Monster;
+import andius.objects.MonsterModels;
 import andius.objects.MutableMonster;
 import andius.objects.SaveGame.CharacterRecord;
 import andius.objects.Spells;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
+import com.badlogic.gdx.graphics.glutils.HdpiUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
-import utils.AutoFocusScrollPane;
-import utils.FrameMaker;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import java.util.ArrayList;
+import java.util.List;
+import utils.CombatFormation;
+import utils.ObjLoader;
 import utils.Utils;
+import utils.ManagementUi;
+import static utils.SkinUtils.GOLD;
+import static utils.SkinUtils.INK;
 
 public class SummoningCircleScreen implements Screen, Constants {
 
+    static final int SCENE_X = 16, SCENE_Y = 16, SCENE_WIDTH = 992, SCENE_HEIGHT = 512;
+    private static final float CAMERA_PITCH = 28;
+    private static final float MONSTER_Y = .014f;
+    private final ManagementUi ui = new ManagementUi();
     private final Stage stage;
     public final CharacterRecord player;
     private final SummoningCircle summoningId;
-    private final Batch batch;
     private final SelectBox<MonsterItem> select1, select2, select3;
-    private final List<MonsterItem> monsters;
-    private final AutoFocusScrollPane monstersScroll;
     private final TextButton summon;
     private final TextButton exit;
-    private final Texture background;
+    private final PerspectiveCamera camera = new PerspectiveCamera(40, SCENE_WIDTH, SCENE_HEIGHT);
+    private final Environment environment = new Environment();
+    private final ModelBatch modelBatch;
+    private final Model pentagramModel, floorModel;
+    private final ModelInstance pentagram;
+    private final List<ModelInstance> floorTiles = new ArrayList<>();
+    private final List<ModelInstance> summonedModels = new ArrayList<>();
+    private boolean disposed;
 
     public SummoningCircleScreen(CharacterRecord player, SummoningCircle summoningId) {
         this.summoningId = summoningId;
         this.player = player;
-        this.batch = new SpriteBatch();
-        this.stage = new Stage();
+        this.stage = new Stage(new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
+
+        DefaultShader.Config config = new DefaultShader.Config();
+        config.vertexShader = Gdx.files.internal("assets/dungeon.vertex.glsl").readString();
+        config.fragmentShader = Gdx.files.internal("assets/dungeon.fragment.glsl").readString();
+        config.numDirectionalLights = 2;
+        config.numPointLights = 0;
+        config.numSpotLights = 0;
+
+        this.modelBatch = new ModelBatch(new DefaultShaderProvider(config));
+
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, .32f, .36f, .40f, 1));
+        environment.add(new DirectionalLight().set(.85f, .88f, .90f, -.4f, -1, -.25f));
+        environment.add(new DirectionalLight().set(.40f, .30f, .22f, .5f, -.5f, .7f));
+
+        this.pentagramModel = ObjLoader.loadModel("assets/graphics/pentagram.obj", "pentagram", .1f);
+        this.floorModel = ObjLoader.loadModel("assets/graphics/dungeon-walls.obj", "wall-floor", .1f);
+        this.pentagram = new ModelInstance(pentagramModel);
 
         if (!player.summoningCircles.contains(summoningId)) {
             player.summoningCircles.add(summoningId);
@@ -111,19 +152,6 @@ public class SummoningCircleScreen implements Screen, Constants {
 
         this.player.adjustHP(this.player.maxhp);
 
-        FrameMaker fm = new FrameMaker(SCREEN_WIDTH, SCREEN_HEIGHT, new Color(0x080808ff));
-
-        this.monsters = new List(Andius.skin, "default-16");
-        this.monstersScroll = new AutoFocusScrollPane(this.monsters, Andius.skin);
-        this.monstersScroll.setScrollingDisabled(true, false);
-
-        Array<MonsterItem> ms = new Array<>();
-        for (MutableMonster mm : player.summonedMonsters) {
-            ms.add(new MonsterItem((Monster) mm.baseType()));
-        }
-
-        this.monsters.setItems(ms);
-
         Array<MonsterItem> arr = new Array<>();
         for (int j = SummoningCircle.values().length - 1; j >= 0; j--) {
             SummoningCircle sc = SummoningCircle.values()[j];
@@ -135,9 +163,9 @@ public class SummoningCircleScreen implements Screen, Constants {
             }
         }
 
-        select1 = new SelectBox<>(Andius.skin, "default-16");
-        select2 = new SelectBox<>(Andius.skin, "default-16");
-        select3 = new SelectBox<>(Andius.skin, "default-16");
+        select1 = new SelectBox<>(ui.skin);
+        select2 = new SelectBox<>(ui.skin);
+        select3 = new SelectBox<>(ui.skin);
 
         select1.setItems(arr);
         select1.setSelected(arr.first());
@@ -146,7 +174,7 @@ public class SummoningCircleScreen implements Screen, Constants {
         select3.setItems(arr);
         select3.setSelected(arr.first());
 
-        this.summon = new TextButton("SUMMON", Andius.skin, "default-16");
+        this.summon = new TextButton("Summon", ui.skin);
         this.summon.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -154,38 +182,38 @@ public class SummoningCircleScreen implements Screen, Constants {
             }
         });
 
-        this.exit = new TextButton("LEAVE", Andius.skin, "default-16");
+        this.exit = new TextButton("Leave", ui.skin);
         this.exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 mainGame.setScreen(Map.WIZARDRY4.getScreen());
             }
         });
-        this.exit.setBounds(400, 450, 80, 40);
+        caption("The " + this.summoningId.display() + " Level Pentagram Glows...", 700);
+        caption("and the Gate Opens!", 662);
+        caption("Call Forth 3 Groups of Monsters!", 608);
 
-        Texture t = new Texture(Gdx.files.classpath("assets/data/pentagram.png"));
-        t.getTextureData().prepare();
-        fm.drawPixmap(t.getTextureData().consumePixmap(), 100, 0);
+        this.select1.setBounds(24, 548, 228, 38);
+        this.select2.setBounds(264, 548, 228, 38);
+        this.select3.setBounds(504, 548, 228, 38);
+        this.summon.setBounds(744, 548, 132, 38);
+        this.exit.setBounds(888, 548, 112, 38);
 
-        int x = 280;
-        fm.setBounds(this.select1, x, 530, 130, 20);
-        fm.setBounds(this.select2, x += 150, 530, 130, 20);
-        fm.setBounds(this.select3, x += 150, 530, 130, 20);
-        this.summon.setBounds(x += 150, 530 - 4, 100, 30);
-        this.exit.setBounds(x, 485, 100, 30);
-
-        fm.setBounds(this.monstersScroll, 750, 100, 200, 200);
-
-        this.stage.addActor(this.monstersScroll);
         this.stage.addActor(this.select1);
         this.stage.addActor(this.select2);
         this.stage.addActor(this.select3);
 
+        ui.primary(summon);
         this.stage.addActor(summon);
         this.stage.addActor(exit);
 
-        this.background = fm.build();
+        rebuildScene();
 
+    }
+
+    private void caption(String text, float y) {
+        Label label = ui.label(stage, text, "default-24", GOLD, 24, y, SCREEN_WIDTH - 48, 36);
+        label.setAlignment(Align.center);
     }
 
     public void summon() {
@@ -194,12 +222,11 @@ public class SummoningCircleScreen implements Screen, Constants {
         Monster m2 = this.select2.getSelected().m;
         Monster m3 = this.select3.getSelected().m;
 
-        this.player.summonedMonsters.clear();
-        this.monsters.getItems().clear();
-
         if (m1 == null || m2 == null || m3 == null) {
             return;
         }
+
+        this.player.summonedMonsters.clear();
 
         Sounds.play(Sound.SPIRITS);
 
@@ -219,34 +246,122 @@ public class SummoningCircleScreen implements Screen, Constants {
             this.player.summonedMonsters.add(new MutableMonster(m3));
         }
 
-        Array<MonsterItem> ms = new Array<>();
-        for (MutableMonster mm : player.summonedMonsters) {
-            ms.add(new MonsterItem((Monster) mm.baseType()));
+        rebuildScene();
+
+    }
+
+    private void rebuildScene() {
+        summonedModels.clear();
+        List<BoundingBox> footprints = new ArrayList<>();
+        List<Monster> types = WizardryData.Scenario.WER.monsters();
+        for (MutableMonster monster : player.summonedMonsters) {
+            int id = monster.monster().getMonsterId();
+            int icon = id >= 0 && id < types.size() ? types.get(id).getIconId() : monster.icon();
+            ModelInstance instance = new ModelInstance(MonsterModels.values()[icon].model());
+            BoundingBox bounds = instance.calculateBoundingBox(new BoundingBox());
+            float groundedY = MONSTER_Y - bounds.min.y;
+            instance.transform.setToTranslation(0, groundedY, 0);
+            bounds.min.y += groundedY;
+            bounds.max.y += groundedY;
+            summonedModels.add(instance);
+            footprints.add(bounds);
         }
 
-        this.monsters.setItems(ms);
+        CombatFormation.Layout formation = CombatFormation.layout(footprints, (float) SCENE_WIDTH / SCENE_HEIGHT, camera.fieldOfView, .1f, CAMERA_PITCH);
+        Vector3 translation = new Vector3();
+        for (int i = 0; i < summonedModels.size(); i++) {
+            ModelInstance instance = summonedModels.get(i);
+            instance.transform.getTranslation(translation);
+            Vector3 position = formation.positions().get(i);
+            instance.transform.setTranslation(position.x, translation.y, position.z);
+        }
 
+        BoundingBox scene = new BoundingBox(formation.bounds());
+        Vector3 center = scene.getCenter(new Vector3());
+        float diameter = Math.max(2, (float) Math.hypot(scene.getWidth(), scene.getDepth()) + .5f);
+        
+        BoundingBox sigil = pentagram.calculateBoundingBox(new BoundingBox());
+        float scale = 1;//diameter / Math.min(sigil.getWidth(), sigil.getDepth());
+        pentagram.transform.setToScaling(scale, 1, scale);
+        pentagram.transform.setTranslation(
+                center.x - (sigil.min.x + sigil.max.x) / 2 * scale,
+                .008f - sigil.max.y, 
+                center.z - (sigil.min.z + sigil.max.z) / 2 * scale);
+        sigil.mul(pentagram.transform);
+        scene.ext(sigil);
+
+        BoundingBox framing = new BoundingBox(summonedModels.isEmpty() ? scene : formation.bounds());
+        Vector3 margin = framing.getDimensions(new Vector3()).scl(.04f);
+        framing.min.sub(margin);
+        framing.max.add(margin);
+        
+        CombatFormation.Layout fitted = CombatFormation.fitBounds(framing, (float) SCENE_WIDTH / SCENE_HEIGHT, camera.fieldOfView, .1f, CAMERA_PITCH);
+        camera.position.set(fitted.cameraPosition());
+        camera.up.set(Vector3.Y);
+        camera.lookAt(fitted.cameraTarget());
+        camera.near = .1f;
+        camera.far = Math.max(100, camera.position.dst(fitted.cameraTarget()) + diameter * 3);
+        camera.update();
+        
+        buildFloor(scene);
+    }
+
+    private void buildFloor(BoundingBox scene) {
+        floorTiles.clear();
+        BoundingBox tile = new ModelInstance(floorModel).calculateBoundingBox(new BoundingBox());
+        float width = tile.getWidth(), depth = tile.getDepth();
+        // Extend past the view's ground intersections so the static scene has no exposed edges.
+        float reach = camera.position.dst(scene.getCenter(new Vector3())) + scene.getWidth() + scene.getDepth();
+        float centerX = (scene.min.x + scene.max.x) / 2;
+        float centerZ = (scene.min.z + scene.max.z) / 2;
+        for (Vector3 corner : camera.frustum.planePoints) {
+            float dy = corner.y - camera.position.y;
+            if (dy < 0) {
+                float distance = -camera.position.y / dy;
+                float x = camera.position.x + (corner.x - camera.position.x) * distance;
+                float z = camera.position.z + (corner.z - camera.position.z) * distance;
+                reach = Math.max(reach, Math.max(Math.abs(x - centerX), Math.abs(z - centerZ)) + 1);
+            }
+        }
+        float tileScale = Math.max(1, reach / 12);
+        width *= tileScale;
+        depth *= tileScale;
+        for (float x = centerX - reach; x < centerX + reach; x += width) {
+            for (float z = centerZ - reach; z < centerZ + reach; z += depth) {
+                ModelInstance instance = new ModelInstance(floorModel);
+                instance.transform.setToScaling(tileScale, 1, tileScale);
+                instance.transform.setTranslation(x - tile.min.x * tileScale, -tile.max.y, z - tile.min.z * tileScale);
+                floorTiles.add(instance);
+            }
+        }
     }
 
     @Override
     public void show() {
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getViewport().apply();
+        Gdx.gl.glClearColor(INK.r, INK.g, INK.b, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        stage.act(delta);
 
-        batch.begin();
-        batch.draw(this.background, 0, 0);
+        Vector2 origin = stage.stageToScreenCoordinates(new Vector2(SCENE_X, SCENE_Y));
+        Vector2 corner = stage.stageToScreenCoordinates(new Vector2(SCENE_X + SCENE_WIDTH, SCENE_Y + SCENE_HEIGHT));
+        HdpiUtils.glViewport(Math.round(origin.x), Gdx.graphics.getHeight() - Math.round(origin.y),
+                Math.round(corner.x - origin.x), Math.round(origin.y - corner.y));
+        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+        Gdx.gl.glDepthMask(true);
+        modelBatch.begin(camera);
+        modelBatch.render(floorTiles, environment);
+        modelBatch.render(pentagram, environment);
+        modelBatch.render(summonedModels, environment);
+        modelBatch.end();
 
-        Andius.font24.draw(batch, "The " + this.summoningId.display() + " Level Pentagram Glows...", 350, 700);
-        Andius.font24.draw(batch, "and the Gate Opens!", 350, 670);
-        Andius.font24.draw(batch, "Call Forth 3 Groups of Monsters!", 300, 620);
-
-        batch.end();
-
-        stage.act();
+        stage.getViewport().apply();
         stage.draw();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
@@ -259,6 +374,7 @@ public class SummoningCircleScreen implements Screen, Constants {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -271,10 +387,21 @@ public class SummoningCircleScreen implements Screen, Constants {
 
     @Override
     public void hide() {
+        // Dungeon entry creates a fresh summoning screen for each visit.
+        dispose();
     }
 
     @Override
     public void dispose() {
+        if (disposed) {
+            return;
+        }
+        disposed = true;
+        stage.dispose();
+        modelBatch.dispose();
+        pentagramModel.dispose();
+        floorModel.dispose();
+        ui.dispose();
     }
 
     private class MonsterItem {
