@@ -59,4 +59,4 @@ java -jar ./target/gdx-andius-1.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview9.png)
 
-![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview`0.png)
+![screenshot of gameboard](https://raw.github.com/pantinor/gdx-andius/master/preview10.png)
