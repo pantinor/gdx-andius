@@ -20,34 +20,6 @@ public class Sounds {
         backgroundList.add(Sound.SPIRITS);
     }
 
-    public static class BackgroundMusicJukeBox implements Runnable {
-
-        @Override
-        public void run() {
-            while (true) {
-                for (Sound sound : backgroundList) {
-
-                    Music m = play(sound);
-                    backgroundPlaying = true;
-
-                    m.setOnCompletionListener(new Music.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(Music music) {
-                            backgroundPlaying = false;
-                        }
-                    });
-
-                    while (backgroundPlaying) {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     public static Music play(Sound sound) {
         return play(sound, sound.getVolume());
     }

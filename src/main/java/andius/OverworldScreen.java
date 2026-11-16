@@ -128,7 +128,7 @@ public class OverworldScreen extends BaseScreen {
         batch.end();
 
         Andius.HUD.applyMapViewport(viewport, true);
-        // Keep the legacy 17 x 17 tile render bounds and the avatar's position within them.
+        
         renderer.setView(camera.combined, newMapPixelCoords.x - SCALED_DIM * 8,
                 newMapPixelCoords.y - SCALED_DIM * 8, VIEWPORT_DIM, VIEWPORT_DIM);
 

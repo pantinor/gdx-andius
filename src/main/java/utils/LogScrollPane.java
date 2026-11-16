@@ -29,10 +29,6 @@ public class LogScrollPane extends AutoFocusScrollPane implements Loggable {
         setScrollingDisabled(true, false);
     }
 
-    public LogScrollPane(Skin skin, Table table, int width) {
-        this(skin, table, width, "default-16");
-    }
-
     @Override
     public void add(String text) {
         add(text, Color.WHITE);

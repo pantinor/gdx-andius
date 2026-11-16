@@ -19,7 +19,6 @@ import static utils.Utils.CLASSPTH_RSLVR;
 
 public interface Constants {
 
-    public static int WORLD_TILE_DIM = 24;
     public static int TILE_DIM = 16;
 
     enum MapType {
@@ -28,17 +27,6 @@ public interface Constants {
 
     public static final String DEFAULT_SAVE_FILENAME = "party.json";
     public static final String ROSTER_FILENAME = "roster.json";
-    public static final int STATS_NONE = 0;
-    public static final int STATS_PLAYER1 = 1;
-    public static final int STATS_PLAYER2 = 2;
-    public static final int STATS_PLAYER3 = 3;
-    public static final int STATS_PLAYER4 = 4;
-    public static int MOON_PHASES = 24;
-    public static int MOON_SECONDS_PER_PHASE = 4;
-    public static int MOON_CHAR = 20;
-    public static final int MAX_CREATURES_ON_MAP = 10;
-    public static final int MAX_WANDERING_CREATURES_IN_DUNGEON = 2;
-    public static final int MAX_CREATURE_DISTANCE = 24;
 
     public enum Map {
         WORLD(MapType.OVERWORLD, "Overworld", "ultima1.tmx", null, TILE_DIM),
@@ -380,26 +368,6 @@ public interface Constants {
         }
     }
 
-    public enum CreatureStatus {
-
-        FINE,
-        DEAD,
-        FLEEING,
-        CRITICAL,
-        HEAVILYWOUNDED,
-        LIGHTLYWOUNDED,
-        BARELYWOUNDED;
-    }
-
-    public enum HealType {
-
-        NONE,
-        CURE,
-        FULLHEAL,
-        RESURRECT,
-        HEAL;
-    }
-
     public enum Status {
         AFRAID(Color.YELLOW, "AF"),
         SILENCED(Color.MAGENTA, "SI"),
@@ -455,12 +423,6 @@ public interface Constants {
 
     public enum Ability {
         STONE, POISON, PARALYZE, AUTOKILL, SLEEP, RUN, CALLFORHELP;
-    }
-
-    public enum AttackResult {
-
-        HIT,
-        MISS;
     }
 
     public enum CombatAction {

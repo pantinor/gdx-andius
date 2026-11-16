@@ -21,10 +21,6 @@ public class SkinUtils {
     public static final Color MUTED = Color.valueOf("92a7b7");
     public static final Color BORDER = Color.valueOf("66583f");
 
-    public static BitmapFont createTitleFont(int size) {
-        return font("Cinzel.ttf", size);
-    }
-
     public static Skin createSkin(Skin shared) {
         Skin skin = new Skin();
 

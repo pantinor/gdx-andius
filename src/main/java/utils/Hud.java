@@ -146,11 +146,11 @@ public class Hud implements Disposable {
     }
 
     public void renderLocation(Batch batch, String title, int east, int north) {
-        renderHeader(batch, title, "Position   /   East " + east + "   /   North " + north);
+        renderHeader(batch, title, "East " + east + "  North " + north);
     }
 
     public void renderDungeonLocation(Batch batch, String title, int level, int east, int north) {
-        renderHeader(batch, title, "Level " + level + "   /   East " + east + "   North " + north);
+        renderHeader(batch, title, "Level " + level + "  East  " + east + "  North " + north);
     }
 
     private void renderHeader(Batch batch, String title, String detail) {
@@ -158,7 +158,7 @@ public class Hud implements Disposable {
         titleFont.setColor(GOLD);
         drawLine(batch, titleFont, title, MAP_X, 746, MAP_SIZE, Align.left);
         body.setColor(MUTED);
-        drawLine(batch, body, detail, MAP_X, 716, MAP_SIZE, Align.left);
+        drawLine(batch, body, detail, MAP_X, 720, MAP_SIZE, Align.left);
         titleFont.setColor(Color.WHITE);
         body.setColor(Color.WHITE);
     }
