@@ -1,0 +1,86 @@
+# Warlock palette. Kd = RGB / 255; all materials are opaque.
+# Staff skull: bone ivory. Four shoulder spikes and dagger blade: shared steel.
+
+# RGB 179 125 86
+newmtl skin
+Kd 0.701961 0.490196 0.337255
+d 1.0
+illum 1
+
+# RGB 64 46 29
+newmtl eyes
+Kd 0.250980 0.180392 0.113725
+d 1.0
+illum 1
+
+# RGB 40 38 33
+newmtl hair
+Kd 0.156863 0.149020 0.129412
+d 1.0
+illum 1
+
+# RGB 128 76 56
+newmtl lips
+Kd 0.501961 0.298039 0.219608
+d 1.0
+illum 1
+
+# RGB 42 80 96
+newmtl robe
+Kd 0.164706 0.313725 0.376471
+d 1.0
+illum 1
+
+# RGB 130 65 43
+newmtl cloak
+Kd 0.509804 0.254902 0.168627
+d 1.0
+illum 1
+
+# RGB 146 113 67
+newmtl lining
+Kd 0.572549 0.443137 0.262745
+d 1.0
+illum 1
+
+# RGB 39 41 35
+newmtl charcoal
+Kd 0.152941 0.160784 0.137255
+d 1.0
+illum 1
+
+# RGB 92 69 45
+newmtl leather
+Kd 0.360784 0.270588 0.176471
+d 1.0
+illum 1
+
+# RGB 163 126 69
+newmtl gold
+Kd 0.639216 0.494118 0.270588
+d 1.0
+illum 1
+
+# RGB 101 109 103
+newmtl steel
+Kd 0.396078 0.427451 0.403922
+d 1.0
+illum 1
+
+# RGB 200 188 145
+newmtl bone
+Kd 0.784314 0.737255 0.568627
+d 1.0
+illum 1
+
+# RGB 62 46 67
+newmtl sheath
+Kd 0.243137 0.180392 0.262745
+d 1.0
+illum 1
+
+# RGB 43 42 33
+newmtl staff
+Kd 0.168627 0.164706 0.129412
+d 1.0
+illum 1

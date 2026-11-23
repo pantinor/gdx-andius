@@ -1,0 +1,98 @@
+# Skull warrior palette: 16 opaque colors; Kd = RGB / 255.
+# Orange/yellow eyes; bone shield skull; red armor and gold trim.
+
+# RGB 151 40 24
+newmtl armor_red
+Kd 0.592157 0.156863 0.094118
+d 1.0
+illum 1
+
+# RGB 104 28 28
+newmtl dark_red
+Kd 0.407843 0.109804 0.109804
+d 1.0
+illum 1
+
+# RGB 201 145 64
+newmtl gold
+Kd 0.788235 0.568627 0.250980
+d 1.0
+illum 1
+
+# RGB 231 183 92
+newmtl pale_gold
+Kd 0.905882 0.717647 0.360784
+d 1.0
+illum 1
+
+# RGB 215 181 120
+newmtl bone
+Kd 0.843137 0.709804 0.470588
+d 1.0
+illum 1
+
+# RGB 255 93 0
+newmtl orange
+Kd 1.000000 0.364706 0.000000
+d 1.0
+illum 1
+
+# RGB 255 212 52
+newmtl yellow
+Kd 1.000000 0.831373 0.203922
+d 1.0
+illum 1
+
+# RGB 24 12 12
+newmtl socket
+Kd 0.094118 0.047059 0.047059
+d 1.0
+illum 1
+
+# RGB 174 161 134
+newmtl steel
+Kd 0.682353 0.631373 0.525490
+d 1.0
+illum 1
+
+# RGB 127 29 18
+newmtl blood
+Kd 0.498039 0.113725 0.070588
+d 1.0
+illum 1
+
+# RGB 143 108 82
+newmtl cloth
+Kd 0.560784 0.423529 0.321569
+d 1.0
+illum 1
+
+# RGB 64 38 28
+newmtl leather
+Kd 0.250980 0.149020 0.109804
+d 1.0
+illum 1
+
+# RGB 46 29 36
+newmtl plum
+Kd 0.180392 0.113725 0.141176
+d 1.0
+illum 1
+
+# RGB 31 27 29
+newmtl iron
+Kd 0.121569 0.105882 0.113725
+d 1.0
+illum 1
+
+# RGB 92 19 27
+newmtl cloak
+Kd 0.360784 0.074510 0.105882
+d 1.0
+illum 1
+
+# RGB 55 16 25
+newmtl lining
+Kd 0.215686 0.062745 0.098039
+d 1.0
+illum 1

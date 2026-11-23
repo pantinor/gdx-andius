@@ -1,76 +1,103 @@
-# Green and blue kobold material colors
+# Kobold reference palette. Kd = RGB / 255. One original object; geometry unchanged.
 
-newmtl light
-Kd 0.4157 0.7216 0.2902
+# RGB 177 87 59
+newmtl skin
+Kd 0.694118 0.341176 0.231373
 d 1.0
 illum 1
 
-newmtl shade
-Kd 0.1412 0.4118 0.2039
+# RGB 160 56 35
+newmtl snout
+Kd 0.627451 0.219608 0.137255
 d 1.0
 illum 1
 
-newmtl hide
-Kd 0.4275 0.2902 0.1804
+# RGB 199 128 79
+newmtl scales
+Kd 0.780392 0.501961 0.309804
 d 1.0
 illum 1
 
-newmtl green
-Kd 0.2745 0.5922 0.2235
+# RGB 178 104 65
+newmtl frills
+Kd 0.698039 0.407843 0.254902
 d 1.0
 illum 1
 
-newmtl wood
-Kd 0.4471 0.2941 0.1686
+# RGB 226 159 104
+newmtl claws
+Kd 0.886275 0.623529 0.407843
 d 1.0
 illum 1
 
-newmtl blue
-Kd 0.1176 0.4392 0.6510
+# RGB 235 204 151
+newmtl horns_teeth
+Kd 0.921569 0.800000 0.592157
 d 1.0
 illum 1
 
-newmtl linen
-Kd 0.6431 0.5412 0.3686
-d 1.0
-illum 1
-
-newmtl steel
-Kd 0.5882 0.6549 0.6510
-d 1.0
-illum 1
-
-newmtl dark_hide
-Kd 0.2745 0.1804 0.1294
-d 1.0
-illum 1
-
-newmtl edge
-Kd 0.7451 0.8078 0.7882
-d 1.0
-illum 1
-
-newmtl teal
-Kd 0.1059 0.4824 0.5647
-d 1.0
-illum 1
-
-newmtl navy
-Kd 0.1020 0.2549 0.4353
-d 1.0
-illum 1
-
+# RGB 102 20 28
 newmtl mouth
-Kd 0.1765 0.1490 0.1059
+Kd 0.400000 0.078431 0.109804
 d 1.0
 illum 1
 
+# RGB 177 131 45
+newmtl eyes
+Kd 0.694118 0.513725 0.176471
+d 1.0
+illum 1
+
+# RGB 101 64 21
 newmtl pupil
-Kd 0.0745 0.1059 0.0706
+Kd 0.396078 0.250980 0.082353
 d 1.0
 illum 1
 
-newmtl gold
-Kd 0.7255 0.7216 0.2431
+# RGB 110 22 24
+newmtl mane
+Kd 0.431373 0.086275 0.094118
+d 1.0
+illum 1
+
+# RGB 57 59 39
+newmtl cloth
+Kd 0.223529 0.231373 0.152941
+d 1.0
+illum 1
+
+# RGB 100 110 61
+newmtl wraps
+Kd 0.392157 0.431373 0.239216
+d 1.0
+illum 1
+
+# RGB 110 80 67
+newmtl armor
+Kd 0.431373 0.313725 0.262745
+d 1.0
+illum 1
+
+# RGB 176 135 107
+newmtl blade
+Kd 0.690196 0.529412 0.419608
+d 1.0
+illum 1
+
+# RGB 255 236 205
+newmtl blade_edge
+Kd 1.000000 0.925490 0.803922
+d 1.0
+illum 1
+
+# RGB 79 41 33
+newmtl leather
+Kd 0.309804 0.160784 0.129412
+d 1.0
+illum 1
+
+# RGB 106 63 42
+newmtl wood
+Kd 0.415686 0.247059 0.164706
 d 1.0
 illum 1

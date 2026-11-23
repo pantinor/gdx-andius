@@ -31,19 +31,20 @@ public enum MonsterModels {
     //extra icon ids below
     ORC("assets/graphics/monsters/orc.obj", "orc"),//20
     PLANT("assets/graphics/monsters/plant.obj", "plant"),//any plant like things
-    WARLOCK("assets/graphics/monsters/warlock1.obj", "warlock1"),//bishop priest warlock higher level
+    WARLOCK("assets/graphics/monsters/warlock.obj", "warlock"),//bishop priest warlock higher level
     DARK_WIZARD("assets/graphics/monsters/dark-wizard.obj", "dark-wizard"), //special evil wizard higher level than regular wizard
     WARRIOR("assets/graphics/monsters/warrior.obj", "warrior"),//leader warrior etc
     GHOUL("assets/graphics/monsters/ghoul.obj", "ghoul"),//25  //undead ghoul or ghast
     HARPY("assets/graphics/monsters/harpy.obj", "harpy"),
     WOLF("assets/graphics/monsters/wolf.obj", "wolf"), //canine dog coyote wolf
-    VIKING("assets/graphics/monsters/viking.obj", "viking"), //a viking with a mace dwarf warriors
+    DWARVEN_WARRIOR("assets/graphics/monsters/dwarven-warrior.obj", "dwarven-warrior"),
     SNAKE("assets/graphics/monsters/snake.obj", "snake"),
     TIGER("assets/graphics/monsters/tiger.obj", "tiger"), //30 felines
     GOBLIN("assets/graphics/monsters/goblin.obj", "goblin"), //goblins
     SAMURAI("assets/graphics/monsters/samurai.obj", "samurai"), //samurai or ronin
-    VAMPIRE("assets/graphics/monsters/vampire.obj", "vampire"),
-    WYVERN("assets/graphics/monsters/wyvern.obj", "wyvern");//any small baby dragons
+    VAMPIRE("assets/graphics/monsters/vampire.obj", "vampire"), // 33
+    WYVERN("assets/graphics/monsters/wyvern.obj", "wyvern"),//34 any small baby dragons
+    SKULL_WARRIOR("assets/graphics/monsters/skull-warrior.obj", "skull-warrior");//35
 
     private Model model;
     private final String path, name;

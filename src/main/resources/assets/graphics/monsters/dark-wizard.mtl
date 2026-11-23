@@ -1,106 +1,98 @@
-# Storm-blue dark wizard material colors
+# Dark wizard palette: at most 16 opaque colors; Kd = RGB / 255.
+# Violet robes, silver borders, amethyst crystals and leather-bound book.
 
+# RGB 155 135 112
 newmtl skin
-Kd 0.4863 0.4824 0.5020
+Kd 0.607843 0.529412 0.439216
 d 1.0
 illum 1
 
-newmtl skin_shadow
-Kd 0.3176 0.3255 0.3686
+# RGB 52 46 39
+newmtl eyes
+Kd 0.203922 0.180392 0.152941
 d 1.0
 illum 1
 
-newmtl belt
-Kd 0.2706 0.1882 0.1529
+# RGB 40 37 34
+newmtl hair
+Kd 0.156863 0.145098 0.133333
 d 1.0
 illum 1
 
-newmtl bronze
-Kd 0.4314 0.3569 0.2588
+# RGB 112 86 75
+newmtl lips
+Kd 0.439216 0.337255 0.294118
 d 1.0
 illum 1
 
-newmtl robe
-Kd 0.1020 0.1922 0.2588
+# RGB 52 47 66
+newmtl violet
+Kd 0.203922 0.184314 0.258824
 d 1.0
 illum 1
 
-newmtl robe_dark
-Kd 0.0627 0.1216 0.1804
+# RGB 82 75 94
+newmtl slate
+Kd 0.321569 0.294118 0.368627
 d 1.0
 illum 1
 
-newmtl robe_light
-Kd 0.1804 0.2980 0.3686
+# RGB 27 24 32
+newmtl ink
+Kd 0.105882 0.094118 0.125490
 d 1.0
 illum 1
 
-newmtl boot
-Kd 0.1333 0.1137 0.1216
-d 1.0
-illum 1
-
-newmtl beard_light
-Kd 0.5373 0.5882 0.6392
-d 1.0
-illum 1
-
-newmtl beard
-Kd 0.3608 0.4275 0.4863
-d 1.0
-illum 1
-
+# RGB 125 122 126
 newmtl silver
-Kd 0.4431 0.5255 0.5686
+Kd 0.490196 0.478431 0.494118
 d 1.0
 illum 1
 
-newmtl orb_blue
-Kd 0.2706 0.4353 0.7373
+# RGB 91 91 86
+newmtl steel
+Kd 0.356863 0.356863 0.337255
 d 1.0
 illum 1
 
-newmtl orb_light
-Kd 0.6000 0.8941 0.9490
+# RGB 74 59 44
+newmtl leather
+Kd 0.290196 0.231373 0.172549
 d 1.0
 illum 1
 
-newmtl orb_violet
-Kd 0.4902 0.3255 0.6941
+# RGB 38 36 31
+newmtl charcoal
+Kd 0.149020 0.141176 0.121569
 d 1.0
 illum 1
 
-newmtl orb_cyan
-Kd 0.3059 0.7412 0.8706
+# RGB 170 157 128
+newmtl parchment
+Kd 0.666667 0.615686 0.501961
 d 1.0
 illum 1
 
-newmtl staff_iron
-Kd 0.1373 0.1765 0.2235
+# RGB 104 75 157
+newmtl amethyst
+Kd 0.407843 0.294118 0.615686
 d 1.0
 illum 1
 
-newmtl staff_shadow
-Kd 0.1529 0.1176 0.1098
+# RGB 174 153 218
+newmtl lavender
+Kd 0.682353 0.600000 0.854902
 d 1.0
 illum 1
 
-newmtl lining
-Kd 0.0471 0.0745 0.1176
+# RGB 132 113 72
+newmtl brass
+Kd 0.517647 0.443137 0.282353
 d 1.0
 illum 1
 
-newmtl staff_wood
-Kd 0.2392 0.1608 0.1333
-d 1.0
-illum 1
-
-newmtl trim
-Kd 0.3216 0.4275 0.4863
-d 1.0
-illum 1
-
-newmtl eye
-Kd 0.2863 0.8078 0.9412
+# RGB 129 141 145
+newmtl glass
+Kd 0.505882 0.552941 0.568627
 d 1.0
 illum 1
