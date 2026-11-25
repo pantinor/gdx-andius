@@ -1,2 +1,98 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Vampire warrior reference palette: Kd = sRGB / 255.
+# One OBJ object; face material assignments only.
+
+# RGB 188 173 174
+newmtl pale_skin
+Kd 0.737255 0.678431 0.682353
+d 1.0
+illum 1
+
+# RGB 126 107 113
+newmtl mauve
+Kd 0.494118 0.419608 0.443137
+d 1.0
+illum 1
+
+# RGB 15 18 21
+newmtl raven
+Kd 0.058824 0.070588 0.082353
+d 1.0
+illum 1
+
+# RGB 91 96 100
+newmtl slate
+Kd 0.356863 0.376471 0.392157
+d 1.0
+illum 1
+
+# RGB 28 29 28
+newmtl coat
+Kd 0.109804 0.113725 0.109804
+d 1.0
+illum 1
+
+# RGB 54 55 51
+newmtl worn_leather
+Kd 0.211765 0.215686 0.200000
+d 1.0
+illum 1
+
+# RGB 24 27 27
+newmtl soft_leather
+Kd 0.094118 0.105882 0.105882
+d 1.0
+illum 1
+
+# RGB 18 20 21
+newmtl black_fabric
+Kd 0.070588 0.078431 0.082353
+d 1.0
+illum 1
+
+# RGB 75 15 29
+newmtl burgundy
+Kd 0.294118 0.058824 0.113725
+d 1.0
+illum 1
+
+# RGB 40 7 16
+newmtl wine
+Kd 0.156863 0.027451 0.062745
+d 1.0
+illum 1
+
+# RGB 65 36 37
+newmtl oxblood
+Kd 0.254902 0.141176 0.145098
+d 1.0
+illum 1
+
+# RGB 183 184 177
+newmtl silver
+Kd 0.717647 0.721569 0.694118
+d 1.0
+illum 1
+
+# RGB 82 86 85
+newmtl dark_steel
+Kd 0.321569 0.337255 0.333333
+d 1.0
+illum 1
+
+# RGB 166 140 82
+newmtl gold
+Kd 0.650980 0.549020 0.321569
+d 1.0
+illum 1
+
+# RGB 58 105 70
+newmtl emerald
+Kd 0.227451 0.411765 0.274510
+d 1.0
+illum 1
+
+# RGB 215 207 183
+newmtl ivory
+Kd 0.843137 0.811765 0.717647
+d 1.0
+illum 1

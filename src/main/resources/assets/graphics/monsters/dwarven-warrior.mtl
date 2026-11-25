@@ -1,2 +1,98 @@
-# Blender 4.3.2 MTL File: 'None'
-# www.blender.org
+# Dwarven warrior: reference palette, Kd = sRGB / 255.
+# Single OBJ object; face materials only.
+
+# RGB 211 163 116
+newmtl skin
+Kd 0.827451 0.639216 0.454902
+d 1.0
+illum 1
+
+# RGB 181 70 28
+newmtl copper_hair
+Kd 0.709804 0.274510 0.109804
+d 1.0
+illum 1
+
+# RGB 231 123 67
+newmtl ginger
+Kd 0.905882 0.482353 0.262745
+d 1.0
+illum 1
+
+# RGB 126 100 132
+newmtl tattoo
+Kd 0.494118 0.392157 0.517647
+d 1.0
+illum 1
+
+# RGB 145 143 135
+newmtl silver
+Kd 0.568627 0.560784 0.529412
+d 1.0
+illum 1
+
+# RGB 63 68 68
+newmtl gunmetal
+Kd 0.247059 0.266667 0.266667
+d 1.0
+illum 1
+
+# RGB 205 147 35
+newmtl gold
+Kd 0.803922 0.576471 0.137255
+d 1.0
+illum 1
+
+# RGB 117 82 23
+newmtl brass
+Kd 0.458824 0.321569 0.090196
+d 1.0
+illum 1
+
+# RGB 116 72 39
+newmtl chestnut
+Kd 0.454902 0.282353 0.152941
+d 1.0
+illum 1
+
+# RGB 55 38 27
+newmtl dark_leather
+Kd 0.215686 0.149020 0.105882
+d 1.0
+illum 1
+
+# RGB 108 94 76
+newmtl gloves
+Kd 0.423529 0.368627 0.298039
+d 1.0
+illum 1
+
+# RGB 183 148 108
+newmtl beige
+Kd 0.717647 0.580392 0.423529
+d 1.0
+illum 1
+
+# RGB 100 72 49
+newmtl seams
+Kd 0.392157 0.282353 0.192157
+d 1.0
+illum 1
+
+# RGB 183 66 25
+newmtl red_grip
+Kd 0.717647 0.258824 0.098039
+d 1.0
+illum 1
+
+# RGB 224 213 190
+newmtl ivory
+Kd 0.878431 0.835294 0.745098
+d 1.0
+illum 1
+
+# RGB 25 23 20
+newmtl near_black
+Kd 0.098039 0.090196 0.078431
+d 1.0
+illum 1
